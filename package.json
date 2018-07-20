@@ -1,0 +1,14 @@
+{
+    "name": "AdGuard",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "inspect": "electron --inspect=5858 ."
+    },
+    "devDependencies": {
+        "electron": "^2.0.5"
+    }
+}
