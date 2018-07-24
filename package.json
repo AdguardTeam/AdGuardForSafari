@@ -13,6 +13,7 @@
         "electron-store": "^2.0.0",
         "filters-downloader": "git+https://github.com/AdguardTeam/FiltersDownloader.git#a7d2177",
         "i18n": "^0.8.3",
+        "moment": "^2.22.2",
         "xmlhttprequest": "^1.8.0"
     },
     "devDependencies": {

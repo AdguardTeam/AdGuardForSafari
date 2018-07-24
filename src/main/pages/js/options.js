@@ -1,6 +1,7 @@
-/* global CheckboxUtils, moment, ace, i18n, EventNotifierTypes */
+/* global CheckboxUtils, ace, i18n, EventNotifierTypes */
 
 const {ipcRenderer} = require('electron');
+const moment = require('moment');
 
 /**
  * Common utils
@@ -487,11 +488,9 @@ const AntiBannerFilters = function (options) {
     }
 
     function getFilterTemplate(filter, enabled, showDeleteButton) {
-        //TODO: Fix moment
-        // const timeUpdated = moment(filter.timeUpdated);
-        // timeUpdated.locale(environmentOptions.Prefs.locale);
-        // const timeUpdatedText = timeUpdated.format("D/MM/YYYY HH:mm").toLowerCase();
-        const timeUpdatedText = 'time-updated';
+        const timeUpdated = moment(filter.timeUpdated);
+        timeUpdated.locale(environmentOptions.Prefs.locale);
+        const timeUpdatedText = timeUpdated.format("D/MM/YYYY HH:mm").toLowerCase();
 
         let tagDetails = '';
         filter.tagsDetails.forEach(function (tag) {
@@ -838,10 +837,9 @@ const AntiBannerFilters = function (options) {
         let updateText = "";
         lastUpdateTime = loadedFiltersInfo.lastUpdateTime;
         if (lastUpdateTime) {
-            // lastUpdateTime = moment(lastUpdateTime);
-            // lastUpdateTime.locale(environmentOptions.Prefs.locale);
-            // updateText = lastUpdateTime.format("D MMMM YYYY HH:mm").toLowerCase();
-            updateText = 'time-updated';
+            lastUpdateTime = moment(lastUpdateTime);
+            lastUpdateTime.locale(environmentOptions.Prefs.locale);
+            updateText = lastUpdateTime.format("D MMMM YYYY HH:mm").toLowerCase();
             //TODO: localization (options_filter_version)
         }
 

@@ -6,8 +6,7 @@ const subscriptions = require('./filters/subscriptions');
 module.exports = (function () {
 
     const getFilters = () => {
-        let filters = subscriptions.getFilters();
-        return filters;
+        return subscriptions.getFilters();
     };
 
     const isFilterEnabled = () => {
