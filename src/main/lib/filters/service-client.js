@@ -2,6 +2,7 @@ const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const fs = require('fs');
 const filterDownloader = require('filters-downloader');
 const subscriptions = require('./subscriptions');
+const config = require('config');
 
 /**
  * Backend service client
@@ -16,22 +17,21 @@ module.exports = (function () {
 
     /**
      * Configuration
-     * TODO: Move to app configuration
      */
     const settings = {
 
         // Base url of our backend server
         get backendUrl() {
-            return "https://chrome.adtidy.org";
+            return config.get('backendUrl');
         },
 
         get apiKey() {
-            return "4DDBE80A3DA94D819A00523252FB6380";
+            return config.get('backendApiKey');
         },
 
         // Url for load filters metadata and rules
         get filtersUrl() {
-            return 'https://filters.adtidy.org/extension/safari';
+            return config.get('filtersUrl');
         },
 
         // URL for downloading AG filters
@@ -57,11 +57,11 @@ module.exports = (function () {
 
         // Folder that contains filters metadata and files with rules. 'filters' by default
         get localFiltersFolder() {
-            return './filters';
+            return config.get('localFiltersFolder');
         },
         // Array of filter identifiers, that have local file with rules. Range from 1 to 14 by default
         get localFilterIds() {
-            return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+            return config.get('localFilterIds');
         },
 
         /**
