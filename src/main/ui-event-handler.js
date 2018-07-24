@@ -3,6 +3,7 @@ const {ipcMain} = require('electron');
 const settings = require('./lib/settings-manager');
 const filterUtils = require('./lib/utils/filter-utils');
 const filters = require('./lib/filters-manager');
+const filterCategories = require('./lib/filters-categories');
 
 /**
  * Initializes event listener
@@ -14,6 +15,9 @@ module.exports.init = function () {
         switch (message.type) {
             case 'initializeOptionsPage':
                 event.sender.send('initializeOptionsPageResponse', processInitializeFrameScriptRequest());
+                break;
+            case 'getFiltersMetadata':
+                event.sender.send('getFiltersMetadataResponse', filterCategories.getFiltersMetadata());
                 break;
         }
     });

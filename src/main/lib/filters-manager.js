@@ -1,11 +1,13 @@
+const subscriptions = require('./subscriptions');
+
 /**
  * Filters manager
  */
 module.exports = (function () {
 
     const getFilters = () => {
-        //TODO: Implement
-        return [];
+        let filters = subscriptions.getFilters();
+        return filters;
     };
 
     const isFilterEnabled = () => {
