@@ -1,4 +1,4 @@
-const subscriptions = require('./subscriptions');
+const subscriptions = require('./filters/subscriptions');
 
 /**
  * Filters manager

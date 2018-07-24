@@ -1,6 +1,6 @@
 const subscriptions = require('./subscriptions');
 const tagService = require('./filters-tags');
-const filterUtils = require('./utils/filter-utils');
+const config = require('config');
 
 /**
  * Filter categories service
@@ -20,7 +20,7 @@ module.exports = (() => {
      * @returns {Array.<*>} filters
      */
     const getFilters = () => {
-        const result = subscriptions.getFilters().filter(f => !f.removed && f.filterId !== filterUtils.ids.SEARCH_AND_SELF_PROMO_FILTER_ID);
+        const result = subscriptions.getFilters().filter(f => !f.removed && f.filterId !== config.get('AntiBannerFiltersId').SEARCH_AND_SELF_PROMO_FILTER_ID);
 
         const tags = tagService.getTags();
 

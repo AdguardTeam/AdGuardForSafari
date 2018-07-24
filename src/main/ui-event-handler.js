@@ -1,9 +1,8 @@
 const {ipcMain} = require('electron');
-
+const config = require('config');
 const settings = require('./lib/settings-manager');
-const filterUtils = require('./lib/utils/filter-utils');
 const filters = require('./lib/filters-manager');
-const filterCategories = require('./lib/filters-categories');
+const filterCategories = require('./lib/filters/filters-categories');
 
 /**
  * Initializes event listener
@@ -30,7 +29,7 @@ function processInitializeFrameScriptRequest() {
 
     const enabledFilters = Object.create(null);
 
-    const AntiBannerFiltersId = filterUtils.ids;
+    const AntiBannerFiltersId = config.get('AntiBannerFiltersId');
 
     for (let key in AntiBannerFiltersId) {
         if (AntiBannerFiltersId.hasOwnProperty(key)) {
@@ -56,7 +55,7 @@ function processInitializeFrameScriptRequest() {
             }
         },
         constants: {
-            AntiBannerFiltersId: filterUtils.ids
+            AntiBannerFiltersId: AntiBannerFiltersId
         }
     };
 }

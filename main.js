@@ -4,7 +4,7 @@ const {app, BrowserWindow} = require('electron');
 const fs = require('fs');
 const uiEventListener = require('./src/main/ui-event-handler');
 
-const subscriptions = require('./src/main/lib/subscriptions');
+const subscriptions = require('./src/main/lib/filters/subscriptions');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
