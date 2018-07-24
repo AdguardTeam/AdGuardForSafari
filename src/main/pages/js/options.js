@@ -1107,16 +1107,6 @@ const AntiBannerFilters = function (options) {
 const Settings = function () {
     'use strict';
 
-    const updateDisplayAdguardPromo = (showPromo) => {
-        if (showPromo) {
-            document.querySelector('.download-adguard-block').style.display = '';
-            document.querySelector('.non-download-adguard-block').style.display = 'none';
-        } else {
-            document.querySelector('.download-adguard-block').style.display = 'none';
-            document.querySelector('.non-download-adguard-block').style.display = '';
-        }
-    };
-
     const Checkbox = function (id, property, options) {
 
         options = options || {};
@@ -1126,16 +1116,11 @@ const Settings = function () {
         const element = document.querySelector(id);
         if (!hidden) {
             element.addEventListener('change', function () {
-                //TODO: Fix implement
-                // contentPage.sendMessage({
-                //     type: 'changeUserSetting',
-                //     key: property,
-                //     value: negate ? !this.checked : this.checked
-                // });
-
-                if (property === userSettings.names.DISABLE_SHOW_ADGUARD_PROMO_INFO) {
-                    updateDisplayAdguardPromo(this.checked);
-                }
+                ipcRenderer.send('message', JSON.stringify({
+                    'type': 'changeUserSetting',
+                    'key': property,
+                    'value': negate ? !this.checked : this.checked
+                }));
             });
         }
 

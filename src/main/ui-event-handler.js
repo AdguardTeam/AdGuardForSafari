@@ -18,6 +18,9 @@ module.exports.init = function () {
             case 'getFiltersMetadata':
                 event.sender.send('getFiltersMetadataResponse', filterCategories.getFiltersMetadata());
                 break;
+            case 'changeUserSetting':
+                settings.setProperty(message.key, message.value);
+                break;
         }
     });
 };
