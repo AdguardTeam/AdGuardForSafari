@@ -4,6 +4,9 @@ const subscriptions = require('./filters/subscriptions');
 const categories = require('./filters/filters-categories');
 const filtersState = require('./filters/filters-state');
 const events = require('../events');
+const serviceClient = require('./filters/service-client');
+const settings  = require('./settings-manager');
+
 
 /**
  * Filters manager
@@ -19,7 +22,7 @@ module.exports = (() => {
      * @private
      */
     const getFilterById = (filterId) => {
-        var filter = subscriptions.getFilter(filterId);
+        let filter = subscriptions.getFilter(filterId);
         if (!filter) {
             throw 'Filter with id ' + filterId + ' not found';
         }
@@ -85,6 +88,11 @@ module.exports = (() => {
         };
     };
 
+    /**
+     * Enables filter
+     *
+     * @param filterId
+     */
     const enableFilter = (filterId) => {
         if (isFilterEnabled(filterId)) {
             return;
@@ -96,6 +104,12 @@ module.exports = (() => {
         //adguard.listeners.notifyListeners(adguard.listeners.SYNC_REQUIRED, options);
     };
 
+    /**
+     * Removes array duplicates
+     *
+     * @param arr
+     * @returns {*}
+     */
     const removeDuplicates = (arr) => {
         if (!arr || arr.length === 1) {
             return arr;
@@ -105,6 +119,12 @@ module.exports = (() => {
         });
     };
 
+    /**
+     * Loads filter
+     *
+     * @param filterId
+     * @param callback
+     */
     const addAntiBannerFilter = (filterId, callback) => {
         const filter = getFilterById(filterId);
         if (filter.installed) {
@@ -125,14 +145,52 @@ module.exports = (() => {
             return;
         }
 
-        /**
-         * TODO: when we want to load filter from backend, we should retrieve metadata from backend too, but not from local file.
-         */
-        //TODO: Load rules
-        //loadFilterRules(filter, false, onFilterLoaded);
-        onFilterLoaded(true);
+        loadFilterRules(filter, false, onFilterLoaded);
     };
 
+    /**
+     * Loads filter rules
+     *
+     * @param filterMetadata Filter metadata
+     * @param forceRemote Force download filter rules from remote server (if false try to download local copy of rules if it's possible)
+     * @param callback Called when filter rules have been loaded
+     * @private
+     */
+    const loadFilterRules = (filterMetadata, forceRemote, callback) => {
+
+        const filter = getFilterById(filterMetadata.filterId);
+
+        filter._isDownloading = true;
+        listeners.notifyListeners(listeners.START_DOWNLOAD_FILTER, filter);
+
+        const successCallback = function (filterRules) {
+            console.info("Retrieved response from server for filter {0}, rules count: {1}", filter.filterId, filterRules.length);
+            delete filter._isDownloading;
+            filter.version = filterMetadata.version;
+            filter.lastUpdateTime = filterMetadata.timeUpdated;
+            filter.lastCheckTime = Date.now();
+            filter.loaded = true;
+            //notify listeners
+            listeners.notifyListeners(listeners.SUCCESS_DOWNLOAD_FILTER, filter);
+            listeners.notifyListeners(listeners.UPDATE_FILTER_RULES, filter, filterRules);
+            callback(true);
+        };
+
+        const errorCallback = function (cause) {
+            console.error("Error retrieved response from server for filter {0}, cause: {1}", filter.filterId, cause || "");
+            delete filter._isDownloading;
+            listeners.notifyListeners(adguard.listeners.ERROR_DOWNLOAD_FILTER, filter);
+            callback(false);
+        };
+
+        serviceClient.loadFilterRules(filter.filterId, forceRemote, settings.isUseOptimizedFiltersEnabled(), successCallback, errorCallback);
+    };
+
+    /**
+     * Loads and enables filters
+     *
+     * @param filterIds
+     */
     const addAndEnableFilters = (filterIds) => {
 
         if (!filterIds || filterIds.length === 0) {
@@ -159,16 +217,21 @@ module.exports = (() => {
         loadNextFilter();
     };
 
+    /**
+     * Disables filters
+     *
+     * @param filterIds
+     */
     const disableFilters = (filterIds) => {
         filterIds = removeDuplicates(filterIds.slice(0));
 
         for (let i = 0; i < filterIds.length; i++) {
-            var filterId = filterIds[i];
+            const filterId = filterIds[i];
             if (!isFilterEnabled(filterId)) {
                 return;
             }
 
-            var filter = subscriptions.getFilter(filterId);
+            const filter = subscriptions.getFilter(filterId);
             filter.enabled = false;
             listeners.notifyListeners(listeners.FILTER_ENABLE_DISABLE, filter);
         }
