@@ -261,6 +261,21 @@ module.exports = (() => {
         disableFilters(idsByTagId);
     };
 
+    /**
+     * Returns rules for all enabled filters
+     */
+    const getRules = () => {
+        const filters = getFilters();
+        filters.filter((f) => {
+            return f.enabled;
+        });
+
+        const rules = [];
+
+        //TODO: Load rules from storage
+        return rules;
+    };
+
     return {
         getFilters: getFilters,
         isFilterEnabled: isFilterEnabled,
@@ -270,7 +285,9 @@ module.exports = (() => {
         disableFilters: disableFilters,
 
         addAndEnableFiltersByGroupId: addAndEnableFiltersByGroupId,
-        disableAntiBannerFiltersByGroupId: disableAntiBannerFiltersByGroupId
+        disableAntiBannerFiltersByGroupId: disableAntiBannerFiltersByGroupId,
+
+        getRules: getRules
     };
 
 })();
