@@ -130,34 +130,9 @@ module.exports = (() => {
         });
     };
 
-    /**
-     * Adds and enables recommended filters by groupId
-     *
-     * @param groupId
-     */
-    const addAndEnableFiltersByGroupId = groupId => {
-        const idsByTagId = getRecommendedFilterIdsByGroupId(groupId);
-
-        //TODO: Implement
-        //adguard.filters.addAndEnableFilters(idsByTagId);
-    };
-
-    /**
-     * Disables recommended filters by groupId
-     *
-     * @param groupId
-     */
-    const disableAntiBannerFiltersByGroupId = groupId => {
-        const idsByTagId = getRecommendedFilterIdsByGroupId(groupId);
-
-        //TODO: Implement
-        //adguard.filters.disableFilters(idsByTagId);
-    };
-
     return {
         getFiltersMetadata: getFiltersMetadata,
-        addAndEnableFiltersByGroupId: addAndEnableFiltersByGroupId,
-        disableAntiBannerFiltersByGroupId: disableAntiBannerFiltersByGroupId
+        getRecommendedFilterIdsByGroupId: getRecommendedFilterIdsByGroupId
     };
 })();
 

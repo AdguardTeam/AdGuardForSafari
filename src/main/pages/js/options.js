@@ -667,6 +667,8 @@ const AntiBannerFilters = function (options) {
 
     function renderCategoriesAndFilters() {
         ipcRenderer.on('getFiltersMetadataResponse', (e, response) => {
+            console.log(response.filters);
+
             loadedFiltersInfo.initLoadedFilters(response.filters, response.categories);
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
 
@@ -685,34 +687,44 @@ const AntiBannerFilters = function (options) {
             }
         });
 
-        ipcRenderer.send('message', JSON.stringify({
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'getFiltersMetadata'
         }));
     }
 
     function toggleFilterState() {
         const filterId = this.value - 0;
-        //TODO: Fix implement
-        // if (this.checked) {
-        //     contentPage.sendMessage({type: 'addAndEnableFilter', filterId: filterId});
-        // } else {
-        //     contentPage.sendMessage({type: 'disableAntiBannerFilter', filterId: filterId});
-        // }
+        if (this.checked) {
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'addAndEnableFilter',
+                'filterId': filterId
+            }));
+        } else {
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'disableFilter',
+                'filterId': filterId
+            }));
+        }
     }
 
     function toggleGroupState() {
         const groupId = this.value - 0;
-        //TODO: Fix implement
-        // if (this.checked) {
-        //     contentPage.sendMessage({type: 'addAndEnableFiltersByGroupId', groupId: groupId});
-        // } else {
-        //     contentPage.sendMessage({type: 'disableAntiBannerFiltersByGroupId', groupId: groupId});
-        // }
+        if (this.checked) {
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'addAndEnableFiltersByGroupId',
+                'groupId': groupId
+            }));
+        } else {
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'disableAntiBannerFiltersByGroupId',
+                'groupId': groupId
+            }));
+        }
     }
 
     function updateAntiBannerFilters(e) {
         e.preventDefault();
-        //TODO: Fix implement
+        //TODO: Implement checkAntiBannerFiltersUpdate
         // contentPage.sendMessage({type: 'checkAntiBannerFiltersUpdate'}, function () {
         //     //Empty
         // });
@@ -1116,7 +1128,7 @@ const Settings = function () {
         const element = document.querySelector(id);
         if (!hidden) {
             element.addEventListener('change', function () {
-                ipcRenderer.send('message', JSON.stringify({
+                ipcRenderer.send('renderer-to-main', JSON.stringify({
                     'type': 'changeUserSetting',
                     'key': property,
                     'value': negate ? !this.checked : this.checked
@@ -1414,49 +1426,43 @@ const initPage = function (response) {
         const controller = new PageController();
         controller.init();
 
-        ipcRenderer.on(EventNotifierTypes.FILTER_ENABLE_DISABLE, (e, arg) => {
-            controller.checkSubscriptionsCount();
-            controller.antiBannerFilters.onFilterStateChanged(arg);
-        });
+        ipcRenderer.on('main-to-renderer', (e, arg) => {
+            const event = arg[0];
+            const options = arg[1];
 
-        ipcRenderer.on(EventNotifierTypes.FILTER_ADD_REMOVE, (e, arg) => {
-            controller.antiBannerFilters.render();
+            switch (event) {
+                case EventNotifierTypes.FILTER_ENABLE_DISABLE:
+                    controller.checkSubscriptionsCount();
+                    controller.antiBannerFilters.onFilterStateChanged(options);
+                    break;
+                case EventNotifierTypes.FILTER_ADD_REMOVE:
+                    controller.antiBannerFilters.render();
+                    break;
+                case EventNotifierTypes.START_DOWNLOAD_FILTER:
+                    controller.antiBannerFilters.onFilterDownloadStarted(options);
+                    break;
+                case EventNotifierTypes.SUCCESS_DOWNLOAD_FILTER:
+                case EventNotifierTypes.ERROR_DOWNLOAD_FILTER:
+                    controller.antiBannerFilters.onFilterDownloadFinished(options);
+                    break;
+                case EventNotifierTypes.UPDATE_USER_FILTER_RULES:
+                    controller.userFilter.updateUserFilterRules();
+                    controller.antiBannerFilters.updateRulesCountInfo(options);
+                    break;
+                case EventNotifierTypes.UPDATE_WHITELIST_FILTER_RULES:
+                    controller.whiteListFilter.updateWhiteListDomains();
+                    break;
+                case EventNotifierTypes.REQUEST_FILTER_UPDATED:
+                    controller.antiBannerFilters.updateRulesCountInfo(options);
+                    break;
+                // case EventNotifierTypes.SYNC_STATUS_UPDATED:
+                //     controller.syncSettings.updateSyncSettings(options);
+                //     break;
+                case EventNotifierTypes.SETTINGS_UPDATED:
+                    controller.onSettingsImported(options);
+                    break;
+            }
         });
-
-        // createEventListener(events, function (event, options) {
-        //     switch (event) {
-        //         case EventNotifierTypes.FILTER_ENABLE_DISABLE:
-        //             controller.checkSubscriptionsCount();
-        //             controller.antiBannerFilters.onFilterStateChanged(options);
-        //             break;
-        //         case EventNotifierTypes.FILTER_ADD_REMOVE:
-        //             controller.antiBannerFilters.render();
-        //             break;
-        //         case EventNotifierTypes.START_DOWNLOAD_FILTER:
-        //             controller.antiBannerFilters.onFilterDownloadStarted(options);
-        //             break;
-        //         case EventNotifierTypes.SUCCESS_DOWNLOAD_FILTER:
-        //         case EventNotifierTypes.ERROR_DOWNLOAD_FILTER:
-        //             controller.antiBannerFilters.onFilterDownloadFinished(options);
-        //             break;
-        //         case EventNotifierTypes.UPDATE_USER_FILTER_RULES:
-        //             controller.userFilter.updateUserFilterRules();
-        //             controller.antiBannerFilters.updateRulesCountInfo(options);
-        //             break;
-        //         case EventNotifierTypes.UPDATE_WHITELIST_FILTER_RULES:
-        //             controller.whiteListFilter.updateWhiteListDomains();
-        //             break;
-        //         case EventNotifierTypes.REQUEST_FILTER_UPDATED:
-        //             controller.antiBannerFilters.updateRulesCountInfo(options);
-        //             break;
-        //         case EventNotifierTypes.SYNC_STATUS_UPDATED:
-        //             controller.syncSettings.updateSyncSettings(options);
-        //             break;
-        //         case EventNotifierTypes.SETTINGS_UPDATED:
-        //             controller.onSettingsImported(options);
-        //             break;
-        //     }
-        // });
     };
 
     if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
@@ -1470,6 +1476,6 @@ ipcRenderer.on('initializeOptionsPageResponse', (e, arg) => {
     initPage(arg);
 });
 
-ipcRenderer.send('message', JSON.stringify({
+ipcRenderer.send('renderer-to-main', JSON.stringify({
     'type': 'initializeOptionsPage'
 }));

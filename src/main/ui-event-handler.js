@@ -3,12 +3,15 @@ const config = require('config');
 const settings = require('./lib/settings-manager');
 const filters = require('./lib/filters-manager');
 const filterCategories = require('./lib/filters/filters-categories');
+const listeners = require('./notifier');
 
 /**
  * Initializes event listener
  */
-module.exports.init = function () {
-    ipcMain.on('message', function (event, arg) {
+module.exports.init = function (win) {
+
+    // Handle messages from renderer process
+    ipcMain.on('renderer-to-main', function (event, arg) {
 
         const message = JSON.parse(arg);
         switch (message.type) {
@@ -21,8 +24,35 @@ module.exports.init = function () {
             case 'changeUserSetting':
                 settings.setProperty(message.key, message.value);
                 break;
+            case 'addAndEnableFilter':
+                filters.addAndEnableFilters([message.filterId]);
+                break;
+            case 'disableFilter':
+                filters.disableFilters([message.filterId]);
+                break;
+            case 'addAndEnableFiltersByGroupId':
+                filters.addAndEnableFiltersByGroupId(message.groupId);
+                break;
+            case 'disableAntiBannerFiltersByGroupId':
+                filters.disableAntiBannerFiltersByGroupId(message.groupId);
+                break;
         }
     });
+
+};
+
+function eventHandler (win) {
+    return function () {
+        win.webContents.send('main-to-renderer', {
+            type: 'message',
+            args: Array.prototype.slice.call(arguments)
+        });
+    };
+}
+
+module.exports.register = (win) => {
+    //Retranslate messages to renderer process
+    listeners.addListener(eventHandler(win));
 };
 
 /**

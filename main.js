@@ -43,6 +43,7 @@ app.on('ready', (() => {
 
     uiEventListener.init();
     createWindow();
+    uiEventListener.register(mainWindow);
 }));
 
 // Quit when all windows are closed.
@@ -59,5 +60,6 @@ app.on('activate', () => {
     // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {
         createWindow();
+        uiEventListener.register(mainWindow);
     }
 });
