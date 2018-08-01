@@ -1,7 +1,7 @@
 const listeners = require('../../notifier');
 const settings = require('../settings-manager');
 const filters = require('../filters-manager');
-const converter = require('safari-converter');
+const jsonFromFilters = require('../libs/JSConverter');
 const whitelist = require('../whitelist');
 
 /**
@@ -96,14 +96,12 @@ module.exports = (function () {
             }
         }
 
-        callback(null);
-        //TODO: Use converter
-        // const result = converter.convertArray(rules, rulesLimit);
-        // if (result && result.converted) {
-        //     callback(result);
-        // } else {
-        //     callback(null);
-        // }
+        const result = jsonFromFilters(rules, rulesLimit);
+        if (result && result.converted) {
+            callback(result);
+        } else {
+            callback(null);
+        }
 
     }, 500);
 
