@@ -213,12 +213,10 @@ module.exports = (function () {
                 filters.push(filter);
                 filtersMap[filter.filterId] = filter;
 
-                //TODO: Fix
-                //adguard.listeners.notifyListeners(adguard.listeners.SUCCESS_DOWNLOAD_FILTER, filter);
+                listeners.notifyListeners(listeners.SUCCESS_DOWNLOAD_FILTER, filter);
             }
 
-            //TODO: Fix
-            //adguard.listeners.notifyListeners(adguard.listeners.UPDATE_FILTER_RULES, filter, rules);
+            listeners.notifyListeners(listeners.UPDATE_FILTER_RULES, filter, rules);
 
             callback(filter.filterId);
 

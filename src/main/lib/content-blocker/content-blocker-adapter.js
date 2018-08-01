@@ -2,6 +2,7 @@ const listeners = require('../../notifier');
 const settings = require('../settings-manager');
 const filters = require('../filters-manager');
 const converter = require('safari-converter');
+const whitelist = require('../whitelist');
 
 /**
  * Safari Content Blocker Adapter
@@ -31,15 +32,15 @@ module.exports = (function () {
      */
     const updateContentBlocker = () => {
 
-        _loadAndConvertRules(RULES_LIMIT, result => {
+        loadAndConvertRules(RULES_LIMIT, result => {
 
             if (!result) {
-                _clearFilters();
+                clearFilters();
                 return;
             }
 
             const json = JSON.parse(result.converted);
-            _setSafariContentBlocker(json);
+            setSafariContentBlocker(json);
             listeners.notifyListeners(listeners.CONTENT_BLOCKER_UPDATED, {
                 rulesCount: json.length,
                 rulesOverLimit: result.overLimit
@@ -52,15 +53,15 @@ module.exports = (function () {
      * Disables content blocker
      * @private
      */
-    const _clearFilters = () => {
-        _setSafariContentBlocker(_getEmptyBlockerJson());
+    const clearFilters = () => {
+        setSafariContentBlocker(getEmptyBlockerJson());
     };
 
     /**
      * @returns JSON for empty content blocker
      * @private
      */
-    const _getEmptyBlockerJson = () => {
+    const getEmptyBlockerJson = () => {
         if (!emptyBlockerJSON) {
             const xhr = new XMLHttpRequest();
             xhr.open("GET", emptyBlockerUrl, false);
@@ -74,7 +75,7 @@ module.exports = (function () {
      * Load rules from requestFilter and WhiteListService and convert for ContentBlocker
      * @private
      */
-    const _loadAndConvertRules = debounce((rulesLimit, callback) => {
+    const loadAndConvertRules = debounce((rulesLimit, callback) => {
 
         if (settings.isFilteringDisabled()) {
             console.info('Disabling content blocker.');
@@ -87,8 +88,7 @@ module.exports = (function () {
         let rules = filters.getRules();
 
         if (settings.isDefaultWhiteListMode()) {
-            //TODO: Add whitelist
-            //rules = rules.concat(whitelist.getRules());
+            rules = rules.concat(whitelist.getRules());
         } else {
             const invertedWhitelistRule = _constructInvertedWhitelistRule();
             if (invertedWhitelistRule) {
@@ -107,7 +107,7 @@ module.exports = (function () {
 
     }, 500);
 
-    const _setSafariContentBlocker = json => {
+    const setSafariContentBlocker = json => {
         try {
             console.info('Setting content blocker. Length=' + json.length);
             //safari.extension.setContentBlocker(json);
@@ -119,28 +119,26 @@ module.exports = (function () {
     };
 
     /**
-     * TODO: Implement whitelist
      *
      * @private
      */
     const _constructInvertedWhitelistRule = () => {
-        // const domains = whitelist.getWhiteListDomains();
-        // let invertedWhitelistRule = '@@||*$document';
-        // if (domains && domains.length > 0) {
-        //     invertedWhitelistRule += ",domain=";
-        //     let i = 0;
-        //     const len = domains.length;
-        //     for (; i < len; i++) {
-        //         if (i > 0) {
-        //             invertedWhitelistRule += '|';
-        //         }
-        //
-        //         invertedWhitelistRule += '~' + domains[i];
-        //     }
-        // }
-        //
-        // return invertedWhitelistRule;
-        return null;
+        const domains = whitelist.getWhiteListDomains();
+        let invertedWhitelistRule = '@@||*$document';
+        if (domains && domains.length > 0) {
+            invertedWhitelistRule += ",domain=";
+            let i = 0;
+            const len = domains.length;
+            for (; i < len; i++) {
+                if (i > 0) {
+                    invertedWhitelistRule += '|';
+                }
+
+                invertedWhitelistRule += '~' + domains[i];
+            }
+        }
+
+        return invertedWhitelistRule;
     };
 
     return {

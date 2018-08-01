@@ -1307,21 +1307,12 @@ PageController.prototype = {
 
     _bindEvents: function () {
 
-        this.resetStatsPopup = document.querySelector("#resetStatsPopup");
         this.tooManySubscriptionsEl = document.querySelector('#tooManySubscriptions');
-
-        document.querySelector("#resetStats").addEventListener('click', this.onResetStatsClicked.bind(this));
 
         document.querySelector(".openExtensionStore").addEventListener('click', function (e) {
             e.preventDefault();
             //TODO: Fix implement
             //contentPage.sendMessage({type: 'openExtensionStore'});
-        });
-
-        document.querySelector("#openLog").addEventListener('click', function (e) {
-            e.preventDefault();
-            ////TODO: Fix implement
-            //contentPage.sendMessage({type: 'openFilteringLog'});
         });
     },
 
@@ -1354,23 +1345,6 @@ PageController.prototype = {
         //TODO: Fix implement
         // this.syncSettings = new SyncSettings({syncStatusInfo: syncStatusInfo});
         // this.syncSettings.renderSyncSettings();
-    },
-
-    onResetStatsClicked: function (e) {
-        e.preventDefault();
-        //TODO: Fix implement
-        //contentPage.sendMessage({type: 'resetBlockedAdsCount'});
-        this._onStatsReset();
-    },
-
-    _onStatsReset: function () {
-        this.resetStatsPopup.style.display = 'block';
-        if (this.closePopupTimeoutId) {
-            clearTimeout(this.closePopupTimeoutId);
-        }
-        this.closePopupTimeoutId = setTimeout(function () {
-            this.resetStatsPopup.style.display = 'none';
-        }.bind(this), 4000);
     },
 
     checkSubscriptionsCount: function () {

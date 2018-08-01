@@ -3,6 +3,7 @@ const fs = require('fs');
 const filterDownloader = require('filters-downloader');
 const subscriptions = require('./subscriptions');
 const config = require('config');
+const path = require('path');
 
 /**
  * Backend service client
@@ -229,6 +230,8 @@ module.exports = (function () {
             if (useOptimizedFilters) {
                 url = settings.localFiltersFolder + "/filter_mobile_" + filterId + ".txt";
             }
+
+            url = path.resolve(url);
         }
 
         filterDownloader.download(url, FilterCompilerConditionsConstants).then(successCallback, errorCallback);
