@@ -84,6 +84,10 @@ module.exports = (() => {
         //checkAntiBannerFiltersUpdate(true, successCallback, errorCallback);
     };
 
+    const checkAntiBannerFiltersUpdate = () => {
+        //TODO: checkAntiBannerFiltersUpdate
+    };
+
     /**
      * Subscribe to events which lead to filters update.
      */
@@ -532,6 +536,7 @@ module.exports = (() => {
         start: start,
         offerFilters: offerFilters,
         getRequestFilterInfo: getRequestFilterInfo,
-        getRules: getRules
+        getRules: getRules,
+        checkAntiBannerFiltersUpdate: checkAntiBannerFiltersUpdate
     }
 })();

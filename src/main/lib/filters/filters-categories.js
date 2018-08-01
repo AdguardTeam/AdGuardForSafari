@@ -1,6 +1,7 @@
 const subscriptions = require('./subscriptions');
 const tagService = require('./filters-tags');
 const config = require('config');
+const collections = require('../utils/collections');
 
 /**
  * Filter categories service
@@ -66,7 +67,7 @@ module.exports = (() => {
         }
 
         const recommendedFilters = tagService.getRecommendedFilters(groupFilters);
-        const otherFilters = getArraySubtraction(groupFilters, recommendedFilters);
+        const otherFilters = collections.getArraySubtraction(groupFilters, recommendedFilters);
 
         return {
             recommendedFilters: recommendedFilters,
@@ -76,6 +77,8 @@ module.exports = (() => {
 
     /**
      * Constructs filters metadata for options.html page
+     *
+     * @returns {{filters: Array.<*>, categories: Array}}
      */
     const getFiltersMetadata = () => {
         const groupsMeta = subscriptions.getGroups();
@@ -122,12 +125,6 @@ module.exports = (() => {
         }
 
         return [];
-    };
-
-    const getArraySubtraction = (a, b) => {
-        return a.filter(function (i) {
-            return b.indexOf(i) < 0;
-        });
     };
 
     return {

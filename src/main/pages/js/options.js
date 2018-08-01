@@ -723,10 +723,9 @@ const AntiBannerFilters = function (options) {
 
     function updateAntiBannerFilters(e) {
         e.preventDefault();
-        //TODO: Implement checkAntiBannerFiltersUpdate
-        // contentPage.sendMessage({type: 'checkAntiBannerFiltersUpdate'}, function () {
-        //     //Empty
-        // });
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'checkAntiBannerFiltersUpdate'
+        }));
     }
 
     function addCustomFilter(e) {
@@ -857,7 +856,7 @@ const AntiBannerFilters = function (options) {
     }
 
     function updateRulesCountInfo(info) {
-        const message = i18n.__("options_antibanner_info.message", [String(info.rulesCount || 0)]);
+        const message = i18n.__("options_antibanner_info.message", String(info.rulesCount || 0));
         document.querySelector('#filtersRulesInfo').textContent = message;
     }
 
@@ -1111,7 +1110,7 @@ const AntiBannerFilters = function (options) {
 /**
  * Settings block
  *
- * @returns {{render: render, showPopup: showPopup}}
+ * @returns {{render: render}}
  * @constructor
  */
 const Settings = function () {
@@ -1196,46 +1195,8 @@ const Settings = function () {
         CheckboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID in enabledFilters);
     };
 
-    const showPopup = function (title, text) {
-        //TODO: Fix implement
-        //contentPage.sendMessage({type: 'showAlertMessagePopup', title: title, text: text});
-    };
-
-    const importSettingsFile = function () {
-        const input = document.createElement('input');
-        input.type = 'file';
-        const event = document.createEvent('HTMLEvents');
-        event.initEvent('click', true, false);
-        input.dispatchEvent(event);
-
-        const onFileLoaded = function (content) {
-            //TODO: Import settings
-            //contentPage.sendMessage({type: 'applySettingsJson', json: content});
-        };
-
-        input.addEventListener('change', function () {
-            const file = e.currentTarget.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.readAsText(file, "UTF-8");
-                reader.onload = function (evt) {
-                    onFileLoaded(evt.target.result);
-                };
-                reader.onerror = function (evt) {
-                    showPopup(i18n.__('options_popup_import_error_file_title.message'), i18n.__('options_popup_import_error_file_description.message'));
-                };
-            }
-        });
-    };
-
-    document.querySelector('#importSettingsFile').addEventListener('click', function (e) {
-        e.preventDefault();
-        importSettingsFile();
-    }.bind(this));
-
     return {
-        render: render,
-        showPopup: showPopup
+        render: render
     };
 };
 
@@ -1270,23 +1231,6 @@ PageController.prototype = {
         //customizePopupFooter(environmentOptions.isMacOs);
     },
 
-    onSettingsImported: function (success) {
-        if (success) {
-            this.settings.showPopup(i18n.__('options_popup_import_success_title.message'), i18n.__('options_popup_import_success_description.message'));
-            //TODO: Import settings
-            // const self = this;
-            // contentPage.sendMessage({type: 'initializeFrameScript'}, function (response) {
-            //     userSettings = response.userSettings;
-            //     enabledFilters = response.enabledFilters;
-            //     requestFilterInfo = response.requestFilterInfo;
-            //
-            //     self._render();
-            // });
-        } else {
-            this.settings.showPopup(i18n.__('options_popup_import_error_title.message'), i18n.__('options_popup_import_error_description.message'));
-        }
-    },
-
     _customizeText: function () {
         document.querySelectorAll('a.sp-table-row-info').forEach(function (a) {
             a.classList.add('question');
@@ -1304,9 +1248,6 @@ PageController.prototype = {
     },
 
     _bindEvents: function () {
-
-        this.tooManySubscriptionsEl = document.querySelector('#tooManySubscriptions');
-
         document.querySelector(".openExtensionStore").addEventListener('click', function (e) {
             e.preventDefault();
             //TODO: openExtensionStore
@@ -1321,8 +1262,6 @@ PageController.prototype = {
         if (environmentOptions.Prefs.mobile) {
             document.querySelector('#resetStats').style.display = 'none';
         }
-
-        this.checkSubscriptionsCount();
 
         this.settings = new Settings();
         this.settings.render();
@@ -1343,17 +1282,6 @@ PageController.prototype = {
         //TODO: Sync
         // this.syncSettings = new SyncSettings({syncStatusInfo: syncStatusInfo});
         // this.syncSettings.renderSyncSettings();
-    },
-
-    checkSubscriptionsCount: function () {
-        //TODO: Fix too many subscriptions warning
-        //var enabledCount = this.subscriptionModalEl.querySelectorAll('input[name="modalFilterId"][checked="checked"]').length;
-
-        // if (enabledCount >= this.SUBSCRIPTIONS_LIMIT) {
-        //     this.tooManySubscriptionsEl.show();
-        // } else {
-        //     this.tooManySubscriptionsEl.hide();
-        // }
     }
 };
 
@@ -1388,7 +1316,6 @@ const initPage = function (response) {
 
             switch (event) {
                 case EventNotifierTypes.FILTER_ENABLE_DISABLE:
-                    controller.checkSubscriptionsCount();
                     controller.antiBannerFilters.onFilterStateChanged(options);
                     break;
                 case EventNotifierTypes.FILTER_ADD_REMOVE:
@@ -1414,9 +1341,9 @@ const initPage = function (response) {
                 // case EventNotifierTypes.SYNC_STATUS_UPDATED:
                 //     controller.syncSettings.updateSyncSettings(options);
                 //     break;
-                case EventNotifierTypes.SETTINGS_UPDATED:
-                    controller.onSettingsImported(options);
-                    break;
+                // case EventNotifierTypes.SETTINGS_UPDATED:
+                //     controller.onSettingsImported(options);
+                //     break;
             }
         });
     };

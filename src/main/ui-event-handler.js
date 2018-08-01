@@ -58,6 +58,9 @@ module.exports.init = function (win) {
             case 'saveUserRules':
                 userrules.updateUserRulesText(message.content);
                 break;
+            case 'checkAntiBannerFiltersUpdate':
+                antibanner.checkAntiBannerFiltersUpdate();
+                break;
         }
     });
 

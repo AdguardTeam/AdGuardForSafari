@@ -1,12 +1,14 @@
 const listeners = require('../../notifier');
 const settings = require('../settings-manager');
 const antibanner = require('../antibanner');
-const jsonFromFilters = require('../libs/JSConverter');
+const {jsonFromFilters} = require('../libs/JSConverter');
 const whitelist = require('../whitelist');
 const log = require('../utils/log');
 
 /**
  * Safari Content Blocker Adapter
+ *
+ * @type {{updateContentBlocker}}
  */
 module.exports = (function () {
 
@@ -15,6 +17,12 @@ module.exports = (function () {
     const emptyBlockerUrl = 'config/empty.json';
     let emptyBlockerJSON = null;
 
+    /**
+     * TODO: Move to utils
+     * @param func
+     * @param wait
+     * @returns {Function}
+     */
     const debounce = function (func, wait) {
         let timeout;
         return function () {
@@ -42,10 +50,11 @@ module.exports = (function () {
 
             const json = JSON.parse(result.converted);
             setSafariContentBlocker(json);
-            listeners.notifyListeners(listeners.CONTENT_BLOCKER_UPDATED, {
-                rulesCount: json.length,
-                rulesOverLimit: result.overLimit
-            });
+            //TODO: updateContentBlockerInfo
+            // listeners.notifyListeners(listeners.CONTENT_BLOCKER_UPDATED, {
+            //     rulesCount: json.length,
+            //     rulesOverLimit: result.overLimit
+            // });
 
         });
     };
@@ -84,30 +93,34 @@ module.exports = (function () {
             return;
         }
 
-        log.info('Starting loading content blocker.');
+        log.info('Loading content blocker.');
 
-        antibanner.getRules((rules) => {
+        let rules = antibanner.getRules();
 
-
-            if (settings.isDefaultWhiteListMode()) {
-                rules = rules.concat(whitelist.getRules());
-            } else {
-                const invertedWhitelistRule = constructInvertedWhitelistRule();
-                if (invertedWhitelistRule) {
-                    rules = rules.concat(invertedWhitelistRule);
-                }
+        log.info('Rules loaded: {0}', rules.length);
+        if (settings.isDefaultWhiteListMode()) {
+            rules = rules.concat(whitelist.getRules());
+        } else {
+            const invertedWhitelistRule = constructInvertedWhitelistRule();
+            if (invertedWhitelistRule) {
+                rules = rules.concat(invertedWhitelistRule);
             }
+        }
 
-            const result = jsonFromFilters(rules, rulesLimit);
-            if (result && result.converted) {
-                callback(result);
-            } else {
-                callback(null);
-            }
-        });
+        const result = jsonFromFilters(rules, rulesLimit);
+        if (result && result.converted) {
+            callback(result);
+        } else {
+            callback(null);
+        }
 
     }, 500);
 
+    /**
+     * Activates content blocker json
+     *
+     * @param json
+     */
     const setSafariContentBlocker = json => {
         try {
             log.info('Setting content blocker. Length=' + json.length);
@@ -120,6 +133,7 @@ module.exports = (function () {
     };
 
     /**
+     * Constructs rule for inverted whitelist
      *
      * @private
      */

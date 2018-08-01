@@ -1,7 +1,9 @@
 const whitelist = require('./lib/whitelist');
 const filters = require('./lib/filters-manager');
 const antibanner = require('./lib/antibanner');
+const filterState = require('./lib/filters/filters-state');
 const log = require('./lib/utils/log');
+const contentBlockerListener = require('./lib/content-blocker/content-blocker-listener');
 
 /**
  * Application
@@ -15,6 +17,8 @@ module.exports = (() => {
         log.info('Application initialization..');
 
         whitelist.init();
+        contentBlockerListener.init();
+        filterState.init();
 
         antibanner.start({
             onInstall: function (callback) {

@@ -309,52 +309,6 @@ module.exports = (function () {
         });
     };
 
-    /**
-     * Sends feedback from the user to our server
-     *
-     * @param url           URL
-     * @param messageType   Message type
-     * @param comment       Message text
-     */
-    const sendUrlReport = function (url, messageType, comment) {
-
-        let params = "url=" + encodeURIComponent(url);
-        params += "&messageType=" + encodeURIComponent(messageType);
-        if (comment) {
-            params += "&comment=" + encodeURIComponent(comment);
-        }
-        params = addKeyParameter(params);
-
-        const request = new XMLHttpRequest();
-        request.open('POST', settings.reportUrl);
-        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        request.send(params);
-    };
-
-    /**
-     * Allows to receive response headers from the request to the given URL
-     * @param url URL
-     * @param callback Callback with headers or null in the case of error
-     */
-    const getResponseHeaders = function (url, callback) {
-        executeRequestAsync(url, 'text/plain', function (request) {
-            const arr = request.getAllResponseHeaders().trim().split(/[\r\n]+/);
-            const headers = arr.map(function (line) {
-                const parts = line.split(': ');
-                const header = parts.shift();
-                const value = parts.join(': ');
-                return {
-                    name: header,
-                    value: value
-                };
-            });
-            callback(headers);
-        }, function (request) {
-            log.error("Error retrieved response from {0}, cause: {1}", url, request.statusText);
-            callback(null);
-        })
-    };
-
     return {
 
         loadFiltersMetadata: loadFiltersMetadata,
@@ -364,10 +318,6 @@ module.exports = (function () {
 
         loadLocalFiltersMetadata: loadLocalFiltersMetadata,
         loadLocalFiltersI18Metadata: loadLocalFiltersI18Metadata,
-
-        sendUrlReport: sendUrlReport,
-
-        getResponseHeaders: getResponseHeaders
     };
 
 })();

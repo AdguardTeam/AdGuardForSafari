@@ -79,24 +79,30 @@ module.exports = (() => {
         localStorage.setItem(FILTERS_STATE_PROP, JSON.stringify(filters));
     };
 
-    listeners.addListener((event, filter) => {
-        switch (event) {
-            case listeners.SUCCESS_DOWNLOAD_FILTER:
-                updateFilterState(filter);
-                updateFilterVersion(filter);
-                break;
-            case listeners.FILTER_ADD_REMOVE:
-            case listeners.FILTER_ENABLE_DISABLE:
-                updateFilterState(filter);
-                break;
-        }
-    });
+    /**
+     * Initialize
+     */
+    const init = () => {
+        listeners.addListener((event, filter) => {
+            switch (event) {
+                case listeners.SUCCESS_DOWNLOAD_FILTER:
+                    updateFilterState(filter);
+                    updateFilterVersion(filter);
+                    break;
+                case listeners.FILTER_ADD_REMOVE:
+                case listeners.FILTER_ENABLE_DISABLE:
+                    updateFilterState(filter);
+                    break;
+            }
+        });
+    };
 
     return {
+        init: init,
         getFiltersVersion: getFiltersVersion,
         getFiltersState: getFiltersState,
         updateFilterVersion: updateFilterVersion,
-        updateFilterState: updateFilterState
+        updateFilterState: updateFilterState,
     };
 
 })();
