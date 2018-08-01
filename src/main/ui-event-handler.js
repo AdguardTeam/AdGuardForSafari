@@ -4,6 +4,7 @@ const settings = require('./lib/settings-manager');
 const filters = require('./lib/filters-manager');
 const filterCategories = require('./lib/filters/filters-categories');
 const listeners = require('./notifier');
+const whitelist = require('./lib/whitelist');
 
 /**
  * Initializes event listener
@@ -36,12 +37,23 @@ module.exports.init = function (win) {
             case 'disableAntiBannerFiltersByGroupId':
                 filters.disableAntiBannerFiltersByGroupId(message.groupId);
                 break;
+            case 'getWhiteListDomains':
+                const whiteListDomains = whitelist.getWhiteListDomains();
+                event.returnValue = {content: whiteListDomains.join('\r\n')};
+                break;
+            case 'saveWhiteListDomains':
+                const domains = message.content.split(/[\r\n]+/);
+                whitelist.updateWhiteListDomains(domains);
+                break;
+            case 'changeDefaultWhiteListMode':
+                whitelist.changeDefaultWhiteListMode(message.enabled);
+                break;
         }
     });
 
 };
 
-function eventHandler (win) {
+function eventHandler(win) {
     return function () {
         win.webContents.send('main-to-renderer', {
             type: 'message',

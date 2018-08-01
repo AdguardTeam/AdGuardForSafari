@@ -5,6 +5,7 @@ const fs = require('fs');
 const uiEventListener = require('./src/main/ui-event-handler');
 
 const subscriptions = require('./src/main/lib/filters/subscriptions');
+const whitelist = require('./src/main/lib/whitelist');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -40,6 +41,9 @@ app.on('ready', (() => {
     subscriptions.init(() => {
         console.log('Ok');
     });
+
+    whitelist.init();
+
 
     uiEventListener.init();
     createWindow();

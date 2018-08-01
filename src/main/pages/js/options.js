@@ -230,13 +230,12 @@ const WhiteListFilter = function (options) {
     const changeDefaultWhiteListModeCheckbox = document.querySelector('#changeDefaultWhiteListMode');
 
     function loadWhiteListDomains() {
-        //TODO: Fix implement
-        // contentPage.sendMessage({
-        //     type: 'getWhiteListDomains'
-        // }, function (response) {
-        //     editor.setValue(response.content || '');
-        //     applyChangesBtn.style.display = 'none';
-        // });
+        const response = ipcRenderer.sendSync('renderer-to-main', JSON.stringify({
+            'type': 'getWhiteListDomains'
+        }));
+
+        editor.setValue(response.content || '');
+        applyChangesBtn.style.display = 'none';
     }
 
     function saveWhiteListDomains(e) {
@@ -247,14 +246,13 @@ const WhiteListFilter = function (options) {
         editor.setReadOnly(true);
         const text = editor.getValue();
 
-        //TODO: Fix implement
-        // contentPage.sendMessage({
-        //     type: 'saveWhiteListDomains',
-        //     content: text
-        // }, function () {
-        //     editor.setReadOnly(false);
-        //     applyChangesBtn.style.display = 'none';
-        // });
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'saveWhiteListDomains',
+            'content': text
+        }));
+
+        editor.setReadOnly(false);
+        applyChangesBtn.style.display = 'none';
     }
 
     function updateWhiteListDomains() {
@@ -269,10 +267,12 @@ const WhiteListFilter = function (options) {
     function changeDefaultWhiteListMode(e) {
         e.preventDefault();
 
-        //TODO: Fix implement
-        // contentPage.sendMessage({type: 'changeDefaultWhiteListMode', enabled: !e.currentTarget.checked}, function () {
-        //     updateWhiteListDomains();
-        // });
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'changeDefaultWhiteListMode',
+            enabled: !e.currentTarget.checked
+        }));
+
+        updateWhiteListDomains();
     }
 
     applyChangesBtn.addEventListener('click', saveWhiteListDomains);
@@ -1177,18 +1177,17 @@ const Settings = function () {
 
     const allowAcceptableAdsCheckbox = document.querySelector("#allowAcceptableAds");
     allowAcceptableAdsCheckbox.addEventListener('change', function () {
-        //TODO: Fix implement
-        // if (this.checked) {
-        //     contentPage.sendMessage({
-        //         type: 'addAndEnableFilter',
-        //         filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
-        //     });
-        // } else {
-        //     contentPage.sendMessage({
-        //         type: 'disableAntiBannerFilter',
-        //         filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
-        //     });
-        // }
+        if (this.checked) {
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'addAndEnableFilter',
+                filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
+            }));
+        } else {
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'disableAntiBannerFilter',
+                filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
+            }));
+        }
     });
 
     var render = function () {
@@ -1355,21 +1354,6 @@ PageController.prototype = {
         //TODO: Fix implement
         // this.syncSettings = new SyncSettings({syncStatusInfo: syncStatusInfo});
         // this.syncSettings.renderSyncSettings();
-    },
-
-    allowAcceptableAdsChange: function () {
-        //TODO: Fix implement
-        // if (this.checked) {
-        //     contentPage.sendMessage({
-        //         type: 'addAndEnableFilter',
-        //         filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
-        //     });
-        // } else {
-        //     contentPage.sendMessage({
-        //         type: 'disableAntiBannerFilter',
-        //         filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
-        //     });
-        // }
     },
 
     onResetStatsClicked: function (e) {
