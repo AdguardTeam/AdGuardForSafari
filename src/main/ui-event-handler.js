@@ -6,6 +6,7 @@ const filterCategories = require('./lib/filters/filters-categories');
 const listeners = require('./notifier');
 const whitelist = require('./lib/whitelist');
 const userrules = require('./lib/userrules');
+const antibanner = require('./lib/antibanner');
 
 /**
  * Initializes event listener
@@ -99,7 +100,7 @@ function processInitializeFrameScriptRequest() {
         userSettings: settings.getAllSettings(),
         enabledFilters: enabledFilters,
         filtersMetadata: filters.getFilters(),
-        requestFilterInfo: filters.getRequestFilterInfo(),
+        requestFilterInfo: antibanner.getRequestFilterInfo(),
         //syncStatusInfo: adguard.sync.syncService.getSyncStatus(),
         environmentOptions: {
             isMacOs: true,

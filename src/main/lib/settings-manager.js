@@ -1,6 +1,7 @@
 const localStorage = require('./storage/storage');
 const cache = require('./utils/cache');
 const log = require('./utils/log');
+const channels = require('./utils/channels');
 
 /**
  * Object that manages user settings.
@@ -25,7 +26,7 @@ module.exports = (function () {
     };
 
     const properties = Object.create(null);
-    //const propertyUpdateChannel = adguard.utils.channels.newChannel();
+    const propertyUpdateChannel = channels.newChannel();
 
     /**
      * Lazy default properties
@@ -87,7 +88,7 @@ module.exports = (function () {
     const setProperty = function (propertyName, propertyValue, options) {
         localStorage.setItem(propertyName, propertyValue);
         properties[propertyName] = propertyValue;
-        //propertyUpdateChannel.notify(propertyName, propertyValue);
+        propertyUpdateChannel.notify(propertyName, propertyValue);
 
         //adguard.listeners.notifyListeners(adguard.listeners.SYNC_REQUIRED, options);
     };
@@ -217,7 +218,7 @@ module.exports = (function () {
     api.setProperty = setProperty;
     api.getAllSettings = getAllSettings;
 
-    //api.onUpdated = propertyUpdateChannel;
+    api.onUpdated = propertyUpdateChannel;
 
     api.isFilteringDisabled = isFilteringDisabled;
     api.changeFilteringDisabled = changeFilteringDisabled;

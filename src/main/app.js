@@ -1,6 +1,6 @@
 const whitelist = require('./lib/whitelist');
 const filters = require('./lib/filters-manager');
-const subscriptions = require('./lib/filters/subscriptions');
+const antibanner = require('./lib/antibanner');
 const log = require('./lib/utils/log');
 
 /**
@@ -14,15 +14,20 @@ module.exports = (() => {
     const init = () => {
         log.info('Application initialization..');
 
-        subscriptions.init(() => {
-            whitelist.init();
+        whitelist.init();
 
-            //TODO: Postpone load rules from files and save to storage
-            // filters.loadRules((rules) => {
-            //     console.log('Loaded rules: ' + rules.length);
-            // });
-            log.info('Application initialization finished');
+        antibanner.start({
+            onInstall: function (callback) {
+                // Retrieve filters and install them
+                antibanner.offerFilters(function (filterIds) {
+                    filters.addAndEnableFilters(filterIds, callback);
+                });
+            }
+        }, function () {
+            // Doing nothing
         });
+
+        log.info('Application initialization finished');
     };
 
     return {

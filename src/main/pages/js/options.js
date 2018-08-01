@@ -741,7 +741,7 @@ const AntiBannerFilters = function (options) {
 
         const filterId = e.currentTarget.getAttribute('filterId');
 
-        //TODO: Fix implement
+        //TODO: Custom filters
         // contentPage.sendMessage({
         //     type: 'removeAntiBannerFilter',
         //     filterId: filterId
@@ -800,7 +800,7 @@ const AntiBannerFilters = function (options) {
             document.querySelector('#custom-filter-popup-added-subscribe').addEventListener('click', onSubscribeClicked);
 
             document.querySelector('#custom-filter-popup-remove').addEventListener('click', function () {
-                //TODO: Fix implement
+                //TODO: Custom filters
                 // contentPage.sendMessage({
                 //     type: 'removeAntiBannerFilter',
                 //     filterId: filter.filterId
@@ -810,7 +810,7 @@ const AntiBannerFilters = function (options) {
         }
 
         function onSubscribeClicked() {
-            //TODO: Fix implement
+            //TODO: Custom filters
             //contentPage.sendMessage({type: 'addAndEnableFilter', filterId: filter.filterId});
             closePopup();
         }
@@ -823,7 +823,7 @@ const AntiBannerFilters = function (options) {
             e.preventDefault();
 
             const url = document.querySelector('#custom-filter-popup-url').value;
-            //TODO: Fix implement
+            //TODO: Custom filters
             // contentPage.sendMessage({type: 'loadCustomFilterInfo', url: url}, function (filter) {
             //     if (filter) {
             //         renderStepFour(filter);
@@ -851,7 +851,6 @@ const AntiBannerFilters = function (options) {
             lastUpdateTime = moment(lastUpdateTime);
             lastUpdateTime.locale(environmentOptions.Prefs.locale);
             updateText = lastUpdateTime.format("D MMMM YYYY HH:mm").toLowerCase();
-            //TODO: localization (options_filter_version)
         }
 
         document.querySelector('#lastUpdateTime').textContent = updateText;
@@ -1210,7 +1209,7 @@ const Settings = function () {
         input.dispatchEvent(event);
 
         const onFileLoaded = function (content) {
-            //TODO: Fix implement
+            //TODO: Import settings
             //contentPage.sendMessage({type: 'applySettingsJson', json: content});
         };
 
@@ -1274,7 +1273,7 @@ PageController.prototype = {
     onSettingsImported: function (success) {
         if (success) {
             this.settings.showPopup(i18n.__('options_popup_import_success_title.message'), i18n.__('options_popup_import_success_description.message'));
-            //TODO: Fix implement
+            //TODO: Import settings
             // const self = this;
             // contentPage.sendMessage({type: 'initializeFrameScript'}, function (response) {
             //     userSettings = response.userSettings;
@@ -1310,7 +1309,7 @@ PageController.prototype = {
 
         document.querySelector(".openExtensionStore").addEventListener('click', function (e) {
             e.preventDefault();
-            //TODO: Fix implement
+            //TODO: openExtensionStore
             //contentPage.sendMessage({type: 'openExtensionStore'});
         });
     },
@@ -1341,7 +1340,7 @@ PageController.prototype = {
         this.antiBannerFilters.render();
 
         // Initialize sync tab
-        //TODO: Fix implement
+        //TODO: Sync
         // this.syncSettings = new SyncSettings({syncStatusInfo: syncStatusInfo});
         // this.syncSettings.renderSyncSettings();
     },

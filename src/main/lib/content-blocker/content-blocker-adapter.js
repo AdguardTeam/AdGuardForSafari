@@ -1,6 +1,6 @@
 const listeners = require('../../notifier');
 const settings = require('../settings-manager');
-const filters = require('../filters-manager');
+const antibanner = require('../antibanner');
 const jsonFromFilters = require('../libs/JSConverter');
 const whitelist = require('../whitelist');
 const log = require('../utils/log');
@@ -86,7 +86,9 @@ module.exports = (function () {
 
         log.info('Starting loading content blocker.');
 
-        filters.getRules((rules) => {
+        antibanner.getRules((rules) => {
+
+
             if (settings.isDefaultWhiteListMode()) {
                 rules = rules.concat(whitelist.getRules());
             } else {
