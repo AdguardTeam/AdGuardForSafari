@@ -1,18 +1,23 @@
 const listeners = require('../notifier');
-
+const config = require('config');
 const subscriptions = require('./filters/subscriptions');
 const categories = require('./filters/filters-categories');
 const filtersState = require('./filters/filters-state');
 const events = require('../events');
 const serviceClient = require('./filters/service-client');
-const settings  = require('./settings-manager');
+const settings = require('./settings-manager');
 const collections = require('./utils/collections');
+const rulesStorage = require('./storage/rules-storage');
 
 
 /**
  * Filters manager
  */
 module.exports = (() => {
+
+    const USER_FILTER_ID = config.get('AntiBannerFiltersId').USER_FILTER_ID;
+
+    let loadedRules = null;
 
     /**
      * Gets filter by ID.
@@ -82,10 +87,13 @@ module.exports = (() => {
      * @returns {{rulesCount: number}}
      */
     const getRequestFilterInfo = () => {
-        //TODO: Implement
+        let rulesCount = 0;
+        if (loadedRules) {
+            rulesCount = loadedRules.length;
+        }
 
         return {
-            rulesCount: 0
+            rulesCount: rulesCount
         };
     };
 
@@ -248,18 +256,96 @@ module.exports = (() => {
     };
 
     /**
-     * Returns rules for all enabled filters
+     * Loads filter rules from storage
+     *
+     * @param filterId Filter identifier
+     * @param rulesFilterMap Map for loading rules
+     * @returns {*} Deferred object
      */
-    const getRules = () => {
+    const loadFilterRulesFromStorage = (filterId, rulesFilterMap) => {
+        return new Promise((resolve) => {
+            rulesStorage.read(filterId, rulesText => {
+                if (rulesText) {
+                    rulesFilterMap[filterId] = rulesText;
+                }
+
+                resolve();
+            });
+        });
+    };
+
+    /**
+     * Adds user rules (got from the storage)
+     *
+     * @param rulesFilterMap Map for loading rules
+     * @returns {*} Deferred object
+     * @private
+     */
+    function loadUserRules(rulesFilterMap) {
+        return new Promise((resolve) => {
+            rulesStorage.read(USER_FILTER_ID, rulesText => {
+                if (!rulesText) {
+                    resolve();
+                    return;
+                }
+
+                rulesFilterMap[USER_FILTER_ID] = rulesText;
+                resolve();
+            });
+        });
+    }
+
+    /**
+     * Loads rules for all enabled filters
+     */
+    const loadRules = (callback) => {
         const filters = getFilters();
         filters.filter((f) => {
             return f.enabled;
         });
 
-        const rules = [];
+        // Prepare map for filter rules
+        // Map key is filter ID
+        // Map value is array with filter rules
+        const rulesFilterMap = Object.create(null);
 
-        //TODO: Load rules from storage
-        return rules;
+        const dfds = [];
+        filters.forEach((f) => {
+            dfds.push(loadFilterRulesFromStorage(f.filterId, rulesFilterMap));
+        });
+
+        dfds.push(loadUserRules(rulesFilterMap));
+
+        Promise.all(dfds).then(() => {
+            let rules = [];
+
+            for (let filterId in rulesFilterMap) {
+                filterId = filterId - 0;
+                if (filterId !== USER_FILTER_ID) {
+                    let rulesTexts = rulesFilterMap[filterId];
+                    rules = rules.concat(rulesTexts);
+                }
+            }
+
+            loadedRules = rules;
+
+            callback(rules);
+        });
+    };
+
+    /**
+     * Returns rules for all enabled filters
+     *
+     * @param callback
+     */
+    const getRules = (callback) => {
+        if (!loadedRules) {
+            loadRules((rules) => {
+                callback(rules);
+            });
+        } else {
+            callback(loadedRules);
+        }
     };
 
     return {
@@ -273,7 +359,8 @@ module.exports = (() => {
         addAndEnableFiltersByGroupId: addAndEnableFiltersByGroupId,
         disableAntiBannerFiltersByGroupId: disableAntiBannerFiltersByGroupId,
 
-        getRules: getRules
+        getRules: getRules,
+        loadRules: loadRules
     };
 
 })();

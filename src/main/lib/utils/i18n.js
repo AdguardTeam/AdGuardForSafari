@@ -5,6 +5,16 @@ const collections = require('./collections.js');
  */
 module.exports = (() => {
 
+    /**
+     * Application locale
+     * TODO: Parse and use user's locale
+     *
+     * @returns {string}
+     */
+    const getLocale = () => {
+        return 'en';
+    };
+
     function isArrayElement(array, elem) {
         return array.indexOf(elem) >= 0;
     }
@@ -50,7 +60,9 @@ module.exports = (() => {
             }
 
             return null;
-        }
+        },
+
+        getLocale: getLocale
     };
 
 })();

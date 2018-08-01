@@ -85,23 +85,23 @@ module.exports = (function () {
 
         console.info('Starting loading content blocker.');
 
-        let rules = filters.getRules();
-
-        if (settings.isDefaultWhiteListMode()) {
-            rules = rules.concat(whitelist.getRules());
-        } else {
-            const invertedWhitelistRule = _constructInvertedWhitelistRule();
-            if (invertedWhitelistRule) {
-                rules = rules.concat(invertedWhitelistRule);
+        filters.getRules((rules) => {
+            if (settings.isDefaultWhiteListMode()) {
+                rules = rules.concat(whitelist.getRules());
+            } else {
+                const invertedWhitelistRule = constructInvertedWhitelistRule();
+                if (invertedWhitelistRule) {
+                    rules = rules.concat(invertedWhitelistRule);
+                }
             }
-        }
 
-        const result = jsonFromFilters(rules, rulesLimit);
-        if (result && result.converted) {
-            callback(result);
-        } else {
-            callback(null);
-        }
+            const result = jsonFromFilters(rules, rulesLimit);
+            if (result && result.converted) {
+                callback(result);
+            } else {
+                callback(null);
+            }
+        });
 
     }, 500);
 
@@ -120,7 +120,7 @@ module.exports = (function () {
      *
      * @private
      */
-    const _constructInvertedWhitelistRule = () => {
+    const constructInvertedWhitelistRule = () => {
         const domains = whitelist.getWhiteListDomains();
         let invertedWhitelistRule = '@@||*$document';
         if (domains && domains.length > 0) {
