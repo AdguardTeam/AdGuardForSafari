@@ -1,4 +1,5 @@
-const localStorage = require('./utils/storage');
+const localStorage = require('./storage/storage');
+const cache = require('./utils/cache');
 
 /**
  * Object that manages user settings.
@@ -25,22 +26,12 @@ module.exports = (function () {
     const properties = Object.create(null);
     //const propertyUpdateChannel = adguard.utils.channels.newChannel();
 
-    const lazyGet = function (object, prop, calculateFunc) {
-        let cachedProp = '_' + prop;
-        if (cachedProp in object) {
-            return object[cachedProp];
-        }
-        let value = calculateFunc.apply(object);
-        object[cachedProp] = value;
-        return value;
-    };
-
     /**
      * Lazy default properties
      */
     const defaultProperties = {
         get defaults() {
-            return lazyGet(this, 'defaults', function () {
+            return cache.lazyGet(this, 'defaults', function () {
                 // Initialize default properties
                 const defaults = Object.create(null);
                 for (let name in settings) {

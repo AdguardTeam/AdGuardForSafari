@@ -1,4 +1,7 @@
 const serviceClient = require('./service-client');
+const i18n = require('../utils/i18n');
+const versionUtils = require('../utils/version');
+const app = require('../../app');
 
 /**
  * Service that loads and parses filters metadata from backend server.
@@ -197,12 +200,11 @@ module.exports = (function () {
             });
 
             if (filter) {
-                //TODO: Fix
-                // if (version && adguard.utils.browser.isGreaterVersion(filter.version, version)) {
-                //     //Update version is not greater
-                //     callback();
-                //     return;
-                // }
+                if (version && versionUtils.isGreaterVersion(filter.version, version)) {
+                    //Update version is not greater
+                    callback();
+                    return;
+                }
             } else {
                 filter = new SubscriptionFilter(filterId, groupId, defaultName, defaultDescription, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
                 filter.loaded = true;
@@ -307,9 +309,7 @@ module.exports = (function () {
         const tagId = tag.tagId;
         const localizations = i18nMetadata[tagId];
         if (localizations) {
-            //TODO: Fix locale
-            //const locale = adguard.utils.i18n.normalize(localizations, adguard.app.getLocale());
-            const locale = "en";
+            const locale = i18n.normalize(localizations, app.getLocale());
             const localization = localizations[locale];
             if (localization) {
                 tag.name = localization.name;
@@ -328,9 +328,7 @@ module.exports = (function () {
         const groupId = group.groupId;
         const localizations = i18nMetadata[groupId];
         if (localizations) {
-            //TODO: Fix locale
-            //const locale = adguard.utils.i18n.normalize(localizations, adguard.app.getLocale());
-            const locale = "en";
+            const locale = i18n.normalize(localizations, app.getLocale());
             const localization = localizations[locale];
             if (localization) {
                 group.groupName = localization.name;
@@ -348,9 +346,7 @@ module.exports = (function () {
         const filterId = filter.filterId;
         const localizations = i18nMetadata[filterId];
         if (localizations) {
-            //TODO: Fix locale
-            //const locale = adguard.utils.i18n.normalize(localizations, adguard.app.getLocale());
-            const locale = "en";
+            const locale = i18n.normalize(localizations, app.getLocale());
             const localization = localizations[locale];
             if (localization) {
                 filter.name = localization.name;
@@ -411,10 +407,8 @@ module.exports = (function () {
             const filter = filters[i];
             const languages = filter.languages;
             if (languages && languages.length > 0) {
-                //TODO: Fix locale
-                //const locale = adguard.utils.i18n.normalize(localizations, adguard.app.getLocale());
-                const language = "en";
-                if (language) {
+                const locale = i18n.normalize(languages, app.getLocale());
+                if (locale) {
                     filterIds.push(filter.filterId);
                 }
             }

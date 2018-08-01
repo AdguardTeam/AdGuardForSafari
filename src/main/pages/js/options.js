@@ -667,7 +667,6 @@ const AntiBannerFilters = function (options) {
 
     function renderCategoriesAndFilters() {
         ipcRenderer.on('getFiltersMetadataResponse', (e, response) => {
-            console.log(response.filters);
 
             loadedFiltersInfo.initLoadedFilters(response.filters, response.categories);
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);

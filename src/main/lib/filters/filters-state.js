@@ -1,6 +1,6 @@
 const listeners = require('../../notifier');
 const events = require('../../events');
-const localStorage = require('../utils/storage');
+const localStorage = require('../storage/storage');
 
 /**
  * Helper class for working with filters metadata storage (local storage)

@@ -1,11 +1,10 @@
 /* global require, process */
 
 const {app, BrowserWindow} = require('electron');
-const fs = require('fs');
-const uiEventListener = require('./src/main/ui-event-handler');
 
+const uiEventListener = require('./src/main/ui-event-handler');
+const application = require('./src/main/app');
 const subscriptions = require('./src/main/lib/filters/subscriptions');
-const whitelist = require('./src/main/lib/whitelist');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -38,12 +37,12 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', (() => {
+
     subscriptions.init(() => {
         console.log('Ok');
     });
 
-    whitelist.init();
-
+    application.init();
 
     uiEventListener.init();
     createWindow();

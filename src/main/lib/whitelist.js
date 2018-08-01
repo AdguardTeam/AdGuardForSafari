@@ -1,6 +1,8 @@
 const settings  = require('./settings-manager');
 const listeners = require('../notifier');
-const localStorage = require('./utils/storage');
+const localStorage = require('./storage/storage');
+const collections = require('./utils/collections');
+const cache = require('./utils/cache');
 
 /**
  * Whitelist
@@ -19,36 +21,6 @@ module.exports = (function () {
      */
     const isDefaultWhiteListMode = () => {
         return settings.isDefaultWhiteListMode();
-    };
-
-    const lazyGet = function (object, prop, calculateFunc) {
-        let cachedProp = '_' + prop;
-        if (cachedProp in object) {
-            return object[cachedProp];
-        }
-        let value = calculateFunc.apply(object);
-        object[cachedProp] = value;
-        return value;
-    };
-
-    /**
-     * Clear cached property
-     * @param object Object
-     * @param prop Original property name
-     */
-    const lazyGetClear = function (object, prop) {
-        delete object['_' + prop];
-    };
-
-    const removeAll = function (collection, element) {
-        if (!element || !collection) {
-            return;
-        }
-        for (let i = collection.length - 1; i >= 0; i--) {
-            if (collection[i] === element) {
-                collection.splice(i, 1);
-            }
-        }
     };
 
     /**
@@ -93,7 +65,7 @@ module.exports = (function () {
      */
     const whiteListDomainsHolder = {
         get domains() {
-            return lazyGet(whiteListDomainsHolder, 'domains', function () {
+            return cache.lazyGet(whiteListDomainsHolder, 'domains', function () {
                 return getDomainsFromLocalStorage(WHITE_LIST_DOMAINS_LS_PROP);
             });
         },
@@ -106,7 +78,7 @@ module.exports = (function () {
 
     const blockListDomainsHolder = {
         get domains() {
-            return lazyGet(blockListDomainsHolder, 'domains', function () {
+            return cache.lazyGet(blockListDomainsHolder, 'domains', function () {
                 return getDomainsFromLocalStorage(BLOCK_LIST_DOMAINS_LS_PROP);
             });
         },
@@ -159,9 +131,9 @@ module.exports = (function () {
             return;
         }
         if (isDefaultWhiteListMode()) {
-            removeAll(whiteListDomainsHolder.domains, domain);
+            collections.removeAll(whiteListDomainsHolder.domains, domain);
         } else {
-            removeAll(blockListDomainsHolder.domains, domain);
+            collections.removeAll(blockListDomainsHolder.domains, domain);
         }
     }
 
@@ -300,7 +272,7 @@ module.exports = (function () {
      */
     const clearWhiteListed = function () {
         localStorage.removeItem(WHITE_LIST_DOMAINS_LS_PROP);
-        lazyGetClear(whiteListDomainsHolder, 'domains');
+        cache.lazyGetClear(whiteListDomainsHolder, 'domains');
     };
 
     /**
@@ -308,7 +280,7 @@ module.exports = (function () {
      */
     const clearBlockListed = function () {
         localStorage.removeItem(BLOCK_LIST_DOMAINS_LS_PROP);
-        lazyGetClear(blockListDomainsHolder, 'domains');
+        cache.lazyGetClear(blockListDomainsHolder, 'domains');
     };
 
     /**
@@ -377,8 +349,8 @@ module.exports = (function () {
          * To prevent it we should clear cached values
          * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/933
          */
-        lazyGetClear(whiteListDomainsHolder, 'domains');
-        lazyGetClear(blockListDomainsHolder, 'domains');
+        cache.lazyGetClear(whiteListDomainsHolder, 'domains');
+        cache.lazyGetClear(blockListDomainsHolder, 'domains');
     };
 
     return {

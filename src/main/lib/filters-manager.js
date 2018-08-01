@@ -6,6 +6,7 @@ const filtersState = require('./filters/filters-state');
 const events = require('../events');
 const serviceClient = require('./filters/service-client');
 const settings  = require('./settings-manager');
+const collections = require('./utils/collections');
 
 
 /**
@@ -105,21 +106,6 @@ module.exports = (() => {
     };
 
     /**
-     * Removes array duplicates
-     *
-     * @param arr
-     * @returns {*}
-     */
-    const removeDuplicates = (arr) => {
-        if (!arr || arr.length === 1) {
-            return arr;
-        }
-        return arr.filter(function (elem, pos) {
-            return arr.indexOf(elem) === pos;
-        });
-    };
-
-    /**
      * Loads filter
      *
      * @param filterId
@@ -197,7 +183,7 @@ module.exports = (() => {
             return;
         }
 
-        filterIds = removeDuplicates(filterIds.slice(0));
+        filterIds = collections.removeDuplicates(filterIds.slice(0));
 
         const loadNextFilter = function () {
             if (filterIds.length === 0) {
@@ -223,7 +209,7 @@ module.exports = (() => {
      * @param filterIds
      */
     const disableFilters = (filterIds) => {
-        filterIds = removeDuplicates(filterIds.slice(0));
+        filterIds = collections.removeDuplicates(filterIds.slice(0));
 
         for (let i = 0; i < filterIds.length; i++) {
             const filterId = filterIds[i];

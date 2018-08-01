@@ -1,6 +1,8 @@
+const config = require('config');
+
 const listeners = require('../notifier');
 const filters = require('./filters-manager');
-const rulesStorage = require('./utils/rules-storage');
+const rulesStorage = require('./storage/rules-storage');
 
 /**
  * Class for manage user rules
@@ -9,7 +11,7 @@ module.exports = (function () {
 
     'use strict';
 
-    const USER_FILTER_ID = 0;
+    const USER_FILTER_ID = config.get('AntiBannerFiltersId').USER_FILTER_ID;
 
     /**
      * Save user rules text to storage
