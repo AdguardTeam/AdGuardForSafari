@@ -309,13 +309,14 @@ const UserFilter = function () {
     const applyChangesBtn = document.querySelector('#userFilterApplyChanges');
 
     function loadUserRules() {
-        //TODO: Fix implement
-        // contentPage.sendMessage({
-        //     type: 'getUserRules'
-        // }, function (response) {
-        //     editor.setValue(response.content || '');
-        //     applyChangesBtn.style.display = 'none';
-        // });
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'getUserRules'
+        }));
+
+        ipcRenderer.on('getUserRulesResponse', (e, arg) => {
+            editor.setValue(arg.content || '');
+            applyChangesBtn.style.display = 'none';
+        });
     }
 
     function saveUserRules(e) {
@@ -326,14 +327,13 @@ const UserFilter = function () {
         editor.setReadOnly(true);
         const text = editor.getValue();
 
-        //TODO: Fix implement
-        // contentPage.sendMessage({
-        //     type: 'saveUserRules',
-        //     content: text
-        // }, function () {
-        //     editor.setReadOnly(false);
-        //     applyChangesBtn.style.display = 'none';
-        // });
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'saveUserRules',
+            'content': text
+        }));
+
+        editor.setReadOnly(false);
+        applyChangesBtn.style.display = 'none';
     }
 
     function updateUserFilterRules() {

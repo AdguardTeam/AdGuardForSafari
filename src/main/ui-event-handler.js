@@ -5,6 +5,7 @@ const filters = require('./lib/filters-manager');
 const filterCategories = require('./lib/filters/filters-categories');
 const listeners = require('./notifier');
 const whitelist = require('./lib/whitelist');
+const userrules = require('./lib/userrules');
 
 /**
  * Initializes event listener
@@ -47,6 +48,14 @@ module.exports.init = function (win) {
                 break;
             case 'changeDefaultWhiteListMode':
                 whitelist.changeDefaultWhiteListMode(message.enabled);
+                break;
+            case 'getUserRules':
+                userrules.getUserRulesText(function (content) {
+                    event.sender.send('getUserRulesResponse', {content: content});
+                });
+                break;
+            case 'saveUserRules':
+                userrules.updateUserRulesText(message.content);
                 break;
         }
     });
