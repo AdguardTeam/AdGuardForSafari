@@ -3,6 +3,7 @@ const listeners = require('../notifier');
 const localStorage = require('./storage/storage');
 const collections = require('./utils/collections');
 const cache = require('./utils/cache');
+const log = require('./utils/log');
 
 /**
  * Whitelist
@@ -168,7 +169,7 @@ module.exports = (function () {
                 domains = JSON.parse(json);
             }
         } catch (ex) {
-            console.error("Error retrieve whitelist domains {0}, cause {1}", prop, ex);
+            log.error("Error retrieve whitelist domains {0}, cause {1}", prop, ex);
         }
         return domains;
     }

@@ -8,7 +8,7 @@ const serviceClient = require('./filters/service-client');
 const settings = require('./settings-manager');
 const collections = require('./utils/collections');
 const rulesStorage = require('./storage/rules-storage');
-
+const log = require('./utils/log');
 
 /**
  * Filters manager
@@ -111,6 +111,7 @@ module.exports = (() => {
         filter.enabled = true;
         listeners.notifyListeners(listeners.FILTER_ENABLE_DISABLE, filter);
         //adguard.listeners.notifyListeners(adguard.listeners.SYNC_REQUIRED, options);
+        log.info('Filter {0} enabled successfully', filterId);
     };
 
     /**
@@ -140,6 +141,8 @@ module.exports = (() => {
         }
 
         loadFilterRules(filter, false, onFilterLoaded);
+
+        log.info('Filter {0} added successfully', filterId);
     };
 
     /**
@@ -158,7 +161,7 @@ module.exports = (() => {
         listeners.notifyListeners(listeners.START_DOWNLOAD_FILTER, filter);
 
         const successCallback = function (filterRules) {
-            console.info("Retrieved response from server for filter {0}, rules count: {1}", filter.filterId, filterRules.length);
+            log.info("Retrieved response from server for filter {0}, rules count: {1}", filter.filterId, filterRules.length);
             delete filter._isDownloading;
             filter.version = filterMetadata.version;
             filter.lastUpdateTime = filterMetadata.timeUpdated;
@@ -171,7 +174,7 @@ module.exports = (() => {
         };
 
         const errorCallback = function (cause) {
-            console.error("Error retrieved response from server for filter {0}, cause: {1}", filter.filterId, cause || "");
+            log.error("Error retrieved response from server for filter {0}, cause: {1}", filter.filterId, cause || "");
             delete filter._isDownloading;
             listeners.notifyListeners(adguard.listeners.ERROR_DOWNLOAD_FILTER, filter);
             callback(false);
@@ -228,6 +231,8 @@ module.exports = (() => {
             const filter = subscriptions.getFilter(filterId);
             filter.enabled = false;
             listeners.notifyListeners(listeners.FILTER_ENABLE_DISABLE, filter);
+
+            log.info('Filter {0} disabled successfully', filter.filterId);
         }
 
         //adguard.listeners.notifyListeners(adguard.listeners.SYNC_REQUIRED, options);
@@ -299,6 +304,8 @@ module.exports = (() => {
      * Loads rules for all enabled filters
      */
     const loadRules = (callback) => {
+        log.info('Rules loading started..');
+
         const filters = getFilters();
         filters.filter((f) => {
             return f.enabled;
@@ -330,6 +337,8 @@ module.exports = (() => {
             loadedRules = rules;
 
             callback(rules);
+
+            log.info('Rules loading finished');
         });
     };
 

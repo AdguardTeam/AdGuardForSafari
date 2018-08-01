@@ -1,7 +1,7 @@
 const serviceClient = require('./service-client');
 const i18n = require('../utils/i18n');
 const versionUtils = require('../utils/version');
-//const app = require('../../app');
+const log = require('../utils/log');
 
 /**
  * Service that loads and parses filters metadata from backend server.
@@ -223,7 +223,7 @@ module.exports = (function () {
             callback(filter.filterId);
 
         }, function (request, cause) {
-            console.error("Error download filter by url {0}, cause: {1} {2}", url, request.statusText, cause || "");
+            log.error("Error download filter by url {0}, cause: {1} {2}", url, request.statusText, cause || "");
             callback();
         });
     };
@@ -262,7 +262,7 @@ module.exports = (function () {
 
             groups.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
 
-            console.info('Filters metadata loaded');
+            log.info('Filters metadata loaded');
             successCallback();
 
         }, errorCallback);
@@ -293,7 +293,7 @@ module.exports = (function () {
                 applyGroupLocalization(groups[k], groupsI18n);
             }
 
-            console.info('Filters i18n metadata loaded');
+            log.info('Filters i18n metadata loaded');
             successCallback();
 
         }, errorCallback);
@@ -363,7 +363,7 @@ module.exports = (function () {
     const init = callback => {
 
         const errorCallback = (request, cause) => {
-            console.error('Error loading metadata, cause: {0} {1}', request.statusText, cause);
+            log.error('Error loading metadata, cause: {0} {1}', request.statusText, cause);
         };
 
         loadMetadata(() => {

@@ -3,6 +3,7 @@ const settings = require('../settings-manager');
 const filters = require('../filters-manager');
 const jsonFromFilters = require('../libs/JSConverter');
 const whitelist = require('../whitelist');
+const log = require('../utils/log');
 
 /**
  * Safari Content Blocker Adapter
@@ -78,12 +79,12 @@ module.exports = (function () {
     const loadAndConvertRules = debounce((rulesLimit, callback) => {
 
         if (settings.isFilteringDisabled()) {
-            console.info('Disabling content blocker.');
+            log.info('Disabling content blocker.');
             callback(null);
             return;
         }
 
-        console.info('Starting loading content blocker.');
+        log.info('Starting loading content blocker.');
 
         filters.getRules((rules) => {
             if (settings.isDefaultWhiteListMode()) {
@@ -107,12 +108,12 @@ module.exports = (function () {
 
     const setSafariContentBlocker = json => {
         try {
-            console.info('Setting content blocker. Length=' + json.length);
+            log.info('Setting content blocker. Length=' + json.length);
             //safari.extension.setContentBlocker(json);
             //TODO: Implement setContentBlocker(json);
-            console.info('Content blocker has been set.');
+            log.info('Content blocker has been set.');
         } catch (ex) {
-            console.error('Error while setting content blocker: ' + ex);
+            log.error('Error while setting content blocker: ' + ex);
         }
     };
 

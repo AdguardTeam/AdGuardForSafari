@@ -1,6 +1,7 @@
 const listeners = require('../../notifier');
 const events = require('../../events');
 const localStorage = require('../storage/storage');
+const log = require('../utils/log');
 
 /**
  * Helper class for working with filters metadata storage (local storage)
@@ -22,7 +23,7 @@ module.exports = (() => {
                 filters = JSON.parse(json);
             }
         } catch (ex) {
-            console.error("Error retrieve filters version info, cause {0}", ex);
+            log.error("Error retrieve filters version info, cause {0}", ex);
         }
 
         return filters;
@@ -40,7 +41,7 @@ module.exports = (() => {
                 filters = JSON.parse(json);
             }
         } catch (ex) {
-            console.error("Error retrieve filters state info, cause {0}", ex);
+            log.error("Error retrieve filters state info, cause {0}", ex);
         }
 
         return filters;

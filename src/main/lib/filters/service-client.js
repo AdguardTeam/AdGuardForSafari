@@ -4,6 +4,7 @@ const filterDownloader = require('filters-downloader');
 const subscriptions = require('./subscriptions');
 const config = require('config');
 const path = require('path');
+const log = require('../utils/log');
 
 /**
  * Backend service client
@@ -166,7 +167,7 @@ module.exports = (function () {
         try {
             return JSON.parse(text);
         } catch (ex) {
-            console.error('Error parse json {0}', ex);
+            log.error('Error parse json {0}', ex);
             return null;
         }
     };
@@ -281,7 +282,7 @@ module.exports = (function () {
         const url = settings.localFiltersFolder + '/filters.json';
         fs.readFile(url, "utf8", (err, data) => {
             if (err) {
-                console.error(err);
+                log.error(err);
                 errorCallback();
             }
 
@@ -300,7 +301,7 @@ module.exports = (function () {
         const url = settings.localFiltersFolder + '/filters_i18n.json';
         fs.readFile(url, "utf8", (err, data) => {
             if (err) {
-                console.error(err);
+                log.error(err);
                 errorCallback();
             }
 
@@ -349,7 +350,7 @@ module.exports = (function () {
             });
             callback(headers);
         }, function (request) {
-            console.error("Error retrieved response from {0}, cause: {1}", url, request.statusText);
+            log.error("Error retrieved response from {0}, cause: {1}", url, request.statusText);
             callback(null);
         })
     };

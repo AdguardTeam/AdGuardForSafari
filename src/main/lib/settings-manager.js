@@ -1,5 +1,6 @@
 const localStorage = require('./storage/storage');
 const cache = require('./utils/cache');
+const log = require('./utils/log');
 
 /**
  * Object that manages user settings.
@@ -72,7 +73,7 @@ module.exports = (function () {
             try {
                 propertyValue = JSON.parse(localStorage.getItem(propertyName));
             } catch (ex) {
-                console.error('Error get property {0}, cause: {1}', propertyName, ex);
+                log.error('Error get property {0}, cause: {1}', propertyName, ex);
             }
         } else if (propertyName in defaultProperties.defaults) {
             propertyValue = defaultProperties.defaults[propertyName];

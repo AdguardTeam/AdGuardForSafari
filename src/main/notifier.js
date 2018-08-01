@@ -1,5 +1,5 @@
-
 const events = require('./events');
+const log = require('./lib/utils/log');
 
 /**
  * Simple mediator
@@ -73,7 +73,7 @@ module.exports = (function () {
                     const listener = this.listenersMap[listenerId];
                     listener.apply(listener, arguments);
                 } catch (ex) {
-                    console.error("Error invoking listener for {0} cause: {1}", event, ex);
+                    log.error("Error invoking listener for {0} cause: {1}", event, ex);
                 }
             }
         },
