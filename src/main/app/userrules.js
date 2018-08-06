@@ -22,7 +22,7 @@ module.exports = (function () {
         const lines = content.split(/[\r\n]+/) || [];
         //listeners.notifyListeners(listeners.UPDATE_FILTER_RULES, userFilter, lines);
         rulesStorage.write(USER_FILTER_ID, lines, function () {
-            listeners.notifyListeners(listeners.UPDATE_USER_FILTER_RULES, antibanner.getRequestFilterInfo());
+            listeners.notifyListeners(listeners.UPDATE_USER_FILTER_RULES);
         });
     };
 

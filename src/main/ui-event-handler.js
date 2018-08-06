@@ -103,8 +103,7 @@ function processInitializeFrameScriptRequest() {
         userSettings: settings.getAllSettings(),
         enabledFilters: enabledFilters,
         filtersMetadata: filters.getFilters(),
-        requestFilterInfo: antibanner.getRequestFilterInfo(),
-        //syncStatusInfo: adguard.sync.syncService.getSyncStatus(),
+        contentBlockerInfo: antibanner.getContentBlockerInfo(),
         environmentOptions: {
             isMacOs: true,
             Prefs: {

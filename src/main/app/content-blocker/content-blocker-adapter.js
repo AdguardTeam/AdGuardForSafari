@@ -4,6 +4,7 @@ const antibanner = require('../antibanner');
 const {jsonFromFilters} = require('../libs/JSConverter');
 const whitelist = require('../whitelist');
 const log = require('../utils/log');
+const concurrent = require('../utils/concurrent');
 
 /**
  * Safari Content Blocker Adapter
@@ -13,28 +14,10 @@ const log = require('../utils/log');
 module.exports = (function () {
 
     const RULES_LIMIT = 50000;
+    const DEBOUNCE_PERIOD = 500;
 
     const emptyBlockerUrl = 'config/empty.json';
     let emptyBlockerJSON = null;
-
-    /**
-     * TODO: Move to utils
-     * @param func
-     * @param wait
-     * @returns {Function}
-     */
-    const debounce = function (func, wait) {
-        let timeout;
-        return function () {
-            const context = this, args = arguments;
-            const later = () => {
-                timeout = null;
-                func.apply(context, args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    };
 
     /**
      * Load content blocker
@@ -50,11 +33,10 @@ module.exports = (function () {
 
             const json = JSON.parse(result.converted);
             setSafariContentBlocker(json);
-            //TODO: updateContentBlockerInfo
-            // listeners.notifyListeners(listeners.CONTENT_BLOCKER_UPDATED, {
-            //     rulesCount: json.length,
-            //     rulesOverLimit: result.overLimit
-            // });
+            listeners.notifyListeners(listeners.CONTENT_BLOCKER_UPDATED, {
+                rulesCount: json.length,
+                rulesOverLimit: result.overLimit
+            });
 
         });
     };
@@ -85,7 +67,7 @@ module.exports = (function () {
      * Load rules from requestFilter and WhiteListService and convert for ContentBlocker
      * @private
      */
-    const loadAndConvertRules = debounce((rulesLimit, callback) => {
+    const loadAndConvertRules = concurrent.debounce((rulesLimit, callback) => {
 
         if (settings.isFilteringDisabled()) {
             log.info('Disabling content blocker.');
@@ -114,7 +96,7 @@ module.exports = (function () {
             callback(null);
         }
 
-    }, 500);
+    }, DEBOUNCE_PERIOD);
 
     /**
      * Activates content blocker json

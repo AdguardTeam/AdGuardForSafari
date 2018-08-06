@@ -1,6 +1,7 @@
 const settings = require('../settings-manager');
 const listeners = require('../../notifier');
 const contentBlockerAdapter = require('./content-blocker-adapter');
+const antibanner = require('../antibanner');
 
 /**
  * Content Blocker Listener
@@ -25,13 +26,12 @@ module.exports = (() => {
             }
         });
 
-        //TODO: updateContentBlockerInfo
-        // // When content blocker is updated we need to save finally converted rules count and over limit flag
-        // adguard.listeners.addListener(function (event, info) {
-        //     if (event === adguard.listeners.CONTENT_BLOCKER_UPDATED) {
-        //         adguard.requestFilter.updateContentBlockerInfo(info);
-        //     }
-        // });
+        // When content blocker is updated we need to save finally converted rules count and over limit flag
+        listeners.addListener(function (event, info) {
+            if (event === listeners.CONTENT_BLOCKER_UPDATED) {
+                antibanner.updateContentBlockerInfo(info);
+            }
+        });
     };
 
     return {

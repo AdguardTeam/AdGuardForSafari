@@ -7,6 +7,7 @@ const filters = require('./filters-manager');
 const settings = require('./settings-manager');
 const rulesStorage = require('./storage/rules-storage');
 const collections = require('./utils/collections');
+const concurrent = require('./utils/concurrent');
 
 /**
  * Antibanner service
@@ -17,6 +18,14 @@ module.exports = (() => {
 
     let applicationInitialized = false;
     let requestFilter = null;
+
+    /**
+     * Persist state of content blocker
+     */
+    const contentBlockerInfo = {
+        rulesCount: 0,
+        rulesOverLimit: false
+    };
 
     /**
      * Period for filters update check -- 48 hours
@@ -57,19 +66,6 @@ module.exports = (() => {
         return SAVE_FILTER_RULES_TO_STORAGE_EVENTS.indexOf(el.event) >= 0;
     };
 
-    const debounce = function (func, wait) {
-        let timeout;
-        return function () {
-            const context = this, args = arguments;
-            const later = () => {
-                timeout = null;
-                func.apply(context, args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    };
-
     const scheduleFiltersUpdate = () => {
         //TODO: scheduleFiltersUpdate
     };
@@ -93,7 +89,7 @@ module.exports = (() => {
      */
     const subscribeToFiltersChangeEvents = () => {
         // on USE_OPTIMIZED_FILTERS setting change we need to reload filters
-        const onUsedOptimizedFiltersChange = debounce(reloadAntiBannerFilters, RELOAD_FILTERS_DEBOUNCE_PERIOD);
+        const onUsedOptimizedFiltersChange = concurrent.debounce(reloadAntiBannerFilters, RELOAD_FILTERS_DEBOUNCE_PERIOD);
 
         settings.onUpdated.addListener(function (setting) {
             if (setting === settings.USE_OPTIMIZED_FILTERS) {
@@ -181,7 +177,7 @@ module.exports = (() => {
                 callback();
             }
 
-            listeners.notifyListeners(listeners.REQUEST_FILTER_UPDATED, getRequestFilterInfo());
+            listeners.notifyListeners(listeners.REQUEST_FILTER_UPDATED);
             log.info("Finished request filter initialization in {0} ms. Rules count: {1}", (new Date().getTime() - start), newRequestFilter.rules.length);
         };
 
@@ -280,20 +276,6 @@ module.exports = (() => {
         loadFilterRules();
     };
 
-    /**
-     * Request Filter info
-     */
-    const getRequestFilterInfo = function () {
-        let rulesCount = 0;
-        if (requestFilter) {
-            rulesCount = requestFilter.rules.length;
-        }
-
-        return {
-            rulesCount: rulesCount
-        };
-    };
-
     const getRules = () => {
         return requestFilter ? requestFilter.rules : [];
     };
@@ -341,7 +323,7 @@ module.exports = (() => {
                 rulesStorage.write(filterId, loadedRulesText, function () {
                     resolve();
                     if (filterId === adguard.utils.filters.USER_FILTER_ID) {
-                        listeners.notifyListeners(listeners.UPDATE_USER_FILTER_RULES, getRequestFilterInfo());
+                        listeners.notifyListeners(listeners.UPDATE_USER_FILTER_RULES);
                     }
                 });
             });
@@ -398,7 +380,7 @@ module.exports = (() => {
                     Promise.all(dfds).then(createRequestFilter);
                 } else {
                     // Rules are already in request filter, notify listeners
-                    listeners.notifyListeners(listeners.REQUEST_FILTER_UPDATED, getRequestFilterInfo());
+                    listeners.notifyListeners(listeners.REQUEST_FILTER_UPDATED);
                 }
 
             }, FILTERS_CHANGE_DEBOUNCE_PERIOD);
@@ -532,11 +514,27 @@ module.exports = (() => {
         callback(filterIds);
     };
 
+    /**
+     * Update content blocker info
+     * We save state of content blocker for properly show in options page (converted rules count and over limit flag)
+     * @param info Content blocker info
+     */
+    const updateContentBlockerInfo = info => {
+        contentBlockerInfo.rulesCount = info.rulesCount;
+        contentBlockerInfo.rulesOverLimit = info.rulesOverLimit;
+    };
+
+    /**
+     * Content Blocker info
+     */
+    const getContentBlockerInfo = () => contentBlockerInfo;
+
     return {
         start: start,
         offerFilters: offerFilters,
-        getRequestFilterInfo: getRequestFilterInfo,
         getRules: getRules,
-        checkAntiBannerFiltersUpdate: checkAntiBannerFiltersUpdate
+        checkAntiBannerFiltersUpdate: checkAntiBannerFiltersUpdate,
+        updateContentBlockerInfo: updateContentBlockerInfo,
+        getContentBlockerInfo: getContentBlockerInfo
     }
 })();

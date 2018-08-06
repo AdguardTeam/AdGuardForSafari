@@ -858,6 +858,9 @@ const AntiBannerFilters = function (options) {
     function updateRulesCountInfo(info) {
         const message = i18n.__("options_antibanner_info.message", String(info.rulesCount || 0));
         document.querySelector('#filtersRulesInfo').textContent = message;
+
+        // TODO: Show content blocker limit warning
+        //checkSafariContentBlockerRulesLimit(info.rulesOverLimit);
     }
 
     function onFilterStateChanged(filter) {
@@ -1032,7 +1035,7 @@ PageController.prototype = {
         this.userFilter.updateUserFilterRules();
 
         // Initialize AntiBanner filters
-        this.antiBannerFilters = new AntiBannerFilters({rulesInfo: requestFilterInfo});
+        this.antiBannerFilters = new AntiBannerFilters({rulesInfo: contentBlockerInfo});
         this.antiBannerFilters.render();
     }
 };
@@ -1041,7 +1044,7 @@ let userSettings;
 let enabledFilters;
 let environmentOptions;
 let AntiBannerFiltersId;
-let requestFilterInfo;
+let contentBlockerInfo;
 
 /**
  * Initializes page
@@ -1051,7 +1054,7 @@ const initPage = function (response) {
     userSettings = response.userSettings;
     enabledFilters = response.enabledFilters;
     environmentOptions = response.environmentOptions;
-    requestFilterInfo = response.requestFilterInfo;
+    contentBlockerInfo = response.contentBlockerInfo;
 
     AntiBannerFiltersId = response.constants.AntiBannerFiltersId;
 
@@ -1080,12 +1083,11 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.UPDATE_USER_FILTER_RULES:
                     controller.userFilter.updateUserFilterRules();
-                    controller.antiBannerFilters.updateRulesCountInfo(options);
                     break;
                 case EventNotifierTypes.UPDATE_WHITELIST_FILTER_RULES:
                     controller.whiteListFilter.updateWhiteListDomains();
                     break;
-                case EventNotifierTypes.REQUEST_FILTER_UPDATED:
+                case EventNotifierTypes.CONTENT_BLOCKER_UPDATED:
                     controller.antiBannerFilters.updateRulesCountInfo(options);
                     break;
             }
