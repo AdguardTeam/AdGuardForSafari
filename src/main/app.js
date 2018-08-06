@@ -23,7 +23,7 @@ module.exports = (() => {
         antibanner.start({
             onInstall: function (callback) {
                 // Retrieve filters and install them
-                antibanner.offerFilters(function (filterIds) {
+                filters.offerFilters(function (filterIds) {
                     filters.addAndEnableFilters(filterIds, callback);
                 });
             }

@@ -1,16 +1,14 @@
 const log = require('./utils/log');
-const i18n = require('./utils/i18n');
 const config = require('config');
 const subscriptions = require('./filters/subscriptions');
 const listeners = require('../notifier');
 const filters = require('./filters-manager');
 const settings = require('./settings-manager');
-const rulesStorage = require('./storage/rules-storage');
 const collections = require('./utils/collections');
 const concurrent = require('./utils/concurrent');
 const updateService = require('./update-service');
-const versionUtils = require('./utils/version');
-const serviceClient = require('./filters/service-client');
+const filtersUpdate = require('./filters/filters-update');
+const filterRules = require('./filters/filter-rules');
 
 /**
  * Antibanner service
@@ -21,6 +19,7 @@ module.exports = (() => {
 
     let applicationInitialized = false;
     let requestFilter = null;
+    let requestFilterInitTime = 0;
 
     /**
      * Persist state of content blocker
@@ -29,16 +28,6 @@ module.exports = (() => {
         rulesCount: 0,
         rulesOverLimit: false
     };
-
-    /**
-     * Period for filters update check -- 48 hours
-     */
-    const UPDATE_FILTERS_PERIOD = 48 * 60 * 60 * 1000;
-
-    /**
-     * Delay before doing first filters update check -- 5 minutes
-     */
-    const UPDATE_FILTERS_DELAY = 5 * 60 * 1000;
 
     /**
      * Delay on application updated event
@@ -70,205 +59,6 @@ module.exports = (() => {
     };
 
     /**
-     * Schedules filters update job
-     *
-     * @param isFirstRun App first run flag
-     * @private
-     */
-    const scheduleFiltersUpdate = (isFirstRun) => {
-        // First run delay
-        setTimeout(checkAntiBannerFiltersUpdate, UPDATE_FILTERS_DELAY, isFirstRun === true);
-
-        // Scheduling job
-        const scheduleUpdate = () => {
-            setTimeout(() => {
-                try {
-                    checkAntiBannerFiltersUpdate();
-                } catch (ex) {
-                    log.error("Error update filters, cause {0}", ex);
-                }
-                scheduleUpdate();
-            }, UPDATE_FILTERS_PERIOD);
-        };
-
-        scheduleUpdate();
-    };
-
-    /**
-     * Checks filters updates.
-     *
-     * @param forceUpdate Normally we respect filter update period. But if this parameter is
-     *                    true - we ignore it and check updates for all filters.
-     * @param successCallback Called if filters were updated successfully
-     * @param errorCallback Called if something gone wrong
-     */
-    const checkAntiBannerFiltersUpdate = (forceUpdate, successCallback, errorCallback) => {
-        successCallback = successCallback || function () {
-                // Empty callback
-            };
-        errorCallback = errorCallback || function () {
-                // Empty callback
-            };
-
-        log.info("Start checking filters updates..");
-
-        // Select filters for update
-        const toUpdate = selectFilterIdsToUpdate(forceUpdate);
-        const filterIdsToUpdate = toUpdate.filterIds;
-        const customFilterIdsToUpdate = toUpdate.customFilterIds;
-
-        const totalToUpdate = filterIdsToUpdate.length + customFilterIdsToUpdate.length;
-        if (totalToUpdate === 0) {
-            if (successCallback) {
-                successCallback([]);
-                return;
-            }
-        }
-
-        log.info("Checking updates for {0} filters", totalToUpdate);
-
-        // Load filters with changed version
-        const loadFiltersFromBackendCallback = filterMetadataList => {
-            loadFiltersFromBackend(filterMetadataList, (success, filterIds) => {
-                if (success) {
-                    const filters = [];
-                    for (let i = 0; i < filterIds.length; i++) {
-                        const filter = subscriptions.getFilter(filterIds[i]);
-                        if (filter) {
-                            filters.push(filter);
-                        }
-                    }
-
-                    //TODO: Custom filters
-                    // updateCustomFilters(customFilterIdsToUpdate, function (customFilters) {
-                    //     successCallback(filters.concat(customFilters));
-                    // });
-
-                    log.info('Filters updated successfully');
-                    successCallback(filters);
-                } else {
-                    errorCallback();
-                }
-            });
-        };
-
-        // Method is called after we have got server response
-        // Now we check filters version and update filter if needed
-        const onLoadFilterMetadataList = (success, filterMetadataList) => {
-            if (success) {
-                const filterMetadataListToUpdate = [];
-                for (let i = 0; i < filterMetadataList.length; i++) {
-                    const filterMetadata = subscriptions.createSubscriptionFilterFromJSON(filterMetadataList[i]);
-                    const filter = subscriptions.getFilter(filterMetadata.filterId);
-                    if (filter && filterMetadata.version && versionUtils.isGreaterVersion(filterMetadata.version, filter.version)) {
-                        log.info("Updating filter {0} to version {1}", filter.filterId, filterMetadata.version);
-                        filterMetadataListToUpdate.push(filterMetadata);
-                    }
-                }
-
-                loadFiltersFromBackendCallback(filterMetadataListToUpdate);
-            } else {
-                errorCallback();
-            }
-        };
-
-        // Retrieve current filters metadata for update
-        loadFiltersMetadataFromBackend(filterIdsToUpdate, onLoadFilterMetadataList);
-    };
-
-    /**
-     * Loads filter versions from remote server
-     *
-     * @param filterIds Filter identifiers
-     * @param callback Callback (called when load is finished)
-     * @private
-     */
-    const loadFiltersMetadataFromBackend = (filterIds, callback) => {
-
-        if (filterIds.length === 0) {
-            callback(true, []);
-            return;
-        }
-
-        const loadSuccess = function (filterMetadataList) {
-            log.debug("Retrieved response from server for {0} filters, result: {1} metadata", filterIds.length, filterMetadataList.length);
-            callback(true, filterMetadataList);
-        };
-
-        const loadError = function (request, cause) {
-            log.error("Error retrieved response from server for filters {0}, cause: {1} {2}", filterIds, request.statusText, cause || "");
-            callback(false);
-        };
-
-        serviceClient.loadFiltersMetadata(filterIds, loadSuccess, loadError);
-    };
-
-    /**
-     * Loads filters (ony-by-one) from the remote server
-     *
-     * @param filterMetadataList List of filter metadata to load
-     * @param callback Called when filters have been loaded
-     * @private
-     */
-    const loadFiltersFromBackend = (filterMetadataList, callback) => {
-
-        const dfds = [];
-        const loadedFilters = [];
-
-        filterMetadataList.forEach(function (filterMetadata) {
-            const dfd = new Promise((resolve, reject) => {
-                filters.loadFilterRules(filterMetadata, true, function (success) {
-                    if (!success) {
-                        reject();
-                        return;
-                    }
-
-                    loadedFilters.push(filterMetadata.filterId);
-                    resolve();
-                });
-            });
-
-            dfds.push(dfd);
-        });
-
-        Promise.all(dfds).then(function () {
-            callback(true, loadedFilters);
-        }, function () {
-            callback(false);
-        });
-    };
-
-    /**
-     * Select filters for update. It depends on the time of last update.
-     *
-     * @param forceUpdate Force update flag.
-     * @returns object
-     */
-    const selectFilterIdsToUpdate = (forceUpdate) => {
-        const filterIds = [];
-        const customFilterIds = [];
-        const filters = subscriptions.getFilters();
-        for (let filter of filters) {
-            if (filter.installed && filter.enabled) {
-                // Check filters update period (or forceUpdate flag)
-                const needUpdate = forceUpdate || (!filter.lastCheckTime || (Date.now() - filter.lastCheckTime) >= UPDATE_FILTERS_PERIOD);
-                if (needUpdate) {
-                    if (filter.customUrl) {
-                        customFilterIds.push(filter.filterId);
-                    } else {
-                        filterIds.push(filter.filterId);
-                    }
-                }
-            }
-        }
-
-        return {
-            filterIds: filterIds,
-            customFilterIds: customFilterIds
-        };
-    };
-
-    /**
      * Triggers filters load
      */
     const loadFiltersVersionAndStateInfo = () => {
@@ -296,7 +86,7 @@ module.exports = (() => {
      */
     const reloadAntiBannerFilters = (successCallback, errorCallback) => {
         resetFiltersVersion();
-        checkAntiBannerFiltersUpdate(true, successCallback, errorCallback);
+        filtersUpdate.checkAntiBannerFiltersUpdate(true, successCallback, errorCallback);
     };
 
     /**
@@ -309,48 +99,7 @@ module.exports = (() => {
         settings.onUpdated.addListener(function (setting) {
             if (setting === settings.USE_OPTIMIZED_FILTERS) {
                 onUsedOptimizedFiltersChange();
-                return;
             }
-        });
-    };
-
-    /**
-     * Loads filter rules from storage
-     *
-     * @param filterId Filter identifier
-     * @param rulesFilterMap Map for loading rules
-     * @returns {*} Deferred object
-     */
-    const loadFilterRulesFromStorage = (filterId, rulesFilterMap) => {
-        return new Promise((resolve) => {
-            rulesStorage.read(filterId, rulesText => {
-                if (rulesText) {
-                    rulesFilterMap[filterId] = rulesText;
-                }
-
-                resolve();
-            });
-        });
-    };
-
-    /**
-     * Adds user rules (got from the storage)
-     *
-     * @param rulesFilterMap Map for loading rules
-     * @returns {*} Deferred object
-     * @private
-     */
-    const loadUserRules = (rulesFilterMap) => {
-        return new Promise((resolve) => {
-            rulesStorage.read(USER_FILTER_ID, rulesText => {
-                if (!rulesText) {
-                    resolve();
-                    return;
-                }
-
-                rulesFilterMap[USER_FILTER_ID] = rulesText;
-                resolve();
-            });
         });
     };
 
@@ -370,11 +119,11 @@ module.exports = (() => {
             rules: []
         };
 
-        // if (requestFilterInitTime === 0) {
-        //     // Setting the time of request filter very first initialization
-        //     requestFilterInitTime = new Date().getTime();
-        //     adguard.listeners.notifyListeners(adguard.listeners.APPLICATION_INITIALIZED);
-        // }
+        if (requestFilterInitTime === 0) {
+            // Setting the time of request filter very first initialization
+            requestFilterInitTime = new Date().getTime();
+            listeners.notifyListeners(listeners.APPLICATION_INITIALIZED);
+        }
 
         // Supplement object to make sure that we use only unique filter rules
         const uniqueRules = Object.create(null);
@@ -479,10 +228,10 @@ module.exports = (() => {
             for (let i = 0; i < filters.length; i++) {
                 const filter = filters[i];
                 if (filter.enabled) {
-                    dfds.push(loadFilterRulesFromStorage(filter.filterId, rulesFilterMap));
+                    dfds.push(filterRules.loadFilterRulesFromStorage(filter.filterId, rulesFilterMap));
                 }
             }
-            dfds.push(loadUserRules(rulesFilterMap));
+            dfds.push(filterRules.loadUserRules(rulesFilterMap));
 
             // Load all filters and then recreate request filter
             Promise.all(dfds).then(loadAllFilterRulesDone);
@@ -491,58 +240,11 @@ module.exports = (() => {
         loadFilterRules();
     };
 
+    /**
+     * @returns rules array or []
+     */
     const getRules = () => {
         return requestFilter ? requestFilter.rules : [];
-    };
-
-    /**
-     * Saves updated filter rules to the storage.
-     *
-     * @param filterId Filter id
-     * @param events Events (what has changed?)
-     * @private
-     */
-    const processSaveFilterRulesToStorageEvents = (filterId, events) => {
-
-        return new Promise((resolve) => {
-            rulesStorage.read(filterId, function (loadedRulesText) {
-
-                for (let i = 0; i < events.length; i++) {
-
-                    if (!loadedRulesText) {
-                        loadedRulesText = [];
-                    }
-
-                    const event = events[i];
-                    const eventType = event.event;
-                    const eventRules = event.rules;
-
-                    switch (eventType) {
-                        case listeners.ADD_RULES:
-                            loadedRulesText = loadedRulesText.concat(eventRules);
-                            log.debug("Add {0} rules to filter {1}", eventRules.length, filterId);
-                            break;
-                        case listeners.REMOVE_RULE:
-                            const actionRule = eventRules[0];
-                            collections.removeAll(loadedRulesText, actionRule);
-                            log.debug("Remove {0} rule from filter {1}", actionRule, filterId);
-                            break;
-                        case listeners.UPDATE_FILTER_RULES:
-                            loadedRulesText = eventRules;
-                            log.debug("Update filter {0} rules count to {1}", filterId, eventRules.length);
-                            break;
-                    }
-                }
-
-                log.debug("Save {0} rules to filter {1}", loadedRulesText.length, filterId);
-                rulesStorage.write(filterId, loadedRulesText, function () {
-                    resolve();
-                    if (filterId === adguard.utils.filters.USER_FILTER_ID) {
-                        listeners.notifyListeners(listeners.UPDATE_USER_FILTER_RULES);
-                    }
-                });
-            });
-        });
     };
 
     /**
@@ -586,7 +288,7 @@ module.exports = (() => {
                     if (!needSaveRulesToStorage) {
                         continue;
                     }
-                    const dfd = processSaveFilterRulesToStorageEvents(filterId, eventsByFilter[filterId]);
+                    const dfd = filterRules.processSaveFilterRulesToStorageEvents(filterId, eventsByFilter[filterId]);
                     dfds.push(dfd);
                 }
 
@@ -674,7 +376,7 @@ module.exports = (() => {
             }
 
             // Schedule filters update job
-            scheduleFiltersUpdate(runInfo.isFirstRun);
+            filtersUpdate.scheduleFiltersUpdate(runInfo.isFirstRun);
         };
 
         /**
@@ -705,22 +407,6 @@ module.exports = (() => {
     };
 
     /**
-     * Offer filters on extension install, select default filters and filters by locale and country
-     *
-     * @param callback
-     */
-    const offerFilters = (callback) => {
-        // These filters are enabled by default
-        let filterIds = [config.AntiBannerFiltersId.ENGLISH_FILTER_ID, config.AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID];
-
-        // Get language-specific filters by user locale
-        let localeFilterIds = subscriptions.getFilterIdsForLanguage(i18n.getLocale());
-        filterIds = filterIds.concat(localeFilterIds);
-
-        callback(filterIds);
-    };
-
-    /**
      * Update content blocker info
      * We save state of content blocker for properly show in options page (converted rules count and over limit flag)
      * @param info Content blocker info
@@ -737,9 +423,7 @@ module.exports = (() => {
 
     return {
         start: start,
-        offerFilters: offerFilters,
         getRules: getRules,
-        checkAntiBannerFiltersUpdate: checkAntiBannerFiltersUpdate,
         updateContentBlockerInfo: updateContentBlockerInfo,
         getContentBlockerInfo: getContentBlockerInfo
     }

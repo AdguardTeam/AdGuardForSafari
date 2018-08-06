@@ -4,10 +4,9 @@ const subscriptions = require('./filters/subscriptions');
 const categories = require('./filters/filters-categories');
 const filtersState = require('./filters/filters-state');
 const events = require('../events');
-const serviceClient = require('./filters/service-client');
-const settings = require('./settings-manager');
 const collections = require('./utils/collections');
 const log = require('./utils/log');
+const filtersUpdate = require('./filters/filters-update');
 
 /**
  * Filters manager
@@ -118,47 +117,9 @@ module.exports = (() => {
             return;
         }
 
-        loadFilterRules(filter, false, onFilterLoaded);
+        filtersUpdate.loadFilterRules(filter, false, onFilterLoaded);
 
         log.info('Filter {0} added successfully', filterId);
-    };
-
-    /**
-     * Loads filter rules
-     *
-     * @param filterMetadata Filter metadata
-     * @param forceRemote Force download filter rules from remote server (if false try to download local copy of rules if it's possible)
-     * @param callback Called when filter rules have been loaded
-     * @private
-     */
-    const loadFilterRules = (filterMetadata, forceRemote, callback) => {
-
-        const filter = getFilterById(filterMetadata.filterId);
-
-        filter._isDownloading = true;
-        listeners.notifyListeners(listeners.START_DOWNLOAD_FILTER, filter);
-
-        const successCallback = function (filterRules) {
-            log.info("Retrieved response from server for filter {0}, rules count: {1}", filter.filterId, filterRules.length);
-            delete filter._isDownloading;
-            filter.version = filterMetadata.version;
-            filter.lastUpdateTime = filterMetadata.timeUpdated;
-            filter.lastCheckTime = Date.now();
-            filter.loaded = true;
-            //notify listeners
-            listeners.notifyListeners(listeners.SUCCESS_DOWNLOAD_FILTER, filter);
-            listeners.notifyListeners(listeners.UPDATE_FILTER_RULES, filter, filterRules);
-            callback(true);
-        };
-
-        const errorCallback = function (cause) {
-            log.error("Error retrieved response from server for filter {0}, cause: {1}", filter.filterId, cause || "");
-            delete filter._isDownloading;
-            listeners.notifyListeners(adguard.listeners.ERROR_DOWNLOAD_FILTER, filter);
-            callback(false);
-        };
-
-        serviceClient.loadFilterRules(filter.filterId, forceRemote, settings.isUseOptimizedFiltersEnabled(), successCallback, errorCallback);
     };
 
     /**
@@ -236,6 +197,34 @@ module.exports = (() => {
         disableFilters(idsByTagId);
     };
 
+    /**
+     * Offer filters on extension install, select default filters and filters by locale and country
+     *
+     * @param callback
+     */
+    const offerFilters = (callback) => {
+        // These filters are enabled by default
+        let filterIds = [config.AntiBannerFiltersId.ENGLISH_FILTER_ID, config.AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID];
+
+        // Get language-specific filters by user locale
+        let localeFilterIds = subscriptions.getFilterIdsForLanguage(i18n.getLocale());
+        filterIds = filterIds.concat(localeFilterIds);
+
+        callback(filterIds);
+    };
+
+    /**
+     * Checks filters updates.
+     *
+     * @param forceUpdate Normally we respect filter update period. But if this parameter is
+     *                    true - we ignore it and check updates for all filters.
+     * @param successCallback Called if filters were updated successfully
+     * @param errorCallback Called if something gone wrong
+     */
+    const checkAntiBannerFiltersUpdate = (forceUpdate, successCallback, errorCallback) => {
+        filtersUpdate.checkAntiBannerFiltersUpdate(forceUpdate, successCallback, errorCallback);
+    };
+
     return {
         getFilters: getFilters,
         isFilterEnabled: isFilterEnabled,
@@ -246,7 +235,9 @@ module.exports = (() => {
         addAndEnableFiltersByGroupId: addAndEnableFiltersByGroupId,
         disableAntiBannerFiltersByGroupId: disableAntiBannerFiltersByGroupId,
 
-        loadFilterRules: loadFilterRules
+        offerFilters: offerFilters,
+
+        checkAntiBannerFiltersUpdate: checkAntiBannerFiltersUpdate
     };
 
 })();
