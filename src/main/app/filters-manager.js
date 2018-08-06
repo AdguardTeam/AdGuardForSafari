@@ -1,9 +1,9 @@
 const listeners = require('../notifier');
+const events = require('../events');
 const config = require('config');
 const subscriptions = require('./filters/subscriptions');
 const categories = require('./filters/filters-categories');
 const filtersState = require('./filters/filters-state');
-const events = require('../events');
 const collections = require('./utils/collections');
 const log = require('./utils/log');
 const filtersUpdate = require('./filters/filters-update');
@@ -87,7 +87,7 @@ module.exports = (() => {
 
         let filter = subscriptions.getFilter(filterId);
         filter.enabled = true;
-        listeners.notifyListeners(listeners.FILTER_ENABLE_DISABLE, filter);
+        listeners.notifyListeners(events.FILTER_ENABLE_DISABLE, filter);
         log.info('Filter {0} enabled successfully', filterId);
     };
 
@@ -107,7 +107,7 @@ module.exports = (() => {
         const onFilterLoaded = function (success) {
             if (success) {
                 filter.installed = true;
-                listeners.notifyListeners(listeners.FILTER_ADD_REMOVE, filter);
+                listeners.notifyListeners(events.FILTER_ADD_REMOVE, filter);
             }
             callback(success);
         };
@@ -169,7 +169,7 @@ module.exports = (() => {
 
             const filter = subscriptions.getFilter(filterId);
             filter.enabled = false;
-            listeners.notifyListeners(listeners.FILTER_ENABLE_DISABLE, filter);
+            listeners.notifyListeners(events.FILTER_ENABLE_DISABLE, filter);
 
             log.info('Filter {0} disabled successfully', filter.filterId);
         }

@@ -2,6 +2,7 @@ const log = require('./utils/log');
 const config = require('config');
 const subscriptions = require('./filters/subscriptions');
 const listeners = require('../notifier');
+const events = require('../events');
 const filters = require('./filters-manager');
 const settings = require('./settings-manager');
 const collections = require('./utils/collections');
@@ -42,7 +43,7 @@ module.exports = (() => {
      * List of events which cause RequestFilter re-creation
      * @type {Array}
      */
-    const UPDATE_REQUEST_FILTER_EVENTS = [listeners.UPDATE_FILTER_RULES, listeners.FILTER_ENABLE_DISABLE];
+    const UPDATE_REQUEST_FILTER_EVENTS = [events.UPDATE_FILTER_RULES, events.FILTER_ENABLE_DISABLE];
 
     const isUpdateRequestFilterEvent = function (el) {
         return UPDATE_REQUEST_FILTER_EVENTS.indexOf(el.event) >= 0;
@@ -52,7 +53,7 @@ module.exports = (() => {
      * List of events which cause saving filter rules to the rules storage
      * @type {Array}
      */
-    const SAVE_FILTER_RULES_TO_STORAGE_EVENTS = [listeners.UPDATE_FILTER_RULES, listeners.ADD_RULES, listeners.REMOVE_RULE];
+    const SAVE_FILTER_RULES_TO_STORAGE_EVENTS = [events.UPDATE_FILTER_RULES, events.ADD_RULES, events.REMOVE_RULE];
 
     const isSaveRulesToStorageEvent = function (el) {
         return SAVE_FILTER_RULES_TO_STORAGE_EVENTS.indexOf(el.event) >= 0;
@@ -122,7 +123,7 @@ module.exports = (() => {
         if (requestFilterInitTime === 0) {
             // Setting the time of request filter very first initialization
             requestFilterInitTime = new Date().getTime();
-            listeners.notifyListeners(listeners.APPLICATION_INITIALIZED);
+            listeners.notifyListeners(events.APPLICATION_INITIALIZED);
         }
 
         // Supplement object to make sure that we use only unique filter rules
@@ -141,7 +142,7 @@ module.exports = (() => {
                 callback();
             }
 
-            listeners.notifyListeners(listeners.REQUEST_FILTER_UPDATED);
+            listeners.notifyListeners(events.REQUEST_FILTER_UPDATED);
             log.info("Finished request filter initialization in {0} ms. Rules count: {1}", (new Date().getTime() - start), newRequestFilter.rules.length);
         };
 
@@ -297,7 +298,7 @@ module.exports = (() => {
                     Promise.all(dfds).then(createRequestFilter);
                 } else {
                     // Rules are already in request filter, notify listeners
-                    listeners.notifyListeners(listeners.REQUEST_FILTER_UPDATED);
+                    listeners.notifyListeners(events.REQUEST_FILTER_UPDATED);
                 }
 
             }, FILTERS_CHANGE_DEBOUNCE_PERIOD);
@@ -306,10 +307,10 @@ module.exports = (() => {
 
         listeners.addListener(function (event, filter, rules) {
             switch (event) {
-                case listeners.ADD_RULES:
-                case listeners.REMOVE_RULE:
-                case listeners.UPDATE_FILTER_RULES:
-                case listeners.FILTER_ENABLE_DISABLE:
+                case events.ADD_RULES:
+                case events.REMOVE_RULE:
+                case events.UPDATE_FILTER_RULES:
+                case events.FILTER_ENABLE_DISABLE:
                     processFilterEvent(event, filter, rules);
                     break;
             }
@@ -331,7 +332,7 @@ module.exports = (() => {
          */
         const notifyApplicationUpdated = runInfo => {
             setTimeout(() => {
-                listeners.notifyListeners(listeners.APPLICATION_UPDATED, runInfo);
+                listeners.notifyListeners(events.APPLICATION_UPDATED, runInfo);
             }, APP_UPDATED_NOTIFICATION_DELAY);
         };
 

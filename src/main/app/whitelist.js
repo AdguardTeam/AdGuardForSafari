@@ -1,5 +1,6 @@
 const settings  = require('./settings-manager');
 const listeners = require('../notifier');
+const events = require('../events');
 const localStorage = require('./storage/storage');
 const collections = require('./utils/collections');
 const cache = require('./utils/cache');
@@ -91,7 +92,7 @@ module.exports = (function () {
     };
 
     function notifyWhiteListUpdated(options) {
-        listeners.notifyListeners(listeners.UPDATE_WHITELIST_FILTER_RULES);
+        listeners.notifyListeners(events.UPDATE_WHITELIST_FILTER_RULES);
     }
 
     /**

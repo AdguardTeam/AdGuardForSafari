@@ -1,6 +1,7 @@
 const subscriptions = require('./subscriptions');
 const serviceClient = require('./service-client');
 const listeners = require('../../notifier');
+const events = require('../../events');
 const settings = require('../settings-manager');
 const versionUtils = require('../utils/version');
 const log = require('../utils/log');
@@ -204,7 +205,7 @@ module.exports = (() =>{
         const filter = subscriptions.getFilter(filterMetadata.filterId);
 
         filter._isDownloading = true;
-        listeners.notifyListeners(listeners.START_DOWNLOAD_FILTER, filter);
+        listeners.notifyListeners(events.START_DOWNLOAD_FILTER, filter);
 
         const successCallback = function (filterRules) {
             log.info("Retrieved response from server for filter {0}, rules count: {1}", filter.filterId, filterRules.length);
@@ -214,15 +215,15 @@ module.exports = (() =>{
             filter.lastCheckTime = Date.now();
             filter.loaded = true;
             //notify listeners
-            listeners.notifyListeners(listeners.SUCCESS_DOWNLOAD_FILTER, filter);
-            listeners.notifyListeners(listeners.UPDATE_FILTER_RULES, filter, filterRules);
+            listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
+            listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, filterRules);
             callback(true);
         };
 
         const errorCallback = function (cause) {
             log.error("Error retrieved response from server for filter {0}, cause: {1}", filter.filterId, cause || "");
             delete filter._isDownloading;
-            listeners.notifyListeners(listeners.ERROR_DOWNLOAD_FILTER, filter);
+            listeners.notifyListeners(events.ERROR_DOWNLOAD_FILTER, filter);
             callback(false);
         };
 

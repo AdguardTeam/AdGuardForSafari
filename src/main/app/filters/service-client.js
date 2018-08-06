@@ -51,11 +51,6 @@ module.exports = (function () {
             return this.filtersUrl + '/filters.json?' + params.join('&');
         },
 
-        // URL for user complaints on missed ads or malware/phishing websites
-        get reportUrl() {
-            return this.backendUrl + "/url-report.html";
-        },
-
         // Folder that contains filters metadata and files with rules. 'filters' by default
         get localFiltersFolder() {
             return config.get('localFiltersFolder');
@@ -71,11 +66,11 @@ module.exports = (function () {
         getExtensionParams: function () {
             //TODO: Properly setup parameters
 
-            var clientId = encodeURIComponent('123123123');
-            var locale = encodeURIComponent('en');
-            var version = encodeURIComponent('1.0.0');
-            var id = encodeURIComponent('123123123');
-            var params = [];
+            const clientId = encodeURIComponent('123123123');
+            const locale = encodeURIComponent('en');
+            const version = encodeURIComponent('1.0.0');
+            const id = encodeURIComponent('123123123');
+            const params = [];
             params.push('v=' + version);
             params.push('cid=' + clientId);
             params.push('lang=' + locale);
@@ -151,13 +146,6 @@ module.exports = (function () {
     };
 
     /**
-     * Appends request key to url
-     */
-    const addKeyParameter = (url) => {
-        return url + "&key=" + settings.apiKey;
-    };
-
-    /**
      * Safe json parsing
      * @param text
      * @private
@@ -195,7 +183,7 @@ module.exports = (function () {
                 const filterMetadataList = [];
                 for (let i = 0; i < filterIds.length; i++) {
                     const filter = metadata.filters.find(function(element) {
-                        return element.filterId == filterIds[i];
+                        return element.filterId === filterIds[i];
                     });
 
                     if (filter) {

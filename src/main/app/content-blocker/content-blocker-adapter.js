@@ -1,4 +1,5 @@
 const listeners = require('../../notifier');
+const events = require('../../events');
 const settings = require('../settings-manager');
 const antibanner = require('../antibanner');
 const {jsonFromFilters} = require('../libs/JSConverter');
@@ -33,7 +34,7 @@ module.exports = (function () {
 
             const json = JSON.parse(result.converted);
             setSafariContentBlocker(json);
-            listeners.notifyListeners(listeners.CONTENT_BLOCKER_UPDATED, {
+            listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
                 rulesCount: json.length,
                 rulesOverLimit: result.overLimit
             });

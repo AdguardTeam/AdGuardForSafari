@@ -11,7 +11,7 @@ const antibanner = require('./app/antibanner');
 /**
  * Initializes event listener
  */
-module.exports.init = function (win) {
+module.exports.init = function () {
 
     // Handle messages from renderer process
     ipcMain.on('renderer-to-main', function (event, arg) {

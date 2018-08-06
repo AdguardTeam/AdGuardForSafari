@@ -3,6 +3,7 @@ const config = require('config');
 const rulesStorage = require('../storage/rules-storage');
 const collections = require('../utils/collections');
 const listeners = require('../../notifier');
+const events = require('../../events');
 
 /**
  * Filter rules service
@@ -76,16 +77,16 @@ module.exports = (() => {
                     const eventRules = event.rules;
 
                     switch (eventType) {
-                        case listeners.ADD_RULES:
+                        case events.ADD_RULES:
                             loadedRulesText = loadedRulesText.concat(eventRules);
                             log.debug("Add {0} rules to filter {1}", eventRules.length, filterId);
                             break;
-                        case listeners.REMOVE_RULE:
+                        case events.REMOVE_RULE:
                             const actionRule = eventRules[0];
                             collections.removeAll(loadedRulesText, actionRule);
                             log.debug("Remove {0} rule from filter {1}", actionRule, filterId);
                             break;
-                        case listeners.UPDATE_FILTER_RULES:
+                        case events.UPDATE_FILTER_RULES:
                             loadedRulesText = eventRules;
                             log.debug("Update filter {0} rules count to {1}", filterId, eventRules.length);
                             break;
@@ -96,7 +97,7 @@ module.exports = (() => {
                 rulesStorage.write(filterId, loadedRulesText, function () {
                     resolve();
                     if (filterId === USER_FILTER_ID) {
-                        listeners.notifyListeners(listeners.UPDATE_USER_FILTER_RULES);
+                        listeners.notifyListeners(events.UPDATE_USER_FILTER_RULES);
                     }
                 });
             });

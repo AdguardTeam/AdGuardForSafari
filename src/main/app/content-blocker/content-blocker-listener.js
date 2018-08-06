@@ -1,5 +1,5 @@
-const settings = require('../settings-manager');
 const listeners = require('../../notifier');
+const events = require('../../events');
 const contentBlockerAdapter = require('./content-blocker-adapter');
 const antibanner = require('../antibanner');
 
@@ -19,8 +19,8 @@ module.exports = (() => {
         // Subscribe to events which lead to content blocker update
         listeners.addListener(event => {
 
-            if (event === listeners.REQUEST_FILTER_UPDATED ||
-                event === listeners.UPDATE_WHITELIST_FILTER_RULES) {
+            if (event === events.REQUEST_FILTER_UPDATED ||
+                event === events.UPDATE_WHITELIST_FILTER_RULES) {
 
                 contentBlockerAdapter.updateContentBlocker();
             }
@@ -28,7 +28,7 @@ module.exports = (() => {
 
         // When content blocker is updated we need to save finally converted rules count and over limit flag
         listeners.addListener(function (event, info) {
-            if (event === listeners.CONTENT_BLOCKER_UPDATED) {
+            if (event === events.CONTENT_BLOCKER_UPDATED) {
                 antibanner.updateContentBlockerInfo(info);
             }
         });

@@ -85,12 +85,12 @@ module.exports = (() => {
     const init = () => {
         listeners.addListener((event, filter) => {
             switch (event) {
-                case listeners.SUCCESS_DOWNLOAD_FILTER:
+                case events.SUCCESS_DOWNLOAD_FILTER:
                     updateFilterState(filter);
                     updateFilterVersion(filter);
                     break;
-                case listeners.FILTER_ADD_REMOVE:
-                case listeners.FILTER_ENABLE_DISABLE:
+                case events.FILTER_ADD_REMOVE:
+                case events.FILTER_ENABLE_DISABLE:
                     updateFilterState(filter);
                     break;
             }
