@@ -14,11 +14,11 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
-        icon: './src/main/pages/images/128x128.png',
+        icon: './src/main/ui/images/128x128.png',
         resizable: true
     });
 
-    mainWindow.loadFile('./src/main/pages/options.html');
+    mainWindow.loadFile('./src/main/ui/options.html');
 
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()

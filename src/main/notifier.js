@@ -1,5 +1,5 @@
 const events = require('./events');
-const log = require('./lib/utils/log');
+const log = require('./app/utils/log');
 
 /**
  * Simple mediator

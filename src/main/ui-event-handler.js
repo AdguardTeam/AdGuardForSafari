@@ -1,12 +1,12 @@
 const {ipcMain} = require('electron');
 const config = require('config');
-const settings = require('./lib/settings-manager');
-const filters = require('./lib/filters-manager');
-const filterCategories = require('./lib/filters/filters-categories');
+const settings = require('./app/settings-manager');
+const filters = require('./app/filters-manager');
+const filterCategories = require('./app/filters/filters-categories');
 const listeners = require('./notifier');
-const whitelist = require('./lib/whitelist');
-const userrules = require('./lib/userrules');
-const antibanner = require('./lib/antibanner');
+const whitelist = require('./app/whitelist');
+const userrules = require('./app/userrules');
+const antibanner = require('./app/antibanner');
 
 /**
  * Initializes event listener

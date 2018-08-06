@@ -1,9 +1,9 @@
-const whitelist = require('./lib/whitelist');
-const filters = require('./lib/filters-manager');
-const antibanner = require('./lib/antibanner');
-const filterState = require('./lib/filters/filters-state');
-const log = require('./lib/utils/log');
-const contentBlockerListener = require('./lib/content-blocker/content-blocker-listener');
+const whitelist = require('./app/whitelist');
+const filters = require('./app/filters-manager');
+const antibanner = require('./app/antibanner');
+const filterState = require('./app/filters/filters-state');
+const log = require('./app/utils/log');
+const contentBlockerListener = require('./app/content-blocker/content-blocker-listener');
 
 /**
  * Application
