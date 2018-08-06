@@ -31,7 +31,7 @@ function createWindow() {
         mainWindow = null;
     });
 
-    //Open _target=blank href in external url
+    // Open _target=blank hrefs in external window
     mainWindow.webContents.on('new-window', function(event, url){
         event.preventDefault();
         shell.openExternal(url);
