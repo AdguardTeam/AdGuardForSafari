@@ -995,9 +995,6 @@ PageController.prototype = {
                 // Doing nothing
             }.bind(this)
         });
-
-        //updateDisplayAdguardPromo(!userSettings.values[userSettings.names.DISABLE_SHOW_ADGUARD_PROMO_INFO]);
-        //customizePopupFooter(environmentOptions.isMacOs);
     },
 
     _customizeText: function () {
