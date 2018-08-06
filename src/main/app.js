@@ -28,10 +28,8 @@ module.exports = (() => {
                 });
             }
         }, function () {
-            // Doing nothing
+            log.info('Application initialization finished');
         });
-
-        log.info('Application initialization finished');
     };
 
     return {

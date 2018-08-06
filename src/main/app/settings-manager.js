@@ -12,14 +12,14 @@ module.exports = (function () {
     'use strict';
 
     const settings = {
-        DISABLE_DETECT_FILTERS: 'detect-filters-disabled',
-        DISABLE_SHOW_PAGE_STATS: 'disable-show-page-statistic',
-        DISABLE_SHOW_ADGUARD_PROMO_INFO: 'show-info-about-adguard-disabled',
+        //DISABLE_DETECT_FILTERS: 'detect-filters-disabled',
+        //DISABLE_SHOW_PAGE_STATS: 'disable-show-page-statistic',
+        //DISABLE_SHOW_ADGUARD_PROMO_INFO: 'show-info-about-adguard-disabled',
         DISABLE_SAFEBROWSING: 'safebrowsing-disabled',
         DISABLE_SEND_SAFEBROWSING_STATS: 'safebrowsing-stats-disabled',
         DISABLE_FILTERING: 'adguard-disabled',
-        DISABLE_COLLECT_HITS: 'hits-count-disabled',
-        DISABLE_SHOW_CONTEXT_MENU: 'context-menu-disabled',
+        //DISABLE_COLLECT_HITS: 'hits-count-disabled',
+        //DISABLE_SHOW_CONTEXT_MENU: 'context-menu-disabled',
         USE_OPTIMIZED_FILTERS: 'use-optimized-filters',
         DEFAULT_WHITE_LIST_MODE: 'default-whitelist-mode',
         DISABLE_SHOW_APP_UPDATED_NOTIFICATION: 'show-app-updated-disabled'

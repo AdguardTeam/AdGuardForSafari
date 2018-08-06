@@ -6,31 +6,15 @@ const log = require('./app/utils/log');
  */
 module.exports = (function () {
 
+    const ASYNC_NOTIFICATION_DELAY = 500;
+
     const EventNotifierTypesMap = events;
     const EventNotifierEventsMap = Object.create(null);
 
     const EventNotifier = {
 
         listenersMap: Object.create(null),
-        listenersEventsMap: Object.create(null),
         listenerId: 0,
-
-        /**
-         * Subscribes listener to the specified events
-         *
-         * @param events    List of event types listener will be notified of
-         * @param listener  Listener object
-         * @returns Index of the listener
-         */
-        addSpecifiedListener: function (events, listener) {
-            if (typeof listener !== 'function') {
-                throw new Error('Illegal listener');
-            }
-            const listenerId = this.listenerId++;
-            this.listenersMap[listenerId] = listener;
-            this.listenersEventsMap[listenerId] = events;
-            return listenerId;
-        },
 
         /**
          * Subscribe specified listener to all events
@@ -53,7 +37,6 @@ module.exports = (function () {
          */
         removeListener: function (listenerId) {
             delete this.listenersMap[listenerId];
-            delete this.listenersEventsMap[listenerId];
         },
 
         /**
@@ -65,10 +48,6 @@ module.exports = (function () {
                 throw new Error('Illegal event: ' + event);
             }
             for (let listenerId in this.listenersMap) { // jshint ignore:line
-                const events = this.listenersEventsMap[listenerId];
-                if (events && events.length > 0 && events.indexOf(event) < 0) {
-                    continue;
-                }
                 try {
                     const listener = this.listenersMap[listenerId];
                     listener.apply(listener, arguments);
@@ -82,12 +61,13 @@ module.exports = (function () {
          * Asynchronously notifies all listeners about the events passed as arguments of this function.
          * Some events should be dispatched asynchronously, for instance this is very important for Safari:
          * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/251
+         * TODO: Should use it probably
          */
         notifyListenersAsync: function () {
             const args = arguments;
             setTimeout(function () {
                 EventNotifier.notifyListeners.apply(EventNotifier, args);
-            }, 500);
+            }, ASYNC_NOTIFICATION_DELAY);
         }
     };
 
