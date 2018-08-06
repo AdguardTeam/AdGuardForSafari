@@ -176,6 +176,32 @@ module.exports = (() => {
     };
 
     /**
+     * Removes filter
+     *
+     * @param {Number} filterId Filter identifier
+     */
+    const removeFilter = function (filterId) {
+
+        const filter = subscriptions.getFilter(filterId);
+        if (!filter || filter.removed) {
+            return;
+        }
+
+        if (!filter.customUrl) {
+            log.error("Filter {0} is not custom and could not be removed", filter.filterId);
+            return;
+        }
+
+        log.debug("Remove filter {0}", filter.filterId);
+
+        filter.enabled = false;
+        filter.installed = false;
+        filter.removed = true;
+        listeners.notifyListeners(events.FILTER_ENABLE_DISABLE, filter);
+        listeners.notifyListeners(events.FILTER_ADD_REMOVE, filter);
+    };
+
+    /**
      * Adds and enables recommended filters by groupId
      *
      * @param groupId
@@ -225,17 +251,53 @@ module.exports = (() => {
         filtersUpdate.checkAntiBannerFiltersUpdate(forceUpdate, successCallback, errorCallback);
     };
 
+    /**
+     * Loads filter rules from url, then tries to parse header to filter metadata
+     * and adds filter object to subscriptions from it.
+     * These custom filters will have special attribute customUrl, from there it could be downloaded and updated.
+     *
+     * @param url custom url, there rules are
+     * @param successCallback
+     * @param errorCallback
+     */
+    const loadCustomFilter = (url, successCallback, errorCallback) =>{
+        log.info('Downloading custom filter from {0}', url);
+
+        errorCallback = errorCallback || function () {};
+
+        if (!url) {
+            errorCallback();
+            return;
+        }
+
+        subscriptions.updateCustomFilter(url, filterId =>{
+            if (filterId) {
+                log.info('Custom filter info downloaded');
+
+                const filter = subscriptions.getFilter(filterId);
+                //In case filter is loaded again and was removed before
+                delete filter.removed;
+
+                successCallback(filter);
+            } else {
+                errorCallback();
+            }
+        });
+    };
+
     return {
         getFilters: getFilters,
         isFilterEnabled: isFilterEnabled,
 
         addAndEnableFilters: addAndEnableFilters,
         disableFilters: disableFilters,
+        removeFilter: removeFilter,
 
         addAndEnableFiltersByGroupId: addAndEnableFiltersByGroupId,
         disableAntiBannerFiltersByGroupId: disableAntiBannerFiltersByGroupId,
 
         offerFilters: offerFilters,
+        loadCustomFilter: loadCustomFilter,
 
         checkAntiBannerFiltersUpdate: checkAntiBannerFiltersUpdate
     };

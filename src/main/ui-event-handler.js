@@ -61,6 +61,14 @@ module.exports.init = function () {
             case 'checkAntiBannerFiltersUpdate':
                 filters.checkAntiBannerFiltersUpdate(true);
                 break;
+            case 'removeAntiBannerFilter':
+                filters.removeFilter(message.filterId);
+                break;
+            case 'loadCustomFilterInfo':
+                filters.loadCustomFilter(message.url, function (filter) {
+                    event.sender.send('loadCustomFilterInfoResponse', filter);
+                });
+                break;
         }
     });
 

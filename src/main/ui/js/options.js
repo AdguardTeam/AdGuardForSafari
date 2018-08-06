@@ -739,12 +739,10 @@ const AntiBannerFilters = function (options) {
         e.preventDefault();
 
         const filterId = e.currentTarget.getAttribute('filterId');
-
-        //TODO: Custom filters
-        // contentPage.sendMessage({
-        //     type: 'removeAntiBannerFilter',
-        //     filterId: filterId
-        // });
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'removeAntiBannerFilter',
+            filterId: filterId
+        }));
 
         const filterElement = getFilterElement(filterId);
         filterElement.parentNode.removeChild(filterElement);
@@ -799,19 +797,20 @@ const AntiBannerFilters = function (options) {
             document.querySelector('#custom-filter-popup-added-subscribe').addEventListener('click', onSubscribeClicked);
 
             document.querySelector('#custom-filter-popup-remove').addEventListener('click', function () {
-                //TODO: Custom filters
-                // contentPage.sendMessage({
-                //     type: 'removeAntiBannerFilter',
-                //     filterId: filter.filterId
-                // });
+                ipcRenderer.send('renderer-to-main', JSON.stringify({
+                    'type': 'removeAntiBannerFilter',
+                    filterId: filter.filterId
+                }));
                 closePopup();
             });
-        }
 
-        function onSubscribeClicked() {
-            //TODO: Custom filters
-            //contentPage.sendMessage({type: 'addAndEnableFilter', filterId: filter.filterId});
-            closePopup();
+            function onSubscribeClicked() {
+                ipcRenderer.send('renderer-to-main', JSON.stringify({
+                    'type': 'addAndEnableFilter',
+                    filterId: filter.filterId
+                }));
+                closePopup();
+            }
         }
 
         document.querySelector('#add-custom-filter-popup').classList.add('option-popup--active');
@@ -822,14 +821,18 @@ const AntiBannerFilters = function (options) {
             e.preventDefault();
 
             const url = document.querySelector('#custom-filter-popup-url').value;
-            //TODO: Custom filters
-            // contentPage.sendMessage({type: 'loadCustomFilterInfo', url: url}, function (filter) {
-            //     if (filter) {
-            //         renderStepFour(filter);
-            //     } else {
-            //         renderStepThree();
-            //     }
-            // });
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'loadCustomFilterInfo',
+                url: url
+            }));
+
+            ipcRenderer.on('loadCustomFilterInfoResponse', (e, arg) => {
+                if (arg) {
+                    renderStepFour(arg);
+                } else {
+                    renderStepThree();
+                }
+            });
 
             renderStepTwo();
         });

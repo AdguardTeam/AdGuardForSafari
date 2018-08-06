@@ -2,6 +2,8 @@ const serviceClient = require('./service-client');
 const i18n = require('../utils/i18n');
 const versionUtils = require('../utils/version');
 const log = require('../utils/log');
+const listeners = require('../../notifier');
+const events = require('../../events');
 
 /**
  * Service that loads and parses filters metadata from backend server.
@@ -215,10 +217,10 @@ module.exports = (function () {
                 filters.push(filter);
                 filtersMap[filter.filterId] = filter;
 
-                listeners.notifyListeners(listeners.SUCCESS_DOWNLOAD_FILTER, filter);
+                listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
             }
 
-            listeners.notifyListeners(listeners.UPDATE_FILTER_RULES, filter, rules);
+            listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, rules);
 
             callback(filter.filterId);
 

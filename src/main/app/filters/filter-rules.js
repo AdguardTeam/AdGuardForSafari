@@ -61,18 +61,18 @@ module.exports = (() => {
      * @param events Events (what has changed?)
      * @private
      */
-    const processSaveFilterRulesToStorageEvents = (filterId, events) => {
+    const processSaveFilterRulesToStorageEvents = (filterId, eventsToProcess) => {
 
         return new Promise((resolve) => {
             rulesStorage.read(filterId, function (loadedRulesText) {
 
-                for (let i = 0; i < events.length; i++) {
+                for (let i = 0; i < eventsToProcess.length; i++) {
 
                     if (!loadedRulesText) {
                         loadedRulesText = [];
                     }
 
-                    const event = events[i];
+                    const event = eventsToProcess[i];
                     const eventType = event.event;
                     const eventRules = event.rules;
 
