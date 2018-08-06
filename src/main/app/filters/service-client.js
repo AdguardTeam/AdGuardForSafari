@@ -1,7 +1,6 @@
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const fs = require('fs');
 const filterDownloader = require('filters-downloader');
-const subscriptions = require('./subscriptions');
 const config = require('config');
 const path = require('path');
 const log = require('../utils/log');
@@ -200,7 +199,7 @@ module.exports = (function () {
                     });
 
                     if (filter) {
-                        filterMetadataList.push(subscriptions.createSubscriptionFilterFromJSON(filter));
+                        filterMetadataList.push(filter);
                     }
                 }
                 successCallback(filterMetadataList);

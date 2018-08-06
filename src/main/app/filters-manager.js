@@ -245,6 +245,8 @@ module.exports = (() => {
 
         addAndEnableFiltersByGroupId: addAndEnableFiltersByGroupId,
         disableAntiBannerFiltersByGroupId: disableAntiBannerFiltersByGroupId,
+
+        loadFilterRules: loadFilterRules
     };
 
 })();

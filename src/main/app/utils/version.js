@@ -28,6 +28,23 @@ module.exports = (() => {
     };
 
     /**
+     * Compares with other version
+     * @param o
+     * @returns {number}
+     */
+    Version.prototype.compare = function (o) {
+        for (let i = 0; i < 4; i++) {
+            if (this.version[i] > o.version[i]) {
+                return 1;
+            } else if (this.version[i] < o.version[i]) {
+                return -1;
+            }
+        }
+
+        return 0;
+    };
+
+    /**
      * Checks if left version is greater than the right version
      */
     const isGreaterVersion = (leftVersion, rightVersion) => {
