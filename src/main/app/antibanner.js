@@ -8,6 +8,7 @@ const settings = require('./settings-manager');
 const rulesStorage = require('./storage/rules-storage');
 const collections = require('./utils/collections');
 const concurrent = require('./utils/concurrent');
+const updateService = require('./update-service');
 
 /**
  * Antibanner service
@@ -449,11 +450,10 @@ module.exports = (() => {
                     callback();
                 }
             } else if (runInfo.isUpdate) {
-                //TODO: Implement update-service
                 // Updating storage schema on extension update (if needed)
-                //adguard.applicationUpdateService.onUpdate(runInfo, initRequestFilter);
+                updateService.onUpdate(runInfo, initRequestFilter);
                 // Show updated version popup
-                //notifyApplicationUpdated(runInfo);
+                notifyApplicationUpdated(runInfo);
             } else {
                 // Init RequestFilter object
                 initRequestFilter();
@@ -466,18 +466,10 @@ module.exports = (() => {
         /**
          * Init extension common info.
          */
-        //TODO: Implement update-service
-        // adguard.applicationUpdateService.getRunInfo(runInfo => {
-        //     // Load subscription from the storage
-        //     subscriptions.init(onSubscriptionLoaded.bind(null, runInfo));
-        // });
-
-        subscriptions.init(onSubscriptionLoaded.bind(null, {
-            isFirstRun: true,
-            isUpdate: false,
-            currentVersion: '1.0.0',
-            prevVersion: null
-        }));
+        updateService.getRunInfo(runInfo => {
+            // Load subscription from the storage
+            subscriptions.init(onSubscriptionLoaded.bind(null, runInfo));
+        });
     };
 
     /**
