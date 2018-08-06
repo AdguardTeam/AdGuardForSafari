@@ -889,224 +889,6 @@ const AntiBannerFilters = function (options) {
     };
 };
 
-// const SyncSettings = function (options) {
-//     'use strict';
-//
-//     let syncStatus = options.syncStatusInfo;
-//     let currentProvider = options.syncStatusInfo.currentProvider;
-//
-//     const unauthorizedBlock = document.querySelector('#unauthorizedBlock');
-//     const authorizedBlock = document.querySelector('#authorizedBlock');
-//     const signInButton = document.querySelector('#signInButton');
-//     const signOutButton = document.querySelector('#signOutButton');
-//     const startSyncButton = document.querySelector('#startSyncButton');
-//     const syncNowButton = document.querySelector('#syncNowButton');
-//     const lastSyncTimeInfo = document.querySelector('#lastSyncTimeInfo');
-//     const selectProviderButton = document.querySelector('#selectProviderButton');
-//
-//     const providersDropdown = document.querySelector('#selectProviderDropdown');
-//
-//     bindControls();
-//
-//     function bindControls() {
-//
-//         selectProviderButton.addEventListener('click', function () {
-//             providersDropdown.style.display = 'block';
-//         });
-//
-//         signInButton.addEventListener('click', function (e) {
-//             e.preventDefault();
-//             if (currentProvider) {
-//                 contentPage.sendMessage({
-//                     type: 'authSync',
-//                     provider: currentProvider.name
-//                 });
-//             }
-//         });
-//
-//         signOutButton.addEventListener('click', function (e) {
-//             e.preventDefault();
-//             if (currentProvider && currentProvider.isOAuthSupported) {
-//                 contentPage.sendMessage({
-//                     type: 'dropAuthSync',
-//                     provider: currentProvider.name
-//                 });
-//             } else {
-//                 contentPage.sendMessage({type: 'toggleSync'});
-//             }
-//         });
-//
-//         startSyncButton.addEventListener('click', function (e) {
-//             e.preventDefault();
-//             contentPage.sendMessage({type: 'toggleSync'});
-//         });
-//
-//         syncNowButton.addEventListener('click', function (e) {
-//             e.preventDefault();
-//             updateSyncState();
-//             contentPage.sendMessage({type: 'syncNow'});
-//         });
-//
-//         document.querySelector('#changeDeviceNameButton').addEventListener('click', function (e) {
-//             e.preventDefault();
-//             const deviceName = document.querySelector('#deviceNameInput').value;
-//             contentPage.sendMessage({
-//                 type: 'syncChangeDeviceName',
-//                 deviceName: deviceName
-//             });
-//         });
-//
-//         document.querySelector('#adguardSelectProvider').addEventListener('click', onProviderSelected('ADGUARD_SYNC'));
-//         document.querySelector('#dropboxSelectProvider').addEventListener('click', onProviderSelected('DROPBOX'));
-//         document.querySelector('#browserStorageSelectProvider').addEventListener('click', onProviderSelected('BROWSER_SYNC'));
-//
-//         document.querySelector('#sync-general-settings-checkbox').addEventListener('change', onSyncOptionsChanged);
-//         document.querySelector('#sync-filters-checkbox').addEventListener('change', onSyncOptionsChanged);
-//         document.querySelector('#sync-extension-specific-checkbox').addEventListener('change', onSyncOptionsChanged);
-//     }
-//
-//     function onSyncOptionsChanged() {
-//         contentPage.sendMessage({
-//             type: 'setSyncOptions', options: {
-//                 syncGeneral: document.querySelector('#sync-general-settings-checkbox').hasAttribute('checked'),
-//                 syncFilters: document.querySelector('#sync-filters-checkbox').hasAttribute('checked'),
-//                 syncExtensionSpecific: document.querySelector('#sync-extension-specific-checkbox').hasAttribute('checked')
-//             }
-//         });
-//     }
-//
-//     function onProviderSelected(providerName) {
-//         return function (e) {
-//             e.preventDefault();
-//             providersDropdown.style.display = 'none';
-//             contentPage.sendMessage({type: 'setSyncProvider', provider: providerName}, function () {
-//                 document.location.reload();
-//             });
-//         };
-//     }
-//
-//     function renderSelectProviderBlock() {
-//         unauthorizedBlock.style.display = 'block';
-//         authorizedBlock.style.display = 'none';
-//         signInButton.style.display = 'none';
-//         startSyncButton.style.display = 'none';
-//     }
-//
-//     function renderUnauthorizedBlock() {
-//
-//         unauthorizedBlock.style.display = 'block';
-//         authorizedBlock.style.display = 'none';
-//
-//         if (currentProvider.isOAuthSupported && !currentProvider.isAuthorized) {
-//             signInButton.style.display = 'block';
-//         } else {
-//             signInButton.style.display = 'none';
-//         }
-//
-//         if (!syncStatus.enabled && currentProvider.isAuthorized) {
-//             startSyncButton.style.display = 'block';
-//         } else {
-//             startSyncButton.style.display = 'none';
-//         }
-//
-//         selectProviderButton.textContent = currentProvider.title;
-//     }
-//
-//     function renderAuthorizedBlock() {
-//
-//         unauthorizedBlock.style.display = 'none';
-//         authorizedBlock.style.display = 'block';
-//
-//         document.querySelector('#providerNameInfo').textContent = currentProvider.title;
-//
-//         const manageAccountButton = document.querySelector('#manageAccountButton');
-//         const deviceNameBlock = document.querySelector('#deviceNameBlock');
-//
-//         updateSyncState();
-//
-//         if (currentProvider.isOAuthSupported && currentProvider.name === 'ADGUARD_SYNC') {
-//             manageAccountButton.style.display = 'block';
-//             deviceNameBlock.style.display = 'block';
-//             document.querySelector('#deviceNameInput').value = currentProvider.deviceName;
-//         } else {
-//             manageAccountButton.style.display = 'none';
-//             deviceNameBlock.style.display = 'none';
-//         }
-//
-//         document.querySelector('#sync-general-settings-checkbox').setAttribute('checked', syncStatus.syncOptions.syncGeneral);
-//         document.querySelector('#sync-filters-checkbox').setAttribute('checked', syncStatus.syncOptions.syncFilters);
-//         document.querySelector('#sync-extension-specific-checkbox').setAttribute('checked', syncStatus.syncOptions.syncExtensionSpecific);
-//     }
-//
-//     function renderSyncSettings() {
-//
-//         if (!currentProvider) {
-//             renderSelectProviderBlock();
-//             return;
-//         }
-//
-//         if (!currentProvider.isAuthorized || !syncStatus.enabled) {
-//             renderUnauthorizedBlock();
-//         } else {
-//             renderAuthorizedBlock();
-//         }
-//
-//         let browserStorageSupported = syncStatus.providers.filter(function (p) {
-//                 return p.name === 'BROWSER_SYNC';
-//             }).length > 0;
-//
-//         if (!browserStorageSupported) {
-//             document.querySelector('#browserStorageSelectProvider').style.display = 'none';
-//         }
-//
-//         if (currentProvider) {
-//             const activeClass = 'dropdown__item--active';
-//
-//             switch (currentProvider.name) {
-//                 case 'ADGUARD_SYNC':
-//                     document.querySelector('#adguardSelectProvider').classList.add(activeClass);
-//                     break;
-//                 case 'DROPBOX':
-//                     document.querySelector('#dropboxSelectProvider').classList.add(activeClass);
-//                     break;
-//                 case 'BROWSER_SYNC':
-//                     document.querySelector('#browserStorageSelectProvider').classList.add(activeClass);
-//                     break;
-//             }
-//         }
-//     }
-//
-//     function updateSyncSettings(options) {
-//         syncStatus = options.status;
-//         currentProvider = options.status.currentProvider;
-//         renderSyncSettings();
-//     }
-//
-//     function updateSyncState() {
-//         if (syncStatus.syncInProgress) {
-//             syncNowButton.setAttribute('disabled', 'disabled');
-//             syncNowButton.textContent = i18n.__('sync_in_progress_button_text.message');
-//         } else {
-//             syncNowButton.removeAttribute('disabled');
-//             syncNowButton.textContent = i18n.__('sync_now_button_text.message');
-//         }
-//
-//         if (currentProvider) {
-//             const lastSyncTime = currentProvider.lastSyncTime;
-//             if (lastSyncTime) {
-//                 lastSyncTimeInfo.textContent = new Date(parseInt(lastSyncTime)).toLocaleString();
-//             } else {
-//                 lastSyncTimeInfo.textContent = i18n.__('sync_last_sync_time_never_sync_text.message');
-//             }
-//         }
-//     }
-//
-//     return {
-//         renderSyncSettings: renderSyncSettings,
-//         updateSyncSettings: updateSyncSettings
-//     };
-// };
-
 /**
  * Settings block
  *
@@ -1187,7 +969,7 @@ const Settings = function () {
         }
     });
 
-    var render = function () {
+    const render = function () {
         for (let i = 0; i < checkboxes.length; i++) {
             checkboxes[i].render();
         }
@@ -1277,11 +1059,6 @@ PageController.prototype = {
         // Initialize AntiBanner filters
         this.antiBannerFilters = new AntiBannerFilters({rulesInfo: requestFilterInfo});
         this.antiBannerFilters.render();
-
-        // Initialize sync tab
-        //TODO: Sync
-        // this.syncSettings = new SyncSettings({syncStatusInfo: syncStatusInfo});
-        // this.syncSettings.renderSyncSettings();
     }
 };
 
@@ -1290,7 +1067,6 @@ let enabledFilters;
 let environmentOptions;
 let AntiBannerFiltersId;
 let requestFilterInfo;
-//let syncStatusInfo;
 
 /**
  * Initializes page
@@ -1301,7 +1077,6 @@ const initPage = function (response) {
     enabledFilters = response.enabledFilters;
     environmentOptions = response.environmentOptions;
     requestFilterInfo = response.requestFilterInfo;
-    //syncStatusInfo = response.syncStatusInfo;
 
     AntiBannerFiltersId = response.constants.AntiBannerFiltersId;
 
@@ -1338,12 +1113,6 @@ const initPage = function (response) {
                 case EventNotifierTypes.REQUEST_FILTER_UPDATED:
                     controller.antiBannerFilters.updateRulesCountInfo(options);
                     break;
-                // case EventNotifierTypes.SYNC_STATUS_UPDATED:
-                //     controller.syncSettings.updateSyncSettings(options);
-                //     break;
-                // case EventNotifierTypes.SETTINGS_UPDATED:
-                //     controller.onSettingsImported(options);
-                //     break;
             }
         });
     };

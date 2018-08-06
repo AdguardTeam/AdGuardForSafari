@@ -89,8 +89,6 @@ module.exports = (function () {
         localStorage.setItem(propertyName, propertyValue);
         properties[propertyName] = propertyValue;
         propertyUpdateChannel.notify(propertyName, propertyValue);
-
-        //adguard.listeners.notifyListeners(adguard.listeners.SYNC_REQUIRED, options);
     };
 
     const getAllSettings = function () {
@@ -158,8 +156,6 @@ module.exports = (function () {
 
     const changeEnableSafebrowsing = function (enabled, options) {
         setProperty(settings.DISABLE_SAFEBROWSING, !enabled);
-
-        //adguard.listeners.notifyListeners(adguard.listeners.SYNC_REQUIRED, options);
     };
 
     const changeSendSafebrowsingStats = function (enabled, options) {

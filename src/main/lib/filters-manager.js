@@ -89,7 +89,6 @@ module.exports = (() => {
         let filter = subscriptions.getFilter(filterId);
         filter.enabled = true;
         listeners.notifyListeners(listeners.FILTER_ENABLE_DISABLE, filter);
-        //adguard.listeners.notifyListeners(adguard.listeners.SYNC_REQUIRED, options);
         log.info('Filter {0} enabled successfully', filterId);
     };
 
@@ -213,8 +212,6 @@ module.exports = (() => {
 
             log.info('Filter {0} disabled successfully', filter.filterId);
         }
-
-        //adguard.listeners.notifyListeners(adguard.listeners.SYNC_REQUIRED, options);
     };
 
     /**

@@ -92,7 +92,6 @@ module.exports = (function () {
 
     function notifyWhiteListUpdated(options) {
         listeners.notifyListeners(listeners.UPDATE_WHITELIST_FILTER_RULES);
-        listeners.notifyListeners(listeners.SYNC_REQUIRED, options);
     }
 
     /**
