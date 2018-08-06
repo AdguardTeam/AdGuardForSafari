@@ -984,7 +984,6 @@ PageController.prototype = {
     init: function () {
 
         this._customizeText();
-        this._bindEvents();
         this._render();
 
         CheckboxUtils.toggleCheckbox(document.querySelectorAll(".opt-state input[type=checkbox]"));
@@ -1010,14 +1009,6 @@ PageController.prototype = {
             const state = li.querySelector('.opt-state');
             element.classList.add('desc');
             state.insertBefore(element, state.firstChild);
-        });
-    },
-
-    _bindEvents: function () {
-        document.querySelector(".openExtensionStore").addEventListener('click', function (e) {
-            e.preventDefault();
-            //TODO: openExtensionStore
-            //contentPage.sendMessage({type: 'openExtensionStore'});
         });
     },
 

@@ -1,6 +1,6 @@
 /* global require, process */
 
-const {app, BrowserWindow} = require('electron');
+const {app, shell, BrowserWindow} = require('electron');
 
 const uiEventListener = require('./src/main/ui-event-handler');
 const application = require('./src/main/app');
@@ -29,6 +29,12 @@ function createWindow() {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null;
+    });
+
+    //Open _target=blank href in external url
+    mainWindow.webContents.on('new-window', function(event, url){
+        event.preventDefault();
+        shell.openExternal(url);
     });
 }
 
