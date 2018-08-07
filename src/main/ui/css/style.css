@@ -1380,3 +1380,62 @@ li.active .toggler:before {
   background-size: contain;
   background-image: url("../images/icon-trash.svg");
 }
+
+.alert {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 25px 20px 25px;
+  background-color: #fff;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.alert--warning {
+  background-color: #ad0900;
+  text-align: center;
+  color: #fff;
+}
+
+.alert--active {
+  display: block;
+}
+
+.alert__close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 13px;
+  height: 13px;
+  cursor: pointer;
+  background-image: url("../images/cross.svg");
+}
+
+.alert__in {
+  display: flex;
+  align-items: center;
+}
+
+.alert__ico {
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 29px;
+  height: 29px;
+  margin-right: 25px;
+  background-image: url("../images/logo-shield.svg");
+ }
+
+.alert__desc {
+  font-size: 12px;
+  display: flex;
+  line-height: 20px;
+ }
+
+.alert__link {
+  cursor: pointer;
+  color: #66b574;
+  transition: 0.3s ease color;
+  white-space: nowrap;
+  padding-left: 10px;
+}
