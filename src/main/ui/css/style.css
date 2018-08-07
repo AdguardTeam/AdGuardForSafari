@@ -29,7 +29,7 @@
   padding-bottom: 50px;
 }
 .settings-wrap .page-title {
-  font-family: gotham_probol;
+  font-weight: 700;
   font-size: 30px;
   letter-spacing: -1.5px;
   color: #454545;
@@ -44,7 +44,7 @@
   float: right;
   font-size: 13px;
   line-height: normal;
-  font-family: gotham_promedium;
+  font-weight: 600;
   color: #4d4d4d;
   text-align: right;
   letter-spacing: -0.4px;
@@ -55,7 +55,7 @@
   margin-top: 5px;
 }
 .settings-body-subtitle {
-  font-family: gotham_probol;
+  font-weight: 700;
   font-size: 18px;
   color: #4d4d4d;
   letter-spacing: -1px;
@@ -87,7 +87,7 @@
   color: #4D4D4D;
 }
 .settings-sidebar .nav a.active {
-  font-family: gotham_probol;
+  font-weight: 700;
 }
 .settings-sidebar .nav a.active:before {
   content: '';
@@ -120,7 +120,7 @@
 .settings-actions {
   margin-top: 30px;
   font-size: 14px;
-  font-family: gotham_promedium;
+  font-weight: 600;
 }
 .settings-actions a {
   padding-right: 42px;
@@ -149,7 +149,7 @@
 }
 .opts-list li {
   font-size: 14px;
-  font-family: gotham_promedium;
+  font-weight: 600;
   letter-spacing: -0.4px;
   color: #D6D6D6;
   border: 1px solid #E7E7E7;
@@ -196,7 +196,7 @@
 }
 .opts-list .opt-name .title {
   font-size: 15px;
-  font-family: gotham_promedium;
+  font-weight: 600;
   letter-spacing: -0.5px;
   padding-right: 30px;
   line-height: 22px;
@@ -204,7 +204,7 @@
 .opts-list .opt-name .desc {
   font-size: 13px;
   margin-top: 10px;
-  font-family: gotham_proregular;
+  font-weight: 400;
   line-height: 19px;
   padding-right: 30px;
 }
@@ -278,7 +278,7 @@
 .opts-list .opt-state .desc {
   color: #D6D6D6;
   font-size: 12px;
-  font-family: gotham_proregular;
+  font-weight: 400;
   padding-right: 25px;
   letter-spacing: -0.2px;
   margin-left: 0;
@@ -366,7 +366,7 @@ li.active .toggler:before {
 .settings-footer .copy {
   color: #fff;
   font-size: 14px;
-  font-family: gotham_promedium;
+  font-weight: 600;
 }
 .settings-footer .copy img {
   width: 29px;
@@ -379,7 +379,7 @@ li.active .toggler:before {
 .settings-footer .rate-row .text {
   color: #505050;
   font-size: 16px;
-  font-family: gotham_promedium;
+  font-weight: 600;
 }
 .settings-footer .rate-row .wlimit {
   height: 80px;
@@ -459,12 +459,12 @@ li.active .toggler:before {
 .white-list .rule-name {
   font-size: 14px;
   color: #4D4D4D;
-  font-family: gotham_promedium;
+  font-weight: 600;
   letter-spacing: -0.5px;
 }
 .white-list .rule-name input {
   border: 0;
-  font-family: gotham_promedium;
+  font-weight: 600;
   font-size: 14px;
 }
 .white-list .rule-ctrl a {
@@ -547,7 +547,7 @@ li.active .toggler:before {
   display: inline-block;
 }
 .tabs-bar .tab {
-  font-family: gotham_promedium;
+  font-weight: 600;
   font-size: 14px;
   color: #4d4d4d;
   border: 0;
@@ -600,7 +600,7 @@ li.active .toggler:before {
   font-size: 13px;
   line-height: 43px;
   transition: 0.3s ease background-color;
-  font-family: gotham_promedium;
+  font-weight: 600;
 }
 .button--green {
   padding: 0 30px;
@@ -674,7 +674,7 @@ li.active .toggler:before {
 .subtitle-2 {
   margin-bottom: 7px;
   font-size: 14px;
-  font-family: gotham_promedium;
+  font-weight: 600;
 }
 .dropdown {
   position: absolute;
@@ -752,7 +752,7 @@ li.active .toggler:before {
   position: relative;
   padding-left: 40px;
   font-size: 14px;
-  font-family: gotham_promedium;
+  font-weight: 600;
 }
 .settings-checkboxes__label:before {
   content: "";
@@ -872,7 +872,6 @@ li.active .toggler:before {
 }
 .filters-check__label {
   font-size: 14px;
-  font-family: "Gotham Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 600;
 }
 .filters-check__in {
@@ -1285,7 +1284,7 @@ li.active .toggler:before {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   padding-top: 10px;
-  font-family: gotham_proregular;
+  font-weight: 400;
 }
 
 .opt-name__info-labels {
@@ -1380,4 +1379,63 @@ li.active .toggler:before {
   cursor: pointer;
   background-size: contain;
   background-image: url("../images/icon-trash.svg");
+}
+
+.alert {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 25px 20px 25px;
+  background-color: #fff;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.alert--warning {
+  background-color: #ad0900;
+  text-align: center;
+  color: #fff;
+}
+
+.alert--active {
+  display: block;
+}
+
+.alert__close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 13px;
+  height: 13px;
+  cursor: pointer;
+  background-image: url("../images/cross.svg");
+}
+
+.alert__in {
+  display: flex;
+  align-items: center;
+}
+
+.alert__ico {
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 29px;
+  height: 29px;
+  margin-right: 25px;
+  background-image: url("../images/logo-shield.svg");
+ }
+
+.alert__desc {
+  font-size: 12px;
+  display: flex;
+  line-height: 20px;
+ }
+
+.alert__link {
+  cursor: pointer;
+  color: #66b574;
+  transition: 0.3s ease color;
+  white-space: nowrap;
+  padding-left: 10px;
 }
