@@ -94,10 +94,9 @@ module.exports = (() =>{
                         }
                     }
 
-                    //TODO: Custom filters
-                    // updateCustomFilters(customFilterIdsToUpdate, function (customFilters) {
-                    //     successCallback(filters.concat(customFilters));
-                    // });
+                    updateCustomFilters(customFilterIdsToUpdate, function (customFilters) {
+                        onSuccess(filters.concat(customFilters));
+                    });
 
                     log.info('Filters updated successfully');
                     onSuccess(filters);
@@ -123,7 +122,7 @@ module.exports = (() =>{
 
                 loadFiltersFromBackendCallback(filterMetadataListToUpdate);
             } else {
-                errorCallback();
+                onError();
             }
         };
 
@@ -259,6 +258,42 @@ module.exports = (() =>{
             filterIds: filterIds,
             customFilterIds: customFilterIds
         };
+    };
+
+    /**
+     * Update filters with custom urls
+     *
+     * @param customFilterIds
+     * @param callback
+     */
+    const updateCustomFilters = (customFilterIds, callback) => {
+        if (customFilterIds.length === 0) {
+            callback([]);
+            return;
+        }
+
+        const dfds = [];
+        const filters = [];
+        for (let i = 0; i < customFilterIds.length; i++) {
+            const filter = subscriptions.getFilter(customFilterIds[i]);
+
+            dfds.push((function (filter, filters) {
+                return new Promise((resolve) => {
+                    subscriptions.updateCustomFilter(filter.customUrl, function (filterId) {
+                        if (filterId) {
+                            filters.push(filter);
+                        }
+
+                        resolve();
+                    });
+                });
+            })(filter, filters));
+        }
+
+        Promise.all(dfds).then(function () {
+            log.info("Custom filters updated");
+            callback(filters);
+        });
     };
 
     return {
