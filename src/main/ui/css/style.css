@@ -867,6 +867,11 @@ li.active .toggler:before {
 .alert__desc {
   font-size: 12px;
 }
+.alert__cont {
+  white-space: pre-wrap;
+  height: 20px;
+  overflow-y: hidden;
+}
 .filters-check {
   margin-top: 60px;
 }

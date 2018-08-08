@@ -53,16 +53,19 @@ module.exports = (() =>{
      *
      * @param forceUpdate Normally we respect filter update period. But if this parameter is
      *                    true - we ignore it and check updates for all filters.
-     * @param successCallback Called if filters were updated successfully
-     * @param errorCallback Called if something gone wrong
      */
-    const checkAntiBannerFiltersUpdate = (forceUpdate, successCallback, errorCallback) => {
-        successCallback = successCallback || function () {
-                // Empty callback
-            };
-        errorCallback = errorCallback || function () {
-                // Empty callback
-            };
+    const checkAntiBannerFiltersUpdate = (forceUpdate) => {
+        const onSuccess = (updatedFilters) => {
+            listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
+                success: true,
+                updatedFilters: updatedFilters
+            });
+        };
+        const onError = () => {
+            listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
+                success: false
+            });
+        };
 
         log.info("Start checking filters updates..");
 
@@ -73,10 +76,8 @@ module.exports = (() =>{
 
         const totalToUpdate = filterIdsToUpdate.length + customFilterIdsToUpdate.length;
         if (totalToUpdate === 0) {
-            if (successCallback) {
-                successCallback([]);
-                return;
-            }
+            onSuccess([]);
+            return;
         }
 
         log.info("Checking updates for {0} filters", totalToUpdate);
@@ -99,9 +100,9 @@ module.exports = (() =>{
                     // });
 
                     log.info('Filters updated successfully');
-                    successCallback(filters);
+                    onSuccess(filters);
                 } else {
-                    errorCallback();
+                    onError();
                 }
             });
         };

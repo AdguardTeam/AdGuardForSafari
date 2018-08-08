@@ -858,12 +858,79 @@ const AntiBannerFilters = function (options) {
         document.querySelector('#lastUpdateTime').textContent = updateText;
     }
 
-    function updateRulesCountInfo(info) {
-        const message = i18n.__("options_antibanner_info.message", String(info.rulesCount || 0));
-        document.querySelector('#filtersRulesInfo').textContent = message;
+    /**
+     * Checks Safari content blocker rules limit, shows alert message for rules overlimit.
+     * It's important to check that limit because of Safari limitations.
+     * Content blocker with too many rules won't work at all.
+     *
+     * @param rulesOverLimit True if loaded rules more than limit
+     * @private
+     */
+    function checkSafariContentBlockerRulesLimit(rulesOverLimit) {
+        const tooManyRulesEl = document.querySelector('#too-many-subscriptions-warning');
+        if (rulesOverLimit) {
+            tooManyRulesEl.style.display = 'block';
+        } else {
+            tooManyRulesEl.style.display = 'none';
+        }
+    }
 
-        // TODO: Show content blocker limit warning
-        //checkSafariContentBlockerRulesLimit(info.rulesOverLimit);
+    function updateRulesCountInfo(info) {
+        document.querySelector('#filtersRulesInfo').textContent =
+            i18n.__("options_antibanner_info.message", String(info.rulesCount || 0));
+
+        checkSafariContentBlockerRulesLimit(info.rulesOverLimit);
+    }
+
+    function getFiltersUpdateResultMessage(success, updatedFilters) {
+        const title = i18n.__("options_popup_update_title.message");
+        const text = [];
+        if (success) {
+            if (updatedFilters.length === 0) {
+                text.push(i18n.__("options_popup_update_not_found.message"));
+            } else {
+                updatedFilters.sort(function (a, b) {
+                    return a.displayNumber - b.displayNumber;
+                });
+                for (let i = 0; i < updatedFilters.length; i++) {
+                    const filter = updatedFilters[i];
+                    text.push(i18n.__("options_popup_update_updated.message", [filter.name, filter.version]).replace("$1", filter.name).replace("$2", filter.version));
+                }
+            }
+        } else {
+            text.push(i18n.__("options_popup_update_error.message"));
+        }
+
+        return {
+            title: title,
+            text: text.join('\r\n')
+        };
+    }
+
+    function showFiltersUpdatePopup(options) {
+        if (options) {
+            const message = getFiltersUpdateResultMessage(options.success, options.updatedFilters);
+
+            const popup = document.querySelector('#filters-update-popup');
+            popup.style.display = 'block';
+            popup.querySelector('#filters-update-popup-close').addEventListener('click', function (e) {
+                e.preventDefault();
+                popup.style.display = 'none';
+            });
+
+            popup.querySelector('#filters-update-popup-title').textContent = message.title;
+            popup.querySelector('#filters-update-popup-description').textContent = message.text;
+
+            const showMoreButton = popup.querySelector('#filters-update-popup-more');
+            if (options.success && options.updatedFilters.length > 1) {
+                showMoreButton.style.display = 'block';
+                showMoreButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    popup.querySelector('.alert__cont').style.height = 'auto';
+                    showMoreButton.style.display = 'none';
+                });
+            }
+        }
     }
 
     function onFilterStateChanged(filter) {
@@ -891,7 +958,8 @@ const AntiBannerFilters = function (options) {
         updateRulesCountInfo: updateRulesCountInfo,
         onFilterStateChanged: onFilterStateChanged,
         onFilterDownloadStarted: onFilterDownloadStarted,
-        onFilterDownloadFinished: onFilterDownloadFinished
+        onFilterDownloadFinished: onFilterDownloadFinished,
+        showFiltersUpdatePopup: showFiltersUpdatePopup
     };
 };
 
@@ -1093,6 +1161,8 @@ const initPage = function (response) {
                 case EventNotifierTypes.CONTENT_BLOCKER_UPDATED:
                     controller.antiBannerFilters.updateRulesCountInfo(options);
                     break;
+                case EventNotifierTypes.UPDATE_FILTERS_SHOW_POPUP:
+                    controller.antiBannerFilters.showFiltersUpdatePopup(options);
             }
         });
     };

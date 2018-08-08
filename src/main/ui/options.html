@@ -16,26 +16,23 @@
 </head>
 <body>
 <div class="settings-wrap">
-    <div class="alert">
-        <div class="alert__close"></div>
+    <div id="filters-update-popup" class="alert">
+        <div id="filters-update-popup-close" class="alert__close"></div>
         <div class="alert__in">
             <div class="alert__ico"></div>
             <div>
-                <div class="subtitle-2">
-                    New filters was uploaded:
+                <div id="filters-update-popup-title" class="subtitle-2">
                 </div>
                 <div class="alert__desc">
-                    <div class="alert__cont">
-                        English filter, Russian filter, Social media filter, Anonymous filter,  German filter, English filter, Russian filter, Social media filter, Anonymous filter,  German filter
+                    <div id="filters-update-popup-description" class="alert__cont">
                     </div>
-                    <a href="#" class="alert__link">See more</a>
+                    <a id="filters-update-popup-more" href="#" class="alert__link" style="display: none;">See more</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="alert alert--warning alert--active">
-        <div class="alert__cont">
-            Too many filters enabled. Safari cannot use more then 5000 rules.
+    <div id="too-many-subscriptions-warning" class="alert alert--warning">
+        <div class="alert__cont" i18n="options_content_blocker_overlimit">
         </div>
     </div>
     <div class="wlimit">
@@ -331,12 +328,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<div id="tooManySubscriptions" class="alert-topline" style="display: none;">
-    <div class="wrap">
-        <p i18n="options_too_many_filters_selected"></p>
     </div>
 </div>
 
