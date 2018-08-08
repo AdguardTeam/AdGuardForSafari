@@ -1154,6 +1154,10 @@ PageController.prototype = {
             </div>`;
 
         document.querySelector('#new-version-popup-placeholder').appendChild(Utils.htmlToElement(template));
+        document.querySelector('#adguard-new-version-popup-close').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector('#adguard-new-version-popup').style.display = 'none';
+        });
     }
 };
 
