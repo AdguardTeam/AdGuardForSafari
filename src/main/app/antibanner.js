@@ -376,6 +376,11 @@ module.exports = (() => {
 
             // Schedule filters update job
             filtersUpdate.scheduleFiltersUpdate(runInfo.isFirstRun);
+
+            //TODO: Remove after update popup styles finished
+            setTimeout(function () {
+                listeners.notifyListeners(events.APPLICATION_UPDATED, runInfo);
+            }, 2000);
         };
 
         /**

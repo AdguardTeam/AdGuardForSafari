@@ -1108,6 +1108,52 @@ PageController.prototype = {
         // Initialize AntiBanner filters
         this.antiBannerFilters = new AntiBannerFilters({rulesInfo: contentBlockerInfo});
         this.antiBannerFilters.render();
+    },
+
+    /**
+     * Depending on version numbers select proper message for description
+     */
+    getUpdateDescriptionMessage: function (isMajorUpdate) {
+        if (isMajorUpdate) {
+            return i18n.__("options_popup_version_update_description_major.message");
+        }
+
+        return i18n.__("options_popup_version_update_description_minor.message");
+    },
+
+    showAppUpdatePopup: function (options) {
+        const message = {
+            title: i18n.__("options_popup_version_update_title.message").replace('$1', options.currentVersion),
+            description: this.getUpdateDescriptionMessage(options.isMajorUpdate),
+            changelogHref: i18n.__("options_popup_version_update_changelog_href.message"),
+            changelogText: i18n.__("options_popup_version_update_changelog_text.message"),
+            offer: i18n.__("options_popup_version_update_offer.message"),
+            offerButtonHref: i18n.__("options_popup_version_update_offer_button_href.message"),
+            offerButtonText: i18n.__("options_popup_version_update_offer_button_text.message")
+        };
+
+        const template =
+            `<div id="adguard-new-version-popup" class="adguard-update-popup adguard-update-popup--active">
+                <div id="adguard-new-version-popup-close" class="adguard-update-popup__close"></div>
+                <div class="adguard-update-popup__logo"></div>
+                <div class="adguard-update-popup__title">
+                    ${message.title}
+                </div>
+                <div class="adguard-update-popup__desc">
+                    ${message.description}
+                </div>
+                <a href="${message.changelogHref}" class="adguard-update-popup__link" target="_blank">
+                    ${message.changelogText}
+                </a>
+                <div class="adguard-update-popup__offer">
+                    ${message.offer}
+                </div>
+                <a href="${message.offerButtonHref}" class="adguard-update-popup__btn">
+                    ${message.offerButtonText}
+                </a>
+            </div>`;
+
+        document.querySelector('#new-version-popup-placeholder').appendChild(Utils.htmlToElement(template));
     }
 };
 
@@ -1163,6 +1209,10 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.UPDATE_FILTERS_SHOW_POPUP:
                     controller.antiBannerFilters.showFiltersUpdatePopup(options);
+                    break;
+                case EventNotifierTypes.APPLICATION_UPDATED:
+                    controller.showAppUpdatePopup(options);
+                    break;
             }
         });
     };
