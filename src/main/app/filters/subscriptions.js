@@ -4,6 +4,7 @@ const versionUtils = require('../utils/version');
 const log = require('../utils/log');
 const listeners = require('../../notifier');
 const events = require('../../events');
+const app = require('../app');
 
 /**
  * Service that loads and parses filters metadata from backend server.
@@ -311,7 +312,7 @@ module.exports = (function () {
         const tagId = tag.tagId;
         const localizations = i18nMetadata[tagId];
         if (localizations) {
-            const locale = i18n.normalize(localizations, i18n.getLocale());
+            const locale = i18n.normalize(localizations, app.getLocale());
             const localization = localizations[locale];
             if (localization) {
                 tag.name = localization.name;
@@ -330,7 +331,7 @@ module.exports = (function () {
         const groupId = group.groupId;
         const localizations = i18nMetadata[groupId];
         if (localizations) {
-            const locale = i18n.normalize(localizations, i18n.getLocale());
+            const locale = i18n.normalize(localizations, app.getLocale());
             const localization = localizations[locale];
             if (localization) {
                 group.groupName = localization.name;
@@ -348,7 +349,7 @@ module.exports = (function () {
         const filterId = filter.filterId;
         const localizations = i18nMetadata[filterId];
         if (localizations) {
-            const locale = i18n.normalize(localizations, i18n.getLocale());
+            const locale = i18n.normalize(localizations, app.getLocale());
             const localization = localizations[locale];
             if (localization) {
                 filter.name = localization.name;
@@ -409,7 +410,7 @@ module.exports = (function () {
             const filter = filters[i];
             const languages = filter.languages;
             if (languages && languages.length > 0) {
-                const locale = i18n.normalize(languages, i18n.getLocale());
+                const locale = i18n.normalize(languages, app.getLocale());
                 if (locale) {
                     filterIds.push(filter.filterId);
                 }

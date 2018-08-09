@@ -39,7 +39,7 @@ module.exports = (() => {
      * {*|string} Application locale
      */
     const getLocale = () => {
-        //TODO: Parse user locale
+        return app.getLocale();
     };
 
     /**
