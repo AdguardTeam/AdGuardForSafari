@@ -1,4 +1,4 @@
-const {app} = require('electron');
+const app = require('./app');
 const localStorage = require('./storage/storage');
 const versionUtils = require('./utils/version');
 

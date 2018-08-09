@@ -7,6 +7,7 @@ const filtersState = require('./filters/filters-state');
 const collections = require('./utils/collections');
 const log = require('./utils/log');
 const filtersUpdate = require('./filters/filters-update');
+const app = require('./app');
 
 /**
  * Filters manager
@@ -233,7 +234,7 @@ module.exports = (() => {
         let filterIds = [config.AntiBannerFiltersId.ENGLISH_FILTER_ID, config.AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID];
 
         // Get language-specific filters by user locale
-        let localeFilterIds = subscriptions.getFilterIdsForLanguage(i18n.getLocale());
+        let localeFilterIds = subscriptions.getFilterIdsForLanguage(app.getLocale());
         filterIds = filterIds.concat(localeFilterIds);
 
         callback(filterIds);

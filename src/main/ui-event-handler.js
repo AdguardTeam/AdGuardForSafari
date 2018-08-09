@@ -7,6 +7,7 @@ const listeners = require('./notifier');
 const whitelist = require('./app/whitelist');
 const userrules = require('./app/userrules');
 const antibanner = require('./app/antibanner');
+const app = require('./app/app');
 
 /**
  * Initializes event listener
@@ -115,7 +116,7 @@ function processInitializeFrameScriptRequest() {
         environmentOptions: {
             isMacOs: true,
             Prefs: {
-                locale: 'en',
+                locale: app.getLocale(),
                 mobile: false
             }
         },

@@ -2,11 +2,9 @@
 
 const i18n = require("i18n");
 
-//TODO: Set user's locale as default
 i18n.configure({
     locales: ['en', 'de'],
     directory: './locales',
-    defaultLocale: 'en',
     objectNotation: true
 });
 
