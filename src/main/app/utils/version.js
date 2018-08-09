@@ -53,8 +53,30 @@ module.exports = (() => {
         return left.compare(right) > 0;
     };
 
+    /**
+     * Returns major number of version
+     *
+     * @param version
+     */
+    const getMajorVersionNumber = version =>{
+        const v = new Version(version);
+        return v.version[0];
+    };
+
+    /**
+     * Returns minor number of version
+     *
+     * @param version
+     */
+    const getMinorVersionNumber = version =>{
+        const v = new Version(version);
+        return v.version[1];
+    };
+
     return {
-        isGreaterVersion: isGreaterVersion
+        isGreaterVersion: isGreaterVersion,
+        getMajorVersionNumber: getMajorVersionNumber,
+        getMinorVersionNumber: getMinorVersionNumber
     };
 
 })();

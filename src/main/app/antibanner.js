@@ -81,13 +81,11 @@ module.exports = (() => {
     /**
      * Reloads filters from backend
      *
-     * @param successCallback
-     * @param errorCallback
      * @private
      */
-    const reloadAntiBannerFilters = (successCallback, errorCallback) => {
+    const reloadAntiBannerFilters = () => {
         resetFiltersVersion();
-        filtersUpdate.checkAntiBannerFiltersUpdate(true, successCallback, errorCallback);
+        filtersUpdate.checkAntiBannerFiltersUpdate(true);
     };
 
     /**

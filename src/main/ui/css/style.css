@@ -867,6 +867,11 @@ li.active .toggler:before {
 .alert__desc {
   font-size: 12px;
 }
+.alert__cont {
+  white-space: pre-wrap;
+  height: 20px;
+  overflow-y: hidden;
+}
 .filters-check {
   margin-top: 60px;
 }
@@ -1428,7 +1433,6 @@ li.active .toggler:before {
 
 .alert__desc {
   font-size: 12px;
-  display: flex;
   line-height: 20px;
  }
 
@@ -1437,5 +1441,4 @@ li.active .toggler:before {
   color: #66b574;
   transition: 0.3s ease color;
   white-space: nowrap;
-  padding-left: 10px;
 }

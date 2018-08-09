@@ -244,11 +244,9 @@ module.exports = (() => {
      *
      * @param forceUpdate Normally we respect filter update period. But if this parameter is
      *                    true - we ignore it and check updates for all filters.
-     * @param successCallback Called if filters were updated successfully
-     * @param errorCallback Called if something gone wrong
      */
-    const checkAntiBannerFiltersUpdate = (forceUpdate, successCallback, errorCallback) => {
-        filtersUpdate.checkAntiBannerFiltersUpdate(forceUpdate, successCallback, errorCallback);
+    const checkAntiBannerFiltersUpdate = (forceUpdate) => {
+        filtersUpdate.checkAntiBannerFiltersUpdate(forceUpdate);
     };
 
     /**

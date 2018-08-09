@@ -1,5 +1,6 @@
 const {app} = require('electron');
 const localStorage = require('./storage/storage');
+const versionUtils = require('./utils/version');
 
 /**
  * Service that manages app version information and handles
@@ -37,11 +38,15 @@ module.exports = (function () {
         const isFirstRun = (currentVersion !== prevVersion && !prevVersion);
         const isUpdate = !!(currentVersion !== prevVersion && prevVersion);
 
+        const isMajorUpdate = versionUtils.getMajorVersionNumber(currentVersion) > versionUtils.getMajorVersionNumber(prevVersion) ||
+            versionUtils.getMinorVersionNumber(currentVersion) > versionUtils.getMinorVersionNumber(prevVersion);
+
         callback({
             isFirstRun: isFirstRun,
             isUpdate: isUpdate,
             currentVersion: currentVersion,
-            prevVersion: prevVersion
+            prevVersion: prevVersion,
+            isMajorUpdate: isMajorUpdate
         });
     };
 
