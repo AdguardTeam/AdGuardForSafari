@@ -1133,24 +1133,32 @@ PageController.prototype = {
         };
 
         const template =
-            `<div id="adguard-new-version-popup" class="adguard-update-popup adguard-update-popup--active">
-                <div id="adguard-new-version-popup-close" class="adguard-update-popup__close"></div>
-                <div class="adguard-update-popup__logo"></div>
-                <div class="adguard-update-popup__title">
-                    ${message.title}
+            `<div id="adguard-new-version-popup" class="alert alert--active">
+                <div id="adguard-new-version-popup-close" class="alert__close"></div>
+                <div class="alert__in">
+                    <div class="alert__ico"></div>
+                    <div>
+                        <div class="subtitle-2">
+                            ${message.title}
+                        </div>
+                        <div class="alert__desc">
+                            <span>
+                                ${message.description}
+                            </span>
+                            <a href="${message.changelogHref}" class="alert__link" target="_blank">
+                                ${message.changelogText}
+                            </a>
+                        </div>
+                        <div class="alert__desc">
+                            <span>
+                                ${message.offer}
+                            </span>
+                            <a href="${message.offerButtonHref}" class="alert__link">
+                                ${message.offerButtonText}
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="adguard-update-popup__desc">
-                    ${message.description}
-                </div>
-                <a href="${message.changelogHref}" class="adguard-update-popup__link" target="_blank">
-                    ${message.changelogText}
-                </a>
-                <div class="adguard-update-popup__offer">
-                    ${message.offer}
-                </div>
-                <a href="${message.offerButtonHref}" class="adguard-update-popup__btn">
-                    ${message.offerButtonText}
-                </a>
             </div>`;
 
         document.querySelector('#new-version-popup-placeholder').appendChild(Utils.htmlToElement(template));
