@@ -4,6 +4,7 @@ const filterDownloader = require('filters-downloader');
 const config = require('config');
 const path = require('path');
 const log = require('../utils/log');
+const app = require('../app');
 
 /**
  * Backend service client
@@ -64,12 +65,11 @@ module.exports = (function () {
          * Returns extension params: clientId, version and locale
          */
         getExtensionParams: function () {
-            //TODO: Properly setup parameters
+            const clientId = encodeURIComponent(app.getClientId());
+            const locale = encodeURIComponent(app.getLocale());
+            const version = encodeURIComponent(app.getVersion());
+            const id = encodeURIComponent(app.getId());
 
-            const clientId = encodeURIComponent('123123123');
-            const locale = encodeURIComponent('en');
-            const version = encodeURIComponent('1.0.0');
-            const id = encodeURIComponent('123123123');
             const params = [];
             params.push('v=' + version);
             params.push('cid=' + clientId);

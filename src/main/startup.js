@@ -6,7 +6,7 @@ const log = require('./app/utils/log');
 const contentBlockerListener = require('./app/content-blocker/content-blocker-listener');
 
 /**
- * Application
+ * Application startup
  */
 module.exports = (() => {
 
