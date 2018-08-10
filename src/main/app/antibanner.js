@@ -149,15 +149,13 @@ module.exports = (() => {
          *
          * @param filterId Filter identifier
          * @param rulesTexts Array with filter rules
-         * @param startIdx Start index of the rules array
-         * @param endIdx End index of the rules array
          */
-        const addRules = function (filterId, rulesTexts, startIdx, endIdx) {
+        const addRules = function (filterId, rulesTexts) {
             if (!rulesTexts) {
                 return;
             }
 
-            for (let i = startIdx; i < rulesTexts.length && i < endIdx; i++) {
+            for (let i = 0; i < rulesTexts.length; i++) {
                 const ruleText = rulesTexts[i];
                 if (ruleText in uniqueRules) {
                     // Do not allow duplicates
@@ -180,14 +178,14 @@ module.exports = (() => {
                 filterId = filterId - 0;
                 if (filterId !== USER_FILTER_ID) {
                     const rulesTexts = rulesFilterMap[filterId];
-                    addRules(filterId, rulesTexts, 0, rulesTexts.length);
+                    addRules(filterId, rulesTexts);
                 }
             }
 
             // User filter should be the last
             // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/117
             const userRules = rulesFilterMap[USER_FILTER_ID];
-            addRules(USER_FILTER_ID, userRules, 0, userRules.length);
+            addRules(USER_FILTER_ID, userRules);
             requestFilterInitialized();
         };
 
