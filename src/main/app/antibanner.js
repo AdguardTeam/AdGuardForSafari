@@ -141,7 +141,9 @@ module.exports = (() => {
             }
 
             listeners.notifyListeners(events.REQUEST_FILTER_UPDATED);
-            log.info("Finished request filter initialization in {0} ms. Rules count: {1}", (new Date().getTime() - start), newRequestFilter.rules.length);
+            let rulesCount = newRequestFilter.rules ? newRequestFilter.rules.length : 0;
+            log.debug('Rules count {0}', rulesCount);
+            log.info("Finished request filter initialization in {0} ms. Rules count: {1}", (new Date().getTime() - start), rulesCount);
         };
 
         /**
@@ -151,9 +153,12 @@ module.exports = (() => {
          * @param rulesTexts Array with filter rules
          */
         const addRules = function (filterId, rulesTexts) {
-            if (!rulesTexts) {
+            if (!rulesTexts || !collections.isArray(rulesTexts)) {
+                log.debug('Something wrong with rules:' + rulesTexts);
                 return;
             }
+
+            log.debug('Adding rules for filter {0}, rules count: {1}', filterId, rulesTexts.length);
 
             for (let i = 0; i < rulesTexts.length; i++) {
                 const ruleText = rulesTexts[i];
