@@ -15,6 +15,6 @@
   "backendUrl": "https://chrome.adtidy.org",
   "backendApiKey": "4DDBE80A3DA94D819A00523252FB6380",
   "filtersUrl": "https://filters.adtidy.org/extension/safari",
-  "localFiltersFolder": "./filters",
+  "localFiltersFolder": "/filters",
   "localFilterIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 }
