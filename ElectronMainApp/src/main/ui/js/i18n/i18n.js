@@ -1,10 +1,11 @@
 /* global I18nHelper */
 
 const i18n = require("i18n");
+const appPack = require('../../utils/app-pack');
 
 i18n.configure({
     locales: ['en', 'de'],
-    directory: './locales',
+    directory: appPack.resourcePath('/locales'),
     objectNotation: true
 });
 

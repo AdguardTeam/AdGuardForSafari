@@ -5,6 +5,7 @@ const config = require('config');
 const path = require('path');
 const log = require('../utils/log');
 const app = require('../app');
+const appPack = require('../../../utils/app-pack');
 
 /**
  * Backend service client
@@ -54,7 +55,7 @@ module.exports = (function () {
 
         // Folder that contains filters metadata and files with rules. 'filters' by default
         get localFiltersFolder() {
-            return config.get('localFiltersFolder');
+            return appPack.resourcePath(config.get('localFiltersFolder'));
         },
         // Array of filter identifiers, that have local file with rules. Range from 1 to 14 by default
         get localFilterIds() {
@@ -265,7 +266,6 @@ module.exports = (function () {
      * @param errorCallback     Called on error
      */
     const loadLocalFiltersMetadata = function (successCallback, errorCallback) {
-
         const url = settings.localFiltersFolder + '/filters.json';
         fs.readFile(url, "utf8", (err, data) => {
             if (err) {

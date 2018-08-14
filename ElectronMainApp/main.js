@@ -1,3 +1,9 @@
+
+const appPack = require('./src/utils/app-pack');
+
+/* Reconfigure path to config */
+process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
+
 /* global require, process */
 
 const {app, shell, BrowserWindow} = require('electron');
