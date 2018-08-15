@@ -6,6 +6,9 @@
 //  Copyright © 2018 Roman Sokolov. All rights reserved.
 //
 
+AG_NAME = AdGuard
 AG_VERSION = 1.0.0
 AG_BUILD = 2
 
+AG_BUNDLEID = com.adguard.safari.AdGuard
+AG_SIGN = Mac Developer: Roman Sokolov (5SD72JAA66)
