@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65024EA92126C80D00342E3C /* AdGuardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65024EA82126C80D00342E3C /* AdGuardTests.m */; };
+		65024EAF2126C82E00342E3C /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65024EAE2126C82E00342E3C /* SafariServices.framework */; };
 		652169FB21231D0E00ABF7D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65720AB821219ACB00B2381C /* Assets.xcassets */; };
 		65216A03212436EA00ABF7D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
 		65216A07212436EA00ABF7D0 /* SafariExtensionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 65216A06212436EA00ABF7D0 /* SafariExtensionHandler.m */; };
@@ -14,7 +16,7 @@
 		65216A0D212436EA00ABF7D0 /* SafariExtensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65216A0B212436EA00ABF7D0 /* SafariExtensionViewController.xib */; };
 		65216A10212436EA00ABF7D0 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = 65216A0F212436EA00ABF7D0 /* script.js */; };
 		65216A12212436EA00ABF7D0 /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 65216A11212436EA00ABF7D0 /* ToolbarItemIcon.pdf */; };
-		65216A16212436EA00ABF7D0 /* Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65216A00212436E900ABF7D0 /* Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		65216A16212436EA00ABF7D0 /* AdGuardSafariExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65216A00212436E900ABF7D0 /* AdGuardSafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +43,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				65216A16212436EA00ABF7D0 /* Extension.appex in Embed App Extensions */,
+				65216A16212436EA00ABF7D0 /* AdGuardSafariExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,8 +51,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		65024EA62126C80D00342E3C /* AdGuardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdGuardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65024EA82126C80D00342E3C /* AdGuardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdGuardTests.m; sourceTree = "<group>"; };
+		65024EAA2126C80D00342E3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65024EAE2126C82E00342E3C /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		652169F721231AA100ABF7D0 /* build-electron-app.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "build-electron-app.sh"; sourceTree = "<group>"; };
-		65216A00212436E900ABF7D0 /* Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Extension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		65216A00212436E900ABF7D0 /* AdGuardSafariExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdGuardSafariExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		65216A02212436EA00ABF7D0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		65216A05212436EA00ABF7D0 /* SafariExtensionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SafariExtensionHandler.h; sourceTree = "<group>"; };
 		65216A06212436EA00ABF7D0 /* SafariExtensionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SafariExtensionHandler.m; sourceTree = "<group>"; };
@@ -71,6 +77,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		65024EA32126C80C00342E3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65024EAF2126C82E00342E3C /* SafariServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		652169FD212436E900ABF7D0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -82,9 +96,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		65024EA72126C80D00342E3C /* AdGuardTests */ = {
+			isa = PBXGroup;
+			children = (
+				65024EA82126C80D00342E3C /* AdGuardTests.m */,
+				65024EAA2126C80D00342E3C /* Info.plist */,
+			);
+			path = AdGuardTests;
+			sourceTree = "<group>";
+		};
 		65216A01212436EA00ABF7D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65024EAE2126C82E00342E3C /* SafariServices.framework */,
 				65216A02212436EA00ABF7D0 /* Cocoa.framework */,
 			);
 			name = Frameworks;
@@ -113,6 +137,7 @@
 				652169F721231AA100ABF7D0 /* build-electron-app.sh */,
 				65720AB421219AC900B2381C /* AdGuard */,
 				65216A04212436EA00ABF7D0 /* Extension */,
+				65024EA72126C80D00342E3C /* AdGuardTests */,
 				65216A01212436EA00ABF7D0 /* Frameworks */,
 				65720AB321219AC900B2381C /* Products */,
 			);
@@ -122,7 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				65720AB221219AC900B2381C /* AdGuard.app */,
-				65216A00212436E900ABF7D0 /* Extension.appex */,
+				65216A00212436E900ABF7D0 /* AdGuardSafariExtension.appex */,
+				65024EA62126C80D00342E3C /* AdGuardTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,9 +185,26 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
-		652169FF212436E900ABF7D0 /* Extension */ = {
+		65024EA52126C80C00342E3C /* AdGuardTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 65216A17212436EA00ABF7D0 /* Build configuration list for PBXNativeTarget "Extension" */;
+			buildConfigurationList = 65024EAD2126C80D00342E3C /* Build configuration list for PBXNativeTarget "AdGuardTests" */;
+			buildPhases = (
+				65024EA22126C80C00342E3C /* Sources */,
+				65024EA32126C80C00342E3C /* Frameworks */,
+				65024EA42126C80C00342E3C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdGuardTests;
+			productName = AdGuardTests;
+			productReference = 65024EA62126C80D00342E3C /* AdGuardTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		652169FF212436E900ABF7D0 /* AdGuardSafariExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65216A17212436EA00ABF7D0 /* Build configuration list for PBXNativeTarget "AdGuardSafariExtension" */;
 			buildPhases = (
 				652169FC212436E900ABF7D0 /* Sources */,
 				652169FD212436E900ABF7D0 /* Frameworks */,
@@ -171,9 +214,9 @@
 			);
 			dependencies = (
 			);
-			name = Extension;
+			name = AdGuardSafariExtension;
 			productName = Extension;
-			productReference = 65216A00212436E900ABF7D0 /* Extension.appex */;
+			productReference = 65216A00212436E900ABF7D0 /* AdGuardSafariExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		65720AB121219AC900B2381C /* AdGuard */ = {
@@ -203,6 +246,9 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Roman Sokolov";
 				TargetAttributes = {
+					65024EA52126C80C00342E3C = {
+						CreatedOnToolsVersion = 9.4;
+					};
 					652169F321231A2300ABF7D0 = {
 						CreatedOnToolsVersion = 9.4;
 					};
@@ -239,12 +285,20 @@
 			targets = (
 				65720AB121219AC900B2381C /* AdGuard */,
 				652169F321231A2300ABF7D0 /* BuildElectronApp */,
-				652169FF212436E900ABF7D0 /* Extension */,
+				652169FF212436E900ABF7D0 /* AdGuardSafariExtension */,
+				65024EA52126C80C00342E3C /* AdGuardTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		65024EA42126C80C00342E3C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		652169FA21231D0400ABF7D0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -266,6 +320,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		65024EA22126C80C00342E3C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65024EA92126C80D00342E3C /* AdGuardTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		652169FC212436E900ABF7D0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -285,7 +347,7 @@
 		};
 		65216A15212436EA00ABF7D0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 652169FF212436E900ABF7D0 /* Extension */;
+			target = 652169FF212436E900ABF7D0 /* AdGuardSafariExtension */;
 			targetProxy = 65216A14212436EA00ABF7D0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -302,6 +364,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		65024EAB2126C80D00342E3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				INFOPLIST_FILE = AdGuardTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		65024EAC2126C80D00342E3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				INFOPLIST_FILE = AdGuardTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		652169F521231A2300ABF7D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -517,6 +617,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		65024EAD2126C80D00342E3C /* Build configuration list for PBXNativeTarget "AdGuardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65024EAB2126C80D00342E3C /* Debug */,
+				65024EAC2126C80D00342E3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		652169F421231A2300ABF7D0 /* Build configuration list for PBXLegacyTarget "BuildElectronApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -526,7 +635,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65216A17212436EA00ABF7D0 /* Build configuration list for PBXNativeTarget "Extension" */ = {
+		65216A17212436EA00ABF7D0 /* Build configuration list for PBXNativeTarget "AdGuardSafariExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				65216A18212436EA00ABF7D0 /* Debug */,

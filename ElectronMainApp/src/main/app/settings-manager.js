@@ -2,7 +2,9 @@ const localStorage = require('./storage/storage');
 const cache = require('./utils/cache');
 const log = require('./utils/log');
 const channels = require('./utils/channels');
-
+//TODO: remove this (FOR TEST)
+const safari = require('safari-ext');
+//-------
 /**
  * Object that manages user settings.
  * @constructor
@@ -74,6 +76,13 @@ module.exports = (function () {
         localStorage.setItem(propertyName, propertyValue);
         properties[propertyName] = propertyValue;
         propertyUpdateChannel.notify(propertyName, propertyValue);
+
+//TODO: delete this (FOR TEST)
+        console.log("Trying to send message to Safari App Extension...");
+        safari.send(propertyName, JSON.stringify(propertyValue), (result) => {
+            console.log("Result sending to Safari App Extension: %d", result);
+        });
+//--------------------
     };
 
     const getAllSettings = function () {
