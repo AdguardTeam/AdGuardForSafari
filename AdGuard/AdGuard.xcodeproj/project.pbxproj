@@ -15,8 +15,24 @@
 		65216A0A212436EA00ABF7D0 /* SafariExtensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65216A09212436EA00ABF7D0 /* SafariExtensionViewController.m */; };
 		65216A0D212436EA00ABF7D0 /* SafariExtensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65216A0B212436EA00ABF7D0 /* SafariExtensionViewController.xib */; };
 		65216A10212436EA00ABF7D0 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = 65216A0F212436EA00ABF7D0 /* script.js */; };
-		65216A12212436EA00ABF7D0 /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 65216A11212436EA00ABF7D0 /* ToolbarItemIcon.pdf */; };
 		65216A16212436EA00ABF7D0 /* AdGuardSafariExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65216A00212436E900ABF7D0 /* AdGuardSafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		655C862B212AE6C200CB6DAE /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8629212AE6C200CB6DAE /* AESharedResources.m */; };
+		655C8660212AEA3200CB6DAE /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8638212AEA3200CB6DAE /* NSURL+Utils.m */; };
+		655C8662212AEA3200CB6DAE /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863D212AEA3200CB6DAE /* NSDate+Utils.m */; };
+		655C8663212AEA3200CB6DAE /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863E212AEA3200CB6DAE /* ACLFileLocker.m */; };
+		655C8665212AEA3200CB6DAE /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8640212AEA3200CB6DAE /* NSString+Utils.m */; };
+		655C8667212AEA3200CB6DAE /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8642212AEA3200CB6DAE /* NSException+Utils.m */; };
+		655C8668212AEA3200CB6DAE /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8643212AEA3200CB6DAE /* NSStringPunycodeAdditions.m */; };
+		655C8669212AEA3200CB6DAE /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8647212AEA3200CB6DAE /* DDLog.m */; };
+		655C866B212AEA3200CB6DAE /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C864B212AEA3200CB6DAE /* DDASLLogger.m */; };
+		655C866C212AEA3200CB6DAE /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C864E212AEA3200CB6DAE /* CLIColor.m */; };
+		655C866D212AEA3200CB6DAE /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8651212AEA3200CB6DAE /* DDFileLogger.m */; };
+		655C866E212AEA3200CB6DAE /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8653212AEA3200CB6DAE /* DDContextFilterLogFormatter.m */; };
+		655C866F212AEA3200CB6DAE /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8655212AEA3200CB6DAE /* DDDispatchQueueLogFormatter.m */; };
+		655C8670212AEA3200CB6DAE /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8657212AEA3200CB6DAE /* DDMultiFormatter.m */; };
+		655C8671212AEA3200CB6DAE /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 655C8659212AEA3200CB6DAE /* README.txt */; };
+		655C8672212AEA3200CB6DAE /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865A212AEA3200CB6DAE /* DDTTYLogger.m */; };
+		655C8677212AF2A500CB6DAE /* tray-on.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 655C8676212AF2A500CB6DAE /* tray-on.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,13 +81,59 @@
 		65216A0C212436EA00ABF7D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SafariExtensionViewController.xib; sourceTree = "<group>"; };
 		65216A0E212436EA00ABF7D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65216A0F212436EA00ABF7D0 /* script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
-		65216A11212436EA00ABF7D0 /* ToolbarItemIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ToolbarItemIcon.pdf; sourceTree = "<group>"; };
 		65216A13212436EA00ABF7D0 /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Extension.entitlements; sourceTree = "<group>"; };
 		65216A2F2124517700ABF7D0 /* ElectronChild.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ElectronChild.entitlements; sourceTree = "<group>"; };
+		655C8629212AE6C200CB6DAE /* AESharedResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESharedResources.m; sourceTree = "<group>"; };
+		655C862A212AE6C200CB6DAE /* AESharedResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESharedResources.h; sourceTree = "<group>"; };
+		655C862F212AEA3200CB6DAE /* ACLExecuteBlockDelayed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLExecuteBlockDelayed.h; sourceTree = "<group>"; };
+		655C8630212AEA3200CB6DAE /* ACLFileLocker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLFileLocker.h; sourceTree = "<group>"; };
+		655C8631212AEA3200CB6DAE /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
+		655C8632212AEA3200CB6DAE /* ACLJobController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLJobController.h; sourceTree = "<group>"; };
+		655C8633212AEA3200CB6DAE /* ACLWildcard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLWildcard.m; sourceTree = "<group>"; };
+		655C8634212AEA3200CB6DAE /* NSStringPunycodeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringPunycodeAdditions.h; sourceTree = "<group>"; };
+		655C8635212AEA3200CB6DAE /* NSException+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSException+Utils.h"; sourceTree = "<group>"; };
+		655C8636212AEA3200CB6DAE /* ACLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLLogger.h; sourceTree = "<group>"; };
+		655C8637212AEA3200CB6DAE /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
+		655C8638212AEA3200CB6DAE /* NSURL+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Utils.m"; sourceTree = "<group>"; };
+		655C8639212AEA3200CB6DAE /* ACLFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLFileLogger.h; sourceTree = "<group>"; };
+		655C863A212AEA3200CB6DAE /* ACObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACObject.h; sourceTree = "<group>"; };
+		655C863B212AEA3200CB6DAE /* ACLWildcard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLWildcard.h; sourceTree = "<group>"; };
+		655C863C212AEA3200CB6DAE /* ACLJobController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLJobController.m; sourceTree = "<group>"; };
+		655C863D212AEA3200CB6DAE /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
+		655C863E212AEA3200CB6DAE /* ACLFileLocker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLFileLocker.m; sourceTree = "<group>"; };
+		655C863F212AEA3200CB6DAE /* ACLExecuteBlockDelayed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLExecuteBlockDelayed.m; sourceTree = "<group>"; };
+		655C8640212AEA3200CB6DAE /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
+		655C8641212AEA3200CB6DAE /* ACLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLLogger.m; sourceTree = "<group>"; };
+		655C8642212AEA3200CB6DAE /* NSException+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSException+Utils.m"; sourceTree = "<group>"; };
+		655C8643212AEA3200CB6DAE /* NSStringPunycodeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringPunycodeAdditions.m; sourceTree = "<group>"; };
+		655C8646212AEA3200CB6DAE /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
+		655C8647212AEA3200CB6DAE /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		655C8648212AEA3200CB6DAE /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		655C8649212AEA3200CB6DAE /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		655C864A212AEA3200CB6DAE /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		655C864B212AEA3200CB6DAE /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
+		655C864D212AEA3200CB6DAE /* CLIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLIColor.h; sourceTree = "<group>"; };
+		655C864E212AEA3200CB6DAE /* CLIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLIColor.m; sourceTree = "<group>"; };
+		655C864F212AEA3200CB6DAE /* DDLog+LOGV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DDLog+LOGV.h"; sourceTree = "<group>"; };
+		655C8650212AEA3200CB6DAE /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		655C8651212AEA3200CB6DAE /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
+		655C8653212AEA3200CB6DAE /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		655C8654212AEA3200CB6DAE /* DDMultiFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMultiFormatter.h; sourceTree = "<group>"; };
+		655C8655212AEA3200CB6DAE /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		655C8656212AEA3200CB6DAE /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		655C8657212AEA3200CB6DAE /* DDMultiFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMultiFormatter.m; sourceTree = "<group>"; };
+		655C8658212AEA3200CB6DAE /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		655C8659212AEA3200CB6DAE /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		655C865A212AEA3200CB6DAE /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
+		655C865B212AEA3200CB6DAE /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		655C865C212AEA3200CB6DAE /* NSURL+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Utils.h"; sourceTree = "<group>"; };
+		655C865D212AEA3200CB6DAE /* ACObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACObject.m; sourceTree = "<group>"; };
+		655C865E212AEA3200CB6DAE /* ACLFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLFileLogger.m; sourceTree = "<group>"; };
+		655C8675212AEB5F00CB6DAE /* ACLang.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACLang.h; sourceTree = "<group>"; };
+		655C8676212AF2A500CB6DAE /* tray-on.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "tray-on.pdf"; sourceTree = "<group>"; };
 		65720AB221219AC900B2381C /* AdGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65720AB821219ACB00B2381C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65720ABD21219ACB00B2381C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		65720ABE21219ACB00B2381C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		65720AC021219ACB00B2381C /* AdGuard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuard.entitlements; sourceTree = "<group>"; };
 		657215562121F30600B2381C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,12 +184,115 @@
 				65216A08212436EA00ABF7D0 /* SafariExtensionViewController.h */,
 				65216A09212436EA00ABF7D0 /* SafariExtensionViewController.m */,
 				65216A0B212436EA00ABF7D0 /* SafariExtensionViewController.xib */,
+				655C8676212AF2A500CB6DAE /* tray-on.pdf */,
 				65216A0E212436EA00ABF7D0 /* Info.plist */,
 				65216A0F212436EA00ABF7D0 /* script.js */,
-				65216A11212436EA00ABF7D0 /* ToolbarItemIcon.pdf */,
 				65216A13212436EA00ABF7D0 /* Extension.entitlements */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		655C8628212AE6C200CB6DAE /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				655C862D212AE9DC00CB6DAE /* CommonLib */,
+				655C8629212AE6C200CB6DAE /* AESharedResources.m */,
+				655C862A212AE6C200CB6DAE /* AESharedResources.h */,
+			);
+			name = Shared;
+			path = ../Shared;
+			sourceTree = "<group>";
+		};
+		655C862D212AE9DC00CB6DAE /* CommonLib */ = {
+			isa = PBXGroup;
+			children = (
+				655C8675212AEB5F00CB6DAE /* ACLang.h */,
+				655C862E212AEA3200CB6DAE /* Lang */,
+			);
+			path = CommonLib;
+			sourceTree = "<group>";
+		};
+		655C862E212AEA3200CB6DAE /* Lang */ = {
+			isa = PBXGroup;
+			children = (
+				655C862F212AEA3200CB6DAE /* ACLExecuteBlockDelayed.h */,
+				655C8630212AEA3200CB6DAE /* ACLFileLocker.h */,
+				655C8631212AEA3200CB6DAE /* NSDate+Utils.h */,
+				655C8632212AEA3200CB6DAE /* ACLJobController.h */,
+				655C8633212AEA3200CB6DAE /* ACLWildcard.m */,
+				655C8634212AEA3200CB6DAE /* NSStringPunycodeAdditions.h */,
+				655C8635212AEA3200CB6DAE /* NSException+Utils.h */,
+				655C8636212AEA3200CB6DAE /* ACLLogger.h */,
+				655C8637212AEA3200CB6DAE /* NSString+Utils.h */,
+				655C8638212AEA3200CB6DAE /* NSURL+Utils.m */,
+				655C8639212AEA3200CB6DAE /* ACLFileLogger.h */,
+				655C863A212AEA3200CB6DAE /* ACObject.h */,
+				655C863B212AEA3200CB6DAE /* ACLWildcard.h */,
+				655C863C212AEA3200CB6DAE /* ACLJobController.m */,
+				655C863D212AEA3200CB6DAE /* NSDate+Utils.m */,
+				655C863E212AEA3200CB6DAE /* ACLFileLocker.m */,
+				655C863F212AEA3200CB6DAE /* ACLExecuteBlockDelayed.m */,
+				655C8640212AEA3200CB6DAE /* NSString+Utils.m */,
+				655C8641212AEA3200CB6DAE /* ACLLogger.m */,
+				655C8642212AEA3200CB6DAE /* NSException+Utils.m */,
+				655C8643212AEA3200CB6DAE /* NSStringPunycodeAdditions.m */,
+				655C8644212AEA3200CB6DAE /* Logger */,
+				655C865C212AEA3200CB6DAE /* NSURL+Utils.h */,
+				655C865D212AEA3200CB6DAE /* ACObject.m */,
+				655C865E212AEA3200CB6DAE /* ACLFileLogger.m */,
+			);
+			path = Lang;
+			sourceTree = "<group>";
+		};
+		655C8644212AEA3200CB6DAE /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				655C8645212AEA3200CB6DAE /* Lumberjack */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		655C8645212AEA3200CB6DAE /* Lumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				655C8646212AEA3200CB6DAE /* DDASLLogger.h */,
+				655C8647212AEA3200CB6DAE /* DDLog.m */,
+				655C8648212AEA3200CB6DAE /* DDFileLogger.h */,
+				655C8649212AEA3200CB6DAE /* DDAbstractDatabaseLogger.m */,
+				655C864A212AEA3200CB6DAE /* DDTTYLogger.h */,
+				655C864B212AEA3200CB6DAE /* DDASLLogger.m */,
+				655C864C212AEA3200CB6DAE /* CLI */,
+				655C864F212AEA3200CB6DAE /* DDLog+LOGV.h */,
+				655C8650212AEA3200CB6DAE /* DDLog.h */,
+				655C8651212AEA3200CB6DAE /* DDFileLogger.m */,
+				655C8652212AEA3200CB6DAE /* Extensions */,
+				655C865A212AEA3200CB6DAE /* DDTTYLogger.m */,
+				655C865B212AEA3200CB6DAE /* DDAbstractDatabaseLogger.h */,
+			);
+			path = Lumberjack;
+			sourceTree = "<group>";
+		};
+		655C864C212AEA3200CB6DAE /* CLI */ = {
+			isa = PBXGroup;
+			children = (
+				655C864D212AEA3200CB6DAE /* CLIColor.h */,
+				655C864E212AEA3200CB6DAE /* CLIColor.m */,
+			);
+			path = CLI;
+			sourceTree = "<group>";
+		};
+		655C8652212AEA3200CB6DAE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				655C8653212AEA3200CB6DAE /* DDContextFilterLogFormatter.m */,
+				655C8654212AEA3200CB6DAE /* DDMultiFormatter.h */,
+				655C8655212AEA3200CB6DAE /* DDDispatchQueueLogFormatter.m */,
+				655C8656212AEA3200CB6DAE /* DDContextFilterLogFormatter.h */,
+				655C8657212AEA3200CB6DAE /* DDMultiFormatter.m */,
+				655C8658212AEA3200CB6DAE /* DDDispatchQueueLogFormatter.h */,
+				655C8659212AEA3200CB6DAE /* README.txt */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		65720AA921219AC900B2381C = {
@@ -135,6 +300,7 @@
 			children = (
 				657215562121F30600B2381C /* Config.xcconfig */,
 				652169F721231AA100ABF7D0 /* build-electron-app.sh */,
+				655C8628212AE6C200CB6DAE /* Shared */,
 				65720AB421219AC900B2381C /* AdGuard */,
 				65216A04212436EA00ABF7D0 /* Extension */,
 				65024EA72126C80D00342E3C /* AdGuardTests */,
@@ -158,7 +324,6 @@
 			children = (
 				65720AB821219ACB00B2381C /* Assets.xcassets */,
 				65720ABD21219ACB00B2381C /* Info.plist */,
-				65720ABE21219ACB00B2381C /* main.m */,
 				65720AC021219ACB00B2381C /* AdGuard.entitlements */,
 				65216A2F2124517700ABF7D0 /* ElectronChild.entitlements */,
 			);
@@ -311,8 +476,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65216A12212436EA00ABF7D0 /* ToolbarItemIcon.pdf in Resources */,
 				65216A0D212436EA00ABF7D0 /* SafariExtensionViewController.xib in Resources */,
+				655C8677212AF2A500CB6DAE /* tray-on.pdf in Resources */,
+				655C8671212AEA3200CB6DAE /* README.txt in Resources */,
 				65216A10212436EA00ABF7D0 /* script.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,7 +498,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655C866B212AEA3200CB6DAE /* DDASLLogger.m in Sources */,
+				655C8669212AEA3200CB6DAE /* DDLog.m in Sources */,
 				65216A0A212436EA00ABF7D0 /* SafariExtensionViewController.m in Sources */,
+				655C8670212AEA3200CB6DAE /* DDMultiFormatter.m in Sources */,
+				655C8662212AEA3200CB6DAE /* NSDate+Utils.m in Sources */,
+				655C8668212AEA3200CB6DAE /* NSStringPunycodeAdditions.m in Sources */,
+				655C8667212AEA3200CB6DAE /* NSException+Utils.m in Sources */,
+				655C8663212AEA3200CB6DAE /* ACLFileLocker.m in Sources */,
+				655C866F212AEA3200CB6DAE /* DDDispatchQueueLogFormatter.m in Sources */,
+				655C866D212AEA3200CB6DAE /* DDFileLogger.m in Sources */,
+				655C866E212AEA3200CB6DAE /* DDContextFilterLogFormatter.m in Sources */,
+				655C862B212AE6C200CB6DAE /* AESharedResources.m in Sources */,
+				655C8660212AEA3200CB6DAE /* NSURL+Utils.m in Sources */,
+				655C866C212AEA3200CB6DAE /* CLIColor.m in Sources */,
+				655C8672212AEA3200CB6DAE /* DDTTYLogger.m in Sources */,
+				655C8665212AEA3200CB6DAE /* NSString+Utils.m in Sources */,
 				65216A07212436EA00ABF7D0 /* SafariExtensionHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

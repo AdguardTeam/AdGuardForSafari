@@ -2,7 +2,7 @@ const localStorage = require('./storage/storage');
 const cache = require('./utils/cache');
 const log = require('./utils/log');
 const channels = require('./utils/channels');
-//TODO: remove this (FOR TEST)
+//TODO: delete this (FOR TEST)
 const safari = require('safari-ext');
 //-------
 /**

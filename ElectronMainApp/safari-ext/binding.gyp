@@ -2,7 +2,7 @@
  "targets": [
    {
      "target_name": "safari-ext",
-     "sources": [ "src.mm" ],
+     "sources": [ "src.mm", "../Shared/CommonLib/Lang/ACLFileLocker.m", "../Shared/AESharedResources.m" ],
      "include_dirs" : [
        "<!(node -e \"require('nan')\")"
      ],

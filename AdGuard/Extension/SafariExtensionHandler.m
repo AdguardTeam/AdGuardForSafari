@@ -8,6 +8,7 @@
 
 #import "SafariExtensionHandler.h"
 #import "SafariExtensionViewController.h"
+#import "AESharedResources.h"
 
 @interface SafariExtensionHandler ()
 
@@ -39,5 +40,15 @@
 
 - (void)messageReceivedFromContainingAppWithName:(NSString *)messageName userInfo:(NSDictionary<NSString *,id> *)userInfo {
     NSLog(@"The extension received a message (%@) from a containing app with userInfo (%@)", messageName, userInfo);
+
+    NSDictionary *testData = @{
+                               @"int-value": @(100),
+                               @"string-value": @"ass with pen",
+                               @"string-localized-value": @"жопа с ручкой"
+                               };
+
+    AESharedResources.blockingContentRules = [NSJSONSerialization dataWithJSONObject:testData
+                                                                             options:0
+                                                                               error:NULL];
 }
 @end

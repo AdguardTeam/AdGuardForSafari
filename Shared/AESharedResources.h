@@ -1,0 +1,38 @@
+//
+//  AESharedResources.h
+//  AdGuard
+//
+//  Created by Roman Sokolov on 20.08.2018.
+//  Copyright © 2018 Roman Sokolov. All rights reserved.
+//
+#import <Foundation/Foundation.h>
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark - AESharedResources Constants
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark - AESharedResources
+/////////////////////////////////////////////////////////////////////
+
+/**
+     Class, which provides exchanging data between app and extension.
+ */
+@interface AESharedResources : NSObject
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Properties and public methods
+/////////////////////////////////////////////////////////////////////
+
+/**
+ Returns URL where is shared resources.
+ */
++ (NSURL *)sharedResuorcesURL;
+
+//Property example!!!
+/**
+ Data with blocking content rules JSON.
+ */
+@property (class) NSData *blockingContentRules;
+
+@end

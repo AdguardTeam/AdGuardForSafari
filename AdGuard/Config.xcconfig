@@ -12,3 +12,8 @@ AG_BUILD = 2
 
 AG_BUNDLEID = com.adguard.safari.AdGuard
 AG_SIGN = Mac Developer: Roman Sokolov (5SD72JAA66)
+
+AG_GROUP = TC3Q7MAJXF.com.adguard.safari.AdGuard
+
+
+GCC_PREPROCESSOR_DEFINITIONS = AG_GROUP=@\"$(AG_GROUP)\"
