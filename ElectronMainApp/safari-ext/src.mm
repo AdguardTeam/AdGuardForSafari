@@ -45,6 +45,7 @@ static void AsyncSendHandler(uv_async_t *handle) {
     case CallbackTypeForSend:
       c_arg(1);
       argv[0] = Nan::New(*(bool *)(info->result));
+      free(info->result);
       break;
 
     case CallbackTypeForBlockingContentRules:
