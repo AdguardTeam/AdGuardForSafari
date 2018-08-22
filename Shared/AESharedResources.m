@@ -16,8 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import "AESharedResources.h"
-#import "ACLang.h"
-
+#import "CommonLib/ACLang.h"
 
 #define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"
 

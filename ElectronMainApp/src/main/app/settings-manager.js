@@ -81,7 +81,11 @@ module.exports = (function () {
         console.log("Trying to send message to Safari App Extension...");
         safari.send(propertyName, JSON.stringify(propertyValue), (result) => {
             console.log("Result sending to Safari App Extension: %d", result);
+            
+            console.log("Path to group folder:\n%s", safari.path());
+            safari.blockingContentRules((content)=>{console.log("Json content:\n%s",content);});
         });
+
 //--------------------
     };
 

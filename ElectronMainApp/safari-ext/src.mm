@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <SafariServices/SafariServices.h>
-#import "AESharedResources.h"
+#import "shared/AESharedResources.h"
 #include <nan.h>
 
 
@@ -36,22 +36,21 @@ static void AsyncSendHandler(uv_async_t *handle) {
 
   NSLog(@"Invoking callback with type: %d", info->type);
 
-#define c_arg(N) argc = N; argv = malloc(sizeof(v8::Local<v8::Value>)*N) 
+#define c_arg(N) argc = N; argv = (v8::Local<v8::Value> *)malloc(sizeof(v8::Local<v8::Value>)*N) 
 
-  int argc = 0
-  v8::Local<v8::Value> argv[];
+  int argc = 0;
+  v8::Local<v8::Value> *argv = NULL;
+  NSString *string;
   switch(info->type) {
     case CallbackTypeForSend:
       c_arg(1);
-      argv[0] = Nan::New((bool)*(info->result));
+      argv[0] = Nan::New(*(bool *)(info->result));
       break;
 
     case CallbackTypeForBlockingContentRules:
-        {
-           c_arg(1);
-           NSString *blockingContentRules = info->result;
-           argv[0] = Nan::New((char *)info->result);
-        }
+       c_arg(1);
+       string = CFBridgingRelease(info->result);
+       argv[0] = Nan::New(string.UTF8String).ToLocalChecked();
       break;
 
     default:
@@ -60,6 +59,7 @@ static void AsyncSendHandler(uv_async_t *handle) {
 
   Nan::Call(*(info->callback), argc, argv);
 
+  string = nil;
   delete info;
   info = nullptr;
   handle->data = nullptr;
@@ -71,7 +71,7 @@ NAN_METHOD(getPath) {
 
   NSString *groupPath = AESharedResources.sharedResuorcesURL.path;
   if (groupPath.length) {
-    info.GetReturnValue().Set(Nan::New(groupPath.Utf8String).ToLocalChecked());
+    info.GetReturnValue().Set(Nan::New(groupPath.UTF8String).ToLocalChecked());
   }
 }
 
@@ -115,8 +115,10 @@ NAN_METHOD(msgToSafariExt) {
 
                                    NSLog(@"Error object: %@", error);
 
-                                   auto *info = new SendMessageCallbackInfo();
-                                   info->result = (error == nil);
+                                   auto *info = new CallbackInfo();
+                                   info->type = CallbackTypeForSend;
+                                   info->result = malloc(sizeof(bool));
+                                   *(bool *)info->result = (error == nil);
                                    info->callback = cb;
 
                                    auto *async = new uv_async_t();
@@ -127,11 +129,48 @@ NAN_METHOD(msgToSafariExt) {
 
 }
 
+NAN_METHOD(blockingContentRulesJson) {
+
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsFunction()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+
+    Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
+
+
+      dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        NSLog(@"GEtting blocking rules in global queue");
+        NSData *data = AESharedResources.blockingContentRules;
+
+        NSString *blockingContentRules = data.length ?[[NSString alloc]
+                                                      initWithData:data
+                                                      encoding:NSUTF8StringEncoding]
+        : @"";
+
+        auto *info = new CallbackInfo();
+        info->type = CallbackTypeForBlockingContentRules;
+        info->result = (void *)CFBridgingRetain(blockingContentRules);
+        info->callback = cb;
+
+        auto *async = new uv_async_t();
+        async->data = info;
+        uv_async_init(uv_default_loop(), async, (uv_async_cb)AsyncSendHandler);
+        uv_async_send(async);
+
+    });
+}
+
 NAN_MODULE_INIT(Init) {
   /*
   Sends message to extension.
   Usage:
-  obj.send("message-name","params-like-string-may-be-json", (bool-result)=>{ return bool-result;});
+  obj.send("message-name","params-like-string-may-be-json", (bool_result)=>{ console.log(bool_result);});
   */
 	Nan::Set(target, New<String>("send").ToLocalChecked(),
 	GetFunction(New<FunctionTemplate>(msgToSafariExt)).ToLocalChecked());
@@ -142,6 +181,14 @@ NAN_MODULE_INIT(Init) {
   */
   Nan::Set(target, New<String>("path").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(getPath)).ToLocalChecked());
+  /*
+  TEST METHOD
+  Gets json from group folder.
+  Usage:
+  obj.blockingContentRules((string_content)=>{console.log(string_content);});
+  */
+  Nan::Set(target, New<String>("blockingContentRules").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(blockingContentRulesJson)).ToLocalChecked());
 }
 
 // macro to load the module when require'd

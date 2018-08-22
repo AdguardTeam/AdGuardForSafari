@@ -10,11 +10,22 @@ PLATFORM=darwin
 ARCH=x64
 
 SRC="${SRCROOT}/../ElectronMainApp"
+SHAREDSRC="${SRCROOT}/../Shared"
 
-if [ $1 == "clean" ]; then
+if [ ${1} == "clean" ]; then
 rm -Rfv "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}" || exit 1
+cd "${SHAREDSRC}"
+node-gyp clean || exit 1
 exit 0
 fi
+
+#cd "${SHAREDSRC}"
+#node-gyp configure --verbose || exit 1
+##node-gyp rebuild --verbose|| exit 1
+#
+mkdir -vp "${SRC}/safari-ext/shared"
+cp -v "${BUILT_PRODUCTS_DIR}/libshared.a" "${SRC}/safari-ext/shared/" || exit 1
+find "${SHAREDSRC}" -name "*.h" -depth 1 | xargs -J % cp -v % "${SRC}/safari-ext/shared/" || exit 1
 
 OPT=""
 cd "${SRC}"

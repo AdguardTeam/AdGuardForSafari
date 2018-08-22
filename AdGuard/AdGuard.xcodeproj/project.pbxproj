@@ -16,22 +16,60 @@
 		65216A0D212436EA00ABF7D0 /* SafariExtensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65216A0B212436EA00ABF7D0 /* SafariExtensionViewController.xib */; };
 		65216A10212436EA00ABF7D0 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = 65216A0F212436EA00ABF7D0 /* script.js */; };
 		65216A16212436EA00ABF7D0 /* AdGuardSafariExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65216A00212436E900ABF7D0 /* AdGuardSafariExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		655C862B212AE6C200CB6DAE /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8629212AE6C200CB6DAE /* AESharedResources.m */; };
+		652735BB212D788E005C35BF /* ACLang.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8675212AEB5F00CB6DAE /* ACLang.h */; };
+		652735BC212D788E005C35BF /* ACLExecuteBlockDelayed.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C862F212AEA3200CB6DAE /* ACLExecuteBlockDelayed.h */; };
+		652735BD212D788E005C35BF /* ACLFileLocker.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8630212AEA3200CB6DAE /* ACLFileLocker.h */; };
+		652735BE212D788E005C35BF /* NSDate+Utils.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8631212AEA3200CB6DAE /* NSDate+Utils.h */; };
+		652735BF212D788E005C35BF /* ACLJobController.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8632212AEA3200CB6DAE /* ACLJobController.h */; };
+		652735C0212D788E005C35BF /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8633212AEA3200CB6DAE /* ACLWildcard.m */; };
+		652735C1212D788E005C35BF /* NSStringPunycodeAdditions.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8634212AEA3200CB6DAE /* NSStringPunycodeAdditions.h */; };
+		652735C2212D788E005C35BF /* NSException+Utils.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8635212AEA3200CB6DAE /* NSException+Utils.h */; };
+		652735C3212D788E005C35BF /* ACLLogger.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8636212AEA3200CB6DAE /* ACLLogger.h */; };
+		652735C4212D788E005C35BF /* NSString+Utils.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8637212AEA3200CB6DAE /* NSString+Utils.h */; };
+		652735C5212D788E005C35BF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8638212AEA3200CB6DAE /* NSURL+Utils.m */; };
+		652735C6212D788E005C35BF /* ACLFileLogger.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8639212AEA3200CB6DAE /* ACLFileLogger.h */; };
+		652735C7212D788E005C35BF /* ACObject.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C863A212AEA3200CB6DAE /* ACObject.h */; };
+		652735C8212D788E005C35BF /* ACLWildcard.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C863B212AEA3200CB6DAE /* ACLWildcard.h */; };
+		652735C9212D788E005C35BF /* ACLJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863C212AEA3200CB6DAE /* ACLJobController.m */; };
+		652735CA212D788E005C35BF /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863D212AEA3200CB6DAE /* NSDate+Utils.m */; };
+		652735CB212D788E005C35BF /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863E212AEA3200CB6DAE /* ACLFileLocker.m */; };
+		652735CC212D788E005C35BF /* ACLExecuteBlockDelayed.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863F212AEA3200CB6DAE /* ACLExecuteBlockDelayed.m */; };
+		652735CD212D788E005C35BF /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8640212AEA3200CB6DAE /* NSString+Utils.m */; };
+		652735CE212D788E005C35BF /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8641212AEA3200CB6DAE /* ACLLogger.m */; };
+		652735CF212D788E005C35BF /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8642212AEA3200CB6DAE /* NSException+Utils.m */; };
+		652735D0212D788E005C35BF /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8643212AEA3200CB6DAE /* NSStringPunycodeAdditions.m */; };
+		652735D1212D788E005C35BF /* DDASLLogger.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8646212AEA3200CB6DAE /* DDASLLogger.h */; };
+		652735D2212D788E005C35BF /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8647212AEA3200CB6DAE /* DDLog.m */; };
+		652735D3212D788E005C35BF /* DDFileLogger.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8648212AEA3200CB6DAE /* DDFileLogger.h */; };
+		652735D4212D788E005C35BF /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8649212AEA3200CB6DAE /* DDAbstractDatabaseLogger.m */; };
+		652735D5212D788E005C35BF /* DDTTYLogger.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C864A212AEA3200CB6DAE /* DDTTYLogger.h */; };
+		652735D6212D788E005C35BF /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C864B212AEA3200CB6DAE /* DDASLLogger.m */; };
+		652735D7212D788E005C35BF /* CLIColor.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C864D212AEA3200CB6DAE /* CLIColor.h */; };
+		652735D8212D788E005C35BF /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C864E212AEA3200CB6DAE /* CLIColor.m */; };
+		652735D9212D788E005C35BF /* DDLog+LOGV.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C864F212AEA3200CB6DAE /* DDLog+LOGV.h */; };
+		652735DA212D788E005C35BF /* DDLog.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8650212AEA3200CB6DAE /* DDLog.h */; };
+		652735DB212D788E005C35BF /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8651212AEA3200CB6DAE /* DDFileLogger.m */; };
+		652735DC212D788E005C35BF /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8653212AEA3200CB6DAE /* DDContextFilterLogFormatter.m */; };
+		652735DD212D788E005C35BF /* DDMultiFormatter.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8654212AEA3200CB6DAE /* DDMultiFormatter.h */; };
+		652735DE212D788E005C35BF /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8655212AEA3200CB6DAE /* DDDispatchQueueLogFormatter.m */; };
+		652735DF212D788E005C35BF /* DDContextFilterLogFormatter.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8656212AEA3200CB6DAE /* DDContextFilterLogFormatter.h */; };
+		652735E0212D788E005C35BF /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8657212AEA3200CB6DAE /* DDMultiFormatter.m */; };
+		652735E1212D788E005C35BF /* DDDispatchQueueLogFormatter.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C8658212AEA3200CB6DAE /* DDDispatchQueueLogFormatter.h */; };
+		652735E2212D788E005C35BF /* README.txt in Sources */ = {isa = PBXBuildFile; fileRef = 655C8659212AEA3200CB6DAE /* README.txt */; };
+		652735E3212D788E005C35BF /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865A212AEA3200CB6DAE /* DDTTYLogger.m */; };
+		652735E4212D788E005C35BF /* DDAbstractDatabaseLogger.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C865B212AEA3200CB6DAE /* DDAbstractDatabaseLogger.h */; };
+		652735E5212D788E005C35BF /* NSURL+Utils.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C865C212AEA3200CB6DAE /* NSURL+Utils.h */; };
+		652735E6212D788E005C35BF /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865D212AEA3200CB6DAE /* ACObject.m */; };
+		652735E7212D788E005C35BF /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865E212AEA3200CB6DAE /* ACLFileLogger.m */; };
+		652735E8212D788E005C35BF /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8629212AE6C200CB6DAE /* AESharedResources.m */; };
+		652735E9212D788E005C35BF /* AESharedResources.h in Sources */ = {isa = PBXBuildFile; fileRef = 655C862A212AE6C200CB6DAE /* AESharedResources.h */; };
+		652735EE212D7975005C35BF /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 652735B2212D77A3005C35BF /* libshared.a */; };
 		655C8660212AEA3200CB6DAE /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8638212AEA3200CB6DAE /* NSURL+Utils.m */; };
 		655C8662212AEA3200CB6DAE /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863D212AEA3200CB6DAE /* NSDate+Utils.m */; };
-		655C8663212AEA3200CB6DAE /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863E212AEA3200CB6DAE /* ACLFileLocker.m */; };
 		655C8665212AEA3200CB6DAE /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8640212AEA3200CB6DAE /* NSString+Utils.m */; };
 		655C8667212AEA3200CB6DAE /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8642212AEA3200CB6DAE /* NSException+Utils.m */; };
-		655C8668212AEA3200CB6DAE /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8643212AEA3200CB6DAE /* NSStringPunycodeAdditions.m */; };
-		655C8669212AEA3200CB6DAE /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8647212AEA3200CB6DAE /* DDLog.m */; };
-		655C866B212AEA3200CB6DAE /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C864B212AEA3200CB6DAE /* DDASLLogger.m */; };
 		655C866C212AEA3200CB6DAE /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C864E212AEA3200CB6DAE /* CLIColor.m */; };
-		655C866D212AEA3200CB6DAE /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8651212AEA3200CB6DAE /* DDFileLogger.m */; };
-		655C866E212AEA3200CB6DAE /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8653212AEA3200CB6DAE /* DDContextFilterLogFormatter.m */; };
-		655C866F212AEA3200CB6DAE /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8655212AEA3200CB6DAE /* DDDispatchQueueLogFormatter.m */; };
-		655C8670212AEA3200CB6DAE /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8657212AEA3200CB6DAE /* DDMultiFormatter.m */; };
 		655C8671212AEA3200CB6DAE /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 655C8659212AEA3200CB6DAE /* README.txt */; };
-		655C8672212AEA3200CB6DAE /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865A212AEA3200CB6DAE /* DDTTYLogger.m */; };
 		655C8677212AF2A500CB6DAE /* tray-on.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 655C8676212AF2A500CB6DAE /* tray-on.pdf */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +87,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 652169FF212436E900ABF7D0;
 			remoteInfo = Extension;
+		};
+		652735EA212D78F1005C35BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65720AAA21219AC900B2381C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 652735B1212D77A3005C35BF;
+			remoteInfo = shared;
+		};
+		652735EC212D78FE005C35BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65720AAA21219AC900B2381C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 652735B1212D77A3005C35BF;
+			remoteInfo = shared;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -83,6 +135,7 @@
 		65216A0F212436EA00ABF7D0 /* script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
 		65216A13212436EA00ABF7D0 /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Extension.entitlements; sourceTree = "<group>"; };
 		65216A2F2124517700ABF7D0 /* ElectronChild.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ElectronChild.entitlements; sourceTree = "<group>"; };
+		652735B2212D77A3005C35BF /* libshared.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libshared.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		655C8629212AE6C200CB6DAE /* AESharedResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESharedResources.m; sourceTree = "<group>"; };
 		655C862A212AE6C200CB6DAE /* AESharedResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESharedResources.h; sourceTree = "<group>"; };
 		655C862F212AEA3200CB6DAE /* ACLExecuteBlockDelayed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLExecuteBlockDelayed.h; sourceTree = "<group>"; };
@@ -151,7 +204,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				652735EE212D7975005C35BF /* libshared.a in Frameworks */,
 				65216A03212436EA00ABF7D0 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		652735AF212D77A3005C35BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +376,7 @@
 				65720AB221219AC900B2381C /* AdGuard.app */,
 				65216A00212436E900ABF7D0 /* AdGuardSafariExtension.appex */,
 				65024EA62126C80D00342E3C /* AdGuardTests.xctest */,
+				652735B2212D77A3005C35BF /* libshared.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -332,6 +394,16 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		652735B0212D77A3005C35BF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXLegacyTarget section */
 		652169F321231A2300ABF7D0 /* BuildElectronApp */ = {
 			isa = PBXLegacyTarget;
@@ -342,6 +414,7 @@
 			buildToolPath = /bin/bash;
 			buildWorkingDirectory = "";
 			dependencies = (
+				652735ED212D78FE005C35BF /* PBXTargetDependency */,
 			);
 			name = BuildElectronApp;
 			passBuildSettingsInEnvironment = 1;
@@ -378,11 +451,29 @@
 			buildRules = (
 			);
 			dependencies = (
+				652735EB212D78F1005C35BF /* PBXTargetDependency */,
 			);
 			name = AdGuardSafariExtension;
 			productName = Extension;
 			productReference = 65216A00212436E900ABF7D0 /* AdGuardSafariExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
+		};
+		652735B1212D77A3005C35BF /* shared */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 652735BA212D77A3005C35BF /* Build configuration list for PBXNativeTarget "shared" */;
+			buildPhases = (
+				652735AE212D77A3005C35BF /* Sources */,
+				652735AF212D77A3005C35BF /* Frameworks */,
+				652735B0212D77A3005C35BF /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = shared;
+			productName = shared;
+			productReference = 652735B2212D77A3005C35BF /* libshared.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 		65720AB121219AC900B2381C /* AdGuard */ = {
 			isa = PBXNativeTarget;
@@ -425,6 +516,9 @@
 							};
 						};
 					};
+					652735B1212D77A3005C35BF = {
+						CreatedOnToolsVersion = 9.4;
+					};
 					65720AB121219AC900B2381C = {
 						CreatedOnToolsVersion = 9.4;
 						SystemCapabilities = {
@@ -452,6 +546,7 @@
 				652169F321231A2300ABF7D0 /* BuildElectronApp */,
 				652169FF212436E900ABF7D0 /* AdGuardSafariExtension */,
 				65024EA52126C80C00342E3C /* AdGuardTests */,
+				652735B1212D77A3005C35BF /* shared */,
 			);
 		};
 /* End PBXProject section */
@@ -498,23 +593,67 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				655C866B212AEA3200CB6DAE /* DDASLLogger.m in Sources */,
-				655C8669212AEA3200CB6DAE /* DDLog.m in Sources */,
 				65216A0A212436EA00ABF7D0 /* SafariExtensionViewController.m in Sources */,
-				655C8670212AEA3200CB6DAE /* DDMultiFormatter.m in Sources */,
 				655C8662212AEA3200CB6DAE /* NSDate+Utils.m in Sources */,
-				655C8668212AEA3200CB6DAE /* NSStringPunycodeAdditions.m in Sources */,
 				655C8667212AEA3200CB6DAE /* NSException+Utils.m in Sources */,
-				655C8663212AEA3200CB6DAE /* ACLFileLocker.m in Sources */,
-				655C866F212AEA3200CB6DAE /* DDDispatchQueueLogFormatter.m in Sources */,
-				655C866D212AEA3200CB6DAE /* DDFileLogger.m in Sources */,
-				655C866E212AEA3200CB6DAE /* DDContextFilterLogFormatter.m in Sources */,
-				655C862B212AE6C200CB6DAE /* AESharedResources.m in Sources */,
 				655C8660212AEA3200CB6DAE /* NSURL+Utils.m in Sources */,
 				655C866C212AEA3200CB6DAE /* CLIColor.m in Sources */,
-				655C8672212AEA3200CB6DAE /* DDTTYLogger.m in Sources */,
 				655C8665212AEA3200CB6DAE /* NSString+Utils.m in Sources */,
 				65216A07212436EA00ABF7D0 /* SafariExtensionHandler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		652735AE212D77A3005C35BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				652735BB212D788E005C35BF /* ACLang.h in Sources */,
+				652735BC212D788E005C35BF /* ACLExecuteBlockDelayed.h in Sources */,
+				652735BD212D788E005C35BF /* ACLFileLocker.h in Sources */,
+				652735BE212D788E005C35BF /* NSDate+Utils.h in Sources */,
+				652735BF212D788E005C35BF /* ACLJobController.h in Sources */,
+				652735C0212D788E005C35BF /* ACLWildcard.m in Sources */,
+				652735C1212D788E005C35BF /* NSStringPunycodeAdditions.h in Sources */,
+				652735C2212D788E005C35BF /* NSException+Utils.h in Sources */,
+				652735C3212D788E005C35BF /* ACLLogger.h in Sources */,
+				652735C4212D788E005C35BF /* NSString+Utils.h in Sources */,
+				652735C5212D788E005C35BF /* NSURL+Utils.m in Sources */,
+				652735C6212D788E005C35BF /* ACLFileLogger.h in Sources */,
+				652735C7212D788E005C35BF /* ACObject.h in Sources */,
+				652735C8212D788E005C35BF /* ACLWildcard.h in Sources */,
+				652735C9212D788E005C35BF /* ACLJobController.m in Sources */,
+				652735CA212D788E005C35BF /* NSDate+Utils.m in Sources */,
+				652735CB212D788E005C35BF /* ACLFileLocker.m in Sources */,
+				652735CC212D788E005C35BF /* ACLExecuteBlockDelayed.m in Sources */,
+				652735CD212D788E005C35BF /* NSString+Utils.m in Sources */,
+				652735CE212D788E005C35BF /* ACLLogger.m in Sources */,
+				652735CF212D788E005C35BF /* NSException+Utils.m in Sources */,
+				652735D0212D788E005C35BF /* NSStringPunycodeAdditions.m in Sources */,
+				652735D1212D788E005C35BF /* DDASLLogger.h in Sources */,
+				652735D2212D788E005C35BF /* DDLog.m in Sources */,
+				652735D3212D788E005C35BF /* DDFileLogger.h in Sources */,
+				652735D4212D788E005C35BF /* DDAbstractDatabaseLogger.m in Sources */,
+				652735D5212D788E005C35BF /* DDTTYLogger.h in Sources */,
+				652735D6212D788E005C35BF /* DDASLLogger.m in Sources */,
+				652735D7212D788E005C35BF /* CLIColor.h in Sources */,
+				652735D8212D788E005C35BF /* CLIColor.m in Sources */,
+				652735D9212D788E005C35BF /* DDLog+LOGV.h in Sources */,
+				652735DA212D788E005C35BF /* DDLog.h in Sources */,
+				652735DB212D788E005C35BF /* DDFileLogger.m in Sources */,
+				652735DC212D788E005C35BF /* DDContextFilterLogFormatter.m in Sources */,
+				652735DD212D788E005C35BF /* DDMultiFormatter.h in Sources */,
+				652735DE212D788E005C35BF /* DDDispatchQueueLogFormatter.m in Sources */,
+				652735DF212D788E005C35BF /* DDContextFilterLogFormatter.h in Sources */,
+				652735E0212D788E005C35BF /* DDMultiFormatter.m in Sources */,
+				652735E1212D788E005C35BF /* DDDispatchQueueLogFormatter.h in Sources */,
+				652735E2212D788E005C35BF /* README.txt in Sources */,
+				652735E3212D788E005C35BF /* DDTTYLogger.m in Sources */,
+				652735E4212D788E005C35BF /* DDAbstractDatabaseLogger.h in Sources */,
+				652735E5212D788E005C35BF /* NSURL+Utils.h in Sources */,
+				652735E6212D788E005C35BF /* ACObject.m in Sources */,
+				652735E7212D788E005C35BF /* ACLFileLogger.m in Sources */,
+				652735E8212D788E005C35BF /* AESharedResources.m in Sources */,
+				652735E9212D788E005C35BF /* AESharedResources.h in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +669,16 @@
 			isa = PBXTargetDependency;
 			target = 652169FF212436E900ABF7D0 /* AdGuardSafariExtension */;
 			targetProxy = 65216A14212436EA00ABF7D0 /* PBXContainerItemProxy */;
+		};
+		652735EB212D78F1005C35BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 652735B1212D77A3005C35BF /* shared */;
+			targetProxy = 652735EA212D78F1005C35BF /* PBXContainerItemProxy */;
+		};
+		652735ED212D78FE005C35BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 652735B1212D77A3005C35BF /* shared */;
+			targetProxy = 652735EC212D78FE005C35BF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -639,6 +788,32 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuard.Extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		652735B8212D77A3005C35BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		652735B9212D77A3005C35BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -821,6 +996,15 @@
 			buildConfigurations = (
 				65216A18212436EA00ABF7D0 /* Debug */,
 				65216A19212436EA00ABF7D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		652735BA212D77A3005C35BF /* Build configuration list for PBXNativeTarget "shared" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				652735B8212D77A3005C35BF /* Debug */,
+				652735B9212D77A3005C35BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -36,6 +36,26 @@
                                }];
 }
 
+- (void)testCode {
+
+    NSString *string = @"test string";
+
+    void *ptr = CFBridgingRetain(string);
+
+    string = nil;
+
+    NSString *newstring = CFBridgingRelease(ptr);
+
+    ptr = NULL;
+
+    NSLog(@"New string: %@", newstring);
+
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        NSString *test = [[NSString alloc]
+                          initWithData:[NSData data]
+                          encoding:NSUTF8StringEncoding];
+    });
+}
 /*
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
