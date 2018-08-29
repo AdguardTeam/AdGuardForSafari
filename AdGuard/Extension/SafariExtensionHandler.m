@@ -37,6 +37,10 @@
     return [SafariExtensionViewController sharedController];
 }
 
+- (void)popoverWillShowInWindow:(SFSafariWindow *)window {
+
+    NSLog(@"Popover will show");
+}
 
 - (void)messageReceivedFromContainingAppWithName:(NSString *)messageName userInfo:(NSDictionary<NSString *,id> *)userInfo {
     NSLog(@"The extension received a message (%@) from a containing app with userInfo (%@)", messageName, userInfo);

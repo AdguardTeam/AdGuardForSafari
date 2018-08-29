@@ -7,9 +7,16 @@
 //
 
 #import <SafariServices/SafariServices.h>
+@import AppKit;
+@import Cocoa;
 
 @interface SafariExtensionViewController : SFSafariExtensionViewController
 
 + (SafariExtensionViewController *)sharedController;
+
+//////////////////////////////////////////////////////////////////////////
+#pragma mark - ACTIONS
+
+- (IBAction)clickButton:(id)sender;
 
 @end

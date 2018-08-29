@@ -1,30 +1,155 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="SafariExtensionViewController" customModuleProvider="">
+        <customObject id="-2" userLabel="File's Owner" customClass="SafariExtensionViewController">
             <connections>
                 <outlet property="view" destination="c22-O7-iKe" id="vwT-Xx-Aiz"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="330" height="119"/>
+        <customView id="c22-O7-iKe" customClass="PopupView">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="156"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Iy-aV-wGF">
-                    <rect key="frame" x="103" y="82" width="124" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Extension" id="2Ec-kd-q2K">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
+                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="12" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7nt-U5-nno">
+                    <rect key="frame" x="20" y="20" width="200" height="116"/>
+                    <subviews>
+                        <stackView orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="flP-Sn-ajz">
+                            <rect key="frame" x="0.0" y="94" width="200" height="22"/>
+                            <beginningViews>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XDE-N8-sRz">
+                                    <rect key="frame" x="-2" y="0.0" width="122" height="22"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="AdGuard Filtration" id="vYp-Sg-0Fy">
+                                        <font key="font" metaFont="menuBar"/>
+                                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </beginningViews>
+                            <endViews>
+                                <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jKb-oY-gyH">
+                                    <rect key="frame" x="126" y="-2" width="74" height="25"/>
+                                    <buttonCell key="cell" type="roundTextured" title="Disabled" alternateTitle="Enabled" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="p92-iZ-Q5D">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                        <font key="font" size="15" name=".AppleSystemUIFont"/>
+                                    </buttonCell>
+                                </button>
+                            </endViews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                        <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="apM-bu-gib">
+                            <rect key="frame" x="0.0" y="79" width="200" height="5"/>
+                        </box>
+                        <stackView orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zwl-ox-Qjq">
+                            <rect key="frame" x="0.0" y="47" width="200" height="22"/>
+                            <beginningViews>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ki1-C9-n0z">
+                                    <rect key="frame" x="-2" y="0.0" width="116" height="22"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Filtering This Site" id="SAh-L9-ycs">
+                                        <font key="font" metaFont="menuBar"/>
+                                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </beginningViews>
+                            <endViews>
+                                <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qio-p6-Pqn">
+                                    <rect key="frame" x="164" y="-2" width="36" height="25"/>
+                                    <buttonCell key="cell" type="roundTextured" title="Off" alternateTitle="On" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="t9o-h0-bnn">
+                                        <behavior key="behavior" lightByContents="YES"/>
+                                        <font key="font" size="15" name=".AppleSystemUIFont"/>
+                                    </buttonCell>
+                                </button>
+                            </endViews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                        <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="VMt-uv-XvX">
+                            <rect key="frame" x="0.0" y="32" width="200" height="5"/>
+                        </box>
+                        <stackView orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0f-uP-eKG">
+                            <rect key="frame" x="0.0" y="0.0" width="200" height="22"/>
+                            <beginningViews>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="du9-Ja-6bt">
+                                    <rect key="frame" x="-2" y="0.0" width="122" height="22"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Adguard Assistent" id="uTP-cd-F1b">
+                                        <font key="font" metaFont="menuBar"/>
+                                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </beginningViews>
+                            <endViews>
+                                <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0bc-P0-SgG">
+                                    <rect key="frame" x="164" y="-2" width="36" height="25"/>
+                                    <buttonCell key="cell" type="roundTextured" title="Off" alternateTitle="On" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" inset="2" id="McY-Cj-7jd">
+                                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                        <font key="font" size="15" name=".AppleSystemUIFont"/>
+                                    </buttonCell>
+                                </button>
+                            </endViews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Zwl-ox-Qjq" firstAttribute="leading" secondItem="7nt-U5-nno" secondAttribute="leading" id="1Lq-Gk-NCc"/>
+                        <constraint firstAttribute="trailing" secondItem="A0f-uP-eKG" secondAttribute="trailing" id="8rL-qx-Tyn"/>
+                        <constraint firstAttribute="trailing" secondItem="Zwl-ox-Qjq" secondAttribute="trailing" id="GcY-mQ-J3X"/>
+                        <constraint firstAttribute="trailing" secondItem="flP-Sn-ajz" secondAttribute="trailing" id="XVL-Bl-dFc"/>
+                        <constraint firstItem="flP-Sn-ajz" firstAttribute="leading" secondItem="7nt-U5-nno" secondAttribute="leading" id="cnm-6W-ebF"/>
+                        <constraint firstItem="flP-Sn-ajz" firstAttribute="top" secondItem="7nt-U5-nno" secondAttribute="top" id="rpD-sc-1y9"/>
+                        <constraint firstItem="A0f-uP-eKG" firstAttribute="leading" secondItem="7nt-U5-nno" secondAttribute="leading" id="yse-Uf-U0N"/>
+                    </constraints>
+                    <visibilityPriorities>
+                        <real value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
             </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="7nt-U5-nno" secondAttribute="bottom" constant="20" id="1JH-ct-mWc"/>
+                <constraint firstAttribute="trailing" secondItem="7nt-U5-nno" secondAttribute="trailing" constant="20" id="Q31-74-1Sw"/>
+                <constraint firstItem="7nt-U5-nno" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="deJ-ct-2JX"/>
+                <constraint firstItem="7nt-U5-nno" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="vSn-lQ-L9u"/>
+            </constraints>
+            <point key="canvasLocation" x="-176" y="131"/>
         </customView>
     </objects>
 </document>
