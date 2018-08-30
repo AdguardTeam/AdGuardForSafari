@@ -51,8 +51,9 @@
                                @"string-localized-value": @"жопа с ручкой"
                                };
 
-    AESharedResources.blockingContentRules = [NSJSONSerialization dataWithJSONObject:testData
-                                                                             options:0
-                                                                               error:NULL];
+    [AESharedResources setBlockingContentRulesJson:[NSJSONSerialization dataWithJSONObject:testData
+                                                                                   options:0
+                                                                                     error:NULL]
+                                        completion:nil];
 }
 @end

@@ -914,7 +914,7 @@ rimraf@^2.2.8:
     glob "^7.0.5"
 
 safari-ext@./safari-ext:
-  version "1.0.9"
+  version "1.0.10"
   dependencies:
     nan "^2.3.3"
 

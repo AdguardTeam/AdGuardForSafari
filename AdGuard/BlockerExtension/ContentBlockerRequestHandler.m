@@ -7,6 +7,9 @@
 //
 
 #import "ContentBlockerRequestHandler.h"
+#import "AESharedResources.h"
+
+#define AES_BLOCKING_CONTENT_EMPTY_RESOURCE     @"blocking-content-empry"
 
 @interface ContentBlockerRequestHandler ()
 
@@ -15,7 +18,7 @@
 @implementation ContentBlockerRequestHandler
 
 - (void)beginRequestWithExtensionContext:(NSExtensionContext *)context {
-    NSItemProvider *attachment = [[NSItemProvider alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"blockerList" withExtension:@"json"]];
+    NSItemProvider *attachment = [[NSItemProvider alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:AES_BLOCKING_CONTENT_EMPTY_RESOURCE withExtension:@"json"]];
     
     NSExtensionItem *item = [[NSExtensionItem alloc] init];
     item.attachments = @[attachment];

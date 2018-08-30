@@ -147,7 +147,7 @@ NAN_METHOD(blockingContentRulesJson) {
 
       dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
         NSLog(@"GEtting blocking rules in global queue");
-        NSData *data = AESharedResources.blockingContentRules;
+        NSData *data = [[[AESharedResources blockingContentRulesUrl] path] dataWithEncoding:NSUTF8StringEncoding];
 
         NSString *blockingContentRules = data.length ?[[NSString alloc]
                                                       initWithData:data

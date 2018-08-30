@@ -13,6 +13,11 @@
 
 Also read [Electron App README](./ElectronMainApp/README.md).
 
+## Some tuning
+
+In file `./AdGuard/Config.xcconfig` change AG_SIGN variable to appropriate value (your codesign identity).
+
 ## Input Point
 
-Doubleclick on `AdGuard.xcworkspace` in Finder.
+Doubleclick on `AdGuard.xcworkspace` in Finder. 
+

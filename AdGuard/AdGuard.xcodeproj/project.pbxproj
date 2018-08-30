@@ -73,7 +73,7 @@
 		655C866C212AEA3200CB6DAE /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C864E212AEA3200CB6DAE /* CLIColor.m */; };
 		655C8677212AF2A500CB6DAE /* tray-on.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 655C8676212AF2A500CB6DAE /* tray-on.pdf */; };
 		6584716E2136B373005C74E8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
-		658471712136B373005C74E8 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 658471702136B373005C74E8 /* blockerList.json */; };
+		658471712136B373005C74E8 /* blocking-content-empry.json in Resources */ = {isa = PBXBuildFile; fileRef = 658471702136B373005C74E8 /* blocking-content-empry.json */; };
 		658471742136B373005C74E8 /* ContentBlockerRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 658471732136B373005C74E8 /* ContentBlockerRequestHandler.m */; };
 		658471792136B373005C74E8 /* BlockerExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6584716D2136B372005C74E8 /* BlockerExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6584717D2136B7C5005C74E8 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 652735B2212D77A3005C35BF /* libshared.a */; };
@@ -207,7 +207,7 @@
 		65720AC021219ACB00B2381C /* AdGuard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuard.entitlements; sourceTree = "<group>"; };
 		657215562121F30600B2381C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		6584716D2136B372005C74E8 /* BlockerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BlockerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		658471702136B373005C74E8 /* blockerList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
+		658471702136B373005C74E8 /* blocking-content-empry.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "blocking-content-empry.json"; sourceTree = "<group>"; };
 		658471722136B373005C74E8 /* ContentBlockerRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentBlockerRequestHandler.h; sourceTree = "<group>"; };
 		658471732136B373005C74E8 /* ContentBlockerRequestHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentBlockerRequestHandler.m; sourceTree = "<group>"; };
 		658471752136B373005C74E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -432,7 +432,7 @@
 		6584716F2136B373005C74E8 /* BlockerExtension */ = {
 			isa = PBXGroup;
 			children = (
-				658471702136B373005C74E8 /* blockerList.json */,
+				658471702136B373005C74E8 /* blocking-content-empry.json */,
 				658471722136B373005C74E8 /* ContentBlockerRequestHandler.h */,
 				658471732136B373005C74E8 /* ContentBlockerRequestHandler.m */,
 				658471752136B373005C74E8 /* Info.plist */,
@@ -654,7 +654,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				658471712136B373005C74E8 /* blockerList.json in Resources */,
+				658471712136B373005C74E8 /* blocking-content-empry.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1071,7 +1071,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BlockerExtension/BlockerExtension.entitlements;
-				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BlockerExtension/Info.plist;
@@ -1092,7 +1091,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BlockerExtension/BlockerExtension.entitlements;
-				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BlockerExtension/Info.plist;

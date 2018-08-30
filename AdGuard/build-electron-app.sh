@@ -36,12 +36,7 @@ else
 yarn upgrade --force -P safari-ext || exit 1
 fi
 
-echo "Packager Command"
-echo "electron-packager \"${SRC}\" \"${PRODUCT_NAME}\" --electron-version=2.0.7 --platform=${PLATFORM}  --app-bundle-id=\"${AG_BUNDLEID}\"\
---arch=${ARCH} --app-version=\"${AG_VERSION}\"  --build-version=\"${AG_BUILD}\" --overwrite --out=\"${BUILT_PRODUCTS_DIR}\" \
-${OPT} || exit 1"
-
-electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=2.0.7 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
+electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=2.0.8 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
 --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${BUILT_PRODUCTS_DIR}" \
 ${OPT} || exit 1
 

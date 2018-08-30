@@ -19,24 +19,32 @@
 #import "CommonLib/ACLang.h"
 
 #define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"
+#define AES_WHITELIST_DOMAINS                   @"whitelist-domains.txt"
+#define AES_USERFILTER_RULES                    @"userfilter-rules.txt"
+
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
-/////////////////////////////////////////////////////////////////////
 
 @implementation AESharedResources
+
+static void onDefaultsChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo);
+static void onWhitelistChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo);
+static void onUserFilterChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo);
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Initialize
 /////////////////////////////////////////////////////////////////////
 
 static NSURL *_containerFolderUrl;
+static NSUserDefaults *_sharedUserDefaults;
 
 + (void)initialize{
     
     if (self == [AESharedResources class]) {
         
         _containerFolderUrl = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:AG_GROUP];
+        _sharedUserDefaults = [[NSUserDefaults alloc] initWithSuiteName:AG_GROUP];
     }
 }
 
@@ -49,17 +57,74 @@ static NSURL *_containerFolderUrl;
     return _containerFolderUrl;
 }
 
++ (NSUserDefaults *)sharedDefaults{
 
-+ (NSData *)blockingContentRules{
-    
-    return [self loadDataFromFileRelativePath:AES_BLOCKING_CONTENT_RULES_RESOURCE];
+    return _sharedUserDefaults;
 }
 
-+ (void)setBlockingContentRules:(NSData *)blockingContentRules{
++ (void)synchronizeSharedDefaults{
 
-    [self saveData:blockingContentRules toFileRelativePath:AES_BLOCKING_CONTENT_RULES_RESOURCE];
+    [_sharedUserDefaults synchronize];
 }
 
++ (void)notifyDefaultsChanged {
+
+}
++ (void)listenDefaultsChanged:(void (^)(void))block {
+
+}
+
++ (void)notifyWhitelistChanged {
+
+}
++ (void)setListenerWhitelistChanged:(void (^)(void))block {
+
+}
+
++ (void)notifyUserFilterChanged {
+
+}
++ (void)listenUserFilterChanged:(void (^)(void))block {
+
+}
+
+
++ (void)setBlockingContentRulesJson:(NSString *)jsonString completion:(void (^)(void))completion {
+
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        @autoreleasepool {
+            NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding] ?: [NSData data];
+            [self saveData:data toFileRelativePath:AES_BLOCKING_CONTENT_RULES_RESOURCE];
+            if (completion) {
+                completion();
+            }
+        }
+    });
+}
+
++ (NSURL *)blockingContentRulesUrl {
+    return  [_containerFolderUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_RULES_RESOURCE];
+}
+
++ (void)setWhitelistDomains:(NSArray <NSString *> *)domains completion:(void (^)(void))completion {
+
+    [self saveObject:domains key:AES_WHITELIST_DOMAINS completion:completion];
+}
+
++ (void)whitelistDomainsWithCompletion:(void (^)(NSArray <NSString *> *domains))completion {
+
+    [self loadObjectWithKey:AES_WHITELIST_DOMAINS completion:completion];
+}
+
++ (void)setUserFilterRules:(NSArray <NSString *> *)rules completion:(void (^)(void))completion {
+
+    [self saveObject:rules key:AES_USERFILTER_RULES completion:completion];
+}
+
++ (void)userFilterRulesWithCompletion:(void (^)(NSArray <NSString *> *rules))completion {
+
+    [self loadObjectWithKey:AES_USERFILTER_RULES completion:completion];
+}
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Storage methods (private)
@@ -118,6 +183,45 @@ static NSURL *_containerFolderUrl;
         
         return NO;;
     }
+}
+
++ (void)saveObject:(id)obj key:(NSString *)key completion:(void (^)(void))completion {
+
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        @autoreleasepool {
+            if (obj == nil) {
+                [self saveData:[NSData data] toFileRelativePath:key];
+            }
+            else {
+
+                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:obj];
+                if (!data) {
+                    data = [NSData data];
+                }
+
+                [self saveData:data toFileRelativePath:key];
+            }
+            if (completion) {
+                completion();
+            }
+        }
+    });
+}
+
++ (void)loadObjectWithKey:(NSString *)key completion:(void (^)(id obj))completion {
+
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        @autoreleasepool {
+            NSData *data = [self loadDataFromFileRelativePath:key];
+            id result = nil;
+            if (data.length) {
+                result = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            }
+            if (completion) {
+                completion(result);
+            }
+        }
+    });
 }
 
 - (NSString*) pathForRelativePath:(NSString*) relativePath {
