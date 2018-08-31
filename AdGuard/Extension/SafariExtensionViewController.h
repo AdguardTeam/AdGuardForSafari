@@ -14,9 +14,20 @@
 
 + (SafariExtensionViewController *)sharedController;
 
+@property NSString *domain;
+
+//////////////////////////////////////////////////////////////////////////
+#pragma mark - OUTLETS
+
+@property (weak) IBOutlet NSButton *enabledButton;
+@property (weak) IBOutlet NSButton *whitelistButton;
+@property (weak) IBOutlet NSButton *assistantButton;
+
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - ACTIONS
 
-- (IBAction)clickButton:(id)sender;
+- (IBAction)clickEnabled:(id)sender;
+- (IBAction)clickWhitelist:(id)sender;
+- (IBAction)clickAssistant:(id)sender;
 
 @end

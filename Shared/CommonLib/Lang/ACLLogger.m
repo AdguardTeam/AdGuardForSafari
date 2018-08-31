@@ -18,24 +18,7 @@
 #import "ACLLogger.h"
 #import "ACLFileLogger.h"
 
-int ddLogLevel = LOG_LEVEL_VERBOSE;
-
-@interface ACLoggerFormatter : DDLogFileFormatterDefault
-@end
-
-@implementation ACLoggerFormatter
-
-
-- (NSString *)formatLogMessage:(DDLogMessage *)logMessage
-{
-    NSString *dateAndTime = [dateFormatter stringFromDate:(logMessage->timestamp)];
-    
-    NSString* thread = logMessage->queueLabel ?  [NSString stringWithFormat:@"[%u(%s)]", logMessage->machThreadID, logMessage->queueLabel] :
-                                                        [NSString stringWithFormat:@"[%u]", logMessage->machThreadID];
-    return [NSString stringWithFormat:@"%@ %@  %@", dateAndTime, thread, logMessage->logMsg];
-}
-
-@end
+int ddLogLevel = DDLogFlagVerbose;
 
 @implementation ACLLogger
 
@@ -49,7 +32,6 @@ static ACLLogger *singletonLogger;
     self = [super init];
     if (self)
     {
-        _initialized = NO;
         ddLogLevel = ACLLDefaultLevel;
     }
     
@@ -70,63 +52,28 @@ static ACLLogger *singletonLogger;
     return singletonLogger;
     
 }
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
 
 - (void)initLogger:(NSURL *)folderURL{
-    
-    if (!_initialized) {
-        
+
+    __weak __typeof__(self) wself = self;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        __typeof__(self) sself = wself;
         DDLogFileManagerDefault *defaultLogFileManager = [[DDLogFileManagerDefault alloc] initWithLogsDirectory:[folderURL path]];
-        
-        _fileLogger = [[ACLFileLogger alloc] initWithLogFileManager:defaultLogFileManager];
-        _fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
-        _fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
-        _fileLogger.maximumFileSize = ACL_MAX_LOG_FILE_SIZE;
-        _fileLogger.logFormatter = [ACLoggerFormatter new];
-        
-        [DDLog addLogger:_fileLogger];
+
+        sself->_fileLogger = [[ACLFileLogger alloc] initWithLogFileManager:defaultLogFileManager];
+        sself->_fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+        sself->_fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+        sself->_fileLogger.maximumFileSize = ACL_MAX_LOG_FILE_SIZE;
+
+        [DDLog addLogger:sself->_fileLogger];
 #ifdef DEBUG
         [DDLog addLogger:[DDTTYLogger sharedInstance]];
-        [DDLog addLogger:[DDASLLogger sharedInstance]];
+        [DDLog addLogger:[DDOSLogger sharedInstance]];
 #endif
-        
-        _initialized = YES;
-    }
-}
 
-#elif TARGET_OS_MAC
-
-- (void)initLogger:(NSString *)appName{
-    
-    if (!_initialized) {
-        
-        // Determines logs directory.
-        NSString *logsDirectory;
-        if (appName) {
-            
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-            NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
-            logsDirectory = [[basePath stringByAppendingPathComponent:@"Logs"] stringByAppendingPathComponent:appName];
-        }
-        
-        //
-        DDLogFileManagerDefault *defaultLogFileManager = [[DDLogFileManagerDefault alloc] initWithLogsDirectory:logsDirectory];
-        
-        _fileLogger = [[ACLFileLogger alloc] initWithLogFileManager:defaultLogFileManager];
-        _fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
-        _fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
-        _fileLogger.maximumFileSize = ACL_MAX_LOG_FILE_SIZE;
-        
-        [DDLog addLogger:_fileLogger];
-#ifdef DEBUG
-        [DDLog addLogger:[DDTTYLogger sharedInstance]];
-#endif
-        
-        _initialized = YES;
-    }
+    });
 }
-/// Initializing of logger.
-#endif
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods

@@ -22,6 +22,16 @@
 #define AES_WHITELIST_DOMAINS                   @"whitelist-domains.txt"
 #define AES_USERFILTER_RULES                    @"userfilter-rules.txt"
 
+#define NOTIFICATION_DEFAULTS                   AG_BUNDLEID @".notify.defaults"
+#define NOTIFICATION_WHITELIST                  AG_BUNDLEID @".notify.whitelist"
+#define NOTIFICATION_USERFILTER                 AG_BUNDLEID @".notify.userfilter"
+
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark - AESharedResources Constants
+
+NSString * const AEDefaultsEnabled = @"AEDefaultsEnabled";
+NSString * const AEDefaultsAssistantEnabled = @"AEDefaultsAssistantEnabled";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -39,12 +49,25 @@ static void onUserFilterChanged(CFNotificationCenterRef center, void *observer, 
 static NSURL *_containerFolderUrl;
 static NSUserDefaults *_sharedUserDefaults;
 
+static AESListenerBlock onDefaultsChangedBlock;
+static AESListenerBlock onWhitelistChangedBlock;
+static AESListenerBlock onUserFilterChangedBlock;
+
 + (void)initialize{
     
     if (self == [AESharedResources class]) {
         
         _containerFolderUrl = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:AG_GROUP];
         _sharedUserDefaults = [[NSUserDefaults alloc] initWithSuiteName:AG_GROUP];
+
+        // Registering standart Defaults
+        NSDictionary * defs = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"defaults" ofType:@"plist"]];
+        if (defs)
+        [_sharedUserDefaults registerDefaults:defs];
+
+        onDefaultsChangedBlock = NULL;
+        onWhitelistChangedBlock = NULL;
+        onUserFilterChangedBlock = NULL;
     }
 }
 
@@ -55,6 +78,31 @@ static NSUserDefaults *_sharedUserDefaults;
 + (NSURL *)sharedResuorcesURL{
     
     return _containerFolderUrl;
+}
+
++ (NSURL *)sharedAppLogsURL{
+
+    NSString *ident = [[NSBundle bundleForClass:[self class]] bundleIdentifier];
+
+    NSURL *logsUrl = [AESharedResources sharedLogsURL];
+    if (ident) {
+        logsUrl = [logsUrl URLByAppendingPathComponent:ident];
+    }
+
+    return logsUrl;
+}
+
++ (NSURL *)sharedLogsURL{
+
+    return [_containerFolderUrl URLByAppendingPathComponent:@"Logs"];
+}
+
++ (void)initLogger {
+    [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
+#if DEBUG
+    [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
+#endif
+
 }
 
 + (NSUserDefaults *)sharedDefaults{
@@ -68,24 +116,33 @@ static NSUserDefaults *_sharedUserDefaults;
 }
 
 + (void)notifyDefaultsChanged {
-
+    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_DEFAULTS, NULL, NULL, YES);
 }
-+ (void)listenDefaultsChanged:(void (^)(void))block {
-
++ (void)setListenerOnDefaultsChanged:(AESListenerBlock)block {
+    [self setListenerForNotification:NOTIFICATION_DEFAULTS
+                            blockPtr:&onDefaultsChangedBlock
+                         callbackPtr:&onDefaultsChanged
+                               block:block];
 }
 
 + (void)notifyWhitelistChanged {
-
+    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_WHITELIST, NULL, NULL, YES);
 }
-+ (void)setListenerWhitelistChanged:(void (^)(void))block {
-
++ (void)setListenerOnWhitelistChanged:(AESListenerBlock)block {
+    [self setListenerForNotification:NOTIFICATION_WHITELIST
+                            blockPtr:&onWhitelistChangedBlock
+                         callbackPtr:&onWhitelistChanged
+                               block:block];
 }
 
 + (void)notifyUserFilterChanged {
-
+    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_USERFILTER, NULL, NULL, YES);
 }
-+ (void)listenUserFilterChanged:(void (^)(void))block {
-
++ (void)setListenerOnUserFilterChanged:(AESListenerBlock)block {
+    [self setListenerForNotification:NOTIFICATION_USERFILTER
+                            blockPtr:&onUserFilterChangedBlock
+                         callbackPtr:&onUserFilterChanged
+                               block:block];
 }
 
 
@@ -127,8 +184,37 @@ static NSUserDefaults *_sharedUserDefaults;
 }
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark Storage methods (private)
+#pragma mark Helper methods (private)
+
++ (void)setListenerForNotification:(NSString *)notificationName
+                          blockPtr:(__strong AESListenerBlock *)blockPtr
+                       callbackPtr:(CFNotificationCallback)callbackPtr
+                             block:(AESListenerBlock)block {
+    if (*blockPtr) {
+        //Observer was registered
+        if (! block) {
+            //unregister observer
+            CFNotificationCenterRemoveObserver(CFNotificationCenterGetDarwinNotifyCenter(),
+                                               (__bridge const void *)(self),
+                                               (CFStringRef)notificationName,
+                                               NULL);
+        }
+    }
+    else if (block) {
+        //Register observer
+
+        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
+                                        (__bridge const void *)(self),
+                                        *callbackPtr,
+                                        (CFStringRef)notificationName,
+                                        NULL,
+                                        CFNotificationSuspensionBehaviorDeliverImmediately);
+    }
+    *blockPtr = block;
+}
+
 /////////////////////////////////////////////////////////////////////
+#pragma mark Storage methods (private)
 
 
 + (NSData *)loadDataFromFileRelativePath:(NSString *)relativePath{
@@ -229,6 +315,19 @@ static NSUserDefaults *_sharedUserDefaults;
     NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
     
     return dataUrl.path;
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Darwin notofication callbacks (private)
+
+static void onDefaultsChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
+
+}
+static void onWhitelistChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo){
+
+}
+static void onUserFilterChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo){
+
 }
 
 @end

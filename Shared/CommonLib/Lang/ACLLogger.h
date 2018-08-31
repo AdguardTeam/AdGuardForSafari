@@ -16,9 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import <Foundation/Foundation.h>
-#import "Logger/Lumberjack/DDFileLogger.h"
-#import "Logger/Lumberjack/DDTTYLogger.h"
-#import "Logger/Lumberjack/DDASLLogger.h"
+#import "Logger/Lumberjack/CocoaLumberjack.h"
 
 //Max log file size
 #define ACL_MAX_LOG_FILE_SIZE     512000
@@ -26,21 +24,44 @@
 // Set this log level for application.
 typedef enum{
     
-    ACLLDefaultLevel = LOG_LEVEL_INFO,
-    ACLLDebugLevel = LOG_LEVEL_DEBUG,
-    ACLLVerboseLevel = LOG_LEVEL_VERBOSE
+    ACLLDefaultLevel = DDLogFlagInfo,
+    ACLLDebugLevel = DDLogFlagDebug,
+    ACLLVerboseLevel = DDLogFlagVerbose
     
 } ACLLogLevelType;
 
-//---------------------------------------------------
+// Redefine DDLog macros
 
-#define DDLogTrace() LOG_OBJC_MAYBE(LOG_ASYNC_VERBOSE, ddLogLevel, LOG_FLAG_VERBOSE, 0, @"%@[%p]: %@", THIS_FILE, self, THIS_METHOD)
+#undef DDLogError
+#undef DDLogWarn
+#undef DDLogInfo
+#undef DDLogDebug
+#undef DDLogVerbose
 
-#define DDLogVerboseTrace(fmt, ...) LOG_OBJC_MAYBE(LOG_ASYNC_VERBOSE, ddLogLevel, LOG_FLAG_VERBOSE, 0, @"(%@[%p]: %@) " fmt, THIS_FILE, self, THIS_METHOD,  ##__VA_ARGS__)
+#undef DDLogCError
+#undef DDLogCWarn
+#undef DDLogCInfo
+#undef DDLogCDebug
+#undef DDLogCVerbose
 
-#define DDLogDebugTrace() LOG_OBJC_MAYBE(LOG_ASYNC_DEBUG, ddLogLevel, LOG_FLAG_DEBUG, 0, @"%@[%p]: %@", THIS_FILE, self, THIS_METHOD)
+#define DDLogError(frmt, ...)   LOG_MAYBE(NO,                LOG_LEVEL_DEF, DDLogFlagError,   0, nil, __PRETTY_FUNCTION__, @"(%@[%p] %@) " frmt, THIS_FILE, self, THIS_METHOD, ##__VA_ARGS__)
+#define DDLogWarn(frmt, ...)    LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagWarning, 0, nil, __PRETTY_FUNCTION__, @"(%@) " frmt, THIS_FILE, ##__VA_ARGS__)
+#define DDLogInfo(frmt, ...)    LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagInfo,    0, nil, __PRETTY_FUNCTION__, @"(%@) " frmt, THIS_FILE, ##__VA_ARGS__)
+#define DDLogDebug(frmt, ...)   LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagDebug,   0, nil, __PRETTY_FUNCTION__, @"(%@[%p] %@) " frmt, THIS_FILE, self, THIS_METHOD, ##__VA_ARGS__)
+#define DDLogVerbose(frmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagVerbose, 0, nil, __PRETTY_FUNCTION__, @"(%@[%p] %@) " frmt, THIS_FILE, self, THIS_METHOD, ##__VA_ARGS__)
 
-#define DDLogErrorTrace() LOG_OBJC_MAYBE(LOG_ASYNC_ERROR, ddLogLevel, LOG_FLAG_ERROR, 0, @"Error trace - %@[%p]: %@", THIS_FILE, self, THIS_METHOD)
+#define DDLogCError(frmt, ...)   LOG_MAYBE(NO,                LOG_LEVEL_DEF, DDLogFlagError,   0, nil, __PRETTY_FUNCTION__, @"(%@ %s) " frmt, THIS_FILE, __FUNCTION__, ##__VA_ARGS__)
+#define DDLogCWarn(frmt, ...)    LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagWarning, 0, nil, __PRETTY_FUNCTION__, @"(%@) " frmt, THIS_FILE, ##__VA_ARGS__)
+#define DDLogCInfo(frmt, ...)    LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagInfo,    0, nil, __PRETTY_FUNCTION__, @"(%@) " frmt, THIS_FILE, ##__VA_ARGS__)
+#define DDLogCDebug(frmt, ...)   LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagDebug,   0, nil, __PRETTY_FUNCTION__, @"(%@ %s) " frmt, THIS_FILE, __FUNCTION__, ##__VA_ARGS__)
+#define DDLogCVerbose(frmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagVerbose, 0, nil, __PRETTY_FUNCTION__, @"(%@ %s) " frmt, THIS_FILE, __FUNCTION__, ##__VA_ARGS__)
+
+// Our macros
+#define DDLogTrace() LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagVerbose, 0, nil, __PRETTY_FUNCTION__, @"Trace - %@[%p]: %@", THIS_FILE, self, THIS_METHOD)
+#define DDLogVerboseTrace() DDLogTrace()
+#define DDLogDebugTrace() LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagDebug,   0, nil, __PRETTY_FUNCTION__,  @"Debug trace - %@[%p]: %@", THIS_FILE, self, THIS_METHOD)
+#define DDLogErrorTrace() LOG_MAYBE(NO,                LOG_LEVEL_DEF, DDLogFlagError,   0, nil, __PRETTY_FUNCTION__, @"Error trace - %@[%p]: %@", THIS_FILE, self, THIS_METHOD)
+
 
 extern int ddLogLevel;
 
@@ -49,17 +70,9 @@ extern int ddLogLevel;
 /**
     Global logger class, which have one singleton object.
  */
-@interface ACLLogger : NSObject{
-    
-    BOOL _initialized;
-}
+@interface ACLLogger : NSObject
 
 + (ACLLogger *)singleton;
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Only iOS code here
-/////////////////////////////////////////////////////////////////////
-#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
 
 /**
  Initializing of logger.
@@ -69,25 +82,6 @@ extern int ddLogLevel;
  If nil then will be used default value, that is name of process.
  */
 - (void)initLogger:(NSURL *)folderURL;
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Only OS X code here
-/////////////////////////////////////////////////////////////////////
-#elif TARGET_OS_MAC
-
-/**
- Initializing of logger.
- This method must be called before writing to log file.
- 
- @param appName Directory name where logger will be write logs.
- If nil then will be used default value, that is name of process.
- */
-- (void)initLogger:(NSString *)appName;
-
-/////////////////////////////////////////////////////////////////////
-#pragma mark Common code here
-/////////////////////////////////////////////////////////////////////
-#endif
 
 /// Access to file logger. It need for extracting info from log files.
 @property (readonly) ACLFileLogger *fileLogger;

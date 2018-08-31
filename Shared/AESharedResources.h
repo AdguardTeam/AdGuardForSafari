@@ -7,13 +7,16 @@
 //
 #import <Foundation/Foundation.h>
 
+typedef void (^AESListenerBlock)(void);
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources Constants
-/////////////////////////////////////////////////////////////////////
+
+extern NSString * const AEDefaultsEnabled;
+extern NSString * const AEDefaultsAssistantEnabled;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
-/////////////////////////////////////////////////////////////////////
 
 /**
      Class, which provides exchanging data between app and extension.
@@ -22,30 +25,41 @@
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Properties and public methods
-/////////////////////////////////////////////////////////////////////
 
 /**
  Returns URL where is shared resources.
  */
-+ (NSURL *)sharedResuorcesURL;
+@property (class, readonly) NSURL *sharedResuorcesURL;
+/**
+ Returns URL where must be current application logs.
+ */
+@property (class, readonly) NSURL *sharedAppLogsURL;
 
+/**
+ Returns URL where must be the applications logs.
+ */
+@property (class, readonly) NSURL *sharedLogsURL;
 /**
  Returns shared user defaults object.
  */
 @property (class, readonly) NSUserDefaults *sharedDefaults;
+/**
+ Initializes logger. After that we may use log macros.
+ */
++ (void)initLogger;
 /**
  Performs flush of the shared user defaults.
  */
 + (void)synchronizeSharedDefaults;
 
 + (void)notifyDefaultsChanged;
-+ (void)setListenerOnDefaultsChanged:(void (^)(void))block;
++ (void)setListenerOnDefaultsChanged:(AESListenerBlock)block;
 
 + (void)notifyWhitelistChanged;
-+ (void)setListenerOnWhitelistChanged:(void (^)(void))block;
++ (void)setListenerOnWhitelistChanged:(AESListenerBlock)block;
 
 + (void)notifyUserFilterChanged;
-+ (void)setListenerOnUserFilterChanged:(void (^)(void))block;
++ (void)setListenerOnUserFilterChanged:(AESListenerBlock)block;
 
 /**
  Saves blocking content rules JSON in shared storage.
