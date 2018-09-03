@@ -31,16 +31,13 @@
 #pragma mark - AESharedResources Constants
 
 NSString * const AEDefaultsEnabled = @"AEDefaultsEnabled";
-NSString * const AEDefaultsAssistantEnabled = @"AEDefaultsAssistantEnabled";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 
 @implementation AESharedResources
 
-static void onDefaultsChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo);
-static void onWhitelistChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo);
-static void onUserFilterChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo);
+static void onChangedNotify(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo);
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Initialize
@@ -49,9 +46,9 @@ static void onUserFilterChanged(CFNotificationCenterRef center, void *observer, 
 static NSURL *_containerFolderUrl;
 static NSUserDefaults *_sharedUserDefaults;
 
-static AESListenerBlock onDefaultsChangedBlock;
-static AESListenerBlock onWhitelistChangedBlock;
-static AESListenerBlock onUserFilterChangedBlock;
+static AESListenerBlock _onDefaultsChangedBlock;
+static AESListenerBlock _onWhitelistChangedBlock;
+static AESListenerBlock _onUserFilterChangedBlock;
 
 + (void)initialize{
     
@@ -65,9 +62,9 @@ static AESListenerBlock onUserFilterChangedBlock;
         if (defs)
         [_sharedUserDefaults registerDefaults:defs];
 
-        onDefaultsChangedBlock = NULL;
-        onWhitelistChangedBlock = NULL;
-        onUserFilterChangedBlock = NULL;
+        _onDefaultsChangedBlock = NULL;
+        _onWhitelistChangedBlock = NULL;
+        _onUserFilterChangedBlock = NULL;
     }
 }
 
@@ -120,8 +117,7 @@ static AESListenerBlock onUserFilterChangedBlock;
 }
 + (void)setListenerOnDefaultsChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_DEFAULTS
-                            blockPtr:&onDefaultsChangedBlock
-                         callbackPtr:&onDefaultsChanged
+                            blockPtr:&_onDefaultsChangedBlock
                                block:block];
 }
 
@@ -130,8 +126,7 @@ static AESListenerBlock onUserFilterChangedBlock;
 }
 + (void)setListenerOnWhitelistChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_WHITELIST
-                            blockPtr:&onWhitelistChangedBlock
-                         callbackPtr:&onWhitelistChanged
+                            blockPtr:&_onWhitelistChangedBlock
                                block:block];
 }
 
@@ -140,8 +135,7 @@ static AESListenerBlock onUserFilterChangedBlock;
 }
 + (void)setListenerOnUserFilterChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_USERFILTER
-                            blockPtr:&onUserFilterChangedBlock
-                         callbackPtr:&onUserFilterChanged
+                            blockPtr:&_onUserFilterChangedBlock
                                block:block];
 }
 
@@ -188,7 +182,6 @@ static AESListenerBlock onUserFilterChangedBlock;
 
 + (void)setListenerForNotification:(NSString *)notificationName
                           blockPtr:(__strong AESListenerBlock *)blockPtr
-                       callbackPtr:(CFNotificationCallback)callbackPtr
                              block:(AESListenerBlock)block {
     if (*blockPtr) {
         //Observer was registered
@@ -205,7 +198,7 @@ static AESListenerBlock onUserFilterChangedBlock;
 
         CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                         (__bridge const void *)(self),
-                                        *callbackPtr,
+                                        &onChangedNotify,
                                         (CFStringRef)notificationName,
                                         NULL,
                                         CFNotificationSuspensionBehaviorDeliverImmediately);
@@ -320,14 +313,22 @@ static AESListenerBlock onUserFilterChangedBlock;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Darwin notofication callbacks (private)
 
-static void onDefaultsChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
+static void onChangedNotify(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
+    NSString *nName = (__bridge NSString *)name;
+    AESListenerBlock block = nil;
+    if ([nName isEqualToString:NOTIFICATION_DEFAULTS]) {
+        block = _onDefaultsChangedBlock;
+    }
+    else if ([nName isEqualToString:NOTIFICATION_WHITELIST]){
+        block = _onWhitelistChangedBlock;
+    }
+    else if ([nName isEqualToString:NOTIFICATION_USERFILTER]){
+        block = _onUserFilterChangedBlock;
+    }
 
-}
-static void onWhitelistChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo){
-
-}
-static void onUserFilterChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo){
-
+    if (block) {
+        block();
+    }
 }
 
 @end

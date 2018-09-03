@@ -8,6 +8,7 @@
 
 #import "SafariExtensionHandler.h"
 #import "SafariExtensionViewController.h"
+#import "ACLang.h"
 #import "AESharedResources.h"
 
 @interface SafariExtensionHandler ()
@@ -16,21 +17,40 @@
 
 @implementation SafariExtensionHandler
 
++ (void)initialize {
+    if (self == [SafariExtensionHandler class]) {
+        [AESharedResources initLogger];
+    }
+}
+
 - (void)messageReceivedWithName:(NSString *)messageName fromPage:(SFSafariPage *)page userInfo:(NSDictionary *)userInfo {
     // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").
     [page getPagePropertiesWithCompletionHandler:^(SFSafariPageProperties *properties) {
-        NSLog(@"The extension received a message (%@) from a script injected into (%@) with userInfo (%@)", messageName, properties.url, userInfo);
+        DDLogInfo(@"The extension received a message (%@) from a script injected into (%@) with userInfo (%@)", messageName, properties.url, userInfo);
     }];
 }
 
 - (void)toolbarItemClickedInWindow:(SFSafariWindow *)window {
     // This method will be called when your toolbar item is clicked.
-    NSLog(@"The extension's toolbar item was clicked");
+    DDLogDebugTrace();
 }
 
 - (void)validateToolbarItemInWindow:(SFSafariWindow *)window validationHandler:(void (^)(BOOL enabled, NSString *badgeText))validationHandler {
     // This method will be called whenever some state changes in the passed in window. You should use this as a chance to enable or disable your toolbar item and set badge text.
-    validationHandler(YES, nil);
+    DDLogDebugTrace();
+    [window getActiveTabWithCompletionHandler:^(SFSafariTab * _Nullable activeTab) {
+        [activeTab getActivePageWithCompletionHandler:^(SFSafariPage * _Nullable activePage) {
+            [activePage getPagePropertiesWithCompletionHandler:^(SFSafariPageProperties * _Nullable properties) {
+                if (properties) {
+                    SafariExtensionViewController.sharedController.domain = properties.url.host;
+                    [[SafariExtensionViewController sharedController] setWhitelistButton];
+                    validationHandler(YES, nil);
+                    return;
+                }
+                validationHandler(NO, nil);
+            }];
+        }];
+    }];
 }
 
 - (SFSafariExtensionViewController *)popoverViewController {
@@ -38,12 +58,11 @@
 }
 
 - (void)popoverWillShowInWindow:(SFSafariWindow *)window {
-
-    NSLog(@"Popover will show");
+    DDLogDebugTrace();
 }
 
 - (void)messageReceivedFromContainingAppWithName:(NSString *)messageName userInfo:(NSDictionary<NSString *,id> *)userInfo {
-    NSLog(@"The extension received a message (%@) from a containing app with userInfo (%@)", messageName, userInfo);
+    DDLogInfo(@"The extension received a message (%@) from a containing app with userInfo (%@)", messageName, userInfo);
 
     NSDictionary *testData = @{
                                @"int-value": @(100),

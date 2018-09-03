@@ -13,7 +13,6 @@ typedef void (^AESListenerBlock)(void);
 #pragma mark - AESharedResources Constants
 
 extern NSString * const AEDefaultsEnabled;
-extern NSString * const AEDefaultsAssistantEnabled;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

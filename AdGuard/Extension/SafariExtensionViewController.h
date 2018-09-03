@@ -30,4 +30,9 @@
 - (IBAction)clickWhitelist:(id)sender;
 - (IBAction)clickAssistant:(id)sender;
 
+//////////////////////////////////////////////////////////////////////////
+#pragma mark - Properties and Public methods
+
+- (void)setWhitelistButton;
+
 @end

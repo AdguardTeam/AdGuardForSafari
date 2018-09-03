@@ -24,9 +24,9 @@
 // Set this log level for application.
 typedef enum{
     
-    ACLLDefaultLevel = DDLogFlagInfo,
-    ACLLDebugLevel = DDLogFlagDebug,
-    ACLLVerboseLevel = DDLogFlagVerbose
+    ACLLDefaultLevel = DDLogLevelInfo,
+    ACLLDebugLevel = DDLogLevelDebug,
+    ACLLVerboseLevel = DDLogLevelVerbose
     
 } ACLLogLevelType;
 

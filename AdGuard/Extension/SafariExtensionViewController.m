@@ -20,7 +20,6 @@
     static SafariExtensionViewController *sharedController = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [AESharedResources initLogger];
         sharedController = [[SafariExtensionViewController alloc] initWithNibName:nil bundle:nil];
     });
     return sharedController;
@@ -31,10 +30,11 @@
     DDLogDebugTrace();
     self.view.appearance = NSAppearance.currentAppearance;
 
+    [self setEnabledButton];
+    [self setWhitelistButton];
     [AESharedResources setListenerOnDefaultsChanged:^{
         DDLogDebugTrace();
         [self setEnabledButton];
-        [self setAssistantButton];
     }];
     [AESharedResources setListenerOnWhitelistChanged:^{
         DDLogDebugTrace();
@@ -60,8 +60,8 @@
     }
     [AESharedResources whitelistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
         DDLogDebugTrace();
-        NSMutableArray *mDomains = [domains mutableCopy];
-        if ([mDomains containsObject:domain]) {
+        NSMutableArray *mDomains = [domains mutableCopy] ?: [NSMutableArray new];
+        if ([self domainCheckWithDomains:mDomains]) {
             [mDomains removeObject:domain];
         }
         else {
@@ -76,10 +76,18 @@
 
 - (IBAction)clickAssistant:(id)sender {
     DDLogDebugTrace();
-    [AESharedResources.sharedDefaults
-     setBool:! [AESharedResources.sharedDefaults boolForKey:AEDefaultsAssistantEnabled]
-     forKey:AEDefaultsAssistantEnabled];
-    [AESharedResources notifyDefaultsChanged];
+    //Launch script for select element on web page
+}
+
+//////////////////////////////////////////////////////////////////////////
+#pragma mark - Properties and Public methods
+
+- (void)setWhitelistButton {
+
+    [AESharedResources whitelistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
+        DDLogDebugTrace();
+        [self setWhitelistButtonOn:! [self domainCheckWithDomains:domains]];
+    }];
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -90,38 +98,49 @@
     if ([AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]) {
         self.enabledButton.state = NSOnState;
         self.enabledButton.title = NSLocalizedString(@"sae-popover-enabled-button-on", @"Safari App Extension, toolbar popover, title of the button for on/off AdGuard filtering, \"Enabled\" state.");
+        [self setButtonsEnabled:YES];
     }
     else {
         self.enabledButton.state = NSOffState;
         self.enabledButton.title = NSLocalizedString(@"sae-popover-enabled-button-off", @"Safari App Extension, toolbar popover, title of the button for on/off AdGuard filtering, \"Disabled\" state.");
+        [self setButtonsEnabled:NO];
     }
 }
-- (void)setWhitelistButton {
 
-    [AESharedResources whitelistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
-        DDLogDebugTrace();
-        if (self.domain.length && [domains containsObject:self.domain]) {
-            self.enabledButton.state = NSOffState;
-            self.enabledButton.title = NSLocalizedString(@"sae-popover-filter-this-site-button-off", @"Safari App Extension, toolbar popover, title of the button for on/off filtration on this site, \"Off\" state.");
+- (BOOL)domainCheckWithDomains:(NSArray <NSString *> *)domains {
+    NSString *theDomain = self.domain;
+    if (theDomain.length) {
+        for (NSString *domain in domains) {
+            if (theDomain.hash == domain.hash && [theDomain isEqualToString:domain]) {
+                return YES;
+            }
+            if ([theDomain hasSuffix:[@"." stringByAppendingString:domain]]) {
+                return YES;
+            }
         }
-        else {
-            self.enabledButton.state = NSOnState;
-            self.enabledButton.title = NSLocalizedString(@"sae-popover-filter-this-site-button-on", @"Safari App Extension, toolbar popover, title of the button for on/off filtration on this site, \"On\" state.");
-        }
-
-    }];
+    }
+    return NO;
 }
-- (void)setAssistantButton {
+- (void)setButtonsEnabled:(BOOL)enabled {
 
-    DDLogDebugTrace();
-    if ([AESharedResources.sharedDefaults boolForKey:AEDefaultsAssistantEnabled]) {
-        self.enabledButton.state = NSOnState;
-        self.enabledButton.title = NSLocalizedString(@"sae-popover-assistant-button-on", @"Safari App Extension, toolbar popover, title of the button for on/off AdGuard Assistant, \"On\" state.");
+    self.assistantButton.enabled = enabled;
+    self.whitelistButton.enabled = enabled;
+    if (enabled) {
+        [self setWhitelistButton];
     }
     else {
-        self.enabledButton.state = NSOffState;
-        self.enabledButton.title = NSLocalizedString(@"sae-popover-assistant-button-off", @"Safari App Extension, toolbar popover, title of the button for on/off AdGuard Assistant, \"Off\" state.");
+        [self setWhitelistButtonOn:NO];
     }
 }
 
+- (void)setWhitelistButtonOn:(BOOL)on {
+    if (on) {
+        self.whitelistButton.state = NSOnState;
+        self.whitelistButton.title = NSLocalizedString(@"sae-popover-filter-this-site-button-on", @"Safari App Extension, toolbar popover, title of the button for on/off filtration on this site, \"On\" state.");
+    }
+    else {
+        self.whitelistButton.state = NSOffState;
+        self.whitelistButton.title = NSLocalizedString(@"sae-popover-filter-this-site-button-off", @"Safari App Extension, toolbar popover, title of the button for on/off filtration on this site, \"Off\" state.");
+    }
+}
 @end

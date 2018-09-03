@@ -18,13 +18,13 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe" customClass="PopupView">
-            <rect key="frame" x="0.0" y="0.0" width="240" height="156"/>
+            <rect key="frame" x="0.0" y="0.0" width="240" height="204"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="12" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7nt-U5-nno">
-                    <rect key="frame" x="20" y="20" width="200" height="116"/>
+                    <rect key="frame" x="20" y="44" width="200" height="116"/>
                     <subviews>
-                        <stackView orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="flP-Sn-ajz">
+                        <stackView orientation="horizontal" alignment="top" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="flP-Sn-ajz">
                             <rect key="frame" x="0.0" y="94" width="200" height="22"/>
                             <beginningViews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XDE-N8-sRz">
@@ -38,8 +38,8 @@
                             </beginningViews>
                             <endViews>
                                 <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jKb-oY-gyH">
-                                    <rect key="frame" x="126" y="-2" width="74" height="25"/>
-                                    <buttonCell key="cell" type="roundTextured" title="Disabled" alternateTitle="Enabled" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="p92-iZ-Q5D">
+                                    <rect key="frame" x="186" y="-2" width="14" height="25"/>
+                                    <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="p92-iZ-Q5D">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                         <font key="font" size="15" name=".AppleSystemUIFont"/>
                                     </buttonCell>
@@ -60,7 +60,7 @@
                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="apM-bu-gib">
                             <rect key="frame" x="0.0" y="79" width="200" height="5"/>
                         </box>
-                        <stackView orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zwl-ox-Qjq">
+                        <stackView orientation="horizontal" alignment="bottom" spacing="12" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zwl-ox-Qjq">
                             <rect key="frame" x="0.0" y="47" width="200" height="22"/>
                             <beginningViews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ki1-C9-n0z">
@@ -74,9 +74,9 @@
                             </beginningViews>
                             <endViews>
                                 <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qio-p6-Pqn">
-                                    <rect key="frame" x="164" y="-2" width="36" height="25"/>
-                                    <buttonCell key="cell" type="roundTextured" title="Off" alternateTitle="On" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="t9o-h0-bnn">
-                                        <behavior key="behavior" lightByContents="YES"/>
+                                    <rect key="frame" x="186" y="-2" width="14" height="25"/>
+                                    <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" alignment="center" borderStyle="border" inset="2" id="t9o-h0-bnn">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                         <font key="font" size="15" name=".AppleSystemUIFont"/>
                                     </buttonCell>
                                     <connections>
@@ -96,12 +96,12 @@
                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="VMt-uv-XvX">
                             <rect key="frame" x="0.0" y="32" width="200" height="5"/>
                         </box>
-                        <stackView orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0f-uP-eKG">
+                        <stackView orientation="horizontal" alignment="bottom" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0f-uP-eKG">
                             <rect key="frame" x="0.0" y="0.0" width="200" height="22"/>
                             <beginningViews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="du9-Ja-6bt">
-                                    <rect key="frame" x="-2" y="0.0" width="122" height="22"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Adguard Assistant" id="uTP-cd-F1b">
+                                    <rect key="frame" x="-2" y="0.0" width="121" height="22"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Block the Element" id="uTP-cd-F1b">
                                         <font key="font" metaFont="menuBar"/>
                                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -110,9 +110,9 @@
                             </beginningViews>
                             <endViews>
                                 <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0bc-P0-SgG">
-                                    <rect key="frame" x="164" y="-2" width="36" height="25"/>
-                                    <buttonCell key="cell" type="roundTextured" title="Off" alternateTitle="On" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" inset="2" id="McY-Cj-7jd">
-                                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                    <rect key="frame" x="142" y="-2" width="58" height="25"/>
+                                    <buttonCell key="cell" type="roundTextured" title="Select" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" inset="2" id="McY-Cj-7jd">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" size="15" name=".AppleSystemUIFont"/>
                                     </buttonCell>
                                     <connections>
@@ -154,14 +154,23 @@
                         <real value="3.4028234663852886e+38"/>
                     </customSpacing>
                 </stackView>
+                <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Jj4-64-W51">
+                    <rect key="frame" x="204" y="20" width="16" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="5eo-cW-aW4"/>
+                        <constraint firstAttribute="width" constant="16" id="9fb-Ls-CPA"/>
+                    </constraints>
+                </progressIndicator>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="7nt-U5-nno" secondAttribute="bottom" constant="20" id="1JH-ct-mWc"/>
+                <constraint firstAttribute="trailing" secondItem="Jj4-64-W51" secondAttribute="trailing" constant="20" id="K3z-Zt-WWW"/>
+                <constraint firstAttribute="bottom" secondItem="Jj4-64-W51" secondAttribute="bottom" constant="20" id="Pdq-WZ-AMK"/>
                 <constraint firstAttribute="trailing" secondItem="7nt-U5-nno" secondAttribute="trailing" constant="20" id="Q31-74-1Sw"/>
-                <constraint firstItem="7nt-U5-nno" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="deJ-ct-2JX"/>
+                <constraint firstItem="Jj4-64-W51" firstAttribute="top" secondItem="7nt-U5-nno" secondAttribute="bottom" constant="8" id="UjL-72-rQX"/>
+                <constraint firstItem="7nt-U5-nno" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="44" id="deJ-ct-2JX"/>
                 <constraint firstItem="7nt-U5-nno" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="vSn-lQ-L9u"/>
             </constraints>
-            <point key="canvasLocation" x="-176" y="131"/>
+            <point key="canvasLocation" x="-176" y="168.5"/>
         </customView>
     </objects>
 </document>

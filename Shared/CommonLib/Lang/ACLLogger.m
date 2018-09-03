@@ -18,7 +18,7 @@
 #import "ACLLogger.h"
 #import "ACLFileLogger.h"
 
-int ddLogLevel = DDLogFlagVerbose;
+int ddLogLevel = DDLogLevelVerbose;
 
 @implementation ACLLogger
 

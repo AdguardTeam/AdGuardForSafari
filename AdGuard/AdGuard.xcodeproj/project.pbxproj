@@ -32,6 +32,7 @@
 		652735E7212D788E005C35BF /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865E212AEA3200CB6DAE /* ACLFileLogger.m */; };
 		652735E8212D788E005C35BF /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8629212AE6C200CB6DAE /* AESharedResources.m */; };
 		652735EE212D7975005C35BF /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 652735B2212D77A3005C35BF /* libshared.a */; };
+		6535D712213D4374004D8A08 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6535D714213D4374004D8A08 /* Localizable.strings */; };
 		655C8660212AEA3200CB6DAE /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8638212AEA3200CB6DAE /* NSURL+Utils.m */; };
 		655C8662212AEA3200CB6DAE /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863D212AEA3200CB6DAE /* NSDate+Utils.m */; };
 		655C8665212AEA3200CB6DAE /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8640212AEA3200CB6DAE /* NSString+Utils.m */; };
@@ -146,6 +147,9 @@
 		65216A13212436EA00ABF7D0 /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Extension.entitlements; sourceTree = "<group>"; };
 		65216A2F2124517700ABF7D0 /* ElectronChild.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ElectronChild.entitlements; sourceTree = "<group>"; };
 		652735B2212D77A3005C35BF /* libshared.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libshared.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6535D713213D4374004D8A08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6535D715213D4399004D8A08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6535D717213D4505004D8A08 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		655C8629212AE6C200CB6DAE /* AESharedResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESharedResources.m; sourceTree = "<group>"; };
 		655C862A212AE6C200CB6DAE /* AESharedResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESharedResources.h; sourceTree = "<group>"; };
 		655C862F212AEA3200CB6DAE /* ACLExecuteBlockDelayed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLExecuteBlockDelayed.h; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 				6504C10A2136BF10007E9674 /* Info.plist */,
 				65216A0F212436EA00ABF7D0 /* script.js */,
 				65216A13212436EA00ABF7D0 /* Extension.entitlements */,
+				6535D714213D4374004D8A08 /* Localizable.strings */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -669,6 +674,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6535D712213D4374004D8A08 /* Localizable.strings in Resources */,
 				65216A0D212436EA00ABF7D0 /* SafariExtensionViewController.xib in Resources */,
 				655C8677212AF2A500CB6DAE /* tray-on.pdf in Resources */,
 				65D151852139771A0014BE79 /* defaults.plist in Resources */,
@@ -787,6 +793,16 @@
 				6504C10C2136CD37007E9674 /* en */,
 			);
 			name = SafariExtensionViewController.xib;
+			sourceTree = "<group>";
+		};
+		6535D714213D4374004D8A08 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6535D713213D4374004D8A08 /* en */,
+				6535D715213D4399004D8A08 /* Base */,
+				6535D717213D4505004D8A08 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
