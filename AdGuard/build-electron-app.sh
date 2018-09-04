@@ -25,7 +25,8 @@ fi
 #
 mkdir -vp "${SRC}/safari-ext/shared"
 cp -v "${BUILT_PRODUCTS_DIR}/libshared.a" "${SRC}/safari-ext/shared/" || exit 1
-find "${SHAREDSRC}" -name "*.h" -depth 1 | xargs -J % cp -v % "${SRC}/safari-ext/shared/" || exit 1
+rsync -avm --include='*.h' -f 'hide,! */' "${SHAREDSRC}/" "${SRC}/safari-ext/shared/"
+
 
 OPT=""
 cd "${SRC}"

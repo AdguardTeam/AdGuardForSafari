@@ -13,6 +13,7 @@ typedef void (^AESListenerBlock)(void);
 #pragma mark - AESharedResources Constants
 
 extern NSString * const AEDefaultsEnabled;
+extern NSString * const AEDefaultsMainAppBusy;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -59,6 +60,9 @@ extern NSString * const AEDefaultsEnabled;
 
 + (void)notifyUserFilterChanged;
 + (void)setListenerOnUserFilterChanged:(AESListenerBlock)block;
+
++ (void)notifyBusyChanged;
++ (void)setListenerOnBusyChanged:(AESListenerBlock)block;
 
 /**
  Saves blocking content rules JSON in shared storage.

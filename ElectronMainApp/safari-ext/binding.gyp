@@ -1,7 +1,7 @@
 {
  "targets": [
    {
-     "target_name": "safari-ext",
+     "target_name": "safari_ext_addon",
      "sources": [ "src.mm"],
      "include_dirs" : [
        "<!(node -e \"require('nan')\")",

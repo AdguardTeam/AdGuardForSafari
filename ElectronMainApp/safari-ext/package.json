@@ -1,10 +1,11 @@
 {
       "name": "safari-ext",
-      "version": "1.0.10",
+      "version": "1.0.13",
       "description": "Comunicate to Safari App Extension",
       "gypfile": true,
-      "main": "build/Release/safari-ext",
+      "main": "index.js",
       "dependencies": {
-        "nan": "^2.3.3"
+        "nan": "^2.3.3",
+        "bindings": "^1.2.1"
       }
 }

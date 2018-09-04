@@ -25,12 +25,14 @@
 #define NOTIFICATION_DEFAULTS                   AG_BUNDLEID @".notify.defaults"
 #define NOTIFICATION_WHITELIST                  AG_BUNDLEID @".notify.whitelist"
 #define NOTIFICATION_USERFILTER                 AG_BUNDLEID @".notify.userfilter"
+#define NOTIFICATION_BUSY                       AG_BUNDLEID @".notify.busy"
 
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources Constants
 
 NSString * const AEDefaultsEnabled = @"AEDefaultsEnabled";
+NSString * const AEDefaultsMainAppBusy = @"AEDefaultsMainAppBusy";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -49,6 +51,7 @@ static NSUserDefaults *_sharedUserDefaults;
 static AESListenerBlock _onDefaultsChangedBlock;
 static AESListenerBlock _onWhitelistChangedBlock;
 static AESListenerBlock _onUserFilterChangedBlock;
+static AESListenerBlock _onBusyChangedBlock;
 
 + (void)initialize{
     
@@ -139,6 +142,14 @@ static AESListenerBlock _onUserFilterChangedBlock;
                                block:block];
 }
 
++ (void)notifyBusyChanged {
+    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_BUSY, NULL, NULL, YES);
+}
++ (void)setListenerOnBusyChanged:(AESListenerBlock)block {
+    [self setListenerForNotification:NOTIFICATION_BUSY
+                            blockPtr:&_onBusyChangedBlock
+                               block:block];
+}
 
 + (void)setBlockingContentRulesJson:(NSString *)jsonString completion:(void (^)(void))completion {
 

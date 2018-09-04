@@ -18,7 +18,7 @@
 #import "ACLLogger.h"
 #import "ACLFileLogger.h"
 
-int ddLogLevel = DDLogLevelVerbose;
+DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @implementation ACLLogger
 
@@ -67,9 +67,9 @@ static ACLLogger *singletonLogger;
         sself->_fileLogger.maximumFileSize = ACL_MAX_LOG_FILE_SIZE;
 
         [DDLog addLogger:sself->_fileLogger];
+        [DDLog addLogger:[DDOSLogger sharedInstance]];
 #ifdef DEBUG
         [DDLog addLogger:[DDTTYLogger sharedInstance]];
-        [DDLog addLogger:[DDOSLogger sharedInstance]];
 #endif
 
     });

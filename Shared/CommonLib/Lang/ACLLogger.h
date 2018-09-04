@@ -22,13 +22,13 @@
 #define ACL_MAX_LOG_FILE_SIZE     512000
 
 // Set this log level for application.
-typedef enum{
+typedef NS_ENUM(NSUInteger, ACLLogLevelType) {
     
     ACLLDefaultLevel = DDLogLevelInfo,
     ACLLDebugLevel = DDLogLevelDebug,
     ACLLVerboseLevel = DDLogLevelVerbose
     
-} ACLLogLevelType;
+};
 
 // Redefine DDLog macros
 
@@ -63,7 +63,7 @@ typedef enum{
 #define DDLogErrorTrace() LOG_MAYBE(NO,                LOG_LEVEL_DEF, DDLogFlagError,   0, nil, __PRETTY_FUNCTION__, @"Error trace - %@[%p]: %@", THIS_FILE, self, THIS_METHOD)
 
 
-extern int ddLogLevel;
+extern DDLogLevel ddLogLevel;
 
 @class ACLFileLogger;
 

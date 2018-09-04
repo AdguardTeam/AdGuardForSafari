@@ -38,16 +38,25 @@
 - (void)validateToolbarItemInWindow:(SFSafariWindow *)window validationHandler:(void (^)(BOOL enabled, NSString *badgeText))validationHandler {
     // This method will be called whenever some state changes in the passed in window. You should use this as a chance to enable or disable your toolbar item and set badge text.
     DDLogDebugTrace();
-    [window getActiveTabWithCompletionHandler:^(SFSafariTab * _Nullable activeTab) {
-        [activeTab getActivePageWithCompletionHandler:^(SFSafariPage * _Nullable activePage) {
-            [activePage getPagePropertiesWithCompletionHandler:^(SFSafariPageProperties * _Nullable properties) {
-                if (properties) {
-                    SafariExtensionViewController.sharedController.domain = properties.url.host;
-                    [[SafariExtensionViewController sharedController] setWhitelistButton];
-                    validationHandler(YES, nil);
-                    return;
-                }
-                validationHandler(NO, nil);
+    BOOL running = ([NSRunningApplication runningApplicationsWithBundleIdentifier:AG_BUNDLEID].count > 0);
+    SafariExtensionViewController.sharedController.mainAppRunning = running;
+    [window getToolbarItemWithCompletionHandler:^(SFSafariToolbarItem * _Nullable toolbarItem) {
+        if (running) {
+            [toolbarItem setImage:[NSImage imageNamed:@"toolbar-on"]];
+        }
+        else {
+            [toolbarItem setImage:[NSImage imageNamed:@"toolbar-off"]];
+        }
+        [window getActiveTabWithCompletionHandler:^(SFSafariTab * _Nullable activeTab) {
+            [activeTab getActivePageWithCompletionHandler:^(SFSafariPage * _Nullable activePage) {
+                [activePage getPagePropertiesWithCompletionHandler:^(SFSafariPageProperties * _Nullable properties) {
+                    if (properties) {
+                        SafariExtensionViewController.sharedController.domain = properties.url.host;
+                        validationHandler(YES, nil);
+                        return;
+                    }
+                    validationHandler(NO, nil);
+                }];
             }];
         }];
     }];

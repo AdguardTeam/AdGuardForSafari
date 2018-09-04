@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <SafariServices/SafariServices.h>
 #import "shared/AESharedResources.h"
+#import "shared/CommonLib/ACLang.h"
 #include <nan.h>
 
 
@@ -34,7 +35,7 @@ static void AsyncSendHandler(uv_async_t *handle) {
 
   auto *info = static_cast<CallbackInfo *>(handle->data);
 
-  NSLog(@"Invoking callback with type: %d", info->type);
+  DDLogCDebug(@"Invoking callback with type: %d", info->type);
 
 #define c_arg(N) argc = N; argv = (v8::Local<v8::Value> *)malloc(sizeof(v8::Local<v8::Value>)*N) 
 
@@ -75,7 +76,26 @@ NAN_METHOD(getPath) {
     info.GetReturnValue().Set(Nan::New(groupPath.UTF8String).ToLocalChecked());
   }
 }
+/*
+NAN_METHOD(getEnabled) {
 
+    info.GetReturnValue().Set(Nan::New((bool)[AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]).ToLocalChecked());
+}
+NAN_METHOD(setEnabled) {
+
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsBoolean()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+
+    [AESharedResources.sharedDefaults setBool:(BOOL)info[0].value() forKey:AEDefaultsEnabled];
+}
+*/
 NAN_METHOD(msgToSafariExt) {
 
     if (info.Length() < 3) {
@@ -108,13 +128,13 @@ NAN_METHOD(msgToSafariExt) {
     NSDictionary *infoDict = @{@"params": paramsJson};
 
 
-    NSLog(@"Sending message (%@) to Safari App Extension with info (%@)", message, infoDict);
+    DDLogCInfo(@"Sending message (%@) to Safari App Extension with info (%@)", message, infoDict);
     [SFSafariApplication dispatchMessageWithName:message
                        toExtensionWithIdentifier:EXT_BUNDLE_ID
                                         userInfo:infoDict
                                completionHandler:^(NSError * _Nullable error) {
 
-                                   NSLog(@"Error object: %@", error);
+                                   DDLogCError(@"Error object: %@", error);
 
                                    auto *info = new CallbackInfo();
                                    info->type = CallbackTypeForSend;
@@ -129,24 +149,29 @@ NAN_METHOD(msgToSafariExt) {
                                }];
 
 }
+/*
+NAN_METHOD(setBlockingContentRulesJson) {
 
-NAN_METHOD(blockingContentRulesJson) {
-
-    if (info.Length() < 1) {
+    if (info.Length() < 2) {
         ThrowTypeError("Wrong number of arguments");
         return;
     }
 
-    if (!info[0]->IsFunction()) {
+    if (!info[0]->IsString() || !info[1]->IsFunction()) {
         ThrowTypeError("Wrong arguments");
         return;
     }
+    NSData *data = [NSData new];
+    Nan::Utf8String msg (info[0]);
+    if (msg.length() > 0) {
+        data = [NSData dataWithBytesNoCopy:*msg length:msg.length];
+     }
 
-    Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
+    Nan::Callback *cb = new Nan::Callback(info[1].As<Function>());
 
 
       dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
-        NSLog(@"GEtting blocking rules in global queue");
+        DDLogCDebug(@"Getting blocking rules in global queue");
         NSData *data = [[[AESharedResources blockingContentRulesUrl] path] dataWithEncoding:NSUTF8StringEncoding];
 
         NSString *blockingContentRules = data.length ?[[NSString alloc]
@@ -166,15 +191,74 @@ NAN_METHOD(blockingContentRulesJson) {
 
     });
 }
+*/
+NAN_METHOD(blockingContentRulesJson) {
+
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsFunction()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+
+    Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
+
+
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        NSLog(@"GEtting blocking rules in global queue");
+        NSData *data = [[[AESharedResources blockingContentRulesUrl] path] dataWithEncoding:NSUTF8StringEncoding];
+
+        NSString *blockingContentRules = data.length ?[[NSString alloc]
+                                                       initWithData:data
+                                                       encoding:NSUTF8StringEncoding]
+        : @"";
+
+        auto *info = new CallbackInfo();
+        info->type = CallbackTypeForBlockingContentRules;
+        info->result = (void *)CFBridgingRetain(blockingContentRules);
+        info->callback = cb;
+
+        auto *async = new uv_async_t();
+        async->data = info;
+        uv_async_init(uv_default_loop(), async, (uv_async_cb)AsyncSendHandler);
+        uv_async_send(async);
+
+    });
+}
+
+NAN_METHOD(setBusy) {
+
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsBoolean()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+
+    DDLogCDebug(@"Args is ok.");
+
+    BOOL val = info[0]->BooleanValue(); 
+    [[AESharedResources sharedDefaults] setBool:val forKey:AEDefaultsMainAppBusy];
+    [AESharedResources notifyBusyChanged];
+}
 
 NAN_MODULE_INIT(Init) {
+
+    [AESharedResources initLogger];
+
   /*
   Sends message to extension.
   Usage:
   obj.send("message-name","params-like-string-may-be-json", (bool_result)=>{ console.log(bool_result);});
   */
-	Nan::Set(target, New<String>("send").ToLocalChecked(),
-	GetFunction(New<FunctionTemplate>(msgToSafariExt)).ToLocalChecked());
+	Nan::Set(target, New<String>("setBusy").ToLocalChecked(),
+	GetFunction(New<FunctionTemplate>(setBusy)).ToLocalChecked());
   /*
   Gets path to folder, which shares between app and extension.
   Usage:
@@ -193,4 +277,4 @@ NAN_MODULE_INIT(Init) {
 }
 
 // macro to load the module when require'd
- NODE_MODULE(safari_ext, Init)
+ NODE_MODULE(safari_ext_addon, Init)

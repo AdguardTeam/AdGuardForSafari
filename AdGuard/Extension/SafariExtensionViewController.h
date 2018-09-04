@@ -29,10 +29,13 @@
 - (IBAction)clickEnabled:(id)sender;
 - (IBAction)clickWhitelist:(id)sender;
 - (IBAction)clickAssistant:(id)sender;
+- (IBAction)clickRunAdguard:(id)sender;
 
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - Properties and Public methods
 
-- (void)setWhitelistButton;
+@property BOOL otherButtonsEnabled;
+@property BOOL busy;
+@property BOOL mainAppRunning;
 
 @end

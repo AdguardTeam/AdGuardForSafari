@@ -11,7 +11,6 @@
 #import "AESharedResources.h"
 
 @interface SafariExtensionViewController ()
-
 @end
 
 @implementation SafariExtensionViewController
@@ -30,18 +29,26 @@
     DDLogDebugTrace();
     self.view.appearance = NSAppearance.currentAppearance;
 
-    [self setEnabledButton];
-    [self setWhitelistButton];
-    [AESharedResources setListenerOnDefaultsChanged:^{
+//    [[NSWorkspace sharedWorkspace] addObserver:self
+//                                    forKeyPath:@"runningApplications"
+//                                       options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+//                                       context:NULL];
+
+    [AESharedResources setListenerOnBusyChanged:^{
         DDLogDebugTrace();
         [self setEnabledButton];
-    }];
-    [AESharedResources setListenerOnWhitelistChanged:^{
-        DDLogDebugTrace();
-        [self setWhitelistButton];
+        self.busy = [AESharedResources.sharedDefaults boolForKey:AEDefaultsMainAppBusy];
     }];
 }
 
+- (void)viewWillAppear {
+    self.busy = [AESharedResources.sharedDefaults boolForKey:AEDefaultsMainAppBusy];
+    [self setEnabledButton];
+}
+
+- (void)dealloc {
+    [AESharedResources setListenerOnBusyChanged:nil];
+}
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - ACTIONS
 
@@ -77,6 +84,13 @@
 - (IBAction)clickAssistant:(id)sender {
     DDLogDebugTrace();
     //Launch script for select element on web page
+}
+
+- (IBAction)clickRunAdguard:(id)sender {
+    [[NSWorkspace sharedWorkspace] launchAppWithBundleIdentifier:AG_BUNDLEID
+                                                         options:(NSWorkspaceLaunchWithoutActivation | NSWorkspaceLaunchAndHide)
+                                  additionalEventParamDescriptor:nil
+                                                launchIdentifier:NULL];
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -123,8 +137,7 @@
 }
 - (void)setButtonsEnabled:(BOOL)enabled {
 
-    self.assistantButton.enabled = enabled;
-    self.whitelistButton.enabled = enabled;
+    self.otherButtonsEnabled = enabled;
     if (enabled) {
         [self setWhitelistButton];
     }
@@ -143,4 +156,18 @@
         self.whitelistButton.title = NSLocalizedString(@"sae-popover-filter-this-site-button-off", @"Safari App Extension, toolbar popover, title of the button for on/off filtration on this site, \"Off\" state.");
     }
 }
+//////////////////////////////////////////////////////////////////////////
+#pragma mark - Properties Observer
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+//    if ([keyPath isEqualToString:@"runningApplications"]) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            self.mainAppRunning = ([NSRunningApplication runningApplicationsWithBundleIdentifier:AG_BUNDLEID] != nil);
+//        });
+//    }
+}
+
 @end
