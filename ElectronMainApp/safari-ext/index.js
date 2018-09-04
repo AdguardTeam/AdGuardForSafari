@@ -57,9 +57,12 @@ module.exports = (() => {
 
     /**
      * Sets protection status
+     *
+     * @param isEnabled
+     * @param callback = () => {}
      */
-    const setProtectionEnabled = (isEnabled) => {
-        addon.setProtectionEnabled(isEnabled);
+    const setProtectionEnabled = (isEnabled, callback) => {
+        addon.setProtectionEnabled(isEnabled, callback);
     };
 
     /**
