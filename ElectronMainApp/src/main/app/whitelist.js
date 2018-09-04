@@ -342,6 +342,25 @@ module.exports = (function () {
     };
 
     /**
+     * Finds if url is whitelisted
+     *
+     * @param url
+     */
+    const isWhitelisted = (url) => {
+        if (!url) {
+            return null;
+        }
+
+        const host = getHost(url);
+
+        if (isDefaultWhiteListMode()) {
+            return getWhiteListedDomains().indexOf(host) >= 0;
+        } else {
+            return !getBlockListedDomains().indexOf(host) >= 0;
+        }
+    };
+
+    /**
      * Initializes whitelist filter
      */
     const init = function () {
@@ -365,6 +384,8 @@ module.exports = (function () {
 
         whiteListUrl: whiteListUrl,
         unWhiteListUrl: unWhiteListUrl,
+
+        isWhitelisted: isWhitelisted,
 
         updateWhiteListDomains: updateWhiteListDomains,
 
