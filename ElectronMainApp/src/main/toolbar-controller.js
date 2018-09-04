@@ -4,7 +4,8 @@ const listeners = require('./notifier');
 const events = require('./events');
 
 /**
- * Addon toolbar controller
+ * Addon toolbar controller.
+ * Handles safari-ext events and setups its view state.
  */
 module.exports = (() => {
 
@@ -75,9 +76,8 @@ module.exports = (() => {
      */
     const setProtectionEnabled = (isEnabled) => {
         safariToolbar.busyStatus(true);
-        safariToolbar.setProtectionEnabled(isEnabled, () => {
-            safariToolbar.busyStatus(false);
-        });
+        safariToolbar.setProtectionEnabled(isEnabled);
+        safariToolbar.busyStatus(false);
     };
 
     /**
