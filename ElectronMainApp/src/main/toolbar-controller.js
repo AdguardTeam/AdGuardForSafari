@@ -62,10 +62,12 @@ module.exports = (() => {
     /**
      * Sets content blocker json
      */
-    const setContentBlockingJson = (jsonString, callback) => {
+    const setContentBlockingJson = (jsonString) => {
         safariToolbar.busyStatus(true);
-        safariToolbar.setContentBlockingJson(jsonString, callback);
-        safariToolbar.busyStatus(false);
+        safariToolbar.setContentBlockingJson(jsonString, () => {
+            safariToolbar.busyStatus(false);
+        });
+
     };
 
     /**
@@ -73,26 +75,29 @@ module.exports = (() => {
      */
     const setProtectionEnabled = (isEnabled) => {
         safariToolbar.busyStatus(true);
-        safariToolbar.setProtectionEnabled(isEnabled);
-        safariToolbar.busyStatus(false);
+        safariToolbar.setProtectionEnabled(isEnabled, () => {
+            safariToolbar.busyStatus(false);
+        });
     };
 
     /**
      * Sets whitelisted domains
      */
-    const setWhitelistDomains = (domains, callback) => {
+    const setWhitelistDomains = (domains) => {
         safariToolbar.busyStatus(true);
-        safariToolbar.setWhitelistDomains(domains, callback);
-        safariToolbar.busyStatus(false);
+        safariToolbar.setWhitelistDomains(domains, () => {
+            safariToolbar.busyStatus(false);
+        });
     };
 
     /**
      * Sets user filter rules
      */
-    const setUserFilter = (rules, callback) => {
+    const setUserFilter = (rules) => {
         safariToolbar.busyStatus(true);
-        safariToolbar.setUserFilter(rules, callback);
-        safariToolbar.busyStatus(false);
+        safariToolbar.setUserFilter(rules, () => {
+            safariToolbar.busyStatus(false);
+        });
     };
 
     return {
