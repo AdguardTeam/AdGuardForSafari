@@ -37,6 +37,11 @@ module.exports = (function () {
 
             if (!result) {
                 clearFilters();
+                listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
+                    rulesCount: 0,
+                    rulesOverLimit: false
+                });
+
                 return;
             }
 
