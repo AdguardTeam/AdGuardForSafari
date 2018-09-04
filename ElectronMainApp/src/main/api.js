@@ -21,8 +21,9 @@ module.exports = (() => {
      * Returns toolbar data for url
      *
      * @param url
+     * @returns {{applicationFilteringDisabled: boolean, urlFilteringDisabled: boolean, isWhitelisted: boolean}}
      */
-    const getToolbarMenuOpened = (url) => {
+    const getToolbarMenuData = (url) => {
         const urlFilteringDisabled = !url || url.indexOf('http') !== 0;
         const applicationFilteringDisabled = antibanner.isRunning();
         let isWhitelisted = false;
@@ -40,7 +41,7 @@ module.exports = (() => {
     };
 
     /**
-     * Enables protection for url
+     * Enables protection for url domain
      *
      * @param url
      */
@@ -51,7 +52,7 @@ module.exports = (() => {
     };
 
     /**
-     * Disables protection for url
+     * Disables protection for url domain
      *
      * @param url
      */
@@ -81,7 +82,7 @@ module.exports = (() => {
 
     return {
         setContentBlocker: setContentBlocker,
-        getToolbarMenuOpened: getToolbarMenuOpened,
+        getToolbarMenuData: getToolbarMenuData,
         enable: enable,
         disable: disable,
         pause: pause,
