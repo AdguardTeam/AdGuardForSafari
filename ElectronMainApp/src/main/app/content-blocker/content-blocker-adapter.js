@@ -101,9 +101,11 @@ module.exports = (function () {
     const setSafariContentBlocker = json => {
         try {
             log.info('Setting content blocker. Length=' + json.length);
-            //safari.extension.setContentBlocker(json);
-            //TODO: Implement setContentBlocker(json);
-            //TODO: You can get json here.
+
+            listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, {
+                json: json
+            });
+
             log.info('Content blocker has been set.');
         } catch (ex) {
             log.error('Error while setting content blocker: ' + ex);

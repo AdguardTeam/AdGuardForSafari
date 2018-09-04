@@ -1,7 +1,7 @@
 const whitelist = require('./app/whitelist');
+const userrules = require('./app/userrules');
 const antibanner = require('./app/antibanner');
 const log = require('./app/utils/log');
-const contentBlockerAdapter = require('./app/content-blocker/content-blocker-adapter');
 
 /**
  * Api
@@ -9,18 +9,9 @@ const contentBlockerAdapter = require('./app/content-blocker/content-blocker-ada
 module.exports = (() => {
 
     /**
-     * Sets content blocker json
-     *
-     * @param json
-     */
-    const setContentBlocker = (json) => {
-        contentBlockerAdapter.setSafariContentBlocker(json);
-    };
-
-    /**
      * Returns toolbar data for url
      *
-     * @param url
+     * @param {String} url
      * @returns {{applicationFilteringDisabled: boolean, urlFilteringDisabled: boolean, isWhitelisted: boolean}}
      */
     const getToolbarMenuData = (url) => {
@@ -43,7 +34,7 @@ module.exports = (() => {
     /**
      * Enables protection for url domain
      *
-     * @param url
+     * @param {String} url
      */
     const enable = (url) => {
         whitelist.unWhiteListUrl(url);
@@ -54,7 +45,7 @@ module.exports = (() => {
     /**
      * Disables protection for url domain
      *
-     * @param url
+     * @param {String} url
      */
     const disable = (url) => {
         whitelist.whiteListUrl(url);
@@ -80,13 +71,52 @@ module.exports = (() => {
         });
     };
 
+    /**
+     * Sets user filter rules
+     *
+     * @param {Array} rules
+     */
+    const setUserFilterRules = (rules) => {
+        userrules.updateUserRulesText(rules.join('\n'));
+
+        log.info('User filter rules updated');
+    };
+
+    /**
+     * Sets whitelist domains
+     *
+     * @param {Array} domains
+     */
+    const setWhitelist = (domains) => {
+        whitelist.updateWhiteListDomains(domains);
+
+        log.info('Whitelist updated');
+    };
+
+    /**
+     * Returns whitelisted domains
+     */
+    const getWhitelist = () => {
+        return whitelist.getWhiteListDomains();
+    };
+
+    /**
+     * Returns user filter rules
+     */
+    const getUserFilterRules = () => {
+        return userrules.getUserRulesText().split('\r\n');
+    };
+
     return {
-        setContentBlocker: setContentBlocker,
         getToolbarMenuData: getToolbarMenuData,
         enable: enable,
         disable: disable,
         pause: pause,
-        start: start
+        start: start,
+        setWhitelist: setWhitelist,
+        getWhitelist: getWhitelist,
+        setUserFilterRules: setUserFilterRules,
+        getUserFilterRules: getUserFilterRules
     };
 
 })();

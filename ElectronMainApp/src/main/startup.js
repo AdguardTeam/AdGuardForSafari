@@ -4,6 +4,7 @@ const antibanner = require('./app/antibanner');
 const filterState = require('./app/filters/filters-state');
 const log = require('./app/utils/log');
 const contentBlockerListener = require('./app/content-blocker/content-blocker-listener');
+const toolbarController = require('./toolbar-controller');
 
 /**
  * Application startup
@@ -29,6 +30,8 @@ module.exports = (() => {
             }
         }, function () {
             log.info('Application initialization finished');
+
+            toolbarController.init();
         });
     };
 

@@ -1,37 +1,35 @@
 const addon = require('bindings')('safari_ext_addon')
 
 /**
- * Addon toolbar controller
-
- Before any `set` operations we need call `busyStatus(true)`, 
- and after all changes we need call `busyStatus(false)`. 
- Like begin/end transaction. 
+ * Addon toolbar api
+ *
+ * Before any `set` operations we need call `busyStatus(true)`,
+ * and after all changes we need call `busyStatus(false)`.
+ * Like begin/end transaction.
  */
 module.exports = (() => {
 
     /**
-     * Initializes toolbar controller
-     * Adds toolbar events listener and reacts on them.
-
-        onProtectionChangedCallback  = (bool) => {}
-        onWhitelistChangedCallback = (stringArray) => {}
-        onUserFilterChangedCallback = (stringArray) => {}
-
+     * Initializes toolbar
+     *
+     * @param onProtectionChangedCallback  = (bool) => {}
+     * @param onWhitelistChangedCallback = (stringArray) => {}
+     * @param onUserFilterChangedCallback = (stringArray) => {}
      */
     const init = (onProtectionChangedCallback, onWhitelistChangedCallback, onUserFilterChangedCallback) => {
-        if (onProtectionChangedCallback) {        
-                addon.setOnProtectionEnabled(()=>{
+        if (onProtectionChangedCallback) {
+            addon.setOnProtectionEnabled(() => {
                 onProtectionChangedCallback(addon.protectionEnabled());
             });
         }
 
-        if (onWhitelistChangedCallback) {        
-            addon.setOnWhitelist(()=>{
+        if (onWhitelistChangedCallback) {
+            addon.setOnWhitelist(() => {
                 addon.whitelistDomains(onWhitelistChangedCallback);
             });
         }
         if (onUserFilterChangedCallback) {
-            addon.setOnUserFilter(()=>{
+            addon.setOnUserFilter(() => {
                 addon.userfilter(onUserFilterChangedCallback);
             });
         }
@@ -39,16 +37,19 @@ module.exports = (() => {
         busyStatus(false);
     };
 
-
+    /**
+     * Sets busy status
+     *
+     * @param busy
+     */
     const busyStatus = (busy) => {
-
         addon.setBusy(busy);
     };
 
     /**
-
-        jsonString - string with content blocking json
-        callback = () => {}
+     *
+     * @param jsonString - string with content blocking json
+     * @param callback = () => {}
      */
     const setContentBlockingJson = (jsonString, callback) => {
         addon.setContentBlockingJson(jsonString, callback);
@@ -62,18 +63,18 @@ module.exports = (() => {
     };
 
     /**
-        domains - string array
-        callback = () => {}
-    */
+     * @param domains - string array
+     * @param callback = () => {}
+     */
     const setWhitelistDomains = (domains, callback) => {
         addon.setWhitelistDomains(domains, callback);
     };
 
     /**
-        rules - string array
-        callback = () => {}
-    */
-    const setUserFilter= (rules, callback) => {
+     * @param rules - string array
+     * @param callback = () => {}
+     */
+    const setUserFilter = (rules, callback) => {
         addon.setUserfilter(rules, callback);
     };
 
