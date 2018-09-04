@@ -17,8 +17,16 @@ module.exports = (function () {
     const RULES_LIMIT = 50000;
     const DEBOUNCE_PERIOD = 500;
 
-    const emptyBlockerUrl = 'config/empty.json';
-    let emptyBlockerJSON = null;
+    const emptyBlockerJSON = [
+        {
+            "action": {
+                "type": "ignore-previous-rules"
+            },
+            "trigger": {
+                "url-filter": "none"
+            }
+        }
+    ];
 
     /**
      * Load content blocker
@@ -47,21 +55,7 @@ module.exports = (function () {
      * @private
      */
     const clearFilters = () => {
-        setSafariContentBlocker(getEmptyBlockerJson());
-    };
-
-    /**
-     * @returns JSON for empty content blocker
-     * @private
-     */
-    const getEmptyBlockerJson = () => {
-        if (!emptyBlockerJSON) {
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET", emptyBlockerUrl, false);
-            xhr.send(null);
-            emptyBlockerJSON = JSON.parse(xhr.responseText);
-        }
-        return emptyBlockerJSON;
+        setSafariContentBlocker(emptyBlockerJSON);
     };
 
     /**
@@ -109,6 +103,7 @@ module.exports = (function () {
             log.info('Setting content blocker. Length=' + json.length);
             //safari.extension.setContentBlocker(json);
             //TODO: Implement setContentBlocker(json);
+            //TODO: You can get json here.
             log.info('Content blocker has been set.');
         } catch (ex) {
             log.error('Error while setting content blocker: ' + ex);
@@ -140,7 +135,8 @@ module.exports = (function () {
     };
 
     return {
-        updateContentBlocker: updateContentBlocker
+        updateContentBlocker: updateContentBlocker,
+        setSafariContentBlocker: setSafariContentBlocker
     };
 
 })();

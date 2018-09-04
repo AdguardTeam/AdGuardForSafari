@@ -19,6 +19,7 @@ module.exports = (() => {
     const USER_FILTER_ID = config.get('AntiBannerFiltersId').USER_FILTER_ID;
 
     let applicationInitialized = false;
+    let applicationRunning = false;
     let requestFilter = null;
     let requestFilterInitTime = 0;
 
@@ -399,14 +400,42 @@ module.exports = (() => {
     const start = (options, callback) => {
         log.info('Starting antibanner service..');
 
+        if (applicationRunning === true) {
+            callback();
+            return;
+        }
+
+        applicationRunning = true;
+
         if (!applicationInitialized) {
             initialize(options, callback);
             applicationInitialized = true;
             return;
         }
 
+        createRequestFilter(callback);
+
         log.info('Starting antibanner service finished');
     };
+
+    /**
+     * Clear request filter
+     */
+    const stop = () => {
+        applicationRunning = false;
+
+        //Set empty request filter
+        requestFilter = {
+            rules: []
+        };
+
+        listeners.notifyListeners(events.REQUEST_FILTER_UPDATED);
+    };
+
+    /**
+     * Is Application running
+     */
+    const isRunning = () => applicationRunning;
 
     /**
      * Update content blocker info
@@ -425,6 +454,8 @@ module.exports = (() => {
 
     return {
         start: start,
+        stop: stop,
+        isRunning: isRunning,
         getRules: getRules,
         updateContentBlockerInfo: updateContentBlockerInfo,
         getContentBlockerInfo: getContentBlockerInfo
