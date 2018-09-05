@@ -12,8 +12,8 @@ using namespace Nan;
 using namespace v8;
 
 typedef enum {
-  CallbackTypeForSend = 1,
-  CallbackTypeForBlockingContentRules
+  CallbackTypeForBlockingContentRules = 1,
+  CallbackTypeForEmptyResponse,
 } CallbackType;
 
 struct CallbackInfo {
@@ -43,10 +43,8 @@ static void AsyncSendHandler(uv_async_t *handle) {
   v8::Local<v8::Value> *argv = NULL;
   NSString *string;
   switch(info->type) {
-    case CallbackTypeForSend:
-      c_arg(1);
-      argv[0] = Nan::New(*(bool *)(info->result));
-      free(info->result);
+    case CallbackTypeForEmptyResponse:
+      c_arg(0);
       break;
 
     case CallbackTypeForBlockingContentRules:
@@ -96,61 +94,107 @@ NAN_METHOD(setEnabled) {
     [AESharedResources.sharedDefaults setBool:(BOOL)info[0].value() forKey:AEDefaultsEnabled];
 }
 */
-NAN_METHOD(msgToSafariExt) {
+NAN_METHOD(setWhitelistDomains) {
 
-    if (info.Length() < 3) {
+    if (info.Length() < 2) {
         ThrowTypeError("Wrong number of arguments");
         return;
     }
 
-    if (!info[0]->IsString() || !info[1]->IsString() || !info[2]->IsFunction()) {
+    if (!info[0]->IsArray() || !info[1]->IsFunction()) {
         ThrowTypeError("Wrong arguments");
         return;
     }
 
-    Nan::Utf8String msg (info[0]);
-    if (msg.length() == 0)
-     {
+    Nan::Callback *cb = new Nan::Callback(info[1].As<Function>());
+
+    Local<Array> array = Local<Array>::Cast(info[0]);
+    NSMutableArray *domains = [NSMutableArray new];
+
+    for (unsigned int i = 0; i < array->Length(); i++ ) {
+      Local<Value> val = array->Get(i);
+      if (! val.IsEmpty()) {
+        Nan::Utf8String item(val);
+        if (item.length() > 0) {
+          NSString *domain = [[NSString alloc] initWithBytesNoCopy:*item 
+                                              length:item.length() 
+                                              encoding:NSUTF8StringEncoding
+                                               freeWhenDone:NO];
+          if (domain) {
+            [domains addObject:domain];
+          }
+        }
+      }
+    }
+
+    DDLogCDebug(@"List of domains count: %lu", domains.count);
+
+    [AESharedResources setWhitelistDomains:domains completion:^{
+      DDLogCDebug(@"Domains saved");
+
+      auto *info = new CallbackInfo();
+      info->type = CallbackTypeForEmptyResponse;
+      info->result = NULL;
+      info->callback = cb;
+
+      auto *async = new uv_async_t();
+      async->data = info;
+      uv_async_init(uv_default_loop(), async, (uv_async_cb)AsyncSendHandler);
+      uv_async_send(async);
+    }];
+}
+
+NAN_METHOD(setUserFilter) {
+
+    if (info.Length() < 2) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsArray() || !info[1]->IsFunction()) {
         ThrowTypeError("Wrong arguments");
         return;
-     }
-    NSString *message = [NSString stringWithUTF8String: *msg];
+    }
 
-    Nan::Utf8String prms (info[1]);
-    NSString *paramsJson = [NSString new];
-    if (prms.length() > 0)
-     {
-        paramsJson = [NSString stringWithUTF8String: *prms];
-     }
+    Nan::Callback *cb = new Nan::Callback(info[1].As<Function>());
 
-    Nan::Callback *cb = new Nan::Callback(info[2].As<Function>());
+    Local<Array> array = Local<Array>::Cast(info[0]);
+    NSMutableArray *rules = [NSMutableArray new];
 
-    NSDictionary *infoDict = @{@"params": paramsJson};
+    for (unsigned int i = 0; i < array->Length(); i++ ) {
+      Local<Value> val = array->Get(i);
+      if (! val.IsEmpty()) {
+        Nan::Utf8String item(val);
+        if (item.length() > 0) {
+          NSString *rule = [[NSString alloc] initWithBytesNoCopy:*item 
+                                              length:item.length() 
+                                              encoding:NSUTF8StringEncoding
+                                               freeWhenDone:NO];
+          if (rule) {
+            [rules addObject:rule];
+          }
+        }
+      }
+    }
 
+    DDLogCDebug(@"List of rules count: %lu", rules.count);
 
-    DDLogCInfo(@"Sending message (%@) to Safari App Extension with info (%@)", message, infoDict);
-    [SFSafariApplication dispatchMessageWithName:message
-                       toExtensionWithIdentifier:EXT_BUNDLE_ID
-                                        userInfo:infoDict
-                               completionHandler:^(NSError * _Nullable error) {
+    [AESharedResources setUserFilterRules:rules completion:^{
+      DDLogCDebug(@"UserFilter saved");
 
-                                   DDLogCError(@"Error object: %@", error);
+      auto *info = new CallbackInfo();
+      info->type = CallbackTypeForEmptyResponse;
+      info->result = NULL;
+      info->callback = cb;
 
-                                   auto *info = new CallbackInfo();
-                                   info->type = CallbackTypeForSend;
-                                   info->result = malloc(sizeof(bool));
-                                   *(bool *)info->result = (error == nil);
-                                   info->callback = cb;
-
-                                   auto *async = new uv_async_t();
-                                   async->data = info;
-                                   uv_async_init(uv_default_loop(), async, (uv_async_cb)AsyncSendHandler);
-                                   uv_async_send(async);
-                               }];
-
+      auto *async = new uv_async_t();
+      async->data = info;
+      uv_async_init(uv_default_loop(), async, (uv_async_cb)AsyncSendHandler);
+      uv_async_send(async);
+    }];
 }
-/*
-NAN_METHOD(setBlockingContentRulesJson) {
+
+NAN_METHOD(setContentBlockingJson) {
 
     if (info.Length() < 2) {
         ThrowTypeError("Wrong number of arguments");
@@ -164,69 +208,34 @@ NAN_METHOD(setBlockingContentRulesJson) {
     NSData *data = [NSData new];
     Nan::Utf8String msg (info[0]);
     if (msg.length() > 0) {
-        data = [NSData dataWithBytesNoCopy:*msg length:msg.length];
+        data = [NSData dataWithBytesNoCopy:*msg length:msg.length()];
      }
 
     Nan::Callback *cb = new Nan::Callback(info[1].As<Function>());
 
-
-      dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
-        DDLogCDebug(@"Getting blocking rules in global queue");
-        NSData *data = [[[AESharedResources blockingContentRulesUrl] path] dataWithEncoding:NSUTF8StringEncoding];
-
-        NSString *blockingContentRules = data.length ?[[NSString alloc]
-                                                      initWithData:data
-                                                      encoding:NSUTF8StringEncoding]
-        : @"";
+    [AESharedResources setBlockingContentRulesJson:data completion:^{
+      DDLogCDebug(@"Json updated in file. Notify the content blocker extension.");
+      [SFContentBlockerManager 
+      reloadContentBlockerWithIdentifier:AESharedResources.blockerBundleId
+      completionHandler:^(NSError * _Nullable error) {
+        DDLogCDebug(@"Notifying completion with error: %@", error ?: @"[no error]");
+        NSString *jsonResult = @"{\"result\":\"success\"}";
+          if (error) {
+              jsonResult = [NSString stringWithFormat:@"{\"result\":\"error\", \"error\":{\"domain\":\"%@\", \"code\":%ld, \"descr\":\"%@\"}", 
+              error.domain, error.code, error.localizedDescription];
+          }
 
         auto *info = new CallbackInfo();
         info->type = CallbackTypeForBlockingContentRules;
-        info->result = (void *)CFBridgingRetain(blockingContentRules);
+        info->result = (void *)CFBridgingRetain(jsonResult);
         info->callback = cb;
 
         auto *async = new uv_async_t();
         async->data = info;
         uv_async_init(uv_default_loop(), async, (uv_async_cb)AsyncSendHandler);
         uv_async_send(async);
-
-    });
-}
-*/
-NAN_METHOD(blockingContentRulesJson) {
-
-    if (info.Length() < 1) {
-        ThrowTypeError("Wrong number of arguments");
-        return;
-    }
-
-    if (!info[0]->IsFunction()) {
-        ThrowTypeError("Wrong arguments");
-        return;
-    }
-
-    Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
-
-
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
-        NSLog(@"GEtting blocking rules in global queue");
-        NSData *data = [[[AESharedResources blockingContentRulesUrl] path] dataWithEncoding:NSUTF8StringEncoding];
-
-        NSString *blockingContentRules = data.length ?[[NSString alloc]
-                                                       initWithData:data
-                                                       encoding:NSUTF8StringEncoding]
-        : @"";
-
-        auto *info = new CallbackInfo();
-        info->type = CallbackTypeForBlockingContentRules;
-        info->result = (void *)CFBridgingRetain(blockingContentRules);
-        info->callback = cb;
-
-        auto *async = new uv_async_t();
-        async->data = info;
-        uv_async_init(uv_default_loop(), async, (uv_async_cb)AsyncSendHandler);
-        uv_async_send(async);
-
-    });
+      }];
+    }];
 }
 
 NAN_METHOD(setBusy) {
@@ -241,39 +250,118 @@ NAN_METHOD(setBusy) {
         return;
     }
 
-    DDLogCDebug(@"Args is ok.");
-
     BOOL val = info[0]->BooleanValue(); 
     [[AESharedResources sharedDefaults] setBool:val forKey:AEDefaultsMainAppBusy];
     [AESharedResources notifyBusyChanged];
+}
+
+NAN_METHOD(setProtection) {
+
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsBoolean()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+
+    BOOL val = info[0]->BooleanValue(); 
+    [[AESharedResources sharedDefaults] setBool:val forKey:AEDefaultsEnabled];
+    [AESharedResources notifyBusyChanged];
+}
+
+NAN_METHOD(userFilter) {
+
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsFunction()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+
+    Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
+
+    [AESharedResources userFilterRulesWithCompletion:^(NSArray <NSString *> *rules){
+
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            Nan::HandleScope scope;
+
+            Local<Array> result = Nan::New<Array>();
+
+            NSUInteger i = 0;
+            for (NSString *item in rules) {
+                result->Set(i++, Nan::New(item.UTF8String).ToLocalChecked());
+            }
+            v8::Local<v8::Value> argv[1] = {result};
+
+            Nan::Call(*cb, 1, argv);
+            delete cb;
+        });
+    }];
+} 
+
+NAN_METHOD(whitelistDomains) {
+
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsFunction()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+    
+    Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
+
+    [AESharedResources whitelistDomainsWithCompletion:^(NSArray <NSString *> *domains){
+
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            Nan::HandleScope scope;
+
+            Local<Array> result = Nan::New<Array>();
+
+            NSUInteger i = 0;
+            for (NSString *item in domains) {
+                result->Set(i++, Nan::New(item.UTF8String).ToLocalChecked());
+            }
+            v8::Local<v8::Value> argv[1] = {result};
+
+            Nan::Call(*cb, 1, argv);
+            delete cb;
+        });
+    }];
 }
 
 NAN_MODULE_INIT(Init) {
 
     [AESharedResources initLogger];
 
-  /*
-  Sends message to extension.
-  Usage:
-  obj.send("message-name","params-like-string-may-be-json", (bool_result)=>{ console.log(bool_result);});
-  */
 	Nan::Set(target, New<String>("setBusy").ToLocalChecked(),
 	GetFunction(New<FunctionTemplate>(setBusy)).ToLocalChecked());
-  /*
-  Gets path to folder, which shares between app and extension.
-  Usage:
-  var path = obj.path();
-  */
-  Nan::Set(target, New<String>("path").ToLocalChecked(),
-  GetFunction(New<FunctionTemplate>(getPath)).ToLocalChecked());
-  /*
-  TEST METHOD
-  Gets json from group folder.
-  Usage:
-  obj.blockingContentRules((string_content)=>{console.log(string_content);});
-  */
-  Nan::Set(target, New<String>("blockingContentRules").ToLocalChecked(),
-  GetFunction(New<FunctionTemplate>(blockingContentRulesJson)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("setProtectionEnabled").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setProtection)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("setContentBlockingJson").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setContentBlockingJson)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("setWhitelistDomains").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setWhitelistDomains)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("setUserFilter").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setUserFilter)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("userFilter").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(userFilter)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("whitelistDomains").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(whitelistDomains)).ToLocalChecked());
 }
 
 // macro to load the module when require'd

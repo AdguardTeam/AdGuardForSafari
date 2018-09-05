@@ -44,6 +44,15 @@ extern NSString * const AEDefaultsMainAppBusy;
  */
 @property (class, readonly) NSUserDefaults *sharedDefaults;
 /**
+ BundleId of the content blocker extension.
+ */
+@property (class, readonly) NSString *blockerBundleId;
+/**
+ Bundle id of the Safari app extension.
+ */
+@property (class, readonly) NSString *extensionBundleId;
+
+/**
  Initializes logger. After that we may use log macros.
  */
 + (void)initLogger;
@@ -76,6 +85,12 @@ extern NSString * const AEDefaultsMainAppBusy;
  Gets URL of the blocking content rules JSON from shared storage.
  */
 + (NSURL *)blockingContentRulesUrl;
+/**
+ Wrapper for getting state of the content blocker.
+
+ @param completion Must be specified;
+ */
++ (void)getStateOfContentBlockerWithCompletion:(void (^)(BOOL enabled))completion;
 /**
  Saves the whitelist domains in shared storage.
  Completion is executed on global concurent queue.

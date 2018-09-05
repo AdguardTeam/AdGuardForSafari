@@ -49,7 +49,10 @@ module.exports = (() => {
     /**
      *
      * @param jsonString - string with content blocking json
-     * @param callback = () => {}
+     * @param callback = (result) => {}
+     * result contains json string with two types of a values:
+     * {"result":"success"}
+     * {"result":"error", "error":{"domain":"ErrorDomain", "code":100, "descr":"Error Description IF Available"}}
      */
     const setContentBlockingJson = (jsonString, callback) => {
         addon.setContentBlockingJson(jsonString, callback);
@@ -71,11 +74,24 @@ module.exports = (() => {
     };
 
     /**
+     * @param callback = (domains as stringArray) => {}
+     */
+    const whitelistDomains = (callback) => {
+        addon.whitelistDomains(callback);
+    };
+
+    /**
      * @param rules - string array
      * @param callback = () => {}
      */
     const setUserFilter = (rules, callback) => {
         addon.setUserfilter(rules, callback);
+    };
+    /**
+     * @param callback = (rules as stringArray) => {}
+     */
+    const userFilter = (callback) => {
+        addon.userFilter(callback);
     };
 
     return {
@@ -84,7 +100,9 @@ module.exports = (() => {
         setContentBlockingJson: setContentBlockingJson,
         setProtectionEnabled: setProtectionEnabled,
         setWhitelistDomains: setWhitelistDomains,
-        setUserFilter: setUserFilter
+        setUserFilter: setUserFilter,
+        userFilter: userFilter,
+        whitelistDomains: whitelistDomains
     };
 
 })();

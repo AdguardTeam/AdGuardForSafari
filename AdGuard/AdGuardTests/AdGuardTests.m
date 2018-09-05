@@ -55,6 +55,10 @@
                           initWithData:[NSData data]
                           encoding:NSUTF8StringEncoding];
     });
+
+    [SFContentBlockerManager reloadContentBlockerWithIdentifier:@"" completionHandler:^(NSError * _Nullable error) {
+
+    }];
 }
 /*
 - (void)testPerformanceExample {

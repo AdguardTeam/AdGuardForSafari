@@ -882,7 +882,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuard.Extension;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_EXTENSION_BUNDLEID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -899,7 +899,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuard.Extension;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_EXTENSION_BUNDLEID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -1095,7 +1095,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuard.BlockerExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_BLOCKER_BUNDLEID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1115,7 +1115,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuard.BlockerExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_BLOCKER_BUNDLEID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;

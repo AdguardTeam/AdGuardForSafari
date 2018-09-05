@@ -20,8 +20,8 @@ exit 0
 fi
 
 #cd "${SHAREDSRC}"
-#node-gyp configure --verbose || exit 1
-##node-gyp rebuild --verbose|| exit 1
+#node-gyp configure --verbose --debug|| exit 1
+#node-gyp rebuild --verbose|| exit 1
 #
 mkdir -vp "${SRC}/safari-ext/shared"
 cp -v "${BUILT_PRODUCTS_DIR}/libshared.a" "${SRC}/safari-ext/shared/" || exit 1

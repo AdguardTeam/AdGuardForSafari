@@ -81,6 +81,14 @@ module.exports = (function () {
         console.log("Trying to send message to Safari App Extension...");
         safari.init(null,null,null);
         safari.busyStatus(true);
+        safari.userFilter((rules) => {
+            console.log("Into USERFILTER CALLBACK");
+            safari.whitelistDomains((domains) => {
+                console.log("Into WHITELIST CALLBACK");
+                console.log(domains);
+                safari.busyStatus(false);
+            });
+        });
 
 //--------------------
     };

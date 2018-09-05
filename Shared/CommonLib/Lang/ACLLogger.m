@@ -68,9 +68,9 @@ static ACLLogger *singletonLogger;
 
         [DDLog addLogger:sself->_fileLogger];
         [DDLog addLogger:[DDOSLogger sharedInstance]];
-#ifdef DEBUG
-        [DDLog addLogger:[DDTTYLogger sharedInstance]];
-#endif
+//#ifdef DEBUG
+//        [DDLog addLogger:[DDTTYLogger sharedInstance]];
+//#endif
 
     });
 }
@@ -83,7 +83,7 @@ static ACLLogger *singletonLogger;
     
     [self willChangeValueForKey:@"logLevel"];
     [self.fileLogger rollLogFileWithCompletionBlock:^{
-        ddLogLevel = logLevel;
+        ddLogLevel = (DDLogLevel)logLevel;
         [self didChangeValueForKey:@"logLevel"];
     }];
 }
