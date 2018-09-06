@@ -161,11 +161,11 @@ static AESListenerBlock _onBusyChangedBlock;
                                block:block];
 }
 
-+ (void)setBlockingContentRulesJson:(NSString *)jsonString completion:(void (^)(void))completion {
++ (void)setBlockingContentRulesJson:(NSData *)jsonData completion:(void (^)(void))completion {
 
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
         @autoreleasepool {
-            NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding] ?: [NSData data];
+            NSData *data = jsonData ?: [NSData data];
             [self saveData:data toFileRelativePath:AES_BLOCKING_CONTENT_RULES_RESOURCE];
             if (completion) {
                 completion();
@@ -176,34 +176,6 @@ static AESListenerBlock _onBusyChangedBlock;
 
 + (NSURL *)blockingContentRulesUrl {
     return  [_containerFolderUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_RULES_RESOURCE];
-}
-
-+ (void)getStateOfContentBlockerWithCompletion:(void (^)(BOOL enabled))completion {
-    if (completion == nil) {
-        [[NSException argumentException:@"completion"] raise];
-    }
-    [SFContentBlockerManager getStateOfContentBlockerWithIdentifier:AG_BLOCKER_BUNDLEID
-                                                  completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
-                                                      if (error) {
-                                                          completion(NO);
-                                                          return;
-                                                      }
-                                                      completion(state.enabled);
-                                                  }];
-}
-
-+ (void)getStateOfSafariExtensionWithCompletion:(void (^)(BOOL enabled))completion {
-    if (completion == nil) {
-        [[NSException argumentException:@"completion"] raise];
-    }
-    [SFSafariExtensionManager getStateOfSafariExtensionWithIdentifier:AG_EXTENSION_BUNDLEID
-                                                    completionHandler:^(SFSafariExtensionState * _Nullable state, NSError * _Nullable error) {
-                                                        if (error) {
-                                                            completion(NO);
-                                                            return;
-                                                        }
-                                                        completion(state.enabled);
-                                                    }];
 }
 
 + (void)setWhitelistDomains:(NSArray <NSString *> *)domains completion:(void (^)(void))completion {

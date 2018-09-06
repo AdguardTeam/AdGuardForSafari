@@ -79,7 +79,19 @@ module.exports = (function () {
 
 //TODO: delete this (FOR TEST)
         console.log("Trying to send message to Safari App Extension...");
-        safari.init(null,null,null);
+        safari.init(
+            ()=>{
+                console.log("Into onProtectionChangedCallback");
+            },
+            (domains)=>{
+                console.log("Into onWhitelistChangedCallback");
+                console.log(domains);
+            },
+            (rules)=>{
+                console.log("Into onUserFilterChangedCallback");
+                console.log(rules);
+            }
+        );
         safari.busyStatus(true);
         safari.userFilter((rules) => {
             console.log("Into USERFILTER CALLBACK");
@@ -90,6 +102,26 @@ module.exports = (function () {
             });
         });
 
+        safari.extensionsState((result)=>{
+            if (! result) {
+                safari.openExtensionsPreferenses((result)=>{
+                    console.log("open safari result %d", result);
+                })
+            }
+        });
+
+        safari.setProtectionEnabled(false);
+        safari.setWhitelistDomains(["yandex.ru", "google.com"], ()=>{
+            safari.setUserFilter(["|domain.com"], () =>{
+                safari.setContentBlockingJson("[{\"trigger\": {\"url-filter\": \".*\",\"if-domain\": [\"domain.com\"]},\"action\":{\"type\": \"ignore-previous-rules\"}}]", (result) => {
+                    var obj = JSON.parse(result);
+                    if (obj.result == "success") {
+                        console.log("TEST SET properties complated");
+                    };
+                    console.log(result);
+                } );
+            });
+        });
 //--------------------
     };
 

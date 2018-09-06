@@ -61,16 +61,48 @@ extern NSString * const AEDefaultsMainAppBusy;
  */
 + (void)synchronizeSharedDefaults;
 
+/**
+ Notifies all, that a user defaults was changed, like that - AEDefaultsEnabled.
+ */
 + (void)notifyDefaultsChanged;
+/**
+ Register listener for changing a user defaults.
+
+ @param block Performed on internal thread when catched notification.
+ */
 + (void)setListenerOnDefaultsChanged:(AESListenerBlock)block;
 
+/**
+ Notifies all, that the whitelist was changed.
+ */
 + (void)notifyWhitelistChanged;
+/**
+ Register listener for changing the whitelist.
+
+ @param block Performed on internal thread when catched notification.
+ */
 + (void)setListenerOnWhitelistChanged:(AESListenerBlock)block;
 
+/**
+ Notifies all, that the user filter rules was changed.
+ */
 + (void)notifyUserFilterChanged;
+/**
+ Register listener for changing the user filter rules.
+
+ @param block Performed on internal thread when catched notification.
+ */
 + (void)setListenerOnUserFilterChanged:(AESListenerBlock)block;
 
+/**
+ Notifies all, that the busy status was changed.
+ */
 + (void)notifyBusyChanged;
+/**
+ Register listener for changing the busy status.
+
+ @param block Performed on internal thread when catched notification.
+ */
 + (void)setListenerOnBusyChanged:(AESListenerBlock)block;
 
 /**
@@ -85,12 +117,6 @@ extern NSString * const AEDefaultsMainAppBusy;
  Gets URL of the blocking content rules JSON from shared storage.
  */
 + (NSURL *)blockingContentRulesUrl;
-/**
- Wrapper for getting state of the content blocker.
-
- @param completion Must be specified;
- */
-+ (void)getStateOfContentBlockerWithCompletion:(void (^)(BOOL enabled))completion;
 /**
  Saves the whitelist domains in shared storage.
  Completion is executed on global concurent queue.

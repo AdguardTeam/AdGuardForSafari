@@ -66,6 +66,14 @@ module.exports = (() => {
     };
 
     /**
+    * Gets protection status
+    * @return Returns boolean value.
+    */
+    const protectionEnabled = () => {
+        return addon.protectionEnabled();
+    };
+
+    /**
      * @param domains - string array
      * @param callback = () => {}
      */
@@ -85,7 +93,7 @@ module.exports = (() => {
      * @param callback = () => {}
      */
     const setUserFilter = (rules, callback) => {
-        addon.setUserfilter(rules, callback);
+        addon.setUserFilter(rules, callback);
     };
     /**
      * @param callback = (rules as stringArray) => {}
@@ -94,15 +102,35 @@ module.exports = (() => {
         addon.userFilter(callback);
     };
 
+    /**
+    * Getting state of the content blocker extension and Safari app extension.
+    * Returns true in callback if both extension enabled, else returns false.
+    * @param callback = (enabled as bool) => {}
+    */
+    const extensionsState = (callback) => {
+        addon.extensionsState(callback);
+    };
+
+    /**
+    * Launches Safari and opens the preferences panel for a desabled extension.
+    * @param callback = (result as bool) => {}
+    */
+    const openExtensionsPreferenses = (callback) => {
+        addon.openExtensionsPreferenses(callback);
+    };
+
     return {
         init: init,
         busyStatus: busyStatus,
         setContentBlockingJson: setContentBlockingJson,
         setProtectionEnabled: setProtectionEnabled,
+        protectionEnabled: protectionEnabled,
         setWhitelistDomains: setWhitelistDomains,
+        whitelistDomains: whitelistDomains,
         setUserFilter: setUserFilter,
         userFilter: userFilter,
-        whitelistDomains: whitelistDomains
+        extensionsState: extensionsState,
+        openExtensionsPreferenses: openExtensionsPreferenses
     };
 
 })();

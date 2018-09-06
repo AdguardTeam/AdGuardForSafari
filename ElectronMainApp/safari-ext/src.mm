@@ -67,33 +67,6 @@ static void AsyncSendHandler(uv_async_t *handle) {
   uv_close((uv_handle_t *)handle, DeleteAsyncHandle);
 }
 
-NAN_METHOD(getPath) {
-
-  NSString *groupPath = AESharedResources.sharedResuorcesURL.path;
-  if (groupPath.length) {
-    info.GetReturnValue().Set(Nan::New(groupPath.UTF8String).ToLocalChecked());
-  }
-}
-/*
-NAN_METHOD(getEnabled) {
-
-    info.GetReturnValue().Set(Nan::New((bool)[AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]).ToLocalChecked());
-}
-NAN_METHOD(setEnabled) {
-
-    if (info.Length() < 1) {
-        ThrowTypeError("Wrong number of arguments");
-        return;
-    }
-
-    if (!info[0]->IsBoolean()) {
-        ThrowTypeError("Wrong arguments");
-        return;
-    }
-
-    [AESharedResources.sharedDefaults setBool:(BOOL)info[0].value() forKey:AEDefaultsEnabled];
-}
-*/
 NAN_METHOD(setWhitelistDomains) {
 
     if (info.Length() < 2) {
@@ -208,7 +181,7 @@ NAN_METHOD(setContentBlockingJson) {
     NSData *data = [NSData new];
     Nan::Utf8String msg (info[0]);
     if (msg.length() > 0) {
-        data = [NSData dataWithBytesNoCopy:*msg length:msg.length()];
+        data = [NSData dataWithBytesNoCopy:*msg length:msg.length() freeWhenDone:NO];
      }
 
     Nan::Callback *cb = new Nan::Callback(info[1].As<Function>());
@@ -271,6 +244,13 @@ NAN_METHOD(setProtection) {
     [[AESharedResources sharedDefaults] setBool:val forKey:AEDefaultsEnabled];
     [AESharedResources notifyBusyChanged];
 }
+
+NAN_METHOD(protectionEnabled) {
+
+  BOOL result = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsEnabled];
+  info.GetReturnValue().Set(Nan::New((bool)result));
+}
+
 
 NAN_METHOD(userFilter) {
 
@@ -338,6 +318,170 @@ NAN_METHOD(whitelistDomains) {
     }];
 }
 
+NAN_METHOD(extensionsState){
+
+     if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsFunction()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+    
+    Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
+
+    void (^resultBlock)(BOOL result)  = ^void(BOOL result) {
+
+      dispatch_sync(dispatch_get_main_queue(), ^{
+          Nan::HandleScope scope;
+
+          v8::Local<v8::Value> argv[1] = {Nan::New((bool)result)};
+
+          Nan::Call(*cb, 1, argv);
+          delete cb;
+      });
+    };
+    [SFContentBlockerManager getStateOfContentBlockerWithIdentifier:AESharedResources.blockerBundleId
+    completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
+      if (error || ! state.enabled) {
+          resultBlock(NO);
+          return;
+      }
+      [SFSafariExtensionManager getStateOfSafariExtensionWithIdentifier:AESharedResources.extensionBundleId
+      completionHandler:^(SFSafariExtensionState * _Nullable state, NSError * _Nullable error) {
+          resultBlock(error == nil && state.enabled);
+      }];
+    }];
+}
+
+NAN_METHOD(openExtensionsPreferenses){
+
+     if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsFunction()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+    
+    Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
+
+    void (^resultBlock)(BOOL result)  = ^void(BOOL result) {
+
+      dispatch_sync(dispatch_get_main_queue(), ^{
+          Nan::HandleScope scope;
+
+          v8::Local<v8::Value> argv[1] = {Nan::New((bool)result)};
+
+          Nan::Call(*cb, 1, argv);
+          delete cb;
+      });
+    };
+
+    [SFContentBlockerManager getStateOfContentBlockerWithIdentifier:AESharedResources.blockerBundleId
+    completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
+      if (error || ! state.enabled) {
+        [SFSafariApplication showPreferencesForExtensionWithIdentifier:AESharedResources.blockerBundleId 
+        completionHandler:^(NSError *error){
+            resultBlock(error == nil);
+        }];
+        return;
+      }
+      [SFSafariApplication showPreferencesForExtensionWithIdentifier:AESharedResources.extensionBundleId 
+      completionHandler:^(NSError *error){
+          resultBlock(error == nil);
+      }];
+    }];
+}
+
+NAN_METHOD(setOnProtectionEnabled) {
+
+  static Nan::Callback *cb = nullptr;
+
+   if (info.Length() < 1) {
+      ThrowTypeError("Wrong number of arguments");
+      return;
+  }
+
+  if (!info[0]->IsFunction()) {
+      ThrowTypeError("Wrong arguments");
+      return;
+  }
+  
+  if (cb) {
+    delete cb;
+  }
+  cb = new Nan::Callback(info[0].As<Function>());
+
+  [AESharedResources setListenerOnDefaultsChanged:^{
+      dispatch_async(dispatch_get_main_queue(), ^{
+          Nan::HandleScope scope;
+
+          Nan::Call(*cb, 0, 0);
+      });
+  }];
+}
+
+NAN_METHOD(setOnWhitelist) {
+
+  static Nan::Callback *cb = nullptr;
+
+   if (info.Length() < 1) {
+      ThrowTypeError("Wrong number of arguments");
+      return;
+  }
+
+  if (!info[0]->IsFunction()) {
+      ThrowTypeError("Wrong arguments");
+      return;
+  }
+  
+  if (cb) {
+    delete cb;
+  }
+  cb = new Nan::Callback(info[0].As<Function>());
+
+  [AESharedResources setListenerOnWhitelistChanged:^{
+      dispatch_async(dispatch_get_main_queue(), ^{
+          Nan::HandleScope scope;
+
+          Nan::Call(*cb, 0, 0);
+      });
+  }];
+}
+
+NAN_METHOD(setOnUserFilter) {
+
+  static Nan::Callback *cb = nullptr;
+  
+   if (info.Length() < 1) {
+      ThrowTypeError("Wrong number of arguments");
+      return;
+  }
+
+  if (!info[0]->IsFunction()) {
+      ThrowTypeError("Wrong arguments");
+      return;
+  }
+  
+  if (cb) {
+    delete cb;
+  }
+  cb = new Nan::Callback(info[0].As<Function>());
+
+  [AESharedResources setListenerOnUserFilterChanged:^{
+      dispatch_async(dispatch_get_main_queue(), ^{
+          Nan::HandleScope scope;
+
+          Nan::Call(*cb, 0, 0);
+      });
+  }];
+}
+
 NAN_MODULE_INIT(Init) {
 
     [AESharedResources initLogger];
@@ -347,6 +491,9 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("setProtectionEnabled").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setProtection)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("protectionEnabled").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(protectionEnabled)).ToLocalChecked());
 
   Nan::Set(target, New<String>("setContentBlockingJson").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setContentBlockingJson)).ToLocalChecked());
@@ -362,6 +509,21 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("whitelistDomains").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(whitelistDomains)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("extensionsState").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(extensionsState)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("openExtensionsPreferenses").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(openExtensionsPreferenses)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("setOnProtectionEnabled").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setOnProtectionEnabled)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("setOnWhitelist").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setOnWhitelist)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("setOnUserFilter").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setOnUserFilter)).ToLocalChecked());
 }
 
 // macro to load the module when require'd
