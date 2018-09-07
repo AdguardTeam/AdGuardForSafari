@@ -126,7 +126,9 @@ static AESListenerBlock _onBusyChangedBlock;
 }
 
 + (void)notifyDefaultsChanged {
-    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_DEFAULTS, NULL, NULL, YES);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_DEFAULTS, NULL, NULL, YES);
+    });
 }
 + (void)setListenerOnDefaultsChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_DEFAULTS
@@ -135,7 +137,9 @@ static AESListenerBlock _onBusyChangedBlock;
 }
 
 + (void)notifyWhitelistChanged {
-    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_WHITELIST, NULL, NULL, YES);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_WHITELIST, NULL, NULL, YES);
+    });
 }
 + (void)setListenerOnWhitelistChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_WHITELIST
@@ -144,7 +148,9 @@ static AESListenerBlock _onBusyChangedBlock;
 }
 
 + (void)notifyUserFilterChanged {
-    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_USERFILTER, NULL, NULL, YES);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_USERFILTER, NULL, NULL, YES);
+    });
 }
 + (void)setListenerOnUserFilterChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_USERFILTER
@@ -153,7 +159,9 @@ static AESListenerBlock _onBusyChangedBlock;
 }
 
 + (void)notifyBusyChanged {
-    CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_BUSY, NULL, NULL, YES);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_BUSY, NULL, NULL, YES);
+    });
 }
 + (void)setListenerOnBusyChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_BUSY
@@ -345,6 +353,9 @@ static void onChangedNotify(CFNotificationCenterRef center, void *observer, CFSt
     }
     else if ([nName isEqualToString:NOTIFICATION_USERFILTER]){
         block = _onUserFilterChangedBlock;
+    }
+    else if ([nName isEqualToString:NOTIFICATION_BUSY]){
+        block = _onBusyChangedBlock;
     }
 
     if (block) {

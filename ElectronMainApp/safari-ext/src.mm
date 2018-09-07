@@ -242,7 +242,6 @@ NAN_METHOD(setProtection) {
 
     BOOL val = info[0]->BooleanValue(); 
     [[AESharedResources sharedDefaults] setBool:val forKey:AEDefaultsEnabled];
-    [AESharedResources notifyBusyChanged];
 }
 
 NAN_METHOD(protectionEnabled) {
@@ -457,7 +456,7 @@ NAN_METHOD(setOnWhitelist) {
 NAN_METHOD(setOnUserFilter) {
 
   static Nan::Callback *cb = nullptr;
-  
+
    if (info.Length() < 1) {
       ThrowTypeError("Wrong number of arguments");
       return;
