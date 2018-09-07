@@ -19,6 +19,7 @@
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - OUTLETS
 
+@property (weak) IBOutlet NSImageView *adguardIcon;
 @property (weak) IBOutlet NSButton *enabledButton;
 @property (weak) IBOutlet NSButton *whitelistButton;
 @property (weak) IBOutlet NSButton *assistantButton;
@@ -37,5 +38,7 @@
 @property BOOL otherButtonsEnabled;
 @property BOOL busy;
 @property BOOL mainAppRunning;
+
+- (void)setEnabledButton;
 
 @end

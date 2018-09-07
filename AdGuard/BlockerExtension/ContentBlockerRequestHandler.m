@@ -19,7 +19,11 @@
 
 - (void)beginRequestWithExtensionContext:(NSExtensionContext *)context {
     NSItemProvider *attachment = [[NSItemProvider alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:AES_BLOCKING_CONTENT_EMPTY_RESOURCE withExtension:@"json"]];
-    
+
+    if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsEnabled]) {
+        attachment = [[NSItemProvider alloc] initWithContentsOfURL:AESharedResources.blockingContentRulesUrl];
+    }
+
     NSExtensionItem *item = [[NSExtensionItem alloc] init];
     item.attachments = @[attachment];
     

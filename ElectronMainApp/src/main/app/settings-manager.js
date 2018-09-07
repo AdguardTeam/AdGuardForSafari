@@ -80,16 +80,19 @@ module.exports = (function () {
 //TODO: delete this (FOR TEST)
         console.log("Trying to send message to Safari App Extension...");
         safari.init(
-            ()=>{
-                console.log("Into onProtectionChangedCallback");
+            (result)=>{
+                console.log("onProtectionChangedCallback");
+                safari.busyStatus(false);
             },
             (domains)=>{
                 console.log("Into onWhitelistChangedCallback");
                 console.log(domains);
+                safari.busyStatus(false);
             },
             (rules)=>{
                 console.log("Into onUserFilterChangedCallback");
                 console.log(rules);
+                safari.busyStatus(false);
             }
         );
         safari.busyStatus(true);

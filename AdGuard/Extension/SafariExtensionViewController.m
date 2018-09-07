@@ -34,16 +34,6 @@
 //                                       options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
 //                                       context:NULL];
 
-    [AESharedResources setListenerOnBusyChanged:^{
-        DDLogDebugTrace();
-        [self setEnabledButton];
-        self.busy = [AESharedResources.sharedDefaults boolForKey:AEDefaultsMainAppBusy];
-    }];
-}
-
-- (void)viewWillAppear {
-    self.busy = [AESharedResources.sharedDefaults boolForKey:AEDefaultsMainAppBusy];
-    [self setEnabledButton];
 }
 
 - (void)dealloc {
@@ -57,6 +47,7 @@
     [AESharedResources.sharedDefaults
      setBool:! [AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]
      forKey:AEDefaultsEnabled];
+    self.busy = YES;
     [AESharedResources notifyDefaultsChanged];
 }
 
@@ -65,6 +56,7 @@
     if (domain.length == 0) {
         return;
     }
+    self.busy = YES;
     [AESharedResources whitelistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
         DDLogDebugTrace();
         NSMutableArray *mDomains = [domains mutableCopy] ?: [NSMutableArray new];
@@ -83,6 +75,7 @@
 
 - (IBAction)clickAssistant:(id)sender {
     DDLogDebugTrace();
+    self.busy = YES;
     //Launch script for select element on web page
 }
 
@@ -96,30 +89,29 @@
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - Properties and Public methods
 
-- (void)setWhitelistButton {
-
-    [AESharedResources whitelistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
-        DDLogDebugTrace();
-        [self setWhitelistButtonOn:! [self domainCheckWithDomains:domains]];
-    }];
-}
-
-//////////////////////////////////////////////////////////////////////////
-#pragma mark - Private methods
-
 - (void)setEnabledButton {
     DDLogDebugTrace();
     if ([AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]) {
+
+        self.adguardIcon.image = self.mainAppRunning ?
+        [NSImage imageNamed:@"green-logo"]
+        : [NSImage imageNamed:@"red-logo"];
+
         self.enabledButton.state = NSOnState;
         self.enabledButton.title = NSLocalizedString(@"sae-popover-enabled-button-on", @"Safari App Extension, toolbar popover, title of the button for on/off AdGuard filtering, \"Enabled\" state.");
         [self setButtonsEnabled:YES];
     }
     else {
+
+        self.adguardIcon.image = [NSImage imageNamed:@"red-logo"];
         self.enabledButton.state = NSOffState;
         self.enabledButton.title = NSLocalizedString(@"sae-popover-enabled-button-off", @"Safari App Extension, toolbar popover, title of the button for on/off AdGuard filtering, \"Disabled\" state.");
         [self setButtonsEnabled:NO];
     }
 }
+
+//////////////////////////////////////////////////////////////////////////
+#pragma mark - Private methods
 
 - (BOOL)domainCheckWithDomains:(NSArray <NSString *> *)domains {
     NSString *theDomain = self.domain;
@@ -135,6 +127,15 @@
     }
     return NO;
 }
+
+- (void)setWhitelistButton {
+
+    [AESharedResources whitelistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
+        DDLogDebugTrace();
+        [self setWhitelistButtonOn:! [self domainCheckWithDomains:domains]];
+    }];
+}
+
 - (void)setButtonsEnabled:(BOOL)enabled {
 
     self.otherButtonsEnabled = enabled;

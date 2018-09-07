@@ -20,6 +20,14 @@
 + (void)initialize {
     if (self == [SafariExtensionHandler class]) {
         [AESharedResources initLogger];
+        [AESharedResources setListenerOnBusyChanged:^{
+            DDLogDebugTrace();
+            [SafariExtensionViewController.sharedController setEnabledButton]; //this call peforms tuning all views
+            SafariExtensionViewController.sharedController.busy = [AESharedResources.sharedDefaults boolForKey:AEDefaultsMainAppBusy];
+            if (SafariExtensionViewController.sharedController.busy == NO) {
+                [SFSafariApplication setToolbarItemsNeedUpdate]; // because changes can happen in main app
+            }
+        }];
     }
 }
 
@@ -42,7 +50,9 @@
     SafariExtensionViewController.sharedController.mainAppRunning = running;
     [window getToolbarItemWithCompletionHandler:^(SFSafariToolbarItem * _Nullable toolbarItem) {
         if (running) {
-            [toolbarItem setImage:[NSImage imageNamed:@"toolbar-on"]];
+            [toolbarItem setImage:([[AESharedResources sharedDefaults] boolForKey:AEDefaultsEnabled] ?
+                                   [NSImage imageNamed:@"toolbar-on"] :
+                                   [NSImage imageNamed:@"toolbar-off"])];
         }
         else {
             [toolbarItem setImage:[NSImage imageNamed:@"toolbar-off"]];
@@ -68,6 +78,8 @@
 
 - (void)popoverWillShowInWindow:(SFSafariWindow *)window {
     DDLogDebugTrace();
+    SafariExtensionViewController.sharedController.busy = [AESharedResources.sharedDefaults boolForKey:AEDefaultsMainAppBusy];
+    [SafariExtensionViewController.sharedController setEnabledButton]; //this call peforms tuning all views
 }
 
 - (void)messageReceivedFromContainingAppWithName:(NSString *)messageName userInfo:(NSDictionary<NSString *,id> *)userInfo {
