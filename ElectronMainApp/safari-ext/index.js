@@ -30,7 +30,7 @@ module.exports = (() => {
         }
         if (onUserFilterChangedCallback) {
             addon.setOnUserFilter(() => {
-                addon.userfilter(onUserFilterChangedCallback);
+                addon.userFilter(onUserFilterChangedCallback);
             });
         }
 

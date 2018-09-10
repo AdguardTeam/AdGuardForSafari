@@ -43,6 +43,8 @@
 		658471742136B373005C74E8 /* ContentBlockerRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 658471732136B373005C74E8 /* ContentBlockerRequestHandler.m */; };
 		658471792136B373005C74E8 /* BlockerExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6584716D2136B372005C74E8 /* BlockerExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6584717D2136B7C5005C74E8 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 652735B2212D77A3005C35BF /* libshared.a */; };
+		65C8B03C2146635C00B2E7FD /* assistant.embedded.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C8B03B2146635B00B2E7FD /* assistant.embedded.js */; };
+		65C8B03E21467AF500B2E7FD /* assistant.runner.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C8B03D21467AF500B2E7FD /* assistant.runner.js */; };
 		65D151842139771A0014BE79 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D151832139771A0014BE79 /* defaults.plist */; };
 		65D151852139771A0014BE79 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D151832139771A0014BE79 /* defaults.plist */; };
 		65D151862139771A0014BE79 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D151832139771A0014BE79 /* defaults.plist */; };
@@ -190,6 +192,8 @@
 		658471752136B373005C74E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		658471762136B373005C74E8 /* BlockerExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlockerExtension.entitlements; sourceTree = "<group>"; };
 		6584717E2136BD0A005C74E8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/SafariExtensionViewController.strings; sourceTree = "<group>"; };
+		65C8B03B2146635B00B2E7FD /* assistant.embedded.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = assistant.embedded.js; sourceTree = "<group>"; };
+		65C8B03D21467AF500B2E7FD /* assistant.runner.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = assistant.runner.js; sourceTree = "<group>"; };
 		65D151832139771A0014BE79 /* defaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
 		65D151892139A5080014BE79 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
 		65D1518B2139A5080014BE79 /* DDASLLogCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogCapture.h; sourceTree = "<group>"; };
@@ -287,6 +291,8 @@
 				6504C10F2136EA2D007E9674 /* PopupView.m */,
 				655C8676212AF2A500CB6DAE /* tray-on.pdf */,
 				6504C10A2136BF10007E9674 /* Info.plist */,
+				65C8B03B2146635B00B2E7FD /* assistant.embedded.js */,
+				65C8B03D21467AF500B2E7FD /* assistant.runner.js */,
 				65216A0F212436EA00ABF7D0 /* script.js */,
 				65216A13212436EA00ABF7D0 /* Extension.entitlements */,
 				6535D714213D4374004D8A08 /* Localizable.strings */,
@@ -674,7 +680,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65C8B03E21467AF500B2E7FD /* assistant.runner.js in Resources */,
 				6535D712213D4374004D8A08 /* Localizable.strings in Resources */,
+				65C8B03C2146635C00B2E7FD /* assistant.embedded.js in Resources */,
 				65216A0D212436EA00ABF7D0 /* SafariExtensionViewController.xib in Resources */,
 				655C8677212AF2A500CB6DAE /* tray-on.pdf in Resources */,
 				65D151852139771A0014BE79 /* defaults.plist in Resources */,

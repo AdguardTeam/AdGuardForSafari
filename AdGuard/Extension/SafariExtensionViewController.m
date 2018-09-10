@@ -75,8 +75,14 @@
 
 - (IBAction)clickAssistant:(id)sender {
     DDLogDebugTrace();
-    self.busy = YES;
     //Launch script for select element on web page
+    [SFSafariApplication getActiveWindowWithCompletionHandler:^(SFSafariWindow * _Nullable activeWindow) {
+        [activeWindow getActiveTabWithCompletionHandler:^(SFSafariTab * _Nullable activeTab) {
+            [activeTab getActivePageWithCompletionHandler:^(SFSafariPage * _Nullable activePage) {
+                [activePage dispatchMessageToScriptWithName:@"blockElementPing" userInfo:NULL];
+            }];
+        }];
+    }];
 }
 
 - (IBAction)clickRunAdguard:(id)sender {

@@ -15,7 +15,7 @@
 
 @end
 
-@implementation SafariExtensionHandler
+@implementation SafariExtensionHandler 
 
 + (void)initialize {
     if (self == [SafariExtensionHandler class]) {
@@ -32,10 +32,30 @@
 }
 
 - (void)messageReceivedWithName:(NSString *)messageName fromPage:(SFSafariPage *)page userInfo:(NSDictionary *)userInfo {
-    // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").
-    [page getPagePropertiesWithCompletionHandler:^(SFSafariPageProperties *properties) {
-        DDLogInfo(@"The extension received a message (%@) from a script injected into (%@) with userInfo (%@)", messageName, properties.url, userInfo);
-    }];
+    @autoreleasepool {
+        // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").
+        [page getPagePropertiesWithCompletionHandler:^(SFSafariPageProperties *properties) {
+            DDLogInfo(@"The extension received a message (%@) from a script injected into (%@) with userInfo (%@)", messageName, properties.url, userInfo);
+        }];
+        if ([messageName isEqualToString:@"blockElementPong"]) {
+            [page dispatchMessageToScriptWithName:@"blockElement" userInfo:NULL];
+        }
+        else if ([messageName isEqualToString:@"ruleResponse"]) {
+            DDLogInfo(@"Adding rule to user filter: %@", userInfo[@"rule"]);
+            NSString *newRule = userInfo[@"rule"];
+            if (newRule.length) {
+                [AESharedResources userFilterRulesWithCompletion:^(NSArray<NSString *> *rules) {
+                    @autoreleasepool {
+                        NSArray *newRules = [rules arrayByAddingObject:newRule];
+                        [AESharedResources setUserFilterRules:newRules completion:^{
+                            [AESharedResources notifyUserFilterChanged];
+                        }];
+                    }
+                }];
+            }
+        }
+
+    }
 }
 
 - (void)toolbarItemClickedInWindow:(SFSafariWindow *)window {
@@ -56,6 +76,7 @@
         }
         else {
             [toolbarItem setImage:[NSImage imageNamed:@"toolbar-off"]];
+            [[AESharedResources sharedDefaults] setBool:NO forKey:AEDefaultsMainAppBusy];
         }
         [window getActiveTabWithCompletionHandler:^(SFSafariTab * _Nullable activeTab) {
             [activeTab getActivePageWithCompletionHandler:^(SFSafariPage * _Nullable activePage) {
