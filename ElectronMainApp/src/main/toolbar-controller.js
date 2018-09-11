@@ -61,7 +61,6 @@ module.exports = (() => {
                 setContentBlockingJson(JSON.stringify(info));
             } else if (event === events.UPDATE_USER_FILTER_RULES) {
                 applicationApi.getUserFilterRules((rules) => {
-                    console.log(rules);
                     setUserFilter(rules);
                 });
             } else if (event === events.UPDATE_WHITELIST_FILTER_RULES) {
