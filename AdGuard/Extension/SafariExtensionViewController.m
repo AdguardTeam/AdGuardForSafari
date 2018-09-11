@@ -27,6 +27,7 @@
 - (void)viewDidLoad {
 
     DDLogDebugTrace();
+
     self.view.appearance = NSAppearance.currentAppearance;
 
 //    [[NSWorkspace sharedWorkspace] addObserver:self
@@ -92,6 +93,10 @@
                                                 launchIdentifier:NULL];
 }
 
+- (IBAction)clickPreferences:(id)sender {
+    [AESharedResources notifyShowPreferences];
+}
+
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - Properties and Public methods
 
@@ -100,8 +105,8 @@
     if ([AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]) {
 
         self.adguardIcon.image = self.mainAppRunning ?
-        [NSImage imageNamed:@"green-logo"]
-        : [NSImage imageNamed:@"red-logo"];
+        [NSImage imageNamed:@"logo-green"]
+        : [NSImage imageNamed:@"logo-gray"];
 
         self.enabledButton.state = NSOnState;
         self.enabledButton.title = NSLocalizedString(@"sae-popover-enabled-button-on", @"Safari App Extension, toolbar popover, title of the button for on/off AdGuard filtering, \"Enabled\" state.");
@@ -109,7 +114,7 @@
     }
     else {
 
-        self.adguardIcon.image = [NSImage imageNamed:@"red-logo"];
+        self.adguardIcon.image = [NSImage imageNamed:@"logo-gray"];
         self.enabledButton.state = NSOffState;
         self.enabledButton.title = NSLocalizedString(@"sae-popover-enabled-button-off", @"Safari App Extension, toolbar popover, title of the button for on/off AdGuard filtering, \"Disabled\" state.");
         [self setButtonsEnabled:NO];

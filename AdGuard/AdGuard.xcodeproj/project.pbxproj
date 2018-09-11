@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		65024EA92126C80D00342E3C /* AdGuardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65024EA82126C80D00342E3C /* AdGuardTests.m */; };
 		65024EAF2126C82E00342E3C /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65024EAE2126C82E00342E3C /* SafariServices.framework */; };
-		6504C10D2136E5C6007E9674 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65720AB821219ACB00B2381C /* Assets.xcassets */; };
 		6504C1102136EA2D007E9674 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6504C10F2136EA2D007E9674 /* PopupView.m */; };
-		652169FB21231D0E00ABF7D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65720AB821219ACB00B2381C /* Assets.xcassets */; };
 		65216A03212436EA00ABF7D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
 		65216A07212436EA00ABF7D0 /* SafariExtensionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 65216A06212436EA00ABF7D0 /* SafariExtensionHandler.m */; };
 		65216A0A212436EA00ABF7D0 /* SafariExtensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65216A09212436EA00ABF7D0 /* SafariExtensionViewController.m */; };
@@ -37,12 +35,16 @@
 		655C8662212AEA3200CB6DAE /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863D212AEA3200CB6DAE /* NSDate+Utils.m */; };
 		655C8665212AEA3200CB6DAE /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8640212AEA3200CB6DAE /* NSString+Utils.m */; };
 		655C8667212AEA3200CB6DAE /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8642212AEA3200CB6DAE /* NSException+Utils.m */; };
-		655C8677212AF2A500CB6DAE /* tray-on.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 655C8676212AF2A500CB6DAE /* tray-on.pdf */; };
 		6584716E2136B373005C74E8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
 		658471712136B373005C74E8 /* blocking-content-empry.json in Resources */ = {isa = PBXBuildFile; fileRef = 658471702136B373005C74E8 /* blocking-content-empry.json */; };
 		658471742136B373005C74E8 /* ContentBlockerRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 658471732136B373005C74E8 /* ContentBlockerRequestHandler.m */; };
 		658471792136B373005C74E8 /* BlockerExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6584716D2136B372005C74E8 /* BlockerExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6584717D2136B7C5005C74E8 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 652735B2212D77A3005C35BF /* libshared.a */; };
+		65975C9421481540007F766E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65975C9321481540007F766E /* Assets.xcassets */; };
+		65975C9521481540007F766E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65975C9321481540007F766E /* Assets.xcassets */; };
+		65975C9621481540007F766E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65975C9321481540007F766E /* Assets.xcassets */; };
+		65975C9921481EF3007F766E /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65975C9821481EF2007F766E /* FlatButton.swift */; };
+		65975C9D2148266C007F766E /* toolbar-on.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 65975C9C2148266C007F766E /* toolbar-on.pdf */; };
 		65C8B03C2146635C00B2E7FD /* assistant.embedded.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C8B03B2146635B00B2E7FD /* assistant.embedded.js */; };
 		65C8B03E21467AF500B2E7FD /* assistant.runner.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C8B03D21467AF500B2E7FD /* assistant.runner.js */; };
 		65D151842139771A0014BE79 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D151832139771A0014BE79 /* defaults.plist */; };
@@ -179,9 +181,7 @@
 		655C865D212AEA3200CB6DAE /* ACObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACObject.m; sourceTree = "<group>"; };
 		655C865E212AEA3200CB6DAE /* ACLFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLFileLogger.m; sourceTree = "<group>"; };
 		655C8675212AEB5F00CB6DAE /* ACLang.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACLang.h; sourceTree = "<group>"; };
-		655C8676212AF2A500CB6DAE /* tray-on.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "tray-on.pdf"; sourceTree = "<group>"; };
 		65720AB221219AC900B2381C /* AdGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		65720AB821219ACB00B2381C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65720ABD21219ACB00B2381C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65720AC021219ACB00B2381C /* AdGuard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuard.entitlements; sourceTree = "<group>"; };
 		657215562121F30600B2381C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -192,6 +192,10 @@
 		658471752136B373005C74E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		658471762136B373005C74E8 /* BlockerExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlockerExtension.entitlements; sourceTree = "<group>"; };
 		6584717E2136BD0A005C74E8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/SafariExtensionViewController.strings; sourceTree = "<group>"; };
+		65975C9321481540007F766E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		65975C9821481EF2007F766E /* FlatButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatButton.swift; sourceTree = "<group>"; };
+		65975C9A214821B7007F766E /* AdGuardSafariExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdGuardSafariExtension-Bridging-Header.h"; sourceTree = "<group>"; };
+		65975C9C2148266C007F766E /* toolbar-on.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "toolbar-on.pdf"; path = "../../MediaResources/toolbar-on.pdf"; sourceTree = "<group>"; };
 		65C8B03B2146635B00B2E7FD /* assistant.embedded.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = assistant.embedded.js; sourceTree = "<group>"; };
 		65C8B03D21467AF500B2E7FD /* assistant.runner.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = assistant.runner.js; sourceTree = "<group>"; };
 		65D151832139771A0014BE79 /* defaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
@@ -282,6 +286,8 @@
 		65216A04212436EA00ABF7D0 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				65975C9B2148241F007F766E /* vendors */,
+				65975C9A214821B7007F766E /* AdGuardSafariExtension-Bridging-Header.h */,
 				65216A05212436EA00ABF7D0 /* SafariExtensionHandler.h */,
 				65216A06212436EA00ABF7D0 /* SafariExtensionHandler.m */,
 				65216A08212436EA00ABF7D0 /* SafariExtensionViewController.h */,
@@ -289,8 +295,8 @@
 				65216A0B212436EA00ABF7D0 /* SafariExtensionViewController.xib */,
 				6504C10E2136EA2D007E9674 /* PopupView.h */,
 				6504C10F2136EA2D007E9674 /* PopupView.m */,
-				655C8676212AF2A500CB6DAE /* tray-on.pdf */,
 				6504C10A2136BF10007E9674 /* Info.plist */,
+				65975C9C2148266C007F766E /* toolbar-on.pdf */,
 				65C8B03B2146635B00B2E7FD /* assistant.embedded.js */,
 				65C8B03D21467AF500B2E7FD /* assistant.runner.js */,
 				65216A0F212436EA00ABF7D0 /* script.js */,
@@ -366,6 +372,7 @@
 				657215562121F30600B2381C /* Config.xcconfig */,
 				65D151832139771A0014BE79 /* defaults.plist */,
 				652169F721231AA100ABF7D0 /* build-electron-app.sh */,
+				65975C9321481540007F766E /* Assets.xcassets */,
 				655C8628212AE6C200CB6DAE /* Shared */,
 				65720AB421219AC900B2381C /* AdGuard */,
 				65216A04212436EA00ABF7D0 /* Extension */,
@@ -391,7 +398,6 @@
 		65720AB421219AC900B2381C /* AdGuard */ = {
 			isa = PBXGroup;
 			children = (
-				65720AB821219ACB00B2381C /* Assets.xcassets */,
 				65720ABD21219ACB00B2381C /* Info.plist */,
 				65720AC021219ACB00B2381C /* AdGuard.entitlements */,
 				65216A2F2124517700ABF7D0 /* ElectronChild.entitlements */,
@@ -409,6 +415,14 @@
 				658471762136B373005C74E8 /* BlockerExtension.entitlements */,
 			);
 			path = BlockerExtension;
+			sourceTree = "<group>";
+		};
+		65975C9B2148241F007F766E /* vendors */ = {
+			isa = PBXGroup;
+			children = (
+				65975C9821481EF2007F766E /* FlatButton.swift */,
+			);
+			path = vendors;
 			sourceTree = "<group>";
 		};
 		65D151882139A5080014BE79 /* Lumberjack */ = {
@@ -613,6 +627,7 @@
 					};
 					652169FF212436E900ABF7D0 = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 0940;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
 								enabled = 1;
@@ -671,8 +686,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65975C9421481540007F766E /* Assets.xcassets in Resources */,
 				65D151842139771A0014BE79 /* defaults.plist in Resources */,
-				652169FB21231D0E00ABF7D0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,10 +698,10 @@
 				65C8B03E21467AF500B2E7FD /* assistant.runner.js in Resources */,
 				6535D712213D4374004D8A08 /* Localizable.strings in Resources */,
 				65C8B03C2146635C00B2E7FD /* assistant.embedded.js in Resources */,
+				65975C9D2148266C007F766E /* toolbar-on.pdf in Resources */,
 				65216A0D212436EA00ABF7D0 /* SafariExtensionViewController.xib in Resources */,
-				655C8677212AF2A500CB6DAE /* tray-on.pdf in Resources */,
 				65D151852139771A0014BE79 /* defaults.plist in Resources */,
-				6504C10D2136E5C6007E9674 /* Assets.xcassets in Resources */,
+				65975C9521481540007F766E /* Assets.xcassets in Resources */,
 				65216A10212436EA00ABF7D0 /* script.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,6 +711,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65D151862139771A0014BE79 /* defaults.plist in Resources */,
+				65975C9621481540007F766E /* Assets.xcassets in Resources */,
 				658471712136B373005C74E8 /* blocking-content-empry.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -721,6 +737,7 @@
 				655C8660212AEA3200CB6DAE /* NSURL+Utils.m in Sources */,
 				6504C1102136EA2D007E9674 /* PopupView.m in Sources */,
 				655C8665212AEA3200CB6DAE /* NSString+Utils.m in Sources */,
+				65975C9921481EF3007F766E /* FlatButton.swift in Sources */,
 				65216A07212436EA00ABF7D0 /* SafariExtensionHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -883,7 +900,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = Extension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -893,6 +912,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_EXTENSION_BUNDLEID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/AdGuardSafariExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -900,7 +922,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = Extension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -910,6 +934,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_EXTENSION_BUNDLEID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/AdGuardSafariExtension-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1055,6 +1081,7 @@
 		65720AC421219ACB00B2381C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AdGuard/AdGuard.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1074,6 +1101,7 @@
 		65720AC521219ACB00B2381C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AdGuard/AdGuard.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;

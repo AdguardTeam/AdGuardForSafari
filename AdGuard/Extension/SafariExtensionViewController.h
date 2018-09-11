@@ -9,6 +9,7 @@
 #import <SafariServices/SafariServices.h>
 @import AppKit;
 @import Cocoa;
+#import "AdGuardSafariExtension-Swift.h"
 
 @interface SafariExtensionViewController : SFSafariExtensionViewController
 
@@ -31,6 +32,7 @@
 - (IBAction)clickWhitelist:(id)sender;
 - (IBAction)clickAssistant:(id)sender;
 - (IBAction)clickRunAdguard:(id)sender;
+- (IBAction)clickPreferences:(id)sender;
 
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - Properties and Public methods

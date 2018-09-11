@@ -104,6 +104,16 @@ extern NSString * const AEDefaultsMainAppBusy;
  @param block Performed on internal thread when catched notification.
  */
 + (void)setListenerOnBusyChanged:(AESListenerBlock)block;
+/**
+ Notifies, that user wants to see the prerefences window.
+ */
++ (void)notifyShowPreferences;
+/**
+ Register listener for show preferences.
+
+ @param block Performed on internal thread when catched notification.
+ */
++ (void)setListenerOnShowPreferences:(AESListenerBlock)block;
 
 /**
  Saves blocking content rules JSON in shared storage.

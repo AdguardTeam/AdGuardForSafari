@@ -27,6 +27,7 @@
 #define NOTIFICATION_WHITELIST                  AG_BUNDLEID @".notify.whitelist"
 #define NOTIFICATION_USERFILTER                 AG_BUNDLEID @".notify.userfilter"
 #define NOTIFICATION_BUSY                       AG_BUNDLEID @".notify.busy"
+#define NOTIFICATION_SHOW_PREFS                 AG_BUNDLEID @".notify.showprefs"
 
 
 /////////////////////////////////////////////////////////////////////
@@ -53,6 +54,7 @@ static AESListenerBlock _onDefaultsChangedBlock;
 static AESListenerBlock _onWhitelistChangedBlock;
 static AESListenerBlock _onUserFilterChangedBlock;
 static AESListenerBlock _onBusyChangedBlock;
+static AESListenerBlock _onShowPreferences;
 
 + (void)initialize{
     
@@ -69,6 +71,8 @@ static AESListenerBlock _onBusyChangedBlock;
         _onDefaultsChangedBlock = NULL;
         _onWhitelistChangedBlock = NULL;
         _onUserFilterChangedBlock = NULL;
+        _onBusyChangedBlock = NULL;
+        _onShowPreferences = NULL;
     }
 }
 
@@ -155,6 +159,17 @@ static AESListenerBlock _onBusyChangedBlock;
 + (void)setListenerOnUserFilterChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_USERFILTER
                             blockPtr:&_onUserFilterChangedBlock
+                               block:block];
+}
+
++ (void)notifyShowPreferences {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_SHOW_PREFS, NULL, NULL, YES);
+    });
+}
++ (void)setListenerOnShowPreferences:(AESListenerBlock)block {
+    [self setListenerForNotification:NOTIFICATION_SHOW_PREFS
+                            blockPtr:&_onShowPreferences
                                block:block];
 }
 
@@ -356,6 +371,9 @@ static void onChangedNotify(CFNotificationCenterRef center, void *observer, CFSt
     }
     else if ([nName isEqualToString:NOTIFICATION_BUSY]){
         block = _onBusyChangedBlock;
+    }
+    else if ([nName isEqualToString:NOTIFICATION_SHOW_PREFS]){
+        block = _onShowPreferences;
     }
 
     if (block) {

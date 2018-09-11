@@ -481,6 +481,34 @@ NAN_METHOD(setOnUserFilter) {
   }];
 }
 
+NAN_METHOD(setOnShowPreferences) {
+
+  static Nan::Callback *cb = nullptr;
+
+   if (info.Length() < 1) {
+      ThrowTypeError("Wrong number of arguments");
+      return;
+  }
+
+  if (!info[0]->IsFunction()) {
+      ThrowTypeError("Wrong arguments");
+      return;
+  }
+  
+  if (cb) {
+    delete cb;
+  }
+  cb = new Nan::Callback(info[0].As<Function>());
+
+  [AESharedResources setListenerOnShowPreferences:^{
+      dispatch_async(dispatch_get_main_queue(), ^{
+          Nan::HandleScope scope;
+
+          Nan::Call(*cb, 0, 0);
+      });
+  }];
+}
+
 NAN_MODULE_INIT(Init) {
 
     [AESharedResources initLogger];
@@ -523,6 +551,9 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("setOnUserFilter").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setOnUserFilter)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("setOnShowPreferences").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setOnShowPreferences)).ToLocalChecked());
 }
 
 // macro to load the module when require'd

@@ -2,9 +2,6 @@ const localStorage = require('./storage/storage');
 const cache = require('./utils/cache');
 const log = require('./utils/log');
 const channels = require('./utils/channels');
-//TODO: delete this (FOR TEST)
-const safari = require('safari-ext');
-//-------
 /**
  * Object that manages user settings.
  * @constructor
@@ -76,56 +73,6 @@ module.exports = (function () {
         localStorage.setItem(propertyName, propertyValue);
         properties[propertyName] = propertyValue;
         propertyUpdateChannel.notify(propertyName, propertyValue);
-
-//TODO: delete this (FOR TEST)
-        console.log("Trying to send message to Safari App Extension...");
-        safari.init(
-            (result)=>{
-                console.log("onProtectionChangedCallback");
-                safari.busyStatus(false);
-            },
-            (domains)=>{
-                console.log("Into onWhitelistChangedCallback");
-                console.log(domains);
-                safari.busyStatus(false);
-            },
-            (rules)=>{
-                console.log("Into onUserFilterChangedCallback");
-                console.log(rules);
-                safari.busyStatus(false);
-            }
-        );
-        safari.busyStatus(true);
-        safari.userFilter((rules) => {
-            console.log("Into USERFILTER CALLBACK");
-            safari.whitelistDomains((domains) => {
-                console.log("Into WHITELIST CALLBACK");
-                console.log(domains);
-                safari.busyStatus(false);
-            });
-        });
-
-        safari.extensionsState((result)=>{
-            if (! result) {
-                safari.openExtensionsPreferenses((result)=>{
-                    console.log("open safari result %d", result);
-                })
-            }
-        });
-
-        safari.setProtectionEnabled(false);
-        safari.setWhitelistDomains(["yandex.ru", "google.com"], ()=>{
-            safari.setUserFilter(["|domain.com"], () =>{
-                safari.setContentBlockingJson("[{\"trigger\": {\"url-filter\": \".*\",\"if-domain\": [\"domain.com\"]},\"action\":{\"type\": \"ignore-previous-rules\"}}]", (result) => {
-                    var obj = JSON.parse(result);
-                    if (obj.result == "success") {
-                        console.log("TEST SET properties complated");
-                    };
-                    console.log(result);
-                } );
-            });
-        });
-//--------------------
     };
 
     const getAllSettings = function () {
