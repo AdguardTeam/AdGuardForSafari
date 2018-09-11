@@ -46,7 +46,7 @@
             if (newRule.length) {
                 [AESharedResources userFilterRulesWithCompletion:^(NSArray<NSString *> *rules) {
                     @autoreleasepool {
-                        NSArray *newRules = [rules arrayByAddingObject:newRule];
+                        NSArray *newRules = [rules arrayByAddingObject:newRule] ?: @[newRule];
                         [AESharedResources setUserFilterRules:newRules completion:^{
                             [AESharedResources notifyUserFilterChanged];
                         }];
