@@ -2,6 +2,7 @@ const safariToolbar = require('safari-ext');
 const applicationApi = require('./api');
 const listeners = require('./notifier');
 const events = require('./events');
+const log = require('./app/utils/log');
 
 /**
  * Addon toolbar controller.
@@ -15,6 +16,8 @@ module.exports = (() => {
      * @param isEnabled
      */
     const onProtectionChangedCallback = (isEnabled) => {
+        log.debug('Protection status changed: {0}', isEnabled);
+
         if (isEnabled) {
             applicationApi.start();
         } else {
@@ -27,6 +30,8 @@ module.exports = (() => {
      *
      */
     const onWhitelistChangedCallback = (domains) => {
+        log.debug('Whitelist changed: {0}', domains);
+
         applicationApi.setWhitelist(domains);
     };
 
@@ -34,6 +39,8 @@ module.exports = (() => {
      * User filter rules have been changed from toolbar
      */
     const onUserFilterChangedCallback = (rules) => {
+        log.debug('User filter changed: {0}', rules);
+
         applicationApi.setUserFilterRules(rules);
     };
 
@@ -43,6 +50,8 @@ module.exports = (() => {
      */
     const init = () => {
 
+        log.debug('Initializing toolbar controller..');
+
         //Subscribe to toolbar events
         safariToolbar.init(onProtectionChangedCallback, onWhitelistChangedCallback, onUserFilterChangedCallback);
 
@@ -51,13 +60,18 @@ module.exports = (() => {
             if (event === events.CONTENT_BLOCKER_UPDATE_REQUIRED) {
                 setContentBlockingJson(JSON.stringify(info));
             } else if (event === events.UPDATE_USER_FILTER_RULES) {
-                setUserFilter(applicationApi.getUserFilterRules());
+                applicationApi.getUserFilterRules((rules) => {
+                    console.log(rules);
+                    setUserFilter(rules);
+                });
             } else if (event === events.UPDATE_WHITELIST_FILTER_RULES) {
                 setWhitelistDomains(applicationApi.getWhitelist());
             }
         });
 
         setProtectionEnabled(true);
+
+        log.debug('Initializing toolbar controller ok.');
     };
 
     /**

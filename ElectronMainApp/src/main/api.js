@@ -103,8 +103,10 @@ module.exports = (() => {
     /**
      * Returns user filter rules
      */
-    const getUserFilterRules = () => {
-        return userrules.getUserRulesText().split('\r\n');
+    const getUserFilterRules = (callback) => {
+        return userrules.getUserRulesText((result) => {
+            return result ? result.split('\r\n') : '';
+        });
     };
 
     return {

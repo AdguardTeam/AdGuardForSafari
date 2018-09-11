@@ -33,7 +33,9 @@ module.exports = (function () {
     const getUserRulesText = function (callback) {
         rulesStorage.read(USER_FILTER_ID, function (rulesText) {
             const content = (rulesText || []).join('\n');
-            callback(content);
+            if (callback) {
+                callback(content);
+            }
         });
     };
 
