@@ -107,9 +107,7 @@ module.exports = (function () {
         try {
             log.info('Setting content blocker. Length=' + json.length);
 
-            listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, {
-                json: json
-            });
+            listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, json);
 
             log.info('Content blocker has been set.');
         } catch (ex) {

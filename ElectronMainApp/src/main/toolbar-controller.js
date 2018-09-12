@@ -78,7 +78,9 @@ module.exports = (() => {
      */
     const setContentBlockingJson = (jsonString) => {
         safariToolbar.busyStatus(true);
-        safariToolbar.setContentBlockingJson(jsonString, () => {
+        safariToolbar.setContentBlockingJson(jsonString, (result) => {
+            log.info('Content-blocker set result: ' + result);
+
             safariToolbar.busyStatus(false);
         });
 
