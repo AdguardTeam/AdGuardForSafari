@@ -31,27 +31,61 @@
                                                          xRadius:CORNER_RADIUS
                                                          yRadius:CORNER_RADIUS];
 
-    if ((self.showsStateBy & NSChangeBackgroundCellMask) && (self.isHighlighted || self.state != NSOffState)) {
-        [[self colorWithSketchRed:103 green:178 blue:121 alfa:100] setFill];
-        [shadow set];
+    if ((self.showsStateBy & NSChangeBackgroundCellMask)) {
+        //push on push off button
+        if (!self.isHighlighted) {
+            //not pressed
+            [shadow set];
+        }
+        if (self.state != NSOffState) {
+            [[self colorWithSketchRed:103 green:178 blue:121 alfa:100] setFill];
+        }
+        else {
+            [[self colorWithSketchRed:136 green:136 blue:136 alfa:100] setFill];
+        }
         [path fill];
     }
     else {
-        [[NSColor whiteColor] setFill];
-        [shadow set];
-        [path fill];
+        // momentary button
+        if (self.isHighlighted) {
+            //pressed
+            [[self colorWithSketchRed:136 green:136 blue:136 alfa:100] setFill];
+            [path fill];
+        }
+        else {
+            [[NSColor whiteColor] setFill];
+            [shadow set];
+            [path fill];
 
-        [[NSColor colorWithSRGBRed:0 green:0 blue:0 alpha:0.15] set];
-        path = [NSBezierPath bezierPathWithRoundedRect:NSInsetRect(frame, 1, 1)
-                                               xRadius:CORNER_RADIUS
-                                               yRadius:CORNER_RADIUS];
-        [path setLineWidth:1];
-        [path stroke];
+            [[NSColor colorWithSRGBRed:0 green:0 blue:0 alpha:0.15] set];
+            [path setLineWidth:1];
+            [path stroke];
+        }
     }
 }
 
-- (void)setButtonType:(NSButtonType)type {
-    [super setButtonType:type];
+- (NSRect)drawTitle:(NSAttributedString *)title withFrame:(NSRect)frame inView:(NSView *)controlView {
+
+    if ((self.showsStateBy & NSChangeBackgroundCellMask)) {
+        //push on push off button
+        if (! self.isHighlighted && self.enabled) {
+            //not pressed
+            title = [title mutableCopy];
+            [(NSMutableAttributedString *)title addAttribute:NSForegroundColorAttributeName
+                                                       value:[NSColor whiteColor]
+                                                       range:NSMakeRange(0, title.length)];
+        }
+    }
+    else {
+        // momentary button
+        if (self.isHighlighted) {
+            //pressed
+        }
+        else {
+        }
+    }
+
+    return [super drawTitle:title withFrame:frame inView:controlView];
 }
 
 - (NSColor *)colorWithSketchRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alfa:(CGFloat)alfa {
