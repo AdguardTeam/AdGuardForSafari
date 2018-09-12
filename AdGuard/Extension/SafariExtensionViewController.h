@@ -9,7 +9,6 @@
 #import <SafariServices/SafariServices.h>
 @import AppKit;
 @import Cocoa;
-#import "AdGuardSafariExtension-Swift.h"
 
 @interface SafariExtensionViewController : SFSafariExtensionViewController
 

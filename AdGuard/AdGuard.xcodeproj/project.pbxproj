@@ -43,8 +43,8 @@
 		65975C9421481540007F766E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65975C9321481540007F766E /* Assets.xcassets */; };
 		65975C9521481540007F766E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65975C9321481540007F766E /* Assets.xcassets */; };
 		65975C9621481540007F766E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65975C9321481540007F766E /* Assets.xcassets */; };
-		65975C9921481EF3007F766E /* FlatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65975C9821481EF2007F766E /* FlatButton.swift */; };
 		65975C9D2148266C007F766E /* toolbar-on.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 65975C9C2148266C007F766E /* toolbar-on.pdf */; };
+		65975CA021484E13007F766E /* GreenButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65975C9F21484E13007F766E /* GreenButtonCell.m */; };
 		65C8B03C2146635C00B2E7FD /* assistant.embedded.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C8B03B2146635B00B2E7FD /* assistant.embedded.js */; };
 		65C8B03E21467AF500B2E7FD /* assistant.runner.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C8B03D21467AF500B2E7FD /* assistant.runner.js */; };
 		65D151842139771A0014BE79 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D151832139771A0014BE79 /* defaults.plist */; };
@@ -193,9 +193,9 @@
 		658471762136B373005C74E8 /* BlockerExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlockerExtension.entitlements; sourceTree = "<group>"; };
 		6584717E2136BD0A005C74E8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/SafariExtensionViewController.strings; sourceTree = "<group>"; };
 		65975C9321481540007F766E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		65975C9821481EF2007F766E /* FlatButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatButton.swift; sourceTree = "<group>"; };
-		65975C9A214821B7007F766E /* AdGuardSafariExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdGuardSafariExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		65975C9C2148266C007F766E /* toolbar-on.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "toolbar-on.pdf"; path = "../../MediaResources/toolbar-on.pdf"; sourceTree = "<group>"; };
+		65975C9E21484E13007F766E /* GreenButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GreenButtonCell.h; sourceTree = "<group>"; };
+		65975C9F21484E13007F766E /* GreenButtonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GreenButtonCell.m; sourceTree = "<group>"; };
 		65C8B03B2146635B00B2E7FD /* assistant.embedded.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = assistant.embedded.js; sourceTree = "<group>"; };
 		65C8B03D21467AF500B2E7FD /* assistant.runner.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = assistant.runner.js; sourceTree = "<group>"; };
 		65D151832139771A0014BE79 /* defaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
@@ -287,7 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				65975C9B2148241F007F766E /* vendors */,
-				65975C9A214821B7007F766E /* AdGuardSafariExtension-Bridging-Header.h */,
 				65216A05212436EA00ABF7D0 /* SafariExtensionHandler.h */,
 				65216A06212436EA00ABF7D0 /* SafariExtensionHandler.m */,
 				65216A08212436EA00ABF7D0 /* SafariExtensionViewController.h */,
@@ -302,6 +301,8 @@
 				65216A0F212436EA00ABF7D0 /* script.js */,
 				65216A13212436EA00ABF7D0 /* Extension.entitlements */,
 				6535D714213D4374004D8A08 /* Localizable.strings */,
+				65975C9E21484E13007F766E /* GreenButtonCell.h */,
+				65975C9F21484E13007F766E /* GreenButtonCell.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -420,7 +421,6 @@
 		65975C9B2148241F007F766E /* vendors */ = {
 			isa = PBXGroup;
 			children = (
-				65975C9821481EF2007F766E /* FlatButton.swift */,
 			);
 			path = vendors;
 			sourceTree = "<group>";
@@ -735,9 +735,9 @@
 				655C8662212AEA3200CB6DAE /* NSDate+Utils.m in Sources */,
 				655C8667212AEA3200CB6DAE /* NSException+Utils.m in Sources */,
 				655C8660212AEA3200CB6DAE /* NSURL+Utils.m in Sources */,
+				65975CA021484E13007F766E /* GreenButtonCell.m in Sources */,
 				6504C1102136EA2D007E9674 /* PopupView.m in Sources */,
 				655C8665212AEA3200CB6DAE /* NSString+Utils.m in Sources */,
-				65975C9921481EF3007F766E /* FlatButton.swift in Sources */,
 				65216A07212436EA00ABF7D0 /* SafariExtensionHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -902,7 +902,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
-				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = Extension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -924,7 +923,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
-				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = Extension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1081,7 +1079,6 @@
 		65720AC421219ACB00B2381C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AdGuard/AdGuard.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1101,7 +1098,6 @@
 		65720AC521219ACB00B2381C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AdGuard/AdGuard.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
