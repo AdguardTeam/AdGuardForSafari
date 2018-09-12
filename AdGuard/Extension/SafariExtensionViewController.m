@@ -48,6 +48,7 @@
     [AESharedResources.sharedDefaults
      setBool:! [AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]
      forKey:AEDefaultsEnabled];
+    [AESharedResources synchronizeSharedDefaults];
     self.busy = YES;
     [AESharedResources notifyDefaultsChanged];
 }

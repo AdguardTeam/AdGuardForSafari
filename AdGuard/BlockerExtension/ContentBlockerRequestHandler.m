@@ -18,16 +18,23 @@
 @implementation ContentBlockerRequestHandler
 
 - (void)beginRequestWithExtensionContext:(NSExtensionContext *)context {
-    NSItemProvider *attachment = [[NSItemProvider alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:AES_BLOCKING_CONTENT_EMPTY_RESOURCE withExtension:@"json"]];
+    NSItemProvider *attachment;
 
     if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsEnabled]) {
         attachment = [[NSItemProvider alloc] initWithContentsOfURL:AESharedResources.blockingContentRulesUrl];
     }
+    else {
+        attachment = [[NSItemProvider alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:AES_BLOCKING_CONTENT_EMPTY_RESOURCE withExtension:@"json"]];
+    }
+    if (attachment) {
+        NSExtensionItem *item = [[NSExtensionItem alloc] init];
+        item.attachments = @[attachment];
 
-    NSExtensionItem *item = [[NSExtensionItem alloc] init];
-    item.attachments = @[attachment];
-    
-    [context completeRequestReturningItems:@[item] completionHandler:nil];
+        [context completeRequestReturningItems:@[item] completionHandler:nil];
+        return;
+    }
+
+    [context completeRequestReturningItems:nil completionHandler:nil];
 }
 
 @end
