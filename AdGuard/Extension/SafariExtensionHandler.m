@@ -86,7 +86,7 @@
                         validationHandler(YES, nil);
                         return;
                     }
-                    validationHandler(NO, nil);
+                    validationHandler(YES, nil);
                 }];
             }];
         }];

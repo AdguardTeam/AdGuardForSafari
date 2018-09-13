@@ -68,12 +68,24 @@
 
     if ((self.showsStateBy & NSChangeBackgroundCellMask)) {
         //push on push off button
-        if (! self.isHighlighted && self.enabled) {
+        if (! self.isHighlighted) {
             //not pressed
             title = [title mutableCopy];
-            [(NSMutableAttributedString *)title addAttribute:NSForegroundColorAttributeName
-                                                       value:[NSColor whiteColor]
-                                                       range:NSMakeRange(0, title.length)];
+            if (self.enabled) {
+                [(NSMutableAttributedString *)title addAttribute:NSForegroundColorAttributeName
+                                                           value:[NSColor whiteColor]
+                                                           range:NSMakeRange(0, title.length)];
+            }
+            else {
+                [(NSMutableAttributedString *)title addAttribute:NSForegroundColorAttributeName
+                                                           value:[NSColor colorWithSRGBRed:1 green:1 blue:1 alpha:0.7]
+                                                           range:NSMakeRange(0, title.length)];
+            }
+        }
+        else {
+            NSLog(@"%@", title);
+            id attr = [title attribute:NSForegroundColorAttributeName atIndex:0 effectiveRange:nil];
+            NSLog(@"Color %@", attr);
         }
     }
     else {
