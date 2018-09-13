@@ -19,437 +19,61 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe" customClass="PopupView">
-            <rect key="frame" x="0.0" y="0.0" width="314" height="466"/>
+            <rect key="frame" x="0.0" y="0.0" width="248" height="266"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <userGuides>
+                <userLayoutGuide location="319" affinity="minY"/>
+                <userLayoutGuide location="279" affinity="minY"/>
+                <userLayoutGuide location="237" affinity="minY"/>
+                <userLayoutGuide location="228" affinity="minX"/>
+            </userGuides>
             <subviews>
-                <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A4L-7y-zsz">
-                    <rect key="frame" x="0.0" y="20" width="314" height="426"/>
-                    <subviews>
-                        <stackView orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtO-ks-TWg">
-                            <rect key="frame" x="0.0" y="395" width="314" height="31"/>
-                            <edgeInsets key="edgeInsets" left="20" right="20" top="0.0" bottom="0.0"/>
-                            <beginningViews>
-                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DHo-Vn-6on">
-                                    <rect key="frame" x="20" y="0.0" width="142" height="31"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="31" id="Hde-Kq-d3U"/>
-                                        <constraint firstAttribute="width" constant="142" id="UbN-1G-joh"/>
-                                    </constraints>
-                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="logo-green" id="GEf-It-b4R"/>
-                                </imageView>
-                            </beginningViews>
-                            <endViews>
-                                <button horizontalHuggingPriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eiI-Sm-BOy">
-                                    <rect key="frame" x="272" y="0.0" width="22" height="31"/>
-                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="settings" imagePosition="only" alignment="center" refusesFirstResponder="YES" inset="2" id="24o-Wm-bnS">
-                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="system"/>
-                                    </buttonCell>
-                                    <connections>
-                                        <action selector="clickPreferences:" target="-2" id="3J6-jK-bQH"/>
-                                    </connections>
-                                </button>
-                            </endViews>
-                            <visibilityPriorities>
-                                <integer value="1000"/>
-                                <integer value="1000"/>
-                            </visibilityPriorities>
-                            <customSpacing>
-                                <real value="3.4028234663852886e+38"/>
-                                <real value="3.4028234663852886e+38"/>
-                            </customSpacing>
-                        </stackView>
-                        <stackView orientation="horizontal" alignment="top" spacing="12" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="flP-Sn-ajz">
-                            <rect key="frame" x="0.0" y="354" width="314" height="21"/>
-                            <edgeInsets key="edgeInsets" left="20" right="20" top="0.0" bottom="0.0"/>
-                            <beginningViews>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XDE-N8-sRz">
-                                    <rect key="frame" x="18" y="0.0" width="114" height="21"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="AdGuard Filtration" id="vYp-Sg-0Fy">
-                                        <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                            </beginningViews>
-                            <endViews>
-                                <button horizontalHuggingPriority="750" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jKb-oY-gyH">
-                                    <rect key="frame" x="260" y="-7" width="40" height="32"/>
-                                    <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" borderStyle="border" inset="2" id="p92-iZ-Q5D" customClass="GreenButtonCell">
-                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                        <font key="font" metaFont="system"/>
-                                    </buttonCell>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="3"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                            <real key="value" value="1"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="activeButtonColor">
-                                            <color key="value" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="activeTextColor">
-                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.1528230444785276" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="activeBorderColor">
-                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.15180454371165644" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
-                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                            <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="glowRadius">
-                                            <real key="value" value="0.0"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="glowOpacity">
-                                            <real key="value" value="0.0"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="momentary" value="NO"/>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="clickEnabled:" target="-2" id="cRK-Rc-CFK"/>
-                                        <binding destination="-2" name="enabled" keyPath="self.busy" id="cc0-M1-mNw">
-                                            <dictionary key="options">
-                                                <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                                <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                                <integer key="NSNullPlaceholder" value="0"/>
-                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                            </dictionary>
-                                        </binding>
-                                    </connections>
-                                </button>
-                            </endViews>
-                            <visibilityPriorities>
-                                <integer value="1000"/>
-                                <integer value="1000"/>
-                            </visibilityPriorities>
-                            <customSpacing>
-                                <real value="3.4028234663852886e+38"/>
-                                <real value="3.4028234663852886e+38"/>
-                            </customSpacing>
-                            <connections>
-                                <binding destination="-2" name="hidden" keyPath="self.mainAppRunning" id="HRx-LV-6co">
-                                    <dictionary key="options">
-                                        <integer key="NSNoSelectionPlaceholder" value="1"/>
-                                        <integer key="NSNotApplicablePlaceholder" value="1"/>
-                                        <integer key="NSNullPlaceholder" value="1"/>
-                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                    </dictionary>
-                                </binding>
-                            </connections>
-                        </stackView>
-                        <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="CVr-v4-bDt">
-                            <rect key="frame" x="0.0" y="331" width="314" height="5"/>
-                            <connections>
-                                <binding destination="-2" name="hidden" keyPath="self.mainAppRunning" id="S8a-Bb-lMM">
-                                    <dictionary key="options">
-                                        <integer key="NSNoSelectionPlaceholder" value="1"/>
-                                        <integer key="NSNotApplicablePlaceholder" value="1"/>
-                                        <integer key="NSNullPlaceholder" value="1"/>
-                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                    </dictionary>
-                                </binding>
-                            </connections>
-                        </box>
-                        <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="60" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TU5-0x-fAt">
-                            <rect key="frame" x="0.0" y="128" width="314" height="185"/>
-                            <subviews>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WI5-OB-i6V">
-                                    <rect key="frame" x="-2" y="101" width="318" height="44"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="AdGuard don’t work.  Please run AdGuard." id="F0e-9f-alD">
-                                        <font key="font" metaFont="system" size="18"/>
-                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                </textField>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K9v-08-IS3">
-                                    <rect key="frame" x="97" y="13" width="121" height="32"/>
-                                    <buttonCell key="cell" type="push" title="Run AdGuard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MCZ-9T-yrA" customClass="GreenButtonCell">
-                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="system"/>
-                                    </buttonCell>
-                                    <connections>
-                                        <action selector="clickRunAdguard:" target="-2" id="4K3-ie-vq7"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <edgeInsets key="edgeInsets" left="20" right="20" top="40" bottom="20"/>
+                <stackView orientation="horizontal" alignment="centerY" spacing="13" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtO-ks-TWg" userLabel="Stack Top Icons">
+                    <rect key="frame" x="0.0" y="215" width="248" height="31"/>
+                    <edgeInsets key="edgeInsets" left="20" right="20" top="0.0" bottom="0.0"/>
+                    <beginningViews>
+                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DHo-Vn-6on">
+                            <rect key="frame" x="20" y="0.0" width="142" height="31"/>
                             <constraints>
-                                <constraint firstItem="WI5-OB-i6V" firstAttribute="leading" secondItem="TU5-0x-fAt" secondAttribute="leading" id="MrV-Ti-K1I"/>
-                                <constraint firstAttribute="trailing" secondItem="WI5-OB-i6V" secondAttribute="trailing" id="d3B-QQ-sdY"/>
+                                <constraint firstAttribute="height" constant="31" id="Hde-Kq-d3U"/>
+                                <constraint firstAttribute="width" constant="142" id="UbN-1G-joh"/>
                             </constraints>
-                            <visibilityPriorities>
-                                <integer value="1000"/>
-                                <integer value="1000"/>
-                            </visibilityPriorities>
-                            <customSpacing>
-                                <real value="3.4028234663852886e+38"/>
-                                <real value="3.4028234663852886e+38"/>
-                            </customSpacing>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="logo-green" id="GEf-It-b4R"/>
+                        </imageView>
+                    </beginningViews>
+                    <endViews>
+                        <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Jj4-64-W51">
+                            <rect key="frame" x="177" y="0.0" width="16" height="31"/>
                             <connections>
-                                <binding destination="-2" name="hidden" keyPath="self.mainAppRunning" id="CV8-0E-cdF">
+                                <binding destination="-2" name="hidden" keyPath="self.busy" id="psU-z0-4GN">
                                     <dictionary key="options">
                                         <integer key="NSNoSelectionPlaceholder" value="0"/>
                                         <integer key="NSNotApplicablePlaceholder" value="0"/>
                                         <integer key="NSNullPlaceholder" value="0"/>
+                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
                                     </dictionary>
                                 </binding>
-                            </connections>
-                        </stackView>
-                        <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="hcL-dQ-bKk">
-                            <rect key="frame" x="0.0" y="0.0" width="314" height="108"/>
-                            <subviews>
-                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="20" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7nt-U5-nno">
-                                    <rect key="frame" x="20" y="0.0" width="274" height="103"/>
-                                    <subviews>
-                                        <stackView orientation="horizontal" alignment="bottom" spacing="12" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zwl-ox-Qjq">
-                                            <rect key="frame" x="0.0" y="82" width="274" height="21"/>
-                                            <beginningViews>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ki1-C9-n0z">
-                                                    <rect key="frame" x="-2" y="0.0" width="110" height="21"/>
-                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Filtering This Site" id="SAh-L9-ycs">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                            </beginningViews>
-                                            <endViews>
-                                                <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qio-p6-Pqn">
-                                                    <rect key="frame" x="240" y="-7" width="40" height="32"/>
-                                                    <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" borderStyle="border" inset="2" id="t9o-h0-bnn" customClass="GreenButtonCell">
-                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <action selector="clickWhitelist:" target="-2" id="QCg-Iz-Cts"/>
-                                                        <binding destination="-2" name="enabled" keyPath="self.busy" id="h1d-81-mA7">
-                                                            <dictionary key="options">
-                                                                <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                                                <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                                                <integer key="NSNullPlaceholder" value="0"/>
-                                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                                            </dictionary>
-                                                        </binding>
-                                                        <binding destination="-2" name="enabled2" keyPath="self.otherButtonsEnabled" previousBinding="h1d-81-mA7" id="UWd-A6-8wj">
-                                                            <dictionary key="options">
-                                                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                                                <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                                                <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                                                <integer key="NSNullPlaceholder" value="0"/>
-                                                            </dictionary>
-                                                        </binding>
-                                                    </connections>
-                                                </button>
-                                            </endViews>
-                                            <visibilityPriorities>
-                                                <integer value="1000"/>
-                                                <integer value="1000"/>
-                                            </visibilityPriorities>
-                                            <customSpacing>
-                                                <real value="3.4028234663852886e+38"/>
-                                                <real value="3.4028234663852886e+38"/>
-                                            </customSpacing>
-                                        </stackView>
-                                        <stackView orientation="horizontal" alignment="bottom" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0f-uP-eKG">
-                                            <rect key="frame" x="0.0" y="41" width="274" height="21"/>
-                                            <beginningViews>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="du9-Ja-6bt">
-                                                    <rect key="frame" x="-2" y="0.0" width="114" height="21"/>
-                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Block the Element" id="uTP-cd-F1b">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                            </beginningViews>
-                                            <endViews>
-                                                <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0bc-P0-SgG">
-                                                    <rect key="frame" x="201" y="-7" width="79" height="32"/>
-                                                    <buttonCell key="cell" type="push" title="Select" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" state="on" borderStyle="border" inset="2" id="McY-Cj-7jd" customClass="GreenButtonCell">
-                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <action selector="clickAssistant:" target="-2" id="PAa-ZV-aeP"/>
-                                                        <binding destination="-2" name="enabled" keyPath="self.busy" id="zb3-mt-RMp">
-                                                            <dictionary key="options">
-                                                                <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                                                <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                                                <integer key="NSNullPlaceholder" value="0"/>
-                                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                                            </dictionary>
-                                                        </binding>
-                                                        <binding destination="-2" name="enabled2" keyPath="self.otherButtonsEnabled" previousBinding="zb3-mt-RMp" id="f60-jx-wto">
-                                                            <dictionary key="options">
-                                                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                                                <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                                                <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                                                <integer key="NSNullPlaceholder" value="0"/>
-                                                            </dictionary>
-                                                        </binding>
-                                                    </connections>
-                                                </button>
-                                            </endViews>
-                                            <visibilityPriorities>
-                                                <integer value="1000"/>
-                                                <integer value="1000"/>
-                                            </visibilityPriorities>
-                                            <customSpacing>
-                                                <real value="3.4028234663852886e+38"/>
-                                                <real value="3.4028234663852886e+38"/>
-                                            </customSpacing>
-                                        </stackView>
-                                        <stackView orientation="horizontal" alignment="bottom" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JiV-em-MKS">
-                                            <rect key="frame" x="0.0" y="0.0" width="274" height="21"/>
-                                            <beginningViews>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gvG-9D-ca7">
-                                                    <rect key="frame" x="-2" y="0.0" width="119" height="21"/>
-                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Report the website" id="Uuh-Ao-BUJ">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                            </beginningViews>
-                                            <endViews>
-                                                <button horizontalHuggingPriority="1000" verticalHuggingPriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VtF-CS-bVP">
-                                                    <rect key="frame" x="199" y="-7" width="81" height="32"/>
-                                                    <buttonCell key="cell" type="push" title="Report" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" state="on" borderStyle="border" inset="2" id="d52-xp-fe4" customClass="GreenButtonCell">
-                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <action selector="clickAssistant:" target="-2" id="f3d-9s-vxL"/>
-                                                        <binding destination="-2" name="enabled" keyPath="self.busy" id="VVy-Az-67N">
-                                                            <dictionary key="options">
-                                                                <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                                                <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                                                <integer key="NSNullPlaceholder" value="0"/>
-                                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                                            </dictionary>
-                                                        </binding>
-                                                        <binding destination="-2" name="enabled2" keyPath="self.otherButtonsEnabled" previousBinding="VVy-Az-67N" id="VFh-Te-CXB">
-                                                            <dictionary key="options">
-                                                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                                                <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                                                <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                                                <integer key="NSNullPlaceholder" value="0"/>
-                                                            </dictionary>
-                                                        </binding>
-                                                    </connections>
-                                                </button>
-                                            </endViews>
-                                            <visibilityPriorities>
-                                                <integer value="1000"/>
-                                                <integer value="1000"/>
-                                            </visibilityPriorities>
-                                            <customSpacing>
-                                                <real value="3.4028234663852886e+38"/>
-                                                <real value="3.4028234663852886e+38"/>
-                                            </customSpacing>
-                                        </stackView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="Zwl-ox-Qjq" firstAttribute="leading" secondItem="7nt-U5-nno" secondAttribute="leading" id="4Sd-cv-m8g"/>
-                                        <constraint firstAttribute="trailing" secondItem="A0f-uP-eKG" secondAttribute="trailing" id="8rL-qx-Tyn"/>
-                                        <constraint firstAttribute="trailing" secondItem="Zwl-ox-Qjq" secondAttribute="trailing" id="Vlb-el-c6E"/>
-                                        <constraint firstItem="A0f-uP-eKG" firstAttribute="leading" secondItem="7nt-U5-nno" secondAttribute="leading" id="yse-Uf-U0N"/>
-                                    </constraints>
-                                    <visibilityPriorities>
-                                        <integer value="1000"/>
-                                        <integer value="1000"/>
-                                        <integer value="1000"/>
-                                    </visibilityPriorities>
-                                    <customSpacing>
-                                        <real value="3.4028234663852886e+38"/>
-                                        <real value="3.4028234663852886e+38"/>
-                                        <real value="3.4028234663852886e+38"/>
-                                    </customSpacing>
-                                    <connections>
-                                        <binding destination="-2" name="hidden" keyPath="self.mainAppRunning" id="pPl-zh-SAi">
-                                            <dictionary key="options">
-                                                <integer key="NSNoSelectionPlaceholder" value="1"/>
-                                                <integer key="NSNotApplicablePlaceholder" value="1"/>
-                                                <integer key="NSNullPlaceholder" value="1"/>
-                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                            </dictionary>
-                                        </binding>
-                                    </connections>
-                                </stackView>
-                                <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Jj4-64-W51">
-                                    <rect key="frame" x="278" y="0.0" width="16" height="16"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="16" id="5eo-cW-aW4"/>
-                                        <constraint firstAttribute="width" constant="16" id="9fb-Ls-CPA"/>
-                                    </constraints>
-                                    <connections>
-                                        <binding destination="-2" name="hidden" keyPath="self.busy" id="psU-z0-4GN">
-                                            <dictionary key="options">
-                                                <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                                <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                                <integer key="NSNullPlaceholder" value="0"/>
-                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                            </dictionary>
-                                        </binding>
-                                        <binding destination="-2" name="animate" keyPath="self.busy" id="sdS-o9-ZzH">
-                                            <dictionary key="options">
-                                                <integer key="NSNoSelectionPlaceholder" value="1"/>
-                                                <integer key="NSNotApplicablePlaceholder" value="1"/>
-                                                <integer key="NSNullPlaceholder" value="1"/>
-                                            </dictionary>
-                                        </binding>
-                                    </connections>
-                                </progressIndicator>
-                            </subviews>
-                            <edgeInsets key="edgeInsets" left="20" right="20" top="5" bottom="0.0"/>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="Jj4-64-W51" secondAttribute="trailing" constant="20" id="0PB-kI-oXI"/>
-                                <constraint firstItem="Jj4-64-W51" firstAttribute="bottom" secondItem="7nt-U5-nno" secondAttribute="bottom" id="AQo-ef-5qx"/>
-                                <constraint firstItem="7nt-U5-nno" firstAttribute="leading" secondItem="hcL-dQ-bKk" secondAttribute="leading" constant="20" id="Bcr-qb-hA7"/>
-                                <constraint firstAttribute="trailing" secondItem="7nt-U5-nno" secondAttribute="trailing" constant="20" id="m4e-yf-k2p"/>
-                            </constraints>
-                            <visibilityPriorities>
-                                <integer value="1000"/>
-                                <integer value="1000"/>
-                            </visibilityPriorities>
-                            <customSpacing>
-                                <real value="3.4028234663852886e+38"/>
-                                <real value="3.4028234663852886e+38"/>
-                            </customSpacing>
-                            <connections>
-                                <binding destination="-2" name="hidden" keyPath="self.mainAppRunning" id="1pW-Ts-lm0">
+                                <binding destination="-2" name="animate" keyPath="self.busy" id="sdS-o9-ZzH">
                                     <dictionary key="options">
                                         <integer key="NSNoSelectionPlaceholder" value="1"/>
                                         <integer key="NSNotApplicablePlaceholder" value="1"/>
                                         <integer key="NSNullPlaceholder" value="1"/>
-                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
                                     </dictionary>
                                 </binding>
                             </connections>
-                        </stackView>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="TU5-0x-fAt" firstAttribute="leading" secondItem="A4L-7y-zsz" secondAttribute="leading" id="0QD-Tm-SkJ"/>
-                        <constraint firstAttribute="trailing" secondItem="flP-Sn-ajz" secondAttribute="trailing" id="2AG-H2-Knr"/>
-                        <constraint firstAttribute="trailing" secondItem="hcL-dQ-bKk" secondAttribute="trailing" id="7wD-fV-eUc"/>
-                        <constraint firstItem="hcL-dQ-bKk" firstAttribute="leading" secondItem="A4L-7y-zsz" secondAttribute="leading" id="TNC-lj-OQ1"/>
-                        <constraint firstItem="CVr-v4-bDt" firstAttribute="leading" secondItem="A4L-7y-zsz" secondAttribute="leading" id="XYN-zT-79C"/>
-                        <constraint firstAttribute="trailing" secondItem="TU5-0x-fAt" secondAttribute="trailing" id="cOj-JZ-0Sz"/>
-                        <constraint firstItem="flP-Sn-ajz" firstAttribute="leading" secondItem="A4L-7y-zsz" secondAttribute="leading" id="gkh-oV-fZE"/>
-                        <constraint firstItem="rtO-ks-TWg" firstAttribute="leading" secondItem="A4L-7y-zsz" secondAttribute="leading" id="rIG-3W-7t4"/>
-                        <constraint firstAttribute="trailing" secondItem="rtO-ks-TWg" secondAttribute="trailing" id="yTr-HZ-iJr"/>
-                        <constraint firstAttribute="trailing" secondItem="CVr-v4-bDt" secondAttribute="trailing" id="zPh-2t-8RB"/>
-                    </constraints>
+                        </progressIndicator>
+                        <button horizontalHuggingPriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eiI-Sm-BOy">
+                            <rect key="frame" x="206" y="0.0" width="22" height="31"/>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="settings" imagePosition="only" alignment="center" refusesFirstResponder="YES" inset="2" id="24o-Wm-bnS">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="clickPreferences:" target="-2" id="3J6-jK-bQH"/>
+                            </connections>
+                        </button>
+                    </endViews>
                     <visibilityPriorities>
-                        <integer value="1000"/>
-                        <integer value="1000"/>
                         <integer value="1000"/>
                         <integer value="1000"/>
                         <integer value="1000"/>
@@ -458,18 +82,332 @@
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XDE-N8-sRz">
+                    <rect key="frame" x="18" y="176" width="123" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="AdGuard Filtration" id="vYp-Sg-0Fy">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="hidden" keyPath="self.mainAppRunning" id="fOR-as-Eh5">
+                            <dictionary key="options">
+                                <integer key="NSNoSelectionPlaceholder" value="1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="1"/>
+                                <integer key="NSNullPlaceholder" value="1"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </textField>
+                <button horizontalHuggingPriority="750" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="jKb-oY-gyH">
+                    <rect key="frame" x="153" y="167" width="81" height="32"/>
+                    <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" borderStyle="border" inset="2" id="p92-iZ-Q5D" customClass="GreenButtonCell">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="activeButtonColor">
+                            <color key="value" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="activeTextColor">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.1528230444785276" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="activeBorderColor">
+                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.15180454371165644" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="buttonColor">
+                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                            <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="glowRadius">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="glowOpacity">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="momentary" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="clickEnabled:" target="-2" id="cRK-Rc-CFK"/>
+                        <binding destination="-2" name="hidden" keyPath="self.mainAppRunning" previousBinding="cc0-M1-mNw" id="ftj-lQ-gCq">
+                            <dictionary key="options">
+                                <integer key="NSNoSelectionPlaceholder" value="1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="1"/>
+                                <integer key="NSNullPlaceholder" value="1"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="-2" name="enabled" keyPath="self.busy" id="cc0-M1-mNw">
+                            <dictionary key="options">
+                                <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                <integer key="NSNullPlaceholder" value="0"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
+                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="CVr-v4-bDt">
+                    <rect key="frame" x="0.0" y="151" width="248" height="5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="pQJ-d8-2Tr"/>
+                    </constraints>
+                    <connections>
+                        <binding destination="-2" name="hidden" keyPath="self.mainAppRunning" id="S8a-Bb-lMM">
+                            <dictionary key="options">
+                                <integer key="NSNoSelectionPlaceholder" value="1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="1"/>
+                                <integer key="NSNullPlaceholder" value="1"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </box>
+                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="23.5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJ8-Wf-pr8" userLabel="Stack Titles">
+                    <rect key="frame" x="20" y="28" width="119" height="98"/>
+                    <subviews>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ki1-C9-n0z">
+                            <rect key="frame" x="-2" y="81" width="110" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Filtering This Site" id="SAh-L9-ycs">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="du9-Ja-6bt">
+                            <rect key="frame" x="-2" y="41" width="114" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Block the Element" id="uTP-cd-F1b">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gvG-9D-ca7">
+                            <rect key="frame" x="-2" y="0.0" width="119" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Report the website" id="Uuh-Ao-BUJ">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                    </subviews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                     </customSpacing>
+                    <connections>
+                        <binding destination="-2" name="hidden" keyPath="self.mainAppRunning" id="caR-yF-Dcx">
+                            <dictionary key="options">
+                                <integer key="NSNoSelectionPlaceholder" value="1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="1"/>
+                                <integer key="NSNullPlaceholder" value="1"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </stackView>
+                <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rhc-3f-Mmp" userLabel="Stack Buttons">
+                    <rect key="frame" x="159" y="25" width="69" height="103"/>
+                    <subviews>
+                        <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="qio-p6-Pqn">
+                            <rect key="frame" x="-6" y="75" width="81" height="32"/>
+                            <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" borderStyle="border" inset="2" id="t9o-h0-bnn" customClass="GreenButtonCell">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="clickWhitelist:" target="-2" id="QCg-Iz-Cts"/>
+                                <binding destination="-2" name="enabled" keyPath="self.busy" id="h1d-81-mA7">
+                                    <dictionary key="options">
+                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                        <integer key="NSNullPlaceholder" value="0"/>
+                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                    </dictionary>
+                                </binding>
+                                <binding destination="-2" name="enabled2" keyPath="self.otherButtonsEnabled" previousBinding="h1d-81-mA7" id="UWd-A6-8wj">
+                                    <dictionary key="options">
+                                        <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                        <integer key="NSNullPlaceholder" value="0"/>
+                                    </dictionary>
+                                </binding>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="0bc-P0-SgG">
+                            <rect key="frame" x="-6" y="34" width="81" height="32"/>
+                            <buttonCell key="cell" type="push" title="Select" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" state="on" borderStyle="border" inset="2" id="McY-Cj-7jd" customClass="GreenButtonCell">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="clickAssistant:" target="-2" id="PAa-ZV-aeP"/>
+                                <binding destination="-2" name="enabled" keyPath="self.busy" id="zb3-mt-RMp">
+                                    <dictionary key="options">
+                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                        <integer key="NSNullPlaceholder" value="0"/>
+                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                    </dictionary>
+                                </binding>
+                                <binding destination="-2" name="enabled2" keyPath="self.otherButtonsEnabled" previousBinding="zb3-mt-RMp" id="f60-jx-wto">
+                                    <dictionary key="options">
+                                        <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                        <integer key="NSNullPlaceholder" value="0"/>
+                                    </dictionary>
+                                </binding>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="VtF-CS-bVP">
+                            <rect key="frame" x="-6" y="-7" width="81" height="32"/>
+                            <buttonCell key="cell" type="push" title="Report" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" state="on" borderStyle="border" inset="2" id="d52-xp-fe4" customClass="GreenButtonCell">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="clickAssistant:" target="-2" id="f3d-9s-vxL"/>
+                                <binding destination="-2" name="enabled" keyPath="self.busy" id="VVy-Az-67N">
+                                    <dictionary key="options">
+                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                        <integer key="NSNullPlaceholder" value="0"/>
+                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                    </dictionary>
+                                </binding>
+                                <binding destination="-2" name="enabled2" keyPath="self.otherButtonsEnabled" previousBinding="VVy-Az-67N" id="VFh-Te-CXB">
+                                    <dictionary key="options">
+                                        <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                        <integer key="NSNullPlaceholder" value="0"/>
+                                    </dictionary>
+                                </binding>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="0bc-P0-SgG" firstAttribute="leading" secondItem="Rhc-3f-Mmp" secondAttribute="leading" id="09g-gR-xw3"/>
+                        <constraint firstAttribute="trailing" secondItem="0bc-P0-SgG" secondAttribute="trailing" id="Bmu-hY-2JU"/>
+                        <constraint firstItem="VtF-CS-bVP" firstAttribute="leading" secondItem="Rhc-3f-Mmp" secondAttribute="leading" id="F4C-xw-LAM"/>
+                        <constraint firstItem="qio-p6-Pqn" firstAttribute="leading" secondItem="Rhc-3f-Mmp" secondAttribute="leading" id="WsJ-eO-AR3"/>
+                        <constraint firstAttribute="trailing" secondItem="qio-p6-Pqn" secondAttribute="trailing" id="tzO-SG-gbM"/>
+                        <constraint firstAttribute="trailing" secondItem="VtF-CS-bVP" secondAttribute="trailing" id="xDJ-hV-XFg"/>
+                    </constraints>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                    <connections>
+                        <binding destination="-2" name="hidden" keyPath="self.mainAppRunning" id="AcC-sE-v6e">
+                            <dictionary key="options">
+                                <integer key="NSNoSelectionPlaceholder" value="1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="1"/>
+                                <integer key="NSNullPlaceholder" value="1"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </stackView>
+                <stackView hidden="YES" distribution="fill" orientation="vertical" alignment="centerX" spacing="60" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TU5-0x-fAt" userLabel="Stack Adguard Dont Work">
+                    <rect key="frame" x="0.0" y="0.0" width="248" height="215"/>
+                    <subviews>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="WI5-OB-i6V">
+                            <rect key="frame" x="-2" y="126" width="252" height="44"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="AdGuard don’t work.  Please run AdGuard." id="F0e-9f-alD">
+                                <font key="font" metaFont="system" size="18"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="K9v-08-IS3">
+                            <rect key="frame" x="64" y="38" width="121" height="32"/>
+                            <buttonCell key="cell" type="push" title="Run AdGuard" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MCZ-9T-yrA" customClass="GreenButtonCell">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="clickRunAdguard:" target="-2" id="4K3-ie-vq7"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <edgeInsets key="edgeInsets" left="20" right="20" top="45" bottom="45"/>
+                    <constraints>
+                        <constraint firstItem="WI5-OB-i6V" firstAttribute="leading" secondItem="TU5-0x-fAt" secondAttribute="leading" id="MrV-Ti-K1I"/>
+                        <constraint firstAttribute="trailing" secondItem="WI5-OB-i6V" secondAttribute="trailing" id="d3B-QQ-sdY"/>
+                    </constraints>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                    <connections>
+                        <binding destination="-2" name="hidden" keyPath="self.mainAppRunning" id="CV8-0E-cdF">
+                            <dictionary key="options">
+                                <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                <integer key="NSNullPlaceholder" value="0"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
                 </stackView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="A4L-7y-zsz" secondAttribute="trailing" id="8YS-Mi-eDb"/>
-                <constraint firstItem="A4L-7y-zsz" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="NqX-Zi-N37"/>
-                <constraint firstItem="A4L-7y-zsz" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="UAs-vs-dmh"/>
-                <constraint firstAttribute="bottom" secondItem="A4L-7y-zsz" secondAttribute="bottom" constant="20" id="vyp-FF-kp9"/>
+                <constraint firstItem="XDE-N8-sRz" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="0zj-D6-Tfe"/>
+                <constraint firstItem="SJ8-Wf-pr8" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="2EK-9k-thD"/>
+                <constraint firstItem="Rhc-3f-Mmp" firstAttribute="leading" secondItem="SJ8-Wf-pr8" secondAttribute="trailing" constant="20" id="46A-3c-Y7n"/>
+                <constraint firstItem="rtO-ks-TWg" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="4lV-xK-QcA"/>
+                <constraint firstAttribute="trailing" secondItem="rtO-ks-TWg" secondAttribute="trailing" id="7uW-dJ-EnM"/>
+                <constraint firstItem="rtO-ks-TWg" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="Bvm-zo-3Ea"/>
+                <constraint firstAttribute="bottom" secondItem="TU5-0x-fAt" secondAttribute="bottom" id="CSn-KP-lJK"/>
+                <constraint firstAttribute="trailing" secondItem="Rhc-3f-Mmp" secondAttribute="trailing" constant="20" id="DXR-Kf-oin"/>
+                <constraint firstAttribute="trailing" secondItem="CVr-v4-bDt" secondAttribute="trailing" id="Glr-UY-eS3"/>
+                <constraint firstItem="jKb-oY-gyH" firstAttribute="leading" secondItem="Rhc-3f-Mmp" secondAttribute="leading" id="O8k-EN-MkE"/>
+                <constraint firstItem="jKb-oY-gyH" firstAttribute="top" secondItem="rtO-ks-TWg" secondAttribute="bottom" constant="20" id="OkA-tf-dGl"/>
+                <constraint firstItem="jKb-oY-gyH" firstAttribute="leading" secondItem="XDE-N8-sRz" secondAttribute="trailing" constant="20" id="PWO-Bs-2le"/>
+                <constraint firstItem="TU5-0x-fAt" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="QkH-8h-ESD"/>
+                <constraint firstItem="Rhc-3f-Mmp" firstAttribute="top" secondItem="CVr-v4-bDt" secondAttribute="bottom" constant="25" id="b67-8W-l1m"/>
+                <constraint firstItem="CVr-v4-bDt" firstAttribute="top" secondItem="jKb-oY-gyH" secondAttribute="bottom" constant="20" id="eUN-uE-eZ2"/>
+                <constraint firstItem="CVr-v4-bDt" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="f5i-Kg-gbH"/>
+                <constraint firstAttribute="trailing" secondItem="TU5-0x-fAt" secondAttribute="trailing" id="ghn-fT-bZa"/>
+                <constraint firstAttribute="bottom" secondItem="Rhc-3f-Mmp" secondAttribute="bottom" constant="25" id="hAm-fO-Sf0"/>
+                <constraint firstAttribute="trailing" secondItem="jKb-oY-gyH" secondAttribute="trailing" constant="20" id="k4r-ic-CLB"/>
+                <constraint firstItem="Rhc-3f-Mmp" firstAttribute="centerY" secondItem="SJ8-Wf-pr8" secondAttribute="centerY" id="vXK-bX-T8P"/>
+                <constraint firstItem="TU5-0x-fAt" firstAttribute="top" secondItem="rtO-ks-TWg" secondAttribute="bottom" id="wTB-Ju-cOE"/>
+                <constraint firstItem="jKb-oY-gyH" firstAttribute="centerY" secondItem="XDE-N8-sRz" secondAttribute="centerY" id="y4R-vZ-afX"/>
             </constraints>
-            <point key="canvasLocation" x="-510" y="158"/>
+            <point key="canvasLocation" x="-504" y="157"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="E66-b2-ykH"/>
     </objects>
