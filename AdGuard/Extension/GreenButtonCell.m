@@ -49,15 +49,26 @@
         // momentary button
         if (self.isHighlighted) {
             //pressed
-            [[self colorWithSketchRed:136 green:136 blue:136 alfa:100] setFill];
+            if ([self isDark]) {
+                [[NSColor whiteColor] setFill];
+            }
+            else {
+                [[self colorWithSketchRed:136 green:136 blue:136 alfa:100] setFill];
+            }
             [path fill];
         }
         else {
-            [[NSColor whiteColor] setFill];
+            if ([self isDark]) {
+                [[self colorWithSketchRed:40 green:40 blue:40 alfa:100] setFill];
+                [[NSColor colorWithSRGBRed:1 green:1 blue:1 alpha:0.15] set];
+            }
+            else {
+                [[NSColor whiteColor] setFill];
+                [[NSColor colorWithSRGBRed:0 green:0 blue:0 alpha:0.15] set];
+            }
             [shadow set];
             [path fill];
 
-            [[NSColor colorWithSRGBRed:0 green:0 blue:0 alpha:0.15] set];
             [path setLineWidth:1];
             [path stroke];
         }
@@ -104,4 +115,11 @@
     return [NSColor colorWithSRGBRed:red/255 green:green/255 blue:blue/255 alpha:alfa/100];
 }
 
+- (BOOL)isDark {
+    if (@available(macOS 10.14, *)) {
+        //TODO: uncomment this on Xcode 10
+//        return [self.controlView.effectiveAppearance.name isEqualToString:NSAppearanceNameDarkAqua];
+    }
+    return NO;
+}
 @end

@@ -93,10 +93,12 @@ app.on('ready', (() => {
     startup.init();
 
     uiEventListener.init();
-    createWindow();
-    uiEventListener.register(mainWindow);
-
+    // createWindow();
+    // uiEventListener.register(mainWindow);
     initTrayIcon();
+    if (process.platform === 'darwin') {
+        app.dock.hide();
+    }
 }));
 
 /**
@@ -107,6 +109,15 @@ app.on('window-all-closed', () => {
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
         app.quit();
+    }
+    else {
+        app.dock.hide();
+    }
+});
+
+app.on('browser-window-created', () => {
+    if (process.platform === 'darwin') {
+        app.dock.show();
     }
 });
 
