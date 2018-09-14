@@ -60,11 +60,11 @@
         else {
             if ([self isDark]) {
                 [[self colorWithSketchRed:40 green:40 blue:40 alfa:100] setFill];
-                [[NSColor colorWithSRGBRed:1 green:1 blue:1 alpha:0.15] set];
+                [[NSColor colorWithSRGBRed:1 green:1 blue:1 alpha:0.15] setStroke];
             }
             else {
                 [[NSColor whiteColor] setFill];
-                [[NSColor colorWithSRGBRed:0 green:0 blue:0 alpha:0.15] set];
+                [[NSColor colorWithSRGBRed:0 green:0 blue:0 alpha:0.15] setStroke];
             }
             [shadow set];
             [path fill];

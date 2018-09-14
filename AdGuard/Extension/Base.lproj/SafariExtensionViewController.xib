@@ -143,19 +143,19 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="clickEnabled:" target="-2" id="cRK-Rc-CFK"/>
-                        <binding destination="-2" name="hidden" keyPath="self.mainAppRunning" previousBinding="cc0-M1-mNw" id="ftj-lQ-gCq">
-                            <dictionary key="options">
-                                <integer key="NSNoSelectionPlaceholder" value="1"/>
-                                <integer key="NSNotApplicablePlaceholder" value="1"/>
-                                <integer key="NSNullPlaceholder" value="1"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
                         <binding destination="-2" name="enabled" keyPath="self.busy" id="cc0-M1-mNw">
                             <dictionary key="options">
                                 <integer key="NSNoSelectionPlaceholder" value="0"/>
                                 <integer key="NSNotApplicablePlaceholder" value="0"/>
                                 <integer key="NSNullPlaceholder" value="0"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="-2" name="hidden" keyPath="self.mainAppRunning" previousBinding="cc0-M1-mNw" id="ftj-lQ-gCq">
+                            <dictionary key="options">
+                                <integer key="NSNoSelectionPlaceholder" value="1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="1"/>
+                                <integer key="NSNullPlaceholder" value="1"/>
                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
@@ -237,6 +237,15 @@
                             </buttonCell>
                             <connections>
                                 <action selector="clickWhitelist:" target="-2" id="QCg-Iz-Cts"/>
+                                <binding destination="-2" name="enabled3" keyPath="self.domain" previousBinding="UWd-A6-8wj" id="0AV-pH-zaZ">
+                                    <dictionary key="options">
+                                        <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                        <integer key="NSNullPlaceholder" value="0"/>
+                                        <string key="NSValueTransformerName">NSIsNotNil</string>
+                                    </dictionary>
+                                </binding>
                                 <binding destination="-2" name="enabled" keyPath="self.busy" id="h1d-81-mA7">
                                     <dictionary key="options">
                                         <integer key="NSNoSelectionPlaceholder" value="0"/>
@@ -263,6 +272,15 @@
                             </buttonCell>
                             <connections>
                                 <action selector="clickAssistant:" target="-2" id="PAa-ZV-aeP"/>
+                                <binding destination="-2" name="enabled3" keyPath="self.domain" previousBinding="f60-jx-wto" id="4Q8-nO-3YV">
+                                    <dictionary key="options">
+                                        <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                        <integer key="NSNullPlaceholder" value="0"/>
+                                        <string key="NSValueTransformerName">NSIsNotNil</string>
+                                    </dictionary>
+                                </binding>
                                 <binding destination="-2" name="enabled" keyPath="self.busy" id="zb3-mt-RMp">
                                     <dictionary key="options">
                                         <integer key="NSNoSelectionPlaceholder" value="0"/>
@@ -289,6 +307,15 @@
                             </buttonCell>
                             <connections>
                                 <action selector="clickAssistant:" target="-2" id="f3d-9s-vxL"/>
+                                <binding destination="-2" name="enabled3" keyPath="self.domain" previousBinding="VFh-Te-CXB" id="UOy-xx-I7D">
+                                    <dictionary key="options">
+                                        <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                        <integer key="NSNullPlaceholder" value="0"/>
+                                        <string key="NSValueTransformerName">NSIsNotNil</string>
+                                    </dictionary>
+                                </binding>
                                 <binding destination="-2" name="enabled" keyPath="self.busy" id="VVy-Az-67N">
                                     <dictionary key="options">
                                         <integer key="NSNoSelectionPlaceholder" value="0"/>

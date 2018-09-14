@@ -81,10 +81,9 @@
         [window getActiveTabWithCompletionHandler:^(SFSafariTab * _Nullable activeTab) {
             [activeTab getActivePageWithCompletionHandler:^(SFSafariPage * _Nullable activePage) {
                 [activePage getPagePropertiesWithCompletionHandler:^(SFSafariPageProperties * _Nullable properties) {
+                    SafariExtensionViewController.sharedController.domain = nil;
                     if (properties) {
                         SafariExtensionViewController.sharedController.domain = properties.url.host;
-                        validationHandler(YES, nil);
-                        return;
                     }
                     validationHandler(YES, nil);
                 }];

@@ -14,8 +14,6 @@
 
 + (SafariExtensionViewController *)sharedController;
 
-@property NSString *domain;
-
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - OUTLETS
 
@@ -36,6 +34,7 @@
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - Properties and Public methods
 
+@property NSString *domain;
 @property BOOL otherButtonsEnabled;
 @property BOOL busy;
 @property BOOL mainAppRunning;
