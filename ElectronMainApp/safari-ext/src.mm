@@ -211,6 +211,11 @@ NAN_METHOD(setContentBlockingJson) {
     }];
 }
 
+NAN_METHOD(sendReady) {
+
+    [AESharedResources notifyReady];
+}
+
 NAN_METHOD(setBusy) {
 
     if (info.Length() < 1) {
@@ -509,6 +514,24 @@ NAN_METHOD(setOnShowPreferences) {
   }];
 }
 
+NAN_METHOD(debugLog) {
+
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsString()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+
+    Nan::Utf8String msg (info[0]);
+    if (msg.length() > 0) {
+        DDLogCDebug(@"JS: %s", *msg);
+     }
+}
+
 NAN_MODULE_INIT(Init) {
 
     [AESharedResources initLogger];
@@ -554,6 +577,12 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("setOnShowPreferences").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setOnShowPreferences)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("debugLog").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(debugLog)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("sendReady").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(sendReady)).ToLocalChecked());
 }
 
 // macro to load the module when require'd

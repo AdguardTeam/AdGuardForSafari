@@ -5,6 +5,7 @@ const filterState = require('./app/filters/filters-state');
 const log = require('./app/utils/log');
 const contentBlockerListener = require('./app/content-blocker/content-blocker-listener');
 const toolbarController = require('./toolbar-controller');
+const safariToolbar = require('safari-ext');
 
 /**
  * Application startup
@@ -16,6 +17,8 @@ module.exports = (() => {
      */
     const init = () => {
         log.info('Application initialization..');
+
+        safariToolbar.busyStatus(true);
 
         whitelist.init();
         contentBlockerListener.init();
@@ -32,6 +35,8 @@ module.exports = (() => {
             log.info('Application initialization finished');
 
             toolbarController.init();
+            safariToolbar.busyStatus(false);
+            safariToolbar.sendReady();
         });
     };
 

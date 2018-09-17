@@ -15,10 +15,15 @@
 
 @end
 
-@implementation SafariExtensionHandler 
+@implementation SafariExtensionHandler
+
+static NSMutableArray *_onReadyBlocks;
+static BOOL _mainAppReady;
 
 + (void)initialize {
     if (self == [SafariExtensionHandler class]) {
+        _onReadyBlocks = [NSMutableArray new];
+        _mainAppReady = NO;
         [AESharedResources initLogger];
         [AESharedResources setListenerOnBusyChanged:^{
             DDLogDebugTrace();
@@ -28,6 +33,25 @@
                 [SFSafariApplication setToolbarItemsNeedUpdate]; // because changes can happen in main app
             }
         }];
+        [AESharedResources setListenerOnReady:^{
+            @synchronized(_onReadyBlocks) {
+                _mainAppReady = YES;
+                for (dispatch_block_t block in _onReadyBlocks) {
+                    dispatch_async(dispatch_get_main_queue(), block);
+                }
+                [_onReadyBlocks removeAllObjects];
+            }
+        }];
+    }
+}
+
++ (void)onReady:(dispatch_block_t)block {
+    @synchronized(_onReadyBlocks) {
+        if (_mainAppReady) {
+            dispatch_async(dispatch_get_main_queue(), block);
+            return;
+        }
+        [_onReadyBlocks addObject:block];
     }
 }
 
@@ -66,10 +90,8 @@
 - (void)validateToolbarItemInWindow:(SFSafariWindow *)window validationHandler:(void (^)(BOOL enabled, NSString *badgeText))validationHandler {
     // This method will be called whenever some state changes in the passed in window. You should use this as a chance to enable or disable your toolbar item and set badge text.
     DDLogDebugTrace();
-    BOOL running = ([NSRunningApplication runningApplicationsWithBundleIdentifier:AG_BUNDLEID].count > 0);
-    SafariExtensionViewController.sharedController.mainAppRunning = running;
     [window getToolbarItemWithCompletionHandler:^(SFSafariToolbarItem * _Nullable toolbarItem) {
-        if (running) {
+        if ([self setMainAppRunning]) {
             [toolbarItem setImage:([[AESharedResources sharedDefaults] boolForKey:AEDefaultsEnabled] ?
                                    [NSImage imageNamed:@"toolbar-on"] :
                                    [NSImage imageNamed:@"toolbar-off"])];
@@ -98,6 +120,7 @@
 
 - (void)popoverWillShowInWindow:(SFSafariWindow *)window {
     DDLogDebugTrace();
+    [self setMainAppRunning];
     SafariExtensionViewController.sharedController.busy = [AESharedResources.sharedDefaults boolForKey:AEDefaultsMainAppBusy];
     [SafariExtensionViewController.sharedController setEnabledButton]; //this call peforms tuning all views
 }
@@ -115,5 +138,16 @@
                                                                                    options:0
                                                                                      error:NULL]
                                         completion:nil];
+}
+
+- (BOOL)setMainAppRunning {
+    BOOL running = ([NSRunningApplication runningApplicationsWithBundleIdentifier:AG_BUNDLEID].count > 0);
+    SafariExtensionViewController.sharedController.mainAppRunning = running;
+    @synchronized(_onReadyBlocks) {
+        if (running == NO) {
+            _mainAppReady = NO;
+        }
+    }
+    return running;
 }
 @end

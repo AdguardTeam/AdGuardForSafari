@@ -114,6 +114,16 @@ extern NSString * const AEDefaultsMainAppBusy;
  @param block Performed on internal thread when catched notification.
  */
 + (void)setListenerOnShowPreferences:(AESListenerBlock)block;
+/**
+ Notifies others, that main app successfully launched.
+ */
++ (void)notifyReady;
+/**
+ Register listener for main app ready.
+
+ @param block Performed on internal thread when catched notification.
+ */
++ (void)setListenerOnReady:(AESListenerBlock)block;
 
 /**
  Saves blocking content rules JSON in shared storage.

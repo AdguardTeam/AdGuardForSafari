@@ -71,6 +71,7 @@ function initTrayIcon() {
                     mainWindow.show();
                 } else {
                     createWindow();
+                    uiEventListener.register(mainWindow);
                 }
             }
         },
@@ -127,7 +128,9 @@ app.on('browser-window-created', () => {
 app.on('activate', () => {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (mainWindow === null) {
+    if (mainWindow) {
+        mainWindow.show();
+    } else {
         createWindow();
         uiEventListener.register(mainWindow);
     }
