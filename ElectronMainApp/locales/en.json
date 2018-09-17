@@ -934,5 +934,8 @@
 	},
 	"options_content_blocker_overlimit": {
 		"message": "Too many filters enabled. Safari cannot use more than 50000 rules."
+	},
+	"options_safari_extensions_disabled": {
+		"message": "Safari extensions are not OK!"
 	}
 }

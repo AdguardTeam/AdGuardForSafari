@@ -1016,6 +1016,31 @@ PageController.prototype = {
                 // Doing nothing
             }.bind(this)
         });
+
+        this._checkSafariExtensions();
+    },
+
+    _checkSafariExtensions: function () {
+        let warningEl = document.querySelector('#extensions-disabled-warning');
+        warningEl.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'openSafariExtensionsPrefs'
+            }));
+        });
+
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'checkSafariExtensions'
+        }));
+
+        ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
+            if (!arg) {
+                warningEl.style.display = 'block';
+            } else {
+                warningEl.style.display = 'none';
+            }
+        });
     },
 
     _customizeText: function () {

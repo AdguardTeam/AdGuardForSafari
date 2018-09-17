@@ -8,6 +8,7 @@ const whitelist = require('./app/whitelist');
 const userrules = require('./app/userrules');
 const antibanner = require('./app/antibanner');
 const app = require('./app/app');
+const safariToolbar = require('safari-ext');
 
 /**
  * Initializes event listener
@@ -68,6 +69,16 @@ module.exports.init = function () {
             case 'loadCustomFilterInfo':
                 filters.loadCustomFilter(message.url, function (filter) {
                     event.sender.send('loadCustomFilterInfoResponse', filter);
+                });
+                break;
+            case 'checkSafariExtensions':
+                safariToolbar.extensionsState((result) => {
+                    event.sender.send('checkSafariExtensionsResponse', result);
+                });
+                break;
+            case 'openSafariExtensionsPrefs':
+                safariToolbar.openExtensionsPreferenses(()=> {
+                    //Do nothing
                 });
                 break;
         }
