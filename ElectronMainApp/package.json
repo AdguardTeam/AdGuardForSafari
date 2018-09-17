@@ -1,5 +1,5 @@
 {
-    "name": "AdGuard",
+    "name": "AdGuardSafariApp",
     "version": "1.0.0",
     "description": "",
     "main": "./main.js",
@@ -9,6 +9,7 @@
         "inspect": "electron --inspect=5858 ."
     },
     "dependencies": {
+        "auto-launch": "^5.0.5",
         "config": "^1.31.0",
         "electron-store": "^2.0.0",
         "filters-downloader": "git+https://github.com/AdguardTeam/FiltersDownloader.git#a7d2177",

@@ -5,10 +5,12 @@ process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
 
 /* global require, process */
 
-const {app, shell, BrowserWindow, Tray, Menu} = require('electron');
+const {app, shell, BrowserWindow} = require('electron');
 
 const uiEventListener = require('./src/main/ui-event-handler');
 const startup = require('./src/main/startup');
+
+const trayController = require('./src/main/tray-controller');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -49,40 +51,20 @@ function createWindow() {
     });
 }
 
+function showWindow(callback) {
+    if (mainWindow) {
+        mainWindow.show();
+    } else {
+        createWindow();
+        uiEventListener.register(mainWindow);
+    }
+
+    callback();
+}
+
 // Keep a global reference of the tray object, if you don't, the tray icon will
 // be hidden automatically when the JavaScript object is garbage collected.
 let tray;
-
-/**
- * Initializes tray icon
- */
-function initTrayIcon() {
-
-    const imageFolder = appPack.resourcePath('/src/main/icons');
-    const trayImage = imageFolder + '/app-icon-16.png';
-    tray = new Tray(trayImage);
-    tray.setPressedImage(imageFolder + '/app-icon-16.png');
-
-    const contextMenu = Menu.buildFromTemplate([
-        {
-            label: "Preferences", click: () => {
-                if (mainWindow) {
-                    mainWindow.show();
-                } else {
-                    createWindow();
-                    uiEventListener.register(mainWindow);
-                }
-            }
-        },
-        {
-            label: "Quit", click: () => {
-                app.quit();
-            }
-        }
-    ]);
-
-    tray.setContextMenu(contextMenu);
-}
 
 /**
  * This method will be called when Electron has finished
@@ -91,11 +73,9 @@ function initTrayIcon() {
  */
 app.on('ready', (() => {
     startup.init();
-
     uiEventListener.init();
-    // createWindow();
-    // uiEventListener.register(mainWindow);
-    initTrayIcon();
+
+    tray = trayController.initTrayIcon(showWindow);
     if (process.platform === 'darwin') {
         app.dock.hide();
     }
@@ -127,9 +107,7 @@ app.on('browser-window-created', () => {
 app.on('activate', () => {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (mainWindow) {
-        mainWindow.show();
-    } else {
+    if (mainWindow === null) {
         createWindow();
         uiEventListener.register(mainWindow);
     }
