@@ -54,4 +54,5 @@ codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${CHIL
 codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${CHILD_ENT}" "$FRAMEWORKS/AdGuard Helper.app" || exit 1
 
 rm -Rfv "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app"
-cp -HRfpv "${APP}" "${BUILT_PRODUCTS_DIR}" || exit 1
+cp -HRfp "${APP}" "${BUILT_PRODUCTS_DIR}" || exit 1
+rm -Rfv "${APP}" || exit 1

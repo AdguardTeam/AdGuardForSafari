@@ -44,6 +44,10 @@ module.exports = (() => {
         busyStatus(false);
     };
 
+    const sendReady = () => {
+        addon.sendReady();
+    };
+
     /**
      * Sets busy status
      *
@@ -126,8 +130,13 @@ module.exports = (() => {
         addon.openExtensionsPreferenses(callback);
     };
 
+    const debugLog = (msg) => {
+        addon.debugLog(msg);
+    };
+
     return {
         init: init,
+        sendReady: sendReady,
         busyStatus: busyStatus,
         setContentBlockingJson: setContentBlockingJson,
         setProtectionEnabled: setProtectionEnabled,
@@ -137,7 +146,8 @@ module.exports = (() => {
         setUserFilter: setUserFilter,
         userFilter: userFilter,
         extensionsState: extensionsState,
-        openExtensionsPreferenses: openExtensionsPreferenses
+        openExtensionsPreferenses: openExtensionsPreferenses,
+        debugLog: debugLog
     };
 
 })();

@@ -28,6 +28,7 @@
 #define NOTIFICATION_USERFILTER                 AG_BUNDLEID @".notify.userfilter"
 #define NOTIFICATION_BUSY                       AG_BUNDLEID @".notify.busy"
 #define NOTIFICATION_SHOW_PREFS                 AG_BUNDLEID @".notify.showprefs"
+#define NOTIFICATION_READY                      AG_BUNDLEID @".notify.ready"
 
 
 /////////////////////////////////////////////////////////////////////
@@ -55,6 +56,7 @@ static AESListenerBlock _onWhitelistChangedBlock;
 static AESListenerBlock _onUserFilterChangedBlock;
 static AESListenerBlock _onBusyChangedBlock;
 static AESListenerBlock _onShowPreferences;
+static AESListenerBlock _onReady;
 
 + (void)initialize{
     
@@ -170,6 +172,17 @@ static AESListenerBlock _onShowPreferences;
 + (void)setListenerOnShowPreferences:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_SHOW_PREFS
                             blockPtr:&_onShowPreferences
+                               block:block];
+}
+
++ (void)notifyReady {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_READY, NULL, NULL, YES);
+    });
+}
++ (void)setListenerOnReady:(AESListenerBlock)block {
+    [self setListenerForNotification:NOTIFICATION_READY
+                            blockPtr:&_onReady
                                block:block];
 }
 
@@ -374,6 +387,9 @@ static void onChangedNotify(CFNotificationCenterRef center, void *observer, CFSt
     }
     else if ([nName isEqualToString:NOTIFICATION_SHOW_PREFS]){
         block = _onShowPreferences;
+    }
+    else if ([nName isEqualToString:NOTIFICATION_READY]){
+        block = _onReady;
     }
 
     if (block) {

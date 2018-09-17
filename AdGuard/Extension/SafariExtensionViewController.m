@@ -9,6 +9,7 @@
 #import "SafariExtensionViewController.h"
 #import "ACLang.h"
 #import "AESharedResources.h"
+#import "SafariExtensionHandler.h"
 
 @interface SafariExtensionViewController ()
 @end
@@ -95,7 +96,18 @@
 }
 
 - (IBAction)clickPreferences:(id)sender {
-    [AESharedResources notifyShowPreferences];
+    if (self.mainAppRunning) {
+        [AESharedResources notifyShowPreferences];
+    }
+    else {
+        [[NSWorkspace sharedWorkspace] launchAppWithBundleIdentifier:AG_BUNDLEID
+                                                             options:0
+                                      additionalEventParamDescriptor:nil
+                                                    launchIdentifier:NULL];
+        [SafariExtensionHandler onReady:^{
+            [AESharedResources notifyShowPreferences];
+        }];
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////
