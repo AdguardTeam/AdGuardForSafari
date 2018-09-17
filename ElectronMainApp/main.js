@@ -20,14 +20,13 @@ let mainWindow;
 function createWindow() {
 
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1024,
+        height: 768,
+        minWidth: 800,
+        minHeight: 768,
         center: true,
         icon: './src/main/ui/images/128x128.png',
-        resizable: true,
-        webPreferences: {
-            zoomFactor: 0.7
-        }
+        resizable: true
     });
 
     mainWindow.loadFile('./src/main/ui/options.html');
