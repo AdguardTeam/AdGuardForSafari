@@ -5,6 +5,7 @@ const filterState = require('./app/filters/filters-state');
 const log = require('./app/utils/log');
 const contentBlockerListener = require('./app/content-blocker/content-blocker-listener');
 const toolbarController = require('./toolbar-controller');
+const notificationController = require('./notification-controller');
 const safariToolbar = require('safari-ext');
 
 /**
@@ -23,6 +24,7 @@ module.exports = (() => {
         whitelist.init();
         contentBlockerListener.init();
         filterState.init();
+        notificationController.init();
 
         antibanner.start({
             onInstall: function (callback) {

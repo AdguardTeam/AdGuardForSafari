@@ -882,57 +882,6 @@ const AntiBannerFilters = function (options) {
         checkSafariContentBlockerRulesLimit(info.rulesOverLimit);
     }
 
-    function getFiltersUpdateResultMessage(success, updatedFilters) {
-        const title = i18n.__("options_popup_update_title.message");
-        const text = [];
-        if (success) {
-            if (updatedFilters.length === 0) {
-                text.push(i18n.__("options_popup_update_not_found.message"));
-            } else {
-                updatedFilters.sort(function (a, b) {
-                    return a.displayNumber - b.displayNumber;
-                });
-                for (let i = 0; i < updatedFilters.length; i++) {
-                    const filter = updatedFilters[i];
-                    text.push(i18n.__("options_popup_update_updated.message", [filter.name, filter.version]).replace("$1", filter.name).replace("$2", filter.version));
-                }
-            }
-        } else {
-            text.push(i18n.__("options_popup_update_error.message"));
-        }
-
-        return {
-            title: title,
-            text: text.join('\r\n')
-        };
-    }
-
-    function showFiltersUpdatePopup(options) {
-        if (options) {
-            const message = getFiltersUpdateResultMessage(options.success, options.updatedFilters);
-
-            const popup = document.querySelector('#filters-update-popup');
-            popup.style.display = 'block';
-            popup.querySelector('#filters-update-popup-close').addEventListener('click', function (e) {
-                e.preventDefault();
-                popup.style.display = 'none';
-            });
-
-            popup.querySelector('#filters-update-popup-title').textContent = message.title;
-            popup.querySelector('#filters-update-popup-description').textContent = message.text;
-
-            const showMoreButton = popup.querySelector('#filters-update-popup-more');
-            if (options.success && options.updatedFilters.length > 1) {
-                showMoreButton.style.display = 'block';
-                showMoreButton.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    popup.querySelector('.alert__cont').style.height = 'auto';
-                    showMoreButton.style.display = 'none';
-                });
-            }
-        }
-    }
-
     function onFilterStateChanged(filter) {
         const filterId = filter.filterId;
         const enabled = filter.enabled;
@@ -958,8 +907,7 @@ const AntiBannerFilters = function (options) {
         updateRulesCountInfo: updateRulesCountInfo,
         onFilterStateChanged: onFilterStateChanged,
         onFilterDownloadStarted: onFilterDownloadStarted,
-        onFilterDownloadFinished: onFilterDownloadFinished,
-        showFiltersUpdatePopup: showFiltersUpdatePopup
+        onFilterDownloadFinished: onFilterDownloadFinished
     };
 };
 
@@ -1108,64 +1056,6 @@ PageController.prototype = {
         // Initialize AntiBanner filters
         this.antiBannerFilters = new AntiBannerFilters({rulesInfo: contentBlockerInfo});
         this.antiBannerFilters.render();
-    },
-
-    /**
-     * Depending on version numbers select proper message for description
-     */
-    getUpdateDescriptionMessage: function (isMajorUpdate) {
-        if (isMajorUpdate) {
-            return i18n.__("options_popup_version_update_description_major.message");
-        }
-
-        return i18n.__("options_popup_version_update_description_minor.message");
-    },
-
-    showAppUpdatePopup: function (options) {
-        const message = {
-            title: i18n.__("options_popup_version_update_title.message").replace('$1', options.currentVersion),
-            description: this.getUpdateDescriptionMessage(options.isMajorUpdate),
-            changelogHref: i18n.__("options_popup_version_update_changelog_href.message"),
-            changelogText: i18n.__("options_popup_version_update_changelog_text.message"),
-            offer: i18n.__("options_popup_version_update_offer.message"),
-            offerButtonHref: i18n.__("options_popup_version_update_offer_button_href.message"),
-            offerButtonText: i18n.__("options_popup_version_update_offer_button_text.message")
-        };
-
-        const template =
-            `<div id="adguard-new-version-popup" class="alert alert--active">
-                <div id="adguard-new-version-popup-close" class="alert__close"></div>
-                <div class="alert__in">
-                    <div class="alert__ico"></div>
-                    <div>
-                        <div class="subtitle-2">
-                            ${message.title}
-                        </div>
-                        <div class="alert__desc">
-                            <span>
-                                ${message.description}
-                            </span>
-                            <a href="${message.changelogHref}" class="alert__link" target="_blank">
-                                ${message.changelogText}
-                            </a>
-                        </div>
-                        <div class="alert__desc">
-                            <span>
-                                ${message.offer}
-                            </span>
-                            <a href="${message.offerButtonHref}" class="alert__link">
-                                ${message.offerButtonText}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-
-        document.querySelector('#new-version-popup-placeholder').appendChild(Utils.htmlToElement(template));
-        document.querySelector('#adguard-new-version-popup-close').addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector('#adguard-new-version-popup').style.display = 'none';
-        });
     }
 };
 
@@ -1218,12 +1108,6 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.CONTENT_BLOCKER_UPDATED:
                     controller.antiBannerFilters.updateRulesCountInfo(options);
-                    break;
-                case EventNotifierTypes.UPDATE_FILTERS_SHOW_POPUP:
-                    controller.antiBannerFilters.showFiltersUpdatePopup(options);
-                    break;
-                case EventNotifierTypes.APPLICATION_UPDATED:
-                    controller.showAppUpdatePopup(options);
                     break;
                 case EventNotifierTypes.SHOW_OPTIONS_GENERAL:
                     window.location.hash = 'general-settings';
