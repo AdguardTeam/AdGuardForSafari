@@ -638,58 +638,6 @@ li.active .toggler:before {
   color: #66b574;
   margin-left: 20px;
 }
-.account {
-  display: none;
-  padding-top: 35px;
-  padding-bottom: 35px;
-  box-shadow: 0 -1px 0 0 rgba(216, 216, 216, .7);
-}
-.account--active {
-  display: block;
-}
-.account__control {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-}
-.account__control-authorized {
-  margin-bottom: 25px;
-}
-.account__avatar {
-  flex-shrink: 0;
-  width: 80px;
-  height: 80px;
-  margin-right: 30px;
-  border-radius: 4px;
-  background-color: #f7f7f7;
-  background-size: 32px 42px;
-  background-repeat: no-repeat;
-  background-position: 50%;
-  background-image: url(../images/avatar.svg);
-}
-.account__desc {
-  margin-bottom: 35px;
-}
-.account__avatar-pic {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-}
-.account__btns {
-  padding-top: 13px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.account__btn {
-  margin-right: 15px;
-}
-
-.account__btn:last-child {
-  margin-right: 0;
-}
 
 .subtitle-2 {
   margin-bottom: 7px;
@@ -780,34 +728,6 @@ li.active .toggler:before {
   background-color: rgba(216, 216, 216, .7);
   cursor: pointer;
   transition: 0.3s ease background-color, 0.3s ease background-image;
-}
-.app-download {
-  padding-top: 30px;
-  box-shadow: 0 -1px 0 0 rgba(216, 216, 216, .7);
-}
-.app-download__desc {
-  margin-bottom: 20px;
-  font-size: 12px;
-  opacity: 0.5;
-}
-
-.btn-app-store {
-  cursor: pointer;
-  border: 0;
-  display: inline-block;
-  vertical-align: middle;
-  width: 91px;
-  height: 32px;
-  background-image: url(../images/app-store.svg);
-}
-.btn-google-play {
-  cursor: pointer;
-  border: 0;
-  display: inline-block;
-  vertical-align: middle;
-  width: 104px;
-  height: 24px;
-  background-image: url(../images/google-play.svg);
 }
 /* /st */
 .filter-rules {
