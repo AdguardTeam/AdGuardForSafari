@@ -2,6 +2,7 @@ const appPack = require('../utils/app-pack');
 
 const filters = require('./app/filters-manager');
 const listeners = require('./notifier');
+const antibanner = require('./app/antibanner');
 const events = require('./events');
 
 const {app, shell, Tray, Menu} = require('electron');
@@ -40,6 +41,10 @@ module.exports = (() => {
         }
     };
 
+    const imageFolder = appPack.resourcePath('/src/main/icons');
+    const trayImageOff = imageFolder + '/toolbar-off.png';
+    const trayImageOn = imageFolder + '/toolbar-on.png';
+
     /**
      * Initializes icon in tray
      */
@@ -47,10 +52,8 @@ module.exports = (() => {
 
         const isLaunchAtLogin = autoLaunchEnabled;
 
-        const imageFolder = appPack.resourcePath('/src/main/icons');
-        const trayImage = imageFolder + '/app-icon-16.png';
-        let tray = new Tray(trayImage);
-        tray.setPressedImage(imageFolder + '/app-icon-16.png');
+        const tray = new Tray(trayImageOff);
+        tray.setPressedImage(trayImageOff);
 
         const contextMenu = Menu.buildFromTemplate([{
             label: "About", click: () => {
@@ -109,6 +112,24 @@ module.exports = (() => {
         ]);
 
         tray.setContextMenu(contextMenu);
+
+        const setTrayProtectionStatusIcon = () => {
+            if (antibanner.isRunning()) {
+                tray.setImage(trayImageOn);
+                tray.setPressedImage(trayImageOn);
+            } else {
+                tray.setImage(trayImageOff);
+                tray.setPressedImage(trayImageOff);
+            }
+        };
+
+        listeners.addListener((event) => {
+            if (event === events.REQUEST_FILTER_UPDATED) {
+                setTrayProtectionStatusIcon();
+            }
+        });
+
+        setTrayProtectionStatusIcon();
 
         return tray;
     };
