@@ -530,7 +530,7 @@ const AntiBannerFilters = function (options) {
         return `
             <div class="page-title">
                 <a href="#antibanner">
-                    <img src="images/icon-back.png" class="back">
+                    <img src="images/arrow-left.svg" class="back">
                 </a>
                 ${name}
             </div>`;
