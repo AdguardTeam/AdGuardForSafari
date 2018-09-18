@@ -719,12 +719,6 @@ li.active .toggler:before {
 .dropdown__item--adguard {
   background-image: url("../images/logo-shield.svg");
 }
-.dropdown__item--dropbox {
-  background-image: url("../images/dropbox.svg");
-}
-.dropdown__item--chrome {
-  background-image: url("../images/chrome.svg");
-}
 
 .settings-form {
   padding-top: 30px;
@@ -1305,15 +1299,6 @@ li.active .toggler:before {
   background-color: #ad0900;
   text-align: center;
   color: #fff;
-}
-.alert__close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 13px;
-  height: 13px;
-  cursor: pointer;
-  background-image: url("../images/cross.svg");
 }
 .alert__in {
   display: -webkit-box;
