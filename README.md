@@ -1,33 +1,23 @@
 # AdGuard Safari Application Extension
 
-### How to build
-```
-  yarn build
-```
-
 #### Requirements
 
+- MacOS 10.13 or above
+- Xcode 9.4 or above
+- installed Xcode Command Line Tools
 - [nodejs](https://nodejs.org/en/download/)
 - [yarn](https://yarnpkg.com/en/docs/install/)
+- [electron-packager](https://github.com/electron-userland/electron-packager)
+- [node-gyp](https://github.com/nodejs/node-gyp)
+- [electron-osx-sign](https://github.com/electron-userland/electron-osx-sign) 
 
-Install local dependencies by runnning:
-```
-  yarn install
-```
+Also read [Electron App README](./ElectronMainApp/README.md).
 
-### How to run tests
-```
-  yarn test
-```
+## Some tuning
 
-## How to debug application during development
+In file `./AdGuard/Config.xcconfig` change AG_SIGN variable to appropriate value (your codesign identity).
 
-### Debug window
+## Input Point
 
-Launch application via `yarn start` and open menu `View -> Toggle Developer Tools`
+Doubleclick on `AdGuard.xcworkspace` in Finder. 
 
-### Debug main process
-
-Launch application via `yarn inspect` and open URI `chrome://inspect` in Chrome
-
-Then add network target `localhost:5858` via button 'Configure' and select this target below.
