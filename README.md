@@ -1,23 +1,83 @@
 # AdGuard Safari Application Extension
 
-#### Requirements
+AdGuard is a fast and lightweight ad blocking browser extension that effectively blocks all types of ads on all web pages. Unlike its standalone counterparts (AG for Windows, Mac), browser extension is completely free and open source.
+
+AdGuard for Safari is [Electron](https://electronjs.org/) application that runs on your Mac OS. 
+When app is running you can see AdGuard icon in tray.
+The app adds two Safari browser extensions:
+- Content Blocker
+- Toolbar icon
+
+If Toolbar icon is enabled, AdGuard icon should appear in Safari toolbar for quick access to your settings.
+
+
+## Prerequisites
 
 - MacOS 10.13 or above
-- Xcode 9.4 or above
+- [Xcode](https://developer.apple.com/xcode/) 9.4 or above
 - installed Xcode Command Line Tools
-- [nodejs](https://nodejs.org/en/download/)
-- [yarn](https://yarnpkg.com/en/docs/install/)
+- [Node.js](https://nodejs.org/) v8.9.4 and higher
+- [Yarn](https://yarnpkg.com/lang/en/)
+
+
+Also you need install these packages globally
+
 - [electron-packager](https://github.com/electron-userland/electron-packager)
 - [node-gyp](https://github.com/nodejs/node-gyp)
-- [electron-osx-sign](https://github.com/electron-userland/electron-osx-sign) 
+- [electron-osx-sign](https://www.npmjs.com/package/electron-osx-sign)
 
-Also read [Electron App README](./ElectronMainApp/README.md).
+```
+npm install -g electron-packager 
+npm install -g node-gyp 
+npm install -g electron-osx-sign
+```
 
-## Some tuning
 
-In file `./AdGuard/Config.xcconfig` change AG_SIGN variable to appropriate value (your codesign identity).
+## Installing 
 
-## Input Point
+### To run application in development mode 
 
-Doubleclick on `AdGuard.xcworkspace` in Finder. 
+```
+cd ElectronMainApp
+```
 
+Install local dependencies by runnning:
+
+```
+yarn install
+```
+
+### How to debug application during development
+
+#### Debug window
+
+Launch application via 
+```
+yarn start
+```
+Open menu `View -> Toggle Developer Tools`
+
+#### Debug main process
+
+Launch application via 
+```
+yarn inspect
+```
+Open URI `chrome://inspect` in Chrome
+
+Then add network target `localhost:5858` via button "Configure" and select this target below.
+
+### Build and run in production mode
+
+Replace string in file `./AdGuard/Config.xcconfig`
+```
+AG_SIGN = <YOUR APPLE DEVELOPER COMMON NAME>
+```
+where `YOUR APPLE DEVELOPER COMMON NAME` is your codesign identity 
+Open `AdGuard.xcworkspace` in Xcode
+
+### How to run tests
+```
+cd ElectronMainApp
+yarn test
+```
