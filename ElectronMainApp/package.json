@@ -19,6 +19,7 @@
         "xmlhttprequest": "^1.8.0"
     },
     "devDependencies": {
-        "electron": "^2.0.5"
+        "electron": "^2.0.5",
+        "electron-rebuild": "^1.8.2"
     }
 }

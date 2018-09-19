@@ -37,6 +37,9 @@ else
 yarn upgrade --force -P safari-ext || exit 1
 fi
 
+#Run this binary file to rebuild node packages for electron
+"${SRC}/node_modules/.bin/electron-rebuild"
+
 electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=2.0.8 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
 --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${BUILT_PRODUCTS_DIR}" \
 ${OPT} || exit 1

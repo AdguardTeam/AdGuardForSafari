@@ -1,4 +1,5 @@
 const appPack = require('../utils/app-pack');
+const i18n = require('../utils/i18n');
 
 const filters = require('./app/filters-manager');
 const listeners = require('./notifier');
@@ -11,7 +12,6 @@ const AutoLaunch = require('auto-launch');
 /**
  * Tray controller.
  * Handles tray events and setups its view state.
- * TODO: Use localizations
  */
 module.exports = (() => {
 
@@ -56,56 +56,24 @@ module.exports = (() => {
         tray.setPressedImage(trayImageOff);
 
         const contextMenu = Menu.buildFromTemplate([{
-            label: "About", click: () => {
-                shell.openExternal('https://github.com/AdguardTeam');
+            label: i18n.__('tray_menu_about.message'), click: () => {
+                shell.openExternal('https://github.com/AdguardTeam/AdGuardForSafari');
             }
         }, {
-            label: "Preferences",
-            submenu: [
-                {
-                    label: 'General Settings',
-                    click: () => {
-                        showWindow(() => {
-                            listeners.notifyListeners(events.SHOW_OPTIONS_GENERAL);
-                        });
-                    }
-                },
-                {
-                    label: 'Filters',
-                    click: () => {
-                        showWindow(() => {
-                            listeners.notifyListeners(events.SHOW_OPTIONS_FILTERS);
-                        });
-                    }
-                },
-                {
-                    label: 'Whitelist',
-                    click: () => {
-                        showWindow(() => {
-                            listeners.notifyListeners(events.SHOW_OPTIONS_WHITELIST);
-                        });
-                    }
-                },
-                {
-                    label: 'Userfilter',
-                    click: () => {
-                        showWindow(() => {
-                            listeners.notifyListeners(events.SHOW_OPTIONS_USER_FILTER);
-                        });
-                    }
-                }
-            ]
+            label: i18n.__('tray_menu_preferences.message'), click: () => {
+                showWindow();
+            }
         }, {
-            label: "Check filters updates", click: onCheckFiltersUpdateClicked
+            label: i18n.__('tray_menu_check_updates.message'), click: onCheckFiltersUpdateClicked
         }, {
             type: "separator"
         }, {
-            label: "Launch AdGuard at Login", type: "checkbox",
+            label: i18n.__('tray_menu_launch_at_startup.message'), type: "checkbox",
             checked: isLaunchAtLogin, click: onLaunchAdguardAtLoginClicked
         }, {
             type: "separator"
         }, {
-            label: "Quit", click: () => {
+            label: i18n.__('tray_menu_quit.message'), click: () => {
                 app.quit();
             }
         }

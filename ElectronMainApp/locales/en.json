@@ -937,5 +937,23 @@
 	},
 	"options_safari_extensions_disabled": {
 		"message": "Safari extensions are not OK!"
+	},
+	"options_filters_list_search_placeholder": {
+		"message": "Enter search string"
+	},
+	"tray_menu_about": {
+		"message": "About"
+	},
+	"tray_menu_preferences": {
+		"message": "Preferences"
+	},
+	"tray_menu_check_updates": {
+		"message": "Check filters updates"
+	},
+	"tray_menu_launch_at_startup": {
+		"message": "Launch AdGuard at Login"
+	},
+	"tray_menu_quit": {
+		"message": "Quit"
 	}
 }

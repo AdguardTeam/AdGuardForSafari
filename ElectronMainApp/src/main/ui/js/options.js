@@ -31,6 +31,19 @@ const Utils = {
     },
 
     /**
+     * Escapes regular expression
+     */
+    escapeRegExp: (function () {
+        const matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
+        return function (str) {
+            if (typeof str !== 'string') {
+                throw new TypeError('Expected a string');
+            }
+            return str.replace(matchOperatorsRe, '\\$&');
+        };
+    })(),
+
+    /**
      * Creates HTMLElement from string
      *
      * @param {String} html HTML representing a single element
@@ -416,6 +429,8 @@ const AntiBannerFilters = function (options) {
     });
     document.querySelector('#updateAntiBannerFilters').addEventListener('click', updateAntiBannerFilters);
 
+    window.addEventListener('hashchange', clearSearchEvent);
+
     updateRulesCountInfo(options.rulesInfo);
 
     function getFiltersByGroupId(groupId, filters) {
@@ -530,7 +545,7 @@ const AntiBannerFilters = function (options) {
         return `
             <div class="page-title">
                 <a href="#antibanner">
-                    <img src="images/icon-back.png" class="back">
+                    <img src="images/arrow-left.svg" class="back">
                 </a>
                 ${name}
             </div>`;
@@ -570,10 +585,10 @@ const AntiBannerFilters = function (options) {
     }
 
     function getFiltersContentElement(category) {
-        const filters = category.filters.otherFilters;
+        const otherFilters = category.filters.otherFilters;
         const recommendedFilters = category.filters.recommendedFilters;
+        const filters = [].concat(recommendedFilters, otherFilters);
         let isCustomFilters = category.groupId === 0;
-        let showRecommended = recommendedFilters.length > 0;
 
         if (isCustomFilters &&
             filters.length === 0 &&
@@ -584,32 +599,23 @@ const AntiBannerFilters = function (options) {
 
         const pageTitleEl = getPageTitleTemplate(category.groupName);
 
-        let tabs = '';
-        if (!isCustomFilters) {
-            tabs = getTabsBarTemplate(showRecommended);
-        }
-
-        let recommendedFiltersList = '';
-        let otherFiltersList = '';
-
+        let filtersList = '';
         for (let i = 0; i < filters.length; i++) {
-            otherFiltersList += getFilterTemplate(filters[i], loadedFiltersInfo.isEnabled(filters[i].filterId), isCustomFilters);
-        }
-
-        for (let j = 0; j < recommendedFilters.length; j++) {
-            recommendedFiltersList += getFilterTemplate(recommendedFilters[j], loadedFiltersInfo.isEnabled(recommendedFilters[j].filterId), isCustomFilters);
+            filtersList += getFilterTemplate(filters[i], loadedFiltersInfo.isEnabled(filters[i].filterId), isCustomFilters);
         }
 
         return Utils.htmlToElement(`
             <div id="antibanner${category.groupId}" class="settings-content tab-pane filters-list">
                 ${pageTitleEl}
                 <div class="settings-body">
-                    ${tabs}
-                    <ul class="opts-list" data-tab="other" ${showRecommended ? 'style="display: none;"' : ''}>
-                        ${otherFiltersList}
-                    </ul>
-                    <ul class="opts-list" data-tab="recommended" ${!showRecommended ? 'style="display: none;"' : ''}>
-                        ${recommendedFiltersList}
+                    <div class="filters-search">
+                        <input type="text" placeholder="${i18n.__('options_filters_list_search_placeholder.message')}" name="searchFiltersList"/>
+                        <div class="icon-search">
+                            <img src="images/magnifying-green.svg" alt="">
+                        </div>
+                    </div>
+                    <ul class="opts-list">
+                        ${filtersList}
                     </ul>
                 </div>
             </div>
@@ -665,6 +671,67 @@ const AntiBannerFilters = function (options) {
         });
     }
 
+    function initFiltersSearch(category) {
+        const searchInput = document.querySelector(`#antibanner${category.groupId} input[name="searchFiltersList"]`);
+        let filters = document.querySelectorAll(`#antibanner${category.groupId} .opts-list li`);
+        const SEARCH_DELAY_MS = 250;
+        if (searchInput) {
+            searchInput.addEventListener('input', Utils.debounce((e) => {
+                let searchString;
+                try {
+                    searchString = Utils.escapeRegExp(e.target.value.trim());
+                } catch (err) {
+                    console.log(err.message);
+                    return;
+                }
+
+                if (!searchString) {
+                    filters.forEach(filter => {
+                        filter.style.display = 'flex';
+                    });
+                    return;
+                }
+
+                filters.forEach(filter => {
+                    const title = filter.querySelector('.title');
+                    const regexp = new RegExp(searchString, 'gi');
+                    if (!regexp.test(title.textContent)) {
+                        filter.style.display = 'none';
+                    } else {
+                        filter.style.display = 'flex';
+                    }
+                });
+
+            }, SEARCH_DELAY_MS));
+        }
+    }
+
+    /**
+     * Function clears search results when user moves from category antibanner page to another page
+     *
+     * @param {*} on hashchange event
+     */
+    function clearSearchEvent(event) {
+        const regex = /#antibanner(\d+)/g;
+        const match = regex.exec(event.oldURL);
+        if (!match) {
+            return;
+        }
+
+        const groupId = match[1];
+        const searchInput = document.querySelector(`#antibanner${groupId} input[name="searchFiltersList"]`);
+        let filters = document.querySelectorAll(`#antibanner${groupId} .opts-list li`);
+        if (searchInput) {
+            searchInput.value = '';
+        }
+
+        if (filters && filters.length > 0) {
+            filters.forEach(filter => {
+                filter.style.display = 'flex';
+            });
+        }
+    }
+
     function renderCategoriesAndFilters() {
         ipcRenderer.on('getFiltersMetadataResponse', (e, response) => {
 
@@ -673,7 +740,9 @@ const AntiBannerFilters = function (options) {
 
             const categories = loadedFiltersInfo.categories;
             for (let j = 0; j < categories.length; j++) {
-                renderFilterCategory(categories[j]);
+                const category = categories[j];
+                renderFilterCategory(category);
+                initFiltersSearch(category);
             }
 
             bindControls();
@@ -1133,18 +1202,6 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.CONTENT_BLOCKER_UPDATED:
                     controller.antiBannerFilters.updateRulesCountInfo(options);
-                    break;
-                case EventNotifierTypes.SHOW_OPTIONS_GENERAL:
-                    window.location.hash = 'general-settings';
-                    break;
-                case EventNotifierTypes.SHOW_OPTIONS_FILTERS:
-                    window.location.hash = 'antibanner';
-                    break;
-                case EventNotifierTypes.SHOW_OPTIONS_WHITELIST:
-                    window.location.hash = 'whitelist';
-                    break;
-                case EventNotifierTypes.SHOW_OPTIONS_USER_FILTER:
-                    window.location.hash = 'userfilter';
                     break;
             }
         });
