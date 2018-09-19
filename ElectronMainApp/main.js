@@ -51,15 +51,13 @@ function createWindow() {
     });
 }
 
-function showWindow(callback) {
+function showWindow() {
     if (mainWindow) {
         mainWindow.show();
     } else {
         createWindow();
         uiEventListener.register(mainWindow);
     }
-
-    callback();
 }
 
 // Keep a global reference of the tray object, if you don't, the tray icon will

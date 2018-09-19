@@ -2,15 +2,8 @@ const {Notification} = require('electron');
 
 const listeners = require('./notifier');
 const events = require('./events');
-const i18n = require('i18n');
-
+const i18n = require('../utils/i18n');
 const appPack = require('../utils/app-pack');
-
-i18n.configure({
-    locales: ['en', 'de'],
-    directory: appPack.resourcePath('/locales'),
-    objectNotation: true
-});
 
 /**
  * Notifications controller
