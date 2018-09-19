@@ -73,7 +73,7 @@ Replace following line in file `./AdGuard/Config.xcconfig`
 ```
 AG_SIGN = <YOUR APPLE DEVELOPER COMMON NAME>
 ```
-where `YOUR APPLE DEVELOPER COMMON NAME` is your codesign identity
+where `<YOUR APPLE DEVELOPER COMMON NAME>` is your codesign identity
 
 Make sure your system Nodejs version higher v8.9.4
 
