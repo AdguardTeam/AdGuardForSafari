@@ -32,7 +32,7 @@ OPT=""
 cd "${SRC}"
 if [ ${CONFIGURATION} == "Release" ]; then
 OPT="--asar"
-yarn install --force || ext 1
+yarn install --force || exit 1
 else
 yarn upgrade --force -P safari-ext || exit 1
 fi
