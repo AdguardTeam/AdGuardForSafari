@@ -1203,18 +1203,6 @@ const initPage = function (response) {
                 case EventNotifierTypes.CONTENT_BLOCKER_UPDATED:
                     controller.antiBannerFilters.updateRulesCountInfo(options);
                     break;
-                case EventNotifierTypes.SHOW_OPTIONS_GENERAL:
-                    window.location.hash = 'general-settings';
-                    break;
-                case EventNotifierTypes.SHOW_OPTIONS_FILTERS:
-                    window.location.hash = 'antibanner';
-                    break;
-                case EventNotifierTypes.SHOW_OPTIONS_WHITELIST:
-                    window.location.hash = 'whitelist';
-                    break;
-                case EventNotifierTypes.SHOW_OPTIONS_USER_FILTER:
-                    window.location.hash = 'userfilter';
-                    break;
             }
         });
     };
