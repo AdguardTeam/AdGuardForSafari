@@ -27,12 +27,38 @@
     <div class="wlimit">
 
         <div class="settings-sidebar">
-            <div class="logo"><img src="images/adguard-logo.png" alt=""></div>
+            <div class="logo"><img src="images/logo.svg" alt=""></div>
             <ul class="nav nav-tabs">
-                <li><a href="#" data-tab="#general-settings" i18n="options_general_settings"></a></li>
-                <li><a href="#" data-tab="#antibanner" i18n="options_antibanner"></a></li>
-                <li><a href="#" data-tab="#whitelist" i18n="options_whitelist"></a></li>
-                <li><a href="#" data-tab="#userfilter" i18n="options_userfilter"></a></li>
+                <li>
+                    <a class="nav__item" href="#" data-tab="#general-settings">
+                        <span i18n="options_general_settings"></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav__item" href="#" data-tab="#antibanner">
+                        <span i18n="options_antibanner"></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav__item" href="#" data-tab="#whitelist">
+                        <span i18n="options_whitelist"></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav__item" href="#" data-tab="#userfilter">
+                        <span i18n="options_userfilter"></span>
+                    </a>
+                </li>
+                <li class="try-premium">
+                    <a href="https://adguard.com/" target="_blank" class="try-premium__in">
+                        <span class="try-premium__title">
+                            Try AdGuard Premium for better protection!
+                        </span>
+                        <span class="try-premium__btn">
+                            How they compare
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
         <div id="general-settings" class="settings-content tab-pane">
@@ -83,7 +109,7 @@
                 </ul>
             </div>
             <div class="settings-actions">
-                <a href="https://github.com/AdguardTeam/AdguardBrowserExtension/releases" target="_blank" i18n="options_open_changelog"></a>
+                <a class="button button--green button--link" href="https://github.com/AdguardTeam/AdGuardForSafari/releases" target="_blank" i18n="options_open_changelog"></a>
             </div>
         </div>
 
@@ -210,9 +236,12 @@
             </div>
             <div class="settings-content">
                 <div class="page-title">
-                    <div class="info">
+                    <div class="info info--rules-current">
                         <span id="filtersRulesInfo"></span>
                         <div id="lastUpdateTime" class="upd"></div>
+                        <div class="settings-actions settings-actions--update-filters">
+                            <a id="updateAntiBannerFilters" href="#"></a>
+                        </div>
                     </div>
                     <span i18n="options_antibanner"></span>
                 </div>
@@ -220,10 +249,7 @@
                     <ul id="groupsList" class="opts-list ad-blocker"></ul>
                 </div>
                 <div class="settings-actions">
-                    <a href="#" id="updateAntiBannerFilters" i18n="options_update_antibanner_filters"></a>
-                </div>
-                <div class="settings-actions">
-                    <a href="#" id="addCustomFilter" i18n="options_add_custom_filter"></a>
+                    <a href="#" id="addCustomFilter" class="button button--green button--link" i18n="options_add_custom_filter"></a>
                 </div>
             </div>
             <div class="filters-check">
@@ -300,13 +326,13 @@
             <div class="wlimit">
                 <div class="text" i18n="options_do_you_like"></div>
                 <!--TODO: Set store link-->
-                <a href="https://adguard.com/extension-page.html?browser=chrome" target="_blank" class="btn-rate openExtensionStore"><img src="images/icon-like.png" alt=""><span i18n="options_footer_like_us"></span></a>
+                <a href="https://adguard.com/extension-page.html?browser=chrome" target="_blank" class="btn-rate openExtensionStore"><img src="images/icon-like.svg" alt=""><span i18n="options_footer_like_us"></span></a>
             </div>
         </div>
         <div class="links-row">
             <div class="wlimit">
                 <div class="copy">
-                    <img src="images/icon-logo-white.png" alt="">
+                    <img src="images/icon-logo-white.svg" alt="">
                     &copy; AdGuard, 2009-2018
                 </div>
                 <div class="links">
