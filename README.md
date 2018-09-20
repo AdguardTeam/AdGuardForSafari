@@ -69,12 +69,27 @@ Then add network target `localhost:5858` via button "Configure" and select this 
 
 ### Build and run in production mode
 
-Replace string in file `./AdGuard/Config.xcconfig`
+Replace following line in file `./AdGuard/Config.xcconfig`
 ```
 AG_SIGN = <YOUR APPLE DEVELOPER COMMON NAME>
 ```
-where `YOUR APPLE DEVELOPER COMMON NAME` is your codesign identity 
-Open `AdGuard.xcworkspace` in Xcode
+where `<YOUR APPLE DEVELOPER COMMON NAME>` is your codesign identity
+
+Make sure your system Nodejs version higher v8.9.4
+
+Steps to check it:
+if you use `nvm` run 
+```
+nvm use system
+node -v
+```
+otherwise 
+```
+node -v
+```
+
+Open `AdGuard.xcworkspace` in Xcode and run building project
+
 
 ### How to run tests
 ```
