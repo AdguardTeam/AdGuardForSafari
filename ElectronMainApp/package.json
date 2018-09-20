@@ -6,7 +6,8 @@
     "scripts": {
         "start": "electron .",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "inspect": "electron --inspect=5858 ."
+        "inspect": "electron --inspect=5858 .",
+        "upload-locales": "gulp"
     },
     "dependencies": {
         "auto-launch": "^5.0.5",
@@ -20,6 +21,9 @@
     },
     "devDependencies": {
         "electron": "^2.0.5",
-        "electron-rebuild": "^1.8.2"
+        "electron-rebuild": "^1.8.2",
+        "gulp": "^4.0.0",
+        "gulp-hash-creator": "^0.2.0",
+        "request": "^2.88.0"
     }
 }
