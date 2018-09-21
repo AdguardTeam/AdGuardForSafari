@@ -60,7 +60,7 @@ function writeInFile(filename, body) {
     return new Promise((resolve, reject) => {
         if (typeof body !== 'string') {
             try {
-                body = JSON.stringify(body, null, 2);
+                body = JSON.stringify(body, null, 4);
             } catch (err) {
                 reject(err);
             }
