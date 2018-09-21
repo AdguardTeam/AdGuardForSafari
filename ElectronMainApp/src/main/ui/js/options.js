@@ -189,7 +189,7 @@ const TopMenu = (function () {
             document.querySelector('[data-tab="' + tabId + '"]').classList.add('active');
         }
 
-        tab.style.display = 'block';
+        tab.style.display = 'flex';
 
         if (tabId === WHITELIST) {
             if (typeof onHashUpdatedCallback === 'function') {

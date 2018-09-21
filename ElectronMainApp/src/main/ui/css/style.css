@@ -3,12 +3,15 @@
   width: 990px;
   padding: 0 15px;
   margin: 0 auto;
+  height: 100%;
 }
 /* st */
 .tab-pane {
   display: none;
+  flex-direction: column;
 }
 .settings-wrap {
+  height: 100%;
   min-height: 100%;
   padding-top: 80px;
   display: -webkit-box;
@@ -125,6 +128,7 @@
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  height: calc(100% - 92px);
 }
 .settings-content.tab-pane {
   -webkit-box-flex: 1;
@@ -142,7 +146,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 30px;
+  margin-top: auto;
 }
 .settings-actions {
   margin-top: 30px;
@@ -216,6 +220,8 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  max-height: 475px;
+  overflow-y: auto;
 }
 .opts-list li {
   font-size: 14px;

@@ -147,7 +147,7 @@
 		"message": "AdGuard Settings"
 	},
 	"options_general_settings": {
-		"message": "General Settings"
+		"message": "General"
 	},
 	"options_allow_acceptable_ads": {
 		"message": "Allow search ads and the self-promotion of websites<a target='_blank' href='https://kb.adguard.com/general/search-ads-and-self-promotion?utm_source=extension&aid=16593' class='sp-table-row-info'>Learn more about&nbsp;it</a>"
@@ -165,7 +165,7 @@
 		"message": "Import settings"
 	},
 	"options_antibanner": {
-		"message": "Ad&nbsp;blocker"
+		"message": "Filters"
 	},
 	"options_antibanner_info": {
 		"message": "%s filters"
@@ -720,7 +720,7 @@
 		"message": "Check for filter updates"
 	},
 	"context_general_settings": {
-		"message": "General settings"
+		"message": "Settings"
 	},
 	"context_antibanner": {
 		"message": "Ad blocker"

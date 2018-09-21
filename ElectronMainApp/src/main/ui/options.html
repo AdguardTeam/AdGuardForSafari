@@ -57,8 +57,8 @@
             </ul>
         </div>
         <div id="general-settings" class="settings-content tab-pane">
-            <div class="page-title">Settings</div>
             <div class="settings-body">
+                <div class="subtitle settings-body-subtitle" i18n="options_general_settings"></div>
                 <ul class="opts-list">
                     <li class="active">
                         <div class="opt-name" i18n="options_allow_acceptable_ads"></div>
@@ -66,88 +66,19 @@
                             <input type="checkbox" class="sp-table-row-input" id="allowAcceptableAds"/>
                         </div>
                     </li>
-                    <li class="active">
-                        <div class="opt-name" i18n="options_show_blocked_ads_count"></div>
-                        <div class="opt-state">
-                            <div class="toggler-wr">
-                                <input type="checkbox" class="sp-table-row-input" id="showPageStatisticCheckbox"/>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="opt-name" i18n="options_enable_autodetect_filter"></div>
-                        <div class="opt-state">
-                            <div class="toggler-wr">
-                                <input type="checkbox" class="sp-table-row-input" id="autodetectFiltersCheckbox"/>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="opt-name" i18n="options_set_update_interval"></div>
-                        <select class="opt-select" id="filtersUpdatePeriodSelect">
-                            <option value="86400000">24 hours</option>
-                            <option value="43200000">12 hours</option>
-                            <option value="21600000">6 hours</option>
-                            <option value="3600000">1 hour</option>
-                            <option value="0">Disabled</option></select>
-                        </select>
-                    </li>
-                </ul>
-
-                <div class="subtitle settings-body-subtitle" i18n="options_miscellaneous_settings"></div>
-                <ul class="opts-list">
                     <li>
                         <div>
                             <div class="opt-name" i18n="options_use_optimized_filters"></div>
                             <div class="opt-state"></div>
                         </div>
                         <div class="opt-state input">
-                            <div class="toggler-wr">
-                                <input type="checkbox" class="sp-table-row-input" id="useOptimizedFilters"/>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <div class="opt-name" i18n="options_disable_integration_mode"></div>
-                            <div class="opt-state"></div>
-                        </div>
-                        <div class="opt-state input">
-                            <div class="toggler-wr">
-                                <input type="checkbox" class="sp-table-row-input" id="integrationModeCheckbox"/>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="opt-name" i18n="options_collect_hit_stats"></div>
-                        <div class="opt-state">
-                            <div class="toggler-wr">
-                                <input type="checkbox" class="sp-table-row-input" id="enableHitsCount"/>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="active">
-                        <div class="opt-name" i18n="options_show_context_menu"></div>
-                        <div class="opt-state">
-                            <div class="toggler-wr">
-                                <input type="checkbox" class="sp-table-row-input" id="enableShowContextMenu"/>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="opt-name" i18n="options_show_adguard_full_version"></div>
-                        <div class="opt-state">
-                            <div class="toggler-wr">
-                                <input type="checkbox" class="sp-table-row-input" id="showInfoAboutAdguardFullVersion"/>
-                            </div>
+                            <input type="checkbox" class="sp-table-row-input" id="useOptimizedFilters"/>
                         </div>
                     </li>
                     <li>
                         <div class="opt-name" i18n="options_show_app_updated_notification"></div>
                         <div class="opt-state">
-                            <div class="toggler-wr">
-                                <input type="checkbox" class="sp-table-row-input" id="showAppUpdatedNotification"/>
-                            </div>
+                            <input type="checkbox" class="sp-table-row-input" id="showAppUpdatedNotification"/>
                         </div>
                     </li>
                 </ul>
