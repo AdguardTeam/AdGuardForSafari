@@ -23,8 +23,8 @@ const prepare = () => {
         throw new Error(err);
     }
 
-    const timestamp = Math.round(new Date().getTime() / 1000);
     const url = oneskyapp.url + oneskyapp.projectId + '/files';
+    const timestamp = Math.round(new Date().getTime() / 1000);
     const formData = {
         timestamp,
         file: fs.createReadStream(path.resolve(LOCALES_DIR, 'en.json')),

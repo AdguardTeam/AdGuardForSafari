@@ -7,7 +7,8 @@
         "start": "electron .",
         "test": "echo \"Error: no test specified\" && exit 1",
         "inspect": "electron --inspect=5858 .",
-        "upload-locales": "gulp upload-locales"
+        "upload-locales": "gulp upload-locales",
+        "download-locales": "gulp download-locales"
     },
     "dependencies": {
         "auto-launch": "^5.0.5",
@@ -26,7 +27,6 @@
         "gulp": "^4.0.0",
         "gulp-hash-creator": "^0.2.0",
         "request": "^2.88.0",
-        "require-dir": "^1.0.0",
-        "var": "^0.3.2"
+        "require-dir": "^1.0.0"
     }
 }

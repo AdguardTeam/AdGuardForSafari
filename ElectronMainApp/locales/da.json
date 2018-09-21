@@ -3,64 +3,64 @@
         "message": "Element:"
     },
     "background_tab_title": {
-        "message": "Background tab"
+        "message": "Baggrundsfane"
     },
     "filtering_modal_important": {
-        "message": "Give a higher priority to the rule"
+        "message": "Giv denne regel en h\u00f8jere prioritet"
     },
     "thankyou_want_full_protection": {
-        "message": "Want to&nbsp;try full protection? Download AdGuard for Windows!"
+        "message": "Vil du gerne&nbsp;pr\u00f8ve fuld beskyttelse? Download AdGuard til Windows!"
     },
     "thankyou_want_full_protection_mac": {
-        "message": "Want to&nbsp;try full protection? Download AdGuard for Mac!"
+        "message": "Vil du gerne&nbsp;pr\u00f8ve fuld beskyttelse? Download AdGuard til Mac!"
     },
     "thankyou_compare_ext_title": {
-        "message": "AdGuard Extension"
+        "message": "AdGuard Udvidelse"
     },
     "thankyou_compare_full_title": {
-        "message": "AdGuard for Windows"
+        "message": "AdGuard til Windows"
     },
     "thankyou_compare_full_title_mac": {
-        "message": "AdGuard for Mac"
+        "message": "AdGuard til Mac"
     },
     "thankyou_compare_blocked": {
         "message": "Advertisement blocking"
     },
     "thankyou_compare_ext_blocking": {
-        "message": "Limited by browser extension capabilities"
+        "message": "Begr\u00e6nset af browserens udvidelsesevner"
     },
     "thankyou_compare_full_blocking": {
         "message": "Full"
     },
     "thankyou_compare_safebrowsing": {
-        "message": "Protection against phishing and malicious websites"
+        "message": "Beskyttelse mod phishing og malici\u00f8se hjemmesider"
     },
     "thankyou_compare_parent": {
-        "message": "Parental control"
+        "message": "For\u00e6ldrekontrol"
     },
     "thankyou_compare_safebrowsing_attack": {
-        "message": "Protection against phishing attacks"
+        "message": "Beskyttelse mod phishing angreb"
     },
     "thankyou_compare_any_browser": {
-        "message": "Blocks ads across all browsers"
+        "message": "Blokerer reklamer p\u00e5 kryds af alle browsere"
     },
     "thankyou_compare_traffic": {
-        "message": "Saves Internet traffic"
+        "message": "Sparer internettrafik"
     },
     "thankyou_compare_increase": {
-        "message": "Reduces page loading time"
+        "message": "Reducerer siders indl\u00e6sningstid"
     },
     "thankyou_compare_support": {
-        "message": "Technical support"
+        "message": "Teknisk support"
     },
     "thankyou_installed": {
-        "message": "INSTALLED"
+        "message": "INSTALLERET"
     },
     "thankyou_download": {
         "message": "Download AdGuard"
     },
     "thankyou_help_in_development": {
-        "message": "Participate in&nbsp;the development of&nbsp;AdGuard filters"
+        "message": "Deltag i&nbsp;udviklingen af&nbsp;AdGuard filtre"
     },
     "thankyou_help_in_development_description": {
         "message": "Send anonymous statistics about the work of&nbsp;AdGuard ad&nbsp;filters, as&nbsp;well as&nbsp;websites that AdGuard identified as&nbsp;suspicious. <span class='warn-message'>Not recommended on&nbsp;slow computers.<\/span>"
@@ -78,10 +78,10 @@
         "message": "Click on&nbsp;any element on&nbsp;the page"
     },
     "assistant_select_element_cancel": {
-        "message": "Cancel"
+        "message": "Annuller"
     },
     "assistant_block_element": {
-        "message": "Block element"
+        "message": "Bloker element"
     },
     "assistant_block_element_explain": {
         "message": "Element blocking rule setup"
@@ -93,13 +93,13 @@
         "message": "The filter will contain a&nbsp;rule that blocks the selected element"
     },
     "assistant_slider_min": {
-        "message": "SMALLER"
+        "message": "MINDRE"
     },
     "assistant_slider_max": {
-        "message": "LARGER"
+        "message": "ST\u00d8RRE"
     },
     "assistant_extended_settings": {
-        "message": "Advanced settings"
+        "message": "Avancerede indstillinger"
     },
     "assistant_apply_rule_to_all_sites": {
         "message": "Apply this rule to&nbsp;every web site"
@@ -108,28 +108,28 @@
         "message": "Block element by&nbsp;url"
     },
     "assistant_block_similar": {
-        "message": "Block similar elements"
+        "message": "Bloker lignende elementer"
     },
     "assistant_block": {
-        "message": "Block"
+        "message": "Bloker"
     },
     "assistant_another_element": {
-        "message": "Select another element"
+        "message": "V\u00e6lg et andet element"
     },
     "assistant_preview": {
-        "message": "Preview"
+        "message": "Forh\u00e5ndsvisning"
     },
     "assistant_preview_header": {
-        "message": "Block element - Preview"
+        "message": "Bloker element - Forh\u00e5ndsvisning"
     },
     "assistant_preview_header_info": {
         "message": "Check how the page will look like before confirming the block."
     },
     "assistant_preview_start": {
-        "message": "Preview"
+        "message": "Forh\u00e5ndsvisning"
     },
     "assistant_preview_end": {
-        "message": "Finish preview"
+        "message": "Afslut forh\u00e5ndsvisning"
     },
     "name": {
         "message": "AdGuard AdBlocker"
@@ -141,13 +141,13 @@
         "message": "Unmatched adblock extension against advertising and pop-ups. Blocks ads on Facebook, Youtube and all other websites."
     },
     "description_blocked": {
-        "message": "Ads blocked on this page: $1"
+        "message": "Annoncer blokeret p\u00e5 denne side: $1"
     },
     "options_settings": {
-        "message": "AdGuard Settings"
+        "message": "AdGuard Indstillinger"
     },
     "options_general_settings": {
-        "message": "General Settings"
+        "message": "Generelle Indstillinger"
     },
     "options_allow_acceptable_ads": {
         "message": "Allow search ads and the self-promotion of websites<a target='_blank' href='https:\/\/kb.adguard.com\/general\/search-ads-and-self-promotion?utm_source=extension&aid=16593' class='sp-table-row-info'>Learn more about&nbsp;it<\/a>"
@@ -162,7 +162,7 @@
         "message": "Export settings"
     },
     "options_import_settings": {
-        "message": "Import settings"
+        "message": "Importer indstillinger"
     },
     "options_antibanner": {
         "message": "Ad&nbsp;blocker"
@@ -186,16 +186,16 @@
         "message": "You have selected too many filter subscriptions. It&nbsp;may slow down your web browsing significantly."
     },
     "options_modal_cancel": {
-        "message": "Cancel"
+        "message": "Annuller"
     },
     "options_modal_save": {
-        "message": "Save changes"
+        "message": "Gem \u00e6ndringer"
     },
     "options_modal_edit": {
         "message": "Filters list"
     },
     "options_modal_homepage": {
-        "message": "Homepage"
+        "message": "Hjemmeside"
     },
     "options_antibanner_list_empty": {
         "message": "Filters list is&nbsp;empty. <a class='spl-user-descr-link editAntiBannerFilters' href='#'>Add new filter<\/a>?"
@@ -207,25 +207,25 @@
         "message": "Invert whitelist<span class='sp-table-row-info'>Unblock ads everywhere <i>except<\/i> the whitelist<\/span>"
     },
     "options_whitelist_add_domain": {
-        "message": "Add website"
+        "message": "Tilf\u00f8j hjemmeside"
     },
     "options_userfilter": {
-        "message": "User filter"
+        "message": "Brugerfilter"
     },
     "options_userfilter_description": {
         "message": "You can add your own rules to&nbsp;this filter. This option is&nbsp;recommended for advanced users familiar with HTML\/CSS. Read the <a class='spl-user-descr-link' href='https:\/\/adguard.com\/filterrules.html?utm_source=extension&aid=16593' target='_blank'>filter rules tutorial<\/a> to&nbsp;learn how to&nbsp;write your own filter rules."
     },
     "options_userfilter_add_rule": {
-        "message": "Add new rule"
+        "message": "Tilf\u00f8j ny regel"
     },
     "options_userfilter_export": {
-        "message": "Export"
+        "message": "Eksporter"
     },
     "options_userfilter_import": {
-        "message": "Import"
+        "message": "Importer"
     },
     "options_userfilter_clear": {
-        "message": "Clear"
+        "message": "Ryd"
     },
     "options_userfilter_clear_confirm": {
         "message": "Clearing the user filter removes all rules. Do you really want to clear the user filter?"
@@ -237,7 +237,7 @@
         "message": "Changelog"
     },
     "options_safebrowsing": {
-        "message": "Browsing security"
+        "message": "Browsing sikkerhed"
     },
     "options_safebrowsing_enabled": {
         "message": "Phishing and malware protection<a target='_blank' href='https:\/\/kb.adguard.com\/general\/how-malware-protection-works?utm_source=extension&aid=16593' class='sp-table-row-info'>Learn more about&nbsp;it<\/a>"
