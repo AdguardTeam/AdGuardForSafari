@@ -28,10 +28,19 @@ module.exports = (() => {
 
         antibanner.start({
             onInstall: function (callback) {
+                log.debug('On application install..');
+
                 // Retrieve filters and install them
                 filters.offerFilters(function (filterIds) {
                     filters.addAndEnableFilters(filterIds, callback);
                 });
+
+                // Open Safari with extensions settings
+                safariToolbar.openExtensionsPreferenses(()=> {
+                    //Do nothing
+                });
+
+                log.info('Application installed');
             }
         }, function () {
             log.info('Application initialization finished');
