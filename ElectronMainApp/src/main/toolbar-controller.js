@@ -128,7 +128,7 @@ module.exports = (() => {
     };
 
     return {
-        initToolbarController: initToolbarController
+        initToolbarController
     };
 
 })();
