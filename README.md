@@ -96,3 +96,17 @@ Open `AdGuard.xcworkspace` in Xcode and run building project
 cd ElectronMainApp
 yarn test
 ```
+
+
+### How to update localizations
+
+#### Export
+```
+sh SupportingScripts/localizations/export.sh .
+```
+#### Import 
+```
+sh SupportingScripts/localizations/import.sh .
+```
+
+Change `.` to path to your project if you not in the root
