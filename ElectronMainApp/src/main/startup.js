@@ -4,7 +4,6 @@ const antibanner = require('./app/antibanner');
 const filterState = require('./app/filters/filters-state');
 const log = require('./app/utils/log');
 const contentBlockerListener = require('./app/content-blocker/content-blocker-listener');
-const toolbarController = require('./toolbar-controller');
 const notificationController = require('./notification-controller');
 const safariToolbar = require('safari-ext');
 
@@ -36,7 +35,6 @@ module.exports = (() => {
         }, function () {
             log.info('Application initialization finished');
 
-            toolbarController.init();
             safariToolbar.busyStatus(false);
             safariToolbar.sendReady();
         });

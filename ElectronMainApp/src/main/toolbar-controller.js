@@ -44,16 +44,22 @@ module.exports = (() => {
         applicationApi.setUserFilterRules(rules);
     };
 
+    const onShowPreferencesCallback = (showWindow) => {
+        log.debug('Show preferences callback');
+
+        return showWindow;
+    };
+
     /**
      * Initializes toolbar controller
      * Adds toolbar events listener and reacts on them.
      */
-    const init = () => {
+    const initToolbarController = (showWindow) => {
 
         log.debug('Initializing toolbar controller..');
 
         //Subscribe to toolbar events
-        safariToolbar.init(onProtectionChangedCallback, onWhitelistChangedCallback, onUserFilterChangedCallback);
+        safariToolbar.init(onProtectionChangedCallback, onWhitelistChangedCallback, onUserFilterChangedCallback, onShowPreferencesCallback(showWindow));
 
         //Subscribe to application events
         listeners.addListener(function (event, info) {
@@ -116,7 +122,7 @@ module.exports = (() => {
     };
 
     return {
-        init: init
+        initToolbarController: initToolbarController
     };
 
 })();
