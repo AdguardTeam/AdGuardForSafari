@@ -44,6 +44,12 @@ module.exports = (() => {
         applicationApi.setUserFilterRules(rules);
     };
 
+    /**
+     * Return callback function for show preferences event
+     *
+     * @param showWindow
+     * @returns {*}
+     */
     const onShowPreferencesCallback = (showWindow) => {
         log.debug('Show preferences callback');
 
