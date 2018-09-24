@@ -11,6 +11,7 @@ const uiEventListener = require('./src/main/ui-event-handler');
 const startup = require('./src/main/startup');
 
 const trayController = require('./src/main/tray-controller');
+const toolbarController = require('./src/main/toolbar-controller');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -74,6 +75,7 @@ app.on('ready', (() => {
     uiEventListener.init();
 
     tray = trayController.initTrayIcon(showWindow);
+    toolbarController.initToolbarController(showWindow);
     if (process.platform === 'darwin') {
         app.dock.hide();
     }
