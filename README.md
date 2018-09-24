@@ -100,11 +100,30 @@ yarn test
 
 ### How to update localizations
 
-#### Export
+Before updating localizations you need to install dependencies. 
+To do this, you can build project in xCode or run the next commands
+```
+cd ElectronMainApp
+yarn install
+```
+
+Create directory `private` in the root of the project and put file `oneskyapp.json` in it. 
+
+Example of `oneskyapp.json`
+```
+{
+    "url": "https://platform.api.onesky.io/1/projects/",
+    "projectId": <PROJECT ID>,
+    "apiKey": <API KEY>,
+    "secretKey": <SECRET KEY>
+}
+```
+
+#### Export localizations
 ```
 sh SupportingScripts/localizations/export.sh .
 ```
-#### Import 
+#### Import localizations
 ```
 sh SupportingScripts/localizations/import.sh .
 ```
