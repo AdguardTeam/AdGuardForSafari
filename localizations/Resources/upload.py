@@ -49,13 +49,13 @@ class MultiPartForm(object):
 
         # Add the form fields
         parts.extend(
-             [ part_boundary,
-              'Content-Disposition: form-data; name="%s"' % name,
-              '',
-              value,
-              ]
-             for name, value in self.form_fields
-             )
+            [ part_boundary,
+            'Content-Disposition: form-data; name="%s"' % name,
+            '',
+            value,
+            ]
+            for name, value in self.form_fields
+            )
     
         # Add the files to upload
         parts.extend(
@@ -74,6 +74,7 @@ class MultiPartForm(object):
         flattened = list(itertools.chain(*parts))
         flattened.append('--' + self.boundary + '--')
         flattened.append('')
+
         return '\r\n'.join(flattened)
 
 parser = optparse.OptionParser(usage="%prog [options]. %prog -h for help.")
@@ -104,11 +105,11 @@ if (not options.fileFormat):
     parser.error('File format name not given')
 
 timestamp = str(int(time.time()))
-devHash = md5.new(timestamp + oneskyapp["secretKey"]).hexdigest()
+devHash = md5.new(timestamp + oneskyapp["secretKey"].encode()).hexdigest()
 
 # Build url from oneskyapp settings
-url = oneskyapp["url"]
-url += oneskyapp["projectId"]
+url = oneskyapp["url"].encode()
+url += oneskyapp["projectId"].encode()
 url += "/files"
 
 # Create the form with simple fields
@@ -116,7 +117,7 @@ form = MultiPartForm()
 form.add_field('locale', options.locale)
 form.add_field('file_format', options.fileFormat)
 form.add_field('is_keeping_all_strings', 'false')
-form.add_field('api_key', oneskyapp["apiKey"])
+form.add_field('api_key', oneskyapp["apiKey"].encode())
 form.add_field('timestamp', timestamp)
 form.add_field('dev_hash', devHash)
 form.add_file('file', options.fileName, open(options.fileName, "rb"))
