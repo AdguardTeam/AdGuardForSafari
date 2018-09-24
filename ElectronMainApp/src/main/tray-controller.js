@@ -42,8 +42,8 @@ module.exports = (() => {
     };
 
     const imageFolder = appPack.resourcePath('/src/main/icons');
-    const trayImageOff = imageFolder + '/toolbar-off.png';
-    const trayImageOn = imageFolder + '/toolbar-on.png';
+    const trayImageOff = imageFolder + '/tray-icon-off.png';
+    const trayImageOn = imageFolder + '/tray-icon-on.png';
 
     /**
      * Initializes icon in tray
