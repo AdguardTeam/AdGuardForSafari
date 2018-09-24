@@ -85,7 +85,7 @@ parser.add_option("-r", "--fileformat", dest="fileFormat", help="Oneskyapp File 
 
 # Get oneskyapp settings
 oneskyapp = {};
-with open('ElectronMainApp/private/oneskyapp.json') as json_data:
+with open('./private/oneskyapp.json') as json_data:
     oneskyapp = json.load(json_data)
 
 # Check oneskyapp settigns

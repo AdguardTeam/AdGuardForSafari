@@ -2,4 +2,4 @@ module.exports.LOCALES = ['en', 'ru', 'de', 'tr', 'uk', 'pl', 'pt_BR', 'pt_PT', 
 
 module.exports.LOCALES_DIR = 'locales';
 
-module.exports.PRIVATE_FILES = 'private';
+module.exports.PRIVATE_FILES = '../private';

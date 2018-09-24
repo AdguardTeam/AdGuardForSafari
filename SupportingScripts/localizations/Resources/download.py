@@ -17,7 +17,7 @@ parser.add_option("-o", "--output", dest="output", help="Output file name", meta
 
 # Get oneskyapp settings
 oneskyapp = {};
-with open('./ElectronMainApp/private/oneskyapp.json') as json_data:
+with open('./private/oneskyapp.json') as json_data:
     oneskyapp = json.load(json_data)
 
 # Check oneskyapp settigns
@@ -36,10 +36,10 @@ if (not options.output):
     parser.error('Output file name not given')
 
 timestamp = str(int(time.time()))
-devHash = md5.new(timestamp + oneskyapp["secretKey"]).hexdigest()
+devHash = md5.new(timestamp + oneskyapp["secretKey"].encode()).hexdigest()
 
 url = oneskyapp["url"]
-url += oneskyapp["projectId"]
+url += oneskyapp["projectId"].encode()
 url += "/translations?locale="
 url += options.locale
 url += "&source_file_name="
@@ -47,7 +47,7 @@ url += options.fileName
 url += "&export_file_name="
 url += options.output
 url += "&api_key="
-url += oneskyapp["apiKey"]
+url += oneskyapp["apiKey"].encode()
 url += "&timestamp="
 url += timestamp
 url += "&dev_hash="
@@ -59,7 +59,6 @@ def downloadFile(url):
     responseHtml = response.read()
     return responseHtml
 
-# http://support.oneskyapp.com/support/tickets/5989
 # Sometimes html files download contains garbage in the end
 def removeGarbage(html):
     return re.sub('\{"code":500.*$', '', html)

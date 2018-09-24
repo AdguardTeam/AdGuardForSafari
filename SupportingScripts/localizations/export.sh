@@ -59,7 +59,7 @@ echo "${THEBASE}/${filename}.xib"
 
 ibtool --generate-strings-file "${FILE}" "${THEBASE}/${filename}.xib"
 python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${FILE}" -r IOS_STRINGS
-# rm "${FILE}"
+rm "${FILE}"
 }
 
 ###################################
@@ -88,4 +88,16 @@ python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${THEROOT}/Base.lpr
 
 echo "Done"
 
-echo "Upload finished"
+echo "Upload finished Native string files"
+
+
+#################################
+echo "========================= UPLOAD JSON FILE =============================="
+
+cd "ElectronMainApp"
+npm run rebuild-locales
+npm run upload-locales
+
+echo "Done"
+
+echo "Upload finished JavaScript files"

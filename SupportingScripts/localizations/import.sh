@@ -106,3 +106,12 @@ fi
 done
 
 echo "Import finished"
+
+
+##############################
+echo "========================= UPDATING JavaScript FILES =============================="
+cd "ElectronMainApp"
+
+npm run download-locales
+
+echo "Done"
