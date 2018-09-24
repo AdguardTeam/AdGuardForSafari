@@ -20,10 +20,7 @@
 
 <details><summary>Screenshots:</summary>
 
-<!--- drag and drop, upload or paste your screenshot to this area-->
-
-</details>
-
+<!--- Drag and drop, upload or paste your screenshot to this area-->
 <!--- If there are any errors in popup windows, please make a screenshot of them as well -->
 
 </details>
