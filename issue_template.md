@@ -33,6 +33,6 @@
 <!--- Please include all relevant details about the environment you experienced the bug in -->
 * AdGuard for Safari version: 
 * Environment name and version: (e.g. Safari 11.1.2 (13605.3.8))
-* Operating System (e.g macOS High Sierra 10.13.6)
+* Operating System: (e.g macOS High Sierra 10.13.6)
 * Filters you use in AdGuard:
 * Any other browser extensions you have installed:
