@@ -96,3 +96,36 @@ Open `AdGuard.xcworkspace` in Xcode and run building project
 cd ElectronMainApp
 yarn test
 ```
+
+
+### How to update localizations
+
+Before updating localizations you need to install dependencies. 
+To do this, you can build project in xCode or run the next commands
+```
+cd ElectronMainApp
+yarn install
+```
+
+Create directory `private` in the root of the project and put file `oneskyapp.json` in it. 
+
+Example of `oneskyapp.json`
+```
+{
+    "url": "https://platform.api.onesky.io/1/projects/",
+    "projectId": <PROJECT ID>,
+    "apiKey": <API KEY>,
+    "secretKey": <SECRET KEY>
+}
+```
+
+#### Export localizations
+```
+sh SupportingScripts/localizations/export.sh .
+```
+#### Import localizations
+```
+sh SupportingScripts/localizations/import.sh .
+```
+
+Change `.` to path to your project if you not in the root
