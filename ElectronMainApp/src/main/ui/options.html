@@ -49,20 +49,14 @@
                         <span i18n="options_userfilter"></span>
                     </a>
                 </li>
-                <li class="try-premium">
-                    <a href="https://adguard.com/" target="_blank" class="try-premium__in">
-                        <span class="try-premium__title">
-                            Try AdGuard Premium for better protection!
-                        </span>
-                        <span class="try-premium__btn">
-                            How they compare
-                        </span>
+                <li>
+                    <a class="nav__item" href="#" data-tab="#about">
+                        <span i18n="options_about"></span>
                     </a>
                 </li>
             </ul>
         </div>
         <div id="general-settings" class="settings-content tab-pane">
-            <div class="page-title">Settings</div>
             <div class="settings-body">
                 <div class="subtitle settings-body-subtitle" i18n="options_general_settings"></div>
                 <ul class="opts-list">
@@ -88,28 +82,19 @@
                         </div>
                     </li>
                 </ul>
-
-                <div class="subtitle settings-body-subtitle" i18n="options_safebrowsing"></div>
-                <ul class="opts-list">
-                    <li>
-                        <div class="title" i18n="options_safebrowsing_enabled"></div>
-                        <div class="opt-state">
-                            <input type="checkbox" class="sp-table-row-input" id="safebrowsingEnabledCheckbox"/>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="">
-                            <div class="title" i18n="options_safebrowsing_help"></div>
-                            <div class="opt-state"></div>
-                        </div>
-                        <div class="opt-state input">
-                            <input type="checkbox" class="sp-table-row-input" id="sendSafebrowsingStatsCheckbox"/>
-                        </div>
-                    </li>
-                </ul>
             </div>
-            <div class="settings-actions">
-                <a class="button button--green button--link" href="https://github.com/AdguardTeam/AdGuardForSafari/releases" target="_blank" i18n="options_open_changelog"></a>
+            <div class="settings-actions-wr">
+                <div class="try-premium">
+                    <a href="https://adguard.com/" target="_blank" class="try-premium__in">
+                        <span class="try-premium__btn" i18n="options_compare_btn"></span>
+                        <span class="try-premium__title" i18n="options_compare_title"></span>
+                    </a>
+                </div>
+
+                <div class="settings-actions settings-actions--in">
+                    <a href="/pages/export.html#exs" target="_blank" id="exportSettingsFile" class="button button--green button--link" i18n="options_export_settings"></a>
+                    <a href="#" id="importSettingsFile" i18n="options_import_settings" class="button button--green-bd button--link"></a>
+                </div>
             </div>
         </div>
 
@@ -237,19 +222,20 @@
             <div class="settings-content">
                 <div class="page-title">
                     <div class="info info--rules-current">
-                        <span id="filtersRulesInfo"></span>
-                        <div id="lastUpdateTime" class="upd"></div>
-                        <div class="settings-actions settings-actions--update-filters">
-                            <a id="updateAntiBannerFilters" href="#"></a>
+                        <span class="info__label" id="filtersRulesInfo"></span>
+                        <div class="upd-wr">
+                            <div class="upd">
+                                <span i18n="options_last_update"></span>
+                                <span id="lastUpdateTime"></span>
+                            </div>
+                            <div class="settings-actions settings-actions--update-filters">
+                                <a id="updateAntiBannerFilters" href="#"></a>
+                            </div>
                         </div>
                     </div>
-                    <span i18n="options_antibanner"></span>
                 </div>
                 <div class="settings-body">
                     <ul id="groupsList" class="opts-list ad-blocker"></ul>
-                </div>
-                <div class="settings-actions">
-                    <a href="#" id="addCustomFilter" class="button button--green button--link" i18n="options_add_custom_filter"></a>
                 </div>
             </div>
             <div class="filters-check">
@@ -264,17 +250,6 @@
                         Check for filters update
                     </div>
                 </div>
-                <!--<div class="filters-check__in filters-check__in&#45;&#45;alert filters-check__in&#45;&#45;active">-->
-                <!--<div class="subtitle-2">-->
-                <!--New filters was uploaded:-->
-                <!--</div>-->
-                <!--<div class="filters-check__alert">-->
-                <!--English filter, Russian filter, Social media filter, Anonymous filter,  German filter, English filter, Russian filter, Social media filter, Anonymous filter,  German filter,-->
-                <!--</div>-->
-                <!--<a href="#" class="btn-inline">-->
-                <!--See more-->
-                <!--</a>-->
-                <!--</div>-->
             </div>
         </div>
 
@@ -319,27 +294,31 @@
             </div>
         </div>
 
-    </div>
-
-    <div class="settings-footer">
-        <div class="rate-row">
-            <div class="wlimit">
-                <div class="text" i18n="options_do_you_like"></div>
-                <!--TODO: Set store link-->
-                <a href="https://adguard.com/extension-page.html?browser=chrome" target="_blank" class="btn-rate openExtensionStore"><img src="images/icon-like.svg" alt=""><span i18n="options_footer_like_us"></span></a>
-            </div>
-        </div>
-        <div class="links-row">
-            <div class="wlimit">
-                <div class="copy">
-                    <img src="images/icon-logo-white.svg" alt="">
-                    &copy; AdGuard, 2009-2018
-                </div>
-                <div class="links">
-                    <a href="https://adguard.com?utm_source=extension&aid=16593" target="_blank" i18n="options_site"></a>
-                    <a href="https://blog.adguard.com/?utm_source=extension?aid=16593" target="_blank" i18n="options_blog"></a>
-                    <a href="https://forum.adguard.com?utm_source=extension&aid=16593" target="_blank" i18n="options_forum"></a>
-                    <a href="https://adguard.com/discuss.html?utm_source=extension&aid=16593" target="_blank" i18n="options_feedback"></a>
+        <div id="about" class="settings-content tab-pane">
+            <div class="settings-content">
+                <div class="settings-body">
+                    <div class="about-opt">
+                        <div class="logo about-opt__logo"><img src="images/logo.svg" alt=""></div>
+                        <div class="about-opt__desc">
+                            <div class="about-opt__version">
+                                Версия 7.0.1280.361 (NIGHTLY)
+                            </div>
+                            <div class="about-opt__desc">
+                                <div class="about-opt__desc-item">
+                                    © 2009-2018 AdGuard Software Ltd.
+                                </div>
+                                <div class="about-opt__desc-item">
+                                    All rights reserved. Adguard.com
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-opt__menu">
+                            <a href="#" i18n="options_license_agreement" class="about-opt__menu-item"></a>
+                            <a href="#" i18n="options_privacy_policy" class="about-opt__menu-item"></a>
+                            <a href="#" i18n="options_gratitude" class="about-opt__menu-item"></a>
+                            <a href="#" i18n="options_discuss" class="about-opt__menu-item"></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -147,7 +147,7 @@
         "message": "AdGuard Settings"
     },
     "options_general_settings": {
-        "message": "General Settings"
+        "message": "General"
     },
     "options_allow_acceptable_ads": {
         "message": "Allow search ads and the self-promotion of websites<a target='_blank' href='https:\/\/kb.adguard.com\/general\/search-ads-and-self-promotion?utm_source=extension&aid=16593' class='sp-table-row-info'>Learn more about&nbsp;it<\/a>"
@@ -165,10 +165,10 @@
         "message": "Import settings"
     },
     "options_antibanner": {
-        "message": "Ad&nbsp;blocker"
+        "message": "Filters"
     },
     "options_antibanner_info": {
-        "message": "Filter rules count: %s"
+        "message": "%s filters"
     },
     "options_whitelist": {
         "message": "Whitelist"
@@ -720,7 +720,7 @@
         "message": "Check for filter updates"
     },
     "context_general_settings": {
-        "message": "General settings"
+        "message": "Settings"
     },
     "context_antibanner": {
         "message": "Ad blocker"
@@ -955,5 +955,35 @@
     },
     "tray_menu_quit": {
         "message": "Quit"
-    }
+    },
+    "options_disable_integration_mode": {
+		"message": "Enable integration mode"
+	},
+	"options_set_update_interval": {
+		"message": "Filters update interval"
+	},
+	"options_last_update": {
+		"message": "Last update:"
+	},
+	"options_about": {
+		"message": "About"
+	},
+	"options_compare_btn": {
+		"message": "How they compare"
+	},
+	"options_compare_title": {
+		"message": "Try AdGuard Premium for better protection!"
+	},
+	"options_license_agreement": {
+		"message": "License agreement"
+	},
+	"options_privacy_policy": {
+		"message": "Privacy policy"
+	},
+	"options_gratitude": {
+		"message": "Gratitude"
+	},
+	"options_discuss": {
+		"message": "Discuss"
+	}
 }

@@ -189,7 +189,7 @@ const TopMenu = (function () {
             document.querySelector('[data-tab="' + tabId + '"]').classList.add('active');
         }
 
-        tab.style.display = 'block';
+        tab.style.display = 'flex';
 
         if (tabId === WHITELIST) {
             if (typeof onHashUpdatedCallback === 'function') {
@@ -646,7 +646,6 @@ const AntiBannerFilters = function (options) {
             emptyFiltersAddCustomButton.addEventListener('click', addCustomFilter);
         }
 
-        document.querySelector('#addCustomFilter').addEventListener('click', addCustomFilter);
         document.querySelectorAll('.remove-custom-filter-button').forEach(function (el) {
             el.addEventListener('click', removeCustomFilter);
         });
@@ -1025,8 +1024,6 @@ const Settings = function () {
     };
 
     const checkboxes = [];
-    checkboxes.push(new Checkbox('#safebrowsingEnabledCheckbox', userSettings.names.DISABLE_SAFEBROWSING, {negate: true}));
-    checkboxes.push(new Checkbox('#sendSafebrowsingStatsCheckbox', userSettings.names.DISABLE_SEND_SAFEBROWSING_STATS, {negate: true}));
     checkboxes.push(new Checkbox('#useOptimizedFilters', userSettings.names.USE_OPTIMIZED_FILTERS));
     checkboxes.push(new Checkbox('#showAppUpdatedNotification', userSettings.names.DISABLE_SHOW_APP_UPDATED_NOTIFICATION, {
         negate: true
