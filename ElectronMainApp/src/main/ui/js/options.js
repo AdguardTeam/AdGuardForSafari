@@ -1083,11 +1083,19 @@ PageController.prototype = {
             }.bind(this)
         });
 
-        this._checkSafariExtensions();
+        this._initBoardingScreen();
     },
 
-    _checkSafariExtensions: function () {
+    _initBoardingScreen: function () {
         let onBoardingScreenEl = document.querySelector('#boarding-screen-placeholder');
+        ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
+            if (!arg) {
+                onBoardingScreenEl.style.display = 'block';
+            } else {
+                onBoardingScreenEl.style.display = 'none';
+            }
+        });
+
         let openSafariSettingsButton = document.querySelector('#open-safari-extensions-settings-btn');
         openSafariSettingsButton.addEventListener('click', (e) => {
             e.preventDefault();
@@ -1097,19 +1105,19 @@ PageController.prototype = {
             }));
         });
 
+        // First extensions check
+        this._checkSafariExtensions();
+
+        // Check on every window focus
+        window.addEventListener("focus", function (event) {
+            this._checkSafariExtensions();
+        }.bind(this), false);
+    },
+
+    _checkSafariExtensions: function () {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'checkSafariExtensions'
         }));
-
-        ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
-            if (!arg) {
-                onBoardingScreenEl.style.display = 'block';
-
-                //TODO: Add safariToolbar callback on extensions settings changed
-            } else {
-                onBoardingScreenEl.style.display = 'none';
-            }
-        });
     },
 
     _customizeText: function () {
