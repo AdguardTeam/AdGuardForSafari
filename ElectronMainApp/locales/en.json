@@ -985,5 +985,11 @@
 	},
 	"options_discuss": {
 		"message": "Discuss"
-	}
+	},
+    "onboarding_safari_desc": {
+        "message": "Check the box next to \"Toolbar Icon\" and \"Content blocker\" in Safari preferences"
+    },
+    "onboarding_safari_btn": {
+        "message": "Open preferences"
+    }
 }
