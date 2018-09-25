@@ -1090,7 +1090,7 @@ PageController.prototype = {
         let onBoardingScreenEl = document.querySelector('#boarding-screen-placeholder');
         ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
             if (!arg) {
-                onBoardingScreenEl.style.display = 'block';
+                onBoardingScreenEl.style.display = 'flex';
             } else {
                 onBoardingScreenEl.style.display = 'none';
             }
