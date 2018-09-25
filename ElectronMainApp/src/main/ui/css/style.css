@@ -1305,3 +1305,32 @@ li.active .toggler:before {
 .about-opt__menu-item:hover {
   text-decoration: underline;
 }
+
+.onboarding {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: #fff;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.onboarding__pic {
+  width: 890px;
+  height: 433px;
+  margin-bottom: 40px;
+  background-image: url("../images/help_info.jpg");
+  background-size: cover;
+}
+
+.onboarding__desc {
+  font-size: 24px;
+  line-height: 33px;
+  text-align: center;
+  max-width: 540px;
+  margin-bottom: 50px;
+}

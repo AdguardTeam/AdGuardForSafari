@@ -71,7 +71,7 @@ let tray;
  * Some APIs can only be used after this event occurs.
  */
 app.on('ready', (() => {
-    startup.init();
+    startup.init(showWindow);
     uiEventListener.init();
 
     tray = trayController.initTrayIcon(showWindow);

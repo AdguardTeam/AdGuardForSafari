@@ -15,7 +15,7 @@ module.exports = (() => {
     /**
      * Initialize application services
      */
-    const init = () => {
+    const init = (showWindow) => {
         log.info('Application initialization..');
 
         safariToolbar.busyStatus(true);
@@ -27,21 +27,36 @@ module.exports = (() => {
 
         antibanner.start({
             onInstall: function (callback) {
+                log.debug('On application install..');
+
                 // Retrieve filters and install them
                 filters.offerFilters(function (filterIds) {
                     filters.addAndEnableFilters(filterIds, callback);
                 });
+
+                showWindow();
+
+                log.info('Application installed');
             }
         }, function () {
             log.info('Application initialization finished');
 
             safariToolbar.busyStatus(false);
             safariToolbar.sendReady();
+
+            // Check safari extensions
+            safariToolbar.extensionsState((result) => {
+                if (!result) {
+                    log.warn('Safari extensions are not ok!');
+
+                    showWindow();
+                }
+            });
         });
     };
 
     return {
-        init: init
+        init
     };
 
 })();
