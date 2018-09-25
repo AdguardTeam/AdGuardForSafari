@@ -1118,16 +1118,6 @@ PageController.prototype = {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'checkSafariExtensions'
         }));
-
-        ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
-            if (!arg) {
-                onBoardingScreenEl.style.display = 'flex';
-
-                //TODO: Add safariToolbar callback on extensions settings changed
-            } else {
-                onBoardingScreenEl.style.display = 'none';
-            }
-        });
     },
 
     _customizeText: function () {
