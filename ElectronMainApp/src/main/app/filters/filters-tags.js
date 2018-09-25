@@ -20,6 +20,16 @@ module.exports = (() =>{
     const getTags = () => subscriptions.getTags();
 
     /**
+     * Is filter recommended
+     *
+     * @param filter
+     * @returns {boolean}
+     */
+    const isRecommendedFilter = (filter) => {
+        return filter.tags.includes(RECOMMENDED_TAG_ID);
+    };
+
+    /**
      * Filters by tag identifier
      *
      * @param tagId
@@ -35,8 +45,9 @@ module.exports = (() =>{
     const getRecommendedFilters = filters => getFiltersByTagId(RECOMMENDED_TAG_ID, filters);
 
     return {
-        getTags: getTags,
-        getRecommendedFilters: getRecommendedFilters
+        getTags,
+        getRecommendedFilters,
+        isRecommendedFilter
     };
 })();
 

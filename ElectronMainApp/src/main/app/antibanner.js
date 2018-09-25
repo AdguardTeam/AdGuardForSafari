@@ -44,7 +44,11 @@ module.exports = (() => {
      * List of events which cause RequestFilter re-creation
      * @type {Array}
      */
-    const UPDATE_REQUEST_FILTER_EVENTS = [events.UPDATE_FILTER_RULES, events.FILTER_ENABLE_DISABLE];
+    const UPDATE_REQUEST_FILTER_EVENTS = [
+        events.UPDATE_FILTER_RULES,
+        events.FILTER_ENABLE_DISABLE,
+        events.FILTER_GROUP_ENABLE_DISABLE,
+    ];
 
     const isUpdateRequestFilterEvent = function (el) {
         return UPDATE_REQUEST_FILTER_EVENTS.indexOf(el.event) >= 0;
@@ -59,6 +63,14 @@ module.exports = (() => {
     const isSaveRulesToStorageEvent = function (el) {
         return SAVE_FILTER_RULES_TO_STORAGE_EVENTS.indexOf(el.event) >= 0;
     };
+
+
+    /**
+     * Triggers groups load
+     */
+    function loadGroupsStateInfo() {
+        filters.getGroups();
+    }
 
     /**
      * Triggers filters load
@@ -230,7 +242,8 @@ module.exports = (() => {
             const filters = subscriptions.getFilters();
             for (let i = 0; i < filters.length; i++) {
                 const filter = filters[i];
-                if (filter.enabled) {
+                const group = subscriptions.getGroup(filter.groupId);
+                if (filter.enabled && group.enabled) {
                     dfds.push(filterRules.loadFilterRulesFromStorage(filter.filterId, rulesFilterMap));
                 }
             }
@@ -259,52 +272,64 @@ module.exports = (() => {
         let filterEventsHistory = [];
         let onFilterChangeTimeout = null;
 
-        const processFilterEvent = function (event, filter, rules) {
+        const processEventsHistory = function () {
+            const filterEvents = filterEventsHistory.slice(0);
+            filterEventsHistory = [];
+            onFilterChangeTimeout = null;
 
-            filterEventsHistory.push({event: event, filter: filter, rules: rules});
+            var needCreateRequestFilter = filterEvents.some(isUpdateRequestFilterEvent);
+
+            // Split by filterId
+            const eventsByFilter = Object.create(null);
+            for (let i = 0; i < filterEvents.length; i += 1) {
+                const filterEvent = filterEvents[i];
+                // don't add group events
+                if (!filterEvent.filter) {
+                    continue;
+                }
+                if (!(filterEvent.filter.filterId in eventsByFilter)) {
+                    eventsByFilter[filterEvent.filter.filterId] = [];
+                }
+                eventsByFilter[filterEvent.filter.filterId].push(filterEvent);
+            }
+
+            const dfds = [];
+            for (let filterId in eventsByFilter) { // jshint ignore:line
+                const needSaveRulesToStorage = eventsByFilter[filterId].some(isSaveRulesToStorageEvent);
+                if (!needSaveRulesToStorage) {
+                    continue;
+                }
+                const dfd = filterRules.processSaveFilterRulesToStorageEvents(filterId, eventsByFilter[filterId]);
+                dfds.push(dfd);
+            }
+
+            if (needCreateRequestFilter) {
+                // Rules will be added to request filter lazy, listeners will be notified about REQUEST_FILTER_UPDATED later
+                Promise.all(dfds).then(createRequestFilter);
+            } else {
+                // Rules are already in request filter, notify listeners
+                listeners.notifyListeners(events.REQUEST_FILTER_UPDATED);
+            }
+        };
+
+        const processFilterEvent = function (event, filter, rules) {
+            filterEventsHistory.push({ event: event, filter: filter, rules: rules });
 
             if (onFilterChangeTimeout !== null) {
                 clearTimeout(onFilterChangeTimeout);
             }
 
-            onFilterChangeTimeout = setTimeout(function () {
+            onFilterChangeTimeout = setTimeout(processEventsHistory, FILTERS_CHANGE_DEBOUNCE_PERIOD);
+        };
 
-                const filterEvents = filterEventsHistory.slice(0);
-                filterEventsHistory = [];
-                onFilterChangeTimeout = null;
+        const processGroupEvent = function (event, group) {
+            filterEventsHistory.push({ event: event, group: group });
 
-                const needCreateRequestFilter = filterEvents.some(isUpdateRequestFilterEvent);
+            if (onFilterChangeTimeout !== null) {
+                clearTimeout(onFilterChangeTimeout);
+            }
 
-                // Split by filterId
-                const eventsByFilter = Object.create(null);
-                for (let i = 0; i < filterEvents.length; i++) {
-                    const filterEvent = filterEvents[i];
-                    if (!(filterEvent.filter.filterId in eventsByFilter)) {
-                        eventsByFilter[filterEvent.filter.filterId] = [];
-                    }
-                    eventsByFilter[filterEvent.filter.filterId].push(filterEvent);
-                }
-
-                const dfds = [];
-                for (let filterId in eventsByFilter) { // jshint ignore:line
-                    let needSaveRulesToStorage = eventsByFilter[filterId].some(isSaveRulesToStorageEvent);
-                    if (!needSaveRulesToStorage) {
-                        continue;
-                    }
-                    const dfd = filterRules.processSaveFilterRulesToStorageEvents(filterId, eventsByFilter[filterId]);
-                    dfds.push(dfd);
-                }
-
-                if (needCreateRequestFilter) {
-                    // Rules will be added to request filter lazy, listeners will be notified about REQUEST_FILTER_UPDATED later
-                    Promise.all(dfds).then(createRequestFilter);
-                } else {
-                    // Rules are already in request filter, notify listeners
-                    listeners.notifyListeners(events.REQUEST_FILTER_UPDATED);
-                }
-
-            }, FILTERS_CHANGE_DEBOUNCE_PERIOD);
-
+            onFilterChangeTimeout = setTimeout(processEventsHistory, FILTERS_CHANGE_DEBOUNCE_PERIOD);
         };
 
         listeners.addListener(function (event, filter, rules) {
@@ -314,6 +339,18 @@ module.exports = (() => {
                 case events.UPDATE_FILTER_RULES:
                 case events.FILTER_ENABLE_DISABLE:
                     processFilterEvent(event, filter, rules);
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        listeners.addListener(function (event, group) {
+            switch (event) {
+                case events.FILTER_GROUP_ENABLE_DISABLE:
+                    processGroupEvent(event, group);
+                    break;
+                default:
                     break;
             }
         });
@@ -344,6 +381,7 @@ module.exports = (() => {
          */
         const initRequestFilter = () => {
             loadFiltersVersionAndStateInfo();
+            loadGroupsStateInfo();
             createRequestFilter(() => {
                 addFiltersChangeEventListener();
                 callback();
