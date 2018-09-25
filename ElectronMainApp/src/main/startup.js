@@ -15,7 +15,7 @@ module.exports = (() => {
     /**
      * Initialize application services
      */
-    const init = () => {
+    const init = (showWindow) => {
         log.info('Application initialization..');
 
         safariToolbar.busyStatus(true);
@@ -34,10 +34,7 @@ module.exports = (() => {
                     filters.addAndEnableFilters(filterIds, callback);
                 });
 
-                // Open Safari with extensions settings
-                safariToolbar.openExtensionsPreferenses(()=> {
-                    //Do nothing
-                });
+                showWindow();
 
                 log.info('Application installed');
             }
@@ -50,7 +47,7 @@ module.exports = (() => {
     };
 
     return {
-        init: init
+        init
     };
 
 })();

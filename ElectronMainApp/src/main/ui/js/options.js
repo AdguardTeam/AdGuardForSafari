@@ -1087,8 +1087,9 @@ PageController.prototype = {
     },
 
     _checkSafariExtensions: function () {
-        let warningEl = document.querySelector('#extensions-disabled-warning');
-        warningEl.addEventListener('click', (e) => {
+        let onBoardingScreenEl = document.querySelector('#boarding-screen-placeholder');
+        let openSafariSettingsButton = document.querySelector('#open-safari-extensions-settings-btn');
+        openSafariSettingsButton.addEventListener('click', (e) => {
             e.preventDefault();
 
             ipcRenderer.send('renderer-to-main', JSON.stringify({
@@ -1102,9 +1103,11 @@ PageController.prototype = {
 
         ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
             if (!arg) {
-                warningEl.style.display = 'block';
+                onBoardingScreenEl.style.display = 'block';
+
+                //TODO: Add safariToolbar callback on extensions settings changed
             } else {
-                warningEl.style.display = 'none';
+                onBoardingScreenEl.style.display = 'none';
             }
         });
     },
