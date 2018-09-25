@@ -43,6 +43,15 @@ module.exports = (() => {
 
             safariToolbar.busyStatus(false);
             safariToolbar.sendReady();
+
+            // Check safari extensions
+            safariToolbar.extensionsState((result) => {
+                if (!result) {
+                    log.warn('Safari extensions are not ok!');
+
+                    showWindow();
+                }
+            });
         });
     };
 
