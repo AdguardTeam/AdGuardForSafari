@@ -1103,7 +1103,7 @@ PageController.prototype = {
 
         ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
             if (!arg) {
-                onBoardingScreenEl.style.display = 'block';
+                onBoardingScreenEl.style.display = 'flex';
 
                 //TODO: Add safariToolbar callback on extensions settings changed
             } else {
