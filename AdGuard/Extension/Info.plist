@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Toolbar Icon</string>
+	<string>AdGuard Safari Icon</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -53,8 +53,8 @@
 		</dict>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2018 Roman Sokolov. All rights reserved.</string>
+	<string>Copyright © 2018 AdGuard. All rights reserved.</string>
 	<key>NSHumanReadableDescription</key>
-	<string>This is a Safari Extension. You should tell us what your extension does here.</string>
+	<string>You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually.</string>
 </dict>
 </plist>
