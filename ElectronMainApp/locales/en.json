@@ -213,7 +213,7 @@
         "message": "User filter"
     },
     "options_userfilter_description": {
-        "message": "You can add your own rules to&nbsp;this filter. This option is&nbsp;recommended for advanced users familiar with HTML\/CSS. Read the <a class='spl-user-descr-link' href='https:\/\/adguard.com\/filterrules.html?utm_source=extension&aid=16593' target='_blank'>filter rules tutorial<\/a> to&nbsp;learn how to&nbsp;write your own filter rules."
+        "message": "You can add your own rules to&nbsp;this filter. This option is&nbsp;recommended for advanced users familiar with HTML/CSS. Read the <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filter rules tutorial</a> to&nbsp;learn how to&nbsp;write your own filter rules."
     },
     "options_userfilter_add_rule": {
         "message": "Add new rule"
@@ -975,21 +975,21 @@
 		"message": "Try AdGuard Premium for better protection!"
 	},
 	"options_license_agreement": {
-		"message": "License agreement"
+		"message": "End-User License Agreement"
 	},
 	"options_privacy_policy": {
 		"message": "Privacy policy"
 	},
-	"options_gratitude": {
-		"message": "Gratitude"
-	},
-	"options_discuss": {
-		"message": "Discuss"
+	"options_acknowledgment": {
+		"message": "Acknowledgment"
 	},
     "onboarding_safari_desc": {
         "message": "Check the box next to \"AdGuard Safari Icon\" and \"AdGuard\" in Safari preferences"
     },
     "onboarding_safari_btn": {
         "message": "Open preferences"
-    }
+    },
+	"options_learn_more": {
+		"message": "Learn more about it"
+	}
 }

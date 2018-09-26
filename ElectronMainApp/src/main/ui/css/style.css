@@ -13,7 +13,7 @@
 .settings-wrap {
   height: 100%;
   min-height: 100%;
-  padding-top: 80px;
+  padding-top: 45px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -110,7 +110,7 @@
   font-weight: 700;
 }
 .nav__item:hover {
-   transform: translateY(2px);
+  transform: translateY(2px);
 }
 .nav__item.active:hover {
   transform: translateY(0);
@@ -128,7 +128,7 @@
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  height: calc(100% - 92px);
+  height: calc(100% - 82px);
 }
 .settings-content.tab-pane {
   -webkit-box-flex: 1;
@@ -382,6 +382,16 @@
   margin-right: 15px;
   margin-left: 15px;
   cursor: pointer;
+}
+.opt-state__link {
+  text-decoration: none;
+}
+.opt-state__link:hover {
+  text-decoration: underline;
+  color: #58a273;
+}
+.opts-list li .opt-state__link {
+  color: #66b574;
 }
 .opt-select {
   cursor: pointer;
@@ -1268,9 +1278,9 @@ li.active .toggler:before {
 .about-opt {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  margin-top: 170px;
+  height: calc(100% - 55px);
 }
 
 .about-opt__logo {
