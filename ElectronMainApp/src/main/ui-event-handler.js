@@ -129,7 +129,8 @@ function processInitializeFrameScriptRequest() {
             Prefs: {
                 locale: app.getLocale(),
                 mobile: false
-            }
+            },
+            appVersion: app.getVersion()
         },
         constants: {
             AntiBannerFiltersId: AntiBannerFiltersId

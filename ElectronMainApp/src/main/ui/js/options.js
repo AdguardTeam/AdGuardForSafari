@@ -1158,6 +1158,8 @@ PageController.prototype = {
         // Initialize AntiBanner filters
         this.antiBannerFilters = new AntiBannerFilters({rulesInfo: contentBlockerInfo});
         this.antiBannerFilters.render();
+
+        document.querySelector('#about-version-placeholder').textContent = i18n.__("options_about_version.message", environmentOptions.appVersion);
     }
 };
 
