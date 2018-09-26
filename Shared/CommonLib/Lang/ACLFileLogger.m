@@ -25,6 +25,8 @@
 
 @implementation ACLFileLogger
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-missing-super-calls"
 - (void)flush{
     
     @try {
@@ -35,5 +37,6 @@
     }
 
 }
+#pragma clang diagnostic pop
 
 @end

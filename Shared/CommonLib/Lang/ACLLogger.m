@@ -32,7 +32,7 @@ static ACLLogger *singletonLogger;
     self = [super init];
     if (self)
     {
-        ddLogLevel = ACLLDefaultLevel;
+        ddLogLevel = (DDLogLevel)ACLLDefaultLevel;
     }
     
     return self;

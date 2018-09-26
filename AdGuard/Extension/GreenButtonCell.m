@@ -117,8 +117,7 @@
 
 - (BOOL)isDark {
     if (@available(macOS 10.14, *)) {
-        //TODO: uncomment this on Xcode 10
-//        return [self.controlView.effectiveAppearance.name isEqualToString:NSAppearanceNameDarkAqua];
+        return [self.controlView.effectiveAppearance.name isEqualToString:NSAppearanceNameDarkAqua];
     }
     return NO;
 }
