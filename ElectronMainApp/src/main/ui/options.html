@@ -63,9 +63,18 @@
                 <div class="subtitle settings-body-subtitle" i18n="options_general_settings"></div>
                 <ul class="opts-list">
                     <li class="active">
-                        <div class="opt-name" i18n="options_allow_acceptable_ads"></div>
+                        <div>
+                            <div class="title" i18n="options_allow_acceptable_ads"></div>
+                            <div class="opt-state">
+                                <div class="sp-table-row-info desc">
+                                    <a class="opt-state__link" target="_blank" href="https://adguard.com/forward.html?action=self_promotion&from=options_screen&app=safari_extension" i18n="options_learn_more"></a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="opt-state">
-                            <input type="checkbox" class="sp-table-row-input" id="allowAcceptableAds"/>
+                            <div class="toggler-wr">
+                                <input type="checkbox" class="sp-table-row-input" id="allowAcceptableAds"/>
+                            </div>
                         </div>
                     </li>
                     <li>
@@ -302,8 +311,7 @@
                     <div class="about-opt">
                         <div class="logo about-opt__logo"><img src="images/logo.svg" alt=""></div>
                         <div class="about-opt__desc">
-                            <div class="about-opt__version">
-                                Версия 7.0.1280.361 (NIGHTLY)
+                            <div id="about-version-placeholder" class="about-opt__version">
                             </div>
                             <div class="about-opt__desc">
                                 <div class="about-opt__desc-item">
@@ -315,10 +323,9 @@
                             </div>
                         </div>
                         <div class="about-opt__menu">
-                            <a href="#" i18n="options_license_agreement" class="about-opt__menu-item"></a>
-                            <a href="#" i18n="options_privacy_policy" class="about-opt__menu-item"></a>
-                            <a href="#" i18n="options_gratitude" class="about-opt__menu-item"></a>
-                            <a href="#" i18n="options_discuss" class="about-opt__menu-item"></a>
+                            <a target="_blank" href="https://adguard.com/forward.html?action=eula&from=options_screen&app=safari_extension" i18n="options_license_agreement" class="about-opt__menu-item"></a>
+                            <a target="_blank" href="https://adguard.com/forward.html?action=privacy&from=options_screen&app=safari_extension" i18n="options_privacy_policy" class="about-opt__menu-item"></a>
+                            <a target="_blank" href="https://adguard.com/forward.html?action=acknowledgments&from=options_screen&app=safari_extension#" i18n="options_acknowledgment" class="about-opt__menu-item"></a>
                         </div>
                     </div>
                 </div>
