@@ -35,11 +35,11 @@ module.exports.init = function () {
             case 'disableFilter':
                 filters.disableFilters([message.filterId]);
                 break;
-            case 'addAndEnableFiltersByGroupId':
-                filters.addAndEnableFiltersByGroupId(message.groupId);
+            case 'enableFiltersGroup':
+                filters.enableFiltersGroup(message.groupId);
                 break;
-            case 'disableAntiBannerFiltersByGroupId':
-                filters.disableAntiBannerFiltersByGroupId(message.groupId);
+            case 'disableFiltersGroup':
+                filters.disableFiltersGroup(message.groupId);
                 break;
             case 'getWhiteListDomains':
                 const whiteListDomains = whitelist.getWhiteListDomains();
@@ -129,7 +129,8 @@ function processInitializeFrameScriptRequest() {
             Prefs: {
                 locale: app.getLocale(),
                 mobile: false
-            }
+            },
+            appVersion: app.getVersion()
         },
         constants: {
             AntiBannerFiltersId: AntiBannerFiltersId

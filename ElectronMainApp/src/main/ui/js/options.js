@@ -383,11 +383,19 @@ const AntiBannerFilters = function (options) {
         filters: [],
         categories: [],
         filtersById: {},
+        categoriesById: {},
         lastUpdateTime: 0,
 
         initLoadedFilters: function (filters, categories) {
             this.filters = filters;
             this.categories = categories;
+
+            const categoriesById = Object.create(null);
+            for (let i = 0; i < this.categories.length; i += 1) {
+                const category = this.categories[i];
+                categoriesById[category.groupId] = category;
+            }
+            this.categoriesById = categoriesById;
 
             let lastUpdateTime = 0;
             const filtersById = Object.create(null);
@@ -415,6 +423,21 @@ const AntiBannerFilters = function (options) {
             } else {
                 this.filters.push(filter);
                 this.filtersById[filter.filterId] = filter;
+            }
+        },
+
+        isCategoryEnabled: function (categoryId) {
+            const category = this.categoriesById[categoryId];
+            return category && category.enabled;
+        },
+
+        updateCategoryEnabled: function (category, enabled) {
+            const categoryInfo = this.categoriesById[category.groupId];
+            if (categoryInfo) {
+                categoryInfo.enabled = enabled;
+            } else {
+                this.categories.push(category);
+                this.categoriesById[category.groupId] = category;
             }
         }
     };
@@ -484,7 +507,10 @@ const AntiBannerFilters = function (options) {
         const checkbox = getCategoryCheckbox(groupId);
 
         element.querySelector('.desc').textContent = 'Enabled filters: ' + enabledFiltersCount;
-        CheckboxUtils.updateCheckbox([checkbox], enabledFiltersCount > 0);
+
+        const isCategoryEnabled = loadedFiltersInfo.isCategoryEnabled(groupId);
+        const isCheckboxChecked = typeof isCategoryEnabled === 'undefined' ? enabledFiltersCount > 0 : isCategoryEnabled;
+        CheckboxUtils.updateCheckbox([checkbox], isCheckboxChecked);
     }
 
     function getFilterCategoryElement(category) {
@@ -551,21 +577,6 @@ const AntiBannerFilters = function (options) {
             </div>`;
     }
 
-    function getTabsBarTemplate(showRecommended) {
-        if (showRecommended) {
-            return `
-                <div class="tabs-bar">
-                    <a href="" class="tab active" data-tab="recommended">Recommended</a>
-                    <a href="" class="tab" data-tab="other">Other</a>
-                </div>`;
-        }
-
-        return `
-            <div class="tabs-bar">
-                <a href="" class="tab active" data-tab="other">Other</a>
-            </div>`;
-    }
-
     function getEmptyCustomFiltersTemplate(category) {
         return `
             <div id="antibanner${category.groupId}" class="settings-content tab-pane filters-list">
@@ -585,14 +596,11 @@ const AntiBannerFilters = function (options) {
     }
 
     function getFiltersContentElement(category) {
-        const otherFilters = category.filters.otherFilters;
-        const recommendedFilters = category.filters.recommendedFilters;
-        const filters = [].concat(recommendedFilters, otherFilters);
+        let filters = category.filters;
         let isCustomFilters = category.groupId === 0;
 
         if (isCustomFilters &&
-            filters.length === 0 &&
-            recommendedFilters.length === 0) {
+            filters.length === 0) {
 
             return Utils.htmlToElement(getEmptyCustomFiltersTemplate(category));
         }
@@ -778,12 +786,12 @@ const AntiBannerFilters = function (options) {
         const groupId = this.value - 0;
         if (this.checked) {
             ipcRenderer.send('renderer-to-main', JSON.stringify({
-                'type': 'addAndEnableFiltersByGroupId',
+                'type': 'enableFiltersGroup',
                 'groupId': groupId
             }));
         } else {
             ipcRenderer.send('renderer-to-main', JSON.stringify({
-                'type': 'disableAntiBannerFiltersByGroupId',
+                'type': 'disableFiltersGroup',
                 'groupId': groupId
             }));
         }
@@ -959,6 +967,11 @@ const AntiBannerFilters = function (options) {
         CheckboxUtils.updateCheckbox([getFilterCheckbox(filterId)], enabled);
     }
 
+    function onCategoryStateChanged(category) {
+        loadedFiltersInfo.updateCategoryEnabled(category, category.enabled);
+        updateCategoryFiltersInfo(category.groupId);
+    }
+
     function onFilterDownloadStarted(filter) {
         getCategoryElement(filter.groupId).querySelector('.preloader').classList.add('active');
         getFilterElement(filter.filterId).querySelector('.preloader').classList.add('active');
@@ -974,6 +987,7 @@ const AntiBannerFilters = function (options) {
         render: renderCategoriesAndFilters,
         updateRulesCountInfo: updateRulesCountInfo,
         onFilterStateChanged: onFilterStateChanged,
+        onCategoryStateChanged: onCategoryStateChanged,
         onFilterDownloadStarted: onFilterDownloadStarted,
         onFilterDownloadFinished: onFilterDownloadFinished
     };
@@ -1158,6 +1172,8 @@ PageController.prototype = {
         // Initialize AntiBanner filters
         this.antiBannerFilters = new AntiBannerFilters({rulesInfo: contentBlockerInfo});
         this.antiBannerFilters.render();
+
+        document.querySelector('#about-version-placeholder').textContent = i18n.__("options_about_version.message", environmentOptions.appVersion);
     }
 };
 
@@ -1194,6 +1210,9 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.FILTER_ADD_REMOVE:
                     controller.antiBannerFilters.render();
+                    break;
+                case EventNotifierTypes.FILTER_GROUP_ENABLE_DISABLE:
+                    controller.antiBannerFilters.onCategoryStateChanged(options);
                     break;
                 case EventNotifierTypes.START_DOWNLOAD_FILTER:
                     controller.antiBannerFilters.onFilterDownloadStarted(options);

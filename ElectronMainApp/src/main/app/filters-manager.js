@@ -64,6 +64,56 @@ module.exports = (() => {
     };
 
     /**
+     * Updates groups state info
+     * Loads state info from the storage and then updates adguard.subscription.groups properly
+     */
+    const getGroups = () => {
+        // Load groups state from the storage
+        const groupsStateInfo = filtersState.getGroupState();
+
+        const groups = subscriptions.getGroups();
+
+        for (let i = 0; i < groups.length; i += 1) {
+            const group = groups[i];
+            const groupId = group.groupId;
+            const stateInfo = groupsStateInfo[groupId];
+            if (stateInfo) {
+                group.enabled = stateInfo.enabled;
+            }
+        }
+    };
+
+    /**
+     * Enables filter group
+     *
+     * @param groupId
+     */
+    const enableGroup = function (groupId) {
+        const group = subscriptions.getGroup(groupId);
+        if (!group || group.enabled) {
+            return;
+        }
+
+        group.enabled = true;
+        listeners.notifyListeners(events.FILTER_GROUP_ENABLE_DISABLE, group);
+    };
+
+    /**
+     * Disables filter group
+     *
+     * @param groupId
+     */
+    const disableGroup = function (groupId) {
+        const group = subscriptions.getGroup(groupId);
+        if (!group || !group.enabled) {
+            return;
+        }
+
+        group.enabled = false;
+        listeners.notifyListeners(events.FILTER_GROUP_ENABLE_DISABLE, group);
+    };
+
+    /**
      * Checks if specified filter is enabled
      *
      * @param filterId Filter identifier
@@ -88,6 +138,15 @@ module.exports = (() => {
 
         let filter = subscriptions.getFilter(filterId);
         filter.enabled = true;
+
+        /**
+         * We enable group if it was never enabled or disabled early
+         */
+        const groupId = filter.groupId;
+        if (!subscriptions.groupHasEnabledStatus(filter.groupId)) {
+            enableGroup(groupId);
+        }
+
         listeners.notifyListeners(events.FILTER_ENABLE_DISABLE, filter);
         log.info('Filter {0} enabled successfully', filterId);
     };
@@ -225,13 +284,40 @@ module.exports = (() => {
     };
 
     /**
+     * If group doesn't have enabled property we consider that group is enabled for the first time
+     * On first group enable we add and enable recommended filters by groupId
+     * On the next calls we just enable group
+     *
+     * TODO: custom category has it's own logic, check how to work with it too
+     *
+     * @param {number} groupId
+     */
+    const enableFiltersGroup = function (groupId) {
+            const group = subscriptions.getGroup(groupId);
+            if (group && typeof group.enabled === 'undefined') {
+                const recommendedFiltersIds = categories.getRecommendedFilterIdsByGroupId(groupId);
+                addAndEnableFilters(recommendedFiltersIds);
+            }
+
+            enableGroup(groupId);
+        };
+
+    /**
+     * Disables group
+     * @param {number} groupId
+     */
+    const disableFiltersGroup = function (groupId) {
+        disableGroup(groupId);
+    };
+
+    /**
      * Offer filters on extension install, select default filters and filters by locale and country
      *
      * @param callback
      */
     const offerFilters = (callback) => {
         // These filters are enabled by default
-        let filterIds = [config.AntiBannerFiltersId.ENGLISH_FILTER_ID, config.AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID];
+        let filterIds = [config.get('AntiBannerFiltersId').ENGLISH_FILTER_ID, config.get('AntiBannerFiltersId').SEARCH_AND_SELF_PROMO_FILTER_ID];
 
         // Get language-specific filters by user locale
         let localeFilterIds = subscriptions.getFilterIdsForLanguage(app.getLocale());
@@ -286,14 +372,18 @@ module.exports = (() => {
 
     return {
         getFilters: getFilters,
+        getGroups: getGroups,
         isFilterEnabled: isFilterEnabled,
 
         addAndEnableFilters: addAndEnableFilters,
         disableFilters: disableFilters,
         removeFilter: removeFilter,
 
-        addAndEnableFiltersByGroupId: addAndEnableFiltersByGroupId,
-        disableAntiBannerFiltersByGroupId: disableAntiBannerFiltersByGroupId,
+        enableGroup: enableGroup,
+        disableGroup: disableGroup,
+
+        enableFiltersGroup: enableFiltersGroup,
+        disableFiltersGroup: disableFiltersGroup,
 
         offerFilters: offerFilters,
         loadCustomFilter: loadCustomFilter,

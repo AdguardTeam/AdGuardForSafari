@@ -2,6 +2,7 @@ const subscriptions = require('./subscriptions');
 const tagService = require('./filters-tags');
 const config = require('config');
 const collections = require('../utils/collections');
+const {app} = require('electron');
 
 /**
  * Filter categories service
@@ -21,7 +22,7 @@ module.exports = (() => {
      * @returns {Array.<*>} filters
      */
     const getFilters = () => {
-        const result = subscriptions.getFilters().filter(f => !f.removed && f.filterId !== config.get('AntiBannerFiltersId').SEARCH_AND_SELF_PROMO_FILTER_ID);
+        const result = subscriptions.getFilters().filter(f => !f.removed);
 
         const tags = tagService.getTags();
 
@@ -50,29 +51,14 @@ module.exports = (() => {
     };
 
     /**
-     * Selects filters by groupId, separates recommended
+     * Selects filters by groupId
      *
      * @param groupId
      * @param filters
      * @returns {{recommendedFilters, otherFilters: *}}
      */
     const selectFiltersByGroupId = (groupId, filters) => {
-        const groupFilters = filters.filter(f => f.groupId === groupId);
-
-        if (groupId === CUSTOM_FILTERS_GROUP_ID) {
-            return {
-                recommendedFilters: groupFilters,
-                otherFilters: []
-            };
-        }
-
-        const recommendedFilters = tagService.getRecommendedFilters(groupFilters);
-        const otherFilters = collections.getArraySubtraction(groupFilters, recommendedFilters);
-
-        return {
-            recommendedFilters: recommendedFilters,
-            otherFilters: otherFilters
-        };
+        return filters.filter(filter => filter.groupId === groupId);
     };
 
     /**
@@ -112,19 +98,30 @@ module.exports = (() => {
     const getRecommendedFilterIdsByGroupId = groupId => {
         const metadata = getFiltersMetadata();
 
-        for (let i = 0; i < metadata.categories.length; i++) {
+        const result = [];
+        const langSuitableFilters = subscriptions.getFilterIdsForLanguage(app.getLocale());
+        for (let i = 0; i < metadata.categories.length; i += 1) {
             const category = metadata.categories[i];
             if (category.groupId === groupId) {
-                const result = [];
-                category.filters.recommendedFilters.forEach(f => {
-                    result.push(f.filterId);
+                category.filters.forEach(filter => {
+                    if (tagService.isRecommendedFilter(filter)) {
+                        // get ids intersection to enable recommended filters matching the lang tag
+                        // only if filter has language
+                        if (filter.languages && filter.languages.length > 0) {
+                            if (langSuitableFilters.includes(filter.filterId)) {
+                                result.push(filter.filterId);
+                            }
+                        } else {
+                            result.push(filter.filterId);
+                        }
+                    }
                 });
 
                 return result;
             }
         }
 
-        return [];
+        return result;
     };
 
     return {

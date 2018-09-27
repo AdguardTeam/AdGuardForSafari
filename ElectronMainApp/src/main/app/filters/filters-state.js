@@ -8,6 +8,7 @@ const log = require('../utils/log');
  */
 module.exports = (() => {
 
+    const GROUPS_STATE_PROP = 'groups-state';
     const FILTERS_STATE_PROP = 'filters-state';
     const FILTERS_VERSION_PROP = 'filters-version';
 
@@ -48,6 +49,22 @@ module.exports = (() => {
     };
 
     /**
+     * Gets groups state from the local storage
+     */
+    const getGroupState = () => {
+        let groups = Object.create(null);
+        try {
+            const json = localStorage.getItem(GROUPS_STATE_PROP);
+            if (json) {
+                groups = JSON.parse(json);
+            }
+        } catch (e) {
+            log.error('Error retrieve groups state info, cause {0}', e);
+        }
+        return groups;
+    };
+
+    /**
      * Updates filter version in the local storage
      *
      * @param filter Filter version metadata
@@ -80,29 +97,48 @@ module.exports = (() => {
     };
 
     /**
+     * Updates group enable state in the local storage
+     *
+     * @param group - SubscriptionGroup object
+     */
+    const updateGroupState = function (group) {
+        let groups = getGroupState();
+        groups[group.groupId] = {
+            enabled: group.enabled,
+        };
+
+        localStorage.setItem(GROUPS_STATE_PROP, JSON.stringify(groups));
+    };
+
+    /**
      * Initialize
      */
     const init = () => {
-        listeners.addListener((event, filter) => {
+        listeners.addListener((event, payload) => {
             switch (event) {
                 case events.SUCCESS_DOWNLOAD_FILTER:
-                    updateFilterState(filter);
-                    updateFilterVersion(filter);
+                    updateFilterState(payload);
+                    updateFilterVersion(payload);
                     break;
                 case events.FILTER_ADD_REMOVE:
                 case events.FILTER_ENABLE_DISABLE:
-                    updateFilterState(filter);
+                    updateFilterState(payload);
+                    break;
+                case events.FILTER_GROUP_ENABLE_DISABLE:
+                    updateGroupState(payload);
                     break;
             }
         });
     };
 
     return {
-        init: init,
-        getFiltersVersion: getFiltersVersion,
-        getFiltersState: getFiltersState,
-        updateFilterVersion: updateFilterVersion,
-        updateFilterState: updateFilterState,
+        init,
+        getFiltersVersion,
+        getFiltersState,
+        getGroupState,
+        updateFilterVersion,
+        updateFilterState,
+        updateGroupState
     };
 
 })();
