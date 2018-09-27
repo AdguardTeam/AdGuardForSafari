@@ -17,6 +17,7 @@ module.exports = (function () {
 
     let tags = [];
     let groups = [];
+    let groupsMap = {};
     let filters = [];
     let filtersMap = {};
 
@@ -244,6 +245,7 @@ module.exports = (function () {
 
             tags = [];
             groups = [];
+            groupsMap = {};
             filters = [];
             filtersMap = {};
 
@@ -258,7 +260,9 @@ module.exports = (function () {
             }
 
             for (let k = 0; k < metadata.groups.length; k++) {
-                groups.push(createSubscriptionGroupFromJSON(metadata.groups[k]));
+                const group = createSubscriptionGroupFromJSON(metadata.groups[k]);
+                groups.push(group);
+                groupsMap[group.groupId] = group;
             }
 
             filters.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
@@ -395,10 +399,26 @@ module.exports = (function () {
     const getGroups = () => groups;
 
     /**
+     * @returns Group metadata
+     */
+    const getGroup = (groupId) => groupsMap[groupId];
+
+    /**
+     * If group has enabled status true or false
+     *
+     * @param groupId
+     * @returns {boolean}
+     */
+    const groupHasEnabledStatus = (groupId) => {
+        const group = groupsMap[groupId];
+        return typeof group.enabled !== 'undefined';
+    };
+
+    /**
      * Gets list of filters for the specified languages
      *
      * @param locale Locale to check
-     * @returns List of filters identifiers
+     * @returns {Array} List of filters identifiers
      */
     const getFilterIdsForLanguage = locale => {
         if (!locale) {
@@ -425,6 +445,8 @@ module.exports = (function () {
         getFilterIdsForLanguage: getFilterIdsForLanguage,
         getTags: getTags,
         getGroups: getGroups,
+        getGroup: getGroup,
+        groupHasEnabledStatus: groupHasEnabledStatus,
         getFilters: getFilters,
         getFilter: getFilter,
         createSubscriptionFilterFromJSON: createSubscriptionFilterFromJSON,
