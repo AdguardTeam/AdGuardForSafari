@@ -53,7 +53,6 @@
      forKey:AEDefaultsEnabled];
     [AESharedResources synchronizeSharedDefaults];
     self.busy = YES;
-    self.showDisabledUI = YES;
     [AESharedResources notifyDefaultsChanged];
 }
 
@@ -130,9 +129,9 @@
 
 - (void)setEnabledButton {
     DDLogDebugTrace();
-    self.showDisabledUI = ! (self.mainAppRunning && [AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]);
+    BOOL showDisabledUI = ! (self.mainAppRunning && [AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]);
     [self setWhitelistButton];
-    if (self.showDisabledUI) {
+    if (showDisabledUI) {
         self.adguardIcon.image = [NSImage imageNamed:@"logo-gray"];
         if (self.mainAppRunning) {
             self.runAdguardButton.title = NSLocalizedString(@"sae-popover-enabled-button-title", @"Safari App Extension, toolbar popover, title of the button for start protection.");
@@ -142,11 +141,15 @@
             self.runAdguardButton.title = NSLocalizedString(@"sae-popover-run-adguard-button-title", @"Safari App Extension, toolbar popover, title of the button for running AdGuard.");
             self.warningMessageLabel.stringValue = NSLocalizedString(@"sae-popover-run-adguard-message", @"Safari App Extension, toolbar popover, message text for running AdGuard.");
         }
-        [self.warningMessageLabel setNeedsUpdateConstraints:YES];
+        [self.warningMessageLabel invalidateIntrinsicContentSize];
+        [self.view setNeedsUpdateConstraints:YES];
     }
     else {
         self.adguardIcon.image = [NSImage imageNamed:@"logo-green"];
     }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.showDisabledUI = showDisabledUI;
+    });
 }
 
 //////////////////////////////////////////////////////////////////////////

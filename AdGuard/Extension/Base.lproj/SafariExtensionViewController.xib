@@ -19,7 +19,7 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe" customClass="PopupView">
-            <rect key="frame" x="0.0" y="0.0" width="246" height="269"/>
+            <rect key="frame" x="0.0" y="0.0" width="247" height="269"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <userGuides>
                 <userLayoutGuide location="319" affinity="minY"/>
@@ -28,8 +28,8 @@
                 <userLayoutGuide location="34" affinity="minX"/>
             </userGuides>
             <subviews>
-                <stackView orientation="horizontal" alignment="centerY" spacing="13" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtO-ks-TWg" userLabel="Stack Top Icons">
-                    <rect key="frame" x="0.0" y="218" width="246" height="31"/>
+                <stackView orientation="horizontal" alignment="centerY" spacing="13" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtO-ks-TWg" userLabel="Stack Top Icons">
+                    <rect key="frame" x="0.0" y="218" width="247" height="31"/>
                     <edgeInsets key="edgeInsets" left="20" right="20" top="0.0" bottom="0.0"/>
                     <beginningViews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DHo-Vn-6on">
@@ -43,7 +43,7 @@
                     </beginningViews>
                     <endViews>
                         <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Jj4-64-W51">
-                            <rect key="frame" x="175" y="0.0" width="16" height="31"/>
+                            <rect key="frame" x="176" y="0.0" width="16" height="31"/>
                             <connections>
                                 <binding destination="-2" name="hidden" keyPath="self.busy" id="psU-z0-4GN">
                                     <dictionary key="options">
@@ -63,7 +63,7 @@
                             </connections>
                         </progressIndicator>
                         <button horizontalHuggingPriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eiI-Sm-BOy">
-                            <rect key="frame" x="204" y="0.0" width="22" height="31"/>
+                            <rect key="frame" x="205" y="0.0" width="22" height="31"/>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="settings" imagePosition="only" alignment="center" refusesFirstResponder="YES" inset="2" id="24o-Wm-bnS">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -95,6 +95,14 @@
                     </buttonCell>
                     <connections>
                         <action selector="clickWhitelist:" target="-2" id="gSg-T4-DN8"/>
+                        <binding destination="-2" name="enabled" keyPath="self.busy" id="IHi-hl-SYy">
+                            <dictionary key="options">
+                                <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                <integer key="NSNullPlaceholder" value="0"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
                         <binding destination="-2" name="enabled2" keyPath="self.domain" previousBinding="IHi-hl-SYy" id="40N-ws-8dk">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -102,14 +110,6 @@
                                 <integer key="NSNotApplicablePlaceholder" value="0"/>
                                 <integer key="NSNullPlaceholder" value="0"/>
                                 <string key="NSValueTransformerName">NSIsNotNil</string>
-                            </dictionary>
-                        </binding>
-                        <binding destination="-2" name="enabled" keyPath="self.busy" id="IHi-hl-SYy">
-                            <dictionary key="options">
-                                <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                <integer key="NSNullPlaceholder" value="0"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
                         <binding destination="-2" name="hidden" keyPath="self.showDisabledUI" previousBinding="40N-ws-8dk" id="pkx-Lb-8dp">
@@ -122,7 +122,7 @@
                     </connections>
                 </button>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="CVr-v4-bDt">
-                    <rect key="frame" x="0.0" y="153" width="246" height="5"/>
+                    <rect key="frame" x="0.0" y="153" width="247" height="5"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="pQJ-d8-2Tr"/>
                     </constraints>
@@ -137,7 +137,7 @@
                     </connections>
                 </box>
                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="23.5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJ8-Wf-pr8" userLabel="Stack Titles">
-                    <rect key="frame" x="20" y="70" width="117" height="58"/>
+                    <rect key="frame" x="20" y="70" width="118" height="58"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="du9-Ja-6bt">
                             <rect key="frame" x="-2" y="41" width="108" height="17"/>
@@ -148,7 +148,7 @@
                             </textFieldCell>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gvG-9D-ca7">
-                            <rect key="frame" x="-2" y="0.0" width="121" height="17"/>
+                            <rect key="frame" x="-2" y="0.0" width="122" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Report this website" id="Uuh-Ao-BUJ">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -175,7 +175,7 @@
                     </connections>
                 </stackView>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rhc-3f-Mmp" userLabel="Stack Buttons">
-                    <rect key="frame" x="157" y="68" width="69" height="62"/>
+                    <rect key="frame" x="158" y="68" width="69" height="62"/>
                     <subviews>
                         <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="0bc-P0-SgG">
                             <rect key="frame" x="-6" y="34" width="81" height="32"/>
@@ -185,6 +185,14 @@
                             </buttonCell>
                             <connections>
                                 <action selector="clickAssistant:" target="-2" id="o3A-Se-Ref"/>
+                                <binding destination="-2" name="enabled" keyPath="self.busy" id="a4i-hk-stz">
+                                    <dictionary key="options">
+                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                        <integer key="NSNullPlaceholder" value="0"/>
+                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                    </dictionary>
+                                </binding>
                                 <binding destination="-2" name="enabled2" keyPath="self.domain" previousBinding="a4i-hk-stz" id="Ojq-XD-oku">
                                     <dictionary key="options">
                                         <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -192,14 +200,6 @@
                                         <integer key="NSNotApplicablePlaceholder" value="0"/>
                                         <integer key="NSNullPlaceholder" value="0"/>
                                         <string key="NSValueTransformerName">NSIsNotNil</string>
-                                    </dictionary>
-                                </binding>
-                                <binding destination="-2" name="enabled" keyPath="self.busy" id="a4i-hk-stz">
-                                    <dictionary key="options">
-                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                        <integer key="NSNullPlaceholder" value="0"/>
-                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
                                     </dictionary>
                                 </binding>
                             </connections>
@@ -211,6 +211,14 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
+                                <binding destination="-2" name="enabled" keyPath="self.busy" id="0aU-Kw-l5g">
+                                    <dictionary key="options">
+                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                        <integer key="NSNullPlaceholder" value="0"/>
+                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                    </dictionary>
+                                </binding>
                                 <binding destination="-2" name="enabled2" keyPath="self.domain" previousBinding="0aU-Kw-l5g" id="Njb-z5-8yS">
                                     <dictionary key="options">
                                         <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -218,14 +226,6 @@
                                         <integer key="NSNotApplicablePlaceholder" value="0"/>
                                         <integer key="NSNullPlaceholder" value="0"/>
                                         <string key="NSValueTransformerName">NSIsNotNil</string>
-                                    </dictionary>
-                                </binding>
-                                <binding destination="-2" name="enabled" keyPath="self.busy" id="0aU-Kw-l5g">
-                                    <dictionary key="options">
-                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                        <integer key="NSNullPlaceholder" value="0"/>
-                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
                                     </dictionary>
                                 </binding>
                             </connections>
@@ -255,51 +255,15 @@
                         </binding>
                     </connections>
                 </stackView>
-                <stackView hidden="YES" distribution="fill" orientation="vertical" alignment="centerX" spacing="60" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TU5-0x-fAt" userLabel="Stack Adguard Dont Work">
-                    <rect key="frame" x="20" y="0.0" width="206" height="218"/>
-                    <subviews>
-                        <textField horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WI5-OB-i6V">
-                            <rect key="frame" x="-2" y="126" width="210" height="44"/>
-                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="F0e-9f-alD">
-                                <font key="font" metaFont="system" size="18"/>
-                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                            </textFieldCell>
-                        </textField>
-                        <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="K9v-08-IS3">
-                            <rect key="frame" x="83" y="38" width="40" height="32"/>
-                            <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MCZ-9T-yrA" customClass="GreenButtonCell">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="clickRunAdguard:" target="-2" id="uqm-v6-ehg"/>
-                                <binding destination="-2" name="enabled" keyPath="self.busy" id="xNq-O2-Vah">
-                                    <dictionary key="options">
-                                        <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                        <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                        <integer key="NSNullPlaceholder" value="0"/>
-                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                    </dictionary>
-                                </binding>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <edgeInsets key="edgeInsets" left="0.0" right="0.0" top="48" bottom="45"/>
-                    <constraints>
-                        <constraint firstItem="WI5-OB-i6V" firstAttribute="leading" secondItem="TU5-0x-fAt" secondAttribute="leading" id="MrV-Ti-K1I"/>
-                        <constraint firstAttribute="trailing" secondItem="WI5-OB-i6V" secondAttribute="trailing" id="d3B-QQ-sdY"/>
-                    </constraints>
-                    <visibilityPriorities>
-                        <integer value="1000"/>
-                        <integer value="1000"/>
-                    </visibilityPriorities>
-                    <customSpacing>
-                        <real value="3.4028234663852886e+38"/>
-                        <real value="3.4028234663852886e+38"/>
-                    </customSpacing>
+                <textField horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WI5-OB-i6V">
+                    <rect key="frame" x="18" y="124" width="211" height="22"/>
+                    <textFieldCell key="cell" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" id="F0e-9f-alD">
+                        <font key="font" metaFont="system" size="18"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="hidden" keyPath="self.showDisabledUI" id="QVg-Uf-UVY">
+                        <binding destination="-2" name="hidden" keyPath="self.showDisabledUI" id="qhP-d1-1pl">
                             <dictionary key="options">
                                 <integer key="NSNoSelectionPlaceholder" value="0"/>
                                 <integer key="NSNotApplicablePlaceholder" value="0"/>
@@ -308,9 +272,35 @@
                             </dictionary>
                         </binding>
                     </connections>
-                </stackView>
+                </textField>
+                <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="K9v-08-IS3">
+                    <rect key="frame" x="104" y="28" width="40" height="32"/>
+                    <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MCZ-9T-yrA" customClass="GreenButtonCell">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="clickRunAdguard:" target="-2" id="uqm-v6-ehg"/>
+                        <binding destination="-2" name="hidden" keyPath="self.showDisabledUI" previousBinding="xNq-O2-Vah" id="fk8-Jo-Mtd">
+                            <dictionary key="options">
+                                <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                <integer key="NSNullPlaceholder" value="0"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="-2" name="enabled" keyPath="self.busy" id="xNq-O2-Vah">
+                            <dictionary key="options">
+                                <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                <integer key="NSNullPlaceholder" value="0"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="jKb-oY-gyH">
-                    <rect key="frame" x="74" y="16" width="98" height="17"/>
+                    <rect key="frame" x="75" y="16" width="98" height="17"/>
                     <buttonCell key="cell" type="bevel" title="Pause AdGuard" bezelStyle="regularSquare" alignment="center" refusesFirstResponder="YES" inset="2" id="p92-iZ-Q5D" customClass="GreenButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -350,13 +340,6 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="clickPause:" target="-2" id="cRK-Rc-CFK"/>
-                        <binding destination="-2" name="hidden" keyPath="self.showDisabledUI" previousBinding="cc0-M1-mNw" id="4d3-2x-3Ru">
-                            <dictionary key="options">
-                                <integer key="NSNoSelectionPlaceholder" value="0"/>
-                                <integer key="NSNotApplicablePlaceholder" value="0"/>
-                                <integer key="NSNullPlaceholder" value="0"/>
-                            </dictionary>
-                        </binding>
                         <binding destination="-2" name="enabled" keyPath="self.busy" id="cc0-M1-mNw">
                             <dictionary key="options">
                                 <integer key="NSNoSelectionPlaceholder" value="0"/>
@@ -365,10 +348,17 @@
                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
+                        <binding destination="-2" name="hidden" keyPath="self.showDisabledUI" previousBinding="cc0-M1-mNw" id="4d3-2x-3Ru">
+                            <dictionary key="options">
+                                <integer key="NSNoSelectionPlaceholder" value="0"/>
+                                <integer key="NSNotApplicablePlaceholder" value="0"/>
+                                <integer key="NSNullPlaceholder" value="0"/>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </button>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="LXA-5T-3Tr">
-                    <rect key="frame" x="0.0" y="41" width="246" height="5"/>
+                    <rect key="frame" x="0.0" y="41" width="247" height="5"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="SpI-nU-o1j"/>
                     </constraints>
@@ -386,9 +376,9 @@
             <constraints>
                 <constraint firstItem="SJ8-Wf-pr8" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="2EK-9k-thD"/>
                 <constraint firstItem="jKb-oY-gyH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="3Iq-9O-hGb"/>
-                <constraint firstAttribute="bottom" secondItem="TU5-0x-fAt" secondAttribute="bottom" id="3aR-fI-R6X"/>
                 <constraint firstItem="Rhc-3f-Mmp" firstAttribute="leading" secondItem="SJ8-Wf-pr8" secondAttribute="trailing" constant="20" id="46A-3c-Y7n"/>
                 <constraint firstItem="rtO-ks-TWg" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="4lV-xK-QcA"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="K9v-08-IS3" secondAttribute="trailing" constant="20" id="5IS-lF-B2J"/>
                 <constraint firstAttribute="trailing" secondItem="rtO-ks-TWg" secondAttribute="trailing" id="7uW-dJ-EnM"/>
                 <constraint firstItem="CVr-v4-bDt" firstAttribute="top" secondItem="qio-p6-Pqn" secondAttribute="bottom" constant="18" id="9Qx-Id-Gye"/>
                 <constraint firstItem="rtO-ks-TWg" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="Bvm-zo-3Ea"/>
@@ -397,17 +387,22 @@
                 <constraint firstItem="jKb-oY-gyH" firstAttribute="top" secondItem="LXA-5T-3Tr" secondAttribute="bottom" constant="10" id="I8H-7C-RJU"/>
                 <constraint firstItem="qio-p6-Pqn" firstAttribute="top" secondItem="rtO-ks-TWg" secondAttribute="bottom" constant="30" id="JbI-67-seB"/>
                 <constraint firstItem="LXA-5T-3Tr" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="Mre-D7-6KB"/>
-                <constraint firstItem="TU5-0x-fAt" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="QkH-8h-ESD"/>
+                <constraint firstItem="WI5-OB-i6V" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="R0c-P4-bmy"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jKb-oY-gyH" secondAttribute="trailing" constant="20" id="SMA-xl-RLK"/>
+                <constraint firstAttribute="centerY" secondItem="WI5-OB-i6V" secondAttribute="centerY" id="VCQ-sc-jOO"/>
                 <constraint firstItem="Rhc-3f-Mmp" firstAttribute="top" secondItem="CVr-v4-bDt" secondAttribute="bottom" constant="25" id="b67-8W-l1m"/>
                 <constraint firstItem="CVr-v4-bDt" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="f5i-Kg-gbH"/>
-                <constraint firstAttribute="trailing" secondItem="TU5-0x-fAt" secondAttribute="trailing" constant="20" id="ghn-fT-bZa"/>
+                <constraint firstItem="K9v-08-IS3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="g0a-db-T75"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qio-p6-Pqn" secondAttribute="trailing" constant="20" id="gyo-VG-72I"/>
                 <constraint firstAttribute="trailing" secondItem="LXA-5T-3Tr" secondAttribute="trailing" id="hA7-sG-jHx"/>
                 <constraint firstAttribute="bottom" secondItem="jKb-oY-gyH" secondAttribute="bottom" constant="16" id="moe-tW-zmz"/>
+                <constraint firstItem="K9v-08-IS3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WI5-OB-i6V" secondAttribute="bottom" constant="35" id="pne-qJ-4nD"/>
                 <constraint firstItem="jKb-oY-gyH" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="s19-GO-PU4"/>
+                <constraint firstAttribute="trailing" secondItem="WI5-OB-i6V" secondAttribute="trailing" constant="20" id="sLe-ih-Djw"/>
+                <constraint firstItem="K9v-08-IS3" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="tBO-lB-BZe"/>
+                <constraint firstAttribute="bottom" secondItem="K9v-08-IS3" secondAttribute="bottom" constant="35" id="tC6-iq-8Ty"/>
+                <constraint firstItem="WI5-OB-i6V" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rtO-ks-TWg" secondAttribute="bottom" constant="35" id="vFM-t3-Pli"/>
                 <constraint firstItem="Rhc-3f-Mmp" firstAttribute="centerY" secondItem="SJ8-Wf-pr8" secondAttribute="centerY" id="vXK-bX-T8P"/>
-                <constraint firstItem="TU5-0x-fAt" firstAttribute="top" secondItem="rtO-ks-TWg" secondAttribute="bottom" id="wTB-Ju-cOE"/>
                 <constraint firstItem="qio-p6-Pqn" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="28" id="ybG-NN-Moh"/>
                 <constraint firstItem="LXA-5T-3Tr" firstAttribute="top" secondItem="Rhc-3f-Mmp" secondAttribute="bottom" constant="24" id="zFu-Yv-T1Q"/>
             </constraints>
