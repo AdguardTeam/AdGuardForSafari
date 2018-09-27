@@ -3,7 +3,6 @@ const {Notification} = require('electron');
 const listeners = require('./notifier');
 const events = require('./events');
 const i18n = require('../utils/i18n');
-const appPack = require('../utils/app-pack');
 
 /**
  * Notifications controller
@@ -19,8 +18,7 @@ module.exports = (() => {
     const showNotification = (title, message) => {
         let notification = new Notification({
             title: title,
-            subtitle: message,
-            icon: appPack.resourcePath('/src/main/icons/app-icon-16.png')
+            subtitle: message
         });
 
         notification.show();
