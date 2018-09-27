@@ -1233,17 +1233,16 @@ li.active .toggler:before {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 20px 25px 20px 25px;
   background-color: #ffffff;
-  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .2);
+  height: 30px;
 }
 .alert--active {
   display: block;
 }
 .alert--warning {
-  background-color: #ad0900;
+  background-color: #F3F3F3;
   text-align: center;
-  color: #fff;
+  color: #9C1D00;
 }
 .alert__in {
   display: -webkit-box;
@@ -1272,8 +1271,8 @@ li.active .toggler:before {
 }
 .alert__cont {
   white-space: pre-wrap;
-  line-height: 20px;
   overflow-y: hidden;
+  line-height: 30px;
 }
 .about-opt {
   display: flex;
