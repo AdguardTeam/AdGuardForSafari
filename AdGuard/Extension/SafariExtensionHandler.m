@@ -126,18 +126,6 @@ static BOOL _mainAppReady;
 }
 
 - (void)messageReceivedFromContainingAppWithName:(NSString *)messageName userInfo:(NSDictionary<NSString *,id> *)userInfo {
-    DDLogInfo(@"The extension received a message (%@) from a containing app with userInfo (%@)", messageName, userInfo);
-
-    NSDictionary *testData = @{
-                               @"int-value": @(100),
-                               @"string-value": @"ass with pen",
-                               @"string-localized-value": @"жопа с ручкой"
-                               };
-
-    [AESharedResources setBlockingContentRulesJson:[NSJSONSerialization dataWithJSONObject:testData
-                                                                                   options:0
-                                                                                     error:NULL]
-                                        completion:nil];
 }
 
 - (BOOL)setMainAppRunning {

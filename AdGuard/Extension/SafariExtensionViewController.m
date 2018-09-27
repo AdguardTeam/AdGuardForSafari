@@ -12,6 +12,8 @@
 #import "SafariExtensionHandler.h"
 
 @interface SafariExtensionViewController ()
+
+@property BOOL showDisabledUI;
 @end
 
 @implementation SafariExtensionViewController
@@ -44,13 +46,14 @@
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - ACTIONS
 
-- (IBAction)clickEnabled:(id)sender {
+- (IBAction)clickPause:(id)sender {
     DDLogDebugTrace();
     [AESharedResources.sharedDefaults
-     setBool:! [AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]
+     setBool:NO
      forKey:AEDefaultsEnabled];
     [AESharedResources synchronizeSharedDefaults];
     self.busy = YES;
+    self.showDisabledUI = YES;
     [AESharedResources notifyDefaultsChanged];
 }
 
@@ -89,10 +92,22 @@
 }
 
 - (IBAction)clickRunAdguard:(id)sender {
-    [[NSWorkspace sharedWorkspace] launchAppWithBundleIdentifier:AG_BUNDLEID
-                                                         options:(NSWorkspaceLaunchWithoutActivation | NSWorkspaceLaunchAndHide)
-                                  additionalEventParamDescriptor:nil
-                                                launchIdentifier:NULL];
+    DDLogDebugTrace();
+    if (self.mainAppRunning) {
+        [self startProtection];
+    }
+    else {
+        //start app
+        [[NSWorkspace sharedWorkspace] launchAppWithBundleIdentifier:AG_BUNDLEID
+                                                             options:(NSWorkspaceLaunchWithoutActivation | NSWorkspaceLaunchAndHide)
+                                      additionalEventParamDescriptor:nil
+                                                    launchIdentifier:NULL];
+        [SafariExtensionHandler onReady:^{
+            if (! [AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]) {
+                [self startProtection];
+            }
+        }];
+    }
 }
 
 - (IBAction)clickPreferences:(id)sender {
@@ -115,22 +130,22 @@
 
 - (void)setEnabledButton {
     DDLogDebugTrace();
-    if ([AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]) {
-
-        self.adguardIcon.image = self.mainAppRunning ?
-        [NSImage imageNamed:@"logo-green"]
-        : [NSImage imageNamed:@"logo-gray"];
-
-        self.enabledButton.state = NSOnState;
-        self.enabledButton.title = NSLocalizedString(@"sae-popover-enabled-button-on", @"Safari App Extension, toolbar popover, title of the button for on/off AdGuard filtering, \"Enabled\" state.");
-        [self setButtonsEnabled:YES];
+    self.showDisabledUI = ! (self.mainAppRunning && [AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]);
+    [self setWhitelistButton];
+    if (self.showDisabledUI) {
+        self.adguardIcon.image = [NSImage imageNamed:@"logo-gray"];
+        if (self.mainAppRunning) {
+            self.runAdguardButton.title = NSLocalizedString(@"sae-popover-enabled-button-title", @"Safari App Extension, toolbar popover, title of the button for start protection.");
+            self.warningMessageLabel.stringValue = NSLocalizedString(@"sae-popover-enabled-message", @"Safari App Extension, toolbar popover, message text for start protection.");
+        }
+        else {
+            self.runAdguardButton.title = NSLocalizedString(@"sae-popover-run-adguard-button-title", @"Safari App Extension, toolbar popover, title of the button for running AdGuard.");
+            self.warningMessageLabel.stringValue = NSLocalizedString(@"sae-popover-run-adguard-message", @"Safari App Extension, toolbar popover, message text for running AdGuard.");
+        }
+        [self.warningMessageLabel setNeedsUpdateConstraints:YES];
     }
     else {
-
-        self.adguardIcon.image = [NSImage imageNamed:@"logo-gray"];
-        self.enabledButton.state = NSOffState;
-        self.enabledButton.title = NSLocalizedString(@"sae-popover-enabled-button-off", @"Safari App Extension, toolbar popover, title of the button for on/off AdGuard filtering, \"Disabled\" state.");
-        [self setButtonsEnabled:NO];
+        self.adguardIcon.image = [NSImage imageNamed:@"logo-green"];
     }
 }
 
@@ -156,31 +171,20 @@
 
     [AESharedResources whitelistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
         DDLogDebugTrace();
-        [self setWhitelistButtonOn:! [self domainCheckWithDomains:domains]];
+        self.whitelistButton.state = ! [self domainCheckWithDomains:domains] ? NSOnState : NSOffState;
     }];
 }
 
-- (void)setButtonsEnabled:(BOOL)enabled {
-
-    self.otherButtonsEnabled = enabled;
-    if (enabled) {
-        [self setWhitelistButton];
-    }
-    else {
-        [self setWhitelistButtonOn:NO];
-    }
+- (void)startProtection {
+    //start protection
+    [AESharedResources.sharedDefaults
+     setBool:YES
+     forKey:AEDefaultsEnabled];
+    [AESharedResources synchronizeSharedDefaults];
+    self.busy = YES;
+    [AESharedResources notifyDefaultsChanged];
 }
 
-- (void)setWhitelistButtonOn:(BOOL)on {
-    if (on) {
-        self.whitelistButton.state = NSOnState;
-        self.whitelistButton.title = NSLocalizedString(@"sae-popover-filter-this-site-button-on", @"Safari App Extension, toolbar popover, title of the button for on/off filtration on this site, \"On\" state.");
-    }
-    else {
-        self.whitelistButton.state = NSOffState;
-        self.whitelistButton.title = NSLocalizedString(@"sae-popover-filter-this-site-button-off", @"Safari App Extension, toolbar popover, title of the button for on/off filtration on this site, \"Off\" state.");
-    }
-}
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - Properties Observer
 

@@ -18,14 +18,15 @@
 #pragma mark - OUTLETS
 
 @property (weak) IBOutlet NSImageView *adguardIcon;
-@property (weak) IBOutlet NSButton *enabledButton;
 @property (weak) IBOutlet NSButton *whitelistButton;
 @property (weak) IBOutlet NSButton *assistantButton;
+@property (weak) IBOutlet NSTextField *warningMessageLabel;
+@property (weak) IBOutlet NSButton *runAdguardButton;
 
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - ACTIONS
 
-- (IBAction)clickEnabled:(id)sender;
+- (IBAction)clickPause:(id)sender;
 - (IBAction)clickWhitelist:(id)sender;
 - (IBAction)clickAssistant:(id)sender;
 - (IBAction)clickRunAdguard:(id)sender;
@@ -35,9 +36,9 @@
 #pragma mark - Properties and Public methods
 
 @property NSString *domain;
-@property BOOL otherButtonsEnabled;
 @property BOOL busy;
-@property BOOL mainAppRunning;
+@property (nonatomic) BOOL mainAppRunning;
+@property (readonly) BOOL showDisabledUI;
 
 - (void)setEnabledButton;
 

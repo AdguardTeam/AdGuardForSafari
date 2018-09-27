@@ -1,12 +1,12 @@
-/* Safari App Extension, toolbar popover, title of the button for on/off AdGuard filtering, \"Disabled\" state. */
-"sae-popover-enabled-button-off" = "Disabled";
+/* Safari App Extension, toolbar popover, title of the button for start protection. */
+"sae-popover-enabled-button-title" = "Start Protection";
 
-/* Safari App Extension, toolbar popover, title of the button for on/off AdGuard filtering, \"Enabled\" state. */
-"sae-popover-enabled-button-on" = "Enabled";
+/* Safari App Extension, toolbar popover, message text for start protection. */
+"sae-popover-enabled-message" = "AdGuard protection disabled. Press to \"Start Protection\" button.";
 
-/* Safari App Extension, toolbar popover, title of the button for on/off filtration on this site, \"Off\" state. */
-"sae-popover-filter-this-site-button-off" = "Off";
+/* Safari App Extension, toolbar popover, title of the button for running AdGuard. */
+"sae-popover-run-adguard-button-title" = "Run AdGuard";
 
-/* Safari App Extension, toolbar popover, title of the button for on/off filtration on this site, \"On\" state. */
-"sae-popover-filter-this-site-button-on" = "On";
+/* Safari App Extension, toolbar popover, message text for running AdGuard. */
+"sae-popover-run-adguard-message" = "AdGuard don’t work.  Please run AdGuard.";
 
