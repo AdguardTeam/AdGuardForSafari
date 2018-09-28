@@ -216,11 +216,15 @@
 }
 /* /st */
 /* th & st */
+.settings-body {
+  height: 100%;
+}
 .opts-list {
   list-style: none;
   padding: 0;
   margin: 0;
   max-height: 475px;
+  height: calc(100% - 30px);
   overflow-y: auto;
 }
 .opts-list li {
