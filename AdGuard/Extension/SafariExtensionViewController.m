@@ -145,7 +145,7 @@
     BOOL showDisabledUI = ! (self.mainAppRunning && [AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]);
     [self setWhitelistButton];
     if (showDisabledUI) {
-        self.adguardIcon.image = [NSImage imageNamed:@"logo-gray"];
+        self.adguardIcon.image = _disabledLogo;
         if (self.mainAppRunning) {
             self.runAdguardButton.title = NSLocalizedString(@"sae-popover-enabled-button-title", @"Safari App Extension, toolbar popover, title of the button for start protection.");
             self.warningMessageLabel.stringValue = NSLocalizedString(@"sae-popover-enabled-message", @"Safari App Extension, toolbar popover, message text for start protection.");
@@ -158,7 +158,7 @@
         [self.view setNeedsUpdateConstraints:YES];
     }
     else {
-        self.adguardIcon.image = [NSImage imageNamed:@"logo-green"];
+        self.adguardIcon.image = _enabledLogo;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         self.showDisabledUI = showDisabledUI;
