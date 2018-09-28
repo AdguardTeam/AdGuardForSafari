@@ -49,12 +49,7 @@
         // momentary button
         if (self.isHighlighted) {
             //pressed
-            if ([self isDark]) {
-                [[NSColor whiteColor] setFill];
-            }
-            else {
-                [[self colorWithSketchRed:136 green:136 blue:136 alfa:100] setFill];
-            }
+            [[self colorWithSketchRed:136 green:136 blue:136 alfa:100] setFill];
             [path fill];
         }
         else {

@@ -16,7 +16,10 @@
 @property BOOL showDisabledUI;
 @end
 
-@implementation SafariExtensionViewController
+@implementation SafariExtensionViewController {
+    NSImage *_disabledLogo;
+    NSImage *_enabledLogo;
+}
 
 + (SafariExtensionViewController *)sharedController {
     static SafariExtensionViewController *sharedController = nil;
@@ -33,6 +36,16 @@
 
     self.view.appearance = NSAppearance.currentAppearance;
 
+    if ([self isDark]) {
+        self.whitelistButton.image = [NSImage imageNamed:@"checkbox-dark"];
+        _disabledLogo = [NSImage imageNamed:@"logo-gray-dark"];
+        _enabledLogo = [NSImage imageNamed:@"logo-green-dark"];
+    }
+    else {
+        self.whitelistButton.image = [NSImage imageNamed:@"checkbox-light"];
+        _disabledLogo = [NSImage imageNamed:@"logo-gray"];
+        _enabledLogo = [NSImage imageNamed:@"logo-green"];
+    }
 //    [[NSWorkspace sharedWorkspace] addObserver:self
 //                                    forKeyPath:@"runningApplications"
 //                                       options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
@@ -186,6 +199,13 @@
     [AESharedResources synchronizeSharedDefaults];
     self.busy = YES;
     [AESharedResources notifyDefaultsChanged];
+}
+
+- (BOOL)isDark {
+    if (@available(macOS 10.14, *)) {
+        return [self.view.effectiveAppearance.name isEqualToString:NSAppearanceNameDarkAqua];
+    }
+    return NO;
 }
 
 //////////////////////////////////////////////////////////////////////////
