@@ -12,8 +12,7 @@ ARCH=x64
 SRC="${SRCROOT}/../ElectronMainApp"
 SHAREDSRC="${SRCROOT}/../Shared"
 
-if [ ${1} == "clean" ]; then
-rm -Rfv "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}" || exit 1
+if [ ${ACTION} == "clean" ]; then
 cd "${SHAREDSRC}"
 node-gyp clean || exit 1
 exit 0
@@ -41,10 +40,10 @@ fi
 "${SRC}/node_modules/.bin/electron-rebuild"
 
 electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=2.0.8 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
---arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${BUILT_PRODUCTS_DIR}" \
+--arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
 ${OPT} || exit 1
 
-APP="${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
+APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
 FRAMEWORKS="${APP}/Contents/Frameworks"
 
 CHILD_ENT="${SRCROOT}/${PRODUCT_NAME}/ElectronChild.entitlements"
@@ -56,6 +55,19 @@ codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${CHIL
 codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${CHILD_ENT}" "$FRAMEWORKS/AdGuard Helper NP.app" || exit 1
 codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${CHILD_ENT}" "$FRAMEWORKS/AdGuard Helper.app" || exit 1
 
-rm -Rfv "${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app"
-cp -HRfp "${APP}" "${BUILT_PRODUCTS_DIR}" || exit 1
-rm -Rfv "${APP}" || exit 1
+DST_DIR="${BUILT_PRODUCTS_DIR}"
+if [ ${ACTION} == "install" ]; then
+DST_DIR="${INSTALL_ROOT}/Applications/"
+mkdir -p "${DST_DIR}"
+fi
+
+
+rm -Rfv "${DST_DIR}/${PRODUCT_NAME}.app"
+cp -HRfp "${APP}" "${DST_DIR}" || exit 1
+
+
+
+#  Touch native part of the project
+touch -c "${SRCROOT}/Assets.xcassets"
+touch -c "${SRCROOT}/AdGuard/Info.plist"
+touch -c "${SRCROOT}/defaults.plist"

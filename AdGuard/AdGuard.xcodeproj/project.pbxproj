@@ -113,6 +113,20 @@
 			remoteGlobalIDString = 6584716C2136B372005C74E8;
 			remoteInfo = BlockerExtension;
 		};
+		65FA4086215CE234000196EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65720AAA21219AC900B2381C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 652169F321231A2300ABF7D0;
+			remoteInfo = BuildElectronApp;
+		};
+		65FA4088215CE23B000196EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65720AAA21219AC900B2381C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 652169F321231A2300ABF7D0;
+			remoteInfo = BuildElectronApp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -550,6 +564,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				65FA4087215CE234000196EC /* PBXTargetDependency */,
 				652735EB212D78F1005C35BF /* PBXTargetDependency */,
 			);
 			name = AdGuardSafariExtension;
@@ -604,6 +619,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				65FA4089215CE23B000196EC /* PBXTargetDependency */,
 			);
 			name = BlockerExtension;
 			productName = BlockerExtension;
@@ -811,6 +827,16 @@
 			isa = PBXTargetDependency;
 			target = 6584716C2136B372005C74E8 /* BlockerExtension */;
 			targetProxy = 658471772136B373005C74E8 /* PBXContainerItemProxy */;
+		};
+		65FA4087215CE234000196EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 652169F321231A2300ABF7D0 /* BuildElectronApp */;
+			targetProxy = 65FA4086215CE234000196EC /* PBXContainerItemProxy */;
+		};
+		65FA4089215CE23B000196EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 652169F321231A2300ABF7D0 /* BuildElectronApp */;
+			targetProxy = 65FA4088215CE23B000196EC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

@@ -16,6 +16,7 @@
 #import "DDDispatchQueueLogFormatter.h"
 #import <pthread/pthread.h>
 #import <objc/runtime.h>
+#import <stdatomic.h>
 
 #if !__has_feature(objc_arc)
 #error This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -25,7 +26,7 @@
     DDDispatchQueueLogFormatterMode _mode;
     NSString *_dateFormatterKey;
     
-    int32_t _atomicLoggerCount;
+    _Atomic(int32_t) _atomicLoggerCount;
     NSDateFormatter *_threadUnsafeDateFormatter; // Use [self stringFromDate]
     
     pthread_mutex_t _mutex;
@@ -271,12 +272,12 @@
 
 - (void)didAddToLogger:(id <DDLogger>  __attribute__((unused)))logger {
     int32_t count = 0;
-    count = OSAtomicIncrement32(&_atomicLoggerCount);
-    NSAssert(count <= 1 || _mode == DDDispatchQueueLogFormatterModeShareble, @"Can't reuse formatter with multiple loggers in non-shareable mode.");
+    count = atomic_fetch_add_explicit(&_atomicLoggerCount, 1, memory_order_relaxed);
+    NSAssert(count < 1 || _mode == DDDispatchQueueLogFormatterModeShareble, @"Can't reuse formatter with multiple loggers in non-shareable mode.");
 }
 
 - (void)willRemoveFromLogger:(id <DDLogger> __attribute__((unused)))logger {
-    OSAtomicDecrement32(&_atomicLoggerCount);
+    atomic_fetch_sub_explicit(&_atomicLoggerCount, 1, memory_order_relaxed);
 }
 
 @end
