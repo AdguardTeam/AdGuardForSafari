@@ -85,11 +85,11 @@
                     </customSpacing>
                 </stackView>
                 <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="qio-p6-Pqn">
-                    <rect key="frame" x="26" y="172" width="166" height="18"/>
+                    <rect key="frame" x="28" y="174" width="162" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="fBY-Nv-eMT"/>
                     </constraints>
-                    <buttonCell key="cell" type="check" title="Enabled on this website" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" inset="2" id="t9o-h0-bnn">
+                    <buttonCell key="cell" type="bevel" title="Enabled on this website" bezelStyle="regularSquare" image="checkbox-light" imagePosition="left" alternateImage="checkbox-selected" refusesFirstResponder="YES" inset="2" id="t9o-h0-bnn">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -136,20 +136,20 @@
                         </binding>
                     </connections>
                 </box>
-                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="23.5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJ8-Wf-pr8" userLabel="Stack Titles">
+                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="23.5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJ8-Wf-pr8" userLabel="Stack Titles">
                     <rect key="frame" x="20" y="70" width="118" height="58"/>
                     <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="du9-Ja-6bt">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="du9-Ja-6bt">
                             <rect key="frame" x="-2" y="41" width="108" height="17"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Block an element" id="uTP-cd-F1b">
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Block an element" usesSingleLineMode="YES" id="uTP-cd-F1b">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gvG-9D-ca7">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="gvG-9D-ca7">
                             <rect key="frame" x="-2" y="0.0" width="122" height="17"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Report this website" id="Uuh-Ao-BUJ">
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Report this website" usesSingleLineMode="YES" id="Uuh-Ao-BUJ">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -174,7 +174,7 @@
                         </binding>
                     </connections>
                 </stackView>
-                <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rhc-3f-Mmp" userLabel="Stack Buttons">
+                <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rhc-3f-Mmp" userLabel="Stack Buttons">
                     <rect key="frame" x="158" y="68" width="69" height="62"/>
                     <subviews>
                         <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="0bc-P0-SgG">
@@ -281,7 +281,7 @@
                     </buttonCell>
                     <connections>
                         <action selector="clickRunAdguard:" target="-2" id="uqm-v6-ehg"/>
-                        <binding destination="-2" name="hidden" keyPath="self.showDisabledUI" previousBinding="xNq-O2-Vah" id="fk8-Jo-Mtd">
+                        <binding destination="-2" name="enabled" keyPath="self.busy" id="xNq-O2-Vah">
                             <dictionary key="options">
                                 <integer key="NSNoSelectionPlaceholder" value="0"/>
                                 <integer key="NSNotApplicablePlaceholder" value="0"/>
@@ -289,7 +289,7 @@
                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
                             </dictionary>
                         </binding>
-                        <binding destination="-2" name="enabled" keyPath="self.busy" id="xNq-O2-Vah">
+                        <binding destination="-2" name="hidden" keyPath="self.showDisabledUI" previousBinding="xNq-O2-Vah" id="fk8-Jo-Mtd">
                             <dictionary key="options">
                                 <integer key="NSNoSelectionPlaceholder" value="0"/>
                                 <integer key="NSNotApplicablePlaceholder" value="0"/>
@@ -299,7 +299,22 @@
                         </binding>
                     </connections>
                 </button>
-                <button horizontalHuggingPriority="750" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="jKb-oY-gyH">
+                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="LXA-5T-3Tr">
+                    <rect key="frame" x="0.0" y="41" width="247" height="5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="SpI-nU-o1j"/>
+                    </constraints>
+                    <connections>
+                        <binding destination="-2" name="hidden" keyPath="self.showDisabledUI" id="Emn-ZM-7JT">
+                            <dictionary key="options">
+                                <integer key="NSNoSelectionPlaceholder" value="1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="1"/>
+                                <integer key="NSNullPlaceholder" value="1"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </box>
+                <button horizontalHuggingPriority="750" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="jKb-oY-gyH" customClass="LinkButton">
                     <rect key="frame" x="75" y="16" width="98" height="17"/>
                     <buttonCell key="cell" type="bevel" title="Pause AdGuard" bezelStyle="regularSquare" alignment="center" refusesFirstResponder="YES" inset="2" id="p92-iZ-Q5D" customClass="GreenButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -357,21 +372,6 @@
                         </binding>
                     </connections>
                 </button>
-                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="LXA-5T-3Tr">
-                    <rect key="frame" x="0.0" y="41" width="247" height="5"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="SpI-nU-o1j"/>
-                    </constraints>
-                    <connections>
-                        <binding destination="-2" name="hidden" keyPath="self.showDisabledUI" id="Emn-ZM-7JT">
-                            <dictionary key="options">
-                                <integer key="NSNoSelectionPlaceholder" value="1"/>
-                                <integer key="NSNotApplicablePlaceholder" value="1"/>
-                                <integer key="NSNullPlaceholder" value="1"/>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </box>
             </subviews>
             <constraints>
                 <constraint firstItem="SJ8-Wf-pr8" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="2EK-9k-thD"/>
@@ -411,6 +411,8 @@
         <userDefaultsController representsSharedInstance="YES" id="E66-b2-ykH"/>
     </objects>
     <resources>
+        <image name="checkbox-light" width="14" height="14"/>
+        <image name="checkbox-selected" width="14" height="14"/>
         <image name="logo-green" width="142" height="31"/>
         <image name="settings" width="22" height="22"/>
     </resources>

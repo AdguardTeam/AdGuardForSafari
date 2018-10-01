@@ -75,6 +75,7 @@
 		65D151C22139A5080014BE79 /* DDOSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D151A52139A5080014BE79 /* DDOSLogger.h */; };
 		65D151C32139A5080014BE79 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A62139A5080014BE79 /* DDTTYLogger.m */; };
 		65D151C42139A5080014BE79 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D151A72139A5080014BE79 /* DDAbstractDatabaseLogger.h */; };
+		65FA408D215E8B6B000196EC /* LinkButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FA408C215E8B6B000196EC /* LinkButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -240,6 +241,8 @@
 		65D151A52139A5080014BE79 /* DDOSLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDOSLogger.h; sourceTree = "<group>"; };
 		65D151A62139A5080014BE79 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
 		65D151A72139A5080014BE79 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		65FA408B215E8B6B000196EC /* LinkButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkButton.h; sourceTree = "<group>"; };
+		65FA408C215E8B6B000196EC /* LinkButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,7 +303,6 @@
 		65216A04212436EA00ABF7D0 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				65975C9B2148241F007F766E /* vendors */,
 				65216A05212436EA00ABF7D0 /* SafariExtensionHandler.h */,
 				65216A06212436EA00ABF7D0 /* SafariExtensionHandler.m */,
 				65216A08212436EA00ABF7D0 /* SafariExtensionViewController.h */,
@@ -317,6 +319,8 @@
 				6535D714213D4374004D8A08 /* Localizable.strings */,
 				65975C9E21484E13007F766E /* GreenButtonCell.h */,
 				65975C9F21484E13007F766E /* GreenButtonCell.m */,
+				65FA408B215E8B6B000196EC /* LinkButton.h */,
+				65FA408C215E8B6B000196EC /* LinkButton.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -430,13 +434,6 @@
 				658471762136B373005C74E8 /* BlockerExtension.entitlements */,
 			);
 			path = BlockerExtension;
-			sourceTree = "<group>";
-		};
-		65975C9B2148241F007F766E /* vendors */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = vendors;
 			sourceTree = "<group>";
 		};
 		65D151882139A5080014BE79 /* Lumberjack */ = {
@@ -760,6 +757,7 @@
 				6504C1102136EA2D007E9674 /* PopupView.m in Sources */,
 				655C8665212AEA3200CB6DAE /* NSString+Utils.m in Sources */,
 				65216A07212436EA00ABF7D0 /* SafariExtensionHandler.m in Sources */,
+				65FA408D215E8B6B000196EC /* LinkButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
