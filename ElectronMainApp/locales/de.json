@@ -1,1 +1,146 @@
-{}
+{
+    "name": {
+        "message": "AdGuard Werbeblocker"
+    },
+    "description": {
+        "message": "Un\u00fcbertroffene Werbeblocker-Erweiterung gegen Werbung und Pop-ups. Blockiert Anzeigen auf Facebook, YouTube und allen anderen Webseiten."
+    },
+    "options_settings": {
+        "message": "AdGuard Einstellungen"
+    },
+    "options_general_settings": {
+        "message": "Allgemeine"
+    },
+    "options_allow_acceptable_ads": {
+        "message": "Werbeanzeigen in Suchvorg\u00e4ngen und Eigen-Werbung auf Webseiten erlauben<a target='_blank' href='https:\/\/kb.adguard.com\/general\/search-ads-and-self-promotion?utm_source=extension&aid=16593' class='sp-table-row-info'>Mehr erfahren<\/a>"
+    },
+    "options_export_settings": {
+        "message": "Einstellungen exportieren"
+    },
+    "options_import_settings": {
+        "message": "Einstellungen importieren"
+    },
+    "options_antibanner": {
+        "message": "Filter"
+    },
+    "options_antibanner_info": {
+        "message": "%s Filter"
+    },
+    "options_whitelist": {
+        "message": "Whitelist"
+    },
+    "options_modal_save": {
+        "message": "\u00c4nderungen speichern"
+    },
+    "options_whitelist_description": {
+        "message": "AdGuard filtert keine Webseiten aus der Whitelist."
+    },
+    "options_whitelist_inverse": {
+        "message": "Whitelist invertieren<span class='sp-table-row-info'>Anzeigen \u00fcberall entsperren <i>au\u00dfer<\/i> von der Whitelist<\/span>"
+    },
+    "options_userfilter": {
+        "message": "Benutzerfilter"
+    },
+    "options_userfilter_description": {
+        "message": "Sie k\u00f6nnen Ihre eigenen Regeln zu diesem Filter hinzuf\u00fcgen. Diese Option ist f\u00fcr die mit HTML\/CSS vertrauten fortgeschrittenen Benutzer empfohlen. Lesen Sie <a class='spl-user-descr-link' href='https:\/\/adguard.com\/filterrules.html?utm_source=extension&aid=16593' target='_blank'>die Filterregeln-Anleitung<\/a>, um zu erfahren, wie Sie Ihre eigenen Filterregeln schreiben k\u00f6nnen."
+    },
+    "options_show_app_updated_notification": {
+        "message": "\u00dcber Updates der Erweiterung benachrichtigen"
+    },
+    "options_use_optimized_filters": {
+        "message": "Optimierte Filter verwenden<span class='sp-table-row-info'>F\u00fcr mobile Ger\u00e4te vereinfachte Filterliste<\/span>"
+    },
+    "options_popup_update_title": {
+        "message": "Filter erfolgreich aktualisiert"
+    },
+    "options_popup_update_not_found": {
+        "message": "Keine Updates gefunden"
+    },
+    "options_popup_update_error": {
+        "message": "Update fehlgeschlagen. Bitte versuchen Sie es sp\u00e4ter noch einmal."
+    },
+    "options_popup_update_updated": {
+        "message": "\"$1\" auf Version $2 aktualisiert"
+    },
+    "options_popup_version_update_title": {
+        "message": "Die AdGuard Browsererweiterung wurde gerade auf Version $1 aktualisiert."
+    },
+    "options_popup_version_update_description_minor": {
+        "message": "Diese Version enth\u00e4lt haupts\u00e4chlich Bugfixes und kleine Verbesserungen."
+    },
+    "options_popup_version_update_description_major": {
+        "message": "Das ist ein wichtiges Erweiterungsupgrade, das viele neue Funktionen und Verbesserungen bringt."
+    },
+    "options_content_blocker_overlimit": {
+        "message": "Zu viele Filter aktiviert. Safari kann nicht mehr als 50 000 Regeln verarbeiten."
+    },
+    "options_filters_list_search_placeholder": {
+        "message": "Geben Sie den Suchbegriff ein"
+    },
+    "main_menu_edit": {
+        "message": "Edit"
+    },
+    "main_menu_undo": {
+        "message": "Undo"
+    },
+    "main_menu_cut": {
+        "message": "Cut"
+    },
+    "main_menu_copy": {
+        "message": "Copy"
+    },
+    "main_menu_paste": {
+        "message": "Paste"
+    },
+    "main_menu_select-all": {
+        "message": "Select All"
+    },
+    "tray_menu_about": {
+        "message": "\u00dcber"
+    },
+    "tray_menu_preferences": {
+        "message": "Einstellungen"
+    },
+    "tray_menu_check_updates": {
+        "message": "Auf Filter-Updates pr\u00fcfen"
+    },
+    "tray_menu_launch_at_startup": {
+        "message": "AdGuard beim Anmelden starten"
+    },
+    "tray_menu_quit": {
+        "message": "Beenden"
+    },
+    "options_last_update": {
+        "message": "Letztes Update:"
+    },
+    "options_about": {
+        "message": "\u00dcber"
+    },
+    "options_compare_btn": {
+        "message": "How they compare"
+    },
+    "options_compare_title": {
+        "message": "Probieren Sie AdGuard Premium f\u00fcr einen besseren Schutz aus!"
+    },
+    "options_license_agreement": {
+        "message": "Endbenutzer-Lizenzvereinbarung"
+    },
+    "options_privacy_policy": {
+        "message": "Datenschutzerkl\u00e4rung"
+    },
+    "options_acknowledgment": {
+        "message": "Danksagungen"
+    },
+    "onboarding_safari_desc": {
+        "message": "Aktivieren Sie das Kontrollk\u00e4stchen neben \"AdGuard Safari Icon\" und \"AdGuard\" in den Safari-Einstellungen"
+    },
+    "onboarding_safari_btn": {
+        "message": "Einstellungen \u00f6ffnen"
+    },
+    "options_learn_more": {
+        "message": "Erfahren Sie mehr dar\u00fcber"
+    },
+    "options_about_version": {
+        "message": "Version %s"
+    }
+}

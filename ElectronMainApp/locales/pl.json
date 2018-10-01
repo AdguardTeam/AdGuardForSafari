@@ -1,147 +1,9 @@
 {
-    "filtering_modal_element": {
-        "message": "Element:"
-    },
-    "background_tab_title": {
-        "message": "Zak\u0142adka w tle"
-    },
-    "filtering_modal_important": {
-        "message": "Nadaj wi\u0119kszy priorytet regule"
-    },
-    "thankyou_want_full_protection": {
-        "message": "Chcesz wypr\u00f3bowa\u0107&nbsp;pe\u0142n\u0105 ochron\u0119? Pobierz AdGuard dla Windows!"
-    },
-    "thankyou_want_full_protection_mac": {
-        "message": "Chcesz wypr\u00f3bowa\u0107&nbsp;pe\u0142n\u0105 ochron\u0119? Pobierz AdGuard dla Mac!"
-    },
-    "thankyou_compare_ext_title": {
-        "message": "Rozszerzenie AdGuard"
-    },
-    "thankyou_compare_full_title": {
-        "message": "AdGuard dla Windows"
-    },
-    "thankyou_compare_full_title_mac": {
-        "message": "AdGuard dla Mac"
-    },
-    "thankyou_compare_blocked": {
-        "message": "Blokowanie reklam"
-    },
-    "thankyou_compare_ext_blocking": {
-        "message": "Ograniczone przez mo\u017cliwo\u015bci rozszerzenia przegl\u0105darki"
-    },
-    "thankyou_compare_full_blocking": {
-        "message": "Pe\u0142ne"
-    },
-    "thankyou_compare_safebrowsing": {
-        "message": "Ochrona przed szkodliwymi stronami i phishingiem"
-    },
-    "thankyou_compare_parent": {
-        "message": "Kontrola rodzicielska"
-    },
-    "thankyou_compare_safebrowsing_attack": {
-        "message": "Ochrona przed atakami typu phishing"
-    },
-    "thankyou_compare_any_browser": {
-        "message": "Blokuje reklamy we wszystkich przegl\u0105darkach"
-    },
-    "thankyou_compare_traffic": {
-        "message": "Oszcz\u0119dza ruch sieciowy"
-    },
-    "thankyou_compare_increase": {
-        "message": "Zmniejsza czas wczytywania strony"
-    },
-    "thankyou_compare_support": {
-        "message": "Pomoc techniczna"
-    },
-    "thankyou_installed": {
-        "message": "ZAINSTALOWANE"
-    },
-    "thankyou_download": {
-        "message": "Pobierz AdGuard"
-    },
-    "thankyou_help_in_development": {
-        "message": "We\u017a udzia\u0142 w&nbsp;tworzeniu&nbsp;filtr\u00f3w AdGuard"
-    },
-    "thankyou_help_in_development_description": {
-        "message": "Przesy\u0142aj anonimowe statystyki dotycz\u0105ce pracy filtr\u00f3w&nbsp;AdGuard &nbsp;filtr\u00f3w, a&nbsp;tak\u017ce &nbsp;witryn, kt\u00f3re AdGuard zidentyfikowa\u0142 jako&nbsp;podejrzane. <span class='warn-message'>Nie zalecane na&nbsp;powolnych komputerach.<\/span>"
-    },
-    "release_notes_title": {
-        "message": "Zaktualizowano rozszerzenie AdGuard!"
-    },
-    "release_notes_whats_new": {
-        "message": "Co nowego w&nbsp;tej wersji?"
-    },
-    "assistant_select_element": {
-        "message": "Tryb zaznaczania"
-    },
-    "assistant_select_element_ext": {
-        "message": "Kliknij na&nbsp;dowolny element&nbsp;tej strony"
-    },
-    "assistant_select_element_cancel": {
-        "message": "Anuluj"
-    },
-    "assistant_block_element": {
-        "message": "Zablokuj element"
-    },
-    "assistant_block_element_explain": {
-        "message": "Ustawianie regu\u0142y blokuj\u0105cej element"
-    },
-    "assistant_slider_explain": {
-        "message": "U\u017cyj tego suwaka, aby&nbsp;zmieni\u0107 rozmiar&nbsp;elementu&nbsp;do&nbsp;zablokowania przez&nbsp;t\u0119 regu\u0142\u0119:"
-    },
-    "assistant_slider_if_hide": {
-        "message": "Filtr b\u0119dzie zawiera\u0142&nbsp;regu\u0142\u0119 blokuj\u0105c\u0105 wybrany element"
-    },
-    "assistant_slider_min": {
-        "message": "MNIEJSZY"
-    },
-    "assistant_slider_max": {
-        "message": "WI\u0118KSZY"
-    },
-    "assistant_extended_settings": {
-        "message": "Ustawienia zaawansowane"
-    },
-    "assistant_apply_rule_to_all_sites": {
-        "message": "Zastosuj t\u0119 regu\u0142\u0119 wobec&nbsp;wszystkich stron internetowych"
-    },
-    "assistant_block_by_reference": {
-        "message": "Zablokuj element poprzez&nbsp;url"
-    },
-    "assistant_block_similar": {
-        "message": "Zablokuj podobne elementy"
-    },
-    "assistant_block": {
-        "message": "Zablokuj"
-    },
-    "assistant_another_element": {
-        "message": "Wybierz inny element"
-    },
-    "assistant_preview": {
-        "message": "Podgl\u0105d"
-    },
-    "assistant_preview_header": {
-        "message": "Zablokuj element - podgl\u0105d"
-    },
-    "assistant_preview_header_info": {
-        "message": "Sprawd\u017a, jak strona b\u0119dzie wygl\u0105da\u0107 przed dodaniem regu\u0142y blokowania."
-    },
-    "assistant_preview_start": {
-        "message": "Podgl\u0105d"
-    },
-    "assistant_preview_end": {
-        "message": "Zako\u0144cz podgl\u0105d"
-    },
     "name": {
-        "message": "Bloker reklam AdGuard"
-    },
-    "short_name": {
         "message": "Bloker reklam AdGuard"
     },
     "description": {
         "message": "Niezr\u00f3wnane rozszerzenie blokuj\u0105ce reklamy i wyskakuj\u0105ce okienka. Blokuje reklamy na Facebooku, Youtube i wszystkich innych stronach internetowych."
-    },
-    "description_blocked": {
-        "message": "Reklamy zablokowane na tej stronie: $1"
     },
     "options_settings": {
         "message": "Ustawienia AdGuard"
@@ -151,12 +13,6 @@
     },
     "options_allow_acceptable_ads": {
         "message": "Nie blokuj po\u017c\u0105danych reklam<a target='_blank' href='https:\/\/kb.adguard.com\/general\/search-ads-and-self-promotion?utm_source=extension&aid=16593' class='sp-table-row-info'>Dowiedz si\u0119 wi\u0119cej<\/a>"
-    },
-    "options_show_blocked_ads_count": {
-        "message": "Pokazuj liczb\u0119&nbsp;zablokowanych reklam na&nbsp;ikonie rozszerzenia AdGuard."
-    },
-    "options_enable_autodetect_filter": {
-        "message": "Automatycznie aktywuj najbardziej odpowiednie filtry"
     },
     "options_export_settings": {
         "message": "Eksportuj ustawienia"
@@ -173,32 +29,8 @@
     "options_whitelist": {
         "message": "Bia\u0142a lista"
     },
-    "options_update_antibanner_filters": {
-        "message": "Sprawd\u017a aktualizacje filtr\u00f3w"
-    },
-    "options_add_custom_filter": {
-        "message": "Dodaj niestandardowy filtr"
-    },
-    "options_edit_antibanner_filters": {
-        "message": "Wszystkie filtry"
-    },
-    "options_too_many_filters_selected": {
-        "message": "Zaznaczy\u0142e\u015b zbyt wiele subskrypcji filtr\u00f3w. Mo\u017ce to&nbsp;znacznie spowolni\u0107 przegl\u0105danie."
-    },
-    "options_modal_cancel": {
-        "message": "Anuluj"
-    },
     "options_modal_save": {
         "message": "Zapisz zmiany"
-    },
-    "options_modal_edit": {
-        "message": "Lista filtr\u00f3w"
-    },
-    "options_modal_homepage": {
-        "message": "Strona g\u0142\u00f3wna"
-    },
-    "options_antibanner_list_empty": {
-        "message": "Lista filtr\u00f3w jest&nbsp;pusta. <a class='spl-user-descr-link editAntiBannerFilters' href='#'>Doda\u0107 nowy filtr<\/a>?"
     },
     "options_whitelist_description": {
         "message": "AdGuard nie filtruje stron znajduj\u0105cych si\u0119 na bia\u0142ej li\u015bcie."
@@ -206,116 +38,14 @@
     "options_whitelist_inverse": {
         "message": "Odwr\u00f3\u0107 bia\u0142\u0105 list\u0119<span class='sp-table-row-info'>Odblokuj reklamy wsz\u0119dzie <i>z wyj\u0105tkiem<\/i> bia\u0142ej listy<\/span>"
     },
-    "options_whitelist_add_domain": {
-        "message": "Dodaj stron\u0119"
-    },
     "options_userfilter": {
         "message": "Filtr u\u017cytkownika"
     },
     "options_userfilter_description": {
         "message": "Mo\u017cesz doda\u0107 swoje w\u0142asne regu\u0142y&nbsp;za pomoc\u0105 tej opcji. Tylko zaawansowani u\u017cytkownicy znaj\u0105cy HTML\/CSS powinni z niej korzysta\u0107. Przeczytaj <a class='spl-user-descr-link' href='https:\/\/adguard.com\/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ten tutorial o regu\u0142ach filtr\u00f3w<\/a>, aby&nbsp;dowiedzie\u0107 si\u0119 jak&nbsp;pisa\u0107 swoje w\u0142asne regu\u0142y."
     },
-    "options_userfilter_add_rule": {
-        "message": "Dodaj now\u0105 regu\u0142\u0119"
-    },
-    "options_userfilter_export": {
-        "message": "Eksportuj"
-    },
-    "options_userfilter_import": {
-        "message": "Importuj"
-    },
-    "options_userfilter_clear": {
-        "message": "Opr\u00f3\u017cnij"
-    },
-    "options_userfilter_clear_confirm": {
-        "message": "Opr\u00f3\u017cnienie filtra u\u017cytkownika spowoduje usuni\u0119cie wszystkich regu\u0142. Czy na pewno chcesz wymaza\u0107 filtr u\u017cytkownika?"
-    },
-    "options_whitelistfilter_clear_confirm": {
-        "message": "Opr\u00f3\u017cnienie bia\u0142ej listy spowoduje r\u00f3wnie\u017c usuni\u0119cie wszystkich regu\u0142. Czy na pewno chcesz wymaza\u0107 bia\u0142\u0105 list\u0119?"
-    },
-    "options_open_changelog": {
-        "message": "Dziennik zmian"
-    },
-    "options_safebrowsing": {
-        "message": "Bezpiecze\u0144stwo Przegl\u0105dania"
-    },
-    "options_safebrowsing_enabled": {
-        "message": "Ochrona przed phishingiem i malware<a target='_blank' href='https:\/\/kb.adguard.com\/general\/how-malware-protection-works?utm_source=extension&aid=16593' class='sp-table-row-info'>Dowiedz si\u0119 wi\u0119cej<\/a>"
-    },
-    "options_safebrowsing_help": {
-        "message": "Pom\u00f3\u017c&nbsp;nam w&nbsp;rozwijaniu filtr\u00f3w ochrony przegl\u0105dania<span class='sp-table-row-info'>Wysy\u0142aj anonimowe informacje o bezpiecze\u0144stwie<\/span>"
-    },
-    "options_filter_version": {
-        "message": "Wersja $1. Zaktualizowano $2 o $3."
-    },
-    "options_site": {
-        "message": "Oficjalna strona"
-    },
-    "options_blog": {
-        "message": "Blog AdGuard"
-    },
-    "options_forum": {
-        "message": "Forum AdGuard"
-    },
-    "options_feedback": {
-        "message": "Skontaktuj si\u0119&nbsp;z nami"
-    },
-    "options_do_you_like": {
-        "message": "Czy&nbsp;lubisz AdGuarda?"
-    },
-    "options_like_us": {
-        "message": "Lubisz AdGuarda? Oce\u0144&nbsp;go!"
-    },
-    "options_footer_like_us": {
-        "message": "Oce\u0144&nbsp;go!"
-    },
-    "options_download_adguard": {
-        "message": "Pobierz pe\u0142n\u0105 wersj\u0119"
-    },
-    "options_whitelist_empty": {
-        "message": "Bia\u0142a lista jest pusta. <a class='spl-user-descr-link addWhiteListFilter' href='#'>Doda\u0107 jak\u0105\u015b stron\u0119<\/a> do bia\u0142ej listy?"
-    },
-    "options_userlist_empty": {
-        "message": "Filtr u\u017cytkownika jest pusty. <a class='spl-user-descr-link addUserFilter' href='#'>Doda\u0107 now\u0105 regu\u0142\u0119 filtrowania<\/a>?"
-    },
-    "options_searchlist_empty": {
-        "message": "Nic nie znaleziono"
-    },
-    "options_whitelist_search": {
-        "message": "Szukaj w&nbsp;bia\u0142ej li\u015bcie"
-    },
-    "options_whitelist_search_placeholder": {
-        "message": "Wprowad\u017a tekst do wyszukania"
-    },
-    "options_userfilter_search": {
-        "message": "Szukaj w&nbsp;filtrze u\u017cytkownika"
-    },
-    "options_userfilter_search_placeholder": {
-        "message": "Wprowad\u017a tekst do wyszukania"
-    },
-    "options_miscellaneous_settings": {
-        "message": "Inne opcje"
-    },
-    "options_show_adguard_full_version": {
-        "message": "Pokazuj informacje o&nbsp;pe\u0142nej wersji AdGuarda"
-    },
     "options_show_app_updated_notification": {
         "message": "Powiadamiaj o aktualizacjach rozszerzenia"
-    },
-    "options_open_log": {
-        "message": "Dziennik filtrowania"
-    },
-    "options_reset_stats": {
-        "message": "Wyczy\u015b\u0107 statystyki"
-    },
-    "options_reset_stats_done": {
-        "message": "Statystyki zosta\u0142y wyczyszczone"
-    },
-    "options_collect_hit_stats": {
-        "message": "Wysy\u0142aj statystyki o u\u017cywaniu&nbsp;filtr\u00f3w reklam<a target='_blank' href='https:\/\/kb.adguard.com\/general\/filter-rules-statistics?utm_source=extension&aid=16593' class='sp-table-row-info'>Dowiedz si\u0119 wi\u0119cej<\/a>"
-    },
-    "options_show_context_menu": {
-        "message": "Dodaj AdGuard do&nbsp;menu kontekstowego przegl\u0105darki"
     },
     "options_use_optimized_filters": {
         "message": "U\u017cyj filtr\u00f3w zoptymalizowanych<span class='sp-table-row-info'>Listy filtr\u00f3w zoptymalizowanych pod urz\u0105dzenia mobilne<\/span>"
@@ -341,605 +71,29 @@
     "options_popup_version_update_description_major": {
         "message": "Jest to wa\u017cna aktualizacja rozszerzenia, kt\u00f3ra przynosi wiele nowych funkcji i usprawnie\u0144."
     },
-    "options_popup_version_update_changelog_text": {
-        "message": "Kliknij tutaj, aby wy\u015bwietli\u0107 pe\u0142n\u0105 list\u0119 zmian."
-    },
-    "options_popup_version_update_changelog_href": {
-        "message": "https:\/\/github.com\/AdguardTeam\/AdguardBrowserExtension\/releases\/latest"
-    },
-    "options_popup_version_update_offer": {
-        "message": "Je\u015bli masz obsesj\u0119 na punkcie prywatno\u015bci, tak jak my, wypr\u00f3buj produkty premium AdGuard dla system\u00f3w Windows, Mac, iOS lub Android, aby znale\u017a\u0107 jeszcze wi\u0119cej funkcji."
-    },
-    "options_popup_version_update_offer_button_href": {
-        "message": "http:\/\/adguard.com\/"
-    },
-    "options_popup_version_update_offer_button_text": {
-        "message": "WYPR\u00d3BUJ PREMIUM"
-    },
-    "options_popup_import_success_title": {
-        "message": "Ustawienia zosta\u0142y pomy\u015blnie zaimportowane"
-    },
-    "options_popup_import_success_description": {
-        "message": "Wszystko w porz\u0105dku"
-    },
-    "options_popup_import_error_title": {
-        "message": "Wyst\u0105pi\u0142 b\u0142\u0105d podczas importowania ustawie\u0144!"
-    },
-    "options_popup_import_error_description": {
-        "message": "Co\u015b posz\u0142o nie tak"
-    },
-    "options_popup_import_error_file_title": {
-        "message": "B\u0142\u0105d podczas \u0142adowania pliku"
-    },
-    "options_popup_import_error_file_description": {
-        "message": "Co\u015b posz\u0142o nie tak"
-    },
-    "sync_provider_adguard": {
-        "message": "AdGuard"
-    },
-    "sync_provider_dropbox": {
-        "message": "Dropbox"
-    },
-    "sync_provider_browser_storage": {
-        "message": "Pami\u0119\u0107 przegl\u0105darki"
-    },
-    "sync_page_title": {
-        "message": "Synchronizuj"
-    },
-    "sync_page_header": {
-        "message": "Synchronizuj"
-    },
-    "sync_login_block_header": {
-        "message": "Zabierz ze sob\u0105 ustawienia Adguard!"
-    },
-    "sync_login_block_header_description": {
-        "message": "Zsynchronizuj filtr u\u017cytkownika, ustawienia filtrowania i preferencje na wszystkich swoich urz\u0105dzeniach."
-    },
-    "sync_select_provider_text": {
-        "message": "Po\u0142\u0105cz z <a href='#' id='selectProviderButton'>Twoim<\/a> kontem"
-    },
-    "sync_sign_in_button_text": {
-        "message": "Zaloguj si\u0119"
-    },
-    "sync_start_sync_button_text": {
-        "message": "Rozpocznij synchronizacj\u0119"
-    },
-    "sync_last_sync_time_text": {
-        "message": "Ostatnia synchronizacja:"
-    },
-    "sync_last_sync_time_never_sync_text": {
-        "message": "Jeszcze niezsynchronizowane"
-    },
-    "sync_sign_out_button_text": {
-        "message": "Roz\u0142\u0105cz"
-    },
-    "sync_manage_account_button_text": {
-        "message": "Zarz\u0105dzaj kontem"
-    },
-    "sync_now_button_text": {
-        "message": "Synchronizuj teraz"
-    },
-    "sync_in_progress_button_text": {
-        "message": "Trwa synchronizacja..."
-    },
-    "sync_device_name_header": {
-        "message": "Nazwa urz\u0105dzenia"
-    },
-    "sync_change_device_name_button_text": {
-        "message": "Zmie\u0144 nazw\u0119 urz\u0105dzenia"
-    },
-    "sync_footer_text": {
-        "message": "Pobierz AdGuard dla <a href='https:\/\/adguard.com\/adguard-android\/overview.html?utm_source=extension&aid=18081' target='_blank'>Android<\/a> lub <a href='https:\/\/adguard.com\/ios' target='_blank'>iOS<\/a> aby zsynchronizowa\u0107 ze swoim urz\u0105dzeniem mobilnym."
-    },
-    "sync_providers_modal_header": {
-        "message": "Dostawcy"
-    },
-    "sync_providers_modal_cancel": {
-        "message": "Anuluj"
-    },
-    "popup_block_site_ads": {
-        "message": "Zablokuj reklamy&nbsp;na&nbsp;tej stronie"
-    },
-    "popup_abuse_site": {
-        "message": "Zg\u0142o\u015b&nbsp;problem&nbsp;z t\u0105 stron\u0105"
-    },
-    "popup_abuse_problem": {
-        "message": "Zg\u0142o\u015b&nbsp;problem"
-    },
-    "popup_security_report": {
-        "message": "Raport bezpiecze\u0144stwa strony"
-    },
-    "popup_open_settings": {
-        "message": "Ustawienia AdGuard"
-    },
-    "popup_disable_protection": {
-        "message": "Wstrzymaj ochron\u0119 AdGuard"
-    },
-    "popup_site_protection_disabled": {
-        "message": "Ochrona AdGuard jest wstrzymana"
-    },
-    "popup_site_filtering_state": {
-        "message": "Ochrona na tej stronie"
-    },
-    "popup_site_filtering_state_enabled": {
-        "message": "Ochrona jest w\u0142\u0105czona"
-    },
-    "popup_site_filtering_state_disabled": {
-        "message": "Ochrona jest wy\u0142\u0105czona"
-    },
-    "popup_site_filtering_state_paused": {
-        "message": "Ochrona jest wstrzymana"
-    },
-    "popup_site_filtering_state_tab_unavailable": {
-        "message": "Niedost\u0119pne"
-    },
-    "popup_site_filtering_state_subscription_unavailable": {
-        "message": "Niedost\u0119pne"
-    },
-    "popup_site_filtering_state_integration": {
-        "message": "Ochrona jest w\u0142\u0105czona"
-    },
-    "popup_site_filtering_disabled": {
-        "message": "AdGuard nie dzia\u0142a w&nbsp;tej domenie"
-    },
-    "popup_site_exception": {
-        "message": "Ta strona jest&nbsp;na&nbsp;li\u015bcie wyj\u0105tk\u00f3w"
-    },
-    "popup_site_exception_info": {
-        "message": "Filtrowanie jest&nbsp;wy\u0142\u0105czone, poniewa\u017c mog\u0142oby ono&nbsp;przeszkodzi\u0107 w dzia\u0142aniu strony."
-    },
-    "popup_block_site_ads_android": {
-        "message": "Zablokuj reklamy na stronie"
-    },
-    "popup_security_report_android": {
-        "message": "Raport bezpiecze\u0144stwa"
-    },
-    "popup_in_white_list_android": {
-        "message": "Na bia\u0142ej li\u015bcie"
-    },
-    "popup_site_protection_disabled_android": {
-        "message": "Ochrona jest wstrzymana"
-    },
-    "popup_open_log_android": {
-        "message": "Dziennik filtrowania"
-    },
-    "popup_feedback_empty_option": {
-        "message": "Wybierz typ problemu"
-    },
-    "popup_feedback_malware_option": {
-        "message": "Podejrzenie phishingu"
-    },
-    "popup_feedback_wrong_block_option": {
-        "message": "Zniekszta\u0142cony wygl\u0105d strony"
-    },
-    "popup_feedback_miss_ads_option": {
-        "message": "Pomini\u0119to&nbsp;reklam\u0119"
-    },
-    "popup_feedback_other_option": {
-        "message": "Inny"
-    },
-    "popup_feedback_option_is_empty": {
-        "message": "Musisz wybra\u0107&nbsp;typ problemu!"
-    },
-    "popup_what_wrong_site": {
-        "message": "Co jest&nbsp;nie tak z t\u0105 stron\u0105?"
-    },
-    "popup_feedback_comment": {
-        "message": "Komentarz"
-    },
-    "popup_feedback_send": {
-        "message": "Zg\u0142o\u015b&nbsp;problem"
-    },
-    "popup_feedback_cancel": {
-        "message": "Anuluj"
-    },
-    "popup_tab_blocked": {
-        "message": "Zablokowano: $1"
-    },
-    "popup_tab_blocked_all": {
-        "message": "Razem: $1"
-    },
-    "popup_filtering_log_icon_title": {
-        "message": "Otw\u00f3rz dziennik filtrowania..."
-    },
-    "popup_adguard_other_os": {
-        "message": "Inne wersje AdGuard:"
-    },
-    "popup_adguard_footer_integration": {
-        "message": "<a href='http:\/\/adguard.com\/adguard-adblock-browser-extension\/integration-mode.html#integration-mode' class='openLink' target='_blank'>tryb integracji<\/a> AdGuard jest w\u0142\u0105czony"
-    },
-    "popup_adguard_android": {
-        "message": "AdGuard dla Android"
-    },
-    "popup_adguard_windows": {
-        "message": "AdGuard dla Windows"
-    },
-    "popup_adguard_mac": {
-        "message": "AdGuard dla Mac"
-    },
-    "popup_adguard_ios": {
-        "message": "AdGuard dla iOS"
-    },
-    "popup_tab_main": {
-        "message": "G\u0142\u00f3wny"
-    },
-    "popup_tab_statistics": {
-        "message": "Statystyki"
-    },
-    "popup_statistics_type_bad_requests": {
-        "message": "Z\u0142e \u017c\u0105dania"
-    },
-    "popup_statistics_type_request_types": {
-        "message": "Typy \u017c\u0105da\u0144"
-    },
-    "popup_statistics_request_types_ads": {
-        "message": "Reklamy"
-    },
-    "popup_statistics_request_types_trackers": {
-        "message": "Elementy \u015bledz\u0105ce"
-    },
-    "popup_statistics_request_types_social": {
-        "message": "Portale spo\u0142eczno\u015bciowe"
-    },
-    "popup_statistics_request_types_annoyances": {
-        "message": "Elementy irytuj\u0105ce"
-    },
-    "popup_statistics_request_types_security": {
-        "message": "Bezpiecze\u0144stwo"
-    },
-    "popup_statistics_request_types_cookies": {
-        "message": "Ciasteczka"
-    },
-    "popup_statistics_request_types_others": {
-        "message": "Inne"
-    },
-    "popup_statistics_time_day": {
-        "message": "Ostatni dzie\u0144"
-    },
-    "popup_statistics_time_week": {
-        "message": "Zesz\u0142y tydzie\u0144"
-    },
-    "popup_statistics_time_month": {
-        "message": "Zesz\u0142y miesi\u0105c"
-    },
-    "popup_statistics_time_year": {
-        "message": "Zesz\u0142y rok"
-    },
-    "popup_statistics_full_statistics": {
-        "message": "Pe\u0142ne statystyki"
-    },
-    "popup_statistics_analytics": {
-        "message": "Analityka"
-    },
-    "popup_statistics_week_days_mon": {
-        "message": "Pon"
-    },
-    "popup_statistics_week_days_tue": {
-        "message": "Wt"
-    },
-    "popup_statistics_week_days_wed": {
-        "message": "\u015ar"
-    },
-    "popup_statistics_week_days_thu": {
-        "message": "Czw"
-    },
-    "popup_statistics_week_days_fri": {
-        "message": "Pt"
-    },
-    "popup_statistics_week_days_sat": {
-        "message": "Sob"
-    },
-    "popup_statistics_week_days_sun": {
-        "message": "Niedz"
-    },
-    "popup_statistics_months_jan": {
-        "message": "Sty"
-    },
-    "popup_statistics_months_feb": {
-        "message": "Lut"
-    },
-    "popup_statistics_months_mar": {
-        "message": "Mar"
-    },
-    "popup_statistics_months_apr": {
-        "message": "Kwi"
-    },
-    "popup_statistics_months_may": {
-        "message": "Maj"
-    },
-    "popup_statistics_months_jun": {
-        "message": "Cze"
-    },
-    "popup_statistics_months_jul": {
-        "message": "Lip"
-    },
-    "popup_statistics_months_aug": {
-        "message": "Sie"
-    },
-    "popup_statistics_months_sep": {
-        "message": "Wrz"
-    },
-    "popup_statistics_months_oct": {
-        "message": "Pa\u017a"
-    },
-    "popup_statistics_months_nov": {
-        "message": "Lis"
-    },
-    "popup_statistics_months_dev": {
-        "message": "Gru"
-    },
-    "context_block_site_ads": {
-        "message": "Zablokuj reklamy na tej stronie..."
-    },
-    "context_block_site_image": {
-        "message": "AdGuard: Zablokuj obrazek..."
-    },
-    "context_block_site_element": {
-        "message": "Zablokuj element..."
-    },
-    "context_abuse_site": {
-        "message": "Zg\u0142o\u015b problem z t\u0105 stron\u0105..."
-    },
-    "context_security_report": {
-        "message": "Otw\u00f3rz raport bezpiecze\u0144stwa strony..."
-    },
-    "context_ads_has_been_removed": {
-        "message": "Reklamy zosta\u0142y usuni\u0119te z tej strony"
-    },
-    "context_ads_has_been_removed_by_adguard": {
-        "message": "Chroniony przez $1"
-    },
-    "context_site_filtering_disabled": {
-        "message": "AdGuard nie dzia\u0142a w tej domenie"
-    },
-    "context_disable_protection": {
-        "message": "Wstrzymaj ochron\u0119 AdGuard"
-    },
-    "context_enable_protection": {
-        "message": "Wzn\u00f3w ochron\u0119 AdGuard"
-    },
-    "context_site_protection_disabled": {
-        "message": "Ochrona AdGuard jest wstrzymana"
-    },
-    "context_open_settings": {
-        "message": "Ustawienia AdGuard..."
-    },
-    "context_open_log": {
-        "message": "Dziennik filtrowania..."
-    },
-    "context_site_exception": {
-        "message": "Ta strona jest na li\u015bcie wyj\u0105tk\u00f3w"
-    },
-    "context_site_filtering_on": {
-        "message": "W\u0142\u0105cz filtrowanie na tej stronie"
-    },
-    "context_site_filtering_off": {
-        "message": "Wy\u0142\u0105cz filtrowanie na tej stronie"
-    },
-    "context_update_antibanner_filters": {
-        "message": "Sprawd\u017a aktualizacje filtr\u00f3w"
-    },
-    "context_general_settings": {
-        "message": "Ustawienia g\u0142\u00f3wne"
-    },
-    "context_antibanner": {
-        "message": "Bloker reklam"
-    },
-    "context_safebrowsing": {
-        "message": "Bezpiecze\u0144stwo Przegl\u0105dania"
-    },
-    "context_whitelist": {
-        "message": "Bia\u0142a lista"
-    },
-    "context_userfilter": {
-        "message": "Filtr u\u017cytkownika"
-    },
-    "context_miscellaneous_settings": {
-        "message": "R\u00f3\u017cne"
-    },
-    "sb_title": {
-        "message": "Ostrze\u017cenie! Strona mo\u017ce by\u0107&nbsp;niebezpieczna!"
-    },
-    "sb_main_title": {
-        "message": "Ostrze\u017cenie! Strona mo\u017ce by\u0107&nbsp;niebezpieczna!"
-    },
-    "sb_adguard_blocked": {
-        "message": "AdGuard zablokowa\u0142 dost\u0119p do&nbsp;tej strony"
-    },
-    "sb_malware_site": {
-        "message": "Strona internetowa&nbsp;<strong>$1<\/strong> jest stron\u0105 zawieraj\u0105c\u0105 szkodliwe oprogramowanie i zosta\u0142a ona zablokowana w oparciu o&nbsp;twoje ustawienia bezpiecze\u0144stwa."
-    },
-    "sb_phishing_site": {
-        "message": "Strona internetowa&nbsp;<strong>$1<\/strong> jest stron\u0105 wy\u0142udzaj\u0105ca informacje i zosta\u0142a ona zablokowana w oparciu o&nbsp;twoje ustawienia bezpiecze\u0144stwa."
-    },
-    "sb_malware_description": {
-        "message": "AdGuard wykry\u0142, \u017ce na Twoim komputerze mo\u017ce&nbsp;zosta\u0107 zainstalowane szkodliwe oprogramowanie je\u015bli&nbsp;otworzysz t\u0119 stron\u0119. Je\u015bli&nbsp;odwiedza\u0142e\u015b j\u0105&nbsp;w przesz\u0142o\u015bci lub&nbsp;jej ufasz, jest&nbsp;bardzo mo\u017cliwe, \u017ce zosta\u0142a ona zaatakowana przez hakera. Zalecamy&nbsp;nie kontynuowa\u0107&nbsp;i nie pr\u00f3bowa\u0107 ponownie jej odwiedza\u0107."
-    },
-    "sb_phishing_description": {
-        "message": "AdGuard wykry\u0142, \u017ce ta strona mo\u017ce by\u0107&nbsp;imitacj\u0105&nbsp;innej strony internetowej, przeznaczon\u0105 do&nbsp;uzyskania osobistych lub&nbsp;finansowych informacji od u\u017cytkownik\u00f3w. W wyniku wpisania danych mo\u017ce nast\u0105pi\u0107&nbsp;kradzie\u017c to\u017csamo\u015bci lub&nbsp;inne nadu\u017cycie."
-    },
-    "sb_go_back": {
-        "message": "Wr\u00f3\u0107"
-    },
-    "sb_more_actions": {
-        "message": "Zaawansowane"
-    },
-    "sb_site_report": {
-        "message": "Wi\u0119cej informacji"
-    },
-    "sb_goto_site": {
-        "message": "Mimo to kontynuuj "
-    },
-    "alert_popup_filter_enabled_title": {
-        "message": "Automatyczna aktywacja filtr\u00f3w"
-    },
-    "alert_popup_filter_enabled_text": {
-        "message": "\u00ab$1\u00bb zosta\u0142 aktywowany automatycznie"
-    },
-    "filter_download_title": {
-        "message": "Wczytywanie bazy&nbsp;filtr\u00f3w..."
-    },
-    "filter_download_loading": {
-        "message": "Wczytywanie bazy filtr\u00f3w,&nbsp;prosz\u0119 czeka\u0107..."
-    },
-    "filter_download_do_you_know": {
-        "message": "Czy wiedzia\u0142e\u015b?"
-    },
-    "filter_download_sb_sites": {
-        "message": "Baza danych AdGuard chroni\u0105ca przed phishingiem i malware zawiera<br\/>ponad&nbsp;million stron internetowych."
-    },
-    "filter_download_rules": {
-        "message": "\u015arednio&nbsp;dodajemy ponad 100&nbsp;regu\u0142 do filtra reklam co tydzie\u0144."
-    },
-    "filter_download_ads_malware": {
-        "message": "90%&nbsp;wirus\u00f3w i szkodliwego oprogramowania jest&nbsp;dystrybuowane<br\/>przez z\u0142e&nbsp;sieci reklamowe."
-    },
-    "thankyou_title": {
-        "message": "Dzi\u0119kujemy za zainstalowanie AdGuard!"
-    },
-    "thankyou_enjoy": {
-        "message": "Ciesz si\u0119&nbsp;stronami internetowymi bez natr\u0119tnych reklam i licznik\u00f3w, kt\u00f3re \u015bledz\u0105 ka\u017cdy tw\u00f3j ruch, a tak\u017ce bez&nbsp;wirus\u00f3w i&nbsp;oszustw tylko czyhaj\u0105cych na ciebie."
-    },
-    "thankyou_setup_filter": {
-        "message": "Dostosuj ustawienia filtrowania"
-    },
-    "thankyou_setup_safebrowsing_title": {
-        "message": "Ochrona przed szkodliwymi stronami i phishingiem"
-    },
-    "thankyou_setup_safebrowsing_description": {
-        "message": "Modu\u0142 Bezpiecze\u0144stwo Przegl\u0105dania zapewnia ochron\u0119 szkodliwymi stronami i stronami wy\u0142udzaj\u0105cymi dane, sprawdzaj\u0105c odwiedzane strony w <a target='blank' href='http:\/\/adguard.com\/how-malware-blocked.html'>specjalnej us\u0142udze<\/a>."
-    },
-    "thankyou_tracking_spyware_filter_title": {
-        "message": "Filtr&nbsp;wszystkich znanych licznik\u00f3w i system\u00f3w analitycznych."
-    },
-    "thankyou_tracking_spyware_filter_description": {
-        "message": "Setki&nbsp;internetowych firm \u015bledzi ka\u017cdy Tw\u00f3j ruch. Dzi\u0119ki AdGuard mo\u017cesz \u0142atwo&nbsp;chroni\u0107 przed tym szpiegowaniem."
-    },
-    "thankyou_tracking_social_filter_title": {
-        "message": "Filtr wid\u017cet\u00f3w portali spo\u0142eczno\u015bciowych"
-    },
-    "thankyou_tracking_social_filter_description": {
-        "message": "AdGuard mo\u017ce usun\u0105\u0107 wid\u017cety portali spo\u0142eczno\u015bciowych ze stron, na przyk\u0142ad przyciski \"Lubi\u0119 to\" \u015bledz\u0105ce twoje ruchy."
-    },
-    "adguard_product_windows": {
-        "message": "AdGuard dla Windows"
-    },
-    "adguard_product_mac": {
-        "message": "AdGuard dla Mac"
-    },
-    "filtering_log_title": {
-        "message": "Dziennik filtrowania"
-    },
-    "filtering_log_tab": {
-        "message": "Karta:"
-    },
-    "filtering_log_search_string": {
-        "message": "Wprowad\u017a tekst do wyszukania"
-    },
-    "filtering_refresh_tab": {
-        "message": "Od\u015bwie\u017c stron\u0119"
-    },
-    "filtering_clear_tab_events": {
-        "message": "Wyczy\u015b\u0107"
-    },
-    "filtering_type_all": {
-        "message": "Wszystko"
-    },
-    "filtering_table_type": {
-        "message": "Typ"
-    },
-    "filtering_table_rule": {
-        "message": "Regu\u0142a filtrowania"
-    },
-    "filtering_table_source": {
-        "message": "\u0179r\u00f3d\u0142o"
-    },
-    "filtering_table_filter": {
-        "message": "Filtr"
-    },
-    "filtering_table_empty_row": {
-        "message": "Raport dla tej strony jest pusty. <a href='#' class='reloadTab'>Od\u015bwie\u017c stron\u0119<\/a>, aby go zobaczy\u0107."
-    },
-    "filtering_modal_info_title": {
-        "message": "Szczeg\u00f3\u0142y \u017c\u0105dania"
-    },
-    "filtering_modal_type": {
-        "message": "Typ:"
-    },
-    "filtering_modal_source": {
-        "message": "\u0179r\u00f3d\u0142o:"
-    },
-    "filtering_modal_rule": {
-        "message": "Regu\u0142a:"
-    },
-    "filtering_modal_filter": {
-        "message": "Filtr:"
-    },
-    "filtering_modal_block": {
-        "message": "Zablokuj"
-    },
-    "filtering_modal_unblock": {
-        "message": "Odblokuj"
-    },
-    "filtering_modal_remove_user": {
-        "message": "Usu\u0144 z filtr\u00f3w u\u017cytkownika"
-    },
-    "filtering_modal_remove_whitelist": {
-        "message": "Usu\u0144 z filtra bia\u0142ej listy"
-    },
-    "filtering_modal_add_title": {
-        "message": "Dodawanie regu\u0142y"
-    },
-    "filtering_modal_rule_text": {
-        "message": "Tekst regu\u0142y"
-    },
-    "filtering_modal_patterns": {
-        "message": "Wzorce"
-    },
-    "filtering_modal_options": {
-        "message": "Opcje"
-    },
-    "filtering_modal_apply_domains": {
-        "message": "Zastosuj t\u0119 regu\u0142\u0119 dla wszystkich stron"
-    },
-    "filtering_modal_match_case": {
-        "message": "Uwzgl\u0119dniaj wielko\u015b\u0107 liter"
-    },
-    "filtering_modal_third_party": {
-        "message": "Zastosuj tylko dla \u017c\u0105da\u0144 firm trzecich"
-    },
-    "filtering_modal_add_rule": {
-        "message": "Dodaj regu\u0142\u0119"
-    },
-    "filtering_modal_exception_title": {
-        "message": "Dodaj wyj\u0105tek"
-    },
-    "filtering_modal_open_in_new_tab": {
-        "message": "Otw\u00f3rz w nowej karcie"
-    },
-    "filtering_log_in_whitelist": {
-        "message": "Strona znajduje si\u0119 na bia\u0142ej li\u015bcie"
-    },
-    "abp_subscribe_confirm_enable": {
-        "message": "AdGuard: czy chcesz w\u0142\u0105czy\u0107 subskrypcj\u0119 $1?"
-    },
-    "abp_subscribe_confirm_import": {
-        "message": "AdGuard: czy chcesz zaimportowa\u0107 regu\u0142y z $1 do twojego filtru u\u017cytkownika?"
-    },
-    "abp_subscribe_confirm_import_finished_title": {
-        "message": "Importowanie zosta\u0142o pomy\u015blnie zako\u0144czone"
-    },
-    "abp_subscribe_confirm_import_finished_text": {
-        "message": "AdGuard zako\u0144czy\u0142 importowanie regu\u0142 do filtru u\u017cytkownika. Liczba zaimportowanych regu\u0142: $1"
-    },
     "options_content_blocker_overlimit": {
         "message": "Uruchomiono zbyt wiele filtr\u00f3w. Safari nie mo\u017ce korzysta\u0107 z wi\u0119cej ni\u017c 50000 regu\u0142."
     },
-    "options_safari_extensions_disabled": {
-        "message": "Rozszerzenia przegl\u0105darki Safari nie s\u0105 poprawne!"
-    },
     "options_filters_list_search_placeholder": {
         "message": "Wpisz tekst do wyszukania"
+    },
+    "main_menu_edit": {
+        "message": "Edit"
+    },
+    "main_menu_undo": {
+        "message": "Undo"
+    },
+    "main_menu_cut": {
+        "message": "Cut"
+    },
+    "main_menu_copy": {
+        "message": "Copy"
+    },
+    "main_menu_paste": {
+        "message": "Paste"
+    },
+    "main_menu_select-all": {
+        "message": "Select All"
     },
     "tray_menu_about": {
         "message": "O rozszerzeniu"
@@ -955,5 +109,38 @@
     },
     "tray_menu_quit": {
         "message": "Zamknij"
+    },
+    "options_last_update": {
+        "message": "Ostatnia aktualizacja:"
+    },
+    "options_about": {
+        "message": "O rozszerzeniu"
+    },
+    "options_compare_btn": {
+        "message": "How they compare"
+    },
+    "options_compare_title": {
+        "message": "Wypr\u00f3buj AdGuard Premium dla lepszej ochrony!"
+    },
+    "options_license_agreement": {
+        "message": "Umowa licencyjna"
+    },
+    "options_privacy_policy": {
+        "message": "Polityka prywatno\u015bci"
+    },
+    "options_acknowledgment": {
+        "message": "Potwierdzenie"
+    },
+    "onboarding_safari_desc": {
+        "message": "Zaznacz pole \"ikona AdGuard Safari\" i \"AdGuard\" w ustawieniach Safari"
+    },
+    "onboarding_safari_btn": {
+        "message": "Otw\u00f3rz ustawienia"
+    },
+    "options_learn_more": {
+        "message": "Dowiedz si\u0119 wi\u0119cej o tym"
+    },
+    "options_about_version": {
+        "message": "Wersja %s"
     }
 }

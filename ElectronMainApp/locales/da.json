@@ -1,162 +1,18 @@
 {
-    "filtering_modal_element": {
-        "message": "Element:"
-    },
-    "background_tab_title": {
-        "message": "Baggrundsfane"
-    },
-    "filtering_modal_important": {
-        "message": "Giv denne regel en h\u00f8jere prioritet"
-    },
-    "thankyou_want_full_protection": {
-        "message": "Vil du gerne&nbsp;pr\u00f8ve fuld beskyttelse? Download AdGuard til Windows!"
-    },
-    "thankyou_want_full_protection_mac": {
-        "message": "Vil du gerne&nbsp;pr\u00f8ve fuld beskyttelse? Download AdGuard til Mac!"
-    },
-    "thankyou_compare_ext_title": {
-        "message": "AdGuard Udvidelse"
-    },
-    "thankyou_compare_full_title": {
-        "message": "AdGuard til Windows"
-    },
-    "thankyou_compare_full_title_mac": {
-        "message": "AdGuard til Mac"
-    },
-    "thankyou_compare_blocked": {
-        "message": "Reklameblokering"
-    },
-    "thankyou_compare_ext_blocking": {
-        "message": "Begr\u00e6nset af browserens udvidelsesevner"
-    },
-    "thankyou_compare_full_blocking": {
-        "message": "Komplet"
-    },
-    "thankyou_compare_safebrowsing": {
-        "message": "Beskyttelse mod phishing og malici\u00f8se hjemmesider"
-    },
-    "thankyou_compare_parent": {
-        "message": "For\u00e6ldrekontrol"
-    },
-    "thankyou_compare_safebrowsing_attack": {
-        "message": "Beskyttelse mod phishing angreb"
-    },
-    "thankyou_compare_any_browser": {
-        "message": "Blokerer reklamer p\u00e5 kryds af alle browsere"
-    },
-    "thankyou_compare_traffic": {
-        "message": "Sparer internettrafik"
-    },
-    "thankyou_compare_increase": {
-        "message": "Reducerer siders indl\u00e6sningstid"
-    },
-    "thankyou_compare_support": {
-        "message": "Teknisk support"
-    },
-    "thankyou_installed": {
-        "message": "INSTALLERET"
-    },
-    "thankyou_download": {
-        "message": "Download AdGuard"
-    },
-    "thankyou_help_in_development": {
-        "message": "Deltag i&nbsp;udviklingen af&nbsp;AdGuard filtre"
-    },
-    "thankyou_help_in_development_description": {
-        "message": "Send anonyme statistikker vedr\u00f8rende arbejdet af&nbsp;AdGuard reklame&nbsp;filtre, s\u00e5vel&nbsp;som&nbsp; hjemmesider som AdGuard identificerer som&nbsp;mist\u00e6nkelige. <span class='warn-message'>Ikke anbefalet p\u00e5&nbsp;langsomme computere.<\/span>"
-    },
-    "release_notes_title": {
-        "message": "AdGuard Udvidelse opdateret!"
-    },
-    "release_notes_whats_new": {
-        "message": "Hvad er nyt i&nbsp;denne version?"
-    },
-    "assistant_select_element": {
-        "message": "Valgtilstand"
-    },
-    "assistant_select_element_ext": {
-        "message": "Tryk p\u00e5 et&nbsp;hvilket som helst element p\u00e5&nbsp;denne side"
-    },
-    "assistant_select_element_cancel": {
-        "message": "Annuller"
-    },
-    "assistant_block_element": {
-        "message": "Bloker element"
-    },
-    "assistant_block_element_explain": {
-        "message": "Ops\u00e6tning af blokeringsregel for element"
-    },
-    "assistant_slider_explain": {
-        "message": "Brug skyderen til at&nbsp;\u00e6ndre st\u00f8rrelsen af&nbsp;elementet som&nbsp;skal&nbsp;blokeres af&nbsp;denne regel:"
-    },
-    "assistant_slider_if_hide": {
-        "message": "Dette filter vil indeholde en&nbsp;regel som blokerer det valgte element"
-    },
-    "assistant_slider_min": {
-        "message": "MINDRE"
-    },
-    "assistant_slider_max": {
-        "message": "ST\u00d8RRE"
-    },
-    "assistant_extended_settings": {
-        "message": "Avancerede indstillinger"
-    },
-    "assistant_apply_rule_to_all_sites": {
-        "message": "Anvend denne regel p\u00e5&nbsp;alle hjemmesider"
-    },
-    "assistant_block_by_reference": {
-        "message": "Bloker elementer ved&nbsp;url"
-    },
-    "assistant_block_similar": {
-        "message": "Bloker lignende elementer"
-    },
-    "assistant_block": {
-        "message": "Bloker"
-    },
-    "assistant_another_element": {
-        "message": "V\u00e6lg et andet element"
-    },
-    "assistant_preview": {
-        "message": "Forh\u00e5ndsvisning"
-    },
-    "assistant_preview_header": {
-        "message": "Bloker element - Forh\u00e5ndsvisning"
-    },
-    "assistant_preview_header_info": {
-        "message": "Tjek hvordan siden vil se ud f\u00f8r bekr\u00e6ftning af blokeringen."
-    },
-    "assistant_preview_start": {
-        "message": "Forh\u00e5ndsvisning"
-    },
-    "assistant_preview_end": {
-        "message": "Afslut forh\u00e5ndsvisning"
-    },
     "name": {
-        "message": "AdGuard AdBlocker"
-    },
-    "short_name": {
         "message": "AdGuard AdBlocker"
     },
     "description": {
         "message": "Uovertruffen adblock-udvidelse mod reklamer og pop op-vinduer. Blokerer annoncer p\u00e5 Facebook, Youtube og alle andre hjemmesider."
     },
-    "description_blocked": {
-        "message": "Annoncer blokeret p\u00e5 denne side: $1"
-    },
     "options_settings": {
         "message": "AdGuard Indstillinger"
     },
     "options_general_settings": {
-        "message": "Generelle Indstillinger"
+        "message": "Generelt"
     },
     "options_allow_acceptable_ads": {
         "message": "Tillad s\u00f8gningsreklamer og selvpromovering af hjemmesider<a target='_blank' href='https:\/\/kb.adguard.com\/general\/search-ads-and-self-promotion?utm_source=extension&aid=16593' class='sp-table-row-info'>L\u00e6r mere om&nbsp;det<\/a>"
-    },
-    "options_show_blocked_ads_count": {
-        "message": "Vis antallet af&nbsp;blokerede reklamer p\u00e5&nbsp;AdGuard udvidelsesikonet"
-    },
-    "options_enable_autodetect_filter": {
-        "message": "Aktiver de mest passende filtre automatisk"
     },
     "options_export_settings": {
         "message": "Eksporter indstillinger"
@@ -165,40 +21,16 @@
         "message": "Importer indstillinger"
     },
     "options_antibanner": {
-        "message": "Ad&nbsp;blocker"
+        "message": "Filtre"
     },
     "options_antibanner_info": {
-        "message": "Antal filterregler: %s"
+        "message": "%s filtre"
     },
     "options_whitelist": {
         "message": "Whitelist"
     },
-    "options_update_antibanner_filters": {
-        "message": "S\u00f8g efter filteropdateringer"
-    },
-    "options_add_custom_filter": {
-        "message": "Tilf\u00f8j brugerdefineret filter"
-    },
-    "options_edit_antibanner_filters": {
-        "message": "Alle filtre"
-    },
-    "options_too_many_filters_selected": {
-        "message": "Du har valgt for mange filterabonnenter. Dette&nbsp;kan s\u00e6nke hastigheden v\u00e6sentligt for din web browsing."
-    },
-    "options_modal_cancel": {
-        "message": "Annuller"
-    },
     "options_modal_save": {
         "message": "Gem \u00e6ndringer"
-    },
-    "options_modal_edit": {
-        "message": "Filterliste"
-    },
-    "options_modal_homepage": {
-        "message": "Hjemmeside"
-    },
-    "options_antibanner_list_empty": {
-        "message": "Filterlisten er&nbsp;tom. <a class='spl-user-descr-link editAntiBannerFilters' href='#'>Tilf\u00f8j nyt filter<\/a>?"
     },
     "options_whitelist_description": {
         "message": "AdGuard filtrerer ikke hjemmesider fra whitelisten."
@@ -206,116 +38,14 @@
     "options_whitelist_inverse": {
         "message": "Invertere whitelisten<span class='sp-table-row-info'>Fjern blokeringen af annoncer overalt <i>bortset fra<\/i> whitelisten<\/span>"
     },
-    "options_whitelist_add_domain": {
-        "message": "Tilf\u00f8j hjemmeside"
-    },
     "options_userfilter": {
         "message": "Brugerfilter"
     },
     "options_userfilter_description": {
-        "message": "Du kan tilf\u00f8je dine egne regler til&nbsp;dette filter. Denne mulighed er&nbsp;anbefalet for avancerede brugere som kender HTML\/CSS. L\u00e6s <a class='spl-user-descr-link' href='https:\/\/adguard.com\/filterrules.html?utm_source=extension&aid=16593' target='_blank'>vejledningen for filterreglerne<\/a> for at&nbsp;l\u00e6re hvordan du&nbsp;kan skrive dine egne filterregler."
-    },
-    "options_userfilter_add_rule": {
-        "message": "Tilf\u00f8j ny regel"
-    },
-    "options_userfilter_export": {
-        "message": "Eksporter"
-    },
-    "options_userfilter_import": {
-        "message": "Importer"
-    },
-    "options_userfilter_clear": {
-        "message": "Ryd"
-    },
-    "options_userfilter_clear_confirm": {
-        "message": "Rydning af brugerfiltret fjerner alle regler. Vil du virkelig gerne rydde brugerfiltret?"
-    },
-    "options_whitelistfilter_clear_confirm": {
-        "message": "Rydning af whitelisten vil slette alle reglerne. Er du sikker p\u00e5, at du vil slette whitelisten?"
-    },
-    "options_open_changelog": {
-        "message": "Changelog"
-    },
-    "options_safebrowsing": {
-        "message": "Browsing sikkerhed"
-    },
-    "options_safebrowsing_enabled": {
-        "message": "Phishing og malware beskyttelse<a target='_blank' href='https:\/\/kb.adguard.com\/general\/how-malware-protection-works?utm_source=extension&aid=16593' class='sp-table-row-info'>L\u00e6r mere om&nbsp;det<\/a>"
-    },
-    "options_safebrowsing_help": {
-        "message": "Hj\u00e6lp&nbsp;os med&nbsp;udviklingen af filtre til Browser sikkerheden<span class='sp-table-row-info'>Indsend anonymt sikkerhedsrelateret information<\/span>"
-    },
-    "options_filter_version": {
-        "message": "Version $1. Opdateret $2 kl. $3."
-    },
-    "options_site": {
-        "message": "Officiel hjemmeside"
-    },
-    "options_blog": {
-        "message": "AdGuard Blog"
-    },
-    "options_forum": {
-        "message": "AdGuard Forum"
-    },
-    "options_feedback": {
-        "message": "Kontakt&nbsp;Os"
-    },
-    "options_do_you_like": {
-        "message": "Kan&nbsp;du lide AdGuard?"
-    },
-    "options_like_us": {
-        "message": "Like AdGuard? Bed\u00f8m&nbsp;det!"
-    },
-    "options_footer_like_us": {
-        "message": "Bed\u00f8m&nbsp;det!"
-    },
-    "options_download_adguard": {
-        "message": "Download den fulde version"
-    },
-    "options_whitelist_empty": {
-        "message": "Whitelisten er tom. <a class='spl-user-descr-link addWhiteListFilter' href='#'>Tilf\u00f8j enhver hjemmeside<\/a> til whitelisten?"
-    },
-    "options_userlist_empty": {
-        "message": "Brugerfiltret er tomt. <a class='spl-user-descr-link addUserFilter' href='#'>Tilf\u00f8j ny filterregel<\/a>?"
-    },
-    "options_searchlist_empty": {
-        "message": "Intet fundet"
-    },
-    "options_whitelist_search": {
-        "message": "S\u00f8g i&nbsp;whitelisten"
-    },
-    "options_whitelist_search_placeholder": {
-        "message": "Indtast s\u00f8geord"
-    },
-    "options_userfilter_search": {
-        "message": "S\u00f8g i&nbsp;brugerfiltret"
-    },
-    "options_userfilter_search_placeholder": {
-        "message": "Indtast s\u00f8geord"
-    },
-    "options_miscellaneous_settings": {
-        "message": "Diverse"
-    },
-    "options_show_adguard_full_version": {
-        "message": "Vis information om den&nbsp;fulde AdGuard version"
+        "message": "Du kan tilf\u00f8je dine egne regler til&nbsp;dette filter. Denne mulighed er&nbsp;anbefalet for avancerede brugere som kender HTML\/CSS. L\u00e6s <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>vejledningen for filterreglerne<\/a> for at&nbsp;l\u00e6re hvordan du&nbsp;kan skrive dine egne filterregler."
     },
     "options_show_app_updated_notification": {
         "message": "Underret om opdateringer til udvidelsen"
-    },
-    "options_open_log": {
-        "message": "Filtreringslog"
-    },
-    "options_reset_stats": {
-        "message": "Nulstil statistikker"
-    },
-    "options_reset_stats_done": {
-        "message": "Statistikkerne er nulstillet"
-    },
-    "options_collect_hit_stats": {
-        "message": "Send statistikker for brugen af&nbsp;annoncefiltrene<a target='_blank' href='https:\/\/kb.adguard.com\/general\/filter-rules-statistics?utm_source=extension&aid=16593' class='sp-table-row-info'>L\u00e6r mere om&nbsp;det<\/a>"
-    },
-    "options_show_context_menu": {
-        "message": "Tilf\u00f8j AdGuard element til&nbsp;browserens kontekstmenu"
     },
     "options_use_optimized_filters": {
         "message": "Brug optimerede filtre<span class='sp-table-row-info'>Let filterliste optimeret til mobile enheder<\/span>"
@@ -341,619 +71,76 @@
     "options_popup_version_update_description_major": {
         "message": "Dette er en st\u00f8rre udvidelsesopdatering, som kommer med mange nye funktioner og forbedringer."
     },
-    "options_popup_version_update_changelog_text": {
-        "message": "Klik her for at se den fulde changelog."
-    },
-    "options_popup_version_update_changelog_href": {
-        "message": "https:\/\/github.com\/AdguardTeam\/AdguardBrowserExtension\/releases\/latest"
-    },
-    "options_popup_version_update_offer": {
-        "message": "Hvis du er lige s\u00e5 optaget af privatlivet som vi er, s\u00e5 pr\u00f8v AdGuards premium produkter til Windows, Mac, iOS eller Android for at finde endnu flere funktioner."
-    },
-    "options_popup_version_update_offer_button_href": {
-        "message": "http:\/\/adguard.com\/"
-    },
-    "options_popup_version_update_offer_button_text": {
-        "message": "PR\u00d8V PREMIUM"
-    },
-    "options_popup_import_success_title": {
-        "message": "Indstillinger importeret succesfuldt"
-    },
-    "options_popup_import_success_description": {
-        "message": "Alt godt"
-    },
-    "options_popup_import_error_title": {
-        "message": "Fejl ved importering af indstillinger"
-    },
-    "options_popup_import_error_description": {
-        "message": "Noget gik galt"
-    },
-    "options_popup_import_error_file_title": {
-        "message": "Fejl ved indl\u00e6sning af fil"
-    },
-    "options_popup_import_error_file_description": {
-        "message": "Noget gik galt"
-    },
-    "sync_provider_adguard": {
-        "message": "Adguard"
-    },
-    "sync_provider_dropbox": {
-        "message": "Dropbox"
-    },
-    "sync_provider_browser_storage": {
-        "message": "Browserlagring"
-    },
-    "sync_page_title": {
-        "message": "Synkroniser"
-    },
-    "sync_page_header": {
-        "message": "Synkroniser"
-    },
-    "sync_login_block_header": {
-        "message": "Tag dine AdGuard indstillinger med dig!"
-    },
-    "sync_login_block_header_description": {
-        "message": "Synkroniser dit brugerfilter, filterindstillinger og pr\u00e6ferencer p\u00e5 tv\u00e6rs af alle dine enheder."
-    },
-    "sync_select_provider_text": {
-        "message": "Opret forbindelse med <a href='#' id='selectProviderButton'>din<\/a> konto"
-    },
-    "sync_sign_in_button_text": {
-        "message": "Log ind"
-    },
-    "sync_start_sync_button_text": {
-        "message": "Start synkronisering"
-    },
-    "sync_last_sync_time_text": {
-        "message": "Sidste synkronisering"
-    },
-    "sync_last_sync_time_never_sync_text": {
-        "message": "Endnu ikke synkroniseret"
-    },
-    "sync_sign_out_button_text": {
-        "message": "Afbryd"
-    },
-    "sync_manage_account_button_text": {
-        "message": "Administrer konto"
-    },
-    "sync_now_button_text": {
-        "message": "Synkroniser nu"
-    },
-    "sync_in_progress_button_text": {
-        "message": "Synkronisering i gang..."
-    },
-    "sync_device_name_header": {
-        "message": "Enhedsnavn"
-    },
-    "sync_change_device_name_button_text": {
-        "message": "Rediger enhedsnavn"
-    },
-    "sync_footer_text": {
-        "message": "Download Adguard for <a href='https:\/\/adguard.com\/adguard-android\/overview.html?utm_source=extension&aid=18081' target='_blank'>Android<\/a> or <a href='https:\/\/adguard.com\/ios' target='_blank'>iOS<\/a> at synkronisere med dine mobilenheder."
-    },
-    "sync_providers_modal_header": {
-        "message": "Udbydere"
-    },
-    "sync_providers_modal_cancel": {
-        "message": "Annuller"
-    },
-    "popup_block_site_ads": {
-        "message": "Bloker annoncer&nbsp;p\u00e5&nbsp;denne hjemmeside"
-    },
-    "popup_abuse_site": {
-        "message": "Submit a&nbsp;complaint about&nbsp;this website"
-    },
-    "popup_abuse_problem": {
-        "message": "Submit a&nbsp;complaint"
-    },
-    "popup_security_report": {
-        "message": "Website security report"
-    },
-    "popup_open_settings": {
-        "message": "AdGuard indstillinger"
-    },
-    "popup_disable_protection": {
-        "message": "Pause AdGuard protection"
-    },
-    "popup_site_protection_disabled": {
-        "message": "AdGuard protection is paused"
-    },
-    "popup_site_filtering_state": {
-        "message": "Protection on this website"
-    },
-    "popup_site_filtering_state_enabled": {
-        "message": "Protection is enabled"
-    },
-    "popup_site_filtering_state_disabled": {
-        "message": "Protection is disabled"
-    },
-    "popup_site_filtering_state_paused": {
-        "message": "Protection is paused"
-    },
-    "popup_site_filtering_state_tab_unavailable": {
-        "message": "Unavailable"
-    },
-    "popup_site_filtering_state_subscription_unavailable": {
-        "message": "Unavailable"
-    },
-    "popup_site_filtering_state_integration": {
-        "message": "Protection is enabled"
-    },
-    "popup_site_filtering_disabled": {
-        "message": "AdGuard can not run on&nbsp;this domain"
-    },
-    "popup_site_exception": {
-        "message": "This website is&nbsp;in&nbsp;the exceptions"
-    },
-    "popup_site_exception_info": {
-        "message": "Filtering is&nbsp;disabled, because it&nbsp;can interfere with this website's working."
-    },
-    "popup_block_site_ads_android": {
-        "message": "Bloker annoncer p\u00e5 en hjemmeside"
-    },
-    "popup_security_report_android": {
-        "message": "Sikkerhedsrapport"
-    },
-    "popup_in_white_list_android": {
-        "message": "In the whitelist"
-    },
-    "popup_site_protection_disabled_android": {
-        "message": "Protection is paused"
-    },
-    "popup_open_log_android": {
-        "message": "Filtreringslog"
-    },
-    "popup_feedback_empty_option": {
-        "message": "Select a complaint reason"
-    },
-    "popup_feedback_malware_option": {
-        "message": "Phishing suspected"
-    },
-    "popup_feedback_wrong_block_option": {
-        "message": "Website display distorted"
-    },
-    "popup_feedback_miss_ads_option": {
-        "message": "Ad&nbsp;skipped"
-    },
-    "popup_feedback_other_option": {
-        "message": "Other"
-    },
-    "popup_feedback_option_is_empty": {
-        "message": "You must select a&nbsp;reason for your complaint!"
-    },
-    "popup_what_wrong_site": {
-        "message": "What is&nbsp;wrong with the web site?"
-    },
-    "popup_feedback_comment": {
-        "message": "Comment"
-    },
-    "popup_feedback_send": {
-        "message": "Submit a&nbsp;complaint"
-    },
-    "popup_feedback_cancel": {
-        "message": "Annuller"
-    },
-    "popup_tab_blocked": {
-        "message": "Blocked: $1"
-    },
-    "popup_tab_blocked_all": {
-        "message": "Total: $1"
-    },
-    "popup_filtering_log_icon_title": {
-        "message": "\u00c5ben filtreringslog..."
-    },
-    "popup_adguard_other_os": {
-        "message": "Andre AdGuard versioner:"
-    },
-    "popup_adguard_footer_integration": {
-        "message": "AdGuard <a href='http:\/\/adguard.com\/adguard-adblock-browser-extension\/integration-mode.html#integration-mode' class='openLink' target='_blank'>integration mode<\/a> is active"
-    },
-    "popup_adguard_android": {
-        "message": "AdGuard til Android"
-    },
-    "popup_adguard_windows": {
-        "message": "AdGuard til Windows"
-    },
-    "popup_adguard_mac": {
-        "message": "AdGuard til Mac"
-    },
-    "popup_adguard_ios": {
-        "message": "AdGuard til iOS"
-    },
-    "popup_tab_main": {
-        "message": "Main"
-    },
-    "popup_tab_statistics": {
-        "message": "Statistikker"
-    },
-    "popup_statistics_type_bad_requests": {
-        "message": "Bad requests"
-    },
-    "popup_statistics_type_request_types": {
-        "message": "Request types"
-    },
-    "popup_statistics_request_types_ads": {
-        "message": "Ads"
-    },
-    "popup_statistics_request_types_trackers": {
-        "message": "Trackers"
-    },
-    "popup_statistics_request_types_social": {
-        "message": "Social"
-    },
-    "popup_statistics_request_types_annoyances": {
-        "message": "Irritationer"
-    },
-    "popup_statistics_request_types_security": {
-        "message": "Sikkerhed"
-    },
-    "popup_statistics_request_types_cookies": {
-        "message": "Cookies"
-    },
-    "popup_statistics_request_types_others": {
-        "message": "Others"
-    },
-    "popup_statistics_time_day": {
-        "message": "Sidste dag"
-    },
-    "popup_statistics_time_week": {
-        "message": "Last week"
-    },
-    "popup_statistics_time_month": {
-        "message": "Last month"
-    },
-    "popup_statistics_time_year": {
-        "message": "Last year"
-    },
-    "popup_statistics_full_statistics": {
-        "message": "Full statistics"
-    },
-    "popup_statistics_analytics": {
-        "message": "Analytics"
-    },
-    "popup_statistics_week_days_mon": {
-        "message": "Mon"
-    },
-    "popup_statistics_week_days_tue": {
-        "message": "Tue"
-    },
-    "popup_statistics_week_days_wed": {
-        "message": "Wed"
-    },
-    "popup_statistics_week_days_thu": {
-        "message": "Thu"
-    },
-    "popup_statistics_week_days_fri": {
-        "message": "Fri"
-    },
-    "popup_statistics_week_days_sat": {
-        "message": "Sat"
-    },
-    "popup_statistics_week_days_sun": {
-        "message": "Sun"
-    },
-    "popup_statistics_months_jan": {
-        "message": "Jan"
-    },
-    "popup_statistics_months_feb": {
-        "message": "Feb"
-    },
-    "popup_statistics_months_mar": {
-        "message": "Mar"
-    },
-    "popup_statistics_months_apr": {
-        "message": "Apr"
-    },
-    "popup_statistics_months_may": {
-        "message": "May"
-    },
-    "popup_statistics_months_jun": {
-        "message": "Jun"
-    },
-    "popup_statistics_months_jul": {
-        "message": "Jul"
-    },
-    "popup_statistics_months_aug": {
-        "message": "Aug"
-    },
-    "popup_statistics_months_sep": {
-        "message": "Sep"
-    },
-    "popup_statistics_months_oct": {
-        "message": "Oct"
-    },
-    "popup_statistics_months_nov": {
-        "message": "Nov"
-    },
-    "popup_statistics_months_dev": {
-        "message": "Dec"
-    },
-    "context_block_site_ads": {
-        "message": "Block ads on this website..."
-    },
-    "context_block_site_image": {
-        "message": "AdGuard: Block image..."
-    },
-    "context_block_site_element": {
-        "message": "Bloker element..."
-    },
-    "context_abuse_site": {
-        "message": "Submit a complaint about this website..."
-    },
-    "context_security_report": {
-        "message": "Open a website security report..."
-    },
-    "context_ads_has_been_removed": {
-        "message": "Ads have been removed from this page"
-    },
-    "context_ads_has_been_removed_by_adguard": {
-        "message": "Protected by $1"
-    },
-    "context_site_filtering_disabled": {
-        "message": "AdGuard can not run on this domain"
-    },
-    "context_disable_protection": {
-        "message": "Pause AdGuard protection"
-    },
-    "context_enable_protection": {
-        "message": "Unpause AdGuard protection"
-    },
-    "context_site_protection_disabled": {
-        "message": "AdGuard protection is paused"
-    },
-    "context_open_settings": {
-        "message": "AdGuard settings..."
-    },
-    "context_open_log": {
-        "message": "Filtering log..."
-    },
-    "context_site_exception": {
-        "message": "This website is in the exceptions"
-    },
-    "context_site_filtering_on": {
-        "message": "Enable filtering on this website"
-    },
-    "context_site_filtering_off": {
-        "message": "Disable filtering on this website"
-    },
-    "context_update_antibanner_filters": {
-        "message": "Check for filter updates"
-    },
-    "context_general_settings": {
-        "message": "Generelle indstillinger"
-    },
-    "context_antibanner": {
-        "message": "Ad blocker"
-    },
-    "context_safebrowsing": {
-        "message": "Browsing sikkerhed"
-    },
-    "context_whitelist": {
-        "message": "Whitelist"
-    },
-    "context_userfilter": {
-        "message": "Brugerfilter"
-    },
-    "context_miscellaneous_settings": {
-        "message": "Miscellaneous"
-    },
-    "sb_title": {
-        "message": "Warning! Could be&nbsp;unsafe!"
-    },
-    "sb_main_title": {
-        "message": "Warning! Could be&nbsp;unsafe!"
-    },
-    "sb_adguard_blocked": {
-        "message": "AdGuard has blocked access to&nbsp;this page"
-    },
-    "sb_malware_site": {
-        "message": "This web page at&nbsp;<strong>$1<\/strong>, has been reported as&nbsp;a&nbsp;malware page and has been blocked based on&nbsp;your security preferences."
-    },
-    "sb_phishing_site": {
-        "message": "This web page at&nbsp;<strong>$1<\/strong>, has been reported as&nbsp;a&nbsp;phishing page and has been blocked based on&nbsp;your security preferences."
-    },
-    "sb_malware_description": {
-        "message": "AdGuard has found that malicious software may be&nbsp;installed onto your computer if&nbsp;you proceed. If&nbsp;you've visited this site in&nbsp;the past or&nbsp;you trust this site, it&nbsp;is&nbsp;possible that it&nbsp;has just recently been compromised by&nbsp;a&nbsp;hacker. We&nbsp;recommend you to&nbsp;not proceed or&nbsp;try again later."
-    },
-    "sb_phishing_description": {
-        "message": "AdGuard has found that this page may be&nbsp;a&nbsp;forgery or&nbsp;imitation of&nbsp;another website, designed to&nbsp;trick users into sharing personal or&nbsp;financial information. Entering any personal information on&nbsp;this page may result in&nbsp;identity theft or&nbsp;other abuse."
-    },
-    "sb_go_back": {
-        "message": "Go back"
-    },
-    "sb_more_actions": {
-        "message": "Avanceret"
-    },
-    "sb_site_report": {
-        "message": "Mere information"
-    },
-    "sb_goto_site": {
-        "message": "Fort\u00e6t alligevel"
-    },
-    "alert_popup_filter_enabled_title": {
-        "message": "Auto-activation of the filters"
-    },
-    "alert_popup_filter_enabled_text": {
-        "message": "\u00ab$1\u00bb has been activated automatically"
-    },
-    "filter_download_title": {
-        "message": "Filters database is&nbsp;loading..."
-    },
-    "filter_download_loading": {
-        "message": "Please wait while filters database is&nbsp;loading..."
-    },
-    "filter_download_do_you_know": {
-        "message": "Did you know?"
-    },
-    "filter_download_sb_sites": {
-        "message": "AdGuard phishing and malware database contains<br\/>more than 1&nbsp;million websites."
-    },
-    "filter_download_rules": {
-        "message": "On&nbsp;average we&nbsp;add more than 100&nbsp;ad filter rules every week."
-    },
-    "filter_download_ads_malware": {
-        "message": "90% of&nbsp;viruses and malicious software is&nbsp;distributed<br\/>through unscrupulous ad&nbsp;networks."
-    },
-    "thankyou_title": {
-        "message": "Thank you for installing AdGuard!"
-    },
-    "thankyou_enjoy": {
-        "message": "Enjoy a&nbsp;wide array of&nbsp;websites without intrusive ads, counters that track your every move, and various threats such as&nbsp;viruses or&nbsp;scams just waiting to&nbsp;prey on&nbsp;you."
-    },
-    "thankyou_setup_filter": {
-        "message": "Customize your filtering options"
-    },
-    "thankyou_setup_safebrowsing_title": {
-        "message": "Protection against phishing and malicious websites"
-    },
-    "thankyou_setup_safebrowsing_description": {
-        "message": "The Browsing Security module protects you from malicious and phishing websites. The module uses <a target='blank' href='http:\/\/adguard.com\/how-malware-blocked.html'>a special web service<\/a> to check the websites you visit."
-    },
-    "thankyou_tracking_spyware_filter_title": {
-        "message": "A&nbsp;filter for all known counters and analytical systems"
-    },
-    "thankyou_tracking_spyware_filter_description": {
-        "message": "Hundreds of&nbsp;Internet companies spy upon your actions. With AdGuard you can be&nbsp;easily protected from this spying."
-    },
-    "thankyou_tracking_social_filter_title": {
-        "message": "Social networks widgets filter"
-    },
-    "thankyou_tracking_social_filter_description": {
-        "message": "AdGuard can remove social network widgets from web pages. For example, the \"Like\" buttons that track your actions."
-    },
-    "adguard_product_windows": {
-        "message": "AdGuard til Windows"
-    },
-    "adguard_product_mac": {
-        "message": "AdGuard til Mac"
-    },
-    "filtering_log_title": {
-        "message": "Filtering log"
-    },
-    "filtering_log_tab": {
-        "message": "Tab:"
-    },
-    "filtering_log_search_string": {
-        "message": "Enter search string"
-    },
-    "filtering_refresh_tab": {
-        "message": "Opdater side"
-    },
-    "filtering_clear_tab_events": {
-        "message": "Clear"
-    },
-    "filtering_type_all": {
-        "message": "All"
-    },
-    "filtering_table_type": {
-        "message": "Type"
-    },
-    "filtering_table_rule": {
-        "message": "Filtreringsregel"
-    },
-    "filtering_table_source": {
-        "message": "Kilde"
-    },
-    "filtering_table_filter": {
-        "message": "Filter"
-    },
-    "filtering_table_empty_row": {
-        "message": "The log for this page is empty. <a href='#' class='reloadTab'>Reload page<\/a> to see the log."
-    },
-    "filtering_modal_info_title": {
-        "message": "Request details"
-    },
-    "filtering_modal_type": {
-        "message": "Type"
-    },
-    "filtering_modal_source": {
-        "message": "Source:"
-    },
-    "filtering_modal_rule": {
-        "message": "Rule:"
-    },
-    "filtering_modal_filter": {
-        "message": "Filter:"
-    },
-    "filtering_modal_block": {
-        "message": "Block"
-    },
-    "filtering_modal_unblock": {
-        "message": "Unblock"
-    },
-    "filtering_modal_remove_user": {
-        "message": "Remove from user filters"
-    },
-    "filtering_modal_remove_whitelist": {
-        "message": "Remove from whitelist filter"
-    },
-    "filtering_modal_add_title": {
-        "message": "Adding a rule"
-    },
-    "filtering_modal_rule_text": {
-        "message": "Rule text"
-    },
-    "filtering_modal_patterns": {
-        "message": "Patterns"
-    },
-    "filtering_modal_options": {
-        "message": "Options"
-    },
-    "filtering_modal_apply_domains": {
-        "message": "Apply the rule to all websites"
-    },
-    "filtering_modal_match_case": {
-        "message": "Consider the case"
-    },
-    "filtering_modal_third_party": {
-        "message": "Apply to third party requests only"
-    },
-    "filtering_modal_add_rule": {
-        "message": "Add a rule"
-    },
-    "filtering_modal_exception_title": {
-        "message": "Add an exception"
-    },
-    "filtering_modal_open_in_new_tab": {
-        "message": "Open in a new tab"
-    },
-    "filtering_log_in_whitelist": {
-        "message": "The site is whitelisted"
-    },
-    "abp_subscribe_confirm_enable": {
-        "message": "AdGuard: do you want to enable the $1 subscription?"
-    },
-    "abp_subscribe_confirm_import": {
-        "message": "AdGuard: do you want to import rules from $1 to your user filter?"
-    },
-    "abp_subscribe_confirm_import_finished_title": {
-        "message": "Importing has been successfully finished"
-    },
-    "abp_subscribe_confirm_import_finished_text": {
-        "message": "AdGuard has finished importing rules to the user filter. Imported rules number: $1"
-    },
     "options_content_blocker_overlimit": {
-        "message": "Too many filters enabled. Safari cannot use more than 50000 rules."
-    },
-    "options_safari_extensions_disabled": {
-        "message": "Safari extensions are not OK!"
+        "message": "For mange filtre er aktiveret. Safari kan ikke bruge mere end 50 000 regler"
     },
     "options_filters_list_search_placeholder": {
-        "message": "Enter search string"
+        "message": "Indtast s\u00f8geord"
+    },
+    "main_menu_edit": {
+        "message": "Rediger"
+    },
+    "main_menu_undo": {
+        "message": "Fortryd"
+    },
+    "main_menu_cut": {
+        "message": "Klip"
+    },
+    "main_menu_copy": {
+        "message": "Kopier"
+    },
+    "main_menu_paste": {
+        "message": "Inds\u00e6t"
+    },
+    "main_menu_select-all": {
+        "message": "V\u00e6lg Alt"
     },
     "tray_menu_about": {
-        "message": "About"
+        "message": "Om"
     },
     "tray_menu_preferences": {
-        "message": "Preferences"
+        "message": "Pr\u00e6ferencer"
     },
     "tray_menu_check_updates": {
-        "message": "Check filters updates"
+        "message": "S\u00f8g efter filteropdateringer"
     },
     "tray_menu_launch_at_startup": {
-        "message": "Launch AdGuard at Login"
+        "message": "Start AdGuard ved Login"
     },
     "tray_menu_quit": {
-        "message": "Quit"
+        "message": "Afslut"
+    },
+    "options_last_update": {
+        "message": "Sidst opdateret:"
+    },
+    "options_about": {
+        "message": "Om"
+    },
+    "options_compare_btn": {
+        "message": "Hvordan de sammenligner"
+    },
+    "options_compare_title": {
+        "message": "Pr\u00f8v AdGuard Premium for bedre beskyttelse!"
+    },
+    "options_license_agreement": {
+        "message": "Slutbrugerlicensaftale"
+    },
+    "options_privacy_policy": {
+        "message": "Privatlivspolitik"
+    },
+    "options_acknowledgment": {
+        "message": "Anerkendelse"
+    },
+    "onboarding_safari_desc": {
+        "message": "Afkryds boksen ved siden af \"AdGuard Safari ikonet\" og \"AdGuard\" i Safari pr\u00e6ferencerne"
+    },
+    "onboarding_safari_btn": {
+        "message": "\u00c5ben pr\u00e6ferencer"
+    },
+    "options_learn_more": {
+        "message": "L\u00e6r mere om det"
+    },
+    "options_about_version": {
+        "message": "Version %s"
     }
 }
