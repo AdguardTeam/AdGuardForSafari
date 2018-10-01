@@ -12,41 +12,42 @@ module.exports = (() => {
         { 
             label: 'AdGuard',
             submenu: [
-                {
-                    label: i18n.__('main_menu_edit.message'),
-                    submenu: [
-                        { 
-                            label: i18n.__('main_menu_undo.message'),
-                            accelerator: 'cmd+z',
-                            selector: 'undo:' 
-                        },
-                        {
-                            label: i18n.__('main_menu_cut.message'),
-                            accelerator: 'cmd+x', 
-                            selector: 'cut:' 
-                        },
-                        { 
-                            label: i18n.__('main_menu_copy.message'),
-                            accelerator: 'cmd+c',
-                            selector: 'copy:' 
-                        },
-                        {
-                            label: i18n.__('main_menu_paste.message'),
-                            accelerator: 'cmd+v',
-                            selector: 'paste:' 
-                        },
-                        {
-                            label: i18n.__('main_menu_select-all.message'),
-                            accelerator: 'cmd+a',
-                            selector: 'selectAll:' 
-                        }
-                    ]
-                },
                 { type: 'separator' },
                 {
                     label: i18n.__('tray_menu_quit.message'),
                     accelerator: 'cmd+q',
                     click() { app.quit(); }
+                }
+            ],
+        },
+        {
+            label: i18n.__('main_menu_edit.message'),
+            submenu: [
+                { 
+                    label: i18n.__('main_menu_undo.message'),
+                    accelerator: 'cmd+z',
+                    selector: 'undo:' 
+                },
+                { type: 'separator' },
+                {
+                    label: i18n.__('main_menu_cut.message'),
+                    accelerator: 'cmd+x', 
+                    selector: 'cut:' 
+                },
+                { 
+                    label: i18n.__('main_menu_copy.message'),
+                    accelerator: 'cmd+c',
+                    selector: 'copy:' 
+                },
+                {
+                    label: i18n.__('main_menu_paste.message'),
+                    accelerator: 'cmd+v',
+                    selector: 'paste:' 
+                },
+                {
+                    label: i18n.__('main_menu_select-all.message'),
+                    accelerator: 'cmd+a',
+                    selector: 'selectAll:' 
                 }
             ]
         }
