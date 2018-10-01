@@ -12,6 +12,7 @@ const startup = require('./src/main/startup');
 
 const trayController = require('./src/main/tray-controller');
 const toolbarController = require('./src/main/toolbar-controller');
+const mainMenuController = require('./src/main/main-menu.controller');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -74,6 +75,7 @@ app.on('ready', (() => {
     startup.init(showWindow);
     uiEventListener.init();
 
+    mainMenuController.initMenu();
     tray = trayController.initTrayIcon(showWindow);
     toolbarController.initToolbarController(showWindow);
     if (process.platform === 'darwin') {
