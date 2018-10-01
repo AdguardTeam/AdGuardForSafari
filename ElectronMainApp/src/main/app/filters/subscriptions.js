@@ -15,6 +15,20 @@ module.exports = (function () {
 
     'use strict';
 
+    /**
+     * Custom filters group identifier
+     *
+     * @type {number}
+     */
+    const CUSTOM_FILTERS_GROUP_ID = 0;
+
+    /**
+     * Custom filters group display number
+     *
+     * @type {number}
+     */
+    const CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER = 99;
+
     let tags = [];
     let groups = [];
     let groupsMap = {};
@@ -265,6 +279,11 @@ module.exports = (function () {
                 groupsMap[group.groupId] = group;
             }
 
+            const customFiltersGroup
+                = new SubscriptionGroup(CUSTOM_FILTERS_GROUP_ID, "Custom", CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER);
+            groups.push(customFiltersGroup);
+            groupsMap[customFiltersGroup.groupId] = customFiltersGroup;
+
             filters.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
 
             groups.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
@@ -411,7 +430,7 @@ module.exports = (function () {
      */
     const groupHasEnabledStatus = (groupId) => {
         const group = groupsMap[groupId];
-        return typeof group.enabled !== 'undefined';
+        return group && typeof group.enabled !== 'undefined';
     };
 
     /**

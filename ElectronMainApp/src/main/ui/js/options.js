@@ -964,7 +964,10 @@ const AntiBannerFilters = function (options) {
         loadedFiltersInfo.updateEnabled(filter, enabled);
         updateCategoryFiltersInfo(filter.groupId);
 
-        CheckboxUtils.updateCheckbox([getFilterCheckbox(filterId)], enabled);
+        const filterCheckbox = getFilterCheckbox(filterId);
+        if (filterCheckbox) {
+            CheckboxUtils.updateCheckbox([filterCheckbox], enabled);
+        }
     }
 
     function onCategoryStateChanged(category) {
@@ -974,12 +977,21 @@ const AntiBannerFilters = function (options) {
 
     function onFilterDownloadStarted(filter) {
         getCategoryElement(filter.groupId).querySelector('.preloader').classList.add('active');
-        getFilterElement(filter.filterId).querySelector('.preloader').classList.add('active');
+
+        const filterEl = getFilterElement(filter.filterId);
+        if (filterEl) {
+            filterEl.querySelector('.preloader').classList.add('active');
+        }
     }
 
     function onFilterDownloadFinished(filter) {
         getCategoryElement(filter.groupId).querySelector('.preloader').classList.remove('active');
-        getFilterElement(filter.filterId).querySelector('.preloader').classList.remove('active');
+
+        const filterEl = getFilterElement(filter.filterId);
+        if (filterEl) {
+            filterEl.querySelector('.preloader').classList.remove('active');
+        }
+
         setLastUpdatedTimeText(filter.lastUpdateTime);
     }
 
