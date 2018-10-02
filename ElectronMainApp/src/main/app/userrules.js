@@ -13,6 +13,8 @@ module.exports = (function () {
 
     const USER_FILTER_ID = config.get('AntiBannerFiltersId').USER_FILTER_ID;
 
+    const userFilter = { filterId: USER_FILTER_ID };
+
     /**
      * Save user rules text to storage
      * @param content Rules text
@@ -20,9 +22,9 @@ module.exports = (function () {
      */
     const updateUserRulesText = function (content, options) {
         const lines = content.split(/[\r\n]+/) || [];
-        //listeners.notifyListeners(listeners.UPDATE_FILTER_RULES, userFilter, lines);
         rulesStorage.write(USER_FILTER_ID, lines, function () {
             listeners.notifyListeners(events.UPDATE_USER_FILTER_RULES);
+            listeners.notifyListeners(events.UPDATE_FILTER_RULES, userFilter, lines);
         });
     };
 
