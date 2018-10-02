@@ -45,8 +45,12 @@ module.exports = (() => {
     };
 
     const getFiltersUpdateResultMessage = (success, updatedFilters) => {
-        const title = i18n.__("options_popup_update_title.message");
+        const title = success
+            ? i18n.__("options_popup_update_title.message")
+            : i18n.__("options_popup_update_error_title.message");
+
         const text = [];
+
         if (success) {
             if (updatedFilters.length === 0) {
                 text.push(i18n.__("options_popup_update_not_found.message"));
@@ -64,7 +68,7 @@ module.exports = (() => {
         }
 
         return {
-            title: title,
+            title,
             text: text.join('\r\n')
         };
     };
