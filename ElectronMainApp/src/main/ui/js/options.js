@@ -824,6 +824,7 @@ const AntiBannerFilters = function (options) {
         filterElement.parentNode.removeChild(filterElement);
     }
 
+    let customPopupInitialized = false;
     function renderCustomFilterPopup() {
         const POPUP_ACTIVE_CLASS = 'option-popup__step--active';
 
@@ -836,18 +837,62 @@ const AntiBannerFilters = function (options) {
             document.querySelector('#add-custom-filter-step-2').classList.remove(POPUP_ACTIVE_CLASS);
             document.querySelector('#add-custom-filter-step-3').classList.remove(POPUP_ACTIVE_CLASS);
             document.querySelector('#add-custom-filter-step-4').classList.remove(POPUP_ACTIVE_CLASS);
+
+            document.querySelector('#custom-filter-popup-close').style.display = 'block';
         }
+
+        function fillLoadedFilterDetails(filter) {
+            document.querySelector('#custom-filter-popup-added-title').textContent = filter.name;
+            document.querySelector('#custom-filter-popup-added-desc').textContent = filter.description;
+            document.querySelector('#custom-filter-popup-added-version').textContent = filter.version;
+            document.querySelector('#custom-filter-popup-added-rules-count').textContent = filter.rulesCount;
+            document.querySelector('#custom-filter-popup-added-homepage').textContent = filter.homepage;
+            document.querySelector('#custom-filter-popup-added-homepage').setAttribute("href", filter.homepage);
+            document.querySelector('#custom-filter-popup-added-url').textContent = filter.customUrl;
+            document.querySelector('#custom-filter-popup-added-url').setAttribute("href", filter.customUrl);
+        }
+
+        function addAndEnableFilter(filterId) {
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'addAndEnableFilter',
+                filterId: filterId
+            }));
+
+            closePopup();
+        }
+
+        function removeAntiBannerFilter(filterId) {
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'removeAntiBannerFilter',
+                filterId: filterId
+            }));
+        }
+
+        let onSubscribeClicked;
+        let onSubscriptionCancel;
+        let onPopupCloseClicked;
+        let onSubscribeBackClicked;
 
         function renderStepOne() {
             clearActiveStep();
             document.querySelector('#add-custom-filter-step-1').classList.add(POPUP_ACTIVE_CLASS);
 
             document.querySelector('#custom-filter-popup-url').focus();
+
+            if (onPopupCloseClicked) {
+                document.querySelector('#custom-filter-popup-close').removeEventListener('click', onPopupCloseClicked);
+            }
+
+            onPopupCloseClicked = () => closePopup();
+            document.querySelector('#custom-filter-popup-close').addEventListener('click', onPopupCloseClicked);
+
+            document.querySelector('#custom-filter-popup-cancel').addEventListener('click', onPopupCloseClicked);
         }
 
         function renderStepTwo() {
             clearActiveStep();
             document.querySelector('#add-custom-filter-step-2').classList.add(POPUP_ACTIVE_CLASS);
+            document.querySelector('#custom-filter-popup-close').style.display = 'none';
         }
 
         function renderStepThree() {
@@ -859,62 +904,74 @@ const AntiBannerFilters = function (options) {
             clearActiveStep();
             document.querySelector('#add-custom-filter-step-4').classList.add(POPUP_ACTIVE_CLASS);
 
-            document.querySelector('#custom-filter-popup-added-title').textContent = filter.name;
-            document.querySelector('#custom-filter-popup-added-desc').textContent = filter.description;
-            document.querySelector('#custom-filter-popup-added-version').textContent = filter.version;
-            document.querySelector('#custom-filter-popup-added-rules-count').textContent = filter.rulesCount;
-            document.querySelector('#custom-filter-popup-added-homepage').textContent = filter.homepage;
-            document.querySelector('#custom-filter-popup-added-homepage').setAttribute("href", filter.homepage);
-            document.querySelector('#custom-filter-popup-added-url').textContent = filter.customUrl;
-            document.querySelector('#custom-filter-popup-added-url').setAttribute("href", filter.customUrl);
+            fillLoadedFilterDetails(filter);
 
-            document.querySelector('#custom-filter-popup-added-back').addEventListener('click', renderStepOne);
-            document.querySelector('#custom-filter-popup-added-subscribe').removeEventListener('click', onSubscribeClicked);
+            if (onSubscribeClicked) {
+                document.querySelector('#custom-filter-popup-added-subscribe').removeEventListener('click', onSubscribeClicked);
+            }
+            onSubscribeClicked = () => addAndEnableFilter(filter.filterId);
             document.querySelector('#custom-filter-popup-added-subscribe').addEventListener('click', onSubscribeClicked);
 
-            document.querySelector('#custom-filter-popup-remove').addEventListener('click', function () {
-                ipcRenderer.send('renderer-to-main', JSON.stringify({
-                    'type': 'removeAntiBannerFilter',
-                    filterId: filter.filterId
-                }));
+            if (onSubscriptionCancel) {
+                document.querySelector('#custom-filter-popup-remove').removeEventListener('click', onSubscriptionCancel);
+            }
+            onSubscriptionCancel = () => {
+                removeAntiBannerFilter(filter.filterId);
                 closePopup();
+            };
+            document.querySelector('#custom-filter-popup-remove').addEventListener('click', onSubscriptionCancel);
+
+            if (onSubscribeBackClicked) {
+                document.querySelector('#custom-filter-popup-added-back').removeEventListener('click', onSubscribeBackClicked);
+            }
+            onSubscribeBackClicked = () => {
+                removeAntiBannerFilter(filter.filterId);
+                renderStepOne();
+            };
+            document.querySelector('#custom-filter-popup-added-back').addEventListener('click', onSubscribeBackClicked);
+
+            if (onPopupCloseClicked) {
+                document.querySelector('#custom-filter-popup-close').removeEventListener('click', onPopupCloseClicked);
+            }
+            onPopupCloseClicked = () => {
+                removeAntiBannerFilter(filter.filterId);
+                closePopup();
+            };
+            document.querySelector('#custom-filter-popup-close').addEventListener('click', onPopupCloseClicked);
+        }
+
+        function bindEvents() {
+            // Step one events
+            document.querySelector('.custom-filter-popup-next').addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const url = document.querySelector('#custom-filter-popup-url').value;
+                ipcRenderer.send('renderer-to-main', JSON.stringify({
+                    'type': 'loadCustomFilterInfo',
+                    url: url
+                }));
+
+                ipcRenderer.on('loadCustomFilterInfoResponse', (e, arg) => {
+                    if (arg) {
+                        renderStepFour(arg);
+                    } else {
+                        renderStepThree();
+                    }
+                });
+
+                renderStepTwo();
             });
 
-            function onSubscribeClicked() {
-                ipcRenderer.send('renderer-to-main', JSON.stringify({
-                    'type': 'addAndEnableFilter',
-                    filterId: filter.filterId
-                }));
-                closePopup();
-            }
+            // Step three events
+            document.querySelector('.custom-filter-popup-try-again').addEventListener('click', renderStepOne);
+        }
+
+        if (!customPopupInitialized) {
+            bindEvents();
+            customPopupInitialized = true;
         }
 
         document.querySelector('#add-custom-filter-popup').classList.add('option-popup--active');
-        document.querySelector('.option-popup__cross').addEventListener('click', closePopup);
-        document.querySelector('.custom-filter-popup-cancel').addEventListener('click', closePopup);
-
-        document.querySelector('.custom-filter-popup-next').addEventListener('click', function (e) {
-            e.preventDefault();
-
-            const url = document.querySelector('#custom-filter-popup-url').value;
-            ipcRenderer.send('renderer-to-main', JSON.stringify({
-                'type': 'loadCustomFilterInfo',
-                url: url
-            }));
-
-            ipcRenderer.on('loadCustomFilterInfoResponse', (e, arg) => {
-                if (arg) {
-                    renderStepFour(arg);
-                } else {
-                    renderStepThree();
-                }
-            });
-
-            renderStepTwo();
-        });
-
-        document.querySelector('.custom-filter-popup-try-again').addEventListener('click', renderStepOne);
-
         renderStepOne();
     }
 
