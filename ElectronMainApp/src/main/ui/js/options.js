@@ -612,6 +612,11 @@ const AntiBannerFilters = function (options) {
             filtersList += getFilterTemplate(filters[i], loadedFiltersInfo.isEnabled(filters[i].filterId), isCustomFilters);
         }
 
+        let addCustomFilterBtn = '';
+        if (isCustomFilters) {
+            addCustomFilterBtn = `<button class="button button--green empty-filters__btn empty-filters__btn--list">Add custom filter</button>`;
+        }
+
         return Utils.htmlToElement(`
             <div id="antibanner${category.groupId}" class="settings-content tab-pane filters-list">
                 ${pageTitleEl}
@@ -625,6 +630,7 @@ const AntiBannerFilters = function (options) {
                     <ul class="opts-list">
                         ${filtersList}
                     </ul>
+                    ${addCustomFilterBtn}
                 </div>
             </div>
         `);

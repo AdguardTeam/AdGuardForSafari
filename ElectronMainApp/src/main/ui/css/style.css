@@ -177,13 +177,14 @@
   position: absolute;
   margin: 0;
   right: 0;
-  top: calc(50% - 14px);
+  top: calc(50% - 12px);
 }
 .settings-actions--update-filters a {
   font-size: 0;
   display: block;
-  width: 22px;
-  height: 18px;
+  width: 20px;
+  height: 16px;
+  background-size: cover;
   cursor: pointer;
   background-repeat: no-repeat;
   background-image: url(../images/reload-ico.svg);
@@ -1098,6 +1099,10 @@ li.active .toggler:before {
   margin: 0 auto;
 }
 
+.empty-filters__btn--list {
+  margin-top: 20px;
+}
+
 .opt-name__info {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1201,8 +1206,11 @@ li.active .toggler:before {
   color: #df3812;
   text-decoration: underline;
   cursor: pointer;
-  position: relative;
-  top: -3px;
+  opacity: 0.5;
+}
+
+.opts-list li.active .remove-custom-filter-button {
+  opacity: 1;
 }
 
 .try-premium__in {
