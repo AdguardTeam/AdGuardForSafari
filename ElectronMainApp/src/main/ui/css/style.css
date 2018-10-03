@@ -1328,7 +1328,7 @@ li.active .toggler:before {
 
 .onboarding {
   position: absolute;
-  display: none !important;
+  display: none;
   top: 0;
   left: 0;
   width: 100%;
