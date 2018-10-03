@@ -518,7 +518,7 @@ const AntiBannerFilters = function (options) {
                 <li id="category${category.groupId}" class="active">
                     <div class="block-type">
                         <div class="block-type__ico block-type__ico--${category.groupId}"></div>
-                        <a href="#antibanner${category.groupId}">${category.groupName}</a>
+                        <a class="block__link" href="#antibanner${category.groupId}">${category.groupName}</a>
                     </div>
                     <div class="opt-state">
                         <div class="preloader"></div>

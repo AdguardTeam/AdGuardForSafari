@@ -20,15 +20,8 @@
         <div class="alert__cont" i18n="options_content_blocker_overlimit">
         </div>
     </div>
-    <div class="wlimit">
-
-        <div id="boarding-screen-placeholder" class="onboarding" style="display: none;">
-            <div class="onboarding__pic"></div>
-            <div class="onboarding__desc" i18n="onboarding_safari_desc"></div>
-            <button id="open-safari-extensions-settings-btn" class="button button--green onboarding__btn" i18n="onboarding_safari_btn"></button>
-        </div>
-
-        <div class="settings-sidebar">
+    <div class="settings-sidebar">
+        <div class="settings-sidebar__in">
             <div class="logo"><img src="images/logo.svg" alt=""></div>
             <ul class="nav nav-tabs">
                 <li>
@@ -57,6 +50,14 @@
                     </a>
                 </li>
             </ul>
+        </div>
+    </div>
+    <div class="wlimit">
+
+        <div id="boarding-screen-placeholder" class="onboarding" style="display: none;">
+            <div class="onboarding__pic"></div>
+            <div class="onboarding__desc" i18n="onboarding_safari_desc"></div>
+            <button id="open-safari-extensions-settings-btn" class="button button--green onboarding__btn" i18n="onboarding_safari_btn"></button>
         </div>
         <div id="general-settings" class="settings-content tab-pane">
             <div class="settings-body">
@@ -279,10 +280,10 @@
                                 <input type="checkbox" class="sp-table-row-input" id="changeDefaultWhiteListMode"/>
                             </div>
                         </li>
-                        <div class="filter-rules">
-                            <div id="whiteListRules" class="user-rules"></div>
-                        </div>
                     </ul>
+                    <div class="filter-rules">
+                        <div id="whiteListRules" class="user-rules"></div>
+                    </div>
                 </div>
                 <div class="settings-actions">
                     <a id="whiteListFilterApplyChanges" href="#" i18n="options_modal_save"></a>
