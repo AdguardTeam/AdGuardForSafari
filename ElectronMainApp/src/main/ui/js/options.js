@@ -516,10 +516,12 @@ const AntiBannerFilters = function (options) {
     function getFilterCategoryElement(category) {
         return Utils.htmlToElement(`
                 <li id="category${category.groupId}" class="active">
-                    <div class="block-type">
+                    <a href="#antibanner${category.groupId}" class="block-type">
                         <div class="block-type__ico block-type__ico--${category.groupId}"></div>
-                        <a class="block__link" href="#antibanner${category.groupId}">${category.groupName}</a>
-                    </div>
+                        <div class="block-type__desc">
+                            <div class="block-type__desc-title">${category.groupName}</div>
+                        </div>
+                    </a>
                     <div class="opt-state">
                         <div class="preloader"></div>
                         <div class="desc"></div>
