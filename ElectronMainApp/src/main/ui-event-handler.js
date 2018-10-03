@@ -67,9 +67,8 @@ module.exports.init = function () {
                 filters.removeFilter(message.filterId);
                 break;
             case 'loadCustomFilterInfo':
-                filters.loadCustomFilter(message.url, function (filter) {
-                    event.sender.send('loadCustomFilterInfoResponse', filter);
-                });
+                filters.loadCustomFilter(message.url, (filter) => event.sender.send('loadCustomFilterInfoResponse', filter),
+                    () => event.sender.send('loadCustomFilterInfoResponse', null));
                 break;
             case 'checkSafariExtensions':
                 safariToolbar.extensionsState((result) => {
