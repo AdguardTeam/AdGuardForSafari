@@ -84,8 +84,9 @@
         else {
             [mDomains addObject:domain];
         }
+        DDLogDebug(@"Whitelist domains for save:\n%@", mDomains);
         [AESharedResources setWhitelistDomains:mDomains completion:^{
-            DDLogDebugTrace();
+            DDLogDebug(@"Whitelist domains saved");
             [AESharedResources notifyWhitelistChanged];
         }];
     }];
@@ -186,8 +187,12 @@
 - (void)setWhitelistButton {
 
     [AESharedResources whitelistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
-        DDLogDebugTrace();
-        self.whitelistButton.state = ! [self domainCheckWithDomains:domains] ? NSOnState : NSOffState;
+        ASSIGN_WEAK(self);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            ASSIGN_STRONG(self);
+            DDLogDebug(@"Whitelist domains:\n%@", domains);
+            USE_STRONG(self).whitelistButton.state = ! [USE_STRONG(self) domainCheckWithDomains:domains] ? NSOnState : NSOffState;
+        });
     }];
 }
 

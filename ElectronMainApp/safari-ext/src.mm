@@ -89,10 +89,9 @@ NAN_METHOD(setWhitelistDomains) {
       if (! val.IsEmpty()) {
         Nan::Utf8String item(val);
         if (item.length() > 0) {
-          NSString *domain = [[NSString alloc] initWithBytesNoCopy:*item 
+          NSString *domain = [[NSString alloc] initWithBytes:*item 
                                               length:item.length() 
-                                              encoding:NSUTF8StringEncoding
-                                               freeWhenDone:NO];
+                                              encoding:NSUTF8StringEncoding];
           if (domain) {
             [domains addObject:domain];
           }
@@ -101,6 +100,7 @@ NAN_METHOD(setWhitelistDomains) {
     }
 
     DDLogCDebug(@"List of domains count: %lu", domains.count);
+    DDLogCDebug(@"List of domains:\n%@", domains);
 
     [AESharedResources setWhitelistDomains:domains completion:^{
       DDLogCDebug(@"Domains saved");
@@ -139,10 +139,9 @@ NAN_METHOD(setUserFilter) {
       if (! val.IsEmpty()) {
         Nan::Utf8String item(val);
         if (item.length() > 0) {
-          NSString *rule = [[NSString alloc] initWithBytesNoCopy:*item 
+          NSString *rule = [[NSString alloc] initWithBytes:*item 
                                               length:item.length() 
-                                              encoding:NSUTF8StringEncoding
-                                               freeWhenDone:NO];
+                                              encoding:NSUTF8StringEncoding];
           if (rule) {
             [rules addObject:rule];
           }
@@ -181,7 +180,7 @@ NAN_METHOD(setContentBlockingJson) {
     NSData *data = [NSData new];
     Nan::Utf8String msg (info[0]);
     if (msg.length() > 0) {
-        data = [NSData dataWithBytesNoCopy:*msg length:msg.length() freeWhenDone:NO];
+        data = [NSData dataWithBytes:*msg length:msg.length()];
      }
 
     Nan::Callback *cb = new Nan::Callback(info[1].As<Function>());

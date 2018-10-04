@@ -20,8 +20,8 @@
 #import <SafariServices/SafariServices.h>
 
 #define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"
-#define AES_WHITELIST_DOMAINS                   @"whitelist-domains.txt"
-#define AES_USERFILTER_RULES                    @"userfilter-rules.txt"
+#define AES_WHITELIST_DOMAINS                   @"whitelist-domains.data"
+#define AES_USERFILTER_RULES                    @"userfilter-rules.data"
 
 #define NOTIFICATION_DEFAULTS                   AG_BUNDLEID @".notify.defaults"
 #define NOTIFICATION_WHITELIST                  AG_BUNDLEID @".notify.whitelist"
@@ -215,13 +215,12 @@ static AESListenerBlock _onReady;
 }
 
 + (void)setWhitelistDomains:(NSArray <NSString *> *)domains completion:(void (^)(void))completion {
-
     [self saveObject:domains key:AES_WHITELIST_DOMAINS completion:completion];
 }
 
 + (void)whitelistDomainsWithCompletion:(void (^)(NSArray <NSString *> *domains))completion {
 
-    [self loadObjectWithKey:AES_WHITELIST_DOMAINS completion:completion];
+    [self loadObjectWithKey:AES_WHITELIST_DOMAINS class:[NSArray class] completion:completion];
 }
 
 + (void)setUserFilterRules:(NSArray <NSString *> *)rules completion:(void (^)(void))completion {
@@ -231,7 +230,7 @@ static AESListenerBlock _onReady;
 
 + (void)userFilterRulesWithCompletion:(void (^)(NSArray <NSString *> *rules))completion {
 
-    [self loadObjectWithKey:AES_USERFILTER_RULES completion:completion];
+    [self loadObjectWithKey:AES_USERFILTER_RULES class:[NSArray class] completion:completion];
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -329,8 +328,16 @@ static AESListenerBlock _onReady;
                 [self saveData:[NSData data] toFileRelativePath:key];
             }
             else {
-
-                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:obj];
+                NSData *data;
+                if (@available(macOS 10.13, *)) {
+                    NSError *err;
+                    data  = [NSKeyedArchiver archivedDataWithRootObject:obj requiringSecureCoding:YES error:&err];
+                    if (err) {
+                        DDLogError(@"Converting error %@ to archive: %@", obj, err);
+                    }
+                } else {
+                    data  = [NSKeyedArchiver archivedDataWithRootObject:obj];
+                }
                 if (!data) {
                     data = [NSData data];
                 }
@@ -344,14 +351,23 @@ static AESListenerBlock _onReady;
     });
 }
 
-+ (void)loadObjectWithKey:(NSString *)key completion:(void (^)(id obj))completion {
++ (void)loadObjectWithKey:(NSString *)key class:(Class)aClass completion:(void (^)(id obj))completion {
 
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
         @autoreleasepool {
             NSData *data = [self loadDataFromFileRelativePath:key];
             id result = nil;
             if (data.length) {
-                result = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                if (@available(macOS 10.13, *)) {
+                    NSError *err;
+                    result = [NSKeyedUnarchiver unarchivedObjectOfClass:aClass fromData:data error:&err];
+                    if (err) {
+                        DDLogError(@"Converting error object from archive: %@", err);
+                    }
+                }
+                else {
+                    result = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                }
             }
             if (completion) {
                 completion(result);
