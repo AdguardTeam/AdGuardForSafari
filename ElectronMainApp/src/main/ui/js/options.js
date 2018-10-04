@@ -980,6 +980,7 @@ const AntiBannerFilters = function (options) {
         }
 
         document.querySelector('#add-custom-filter-popup').classList.add('option-popup--active');
+        document.querySelector('#custom-filter-popup-url').value = '';
         renderStepOne();
     }
 
