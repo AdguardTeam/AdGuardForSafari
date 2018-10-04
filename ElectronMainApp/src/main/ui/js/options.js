@@ -1129,22 +1129,32 @@ const Settings = function () {
             }));
         } else {
             ipcRenderer.send('renderer-to-main', JSON.stringify({
-                'type': 'disableAntiBannerFilter',
+                'type': 'disableFilter',
                 filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
             }));
         }
     });
+
+    const updateAcceptableAdsCheckbox = function (filter) {
+        if (filter.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID) {
+            CheckboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], filter.enabled);
+        }
+    };
 
     const render = function () {
         for (let i = 0; i < checkboxes.length; i++) {
             checkboxes[i].render();
         }
 
-        CheckboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID in enabledFilters);
+        updateAcceptableAdsCheckbox({
+            filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID,
+            enabled: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID in enabledFilters
+        });
     };
 
     return {
-        render: render
+        render,
+        updateAcceptableAdsCheckbox
     };
 };
 
@@ -1284,6 +1294,7 @@ const initPage = function (response) {
             switch (event) {
                 case EventNotifierTypes.FILTER_ENABLE_DISABLE:
                     controller.antiBannerFilters.onFilterStateChanged(options);
+                    controller.settings.updateAcceptableAdsCheckbox(options);
                     break;
                 case EventNotifierTypes.FILTER_ADD_REMOVE:
                     controller.antiBannerFilters.render();
