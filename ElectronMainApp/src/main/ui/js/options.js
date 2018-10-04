@@ -499,14 +499,57 @@ const AntiBannerFilters = function (options) {
         return filterElement.querySelector('input');
     }
 
+    function generateFiltersNamesDescription(filters) {
+        const namesDisplayCount = 3;
+        const enabledFiltersNames = filters
+            .filter(filter => filter.enabled)
+            .map(filter => filter.name);
+
+        let enabledFiltersNamesString;
+        const length = enabledFiltersNames.length;
+        switch (true) {
+            case (length > namesDisplayCount): {
+                const displayNamesString = enabledFiltersNames.slice(0, namesDisplayCount).join(', ');
+                enabledFiltersNamesString = `${i18n.__(
+                    'options_filters_enabled_and_more_divider.message',
+                    displayNamesString, length - namesDisplayCount
+                )}`;
+                break;
+            }
+            case (length > 1): {
+                const lastName = enabledFiltersNames.slice(length - 1);
+                const firstNames = enabledFiltersNames.slice(0, length - 1);
+                enabledFiltersNamesString = `${i18n.__(
+                    'options_filters_enabled_and_divider.message',
+                    firstNames.join(', '), lastName
+                )}`;
+                break;
+            }
+            case (length === 1): {
+                enabledFiltersNamesString = enabledFiltersNames[0];
+                break;
+            }
+            default:
+                break;
+        }
+        enabledFiltersNamesString = length > 0 ?
+            `${i18n.__('options_filters_enabled.message')} ${enabledFiltersNamesString}` :
+            `${i18n.__('options_filters_no_enabled.message')}`;
+        return enabledFiltersNamesString;
+    }
+
     function updateCategoryFiltersInfo(groupId) {
         const groupFilters = getFiltersByGroupId(groupId, loadedFiltersInfo.filters);
         const enabledFiltersCount = countEnabledFilters(groupFilters);
+        var filtersNamesDescription = generateFiltersNamesDescription(groupFilters);
+        var groupFiltersCount = groupFilters.length;
 
         const element = getCategoryElement(groupId);
         const checkbox = getCategoryCheckbox(groupId);
 
-        element.querySelector('.desc').textContent = 'Enabled filters: ' + enabledFiltersCount;
+        if (groupFiltersCount > 0) {
+            element.querySelector('.desc').textContent = filtersNamesDescription;
+        }
 
         const isCategoryEnabled = loadedFiltersInfo.isCategoryEnabled(groupId);
         const isCheckboxChecked = typeof isCategoryEnabled === 'undefined' ? enabledFiltersCount > 0 : isCategoryEnabled;
@@ -520,7 +563,7 @@ const AntiBannerFilters = function (options) {
                         <div class="block-type__ico block-type__ico--${category.groupId}"></div>
                         <div class="block-type__desc">
                             <div class="block-type__desc-title">${category.groupName}</div>
-                            <div class="desc"></div>
+                            <div class="desc desc--filters"></div>
                         </div>
                     </a>
                     <div class="opt-state">

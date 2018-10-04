@@ -26,6 +26,18 @@
     "options_antibanner_info": {
         "message": "%s filters"
     },
+    "options_filters_enabled": {
+        "message": "Enabled:"
+    },
+    "options_filters_enabled_and_more_divider": {
+        "message": "%s and %s more"
+    },
+    "options_filters_enabled_and_divider": {
+        "message": "%s and %s"
+    },
+    "options_filters_no_enabled": {
+        "message": "No filters enabled"
+    },
     "options_whitelist": {
         "message": "Whitelist"
     },
