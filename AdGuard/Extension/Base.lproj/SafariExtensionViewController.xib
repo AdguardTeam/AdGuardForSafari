@@ -85,11 +85,11 @@
                     </customSpacing>
                 </stackView>
                 <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="qio-p6-Pqn">
-                    <rect key="frame" x="28" y="174" width="162" height="14"/>
+                    <rect key="frame" x="26" y="172" width="166" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="fBY-Nv-eMT"/>
                     </constraints>
-                    <buttonCell key="cell" type="bevel" title="Enabled on this website" bezelStyle="regularSquare" image="checkbox-light" imagePosition="left" alternateImage="checkbox-selected" refusesFirstResponder="YES" inset="2" id="t9o-h0-bnn">
+                    <buttonCell key="cell" type="check" title="Enabled on this website" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" inset="2" id="t9o-h0-bnn">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -136,11 +136,11 @@
                         </binding>
                     </connections>
                 </box>
-                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="23.5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJ8-Wf-pr8" userLabel="Stack Titles">
-                    <rect key="frame" x="20" y="70" width="118" height="58"/>
+                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="25" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJ8-Wf-pr8" userLabel="Stack Titles">
+                    <rect key="frame" x="20" y="71" width="118" height="59"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="du9-Ja-6bt">
-                            <rect key="frame" x="-2" y="41" width="108" height="17"/>
+                            <rect key="frame" x="-2" y="42" width="108" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Block an element" usesSingleLineMode="YES" id="uTP-cd-F1b">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -402,7 +402,7 @@
                 <constraint firstItem="K9v-08-IS3" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="tBO-lB-BZe"/>
                 <constraint firstAttribute="bottom" secondItem="K9v-08-IS3" secondAttribute="bottom" constant="35" id="tC6-iq-8Ty"/>
                 <constraint firstItem="WI5-OB-i6V" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rtO-ks-TWg" secondAttribute="bottom" constant="35" id="vFM-t3-Pli"/>
-                <constraint firstItem="Rhc-3f-Mmp" firstAttribute="centerY" secondItem="SJ8-Wf-pr8" secondAttribute="centerY" id="vXK-bX-T8P"/>
+                <constraint firstItem="Rhc-3f-Mmp" firstAttribute="centerY" secondItem="SJ8-Wf-pr8" secondAttribute="centerY" constant="1" id="vXK-bX-T8P"/>
                 <constraint firstItem="qio-p6-Pqn" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="28" id="ybG-NN-Moh"/>
                 <constraint firstItem="LXA-5T-3Tr" firstAttribute="top" secondItem="Rhc-3f-Mmp" secondAttribute="bottom" constant="24" id="zFu-Yv-T1Q"/>
             </constraints>
@@ -411,8 +411,6 @@
         <userDefaultsController representsSharedInstance="YES" id="E66-b2-ykH"/>
     </objects>
     <resources>
-        <image name="checkbox-light" width="14" height="14"/>
-        <image name="checkbox-selected" width="14" height="14"/>
         <image name="logo-green" width="142" height="31"/>
         <image name="settings" width="22" height="22"/>
     </resources>

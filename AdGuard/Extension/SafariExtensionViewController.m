@@ -34,23 +34,11 @@
 
     DDLogDebugTrace();
 
-    self.view.appearance = NSAppearance.currentAppearance;
-
-    if ([self isDark]) {
-        self.whitelistButton.image = [NSImage imageNamed:@"checkbox-dark"];
-        _disabledLogo = [NSImage imageNamed:@"logo-gray-dark"];
-        _enabledLogo = [NSImage imageNamed:@"logo-green-dark"];
-    }
-    else {
-        self.whitelistButton.image = [NSImage imageNamed:@"checkbox-light"];
-        _disabledLogo = [NSImage imageNamed:@"logo-gray"];
-        _enabledLogo = [NSImage imageNamed:@"logo-green"];
-    }
-//    [[NSWorkspace sharedWorkspace] addObserver:self
-//                                    forKeyPath:@"runningApplications"
-//                                       options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
-//                                       context:NULL];
-
+//    [self setAppearance];
+//    [self.view addObserver:self
+//                forKeyPath:@"window"
+//                   options:NSKeyValueObservingOptionNew
+//                   context:nil];
 }
 
 - (void)dealloc {
@@ -208,9 +196,32 @@
 
 - (BOOL)isDark {
     if (@available(macOS 10.14, *)) {
-        return [self.view.effectiveAppearance.name isEqualToString:NSAppearanceNameDarkAqua];
+        return [@[NSAppearanceNameDarkAqua, NSAppearanceNameVibrantDark] containsObject:self.view.effectiveAppearance.name];
     }
     return NO;
+}
+- (void)setAppearance {
+
+    DDLogDebug(@"Current Appearance: %@", NSAppearance.currentAppearance.name);
+//    self.view.window.appearance = NSAppearance.currentAppearance;
+//    self.view.appearance = NSAppearance.currentAppearance;
+
+    self.whitelistButton.alternateImage = [NSImage imageNamed:@"checkbox-selected"];
+    if ([self isDark]) {
+        self.whitelistButton.image = [NSImage imageNamed:@"checkbox-dark"];
+        _disabledLogo = [NSImage imageNamed:@"logo-gray-dark"];
+        _enabledLogo = [NSImage imageNamed:@"logo-green-dark"];
+    }
+    else {
+        self.whitelistButton.image = [NSImage imageNamed:@"checkbox-light"];
+        _disabledLogo = [NSImage imageNamed:@"logo-gray"];
+        _enabledLogo = [NSImage imageNamed:@"logo-green"];
+    }
+}
+
+- (void)viewWillLayout {
+
+    [self setAppearance];
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -224,6 +235,23 @@
 //        dispatch_async(dispatch_get_main_queue(), ^{
 //            self.mainAppRunning = ([NSRunningApplication runningApplicationsWithBundleIdentifier:AG_BUNDLEID] != nil);
 //        });
+//    }
+//    if ([keyPath isEqualToString:@"window"] && [object isEqual:self.view]) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.view.window addObserver:self
+//                               forKeyPath:@"effectiveAppearance"
+//                                  options:NSKeyValueObservingOptionNew
+//                                  context:nil];
+//        });
+//        return;
+//    }
+//
+//    else if ([keyPath isEqualToString:@"effectiveAppearance"]) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            DDLogDebugTrace();
+//            [self setAppearance];
+//        });
+//        return;
 //    }
 }
 
