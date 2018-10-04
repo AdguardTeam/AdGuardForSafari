@@ -553,7 +553,7 @@ const AntiBannerFilters = function (options) {
                     <div class="opt-name__info">
                         <div class="opt-name__info-labels">
                             <div class="opt-name__info-item">version ${filter.version}</div>
-                            <div class="opt-name__info-item">updated: ${timeUpdatedText}</div>
+                            <div class="opt-name__info-item last-update-time">updated: ${timeUpdatedText}</div>
                         </div>
                         <div class="opt-name__info-labels opt-name__info-labels--tags">
                             ${tagDetails}
@@ -810,6 +810,8 @@ const AntiBannerFilters = function (options) {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'checkAntiBannerFiltersUpdate'
         }));
+
+        setLastUpdatedTimeText(Date.now());
     }
 
     function addCustomFilter(e) {
@@ -985,19 +987,19 @@ const AntiBannerFilters = function (options) {
     }
 
     function setLastUpdatedTimeText(lastUpdateTime) {
-        if (lastUpdateTime && lastUpdateTime > loadedFiltersInfo.lastUpdateTime) {
+        if (lastUpdateTime && lastUpdateTime >= loadedFiltersInfo.lastUpdateTime) {
             loadedFiltersInfo.lastUpdateTime = lastUpdateTime;
-        }
 
-        let updateText = "";
-        lastUpdateTime = loadedFiltersInfo.lastUpdateTime;
-        if (lastUpdateTime) {
-            lastUpdateTime = moment(lastUpdateTime);
-            lastUpdateTime.locale(environmentOptions.Prefs.locale);
-            updateText = lastUpdateTime.format("D MMMM YYYY HH:mm").toLowerCase();
-        }
+            let updateText = "";
+            lastUpdateTime = loadedFiltersInfo.lastUpdateTime;
+            if (lastUpdateTime) {
+                lastUpdateTime = moment(lastUpdateTime);
+                lastUpdateTime.locale(environmentOptions.Prefs.locale);
+                updateText = lastUpdateTime.format("D MMMM YYYY HH:mm").toLowerCase();
+            }
 
-        document.querySelector('#lastUpdateTime').textContent = updateText;
+            document.querySelector('#lastUpdateTime').textContent = updateText;
+        }
     }
 
     /**
@@ -1056,6 +1058,12 @@ const AntiBannerFilters = function (options) {
         const filterEl = getFilterElement(filter.filterId);
         if (filterEl) {
             filterEl.querySelector('.preloader').classList.remove('active');
+
+            const timeUpdated = moment(filter.lastUpdateTime);
+            timeUpdated.locale(environmentOptions.Prefs.locale);
+            const timeUpdatedText = timeUpdated.format("D/MM/YYYY HH:mm").toLowerCase();
+
+            filterEl.querySelector('.last-update-time').textContent = `updated:  ${timeUpdatedText}`;
         }
 
         setLastUpdatedTimeText(filter.lastUpdateTime);
