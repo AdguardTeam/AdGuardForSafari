@@ -63,7 +63,7 @@
   font-weight: 700;
   font-size: 18px;
   color: #4d4d4d;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 .settings-sidebar {
   background-color: #fff;
@@ -73,7 +73,7 @@
 }
 .settings-sidebar__in {
   width: 990px;
-  padding: 55px 15px;
+  padding: 46px 15px 56px 15px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -231,7 +231,7 @@
 }
 .opts-list li {
   font-size: 14px;
-  color: #D6D6D6;
+  color: #454545;
   border: 1px solid #E7E7E7;
   border-width: 0 0 1px 0;
   padding: 10px 0;
@@ -262,9 +262,6 @@
 .opts-list li a{
   color: #D6D6D6;
 }
-.opts-list li.active {
-  color: #454545;
-}
 .opts-list li.active .opt-name__tag{
   color: #66b574;
 }
@@ -276,6 +273,12 @@
 }
 .opts-list li:first-child {
   border-top-width: 1px;
+}
+.opts-list li .opts-desc {
+  opacity: 0.5;
+}
+.opts-list li.active .opts-desc {
+  opacity: 1;
 }
 .block__link {
   text-decoration: none;
@@ -304,10 +307,17 @@
   cursor: pointer;
   text-decoration: none;
   padding-right: 70px;
+  opacity: 0.5;
+}
+.opts-list li.active .block-type {
+  opacity: 1;
 }
 .block-type__desc {
   display: flex;
   flex-direction: column;
+}
+.block-type .block-type__desc .desc {
+  color: #454545;
 }
 .block-type__ico {
   width: 61px;
@@ -352,7 +362,7 @@
 
 .block-type__desc-title {
   color: #66b574;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .block-type:hover .block-type__desc-title {
   text-decoration: underline;
@@ -378,12 +388,12 @@
   display: none;
 }
 .opts-list .opt-state .desc {
-  color: #D6D6D6;
+  color: #888888;
   font-size: 12px;
   font-weight: 400;
   padding-right: 25px;
   margin-left: 0;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 .opts-list .opt-state .icon-home {
   width: 18px;
@@ -1299,6 +1309,7 @@ li.active .toggler:before {
   justify-content: center;
   align-items: center;
   height: calc(100% - 55px);
+  padding-top: 100px;
 }
 
 .about-opt__logo {
