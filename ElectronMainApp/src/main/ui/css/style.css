@@ -245,6 +245,7 @@
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: center;
+  padding: 0 15px;
 }
 .opts-list li:first-child {
   border-top: 0;
