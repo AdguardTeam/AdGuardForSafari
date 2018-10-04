@@ -520,11 +520,11 @@ const AntiBannerFilters = function (options) {
                         <div class="block-type__ico block-type__ico--${category.groupId}"></div>
                         <div class="block-type__desc">
                             <div class="block-type__desc-title">${category.groupName}</div>
+                            <div class="desc"></div>
                         </div>
                     </a>
                     <div class="opt-state">
                         <div class="preloader"></div>
-                        <div class="desc"></div>
                         <input type="checkbox" name="groupId" value="${category.groupId}">
                     </div>
                 </li>`);
@@ -547,16 +547,18 @@ const AntiBannerFilters = function (options) {
 
         return `
             <li id="filter${filter.filterId}">
-                <div class="opt-name">
-                    <div class="title">${filter.name}</div>
-                    <div class="desc">${filter.description}</div>
-                    <div class="opt-name__info">
-                        <div class="opt-name__info-labels">
-                            <div class="opt-name__info-item">version ${filter.version}</div>
-                            <div class="opt-name__info-item">updated: ${timeUpdatedText}</div>
-                        </div>
-                        <div class="opt-name__info-labels opt-name__info-labels--tags">
-                            ${tagDetails}
+                <div class="opts-desc">
+                    <div class="opt-name">
+                        <div class="title">${filter.name}</div>
+                        <div class="desc">${filter.description}</div>
+                        <div class="opt-name__info">
+                            <div class="opt-name__info-labels">
+                                <div class="opt-name__info-item">version ${filter.version}</div>
+                                <div class="opt-name__info-item">updated: ${timeUpdatedText}</div>
+                            </div>
+                            <div class="opt-name__info-labels opt-name__info-labels--tags">
+                                ${tagDetails}
+                            </div>
                         </div>
                     </div>
                 </div>
