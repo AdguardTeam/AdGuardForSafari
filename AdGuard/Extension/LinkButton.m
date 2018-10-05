@@ -81,7 +81,7 @@
 
     NSMutableAttributedString *theTitle = [self.attributedTitle mutableCopy];
     [theTitle addAttribute:NSForegroundColorAttributeName
-                     value:NSColor.disabledControlTextColor
+                     value:NSColor.labelColor
                      range:NSMakeRange(0, theTitle.length)];
     if (_mouseEntered && self.enabled) {
         [theTitle addAttribute:NSUnderlineStyleAttributeName
