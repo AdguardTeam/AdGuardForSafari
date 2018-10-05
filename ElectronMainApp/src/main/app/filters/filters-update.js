@@ -100,10 +100,9 @@ module.exports = (() =>{
 
                     updateCustomFilters(customFilterIdsToUpdate, function (customFilters) {
                         onSuccess(filters.concat(customFilters));
-                    });
 
-                    log.info('Filters updated successfully');
-                    onSuccess(filters);
+                        log.info('Filters updated successfully');
+                    });
                 } else {
                     onError();
                 }
