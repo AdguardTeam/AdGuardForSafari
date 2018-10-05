@@ -995,27 +995,36 @@ const AntiBannerFilters = function (options) {
             document.querySelector('#custom-filter-popup-close').addEventListener('click', onPopupCloseClicked);
         }
 
+        function submitUrl(e) {
+            e.preventDefault();
+
+            const url = document.querySelector('#custom-filter-popup-url').value;
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'loadCustomFilterInfo',
+                url: url
+            }));
+
+            ipcRenderer.on('loadCustomFilterInfoResponse', (e, arg) => {
+                if (arg) {
+                    renderStepFour(arg);
+                } else {
+                    renderStepThree();
+                }
+            });
+
+            renderStepTwo();
+        }
+
         function bindEvents() {
             // Step one events
-            document.querySelector('.custom-filter-popup-next').addEventListener('click', function (e) {
+            document.querySelector("#custom-filter-popup-url").addEventListener('keyup', function (e) {
                 e.preventDefault();
 
-                const url = document.querySelector('#custom-filter-popup-url').value;
-                ipcRenderer.send('renderer-to-main', JSON.stringify({
-                    'type': 'loadCustomFilterInfo',
-                    url: url
-                }));
-
-                ipcRenderer.on('loadCustomFilterInfoResponse', (e, arg) => {
-                    if (arg) {
-                        renderStepFour(arg);
-                    } else {
-                        renderStepThree();
-                    }
-                });
-
-                renderStepTwo();
+                if (e.keyCode === 13) {
+                    submitUrl(e);
+                }
             });
+            document.querySelector('.custom-filter-popup-next').addEventListener('click', submitUrl);
 
             // Step three events
             document.querySelector('.custom-filter-popup-try-again').addEventListener('click', renderStepOne);
