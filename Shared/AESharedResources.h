@@ -14,6 +14,7 @@ typedef void (^AESListenerBlock)(void);
 
 extern NSString * const AEDefaultsEnabled;
 extern NSString * const AEDefaultsMainAppBusy;
+extern NSString * const AEDefaultsLastReportUrl;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -124,6 +125,16 @@ extern NSString * const AEDefaultsMainAppBusy;
  @param block Performed on internal thread when catched notification.
  */
 + (void)setListenerOnReady:(AESListenerBlock)block;
+/**
+ Notifies, that user wants to "Report this site".
+ */
++ (void)notifyReport;
+/**
+ Register listener for "Report this site".
+
+ @param block Performed on internal thread when catched notification.
+ */
++ (void)setListenerOnReport:(AESListenerBlock)block;
 
 /**
  Saves blocking content rules JSON in shared storage.

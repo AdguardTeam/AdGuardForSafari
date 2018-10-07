@@ -29,6 +29,7 @@
 #define NOTIFICATION_BUSY                       AG_BUNDLEID @".notify.busy"
 #define NOTIFICATION_SHOW_PREFS                 AG_BUNDLEID @".notify.showprefs"
 #define NOTIFICATION_READY                      AG_BUNDLEID @".notify.ready"
+#define NOTIFICATION_REPORT                     AG_BUNDLEID @".notify.report"
 
 
 /////////////////////////////////////////////////////////////////////
@@ -36,6 +37,7 @@
 
 NSString * const AEDefaultsEnabled = @"AEDefaultsEnabled";
 NSString * const AEDefaultsMainAppBusy = @"AEDefaultsMainAppBusy";
+NSString * const AEDefaultsLastReportUrl = @"AEDefaultsLastReportUrl";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -57,6 +59,7 @@ static AESListenerBlock _onUserFilterChangedBlock;
 static AESListenerBlock _onBusyChangedBlock;
 static AESListenerBlock _onShowPreferences;
 static AESListenerBlock _onReady;
+static AESListenerBlock _onReport;
 
 + (void)initialize{
     
@@ -79,8 +82,7 @@ static AESListenerBlock _onReady;
 }
 
 /////////////////////////////////////////////////////////////////////
-#pragma mark Properties and public methods
-/////////////////////////////////////////////////////////////////////
+#pragma mark   Events (public methods)
 
 + (NSURL *)sharedResuorcesURL{
     
@@ -196,6 +198,20 @@ static AESListenerBlock _onReady;
                             blockPtr:&_onBusyChangedBlock
                                block:block];
 }
+
++ (void)notifyReport {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_REPORT, NULL, NULL, YES);
+    });
+}
++ (void)setListenerOnReport:(AESListenerBlock)block {
+    [self setListenerForNotification:NOTIFICATION_REPORT
+                            blockPtr:&_onReport
+                               block:block];
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Access to shared resources (public methods)
 
 + (void)setBlockingContentRulesJson:(NSData *)jsonData completion:(void (^)(void))completion {
 
@@ -406,6 +422,9 @@ static void onChangedNotify(CFNotificationCenterRef center, void *observer, CFSt
     }
     else if ([nName isEqualToString:NOTIFICATION_READY]){
         block = _onReady;
+    }
+    else if ([nName isEqualToString:NOTIFICATION_REPORT]){
+        block = _onReport;
     }
 
     if (block) {

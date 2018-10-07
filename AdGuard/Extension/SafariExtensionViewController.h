@@ -31,15 +31,17 @@
 - (IBAction)clickAssistant:(id)sender;
 - (IBAction)clickRunAdguard:(id)sender;
 - (IBAction)clickPreferences:(id)sender;
+- (IBAction)clickReport:(id)sender;
 
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - Properties and Public methods
 
-@property NSString *domain;
+@property NSURL *currentPageUrl;
 @property BOOL busy;
 @property (nonatomic) BOOL mainAppRunning;
 @property (readonly) BOOL showDisabledUI;
 
 - (void)setEnabledButton;
+- (void)reloadPage;
 
 @end

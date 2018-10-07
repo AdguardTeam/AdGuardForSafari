@@ -19,6 +19,7 @@
 @implementation SafariExtensionViewController {
     NSImage *_disabledLogo;
     NSImage *_enabledLogo;
+    SFSafariPage *_pageForReload;
 }
 
 + (SafariExtensionViewController *)sharedController {
@@ -55,7 +56,7 @@
 }
 
 - (IBAction)clickWhitelist:(id)sender {
-    NSString *domain = self.domain;
+    NSString *domain = self.currentPageUrl.host;
     if (domain.length == 0) {
         return;
     }
@@ -72,6 +73,7 @@
         DDLogDebug(@"Whitelist domains for save:\n%@", mDomains);
         [AESharedResources setWhitelistDomains:mDomains completion:^{
             DDLogDebug(@"Whitelist domains saved");
+            [self setCurrentPageNeedReload];
             [AESharedResources notifyWhitelistChanged];
         }];
     }];
@@ -123,6 +125,14 @@
     }
 }
 
+- (IBAction)clickReport:(id)sender {
+    NSString *urlString = self.currentPageUrl.absoluteString;
+    if (urlString.length) {
+        [[AESharedResources sharedDefaults] setObject:urlString forKey:AEDefaultsLastReportUrl];
+        [AESharedResources notifyReport];
+    }
+}
+
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - Properties and Public methods
 
@@ -151,11 +161,17 @@
     });
 }
 
+- (void)reloadPage {
+    [self->_pageForReload reload];
+    self->_pageForReload = nil;
+}
+
+
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - Private methods
 
 - (BOOL)domainCheckWithDomains:(NSArray <NSString *> *)domains {
-    NSString *theDomain = self.domain;
+    NSString *theDomain = self.currentPageUrl.host;
     if (theDomain.length) {
         for (NSString *domain in domains) {
             if (theDomain.hash == domain.hash && [theDomain isEqualToString:domain]) {
@@ -189,6 +205,18 @@
     [AESharedResources synchronizeSharedDefaults];
     self.busy = YES;
     [AESharedResources notifyDefaultsChanged];
+}
+
+- (void)setCurrentPageNeedReload {
+        DDLogDebugTrace();
+        //Launch script for select element on web page
+        [SFSafariApplication getActiveWindowWithCompletionHandler:^(SFSafariWindow * _Nullable activeWindow) {
+            [activeWindow getActiveTabWithCompletionHandler:^(SFSafariTab * _Nullable activeTab) {
+                [activeTab getActivePageWithCompletionHandler:^(SFSafariPage * _Nullable activePage) {
+                    self->_pageForReload = activePage;
+                }];
+            }];
+        }];
 }
 
 - (BOOL)isDark {

@@ -513,6 +513,40 @@ NAN_METHOD(setOnShowPreferences) {
   }];
 }
 
+NAN_METHOD(setOnReport) {
+
+  static Nan::Callback *cb = nullptr;
+
+   if (info.Length() < 1) {
+      ThrowTypeError("Wrong number of arguments");
+      return;
+  }
+
+  if (!info[0]->IsFunction()) {
+      ThrowTypeError("Wrong arguments");
+      return;
+  }
+  
+  if (cb) {
+    delete cb;
+  }
+  cb = new Nan::Callback(info[0].As<Function>());
+
+  [AESharedResources setListenerOnReport:^{
+      dispatch_async(dispatch_get_main_queue(), ^{
+          Nan::HandleScope scope;
+
+          Nan::Call(*cb, 0, 0);
+      });
+  }];
+}
+
+NAN_METHOD(reportUrl) {
+
+  NSString *result = [[AESharedResources sharedDefaults] valueForKey:AEDefaultsLastReportUrl];
+  info.GetReturnValue().Set(Nan::New(result.UTF8String).ToLocalChecked());
+}
+
 NAN_METHOD(debugLog) {
 
     if (info.Length() < 1) {
@@ -582,6 +616,12 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("sendReady").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(sendReady)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("setOnReport").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setOnReport)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("reportUrl").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(reportUrl)).ToLocalChecked());
 }
 
 // macro to load the module when require'd
