@@ -5,9 +5,9 @@ const filters = require('./app/filters-manager');
 const listeners = require('./notifier');
 const antibanner = require('./app/antibanner');
 const events = require('./events');
+const storage = require('./app/storage/storage');
 
 const {app, shell, Tray, Menu} = require('electron');
-const AutoLaunch = require('auto-launch');
 
 /**
  * Tray controller.
@@ -15,29 +15,30 @@ const AutoLaunch = require('auto-launch');
  */
 module.exports = (() => {
 
+    const LAUNCH_AT_LOGIN_KEY = 'launch-at-login-set';
+
     const onCheckFiltersUpdateClicked = () => {
         filters.checkAntiBannerFiltersUpdate(true);
     };
 
-    const autoLauncher = new AutoLaunch({
-        name: app.getName(),
-        mac: {
-            useLaunchAgent: true
-        }
-    });
-
-    let autoLaunchEnabled = false;
-    autoLauncher.isEnabled().then(function (isEnabled) {
-        autoLaunchEnabled = isEnabled;
-    }).catch(function (err) {
-        //Ignore
-    });
-
     const onLaunchAdguardAtLoginClicked = (e) => {
-        if (e.checked) {
-            autoLauncher.enable();
+        app.setLoginItemSettings({
+            openAtLogin: !!e.checked
+        });
+    };
+
+    const isOpenAtLoginEnabled = () => {
+        if (storage.getItem(LAUNCH_AT_LOGIN_KEY)) {
+            return app.getLoginItemSettings().openAtLogin
         } else {
-            autoLauncher.disable();
+            storage.setItem(LAUNCH_AT_LOGIN_KEY, true);
+
+            //Set default true
+            app.setLoginItemSettings({
+                openAtLogin: true
+            });
+
+            return true;
         }
     };
 
@@ -50,7 +51,7 @@ module.exports = (() => {
      */
     const initTrayIcon = (showWindow) => {
 
-        const isLaunchAtLogin = autoLaunchEnabled;
+        const isLaunchAtLogin = isOpenAtLoginEnabled();
 
         const tray = new Tray(trayImageOff);
         tray.setPressedImage(trayImageOff);

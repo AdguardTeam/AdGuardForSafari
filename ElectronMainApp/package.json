@@ -12,7 +12,6 @@
         "rebuild-locales": "gulp rebuild-locales"
     },
     "dependencies": {
-        "auto-launch": "^5.0.5",
         "config": "^1.31.0",
         "electron-store": "^2.0.0",
         "filters-downloader": "git+https://github.com/AdguardTeam/FiltersDownloader.git#a7d2177",
