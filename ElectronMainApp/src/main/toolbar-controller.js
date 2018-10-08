@@ -3,6 +3,8 @@ const applicationApi = require('./api');
 const listeners = require('./notifier');
 const events = require('./events');
 const log = require('./app/utils/log');
+const app = require('./app/app');
+const {shell} = require('electron');
 
 /**
  * Addon toolbar controller.
@@ -57,6 +59,23 @@ module.exports = (() => {
     };
 
     /**
+     * Opens site complaint report
+     *
+     * @param reportUrl
+     */
+    const onReportCallback = (reportUrl) => {
+        const browser = 'Safari';
+        const filters = applicationApi.getEnabledFilterIds();
+
+        const url = "https://reports.adguard.com/new_issue.html?product_type=Ext&product_version=" + encodeURIComponent(app.getVersion()) +
+            "&browser=" + encodeURIComponent(browser) +
+            "&url=" + encodeURIComponent(reportUrl) +
+            "&filters=" + encodeURIComponent(filters.join('.'));
+
+        shell.openExternal(url);
+    };
+
+    /**
      * Initializes toolbar controller
      * Adds toolbar events listener and reacts on them.
      */
@@ -65,7 +84,9 @@ module.exports = (() => {
         log.debug('Initializing toolbar controller..');
 
         //Subscribe to toolbar events
-        safariToolbar.init(onProtectionChangedCallback, onWhitelistChangedCallback, onUserFilterChangedCallback, onShowPreferencesCallback(showWindow));
+        safariToolbar.init(onProtectionChangedCallback, onWhitelistChangedCallback,
+            onUserFilterChangedCallback, onShowPreferencesCallback(showWindow),
+            onReportCallback);
 
         //Subscribe to application events
         listeners.addListener(function (event, info) {

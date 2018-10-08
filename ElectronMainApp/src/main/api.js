@@ -2,6 +2,7 @@ const whitelist = require('./app/whitelist');
 const userrules = require('./app/userrules');
 const antibanner = require('./app/antibanner');
 const log = require('./app/utils/log');
+const filtersManager = require('./app/filters-manager');
 
 /**
  * Api
@@ -109,16 +110,33 @@ module.exports = (() => {
         });
     };
 
+    /**
+     * Return array of enabled filters identifiers
+     */
+    const getEnabledFilterIds = () => {
+        const filters = filtersManager.getFilters();
+        const enabledFilters = [];
+        for (let i = 0; i < filters.length; i++) {
+            const filter = filters[i];
+            if (filter.enabled) {
+                enabledFilters.push(filter.filterId);
+            }
+        }
+
+        return enabledFilters;
+    };
+
     return {
-        getToolbarMenuData: getToolbarMenuData,
-        enable: enable,
-        disable: disable,
-        pause: pause,
-        start: start,
-        setWhitelist: setWhitelist,
-        getWhitelist: getWhitelist,
-        setUserFilterRules: setUserFilterRules,
-        getUserFilterRules: getUserFilterRules
+        getToolbarMenuData,
+        enable,
+        disable,
+        pause,
+        start,
+        setWhitelist,
+        getWhitelist,
+        setUserFilterRules,
+        getUserFilterRules,
+        getEnabledFilterIds
     };
 
 })();
