@@ -31,6 +31,7 @@ static BOOL _mainAppReady;
             SafariExtensionViewController.sharedController.busy = [AESharedResources.sharedDefaults boolForKey:AEDefaultsMainAppBusy];
             if (SafariExtensionViewController.sharedController.busy == NO) {
                 [SFSafariApplication setToolbarItemsNeedUpdate]; // because changes can happen in main app
+                [SafariExtensionViewController.sharedController reloadPage];
             }
         }];
         [AESharedResources setListenerOnReady:^{
@@ -103,9 +104,9 @@ static BOOL _mainAppReady;
         [window getActiveTabWithCompletionHandler:^(SFSafariTab * _Nullable activeTab) {
             [activeTab getActivePageWithCompletionHandler:^(SFSafariPage * _Nullable activePage) {
                 [activePage getPagePropertiesWithCompletionHandler:^(SFSafariPageProperties * _Nullable properties) {
-                    SafariExtensionViewController.sharedController.domain = nil;
+                    SafariExtensionViewController.sharedController.currentPageUrl = nil;
                     if (properties) {
-                        SafariExtensionViewController.sharedController.domain = properties.url.host;
+                        SafariExtensionViewController.sharedController.currentPageUrl = [properties.url copy];
                     }
                     validationHandler(YES, nil);
                 }];

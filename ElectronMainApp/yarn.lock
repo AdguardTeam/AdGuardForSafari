@@ -2613,7 +2613,7 @@ rxjs@^5.1.1:
     symbol-observable "1.0.1"
 
 safari-ext@./safari-ext:
-  version "1.0.19"
+  version "1.0.21"
   dependencies:
     bindings "^1.2.1"
     nan "^2.3.3"

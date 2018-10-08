@@ -16,8 +16,16 @@ module.exports = (() => {
      * @param onWhitelistChangedCallback = (stringArray) => {}
      * @param onUserFilterChangedCallback = (stringArray) => {}
      * @param onShowPreferencesCallback = () => ()
+     * @param onReportCallback = (string) => ()
      */
-    const init = (onProtectionChangedCallback, onWhitelistChangedCallback, onUserFilterChangedCallback, onShowPreferencesCallback) => {
+    const init = (
+                    onProtectionChangedCallback, 
+                    onWhitelistChangedCallback, 
+                    onUserFilterChangedCallback, 
+                    onShowPreferencesCallback,
+                    onReportCallback
+                  ) => {
+
         if (onProtectionChangedCallback) {
             addon.setOnProtectionEnabled(() => {
                 onProtectionChangedCallback(addon.protectionEnabled());
@@ -39,6 +47,12 @@ module.exports = (() => {
             addon.setOnShowPreferences(() => {
                 onShowPreferencesCallback();
             });
+        }
+
+        if (onReportCallback) {
+            addon.setOnReport(() => {
+                onReportCallback(addon.reportUrl());
+            })
         }
 
         busyStatus(false);
