@@ -19,7 +19,7 @@
 @implementation SafariExtensionViewController {
     NSImage *_disabledLogo;
     NSImage *_enabledLogo;
-    SFSafariPage *_pageForReload;
+    __weak SFSafariPage *_pageForReload;
 }
 
 + (SafariExtensionViewController *)sharedController {
