@@ -3,6 +3,7 @@
   width: 990px;
   padding: 0 15px;
   margin: 0 auto;
+  margin-top: 140px;
   height: 100%;
 }
 /* st */
@@ -67,7 +68,8 @@
 }
 .settings-sidebar {
   background-color: #fff;
-  position: sticky;
+  width: 100%;
+  position: fixed;
   top: 0;
   z-index: 10;
 }
@@ -234,7 +236,6 @@
   color: #454545;
   border: 1px solid #E7E7E7;
   border-width: 0 0 1px 0;
-  padding: 10px 0;
   min-height: 80px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -245,7 +246,7 @@
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: center;
-  padding: 0 15px;
+  padding: 15px;
 }
 .opts-list li:first-child {
   border-top: 0;
@@ -973,7 +974,9 @@ li.active .toggler:before {
 .option-popup__content {
   margin: auto 0;
 }
-
+.option-popup__content a {
+  word-break: break-word;
+}
 .option-popup__title {
   font-size: 26px;
   font-weight: 600;
