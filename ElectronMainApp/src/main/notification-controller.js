@@ -88,6 +88,18 @@ module.exports = (() => {
     };
 
     /**
+     * Rules are over safari content blocker limit
+     */
+    const showRulesOverLimitNotification = () => {
+        const message = {
+            title: i18n.__("notification_content_blocker_overlimit_title.message"),
+            text: i18n.__("notification_content_blocker_overlimit_desc.message")
+        };
+
+        showNotification(message.title, message.text);
+    };
+
+    /**
      * Subscribes to corresponding events
      */
     const init = () => {
@@ -96,6 +108,10 @@ module.exports = (() => {
                 showFiltersUpdatedNotification(options);
             } else if (event === events.APPLICATION_UPDATED) {
                 showAppUpdatedNotification(options);
+            } else if (event === events.CONTENT_BLOCKER_UPDATED) {
+                if (options.rulesOverLimit) {
+                    showRulesOverLimitNotification();
+                }
             }
         });
     };
