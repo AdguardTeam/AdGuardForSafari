@@ -166,6 +166,8 @@
 		65216A13212436EA00ABF7D0 /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Extension.entitlements; sourceTree = "<group>"; };
 		65216A2F2124517700ABF7D0 /* ElectronChild.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ElectronChild.entitlements; sourceTree = "<group>"; };
 		652735B2212D77A3005C35BF /* libshared.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libshared.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		65275979216CBAEC00F25AA9 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/SafariExtensionViewController.strings; sourceTree = "<group>"; };
+		6527597A216CBAEC00F25AA9 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6535D713213D4374004D8A08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6535D715213D4399004D8A08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6535D717213D4505004D8A08 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -679,6 +681,7 @@
 				en,
 				Base,
 				ru,
+				de,
 			);
 			mainGroup = 65720AA921219AC900B2381C;
 			productRefGroup = 65720AB321219AC900B2381C /* Products */;
@@ -848,6 +851,7 @@
 				65216A0C212436EA00ABF7D0 /* Base */,
 				6584717E2136BD0A005C74E8 /* ru */,
 				6504C10C2136CD37007E9674 /* en */,
+				65275979216CBAEC00F25AA9 /* de */,
 			);
 			name = SafariExtensionViewController.xib;
 			sourceTree = "<group>";
@@ -858,6 +862,7 @@
 				6535D713213D4374004D8A08 /* en */,
 				6535D715213D4399004D8A08 /* Base */,
 				6535D717213D4505004D8A08 /* ru */,
+				6527597A216CBAEC00F25AA9 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

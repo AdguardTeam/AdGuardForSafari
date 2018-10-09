@@ -1,0 +1,11 @@
+/* Safari App Extension, toolbar popover, title of the button for start protection. */
+"sae-popover-enabled-button-title" = "Включить защиту";
+
+/* Safari App Extension, toolbar popover, message text for start protection. */
+"sae-popover-enabled-message" = "AdGuard защита отключена. Нажмите кнопку \"Включить защиту\".";
+
+/* Safari App Extension, toolbar popover, title of the button for running AdGuard. */
+"sae-popover-run-adguard-button-title" = "Запуск AdGuard";
+
+/* Safari App Extension, toolbar popover, message text for running AdGuard. */
+"sae-popover-run-adguard-message" = "AdGuard не работает.  ПОжалуйста запустите AdGuard.";
