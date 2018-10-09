@@ -597,7 +597,7 @@ const AntiBannerFilters = function (options) {
                         <div class="desc">${filter.description}</div>
                         <div class="opt-name__info">
                             <div class="opt-name__info-labels">
-                                <div class="opt-name__info-item">version ${filter.version}</div>
+                                <div class="opt-name__info-item filter-version-desc">version ${filter.version}</div>
                                 <div class="opt-name__info-item last-update-time">updated: ${timeUpdatedText}</div>
                             </div>
                             <div class="opt-name__info-labels opt-name__info-labels--tags">
@@ -1119,6 +1119,7 @@ const AntiBannerFilters = function (options) {
             const timeUpdatedText = timeUpdated.format("D/MM/YYYY HH:mm").toLowerCase();
 
             filterEl.querySelector('.last-update-time').textContent = `updated:  ${timeUpdatedText}`;
+            filterEl.querySelector('.filter-version-desc').textContent = `version: ${filter.version}`;
         }
 
         setLastUpdatedTimeText(filter.lastUpdateTime);
