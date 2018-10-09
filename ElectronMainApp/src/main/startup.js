@@ -23,7 +23,7 @@ module.exports = (() => {
         whitelist.init();
         contentBlockerListener.init();
         filterState.init();
-        notificationController.init();
+        notificationController.init(showWindow);
 
         antibanner.start({
             onInstall: function (callback) {

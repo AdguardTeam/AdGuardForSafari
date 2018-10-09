@@ -14,12 +14,19 @@ module.exports = (() => {
      *
      * @param title
      * @param message
+     * @param onClick
      */
-    const showNotification = (title, message) => {
+    const showNotification = (title, message, onClick) => {
         let notification = new Notification({
             title: title,
             subtitle: message
         });
+
+        if (onClick) {
+            notification.addListener("click", (e) => {
+                onClick();
+            });
+        }
 
         notification.show();
     };
@@ -74,43 +81,61 @@ module.exports = (() => {
     };
 
     /**
+     * Return event click handler to show main window's filters tab
+     *
+     * @param showMainWindow
+     */
+    const getShowFiltersTabOnClick = (showMainWindow) => {
+        return function () {
+            showMainWindow(function () {
+                listeners.notifyListeners(events.SHOW_OPTIONS_FILTERS_TAB);
+            });
+        };
+    };
+
+    /**
      * Filters updated notification
      *
      * @param options
+     * @param showMainWindow
      */
-    const showFiltersUpdatedNotification = (options) => {
+    const showFiltersUpdatedNotification = (options, showMainWindow) => {
         if (!options) {
             return;
         }
 
         const message = getFiltersUpdateResultMessage(options.success, options.updatedFilters);
-        showNotification(message.title, message.text);
+        showNotification(message.title, message.text, getShowFiltersTabOnClick(showMainWindow));
     };
 
     /**
      * Rules are over safari content blocker limit
+     *
+     * @param showMainWindow
      */
-    const showRulesOverLimitNotification = () => {
+    const showRulesOverLimitNotification = (showMainWindow) => {
         const message = {
             title: i18n.__("notification_content_blocker_overlimit_title.message"),
             text: i18n.__("notification_content_blocker_overlimit_desc.message")
         };
 
-        showNotification(message.title, message.text);
+        showNotification(message.title, message.text, getShowFiltersTabOnClick(showMainWindow));
     };
 
     /**
      * Subscribes to corresponding events
+     *
+     * @param showWindow
      */
-    const init = () => {
+    const init = (showWindow) => {
         listeners.addListener((event, options) => {
             if (event === events.UPDATE_FILTERS_SHOW_POPUP) {
-                showFiltersUpdatedNotification(options);
+                showFiltersUpdatedNotification(options, showWindow);
             } else if (event === events.APPLICATION_UPDATED) {
                 showAppUpdatedNotification(options);
             } else if (event === events.CONTENT_BLOCKER_UPDATED) {
                 if (options.rulesOverLimit) {
-                    showRulesOverLimitNotification();
+                    showRulesOverLimitNotification(showWindow);
                 }
             }
         });

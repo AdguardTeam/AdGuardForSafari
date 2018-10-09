@@ -1386,6 +1386,8 @@ const initPage = function (response) {
                 case EventNotifierTypes.CONTENT_BLOCKER_UPDATED:
                     controller.antiBannerFilters.updateRulesCountInfo(options);
                     break;
+                case EventNotifierTypes.SHOW_OPTIONS_FILTERS_TAB:
+                    window.location.hash = 'antibanner';
             }
         });
     };
