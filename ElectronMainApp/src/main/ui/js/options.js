@@ -668,11 +668,11 @@ const AntiBannerFilters = function (options) {
         return Utils.htmlToElement(`
             <div id="antibanner${category.groupId}" class="settings-content tab-pane filters-list">
                 ${pageTitleEl}
-                <div class="settings-body">
+                <div class="settings-body settings-body--search">
                     <div class="filters-search">
                         <input type="text" placeholder="${i18n.__('options_filters_list_search_placeholder.message')}" name="searchFiltersList"/>
                         <div class="icon-search">
-                            <img src="images/magnifying-green.svg" alt="">
+                            <img src="images/magnifying-glass.svg" alt="">
                         </div>
                     </div>
                     <ul class="opts-list">

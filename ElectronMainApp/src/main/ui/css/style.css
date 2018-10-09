@@ -48,6 +48,12 @@
   justify-content: space-between;
   align-items: flex-start;
 }
+.settings-content__desc {
+  margin-top: 235px;
+  max-width: 650px;
+  font-size: 14px;
+  line-height: 24px;
+}
 .info__label {
   font-size: 18px;
   font-weight: 700;
@@ -57,7 +63,6 @@
   padding-right: 40px;
 }
 .settings-wrap .page-title .info .upd {
-  opacity: 0.3;
   font-weight: normal;
 }
 .settings-body-subtitle {
@@ -203,16 +208,28 @@
 .setting-desc + .opts-list li {
   border-top: 0;
 }
-
+.settings-body--search {
+  margin-top: 10px;
+  position: relative;
+}
+.icon-search {
+  padding: 0 5px 0 25px;
+}
 .filters-list .filters-search {
+  position: absolute;
+  right: 0;
+  top: -50px;
+  width: 207px;
   display: flex;
   border: 1px solid #E7E7E7;
   border-width: 0 0 1px 0;
-  padding: 0 10px 10px 10px;
+  padding: 0 0 10px 10px;
 }
 
 .filters-list .filters-search img {
-  height: 30px;
+  height: 15px;
+  position: relative;
+  top: 25px;
 }
 
 .filters-list .filters-search input {
@@ -223,6 +240,7 @@
   padding: 5px 0;
   font-size: 14px;
   margin-top: 20px;
+  text-align: right;
 }
 /* /st */
 /* th & st */
@@ -320,6 +338,7 @@
 }
 .block-type .block-type__desc .desc {
   color: #454545;
+  font-size: 12px;
 }
 .block-type__ico {
   width: 61px;
@@ -1351,7 +1370,7 @@ li.active .toggler:before {
 
 .onboarding {
   position: absolute;
-  display: none;
+  display: none !important;
   top: 0;
   left: 0;
   width: 100%;
