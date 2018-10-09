@@ -440,6 +440,10 @@ const AntiBannerFilters = function (options) {
                 this.categories.push(category);
                 this.categoriesById[category.groupId] = category;
             }
+        },
+
+        getEnabledFiltersCount: function () {
+            return this.filters.filter((f) => f.enabled).length;
         }
     };
 
@@ -454,8 +458,6 @@ const AntiBannerFilters = function (options) {
     document.querySelector('#updateAntiBannerFilters').addEventListener('click', updateAntiBannerFilters);
 
     window.addEventListener('hashchange', clearSearchEvent);
-
-    updateRulesCountInfo(options.rulesInfo);
 
     function getFiltersByGroupId(groupId, filters) {
         return filters.filter(function (f) {
@@ -797,6 +799,7 @@ const AntiBannerFilters = function (options) {
         ipcRenderer.on('getFiltersMetadataResponse', (e, response) => {
 
             loadedFiltersInfo.initLoadedFilters(response.filters, response.categories);
+            updateRulesCountInfo(options.rulesInfo);
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
 
             const categories = loadedFiltersInfo.categories;
@@ -1076,7 +1079,7 @@ const AntiBannerFilters = function (options) {
 
     function updateRulesCountInfo(info) {
         document.querySelector('#filtersRulesInfo').textContent =
-            i18n.__("options_antibanner_info.message", String(info.rulesCount || 0));
+            i18n.__("options_antibanner_info.message", loadedFiltersInfo.getEnabledFiltersCount(), String(info.rulesCount || 0));
 
         checkSafariContentBlockerRulesLimit(info.rulesOverLimit);
     }
