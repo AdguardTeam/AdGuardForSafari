@@ -518,7 +518,7 @@ const AntiBannerFilters = function (options) {
                 break;
             }
             case (length > 1): {
-                const lastName = enabledFiltersNames.slice(length - 1);
+                const lastName = enabledFiltersNames[length - 1];
                 const firstNames = enabledFiltersNames.slice(0, length - 1);
                 enabledFiltersNamesString = `${i18n.__(
                     'options_filters_enabled_and_divider.message',
