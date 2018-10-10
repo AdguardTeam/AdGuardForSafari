@@ -27,7 +27,7 @@
         "message": "Filters"
     },
     "options_antibanner_info": {
-        "message": "%s filters"
+        "message": "%s filters %s rules"
     },
     "options_filters_enabled": {
         "message": "Enabled:"
@@ -88,6 +88,12 @@
     },
     "options_popup_version_update_description_major": {
         "message": "This is a major extension upgrade that brings a lot of new features and improvements."
+    },
+    "notification_content_blocker_overlimit_title": {
+        "message": "Warning"
+    },
+    "notification_content_blocker_overlimit_desc": {
+        "message": "Too many filters enabled. Safari cannot use more than 50 000 rules"
     },
     "options_content_blocker_overlimit": {
         "message": "Too many filters enabled. Safari cannot use more than 50 000 rules"

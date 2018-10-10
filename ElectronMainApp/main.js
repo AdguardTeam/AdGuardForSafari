@@ -21,7 +21,7 @@ let mainWindow;
 /**
  * Creates main window
  */
-function createWindow() {
+function createWindow(onWindowLoaded) {
 
     mainWindow = new BrowserWindow({
         width: 1024,
@@ -51,13 +51,31 @@ function createWindow() {
         event.preventDefault();
         shell.openExternal(url);
     });
+
+    if (onWindowLoaded) {
+        const onDidFinishLoad = () => {
+            mainWindow.webContents.removeListener('did-finish-load', onDidFinishLoad);
+
+            if (typeof onWindowLoaded !== 'undefined') {
+                onWindowLoaded();
+            }
+        };
+
+        mainWindow.webContents.addListener('did-finish-load', onDidFinishLoad);
+    }
 }
 
-function showWindow() {
+/**
+ * Shows main window
+ *
+ * @param onWindowLoaded callback on window created and loaded
+ */
+function showWindow(onWindowLoaded) {
     if (mainWindow) {
         mainWindow.show();
+        onWindowLoaded();
     } else {
-        createWindow();
+        createWindow(onWindowLoaded);
         uiEventListener.register(mainWindow);
     }
 }

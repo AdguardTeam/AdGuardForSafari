@@ -24,6 +24,7 @@ const EventNotifierTypes = module.exports = {
     UPDATE_WHITELIST_FILTER_RULES: "event.update.whitelist.filter.rules",
     CONTENT_BLOCKER_UPDATED: "event.content.blocker.updated",
     CONTENT_BLOCKER_UPDATE_REQUIRED: "event.content.blocker.update.required",
+    SHOW_OPTIONS_FILTERS_TAB: "event.show.options.filters",
     // Log events
     TAB_ADDED: 'log.tab.added',
     TAB_CLOSE: 'log.tab.close',

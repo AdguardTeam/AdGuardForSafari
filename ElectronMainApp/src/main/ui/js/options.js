@@ -440,6 +440,10 @@ const AntiBannerFilters = function (options) {
                 this.categories.push(category);
                 this.categoriesById[category.groupId] = category;
             }
+        },
+
+        getEnabledFiltersCount: function () {
+            return this.filters.filter((f) => f.enabled).length;
         }
     };
 
@@ -454,8 +458,6 @@ const AntiBannerFilters = function (options) {
     document.querySelector('#updateAntiBannerFilters').addEventListener('click', updateAntiBannerFilters);
 
     window.addEventListener('hashchange', clearSearchEvent);
-
-    updateRulesCountInfo(options.rulesInfo);
 
     function getFiltersByGroupId(groupId, filters) {
         return filters.filter(function (f) {
@@ -518,7 +520,7 @@ const AntiBannerFilters = function (options) {
                 break;
             }
             case (length > 1): {
-                const lastName = enabledFiltersNames.slice(length - 1);
+                const lastName = enabledFiltersNames[length - 1];
                 const firstNames = enabledFiltersNames.slice(0, length - 1);
                 enabledFiltersNamesString = `${i18n.__(
                     'options_filters_enabled_and_divider.message',
@@ -597,7 +599,7 @@ const AntiBannerFilters = function (options) {
                         <div class="desc">${filter.description}</div>
                         <div class="opt-name__info">
                             <div class="opt-name__info-labels">
-                                <div class="opt-name__info-item">version ${filter.version}</div>
+                                <div class="opt-name__info-item filter-version-desc">version ${filter.version}</div>
                                 <div class="opt-name__info-item last-update-time">updated: ${timeUpdatedText}</div>
                             </div>
                             <div class="opt-name__info-labels opt-name__info-labels--tags">
@@ -797,6 +799,7 @@ const AntiBannerFilters = function (options) {
         ipcRenderer.on('getFiltersMetadataResponse', (e, response) => {
 
             loadedFiltersInfo.initLoadedFilters(response.filters, response.categories);
+            updateRulesCountInfo(options.rulesInfo);
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
 
             const categories = loadedFiltersInfo.categories;
@@ -1076,7 +1079,7 @@ const AntiBannerFilters = function (options) {
 
     function updateRulesCountInfo(info) {
         document.querySelector('#filtersRulesInfo').textContent =
-            i18n.__("options_antibanner_info.message", String(info.rulesCount || 0));
+            i18n.__("options_antibanner_info.message", loadedFiltersInfo.getEnabledFiltersCount(), String(info.rulesCount || 0));
 
         checkSafariContentBlockerRulesLimit(info.rulesOverLimit);
     }
@@ -1119,6 +1122,7 @@ const AntiBannerFilters = function (options) {
             const timeUpdatedText = timeUpdated.format("D/MM/YYYY HH:mm").toLowerCase();
 
             filterEl.querySelector('.last-update-time').textContent = `updated:  ${timeUpdatedText}`;
+            filterEl.querySelector('.filter-version-desc').textContent = `version: ${filter.version}`;
         }
 
         setLastUpdatedTimeText(filter.lastUpdateTime);
@@ -1382,6 +1386,8 @@ const initPage = function (response) {
                 case EventNotifierTypes.CONTENT_BLOCKER_UPDATED:
                     controller.antiBannerFilters.updateRulesCountInfo(options);
                     break;
+                case EventNotifierTypes.SHOW_OPTIONS_FILTERS_TAB:
+                    window.location.hash = 'antibanner';
             }
         });
     };
