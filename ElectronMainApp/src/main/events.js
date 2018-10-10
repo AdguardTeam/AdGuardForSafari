@@ -21,10 +21,12 @@ const EventNotifierTypes = module.exports = {
     CHANGE_PREFS: "event.change.prefs",
     UPDATE_FILTERS_SHOW_POPUP: "event.update.filters.show.popup",
     UPDATE_USER_FILTER_RULES: "event.update.user.filter.rules",
+    NOTIFY_UPDATE_USER_FILTER_RULES: "event.notify.update.user.filter.rules",
     UPDATE_WHITELIST_FILTER_RULES: "event.update.whitelist.filter.rules",
     CONTENT_BLOCKER_UPDATED: "event.content.blocker.updated",
     CONTENT_BLOCKER_UPDATE_REQUIRED: "event.content.blocker.update.required",
     SHOW_OPTIONS_FILTERS_TAB: "event.show.options.filters",
+    SHOW_OPTIONS_USER_FILTER_TAB: "event.show.options.user.filter",
     // Log events
     TAB_ADDED: 'log.tab.added',
     TAB_CLOSE: 'log.tab.close',

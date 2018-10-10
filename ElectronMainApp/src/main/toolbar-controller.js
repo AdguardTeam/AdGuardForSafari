@@ -44,6 +44,8 @@ module.exports = (() => {
         log.debug('User filter changed: {0}', rules);
 
         applicationApi.setUserFilterRules(rules);
+
+        listeners.notifyListeners(events.NOTIFY_UPDATE_USER_FILTER_RULES);
     };
 
     /**
