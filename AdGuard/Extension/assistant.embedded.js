@@ -2,6 +2,9 @@
 * https://github.com/AdguardTeam/AdguardAssistant
 * Copyright (c) 2018; Licensed LGPL 3.0 */
 
+// PATCHED: Fix missing argument addRule at line 7692
+// iframeCtrl.blockElement(selectedPath, addRule);
+
 (function() {
 /* Inline resource generating by gulp tasks/compile.js */
 
@@ -7685,6 +7688,8 @@ var BlockPreviewController = function ($, selector, gmApi, addRule) { // jshint 
 
     var blockElement = function () {
         iframeCtrl.blockElement(selectedPath);
+        //PATCHED: Fix missing argument addRule
+        iframeCtrl.blockElement(selectedPath, addRule);
     };
 
     var showDetailedMenu = function () {
