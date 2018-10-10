@@ -599,8 +599,12 @@ const AntiBannerFilters = function (options) {
                         <div class="desc">${filter.description}</div>
                         <div class="opt-name__info">
                             <div class="opt-name__info-labels">
-                                <div class="opt-name__info-item filter-version-desc">version ${filter.version}</div>
-                                <div class="opt-name__info-item last-update-time">updated: ${timeUpdatedText}</div>
+                                <div class="opt-name__info-item filter-version-desc">
+                                    ${i18n.__('options_filters_version.message', filter.version)} 
+                                </div>
+                                <div class="opt-name__info-item last-update-time">
+                                    ${i18n.__('options_filters_updated.message', timeUpdatedText)}
+                                </div>
                             </div>
                             <div class="opt-name__info-labels opt-name__info-labels--tags">
                                 ${tagDetails}
@@ -635,10 +639,10 @@ const AntiBannerFilters = function (options) {
                     <div class="empty-filters">
                         <div class="empty-filters__logo"></div>
                         <div class="empty-filters__desc">
-                            Sorry, but you don't have any custom filters yet
+                            ${i18n.__('options_filters_empty_custom_filters.message')}
                         </div>
                         <button class="button button--green empty-filters__btn">
-                            Add custom filter
+                            ${i18n.__('options_filters_empty_custom_add_button.message')}
                         </button>
                     </div>
                 </div>
@@ -664,7 +668,7 @@ const AntiBannerFilters = function (options) {
 
         let addCustomFilterBtn = '';
         if (isCustomFilters) {
-            addCustomFilterBtn = `<button class="button button--green empty-filters__btn empty-filters__btn--list">Add custom filter</button>`;
+            addCustomFilterBtn = `<button class="button button--green empty-filters__btn empty-filters__btn--list">${i18n.__('options_filters_empty_custom_add_button.message')}</button>`;
         }
 
         return Utils.htmlToElement(`
@@ -1121,8 +1125,8 @@ const AntiBannerFilters = function (options) {
             timeUpdated.locale(environmentOptions.Prefs.locale);
             const timeUpdatedText = timeUpdated.format("D/MM/YYYY HH:mm").toLowerCase();
 
-            filterEl.querySelector('.last-update-time').textContent = `updated:  ${timeUpdatedText}`;
-            filterEl.querySelector('.filter-version-desc').textContent = `version: ${filter.version}`;
+            filterEl.querySelector('.last-update-time').textContent = `${i18n.__('options_filters_updated.message', timeUpdatedText)}`;
+            filterEl.querySelector('.filter-version-desc').textContent = `${i18n.__('options_filters_version.message', filter.version)}`;
         }
 
         setLastUpdatedTimeText(filter.lastUpdateTime);
