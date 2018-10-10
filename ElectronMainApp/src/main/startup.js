@@ -30,7 +30,9 @@ module.exports = (() => {
                 log.debug('On application install..');
 
                 // Retrieve filters and install them
-                filters.offerFilters(function (filterIds) {
+                filters.offerGroupsAndFilters(function (groupIds, filterIds) {
+                    groupIds.forEach(groupId => filters.enableFiltersGroup(groupId));
+
                     filters.addAndEnableFilters(filterIds, callback);
                 });
 

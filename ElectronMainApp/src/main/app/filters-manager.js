@@ -311,19 +311,29 @@ module.exports = (() => {
     };
 
     /**
-     * Offer filters on extension install, select default filters and filters by locale and country
+     * Offer groups and filters on extension install, select default filters and filters by locale and country
      *
      * @param callback
      */
-    const offerFilters = (callback) => {
+    const offerGroupsAndFilters = (callback) => {
         // These filters are enabled by default
-        let filterIds = [config.get('AntiBannerFiltersId').ENGLISH_FILTER_ID, config.get('AntiBannerFiltersId').SEARCH_AND_SELF_PROMO_FILTER_ID];
+        const filtersId = config.get('AntiBannerFiltersId');
+        let filterIds = [filtersId.ENGLISH_FILTER_ID, filtersId.SAFARI_FILTER_ID];
 
         // Get language-specific filters by user locale
         let localeFilterIds = subscriptions.getFilterIdsForLanguage(app.getLocale());
         filterIds = filterIds.concat(localeFilterIds);
 
-        callback(filterIds);
+        // These groups are enabled by default
+        const antiBannerFilterGroupsId = config.get('AntiBannerFilterGroupsId');
+        let groupIds = [
+            antiBannerFilterGroupsId.AD_BLOCKING_ID,
+            antiBannerFilterGroupsId.PRIVACY_ID,
+            antiBannerFilterGroupsId.OTHER_ID,
+            antiBannerFilterGroupsId.LANGUAGE_SPECIFIC_ID
+        ];
+
+        callback(groupIds, filterIds);
     };
 
     /**
@@ -385,7 +395,7 @@ module.exports = (() => {
         enableFiltersGroup: enableFiltersGroup,
         disableFiltersGroup: disableFiltersGroup,
 
-        offerFilters: offerFilters,
+        offerGroupsAndFilters: offerGroupsAndFilters,
         loadCustomFilter: loadCustomFilter,
 
         checkAntiBannerFiltersUpdate: checkAntiBannerFiltersUpdate

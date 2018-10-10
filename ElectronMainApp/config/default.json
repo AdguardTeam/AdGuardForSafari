@@ -6,11 +6,18 @@
     "TRACKING_FILTER_ID": 3,
     "SOCIAL_FILTER_ID": 4,
     "SEARCH_AND_SELF_PROMO_FILTER_ID": 10,
+    "SAFARI_FILTER_ID": 12,
     "WHITE_LIST_FILTER_ID": 100,
     "EASY_PRIVACY": 118,
     "FANBOY_ANNOYANCES": 122,
     "FANBOY_SOCIAL": 123,
     "FANBOY_ENHANCED": 215
+  },
+  "AntiBannerFilterGroupsId": {
+    "AD_BLOCKING_ID": 1,
+    "PRIVACY_ID": 2,
+    "OTHER_ID": 6,
+    "LANGUAGE_SPECIFIC_ID": 7
   },
   "backendUrl": "https://chrome.adtidy.org",
   "backendApiKey": "4DDBE80A3DA94D819A00523252FB6380",
