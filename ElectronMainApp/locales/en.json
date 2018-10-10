@@ -57,13 +57,13 @@
         "message": "New filter subscription"
     },
     "options_filters_custom_step_one_input_placeholder": {
-        "message": "Enter URL or path"
+        "message": "Enter filter URL"
     },
     "options_filters_custom_step_one_url_desc": {
-        "message": "Enter valid URL or file path of the filter into field above."
+        "message": "Enter a valid URL of the filter subscription."
     },
     "options_filters_custom_step_one_url_desc_more": {
-        "message": "You will be subscribed to that filter."
+        "message": "AdGuard will add this filter subscription."
     },
     "options_filters_custom_step_one_cancel": {
         "message": "Cancel"
@@ -72,13 +72,13 @@
         "message": "Next"
     },
     "options_filters_custom_step_two_checking": {
-        "message": "Checking your filter"
+        "message": "Downloading the filter"
     },
     "options_filters_custom_step_three_title": {
-        "message": "Check false"
+        "message": "Error occurred"
     },
     "options_filters_custom_step_three_desc": {
-        "message": "Unfortunately your custom filter is not as cool as everyone else"
+        "message": "Unfortunately, your custom filter cannot be added due to an unexpected error."
     },
     "options_filters_custom_step_three_try_again": {
         "message": "Try again"
@@ -114,7 +114,7 @@
         "message": "Subscribe"
     },
     "options_filters_check_filters_update": {
-        "message": "Check for filters update"
+        "message": "Check for filters updates"
     },
     "options_whitelist": {
         "message": "Whitelist"
@@ -138,7 +138,7 @@
         "message": "Notify about extension updates"
     },
     "options_use_optimized_filters": {
-        "message": "Use optimized filters<span class='sp-table-row-info'>Light filter lists optimized for mobile devices</span>"
+        "message": "Use optimized filters<span class='sp-table-row-info'>Light-weigth filter lists optimized for Safari Content Blocking API.</span>"
     },
     "options_popup_update_title": {
         "message": "Filters updated successfully"
@@ -156,7 +156,7 @@
         "message": "\"$1\" updated to version $2"
     },
     "options_popup_version_update_title": {
-        "message": "AdGuard browser extension was just updated to version $1."
+        "message": "AdGuard for Safari was just updated to version $1."
     },
     "options_popup_version_update_description_minor": {
         "message": "This version contains mostly bugfixes and minor improvements."
@@ -168,10 +168,10 @@
         "message": "Warning"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Too many filters enabled. Safari cannot use more than 50 000 rules"
+        "message": "Too many filters enabled. Safari cannot use more than 50 000 rules."
     },
     "options_content_blocker_overlimit": {
-        "message": "Too many filters enabled. Safari cannot use more than 50 000 rules"
+        "message": "Too many filters enabled. Safari cannot use more than 50 000 rules."
     },
     "options_filters_list_search_placeholder": {
         "message": "Search"
