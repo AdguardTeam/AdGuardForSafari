@@ -284,6 +284,8 @@ module.exports = (function () {
             groups.push(customFiltersGroup);
             groupsMap[customFiltersGroup.groupId] = customFiltersGroup;
 
+            //TODO: Add localization for Custom group
+
             filters.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
 
             groups.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
