@@ -94,6 +94,19 @@ module.exports = (() => {
     };
 
     /**
+     * Return event click handler to show main window's user rules tab
+     *
+     * @param showMainWindow
+     */
+    const getShowUserFilterTabOnClick = (showMainWindow) => {
+        return function () {
+            showMainWindow(function () {
+                listeners.notifyListeners(events.SHOW_OPTIONS_USER_FILTER_TAB);
+            });
+        };
+    };
+
+    /**
      * Filters updated notification
      *
      * @param options
@@ -123,6 +136,20 @@ module.exports = (() => {
     };
 
     /**
+     * User rules changed notification
+     *
+     * @param showMainWindow
+     */
+    const showUserFilterUpdatedNotification = (showMainWindow) => {
+        const message = {
+            title: i18n.__("notification_user_filter_updated_title.message"),
+            text: i18n.__("notification_user_filter_updated_desc.message")
+        };
+
+        showNotification(message.title, message.text, getShowUserFilterTabOnClick(showMainWindow));
+    };
+
+    /**
      * Subscribes to corresponding events
      *
      * @param showWindow
@@ -137,6 +164,8 @@ module.exports = (() => {
                 if (options.rulesOverLimit) {
                     showRulesOverLimitNotification(showWindow);
                 }
+            } else if (event === events.NOTIFY_UPDATE_USER_FILTER_RULES) {
+                showUserFilterUpdatedNotification(showWindow);
             }
         });
     };

@@ -1392,6 +1392,10 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.SHOW_OPTIONS_FILTERS_TAB:
                     window.location.hash = 'antibanner';
+                    break;
+                case EventNotifierTypes.SHOW_OPTIONS_USER_FILTER_TAB:
+                    window.location.hash = 'userfilter';
+                    break;
             }
         });
     };
