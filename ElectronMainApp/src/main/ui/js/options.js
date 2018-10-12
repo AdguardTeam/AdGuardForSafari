@@ -295,7 +295,7 @@ const WhiteListFilter = function (options) {
     CheckboxUtils.updateCheckbox([changeDefaultWhiteListModeCheckbox], !options.defaultWhiteListMode);
 
     editor.getSession().addEventListener('change', function () {
-        applyChangesBtn.style.display = 'block';
+        applyChangesBtn.style.display = 'inline-block';
     });
 
     return {
@@ -362,7 +362,7 @@ const UserFilter = function () {
     applyChangesBtn.addEventListener('click', saveUserRules);
 
     editor.getSession().addEventListener('change', function () {
-        applyChangesBtn.style.display = 'block';
+        applyChangesBtn.style.display = 'inline-block';
     });
 
     return {
@@ -593,7 +593,7 @@ const AntiBannerFilters = function (options) {
 
         return `
             <li id="filter${filter.filterId}">
-                <div class="opts-desc">
+                <div class="opts-desc-filter">
                     <div class="opt-name">
                         <div class="title">${filter.name}</div>
                         <div class="desc">${filter.description}</div>
