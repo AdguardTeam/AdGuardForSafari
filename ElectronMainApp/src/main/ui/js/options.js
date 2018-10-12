@@ -1256,7 +1256,7 @@ PageController.prototype = {
             }.bind(this)
         });
 
-        this._initBoardingScreen();
+        //this._initBoardingScreen();
     },
 
     _initBoardingScreen: function () {
