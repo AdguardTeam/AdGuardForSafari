@@ -56,7 +56,7 @@ function createWindow(onWindowLoaded) {
         const onDidFinishLoad = () => {
             mainWindow.webContents.removeListener('did-finish-load', onDidFinishLoad);
 
-            if (typeof onWindowLoaded !== 'undefined') {
+            if (typeof onWindowLoaded === 'function') {
                 onWindowLoaded();
             }
         };
@@ -73,7 +73,10 @@ function createWindow(onWindowLoaded) {
 function showWindow(onWindowLoaded) {
     if (mainWindow) {
         mainWindow.show();
-        onWindowLoaded();
+
+        if (typeof onWindowLoaded === 'function') {
+            onWindowLoaded();
+        }
     } else {
         createWindow(onWindowLoaded);
         uiEventListener.register(mainWindow);
