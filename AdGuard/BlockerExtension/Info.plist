@@ -30,7 +30,7 @@
 		<string>ContentBlockerRequestHandler</string>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2018 AdGuard. All rights reserved.</string>
+	<string>$(AG_COPYRIGHT)</string>
 	<key>NSHumanReadableDescription</key>
 	<string>Fast and lightweight Safari content blocking extension.</string>
 </dict>

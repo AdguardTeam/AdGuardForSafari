@@ -53,7 +53,7 @@
 		</dict>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2018 AdGuard. All rights reserved.</string>
+	<string>$(AG_COPYRIGHT)</string>
 	<key>NSHumanReadableDescription</key>
 	<string>You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually.</string>
 </dict>
