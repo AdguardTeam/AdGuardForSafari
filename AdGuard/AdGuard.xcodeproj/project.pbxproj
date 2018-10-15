@@ -202,7 +202,7 @@
 		655CDD072174CC15007B9987 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		655CDD092174CC43007B9987 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		655CDD0A2174CC44007B9987 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		65720AB221219AC900B2381C /* AdGuard For Safari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AdGuard For Safari.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		65720AB221219AC900B2381C /* AdGuard for Safari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AdGuard for Safari.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65720ABD21219ACB00B2381C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65720AC021219ACB00B2381C /* AdGuard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuard.entitlements; sourceTree = "<group>"; };
 		657215562121F30600B2381C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -411,7 +411,7 @@
 		65720AB321219AC900B2381C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				65720AB221219AC900B2381C /* AdGuard For Safari.app */,
+				65720AB221219AC900B2381C /* AdGuard for Safari.app */,
 				65216A00212436E900ABF7D0 /* AdGuardForSafariExtension.appex */,
 				65024EA62126C80D00342E3C /* AdGuardTests.xctest */,
 				652735B2212D77A3005C35BF /* libshared.a */,
@@ -609,7 +609,7 @@
 			);
 			name = AdGuard;
 			productName = AdGuard;
-			productReference = 65720AB221219AC900B2381C /* AdGuard For Safari.app */;
+			productReference = 65720AB221219AC900B2381C /* AdGuard for Safari.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6584716C2136B372005C74E8 /* AdGuardForSafariBlockerExtension */ = {
