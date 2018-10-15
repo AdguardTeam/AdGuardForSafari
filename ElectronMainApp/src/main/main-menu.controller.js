@@ -58,7 +58,6 @@ module.exports = (() => {
      * Should be execute when the app is ready
      */
     function initMenu() {
-        console.log("TEST BLYA");
         var mainMenu = Menu.buildFromTemplate(template);
         var appMainItem = mainMenu.getMenuItemById("app-main");
         appMainItem.label = i18n.__('main_menu_app.title');
