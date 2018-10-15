@@ -4,7 +4,7 @@
 #  AdGuard
 #
 #  Created by Roman Sokolov on 14.08.2018.
-#  Copyright © 2018 Roman Sokolov. All rights reserved.
+#  Copyright © 2018 Adguard Software Ltd. All rights reserved.
 
 PLATFORM=darwin
 ARCH=x64
