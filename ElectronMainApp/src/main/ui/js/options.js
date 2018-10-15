@@ -443,7 +443,7 @@ const AntiBannerFilters = function (options) {
         },
 
         getEnabledFiltersCount: function () {
-            return this.filters.filter((f) => f.enabled).length;
+            return this.filters.filter((f) => f.enabled && this.isCategoryEnabled(f.groupId)).length;
         }
     };
 
