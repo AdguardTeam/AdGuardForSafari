@@ -10,7 +10,7 @@ const i18n = require('../utils/i18n');
 module.exports = (() => {
     const template = [
         { 
-            id: "app-main",
+            label: 'AdGuard for Safari',
             submenu: [
                 { type: 'separator' },
                 {
@@ -58,11 +58,7 @@ module.exports = (() => {
      * Should be execute when the app is ready
      */
     function initMenu() {
-        var mainMenu = Menu.buildFromTemplate(template);
-        var appMainItem = mainMenu.getMenuItemById("app-main");
-        appMainItem.label = i18n.__('main_menu_app.title');
-        Menu.setApplicationMenu(mainMenu);
-
+        Menu.setApplicationMenu(Menu.buildFromTemplate(template));
     }
 
     return { initMenu }

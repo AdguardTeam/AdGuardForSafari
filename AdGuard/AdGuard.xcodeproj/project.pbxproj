@@ -35,7 +35,6 @@
 		655C8662212AEA3200CB6DAE /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863D212AEA3200CB6DAE /* NSDate+Utils.m */; };
 		655C8665212AEA3200CB6DAE /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8640212AEA3200CB6DAE /* NSString+Utils.m */; };
 		655C8667212AEA3200CB6DAE /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8642212AEA3200CB6DAE /* NSException+Utils.m */; };
-		655CDD062174CC15007B9987 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 655CDD082174CC15007B9987 /* InfoPlist.strings */; };
 		6584716E2136B373005C74E8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
 		658471712136B373005C74E8 /* blocking-content-empry.json in Resources */ = {isa = PBXBuildFile; fileRef = 658471702136B373005C74E8 /* blocking-content-empry.json */; };
 		658471742136B373005C74E8 /* ContentBlockerRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 658471732136B373005C74E8 /* ContentBlockerRequestHandler.m */; };
@@ -199,9 +198,6 @@
 		655C865D212AEA3200CB6DAE /* ACObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACObject.m; sourceTree = "<group>"; };
 		655C865E212AEA3200CB6DAE /* ACLFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLFileLogger.m; sourceTree = "<group>"; };
 		655C8675212AEB5F00CB6DAE /* ACLang.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACLang.h; sourceTree = "<group>"; };
-		655CDD072174CC15007B9987 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		655CDD092174CC43007B9987 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		655CDD0A2174CC44007B9987 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		65720AB221219AC900B2381C /* AdGuard for Safari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AdGuard for Safari.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65720ABD21219ACB00B2381C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65720AC021219ACB00B2381C /* AdGuard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuard.entitlements; sourceTree = "<group>"; };
@@ -426,7 +422,6 @@
 				65720ABD21219ACB00B2381C /* Info.plist */,
 				65720AC021219ACB00B2381C /* AdGuard.entitlements */,
 				65216A2F2124517700ABF7D0 /* ElectronChild.entitlements */,
-				655CDD082174CC15007B9987 /* InfoPlist.strings */,
 			);
 			path = AdGuard;
 			sourceTree = "<group>";
@@ -716,7 +711,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				65975C9421481540007F766E /* Assets.xcassets in Resources */,
-				655CDD062174CC15007B9987 /* InfoPlist.strings in Resources */,
 				65D151842139771A0014BE79 /* defaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -871,16 +865,6 @@
 				6527597A216CBAEC00F25AA9 /* de */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		655CDD082174CC15007B9987 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				655CDD072174CC15007B9987 /* en */,
-				655CDD092174CC43007B9987 /* ru */,
-				655CDD0A2174CC44007B9987 /* de */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
