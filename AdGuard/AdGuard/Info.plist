@@ -20,10 +20,14 @@
 	<string>$(AG_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(AG_BUILD)</string>
+	<key>ElectronTeamID</key>
+	<string>TC3Q7MAJXF</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>LSUIElement</key>
+	<false/>
 	<key>NSHighResolutionCapable</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
@@ -32,9 +36,7 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>AtomApplication</string>
-	<key>ElectronTeamID</key>
-	<string>TC3Q7MAJXF</string>
-	<key>LSUIElement</key>
-	<false/>
+	<key>CFBundleDisplayName</key>
+	<string>AdGuard for Safari</string>
 </dict>
 </plist>

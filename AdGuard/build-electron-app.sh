@@ -46,14 +46,13 @@ ${OPT} || exit 1
 APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
 FRAMEWORKS="${APP}/Contents/Frameworks"
 
-CHILD_ENT="${SRCROOT}/${PRODUCT_NAME}/ElectronChild.entitlements"
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${CHILD_ENT}" "$FRAMEWORKS/Mantle.framework" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${CHILD_ENT}" "$FRAMEWORKS/ReactiveCocoa.framework" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${CHILD_ENT}" "$FRAMEWORKS/AdGuard Helper EH.app" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${CHILD_ENT}" "$FRAMEWORKS/AdGuard Helper NP.app" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${CHILD_ENT}" "$FRAMEWORKS/AdGuard Helper.app" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/Mantle.framework" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/ReactiveCocoa.framework" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper EH.app" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper NP.app" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper.app" || exit 1
 
 DST_DIR="${BUILT_PRODUCTS_DIR}"
 if [ ${ACTION} == "install" ]; then
