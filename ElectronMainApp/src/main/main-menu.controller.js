@@ -10,7 +10,7 @@ const i18n = require('../utils/i18n');
 module.exports = (() => {
     const template = [
         { 
-            label: 'AdGuard',
+            label: 'AdGuard For Safari',
             submenu: [
                 { type: 'separator' },
                 {
