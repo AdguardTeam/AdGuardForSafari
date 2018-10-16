@@ -114,6 +114,15 @@ module.exports = (() => {
     };
 
     /**
+     * @param groupId
+     * @returns {Group|boolean|*} true if group is enabled
+     */
+    const isGroupEnabled = function (groupId) {
+        const group = subscriptions.getGroup(groupId);
+        return group && group.enabled;
+    };
+
+    /**
      * Checks if specified filter is enabled
      *
      * @param filterId Filter identifier
@@ -391,6 +400,7 @@ module.exports = (() => {
 
         enableGroup: enableGroup,
         disableGroup: disableGroup,
+        isGroupEnabled: isGroupEnabled,
 
         enableFiltersGroup: enableFiltersGroup,
         disableFiltersGroup: disableFiltersGroup,
