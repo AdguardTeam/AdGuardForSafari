@@ -218,7 +218,7 @@ module.exports = (function () {
             });
 
             if (filter) {
-                if (version && versionUtils.isGreaterVersion(filter.version, version)) {
+                if (version && !versionUtils.isGreaterVersion(version, filter.version)) {
                     //Update version is not greater
                     callback();
                     return;
