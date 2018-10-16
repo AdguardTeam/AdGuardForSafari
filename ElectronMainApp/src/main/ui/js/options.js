@@ -577,7 +577,7 @@ const AntiBannerFilters = function (options) {
     }
 
     function getFilterTemplate(filter, enabled, showDeleteButton) {
-        const timeUpdated = moment(filter.timeUpdated);
+        const timeUpdated = moment(filter.lastUpdateTime || filter.timeUpdated);
         timeUpdated.locale(environmentOptions.Prefs.locale);
         const timeUpdatedText = timeUpdated.format("D/MM/YYYY HH:mm").toLowerCase();
 
@@ -1121,7 +1121,7 @@ const AntiBannerFilters = function (options) {
         if (filterEl) {
             filterEl.querySelector('.preloader').classList.remove('active');
 
-            const timeUpdated = moment(filter.lastUpdateTime);
+            const timeUpdated = moment(filter.lastUpdateTime || filter.timeUpdated);
             timeUpdated.locale(environmentOptions.Prefs.locale);
             const timeUpdatedText = timeUpdated.format("D/MM/YYYY HH:mm").toLowerCase();
 
