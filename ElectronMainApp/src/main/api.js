@@ -119,7 +119,9 @@ module.exports = (() => {
         for (let i = 0; i < filters.length; i++) {
             const filter = filters[i];
             if (filter.enabled) {
-                enabledFilters.push(filter.filterId);
+                if (filtersManager.isGroupEnabled(filter.groupId)) {
+                    enabledFilters.push(filter.filterId);
+                }
             }
         }
 
