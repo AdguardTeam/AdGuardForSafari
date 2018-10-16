@@ -9,7 +9,10 @@
         "message": "Ustawienia AdGuard"
     },
     "options_general_settings": {
-        "message": "G\u0142\u00f3wne ustawienia"
+        "message": "G\u0142\u00f3wne "
+    },
+    "options_general_desc": {
+        "message": "AdGuard dla Safari to darmowe oprogramowanie o otwartym kodzie \u017ar\u00f3d\u0142owym. Czekamy na Wasze opinie i uwagi. Je\u015bli chcesz zg\u0142osi\u0107 b\u0142\u0105d lub poprosi\u0107 o funkcj\u0119, przejd\u017a do <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nasze repozytorium Github<\/a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Nie blokuj po\u017c\u0105danych reklam<a target='_blank' href='https:\/\/kb.adguard.com\/general\/search-ads-and-self-promotion?utm_source=extension&aid=16593' class='sp-table-row-info'>Dowiedz si\u0119 wi\u0119cej<\/a>"
@@ -21,10 +24,97 @@
         "message": "Importuj ustawienia"
     },
     "options_antibanner": {
-        "message": "Bloker&nbsp;reklam"
+        "message": "Filtry"
     },
     "options_antibanner_info": {
-        "message": "Liczba regu\u0142 filtra: %s"
+        "message": "%s filtry"
+    },
+    "options_filters_enabled": {
+        "message": "W\u0142\u0105czony"
+    },
+    "options_filters_enabled_and_more_divider": {
+        "message": "%s i %s wi\u0119cej"
+    },
+    "options_filters_enabled_and_divider": {
+        "message": "%s i %s"
+    },
+    "options_filters_no_enabled": {
+        "message": "Brak w\u0142\u0105czonych filtr\u00f3w"
+    },
+    "options_filters_version": {
+        "message": "wersja %s"
+    },
+    "options_filters_updated": {
+        "message": "zaktualizowano: %s"
+    },
+    "options_filters_empty_custom_filters": {
+        "message": "Przepraszam, ale nie masz jeszcze \u017cadnych niestandardowych filtr\u00f3w"
+    },
+    "options_filters_empty_custom_add_button": {
+        "message": "Dodaj niestandardowy filtr"
+    },
+    "options_filters_custom_step_one_title": {
+        "message": "Nowa subskrypcja filtra"
+    },
+    "options_filters_custom_step_one_input_placeholder": {
+        "message": "Wprowad\u017a adres URL filtra"
+    },
+    "options_filters_custom_step_one_url_desc": {
+        "message": "Wprowad\u017a poprawny adres URL subskrypcji filtru."
+    },
+    "options_filters_custom_step_one_url_desc_more": {
+        "message": "AdGuard doda t\u0119 subskrypcj\u0119 filtru."
+    },
+    "options_filters_custom_step_one_cancel": {
+        "message": "Anuluj"
+    },
+    "options_filters_custom_step_one_next": {
+        "message": "Dalej"
+    },
+    "options_filters_custom_step_two_checking": {
+        "message": "Pobieranie filtra"
+    },
+    "options_filters_custom_step_three_title": {
+        "message": "Wyst\u0105pi\u0142 b\u0142\u0105d"
+    },
+    "options_filters_custom_step_three_desc": {
+        "message": "Niestety, niestandardowy filtr nie mo\u017ce zosta\u0107 dodany z powodu nieoczekiwanego b\u0142\u0119du."
+    },
+    "options_filters_custom_step_three_try_again": {
+        "message": "Spr\u00f3buj ponownie"
+    },
+    "options_filters_custom_step_final_title": {
+        "message": "Nowa subskrypcja filtra"
+    },
+    "options_filters_custom_step_final_filter_title": {
+        "message": "Nazwa:"
+    },
+    "options_filters_custom_step_final_filter_description": {
+        "message": "Opis:"
+    },
+    "options_filters_custom_step_final_filter_version": {
+        "message": "Wersja:"
+    },
+    "options_filters_custom_step_final_filter_rules_count": {
+        "message": "Licznik Regu\u0142:"
+    },
+    "options_filters_custom_step_final_filter_homepage": {
+        "message": "Strona domowa:"
+    },
+    "options_filters_custom_step_final_filter_url": {
+        "message": "URL:"
+    },
+    "options_filters_custom_step_final_back": {
+        "message": "Wr\u00f3\u0107"
+    },
+    "options_filters_custom_step_final_cancel": {
+        "message": "Anuluj"
+    },
+    "options_filters_custom_step_final_commit": {
+        "message": "Subskrybuj"
+    },
+    "options_filters_check_filters_update": {
+        "message": "Sprawd\u017a aktualizacje filtr\u00f3w"
     },
     "options_whitelist": {
         "message": "Bia\u0142a lista"
@@ -53,6 +143,9 @@
     "options_popup_update_title": {
         "message": "Filtry zosta\u0142y pomy\u015blnie zaktualizowane"
     },
+    "options_popup_update_error_title": {
+        "message": "B\u0142\u0105d aktualizacji filtr\u00f3w"
+    },
     "options_popup_update_not_found": {
         "message": "Nie znaleziono aktualizacji"
     },
@@ -71,6 +164,12 @@
     "options_popup_version_update_description_major": {
         "message": "Jest to wa\u017cna aktualizacja rozszerzenia, kt\u00f3ra przynosi wiele nowych funkcji i usprawnie\u0144."
     },
+    "notification_content_blocker_overlimit_title": {
+        "message": "Ostrze\u017cenie"
+    },
+    "notification_content_blocker_overlimit_desc": {
+        "message": "Uruchomiono zbyt wiele filtr\u00f3w. Safari nie mo\u017ce korzysta\u0107 z wi\u0119cej ni\u017c 50 000 regu\u0142."
+    },
     "options_content_blocker_overlimit": {
         "message": "Uruchomiono zbyt wiele filtr\u00f3w. Safari nie mo\u017ce korzysta\u0107 z wi\u0119cej ni\u017c 50000 regu\u0142."
     },
@@ -78,22 +177,22 @@
         "message": "Wpisz tekst do wyszukania"
     },
     "main_menu_edit": {
-        "message": "Edit"
+        "message": "Edytuj"
     },
     "main_menu_undo": {
-        "message": "Undo"
+        "message": "Cofnij"
     },
     "main_menu_cut": {
-        "message": "Cut"
+        "message": "Wytnij"
     },
     "main_menu_copy": {
-        "message": "Copy"
+        "message": "Kopiuj"
     },
     "main_menu_paste": {
-        "message": "Paste"
+        "message": "Wklej"
     },
     "main_menu_select-all": {
-        "message": "Select All"
+        "message": "Zaznacz wszystko"
     },
     "tray_menu_about": {
         "message": "O rozszerzeniu"
@@ -117,7 +216,7 @@
         "message": "O rozszerzeniu"
     },
     "options_compare_btn": {
-        "message": "How they compare"
+        "message": "Jak si\u0119 por\u00f3wnuj\u0105"
     },
     "options_compare_title": {
         "message": "Wypr\u00f3buj AdGuard Premium dla lepszej ochrony!"
@@ -130,6 +229,9 @@
     },
     "options_acknowledgment": {
         "message": "Potwierdzenie"
+    },
+    "options_github": {
+        "message": "Github"
     },
     "onboarding_safari_desc": {
         "message": "Zaznacz pole \"ikona AdGuard Safari\" i \"AdGuard\" w ustawieniach Safari"
