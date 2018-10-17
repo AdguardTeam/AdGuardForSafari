@@ -116,7 +116,11 @@ module.exports = (() => {
         safariToolbar.setContentBlockingJson(jsonString, (result) => {
             log.info('Content-blocker set result: ' + result);
 
-            safariToolbar.busyStatus(false);
+            //TODO: Handle error result
+
+            setTimeout(() => {
+                safariToolbar.busyStatus(false);
+            }, 1000);
         });
 
     };
