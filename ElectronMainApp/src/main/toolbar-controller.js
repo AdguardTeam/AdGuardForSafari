@@ -136,7 +136,7 @@ module.exports = (() => {
     const setWhitelistDomains = (domains) => {
         safariToolbar.busyStatus(true);
         safariToolbar.setWhitelistDomains(domains, () => {
-            safariToolbar.busyStatus(false);
+            //Do nothing, we wait for CONTENT_BLOCKER_UPDATE_REQUIRED event to set busy off
         });
     };
 
@@ -146,7 +146,7 @@ module.exports = (() => {
     const setUserFilter = (rules) => {
         safariToolbar.busyStatus(true);
         safariToolbar.setUserFilter(rules, () => {
-            safariToolbar.busyStatus(false);
+            //Do nothing, we wait for CONTENT_BLOCKER_UPDATE_REQUIRED event to set busy off
         });
     };
 
