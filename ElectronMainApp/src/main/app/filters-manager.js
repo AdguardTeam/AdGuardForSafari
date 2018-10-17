@@ -4,8 +4,10 @@ const config = require('config');
 const subscriptions = require('./filters/subscriptions');
 const categories = require('./filters/filters-categories');
 const filtersState = require('./filters/filters-state');
+const filtersTags = require('./filters/filters-tags');
 const collections = require('./utils/collections');
 const log = require('./utils/log');
+const i18n = require('./utils/i18n');
 const filtersUpdate = require('./filters/filters-update');
 const app = require('./app');
 
@@ -325,13 +327,29 @@ module.exports = (() => {
      * @param callback
      */
     const offerGroupsAndFilters = (callback) => {
-        // These filters are enabled by default
-        const filtersId = config.get('AntiBannerFiltersId');
-        let filterIds = [filtersId.ENGLISH_FILTER_ID, filtersId.SAFARI_FILTER_ID];
+        // Find all recommended tagged
+        const recommendedFilters = filtersTags.getRecommendedFilters(subscriptions.getFilters());
 
-        // Get language-specific filters by user locale
-        let localeFilterIds = subscriptions.getFilterIdsForLanguage(app.getLocale());
-        filterIds = filterIds.concat(localeFilterIds);
+        // Filter by locale
+        const appLocale = app.getLocale();
+        let filters = recommendedFilters.filter(f => {
+            const languages = f.languages;
+            if (!(languages && languages.length > 0)) {
+                return true;
+            }
+
+            const locale = i18n.normalize(languages, appLocale);
+            return !!locale;
+        });
+
+        // Filter mobile tags
+        filters = filters.filter(f => !filtersTags.isMobileFilter(f));
+
+        const filterIds = filters.map(f => f.filterId);
+
+        // This filter is enabled by default
+        const filtersId = config.get('AntiBannerFiltersId');
+        filterIds.push(filtersId.SAFARI_FILTER_ID);
 
         // These groups are enabled by default
         const antiBannerFilterGroupsId = config.get('AntiBannerFilterGroupsId');
