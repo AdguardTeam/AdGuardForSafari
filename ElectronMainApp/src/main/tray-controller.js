@@ -15,7 +15,7 @@ const {app, shell, Tray, Menu} = require('electron');
  */
 module.exports = (() => {
 
-    const LAUNCH_AT_LOGIN_KEY = 'launch-at-login-set';
+    // const LAUNCH_AT_LOGIN_KEY = 'launch-at-login-set';
 
     const onCheckFiltersUpdateClicked = () => {
         filters.checkAntiBannerFiltersUpdate(true);
@@ -28,18 +28,24 @@ module.exports = (() => {
     };
 
     const isOpenAtLoginEnabled = () => {
-        if (storage.getItem(LAUNCH_AT_LOGIN_KEY)) {
-            return app.getLoginItemSettings().openAtLogin
-        } else {
-            storage.setItem(LAUNCH_AT_LOGIN_KEY, true);
+        return app.getLoginItemSettings().openAtLogin;
 
-            //Set default true
-            app.setLoginItemSettings({
-                openAtLogin: true
-            });
+        // TODO: Fix
+        // Due to https://github.com/electron/electron/issues/10880
+        // by default 'Launch at login is disabled'
 
-            return true;
-        }
+        // if (storage.getItem(LAUNCH_AT_LOGIN_KEY)) {
+        //     return app.getLoginItemSettings().openAtLogin;
+        // } else {
+        //     storage.setItem(LAUNCH_AT_LOGIN_KEY, true);
+        //
+        //     //Set default true
+        //     app.setLoginItemSettings({
+        //         openAtLogin: true
+        //     });
+        //
+        //     return true;
+        // }
     };
 
     const imageFolder = appPack.resourcePath('/src/main/icons');

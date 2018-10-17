@@ -15,6 +15,13 @@ module.exports = (() =>{
     const RECOMMENDED_TAG_ID = 10;
 
     /**
+     * Mobile tag identifier
+     *
+     * @type {number}
+     */
+    const MOBILE_TAG_ID = 19;
+
+    /**
      * All tags
      */
     const getTags = () => subscriptions.getTags();
@@ -27,6 +34,16 @@ module.exports = (() =>{
      */
     const isRecommendedFilter = (filter) => {
         return filter.tags.includes(RECOMMENDED_TAG_ID);
+    };
+
+    /**
+     * Is filter mobile
+     *
+     * @param filter
+     * @returns {boolean}
+     */
+    const isMobileFilter = (filter) => {
+        return filter.tags.includes(MOBILE_TAG_ID);
     };
 
     /**
@@ -47,7 +64,8 @@ module.exports = (() =>{
     return {
         getTags,
         getRecommendedFilters,
-        isRecommendedFilter
+        isRecommendedFilter,
+        isMobileFilter
     };
 })();
 
