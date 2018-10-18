@@ -244,5 +244,11 @@
     },
     "options_about_version": {
         "message": "\u0412\u0435\u0440\u0441\u0438\u044f %s"
+    },
+    "notification_user_filter_updated_title": {
+        "message": "Пользовательский фильтр обновлён"
+    },
+    "notification_user_filter_updated_desc": {
+        "message": "Правила изменены"
     }
 }

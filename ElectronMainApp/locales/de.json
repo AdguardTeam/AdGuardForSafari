@@ -244,5 +244,11 @@
     },
     "options_about_version": {
         "message": "Version %s"
+    },
+    "notification_user_filter_updated_title": {
+        "message": "Benutzerfilter aktualisiert"
+    },
+    "notification_user_filter_updated_desc": {
+        "message": "Benutzerregeln wurden geändert"
     }
 }
