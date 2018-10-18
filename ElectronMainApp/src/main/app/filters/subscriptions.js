@@ -5,6 +5,7 @@ const log = require('../utils/log');
 const listeners = require('../../notifier');
 const events = require('../../events');
 const app = require('../app');
+const localStorage = require('../storage/storage');
 
 /**
  * Service that loads and parses filters metadata from backend server.
@@ -199,7 +200,7 @@ module.exports = (function () {
             const filterData = parseFilterDataFromHeader(rules);
 
             const filterId = addFilterId();
-            const groupId = 0;
+            const groupId = CUSTOM_FILTERS_GROUP_ID;
             const defaultName = filterData.name;
             const defaultDescription = filterData.description;
             const homepage = filterData.homepage;
@@ -233,6 +234,9 @@ module.exports = (function () {
                 filters.push(filter);
                 filtersMap[filter.filterId] = filter;
 
+                // Save filter in separate storage
+                saveCustomFilter(filter);
+
                 listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
             }
 
@@ -244,6 +248,33 @@ module.exports = (function () {
             log.error("Error download filter by url {0}, cause: {1} {2}", url, request.statusText, cause || "");
             callback();
         });
+    };
+
+    const CUSTOM_FILTERS_JSON_KEY = 'custom_filters';
+
+    /**
+     * Saves custom filter to storage
+     *
+     * @param filter
+     */
+    const saveCustomFilter = (filter) => {
+        let customFilters = loadCustomFilters();
+        customFilters.push(filter);
+
+        console.log(filter);
+        console.log(customFilters);
+
+        localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(customFilters));
+    };
+
+    /**
+     * Loads custom filters from storage
+     *
+     * @returns {Array}
+     */
+    const loadCustomFilters = () => {
+        let customFilters = localStorage.getItem(CUSTOM_FILTERS_JSON_KEY);
+        return customFilters ? JSON.parse(customFilters) : [];
     };
 
     /**
@@ -286,8 +317,15 @@ module.exports = (function () {
 
             //TODO: Add localization for Custom group
 
-            filters.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
+            // Load custom filters
+            const customFilters = loadCustomFilters();
+            customFilters.forEach(f => {
+                const filter = createSubscriptionFilterFromJSON(f);
+                filters.push(filter);
+                filtersMap[filter.filterId] = filter;
+            });
 
+            filters.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
             groups.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
 
             log.info('Filters metadata loaded');
