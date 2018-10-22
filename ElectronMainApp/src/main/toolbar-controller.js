@@ -4,7 +4,7 @@ const listeners = require('./notifier');
 const events = require('./events');
 const log = require('./app/utils/log');
 const app = require('./app/app');
-const {shell} = require('electron');
+const { shell } = require('electron');
 
 /**
  * Addon toolbar controller.
@@ -45,7 +45,8 @@ module.exports = (() => {
 
         applicationApi.setUserFilterRules(rules);
 
-        listeners.notifyListeners(events.NOTIFY_UPDATE_USER_FILTER_RULES);
+        let newRule = rules[rules.length - 1];
+        listeners.notifyListeners(events.NOTIFY_UPDATE_USER_FILTER_RULES, { newRule });
     };
 
     /**

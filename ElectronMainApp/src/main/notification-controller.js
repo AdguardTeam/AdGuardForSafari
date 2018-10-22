@@ -1,4 +1,4 @@
-const {Notification} = require('electron');
+const { Notification } = require('electron');
 
 const listeners = require('./notifier');
 const events = require('./events');
@@ -16,11 +16,15 @@ module.exports = (() => {
      * @param message
      * @param onClick
      */
-    const showNotification = (title, message, onClick) => {
-        let notification = new Notification({
-            title: title,
-            subtitle: message
-        });
+    const showNotification = (params) => {
+        let {
+            title,
+            subtitle,
+            body,
+            onClick
+        } = params;
+
+        let notification = new Notification({ title, subtitle, body });
 
         if (onClick) {
             notification.addListener("click", (e) => {
@@ -41,14 +45,14 @@ module.exports = (() => {
             return;
         }
 
-        const message = {
-            title: i18n.__("options_popup_version_update_title.message").replace('$1', options.currentVersion),
-            text: options.isMajorUpdate ?
-                i18n.__("options_popup_version_update_description_major.message") :
-                i18n.__("options_popup_version_update_description_minor.message")
-        };
+        const title = i18n
+            .__("options_popup_version_update_title.message")
+            .replace('$1', options.currentVersion);
+        const subtitle = options.isMajorUpdate ?
+            i18n.__("options_popup_version_update_description_major.message") :
+            i18n.__("options_popup_version_update_description_minor.message")
 
-        showNotification(message.title, message.text);
+        showNotification({ title, subtitle });
     };
 
     const getFiltersUpdateResultMessage = (success, updatedFilters) => {
@@ -116,9 +120,12 @@ module.exports = (() => {
         if (!options) {
             return;
         }
-
-        const message = getFiltersUpdateResultMessage(options.success, options.updatedFilters);
-        showNotification(message.title, message.text, getShowFiltersTabOnClick(showMainWindow));
+        const { title, text } = getFiltersUpdateResultMessage(options.success, options.updatedFilters);
+        showNotification({ 
+            title,
+            subtitle: text,
+            onClick: getShowFiltersTabOnClick(showMainWindow)
+        });
     };
 
     /**
@@ -127,12 +134,14 @@ module.exports = (() => {
      * @param showMainWindow
      */
     const showRulesOverLimitNotification = (showMainWindow) => {
-        const message = {
-            title: i18n.__("notification_content_blocker_overlimit_title.message"),
-            text: i18n.__("notification_content_blocker_overlimit_desc.message")
-        };
+        const title = i18n.__("notification_content_blocker_overlimit_title.message");
+        const subtitle = i18n.__("notification_content_blocker_overlimit_desc.message");
 
-        showNotification(message.title, message.text, getShowFiltersTabOnClick(showMainWindow));
+        showNotification({ 
+            title,
+            subtitle,
+            onClick: getShowFiltersTabOnClick(showMainWindow)
+        });
     };
 
     /**
@@ -140,13 +149,17 @@ module.exports = (() => {
      *
      * @param showMainWindow
      */
-    const showUserFilterUpdatedNotification = (showMainWindow) => {
-        const message = {
-            title: i18n.__("notification_user_filter_updated_title.message"),
-            text: i18n.__("notification_user_filter_updated_desc.message")
-        };
+    const showUserFilterUpdatedNotification = (showMainWindow, newRule) => {
+        const title = i18n.__("notification_user_filter_updated_title.message");
+        const subtitle = i18n.__("notification_user_filter_updated_desc.message");
+        const body = newRule;
 
-        showNotification(message.title, message.text, getShowUserFilterTabOnClick(showMainWindow));
+        showNotification({
+            title,
+            subtitle,
+            body,
+            onClick: getShowUserFilterTabOnClick(showMainWindow)
+        });
     };
 
     /**
@@ -165,7 +178,8 @@ module.exports = (() => {
                     showRulesOverLimitNotification(showWindow);
                 }
             } else if (event === events.NOTIFY_UPDATE_USER_FILTER_RULES) {
-                showUserFilterUpdatedNotification(showWindow);
+                const newRule = options ? options.newRule : '';
+                showUserFilterUpdatedNotification(showWindow, newRule);
             }
         });
     };
