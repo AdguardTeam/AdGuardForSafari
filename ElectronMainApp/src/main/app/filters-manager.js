@@ -327,31 +327,6 @@ module.exports = (() => {
      * @param callback
      */
     const offerGroupsAndFilters = (callback) => {
-        // Find all recommended tagged
-        const recommendedFilters = filtersTags.getRecommendedFilters(subscriptions.getFilters());
-
-        // Filter by locale
-        const appLocale = app.getLocale();
-        let filters = recommendedFilters.filter(f => {
-            const languages = f.languages;
-            if (!(languages && languages.length > 0)) {
-                return true;
-            }
-
-            const locale = i18n.normalize(languages, appLocale);
-            return !!locale;
-        });
-
-        // Filter mobile tags
-        filters = filters.filter(f => !filtersTags.isMobileFilter(f));
-
-        const filterIds = filters.map(f => f.filterId);
-
-        // This filter is enabled by default
-        const filtersId = config.get('AntiBannerFiltersId');
-        filterIds.push(filtersId.SAFARI_FILTER_ID);
-
-        // These groups are enabled by default
         const antiBannerFilterGroupsId = config.get('AntiBannerFilterGroupsId');
         let groupIds = [
             antiBannerFilterGroupsId.AD_BLOCKING_ID,
@@ -360,7 +335,7 @@ module.exports = (() => {
             antiBannerFilterGroupsId.LANGUAGE_SPECIFIC_ID
         ];
 
-        callback(groupIds, filterIds);
+        callback(groupIds);
     };
 
     /**
