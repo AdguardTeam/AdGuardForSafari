@@ -77,29 +77,62 @@ module.exports = (() => {
         };
     };
 
+    const checkMobile = (filter) => {
+        const isMobileFilter = tagService.isMobileFilter(filter);
+
+        if (!isMobileFilter) {
+            return true;
+        }
+
+        if (typeof navigator !== 'undefined' && navigator.userAgent) {
+            const isMobileDevice = navigator.userAgent.match(/iPhone|iPad|iPod/i);
+            return isMobileFilter && isMobileDevice;
+        }
+
+        return false;
+    };
+
+    // https://github.com/AdguardTeam/AdGuardForSafari/issues/57
+    const isOfferedFilter = (filter, langSuitableFilters, safariFilterId) => {
+        // we always enable safari filter in safari extension
+        if (safariFilterId === filter.filterId) {
+            return true;
+        }
+
+        // if filter doesn't has recommended tag we don't enable it
+        if (!tagService.isRecommendedFilter(filter)) {
+            return false;
+        }
+
+        // if filter has language we check if languages are suitable for user locale
+        if (filter.languages && filter.languages.length > 0) {
+            if (langSuitableFilters.includes(filter.filterId)) {
+                // in the end we check if filter is created for mobile device
+                return checkMobile(filter);
+            } else {
+                return false;
+            }
+        }
+
+        return checkMobile(filter);
+    };
+
     /**
      * @param groupId
      * @returns {Array} recommended filters by groupId
      */
     const getRecommendedFilterIdsByGroupId = groupId => {
         const metadata = getFiltersMetadata();
+        const filtersId = config.get('AntiBannerFiltersId');
+        const langSuitableFilters = subscriptions.getFilterIdsForLanguage(app.getLocale());
 
         const result = [];
-        const langSuitableFilters = subscriptions.getFilterIdsForLanguage(app.getLocale());
         for (let i = 0; i < metadata.categories.length; i += 1) {
             const category = metadata.categories[i];
             if (category.groupId === groupId) {
                 category.filters.forEach(filter => {
-                    if (tagService.isRecommendedFilter(filter)) {
-                        // get ids intersection to enable recommended filters matching the lang tag
-                        // only if filter has language
-                        if (filter.languages && filter.languages.length > 0) {
-                            if (langSuitableFilters.includes(filter.filterId)) {
-                                result.push(filter.filterId);
-                            }
-                        } else {
-                            result.push(filter.filterId);
-                        }
+                    if (isOfferedFilter(filter, langSuitableFilters, filtersId.SAFARI_FILTER_ID)) {
+                        result.push(filter.filterId);
                     }
                 });
 

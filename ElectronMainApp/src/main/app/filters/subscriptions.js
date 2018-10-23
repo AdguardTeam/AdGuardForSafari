@@ -489,8 +489,8 @@ module.exports = (function () {
             const filter = filters[i];
             const languages = filter.languages;
             if (languages && languages.length > 0) {
-                const locale = i18n.normalize(languages, app.getLocale());
-                if (locale) {
+                const detectedLocale = i18n.normalize(languages, locale);
+                if (detectedLocale) {
                     filterIds.push(filter.filterId);
                 }
             }
