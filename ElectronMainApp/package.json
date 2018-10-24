@@ -23,6 +23,7 @@
         "xmlhttprequest": "^1.8.0"
     },
     "devDependencies": {
+        "devtron": "^1.4.0",
         "electron": "^2.0.12",
         "electron-rebuild": "^1.8.2",
         "find-in-files": "^0.5.0",

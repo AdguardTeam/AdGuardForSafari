@@ -21,7 +21,10 @@ let mainWindow;
 
 // This package opens devtools only in devmode
 // No need to delete this line
-require('electron-debug')();
+require('electron-debug')({
+    enabled: true,
+    showDevTools: false
+});
 
 /**
  * Creates main window
