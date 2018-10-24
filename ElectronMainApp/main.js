@@ -5,7 +5,7 @@ process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
 
 /* global require, process */
 
-const {app, shell, BrowserWindow} = require('electron');
+const { app, shell, BrowserWindow } = require('electron');
 
 const uiEventListener = require('./src/main/ui-event-handler');
 const startup = require('./src/main/startup');
@@ -17,6 +17,14 @@ const mainMenuController = require('./src/main/main-menu.controller');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+
+
+// This package opens devtools only in devmode
+// No need to delete this line
+require('electron-debug')({
+    enabled: true,
+    showDevTools: false
+});
 
 /**
  * Creates main window
@@ -35,9 +43,6 @@ function createWindow(onWindowLoaded) {
     });
 
     mainWindow.loadFile('./src/main/ui/options.html');
-
-    // Open the DevTools.
-    // mainWindow.webContents.openDevTools();
 
     // Emitted when the window is closed.
     mainWindow.on('closed', () => {
