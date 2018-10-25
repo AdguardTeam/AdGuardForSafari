@@ -2,9 +2,10 @@
 
 const i18n = require("i18n");
 const appPack = require('../../utils/app-pack');
+const { LOCALES } = require('../../../locales/locales');
 
 i18n.configure({
-    locales: ['en', 'de', 'ru'],
+    locales: LOCALES,
     directory: appPack.resourcePath('/locales'),
     objectNotation: true
 });
@@ -14,14 +15,31 @@ i18n.configure({
  */
 document.addEventListener("DOMContentLoaded", () => {
     const defaultLocale = 'en';
-    const navigatorLang = navigator.language || navigator.browserLanguage;
-    const croppedLocaleName = navigatorLang.substr(0, 2);
+    const navigatorLocale = navigator.language || navigator.browserLanguage;
+    const navigatorLanguage = navigatorLocale.substr(0, 2);
+    let catalog = i18n.getCatalog(defaultLocale);
 
-    const catalog = i18n.getCatalog(navigatorLang)
-        ? i18n.getCatalog(navigatorLang)
-        : i18n.getCatalog(croppedLocaleName)
-            ? i18n.getCatalog(croppedLocaleName)
-            : i18n.getCatalog(defaultLocale);
+    // Looking for locale match
+    const fullMatch = Object.keys(i18n.getCatalog())
+        .some(locale => {
+            const match = locale.replace(/-/g, '_').toLowerCase() === navigatorLocale.replace(/-/g, '_').toLowerCase();
+            if (match) {
+                catalog = i18n.getCatalog(locale);
+            }
+            return match;
+        });
+
+    // Looking for language match
+    if (!fullMatch) {
+        Object.keys(i18n.getCatalog())
+            .some(locale => {
+                const match = locale.toLowerCase() === navigatorLanguage.toLowerCase();
+                if (match) {
+                    catalog = i18n.getCatalog(locale);
+                }
+                return match;
+            });
+    }
 
     document.querySelectorAll("[i18n]").forEach(el => {
         const key = el.getAttribute("i18n");
