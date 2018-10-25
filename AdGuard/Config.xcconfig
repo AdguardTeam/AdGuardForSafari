@@ -15,7 +15,7 @@ AG_BUNDLEID = com.adguard.safari.AdGuard
 AG_EXTENSION_BUNDLEID = $(AG_BUNDLEID).Extension
 AG_BLOCKER_BUNDLEID = $(AG_BUNDLEID).BlockerExtension
 
-AG_SIGN = <YOUR APPLE DEVELOPER COMMON NAME>
+AG_SIGN = Mac Developer: Roman Sokolov (5SD72JAA66)
 
 AG_GROUP = TC3Q7MAJXF.com.adguard.safari.AdGuard
 
