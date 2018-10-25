@@ -20,6 +20,8 @@
 	<string>$(AG_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(AG_BUILD)</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSExtension</key>
