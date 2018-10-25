@@ -15,10 +15,13 @@ i18n.configure({
 document.addEventListener("DOMContentLoaded", () => {
     const defaultLocale = 'en';
     const navigatorLang = navigator.language || navigator.browserLanguage;
-    const currentLocale = navigatorLang.substr(0, 2);
-    const catalog = i18n.getCatalog(currentLocale)
-        ? i18n.getCatalog(currentLocale)
-        : i18n.getCatalog(defaultLocale);
+    const croppedLocaleName = navigatorLang.substr(0, 2);
+
+    const catalog = i18n.getCatalog(navigatorLang)
+        ? i18n.getCatalog(navigatorLang)
+        : i18n.getCatalog(croppedLocaleName)
+            ? i18n.getCatalog(croppedLocaleName)
+            : i18n.getCatalog(defaultLocale);
 
     document.querySelectorAll("[i18n]").forEach(el => {
         const key = el.getAttribute("i18n");
