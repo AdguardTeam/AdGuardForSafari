@@ -1,14 +1,5 @@
 /* global I18nHelper */
-
-const i18n = require("i18n");
-const appPack = require('../../utils/app-pack');
-const { LOCALES } = require('../../../locales/locales');
-
-i18n.configure({
-    locales: LOCALES,
-    directory: appPack.resourcePath('/locales'),
-    objectNotation: true
-});
+const i18n = require("../../utils/i18n");
 
 /**
  * Translate elements on document ready

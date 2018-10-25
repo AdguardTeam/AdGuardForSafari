@@ -1,5 +1,6 @@
 const i18n = require("i18n");
 const appPack = require('./app-pack');
+const { LOCALES } = require('../../locales/locales');
 
 /**
  * Configures i18n
@@ -7,7 +8,7 @@ const appPack = require('./app-pack');
 module.exports = (() => {
 
     i18n.configure({
-        locales: ['en', 'de', 'ru'],
+        locales: LOCALES,
         directory: appPack.resourcePath('/locales'),
         objectNotation: true
     });
