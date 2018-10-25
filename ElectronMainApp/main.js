@@ -1,4 +1,5 @@
 const appPack = require('./src/utils/app-pack');
+const i18n = require('./src/utils/i18n');
 
 /* Reconfigure path to config */
 process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
@@ -99,6 +100,7 @@ let tray;
  * Some APIs can only be used after this event occurs.
  */
 app.on('ready', (() => {
+    i18n.setAppLocale(app.getLocale());
     startup.init(showWindow);
     uiEventListener.init();
 
