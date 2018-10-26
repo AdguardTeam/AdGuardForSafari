@@ -1,4 +1,10 @@
 {
+    "options_general_desc_link": {
+        "message": "our Github repo."
+    },
+    "options_saved_status": {
+        "message": "Saved"
+    },
     "name": {
         "message": "AdGuard AdBlocker"
     },
@@ -250,8 +256,5 @@
     },
     "notification_user_filter_updated_desc": {
         "message": "A new rule was added to user filter:"
-    },
-    "options_saved_status": {
-        "message": "Saved"
     }
 }
