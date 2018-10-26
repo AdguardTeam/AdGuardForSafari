@@ -1,0 +1,260 @@
+{
+    "options_general_desc_link": {
+        "message": "\u79c1\u305f\u3061\u306eGithub\u30ec\u30dd\u30b8\u30c8\u30ea"
+    },
+    "options_saved_status": {
+        "message": "\u5909\u66f4\u4fdd\u5b58\u5b8c\u4e86"
+    },
+    "name": {
+        "message": "AdGuard \u5e83\u544a\u30d6\u30ed\u30c3\u30ab\u30fc"
+    },
+    "description": {
+        "message": "AdGuard\u306f\u3001\u5e83\u544a\u3084\u30dd\u30c3\u30d7\u30a2\u30c3\u30d7\u306e\u51e6\u7406\u306b\u306f\u6bd4\u985e\u306e\u306a\u3044\u5e83\u544a\u30d6\u30ed\u30c3\u30af\u62e1\u5f35\u6a5f\u80fd\u3067\u3059\u3002 Facebook\u3001YouTube\u3084\u305d\u306e\u4ed6\u306e\u30b5\u30a4\u30c8\u3067\u5e83\u544a\u3092\u30d6\u30ed\u30c3\u30af\u3057\u307e\u3059\u3002"
+    },
+    "options_settings": {
+        "message": "AdGuard for Safari - \u8a2d\u5b9a"
+    },
+    "options_general_settings": {
+        "message": "\u4e00\u822c\u8a2d\u5b9a"
+    },
+    "options_general_desc": {
+        "message": "AdGuard for Safari\u306f\u7121\u6599\u306e\u30aa\u30fc\u30d7\u30f3\u30bd\u30fc\u30b9\u30bd\u30d5\u30c8\u30a6\u30a7\u30a2\u3067\u3059\u3002 \u30e6\u30fc\u30b6\u30fc\u69d8\u306e\u30d5\u30a3\u30fc\u30c9\u30d0\u30c3\u30af\u3068\u8ca2\u732e\u3092\u6b53\u8fce\u3057\u3066\u304a\u308a\u307e\u3059\u3002 \u30d0\u30b0\u3092\u5831\u544a\u3057\u305f\u308a\u3001\u307e\u305f\u306f\u6a5f\u80fd\u3092\u30ea\u30af\u30a8\u30b9\u30c8\u3059\u308b\u5834\u5408\u306f\u3001<a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>\u79c1\u305f\u3061\u306eGithub\u30ea\u30dd\u30b8\u30c8\u30ea<\/a>\u3078\u304a\u9032\u307f\u304f\u3060\u3055\u3044\u3002"
+    },
+    "options_allow_acceptable_ads": {
+        "message": "\u6709\u7528\u306a\u5e83\u544a\u3092\u8868\u793a\u3059\u308b"
+    },
+    "options_export_settings": {
+        "message": "Export settings"
+    },
+    "options_import_settings": {
+        "message": "Import settings"
+    },
+    "options_antibanner": {
+        "message": "\u30d5\u30a3\u30eb\u30bf"
+    },
+    "options_antibanner_info": {
+        "message": "\u30d5\u30a3\u30eb\u30bf %s \u500b\u3000\u30eb\u30fc\u30eb %s \u4ef6"
+    },
+    "options_filters_enabled": {
+        "message": "\u6709\u52b9\uff1a"
+    },
+    "options_filters_enabled_and_more_divider": {
+        "message": "%s \u3068\u305d\u306e\u4ed6 %s \u500b"
+    },
+    "options_filters_enabled_and_divider": {
+        "message": "%s \u3068 %s"
+    },
+    "options_filters_no_enabled": {
+        "message": "\u6709\u52b9\u30d5\u30a3\u30eb\u30bf\u306f\u3042\u308a\u307e\u305b\u3093"
+    },
+    "options_filters_version": {
+        "message": "\u30d0\u30fc\u30b8\u30e7\u30f3 %s"
+    },
+    "options_filters_updated": {
+        "message": "\u6700\u7d42\u66f4\u65b0\u65e5\u6642: %s"
+    },
+    "options_filters_empty_custom_filters": {
+        "message": "\u30ab\u30b9\u30bf\u30e0\u30d5\u30a3\u30eb\u30bf\u306f\u307e\u3060\u767b\u9332\u3055\u308c\u3066\u3044\u307e\u305b\u3093"
+    },
+    "options_filters_empty_custom_add_button": {
+        "message": "\u30ab\u30b9\u30bf\u30e0\u30d5\u30a3\u30eb\u30bf\u3092\u8ffd\u52a0"
+    },
+    "options_filters_custom_step_one_title": {
+        "message": "\u65b0\u3057\u3044\u30d5\u30a3\u30eb\u30bf\u30fb\u30b5\u30d6\u30b9\u30af\u30ea\u30d7\u30b7\u30e7\u30f3"
+    },
+    "options_filters_custom_step_one_input_placeholder": {
+        "message": "\u30d5\u30a3\u30eb\u30bf\u540d\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044"
+    },
+    "options_filters_custom_step_one_url_desc": {
+        "message": "\u30d5\u30a3\u30eb\u30bf\u30fb\u30b5\u30d6\u30b9\u30af\u30ea\u30d7\u30b7\u30e7\u30f3\u306e\u6709\u52b9\u306aURL\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044\u3002"
+    },
+    "options_filters_custom_step_one_url_desc_more": {
+        "message": "AdGuard\u306f\u3053\u306e\u30d5\u30a3\u30eb\u30bf\u30fb\u30b5\u30d6\u30b9\u30af\u30ea\u30d7\u30b7\u30e7\u30f3\u3092\u8ffd\u52a0\u3057\u307e\u3059\u3002"
+    },
+    "options_filters_custom_step_one_cancel": {
+        "message": "\u30ad\u30e3\u30f3\u30bb\u30eb"
+    },
+    "options_filters_custom_step_one_next": {
+        "message": "\u6b21\u3078"
+    },
+    "options_filters_custom_step_two_checking": {
+        "message": "\u30d5\u30a3\u30eb\u30bf\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u4e2d"
+    },
+    "options_filters_custom_step_three_title": {
+        "message": "\u30a8\u30e9\u30fc\u304c\u767a\u751f\u3057\u307e\u3057\u305f"
+    },
+    "options_filters_custom_step_three_desc": {
+        "message": "\u6b8b\u5ff5\u306a\u304c\u3089\u3001\u3042\u306a\u305f\u306e\u30ab\u30b9\u30bf\u30e0\u30d5\u30a3\u30eb\u30bf\u306f\u4e88\u671f\u305b\u306c\u30a8\u30e9\u30fc\u304c\u539f\u56e0\u3067\u8ffd\u52a0\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f\u3002"
+    },
+    "options_filters_custom_step_three_try_again": {
+        "message": "\u518d\u8a66\u884c\u3059\u308b"
+    },
+    "options_filters_custom_step_final_title": {
+        "message": "\u65b0\u3057\u3044\u30d5\u30a3\u30eb\u30bf\u30fb\u30b5\u30d6\u30b9\u30af\u30ea\u30d7\u30b7\u30e7\u30f3"
+    },
+    "options_filters_custom_step_final_filter_title": {
+        "message": "\u30bf\u30a4\u30c8\u30eb\uff1a"
+    },
+    "options_filters_custom_step_final_filter_description": {
+        "message": "\u6982\u8981\uff1a"
+    },
+    "options_filters_custom_step_final_filter_version": {
+        "message": "\u30d0\u30fc\u30b8\u30e7\u30f3\uff1a"
+    },
+    "options_filters_custom_step_final_filter_rules_count": {
+        "message": "\u30eb\u30fc\u30eb\u6570\uff1a"
+    },
+    "options_filters_custom_step_final_filter_homepage": {
+        "message": "\u30db\u30fc\u30e0\u30da\u30fc\u30b8\uff1a"
+    },
+    "options_filters_custom_step_final_filter_url": {
+        "message": "URL\uff1a"
+    },
+    "options_filters_custom_step_final_back": {
+        "message": "\u623b\u308b"
+    },
+    "options_filters_custom_step_final_cancel": {
+        "message": "\u30ad\u30e3\u30f3\u30bb\u30eb"
+    },
+    "options_filters_custom_step_final_commit": {
+        "message": "\u8cfc\u8aad"
+    },
+    "options_filters_check_filters_update": {
+        "message": "\u30d5\u30a3\u30eb\u30bf\u306e\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8\u3092\u78ba\u8a8d\u3059\u308b"
+    },
+    "options_whitelist": {
+        "message": "\u30db\u30ef\u30a4\u30c8\u30ea\u30b9\u30c8"
+    },
+    "options_modal_save": {
+        "message": "\u5909\u66f4\u3092\u4fdd\u5b58\u3059\u308b"
+    },
+    "options_whitelist_description": {
+        "message": "AdGuard \u306f\u30db\u30ef\u30a4\u30c8\u30ea\u30b9\u30c8\u306b\u3042\u308b\u30a6\u30a7\u30d6\u30b5\u30a4\u30c8\u3092\u30d5\u30a3\u30eb\u30bf\u30ea\u30f3\u30b0\u3057\u307e\u305b\u3093\u3002"
+    },
+    "options_whitelist_inverse": {
+        "message": "\u30db\u30ef\u30a4\u30c8\u30ea\u30b9\u30c8\u3092\u9006\u8ee2\u3055\u305b\u308b<span class='sp-table-row-info'>\u30db\u30ef\u30a4\u30c8\u30ea\u30b9\u30c8<i>\u4ee5\u5916\u3067<\/i>\u5168\u3066\u306e\u5e83\u544a\u3092\u30a2\u30f3\u30d6\u30ed\u30c3\u30af\u3059\u308b<\/span>"
+    },
+    "options_userfilter": {
+        "message": "\u30e6\u30fc\u30b6\u30fc\u30d5\u30a3\u30eb\u30bf"
+    },
+    "options_userfilter_description": {
+        "message": "\u3053\u306e\u30d5\u30a3\u30eb\u30bf\u306b\u72ec\u81ea\u306e\u30eb\u30fc\u30eb\u3092\u8ffd\u52a0\u3067\u304d\u307e\u3059\u3002\u3053\u306e\u30aa\u30d7\u30b7\u30e7\u30f3\u306fHTML\/CSS\u306b\u7cbe\u901a\u3057\u305f\u4e0a\u7d1a\u8005\u30e6\u30fc\u30b6\u30fc\u306b\u304a\u3059\u3059\u3081\u3067\u3059\u3002 <a class='spl-user-descr-link'href='https:\/\/adguard.com\/filterrules.html?utm_source=extension&aid=16593' target='_blank'>\u30d5\u30a3\u30eb\u30bf\u30fb\u30eb\u30fc\u30eb\u306e\u30c1\u30e5\u30fc\u30c8\u30ea\u30a2\u30eb<\/a>\u3092\u8aad\u3080\u3053\u3068\u3067\u72ec\u81ea\u306e\u30d5\u30a3\u30eb\u30bf\u30fb\u30eb\u30fc\u30eb\u3092\u4f5c\u6210\u3059\u308b\u65b9\u6cd5\u3092\u5b66\u3079\u307e\u3059\u3002"
+    },
+    "options_show_app_updated_notification": {
+        "message": "\u62e1\u5f35\u6a5f\u80fd\u306e\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8\u306b\u3064\u3044\u3066\u901a\u77e5\u3092\u53d7\u3051\u53d6\u308b"
+    },
+    "options_use_optimized_filters": {
+        "message": "\u6700\u9069\u5316\u3055\u308c\u305f\u30d5\u30a3\u30eb\u30bf\u3092\u4f7f\u7528\u3059\u308b<span class='sp-table-row-info'>Safari\u30b3\u30f3\u30c6\u30f3\u30c4\u30d6\u30ed\u30c3\u30ab\u30fcAPI\u5411\u3051\u306b\u6700\u9069\u5316\u3055\u308c\u305f\u8efd\u91cf\u7248\u30d5\u30a3\u30eb\u30bf\u306e\u30ea\u30b9\u30c8\u3067\u3059\u3002<\/span>"
+    },
+    "options_popup_update_title": {
+        "message": "\u30d5\u30a3\u30eb\u30bf\u66f4\u65b0\u5b8c\u4e86"
+    },
+    "options_popup_update_error_title": {
+        "message": "\u30d5\u30a3\u30eb\u30bf\u66f4\u65b0\u30a8\u30e9\u30fc"
+    },
+    "options_popup_update_not_found": {
+        "message": "\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f"
+    },
+    "options_popup_update_error": {
+        "message": "\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8\u5931\u6557\u3057\u307e\u3057\u305f\u3002\u3057\u3070\u3089\u304f\u7d4c\u3063\u3066\u304b\u3089\u3082\u3046\u4e00\u5ea6\u304a\u8a66\u3057\u304f\u3060\u3055\u3044\u3002"
+    },
+    "options_popup_update_updated": {
+        "message": "\u300c$1\u300d \u304c\u30d0\u30fc\u30b8\u30e7\u30f3 $2 \u306b\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8\u3055\u308c\u307e\u3057\u305f"
+    },
+    "options_popup_version_update_title": {
+        "message": "AdGuard for Safari \u306f\u305f\u3060\u3044\u307e\u30d0\u30fc\u30b8\u30e7\u30f3 $1 \u306b\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8\u3055\u308c\u307e\u3057\u305f"
+    },
+    "options_popup_version_update_description_minor": {
+        "message": "\u3053\u306e\u30d0\u30fc\u30b8\u30e7\u30f3\u306b\u306f\u4e3b\u306b\u30d0\u30b0\u4fee\u6b63\u3068\u8efd\u5fae\u306a\u6539\u5584\u304c\u542b\u307e\u308c\u3066\u3044\u307e\u3059\u3002"
+    },
+    "options_popup_version_update_description_major": {
+        "message": "\u3053\u308c\u306f\u3001\u591a\u304f\u306e\u65b0\u6a5f\u80fd\u3068\u6539\u5584\u3092\u3082\u305f\u3089\u3059\u30e1\u30b8\u30e3\u30fc\u306a\u62e1\u5f35\u6a5f\u80fd\u30a2\u30c3\u30d7\u30b0\u30ec\u30fc\u30c9\u3067\u3059\u3002"
+    },
+    "notification_content_blocker_overlimit_title": {
+        "message": "\u8b66\u544a"
+    },
+    "notification_content_blocker_overlimit_desc": {
+        "message": "\u6709\u52b9\u30d5\u30a3\u30eb\u30bf\u304c\u591a\u3059\u304e\u3066\u3044\u307e\u3059\u3002Safari \u3067\u4f7f\u7528\u3067\u304d\u308b\u30eb\u30fc\u30eb\u306e\u6570\u306f\u300150000\u307e\u3067\u3067\u3059\u3002"
+    },
+    "options_content_blocker_overlimit": {
+        "message": "\u6709\u52b9\u30d5\u30a3\u30eb\u30bf\u304c\u591a\u3059\u304e\u3066\u3044\u307e\u3059\u3002Safari \u3067\u4f7f\u7528\u3067\u304d\u308b\u30eb\u30fc\u30eb\u306e\u6570\u306f\u300150000\u307e\u3067\u3067\u3059\u3002"
+    },
+    "options_filters_list_search_placeholder": {
+        "message": "\u691c\u7d22"
+    },
+    "main_menu_edit": {
+        "message": "\u7de8\u96c6"
+    },
+    "main_menu_undo": {
+        "message": "\u5143\u306b\u623b\u3059"
+    },
+    "main_menu_cut": {
+        "message": "\u30ab\u30c3\u30c8"
+    },
+    "main_menu_copy": {
+        "message": "\u30b3\u30d4\u30fc"
+    },
+    "main_menu_paste": {
+        "message": "\u30da\u30fc\u30b9\u30c8"
+    },
+    "main_menu_select-all": {
+        "message": "\u3059\u3079\u3066\u9078\u629e"
+    },
+    "tray_menu_about": {
+        "message": "\u3053\u306e\u30a2\u30d7\u30ea\u306b\u3064\u3044\u3066"
+    },
+    "tray_menu_preferences": {
+        "message": "\u8a2d\u5b9a"
+    },
+    "tray_menu_check_updates": {
+        "message": "\u30d5\u30a3\u30eb\u30bf\u306e\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8\u3092\u78ba\u8a8d\u3059\u308b"
+    },
+    "tray_menu_launch_at_startup": {
+        "message": "\u30ed\u30b0\u30a4\u30f3\u6642\u306bAdGuard\u3092\u8d77\u52d5\u3059\u308b"
+    },
+    "tray_menu_quit": {
+        "message": "\u7d42\u4e86"
+    },
+    "options_last_update": {
+        "message": "\u6700\u65b0\u66f4\u65b0\u65e5\u6642\uff1a"
+    },
+    "options_about": {
+        "message": "\u3053\u306e\u30a2\u30d7\u30ea\u306b\u3064\u3044\u3066"
+    },
+    "options_compare_btn": {
+        "message": "\u88fd\u54c1\u6bd4\u8f03\u3092\u898b\u308b"
+    },
+    "options_compare_title": {
+        "message": "\u3088\u308a\u5f37\u529b\u306a\u4fdd\u8b77\u3092\u5229\u7528\u3059\u308b\u306b\u306f\u305c\u3072 AdGuard Premium \u3092\u304a\u8a66\u3057\u304f\u3060\u3055\u3044\uff01"
+    },
+    "options_license_agreement": {
+        "message": "\u4f7f\u7528\u8a31\u8afe\u5951\u7d04"
+    },
+    "options_privacy_policy": {
+        "message": "\u30d7\u30e9\u30a4\u30d0\u30b7\u30fc\u30dd\u30ea\u30b7\u30fc"
+    },
+    "options_acknowledgment": {
+        "message": "\u8b1d\u8f9e"
+    },
+    "options_github": {
+        "message": "Github"
+    },
+    "onboarding_safari_desc": {
+        "message": "Safari\u74b0\u5883\u8a2d\u5b9a\u306e\u300cAdGuard Safari Icon\u300d\u3068\u300cAdGuard\u300d\u306e\u6a2a\u306b\u3042\u308b\u30c1\u30a7\u30c3\u30af\u30dc\u30c3\u30af\u30b9\u306b\u30c1\u30a7\u30c3\u30af\u3092\u5165\u308c\u3066\u304f\u3060\u3055\u3044"
+    },
+    "onboarding_safari_btn": {
+        "message": "\u74b0\u5883\u8a2d\u5b9a\u3092\u958b\u304f"
+    },
+    "options_learn_more": {
+        "message": "\u8a73\u7d30\u306f\u3053\u3061\u3089"
+    },
+    "options_about_version": {
+        "message": "\u30d0\u30fc\u30b8\u30e7\u30f3 %s"
+    },
+    "notification_user_filter_updated_title": {
+        "message": "\u30e6\u30fc\u30b6\u30fc\u30d5\u30a3\u30eb\u30bf\u66f4\u65b0\u5b8c\u4e86"
+    },
+    "notification_user_filter_updated_desc": {
+        "message": "\u30e6\u30fc\u30b6\u30fc\u30d5\u30a3\u30eb\u30bf\u306b\u65b0\u3057\u3044\u30eb\u30fc\u30eb\u304c\u8ffd\u52a0\u3055\u308c\u307e\u3057\u305f\uff1a"
+    }
+}
