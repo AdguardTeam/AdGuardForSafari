@@ -35,6 +35,8 @@
 		655C8662212AEA3200CB6DAE /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863D212AEA3200CB6DAE /* NSDate+Utils.m */; };
 		655C8665212AEA3200CB6DAE /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8640212AEA3200CB6DAE /* NSString+Utils.m */; };
 		655C8667212AEA3200CB6DAE /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8642212AEA3200CB6DAE /* NSException+Utils.m */; };
+		6582EECA2183435C007DC151 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6582EECC2183435C007DC151 /* InfoPlist.strings */; };
+		6582EED121834467007DC151 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6582EED321834467007DC151 /* InfoPlist.strings */; };
 		6584716E2136B373005C74E8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
 		658471712136B373005C74E8 /* blocking-content-empry.json in Resources */ = {isa = PBXBuildFile; fileRef = 658471702136B373005C74E8 /* blocking-content-empry.json */; };
 		658471742136B373005C74E8 /* ContentBlockerRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 658471732136B373005C74E8 /* ContentBlockerRequestHandler.m */; };
@@ -203,6 +205,12 @@
 		65720AC021219ACB00B2381C /* AdGuard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuard.entitlements; sourceTree = "<group>"; };
 		657215562121F30600B2381C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		6582EEC0218334F8007DC151 /* ElectronLoginItem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ElectronLoginItem.entitlements; sourceTree = "<group>"; };
+		6582EECB2183435C007DC151 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6582EECD21834381007DC151 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6582EECE21834382007DC151 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6582EED221834467007DC151 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6582EED421834468007DC151 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6582EED5218344E9007DC151 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6584716D2136B372005C74E8 /* AdGuardForSafariBlockerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdGuardForSafariBlockerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		658471702136B373005C74E8 /* blocking-content-empry.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "blocking-content-empry.json"; sourceTree = "<group>"; };
 		658471722136B373005C74E8 /* ContentBlockerRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentBlockerRequestHandler.h; sourceTree = "<group>"; };
@@ -314,6 +322,7 @@
 				6504C10E2136EA2D007E9674 /* PopupView.h */,
 				6504C10F2136EA2D007E9674 /* PopupView.m */,
 				6504C10A2136BF10007E9674 /* Info.plist */,
+				6582EED321834467007DC151 /* InfoPlist.strings */,
 				65975C9C2148266C007F766E /* toolbar-on.pdf */,
 				65C8B03B2146635B00B2E7FD /* assistant.embedded.js */,
 				65C8B03D21467AF500B2E7FD /* assistant.runner.js */,
@@ -435,6 +444,7 @@
 				658471722136B373005C74E8 /* ContentBlockerRequestHandler.h */,
 				658471732136B373005C74E8 /* ContentBlockerRequestHandler.m */,
 				658471752136B373005C74E8 /* Info.plist */,
+				6582EECC2183435C007DC151 /* InfoPlist.strings */,
 				658471762136B373005C74E8 /* BlockerExtension.entitlements */,
 			);
 			path = BlockerExtension;
@@ -728,6 +738,7 @@
 				65216A0D212436EA00ABF7D0 /* SafariExtensionViewController.xib in Resources */,
 				65D151852139771A0014BE79 /* defaults.plist in Resources */,
 				65975C9521481540007F766E /* Assets.xcassets in Resources */,
+				6582EED121834467007DC151 /* InfoPlist.strings in Resources */,
 				65216A10212436EA00ABF7D0 /* script.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -737,6 +748,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65D151862139771A0014BE79 /* defaults.plist in Resources */,
+				6582EECA2183435C007DC151 /* InfoPlist.strings in Resources */,
 				65975C9621481540007F766E /* Assets.xcassets in Resources */,
 				658471712136B373005C74E8 /* blocking-content-empry.json in Resources */,
 			);
@@ -867,6 +879,26 @@
 				6527597A216CBAEC00F25AA9 /* de */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		6582EECC2183435C007DC151 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6582EECB2183435C007DC151 /* ru */,
+				6582EECD21834381007DC151 /* en */,
+				6582EECE21834382007DC151 /* de */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6582EED321834467007DC151 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6582EED221834467007DC151 /* en */,
+				6582EED421834468007DC151 /* ru */,
+				6582EED5218344E9007DC151 /* de */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
