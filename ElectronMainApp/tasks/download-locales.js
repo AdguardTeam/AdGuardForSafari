@@ -3,7 +3,8 @@ const path = require('path');
 const gulp = require('gulp');
 const md5 = require('gulp-hash-creator');
 const requestPromise = require('request-promise');
-const { LOCALES, LOCALES_DIR, PRIVATE_FILES } = require('./consts');
+const { LOCALES_DIR, PRIVATE_FILES } = require('./consts');
+const { LOCALES } = require('../locales/locales');
 
 /**
  * We use this pairs because we have different locale codes in the onesky and the extension
