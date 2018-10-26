@@ -202,6 +202,7 @@
 		65720ABD21219ACB00B2381C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65720AC021219ACB00B2381C /* AdGuard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuard.entitlements; sourceTree = "<group>"; };
 		657215562121F30600B2381C /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		6582EEC0218334F8007DC151 /* ElectronLoginItem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ElectronLoginItem.entitlements; sourceTree = "<group>"; };
 		6584716D2136B372005C74E8 /* AdGuardForSafariBlockerExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdGuardForSafariBlockerExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		658471702136B373005C74E8 /* blocking-content-empry.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "blocking-content-empry.json"; sourceTree = "<group>"; };
 		658471722136B373005C74E8 /* ContentBlockerRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentBlockerRequestHandler.h; sourceTree = "<group>"; };
@@ -422,6 +423,7 @@
 				65720ABD21219ACB00B2381C /* Info.plist */,
 				65720AC021219ACB00B2381C /* AdGuard.entitlements */,
 				65216A2F2124517700ABF7D0 /* ElectronChild.entitlements */,
+				6582EEC0218334F8007DC151 /* ElectronLoginItem.entitlements */,
 			);
 			path = AdGuard;
 			sourceTree = "<group>";
@@ -1117,7 +1119,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = AdGuard/AdGuard.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_EXPAND_BUILD_SETTINGS = YES;
 				INFOPLIST_FILE = AdGuard/Info.plist;
@@ -1136,7 +1138,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = AdGuard/AdGuard.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_EXPAND_BUILD_SETTINGS = YES;
 				INFOPLIST_FILE = AdGuard/Info.plist;

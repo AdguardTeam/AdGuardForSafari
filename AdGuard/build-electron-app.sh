@@ -6,7 +6,7 @@
 #  Created by Roman Sokolov on 14.08.2018.
 #  Copyright © 2018 Adguard Software Ltd. All rights reserved.
 
-PLATFORM=darwin
+PLATFORM=mas
 ARCH=x64
 
 SRC="${SRCROOT}/../ElectronMainApp"
@@ -39,6 +39,8 @@ fi
 #Run this binary file to rebuild node packages for electron
 "${SRC}/node_modules/.bin/electron-rebuild"
 
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
+
 electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=2.0.8 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
 --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
 ${OPT} || exit 1
@@ -46,15 +48,14 @@ ${OPT} || exit 1
 APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
 FRAMEWORKS="${APP}/Contents/Frameworks"
 
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Resources/crashpad_handler" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/Mantle.framework" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/ReactiveCocoa.framework" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework/Versions/A/Resources/ShipIt" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper EH.app" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper NP.app" || exit 1
-codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTION_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper.app" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Electron Framework" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libnode.dylib" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper EH.app" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper NP.app" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper.app" || exit 1
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_LOGINHELPER_ENT}" "${APP}/Contents/Library/LoginItems/${PRODUCT_NAME} Login Helper.app" || exit 1
 
 DST_DIR="${BUILT_PRODUCTS_DIR}"
 if [ ${ACTION} == "install" ]; then
