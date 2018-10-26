@@ -59,7 +59,7 @@
             <div class="onboarding__desc" i18n="onboarding_safari_desc"></div>
             <button id="open-safari-extensions-settings-btn" class="button button--green onboarding__btn" i18n="onboarding_safari_btn"></button>
         </div>
-        <div id="general-settings" class="settings-content tab-pane">
+        <div id="general-settings" class="settings-content settings-content--general tab-pane">
             <div class="settings-body">
                 <div class="subtitle settings-body-subtitle" i18n="options_general_settings"></div>
                 <ul class="opts-list">
@@ -110,7 +110,10 @@
                     <!--<a href="#" id="importSettingsFile" i18n="options_import_settings" class="button button&#45;&#45;green-bd button&#45;&#45;link"></a>-->
                 <!--</div>-->
             <!--</div>-->
-            <div class="settings-content__desc" i18n="options_general_desc"></div>
+            <div class="settings-content__desc">
+                <span i18n="options_general_desc"></span>
+                <a i18n="options_general_desc_link" target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'></a>
+            </div>
         </div>
 
         <div id="antibanner" class="settings-content tab-pane">
@@ -251,8 +254,9 @@
                         <div id="whiteListRules" class="user-rules"></div>
                     </div>
                 </div>
-                <div class="settings-actions">
+                <div class="settings-actions settings-actions--saved">
                     <a class="button button--green button--m settings-content__save-btn" id="whiteListFilterApplyChanges" href="#" i18n="options_modal_save"></a>
+                    <div i18n="options_saved_status" class="filter-rules__label filter-rules__label--saved" id="whitelistSaveIndicator"></div>
                 </div>
             </div>
         </div>
@@ -266,8 +270,9 @@
                         <div id="userRules" class="user-rules"></div>
                     </div>
                 </div>
-                <div class="settings-actions">
+                <div class="settings-actions settings-actions--saved">
                     <a class="button button--green button--m settings-content__save-btn" id="userFilterApplyChanges" href="#" i18n="options_modal_save"></a>
+                    <div i18n="options_saved_status" class="filter-rules__label filter-rules__label--saved" id="userRulesSaveIndicator"></div>
                 </div>
             </div>
         </div>
