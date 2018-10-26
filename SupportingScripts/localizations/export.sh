@@ -32,8 +32,11 @@ usage
 exit 1
 fi
 
-# Project root directory
-THEROOT="${SRCROOT}/Extension"
+# Project root directory of Extension
+EXTENSION="${SRCROOT}/Extension"
+
+# Project root directory of Blocker Extension
+BLOCKEREXTENSION="${SRCROOT}/BlockerExtension"
 
 # XIB FILES LIST PATH
 XIBFILESLIST="${SCRIPTDIR}/Resources/xib-files-list.txt"
@@ -82,9 +85,9 @@ echo "Uploading Application Strings for DEV locale"
 file="Localizable.strings"
 
 echo "Main App strings uploading.. "
-find "${THEROOT}" -name \*.m | xargs genstrings -o "${THEROOT}"
+find "${EXTENSION}" -name \*.m | xargs genstrings -o "${EXTENSION}"
 
-python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${THEROOT}/Base.lproj/${file}" -r IOS_STRINGS
+python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${EXTENSION}/Base.lproj/${file}" -r IOS_STRINGS
 
 echo "Done"
 
@@ -101,3 +104,5 @@ npm run upload-locales
 echo "Done"
 
 echo "Upload finished JavaScript files"
+
+echo "========================= UPLOAD INFO.PLIST FILE =============================="
