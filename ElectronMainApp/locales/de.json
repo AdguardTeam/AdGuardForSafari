@@ -1,4 +1,10 @@
 {
+    "options_general_desc_link": {
+        "message": "unserem GitHub-Repository."
+    },
+    "options_saved_status": {
+        "message": "Gespeichert"
+    },
     "name": {
         "message": "AdGuard Werbeblocker"
     },
@@ -12,7 +18,7 @@
         "message": "Allgemeine"
     },
     "options_general_desc": {
-        "message": "AdGuard f\u00fcr Safari ist eine freie Open-Source-Software. Wir freuen uns \u00fcber Ihr Feedback und Ihre Beitr\u00e4ge. Falls Sie einen Fehler melden oder eine Funktion anfragen m\u00f6chten, gehen Sie bitte zu <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>unserem GitHub-Repository<\/a>. "
+        "message": "AdGuard f\u00fcr Safari ist eine freie Open-Source-Software. Wir freuen uns \u00fcber Ihr Feedback und Ihre Beitr\u00e4ge. Falls Sie einen Fehler melden oder eine Funktion anfragen m\u00f6chten, gehen Sie bitte zu <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>unserem GitHub-Repository<\/a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Werbeanzeigen in Suchvorg\u00e4ngen und Eigen-Werbung der Webseiten erlauben<a target='_blank' href='https:\/\/kb.adguard.com\/general\/search-ads-and-self-promotion?utm_source=extension&aid=16593' class='sp-table-row-info'>Mehr erfahren<\/a>"
