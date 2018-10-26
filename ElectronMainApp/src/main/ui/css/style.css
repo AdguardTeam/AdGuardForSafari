@@ -49,7 +49,7 @@
   align-items: flex-start;
 }
 .settings-content__desc {
-  margin-top: 235px;
+  margin-top: auto;
   max-width: 650px;
   font-size: 14px;
   line-height: 24px;
@@ -70,6 +70,7 @@
   font-size: 18px;
   color: #4d4d4d;
   margin-bottom: 15px;
+  padding: 0 15px;
 }
 .settings-sidebar {
   background-color: #fff;
@@ -101,7 +102,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-left: 60px;
+  margin-left: 50px;
 }
 .settings-sidebar .nav span {
   display: inline-block;
@@ -155,6 +156,9 @@
   color: #ffffff;
   text-decoration: none;
 }
+.settings-content--general {
+  min-height: 550px;
+}
 .settings-actions-wr {
   display: flex;
   justify-content: space-between;
@@ -179,11 +183,12 @@
   position: relative;
   cursor: pointer;
   margin-bottom: 20px;
+  padding: 0 15px;
 }
 .settings-actions--update-filters {
   position: absolute;
   margin: 0;
-  right: 0;
+  right: 15px;
   top: calc(50% - 12px);
 }
 .settings-actions--update-filters a {
@@ -198,6 +203,9 @@
 }
 .settings-actions--update-filters a.active {
   animation: clockwise 2s linear infinite;
+}
+.settings-actions--saved {
+  position: relative;
 }
 .setting-desc {
   margin-bottom: 20px;
@@ -1344,6 +1352,7 @@ li.active .toggler:before {
 .about-opt__logo {
   width: 160px;
   margin-bottom: 25px;
+  transform: translateX(-4px);
 }
 .about-opt__version {
   margin-bottom: 10px;
@@ -1407,8 +1416,35 @@ li.active .toggler:before {
 .settings-content .settings-content__save-btn {
   color: #fff;
   text-decoration: none;
+  display: inline-block;
 }
 
 .settings-actions .settings-content__save-btn:last-child {
   padding-right: 30px;
+}
+
+.filter-rules__label {
+  position: absolute;
+  bottom: calc(50% - 11px);
+  right: 0;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 22px;
+}
+.filter-rules__label--saved {
+  padding-right: 20px;
+}
+.filter-rules__label--saved:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 4px;
+  background-image: url(../images/tick.svg);
+  background-size: cover;
+  width: 12px;
+  height: 12px;
 }

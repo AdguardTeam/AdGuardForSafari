@@ -241,6 +241,7 @@ const WhiteListFilter = function (options) {
     editor.session.setMode("ace/mode/text_highlight_rules");
 
     const applyChangesBtn = document.querySelector('#whiteListFilterApplyChanges');
+    const applyChangesStatus = document.querySelector('#whitelistSaveIndicator');
     const changeDefaultWhiteListModeCheckbox = document.querySelector('#changeDefaultWhiteListMode');
 
     function loadWhiteListDomains() {
@@ -249,7 +250,7 @@ const WhiteListFilter = function (options) {
         }));
 
         editor.setValue(response.content || '');
-        applyChangesBtn.style.display = 'none';
+        applyChangesStatus.style.display = 'none';
     }
 
     function saveWhiteListDomains(e) {
@@ -266,7 +267,10 @@ const WhiteListFilter = function (options) {
         }));
 
         editor.setReadOnly(false);
-        applyChangesBtn.style.display = 'none';
+        applyChangesStatus.style.display = 'inline-block';
+        setTimeout(function () {
+            applyChangesStatus.style.display = 'none'
+        }, 3000);
     }
 
     function updateWhiteListDomains() {
@@ -294,10 +298,6 @@ const WhiteListFilter = function (options) {
 
     CheckboxUtils.updateCheckbox([changeDefaultWhiteListModeCheckbox], !options.defaultWhiteListMode);
 
-    editor.getSession().addEventListener('change', function () {
-        applyChangesBtn.style.display = 'inline-block';
-    });
-
     return {
         updateWhiteListDomains: updateWhiteListDomains
     };
@@ -321,6 +321,7 @@ const UserFilter = function () {
     editor.session.setMode("ace/mode/text_highlight_rules");
 
     const applyChangesBtn = document.querySelector('#userFilterApplyChanges');
+    const applyChangesStatus = document.querySelector('#userRulesSaveIndicator');
 
     function loadUserRules() {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
@@ -329,7 +330,7 @@ const UserFilter = function () {
 
         ipcRenderer.on('getUserRulesResponse', (e, arg) => {
             editor.setValue(arg.content || '');
-            applyChangesBtn.style.display = 'none';
+            applyChangesStatus.style.display = 'none';
         });
     }
 
@@ -347,7 +348,10 @@ const UserFilter = function () {
         }));
 
         editor.setReadOnly(false);
-        applyChangesBtn.style.display = 'none';
+        applyChangesStatus.style.display = 'inline-block';
+        setTimeout(function () {
+            applyChangesStatus.style.display = 'none'
+        }, 3000);
     }
 
     function updateUserFilterRules() {
@@ -360,10 +364,6 @@ const UserFilter = function () {
     }
 
     applyChangesBtn.addEventListener('click', saveUserRules);
-
-    editor.getSession().addEventListener('change', function () {
-        applyChangesBtn.style.display = 'inline-block';
-    });
 
     return {
         updateUserFilterRules: updateUserFilterRules
