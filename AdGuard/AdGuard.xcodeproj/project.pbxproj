@@ -164,6 +164,10 @@
 		5D04E2F32187363B00A45CD3 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5D04E2F42187363B00A45CD3 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5D04E2F52187363B00A45CD3 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5D04E2FA21873B3B00A45CD3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SafariExtensionViewController.strings"; sourceTree = "<group>"; };
+		5D04E2FB21873B3B00A45CD3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		5D04E2FC21873B3B00A45CD3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		5D04E2FD21873B3B00A45CD3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		65024EA62126C80D00342E3C /* AdGuardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdGuardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65024EA82126C80D00342E3C /* AdGuardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdGuardTests.m; sourceTree = "<group>"; };
 		65024EAA2126C80D00342E3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -714,6 +718,7 @@
 				es,
 				ja,
 				da,
+				"zh-Hans",
 			);
 			mainGroup = 65720AA921219AC900B2381C;
 			productRefGroup = 65720AB321219AC900B2381C /* Products */;
@@ -890,6 +895,7 @@
 				5D04E2EA21836B2700A45CD3 /* es */,
 				5D04E2EE21836B2E00A45CD3 /* ja */,
 				5D04E2F22187363B00A45CD3 /* da */,
+				5D04E2FA21873B3B00A45CD3 /* zh-Hans */,
 			);
 			name = SafariExtensionViewController.xib;
 			sourceTree = "<group>";
@@ -905,6 +911,7 @@
 				5D04E2EC21836B2800A45CD3 /* es */,
 				5D04E2F021836B2E00A45CD3 /* ja */,
 				5D04E2F42187363B00A45CD3 /* da */,
+				5D04E2FC21873B3B00A45CD3 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -919,6 +926,7 @@
 				5D04E2ED21836B2800A45CD3 /* es */,
 				5D04E2F121836B2E00A45CD3 /* ja */,
 				5D04E2F52187363B00A45CD3 /* da */,
+				5D04E2FD21873B3B00A45CD3 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -933,6 +941,7 @@
 				5D04E2EB21836B2700A45CD3 /* es */,
 				5D04E2EF21836B2E00A45CD3 /* ja */,
 				5D04E2F32187363B00A45CD3 /* da */,
+				5D04E2FB21873B3B00A45CD3 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

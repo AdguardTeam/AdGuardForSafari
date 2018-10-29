@@ -1,0 +1,257 @@
+{
+    "options_saved_status": {
+        "message": "\u5df2\u8282\u7701"
+    },
+    "name": {
+        "message": "AdGuard \u5e7f\u544a\u62e6\u622a\u5668"
+    },
+    "description": {
+        "message": "\u65e0\u4e0e\u4f26\u6bd4\u7684\u9488\u5bf9\u5e7f\u544a\u548c\u5f39\u7a97\u7684\u5e7f\u544a\u62e6\u622a\u6269\u5c55\u3002\u62e6\u622a Facebook\uff0cYoutube \u548c\u5176\u5b83\u6240\u6709\u7f51\u7ad9\u4e0a\u7684\u5e7f\u544a\u3002"
+    },
+    "options_settings": {
+        "message": "AdGuard for Safari - \u8bbe\u7f6e"
+    },
+    "options_general_settings": {
+        "message": "\u5e38\u89c4"
+    },
+    "options_general_desc": {
+        "message": "AdGuard for Safari \u662f\u4e00\u6b3e\u514d\u8d39\u5f00\u6e90\u7684\u8f6f\u4ef6\u3002\u6211\u4eec\u6b22\u8fce\u60a8\u53cd\u9988\u548c\u8d21\u732e\u3002\u5982\u60a8\u8981\u62a5\u544a\u9519\u8bef\u6216\u8bf7\u6c42\u65b0\u7279\u6027\uff0c\u8bf7\u8f6c\u5230 <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>Github \u4ee5\u62a5\u544a\u7ed9\u6211\u4eec<\/a>\u3002"
+    },
+    "options_allow_acceptable_ads": {
+        "message": "\u5141\u8bb8\u641c\u7d22\u5e7f\u544a\u548c\u7f51\u7ad9\u81ea\u5ba3\u4f20"
+    },
+    "options_export_settings": {
+        "message": "Export settings"
+    },
+    "options_import_settings": {
+        "message": "Import settings"
+    },
+    "options_antibanner": {
+        "message": "\u8fc7\u6ee4\u5668"
+    },
+    "options_antibanner_info": {
+        "message": "%s \u4e2a\u8fc7\u6ee4\u5668 %s \u6761\u89c4\u5219"
+    },
+    "options_filters_enabled": {
+        "message": "\u5df2\u5f00\u542f\uff1a"
+    },
+    "options_filters_enabled_and_more_divider": {
+        "message": "%s \u548c %s \u66f4\u591a"
+    },
+    "options_filters_enabled_and_divider": {
+        "message": "%s \u548c %s"
+    },
+    "options_filters_no_enabled": {
+        "message": "\u672a\u5f00\u542f\u4efb\u4f55\u8fc7\u6ee4\u5668"
+    },
+    "options_filters_version": {
+        "message": "\u7248\u672c %s"
+    },
+    "options_filters_updated": {
+        "message": "\u66f4\u65b0\u4e8e\uff1a%s"
+    },
+    "options_filters_empty_custom_filters": {
+        "message": "\u62b1\u6b49\uff0c\u60a8\u6ca1\u6709\u4efb\u4f55\u81ea\u5b9a\u4e49\u8fc7\u6ee4\u5668"
+    },
+    "options_filters_empty_custom_add_button": {
+        "message": "\u6dfb\u52a0\u81ea\u5b9a\u4e49\u8fc7\u6ee4\u5668"
+    },
+    "options_filters_custom_step_one_title": {
+        "message": "\u65b0\u8fc7\u6ee4\u5668\u8ba2\u9605"
+    },
+    "options_filters_custom_step_one_input_placeholder": {
+        "message": "\u8f93\u5165\u8fc7\u6ee4\u5668 URL"
+    },
+    "options_filters_custom_step_one_url_desc": {
+        "message": "\u8f93\u5165\u8fc7\u6ee4\u5668\u7684\u6709\u6548 URL \u4ee5\u8ba2\u9605\u3002"
+    },
+    "options_filters_custom_step_one_url_desc_more": {
+        "message": "AdGuard \u5c06\u6dfb\u52a0\u6b64\u8fc7\u6ee4\u5668\u8ba2\u9605\u3002"
+    },
+    "options_filters_custom_step_one_cancel": {
+        "message": "\u53d6\u6d88"
+    },
+    "options_filters_custom_step_one_next": {
+        "message": "\u4e0b\u4e00\u6b65"
+    },
+    "options_filters_custom_step_two_checking": {
+        "message": "\u4e0b\u8f7d\u8fc7\u6ee4\u5668"
+    },
+    "options_filters_custom_step_three_title": {
+        "message": "\u53d1\u751f\u9519\u8bef"
+    },
+    "options_filters_custom_step_three_desc": {
+        "message": "\u7531\u4e8e\u975e\u5e38\u610f\u5916\u9519\u8bef\uff0c\u5bfc\u81f4\u65e0\u6cd5\u6dfb\u52a0\u60a8\u7684\u81ea\u5b9a\u4e49\u8fc7\u6ee4\u5668\u3002"
+    },
+    "options_filters_custom_step_three_try_again": {
+        "message": "\u518d\u8bd5"
+    },
+    "options_filters_custom_step_final_title": {
+        "message": "\u65b0\u8fc7\u6ee4\u5668\u8ba2\u9605"
+    },
+    "options_filters_custom_step_final_filter_title": {
+        "message": "\u6807\u9898\uff1a"
+    },
+    "options_filters_custom_step_final_filter_description": {
+        "message": "\u63cf\u8ff0\uff1a"
+    },
+    "options_filters_custom_step_final_filter_version": {
+        "message": "\u7248\u672c\uff1a"
+    },
+    "options_filters_custom_step_final_filter_rules_count": {
+        "message": "\u89c4\u5219\u6570\u91cf\uff1a"
+    },
+    "options_filters_custom_step_final_filter_homepage": {
+        "message": "\u4e3b\u9875\uff1a"
+    },
+    "options_filters_custom_step_final_filter_url": {
+        "message": "URL\uff1a"
+    },
+    "options_filters_custom_step_final_back": {
+        "message": "\u8fd4\u56de"
+    },
+    "options_filters_custom_step_final_cancel": {
+        "message": "\u53d6\u6d88"
+    },
+    "options_filters_custom_step_final_commit": {
+        "message": "\u8ba2\u9605"
+    },
+    "options_filters_check_filters_update": {
+        "message": "\u68c0\u67e5\u8fc7\u6ee4\u5668\u66f4\u65b0"
+    },
+    "options_whitelist": {
+        "message": "\u767d\u540d\u5355"
+    },
+    "options_modal_save": {
+        "message": "\u4fdd\u5b58\u66f4\u6539"
+    },
+    "options_whitelist_description": {
+        "message": "AdGuard \u4e0d\u8fc7\u6ee4\u767d\u540d\u5355\u4e0a\u7684\u7f51\u7ad9\u3002"
+    },
+    "options_whitelist_inverse": {
+        "message": "\u98a0\u5012\u767d\u540d\u5355<span class='sp-table-row-info'>\u53d6\u6d88\u62e6\u622a\u6240\u6709\u7f51\u7ad9\u7684\u5e7f\u544a\uff0c\u767d\u540d\u5355\u4e0a\u7684\u7f51\u7ad9<i>\u9664\u5916<\/i><\/span>"
+    },
+    "options_userfilter": {
+        "message": "\u7528\u6237\u8fc7\u6ee4\u5668"
+    },
+    "options_userfilter_description": {
+        "message": "\u60a8\u53ef\u6dfb\u52a0\u81ea\u5df1\u7684\u89c4\u5219\u5230\u6b64\u8fc7\u6ee4\u5668\u3002\u6b64\u9009\u9879\u63a8\u8350\u7ed9\u90a3\u4e9b\u719f\u6089 HTML\/CSS \u7684\u9ad8\u7ea7\u7528\u6237\u3002\u9605\u8bfb<a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>\u8fc7\u6ee4\u5668\u89c4\u5219\u6307\u5357<\/a>\u4ee5\u4e86\u89e3\u5982\u4f55\u5199\u60a8\u81ea\u5df1\u7684\u8fc7\u6ee4\u5668\u89c4\u5219\u3002"
+    },
+    "options_show_app_updated_notification": {
+        "message": "\u901a\u77e5\u6269\u5c55\u66f4\u65b0"
+    },
+    "options_use_optimized_filters": {
+        "message": "\u4f7f\u7528\u4f18\u5316\u7684\u8fc7\u6ee4\u5668<span class='sp-table-row-info'>\u4e3a Safari \u5185\u5bb9\u62e6\u622a API \u4f18\u5316\u7684\u8f7b\u91cf\u7ea7\u8fc7\u6ee4\u5668\u5217\u8868\u3002<\/span>"
+    },
+    "options_popup_update_title": {
+        "message": "\u8fc7\u6ee4\u5668\u66f4\u65b0\u6210\u529f"
+    },
+    "options_popup_update_error_title": {
+        "message": "\u8fc7\u6ee4\u5668\u66f4\u65b0\u9519\u8bef"
+    },
+    "options_popup_update_not_found": {
+        "message": "\u672a\u627e\u5230\u66f4\u65b0"
+    },
+    "options_popup_update_error": {
+        "message": "\u83b7\u53d6\u66f4\u65b0\u5931\u8d25\u3002\u8bf7\u7a0d\u540e\u518d\u8bd5\u3002"
+    },
+    "options_popup_update_updated": {
+        "message": "\"$1\" \u5df2\u66f4\u65b0\u5230\u7248\u672c $2"
+    },
+    "options_popup_version_update_title": {
+        "message": "AdGuard for Safari \u521a\u521a\u66f4\u65b0\u81f3\u7248\u672c $1\u3002"
+    },
+    "options_popup_version_update_description_minor": {
+        "message": "\u6b64\u7248\u672c\u5305\u542b\u5927\u91cf\u7684\u9519\u8bef\u4fee\u6b63\u548c\u5c0f\u7684\u6539\u5584\u3002"
+    },
+    "options_popup_version_update_description_major": {
+        "message": "\u6b64\u4e3a\u4e3b\u8981\u6269\u5c55\u5347\u7ea7\uff0c\u5176\u5e26\u6709\u5927\u91cf\u65b0\u7279\u6027\u548c\u6539\u5584\u3002"
+    },
+    "notification_content_blocker_overlimit_title": {
+        "message": "\u7ecf\u8fc7"
+    },
+    "notification_content_blocker_overlimit_desc": {
+        "message": "\u5f00\u542f\u7684\u8fc7\u6ee4\u5668\u8fc7\u591a\u3002Safari \u6700\u591a\u4ec5\u53ef\u4f7f\u7528 50000\u6761\u89c4\u5219\u3002"
+    },
+    "options_content_blocker_overlimit": {
+        "message": "\u5f00\u542f\u7684\u8fc7\u6ee4\u5668\u8fc7\u591a\u3002Safari \u6700\u591a\u4ec5\u53ef\u4f7f\u7528 50000\u6761\u89c4\u5219\u3002"
+    },
+    "options_filters_list_search_placeholder": {
+        "message": "\u641c\u7d22"
+    },
+    "main_menu_edit": {
+        "message": "\u7f16\u8f91"
+    },
+    "main_menu_undo": {
+        "message": "\u64a4\u9500"
+    },
+    "main_menu_cut": {
+        "message": "\u526a\u5207"
+    },
+    "main_menu_copy": {
+        "message": "\u590d\u5236"
+    },
+    "main_menu_paste": {
+        "message": "\u7c98\u8d34"
+    },
+    "main_menu_select-all": {
+        "message": "\u9009\u62e9\u5168\u90e8"
+    },
+    "tray_menu_about": {
+        "message": "\u5173\u4e8e"
+    },
+    "tray_menu_preferences": {
+        "message": "\u9996\u9009\u9879"
+    },
+    "tray_menu_check_updates": {
+        "message": "\u68c0\u67e5\u8fc7\u6ee4\u5668\u66f4\u65b0"
+    },
+    "tray_menu_launch_at_startup": {
+        "message": "AdGuard \u968f\u7cfb\u7edf\u542f\u52a8\u8fd0\u884c"
+    },
+    "tray_menu_quit": {
+        "message": "\u9000\u51fa"
+    },
+    "options_last_update": {
+        "message": "\u6700\u540e\u66f4\u65b0\u4e8e\uff1a"
+    },
+    "options_about": {
+        "message": "\u5173\u4e8e"
+    },
+    "options_compare_btn": {
+        "message": "\u6bd4\u8f83\u5b83\u4eec"
+    },
+    "options_compare_title": {
+        "message": "\u4f7f\u7528 AdGuard Premium \u4ee5\u83b7\u53d6\u66f4\u4f73\u4fdd\u62a4\uff01"
+    },
+    "options_license_agreement": {
+        "message": "\u6700\u7ec8\u7528\u6237\u8bb8\u53ef\u534f\u8bae"
+    },
+    "options_privacy_policy": {
+        "message": "\u9690\u79c1\u7b56\u7565"
+    },
+    "options_acknowledgment": {
+        "message": "\u81f4\u8c22"
+    },
+    "options_github": {
+        "message": "Github"
+    },
+    "onboarding_safari_desc": {
+        "message": "\u5728 Safari \u9996\u9009\u9879\u9875\u5185\uff0c\u590d\u9009\u6846\u7d27\u90bb  \"AdGuard Safari \u56fe\u6807\" \u548c \"AdGuard\""
+    },
+    "onboarding_safari_btn": {
+        "message": "\u6253\u5f00\u9996\u9009\u9879"
+    },
+    "options_learn_more": {
+        "message": "\u4e86\u89e3\u66f4\u591a\u4fe1\u606f"
+    },
+    "options_about_version": {
+        "message": "\u7248\u672c %s"
+    },
+    "notification_user_filter_updated_title": {
+        "message": "\u7528\u6237\u8fc7\u6ee4\u5668\u5df2\u66f4\u65b0"
+    },
+    "notification_user_filter_updated_desc": {
+        "message": "\u65b0\u89c4\u5219\u5df2\u6dfb\u52a0\u81f3\u7528\u6237\u8fc7\u6ee4\u5668\uff1a"
+    }
+}
