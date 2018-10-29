@@ -1417,6 +1417,7 @@ li.active .toggler:before {
   color: #fff;
   text-decoration: none;
   display: inline-block;
+  padding: 0 40px;
 }
 
 .settings-actions .settings-content__save-btn:last-child {
