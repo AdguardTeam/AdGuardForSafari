@@ -17,11 +17,11 @@ SCRIPTDIR="$( cd "$( dirname "$0" )" && pwd )"
 
 if [ $1 ]
 then cd $1
-if [ ! $? == 0 ]; then
-    echo "Can't change current dir to \"$1\""
-    usage
-    exit 1
-fi
+    if [ ! $? == 0 ]; then
+        echo "Can't change current dir to \"$1\""
+        usage
+        exit 1
+    fi
 fi
 
 SRCROOT="$( pwd )/${projectRootFolder}"
@@ -35,8 +35,11 @@ usage
 exit 1
 fi
 
-# Project root directory
-THEROOT="${SRCROOT}/Extension"
+# Project root directory of Extension
+EXTENSION="${SRCROOT}/Extension"
+
+# Project root directory of Blocker Extension
+BLOCKEREXTENSION="${SRCROOT}/BlockerExtension"
 
 # XIB FILES LIST PATH
 XIBFILESLIST="${SCRIPTDIR}/Resources/xib-files-list.txt"
@@ -44,13 +47,14 @@ XIBFILESLIST="${SCRIPTDIR}/Resources/xib-files-list.txt"
 ####### Getting project locales
 
 LOCALES=
-for file in "${THEROOT}"/*.lproj; do
+for file in "${EXTENSION}"/*.lproj; do
 filename=$(basename "$file")
 filename="${filename%.*}"
 if [ "${filename}" != 'Base' ]; then
 LOCALES="${LOCALES} ${filename}"
 fi
 done
+
 
 ####### Downloading XIB function
 xibDownload()
@@ -89,29 +93,53 @@ if [ "${file}" ]; then
 xibDownload "${file}"
 fi
 
+
 ##############################
 echo "========================= UPDATING STRING FILES =============================="
 
 file="Localizable.strings"
-action_file="ActionExtensionLocalizable.strings"
-today_file="TodayExtensionLocalizable.strings"
 for locale in $LOCALES
 do
 echo "Download Main Application Strings for $locale locale"
 python "${SCRIPTDIR}/Resources/download.py" -l $locale -o "${PROJECT_TEMP_DIR}/${locale}_${file}" -f "${file}"
 if [ $? == 0 ]; then
-cp -fv "${PROJECT_TEMP_DIR}/${locale}_${file}" "${THEROOT}/$locale.lproj/$file"
+cp -fv "${PROJECT_TEMP_DIR}/${locale}_${file}" "${EXTENSION}/$locale.lproj/$file"
 rm "${PROJECT_TEMP_DIR}/${locale}_${file}"
 fi
 done
 
-echo "Import finished"
-
 
 ##############################
 echo "========================= UPDATING JavaScript FILES =============================="
-cd "ElectronMainApp"
 
+cd "ElectronMainApp"
 npm run download-locales
+cd ".."
 
 echo "Done"
+
+
+echo "========================= UPDATING InfoPlist FILES =============================="
+
+file="InfoPlist.strings"
+
+oneskyfiles="extension_${file} blockerextension_${file}"
+
+for oneskyfile in $oneskyfiles
+do
+    for locale in $LOCALES 
+    do
+        python "${SCRIPTDIR}/Resources/download.py" -l $locale -o "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}" -f "${oneskyfile}"
+        if [ $? == 0 ]; then
+            folder=${EXTENSION}
+            if [ $oneskyfile = "blockerextension_${file}" ]; then
+                folder=${BLOCKEREXTENSION}
+            fi
+            echo $folder
+            cp -fv "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}" "${folder}/$locale.lproj/$file"
+            rm "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
+        fi
+    done
+done
+
+echo "Import finished"

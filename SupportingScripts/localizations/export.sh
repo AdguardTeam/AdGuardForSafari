@@ -32,8 +32,11 @@ usage
 exit 1
 fi
 
-# Project root directory
-THEROOT="${SRCROOT}/Extension"
+# Project root directory of Extension
+EXTENSION="${SRCROOT}/Extension"
+
+# Project root directory of Blocker Extension
+BLOCKEREXTENSION="${SRCROOT}/BlockerExtension"
 
 # XIB FILES LIST PATH
 XIBFILESLIST="${SCRIPTDIR}/Resources/xib-files-list.txt"
@@ -62,7 +65,7 @@ python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${FILE}" -r IOS_STR
 rm "${FILE}"
 }
 
-###################################
+
 echo "========================= UPLOAD XIB FILES =============================="
 while read -r -u 10 file; do
 if [ "${file}" ]; then
@@ -74,30 +77,43 @@ if [ "${file}" ]; then
 xibUpload "${file}"
 fi
 
-#################################
+
 echo "========================= UPLOAD STRING FILES =============================="
 
 echo "Uploading Application Strings for DEV locale"
+echo "Main App strings uploading.. "
 
 file="Localizable.strings"
-
-echo "Main App strings uploading.. "
-find "${THEROOT}" -name \*.m | xargs genstrings -o "${THEROOT}"
-
-python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${THEROOT}/Base.lproj/${file}" -r IOS_STRINGS
+find "${EXTENSION}" -name \*.m | xargs genstrings -o "${EXTENSION}"
+python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${EXTENSION}/Base.lproj/${file}" -r IOS_STRINGS
 
 echo "Done"
-
 echo "Upload finished Native string files"
 
 
-#################################
 echo "========================= UPLOAD JSON FILE =============================="
 
 cd "ElectronMainApp"
 npm run rebuild-locales
 npm run upload-locales
+cd ".."
 
 echo "Done"
-
 echo "Upload finished JavaScript files"
+
+
+echo "========================= UPLOAD INFOPLIST FILE =============================="
+
+file="InfoPlist.strings"
+find "${EXTENSION}" -name \*.m | xargs genstrings -o "${EXTENSION}"
+cp -fv "${EXTENSION}/en.lproj/${file}" "${PROJECT_TEMP_DIR}/extension_${file}"
+python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}/extension_${file}" -r IOS_STRINGS
+# rm "${PROJECT_TEMP_DIR}/extension_${file}"
+
+find "${BLOCKEREXTENSION}" -name \*.m | xargs genstrings -o "${BLOCKEREXTENSION}"
+cp -fv "${BLOCKEREXTENSION}/en.lproj/${file}" "${PROJECT_TEMP_DIR}/blockerextension_${file}"
+python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}/blockerextension_${file}" -r IOS_STRINGS
+# rm "${PROJECT_TEMP_DIR}/blockerextension_${file}"
+
+echo "Done"
+echo "Upload finished InfoPlist files"

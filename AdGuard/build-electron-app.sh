@@ -41,7 +41,7 @@ fi
 
 codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
 
-electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=2.0.8 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
+electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=2.0.12 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
 --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
 ${OPT} || exit 1
 
