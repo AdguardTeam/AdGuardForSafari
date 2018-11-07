@@ -13,7 +13,7 @@
     <a href="https://twitter.com/AdGuard">Twitter</a> |
     <a href="https://t.me/adguard_en">Telegram</a>
     <br /><br />
-    <a href="https://github.com/AdguardTeam/AdguardForSafari/releases">
+    <a href="https://agrd.io/safari">
         <img src="https://img.shields.io/badge/download-app%20store-blue.svg" alt="Download on the AppStore" />
     </a>
     <a href="https://github.com/AdguardTeam/AdguardForSafari/releases">
