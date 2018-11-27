@@ -1,5 +1,6 @@
 const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
+const path = require('path');
 
 /* Reconfigure path to config */
 process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
@@ -27,6 +28,10 @@ require('electron-debug')({
     showDevTools: false
 });
 
+
+require('electron-reload')(__dirname, {
+    electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
+});
 /**
  * Creates main window
  */
