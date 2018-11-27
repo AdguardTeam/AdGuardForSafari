@@ -379,11 +379,7 @@ const WhiteListFilter = function (options) {
   editor.setShowPrintMargin(false);
 
   editor.$blockScrolling = Infinity;
-  // TODO check fix not working adguard text mode
-  // console.log(ace.require('ace/mode/adguard'));
-  // const AdguardMode = ace.require('ace/mode/adguard').Mode;
   editor.session.setMode('ace/mode/adguard');
-  // editor.session.setMode('ace/mode/text_highlight_rules');
   editor.setOption('wrap', true);
 
   const saveIndicatorElement = document.querySelector('#whiteListRulesSaveIndicator');
@@ -453,9 +449,6 @@ const UserFilter = function () {
   editor.setShowPrintMargin(false);
 
   editor.$blockScrolling = Infinity;
-  // TODO fix rules highlight
-  // const AdguardMode = ace.require('ace/mode/adguard').Mode;
-  // editor.session.setMode(new AdguardMode());
   editor.session.setMode('ace/mode/adguard');
   editor.setOption('wrap', true);
 
