@@ -222,6 +222,149 @@ const TopMenu = (function () {
 
 })();
 
+const Saver = function (options) {
+  this.indicatorElement = options.indicatorElement;
+  this.editor = options.editor;
+  this.saveEventType = options.saveEventType;
+  this.omitRenderEventsCount = 0;
+
+  const states = {
+    CLEAR: 1 << 0,
+    DIRTY: 1 << 1,
+    SAVING: 1 << 2,
+    SAVED: 1 << 3,
+  };
+
+  const indicatorText = {
+    [states.CLEAR]: '',
+    [states.DIRTY]: i18n.__('options_editor_indicator_editing.message'),
+    [states.SAVING]: i18n.__('options_editor_indicator_saving.message'),
+    [states.SAVED]: i18n.__('options_editor_indicator_saved.message'),
+  };
+
+  this.isSaving = function () {
+    return (this.currentState & states.SAVING) === states.SAVING;
+  };
+
+  this.isDirty = function () {
+    return (this.currentState & states.DIRTY) === states.DIRTY;
+  };
+
+  this.updateIndicator = function (state) {
+    this.indicatorElement.textContent = indicatorText[state];
+    switch (state) {
+      case states.DIRTY:
+      case states.CLEAR:
+      case states.SAVING:
+        this.indicatorElement.classList.remove('filter-rules__label--saved');
+        break;
+      case states.SAVED:
+        this.indicatorElement.classList.add('filter-rules__label--saved');
+        break;
+      default:
+        break;
+    }
+  };
+
+  let timeout;
+
+  const setState = (state, skipManageState = false) => {
+    this.currentState |= state;
+    switch (state) {
+      case states.DIRTY:
+        this.currentState &= ~states.CLEAR;
+        break;
+      case states.CLEAR:
+        this.currentState &= ~states.DIRTY;
+        break;
+      case states.SAVING:
+        this.currentState &= ~states.SAVED;
+        break;
+      case states.SAVED:
+        this.currentState &= ~states.SAVING;
+        break;
+      default:
+        break;
+    }
+
+    if (!skipManageState) {
+      this.manageState();
+    }
+  };
+
+  this.manageState = function () {
+    const EDIT_TIMEOUT_MS = 1000;
+    const HIDE_INDICATOR_TIMEOUT_MS = 1500;
+
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+
+    const self = this;
+
+    const isDirty = this.isDirty();
+    const isSaving = this.isSaving();
+
+    if (isDirty && !isSaving) {
+      this.updateIndicator(states.DIRTY);
+      timeout = setTimeout(() => {
+        self.saveRules();
+        setState(states.CLEAR, true);
+        setState(states.SAVING);
+      }, EDIT_TIMEOUT_MS);
+      return;
+    }
+
+    if (isDirty && isSaving) {
+      this.updateIndicator(states.DIRTY);
+      timeout = setTimeout(() => {
+        setState(states.CLEAR);
+        self.saveRules();
+      }, EDIT_TIMEOUT_MS);
+      return;
+    }
+
+    if (!isDirty && !isSaving && (this.omitRenderEventsCount === 1)) {
+      this.updateIndicator(states.SAVED);
+      timeout = setTimeout(() => {
+        self.updateIndicator(states.CLEAR);
+      }, HIDE_INDICATOR_TIMEOUT_MS);
+      return;
+    }
+
+    if (!isDirty && isSaving) {
+      this.updateIndicator(states.SAVING);
+    }
+  };
+
+  this.saveRules = function () {
+    this.omitRenderEventsCount += 1;
+    const text = this.editor.getValue();
+    ipcRenderer.send('renderer-to-main', JSON.stringify({
+      type: this.saveEventType,
+      content: text,
+    }));
+  };
+
+  const setDirty = () => {
+    setState(states.DIRTY);
+  };
+
+  const setSaved = () => {
+    if (this.omitRenderEventsCount > 0) {
+      setState(states.SAVED);
+      this.omitRenderEventsCount -= 1;
+      return true;
+    }
+    return false;
+  };
+
+  return {
+    setDirty: setDirty,
+    setSaved: setSaved,
+  };
+};
+
 /**
  * Whitelist block
  *
@@ -230,77 +373,67 @@ const TopMenu = (function () {
  * @constructor
  */
 const WhiteListFilter = function (options) {
-    'use strict';
+  'use strict';
 
-    let omitRenderEventsCount = 0;
+  const editor = ace.edit('whiteListRules');
+  editor.setShowPrintMargin(false);
 
-    const editor = ace.edit('whiteListRules');
-    editor.setShowPrintMargin(false);
+  editor.$blockScrolling = Infinity;
+  editor.session.setMode('ace/mode/adguard');
+  editor.setOption('wrap', true);
 
-    // Ace TextHighlightRules mode is edited in ace.js library file
-    editor.session.setMode("ace/mode/text_highlight_rules");
+  const saveIndicatorElement = document.querySelector('#whiteListRulesSaveIndicator');
+  const saver = new Saver({
+    editor: editor,
+    saveEventType: 'saveWhiteListDomains',
+    indicatorElement: saveIndicatorElement,
+  });
 
-    const applyChangesBtn = document.querySelector('#whiteListFilterApplyChanges');
-    const applyChangesStatus = document.querySelector('#whitelistSaveIndicator');
-    const changeDefaultWhiteListModeCheckbox = document.querySelector('#changeDefaultWhiteListMode');
+  const changeDefaultWhiteListModeCheckbox = document.querySelector('#changeDefaultWhiteListMode');
 
-    function loadWhiteListDomains() {
-        const response = ipcRenderer.sendSync('renderer-to-main', JSON.stringify({
-            'type': 'getWhiteListDomains'
-        }));
+  function loadWhiteListDomains() {
+    const response = ipcRenderer.sendSync('renderer-to-main', JSON.stringify({
+      'type': 'getWhiteListDomains'
+    }));
+      editor.setValue(response.content || '');
+  }
 
-        editor.setValue(response.content || '');
-        applyChangesStatus.style.display = 'none';
+  function updateWhiteListDomains() {
+    const omitRenderEvent = saver.setSaved();
+    if (omitRenderEvent) {
+      return;
     }
+    loadWhiteListDomains();
+  }
 
-    function saveWhiteListDomains(e) {
-        e.preventDefault();
-
-        omitRenderEventsCount = 1;
-
-        editor.setReadOnly(true);
-        const text = editor.getValue();
-
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'saveWhiteListDomains',
-            'content': text
-        }));
-
-        editor.setReadOnly(false);
-        applyChangesStatus.style.display = 'inline-block';
-        setTimeout(function () {
-            applyChangesStatus.style.display = 'none'
-        }, 3000);
+  const session = editor.getSession();
+  let initialChangeFired = false;
+  session.addEventListener('change', () => {
+    if (!initialChangeFired) {
+      initialChangeFired = true;
+      return;
     }
+    saver.setDirty();
+  });
 
-    function updateWhiteListDomains() {
-        if (omitRenderEventsCount > 0) {
-            omitRenderEventsCount--;
-            return;
-        }
+  function changeDefaultWhiteListMode(e) {
+    e.preventDefault();
 
-        loadWhiteListDomains();
-    }
+    ipcRenderer.send('renderer-to-main', JSON.stringify({
+      'type': 'changeDefaultWhiteListMode',
+      enabled: !e.currentTarget.checked
+    }));
 
-    function changeDefaultWhiteListMode(e) {
-        e.preventDefault();
+    updateWhiteListDomains();
+  }
 
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'changeDefaultWhiteListMode',
-            enabled: !e.currentTarget.checked
-        }));
+  changeDefaultWhiteListModeCheckbox.addEventListener('change', changeDefaultWhiteListMode);
 
-        updateWhiteListDomains();
-    }
+  CheckboxUtils.updateCheckbox([changeDefaultWhiteListModeCheckbox], !options.defaultWhiteListMode);
 
-    applyChangesBtn.addEventListener('click', saveWhiteListDomains);
-    changeDefaultWhiteListModeCheckbox.addEventListener('change', changeDefaultWhiteListMode);
-
-    CheckboxUtils.updateCheckbox([changeDefaultWhiteListModeCheckbox], !options.defaultWhiteListMode);
-
-    return {
-        updateWhiteListDomains: updateWhiteListDomains
-    };
+  return {
+    updateWhiteListDomains: updateWhiteListDomains,
+  };
 };
 
 /**
@@ -310,64 +443,53 @@ const WhiteListFilter = function (options) {
  * @constructor
  */
 const UserFilter = function () {
-    'use strict';
+  'use strict';
 
-    let omitRenderEventsCount = 0;
+  const editor = ace.edit('userRules');
+  editor.setShowPrintMargin(false);
 
-    const editor = ace.edit('userRules');
-    editor.setShowPrintMargin(false);
+  editor.$blockScrolling = Infinity;
+  editor.session.setMode('ace/mode/adguard');
+  editor.setOption('wrap', true);
 
-    // Ace TextHighlightRules mode is edited in ace.js library file
-    editor.session.setMode("ace/mode/text_highlight_rules");
+  const saveIndicatorElement = document.querySelector('#userRulesSaveIndicator');
+  const saver = new Saver({
+    editor: editor,
+    saveEventType: 'saveUserRules',
+    indicatorElement: saveIndicatorElement,
+  });
 
-    const applyChangesBtn = document.querySelector('#userFilterApplyChanges');
-    const applyChangesStatus = document.querySelector('#userRulesSaveIndicator');
+  function loadUserRules() {
+    ipcRenderer.send('renderer-to-main', JSON.stringify({
+      'type': 'getUserRules'
+    }));
 
-    function loadUserRules() {
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'getUserRules'
-        }));
+    ipcRenderer.on('getUserRulesResponse', (e, arg) => {
+      editor.setValue(arg.content || '');
+    });
+  }
 
-        ipcRenderer.on('getUserRulesResponse', (e, arg) => {
-            editor.setValue(arg.content || '');
-            applyChangesStatus.style.display = 'none';
-        });
+  function updateUserFilterRules() {
+    const omitRenderEvent = saver.setSaved();
+    if (omitRenderEvent) {
+      return;
     }
+    loadUserRules();
+  }
 
-    function saveUserRules(e) {
-        e.preventDefault();
-
-        omitRenderEventsCount = 1;
-
-        editor.setReadOnly(true);
-        const text = editor.getValue();
-
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'saveUserRules',
-            'content': text
-        }));
-
-        editor.setReadOnly(false);
-        applyChangesStatus.style.display = 'inline-block';
-        setTimeout(function () {
-            applyChangesStatus.style.display = 'none'
-        }, 3000);
+  const session = editor.getSession();
+  let initialChangeFired = false;
+  session.addEventListener('change', () => {
+    if (!initialChangeFired) {
+      initialChangeFired = true;
+      return;
     }
+    saver.setDirty();
+  });
 
-    function updateUserFilterRules() {
-        if (omitRenderEventsCount > 0) {
-            omitRenderEventsCount--;
-            return;
-        }
-
-        loadUserRules();
-    }
-
-    applyChangesBtn.addEventListener('click', saveUserRules);
-
-    return {
-        updateUserFilterRules: updateUserFilterRules
-    };
+  return {
+    updateUserFilterRules: updateUserFilterRules,
+  };
 };
 
 /**
@@ -1263,7 +1385,8 @@ PageController.prototype = {
         let onBoardingScreenEl = document.querySelector('#boarding-screen-placeholder');
         ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
             if (!arg) {
-                onBoardingScreenEl.style.display = 'flex';
+                // TODO uncomment this line before merge
+                // onBoardingScreenEl.style.display = 'flex';
             } else {
                 onBoardingScreenEl.style.display = 'none';
             }
