@@ -1,6 +1,6 @@
 /* global CheckboxUtils, ace, i18n, EventNotifierTypes */
 
-const {ipcRenderer} = require('electron');
+const { ipcRenderer } = require('electron');
 const moment = require('moment');
 
 /**
@@ -1366,6 +1366,7 @@ PageController.prototype = {
 
     init: function () {
 
+        this._preventDragAndDrop();
         this._customizeText();
         this._render();
 
@@ -1444,7 +1445,7 @@ PageController.prototype = {
         this.settings.render();
 
         // Initialize whitelist filter
-        this.whiteListFilter = new WhiteListFilter({defaultWhiteListMode: defaultWhitelistMode});
+        this.whiteListFilter = new WhiteListFilter({ defaultWhiteListMode: defaultWhitelistMode });
         this.whiteListFilter.updateWhiteListDomains();
 
         // Initialize User filter
@@ -1452,10 +1453,22 @@ PageController.prototype = {
         this.userFilter.updateUserFilterRules();
 
         // Initialize AntiBanner filters
-        this.antiBannerFilters = new AntiBannerFilters({rulesInfo: contentBlockerInfo});
+        this.antiBannerFilters = new AntiBannerFilters({ rulesInfo: contentBlockerInfo });
         this.antiBannerFilters.render();
 
         document.querySelector('#about-version-placeholder').textContent = i18n.__("options_about_version.message", environmentOptions.appVersion);
+    },
+
+    _preventDragAndDrop: function () {
+        document.addEventListener('dragover', function (event) {
+            event.preventDefault();
+            return false;
+        }, false);
+
+        document.addEventListener('drop', function (event) {
+            event.preventDefault();
+            return false;
+        }, false);
     }
 };
 
