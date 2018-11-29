@@ -1093,6 +1093,7 @@ const AntiBannerFilters = function (options) {
         const enabled = filter.enabled;
         loadedFiltersInfo.updateEnabled(filter, enabled);
         updateCategoryFiltersInfo(filter.groupId);
+        updateFilterMetadata(filter);
 
         const filterCheckbox = getFilterCheckbox(filterId);
         if (filterCheckbox) {
@@ -1116,7 +1117,11 @@ const AntiBannerFilters = function (options) {
 
     function onFilterDownloadFinished(filter) {
         getCategoryElement(filter.groupId).querySelector('.preloader').classList.remove('active');
+        updateFilterMetadata(filter);
+        setLastUpdatedTimeText(filter.lastUpdateTime);
+    }
 
+    function updateFilterMetadata(filter) {
         const filterEl = getFilterElement(filter.filterId);
         if (filterEl) {
             filterEl.querySelector('.preloader').classList.remove('active');
@@ -1128,8 +1133,6 @@ const AntiBannerFilters = function (options) {
             filterEl.querySelector('.last-update-time').textContent = `${i18n.__('options_filters_updated.message', timeUpdatedText)}`;
             filterEl.querySelector('.filter-version-desc').textContent = `${i18n.__('options_filters_version.message', filter.version)}`;
         }
-
-        setLastUpdatedTimeText(filter.lastUpdateTime);
     }
 
     return {
