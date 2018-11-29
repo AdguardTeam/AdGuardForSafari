@@ -699,9 +699,8 @@ const AntiBannerFilters = function (options) {
     }
 
     function getFilterTemplate(filter, enabled, showDeleteButton) {
-        const timeUpdated = moment(filter.lastUpdateTime || filter.timeUpdated);
-        timeUpdated.locale(environmentOptions.Prefs.locale);
-        const timeUpdatedText = timeUpdated.format("D/MM/YYYY HH:mm").toLowerCase();
+        const timeUpdated = new Date(filter.lastUpdateTime || filter.timeUpdated);
+        const timeUpdatedText = timeUpdated.toLocaleString(environmentOptions.Prefs.locale);
 
         let tagDetails = '';
         filter.tagsDetails.forEach(function (tag) {
@@ -1177,9 +1176,8 @@ const AntiBannerFilters = function (options) {
             let updateText = "";
             lastUpdateTime = loadedFiltersInfo.lastUpdateTime;
             if (lastUpdateTime) {
-                lastUpdateTime = moment(lastUpdateTime);
-                lastUpdateTime.locale(environmentOptions.Prefs.locale);
-                updateText = lastUpdateTime.format("D MMMM YYYY HH:mm").toLowerCase();
+                lastUpdateTime = new Date(lastUpdateTime);
+                updateText = lastUpdateTime.toLocaleString(environmentOptions.Prefs.locale);
             }
 
             document.querySelector('#lastUpdateTime').textContent = updateText;
@@ -1243,9 +1241,8 @@ const AntiBannerFilters = function (options) {
         if (filterEl) {
             filterEl.querySelector('.preloader').classList.remove('active');
 
-            const timeUpdated = moment(filter.lastUpdateTime || filter.timeUpdated);
-            timeUpdated.locale(environmentOptions.Prefs.locale);
-            const timeUpdatedText = timeUpdated.format("D/MM/YYYY HH:mm").toLowerCase();
+            const timeUpdated = new Date(filter.lastUpdateTime || filter.timeUpdated);
+            const timeUpdatedText = timeUpdated.toLocaleString(environmentOptions.Prefs.locale);
 
             filterEl.querySelector('.last-update-time').textContent = `${i18n.__('options_filters_updated.message', timeUpdatedText)}`;
             filterEl.querySelector('.filter-version-desc').textContent = `${i18n.__('options_filters_version.message', filter.version)}`;
