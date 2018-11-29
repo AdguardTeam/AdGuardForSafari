@@ -9,7 +9,8 @@
         "inspect": "electron --inspect=5858 .",
         "upload-locales": "gulp upload-locales",
         "download-locales": "gulp download-locales",
-        "rebuild-locales": "gulp rebuild-locales"
+        "rebuild-locales": "gulp rebuild-locales",
+        "electron-rebuild": "electron-rebuild"
     },
     "dependencies": {
         "config": "^1.31.0",
