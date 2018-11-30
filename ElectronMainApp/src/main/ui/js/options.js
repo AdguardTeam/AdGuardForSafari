@@ -1,7 +1,6 @@
 /* global CheckboxUtils, ace, i18n, EventNotifierTypes */
 
 const { ipcRenderer } = require('electron');
-const moment = require('moment');
 
 /**
  * Common utils
