@@ -1268,7 +1268,7 @@ const AntiBannerFilters = function (options) {
  * 
  * @param {string} id select ID
  * @param {Array<Object | number | string>} options Array of options
- * @param {string} parentId if you want to create new select pass container id
+ * @param {string | number} value current select value (set 'select' attribute to option)
  */
 const Select = function (id, options, value) {
     if (!id) {
