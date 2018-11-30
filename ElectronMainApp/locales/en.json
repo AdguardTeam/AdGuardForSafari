@@ -265,5 +265,18 @@
 	},
 	"options_filters_update_period": {
 		"message": "Filters update period"
+	},
+	"options_filters_update_period_number": {
+		"message": {
+			"zero": "%s hours",
+			"one": "%s hour",
+			"two": "%s hours",
+			"few": "%s hours",
+			"many": "%s hours",
+			"other": "%s hours"
+		}
+	},
+	"options_filters_period_not_update": {
+		"message": "Do not update"
 	}
 }

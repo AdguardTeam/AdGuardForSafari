@@ -1270,42 +1270,33 @@ const AntiBannerFilters = function (options) {
  * @param {Array<Object | number | string>} options Array of options
  * @param {string} parentId if you want to create new select pass container id
  */
-const Select = function (id, options, value, parentId) {
-    if (!id && !parentId) {
+const Select = function (id, options, value) {
+    if (!id) {
         console.error(`SELECT with id=${id} not found`);
         return;
     }
 
     let select = document.getElementById(id);
-    const parent = document.getElementById(parentId);
     if (!select) {
-        if (!parent) {
-            console.error(`Block with id=${parentId} not found`);
-            return;
-        }
         select = document.createElement('select');
-        select.setAttribute('id', id);
-        select.value = value;
     }
+    select.setAttribute('id', id);
+    select.value = value;
 
-    let optionsElems = [];
     if (Array.isArray(options)) {
-        optionsElems = options.map((item) => {
-            return typeof item === 'object' && item.value !== undefined && item.name !== undefined
-                ? new Option(item.value, item.name, item.value === value)
-                : new Option(item, item, item === value);
-        });
+        options
+            .map((item) => typeof item === 'object'
+                && item.value !== undefined
+                && item.name !== undefined
+                    ? new Option(item.value, item.name, item.value === value)
+                    : new Option(item, item, item === value)
+            )
+            .forEach(option => select.appendChild(option.render()));
     }
 
-    const render = function () {
-        optionsElems.forEach(option => {
-            select.appendChild(option.render())
-        });
-    }
+    const render = () => select;
 
-    return {
-        render
-    };
+    return { render };
 }
 
 /**
@@ -1322,13 +1313,9 @@ const Option = function (value, name, selected) {
     }
     option.innerText = name;
 
-    const render = function () {
-        return option;
-    };
+    const render = () => option;
 
-    return {
-        render
-    };
+    return { render };
 }
 
 /**
@@ -1374,30 +1361,11 @@ const Settings = function () {
             render: render
         };
     };
-
     const checkboxes = [];
     checkboxes.push(new Checkbox('#useOptimizedFilters', userSettings.names.USE_OPTIMIZED_FILTERS));
     checkboxes.push(new Checkbox('#showAppUpdatedNotification', userSettings.names.DISABLE_SHOW_APP_UPDATED_NOTIFICATION, {
         negate: true
     }));
-
-    const updateFiltersPeriod = userSettings.values[userSettings.names.UPDATE_FILTERS_PERIOD];
-    // TODO take periods from brwoser extension
-    // TODO add tranlations
-    const updateFiltersPeriodOptions = [
-        { value: 48, name: '48 hours (default)' },
-        { value: 24, name: '24 hours' },
-        { value: 1, name: '1 hour' },
-        { value: 0, name: 'Do not update' },
-    ];
-    const select = new Select('filterUpdatePeriod', updateFiltersPeriodOptions, updateFiltersPeriod);
-    const updateFilterPeriodSelect = document.getElementById('filterUpdatePeriod');
-    updateFilterPeriodSelect.addEventListener('change', (event) => {
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            type: 'changeUpdateFiltersPeriod',
-            value: parseInt(event.target.value)
-        }));
-    });
 
     const allowAcceptableAdsCheckbox = document.querySelector("#allowAcceptableAds");
     allowAcceptableAdsCheckbox.addEventListener('change', function () {
@@ -1414,6 +1382,30 @@ const Settings = function () {
         }
     });
 
+    const initUpdateFiltersPeriodSelect = () => {
+        const periods = [48, 24, 12, 6, 1]; // in hours
+        const periodSelectOptions = periods.map(item => ({
+            value: item,
+            name: i18n.__n('options_filters_update_period_number.message', item)
+        }));
+        periodSelectOptions.push({ 
+            value: -1,
+            name: i18n.__('options_filters_period_not_update.message')
+        });
+
+        const currentPeriodValue = userSettings.values[userSettings.names.UPDATE_FILTERS_PERIOD];
+        const periodSelect = document.getElementById('filterUpdatePeriod');
+        periodSelect && periodSelect.addEventListener('change', (event) => {
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                type: 'changeUpdateFiltersPeriod',
+                value: parseInt(event.target.value)
+            }));
+        });
+
+        return new Select('filterUpdatePeriod', periodSelectOptions, currentPeriodValue);
+    };
+    const periodSelect = initUpdateFiltersPeriodSelect();
+
     const updateAcceptableAdsCheckbox = function (filter) {
         if (filter.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID) {
             CheckboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], filter.enabled);
@@ -1421,7 +1413,7 @@ const Settings = function () {
     };
 
     const render = function () {
-        select.render();
+        periodSelect.render();
 
         for (let i = 0; i < checkboxes.length; i++) {
             checkboxes[i].render();

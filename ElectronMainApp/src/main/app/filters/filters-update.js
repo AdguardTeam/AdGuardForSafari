@@ -36,8 +36,8 @@ module.exports = (() => {
         // Scheduling job
         const updateFiltersPeriodInMs = settings.getUpdateFiltersPeriod() * 60 * 60 * 1000;
         const scheduleUpdate = () => {
-            if (!updateFiltersPeriodInMs) {
-                // Todo restore shedule if period changes from 0 to something
+            // User can disable autoupdate
+            if (updateFiltersPeriodInMs <= 0) {
                 return;
             }
             filterAutoupdateTimer = setTimeout(() => {
