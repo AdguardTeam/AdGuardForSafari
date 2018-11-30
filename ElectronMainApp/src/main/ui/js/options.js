@@ -1382,6 +1382,8 @@ const Settings = function () {
     }));
 
     const updateFiltersPeriod = userSettings.values[userSettings.names.UPDATE_FILTERS_PERIOD];
+    // TODO take periods from brwoser extension
+    // TODO add tranlations
     const updateFiltersPeriodOptions = [
         { value: 48, name: '48 hours (default)' },
         { value: 24, name: '24 hours' },
