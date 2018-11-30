@@ -14,6 +14,11 @@ module.exports = (() => {
     'use strict';
 
     /**
+     * Autoupdate timer
+     */
+    let filterAutoupdateTimer;
+
+    /**
      * Delay before doing first filters update check -- 5 minutes
      */
     const UPDATE_FILTERS_DELAY = 5 * 60 * 1000;
@@ -27,15 +32,15 @@ module.exports = (() => {
     const scheduleFiltersUpdate = (isFirstRun) => {
         // First run delay
         setTimeout(checkAntiBannerFiltersUpdate, UPDATE_FILTERS_DELAY, isFirstRun === true);
-        const updateFiltersPeriodInMs = settings.getUpdateFiltersPeriod() * 60 * 60 * 1000;
 
         // Scheduling job
+        const updateFiltersPeriodInMs = settings.getUpdateFiltersPeriod() * 60 * 60 * 1000;
         const scheduleUpdate = () => {
-            if (updateFiltersPeriodInMs) {
+            if (!updateFiltersPeriodInMs) {
                 // Todo restore shedule if period changes from 0 to something
                 return;
             }
-            setTimeout(() => {
+            filterAutoupdateTimer = setTimeout(() => {
                 try {
                     checkAntiBannerFiltersUpdate();
                 } catch (ex) {
@@ -43,7 +48,6 @@ module.exports = (() => {
                 }
                 scheduleUpdate();
             }, updateFiltersPeriodInMs);
-
         };
 
         scheduleUpdate();
@@ -308,10 +312,22 @@ module.exports = (() => {
         });
     };
 
+
+    /**
+     * Rerun filters autoupdate timer when period changes
+     */
+    const rerunAutoUpdateTimer = () => {
+        if (filterAutoupdateTimer) {
+            clearTimeout(filterAutoupdateTimer);
+        }
+        scheduleFiltersUpdate(false);
+    }
+
     return {
         checkAntiBannerFiltersUpdate,
         scheduleFiltersUpdate,
         loadFilterRules,
+        rerunAutoUpdateTimer,
     };
 })();
 
