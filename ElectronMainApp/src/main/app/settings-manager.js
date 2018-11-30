@@ -16,7 +16,8 @@ module.exports = (function () {
         DISABLE_FILTERING: 'adguard-disabled',
         USE_OPTIMIZED_FILTERS: 'use-optimized-filters',
         DEFAULT_WHITE_LIST_MODE: 'default-whitelist-mode',
-        DISABLE_SHOW_APP_UPDATED_NOTIFICATION: 'show-app-updated-disabled'
+        DISABLE_SHOW_APP_UPDATED_NOTIFICATION: 'show-app-updated-disabled',
+        UPDATE_FILTERS_PERIOD: 'update-filters-period'
     };
 
     const properties = Object.create(null);
@@ -41,13 +42,14 @@ module.exports = (function () {
                 defaults[settings.DEFAULT_WHITE_LIST_MODE] = true;
                 defaults[settings.USE_OPTIMIZED_FILTERS] = true;
                 defaults[settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION] = false;
+                defaults[settings.UPDATE_FILTERS_PERIOD] = 48;
+
                 return defaults;
             });
         }
     };
 
     const getProperty = function (propertyName) {
-
         if (propertyName in properties) {
             return properties[propertyName];
         }
@@ -76,7 +78,6 @@ module.exports = (function () {
     };
 
     const getAllSettings = function () {
-
         const result = {
             names: Object.create(null),
             values: Object.create(null)
@@ -145,6 +146,14 @@ module.exports = (function () {
         setProperty(settings.DEFAULT_WHITE_LIST_MODE, enabled);
     };
 
+    const changeUpdateFiltersPeriod = (value) => {
+        setProperty(settings.UPDATE_FILTERS_PERIOD, value);
+    }
+
+    const getUpdateFiltersPeriod = () => {
+        return getProperty(settings.UPDATE_FILTERS_PERIOD);
+    }
+
     const api = {};
 
     // Expose settings to api
@@ -171,6 +180,8 @@ module.exports = (function () {
     api.isUseOptimizedFiltersEnabled = isUseOptimizedFiltersEnabled;
     api.changeUseOptimizedFiltersEnabled = changeUseOptimizedFiltersEnabled;
     api.changeDefaultWhiteListMode = changeDefaultWhiteListMode;
+    api.changeUpdateFiltersPeriod = changeUpdateFiltersPeriod;
+    api.getUpdateFiltersPeriod = getUpdateFiltersPeriod;
 
     return api;
 

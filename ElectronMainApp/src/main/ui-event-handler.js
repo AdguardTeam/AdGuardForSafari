@@ -80,6 +80,9 @@ module.exports.init = function () {
                     //Do nothing
                 });
                 break;
+            case  'changeUpdateFiltersPeriod':
+                settings.changeUpdateFiltersPeriod(message.value);
+                break;
         }
     });
 

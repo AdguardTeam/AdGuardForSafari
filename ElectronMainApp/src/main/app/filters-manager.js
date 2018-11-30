@@ -304,14 +304,14 @@ module.exports = (() => {
      * @param {number} groupId
      */
     const enableFiltersGroup = function (groupId) {
-            const group = subscriptions.getGroup(groupId);
-            if (group && typeof group.enabled === 'undefined') {
-                const recommendedFiltersIds = categories.getRecommendedFilterIdsByGroupId(groupId);
-                addAndEnableFilters(recommendedFiltersIds);
-            }
+        const group = subscriptions.getGroup(groupId);
+        if (group && typeof group.enabled === 'undefined') {
+            const recommendedFiltersIds = categories.getRecommendedFilterIdsByGroupId(groupId);
+            addAndEnableFilters(recommendedFiltersIds);
+        }
 
-            enableGroup(groupId);
-        };
+        enableGroup(groupId);
+    };
 
     /**
      * Disables group
@@ -357,17 +357,17 @@ module.exports = (() => {
      * @param successCallback
      * @param errorCallback
      */
-    const loadCustomFilter = (url, successCallback, errorCallback) =>{
+    const loadCustomFilter = (url, successCallback, errorCallback) => {
         log.info('Downloading custom filter from {0}', url);
 
-        errorCallback = errorCallback || function () {};
+        errorCallback = errorCallback || function () { };
 
         if (!url) {
             errorCallback();
             return;
         }
 
-        subscriptions.updateCustomFilter(url, filterId =>{
+        subscriptions.updateCustomFilter(url, filterId => {
             if (filterId) {
                 log.info('Custom filter info downloaded');
 
@@ -383,25 +383,25 @@ module.exports = (() => {
     };
 
     return {
-        getFilters: getFilters,
-        getGroups: getGroups,
-        isFilterEnabled: isFilterEnabled,
+        getFilters,
+        getGroups,
+        isFilterEnabled,
 
-        addAndEnableFilters: addAndEnableFilters,
-        disableFilters: disableFilters,
-        removeFilter: removeFilter,
+        addAndEnableFilters,
+        disableFilters,
+        removeFilter,
 
-        enableGroup: enableGroup,
-        disableGroup: disableGroup,
-        isGroupEnabled: isGroupEnabled,
+        enableGroup,
+        disableGroup,
+        isGroupEnabled,
 
-        enableFiltersGroup: enableFiltersGroup,
-        disableFiltersGroup: disableFiltersGroup,
+        enableFiltersGroup,
+        disableFiltersGroup,
 
-        offerGroupsAndFilters: offerGroupsAndFilters,
-        loadCustomFilter: loadCustomFilter,
+        offerGroupsAndFilters,
+        loadCustomFilter,
 
-        checkAntiBannerFiltersUpdate: checkAntiBannerFiltersUpdate
+        checkAntiBannerFiltersUpdate,
     };
 
 })();
