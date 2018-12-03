@@ -222,146 +222,146 @@ const TopMenu = (function () {
 })();
 
 const Saver = function (options) {
-  this.indicatorElement = options.indicatorElement;
-  this.editor = options.editor;
-  this.saveEventType = options.saveEventType;
-  this.omitRenderEventsCount = 0;
+    this.indicatorElement = options.indicatorElement;
+    this.editor = options.editor;
+    this.saveEventType = options.saveEventType;
+    this.omitRenderEventsCount = 0;
 
-  const states = {
-    CLEAR: 1 << 0,
-    DIRTY: 1 << 1,
-    SAVING: 1 << 2,
-    SAVED: 1 << 3,
-  };
+    const states = {
+        CLEAR: 1 << 0,
+        DIRTY: 1 << 1,
+        SAVING: 1 << 2,
+        SAVED: 1 << 3,
+    };
 
-  const indicatorText = {
-    [states.CLEAR]: '',
-    [states.DIRTY]: i18n.__('options_editor_indicator_editing.message'),
-    [states.SAVING]: i18n.__('options_editor_indicator_saving.message'),
-    [states.SAVED]: i18n.__('options_editor_indicator_saved.message'),
-  };
+    const indicatorText = {
+        [states.CLEAR]: '',
+        [states.DIRTY]: i18n.__('options_editor_indicator_editing.message'),
+        [states.SAVING]: i18n.__('options_editor_indicator_saving.message'),
+        [states.SAVED]: i18n.__('options_editor_indicator_saved.message'),
+    };
 
-  this.isSaving = function () {
-    return (this.currentState & states.SAVING) === states.SAVING;
-  };
+    this.isSaving = function () {
+        return (this.currentState & states.SAVING) === states.SAVING;
+    };
 
-  this.isDirty = function () {
-    return (this.currentState & states.DIRTY) === states.DIRTY;
-  };
+    this.isDirty = function () {
+        return (this.currentState & states.DIRTY) === states.DIRTY;
+    };
 
-  this.updateIndicator = function (state) {
-    this.indicatorElement.textContent = indicatorText[state];
-    switch (state) {
-      case states.DIRTY:
-      case states.CLEAR:
-      case states.SAVING:
-        this.indicatorElement.classList.remove('filter-rules__label--saved');
-        break;
-      case states.SAVED:
-        this.indicatorElement.classList.add('filter-rules__label--saved');
-        break;
-      default:
-        break;
-    }
-  };
+    this.updateIndicator = function (state) {
+        this.indicatorElement.textContent = indicatorText[state];
+        switch (state) {
+            case states.DIRTY:
+            case states.CLEAR:
+            case states.SAVING:
+                this.indicatorElement.classList.remove('filter-rules__label--saved');
+                break;
+            case states.SAVED:
+                this.indicatorElement.classList.add('filter-rules__label--saved');
+                break;
+            default:
+                break;
+        }
+    };
 
-  let timeout;
+    let timeout;
 
-  const setState = (state, skipManageState = false) => {
-    this.currentState |= state;
-    switch (state) {
-      case states.DIRTY:
-        this.currentState &= ~states.CLEAR;
-        break;
-      case states.CLEAR:
-        this.currentState &= ~states.DIRTY;
-        break;
-      case states.SAVING:
-        this.currentState &= ~states.SAVED;
-        break;
-      case states.SAVED:
-        this.currentState &= ~states.SAVING;
-        break;
-      default:
-        break;
-    }
+    const setState = (state, skipManageState = false) => {
+        this.currentState |= state;
+        switch (state) {
+            case states.DIRTY:
+                this.currentState &= ~states.CLEAR;
+                break;
+            case states.CLEAR:
+                this.currentState &= ~states.DIRTY;
+                break;
+            case states.SAVING:
+                this.currentState &= ~states.SAVED;
+                break;
+            case states.SAVED:
+                this.currentState &= ~states.SAVING;
+                break;
+            default:
+                break;
+        }
 
-    if (!skipManageState) {
-      this.manageState();
-    }
-  };
+        if (!skipManageState) {
+            this.manageState();
+        }
+    };
 
-  this.manageState = function () {
-    const EDIT_TIMEOUT_MS = 1000;
-    const HIDE_INDICATOR_TIMEOUT_MS = 1500;
+    this.manageState = function () {
+        const EDIT_TIMEOUT_MS = 1000;
+        const HIDE_INDICATOR_TIMEOUT_MS = 1500;
 
-    if (timeout) {
-      clearTimeout(timeout);
-    }
+        if (timeout) {
+            clearTimeout(timeout);
+        }
 
-    const self = this;
+        const self = this;
 
-    const isDirty = this.isDirty();
-    const isSaving = this.isSaving();
+        const isDirty = this.isDirty();
+        const isSaving = this.isSaving();
 
-    if (isDirty && !isSaving) {
-      this.updateIndicator(states.DIRTY);
-      timeout = setTimeout(() => {
-        self.saveRules();
-        setState(states.CLEAR, true);
-        setState(states.SAVING);
-      }, EDIT_TIMEOUT_MS);
-      return;
-    }
+        if (isDirty && !isSaving) {
+            this.updateIndicator(states.DIRTY);
+            timeout = setTimeout(() => {
+                self.saveRules();
+                setState(states.CLEAR, true);
+                setState(states.SAVING);
+            }, EDIT_TIMEOUT_MS);
+            return;
+        }
 
-    if (isDirty && isSaving) {
-      this.updateIndicator(states.DIRTY);
-      timeout = setTimeout(() => {
-        setState(states.CLEAR);
-        self.saveRules();
-      }, EDIT_TIMEOUT_MS);
-      return;
-    }
+        if (isDirty && isSaving) {
+            this.updateIndicator(states.DIRTY);
+            timeout = setTimeout(() => {
+                setState(states.CLEAR);
+                self.saveRules();
+            }, EDIT_TIMEOUT_MS);
+            return;
+        }
 
-    if (!isDirty && !isSaving && (this.omitRenderEventsCount === 1)) {
-      this.updateIndicator(states.SAVED);
-      timeout = setTimeout(() => {
-        self.updateIndicator(states.CLEAR);
-      }, HIDE_INDICATOR_TIMEOUT_MS);
-      return;
-    }
+        if (!isDirty && !isSaving && (this.omitRenderEventsCount === 1)) {
+            this.updateIndicator(states.SAVED);
+            timeout = setTimeout(() => {
+                self.updateIndicator(states.CLEAR);
+            }, HIDE_INDICATOR_TIMEOUT_MS);
+            return;
+        }
 
-    if (!isDirty && isSaving) {
-      this.updateIndicator(states.SAVING);
-    }
-  };
+        if (!isDirty && isSaving) {
+            this.updateIndicator(states.SAVING);
+        }
+    };
 
-  this.saveRules = function () {
-    this.omitRenderEventsCount += 1;
-    const text = this.editor.getValue();
-    ipcRenderer.send('renderer-to-main', JSON.stringify({
-      type: this.saveEventType,
-      content: text,
-    }));
-  };
+    this.saveRules = function () {
+        this.omitRenderEventsCount += 1;
+        const text = this.editor.getValue();
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            type: this.saveEventType,
+            content: text,
+        }));
+    };
 
-  const setDirty = () => {
-    setState(states.DIRTY);
-  };
+    const setDirty = () => {
+        setState(states.DIRTY);
+    };
 
-  const setSaved = () => {
-    if (this.omitRenderEventsCount > 0) {
-      setState(states.SAVED);
-      this.omitRenderEventsCount -= 1;
-      return true;
-    }
-    return false;
-  };
+    const setSaved = () => {
+        if (this.omitRenderEventsCount > 0) {
+            setState(states.SAVED);
+            this.omitRenderEventsCount -= 1;
+            return true;
+        }
+        return false;
+    };
 
-  return {
-    setDirty: setDirty,
-    setSaved: setSaved,
-  };
+    return {
+        setDirty: setDirty,
+        setSaved: setSaved,
+    };
 };
 
 /**
@@ -372,67 +372,67 @@ const Saver = function (options) {
  * @constructor
  */
 const WhiteListFilter = function (options) {
-  'use strict';
+    'use strict';
 
-  const editor = ace.edit('whiteListRules');
-  editor.setShowPrintMargin(false);
+    const editor = ace.edit('whiteListRules');
+    editor.setShowPrintMargin(false);
 
-  editor.$blockScrolling = Infinity;
-  editor.session.setMode('ace/mode/adguard');
-  editor.setOption('wrap', true);
+    editor.$blockScrolling = Infinity;
+    editor.session.setMode('ace/mode/adguard');
+    editor.setOption('wrap', true);
 
-  const saveIndicatorElement = document.querySelector('#whiteListRulesSaveIndicator');
-  const saver = new Saver({
-    editor: editor,
-    saveEventType: 'saveWhiteListDomains',
-    indicatorElement: saveIndicatorElement,
-  });
+    const saveIndicatorElement = document.querySelector('#whiteListRulesSaveIndicator');
+    const saver = new Saver({
+        editor: editor,
+        saveEventType: 'saveWhiteListDomains',
+        indicatorElement: saveIndicatorElement,
+    });
 
-  const changeDefaultWhiteListModeCheckbox = document.querySelector('#changeDefaultWhiteListMode');
+    const changeDefaultWhiteListModeCheckbox = document.querySelector('#changeDefaultWhiteListMode');
 
-  function loadWhiteListDomains() {
-    const response = ipcRenderer.sendSync('renderer-to-main', JSON.stringify({
-      'type': 'getWhiteListDomains'
-    }));
-      editor.setValue(response.content || '');
-  }
-
-  function updateWhiteListDomains() {
-    const omitRenderEvent = saver.setSaved();
-    if (omitRenderEvent) {
-      return;
+    function loadWhiteListDomains() {
+        const response = ipcRenderer.sendSync('renderer-to-main', JSON.stringify({
+            'type': 'getWhiteListDomains'
+        }));
+        editor.setValue(response.content || '');
     }
-    loadWhiteListDomains();
-  }
 
-  const session = editor.getSession();
-  let initialChangeFired = false;
-  session.addEventListener('change', () => {
-    if (!initialChangeFired) {
-      initialChangeFired = true;
-      return;
+    function updateWhiteListDomains() {
+        const omitRenderEvent = saver.setSaved();
+        if (omitRenderEvent) {
+            return;
+        }
+        loadWhiteListDomains();
     }
-    saver.setDirty();
-  });
 
-  function changeDefaultWhiteListMode(e) {
-    e.preventDefault();
+    const session = editor.getSession();
+    let initialChangeFired = false;
+    session.addEventListener('change', () => {
+        if (!initialChangeFired) {
+            initialChangeFired = true;
+            return;
+        }
+        saver.setDirty();
+    });
 
-    ipcRenderer.send('renderer-to-main', JSON.stringify({
-      'type': 'changeDefaultWhiteListMode',
-      enabled: !e.currentTarget.checked
-    }));
+    function changeDefaultWhiteListMode(e) {
+        e.preventDefault();
 
-    updateWhiteListDomains();
-  }
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'changeDefaultWhiteListMode',
+            enabled: !e.currentTarget.checked
+        }));
 
-  changeDefaultWhiteListModeCheckbox.addEventListener('change', changeDefaultWhiteListMode);
+        updateWhiteListDomains();
+    }
 
-  CheckboxUtils.updateCheckbox([changeDefaultWhiteListModeCheckbox], !options.defaultWhiteListMode);
+    changeDefaultWhiteListModeCheckbox.addEventListener('change', changeDefaultWhiteListMode);
 
-  return {
-    updateWhiteListDomains: updateWhiteListDomains,
-  };
+    CheckboxUtils.updateCheckbox([changeDefaultWhiteListModeCheckbox], !options.defaultWhiteListMode);
+
+    return {
+        updateWhiteListDomains: updateWhiteListDomains,
+    };
 };
 
 /**
@@ -442,53 +442,53 @@ const WhiteListFilter = function (options) {
  * @constructor
  */
 const UserFilter = function () {
-  'use strict';
+    'use strict';
 
-  const editor = ace.edit('userRules');
-  editor.setShowPrintMargin(false);
+    const editor = ace.edit('userRules');
+    editor.setShowPrintMargin(false);
 
-  editor.$blockScrolling = Infinity;
-  editor.session.setMode('ace/mode/adguard');
-  editor.setOption('wrap', true);
+    editor.$blockScrolling = Infinity;
+    editor.session.setMode('ace/mode/adguard');
+    editor.setOption('wrap', true);
 
-  const saveIndicatorElement = document.querySelector('#userRulesSaveIndicator');
-  const saver = new Saver({
-    editor: editor,
-    saveEventType: 'saveUserRules',
-    indicatorElement: saveIndicatorElement,
-  });
-
-  function loadUserRules() {
-    ipcRenderer.send('renderer-to-main', JSON.stringify({
-      'type': 'getUserRules'
-    }));
-
-    ipcRenderer.on('getUserRulesResponse', (e, arg) => {
-      editor.setValue(arg.content || '');
+    const saveIndicatorElement = document.querySelector('#userRulesSaveIndicator');
+    const saver = new Saver({
+        editor: editor,
+        saveEventType: 'saveUserRules',
+        indicatorElement: saveIndicatorElement,
     });
-  }
 
-  function updateUserFilterRules() {
-    const omitRenderEvent = saver.setSaved();
-    if (omitRenderEvent) {
-      return;
+    function loadUserRules() {
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'getUserRules'
+        }));
+
+        ipcRenderer.on('getUserRulesResponse', (e, arg) => {
+            editor.setValue(arg.content || '');
+        });
     }
-    loadUserRules();
-  }
 
-  const session = editor.getSession();
-  let initialChangeFired = false;
-  session.addEventListener('change', () => {
-    if (!initialChangeFired) {
-      initialChangeFired = true;
-      return;
+    function updateUserFilterRules() {
+        const omitRenderEvent = saver.setSaved();
+        if (omitRenderEvent) {
+            return;
+        }
+        loadUserRules();
     }
-    saver.setDirty();
-  });
 
-  return {
-    updateUserFilterRules: updateUserFilterRules,
-  };
+    const session = editor.getSession();
+    let initialChangeFired = false;
+    session.addEventListener('change', () => {
+        if (!initialChangeFired) {
+            initialChangeFired = true;
+            return;
+        }
+        saver.setDirty();
+    });
+
+    return {
+        updateUserFilterRules: updateUserFilterRules,
+    };
 };
 
 /**
@@ -1264,6 +1264,61 @@ const AntiBannerFilters = function (options) {
 };
 
 /**
+ * Generate HTML Element SELECT with passed options
+ * 
+ * @param {string} id select ID
+ * @param {Array<Object | number | string>} options Array of options
+ * @param {string | number} value current select value (set 'select' attribute to option)
+ */
+const Select = function (id, options, value) {
+    if (!id) {
+        console.error(`SELECT with id=${id} not found`);
+        return;
+    }
+
+    let select = document.getElementById(id);
+    if (!select) {
+        select = document.createElement('select');
+    }
+    select.setAttribute('id', id);
+    select.value = value;
+
+    if (Array.isArray(options)) {
+        options
+            .map((item) => typeof item === 'object'
+                && item.value !== undefined
+                && item.name !== undefined
+                    ? new Option(item.value, item.name, item.value === value)
+                    : new Option(item, item, item === value)
+            )
+            .forEach(option => select.appendChild(option.render()));
+    }
+
+    const render = () => select;
+
+    return { render };
+}
+
+/**
+ * Generate HTML Element OPTION with passed params
+ * 
+ * @param {string | number} value Select value
+ * @param {string | number} name Select name text
+ */
+const Option = function (value, name, selected) {
+    const option = document.createElement('option');
+    option.setAttribute('value', value);
+    if (selected) {
+        option.setAttribute('selected', selected);
+    }
+    option.innerText = name;
+
+    const render = () => option;
+
+    return { render };
+}
+
+/**
  * Settings block
  *
  * @returns {{render: render}}
@@ -1306,7 +1361,6 @@ const Settings = function () {
             render: render
         };
     };
-
     const checkboxes = [];
     checkboxes.push(new Checkbox('#useOptimizedFilters', userSettings.names.USE_OPTIMIZED_FILTERS));
     checkboxes.push(new Checkbox('#showAppUpdatedNotification', userSettings.names.DISABLE_SHOW_APP_UPDATED_NOTIFICATION, {
@@ -1328,6 +1382,30 @@ const Settings = function () {
         }
     });
 
+    const initUpdateFiltersPeriodSelect = () => {
+        const periods = [48, 24, 12, 6, 1]; // in hours
+        const periodSelectOptions = periods.map(item => ({
+            value: item,
+            name: i18n.__n('options_filters_update_period_number.message', item)
+        }));
+        periodSelectOptions.push({ 
+            value: -1,
+            name: i18n.__('options_filters_period_not_update.message')
+        });
+
+        const currentPeriodValue = userSettings.values[userSettings.names.UPDATE_FILTERS_PERIOD];
+        const periodSelect = document.getElementById('filterUpdatePeriod');
+        periodSelect && periodSelect.addEventListener('change', (event) => {
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                type: 'changeUpdateFiltersPeriod',
+                value: parseInt(event.target.value)
+            }));
+        });
+
+        return new Select('filterUpdatePeriod', periodSelectOptions, currentPeriodValue);
+    };
+    const periodSelect = initUpdateFiltersPeriodSelect();
+
     const updateAcceptableAdsCheckbox = function (filter) {
         if (filter.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID) {
             CheckboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], filter.enabled);
@@ -1335,6 +1413,8 @@ const Settings = function () {
     };
 
     const render = function () {
+        periodSelect.render();
+
         for (let i = 0; i < checkboxes.length; i++) {
             checkboxes[i].render();
         }

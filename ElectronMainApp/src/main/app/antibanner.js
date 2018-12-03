@@ -113,6 +113,12 @@ module.exports = (() => {
                 onUsedOptimizedFiltersChange();
             }
         });
+
+        settings.onUpdated.addListener(function (setting) {
+            if (setting === settings.UPDATE_FILTERS_PERIOD) {
+                filtersUpdate.rerunAutoUpdateTimer();
+            }
+        });
     };
 
     /**

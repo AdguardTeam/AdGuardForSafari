@@ -9,14 +9,14 @@ const log = require('../utils/log');
 /**
  * Filters update service
  */
-module.exports = (() =>{
+module.exports = (() => {
 
     'use strict';
 
     /**
-     * Period for filters update check -- 48 hours
+     * Autoupdate timer
      */
-    const UPDATE_FILTERS_PERIOD = 48 * 60 * 60 * 1000;
+    let filterAutoupdateTimer;
 
     /**
      * Delay before doing first filters update check -- 5 minutes
@@ -34,15 +34,20 @@ module.exports = (() =>{
         setTimeout(checkAntiBannerFiltersUpdate, UPDATE_FILTERS_DELAY, isFirstRun === true);
 
         // Scheduling job
+        const updateFiltersPeriodInMs = settings.getUpdateFiltersPeriod() * 60 * 60 * 1000;
         const scheduleUpdate = () => {
-            setTimeout(() => {
+            // User can disable autoupdate
+            if (updateFiltersPeriodInMs <= 0) {
+                return;
+            }
+            filterAutoupdateTimer = setTimeout(() => {
                 try {
                     checkAntiBannerFiltersUpdate();
                 } catch (ex) {
                     log.error("Error update filters, cause {0}", ex);
                 }
                 scheduleUpdate();
-            }, UPDATE_FILTERS_PERIOD);
+            }, updateFiltersPeriodInMs);
         };
 
         scheduleUpdate();
@@ -230,7 +235,13 @@ module.exports = (() =>{
             callback(false);
         };
 
-        serviceClient.loadFilterRules(filter.filterId, forceRemote, settings.isUseOptimizedFiltersEnabled(), successCallback, errorCallback);
+        serviceClient.loadFilterRules(
+            filter.filterId,
+            forceRemote,
+            settings.isUseOptimizedFiltersEnabled(),
+            successCallback,
+            errorCallback
+        );
     };
 
     /**
@@ -243,10 +254,12 @@ module.exports = (() =>{
         const filterIds = [];
         const customFilterIds = [];
         const filters = subscriptions.getFilters();
+        const updateFiltersPeriodInMs = settings.getUpdateFiltersPeriod() * 60 * 60 * 1000;
+
         for (let filter of filters) {
             if (filter.installed && filter.enabled) {
                 // Check filters update period (or forceUpdate flag)
-                const needUpdate = forceUpdate || (!filter.lastCheckTime || (Date.now() - filter.lastCheckTime) >= UPDATE_FILTERS_PERIOD);
+                const needUpdate = forceUpdate || (!filter.lastCheckTime || (Date.now() - filter.lastCheckTime) >= updateFiltersPeriodInMs);
                 if (needUpdate) {
                     if (filter.customUrl) {
                         customFilterIds.push(filter.filterId);
@@ -258,8 +271,8 @@ module.exports = (() =>{
         }
 
         return {
-            filterIds: filterIds,
-            customFilterIds: customFilterIds
+            filterIds,
+            customFilterIds,
         };
     };
 
@@ -299,10 +312,22 @@ module.exports = (() =>{
         });
     };
 
+
+    /**
+     * Rerun filters autoupdate timer when period changes
+     */
+    const rerunAutoUpdateTimer = () => {
+        if (filterAutoupdateTimer) {
+            clearTimeout(filterAutoupdateTimer);
+        }
+        scheduleFiltersUpdate(false);
+    }
+
     return {
-        checkAntiBannerFiltersUpdate: checkAntiBannerFiltersUpdate,
-        scheduleFiltersUpdate: scheduleFiltersUpdate,
-        loadFilterRules: loadFilterRules
+        checkAntiBannerFiltersUpdate,
+        scheduleFiltersUpdate,
+        loadFilterRules,
+        rerunAutoUpdateTimer,
     };
 })();
 
