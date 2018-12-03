@@ -1465,8 +1465,7 @@ PageController.prototype = {
         let onBoardingScreenEl = document.querySelector('#boarding-screen-placeholder');
         ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
             if (!arg) {
-                // TODO uncomment this line before merge
-                // onBoardingScreenEl.style.display = 'flex';
+                onBoardingScreenEl.style.display = 'flex';
             } else {
                 onBoardingScreenEl.style.display = 'none';
             }
