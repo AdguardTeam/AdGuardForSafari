@@ -321,9 +321,9 @@ NAN_METHOD(whitelistDomains) {
     }];
 }
 
-NAN_METHOD(extensionsState){
+NAN_METHOD(extensionContentBlockerState){
 
-     if (info.Length() < 1) {
+    if (info.Length() < 1) {
         ThrowTypeError("Wrong number of arguments");
         return;
     }
@@ -332,30 +332,56 @@ NAN_METHOD(extensionsState){
         ThrowTypeError("Wrong arguments");
         return;
     }
-    
+
     Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
 
     void (^resultBlock)(BOOL result)  = ^void(BOOL result) {
 
-      dispatch_sync(dispatch_get_main_queue(), ^{
-          Nan::HandleScope scope;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            Nan::HandleScope scope;
 
-          v8::Local<v8::Value> argv[1] = {Nan::New((bool)result)};
+            v8::Local<v8::Value> argv[1] = {Nan::New((bool)result)};
 
-          Nan::Call(*cb, 1, argv);
-          delete cb;
-      });
+            Nan::Call(*cb, 1, argv);
+            delete cb;
+        });
     };
+
     [SFContentBlockerManager getStateOfContentBlockerWithIdentifier:AESharedResources.blockerBundleId
     completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
-      if (error || ! state.enabled) {
-          resultBlock(NO);
-          return;
-      }
-      [SFSafariExtensionManager getStateOfSafariExtensionWithIdentifier:AESharedResources.extensionBundleId
-      completionHandler:^(SFSafariExtensionState * _Nullable state, NSError * _Nullable error) {
-          resultBlock(error == nil && state.enabled);
-      }];
+        resultBlock(error == nil && state.enabled);
+    }];
+}
+
+NAN_METHOD(extensionSafariIconState){
+    
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+    
+    if (!info[0]->IsFunction()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+    
+    Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
+    
+    void (^resultBlock)(BOOL result)  = ^void(BOOL result) {
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            Nan::HandleScope scope;
+            
+            v8::Local<v8::Value> argv[1] = {Nan::New((bool)result)};
+            
+            Nan::Call(*cb, 1, argv);
+            delete cb;
+        });
+    };
+
+    [SFSafariExtensionManager getStateOfSafariExtensionWithIdentifier:AESharedResources.extensionBundleId
+    completionHandler:^(SFSafariExtensionState * _Nullable state, NSError * _Nullable error) {
+        resultBlock(error == nil && state.enabled);
     }];
 }
 
@@ -593,8 +619,11 @@ NAN_MODULE_INIT(Init) {
   Nan::Set(target, New<String>("whitelistDomains").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(whitelistDomains)).ToLocalChecked());
 
-  Nan::Set(target, New<String>("extensionsState").ToLocalChecked(),
-  GetFunction(New<FunctionTemplate>(extensionsState)).ToLocalChecked());
+  Nan::Set(target, New<String>("extensionContentBlockerState").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(extensionContentBlockerState)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("extensionSafariIconState").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(extensionSafariIconState)).ToLocalChecked());
 
   Nan::Set(target, New<String>("openExtensionsPreferenses").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(openExtensionsPreferenses)).ToLocalChecked());

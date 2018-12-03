@@ -1459,16 +1459,13 @@ PageController.prototype = {
         });
 
         this._initBoardingScreen();
+        this._initSafariIconMessage();
     },
 
     _initBoardingScreen: function () {
         let onBoardingScreenEl = document.querySelector('#boarding-screen-placeholder');
-        ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
-            if (!arg) {
-                onBoardingScreenEl.style.display = 'flex';
-            } else {
-                onBoardingScreenEl.style.display = 'none';
-            }
+        ipcRenderer.on('checkContentBlockerExtensionResponse', (e, arg) => {
+            onBoardingScreenEl.style.display = arg ? 'none' : 'flex';
         });
 
         let openSafariSettingsButton = document.querySelector('#open-safari-extensions-settings-btn');
@@ -1481,17 +1478,31 @@ PageController.prototype = {
         });
 
         // First extensions check
-        this._checkSafariExtensions();
-
+        this._checkContentBlockerExtension();
         // Check on every window focus
-        window.addEventListener("focus", function (event) {
-            this._checkSafariExtensions();
-        }.bind(this), false);
+        window.addEventListener("focus", () => this._checkContentBlockerExtension());
     },
 
-    _checkSafariExtensions: function () {
+    _initSafariIconMessage: function() {
+        ipcRenderer.on('checkSafariIconExtensionResponse', (e, arg) => {
+            console.log(arg);
+        });
+
+        // First extensions check
+        this._checkSafariIconExtension();
+        // Check on every window focus
+        window.addEventListener("focus", () => this._checkSafariIconExtension());
+    },
+
+    _checkContentBlockerExtension: function () {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'checkSafariExtensions'
+            'type': 'checkContentBlockerExtension'
+        }));
+    },
+
+    _checkSafariIconExtension: function() {
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'checkSafariIconExtension'
         }));
     },
 
