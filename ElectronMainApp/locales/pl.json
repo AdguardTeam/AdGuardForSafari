@@ -122,9 +122,6 @@
     "options_whitelist": {
         "message": "Bia\u0142a lista"
     },
-    "options_modal_save": {
-        "message": "Zapisz zmiany"
-    },
     "options_whitelist_description": {
         "message": "AdGuard nie filtruje stron znajduj\u0105cych si\u0119 na bia\u0142ej li\u015bcie."
     },
@@ -178,6 +175,15 @@
     },
     "options_filters_list_search_placeholder": {
         "message": "Wyszukaj"
+    },
+    "options_editor_indicator_editing": {
+        "message": "Edytuj\u0119..."
+    },
+    "options_editor_indicator_saving": {
+        "message": "Zapisuj\u0119..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "Zapisano"
     },
     "main_menu_edit": {
         "message": "Edytuj"
@@ -253,5 +259,25 @@
     },
     "notification_user_filter_updated_desc": {
         "message": "Nowa regu\u0142a zosta\u0142a dodana do filtru u\u017cytkownika:"
+    },
+    "options_filters_update_period": {
+        "message": "Okres aktualizacji filtr\u00f3w"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "one": "%s godzina",
+            "few": "%s godzin",
+            "many": "%s godzin",
+            "other": "%s godziny"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "Nie aktualizuj"
+    },
+    "settings_notification_title": {
+        "message": "Attention! AdGuard icon was disabled"
+    },
+    "settings_notification_text": {
+        "message": "You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually. You can enable Adguard Icon <a href='#' id='notificationEnableIconLink'>here<\/a>"
     }
 }
