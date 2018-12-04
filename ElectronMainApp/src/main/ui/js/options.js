@@ -1459,40 +1459,56 @@ PageController.prototype = {
         });
 
         this._initBoardingScreen();
+        this._initSafariIconMessage();
     },
 
     _initBoardingScreen: function () {
         let onBoardingScreenEl = document.querySelector('#boarding-screen-placeholder');
-        ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
-            if (!arg) {
-                // TODO uncomment this line before merge
-                // onBoardingScreenEl.style.display = 'flex';
-            } else {
-                onBoardingScreenEl.style.display = 'none';
-            }
+        ipcRenderer.on('checkContentBlockerExtensionResponse', (e, arg) => {
+            onBoardingScreenEl.style.display = arg ? 'none' : 'flex';
         });
 
         let openSafariSettingsButton = document.querySelector('#open-safari-extensions-settings-btn');
-        openSafariSettingsButton.addEventListener('click', (e) => {
+        openSafariSettingsButton && openSafariSettingsButton.addEventListener('click', (e) => {
             e.preventDefault();
-
-            ipcRenderer.send('renderer-to-main', JSON.stringify({
-                'type': 'openSafariExtensionsPrefs'
-            }));
+            this._openSafariExtensionsPrefs();
         });
 
-        // First extensions check
-        this._checkSafariExtensions();
-
-        // Check on every window focus
-        window.addEventListener("focus", function (event) {
-            this._checkSafariExtensions();
-        }.bind(this), false);
+        this._checkContentBlockerExtension();
+        window.addEventListener("focus", () => this._checkContentBlockerExtension());
     },
 
-    _checkSafariExtensions: function () {
+    _initSafariIconMessage: function() {
+        const enableIconNotification = document.getElementById('enableIconNotification');
+        ipcRenderer.on('checkSafariIconExtensionResponse', (e, arg) => {
+            enableIconNotification.style.display = arg ? 'none' : 'block';
+        });
+
+        this._checkSafariIconExtension();
+        window.addEventListener("focus", () => this._checkSafariIconExtension());
+
+        const notificationEnableIconLink = document.getElementById('notificationEnableIconLink');
+        notificationEnableIconLink && notificationEnableIconLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            this._openSafariExtensionsPrefs();
+        })
+    },
+
+    _checkContentBlockerExtension: function () {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'checkSafariExtensions'
+            'type': 'checkContentBlockerExtension'
+        }));
+    },
+
+    _checkSafariIconExtension: function() {
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'checkSafariIconExtension'
+        }));
+    },
+
+    _openSafariExtensionsPrefs: function() {
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'openSafariExtensionsPrefs'
         }));
     },
 

@@ -19,12 +19,12 @@ module.exports = (() => {
      * @param onReportCallback = (string) => ()
      */
     const init = (
-                    onProtectionChangedCallback, 
-                    onWhitelistChangedCallback, 
-                    onUserFilterChangedCallback, 
-                    onShowPreferencesCallback,
-                    onReportCallback
-                  ) => {
+        onProtectionChangedCallback,
+        onWhitelistChangedCallback,
+        onUserFilterChangedCallback,
+        onShowPreferencesCallback,
+        onReportCallback
+    ) => {
 
         if (onProtectionChangedCallback) {
             addon.setOnProtectionEnabled(() => {
@@ -128,12 +128,21 @@ module.exports = (() => {
     };
 
     /**
-    * Getting state of the content blocker extension and Safari app extension.
+    * Getting state of the content blocker extension.
+    * Returns true in callback if extension enabled, else returns false.
+    * @param callback = (enabled as bool) => {}
+    */
+    const extensionContentBlockerState = (callback) => {
+        addon.extensionContentBlockerState(callback);
+    };
+
+    /**
+    * Getting state of the icon of Safari app extension.
     * Returns true in callback if both extension enabled, else returns false.
     * @param callback = (enabled as bool) => {}
     */
-    const extensionsState = (callback) => {
-        addon.extensionsState(callback);
+    const extensionSafariIconState = (callback) => {
+        addon.extensionSafariIconState(callback);
     };
 
     /**
@@ -159,7 +168,8 @@ module.exports = (() => {
         whitelistDomains: whitelistDomains,
         setUserFilter: setUserFilter,
         userFilter: userFilter,
-        extensionsState: extensionsState,
+        extensionContentBlockerState: extensionContentBlockerState,
+        extensionSafariIconState: extensionSafariIconState,
         openExtensionsPreferenses: openExtensionsPreferenses,
         debugLog: debugLog
     };

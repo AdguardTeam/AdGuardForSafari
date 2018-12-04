@@ -70,9 +70,14 @@ module.exports.init = function () {
                 filters.loadCustomFilter(message.url, (filter) => event.sender.send('loadCustomFilterInfoResponse', filter),
                     () => event.sender.send('loadCustomFilterInfoResponse', null));
                 break;
-            case 'checkSafariExtensions':
-                safariToolbar.extensionsState((result) => {
-                    event.sender.send('checkSafariExtensionsResponse', result);
+            case 'checkContentBlockerExtension':
+                safariToolbar.extensionContentBlockerState((result) => {
+                    event.sender.send('checkContentBlockerExtensionResponse', result);
+                });
+                break;
+            case 'checkSafariIconExtension':
+                safariToolbar.extensionSafariIconState((result) => {
+                    event.sender.send('checkSafariIconExtensionResponse', result);
                 });
                 break;
             case 'openSafariExtensionsPrefs':
