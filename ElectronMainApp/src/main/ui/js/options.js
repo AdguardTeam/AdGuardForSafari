@@ -1469,29 +1469,29 @@ PageController.prototype = {
         });
 
         let openSafariSettingsButton = document.querySelector('#open-safari-extensions-settings-btn');
-        openSafariSettingsButton.addEventListener('click', (e) => {
+        openSafariSettingsButton && openSafariSettingsButton.addEventListener('click', (e) => {
             e.preventDefault();
-
-            ipcRenderer.send('renderer-to-main', JSON.stringify({
-                'type': 'openSafariExtensionsPrefs'
-            }));
+            this._openSafariExtensionsPrefs();
         });
 
-        // First extensions check
         this._checkContentBlockerExtension();
-        // Check on every window focus
         window.addEventListener("focus", () => this._checkContentBlockerExtension());
     },
 
     _initSafariIconMessage: function() {
+        const enableIconNotification = document.getElementById('enableIconNotification');
         ipcRenderer.on('checkSafariIconExtensionResponse', (e, arg) => {
-            console.log(arg);
+            enableIconNotification.style.display = arg ? 'none' : 'block';
         });
 
-        // First extensions check
         this._checkSafariIconExtension();
-        // Check on every window focus
         window.addEventListener("focus", () => this._checkSafariIconExtension());
+
+        const notificationEnableIconLink = document.getElementById('notificationEnableIconLink');
+        notificationEnableIconLink && notificationEnableIconLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            this._openSafariExtensionsPrefs();
+        })
     },
 
     _checkContentBlockerExtension: function () {
@@ -1503,6 +1503,12 @@ PageController.prototype = {
     _checkSafariIconExtension: function() {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'checkSafariIconExtension'
+        }));
+    },
+
+    _openSafariExtensionsPrefs: function() {
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'openSafariExtensionsPrefs'
         }));
     },
 

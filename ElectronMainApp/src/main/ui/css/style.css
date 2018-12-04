@@ -49,6 +49,7 @@
   align-items: flex-start;
 }
 .settings-content__desc {
+  color: #888888;
   margin-top: auto;
   max-width: 650px;
   font-size: 14px;
@@ -345,6 +346,25 @@
 }
 .opts-list li.active .block-type {
   opacity: 1;
+}
+.settings-notification {
+  margin-top: auto;
+  padding: 24px;
+  background: rgba(245, 166, 35, 0.2);
+  border-radius: 8px 8px 8px 8px;
+}
+.settings-notification__title {
+  font-size: 16px;
+  color: #4d4d4d;
+  width: 470px;
+  line-height: 17px;
+  margin-bottom: 8px;
+}
+.settings-notification__text {
+  color: #888888;
+  font-size: 14px;
+  max-width: 553px;
+  line-height: 17px;
 }
 .block-type__desc {
   display: flex;
