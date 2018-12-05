@@ -8,8 +8,8 @@
 
 AG_COPYRIGHT = Copyright © 2018 Adguard Software Ltd. All rights reserved.
 AG_NAME = AdGuard for Safari
-AG_VERSION = 1.0.1
-AG_BUILD = 6
+AG_VERSION = 1.1.0
+AG_BUILD = 7
 
 AG_BUNDLEID = com.adguard.safari.AdGuard
 AG_EXTENSION_BUNDLEID = $(AG_BUNDLEID).Extension
