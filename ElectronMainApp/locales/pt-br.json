@@ -177,13 +177,13 @@
         "message": "Procurar"
     },
     "options_editor_indicator_editing": {
-        "message": "Editing..."
+        "message": "Editando..."
     },
     "options_editor_indicator_saving": {
-        "message": "Saving..."
+        "message": "Salvando..."
     },
     "options_editor_indicator_saved": {
-        "message": "Saved"
+        "message": "Salvo"
     },
     "main_menu_edit": {
         "message": "Editar"
@@ -261,21 +261,21 @@
         "message": "Uma nova regra foi adicionada ao filtro de usu\u00e1rio:"
     },
     "options_filters_update_period": {
-        "message": "Update interval"
+        "message": "Per\u00edodo entre atualiza\u00e7\u00f5es"
     },
     "options_filters_update_period_number": {
         "message": {
-            "one": "Every %s hour",
-            "other": "Every %s hours"
+            "one": "Cada %s hora",
+            "other": "Cada %s horas"
         }
     },
     "options_filters_period_not_update": {
-        "message": "Do not update"
+        "message": "N\u00e3o atualizar"
     },
     "settings_notification_title": {
-        "message": "Attention! AdGuard icon was disabled"
+        "message": "Aten\u00e7\u00e3o! O \u00edcone do AdGuard foi desativado"
     },
     "settings_notification_text": {
-        "message": "You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually. You can enable Adguard Icon <a href='#' id='notificationEnableIconLink'>here<\/a>"
+        "message": "Voc\u00ea pode usar este \u00edcone para gerenciar as configura\u00e7\u00f5es do AdGuard para Safari. Por exemplo, pausar o bloqueio em um site ou bloquear um an\u00fancio manualmente. Voc\u00ea pode ativar o \u00edcone <a href='#' id='notificationEnableIconLink'>aqui<\/a>."
     }
 }
