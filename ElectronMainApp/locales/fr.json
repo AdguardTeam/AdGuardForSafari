@@ -122,9 +122,6 @@
     "options_whitelist": {
         "message": "Liste blanche"
     },
-    "options_modal_save": {
-        "message": "Sauvegarder les modifications"
-    },
     "options_whitelist_description": {
         "message": "AdGuard ne filtre pas les sites Web sur la liste blanche."
     },
@@ -141,7 +138,7 @@
         "message": "Me notifier des mises \u00e0 jour des extensions"
     },
     "options_use_optimized_filters": {
-        "message": "Utilisez des filtres optimis\u00e9s<span class='sp-table-row-info'>Listes de filtres l\u00e9gers optimis\u00e9s pour les appareils mobiles<\/span>"
+        "message": "Utilisez des filtres optimis\u00e9s : <span class='sp-table-row-info'>Listes de filtres l\u00e9gers optimis\u00e9s pour l'API bloqueuse de contenus sur Safari.<\/span>"
     },
     "options_popup_update_title": {
         "message": "Filtres mis \u00e0 jour"
@@ -179,6 +176,15 @@
     "options_filters_list_search_placeholder": {
         "message": "Rechercher"
     },
+    "options_editor_indicator_editing": {
+        "message": "\u00c9dition en cours ..."
+    },
+    "options_editor_indicator_saving": {
+        "message": "Sauvegarde en cours ..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "Sauvegard\u00e9"
+    },
     "main_menu_edit": {
         "message": "\u00c9diter"
     },
@@ -207,7 +213,7 @@
         "message": "V\u00e9rifier les mises \u00e0 jour des filtres"
     },
     "tray_menu_launch_at_startup": {
-        "message": "Lancer AdGuard d\u00e9s la connexion"
+        "message": "Lancer AdGuard d\u00e8s la connexion"
     },
     "tray_menu_quit": {
         "message": "Quitter"
@@ -253,5 +259,23 @@
     },
     "notification_user_filter_updated_desc": {
         "message": "Une nouvelle r\u00e9gle a \u00e9t\u00e9 ajout\u00e9e au Filtre Utilisateur :"
+    },
+    "options_filters_update_period": {
+        "message": "Interval des mises \u00e0 jour"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "one": "Chaque heure",
+            "other": "Toutes les %s heures"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "Ne pas mettre \u00e0 jour"
+    },
+    "settings_notification_title": {
+        "message": "Attention ! L'ic\u00f4ne AdGuard a \u00e9t\u00e9 d\u00e9sactiv\u00e9e"
+    },
+    "settings_notification_text": {
+        "message": "Vous pouvez acc\u00e8der aux r\u00e8glages d'AdGuard pour Safari par aide de cette ic\u00f4ne : d\u00e9sactiver le blocage sur un site Web particulier ou masquer une pub \u00e0 la main. Vous pouvez activer l'Ic\u00f4ne AdGuard <a href='#' id='notificationEnableIconLink'>ici<\/a>"
     }
 }

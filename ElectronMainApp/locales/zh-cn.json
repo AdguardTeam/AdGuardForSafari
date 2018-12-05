@@ -122,9 +122,6 @@
     "options_whitelist": {
         "message": "\u767d\u540d\u5355"
     },
-    "options_modal_save": {
-        "message": "\u4fdd\u5b58\u66f4\u6539"
-    },
     "options_whitelist_description": {
         "message": "AdGuard \u4e0d\u8fc7\u6ee4\u767d\u540d\u5355\u4e0a\u7684\u7f51\u7ad9\u3002"
     },
@@ -178,6 +175,15 @@
     },
     "options_filters_list_search_placeholder": {
         "message": "\u641c\u7d22"
+    },
+    "options_editor_indicator_editing": {
+        "message": "Editing..."
+    },
+    "options_editor_indicator_saving": {
+        "message": "Saving..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "Saved"
     },
     "main_menu_edit": {
         "message": "\u7f16\u8f91"
@@ -253,5 +259,22 @@
     },
     "notification_user_filter_updated_desc": {
         "message": "\u65b0\u89c4\u5219\u5df2\u6dfb\u52a0\u81f3\u7528\u6237\u8fc7\u6ee4\u5668\uff1a"
+    },
+    "options_filters_update_period": {
+        "message": "Update interval"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "other": "Every %s hours"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "Do not update"
+    },
+    "settings_notification_title": {
+        "message": "Attention! AdGuard icon was disabled"
+    },
+    "settings_notification_text": {
+        "message": "You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually. You can enable AdGuard Icon <a href='#' id='notificationEnableIconLink'>here<\/a>."
     }
 }

@@ -122,9 +122,6 @@
     "options_whitelist": {
         "message": "\n\nWhitelist\n"
     },
-    "options_modal_save": {
-        "message": "Salva cambiamenti"
-    },
     "options_whitelist_description": {
         "message": "AdGuard non filtra i siti della whitelist"
     },
@@ -178,6 +175,15 @@
     },
     "options_filters_list_search_placeholder": {
         "message": "Ricerca"
+    },
+    "options_editor_indicator_editing": {
+        "message": "Editing..."
+    },
+    "options_editor_indicator_saving": {
+        "message": "Saving..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "Saved"
     },
     "main_menu_edit": {
         "message": "Modifica"
@@ -253,5 +259,23 @@
     },
     "notification_user_filter_updated_desc": {
         "message": "Una nuova regola \u00e8 stata aggiunta al filtro utente"
+    },
+    "options_filters_update_period": {
+        "message": "Update interval"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "one": "Every hour",
+            "other": "Every %s hours"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "Do not update"
+    },
+    "settings_notification_title": {
+        "message": "Attention! AdGuard icon was disabled"
+    },
+    "settings_notification_text": {
+        "message": "You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually. You can enable AdGuard Icon <a href='#' id='notificationEnableIconLink'>here<\/a>."
     }
 }

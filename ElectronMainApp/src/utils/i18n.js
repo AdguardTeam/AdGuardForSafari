@@ -10,7 +10,8 @@ module.exports = (() => {
     i18n.configure({
         locales: LOCALES,
         directory: appPack.resourcePath('/locales'),
-        objectNotation: true
+        objectNotation: true,
+        updateFiles: false,
     });
 
     i18n.setAppLocale = function (appLocale) {

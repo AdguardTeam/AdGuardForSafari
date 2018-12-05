@@ -122,9 +122,6 @@
     "options_whitelist": {
         "message": "Lista blanca"
     },
-    "options_modal_save": {
-        "message": "Guardar cambios"
-    },
     "options_whitelist_description": {
         "message": "AdGuard no filtra sitios que est\u00e1n en la lista blanca."
     },
@@ -178,6 +175,15 @@
     },
     "options_filters_list_search_placeholder": {
         "message": "Ingresar cadena de b\u00fasqueda"
+    },
+    "options_editor_indicator_editing": {
+        "message": "Editando..."
+    },
+    "options_editor_indicator_saving": {
+        "message": "Guardando..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "Guardado"
     },
     "main_menu_edit": {
         "message": "Editar"
@@ -253,5 +259,23 @@
     },
     "notification_user_filter_updated_desc": {
         "message": "Una nueva regla ha sido a\u00f1adido al filtro de usuario:"
+    },
+    "options_filters_update_period": {
+        "message": "Intervalo de actualizaci\u00f3n"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "one": "Cada hora",
+            "other": "Cada %s horas"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "No actualizar"
+    },
+    "settings_notification_title": {
+        "message": "\u00a1Atenci\u00f3n! El \u00edcono de AdGuard fue desactivado"
+    },
+    "settings_notification_text": {
+        "message": "Puede usar este \u00edcono para administrar la configuraci\u00f3n de AdGuard para Safari. Por ejemplo, pausar el bloqueo en alg\u00fan sitio o bloquear un anuncio manualmente. Puede activar el \u00edcono de AdGuard <a href='#' id='notificationEnableIconLink'>aqu\u00ed<\/a>."
     }
 }
