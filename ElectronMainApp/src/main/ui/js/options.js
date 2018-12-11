@@ -390,10 +390,12 @@ const WhiteListFilter = function (options) {
 
     const changeDefaultWhiteListModeCheckbox = document.querySelector('#changeDefaultWhiteListMode');
 
+    let hasContent = false;
     function loadWhiteListDomains() {
         const response = ipcRenderer.sendSync('renderer-to-main', JSON.stringify({
             'type': 'getWhiteListDomains'
         }));
+        hasContent = !!response.content;
         editor.setValue(response.content || '');
     }
 
@@ -408,7 +410,7 @@ const WhiteListFilter = function (options) {
     const session = editor.getSession();
     let initialChangeFired = false;
     session.addEventListener('change', () => {
-        if (!initialChangeFired) {
+        if (!initialChangeFired && hasContent) {
             initialChangeFired = true;
             return;
         }
@@ -458,12 +460,14 @@ const UserFilter = function () {
         indicatorElement: saveIndicatorElement,
     });
 
+    let hasContent = false;
     function loadUserRules() {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'getUserRules'
         }));
 
         ipcRenderer.on('getUserRulesResponse', (e, arg) => {
+            hasContent = !!arg.content;
             editor.setValue(arg.content || '');
         });
     }
@@ -479,7 +483,7 @@ const UserFilter = function () {
     const session = editor.getSession();
     let initialChangeFired = false;
     session.addEventListener('change', () => {
-        if (!initialChangeFired) {
+        if (!initialChangeFired && hasContent) {
             initialChangeFired = true;
             return;
         }
@@ -1265,7 +1269,7 @@ const AntiBannerFilters = function (options) {
 
 /**
  * Generate HTML Element SELECT with passed options
- * 
+ *
  * @param {string} id select ID
  * @param {Array<Object | number | string>} options Array of options
  * @param {string | number} value current select value (set 'select' attribute to option)
@@ -1301,7 +1305,7 @@ const Select = function (id, options, value) {
 
 /**
  * Generate HTML Element OPTION with passed params
- * 
+ *
  * @param {string | number} value Select value
  * @param {string | number} name Select name text
  */
@@ -1388,7 +1392,7 @@ const Settings = function () {
             value: item,
             name: i18n.__n('options_filters_update_period_number.message', item)
         }));
-        periodSelectOptions.push({ 
+        periodSelectOptions.push({
             value: -1,
             name: i18n.__('options_filters_period_not_update.message')
         });
