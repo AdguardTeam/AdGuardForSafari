@@ -24,6 +24,11 @@ module.exports = (() => {
     const UPDATE_FILTERS_DELAY = 5 * 60 * 1000;
 
     /**
+     * TImeout for recently updated filters and again enabled filters - 5 minutes
+     */
+    const ENABLED_FILTERS_SKIP_TIMEOUT = 5 * 60 * 1000;
+
+    /**
      * Schedules filters update job
      *
      * @param isFirstRun App first run flag
@@ -326,7 +331,7 @@ module.exports = (() => {
         }
 
         // Skip recently downloaded filters
-        if (Date.now() - filter.lastCheckTime < 5 * 60 * 1000) {
+        if (Date.now() - filter.lastCheckTime < ENABLED_FILTERS_SKIP_TIMEOUT) {
             return;
         }
 
