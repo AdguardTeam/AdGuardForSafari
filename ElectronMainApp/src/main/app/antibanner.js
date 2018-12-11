@@ -450,6 +450,7 @@ module.exports = (() => {
         }
 
         applicationRunning = true;
+        listeners.notifyListeners(events.PROTECTION_STATUS_CHANGED, true);
 
         if (!applicationInitialized) {
             initialize(options, callback);
@@ -474,6 +475,7 @@ module.exports = (() => {
         };
 
         listeners.notifyListeners(events.REQUEST_FILTER_UPDATED);
+        listeners.notifyListeners(events.PROTECTION_STATUS_CHANGED, false);
     };
 
     /**

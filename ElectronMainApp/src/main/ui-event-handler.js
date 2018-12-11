@@ -131,6 +131,7 @@ function processInitializeFrameScriptRequest() {
         enabledFilters: enabledFilters,
         filtersMetadata: filters.getFilters(),
         contentBlockerInfo: antibanner.getContentBlockerInfo(),
+        isProtectionRunning: antibanner.isRunning(),
         environmentOptions: {
             isMacOs: true,
             Prefs: {

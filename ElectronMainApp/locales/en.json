@@ -286,5 +286,11 @@
     },
     "settings_notification_text": {
         "message": "You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually. You can enable AdGuard Icon <a href='#' id='notificationEnableIconLink'>here<\/a>."
+    },
+    "settings_notification_protection_title": {
+        "message": "Attention! Protection was disabled"
+    },
+    "settings_notification_protection_text": {
+        "message": "AdGuard protection is paused. Enable AdGuard."
     }
 }
