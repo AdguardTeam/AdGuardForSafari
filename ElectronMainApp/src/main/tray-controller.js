@@ -1,6 +1,7 @@
 const appPack = require('../utils/app-pack');
 const i18n = require('../utils/i18n');
 
+const applicationApi = require('./api');
 const filters = require('./app/filters-manager');
 const listeners = require('./notifier');
 const antibanner = require('./app/antibanner');
@@ -31,6 +32,20 @@ module.exports = (() => {
 
     const isOpenAtLoginEnabled = () => {
         return settings.isLaunchAtLoginEnabled();
+    };
+
+    const onProtectionToggleClicked = (e) => {
+        const running = antibanner.isRunning();
+
+        if (!!e.checked) {
+            if (!running) {
+                applicationApi.start();
+            }
+        } else {
+            if (running) {
+                applicationApi.pause();
+            }
+        }
     };
 
     /**
@@ -122,6 +137,13 @@ module.exports = (() => {
             {
                 label: i18n.__('tray_menu_check_updates.message'),
                 click: onCheckFiltersUpdateClicked
+            },
+            { type: "separator" },
+            {
+                label: i18n.__('tray_menu_protection_start.message'),
+                type: "checkbox",
+                checked: antibanner.isRunning(),
+                click: onProtectionToggleClicked
             },
             { type: "separator" },
             {
