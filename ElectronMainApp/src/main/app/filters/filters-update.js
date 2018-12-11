@@ -58,8 +58,9 @@ module.exports = (() => {
      *
      * @param forceUpdate Normally we respect filter update period. But if this parameter is
      *                    true - we ignore it and check updates for all filters.
+     * @param filters     Optional Array of filters to update
      */
-    const checkAntiBannerFiltersUpdate = (forceUpdate) => {
+    const checkAntiBannerFiltersUpdate = (forceUpdate, filters) => {
         const onSuccess = (updatedFilters) => {
             if (forceUpdate) {
                 listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
@@ -79,7 +80,7 @@ module.exports = (() => {
         log.info("Start checking filters updates..");
 
         // Select filters for update
-        const toUpdate = selectFilterIdsToUpdate(forceUpdate);
+        const toUpdate = selectFilterIdsToUpdate(forceUpdate, filters);
         const filterIdsToUpdate = toUpdate.filterIds;
         const customFilterIdsToUpdate = toUpdate.customFilterIds;
 
@@ -248,12 +249,14 @@ module.exports = (() => {
      * Select filters for update. It depends on the time of last update.
      *
      * @param forceUpdate Force update flag.
+     * @param filtersToUpdate Optional array of filters
      * @returns object
      */
-    const selectFilterIdsToUpdate = (forceUpdate) => {
+    const selectFilterIdsToUpdate = (forceUpdate, filtersToUpdate) => {
         const filterIds = [];
         const customFilterIds = [];
-        const filters = subscriptions.getFilters();
+
+        const filters = filtersToUpdate || subscriptions.getFilters();
         const updateFiltersPeriodInMs = settings.getUpdateFiltersPeriod() * 60 * 60 * 1000;
 
         for (let filter of filters) {
@@ -312,6 +315,23 @@ module.exports = (() => {
         });
     };
 
+    /**
+     * Force checks updates for specified filter
+     *
+     * @param filter
+     */
+    const checkFilterUpdate = (filter) => {
+        if (!filter.enabled) {
+            return;
+        }
+
+        // Skip recently downloaded filters
+        if (Date.now() - filter.lastCheckTime < 5 * 60 * 1000) {
+            return;
+        }
+
+        checkAntiBannerFiltersUpdate(true, [filter]);
+    };
 
     /**
      * Rerun filters autoupdate timer when period changes
@@ -321,7 +341,17 @@ module.exports = (() => {
             clearTimeout(filterAutoupdateTimer);
         }
         scheduleFiltersUpdate(false);
-    }
+    };
+
+    listeners.addListener(function (event, filter) {
+        switch (event) {
+            case events.FILTER_ENABLE_DISABLE:
+                checkFilterUpdate(filter);
+                break;
+            default:
+                break;
+        }
+    });
 
     return {
         checkAntiBannerFiltersUpdate,
