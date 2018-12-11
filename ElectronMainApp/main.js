@@ -110,7 +110,7 @@ app.on('ready', (() => {
     uiEventListener.init();
 
     mainMenuController.initMenu();
-    tray = trayController.initTrayIcon(showWindow);
+    tray = trayController.initTray(showWindow);
     toolbarController.initToolbarController(showWindow);
     if (process.platform === 'darwin') {
         app.dock.hide();

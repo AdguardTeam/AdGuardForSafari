@@ -6,6 +6,7 @@ const listeners = require('./notifier');
 const antibanner = require('./app/antibanner');
 const events = require('./events');
 const storage = require('./app/storage/storage');
+const settings = require('./app/settings-manager');
 
 const { app, shell, Tray, Menu } = require('electron');
 
@@ -15,35 +16,97 @@ const { app, shell, Tray, Menu } = require('electron');
  */
 module.exports = (() => {
 
-    // const LAUNCH_AT_LOGIN_KEY = 'launch-at-login-set';
+    const imageFolder = appPack.resourcePath('/src/main/icons');
+    const trayImageOff = imageFolder + '/ext_pauseTemplate.png';
+    const trayImageOn = imageFolder + '/extTemplate.png';
 
     const onCheckFiltersUpdateClicked = () => {
         filters.checkAntiBannerFiltersUpdate(true);
     };
 
     const onLaunchAdguardAtLoginClicked = (e) => {
-        app.setLoginItemSettings({
-            openAtLogin: !!e.checked
-        });
+        tray.skipRerender = true;
+        settings.changeLaunchAtLogin(!!e.checked);
     };
 
     const isOpenAtLoginEnabled = () => {
-        return app.getLoginItemSettings().openAtLogin;
+        return settings.isLaunchAtLoginEnabled();
     };
 
-    const imageFolder = appPack.resourcePath('/src/main/icons');
-    const trayImageOff = imageFolder + '/ext_pauseTemplate.png';
-    const trayImageOn = imageFolder + '/extTemplate.png';
+    /**
+     * Sets tray icon according to protection status
+     */
+    const setTrayProtectionStatusIcon = (trayIcon) => {
+        if (trayIcon) {
+            if (antibanner.isRunning()) {
+                trayIcon.setImage(trayImageOn);
+                trayIcon.setPressedImage(trayImageOn);
+            } else {
+                trayIcon.setImage(trayImageOff);
+                trayIcon.setPressedImage(trayImageOff);
+            }
+        }
+    };
 
     /**
-     * Initializes icon in tray
+     * Keep global reference in object
+     *
+     * @type {{tray: null, showMainWindow: null}}
      */
-    const initTrayIcon = (showWindow) => {
+    let tray = {
+        trayIcon: null,
+        showMainWindow: null,
+        skipRerender: false
+    };
 
-        const isLaunchAtLogin = isOpenAtLoginEnabled();
+    /**
+     * Initializes tray
+     *
+     * @param showMainWindow
+     * @returns {{tray: null, showMainWindow: null}}
+     */
+    const initTray = (showMainWindow) => {
 
-        const tray = new Tray(trayImageOff);
-        tray.setPressedImage(trayImageOff);
+        tray.showMainWindow = showMainWindow;
+        tray.trayIcon = renderTray();
+
+        listeners.addListener((event) => {
+            if (event === events.REQUEST_FILTER_UPDATED) {
+                setTrayProtectionStatusIcon(tray.trayIcon);
+            }
+        });
+
+        settings.onUpdated.addListener(function (setting) {
+            if (setting === settings.SHOW_TRAY_ICON ||
+                setting === settings.LAUNCH_AT_LOGIN) {
+                if (tray.skipRerender) {
+                    tray.skipRerender = false;
+                    return;
+                }
+
+                if (tray.trayIcon) {
+                    tray.trayIcon.destroy();
+                }
+
+                tray.trayIcon = renderTray();
+            }
+        });
+
+        return tray;
+    };
+
+    /**
+     * Renders tray icon and menu
+     *
+     * @returns {null}
+     */
+    const renderTray = () => {
+        if (!settings.getProperty(settings.SHOW_TRAY_ICON)) {
+            return null;
+        }
+
+        const trayIcon = new Tray(trayImageOff);
+        trayIcon.setPressedImage(trayImageOff);
 
         const contextMenu = Menu.buildFromTemplate([
             {
@@ -54,17 +117,17 @@ module.exports = (() => {
             },
             {
                 label: i18n.__('tray_menu_preferences.message'),
-                click: () => { showWindow(); }
+                click: () => { tray.showMainWindow(); }
             },
             {
-                label: i18n.__('tray_menu_check_updates.message'), 
+                label: i18n.__('tray_menu_check_updates.message'),
                 click: onCheckFiltersUpdateClicked
             },
             { type: "separator" },
             {
                 label: i18n.__('tray_menu_launch_at_startup.message'),
                 type: "checkbox",
-                checked: isLaunchAtLogin,
+                checked: isOpenAtLoginEnabled(),
                 click: onLaunchAdguardAtLoginClicked
             },
             { type: "separator" },
@@ -74,31 +137,15 @@ module.exports = (() => {
             }
         ]);
 
-        tray.setContextMenu(contextMenu);
+        trayIcon.setContextMenu(contextMenu);
 
-        const setTrayProtectionStatusIcon = () => {
-            if (antibanner.isRunning()) {
-                tray.setImage(trayImageOn);
-                tray.setPressedImage(trayImageOn);
-            } else {
-                tray.setImage(trayImageOff);
-                tray.setPressedImage(trayImageOff);
-            }
-        };
+        setTrayProtectionStatusIcon(trayIcon);
 
-        listeners.addListener((event) => {
-            if (event === events.REQUEST_FILTER_UPDATED) {
-                setTrayProtectionStatusIcon();
-            }
-        });
-
-        setTrayProtectionStatusIcon();
-
-        return tray;
+        return trayIcon;
     };
 
     return {
-        initTrayIcon: initTrayIcon
+        initTray: initTray
     };
 
 })();

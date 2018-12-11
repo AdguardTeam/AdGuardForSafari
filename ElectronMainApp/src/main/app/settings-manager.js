@@ -2,6 +2,10 @@ const localStorage = require('./storage/storage');
 const cache = require('./utils/cache');
 const log = require('./utils/log');
 const channels = require('./utils/channels');
+const listeners = require('../notifier');
+const events = require('../events');
+
+const { app } = require('electron');
 /**
  * Object that manages user settings.
  * @constructor
@@ -17,7 +21,9 @@ module.exports = (function () {
         USE_OPTIMIZED_FILTERS: 'use-optimized-filters',
         DEFAULT_WHITE_LIST_MODE: 'default-whitelist-mode',
         DISABLE_SHOW_APP_UPDATED_NOTIFICATION: 'show-app-updated-disabled',
-        UPDATE_FILTERS_PERIOD: 'update-filters-period'
+        UPDATE_FILTERS_PERIOD: 'update-filters-period',
+        SHOW_TRAY_ICON: 'show-tray-icon',
+        LAUNCH_AT_LOGIN: 'launch-at-login'
     };
 
     const properties = Object.create(null);
@@ -43,6 +49,8 @@ module.exports = (function () {
                 defaults[settings.USE_OPTIMIZED_FILTERS] = true;
                 defaults[settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION] = false;
                 defaults[settings.UPDATE_FILTERS_PERIOD] = 48;
+                defaults[settings.SHOW_TRAY_ICON] = true;
+                defaults[settings.LAUNCH_AT_LOGIN] = true;
 
                 return defaults;
             });
@@ -148,11 +156,25 @@ module.exports = (function () {
 
     const changeUpdateFiltersPeriod = (value) => {
         setProperty(settings.UPDATE_FILTERS_PERIOD, value);
-    }
+    };
 
     const getUpdateFiltersPeriod = () => {
         return getProperty(settings.UPDATE_FILTERS_PERIOD);
-    }
+    };
+
+    const changeLaunchAtLogin = (value) => {
+        setProperty(settings.LAUNCH_AT_LOGIN, value);
+
+        app.setLoginItemSettings({
+            openAtLogin: value
+        });
+
+        listeners.notifyListeners(events.LAUNCH_AT_LOGIN_UPDATED, value);
+    };
+
+    const isLaunchAtLoginEnabled = () => {
+        return getProperty(settings.LAUNCH_AT_LOGIN);
+    };
 
     const api = {};
 
@@ -182,6 +204,12 @@ module.exports = (function () {
     api.changeDefaultWhiteListMode = changeDefaultWhiteListMode;
     api.changeUpdateFiltersPeriod = changeUpdateFiltersPeriod;
     api.getUpdateFiltersPeriod = getUpdateFiltersPeriod;
+    api.changeLaunchAtLogin = changeLaunchAtLogin;
+    api.isLaunchAtLoginEnabled = isLaunchAtLoginEnabled;
+
+    app.setLoginItemSettings({
+        openAtLogin: getProperty(settings.LAUNCH_AT_LOGIN)
+    });
 
     return api;
 
