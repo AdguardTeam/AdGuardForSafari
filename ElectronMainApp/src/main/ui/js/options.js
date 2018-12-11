@@ -1386,6 +1386,9 @@ const Settings = function () {
         }
     });
 
+    checkboxes.push(new Checkbox('#showTrayIcon', userSettings.names.SHOW_TRAY_ICON));
+    checkboxes.push(new Checkbox('#launchAtLogin', userSettings.names.LAUNCH_AT_LOGIN));
+
     const initUpdateFiltersPeriodSelect = () => {
         const periods = [48, 24, 12, 6, 1]; // in hours
         const periodSelectOptions = periods.map(item => ({
@@ -1416,6 +1419,11 @@ const Settings = function () {
         }
     };
 
+    const launchAtLoginCheckbox = document.querySelector("#launchAtLogin");
+    const updateLaunchAtLoginCheckbox = function (enabled) {
+        CheckboxUtils.updateCheckbox([launchAtLoginCheckbox], enabled);
+    };
+
     const render = function () {
         periodSelect.render();
 
@@ -1431,7 +1439,8 @@ const Settings = function () {
 
     return {
         render,
-        updateAcceptableAdsCheckbox
+        updateAcceptableAdsCheckbox,
+        updateLaunchAtLoginCheckbox,
     };
 };
 
@@ -1630,6 +1639,9 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.SHOW_OPTIONS_USER_FILTER_TAB:
                     window.location.hash = 'userfilter';
+                    break;
+                case EventNotifierTypes.LAUNCH_AT_LOGIN_UPDATED:
+                    controller.settings.updateLaunchAtLoginCheckbox(options);
                     break;
             }
         });
