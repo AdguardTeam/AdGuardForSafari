@@ -291,6 +291,6 @@
         "message": "Attention! Protection was disabled"
     },
     "settings_notification_protection_text": {
-        "message": "AdGuard protection is paused. Enable AdGuard."
+        "message": "AdGuard protection is paused. <a href='#' id='notificationEnableProtectionLink'>Enable AdGuard<\/a>."
     }
 }

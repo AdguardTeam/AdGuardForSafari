@@ -1433,6 +1433,15 @@ const Settings = function () {
         }
     };
 
+    const notificationEnableProtectionLink = document.getElementById('notificationEnableProtectionLink');
+    notificationEnableProtectionLink && notificationEnableProtectionLink.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            type: 'enableProtection'
+        }));
+    });
+
     const render = function () {
         periodSelect.render();
 

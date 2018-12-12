@@ -9,6 +9,7 @@ const userrules = require('./app/userrules');
 const antibanner = require('./app/antibanner');
 const app = require('./app/app');
 const safariToolbar = require('safari-ext');
+const applicationApi = require('./api');
 
 /**
  * Initializes event listener
@@ -87,6 +88,9 @@ module.exports.init = function () {
                 break;
             case  'changeUpdateFiltersPeriod':
                 settings.changeUpdateFiltersPeriod(message.value);
+                break;
+            case  'enableProtection':
+                applicationApi.start();
                 break;
         }
     });
