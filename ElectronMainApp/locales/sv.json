@@ -261,12 +261,12 @@
         "message": "En ny filterregel  lades till i det egna filtret."
     },
     "options_filters_update_period": {
-        "message": "Filtrens uppdateringsperiod"
+        "message": "Uppdateringsintervall"
     },
     "options_filters_update_period_number": {
         "message": {
             "one": "%s timme",
-            "other": "%s timmar"
+            "other": "Var %s timme"
         }
     },
     "options_filters_period_not_update": {
