@@ -1497,8 +1497,10 @@ PageController.prototype = {
     },
 
     _initBoardingScreen: function () {
-        let onBoardingScreenEl = document.querySelector('#boarding-screen-placeholder');
+        let body = document.querySelector('body');
+        let onBoardingScreenEl = body.querySelector('#boarding-screen-placeholder');
         ipcRenderer.on('checkContentBlockerExtensionResponse', (e, arg) => {
+            body.style.overflow = arg ? 'auto' : 'hidden';
             onBoardingScreenEl.style.display = arg ? 'none' : 'flex';
         });
 
