@@ -1301,7 +1301,7 @@ const Select = function (id, options, value) {
     const render = () => select;
 
     return { render };
-}
+};
 
 /**
  * Generate HTML Element OPTION with passed params
@@ -1320,7 +1320,7 @@ const Option = function (value, name, selected) {
     const render = () => option;
 
     return { render };
-}
+};
 
 /**
  * Settings block
@@ -1424,6 +1424,24 @@ const Settings = function () {
         CheckboxUtils.updateCheckbox([launchAtLoginCheckbox], enabled);
     };
 
+    const enableProtectionNotification = document.querySelector('#enableProtectionNotification');
+    const showProtectionStatusWarning = function (protectionEnabled) {
+        if (protectionEnabled) {
+            enableProtectionNotification.style.display = 'none';
+        } else {
+            enableProtectionNotification.style.display = 'block';
+        }
+    };
+
+    const notificationEnableProtectionLink = document.getElementById('notificationEnableProtectionLink');
+    notificationEnableProtectionLink && notificationEnableProtectionLink.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            type: 'enableProtection'
+        }));
+    });
+
     const render = function () {
         periodSelect.render();
 
@@ -1435,12 +1453,15 @@ const Settings = function () {
             filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID,
             enabled: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID in enabledFilters
         });
+
+        showProtectionStatusWarning(isProtectionRunning);
     };
 
     return {
         render,
         updateAcceptableAdsCheckbox,
         updateLaunchAtLoginCheckbox,
+        showProtectionStatusWarning,
     };
 };
 
@@ -1476,8 +1497,10 @@ PageController.prototype = {
     },
 
     _initBoardingScreen: function () {
-        let onBoardingScreenEl = document.querySelector('#boarding-screen-placeholder');
+        let body = document.querySelector('body');
+        let onBoardingScreenEl = body.querySelector('#boarding-screen-placeholder');
         ipcRenderer.on('checkContentBlockerExtensionResponse', (e, arg) => {
+            body.style.overflow = arg ? 'auto' : 'hidden';
             onBoardingScreenEl.style.display = arg ? 'none' : 'flex';
         });
 
@@ -1585,6 +1608,7 @@ let enabledFilters;
 let environmentOptions;
 let AntiBannerFiltersId;
 let contentBlockerInfo;
+let isProtectionRunning;
 
 /**
  * Initializes page
@@ -1595,6 +1619,7 @@ const initPage = function (response) {
     enabledFilters = response.enabledFilters;
     environmentOptions = response.environmentOptions;
     contentBlockerInfo = response.contentBlockerInfo;
+    isProtectionRunning = response.isProtectionRunning;
 
     AntiBannerFiltersId = response.constants.AntiBannerFiltersId;
 
@@ -1642,6 +1667,9 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.LAUNCH_AT_LOGIN_UPDATED:
                     controller.settings.updateLaunchAtLoginCheckbox(options);
+                    break;
+                case EventNotifierTypes.PROTECTION_STATUS_CHANGED:
+                    controller.settings.showProtectionStatusWarning(options);
                     break;
             }
         });

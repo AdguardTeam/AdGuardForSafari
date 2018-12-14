@@ -159,6 +159,7 @@
 }
 .settings-content--general {
   min-height: 550px;
+  padding-bottom: 25px;
 }
 .settings-actions-wr {
   display: flex;
@@ -352,6 +353,7 @@
   padding: 24px;
   background: rgba(245, 166, 35, 0.2);
   border-radius: 8px 8px 8px 8px;
+  margin-bottom: 15px;
 }
 .settings-notification__title {
   font-size: 16px;

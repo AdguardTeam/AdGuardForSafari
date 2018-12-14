@@ -51,9 +51,9 @@ module.exports = (() => {
     /**
      * Sets tray icon according to protection status
      */
-    const setTrayProtectionStatusIcon = (trayIcon) => {
+    const setTrayProtectionStatusIcon = (trayIcon, isRunning) => {
         if (trayIcon) {
-            if (antibanner.isRunning()) {
+            if (isRunning) {
                 trayIcon.setImage(trayImageOn);
                 trayIcon.setPressedImage(trayImageOn);
             } else {
@@ -85,9 +85,9 @@ module.exports = (() => {
         tray.showMainWindow = showMainWindow;
         tray.trayIcon = renderTray();
 
-        listeners.addListener((event) => {
-            if (event === events.REQUEST_FILTER_UPDATED) {
-                setTrayProtectionStatusIcon(tray.trayIcon);
+        listeners.addListener((event, options) => {
+            if (event === events.PROTECTION_STATUS_CHANGED) {
+                setTrayProtectionStatusIcon(tray.trayIcon, options);
             }
         });
 
@@ -161,7 +161,7 @@ module.exports = (() => {
 
         trayIcon.setContextMenu(contextMenu);
 
-        setTrayProtectionStatusIcon(trayIcon);
+        setTrayProtectionStatusIcon(trayIcon, antibanner.isRunning());
 
         return trayIcon;
     };

@@ -28,6 +28,7 @@ const EventNotifierTypes = module.exports = {
     SHOW_OPTIONS_FILTERS_TAB: "event.show.options.filters",
     SHOW_OPTIONS_USER_FILTER_TAB: "event.show.options.user.filter",
     LAUNCH_AT_LOGIN_UPDATED: "event.launch.login.updated",
+    PROTECTION_STATUS_CHANGED: "event.protection.status.updated",
     // Log events
     TAB_ADDED: 'log.tab.added',
     TAB_CLOSE: 'log.tab.close',
