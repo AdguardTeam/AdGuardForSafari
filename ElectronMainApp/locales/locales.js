@@ -2,6 +2,7 @@ module.exports.LOCALES = [
     'en',
     'ru',
     'de',
+    'fa',
     'fr',
     'es',
     'ja',

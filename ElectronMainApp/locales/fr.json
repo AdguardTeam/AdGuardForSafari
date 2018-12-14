@@ -1,7 +1,4 @@
 {
-    "options_saved_status": {
-        "message": "Enregistr\u00e9"
-    },
     "name": {
         "message": "Bloqueur de pub AdGuard"
     },
@@ -218,6 +215,9 @@
     "tray_menu_quit": {
         "message": "Quitter"
     },
+    "tray_menu_protection_start": {
+        "message": "Activer AdGuard"
+    },
     "options_last_update": {
         "message": "Derni\u00e8re mise \u00e0 jour :"
     },
@@ -272,10 +272,22 @@
     "options_filters_period_not_update": {
         "message": "Ne pas mettre \u00e0 jour"
     },
+    "options_show_tray_icon": {
+        "message": "Afficher AdGuard pour safari dans la barre du menu"
+    },
+    "options_launch_at_login": {
+        "message": "Lancer AdGuard pour Safari d\u00e8s la connexion"
+    },
     "settings_notification_title": {
         "message": "Attention ! L'ic\u00f4ne AdGuard a \u00e9t\u00e9 d\u00e9sactiv\u00e9e"
     },
     "settings_notification_text": {
         "message": "Vous pouvez acc\u00e8der aux r\u00e8glages d'AdGuard pour Safari par aide de cette ic\u00f4ne : d\u00e9sactiver le blocage sur un site Web particulier ou masquer une pub \u00e0 la main. Vous pouvez activer l'Ic\u00f4ne AdGuard <a href='#' id='notificationEnableIconLink'>ici<\/a>"
+    },
+    "settings_notification_protection_title": {
+        "message": "Attention ! Protection d\u00e9sactiv\u00e9e"
+    },
+    "settings_notification_protection_text": {
+        "message": "La protection AdGuard est en pause. <a href='#' id='notificationEnableProtectionLink'>Activer AdGuard<\/a>."
     }
 }
