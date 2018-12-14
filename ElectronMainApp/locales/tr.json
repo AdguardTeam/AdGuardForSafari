@@ -1,7 +1,4 @@
 {
-    "options_saved_status": {
-        "message": "Tasarruf edilen veri"
-    },
     "name": {
         "message": "AdGuard Reklam Engelleyici"
     },
@@ -218,6 +215,9 @@
     "tray_menu_quit": {
         "message": "\u00c7\u0131k\u0131\u015f"
     },
+    "tray_menu_protection_start": {
+        "message": "Enable AdGuard"
+    },
     "options_last_update": {
         "message": "Son g\u00fcncelleme:"
     },
@@ -272,10 +272,22 @@
     "options_filters_period_not_update": {
         "message": "Do not update"
     },
+    "options_show_tray_icon": {
+        "message": "Show AdGuard for Safari in the menu bar"
+    },
+    "options_launch_at_login": {
+        "message": "Launch AdGuard for Safari at Login"
+    },
     "settings_notification_title": {
         "message": "Attention! AdGuard icon was disabled"
     },
     "settings_notification_text": {
         "message": "You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually. You can enable AdGuard Icon <a href='#' id='notificationEnableIconLink'>here<\/a>."
+    },
+    "settings_notification_protection_title": {
+        "message": "Attention! Protection was disabled"
+    },
+    "settings_notification_protection_text": {
+        "message": "AdGuard protection is paused. <a href='#' id='notificationEnableProtectionLink'>Enable AdGuard<\/a>."
     }
 }

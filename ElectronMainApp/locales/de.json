@@ -1,7 +1,4 @@
 {
-    "options_saved_status": {
-        "message": "Gespeichert"
-    },
     "name": {
         "message": "AdGuard Werbeblocker"
     },
@@ -218,6 +215,9 @@
     "tray_menu_quit": {
         "message": "Beenden"
     },
+    "tray_menu_protection_start": {
+        "message": "AdGuard aktivieren"
+    },
     "options_last_update": {
         "message": "Letztes Update:"
     },
@@ -272,10 +272,22 @@
     "options_filters_period_not_update": {
         "message": "Nicht updaten"
     },
+    "options_show_tray_icon": {
+        "message": "AdGuard f\u00fcr Safari in der Men\u00fcleiste zeigen"
+    },
+    "options_launch_at_login": {
+        "message": "AdGuard f\u00fcr Safari beim Anmelden starten"
+    },
     "settings_notification_title": {
         "message": "Achtung! Das AdGuard-Symbol wurde deaktiviert."
     },
     "settings_notification_text": {
         "message": "Sie k\u00f6nnen dieses Symbol verwenden, um die Einstellungen von AdGuard f\u00fcr Safari zu verwalten, z.B. das Blockieren auf einer Webseite anzuhalten oder eine Anzeige manuell zu blockieren. Sie k\u00f6nnen das AdGuard-Symbol <a href='#' id='notificationEnableIconLink'>hier<\/a> aktivieren."
+    },
+    "settings_notification_protection_title": {
+        "message": "Achtung! Der Schutz wurde deaktiviert."
+    },
+    "settings_notification_protection_text": {
+        "message": "Der Schutz ist angehalten. <a href='#' id='notificationEnableProtectionLink'>AdGuard aktivieren<\/a>."
     }
 }

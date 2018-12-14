@@ -1,7 +1,4 @@
 {
-    "options_saved_status": {
-        "message": "Zaoszcz\u0119dzono"
-    },
     "name": {
         "message": "Bloker reklam AdGuard"
     },
@@ -218,6 +215,9 @@
     "tray_menu_quit": {
         "message": "Zamknij"
     },
+    "tray_menu_protection_start": {
+        "message": "W\u0142\u0105cz AdGuard"
+    },
     "options_last_update": {
         "message": "Ostatnia aktualizacja:"
     },
@@ -274,10 +274,22 @@
     "options_filters_period_not_update": {
         "message": "Nie aktualizuj"
     },
+    "options_show_tray_icon": {
+        "message": "Poka\u017c AdGuard dla Safari na pasku menu"
+    },
+    "options_launch_at_login": {
+        "message": "Uruchom AdGuard dla Safari przy logowaniu"
+    },
     "settings_notification_title": {
         "message": "Uwaga! Ikona AdGuard zosta\u0142a wy\u0142\u0105czona"
     },
     "settings_notification_text": {
         "message": "Mo\u017cesz u\u017cy\u0107 tej ikony do zarz\u0105dzania AdGuard dla ustawie\u0144 Safari. Na przyk\u0142ad wstrzymaj blokowanie w witrynie lub zablokuj reklam\u0119 r\u0119cznie. Mo\u017cesz w\u0142\u0105czy\u0107 ikon\u0119 AdGuard <a href='#' id='notificationEnableIconLink'>tutaj<\/a>."
+    },
+    "settings_notification_protection_title": {
+        "message": "Uwaga! Ochrona zosta\u0142a wy\u0142\u0105czona"
+    },
+    "settings_notification_protection_text": {
+        "message": "Ochrona AdGuard zosta\u0142a wstrzymana. <a href='#' id='notificationEnableProtectionLink'>W\u0142\u0105cz AdGuard<\/a>."
     }
 }
