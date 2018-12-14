@@ -302,10 +302,6 @@
 		65D151A72139A5080014BE79 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		65FA408B215E8B6B000196EC /* LinkButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkButton.h; sourceTree = "<group>"; };
 		65FA408C215E8B6B000196EC /* LinkButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkButton.m; sourceTree = "<group>"; };
-		F480C25B21C3D59E003B9896 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/SafariExtensionViewController.strings; sourceTree = "<group>"; };
-		F480C25C21C3D59F003B9896 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F480C25D21C3D59F003B9896 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F480C25E21C3D59F003B9896 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -758,7 +754,6 @@
 				cs,
 				sv,
 				tr,
-				fa,
 			);
 			mainGroup = 65720AA921219AC900B2381C;
 			productRefGroup = 65720AB321219AC900B2381C /* Products */;
@@ -943,7 +938,6 @@
 				5D438EF821AFEDCF00BA0A3C /* cs */,
 				5D42F55621B6A2D100047487 /* sv */,
 				5D42F55A21B6A2FA00047487 /* tr */,
-				F480C25B21C3D59E003B9896 /* fa */,
 			);
 			name = SafariExtensionViewController.xib;
 			sourceTree = "<group>";
@@ -967,7 +961,6 @@
 				5D438EFA21AFEDCF00BA0A3C /* cs */,
 				5D42F55821B6A2D200047487 /* sv */,
 				5D42F55C21B6A2FA00047487 /* tr */,
-				F480C25D21C3D59F003B9896 /* fa */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -990,7 +983,6 @@
 				5D438EFB21AFEDCF00BA0A3C /* cs */,
 				5D42F55921B6A2D200047487 /* sv */,
 				5D42F55D21B6A2FA00047487 /* tr */,
-				F480C25E21C3D59F003B9896 /* fa */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1013,7 +1005,6 @@
 				5D438EF921AFEDCF00BA0A3C /* cs */,
 				5D42F55721B6A2D100047487 /* sv */,
 				5D42F55B21B6A2FA00047487 /* tr */,
-				F480C25C21C3D59F003B9896 /* fa */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
