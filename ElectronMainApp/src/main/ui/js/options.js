@@ -1371,19 +1371,16 @@ const Settings = function () {
         negate: true
     }));
 
+    const toggleAcceptableAdsFilter = Utils.debounce(function (enabled) {
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': enabled ? 'addAndEnableFilter' : 'disableFilter',
+            filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
+        }));
+    }, 500);
+
     const allowAcceptableAdsCheckbox = document.querySelector("#allowAcceptableAds");
     allowAcceptableAdsCheckbox.addEventListener('change', function () {
-        if (this.checked) {
-            ipcRenderer.send('renderer-to-main', JSON.stringify({
-                'type': 'addAndEnableFilter',
-                filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
-            }));
-        } else {
-            ipcRenderer.send('renderer-to-main', JSON.stringify({
-                'type': 'disableFilter',
-                filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
-            }));
-        }
+        toggleAcceptableAdsFilter(this.checked);
     });
 
     checkboxes.push(new Checkbox('#showTrayIcon', userSettings.names.SHOW_TRAY_ICON));
@@ -1413,11 +1410,11 @@ const Settings = function () {
     };
     const periodSelect = initUpdateFiltersPeriodSelect();
 
-    const updateAcceptableAdsCheckbox = function (filter) {
+    const updateAcceptableAdsCheckbox = Utils.debounce(function (filter) {
         if (filter.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID) {
             CheckboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], filter.enabled);
         }
-    };
+    }, 500);
 
     const launchAtLoginCheckbox = document.querySelector("#launchAtLogin");
     const updateLaunchAtLoginCheckbox = function (enabled) {
