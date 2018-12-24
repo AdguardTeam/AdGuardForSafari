@@ -19,7 +19,7 @@ module.exports = (function () {
     };
 
     const hasItem = (key) => {
-        return !!store.get(key);
+        return store.has(key);
     };
 
     return {
