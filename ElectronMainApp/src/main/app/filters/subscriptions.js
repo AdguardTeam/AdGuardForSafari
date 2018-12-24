@@ -261,8 +261,21 @@ module.exports = (function () {
         let customFilters = loadCustomFilters();
         customFilters.push(filter);
 
-        console.log(filter);
-        console.log(customFilters);
+        localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(customFilters));
+    };
+
+    /**
+     * Removes custom filter from storage
+     *
+     * @param filter
+     */
+    const removeCustomFilter = (filter) => {
+        let customFilters = loadCustomFilters();
+        customFilters.forEach(f => {
+            if (f.filterId === filter.filterId) {
+                f.removed = true;
+            }
+        });
 
         localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(customFilters));
     };
@@ -321,6 +334,10 @@ module.exports = (function () {
             const customFilters = loadCustomFilters();
             customFilters.forEach(f => {
                 const filter = createSubscriptionFilterFromJSON(f);
+                filter.customUrl = f.customUrl;
+                filter.rulesCount = f.rulesCount;
+                filter.removed = f.removed;
+
                 filters.push(filter);
                 filtersMap[filter.filterId] = filter;
             });
@@ -509,7 +526,8 @@ module.exports = (function () {
         getFilters: getFilters,
         getFilter: getFilter,
         createSubscriptionFilterFromJSON: createSubscriptionFilterFromJSON,
-        updateCustomFilter: updateCustomFilter
+        updateCustomFilter: updateCustomFilter,
+        removeCustomFilter: removeCustomFilter,
     };
 
 })();
