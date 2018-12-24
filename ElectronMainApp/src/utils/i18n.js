@@ -16,13 +16,14 @@ module.exports = (() => {
 
     i18n.setAppLocale = function (appLocale) {
         const appLanguage = appLocale.substr(0, 2);
+        let resultLocale = 'en';
 
         // Looking for locale match
         const fullMatch = Object.keys(i18n.getCatalog())
             .some(key => {
                 const match = key.replace(/-/g, '_').toLowerCase() === appLocale.replace(/-/g, '_').toLowerCase();
                 if (match) {
-                    i18n.setLocale(key);
+                    resultLocale = key;
                 }
                 return match;
             });
@@ -33,11 +34,13 @@ module.exports = (() => {
                 .some(key => {
                     const match = key.toLowerCase() === appLanguage.toLowerCase();
                     if (match) {
-                        i18n.setLocale(key);
+                        resultLocale = key;
                     }
                     return match;
                 });
         }
+
+        i18n.setLocale(resultLocale);
     }
 
     return i18n;
