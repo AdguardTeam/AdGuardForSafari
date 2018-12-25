@@ -268,8 +268,11 @@ module.exports = (() => {
         filter.enabled = false;
         filter.installed = false;
         filter.removed = true;
+
         listeners.notifyListeners(events.FILTER_ENABLE_DISABLE, filter);
         listeners.notifyListeners(events.FILTER_ADD_REMOVE, filter);
+
+        subscriptions.removeCustomFilter(filter);
     };
 
     /**
