@@ -32,6 +32,13 @@ require('electron-debug')({
 require('electron-reload')(__dirname, {
     electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
 });
+
+/**
+ * Disables hardware acceleration for this app.
+ * https://github.com/AdguardTeam/AdGuardForSafari/issues/110
+ */
+app.disableHardwareAcceleration();
+
 /**
  * Creates main window
  */
