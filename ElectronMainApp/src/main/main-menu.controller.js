@@ -1,4 +1,4 @@
-const { app, Menu } = require('electron');
+const { app, Menu, BrowserWindow } = require('electron');
 const i18n = require('../utils/i18n');
 
 /**
@@ -17,6 +17,16 @@ module.exports = (() => {
             { 
                 label: 'AdGuard for Safari',
                 submenu: [
+                    {
+                        label: i18n.__('main_menu_hide.message'),
+                        accelerator: 'cmd+h',
+                        click() { app.hide(); }
+                    },
+                    {
+                        label: i18n.__('main_menu_close_window.message'),
+                        accelerator: 'cmd+w',
+                        click() { BrowserWindow.getFocusedWindow().close(); }
+                    },
                     { type: 'separator' },
                     {
                         label: i18n.__('tray_menu_quit.message'),

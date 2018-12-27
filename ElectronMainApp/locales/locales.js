@@ -7,6 +7,7 @@ module.exports.LOCALES = [
     'ja',
     'da',
     'zh-cn',
+    'zh-Hant',
     'it',
     'pl',
     'pt-br',

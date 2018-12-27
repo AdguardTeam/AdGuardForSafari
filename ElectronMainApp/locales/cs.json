@@ -1,4 +1,10 @@
 {
+    "main_menu_hide": {
+        "message": "Hide"
+    },
+    "main_menu_close_window": {
+        "message": "Close window"
+    },
     "name": {
         "message": "AdGuard AdBlocker"
     },
@@ -174,13 +180,13 @@
         "message": "Hledat"
     },
     "options_editor_indicator_editing": {
-        "message": "Editing..."
+        "message": "Editace..."
     },
     "options_editor_indicator_saving": {
-        "message": "Saving..."
+        "message": "Ukl\u00e1d\u00e1n\u00ed..."
     },
     "options_editor_indicator_saved": {
-        "message": "Saved"
+        "message": "Ulo\u017eeno"
     },
     "main_menu_edit": {
         "message": "Upravit"
@@ -216,7 +222,7 @@
         "message": "Ukon\u010dit"
     },
     "tray_menu_protection_start": {
-        "message": "Enable AdGuard"
+        "message": "Zapnout AdGuard"
     },
     "options_last_update": {
         "message": "Posledn\u00ed aktualizace:"
@@ -261,35 +267,35 @@
         "message": "Do u\u017eivatelsk\u00e9ho filtru bylo p\u0159id\u00e1no nov\u00e9 pravidlo:"
     },
     "options_filters_update_period": {
-        "message": "Update interval"
+        "message": "Interval aktualizace"
     },
     "options_filters_update_period_number": {
         "message": {
-            "one": "Every hour",
-            "few": "Every %s hours",
-            "many": "Every %s hours",
-            "other": "Every %s hours"
+            "one": "Ka\u017edou hodinu",
+            "few": "Ka\u017ed\u00e9 %s hodiny",
+            "many": "Ka\u017ed\u00fdch %s hodin",
+            "other": "Ka\u017ed\u00fdch %s hodin"
         }
     },
     "options_filters_period_not_update": {
-        "message": "Do not update"
+        "message": "Neaktualizovat"
     },
     "options_show_tray_icon": {
-        "message": "Show AdGuard for Safari in the menu bar"
+        "message": "V li\u0161t\u011b menu zobrazit AdGuard pro Safari"
     },
     "options_launch_at_login": {
-        "message": "Launch AdGuard for Safari at Login"
+        "message": "Spustit AdGuard pro Safari p\u0159i p\u0159ihl\u00e1\u0161en\u00ed"
     },
     "settings_notification_title": {
-        "message": "Attention! AdGuard icon was disabled"
+        "message": "Pozor! Ikona AdGuardu byla zak\u00e1z\u00e1na"
     },
     "settings_notification_text": {
-        "message": "You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually. You can enable AdGuard Icon <a href='#' id='notificationEnableIconLink'>here<\/a>."
+        "message": "Tuto ikonu m\u016f\u017eete pou\u017e\u00edt ke spr\u00e1v\u011b AdGuardu pro nastaven\u00ed Safari. Nap\u0159\u00edklad pozastavit blokov\u00e1n\u00ed na t\u00e9to str\u00e1nce nebo blokovat reklamy ru\u010dn\u011b. M\u016f\u017eete povolit ikonu AdGuardu <a href='#' id='notificationEnableIconLink'>zde<\/a>."
     },
     "settings_notification_protection_title": {
-        "message": "Attention! Protection was disabled"
+        "message": "Pozor! Ochrana byla vypnuta"
     },
     "settings_notification_protection_text": {
-        "message": "AdGuard protection is paused. <a href='#' id='notificationEnableProtectionLink'>Enable AdGuard<\/a>."
+        "message": "Ochrana AdGuardem je pozastavena. <a href='#' id='notificationEnableProtectionLink'>Zapnout AdGuard<\/a>."
     }
 }
