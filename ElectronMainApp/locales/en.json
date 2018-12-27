@@ -12,7 +12,7 @@
         "message": "General"
     },
     "options_general_desc": {
-        "message": "AdGuard for Safari is a free and open source software. We welcome your feedback and contributions. If you want to report a bug or request a feature, please head to <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo<\/a>."
+        "message": "AdGuard for Safari is a free and open source software. We welcome your feedback and contributions. If you want to report a bug or request a feature, please head to <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Allow search ads and the self-promotion of websites"
@@ -123,19 +123,19 @@
         "message": "AdGuard does not filter web sites from the whitelist."
     },
     "options_whitelist_inverse": {
-        "message": "Invert whitelist<span class='sp-table-row-info'>Unblock ads everywhere <i>except<\/i> the whitelist<\/span>"
+        "message": "Invert whitelist<span class='sp-table-row-info'>Unblock ads everywhere <i>except</i> the whitelist</span>"
     },
     "options_userfilter": {
         "message": "User filter"
     },
     "options_userfilter_description": {
-        "message": "You can add your own rules to&nbsp;this filter. This option is&nbsp;recommended for advanced users familiar with HTML\/CSS. Read the <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filter rules tutorial<\/a> to&nbsp;learn how to&nbsp;write your own filter rules."
+        "message": "You can add your own rules to&nbsp;this filter. This option is&nbsp;recommended for advanced users familiar with HTML/CSS. Read the <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filter rules tutorial</a> to&nbsp;learn how to&nbsp;write your own filter rules."
     },
     "options_show_app_updated_notification": {
         "message": "Notify about extension updates"
     },
     "options_use_optimized_filters": {
-        "message": "Use optimized filters<span class='sp-table-row-info'>Light-weight filter lists optimized for Safari Content Blocking API.<\/span>"
+        "message": "Use optimized filters<span class='sp-table-row-info'>Light-weight filter lists optimized for Safari Content Blocking API.</span>"
     },
     "options_popup_update_title": {
         "message": "Filters updated successfully"
@@ -288,12 +288,12 @@
         "message": "Attention! AdGuard icon was disabled"
     },
     "settings_notification_text": {
-        "message": "You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually. You can enable AdGuard Icon <a href='#' id='notificationEnableIconLink'>here<\/a>."
+        "message": "You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually. You can enable AdGuard Icon <a href='#' id='notificationEnableIconLink'>here</a>."
     },
     "settings_notification_protection_title": {
         "message": "Attention! Protection was disabled"
     },
     "settings_notification_protection_text": {
-        "message": "AdGuard protection is paused. <a href='#' id='notificationEnableProtectionLink'>Enable AdGuard<\/a>."
+        "message": "AdGuard protection is paused. <a href='#' id='notificationEnableProtectionLink'>Enable AdGuard</a>."
     }
 }
