@@ -50,7 +50,7 @@ module.exports = (function () {
                 defaults[settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION] = false;
                 defaults[settings.UPDATE_FILTERS_PERIOD] = 48;
                 defaults[settings.SHOW_TRAY_ICON] = true;
-                defaults[settings.LAUNCH_AT_LOGIN] = true;
+                defaults[settings.LAUNCH_AT_LOGIN] = false;
 
                 return defaults;
             });
