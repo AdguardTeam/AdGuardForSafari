@@ -1180,7 +1180,8 @@ const AntiBannerFilters = function (options) {
             lastUpdateTime = loadedFiltersInfo.lastUpdateTime;
             if (lastUpdateTime) {
                 lastUpdateTime = new Date(lastUpdateTime);
-                updateText = lastUpdateTime.toLocaleString(environmentOptions.Prefs.locale);
+                const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+                updateText = lastUpdateTime.toLocaleString(environmentOptions.Prefs.locale, options);
             }
 
             document.querySelector('#lastUpdateTime').textContent = updateText;
