@@ -707,7 +707,7 @@ const AntiBannerFilters = function (options) {
 
         let tagDetails = '';
         filter.tagsDetails.forEach(function (tag) {
-            tagDetails += `<div class="opt-name__tag" data-tooltip="${tag.description}">#${tag.keyword}</div>`;
+            tagDetails += `<div class="opt-name__tag" data-tooltip='${tag.description}'>#${tag.keyword}</div>`;
         });
 
         let deleteButton = '';
