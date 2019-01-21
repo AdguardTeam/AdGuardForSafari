@@ -76,9 +76,9 @@ module.exports = (() => {
                     const filter = updatedFilters[0];
                     text.push(message.replace("$1", filter.name).replace("$2", filter.version));
                 } else {
-                    message = i18n.__("options_popup_update_updated_more.message");
+                    message = i18n.__n('options_popup_update_updated_more.message', updatedFilters.length);
                     const filtersListString = updatedFilters.map(f => `"${f.name}"`).join(', ');
-                    text.push(message.replace("$1", updatedFilters.length).replace("$2", filtersListString));
+                    text.push(message.replace("$2", filtersListString));
                 }
             }
         } else {
