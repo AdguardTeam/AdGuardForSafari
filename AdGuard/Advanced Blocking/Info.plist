@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(AG_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(AG_BUILD)</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSExtension</key>
@@ -29,21 +29,21 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).SafariExtensionHandler</string>
 		<key>SFSafariToolbarItem</key>
-        <dict>
-            <key>Action</key>
-            <string>Command</string>
-            <key>Identifier</key>
-            <string>Button</string>
-            <key>Image</key>
-            <string>ToolbarItemIcon.pdf</string>
-            <key>Label</key>
-            <string>Your Button</string>
-        </dict>
-        <key>SFSafariWebsiteAccess</key>
-        <dict>
-            <key>Level</key>
-            <string>All</string>
-        </dict>
+		<dict>
+			<key>Action</key>
+			<string>Command</string>
+			<key>Identifier</key>
+			<string>Button</string>
+			<key>Image</key>
+			<string>ToolbarItemIcon.pdf</string>
+			<key>Label</key>
+			<string>Your Button</string>
+		</dict>
+		<key>SFSafariWebsiteAccess</key>
+		<dict>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
 		<key>SFSafariContentScript</key>
 		<array>
 			<dict>
@@ -53,8 +53,8 @@
 		</array>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2019 Adguard Software Ltd. All rights reserved.</string>
+	<string>$(AG_COPYRIGHT)</string>
 	<key>NSHumanReadableDescription</key>
-	<string>This is a Safari Extension. You should tell us what your extension does here.</string>
+	<string>This extension manages injected script and extended css rules.</string>
 </dict>
 </plist>
