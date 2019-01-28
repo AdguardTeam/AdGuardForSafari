@@ -10,19 +10,18 @@ import SafariServices
 
 class SafariExtensionHandler: SFSafariExtensionHandler {
     
+    // TODO: Move to initialize method?
+    private var contentBlockerController: ContentBlockerController = ContentBlockerController()
+    
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {
         page.getPropertiesWithCompletionHandler { properties in
             NSLog("The extension received a message (\(messageName)) from a script injected into (\(String(describing: properties?.url))) with userInfo (\(userInfo ?? [:]))")
-        }
-
-        // TODO: Request content-blocker json from electron
-        // TODO: Keep content-blocker json up-to-date
-        
-        // Content script requests scripts and css for current page
-        if (messageName == "getAdvancedBlockingData") {
-            //TODO: Parse "content-blocker" json for current page
             
-            page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: ["myKey": "myValue"])
+            // Content script requests scripts and css for current page
+            if (messageName == "getAdvancedBlockingData") {
+                let data: [String : Any]? = self.contentBlockerController.getData(url: properties?.url)
+                page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data)
+            }
         }
     }
     
