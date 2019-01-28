@@ -11,7 +11,7 @@ import SafariServices
 class SafariExtensionHandler: SFSafariExtensionHandler {
     
     // TODO: Move to initialize method?
-    private var contentBlockerController: ContentBlockerController = ContentBlockerController()
+    private var contentBlockerController: ContentBlockerController = ContentBlockerController();
     
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {
         page.getPropertiesWithCompletionHandler { properties in
@@ -19,8 +19,8 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             
             // Content script requests scripts and css for current page
             if (messageName == "getAdvancedBlockingData") {
-                let data: [String : Any]? = self.contentBlockerController.getData(url: properties?.url)
-                page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data)
+                let data: [String : Any]? = ["data": self.contentBlockerController.getData(url: properties?.url)];
+                page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data);
             }
         }
     }

@@ -27,7 +27,7 @@ var handleMessage = function (event) {
     console.log("(AdGuard Advanced Blocking) Received message from extention: %s.", event.name);
 
     if (event.name === "advancedBlockingData") {
-        applyAdvancedBlockingData(event.message);
+        applyAdvancedBlockingData(event.message["data"]);
     }
 };
 

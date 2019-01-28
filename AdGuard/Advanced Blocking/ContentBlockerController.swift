@@ -15,7 +15,7 @@ import Foundation
 
 class ContentBlockerController {
     
-    private var contentBlockerJson: String
+    private var contentBlockerJson: String;
     
     // Constructor
     init() {
@@ -50,9 +50,10 @@ class ContentBlockerController {
     }
     
     // Returns requested scripts and css for specified url
-    func getData(url: URL?) -> [String : Any]? {
+    func getData(url: URL?) -> Any {
         //TODO: Select data for current url
+        //TODO: Add cache
         
-        return ["myKey": contentBlockerJson];
+        return contentBlockerJson;
     }
 }
