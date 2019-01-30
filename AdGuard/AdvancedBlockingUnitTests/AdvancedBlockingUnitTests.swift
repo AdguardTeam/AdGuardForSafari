@@ -26,11 +26,11 @@ class AdvancedBlockingTests: XCTestCase {
         
         let contentBlockerContainer: ContentBlockerContainer = ContentBlockerContainer();
         
-        let contentBlockerJsonString = """
+        var contentBlockerJsonString = """
             [
                 {
-                    trigger: {
-                        "if-domain": "example.com",
+                    "trigger": {
+                        "if-domain": "example.com"
                     },
                     "action": {
                         "type": "script",
@@ -38,16 +38,18 @@ class AdvancedBlockingTests: XCTestCase {
                     }
                 },
                 {
-                    trigger: {
-                        "if-domain": "example.com",
+                    "trigger": {
+                        "if-domain": "example.com"
                     },
-                    {
-                        "action": "css",
+                    "action": {
+                        "type": "css",
                         "css": "#banner:has(div) { height: 5px; }"
                     }
                 }
             ]
         """;
+        
+        //var contentBlockerJsonString = "[{\"testKey\":\"A\"},{\"testKey\":\"B\"}]";
         
         contentBlockerContainer.setJson(json: contentBlockerJsonString);
         

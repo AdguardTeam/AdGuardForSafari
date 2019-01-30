@@ -9,17 +9,18 @@
 import Foundation
 
 // Storage and parser
-// TODO: Add unit tests
 class ContentBlockerContainer {
-    private var contentBlockerJson: Any;
+    private var contentBlockerJson: Array<Any>;
     
     init() {
-        contentBlockerJson = "";
+        contentBlockerJson = [];
     }
     
     func setJson(json: String) {
         // Parse "content-blocker" json
         contentBlockerJson = parseJsonString(json: json);
+        
+        //TODO: Add validation
     }
     
     func getData(url: URL?) -> Any {
@@ -29,9 +30,19 @@ class ContentBlockerContainer {
         return contentBlockerJson;
     }
     
-    private func parseJsonString(json: String) -> Any {
-        //TODO: Parse json to object
+    private func parseJsonString(json: String) -> Array<Any> {
+        //TODO: Handle error
         
-        return "parsed";
+        let data = json.data(using: String.Encoding.utf8, allowLossyConversion: false)!
+        
+        let decoder = JSONDecoder();
+        let parsedData = try! decoder.decode([BlockerEntry].self, from: data);
+        
+        return parsedData;
+    }
+    
+    struct BlockerEntry: Codable {
+        let trigger: [String: String]
+        let action: [String:String]
     }
 }
