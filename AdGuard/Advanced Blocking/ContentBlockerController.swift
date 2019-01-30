@@ -15,16 +15,16 @@ import Foundation
 
 class ContentBlockerController {
     
-    private var contentBlockerJson: String;
+    private var contentBlockerContainer: ContentBlockerContainer;
     
     // Constructor
     init() {
-        // TODO: Request content-blocker json from electron
         // TODO: Keep content-blocker json up-to-date
         
-        // TODO: Parse "content-blocker" json
+        contentBlockerContainer = ContentBlockerContainer();
         
-        contentBlockerJson = """
+        // TODO: Request content-blocker json from electron
+        let contentBlockerJsonString = """
             [
                 {
                     trigger: {
@@ -47,13 +47,11 @@ class ContentBlockerController {
             ]
         """;
         
+        contentBlockerContainer.setJson(json: contentBlockerJsonString);
     }
     
     // Returns requested scripts and css for specified url
     func getData(url: URL?) -> Any {
-        //TODO: Select data for current url
-        //TODO: Add cache
-        
-        return contentBlockerJson;
+        return contentBlockerContainer.getData(url: url);
     }
 }
