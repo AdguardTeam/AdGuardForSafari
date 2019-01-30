@@ -1,8 +1,8 @@
 //
 //  SafariExtensionViewController.swift
-//  Advanced Blocking
+//  AdvancedBlocking
 //
-//  Created by Dimitry Kolyshev on 28.01.2019.
+//  Created by Dimitry Kolyshev on 30.01.2019.
 //  Copyright © 2019 Adguard Software Ltd. All rights reserved.
 //
 
