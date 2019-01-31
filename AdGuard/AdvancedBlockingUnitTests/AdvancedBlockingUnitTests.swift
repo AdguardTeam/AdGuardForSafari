@@ -12,53 +12,161 @@ import XCTest
 
 class AdvancedBlockingTests: XCTestCase {
     
+    var contentBlockerContainer: ContentBlockerContainer = ContentBlockerContainer();
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        //contentBlockerContainer = ContentBlockerContainer();
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        let contentBlockerContainer: ContentBlockerContainer = ContentBlockerContainer();
-        
-        var contentBlockerJsonString = """
+    func testTriggerUrlFilterAll() {
+        let contentBlockerJsonString = """
             [
                 {
                     "trigger": {
-                        "if-domain": "example.com"
+                        "url-filter": ".*"
                     },
                     "action": {
                         "type": "script",
-                        "script": "console.log('test injection script')"
+                        "script": "included-script"
                     }
                 },
                 {
                     "trigger": {
-                        "if-domain": "example.com"
+                        "url-filter": ".*"
                     },
                     "action": {
                         "type": "css",
-                        "css": "#banner:has(div) { height: 5px; }"
+                        "css": "#included-css:has(div) { height: 5px; }"
+                    }
+                },
+                {
+                    "trigger": {
+                        "url-filter": "test.com"
+                    },
+                    "action": {
+                        "type": "css",
+                        "css": "#excluded-css:has(div) { height: 5px; }"
                     }
                 }
             ]
         """;
         
-        //var contentBlockerJsonString = "[{\"testKey\":\"A\"},{\"testKey\":\"B\"}]";
+        contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(fileURLWithPath:"http://example.com")) as! ContentBlockerContainer.BlockerData;
+        
+        XCTAssert(data.scripts == "included-script");
+        XCTAssert(data.css == "#included-css:has(div) { height: 5px; }");
+    }
+    
+    func testTriggerUrlFilter() {
+        let contentBlockerJsonString = """
+            [
+                {
+                    "trigger": {
+                        "url-filter": "example.com"
+                    },
+                    "action": {
+                        "type": "script",
+                        "script": "included-script"
+                    }
+                },
+                {
+                    "trigger": {
+                        "url-filter": "not-example.com"
+                    },
+                    "action": {
+                        "type": "css",
+                        "css": "#excluded-css:has(div) { height: 5px; }"
+                    }
+                }
+            ]
+        """;
         
         contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(fileURLWithPath:"http://example.com")) as! ContentBlockerContainer.BlockerData;
         
-        var data = contentBlockerContainer.getData(url: URL(fileURLWithPath:"http://example.com"));
-        XCTAssert(data != nil);
+        XCTAssert(data.scripts == "included-script");
+        XCTAssert(data.css == "");
+    }
+    
+    func testUrlFilterIfDomain() {
+        let contentBlockerJsonString = """
+            [
+                {
+                    "trigger": {
+                        "url-filter": "^[htpsw]+:\\/\\/",
+                        "if-domain": [
+                            "example.com"
+                        ]
+                    },
+                    "action": {
+                        "type": "script",
+                        "script": "included-script"
+                    }
+                },
+                {
+                    "trigger": {
+                        "url-filter": "^[htpsw]+:\\/\\/",
+                        "if-domain": [
+                            "not-example.com"
+                        ]
+                    },
+                    "action": {
+                        "type": "css",
+                        "css": "#excluded-css:has(div) { height: 5px; }"
+                    }
+                }
+            ]
+        """;
+        
+        contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(fileURLWithPath:"http://example.com")) as! ContentBlockerContainer.BlockerData;
+        
+        XCTAssert(data.scripts == "included-script");
+        XCTAssert(data.css == "");
+    }
+    
+    func testUrlFilterUnlessDomain() {
+        let contentBlockerJsonString = """
+            [
+                {
+                    "trigger": {
+                        "url-filter": ".*",
+                        "unless-domain": [
+                            "*example.com",
+                            "*test.com"
+                        ]
+                    },
+                    "action": {
+                        "type": "script",
+                        "script": "excluded-script"
+                    }
+                },
+                {
+                    "trigger": {
+                        "url-filter": ".*"
+                    },
+                    "action": {
+                        "type": "css",
+                        "css": "#included-css:has(div) { height: 5px; }"
+                    }
+                }
+            ]
+        """;
+        
+        contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(fileURLWithPath:"http://example.com")) as! ContentBlockerContainer.BlockerData;
+        
+        XCTAssert(data.scripts == "");
+        XCTAssert(data.css == "#included-css:has(div) { height: 5px; }");
     }
     
     func testPerformanceExample() {
-        // This is an example of a performance test case.
+        // TODO: Add performance test case.
         self.measure {
             // Put the code you want to measure the time of here.
         }
