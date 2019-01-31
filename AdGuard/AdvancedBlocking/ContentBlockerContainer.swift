@@ -32,7 +32,11 @@ class ContentBlockerContainer {
         let blockerData = BlockerData();
         for entry in contentBlockerJson {
             if isEntryTriggered(trigger: entry.trigger, url: url) {
-                addActionContent(blockerData: blockerData, blockerEntry: entry);
+                if entry.action.type == "ignore-previous-rules" {
+                    blockerData.clear();
+                } else {
+                    addActionContent(blockerData: blockerData, blockerEntry: entry);
+                }
             }
         }
         
@@ -41,17 +45,63 @@ class ContentBlockerContainer {
     
     // Checks if trigger content is suitable for current url
     private func isEntryTriggered(trigger: BlockerEntry.Trigger, url: URL?) -> Bool {
-        if trigger.urlFilter != "" {
-            if trigger.urlFilter == ".*" {
-                return true;
+        if url == nil {
+            return true;
+        }
+        
+        let host = url!.host;
+        let absoluteUrl = url!.absoluteString;
+        
+        if trigger.urlFilter != nil {
+            if !matchesPattern(text: absoluteUrl, pattern: trigger.urlFilter!) {
+                return false;
             }
             
-            // TODO: Handle domains
+            return checkDomains(trigger: trigger, host: host!);
         } else {
             // Pass empty url-filter
         }
         
         return false;
+    }
+    
+    // Checks if trigger domain's fields matches current host
+    private func checkDomains(trigger: BlockerEntry.Trigger, host: String) -> Bool {
+        let permittedDomains = trigger.ifDomain;
+        let restrictedDomains = trigger.unlessDomain;
+        
+        let permittedDomainsEmpty = permittedDomains == nil || permittedDomains!.isEmpty;
+        let restrictedDomainsEmpty = restrictedDomains == nil || restrictedDomains!.isEmpty;
+        
+        if permittedDomainsEmpty && restrictedDomainsEmpty {
+            return true;
+        }
+        
+        if !restrictedDomainsEmpty && permittedDomainsEmpty {
+            return !matchesDomains(domainPatterns: restrictedDomains!, domain: host);
+        }
+        
+        if restrictedDomainsEmpty && !permittedDomainsEmpty {
+            return matchesDomains(domainPatterns: permittedDomains!, domain: host);
+        }
+        
+        return matchesDomains(domainPatterns: permittedDomains!, domain: host) && !matchesDomains(domainPatterns: restrictedDomains!, domain: host);
+    }
+    
+    // Checks if domain matches at least one domain pattern
+    private func matchesDomains(domainPatterns: [String], domain: String) -> Bool {
+        for pattern in domainPatterns {
+            if matchesPattern(text: domain, pattern: pattern) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    // Checks if text matches regular expression
+    private func matchesPattern(text: String, pattern: String) -> Bool {
+        return text.range(of: pattern, options: .regularExpression, range: nil, locale: nil) != nil;
     }
     
     // Adds scripts or css to blocker data object
@@ -101,17 +151,22 @@ class ContentBlockerContainer {
         }
     }
     
-    // Wrapper result object
+    // Wrapper result class
     class BlockerData {
         var scripts: String = "";
         var css: String = "";
         
         func addScript(script: String) {
-            scripts += script;
+            scripts += script + "\n";
         }
         
         func addCss(style: String) {
-            css += style;
+            css += style + "\n";
+        }
+        
+        func clear() {
+            scripts = "";
+            css = "";
         }
     }
 }
