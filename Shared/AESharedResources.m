@@ -20,6 +20,7 @@
 #import <SafariServices/SafariServices.h>
 
 #define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"
+#define AES_ADV_BLOCKING_CONTENT_RULES_RESOURCE @"adv-blocking-content-rules.json"
 #define AES_WHITELIST_DOMAINS                   @"whitelist-domains.data"
 #define AES_USERFILTER_RULES                    @"userfilter-rules.data"
 
@@ -226,8 +227,25 @@ static AESListenerBlock _onReport;
     });
 }
 
++ (void)setAdvancedBlockingContentRulesJson:(NSData *)jsonData completion:(void (^)(void))completion {
+
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        @autoreleasepool {
+            NSData *data = jsonData ?: [NSData data];
+            [self saveData:data toFileRelativePath:AES_ADV_BLOCKING_CONTENT_RULES_RESOURCE];
+            if (completion) {
+                completion();
+            }
+        }
+    });
+}
+
 + (NSURL *)blockingContentRulesUrl {
     return  [_containerFolderUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_RULES_RESOURCE];
+}
+
++ (NSURL *)advancedBlockingContentRulesUrl {
+    return  [_containerFolderUrl URLByAppendingPathComponent:AES_ADV_BLOCKING_CONTENT_RULES_RESOURCE];
 }
 
 + (void)setWhitelistDomains:(NSArray <NSString *> *)domains completion:(void (^)(void))completion {

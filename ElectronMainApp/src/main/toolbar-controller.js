@@ -95,6 +95,38 @@ module.exports = (() => {
         listeners.addListener(function (event, info) {
             if (event === events.CONTENT_BLOCKER_UPDATE_REQUIRED) {
                 setContentBlockingJson(JSON.stringify(info));
+                // TODO: Temp - should be bind to some other event with proper json
+                setAdvancedBlockingJson(`[
+                    {
+                        "trigger": {
+                            "url-filter": ".*"
+                        },
+                        "action": {
+                            "type": "script",
+                            "script": "example-ignored-script"
+                        }
+                    },
+                    {
+                        "trigger": {
+                            "url-filter": ".*",
+                            "if-domain": [
+                                "example.com"
+                            ]
+                        },
+                        "action": {
+                            "type": "ignore-previous-rules"
+                        }
+                    },
+                    {
+                        "trigger": {
+                            "url-filter": ".*"
+                        },
+                        "action": {
+                            "type": "script",
+                            "script": "included-script"
+                        }
+                    }
+                ]`);
             } else if (event === events.UPDATE_USER_FILTER_RULES) {
                 applicationApi.getUserFilterRules((rules) => {
                     setUserFilter(rules);
@@ -124,6 +156,23 @@ module.exports = (() => {
             }, 1000);
         });
 
+    };
+
+    /**
+     * Sets advanced blocking json
+     * @param jsonString
+     */
+    const setAdvancedBlockingJson = (jsonString) => {
+        safariToolbar.busyStatus(true);
+        safariToolbar.setAdvancedBlockingJson(jsonString, (result) => {
+            log.info('Advanced-blocking set result: ' + result);
+
+            //TODO: Handle error result
+
+            setTimeout(() => {
+                safariToolbar.busyStatus(false);
+            }, 1000);
+        });
     };
 
     /**

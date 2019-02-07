@@ -210,6 +210,50 @@ NAN_METHOD(setContentBlockingJson) {
     }];
 }
 
+NAN_METHOD(setAdvancedBlockingJson) {
+    
+    if (info.Length() < 2) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+    
+    if (!info[0]->IsString() || !info[1]->IsFunction()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+    NSData *data = [NSData new];
+    Nan::Utf8String msg (info[0]);
+    if (msg.length() > 0) {
+        data = [NSData dataWithBytes:*msg length:msg.length()];
+    }
+    
+    Nan::Callback *cb = new Nan::Callback(info[1].As<Function>());
+    
+    [AESharedResources setAdvancedBlockingContentRulesJson:data completion:^{
+        DDLogCDebug(@"Json updated in file. Notify the advanced blocking extension.");
+        [SFContentBlockerManager
+         reloadContentBlockerWithIdentifier:AESharedResources.blockerBundleId
+         completionHandler:^(NSError * _Nullable error) {
+             DDLogCDebug(@"Notifying completion with error: %@", error ?: @"[no error]");
+             NSString *jsonResult = @"{\"result\":\"success\"}";
+             if (error) {
+                 jsonResult = [NSString stringWithFormat:@"{\"result\":\"error\", \"error\":{\"domain\":\"%@\", \"code\":%ld, \"descr\":\"%@\"}",
+                               error.domain, error.code, error.localizedDescription];
+             }
+             
+             auto *info = new CallbackInfo();
+             info->type = CallbackTypeForBlockingContentRules;
+             info->result = (void *)CFBridgingRetain(jsonResult);
+             info->callback = cb;
+             
+             auto *async = new uv_async_t();
+             async->data = info;
+             uv_async_init(uv_default_loop(), async, (uv_async_cb)AsyncSendHandler);
+             uv_async_send(async);
+         }];
+    }];
+}
+
 NAN_METHOD(sendReady) {
 
     [AESharedResources notifyReady];
@@ -606,6 +650,9 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("setContentBlockingJson").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setContentBlockingJson)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("setAdvancedBlockingJson").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setAdvancedBlockingJson)).ToLocalChecked());
 
   Nan::Set(target, New<String>("setWhitelistDomains").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setWhitelistDomains)).ToLocalChecked());

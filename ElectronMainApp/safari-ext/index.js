@@ -1,4 +1,4 @@
-const addon = require('bindings')('safari_ext_addon')
+const addon = require('bindings')('safari_ext_addon');
 
 /**
  * Addon toolbar api
@@ -72,6 +72,7 @@ module.exports = (() => {
     };
 
     /**
+     * Sets content blocker json
      *
      * @param jsonString - string with content blocking json
      * @param callback = (result) => {}
@@ -81,6 +82,19 @@ module.exports = (() => {
      */
     const setContentBlockingJson = (jsonString, callback) => {
         addon.setContentBlockingJson(jsonString, callback);
+    };
+
+    /**
+     * Sets advanced blocking json
+     *
+     * @param jsonString - string with content blocking json
+     * @param callback = (result) => {}
+     * result contains json string with two types of a values:
+     * {"result":"success"}
+     * {"result":"error", "error":{"domain":"ErrorDomain", "code":100, "descr":"Error Description IF Available"}}
+     */
+    const setAdvancedBlockingJson = (jsonString, callback) => {
+        addon.setAdvancedBlockingJson(jsonString, callback);
     };
 
     /**
@@ -162,6 +176,7 @@ module.exports = (() => {
         sendReady: sendReady,
         busyStatus: busyStatus,
         setContentBlockingJson: setContentBlockingJson,
+        setAdvancedBlockingJson: setAdvancedBlockingJson,
         setProtectionEnabled: setProtectionEnabled,
         protectionEnabled: protectionEnabled,
         setWhitelistDomains: setWhitelistDomains,
