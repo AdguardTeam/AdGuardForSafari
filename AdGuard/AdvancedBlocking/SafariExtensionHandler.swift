@@ -15,7 +15,11 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
     
     override init() {
         // TODO: set listener on shared resources
-        // AESharedResources.setListenerOnReady();
+//        var instanceOfCustomObject: CustomObject = CustomObject();
+//        instanceOfCustomObject.someProperty = "Hello World";
+//        println(instanceOfCustomObject.someProperty);
+//        instanceOfCustomObject.someMethod();
+        AESharedResources.setListenerOnReady(nil);
 //        [AESharedResources setListenerOnReady:^{
 //            @synchronized(_onReadyBlocks) {
 //            _mainAppReady = YES;

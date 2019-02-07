@@ -89,6 +89,54 @@
 		F4D590152201C8F8002DCC2C /* ContentBlockerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */; };
 		F4D5901D2201C965002DCC2C /* AdvancedBlockingUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5901C2201C965002DCC2C /* AdvancedBlockingUnitTests.swift */; };
 		F4D590242201D097002DCC2C /* ContentBlockerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */; };
+		F4FE881B220CCF4200B79CBE /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8629212AE6C200CB6DAE /* AESharedResources.m */; };
+		F4FE881C220CCF4400B79CBE /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8629212AE6C200CB6DAE /* AESharedResources.m */; };
+		F4FE881F220CCF9B00B79CBE /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8633212AEA3200CB6DAE /* ACLWildcard.m */; };
+		F4FE8820220CCFA000B79CBE /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8638212AEA3200CB6DAE /* NSURL+Utils.m */; };
+		F4FE8821220CCFA400B79CBE /* ACLJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863C212AEA3200CB6DAE /* ACLJobController.m */; };
+		F4FE8822220CCFA700B79CBE /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863D212AEA3200CB6DAE /* NSDate+Utils.m */; };
+		F4FE8823220CCFAB00B79CBE /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863E212AEA3200CB6DAE /* ACLFileLocker.m */; };
+		F4FE8824220CCFAF00B79CBE /* ACLExecuteBlockDelayed.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863F212AEA3200CB6DAE /* ACLExecuteBlockDelayed.m */; };
+		F4FE8825220CCFB100B79CBE /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8640212AEA3200CB6DAE /* NSString+Utils.m */; };
+		F4FE8826220CCFB400B79CBE /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8641212AEA3200CB6DAE /* ACLLogger.m */; };
+		F4FE8827220CCFB700B79CBE /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8642212AEA3200CB6DAE /* NSException+Utils.m */; };
+		F4FE8828220CCFBA00B79CBE /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8643212AEA3200CB6DAE /* NSStringPunycodeAdditions.m */; };
+		F4FE8829220CCFC200B79CBE /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1518C2139A5080014BE79 /* DDLog.m */; };
+		F4FE882A220CCFC500B79CBE /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151902139A5080014BE79 /* DDAbstractDatabaseLogger.m */; };
+		F4FE882B220CCFC800B79CBE /* DDOSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151922139A5080014BE79 /* DDOSLogger.m */; };
+		F4FE882C220CCFCC00B79CBE /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151932139A5080014BE79 /* DDASLLogger.m */; };
+		F4FE882D220CCFF200B79CBE /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151982139A5080014BE79 /* CLIColor.m */; };
+		F4FE882E220CCFF700B79CBE /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1519A2139A5080014BE79 /* DDASLLogCapture.m */; };
+		F4FE882F220CCFFA00B79CBE /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1519C2139A5080014BE79 /* DDFileLogger.m */; };
+		F4FE8830220CCFFF00B79CBE /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1519E2139A5080014BE79 /* DDContextFilterLogFormatter.m */; };
+		F4FE8831220CD00200B79CBE /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A02139A5080014BE79 /* DDDispatchQueueLogFormatter.m */; };
+		F4FE8832220CD00700B79CBE /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A22139A5080014BE79 /* DDMultiFormatter.m */; };
+		F4FE8833220CD00B00B79CBE /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A62139A5080014BE79 /* DDTTYLogger.m */; };
+		F4FE8834220CD01A00B79CBE /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865D212AEA3200CB6DAE /* ACObject.m */; };
+		F4FE8835220CD02000B79CBE /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865E212AEA3200CB6DAE /* ACLFileLogger.m */; };
+		F4FE8836220CD07C00B79CBE /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8633212AEA3200CB6DAE /* ACLWildcard.m */; };
+		F4FE8837220CD08100B79CBE /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8638212AEA3200CB6DAE /* NSURL+Utils.m */; };
+		F4FE8838220CD08700B79CBE /* ACLJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863C212AEA3200CB6DAE /* ACLJobController.m */; };
+		F4FE8839220CD08A00B79CBE /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863D212AEA3200CB6DAE /* NSDate+Utils.m */; };
+		F4FE883A220CD09200B79CBE /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863E212AEA3200CB6DAE /* ACLFileLocker.m */; };
+		F4FE883B220CD09200B79CBE /* ACLExecuteBlockDelayed.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863F212AEA3200CB6DAE /* ACLExecuteBlockDelayed.m */; };
+		F4FE883C220CD09200B79CBE /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8640212AEA3200CB6DAE /* NSString+Utils.m */; };
+		F4FE883D220CD09200B79CBE /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8641212AEA3200CB6DAE /* ACLLogger.m */; };
+		F4FE883E220CD09200B79CBE /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8642212AEA3200CB6DAE /* NSException+Utils.m */; };
+		F4FE883F220CD09200B79CBE /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8643212AEA3200CB6DAE /* NSStringPunycodeAdditions.m */; };
+		F4FE8840220CD09900B79CBE /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865D212AEA3200CB6DAE /* ACObject.m */; };
+		F4FE8841220CD09900B79CBE /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865E212AEA3200CB6DAE /* ACLFileLogger.m */; };
+		F4FE8842220CD0A600B79CBE /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1518C2139A5080014BE79 /* DDLog.m */; };
+		F4FE8843220CD0A600B79CBE /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151902139A5080014BE79 /* DDAbstractDatabaseLogger.m */; };
+		F4FE8844220CD0A600B79CBE /* DDOSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151922139A5080014BE79 /* DDOSLogger.m */; };
+		F4FE8845220CD0A600B79CBE /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151932139A5080014BE79 /* DDASLLogger.m */; };
+		F4FE8846220CD0A600B79CBE /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1519A2139A5080014BE79 /* DDASLLogCapture.m */; };
+		F4FE8847220CD0A600B79CBE /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1519C2139A5080014BE79 /* DDFileLogger.m */; };
+		F4FE8848220CD0A600B79CBE /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A62139A5080014BE79 /* DDTTYLogger.m */; };
+		F4FE8849220CD0B000B79CBE /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151982139A5080014BE79 /* CLIColor.m */; };
+		F4FE884A220CD0B000B79CBE /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1519E2139A5080014BE79 /* DDContextFilterLogFormatter.m */; };
+		F4FE884B220CD0B000B79CBE /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A02139A5080014BE79 /* DDDispatchQueueLogFormatter.m */; };
+		F4FE884C220CD0B000B79CBE /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A22139A5080014BE79 /* DDMultiFormatter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,6 +393,7 @@
 		F4D5901A2201C965002DCC2C /* AdvancedBlockingUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdvancedBlockingUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4D5901C2201C965002DCC2C /* AdvancedBlockingUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedBlockingUnitTests.swift; sourceTree = "<group>"; };
 		F4D5901E2201C965002DCC2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4FE8817220CCBF700B79CBE /* AdvancedBlocking-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdvancedBlocking-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -622,6 +671,7 @@
 				F41DA7E82201C81700C63708 /* AdvancedBlocking.entitlements */,
 				F4D590122201C8D3002DCC2C /* ContentBlockerController.swift */,
 				F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */,
+				F4FE8817220CCBF700B79CBE /* AdvancedBlocking-Bridging-Header.h */,
 			);
 			path = AdvancedBlocking;
 			sourceTree = "<group>";
@@ -858,6 +908,7 @@
 					};
 					F41DA7D82201C81700C63708 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 					F4D590192201C965002DCC2C = {
 						CreatedOnToolsVersion = 10.0;
@@ -1033,10 +1084,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4FE8824220CCFAF00B79CBE /* ACLExecuteBlockDelayed.m in Sources */,
+				F4FE882F220CCFFA00B79CBE /* DDFileLogger.m in Sources */,
 				F4D590152201C8F8002DCC2C /* ContentBlockerContainer.swift in Sources */,
+				F4FE8827220CCFB700B79CBE /* NSException+Utils.m in Sources */,
 				F4D590132201C8D3002DCC2C /* ContentBlockerController.swift in Sources */,
+				F4FE882C220CCFCC00B79CBE /* DDASLLogger.m in Sources */,
+				F4FE881F220CCF9B00B79CBE /* ACLWildcard.m in Sources */,
 				F41DA7DF2201C81700C63708 /* SafariExtensionViewController.swift in Sources */,
+				F4FE8828220CCFBA00B79CBE /* NSStringPunycodeAdditions.m in Sources */,
+				F4FE882D220CCFF200B79CBE /* CLIColor.m in Sources */,
+				F4FE8832220CD00700B79CBE /* DDMultiFormatter.m in Sources */,
+				F4FE882E220CCFF700B79CBE /* DDASLLogCapture.m in Sources */,
+				F4FE8831220CD00200B79CBE /* DDDispatchQueueLogFormatter.m in Sources */,
+				F4FE8826220CCFB400B79CBE /* ACLLogger.m in Sources */,
+				F4FE8835220CD02000B79CBE /* ACLFileLogger.m in Sources */,
+				F4FE8822220CCFA700B79CBE /* NSDate+Utils.m in Sources */,
+				F4FE8821220CCFA400B79CBE /* ACLJobController.m in Sources */,
+				F4FE8825220CCFB100B79CBE /* NSString+Utils.m in Sources */,
+				F4FE8823220CCFAB00B79CBE /* ACLFileLocker.m in Sources */,
+				F4FE8830220CCFFF00B79CBE /* DDContextFilterLogFormatter.m in Sources */,
+				F4FE8833220CD00B00B79CBE /* DDTTYLogger.m in Sources */,
+				F4FE8829220CCFC200B79CBE /* DDLog.m in Sources */,
+				F4FE882B220CCFC800B79CBE /* DDOSLogger.m in Sources */,
+				F4FE8820220CCFA000B79CBE /* NSURL+Utils.m in Sources */,
 				F41DA7DD2201C81700C63708 /* SafariExtensionHandler.swift in Sources */,
+				F4FE8834220CD01A00B79CBE /* ACObject.m in Sources */,
+				F4FE882A220CCFC500B79CBE /* DDAbstractDatabaseLogger.m in Sources */,
+				F4FE881B220CCF4200B79CBE /* AESharedResources.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1044,8 +1119,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4FE8840220CD09900B79CBE /* ACObject.m in Sources */,
+				F4FE8849220CD0B000B79CBE /* CLIColor.m in Sources */,
 				F4D590242201D097002DCC2C /* ContentBlockerContainer.swift in Sources */,
+				F4FE8841220CD09900B79CBE /* ACLFileLogger.m in Sources */,
+				F4FE8839220CD08A00B79CBE /* NSDate+Utils.m in Sources */,
+				F4FE8845220CD0A600B79CBE /* DDASLLogger.m in Sources */,
+				F4FE883F220CD09200B79CBE /* NSStringPunycodeAdditions.m in Sources */,
+				F4FE883E220CD09200B79CBE /* NSException+Utils.m in Sources */,
+				F4FE883A220CD09200B79CBE /* ACLFileLocker.m in Sources */,
+				F4FE884A220CD0B000B79CBE /* DDContextFilterLogFormatter.m in Sources */,
+				F4FE881C220CCF4400B79CBE /* AESharedResources.m in Sources */,
+				F4FE8837220CD08100B79CBE /* NSURL+Utils.m in Sources */,
+				F4FE884B220CD0B000B79CBE /* DDDispatchQueueLogFormatter.m in Sources */,
+				F4FE8847220CD0A600B79CBE /* DDFileLogger.m in Sources */,
+				F4FE8836220CD07C00B79CBE /* ACLWildcard.m in Sources */,
+				F4FE883D220CD09200B79CBE /* ACLLogger.m in Sources */,
+				F4FE8838220CD08700B79CBE /* ACLJobController.m in Sources */,
+				F4FE8842220CD0A600B79CBE /* DDLog.m in Sources */,
+				F4FE8848220CD0A600B79CBE /* DDTTYLogger.m in Sources */,
+				F4FE8846220CD0A600B79CBE /* DDASLLogCapture.m in Sources */,
+				F4FE884C220CD0B000B79CBE /* DDMultiFormatter.m in Sources */,
+				F4FE8844220CD0A600B79CBE /* DDOSLogger.m in Sources */,
+				F4FE883C220CD09200B79CBE /* NSString+Utils.m in Sources */,
 				F4D5901D2201C965002DCC2C /* AdvancedBlockingUnitTests.swift in Sources */,
+				F4FE8843220CD0A600B79CBE /* DDAbstractDatabaseLogger.m in Sources */,
+				F4FE883B220CD09200B79CBE /* ACLExecuteBlockDelayed.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1540,6 +1639,7 @@
 		F41DA7ED2201C81700C63708 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
 				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
 				CODE_SIGN_STYLE = Manual;
@@ -1558,6 +1658,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "AdvancedBlocking/AdvancedBlocking-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
@@ -1566,6 +1667,7 @@
 		F41DA7EE2201C81700C63708 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
 				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
 				CODE_SIGN_STYLE = Manual;
@@ -1583,6 +1685,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "AdvancedBlocking/AdvancedBlocking-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 			};
