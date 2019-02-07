@@ -153,6 +153,7 @@ class ContentBlockerContainer {
     
     // Wrapper result class
     class BlockerData {
+        //TODO: Use arrays
         var scripts: String = "";
         var css: String = "";
         
@@ -167,6 +168,17 @@ class ContentBlockerContainer {
         func clear() {
             scripts = "";
             css = "";
+        }
+        
+        func toString() -> String {
+            //TODO: Use JSON encoder
+            
+            return """
+            {
+                "scripts": "\(scripts)",
+                "css": "\(css)"
+            }
+            """;
         }
     }
 }

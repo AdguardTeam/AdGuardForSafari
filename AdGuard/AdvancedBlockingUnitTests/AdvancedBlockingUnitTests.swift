@@ -22,6 +22,39 @@ class AdvancedBlockingTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    func testSimple() {
+        let contentBlockerJsonString = """
+            [
+                {
+                    "trigger": {
+                        "url-filter": ".*"
+                    },
+                    "action": {
+                        "type": "script",
+                        "script": "included-script"
+                    }
+                },
+                {
+                    "trigger": {
+                        "url-filter": ".*"
+                    },
+                    "action": {
+                        "type": "css",
+                        "css": "#included-css:has(div) { height: 5px; }"
+                    }
+                }
+            ]
+        """;
+        
+        contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
+        
+        XCTAssert(data.scripts == "included-script\n");
+        XCTAssert(data.css == "#included-css:has(div) { height: 5px; }\n");
+        
+        //TODO: Check data toString()
+    }
+    
     func testTriggerUrlFilterAll() {
         let contentBlockerJsonString = """
             [

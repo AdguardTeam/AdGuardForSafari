@@ -27,7 +27,10 @@ class ContentBlockerController {
             [
                 {
                     "trigger": {
-                        "url-filter": "example.com"
+                        "url-filter": ".*",
+                        "if-domain": [
+                            "example.com"
+                        ]
                     },
                     "action": {
                         "type": "script",
@@ -36,11 +39,14 @@ class ContentBlockerController {
                 },
                 {
                     "trigger": {
-                        "url-filter": "not-example.com"
+                        "url-filter": ".*",
+                        "if-domain": [
+                            "webkit.org"
+                        ]
                     },
                     "action": {
                         "type": "css",
-                        "css": "#excluded-css:has(div) { height: 5px; }"
+                        "css": "#included-css:has(div) { height: 5px; }"
                     }
                 }
             ]
@@ -50,7 +56,8 @@ class ContentBlockerController {
     }
     
     // Returns requested scripts and css for specified url
-    func getData(url: URL?) -> Any {
-        return contentBlockerContainer.getData(url: url);
+    func getData(url: URL?) -> String {
+        let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: url) as! ContentBlockerContainer.BlockerData;
+        return data.toString();
     }
 }
