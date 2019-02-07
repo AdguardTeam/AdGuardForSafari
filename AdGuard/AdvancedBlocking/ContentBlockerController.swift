@@ -26,21 +26,21 @@ class ContentBlockerController {
         let contentBlockerJsonString = """
             [
                 {
-                    trigger: {
-                        "if-domain": "example.com",
+                    "trigger": {
+                        "url-filter": "example.com"
                     },
                     "action": {
                         "type": "script",
-                        "script": "console.log('test injection script')"
+                        "script": "included-script"
                     }
                 },
                 {
-                    trigger: {
-                        "if-domain": "example.com",
+                    "trigger": {
+                        "url-filter": "not-example.com"
                     },
-                    {
-                        "action": "css",
-                        "css": "#banner:has(div) { height: 5px; }"
+                    "action": {
+                        "type": "css",
+                        "css": "#excluded-css:has(div) { height: 5px; }"
                     }
                 }
             ]
