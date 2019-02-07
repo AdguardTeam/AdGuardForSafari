@@ -31,6 +31,7 @@
 #define NOTIFICATION_SHOW_PREFS                 AG_BUNDLEID @".notify.showprefs"
 #define NOTIFICATION_READY                      AG_BUNDLEID @".notify.ready"
 #define NOTIFICATION_REPORT                     AG_BUNDLEID @".notify.report"
+#define NOTIFICATION_ADVANCED_BLOCKING          AG_BUNDLEID @".notify.advancedblocking"
 
 
 /////////////////////////////////////////////////////////////////////
@@ -237,6 +238,12 @@ static AESListenerBlock _onReport;
                 completion();
             }
         }
+    });
+}
+
++ (void)notifyAdvancedBlockingExtension {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_ADVANCED_BLOCKING, NULL, NULL, YES);
     });
 }
 

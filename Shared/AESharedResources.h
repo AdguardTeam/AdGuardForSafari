@@ -153,6 +153,10 @@ extern NSString * const AEDefaultsLastReportUrl;
  */
 + (void)setAdvancedBlockingContentRulesJson:(NSData *)jsonData completion:(void (^)(void))completion;
 /**
+ Notifies advanced blocking extension
+ */
++ (void)notifyAdvancedBlockingExtension;
+/**
  Gets URL of the blocking content rules JSON from shared storage.
  */
 + (NSURL *)blockingContentRulesUrl;

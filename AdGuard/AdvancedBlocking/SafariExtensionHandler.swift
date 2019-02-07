@@ -13,6 +13,20 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
     // TODO: Move to initialize method?
     private var contentBlockerController: ContentBlockerController = ContentBlockerController();
     
+    override init() {
+        // TODO: set listener on shared resources
+        // AESharedResources.setListenerOnReady();
+//        [AESharedResources setListenerOnReady:^{
+//            @synchronized(_onReadyBlocks) {
+//            _mainAppReady = YES;
+//            for (dispatch_block_t block in _onReadyBlocks) {
+//            dispatch_async(dispatch_get_main_queue(), block);
+//            }
+//            [_onReadyBlocks removeAllObjects];
+//            }
+//            }];
+    }
+    
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {
         // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").
         page.getPropertiesWithCompletionHandler { properties in
