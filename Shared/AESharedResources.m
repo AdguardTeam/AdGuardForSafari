@@ -62,6 +62,7 @@ static AESListenerBlock _onBusyChangedBlock;
 static AESListenerBlock _onShowPreferences;
 static AESListenerBlock _onReady;
 static AESListenerBlock _onReport;
+static AESListenerBlock _onAdvancedBlockingBlock;
 
 + (void)initialize{
     
@@ -212,6 +213,18 @@ static AESListenerBlock _onReport;
                                block:block];
 }
 
++ (void)notifyAdvancedBlockingExtension {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_ADVANCED_BLOCKING, NULL, NULL, YES);
+    });
+}
+
++ (void)setListenerOnAdvancedBlocking:(AESListenerBlock)block {
+    [self setListenerForNotification:NOTIFICATION_ADVANCED_BLOCKING
+                            blockPtr:&_onAdvancedBlockingBlock
+                               block:block];
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Access to shared resources (public methods)
 
@@ -238,12 +251,6 @@ static AESListenerBlock _onReport;
                 completion();
             }
         }
-    });
-}
-
-+ (void)notifyAdvancedBlockingExtension {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_ADVANCED_BLOCKING, NULL, NULL, YES);
     });
 }
 
@@ -450,6 +457,9 @@ static void onChangedNotify(CFNotificationCenterRef center, void *observer, CFSt
     }
     else if ([nName isEqualToString:NOTIFICATION_REPORT]){
         block = _onReport;
+    }
+    else if ([nName isEqualToString:NOTIFICATION_ADVANCED_BLOCKING]){
+        block = _onAdvancedBlockingBlock;
     }
 
     if (block) {

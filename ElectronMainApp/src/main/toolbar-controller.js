@@ -123,7 +123,7 @@ module.exports = (() => {
                         },
                         "action": {
                             "type": "script",
-                            "script": "included-script"
+                            "script": "included-script-all"
                         }
                     }
                 ]`);

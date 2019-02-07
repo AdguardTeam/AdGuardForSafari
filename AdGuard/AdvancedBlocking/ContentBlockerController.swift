@@ -18,11 +18,33 @@ class ContentBlockerController {
     
     // Constructor
     init() {
-        // TODO: Keep content-blocker json up-to-date
-        
         contentBlockerContainer = ContentBlockerContainer();
         
-        // TODO: Request content-blocker json from electron
+        AESharedResources.setListenerOnAdvancedBlocking({
+            NSLog("AG AdvancedBlocking json updated");
+            //self.downloadJson();
+        });
+        
+        downloadJson();
+    }
+    
+    func downloadJson() {
+        // Read from shared file
+        NSLog("AG AdvancedBlocking: reading local json..");
+//        let url = AESharedResources.advancedBlockingContentRulesUrl()!;
+//        NSLog("AdGuard AdvancedBlocking: reading local json \(url)");
+//        let task = URLSession.shared.downloadTask(with: url) { localURL, urlResponse, error in
+//            if let localURL = localURL {
+//                if let string = try? String(contentsOf: localURL) {
+//                    print(string);
+//                    NSLog("AdGuard AdvancedBlocking: local json: \(string)");
+//                    self.contentBlockerContainer.setJson(json: string);
+//                }
+//            }
+//        }
+//
+//        task.resume();
+        
         let contentBlockerJsonString = """
             [
                 {
@@ -51,7 +73,7 @@ class ContentBlockerController {
                 }
             ]
         """;
-        
+
         contentBlockerContainer.setJson(json: contentBlockerJsonString);
     }
     
