@@ -909,6 +909,11 @@
 					F41DA7D82201C81700C63708 = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+						};
 					};
 					F4D590192201C965002DCC2C = {
 						CreatedOnToolsVersion = 10.0;

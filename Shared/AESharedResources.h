@@ -171,6 +171,10 @@ extern NSString * const AEDefaultsLastReportUrl;
  */
 + (NSURL *)advancedBlockingContentRulesUrl;
 /**
+ Gets URL string of the advanced blocking content rules JSON from shared storage.
+ */
++ (NSString *)advancedBlockingContentRulesUrlString;
+/**
  Saves the whitelist domains in shared storage.
  Completion is executed on global concurent queue.
 
