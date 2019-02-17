@@ -46,7 +46,8 @@ module.exports = (function () {
             }
 
             const json = JSON.parse(result.converted);
-            setSafariContentBlocker(json);
+            const advancedBlocking = JSON.parse(result.advancedBlocking);
+            setSafariContentBlocker(json, advancedBlocking);
             listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
                 rulesCount: json.length,
                 rulesOverLimit: result.overLimit
@@ -101,13 +102,17 @@ module.exports = (function () {
     /**
      * Activates content blocker json
      *
-     * @param json
+     * @param contentBlocker json
+     * @param advancedBlocking json
      */
-    const setSafariContentBlocker = json => {
+    const setSafariContentBlocker = (contentBlocker, advancedBlocking) => {
         try {
-            log.info('Setting content blocker. Length=' + json.length);
+            log.info(`Setting content blocker. Length=${contentBlocker.length}; Advanced Blocking Length=${advancedBlocking.length}`);
 
-            listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, json);
+            listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, {
+                contentBlocker,
+                advancedBlocking
+            });
 
             log.info('Content blocker has been set.');
         } catch (ex) {

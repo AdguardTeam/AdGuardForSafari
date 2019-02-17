@@ -38,6 +38,11 @@ class ContentBlockerController {
     // Returns requested scripts and css for specified url
     func getData(url: URL?) -> String {
         let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: url) as! ContentBlockerContainer.BlockerData;
-        return data.toString();
+        
+        let encoder = JSONEncoder();
+        encoder.outputFormatting = .prettyPrinted
+        
+        let json = try! encoder.encode(data);
+        return String(data: json, encoding: .utf8)!;
     }
 }

@@ -94,39 +94,8 @@ module.exports = (() => {
         //Subscribe to application events
         listeners.addListener(function (event, info) {
             if (event === events.CONTENT_BLOCKER_UPDATE_REQUIRED) {
-                setContentBlockingJson(JSON.stringify(info));
-                // TODO: Temp - should be bind to some other event with proper json
-                setAdvancedBlockingJson(`[
-                    {
-                        "trigger": {
-                            "url-filter": ".*"
-                        },
-                        "action": {
-                            "type": "script",
-                            "script": "example-ignored-script"
-                        }
-                    },
-                    {
-                        "trigger": {
-                            "url-filter": ".*",
-                            "if-domain": [
-                                "example.com"
-                            ]
-                        },
-                        "action": {
-                            "type": "ignore-previous-rules"
-                        }
-                    },
-                    {
-                        "trigger": {
-                            "url-filter": ".*"
-                        },
-                        "action": {
-                            "type": "script",
-                            "script": "included-script-all"
-                        }
-                    }
-                ]`);
+                setContentBlockingJson(JSON.stringify(info.contentBlocker));
+                setAdvancedBlockingJson(JSON.stringify(info.advancedBlocking));
             } else if (event === events.UPDATE_USER_FILTER_RULES) {
                 applicationApi.getUserFilterRules((rules) => {
                     setUserFilter(rules);

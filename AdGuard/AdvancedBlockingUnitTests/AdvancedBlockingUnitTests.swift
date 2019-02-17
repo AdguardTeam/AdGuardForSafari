@@ -49,10 +49,8 @@ class AdvancedBlockingTests: XCTestCase {
         contentBlockerContainer.setJson(json: contentBlockerJsonString);
         let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
         
-        XCTAssert(data.scripts == "included-script\n");
-        XCTAssert(data.css == "#included-css:has(div) { height: 5px; }\n");
-        
-        //TODO: Check data toString()
+        XCTAssert(data.scripts[0] == "included-script");
+        XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
     }
     
     func testTriggerUrlFilterAll() {
@@ -91,8 +89,8 @@ class AdvancedBlockingTests: XCTestCase {
         contentBlockerContainer.setJson(json: contentBlockerJsonString);
         let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
         
-        XCTAssert(data.scripts == "included-script\n");
-        XCTAssert(data.css == "#included-css:has(div) { height: 5px; }\n");
+        XCTAssert(data.scripts[0] == "included-script");
+        XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
     }
     
     func testTriggerUrlFilter() {
@@ -122,8 +120,8 @@ class AdvancedBlockingTests: XCTestCase {
         contentBlockerContainer.setJson(json: contentBlockerJsonString);
         let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
         
-        XCTAssert(data.scripts == "included-script\n");
-        XCTAssert(data.css == "");
+        XCTAssert(data.scripts[0] == "included-script");
+        XCTAssert(data.css.count == 0);
     }
     
     func testUrlFilterIfDomain() {
@@ -159,8 +157,8 @@ class AdvancedBlockingTests: XCTestCase {
         contentBlockerContainer.setJson(json: contentBlockerJsonString);
         let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
         
-        XCTAssert(data.scripts == "included-script\n");
-        XCTAssert(data.css == "");
+        XCTAssert(data.scripts[0] == "included-script");
+        XCTAssert(data.css.count == 0);
     }
     
     func testUrlFilterUnlessDomain() {
@@ -194,8 +192,8 @@ class AdvancedBlockingTests: XCTestCase {
         contentBlockerContainer.setJson(json: contentBlockerJsonString);
         let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
         
-        XCTAssert(data.scripts == "");
-        XCTAssert(data.css == "#included-css:has(div) { height: 5px; }\n");
+        XCTAssert(data.scripts.count == 0);
+        XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
     }
     
     func testIgnorePreviousRules() {
@@ -236,13 +234,14 @@ class AdvancedBlockingTests: XCTestCase {
         contentBlockerContainer.setJson(json: contentBlockerJsonString);
         var data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
         
-        XCTAssert(data.scripts == "included-script\n");
-        XCTAssert(data.css == "");
+        XCTAssert(data.scripts[0] == "included-script");
+        XCTAssert(data.css.count == 0);
         
         data = contentBlockerContainer.getData(url: URL(string:"http://test.com")) as! ContentBlockerContainer.BlockerData;
         
-        XCTAssert(data.scripts == "example-ignored-script\nincluded-script\n");
-        XCTAssert(data.css == "");
+        XCTAssert(data.scripts[0] == "example-ignored-script");
+        XCTAssert(data.scripts[1] == "included-script");
+        XCTAssert(data.css.count == 0);
     }
     
     func testPerformanceExample() {

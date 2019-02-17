@@ -152,33 +152,21 @@ class ContentBlockerContainer {
     }
     
     // Wrapper result class
-    class BlockerData {
-        //TODO: Use arrays
-        var scripts: String = "";
-        var css: String = "";
+    class BlockerData: Encodable {
+        var scripts = [String]()
+        var css = [String]()
         
         func addScript(script: String) {
-            scripts += script + "\n";
+            scripts.append(script);
         }
         
         func addCss(style: String) {
-            css += style + "\n";
+            css.append(style);
         }
         
         func clear() {
-            scripts = "";
-            css = "";
-        }
-        
-        func toString() -> String {
-            //TODO: Use JSON encoder
-            
-            return """
-            {
-                "scripts": "\(scripts)",
-                "css": "\(css)"
-            }
-            """;
+            scripts = [];
+            css = [];
         }
     }
 }

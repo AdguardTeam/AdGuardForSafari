@@ -89,6 +89,7 @@
 		F4D590152201C8F8002DCC2C /* ContentBlockerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */; };
 		F4D5901D2201C965002DCC2C /* AdvancedBlockingUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5901C2201C965002DCC2C /* AdvancedBlockingUnitTests.swift */; };
 		F4D590242201D097002DCC2C /* ContentBlockerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */; };
+		F4F479FC221A05B600A68681 /* extended-css.js in Resources */ = {isa = PBXBuildFile; fileRef = F4F479FB221A05B600A68681 /* extended-css.js */; };
 		F4FE881B220CCF4200B79CBE /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8629212AE6C200CB6DAE /* AESharedResources.m */; };
 		F4FE881C220CCF4400B79CBE /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8629212AE6C200CB6DAE /* AESharedResources.m */; };
 		F4FE881F220CCF9B00B79CBE /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8633212AEA3200CB6DAE /* ACLWildcard.m */; };
@@ -393,6 +394,7 @@
 		F4D5901A2201C965002DCC2C /* AdvancedBlockingUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdvancedBlockingUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4D5901C2201C965002DCC2C /* AdvancedBlockingUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedBlockingUnitTests.swift; sourceTree = "<group>"; };
 		F4D5901E2201C965002DCC2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4F479FB221A05B600A68681 /* extended-css.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "extended-css.js"; sourceTree = "<group>"; };
 		F4FE8817220CCBF700B79CBE /* AdvancedBlocking-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdvancedBlocking-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -667,6 +669,7 @@
 				F41DA7E02201C81700C63708 /* SafariExtensionViewController.xib */,
 				F41DA7E32201C81700C63708 /* Info.plist */,
 				F41DA7E42201C81700C63708 /* script.js */,
+				F4F479FB221A05B600A68681 /* extended-css.js */,
 				F41DA7E62201C81700C63708 /* ToolbarItemIcon.pdf */,
 				F41DA7E82201C81700C63708 /* AdvancedBlocking.entitlements */,
 				F4D590122201C8D3002DCC2C /* ContentBlockerController.swift */,
@@ -1009,6 +1012,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F41DA7E72201C81700C63708 /* ToolbarItemIcon.pdf in Resources */,
+				F4F479FC221A05B600A68681 /* extended-css.js in Resources */,
 				F41DA7E22201C81700C63708 /* SafariExtensionViewController.xib in Resources */,
 				F41DA7E52201C81700C63708 /* script.js in Resources */,
 			);
