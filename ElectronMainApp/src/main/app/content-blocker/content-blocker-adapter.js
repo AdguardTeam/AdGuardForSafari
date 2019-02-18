@@ -90,7 +90,7 @@ module.exports = (function () {
             }
         }
 
-        const result = jsonFromFilters(rules, rulesLimit);
+        const result = jsonFromFilters(rules, rulesLimit, false, true);
         if (result && result.converted) {
             callback(result);
         } else {

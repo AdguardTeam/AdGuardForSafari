@@ -10,6 +10,7 @@
  * @param {} rules Rules to convert
  * @param {*} limit Max number of rules
  * @param {*} optimize True if we should apply additional optimization
+ * @param {*} advancedBlocking True if we need advanced blocking json
  */
 var jsonFromFilters = (function () {
 
@@ -34,7 +35,7 @@ var jsonFromFilters = (function () {
     })();
     /** end of adguard.js */
     /** start of punycode.js */
-	/*! http://mths.be/punycode v1.3.0 by @mathias */
+    /*! http://mths.be/punycode v1.3.0 by @mathias */
     ;(function(root) {
 
         /**
@@ -77,7 +78,7 @@ var jsonFromFilters = (function () {
             /** Temporary variable */
             key;
 
-		/*--------------------------------------------------------------------------*/
+        /*--------------------------------------------------------------------------*/
 
         /**
          * A generic error utility function.
@@ -492,7 +493,7 @@ var jsonFromFilters = (function () {
             });
         }
 
-		/*--------------------------------------------------------------------------*/
+        /*--------------------------------------------------------------------------*/
 
         /** Define the public API */
         punycode = {
@@ -3254,13 +3255,51 @@ var jsonFromFilters = (function () {
         };
 
         /**
+         * Creates rule objects from string and parses bad-filter exceptions
+         *
+         * @param rules
+         * @param errors
+         * @return {{agRules: Array, badFilterExceptions: Array}}
+         */
+        const parseAGRules = (rules, errors) => {
+            const agRules = [];
+
+            // $badfilter rules
+            const badFilterExceptions = [];
+
+            for (let j = 0; j < rules.length; j++) {
+                let rule;
+
+                if (rules[j] !== null && rules[j].ruleText) {
+                    rule = rules[j];
+                } else {
+                    rule = parseAGRule(rules[j], errors);
+                }
+
+                if (rule) {
+                    if (rule.isBadFilter && rule.isBadFilter()) {
+                        badFilterExceptions.push(rule.badFilter);
+                    } else {
+                        agRules.push(rule);
+                    }
+                }
+            }
+
+            return {
+                agRules,
+                badFilterExceptions
+            }
+        };
+
+        /**
          * Converts array of rules to JSON
          *
          * @param rules array of strings or AG rules objects
          * @param optimize if true - ignore slow rules
+         * @param advancedBlocking if true - convert advanced blocking rules (script and extended css)
          * @return {*} content blocker object with converted rules grouped by type
          */
-        const convertLines = (rules, optimize) =>{
+        const convertLines = (rules, optimize, advancedBlocking) =>{
             adguard.console.info('Converting ' + rules.length + ' rules. Optimize=' + optimize);
 
             const contentBlocker = {
@@ -3301,10 +3340,8 @@ var jsonFromFilters = (function () {
 
             // Elemhide rules (##)
             let cssBlocking = [];
-
             // Elemhide exceptions (#@#)
             const cssExceptions = [];
-
             // Extended css Elemhide rules (##)
             let extendedCssBlocking = [];
 
@@ -3312,39 +3349,19 @@ var jsonFromFilters = (function () {
             let scriptRules = [];
             const scriptExceptionRules = [];
 
-            // $badfilter rules
-            const badFilterExceptions = [];
-
-            const agRules = [];
-            for (let j = 0; j < rules.length; j++) {
-                let rule;
-
-                if (rules[j] !== null && rules[j].ruleText) {
-                    rule = rules[j];
-                } else {
-                    rule = parseAGRule(rules[j], contentBlocker.errors);
-                }
-
-                if (rule) {
-                    if (rule.isBadFilter && rule.isBadFilter()) {
-                        badFilterExceptions.push(rule.badFilter);
-                    } else {
-                        agRules.push(rule);
-                    }
-                }
-            }
+            const parsedRules = parseAGRules(rules, contentBlocker.errors);
 
             let i = 0;
-            const len = agRules.length;
+            const len = parsedRules.agRules.length;
             for (; i < len; i++) {
-                const agRule = agRules[i];
-                if (badFilterExceptions.indexOf(agRule.ruleText) >= 0) {
+                const agRule = parsedRules.agRules[i];
+                if (parsedRules.badFilterExceptions.indexOf(agRule.ruleText) >= 0) {
                     // Removed with bad-filter
                     adguard.console.info('Rule ' + agRule.ruleText + ' removed with a $badfilter modifier');
                     continue;
                 }
 
-                const item = convertAGRule(agRules[i], contentBlocker.errors);
+                const item = convertAGRule(parsedRules.agRules[i], contentBlocker.errors);
 
                 if (item !== null && item !== '') {
                     if (item.action === null || item.action === '') {
@@ -3360,9 +3377,9 @@ var jsonFromFilters = (function () {
                         }
                     } else if (item.action.type === 'css-display-none') {
                         cssBlocking.push(item);
-                    } else if (item.action.type === 'css') {
+                    } else if (item.action.type === 'css' && advancedBlocking) {
                         extendedCssBlocking.push(item);
-                    } else if (item.action.type === 'script') {
+                    } else if (item.action.type === 'script' && advancedBlocking) {
                         scriptRules.push(item);
                     } else if (item.action.type === 'ignore-previous-rules' && agRule.script) {
                         // #@%# rules
@@ -3379,8 +3396,9 @@ var jsonFromFilters = (function () {
                         // elemhide rules
                         contentBlocker.cssElemhide.push(item);
                     } else if (item.action.type === 'ignore-previous-rules' &&
-                        AGRuleConverter.isSingleOption(agRule, adguard.rules.UrlFilterRule.options.JSINJECT)) {
-                        // elemhide rules
+                        AGRuleConverter.isSingleOption(agRule, adguard.rules.UrlFilterRule.options.JSINJECT) &&
+                        advancedBlocking) {
+                        // jsinject rules
                         contentBlocker.scriptJsInjectExceptions.push(item);
                     } else {
                         // other exceptions
@@ -3404,18 +3422,20 @@ var jsonFromFilters = (function () {
             contentBlocker.cssBlockingGenericDomainSensitive = cssCompact.cssBlockingGenericDomainSensitive;
             contentBlocker.cssBlockingDomainSensitive = cssCompact.cssBlockingDomainSensitive;
 
-            // Applying CSS exceptions for extended css rules
-            extendedCssBlocking = applyActionExceptions(extendedCssBlocking, cssExceptions, 'selector');
-            const extendedCssCompact = compactCssRules(extendedCssBlocking);
-            if (!optimize) {
-                contentBlocker.extendedCssBlockingWide = extendedCssCompact.cssBlockingWide;
-            }
-            contentBlocker.extendedCssBlockingGenericDomainSensitive = extendedCssCompact.cssBlockingGenericDomainSensitive;
-            contentBlocker.extendedCssBlockingDomainSensitive = extendedCssCompact.cssBlockingDomainSensitive;
+            if (advancedBlocking) {
+                // Applying CSS exceptions for extended css rules
+                extendedCssBlocking = applyActionExceptions(extendedCssBlocking, cssExceptions, 'selector');
+                const extendedCssCompact = compactCssRules(extendedCssBlocking);
+                if (!optimize) {
+                    contentBlocker.extendedCssBlockingWide = extendedCssCompact.cssBlockingWide;
+                }
+                contentBlocker.extendedCssBlockingGenericDomainSensitive = extendedCssCompact.cssBlockingGenericDomainSensitive;
+                contentBlocker.extendedCssBlockingDomainSensitive = extendedCssCompact.cssBlockingDomainSensitive;
 
-            // Applying script exceptions
-            scriptRules = applyActionExceptions(scriptRules, scriptExceptionRules, 'script');
-            contentBlocker.script = scriptRules;
+                // Applying script exceptions
+                scriptRules = applyActionExceptions(scriptRules, scriptExceptionRules, 'script');
+                contentBlocker.script = scriptRules;
+            }
 
             const convertedCount = rules.length - contentBlocker.errors.length;
             let message = 'Rules converted: ' + convertedCount + ' (' + contentBlocker.errors.length + ' errors)';
@@ -3444,9 +3464,10 @@ var jsonFromFilters = (function () {
          *
          * @param contentBlocker
          * @param limit
+         * @param advancedBlocking
          * @return {{totalConvertedCount: Number, convertedCount: Number, errorsCount: Number, overLimit: boolean, converted, advancedBlocking}}
          */
-        const createConversionResult = (contentBlocker, limit) =>{
+        const createConversionResult = (contentBlocker, limit, advancedBlocking) =>{
             let overLimit = false;
             let converted = [];
             converted = converted.concat(contentBlocker.cssBlockingWide);
@@ -3473,28 +3494,33 @@ var jsonFromFilters = (function () {
             applyDomainWildcards(converted);
             adguard.console.info('Content blocker length: ' + converted.length);
 
-            let advancedBlocking = [];
-            advancedBlocking = advancedBlocking.concat(contentBlocker.script);
-            advancedBlocking = advancedBlocking.concat(contentBlocker.scriptJsInjectExceptions);
-            advancedBlocking = advancedBlocking.concat(contentBlocker.extendedCssBlockingWide);
-            advancedBlocking = advancedBlocking.concat(contentBlocker.extendedCssBlockingGenericDomainSensitive);
-            advancedBlocking = advancedBlocking.concat(contentBlocker.cssBlockingGenericHideExceptions);
-            advancedBlocking = advancedBlocking.concat(contentBlocker.extendedCssBlockingDomainSensitive);
-            advancedBlocking = advancedBlocking.concat(contentBlocker.cssElemhide);
-            advancedBlocking = advancedBlocking.concat(contentBlocker.other);
-            advancedBlocking = advancedBlocking.concat(contentBlocker.importantExceptions);
-            advancedBlocking = advancedBlocking.concat(contentBlocker.documentExceptions);
-
-            adguard.console.info('Advanced Blocking length: ' + advancedBlocking.length);
-
-            return {
+            const result = {
                 totalConvertedCount: convertedLength,
                 convertedCount: converted.length,
                 errorsCount: contentBlocker.errors.length,
                 overLimit: overLimit,
-                converted: JSON.stringify(converted, null, "\t"),
-                advancedBlocking: JSON.stringify(advancedBlocking, null, "\t")
+                converted: JSON.stringify(converted, null, "\t")
             };
+
+            if (advancedBlocking) {
+                let advancedBlocker = [];
+                advancedBlocker = advancedBlocker.concat(contentBlocker.script);
+                advancedBlocker = advancedBlocker.concat(contentBlocker.scriptJsInjectExceptions);
+                advancedBlocker = advancedBlocker.concat(contentBlocker.extendedCssBlockingWide);
+                advancedBlocker = advancedBlocker.concat(contentBlocker.extendedCssBlockingGenericDomainSensitive);
+                advancedBlocker = advancedBlocker.concat(contentBlocker.cssBlockingGenericHideExceptions);
+                advancedBlocker = advancedBlocker.concat(contentBlocker.extendedCssBlockingDomainSensitive);
+                advancedBlocker = advancedBlocker.concat(contentBlocker.cssElemhide);
+                advancedBlocker = advancedBlocker.concat(contentBlocker.other);
+                advancedBlocker = advancedBlocker.concat(contentBlocker.importantExceptions);
+                advancedBlocker = advancedBlocker.concat(contentBlocker.documentExceptions);
+
+                adguard.console.info('Advanced Blocking length: ' + advancedBlocker.length);
+
+                result.advancedBlocking = JSON.stringify(advancedBlocker, null, "\t");
+            }
+
+            return result;
         };
 
         /**
@@ -3503,8 +3529,9 @@ var jsonFromFilters = (function () {
          * @param rules array of strings
          * @param limit over that limit rules will be ignored
          * @param optimize if true - "wide" rules will be ignored
+         * @param advancedBlocking if true - advanced blocking json will be included
          */
-        const convertArray = (rules, limit, optimize) =>{
+        const convertArray = (rules, limit, optimize, advancedBlocking) =>{
             printVersionMessage();
 
             // Temporarily change the configuration in order to generate more effective regular expressions
@@ -3526,8 +3553,8 @@ var jsonFromFilters = (function () {
                     return null;
                 }
 
-                const contentBlocker = convertLines(rules, !!optimize);
-                return createConversionResult(contentBlocker, limit);
+                const contentBlocker = convertLines(rules, !!optimize, advancedBlocking);
+                return createConversionResult(contentBlocker, limit, advancedBlocking);
             } finally {
                 // Restore the regex configuration
                 regexConfiguration.regexStartUrl = prevRegexStartUrl;
@@ -3546,9 +3573,9 @@ var jsonFromFilters = (function () {
      * End of the dependencies content
      */
 
-    return function (rules, limit, optimize) {
+    return function (rules, limit, optimize, advancedBlocking) {
         try {
-            return SafariContentBlockerConverter.convertArray(rules, limit, optimize);
+            return SafariContentBlockerConverter.convertArray(rules, limit, optimize, advancedBlocking);
         } catch (ex) {
             console.log('Unexpected error: ' + ex);
         }
