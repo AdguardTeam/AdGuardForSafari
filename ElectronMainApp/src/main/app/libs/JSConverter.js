@@ -1,6 +1,6 @@
 /**
  * AdGuard -> Safari Content Blocker converter
- * Version 3.2.0
+ * Version 4.0.0
  * License: https://github.com/AdguardTeam/SafariContentBlockerConverterCompiler/blob/master/LICENSE
  */
 
@@ -2393,7 +2393,7 @@ var jsonFromFilters = (function () {
         /**
          * Safari content blocking format rules converter.
          */
-        const CONVERTER_VERSION = '3.2.0';
+        const CONVERTER_VERSION = '4.0.0';
         // Max number of CSS selectors per rule (look at compactCssRules function)
         const MAX_SELECTORS_PER_WIDE_RULE = 250;
 
