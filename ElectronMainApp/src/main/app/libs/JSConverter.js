@@ -910,18 +910,27 @@ var jsonFromFilters = (function () {
         /**
          * Helper class for creating regular expression from a simple wildcard-syntax used in basic filters
          */
-        var SimpleRegex = (function () {
+        api.SimpleRegex = (function () {
+
+            /**
+             * Improved regular expression instead of UrlFilterRule.REGEXP_START_URL (||)
+             * Please note, that this regular expression matches only ONE level of subdomains
+             * Using ([a-z0-9-.]+\\.)? instead increases memory usage by 10Mb
+             */
+            const URL_FILTER_REGEXP_START_URL = "^[htpsw]+:\\/\\/([a-z0-9-]+\\.)?";
+            /** Simplified separator (to fix an issue with $ restriction - it can be only in the end of regexp) */
+            const URL_FILTER_REGEXP_SEPARATOR = "[/:&?]?";
 
             // Constants
-            var regexConfiguration = {
+            const regexConfiguration = {
                 maskStartUrl: "||",
                 maskPipe: "|",
                 maskSeparator: "^",
                 maskAnySymbol: "*",
 
                 regexAnySymbol: ".*",
-                regexSeparator: "([^ a-zA-Z0-9.%]|$)",
-                regexStartUrl: "^(http|https|ws|wss)://([a-z0-9-_.]+\\.)?",
+                regexSeparator: URL_FILTER_REGEXP_SEPARATOR,
+                regexStartUrl: URL_FILTER_REGEXP_START_URL,
                 regexStartString: "^",
                 regexEndString: "$"
             };
@@ -929,29 +938,25 @@ var jsonFromFilters = (function () {
             // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/regexp
             // should be escaped . * + ? ^ $ { } ( ) | [ ] / \
             // except of * | ^
-            var specials = [
+            const specials = [
                 '.', '+', '?', '$', '{', '}', '(', ')', '[', ']', '\\', '/'
             ];
-            var specialsRegex = new RegExp('[' + specials.join('\\') + ']', 'g');
+            const specialsRegex = new RegExp('[' + specials.join('\\') + ']', 'g');
 
             /**
              * Escapes regular expression string
              */
-            var escapeRegExp = function (str) {
-                return str.replace(specialsRegex, "\\$&");
-            };
+            const escapeRegExp = str => str.replace(specialsRegex, "\\$&");
 
             /**
              * Checks if string "str" starts with the specified "prefix"
              */
-            var startsWith = function (str, prefix) {
-                return str && str.indexOf(prefix) === 0;
-            };
+            const startsWith = (str, prefix) => str && str.indexOf(prefix) === 0;
 
             /**
              * Checks if string "str" ends with the specified "postfix"
              */
-            var endsWith = function (str, postfix) {
+            const endsWith = (str, postfix) => {
                 if (!str || !postfix) {
                     return false;
                 }
@@ -959,15 +964,15 @@ var jsonFromFilters = (function () {
                 if (str.endsWith) {
                     return str.endsWith(postfix);
                 }
-                var t = String(postfix);
-                var index = str.lastIndexOf(t);
+                const t = String(postfix);
+                const index = str.lastIndexOf(t);
                 return index >= 0 && index === str.length - t.length;
             };
 
             /**
              * Replaces all occurencies of a string "find" with "replace" str;
              */
-            var replaceAll = function (str, find, replace) {
+            const replaceAll = (str, find, replace) => {
                 if (!str) {
                     return str;
                 }
@@ -978,14 +983,14 @@ var jsonFromFilters = (function () {
             /**
              * Creates regex
              */
-            var createRegexText = function (str) {
+            const createRegexText = str => {
                 if (str === regexConfiguration.maskStartUrl ||
                     str === regexConfiguration.maskPipe ||
                     str === regexConfiguration.maskAnySymbol) {
                     return regexConfiguration.regexAnySymbol;
                 }
 
-                var regex = escapeRegExp(str);
+                let regex = escapeRegExp(str);
 
                 if (startsWith(regex, regexConfiguration.maskStartUrl)) {
                     regex = regex.substring(0, regexConfiguration.maskStartUrl.length) +
@@ -1026,8 +1031,6 @@ var jsonFromFilters = (function () {
             };
         })();
 
-        api.SimpleRegex = SimpleRegex;
-
     })(adguard.rules);
     /** end of simple-regex.js */
     /** start of base-filter-rule.js */
@@ -1038,9 +1041,8 @@ var jsonFromFilters = (function () {
         /**
          * Base class for all filter rules
          */
-        const FilterRule = function (text, filterId) {
+        const FilterRule = function (text) {
             this.ruleText = text;
-            this.filterId = filterId;
         };
 
         FilterRule.prototype = {
@@ -1407,9 +1409,9 @@ var jsonFromFilters = (function () {
                 };
             };
 
-            return function (rule, filterId) {
+            return function (rule) {
 
-                api.FilterRule.call(this, rule, filterId);
+                api.FilterRule.call(this, rule);
 
                 let mask = api.FilterRule.findRuleMarker(rule, CssFilterRule.RULE_MARKERS, CssFilterRule.RULE_MARKER_FIRST_CHAR);
                 if (!mask) {
@@ -1734,9 +1736,9 @@ var jsonFromFilters = (function () {
          * Read here for details:
          * http://adguard.com/en/filterrules.html#baseRules
          */
-        let UrlFilterRule = function (rule, filterId) {
+        let UrlFilterRule = function (rule) {
 
-            api.FilterRule.call(this, rule, filterId);
+            api.FilterRule.call(this, rule);
 
             // Content type masks
             this.permittedContentType = UrlFilterRule.contentTypes.ALL;
@@ -2344,9 +2346,9 @@ var jsonFromFilters = (function () {
          * JS injection rule:
          * http://adguard.com/en/filterrules.html#javascriptInjection
          */
-        const ScriptFilterRule = function (rule, filterId) {
+        const ScriptFilterRule = function (rule) {
 
-            api.FilterRule.call(this, rule, filterId);
+            api.FilterRule.call(this, rule);
 
             this.script = null;
             this.whiteListRule = adguard.utils.strings.contains(rule, api.FilterRule.MASK_SCRIPT_EXCEPTION_RULE);
@@ -2413,14 +2415,6 @@ var jsonFromFilters = (function () {
          */
         const URL_FILTER_CSS_RULES = ".*";
         const URL_FILTER_SCRIPT_RULES = ".*";
-        /**
-         * Improved regular expression instead of UrlFilterRule.REGEXP_START_URL (||)
-         * Please note, that this regular expression matches only ONE level of subdomains
-         * Using ([a-z0-9-.]+\\.)? instead increases memory usage by 10Mb
-         */
-        const URL_FILTER_REGEXP_START_URL = URL_FILTER_ANY_URL + "([a-z0-9-]+\\.)?";
-        /** Simplified separator (to fix an issue with $ restriction - it can be only in the end of regexp) */
-        const URL_FILTER_REGEXP_SEPARATOR = "[/:&?]?";
 
         /**
          * Converter implementation.
@@ -3534,15 +3528,7 @@ var jsonFromFilters = (function () {
         const convertArray = (rules, limit, optimize, advancedBlocking) =>{
             printVersionMessage();
 
-            // Temporarily change the configuration in order to generate more effective regular expressions
-            const regexConfiguration = adguard.rules.SimpleRegex.regexConfiguration;
-            const prevRegexStartUrl = regexConfiguration.regexStartUrl;
-            const prevRegexSeparator = regexConfiguration.regexSeparator;
-
             try {
-                regexConfiguration.regexStartUrl = URL_FILTER_REGEXP_START_URL;
-                regexConfiguration.regexSeparator = URL_FILTER_REGEXP_SEPARATOR;
-
                 if (rules === null) {
                     adguard.console.error('Invalid argument rules');
                     return null;
@@ -3555,10 +3541,8 @@ var jsonFromFilters = (function () {
 
                 const contentBlocker = convertLines(rules, !!optimize, advancedBlocking);
                 return createConversionResult(contentBlocker, limit, advancedBlocking);
-            } finally {
-                // Restore the regex configuration
-                regexConfiguration.regexStartUrl = prevRegexStartUrl;
-                regexConfiguration.regexSeparator = prevRegexSeparator;
+            } catch (e) {
+                adguard.console.error('Unexpected error: ' + e);
             }
         };
 
