@@ -158,6 +158,11 @@
     "options_popup_update_updated": {
         "message": "\"$1\" \u5df2\u66f4\u65b0\u5230\u7248\u672c $2"
     },
+    "options_popup_update_updated_more": {
+        "message": {
+            "other": "%s filters updated: $2"
+        }
+    },
     "options_popup_version_update_title": {
         "message": "AdGuard for Safari \u521a\u521a\u66f4\u65b0\u81f3\u7248\u672c $1\u3002"
     },

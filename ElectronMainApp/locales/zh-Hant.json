@@ -18,7 +18,7 @@
         "message": "\u4e00\u822c\u7684"
     },
     "options_general_desc": {
-        "message": "AdGuard for Safari\u662f\u4e00\u6b3e\u514d\u8cbb\u7684\u4e14\u958b\u6e90\u7684\u8edf\u9ad4\u3002\u6211\u5011\u6b61\u8fce\u60a8\u7684\u56de\u994b\u610f\u898b\u548c\u8ca2\u737b\u3002\u5982\u679c\u60a8\u60f3\u8981\u5831\u544a\u7a0b\u5f0f\u932f\u8aa4\u6216\u8acb\u6c42\u529f\u80fd\uff0c\u8acb\u524d\u5f80<a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>\u6211\u5011\u7684GitHub\u8caf\u85cf\u8655<\/a>\u3002"
+        "message": "AdGuard for Safari\u662f\u4e00\u6b3e\u514d\u8cbb\u7684\u4e14\u958b\u6e90\u7684\u8edf\u9ad4\u3002\u6211\u5011\u6b61\u8fce\u60a8\u7684\u56de\u994b\u610f\u898b\u548c\u8ca2\u737b\u3002\u5982\u679c\u60a8\u60f3\u8981\u5831\u544a\u7a0b\u5f0f\u932f\u8aa4\u6216\u8acb\u6c42\u529f\u80fd\uff0c\u8acb\u524d\u5f80<a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>\u6211\u5011\u7684GitHub\u5132\u5b58\u5eab<\/a>\u3002"
     },
     "options_allow_acceptable_ads": {
         "message": "\u5141\u8a31\u641c\u5c0b\u5ee3\u544a\u548c\u7db2\u7ad9\u4e4b\u81ea\u6211\u63a8\u92b7"
@@ -158,6 +158,11 @@
     "options_popup_update_updated": {
         "message": "\"$1\" \u5df2\u66f4\u65b0\u81f3\u7248\u672c $2"
     },
+    "options_popup_update_updated_more": {
+        "message": {
+            "other": "%s \u904e\u6ffe\u5668\u5df2\u66f4\u65b0\uff1a$2"
+        }
+    },
     "options_popup_version_update_title": {
         "message": "AdGuard for Safari\u525b\u525b\u5df2\u88ab\u66f4\u65b0\u81f3\u7248\u672c $1\u3002"
     },
@@ -293,6 +298,6 @@
         "message": "\u6ce8\u610f\uff01\u9632\u8b77\u5df2\u88ab\u7981\u7528"
     },
     "settings_notification_protection_text": {
-        "message": "AdGuard\u9632\u8b77\u5df2\u88ab\u66ab\u505c\u3002<a href='#' id='notificationEnableProtectionLink'>\u555f\u7528AdGuard<\/a>\u3002"
+        "message": "AdGuard\u9632\u8b77\u88ab\u66ab\u505c\u3002<a href='#' id='notificationEnableProtectionLink'>\u555f\u7528AdGuard<\/a>\u3002"
     }
 }

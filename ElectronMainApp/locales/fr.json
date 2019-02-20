@@ -158,6 +158,12 @@
     "options_popup_update_updated": {
         "message": "\"$1\" mis \u00e0 jour vers la version $2"
     },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s filters updated: $2",
+            "other": "%s filters updated: $2"
+        }
+    },
     "options_popup_version_update_title": {
         "message": "AdGuard pour Safari a \u00e9t\u00e9 mis \u00e0 jour \u00e0 la version $1."
     },

@@ -158,6 +158,12 @@
     "options_popup_update_updated": {
         "message": "\"$1\" uppdaterad till version $2"
     },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "K\u00e4llspr\u00e5ket har inte den h\u00e4r pluralformen",
+            "other": "%s filter uppdaterade: $2"
+        }
+    },
     "options_popup_version_update_title": {
         "message": "AdGuard f\u00f6r Safari uppdaterades till version $1."
     },

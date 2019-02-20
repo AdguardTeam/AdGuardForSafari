@@ -158,6 +158,14 @@
     "options_popup_update_updated": {
         "message": "\"$1\" aktualizov\u00e1n na verzi $2"
     },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s filters updated: $2",
+            "few": "%s filters updated: $2",
+            "many": "%s filters updated: $2",
+            "other": "%s filters updated: $2"
+        }
+    },
     "options_popup_version_update_title": {
         "message": "AdGuard pro Safari byl pr\u00e1v\u011b aktualizov\u00e1n na verzi $1."
     },

@@ -158,6 +158,14 @@
     "options_popup_update_updated": {
         "message": "\"$1\" \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0434\u043e \u0432\u0435\u0440\u0441\u0438\u0438 $2"
     },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s filters updated: $2",
+            "few": "%s filters updated: $2",
+            "many": "%s filters updated: $2",
+            "other": "%s filters updated: $2"
+        }
+    },
     "options_popup_version_update_title": {
         "message": "\u0420\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u0435 AdGuard \u0434\u043b\u044f Safari \u0431\u044b\u043b\u043e \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u043e \u0434\u043e \u0432\u0435\u0440\u0441\u0438\u0438 $1."
     },

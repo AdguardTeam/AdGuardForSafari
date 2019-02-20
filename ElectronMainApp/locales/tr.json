@@ -1,15 +1,15 @@
 {
     "main_menu_hide": {
-        "message": "Hide"
+        "message": "Gizle"
     },
     "main_menu_close_window": {
-        "message": "Close window"
+        "message": "Pencereyi kapat"
     },
     "name": {
-        "message": "AdGuard Reklam Engelleyici"
+        "message": "AdGuard AdBlocker"
     },
     "description": {
-        "message": "Benzersiz reklam engelleyici uzant\u0131. Facebook, Youtube ve di\u011fer t\u00fcm sitelerdeki reklamlar\u0131 engeller."
+        "message": "Reklam ve pop-uplara kar\u015f\u0131 benzersiz reklam engelleme eklentisi. Facebook, Youtube ve di\u011fer t\u00fcm sitelerdeki reklamlar\u0131 engeller."
     },
     "options_settings": {
         "message": "Safari i\u00e7in AdGuard - Ayarlar"
@@ -33,13 +33,13 @@
         "message": "Filtreler"
     },
     "options_antibanner_info": {
-        "message": "%s filtre %s kural"
+        "message": "%s filtreler %s kurallar"
     },
     "options_filters_enabled": {
         "message": "Etkin:"
     },
     "options_filters_enabled_and_more_divider": {
-        "message": "%s ve %s filtre daha"
+        "message": "%s ve %s daha"
     },
     "options_filters_enabled_and_divider": {
         "message": "%s ve %s"
@@ -69,7 +69,7 @@
         "message": "Filtre aboneli\u011fi i\u00e7in ge\u00e7erli bir URL girin."
     },
     "options_filters_custom_step_one_url_desc_more": {
-        "message": "AdGuard bu filtreyi ekleyecektir."
+        "message": "AdGuard bu filtre aboneli\u011fini ekleyecektir."
     },
     "options_filters_custom_step_one_cancel": {
         "message": "\u0130ptal"
@@ -87,7 +87,7 @@
         "message": "Maalesef, beklenmedik bir hata nedeniyle \u00f6zel filtreniz eklenemiyor."
     },
     "options_filters_custom_step_three_try_again": {
-        "message": "Tekrar dene"
+        "message": "Tekrar deneyin"
     },
     "options_filters_custom_step_final_title": {
         "message": "Yeni filtre aboneli\u011fi"
@@ -117,7 +117,7 @@
         "message": "\u0130ptal"
     },
     "options_filters_custom_step_final_commit": {
-        "message": "Ekle"
+        "message": "\u00dcye ol"
     },
     "options_filters_check_filters_update": {
         "message": "Filtre g\u00fcncellemelerini denetle"
@@ -126,10 +126,10 @@
         "message": "Beyazliste"
     },
     "options_whitelist_description": {
-        "message": "AdGuard, beyazlistedeki sitelede reklamlar\u0131 engellemez."
+        "message": "AdGuard, beyazlistedeki sitelerde reklamlar\u0131 filtrelemez."
     },
     "options_whitelist_inverse": {
-        "message": "Beyazlisteyi ters \u00e7evir<span class='sp-table-row-info'>Reklamlar\u0131 beyazliste <i>haricinde<\/i> engelleme<\/span>"
+        "message": "Beyazlisteyi i\u00e7e aktar<span class='sp-table-row-info'>bu beyazliste harici t\u00fcm reklamlar\u0131 engelle <i><\/i> <\/span>"
     },
     "options_userfilter": {
         "message": "Kullan\u0131c\u0131 filtresi"
@@ -158,6 +158,12 @@
     "options_popup_update_updated": {
         "message": "\"$1\" s\u00fcr\u00fcm\u00fcne g\u00fcncellendi $2"
     },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s filtre g\u00fcncellendi : $2",
+            "other": "%s filtre g\u00fcncellendi : $2"
+        }
+    },
     "options_popup_version_update_title": {
         "message": "Safari i\u00e7in AdGuard, az \u00f6nce $1 s\u00fcr\u00fcm\u00fcne g\u00fcncellendi."
     },
@@ -165,7 +171,7 @@
         "message": "Bu s\u00fcr\u00fcm \u00e7o\u011funlukla hata d\u00fczeltmeler ve k\u00fc\u00e7\u00fck geli\u015ftirmeler i\u00e7erir."
     },
     "options_popup_version_update_description_major": {
-        "message": "Bu s\u00fcr\u00fcm, bir\u00e7ok yeni \u00f6zellik ve iyile\u015ftirmeleri getiren b\u00fcy\u00fck bir g\u00fcncellemedir."
+        "message": "Bu; Bir\u00e7ok yeni \u00f6zellik ve iyili\u015ftirmeler getiren bir ana eklenti s\u00fcr\u00fcm g\u00fcncellemesidir."
     },
     "notification_content_blocker_overlimit_title": {
         "message": "Uyar\u0131"
@@ -180,13 +186,13 @@
         "message": "Ara"
     },
     "options_editor_indicator_editing": {
-        "message": "Editing..."
+        "message": "D\u00fczeltiliyor..."
     },
     "options_editor_indicator_saving": {
-        "message": "Saving..."
+        "message": "Kaydediliyor..."
     },
     "options_editor_indicator_saved": {
-        "message": "Saved"
+        "message": "Kaydedildi"
     },
     "main_menu_edit": {
         "message": "D\u00fczenle"
@@ -222,7 +228,7 @@
         "message": "\u00c7\u0131k\u0131\u015f"
     },
     "tray_menu_protection_start": {
-        "message": "Enable AdGuard"
+        "message": "AdGuard'\u0131 etkinle\u015ftir"
     },
     "options_last_update": {
         "message": "Son g\u00fcncelleme:"
@@ -243,13 +249,13 @@
         "message": "Gizlilik S\u00f6zle\u015fmesi"
     },
     "options_acknowledgment": {
-        "message": "Te\u015fekk\u00fcrler"
+        "message": "Te\u015fekk\u00fcr"
     },
     "options_github": {
         "message": "Github"
     },
     "onboarding_safari_desc": {
-        "message": "\"AdGuard Safari simgesi\" yan\u0131ndaki ve Safari ayarlar\u0131nda \"AdGuard\" yan\u0131ndaki kutuyu i\u015faretleyin"
+        "message": "Safari ayarlarda ; \"AdGuard Safari Icon\" ve \"AdGuard\" yanlar\u0131ndaki kutucuklar\u0131 i\u015faretleyin"
     },
     "onboarding_safari_btn": {
         "message": "Se\u00e7enekleri a\u00e7"
@@ -264,36 +270,36 @@
         "message": "Kullan\u0131c\u0131 filtresi g\u00fcncellendi"
     },
     "notification_user_filter_updated_desc": {
-        "message": "Kullan\u0131c\u0131 kurallar\u0131 de\u011fi\u015ftirildi"
+        "message": "Kullan\u0131c\u0131 filtresine yeni bir kural eklendi:"
     },
     "options_filters_update_period": {
-        "message": "Update interval"
+        "message": "G\u00fcncelleme aral\u0131\u011f\u0131"
     },
     "options_filters_update_period_number": {
         "message": {
             "one": "Every hour",
-            "other": "Every %s hours"
+            "other": "Her %s saatte"
         }
     },
     "options_filters_period_not_update": {
-        "message": "Do not update"
+        "message": "G\u00fcncellemeyin"
     },
     "options_show_tray_icon": {
-        "message": "Show AdGuard for Safari in the menu bar"
+        "message": "Safari i\u00e7in AdGuard'\u0131 men\u00fc \u00e7ubu\u011funda g\u00f6ster"
     },
     "options_launch_at_login": {
-        "message": "Launch AdGuard for Safari at Login"
+        "message": "Oturum a\u00e7mada Safari i\u00e7in AdGuard'\u0131 ba\u015flat"
     },
     "settings_notification_title": {
-        "message": "Attention! AdGuard icon was disabled"
+        "message": "Dikkat! AdGuard simgesi devre d\u0131\u015f\u0131"
     },
     "settings_notification_text": {
-        "message": "You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually. You can enable AdGuard Icon <a href='#' id='notificationEnableIconLink'>here<\/a>."
+        "message": "Safari i\u00e7in AdGuard ayarlar\u0131n\u0131 y\u00f6netmek i\u00e7in bu simgeyi kullanabiilirsin. \u00d6rne\u011fin bir sitede reklam engellemek ya da bir reklam\u0131 el ile engellemek i\u00e7in. AdGuard Icon'\u0131 buradan <a href='#' id='notificationEnableIconLink'> aktifle\u015ftirebilirsin<\/a>."
     },
     "settings_notification_protection_title": {
         "message": "Dikkat! Koruma devre d\u0131\u015f\u0131 b\u0131rak\u0131ld\u0131"
     },
     "settings_notification_protection_text": {
-        "message": "AdGuard protection is paused. <a href='#' id='notificationEnableProtectionLink'>Enable AdGuard<\/a>."
+        "message": "AdGuard korumas\u0131 duraklat\u0131ld\u0131. AdGuard'\u0131 aktifle\u015ftir <a href='#' id='notificationEnableProtectionLink'>"
     }
 }

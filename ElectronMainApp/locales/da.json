@@ -1,9 +1,9 @@
 {
     "main_menu_hide": {
-        "message": "Hide"
+        "message": "Skjul"
     },
     "main_menu_close_window": {
-        "message": "Close window"
+        "message": "Luk vindue"
     },
     "name": {
         "message": "AdGuard AdBlocker"
@@ -157,6 +157,12 @@
     },
     "options_popup_update_updated": {
         "message": "\"$1\" opdateret til version $2"
+    },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "",
+            "other": "%s filtre opdateret: $2"
+        }
     },
     "options_popup_version_update_title": {
         "message": "AdGuard til Safari er lige blevet opdateret til version $1."

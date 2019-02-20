@@ -158,6 +158,12 @@
     "options_popup_update_updated": {
         "message": "\"$1\" auf Version $2 aktualisiert"
     },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s Filter aktualisiert: $2",
+            "other": "%s Filter aktualisiert: $2"
+        }
+    },
     "options_popup_version_update_title": {
         "message": "Die AdGuard Browsererweiterung wurde gerade auf Version $1 aktualisiert."
     },
