@@ -18,15 +18,13 @@ class ContentBlockerContainer {
     }
     
     // Parses and saves json
-    func setJson(json: String) {
+    func setJson(json: String) throws {
         // Parse "content-blocker" json
-        contentBlockerJson = parseJsonString(json: json);
-        
-        //TODO: Add validation
+        contentBlockerJson = try parseJsonString(json: json);
     }
     
     // Returns scripts and css wrapper object for current url
-    func getData(url: URL?) -> Any {
+    func getData(url: URL?) throws -> Any {
         //TODO: Add cache
         
         let blockerData = BlockerData();
@@ -116,13 +114,11 @@ class ContentBlockerContainer {
     }
     
     // Parses json to objects array
-    private func parseJsonString(json: String) -> Array<BlockerEntry> {
-        //TODO: Handle error
-        
+    private func parseJsonString(json: String) throws -> Array<BlockerEntry> {
         let data = json.data(using: String.Encoding.utf8, allowLossyConversion: false)!
         
         let decoder = JSONDecoder();
-        let parsedData = try! decoder.decode([BlockerEntry].self, from: data);
+        let parsedData = try decoder.decode([BlockerEntry].self, from: data);
         
         return parsedData;
     }

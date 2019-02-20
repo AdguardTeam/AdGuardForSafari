@@ -22,27 +22,46 @@ class ContentBlockerController {
         
         AESharedResources.setListenerOnAdvancedBlocking({
             NSLog("AG AdvancedBlocking json updated - download and setup new version");
-            self.downloadJson();
+            self.setupJson();
         });
         
-        downloadJson();
+        setupJson();
+    }
+    
+    func initJson() throws {
+        let text = try String(contentsOfFile: AESharedResources.advancedBlockingContentRulesUrlString()!, encoding: .utf8);
+        try self.contentBlockerContainer.setJson(json: text);
     }
     
     // Downloads and sets up json from shared resources
-    func downloadJson() {
-        let text = try! String(contentsOfFile: AESharedResources.advancedBlockingContentRulesUrlString()!, encoding: .utf8);
-        NSLog("AG AdvancedBlocking: '\(text)'");
-        self.contentBlockerContainer.setJson(json: text);
+    func setupJson() {
+        do {
+            try initJson();
+            NSLog("AG AdvancedBlocking: Json setup successfully.");
+        } catch {
+            NSLog("AG AdvancedBlocking: Error setting json: \(error)");
+        }
     }
     
-    // Returns requested scripts and css for specified url
-    func getData(url: URL?) -> String {
-        let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: url) as! ContentBlockerContainer.BlockerData;
+    func getBlockerData(url: URL?) throws -> String {
+        let data: ContentBlockerContainer.BlockerData = try contentBlockerContainer.getData(url: url) as! ContentBlockerContainer.BlockerData;
         
         let encoder = JSONEncoder();
         encoder.outputFormatting = .prettyPrinted
         
-        let json = try! encoder.encode(data);
+        let json = try encoder.encode(data);
         return String(data: json, encoding: .utf8)!;
+    }
+    
+    // Returns requested scripts and css for specified url
+    func getData(url: URL?) -> String {
+        var data = "";
+        do {
+            data = try getBlockerData(url: url);
+        } catch {
+            NSLog("AG AdvancedBlocking: Error getting data: \(error)");
+        }
+        
+        return data;
     }
 }

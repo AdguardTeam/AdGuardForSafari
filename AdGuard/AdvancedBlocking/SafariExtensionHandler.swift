@@ -10,7 +10,6 @@ import SafariServices
 
 class SafariExtensionHandler: SFSafariExtensionHandler {
     
-    // TODO: Move to initialize method?
     private var contentBlockerController: ContentBlockerController = ContentBlockerController();
     
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {

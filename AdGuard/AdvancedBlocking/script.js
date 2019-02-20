@@ -75,8 +75,12 @@ const handleMessage = function (event) {
     console.log("(AdGuard Advanced Blocking) Received message from extension: %s.", event.name);
     
     if (event.name === "advancedBlockingData") {
-        var data = JSON.parse(event.message["data"]);
-        applyAdvancedBlockingData(data);
+        try {
+            var data = JSON.parse(event.message["data"]);
+            applyAdvancedBlockingData(data);
+        } catch (e) {
+            console.error(e);
+        }
     }
 };
 

@@ -46,8 +46,8 @@ class AdvancedBlockingTests: XCTestCase {
             ]
         """;
         
-        contentBlockerContainer.setJson(json: contentBlockerJsonString);
-        let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        let data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
         
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
@@ -86,8 +86,8 @@ class AdvancedBlockingTests: XCTestCase {
             ]
         """;
         
-        contentBlockerContainer.setJson(json: contentBlockerJsonString);
-        let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        let data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
         
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
@@ -117,8 +117,8 @@ class AdvancedBlockingTests: XCTestCase {
             ]
         """;
         
-        contentBlockerContainer.setJson(json: contentBlockerJsonString);
-        let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        let data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
         
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css.count == 0);
@@ -154,8 +154,8 @@ class AdvancedBlockingTests: XCTestCase {
             ]
         """;
         
-        contentBlockerContainer.setJson(json: contentBlockerJsonString);
-        let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        let data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
         
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css.count == 0);
@@ -189,8 +189,8 @@ class AdvancedBlockingTests: XCTestCase {
             ]
         """;
         
-        contentBlockerContainer.setJson(json: contentBlockerJsonString);
-        let data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        let data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
         
         XCTAssert(data.scripts.count == 0);
         XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
@@ -231,13 +231,13 @@ class AdvancedBlockingTests: XCTestCase {
             ]
         """;
         
-        contentBlockerContainer.setJson(json: contentBlockerJsonString);
-        var data: ContentBlockerContainer.BlockerData = contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        var data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
         
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css.count == 0);
         
-        data = contentBlockerContainer.getData(url: URL(string:"http://test.com")) as! ContentBlockerContainer.BlockerData;
+        data = try! contentBlockerContainer.getData(url: URL(string:"http://test.com")) as! ContentBlockerContainer.BlockerData;
         
         XCTAssert(data.scripts[0] == "example-ignored-script");
         XCTAssert(data.scripts[1] == "included-script");
