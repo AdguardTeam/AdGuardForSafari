@@ -46,7 +46,7 @@ const applyExtendedCss = function (extendedCss) {
     }
 
     console.log('(AdGuard Advanced Blocking) extended css length: ' + extendedCss.length);
-    window.extcss = new ExtendedCss({
+    const extcss = new ExtendedCss({
         styleSheet: extendedCss.join("\n")
     });
     extcss.apply();
@@ -59,8 +59,6 @@ const applyExtendedCss = function (extendedCss) {
  */
 const applyAdvancedBlockingData = function (data) {
     console.log('(AdGuard Advanced Blocking) Applying scripts and css..');
-
-    console.log(data);
 
     applyScripts(data.scripts);
     applyExtendedCss(data.css);
