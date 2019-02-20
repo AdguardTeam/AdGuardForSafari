@@ -1,9 +1,9 @@
 {
     "main_menu_hide": {
-        "message": "Hide"
+        "message": "Esconder"
     },
     "main_menu_close_window": {
-        "message": "Close window"
+        "message": "Fechar janela"
     },
     "name": {
         "message": "Bloqueador de Publicidade AdGuard"
@@ -157,6 +157,12 @@
     },
     "options_popup_update_updated": {
         "message": "\"$1\" actualizado para a vers\u00e3o $2"
+    },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s filter updated: $2",
+            "other": "%s filters updated: $2"
+        }
     },
     "options_popup_version_update_title": {
         "message": "O AdGuard para o Safari acabou de ser actualizado para a vers\u00e3o $1."

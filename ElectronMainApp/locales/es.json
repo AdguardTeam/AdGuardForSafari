@@ -1,9 +1,9 @@
 {
     "main_menu_hide": {
-        "message": "Hide"
+        "message": "Ocultar"
     },
     "main_menu_close_window": {
-        "message": "Close window"
+        "message": "Cerrar la ventana"
     },
     "name": {
         "message": "AdGuard AdBlocker"
@@ -12,7 +12,7 @@
         "message": "Una extensi\u00f3n incomparable que bloquea anuncios y popups. Bloquea anuncions en Facebook, Youtube y otros sitios web."
     },
     "options_settings": {
-        "message": "Ajustes de AdGuard"
+        "message": "Adguard para Safari - Ajustes"
     },
     "options_general_settings": {
         "message": "General"
@@ -33,7 +33,7 @@
         "message": "Filtros"
     },
     "options_antibanner_info": {
-        "message": "%s filtros"
+        "message": "%s filtros %s reglas"
     },
     "options_filters_enabled": {
         "message": "Activado"
@@ -141,7 +141,7 @@
         "message": "Notificar sobre las actualizaciones"
     },
     "options_use_optimized_filters": {
-        "message": "Usar filtros optimizados<span class='sp-table-row-info'>Listas de filtros optimizadas para dispositivos m\u00f3viles<\/span>"
+        "message": "Usar filtros optimizados<span class='sp-table-row-info'>Listas de filtros optimizadas para el blockeo de contenido de Safari.<\/span>"
     },
     "options_popup_update_title": {
         "message": "Filtros han sido actualizados"
@@ -158,8 +158,14 @@
     "options_popup_update_updated": {
         "message": "\"$1\" ha sido actualizado hasta la versi\u00f3n $2"
     },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s filter updated: $2",
+            "other": "%s filters updated: $2"
+        }
+    },
     "options_popup_version_update_title": {
-        "message": "La extensi\u00f3n de AdGuard ha sido actualizada hasta la versi\u00f3n $1."
+        "message": "La extensi\u00f3n de AdGuard ha sido actualizada a la versi\u00f3n $1."
     },
     "options_popup_version_update_description_minor": {
         "message": "Esta versi\u00f3n trae mejoras y correcciones de errores."
@@ -177,7 +183,7 @@
         "message": "Demasiados filtros activados. Safari no puede usar m\u00e1s de 50 000 reglas."
     },
     "options_filters_list_search_placeholder": {
-        "message": "Ingresar cadena de b\u00fasqueda"
+        "message": "B\u00fasqueda"
     },
     "options_editor_indicator_editing": {
         "message": "Editando..."
