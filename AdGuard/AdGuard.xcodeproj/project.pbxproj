@@ -80,10 +80,7 @@
 		65FA408D215E8B6B000196EC /* LinkButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FA408C215E8B6B000196EC /* LinkButton.m */; };
 		F41DA7DA2201C81700C63708 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
 		F41DA7DD2201C81700C63708 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */; };
-		F41DA7DF2201C81700C63708 /* SafariExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41DA7DE2201C81700C63708 /* SafariExtensionViewController.swift */; };
-		F41DA7E22201C81700C63708 /* SafariExtensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F41DA7E02201C81700C63708 /* SafariExtensionViewController.xib */; };
 		F41DA7E52201C81700C63708 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = F41DA7E42201C81700C63708 /* script.js */; };
-		F41DA7E72201C81700C63708 /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F41DA7E62201C81700C63708 /* ToolbarItemIcon.pdf */; };
 		F41DA7EB2201C81700C63708 /* AdvancedBlocking.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F41DA7D92201C81700C63708 /* AdvancedBlocking.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F4D590132201C8D3002DCC2C /* ContentBlockerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D590122201C8D3002DCC2C /* ContentBlockerController.swift */; };
 		F4D590152201C8F8002DCC2C /* ContentBlockerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */; };
@@ -379,11 +376,8 @@
 		65FA408C215E8B6B000196EC /* LinkButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkButton.m; sourceTree = "<group>"; };
 		F41DA7D92201C81700C63708 /* AdvancedBlocking.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdvancedBlocking.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
-		F41DA7DE2201C81700C63708 /* SafariExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionViewController.swift; sourceTree = "<group>"; };
-		F41DA7E12201C81700C63708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SafariExtensionViewController.xib; sourceTree = "<group>"; };
 		F41DA7E32201C81700C63708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F41DA7E42201C81700C63708 /* script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
-		F41DA7E62201C81700C63708 /* ToolbarItemIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ToolbarItemIcon.pdf; sourceTree = "<group>"; };
 		F41DA7E82201C81700C63708 /* AdvancedBlocking.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdvancedBlocking.entitlements; sourceTree = "<group>"; };
 		F44ABA9821D4CE21004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/SafariExtensionViewController.strings"; sourceTree = "<group>"; };
 		F44ABA9921D4CE21004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -665,12 +659,9 @@
 			isa = PBXGroup;
 			children = (
 				F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */,
-				F41DA7DE2201C81700C63708 /* SafariExtensionViewController.swift */,
-				F41DA7E02201C81700C63708 /* SafariExtensionViewController.xib */,
 				F41DA7E32201C81700C63708 /* Info.plist */,
 				F41DA7E42201C81700C63708 /* script.js */,
 				F4F479FB221A05B600A68681 /* extended-css.js */,
-				F41DA7E62201C81700C63708 /* ToolbarItemIcon.pdf */,
 				F41DA7E82201C81700C63708 /* AdvancedBlocking.entitlements */,
 				F4D590122201C8D3002DCC2C /* ContentBlockerController.swift */,
 				F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */,
@@ -1011,9 +1002,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F41DA7E72201C81700C63708 /* ToolbarItemIcon.pdf in Resources */,
 				F4F479FC221A05B600A68681 /* extended-css.js in Resources */,
-				F41DA7E22201C81700C63708 /* SafariExtensionViewController.xib in Resources */,
 				F41DA7E52201C81700C63708 /* script.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1100,7 +1089,6 @@
 				F4D590132201C8D3002DCC2C /* ContentBlockerController.swift in Sources */,
 				F4FE882C220CCFCC00B79CBE /* DDASLLogger.m in Sources */,
 				F4FE881F220CCF9B00B79CBE /* ACLWildcard.m in Sources */,
-				F41DA7DF2201C81700C63708 /* SafariExtensionViewController.swift in Sources */,
 				F4FE8828220CCFBA00B79CBE /* NSStringPunycodeAdditions.m in Sources */,
 				F4FE882D220CCFF200B79CBE /* CLIColor.m in Sources */,
 				F4FE8832220CD00700B79CBE /* DDMultiFormatter.m in Sources */,
@@ -1300,14 +1288,6 @@
 				F44ABA9921D4CE21004EE45B /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		F41DA7E02201C81700C63708 /* SafariExtensionViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F41DA7E12201C81700C63708 /* Base */,
-			);
-			name = SafariExtensionViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
