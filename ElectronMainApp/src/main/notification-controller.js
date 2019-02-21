@@ -69,9 +69,16 @@ module.exports = (() => {
                 updatedFilters.sort(function (a, b) {
                     return a.displayNumber - b.displayNumber;
                 });
-                for (let i = 0; i < updatedFilters.length; i++) {
-                    const filter = updatedFilters[i];
-                    text.push(i18n.__("options_popup_update_updated.message", [filter.name, filter.version]).replace("$1", filter.name).replace("$2", filter.version));
+
+                let message;
+                if (updatedFilters.length === 1) {
+                    message = i18n.__("options_popup_update_updated.message");
+                    const filter = updatedFilters[0];
+                    text.push(message.replace("$1", filter.name).replace("$2", filter.version));
+                } else {
+                    message = i18n.__n('options_popup_update_updated_more.message', updatedFilters.length);
+                    const filtersListString = updatedFilters.map(f => `"${f.name}"`).join(', ');
+                    text.push(message.replace("$2", filtersListString));
                 }
             }
         } else {
@@ -120,6 +127,7 @@ module.exports = (() => {
         if (!options) {
             return;
         }
+
         const { title, text } = getFiltersUpdateResultMessage(options.success, options.updatedFilters);
         showNotification({ 
             title,

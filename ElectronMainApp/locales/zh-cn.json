@@ -1,9 +1,9 @@
 {
     "main_menu_hide": {
-        "message": "Hide"
+        "message": "\u9690\u85cf\u89c6\u9891"
     },
     "main_menu_close_window": {
-        "message": "Close window"
+        "message": "\u5173\u95ed\u7a97\u53e3"
     },
     "name": {
         "message": "AdGuard \u5e7f\u544a\u62e6\u622a\u5668"
@@ -158,6 +158,11 @@
     "options_popup_update_updated": {
         "message": "\"$1\" \u5df2\u66f4\u65b0\u5230\u7248\u672c $2"
     },
+    "options_popup_update_updated_more": {
+        "message": {
+            "other": "%s filters updated: $2"
+        }
+    },
     "options_popup_version_update_title": {
         "message": "AdGuard for Safari \u521a\u521a\u66f4\u65b0\u81f3\u7248\u672c $1\u3002"
     },
@@ -165,10 +170,10 @@
         "message": "\u6b64\u7248\u672c\u5305\u542b\u5927\u91cf\u7684\u9519\u8bef\u4fee\u6b63\u548c\u5c0f\u7684\u6539\u5584\u3002"
     },
     "options_popup_version_update_description_major": {
-        "message": "\u6b64\u4e3a\u4e3b\u8981\u6269\u5c55\u5347\u7ea7\uff0c\u5176\u5e26\u6709\u5927\u91cf\u65b0\u7279\u6027\u548c\u6539\u5584\u3002"
+        "message": "\u8fd9\u4e2a\u4e3b\u8981\u6269\u5c55\u5347\u7ea7\u589e\u52a0\u4e86\u5927\u91cf\u65b0\u7279\u6027\u548c\u6027\u80fd\u6539\u5584\u3002"
     },
     "notification_content_blocker_overlimit_title": {
-        "message": "\u7ecf\u8fc7"
+        "message": "\u8b66\u544a"
     },
     "notification_content_blocker_overlimit_desc": {
         "message": "\u5f00\u542f\u7684\u8fc7\u6ee4\u5668\u8fc7\u591a\u3002Safari \u6700\u591a\u4ec5\u53ef\u4f7f\u7528 50000\u6761\u89c4\u5219\u3002"
@@ -180,13 +185,13 @@
         "message": "\u641c\u7d22"
     },
     "options_editor_indicator_editing": {
-        "message": "Editing..."
+        "message": "\u7f16\u8f91\u4e2d..."
     },
     "options_editor_indicator_saving": {
-        "message": "Saving..."
+        "message": "\u4fdd\u5b58\u4e2d..."
     },
     "options_editor_indicator_saved": {
-        "message": "Saved"
+        "message": "\u5df2\u4fdd\u5b58"
     },
     "main_menu_edit": {
         "message": "\u7f16\u8f91"
@@ -216,13 +221,13 @@
         "message": "\u68c0\u67e5\u8fc7\u6ee4\u5668\u66f4\u65b0"
     },
     "tray_menu_launch_at_startup": {
-        "message": "AdGuard \u968f\u7cfb\u7edf\u542f\u52a8\u8fd0\u884c"
+        "message": "\u542f\u52a8\u7cfb\u7edf\u65f6\u8fd0\u884cAdGuard"
     },
     "tray_menu_quit": {
         "message": "\u9000\u51fa"
     },
     "tray_menu_protection_start": {
-        "message": "Enable AdGuard"
+        "message": "\u542f\u52a8 AdGuard"
     },
     "options_last_update": {
         "message": "\u6700\u540e\u66f4\u65b0\u4e8e\uff1a"
@@ -231,7 +236,7 @@
         "message": "\u5173\u4e8e"
     },
     "options_compare_btn": {
-        "message": "\u6bd4\u8f83\u5b83\u4eec"
+        "message": "\u4e24\u8005\u5bf9\u6bd4"
     },
     "options_compare_title": {
         "message": "\u4f7f\u7528 AdGuard Premium \u4ee5\u83b7\u53d6\u66f4\u4f73\u4fdd\u62a4\uff01"
@@ -267,32 +272,32 @@
         "message": "\u65b0\u89c4\u5219\u5df2\u6dfb\u52a0\u81f3\u7528\u6237\u8fc7\u6ee4\u5668\uff1a"
     },
     "options_filters_update_period": {
-        "message": "Update interval"
+        "message": "\u66f4\u65b0\u5468\u671f"
     },
     "options_filters_update_period_number": {
         "message": {
-            "other": "Every %s hours"
+            "other": "\u6bcf %s \u5c0f\u65f6"
         }
     },
     "options_filters_period_not_update": {
-        "message": "Do not update"
+        "message": "\u4e0d\u66f4\u65b0"
     },
     "options_show_tray_icon": {
-        "message": "Show AdGuard for Safari in the menu bar"
+        "message": "\u5728\u83dc\u5355\u680f\u4e0a\u663e\u793aAdGuard for Safari"
     },
     "options_launch_at_login": {
-        "message": "Launch AdGuard for Safari at Login"
+        "message": "\u5728\u542f\u52a8\u65f6\u8fd0\u884cAdGuard for Safari"
     },
     "settings_notification_title": {
-        "message": "Attention! AdGuard icon was disabled"
+        "message": "\u6ce8\u610f! AdGuard\u56fe\u6807\u5df2\u88ab\u7981\u7528"
     },
     "settings_notification_text": {
-        "message": "You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually. You can enable AdGuard Icon <a href='#' id='notificationEnableIconLink'>here<\/a>."
+        "message": "\u4f60\u53ef\u4ee5\u901a\u8fc7\u8be5\u56fe\u6807\u6765\u7ba1\u7406 AdGuard for Safari \u7684\u5404\u9879\u8bbe\u7f6e\u3002\u4f8b\u5982\u6682\u505c\u62e6\u622a\u67d0\u4e00\u7f51\u7ad9\uff0c\u6216\u624b\u52a8\u8fc7\u6ee4\u67d0\u4e00\u5e7f\u544a\u7b49\u7b49\u3002<a href='#' id='notificationEnableIconLink'>\u5728\u8fd9\u91cc<\/a> \u4f60\u53ef\u4ee5\u542f\u52a8AdGuard\u56fe\u6807\u3002"
     },
     "settings_notification_protection_title": {
-        "message": "Attention! Protection was disabled"
+        "message": "\u6ce8\u610f! \u4fdd\u62a4\u5df2\u88ab\u7981\u7528"
     },
     "settings_notification_protection_text": {
-        "message": "AdGuard protection is paused. <a href='#' id='notificationEnableProtectionLink'>Enable AdGuard<\/a>."
+        "message": "AdGuard\u4fdd\u62a4\u5df2\u88ab\u6682\u505c\u3002<a href='#' id='notificationEnableProtectionLink'>\u542f\u52a8AdGuard<\/a>\u3002"
     }
 }

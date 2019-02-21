@@ -18,7 +18,7 @@
         "message": "\u4e00\u822c\u7684"
     },
     "options_general_desc": {
-        "message": "AdGuard for Safari\u662f\u4e00\u6b3e\u514d\u8cbb\u7684\u4e14\u958b\u6e90\u7684\u8edf\u9ad4\u3002\u6211\u5011\u6b61\u8fce\u60a8\u7684\u56de\u994b\u610f\u898b\u548c\u8ca2\u737b\u3002\u5982\u679c\u60a8\u60f3\u8981\u5831\u544a\u7a0b\u5f0f\u932f\u8aa4\u6216\u8acb\u6c42\u529f\u80fd\uff0c\u8acb\u524d\u5f80<a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>\u6211\u5011\u7684GitHub\u8caf\u85cf\u8655<\/a>\u3002"
+        "message": "AdGuard for Safari\u662f\u4e00\u6b3e\u514d\u8cbb\u7684\u4e14\u958b\u6e90\u7684\u8edf\u9ad4\u3002\u6211\u5011\u6b61\u8fce\u60a8\u7684\u56de\u994b\u610f\u898b\u548c\u8ca2\u737b\u3002\u5982\u679c\u60a8\u60f3\u8981\u5831\u544a\u7a0b\u5f0f\u932f\u8aa4\u6216\u8acb\u6c42\u529f\u80fd\uff0c\u8acb\u524d\u5f80<a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>\u6211\u5011\u7684GitHub\u5132\u5b58\u5eab<\/a>\u3002"
     },
     "options_allow_acceptable_ads": {
         "message": "\u5141\u8a31\u641c\u5c0b\u5ee3\u544a\u548c\u7db2\u7ad9\u4e4b\u81ea\u6211\u63a8\u92b7"
@@ -129,7 +129,7 @@
         "message": "AdGuard\u4e0d\u904e\u6ffe\u4f86\u81ea\u767d\u540d\u55ae\u4e2d\u7684\u7db2\u7ad9\u3002"
     },
     "options_whitelist_inverse": {
-        "message": "\u53cd\u5411\u7684\u767d\u540d\u55ae<span class='sp-table-row-info'>\u89e3\u9664\u5c01\u9396\u5404\u8655\u5ee3\u544a<i>\u9664\u4e86<\/i>\u767d\u540d\u55ae<\/span>"
+        "message": "\u53cd\u5411\u7684\u767d\u540d\u55ae<span class='sp-table-row-info'><i>\u9664<\/i>\u767d\u540d\u55ae\u4e4b\u5916\uff0c\u89e3\u9664\u5c01\u9396\u5404\u8655\u5ee3\u544a<\/span>"
     },
     "options_userfilter": {
         "message": "\u4f7f\u7528\u8005\u904e\u6ffe\u5668"
@@ -150,16 +150,21 @@
         "message": "\u904e\u6ffe\u5668\u4e4b\u66f4\u65b0\u51fa\u932f"
     },
     "options_popup_update_not_found": {
-        "message": "\u7121\u66f4\u65b0\u88ab\u767c\u73fe"
+        "message": "\u7121\u5df2\u767c\u73fe\u7684\u66f4\u65b0"
     },
     "options_popup_update_error": {
-        "message": "\u53d6\u5f97\u66f4\u65b0\u5931\u6557\u3002\u8acb\u7a0d\u5f8c\u518d\u8a66\u3002"
+        "message": "\u672a\u80fd\u53d6\u5f97\u66f4\u65b0\u3002\u8acb\u7a0d\u5f8c\u518d\u8a66\u3002"
     },
     "options_popup_update_updated": {
-        "message": "\"$1\" \u66f4\u65b0\u81f3\u7248\u672c $2"
+        "message": "\"$1\" \u5df2\u66f4\u65b0\u81f3\u7248\u672c $2"
+    },
+    "options_popup_update_updated_more": {
+        "message": {
+            "other": "%s \u904e\u6ffe\u5668\u5df2\u66f4\u65b0\uff1a$2"
+        }
     },
     "options_popup_version_update_title": {
-        "message": "AdGuard for Safari\u525b\u525b\u88ab\u66f4\u65b0\u81f3\u7248\u672c $1\u3002"
+        "message": "AdGuard for Safari\u525b\u525b\u5df2\u88ab\u66f4\u65b0\u81f3\u7248\u672c $1\u3002"
     },
     "options_popup_version_update_description_minor": {
         "message": "\u8a72\u7248\u672c\u4e3b\u8981\u5730\u5305\u542b\u7a0b\u5f0f\u932f\u8aa4\u4fee\u6b63\u548c\u5c0f\u6539\u9032\u3002"
@@ -198,19 +203,19 @@
         "message": "\u526a\u4e0b"
     },
     "main_menu_copy": {
-        "message": "\u8907\u88fd"
+        "message": "\u62f7\u8c9d"
     },
     "main_menu_paste": {
         "message": "\u8cbc\u4e0a"
     },
     "main_menu_select-all": {
-        "message": "\u9078\u64c7\u5168\u90e8"
+        "message": "\u5168\u9078"
     },
     "tray_menu_about": {
         "message": "\u95dc\u65bc"
     },
     "tray_menu_preferences": {
-        "message": "\u504f\u597d"
+        "message": "\u504f\u597d\u8a2d\u5b9a"
     },
     "tray_menu_check_updates": {
         "message": "\u6aa2\u67e5\u904e\u6ffe\u5668\u66f4\u65b0"
@@ -231,7 +236,7 @@
         "message": "\u95dc\u65bc"
     },
     "options_compare_btn": {
-        "message": "\u4ed6\u5011\u5982\u4f55\u6bd4\u8f03"
+        "message": "\u5b83\u5011\u5982\u4f55\u6bd4\u8f03"
     },
     "options_compare_title": {
         "message": "\u70ba\u4e86\u8f03\u597d\u7684\u9632\u8b77\u5617\u8a66AdGuard\u9ad8\u7d1a\u7248\uff01"
@@ -249,10 +254,10 @@
         "message": "GitHub"
     },
     "onboarding_safari_desc": {
-        "message": "\u5728Safari\u504f\u597d\u4e2d\u52fe\u9078\u7dca\u9130\u8457\"AdGuard Safari \u5716\u793a\"\u548c\"AdGuard\"\u4e4b\u6838\u53d6\u6846"
+        "message": "\u5728Safari\u504f\u597d\u8a2d\u5b9a\u4e2d\u52fe\u9078\u7dca\u9130\u8457\"AdGuard Safari\u5716\u50cf\"\u548c\"AdGuard\"\u4e4b\u6838\u53d6\u6846"
     },
     "onboarding_safari_btn": {
-        "message": "\u958b\u555f\u504f\u597d"
+        "message": "\u958b\u555f\u504f\u597d\u8a2d\u5b9a"
     },
     "options_learn_more": {
         "message": "\u4e86\u89e3\u66f4\u591a\u95dc\u65bc\u5b83"
@@ -264,7 +269,7 @@
         "message": "\u4f7f\u7528\u8005\u904e\u6ffe\u5668\u5df2\u66f4\u65b0"
     },
     "notification_user_filter_updated_desc": {
-        "message": "\u4e00\u9805\u65b0\u7684\u898f\u5247\u88ab\u52a0\u81f3\u4f7f\u7528\u8005\u904e\u6ffe\u5668\uff1a"
+        "message": "\u4e00\u9805\u65b0\u7684\u898f\u5247\u5df2\u88ab\u52a0\u81f3\u4f7f\u7528\u8005\u904e\u6ffe\u5668\u4e2d\uff1a"
     },
     "options_filters_update_period": {
         "message": "\u66f4\u65b0\u9593\u9694"
@@ -284,15 +289,15 @@
         "message": "\u5728\u767b\u5165\u6642\u555f\u52d5AdGuard for Safari"
     },
     "settings_notification_title": {
-        "message": "\u6ce8\u610f\uff01AdGuard\u5716\u793a\u5df2\u88ab\u7981\u7528"
+        "message": "\u6ce8\u610f\uff01AdGuard\u5716\u50cf\u5df2\u88ab\u7981\u7528"
     },
     "settings_notification_text": {
-        "message": "\u60a8\u53ef\u4f7f\u7528\u8a72\u5716\u793a\u4ee5\u7ba1\u7406AdGuard for Safari\u8a2d\u5b9a\u3002\u4f8b\u5982\uff0c\u66ab\u505c\u65bc\u7db2\u7ad9\u4e0a\u4e4b\u5c01\u9396\u6216\u624b\u52d5\u5730\u5c01\u9396\u5ee3\u544a\u3002<a href='#' id='notificationEnableIconLink'>\u65bc\u6b64<\/a>\u60a8\u53ef\u555f\u7528AdGuard\u5716\u793a\u3002"
+        "message": "\u60a8\u53ef\u4f7f\u7528\u8a72\u5716\u50cf\u4ee5\u7ba1\u7406AdGuard for Safari\u8a2d\u5b9a\u3002\u4f8b\u5982\uff0c\u66ab\u505c\u65bc\u7db2\u7ad9\u4e0a\u4e4b\u5c01\u9396\u6216\u624b\u52d5\u5730\u5c01\u9396\u5ee3\u544a\u3002<a href='#' id='notificationEnableIconLink'>\u65bc\u6b64<\/a>\u60a8\u53ef\u555f\u7528AdGuard\u5716\u50cf\u3002"
     },
     "settings_notification_protection_title": {
         "message": "\u6ce8\u610f\uff01\u9632\u8b77\u5df2\u88ab\u7981\u7528"
     },
     "settings_notification_protection_text": {
-        "message": "AdGuard\u9632\u8b77\u5df2\u88ab\u66ab\u505c\u3002<a href='#' id='notificationEnableProtectionLink'>\u555f\u7528AdGuard<\/a>\u3002"
+        "message": "AdGuard\u9632\u8b77\u88ab\u66ab\u505c\u3002<a href='#' id='notificationEnableProtectionLink'>\u555f\u7528AdGuard<\/a>\u3002"
     }
 }
