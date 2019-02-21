@@ -126,7 +126,7 @@ echo "========================= UPDATING InfoPlist FILES =======================
 
 file="InfoPlist.strings"
 
-oneskyfiles="extension_${file} blockerextension_${file}"
+oneskyfiles="extension_${file} blockerextension_${file} adv_blocking_extension_${file}"
 
 for oneskyfile in $oneskyfiles
 do
