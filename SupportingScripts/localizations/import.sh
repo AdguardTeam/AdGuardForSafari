@@ -41,6 +41,9 @@ EXTENSION="${SRCROOT}/Extension"
 # Project root directory of Blocker Extension
 BLOCKEREXTENSION="${SRCROOT}/BlockerExtension"
 
+# Project root directory of Advanced Blocking Extension
+ADVANCED_BLOCKING_EXTENSION="${SRCROOT}/AdvancedBlocking"
+
 # XIB FILES LIST PATH
 XIBFILESLIST="${SCRIPTDIR}/Resources/xib-files-list.txt"
 
@@ -135,6 +138,11 @@ do
             if [ $oneskyfile = "blockerextension_${file}" ]; then
                 folder=${BLOCKEREXTENSION}
             fi
+
+            if [ $oneskyfile = "adv_blocking_extension_${file}" ]; then
+                folder=${ADVANCED_BLOCKING_EXTENSION}
+            fi
+
             echo $folder
             cp -fv "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}" "${folder}/$locale.lproj/$file"
             rm "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
