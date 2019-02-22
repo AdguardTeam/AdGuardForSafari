@@ -47,7 +47,11 @@ const applyExtendedCss = function (extendedCss) {
 
     console.log('(AdGuard Advanced Blocking) extended css length: ' + extendedCss.length);
     const extcss = new ExtendedCss({
-        styleSheet: extendedCss.join("\n")
+        styleSheet: extendedCss
+            .filter(s => s.length > 0)
+            .map(s => s.trim())
+            .map(s => s[s.length] !== '}' ? `${s} {display:none!important;}` : s)
+            .join("\n")
     });
     extcss.apply();
 };
@@ -76,7 +80,7 @@ const handleMessage = function (event) {
     
     if (event.name === "advancedBlockingData") {
         try {
-            var data = JSON.parse(event.message["data"]);
+            const data = JSON.parse(event.message["data"]);
             applyAdvancedBlockingData(data);
         } catch (e) {
             console.error(e);
@@ -87,15 +91,12 @@ const handleMessage = function (event) {
 
 if (window.top === window) {
     console.log("(AdGuard Advanced Blocking) Loading in main frame..");
-    
-    // TODO: Find out if it is possible to do it earlier
-    document.addEventListener("DOMContentLoaded", function (event) {
-                              safari.self.addEventListener("message", handleMessage);
-                              console.log("(AdGuard Advanced Blocking) Added Listener for messages from app extension.");
-                              
-                              // Request advanced blocking data
-                              safari.extension.dispatchMessage("getAdvancedBlockingData");
-                              });
+
+    safari.self.addEventListener("message", handleMessage);
+    console.log("(AdGuard Advanced Blocking) Added Listener for messages from app extension.");
+
+    // Request advanced blocking data
+    safari.extension.dispatchMessage("getAdvancedBlockingData");
     
     console.log("(AdGuard Advanced Blocking) Loading in main frame - done");
 }
