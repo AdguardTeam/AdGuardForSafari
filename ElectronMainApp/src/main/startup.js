@@ -45,9 +45,9 @@ module.exports = (() => {
             safariToolbar.sendReady();
 
             // Check safari extensions
-            safariToolbar.extensionsState((result) => {
+            safariToolbar.extensionContentBlockerState((result) => {
                 if (!result) {
-                    log.warn('Safari extensions are not ok!');
+                    log.warn('Safari extension content blocker is turned off!');
 
                     showWindow();
                 }
