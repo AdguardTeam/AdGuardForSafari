@@ -25,8 +25,6 @@ class ContentBlockerContainer {
     
     // Returns scripts and css wrapper object for current url
     func getData(url: URL?) throws -> Any {
-        //TODO: Add cache
-        
         let blockerData = BlockerData();
         for entry in contentBlockerJson {
             if isEntryTriggered(trigger: entry.trigger, url: url) {

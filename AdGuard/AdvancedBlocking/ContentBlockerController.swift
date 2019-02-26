@@ -15,10 +15,12 @@ import Foundation
 class ContentBlockerController {
     
     private var contentBlockerContainer: ContentBlockerContainer;
+    private var blockerDataCache: [String: String];
     
     // Constructor
     init() {
         contentBlockerContainer = ContentBlockerContainer();
+        blockerDataCache = [:];
         
         AESharedResources.setListenerOnAdvancedBlocking({
             NSLog("AG AdvancedBlocking json updated - download and setup new version");
@@ -35,6 +37,9 @@ class ContentBlockerController {
     
     // Downloads and sets up json from shared resources
     func setupJson() {
+        // Drop cache
+        blockerDataCache = [:];
+        
         do {
             try initJson();
             NSLog("AG AdvancedBlocking: Json setup successfully.");
@@ -55,9 +60,16 @@ class ContentBlockerController {
     
     // Returns requested scripts and css for specified url
     func getData(url: URL?) -> String {
+        let cacheKey = (url?.absoluteString)!;
+        let cached = blockerDataCache[cacheKey];
+        if cached != nil {
+            return cached!;
+        }
+        
         var data = "";
         do {
             data = try getBlockerData(url: url);
+            blockerDataCache[cacheKey] = data;
         } catch {
             NSLog("AG AdvancedBlocking: Error getting data: \(error)");
         }
