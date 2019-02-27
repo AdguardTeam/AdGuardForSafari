@@ -283,8 +283,7 @@ class AdvancedBlockingTests: XCTestCase {
     }
     
     func testPerformanceLongList() {
-        self.measure {
-            var contentBlockerJsonString = """
+        var contentBlockerJsonString = """
                 [
                     {
                         "trigger": {
@@ -311,27 +310,30 @@ class AdvancedBlockingTests: XCTestCase {
                         }
                     }
             """;
-            
-            for index in 1...5000 {
-                contentBlockerJsonString += """
-                ,{
-                    "trigger": {
-                        "url-filter": "^[htpsw]+:\\/\\/",
-                        "if-domain": [
-                            "not-example-\(index).com"
+        
+        for index in 1...5000 {
+            contentBlockerJsonString += """
+            ,{
+                "trigger": {
+                    "url-filter": "^[htpsw]+:\\/\\/",
+                    "if-domain": [
+                        "not-example-\(index).com"
                         ]
-                    },
-                    "action": {
+                },
+                "action": {
                     "type": "css",
                     "css": "#excluded-css:has(div) { height: 5px; }"
-                    }
                 }
-                """;
             }
-            
-            contentBlockerJsonString += "]";
+            """;
+        }
+        
+        contentBlockerJsonString += "]";
+        
+        self.measure {
             
             try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+            
             let data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
             
             XCTAssert(data.scripts[0] == "included-script");
