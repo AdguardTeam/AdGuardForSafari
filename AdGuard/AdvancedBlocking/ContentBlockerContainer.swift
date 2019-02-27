@@ -87,7 +87,7 @@ class ContentBlockerContainer {
     // Checks if domain matches at least one domain pattern
     private func matchesDomains(domainPatterns: [String], domain: String) -> Bool {
         for pattern in domainPatterns {
-            if matchesPattern(text: domain, pattern: pattern) {
+            if (domain == pattern || matchesPattern(text: domain, pattern: pattern)) {
                 return true;
             }
         }
@@ -97,6 +97,10 @@ class ContentBlockerContainer {
     
     // Checks if text matches regular expression
     private func matchesPattern(text: String, pattern: String) -> Bool {
+        if pattern == ".*" || pattern == "^[htpsw]+://" {
+            return true;
+        }
+        
         return text.range(of: pattern, options: .regularExpression, range: nil, locale: nil) != nil;
     }
     

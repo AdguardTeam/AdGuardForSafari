@@ -330,14 +330,16 @@ class AdvancedBlockingTests: XCTestCase {
         
         contentBlockerJsonString += "]";
         
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        
         self.measure {
-            
-            try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
-            
-            let data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
-            
-            XCTAssert(data.scripts[0] == "included-script");
+            for _ in 1...3 {
+                let data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
+                
+                XCTAssert(data.scripts[0] == "included-script");
+            }
         }
+        
     }
     
 }
