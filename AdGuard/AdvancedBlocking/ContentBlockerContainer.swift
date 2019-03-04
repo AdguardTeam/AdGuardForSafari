@@ -26,6 +26,7 @@ class ContentBlockerContainer {
     // Returns scripts and css wrapper object for current url
     func getData(url: URL?) throws -> Any {
         let blockerData = BlockerData();
+        //TODO: Most probably it's possible to check some important 'ignore-previous' points before checking everything
         for entry in contentBlockerJson {
             if isEntryTriggered(trigger: entry.trigger, url: url) {
                 if entry.action.type == "ignore-previous-rules" {
@@ -48,7 +49,7 @@ class ContentBlockerContainer {
         let host = url!.host;
         let absoluteUrl = url!.absoluteString;
         
-        if trigger.urlFilter != nil {
+        if trigger.urlFilter != nil && trigger.urlFilter != "" {
             if !matchesPattern(text: absoluteUrl, pattern: trigger.urlFilter!) {
                 return false;
             }
@@ -87,7 +88,9 @@ class ContentBlockerContainer {
     // Checks if domain matches at least one domain pattern
     private func matchesDomains(domainPatterns: [String], domain: String) -> Bool {
         for pattern in domainPatterns {
-            if (domain == pattern || matchesPattern(text: domain, pattern: pattern)) {
+            //TODO: Find out how should it work with subdomains?
+            //if (domain == pattern || matchesPattern(text: domain, pattern: pattern)) {
+            if domain == pattern {
                 return true;
             }
         }
