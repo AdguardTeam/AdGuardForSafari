@@ -119,9 +119,14 @@ class ContentBlockerContainer {
     // Checks if domain matches at least one domain pattern
     private func matchesDomains(domainPatterns: [String], domain: String) -> Bool {
         for pattern in domainPatterns {
-            //TODO: Find out how should it work with subdomains?
-            //if (domain == pattern || matchesPattern(text: domain, pattern: pattern)) {
             if domain == pattern {
+                return true;
+            }
+            
+            // If pattern starts with '*' - it matches sub domains
+            if (pattern.count > 0
+                && pattern.hasPrefix("*")
+                && matchesPattern(text: domain, pattern: "." + pattern)) {
                 return true;
             }
         }

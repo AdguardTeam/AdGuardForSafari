@@ -161,6 +161,43 @@ class AdvancedBlockingTests: XCTestCase {
         XCTAssert(data.css.count == 0);
     }
     
+    func testUrlFilterIfSubDomain() {
+        let contentBlockerJsonString = """
+            [
+                {
+                    "trigger": {
+                        "url-filter": "^[htpsw]+:\\/\\/",
+                        "if-domain": [
+                            "*example.com"
+                        ]
+                    },
+                    "action": {
+                        "type": "script",
+                        "script": "included-script"
+                    }
+                },
+                {
+                    "trigger": {
+                        "url-filter": "^[htpsw]+:\\/\\/",
+                        "if-domain": [
+                            "not-example.com"
+                        ]
+                    },
+                    "action": {
+                        "type": "css",
+                        "css": "#excluded-css:has(div) { height: 5px; }"
+                    }
+                }
+            ]
+        """;
+        
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        let data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://sub.example.com")) as! ContentBlockerContainer.BlockerData;
+        
+        XCTAssert(data.scripts[0] == "included-script");
+        XCTAssert(data.css.count == 0);
+    }
+    
     func testUrlFilterUnlessDomain() {
         let contentBlockerJsonString = """
             [
