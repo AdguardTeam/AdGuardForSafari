@@ -29,22 +29,25 @@ class ContentBlockerContainer {
     
     // Parses url shortcuts
     private func parseShortcut(urlMask: String?) -> String? {
-        if urlMask != nil
-            && urlMask != ""
-            && urlMask != ".*"
-            && urlMask != "^[htpsw]+://" {
-            var longest = "";
-            let parts = urlMask!.components(separatedBy: ["*", "^", "|"]);
-            for part in parts {
-                if (part.count > longest.count) {
-                    longest = part;
-                }
-            }
-            
-            return longest != "" ? longest.lowercased() : nil;
+        // Skip empty string
+        if urlMask == nil || urlMask == "" {
+            return nil;
         }
         
-        return nil;
+        // Skip all url templates
+        if urlMask == ".*" || urlMask == "^[htpsw]+://" {
+            return nil;
+        }
+        
+        var longest = "";
+        let parts = urlMask!.components(separatedBy: ["*", "^", "|", "+", "?", "$", "[", "]", "(", ")", "{", "}"]);
+        for part in parts {
+            if (part.count > longest.count) {
+                longest = part;
+            }
+        }
+        
+        return longest != "" ? longest.lowercased() : nil;
     }
     
     // Returns scripts and css wrapper object for current url
