@@ -34,13 +34,42 @@ class ContentBlockerContainer {
             return nil;
         }
         
+        var mask = urlMask!;
+        
         // Skip all url templates
-        if urlMask == ".*" || urlMask == "^[htpsw]+://" {
+        if mask == ".*" || mask == "^[htpsw]+://" {
             return nil;
         }
         
+        let specialCharacter = "...";
+        
+        if (mask.contains("?")) {
+            // Do not mess with complex expressions which use lookahead
+            // And with those using ? special character: https://github.com/AdguardTeam/AdguardBrowserExtension/issues/978
+            return nil;
+        }
+        
+        // (Dirty) prepend specialCharacter for the following replace calls to work properly
+        mask = specialCharacter + mask;
+        
+        // Strip all types of brackets
+        if let regex = try? NSRegularExpression(pattern: "[^\\\\]\\(.*[^\\\\]\\)", options: .caseInsensitive) {
+            mask = regex.stringByReplacingMatches(in: mask, options: [], range: NSRange(location: 0, length:  mask.count), withTemplate: specialCharacter)
+        }
+        if let regex = try? NSRegularExpression(pattern: "[^\\\\]\\[.*[^\\\\]\\]", options: .caseInsensitive) {
+            mask = regex.stringByReplacingMatches(in: mask, options: [], range: NSRange(location: 0, length:  mask.count), withTemplate: specialCharacter)
+        }
+        if let regex = try? NSRegularExpression(pattern: "[^\\\\]\\{.*[^\\\\]\\}", options: .caseInsensitive) {
+            mask = regex.stringByReplacingMatches(in: mask, options: [], range: NSRange(location: 0, length:  mask.count), withTemplate: specialCharacter)
+        }
+        
+        // Strip some special characters (\n, \t etc)
+        if let regex = try? NSRegularExpression(pattern: "[^\\\\]\\\\[a-zA-Z]", options: .caseInsensitive) {
+            mask = regex.stringByReplacingMatches(in: mask, options: [], range: NSRange(location: 0, length:  mask.count), withTemplate: specialCharacter)
+        }
+        
         var longest = "";
-        let parts = urlMask!.components(separatedBy: ["*", "^", "|", "+", "?", "$", "[", "]", "(", ")", "{", "}"]);
+        let parts = mask.components(separatedBy: ["*", ".", "^", "|", "+", "?", "$", "[", "]", "(", ")", "{", "}"]);
         for part in parts {
             if (part.count > longest.count) {
                 longest = part;
