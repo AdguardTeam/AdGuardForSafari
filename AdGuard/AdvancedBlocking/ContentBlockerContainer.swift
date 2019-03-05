@@ -53,11 +53,10 @@ class ContentBlockerContainer {
     // Returns scripts and css wrapper object for current url
     func getData(url: URL?) throws -> Any {
         let blockerData = BlockerData();
-        //TODO: Most probably it's possible to check some important 'ignore-previous' points before checking everything
-        for entry in contentBlockerJson {
+        for entry in contentBlockerJson.reversed() {
             if isEntryTriggered(trigger: entry.trigger, url: url) {
                 if entry.action.type == "ignore-previous-rules" {
-                    blockerData.clear();
+                    return blockerData;
                 } else {
                     addActionContent(blockerData: blockerData, blockerEntry: entry);
                 }

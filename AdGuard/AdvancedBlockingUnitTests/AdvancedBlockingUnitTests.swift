@@ -276,8 +276,8 @@ class AdvancedBlockingTests: XCTestCase {
         
         data = try! contentBlockerContainer.getData(url: URL(string:"http://test.com")) as! ContentBlockerContainer.BlockerData;
         
-        XCTAssert(data.scripts[0] == "example-ignored-script");
-        XCTAssert(data.scripts[1] == "included-script");
+        XCTAssert(data.scripts[0] == "included-script");
+        XCTAssert(data.scripts[1] == "example-ignored-script");
         XCTAssert(data.css.count == 0);
     }
     
