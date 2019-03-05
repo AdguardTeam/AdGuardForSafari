@@ -244,6 +244,45 @@ class AdvancedBlockingTests: XCTestCase {
         XCTAssert(data.css.count == 0);
     }
     
+    func testUrlFilterShortcuts() {
+        let contentBlockerJsonString = """
+            [
+                {
+                    "trigger": {
+                        "url-filter": "/YanAds/"
+                    },
+                    "action": {
+                        "type": "script",
+                        "script": "excluded-script"
+                    }
+                },
+                {
+                    "trigger": {
+                        "url-filter": "/cdsbData_gal/bannerFile/"
+                    },
+                    "action": {
+                        "type": "script",
+                        "script": "excluded-script"
+                    }
+                },
+                {
+                    "trigger": {
+                        "url-filter": "test.ru"
+                    },
+                    "action": {
+                        "type": "script",
+                        "script": "test-included-script"
+                    }
+                }
+            ]
+        """;
+        
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        let data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")) as! ContentBlockerContainer.BlockerData;
+        
+        XCTAssert(data.scripts[0] == "test-included-script");
+    }
+    
     func testPerformanceEmptyList() {
         self.measure {
             let contentBlockerJsonString = """
@@ -323,6 +362,57 @@ class AdvancedBlockingTests: XCTestCase {
                 "action": {
                     "type": "css",
                     "css": "#excluded-css:has(div) { height: 5px; }"
+                }
+            }
+            """;
+        }
+        
+        contentBlockerJsonString += "]";
+        
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        
+        self.measure {
+            for _ in 1...3 {
+                let data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")) as! ContentBlockerContainer.BlockerData;
+                
+                XCTAssert(data.scripts[0] == "included-script");
+            }
+        }
+        
+    }
+    
+    func testPerformanceUrlShortcutsLongList() {
+        var contentBlockerJsonString = """
+                [
+                    {
+                        "trigger": {
+                            "url-filter": "example.com"
+                        },
+                        "action": {
+                            "type": "script",
+                            "script": "included-script"
+                        }
+                    },
+                    {
+                        "trigger": {
+                            "url-filter": "not-example.com"
+                        },
+                        "action": {
+                            "type": "script",
+                            "script": "excluded-script"
+                        }
+                    }
+            """;
+        
+        for index in 1...5000 {
+            contentBlockerJsonString += """
+            ,{
+                "trigger": {
+                    "url-filter": "not-example-\(index).com"
+                },
+                "action": {
+                    "type": "script",
+                    "script": "excluded-script"
                 }
             }
             """;

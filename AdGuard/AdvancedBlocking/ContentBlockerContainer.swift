@@ -21,6 +21,30 @@ class ContentBlockerContainer {
     func setJson(json: String) throws {
         // Parse "content-blocker" json
         contentBlockerJson = try parseJsonString(json: json);
+        // Parse shortcuts
+        for i in 0 ..< contentBlockerJson.count {
+            contentBlockerJson[i].trigger.setShortcut(shortcutValue: parseShortcut(urlMask: contentBlockerJson[i].trigger.urlFilter));
+        }
+    }
+    
+    // Parses url shortcuts
+    private func parseShortcut(urlMask: String?) -> String? {
+        if urlMask != nil
+            && urlMask != ""
+            && urlMask != ".*"
+            && urlMask != "^[htpsw]+://" {
+            var longest = "";
+            let parts = urlMask!.components(separatedBy: ["*", "^", "|"]);
+            for part in parts {
+                if (part.count > longest.count) {
+                    longest = part;
+                }
+            }
+            
+            return longest != "" ? longest.lowercased() : nil;
+        }
+        
+        return nil;
     }
     
     // Returns scripts and css wrapper object for current url
@@ -50,6 +74,10 @@ class ContentBlockerContainer {
         let absoluteUrl = url!.absoluteString;
         
         if trigger.urlFilter != nil && trigger.urlFilter != "" {
+            if trigger.shortcut != nil && !absoluteUrl.lowercased().contains(trigger.shortcut) {
+                return false;
+            }
+            
             if !matchesPattern(text: absoluteUrl, pattern: trigger.urlFilter!) {
                 return false;
             }
@@ -130,18 +158,24 @@ class ContentBlockerContainer {
     
     // Json decoded object description
     struct BlockerEntry: Codable {
-        let trigger: Trigger
+        var trigger: Trigger
         let action: Action
         
         struct Trigger : Codable {
             let ifDomain: [String]?
             let urlFilter: String?
+            var shortcut: String?
             let unlessDomain: [String]?
             
             enum CodingKeys: String, CodingKey {
                 case ifDomain = "if-domain"
                 case urlFilter = "url-filter"
                 case unlessDomain = "unless-domain"
+                case shortcut = "url-shortcut"
+            }
+            
+            mutating func setShortcut(shortcutValue: String?) {
+                self.shortcut = shortcutValue;
             }
         }
         
