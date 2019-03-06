@@ -22,6 +22,7 @@ class ContentBlockerContainer {
         // Parse "content-blocker" json
         contentBlockerJson = try parseJsonString(json: json);
         // Parse shortcuts
+        // TODO: Do it lazy
         for i in 0 ..< contentBlockerJson.count {
             contentBlockerJson[i].trigger.setShortcut(shortcutValue: parseShortcut(urlMask: contentBlockerJson[i].trigger.urlFilter));
         }
@@ -174,11 +175,9 @@ class ContentBlockerContainer {
     // Adds scripts or css to blocker data object
     private func addActionContent(blockerData: BlockerData, blockerEntry: BlockerEntry) {
         if blockerEntry.action.type == "css" {
-            let style = blockerEntry.action.css ?? "";
-            blockerData.addCss(style: style);
+            blockerData.addCss(style: blockerEntry.action.css);
         } else if blockerEntry.action.type == "script" {
-            let script = blockerEntry.action.script ?? "";
-            blockerData.addScript(script: script);
+            blockerData.addScript(script: blockerEntry.action.script);
         }
     }
     
@@ -227,12 +226,16 @@ class ContentBlockerContainer {
         var scripts = [String]()
         var css = [String]()
         
-        func addScript(script: String) {
-            scripts.append(script);
+        func addScript(script: String?) {
+            if (script != nil && script != "") {
+                scripts.append(script!);
+            }
         }
         
-        func addCss(style: String) {
-            css.append(style);
+        func addCss(style: String?) {
+            if (style != nil && style != "") {
+                css.append(style!);
+            }
         }
         
         func clear() {

@@ -320,6 +320,90 @@ class AdvancedBlockingTests: XCTestCase {
         XCTAssert(data.scripts[0] == "test-included-script");
     }
     
+    func testInvalidItems() {
+        // Invalid trigger
+        var contentBlockerJsonString = """
+            [
+                {
+                    "trigger": {
+                    },
+                    "action": {
+                        "type": "script",
+                        "script": "some-script"
+                    }
+                }
+            ]
+        """;
+        
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        var data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")) as! ContentBlockerContainer.BlockerData;
+        
+        XCTAssert(data.scripts.count == 0);
+        XCTAssert(data.css.count == 0);
+        
+        // Unsupported action
+        contentBlockerJsonString = """
+            [
+                {
+                    "trigger": {
+                        "url-filter": ".*"
+                    },
+                    "action": {
+                        "type": "unsupported",
+                        "script": "some-script"
+                    }
+                }
+            ]
+        """;
+        
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        data = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")) as! ContentBlockerContainer.BlockerData;
+        
+        XCTAssert(data.scripts.count == 0);
+        XCTAssert(data.css.count == 0);
+        
+        // Invalid action
+        contentBlockerJsonString = """
+            [
+                {
+                    "trigger": {
+                        "url-filter": ".*"
+                    },
+                    "action": {
+                        "type": "script"
+                    }
+                }
+            ]
+        """;
+        
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        data = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")) as! ContentBlockerContainer.BlockerData;
+        
+        XCTAssert(data.scripts.count == 0);
+        XCTAssert(data.css.count == 0);
+        
+        // Invalid regexp
+        contentBlockerJsonString = """
+            [
+                {
+                    "trigger": {
+                        "url-filter": "t{1}est.ru{a)$"
+                    },
+                    "action": {
+                        "type": "script",
+                        "script": "some-script"
+                    }
+                }
+            ]
+        """;
+        
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        data = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")) as! ContentBlockerContainer.BlockerData;
+        
+        XCTAssert(data.scripts.count == 0);
+        XCTAssert(data.css.count == 0);
+    }
+    
     func testPerformanceEmptyList() {
         self.measure {
             let contentBlockerJsonString = """
