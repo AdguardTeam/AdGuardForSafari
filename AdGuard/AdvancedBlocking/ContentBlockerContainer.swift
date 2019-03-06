@@ -82,8 +82,9 @@ class ContentBlockerContainer {
     // Returns scripts and css wrapper object for current url
     func getData(url: URL?) throws -> Any {
         let blockerData = BlockerData();
-        for entry in contentBlockerJson.reversed() {
-            if isEntryTriggered(trigger: entry.trigger, url: url) {
+        for i in (0 ..< contentBlockerJson.count).reversed() {
+            var entry = contentBlockerJson[i];
+            if (isEntryTriggered(trigger: &entry.trigger, url: url)) {
                 if entry.action.type == "ignore-previous-rules" {
                     return blockerData;
                 } else {
@@ -96,7 +97,7 @@ class ContentBlockerContainer {
     }
     
     // Checks if trigger content is suitable for current url
-    private func isEntryTriggered(trigger: BlockerEntry.Trigger, url: URL?) -> Bool {
+    private func isEntryTriggered(trigger: inout BlockerEntry.Trigger, url: URL?) -> Bool {
         if url == nil {
             return true;
         }
@@ -109,11 +110,11 @@ class ContentBlockerContainer {
                 return false;
             }
             
-            if !matchesPattern(text: absoluteUrl, pattern: trigger.urlFilter!) {
+            if (!checkDomains(trigger: trigger, host: host!)) {
                 return false;
             }
             
-            return checkDomains(trigger: trigger, host: host!);
+            return matchesUrlFilter(text: absoluteUrl, trigger: &trigger);
         } else {
             // Pass empty url-filter
         }
@@ -162,13 +163,25 @@ class ContentBlockerContainer {
         return false;
     }
     
-    // Checks if text matches regular expression
-    private func matchesPattern(text: String, pattern: String) -> Bool {
-        if pattern == ".*" || pattern == "^[htpsw]+://" {
+    // Checks if text matches specified trigger
+    // Checks url-filter or cached regexp
+    private func matchesUrlFilter(text: String, trigger: inout BlockerEntry.Trigger) -> Bool {
+        let pattern = trigger.urlFilter;
+        if (pattern == ".*" || pattern == "^[htpsw]+://") {
             return true;
         }
         
-        return text.range(of: pattern, options: .regularExpression, range: nil, locale: nil) != nil;
+        if (trigger.regex == nil) {
+            let regex = try? NSRegularExpression(pattern: pattern!, options: []);
+            trigger.setRegex(regex: regex);
+        }
+        
+        if (trigger.regex == nil) {
+            return text.range(of: pattern!, options: .regularExpression, range: nil, locale: nil) != nil;
+        } else {
+            let numberOfMatches = trigger.regex!.numberOfMatches(in: text, range: NSRange(text.startIndex..., in: text));
+            return numberOfMatches > 0;
+        }
     }
     
     // Adds scripts or css to blocker data object
@@ -198,8 +211,10 @@ class ContentBlockerContainer {
         struct Trigger : Codable {
             let ifDomain: [String]?
             let urlFilter: String?
-            var shortcut: String?
             let unlessDomain: [String]?
+            
+            var shortcut: String?
+            var regex: NSRegularExpression?
             
             enum CodingKeys: String, CodingKey {
                 case ifDomain = "if-domain"
@@ -210,6 +225,10 @@ class ContentBlockerContainer {
             
             mutating func setShortcut(shortcutValue: String?) {
                 self.shortcut = shortcutValue;
+            }
+            
+            mutating func setRegex(regex: NSRegularExpression?) {
+                self.regex = regex;
             }
         }
         
