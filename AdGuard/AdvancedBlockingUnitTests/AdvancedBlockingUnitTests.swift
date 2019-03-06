@@ -469,11 +469,11 @@ class AdvancedBlockingTests: XCTestCase {
         
     }
     
+    // Base + Russian filters
     func testPerformanceCommonFilter() {
         let bundle = Bundle(for: type(of:self));
         let path = bundle.path(forResource: "adv-blocking-content-rules", ofType: "json");
         
-        //let path = "adv-blocking-content-rules.json";
         let content = try! String(contentsOfFile: path!, encoding: String.Encoding.utf8);
         
         try! contentBlockerContainer.setJson(json: content);
