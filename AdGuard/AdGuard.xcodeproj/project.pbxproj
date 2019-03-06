@@ -82,8 +82,7 @@
 		F41DA7DD2201C81700C63708 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */; };
 		F41DA7E52201C81700C63708 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = F41DA7E42201C81700C63708 /* script.js */; };
 		F41DA7EB2201C81700C63708 /* AdvancedBlocking.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F41DA7D92201C81700C63708 /* AdvancedBlocking.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		F47574F9222FE83C00DE28C3 /* adv-blocking-content-rules.json in Resources */ = {isa = PBXBuildFile; fileRef = F47574F8222FE83B00DE28C3 /* adv-blocking-content-rules.json */; };
-		F47574FA222FEAEF00DE28C3 /* adv-blocking-content-rules.json in Resources */ = {isa = PBXBuildFile; fileRef = F47574F8222FE83B00DE28C3 /* adv-blocking-content-rules.json */; };
+		F4757500222FF92200DE28C3 /* adv-blocking-content-rules.json in Resources */ = {isa = PBXBuildFile; fileRef = F47574FF222FF92200DE28C3 /* adv-blocking-content-rules.json */; };
 		F49E3FE6221F4D72001B9E86 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F49E3FE8221F4D72001B9E86 /* InfoPlist.strings */; };
 		F4D590132201C8D3002DCC2C /* ContentBlockerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D590122201C8D3002DCC2C /* ContentBlockerController.swift */; };
 		F4D590152201C8F8002DCC2C /* ContentBlockerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */; };
@@ -386,7 +385,7 @@
 		F44ABA9921D4CE21004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		F44ABA9A21D4CE21004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F44ABA9B21D4CE22004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		F47574F8222FE83B00DE28C3 /* adv-blocking-content-rules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "adv-blocking-content-rules.json"; sourceTree = "<group>"; };
+		F47574FF222FF92200DE28C3 /* adv-blocking-content-rules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "adv-blocking-content-rules.json"; sourceTree = "<group>"; };
 		F49E3FE7221F4D72001B9E86 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F49E3FE9221F4D77001B9E86 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F49E3FEA221F4D79001B9E86 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -694,8 +693,8 @@
 		F4D5901B2201C965002DCC2C /* AdvancedBlockingUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				F47574FF222FF92200DE28C3 /* adv-blocking-content-rules.json */,
 				F4D5901C2201C965002DCC2C /* AdvancedBlockingUnitTests.swift */,
-				F47574F8222FE83B00DE28C3 /* adv-blocking-content-rules.json */,
 				F4D5901E2201C965002DCC2C /* Info.plist */,
 			);
 			path = AdvancedBlockingUnitTests;
@@ -981,7 +980,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F47574FA222FEAEF00DE28C3 /* adv-blocking-content-rules.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1035,7 +1033,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F47574F9222FE83C00DE28C3 /* adv-blocking-content-rules.json in Resources */,
+				F4757500222FF92200DE28C3 /* adv-blocking-content-rules.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

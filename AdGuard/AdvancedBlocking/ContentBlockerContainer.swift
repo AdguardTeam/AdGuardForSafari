@@ -154,7 +154,7 @@ class ContentBlockerContainer {
             // If pattern starts with '*' - it matches sub domains
             if (pattern.count > 0
                 && pattern.hasPrefix("*")
-                && matchesPattern(text: domain, pattern: "." + pattern)) {
+                && domain.hasSuffix(String(pattern.characters.dropFirst(1)))) {
                 return true;
             }
         }

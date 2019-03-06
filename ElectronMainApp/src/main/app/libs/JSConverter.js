@@ -1,6 +1,6 @@
 /**
  * AdGuard -> Safari Content Blocker converter
- * Version 4.0.0
+ * Version 4.0.1
  * License: https://github.com/AdguardTeam/SafariContentBlockerConverterCompiler/blob/master/LICENSE
  */
 
@@ -2393,7 +2393,7 @@ var jsonFromFilters = (function () {
         /**
          * Safari content blocking format rules converter.
          */
-        const CONVERTER_VERSION = '4.0.0';
+        const CONVERTER_VERSION = '4.0.1';
         // Max number of CSS selectors per rule (look at compactCssRules function)
         const MAX_SELECTORS_PER_WIDE_RULE = 250;
 
@@ -3094,7 +3094,9 @@ var jsonFromFilters = (function () {
                 }
 
                 for (let i = 0; i < array.length; i++) {
-                    array[i] = "*" + array[i];
+                    if (!array[i].startsWith('*')) {
+                        array[i] = "*" + array[i];
+                    }
                 }
             };
 
@@ -3509,6 +3511,7 @@ var jsonFromFilters = (function () {
                 advancedBlocker = advancedBlocker.concat(contentBlocker.importantExceptions);
                 advancedBlocker = advancedBlocker.concat(contentBlocker.documentExceptions);
 
+                applyDomainWildcards(advancedBlocker);
                 adguard.console.info('Advanced Blocking length: ' + advancedBlocker.length);
 
                 result.advancedBlocking = JSON.stringify(advancedBlocker, null, "\t");
