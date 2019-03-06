@@ -469,4 +469,24 @@ class AdvancedBlockingTests: XCTestCase {
         
     }
     
+    func testPerformanceCommonFilter() {
+        let bundle = Bundle(for: type(of:self));
+        let path = bundle.path(forResource: "adv-blocking-content-rules", ofType: "json");
+        
+        //let path = "adv-blocking-content-rules.json";
+        let content = try! String(contentsOfFile: path!, encoding: String.Encoding.utf8);
+        
+        try! contentBlockerContainer.setJson(json: content);
+        
+        self.measure {
+            for _ in 1...10 {
+                let data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://mail.ru")) as! ContentBlockerContainer.BlockerData;
+                
+                XCTAssert(data.scripts.count == 11);
+                XCTAssert(data.css.count == 0);
+            }
+        }
+        
+    }
+    
 }
