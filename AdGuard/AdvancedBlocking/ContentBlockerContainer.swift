@@ -22,7 +22,6 @@ class ContentBlockerContainer {
         // Parse "content-blocker" json
         contentBlockerJson = try parseJsonString(json: json);
         // Parse shortcuts
-        // TODO: Do it lazy
         for i in 0 ..< contentBlockerJson.count {
             contentBlockerJson[i].trigger.setShortcut(shortcutValue: parseShortcut(urlMask: contentBlockerJson[i].trigger.urlFilter));
         }
