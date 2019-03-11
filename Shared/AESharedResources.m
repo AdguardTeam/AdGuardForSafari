@@ -20,6 +20,7 @@
 #import <SafariServices/SafariServices.h>
 
 #define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"
+#define AES_ADV_BLOCKING_CONTENT_RULES_RESOURCE @"adv-blocking-content-rules.json"
 #define AES_WHITELIST_DOMAINS                   @"whitelist-domains.data"
 #define AES_USERFILTER_RULES                    @"userfilter-rules.data"
 
@@ -30,6 +31,7 @@
 #define NOTIFICATION_SHOW_PREFS                 AG_BUNDLEID @".notify.showprefs"
 #define NOTIFICATION_READY                      AG_BUNDLEID @".notify.ready"
 #define NOTIFICATION_REPORT                     AG_BUNDLEID @".notify.report"
+#define NOTIFICATION_ADVANCED_BLOCKING          AG_BUNDLEID @".notify.advancedblocking"
 
 
 /////////////////////////////////////////////////////////////////////
@@ -60,6 +62,7 @@ static AESListenerBlock _onBusyChangedBlock;
 static AESListenerBlock _onShowPreferences;
 static AESListenerBlock _onReady;
 static AESListenerBlock _onReport;
+static AESListenerBlock _onAdvancedBlockingBlock;
 
 + (void)initialize{
     
@@ -210,6 +213,18 @@ static AESListenerBlock _onReport;
                                block:block];
 }
 
++ (void)notifyAdvancedBlockingExtension {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_ADVANCED_BLOCKING, NULL, NULL, YES);
+    });
+}
+
++ (void)setListenerOnAdvancedBlocking:(AESListenerBlock)block {
+    [self setListenerForNotification:NOTIFICATION_ADVANCED_BLOCKING
+                            blockPtr:&_onAdvancedBlockingBlock
+                               block:block];
+}
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Access to shared resources (public methods)
 
@@ -226,8 +241,29 @@ static AESListenerBlock _onReport;
     });
 }
 
++ (void)setAdvancedBlockingContentRulesJson:(NSData *)jsonData completion:(void (^)(void))completion {
+
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
+        @autoreleasepool {
+            NSData *data = jsonData ?: [NSData data];
+            [self saveData:data toFileRelativePath:AES_ADV_BLOCKING_CONTENT_RULES_RESOURCE];
+            if (completion) {
+                completion();
+            }
+        }
+    });
+}
+
 + (NSURL *)blockingContentRulesUrl {
     return  [_containerFolderUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_RULES_RESOURCE];
+}
+
++ (NSURL *)advancedBlockingContentRulesUrl {
+    return  [_containerFolderUrl URLByAppendingPathComponent:AES_ADV_BLOCKING_CONTENT_RULES_RESOURCE];
+}
+
++ (NSString *)advancedBlockingContentRulesUrlString {
+    return  [_containerFolderUrl URLByAppendingPathComponent:AES_ADV_BLOCKING_CONTENT_RULES_RESOURCE].path;
 }
 
 + (void)setWhitelistDomains:(NSArray <NSString *> *)domains completion:(void (^)(void))completion {
@@ -425,6 +461,9 @@ static void onChangedNotify(CFNotificationCenterRef center, void *observer, CFSt
     }
     else if ([nName isEqualToString:NOTIFICATION_REPORT]){
         block = _onReport;
+    }
+    else if ([nName isEqualToString:NOTIFICATION_ADVANCED_BLOCKING]){
+        block = _onAdvancedBlockingBlock;
     }
 
     if (block) {

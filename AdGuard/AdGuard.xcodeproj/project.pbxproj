@@ -78,6 +78,65 @@
 		65D151C32139A5080014BE79 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A62139A5080014BE79 /* DDTTYLogger.m */; };
 		65D151C42139A5080014BE79 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D151A72139A5080014BE79 /* DDAbstractDatabaseLogger.h */; };
 		65FA408D215E8B6B000196EC /* LinkButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FA408C215E8B6B000196EC /* LinkButton.m */; };
+		F41DA7DA2201C81700C63708 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
+		F41DA7DD2201C81700C63708 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */; };
+		F41DA7E52201C81700C63708 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = F41DA7E42201C81700C63708 /* script.js */; };
+		F41DA7EB2201C81700C63708 /* AdvancedBlocking.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F41DA7D92201C81700C63708 /* AdvancedBlocking.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F4757500222FF92200DE28C3 /* adv-blocking-content-rules.json in Resources */ = {isa = PBXBuildFile; fileRef = F47574FF222FF92200DE28C3 /* adv-blocking-content-rules.json */; };
+		F49E3FE6221F4D72001B9E86 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F49E3FE8221F4D72001B9E86 /* InfoPlist.strings */; };
+		F4D590132201C8D3002DCC2C /* ContentBlockerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D590122201C8D3002DCC2C /* ContentBlockerController.swift */; };
+		F4D590152201C8F8002DCC2C /* ContentBlockerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */; };
+		F4D5901D2201C965002DCC2C /* AdvancedBlockingUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5901C2201C965002DCC2C /* AdvancedBlockingUnitTests.swift */; };
+		F4D590242201D097002DCC2C /* ContentBlockerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */; };
+		F4F479FC221A05B600A68681 /* extended-css.js in Resources */ = {isa = PBXBuildFile; fileRef = F4F479FB221A05B600A68681 /* extended-css.js */; };
+		F4FE881B220CCF4200B79CBE /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8629212AE6C200CB6DAE /* AESharedResources.m */; };
+		F4FE881C220CCF4400B79CBE /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8629212AE6C200CB6DAE /* AESharedResources.m */; };
+		F4FE881F220CCF9B00B79CBE /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8633212AEA3200CB6DAE /* ACLWildcard.m */; };
+		F4FE8820220CCFA000B79CBE /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8638212AEA3200CB6DAE /* NSURL+Utils.m */; };
+		F4FE8821220CCFA400B79CBE /* ACLJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863C212AEA3200CB6DAE /* ACLJobController.m */; };
+		F4FE8822220CCFA700B79CBE /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863D212AEA3200CB6DAE /* NSDate+Utils.m */; };
+		F4FE8823220CCFAB00B79CBE /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863E212AEA3200CB6DAE /* ACLFileLocker.m */; };
+		F4FE8824220CCFAF00B79CBE /* ACLExecuteBlockDelayed.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863F212AEA3200CB6DAE /* ACLExecuteBlockDelayed.m */; };
+		F4FE8825220CCFB100B79CBE /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8640212AEA3200CB6DAE /* NSString+Utils.m */; };
+		F4FE8826220CCFB400B79CBE /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8641212AEA3200CB6DAE /* ACLLogger.m */; };
+		F4FE8827220CCFB700B79CBE /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8642212AEA3200CB6DAE /* NSException+Utils.m */; };
+		F4FE8828220CCFBA00B79CBE /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8643212AEA3200CB6DAE /* NSStringPunycodeAdditions.m */; };
+		F4FE8829220CCFC200B79CBE /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1518C2139A5080014BE79 /* DDLog.m */; };
+		F4FE882A220CCFC500B79CBE /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151902139A5080014BE79 /* DDAbstractDatabaseLogger.m */; };
+		F4FE882B220CCFC800B79CBE /* DDOSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151922139A5080014BE79 /* DDOSLogger.m */; };
+		F4FE882C220CCFCC00B79CBE /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151932139A5080014BE79 /* DDASLLogger.m */; };
+		F4FE882D220CCFF200B79CBE /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151982139A5080014BE79 /* CLIColor.m */; };
+		F4FE882E220CCFF700B79CBE /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1519A2139A5080014BE79 /* DDASLLogCapture.m */; };
+		F4FE882F220CCFFA00B79CBE /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1519C2139A5080014BE79 /* DDFileLogger.m */; };
+		F4FE8830220CCFFF00B79CBE /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1519E2139A5080014BE79 /* DDContextFilterLogFormatter.m */; };
+		F4FE8831220CD00200B79CBE /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A02139A5080014BE79 /* DDDispatchQueueLogFormatter.m */; };
+		F4FE8832220CD00700B79CBE /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A22139A5080014BE79 /* DDMultiFormatter.m */; };
+		F4FE8833220CD00B00B79CBE /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A62139A5080014BE79 /* DDTTYLogger.m */; };
+		F4FE8834220CD01A00B79CBE /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865D212AEA3200CB6DAE /* ACObject.m */; };
+		F4FE8835220CD02000B79CBE /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865E212AEA3200CB6DAE /* ACLFileLogger.m */; };
+		F4FE8836220CD07C00B79CBE /* ACLWildcard.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8633212AEA3200CB6DAE /* ACLWildcard.m */; };
+		F4FE8837220CD08100B79CBE /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8638212AEA3200CB6DAE /* NSURL+Utils.m */; };
+		F4FE8838220CD08700B79CBE /* ACLJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863C212AEA3200CB6DAE /* ACLJobController.m */; };
+		F4FE8839220CD08A00B79CBE /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863D212AEA3200CB6DAE /* NSDate+Utils.m */; };
+		F4FE883A220CD09200B79CBE /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863E212AEA3200CB6DAE /* ACLFileLocker.m */; };
+		F4FE883B220CD09200B79CBE /* ACLExecuteBlockDelayed.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863F212AEA3200CB6DAE /* ACLExecuteBlockDelayed.m */; };
+		F4FE883C220CD09200B79CBE /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8640212AEA3200CB6DAE /* NSString+Utils.m */; };
+		F4FE883D220CD09200B79CBE /* ACLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8641212AEA3200CB6DAE /* ACLLogger.m */; };
+		F4FE883E220CD09200B79CBE /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8642212AEA3200CB6DAE /* NSException+Utils.m */; };
+		F4FE883F220CD09200B79CBE /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8643212AEA3200CB6DAE /* NSStringPunycodeAdditions.m */; };
+		F4FE8840220CD09900B79CBE /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865D212AEA3200CB6DAE /* ACObject.m */; };
+		F4FE8841220CD09900B79CBE /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C865E212AEA3200CB6DAE /* ACLFileLogger.m */; };
+		F4FE8842220CD0A600B79CBE /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1518C2139A5080014BE79 /* DDLog.m */; };
+		F4FE8843220CD0A600B79CBE /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151902139A5080014BE79 /* DDAbstractDatabaseLogger.m */; };
+		F4FE8844220CD0A600B79CBE /* DDOSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151922139A5080014BE79 /* DDOSLogger.m */; };
+		F4FE8845220CD0A600B79CBE /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151932139A5080014BE79 /* DDASLLogger.m */; };
+		F4FE8846220CD0A600B79CBE /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1519A2139A5080014BE79 /* DDASLLogCapture.m */; };
+		F4FE8847220CD0A600B79CBE /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1519C2139A5080014BE79 /* DDFileLogger.m */; };
+		F4FE8848220CD0A600B79CBE /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A62139A5080014BE79 /* DDTTYLogger.m */; };
+		F4FE8849220CD0B000B79CBE /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151982139A5080014BE79 /* CLIColor.m */; };
+		F4FE884A220CD0B000B79CBE /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D1519E2139A5080014BE79 /* DDContextFilterLogFormatter.m */; };
+		F4FE884B220CD0B000B79CBE /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A02139A5080014BE79 /* DDDispatchQueueLogFormatter.m */; };
+		F4FE884C220CD0B000B79CBE /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A22139A5080014BE79 /* DDMultiFormatter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +189,20 @@
 			remoteGlobalIDString = 652169F321231A2300ABF7D0;
 			remoteInfo = BuildElectronApp;
 		};
+		F41DA7E92201C81700C63708 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65720AAA21219AC900B2381C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F41DA7D82201C81700C63708;
+			remoteInfo = AdvancedBlocking;
+		};
+		F4D5901F2201C965002DCC2C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65720AAA21219AC900B2381C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65720AB121219AC900B2381C;
+			remoteInfo = AdGuard;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -140,6 +213,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				65216A16212436EA00ABF7D0 /* AdGuardForSafariExtension.appex in Embed App Extensions */,
+				F41DA7EB2201C81700C63708 /* AdvancedBlocking.appex in Embed App Extensions */,
 				658471792136B373005C74E8 /* AdGuardForSafariBlockerExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -302,10 +376,39 @@
 		65D151A72139A5080014BE79 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		65FA408B215E8B6B000196EC /* LinkButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkButton.h; sourceTree = "<group>"; };
 		65FA408C215E8B6B000196EC /* LinkButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkButton.m; sourceTree = "<group>"; };
+		F41DA7D92201C81700C63708 /* AdvancedBlocking.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdvancedBlocking.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
+		F41DA7E32201C81700C63708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F41DA7E42201C81700C63708 /* script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
+		F41DA7E82201C81700C63708 /* AdvancedBlocking.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdvancedBlocking.entitlements; sourceTree = "<group>"; };
 		F44ABA9821D4CE21004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/SafariExtensionViewController.strings"; sourceTree = "<group>"; };
 		F44ABA9921D4CE21004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		F44ABA9A21D4CE21004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F44ABA9B21D4CE22004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		F47574FF222FF92200DE28C3 /* adv-blocking-content-rules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "adv-blocking-content-rules.json"; sourceTree = "<group>"; };
+		F49E3FE7221F4D72001B9E86 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49E3FE9221F4D77001B9E86 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49E3FEA221F4D79001B9E86 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49E3FEB221F4D7A001B9E86 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49E3FEC221F4D7B001B9E86 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49E3FED221F4D7C001B9E86 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49E3FEE221F4D7D001B9E86 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49E3FEF221F4D7E001B9E86 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		F49E3FF0221F4D80001B9E86 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49E3FF1221F4D82001B9E86 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49E3FF2221F4D83001B9E86 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		F49E3FF3221F4D84001B9E86 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		F49E3FF4221F4D86001B9E86 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49E3FF5221F4D87001B9E86 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49E3FF6221F4D88001B9E86 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49E3FF7221F4D89001B9E86 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		F4D590122201C8D3002DCC2C /* ContentBlockerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerController.swift; sourceTree = "<group>"; };
+		F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerContainer.swift; sourceTree = "<group>"; };
+		F4D5901A2201C965002DCC2C /* AdvancedBlockingUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdvancedBlockingUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4D5901C2201C965002DCC2C /* AdvancedBlockingUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedBlockingUnitTests.swift; sourceTree = "<group>"; };
+		F4D5901E2201C965002DCC2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4F479FB221A05B600A68681 /* extended-css.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "extended-css.js"; sourceTree = "<group>"; };
+		F4FE8817220CCBF700B79CBE /* AdvancedBlocking-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdvancedBlocking-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -339,6 +442,21 @@
 			files = (
 				6584717D2136B7C5005C74E8 /* libshared.a in Frameworks */,
 				6584716E2136B373005C74E8 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F41DA7D62201C81700C63708 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F41DA7DA2201C81700C63708 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4D590172201C965002DCC2C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +579,8 @@
 				65216A04212436EA00ABF7D0 /* Extension */,
 				6584716F2136B373005C74E8 /* BlockerExtension */,
 				65024EA72126C80D00342E3C /* AdGuardTests */,
+				F41DA7DB2201C81700C63708 /* AdvancedBlocking */,
+				F4D5901B2201C965002DCC2C /* AdvancedBlockingUnitTests */,
 				65216A01212436EA00ABF7D0 /* Frameworks */,
 				65720AB321219AC900B2381C /* Products */,
 			);
@@ -474,6 +594,8 @@
 				65024EA62126C80D00342E3C /* AdGuardTests.xctest */,
 				652735B2212D77A3005C35BF /* libshared.a */,
 				6584716D2136B372005C74E8 /* AdGuardForSafariBlockerExtension.appex */,
+				F41DA7D92201C81700C63708 /* AdvancedBlocking.appex */,
+				F4D5901A2201C965002DCC2C /* AdvancedBlockingUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -550,6 +672,32 @@
 				65D151A32139A5080014BE79 /* DDDispatchQueueLogFormatter.h */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F41DA7DB2201C81700C63708 /* AdvancedBlocking */ = {
+			isa = PBXGroup;
+			children = (
+				F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */,
+				F41DA7E32201C81700C63708 /* Info.plist */,
+				F41DA7E42201C81700C63708 /* script.js */,
+				F4F479FB221A05B600A68681 /* extended-css.js */,
+				F41DA7E82201C81700C63708 /* AdvancedBlocking.entitlements */,
+				F4D590122201C8D3002DCC2C /* ContentBlockerController.swift */,
+				F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */,
+				F4FE8817220CCBF700B79CBE /* AdvancedBlocking-Bridging-Header.h */,
+				F49E3FE8221F4D72001B9E86 /* InfoPlist.strings */,
+			);
+			path = AdvancedBlocking;
+			sourceTree = "<group>";
+		};
+		F4D5901B2201C965002DCC2C /* AdvancedBlockingUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				F47574FF222FF92200DE28C3 /* adv-blocking-content-rules.json */,
+				F4D5901C2201C965002DCC2C /* AdvancedBlockingUnitTests.swift */,
+				F4D5901E2201C965002DCC2C /* Info.plist */,
+			);
+			path = AdvancedBlockingUnitTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -665,6 +813,7 @@
 				652169F921231BFB00ABF7D0 /* PBXTargetDependency */,
 				65216A15212436EA00ABF7D0 /* PBXTargetDependency */,
 				658471782136B373005C74E8 /* PBXTargetDependency */,
+				F41DA7EA2201C81700C63708 /* PBXTargetDependency */,
 			);
 			name = AdGuard;
 			productName = AdGuard;
@@ -689,17 +838,54 @@
 			productReference = 6584716D2136B372005C74E8 /* AdGuardForSafariBlockerExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		F41DA7D82201C81700C63708 /* AdvancedBlocking */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F41DA7EC2201C81700C63708 /* Build configuration list for PBXNativeTarget "AdvancedBlocking" */;
+			buildPhases = (
+				F41DA7D52201C81700C63708 /* Sources */,
+				F41DA7D62201C81700C63708 /* Frameworks */,
+				F41DA7D72201C81700C63708 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdvancedBlocking;
+			productName = AdvancedBlocking;
+			productReference = F41DA7D92201C81700C63708 /* AdvancedBlocking.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		F4D590192201C965002DCC2C /* AdvancedBlockingUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4D590212201C965002DCC2C /* Build configuration list for PBXNativeTarget "AdvancedBlockingUnitTests" */;
+			buildPhases = (
+				F4D590162201C965002DCC2C /* Sources */,
+				F4D590172201C965002DCC2C /* Frameworks */,
+				F4D590182201C965002DCC2C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F4D590202201C965002DCC2C /* PBXTargetDependency */,
+			);
+			name = AdvancedBlockingUnitTests;
+			productName = AdvancedBlockingUnitTests;
+			productReference = F4D5901A2201C965002DCC2C /* AdvancedBlockingUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		65720AAA21219AC900B2381C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Adguard Software Ltd";
 				TargetAttributes = {
 					65024EA52126C80C00342E3C = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
 					};
 					652169F321231A2300ABF7D0 = {
 						CreatedOnToolsVersion = 9.4;
@@ -734,6 +920,18 @@
 								enabled = 1;
 							};
 						};
+					};
+					F41DA7D82201C81700C63708 = {
+						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+						};
+					};
+					F4D590192201C965002DCC2C = {
+						CreatedOnToolsVersion = 10.0;
 					};
 				};
 			};
@@ -771,6 +969,8 @@
 				6584716C2136B372005C74E8 /* AdGuardForSafariBlockerExtension */,
 				65024EA52126C80C00342E3C /* AdGuardTests */,
 				652735B1212D77A3005C35BF /* shared */,
+				F41DA7D82201C81700C63708 /* AdvancedBlocking */,
+				F4D590192201C965002DCC2C /* AdvancedBlockingUnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -816,6 +1016,24 @@
 				6582EECA2183435C007DC151 /* InfoPlist.strings in Resources */,
 				65975C9621481540007F766E /* Assets.xcassets in Resources */,
 				658471712136B373005C74E8 /* blocking-content-empry.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F41DA7D72201C81700C63708 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4F479FC221A05B600A68681 /* extended-css.js in Resources */,
+				F49E3FE6221F4D72001B9E86 /* InfoPlist.strings in Resources */,
+				F41DA7E52201C81700C63708 /* script.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4D590182201C965002DCC2C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4757500222FF92200DE28C3 /* adv-blocking-content-rules.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,6 +1101,73 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F41DA7D52201C81700C63708 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4FE8824220CCFAF00B79CBE /* ACLExecuteBlockDelayed.m in Sources */,
+				F4FE882F220CCFFA00B79CBE /* DDFileLogger.m in Sources */,
+				F4D590152201C8F8002DCC2C /* ContentBlockerContainer.swift in Sources */,
+				F4FE8827220CCFB700B79CBE /* NSException+Utils.m in Sources */,
+				F4D590132201C8D3002DCC2C /* ContentBlockerController.swift in Sources */,
+				F4FE882C220CCFCC00B79CBE /* DDASLLogger.m in Sources */,
+				F4FE881F220CCF9B00B79CBE /* ACLWildcard.m in Sources */,
+				F4FE8828220CCFBA00B79CBE /* NSStringPunycodeAdditions.m in Sources */,
+				F4FE882D220CCFF200B79CBE /* CLIColor.m in Sources */,
+				F4FE8832220CD00700B79CBE /* DDMultiFormatter.m in Sources */,
+				F4FE882E220CCFF700B79CBE /* DDASLLogCapture.m in Sources */,
+				F4FE8831220CD00200B79CBE /* DDDispatchQueueLogFormatter.m in Sources */,
+				F4FE8826220CCFB400B79CBE /* ACLLogger.m in Sources */,
+				F4FE8835220CD02000B79CBE /* ACLFileLogger.m in Sources */,
+				F4FE8822220CCFA700B79CBE /* NSDate+Utils.m in Sources */,
+				F4FE8821220CCFA400B79CBE /* ACLJobController.m in Sources */,
+				F4FE8825220CCFB100B79CBE /* NSString+Utils.m in Sources */,
+				F4FE8823220CCFAB00B79CBE /* ACLFileLocker.m in Sources */,
+				F4FE8830220CCFFF00B79CBE /* DDContextFilterLogFormatter.m in Sources */,
+				F4FE8833220CD00B00B79CBE /* DDTTYLogger.m in Sources */,
+				F4FE8829220CCFC200B79CBE /* DDLog.m in Sources */,
+				F4FE882B220CCFC800B79CBE /* DDOSLogger.m in Sources */,
+				F4FE8820220CCFA000B79CBE /* NSURL+Utils.m in Sources */,
+				F41DA7DD2201C81700C63708 /* SafariExtensionHandler.swift in Sources */,
+				F4FE8834220CD01A00B79CBE /* ACObject.m in Sources */,
+				F4FE882A220CCFC500B79CBE /* DDAbstractDatabaseLogger.m in Sources */,
+				F4FE881B220CCF4200B79CBE /* AESharedResources.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4D590162201C965002DCC2C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4FE8840220CD09900B79CBE /* ACObject.m in Sources */,
+				F4FE8849220CD0B000B79CBE /* CLIColor.m in Sources */,
+				F4D590242201D097002DCC2C /* ContentBlockerContainer.swift in Sources */,
+				F4FE8841220CD09900B79CBE /* ACLFileLogger.m in Sources */,
+				F4FE8839220CD08A00B79CBE /* NSDate+Utils.m in Sources */,
+				F4FE8845220CD0A600B79CBE /* DDASLLogger.m in Sources */,
+				F4FE883F220CD09200B79CBE /* NSStringPunycodeAdditions.m in Sources */,
+				F4FE883E220CD09200B79CBE /* NSException+Utils.m in Sources */,
+				F4FE883A220CD09200B79CBE /* ACLFileLocker.m in Sources */,
+				F4FE884A220CD0B000B79CBE /* DDContextFilterLogFormatter.m in Sources */,
+				F4FE881C220CCF4400B79CBE /* AESharedResources.m in Sources */,
+				F4FE8837220CD08100B79CBE /* NSURL+Utils.m in Sources */,
+				F4FE884B220CD0B000B79CBE /* DDDispatchQueueLogFormatter.m in Sources */,
+				F4FE8847220CD0A600B79CBE /* DDFileLogger.m in Sources */,
+				F4FE8836220CD07C00B79CBE /* ACLWildcard.m in Sources */,
+				F4FE883D220CD09200B79CBE /* ACLLogger.m in Sources */,
+				F4FE8838220CD08700B79CBE /* ACLJobController.m in Sources */,
+				F4FE8842220CD0A600B79CBE /* DDLog.m in Sources */,
+				F4FE8848220CD0A600B79CBE /* DDTTYLogger.m in Sources */,
+				F4FE8846220CD0A600B79CBE /* DDASLLogCapture.m in Sources */,
+				F4FE884C220CD0B000B79CBE /* DDMultiFormatter.m in Sources */,
+				F4FE8844220CD0A600B79CBE /* DDOSLogger.m in Sources */,
+				F4FE883C220CD09200B79CBE /* NSString+Utils.m in Sources */,
+				F4D5901D2201C965002DCC2C /* AdvancedBlockingUnitTests.swift in Sources */,
+				F4FE8843220CD0A600B79CBE /* DDAbstractDatabaseLogger.m in Sources */,
+				F4FE883B220CD09200B79CBE /* ACLExecuteBlockDelayed.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -920,6 +1205,16 @@
 			isa = PBXTargetDependency;
 			target = 652169F321231A2300ABF7D0 /* BuildElectronApp */;
 			targetProxy = 65FA4088215CE23B000196EC /* PBXContainerItemProxy */;
+		};
+		F41DA7EA2201C81700C63708 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F41DA7D82201C81700C63708 /* AdvancedBlocking */;
+			targetProxy = F41DA7E92201C81700C63708 /* PBXContainerItemProxy */;
+		};
+		F4D590202201C965002DCC2C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65720AB121219AC900B2381C /* AdGuard */;
+			targetProxy = F4D5901F2201C965002DCC2C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1018,12 +1313,37 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		F49E3FE8221F4D72001B9E86 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F49E3FE7221F4D72001B9E86 /* en */,
+				F49E3FE9221F4D77001B9E86 /* ru */,
+				F49E3FEA221F4D79001B9E86 /* de */,
+				F49E3FEB221F4D7A001B9E86 /* fr */,
+				F49E3FEC221F4D7B001B9E86 /* es */,
+				F49E3FED221F4D7C001B9E86 /* ja */,
+				F49E3FEE221F4D7D001B9E86 /* da */,
+				F49E3FEF221F4D7E001B9E86 /* zh-Hans */,
+				F49E3FF0221F4D80001B9E86 /* it */,
+				F49E3FF1221F4D82001B9E86 /* pl */,
+				F49E3FF2221F4D83001B9E86 /* pt-BR */,
+				F49E3FF3221F4D84001B9E86 /* pt-PT */,
+				F49E3FF4221F4D86001B9E86 /* cs */,
+				F49E3FF5221F4D87001B9E86 /* sv */,
+				F49E3FF6221F4D88001B9E86 /* tr */,
+				F49E3FF7221F4D89001B9E86 /* zh-Hant */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		65024EAB2126C80D00342E3C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1037,12 +1357,17 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuardTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Advanced Blocking/AdGuardTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
 		65024EAC2126C80D00342E3C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1056,6 +1381,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuardTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Advanced Blocking/AdGuardTests-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1267,6 +1594,7 @@
 		65720AC421219ACB00B2381C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1286,6 +1614,7 @@
 		65720AC521219ACB00B2381C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1339,6 +1668,108 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		F41DA7ED2201C81700C63708 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
+				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = AdvancedBlocking/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuard.AdvancedBlocking;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "AdvancedBlocking/AdvancedBlocking-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		F41DA7EE2201C81700C63708 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
+				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = AdvancedBlocking/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuard.AdvancedBlocking;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "AdvancedBlocking/AdvancedBlocking-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		F4D590222201C965002DCC2C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2UQZLU4666;
+				INFOPLIST_FILE = AdvancedBlockingUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = mizzick.AdvancedBlockingUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		F4D590232201C965002DCC2C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2UQZLU4666;
+				INFOPLIST_FILE = AdvancedBlockingUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = mizzick.AdvancedBlockingUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1404,6 +1835,24 @@
 			buildConfigurations = (
 				6584717A2136B373005C74E8 /* Debug */,
 				6584717B2136B373005C74E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F41DA7EC2201C81700C63708 /* Build configuration list for PBXNativeTarget "AdvancedBlocking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F41DA7ED2201C81700C63708 /* Debug */,
+				F41DA7EE2201C81700C63708 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F4D590212201C965002DCC2C /* Build configuration list for PBXNativeTarget "AdvancedBlockingUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4D590222201C965002DCC2C /* Debug */,
+				F4D590232201C965002DCC2C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

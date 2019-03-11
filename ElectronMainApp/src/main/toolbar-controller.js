@@ -94,7 +94,8 @@ module.exports = (() => {
         //Subscribe to application events
         listeners.addListener(function (event, info) {
             if (event === events.CONTENT_BLOCKER_UPDATE_REQUIRED) {
-                setContentBlockingJson(JSON.stringify(info));
+                setContentBlockingJson(JSON.stringify(info.contentBlocker));
+                setAdvancedBlockingJson(JSON.stringify(info.advancedBlocking));
             } else if (event === events.UPDATE_USER_FILTER_RULES) {
                 applicationApi.getUserFilterRules((rules) => {
                     setUserFilter(rules);
@@ -124,6 +125,23 @@ module.exports = (() => {
             }, 1000);
         });
 
+    };
+
+    /**
+     * Sets advanced blocking json
+     * @param jsonString
+     */
+    const setAdvancedBlockingJson = (jsonString) => {
+        safariToolbar.busyStatus(true);
+        safariToolbar.setAdvancedBlockingJson(jsonString, (result) => {
+            log.info('Advanced-blocking set result: ' + result);
+
+            //TODO: Handle error result
+
+            setTimeout(() => {
+                safariToolbar.busyStatus(false);
+            }, 1000);
+        });
     };
 
     /**

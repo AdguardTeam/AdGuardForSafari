@@ -38,6 +38,9 @@ EXTENSION="${SRCROOT}/Extension"
 # Project root directory of Blocker Extension
 BLOCKEREXTENSION="${SRCROOT}/BlockerExtension"
 
+# Project root directory of Advanced Blocking Extension
+ADVANCED_BLOCKING_EXTENSION="${SRCROOT}/AdvancedBlocking"
+
 # XIB FILES LIST PATH
 XIBFILESLIST="${SCRIPTDIR}/Resources/xib-files-list.txt"
 
@@ -114,6 +117,11 @@ find "${BLOCKEREXTENSION}" -name \*.m | xargs genstrings -o "${BLOCKEREXTENSION}
 cp -fv "${BLOCKEREXTENSION}/en.lproj/${file}" "${PROJECT_TEMP_DIR}/blockerextension_${file}"
 python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}/blockerextension_${file}" -r IOS_STRINGS
 # rm "${PROJECT_TEMP_DIR}/blockerextension_${file}"
+
+find "${ADVANCED_BLOCKING_EXTENSION}" -name \*.m | xargs genstrings -o "${ADVANCED_BLOCKING_EXTENSION}"
+cp -fv "${ADVANCED_BLOCKING_EXTENSION}/en.lproj/${file}" "${PROJECT_TEMP_DIR}/adv_blocking_extension_${file}"
+python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}/adv_blocking_extension_${file}" -r IOS_STRINGS
+# rm "${PROJECT_TEMP_DIR}/adv_blocking_extension_${file}"
 
 echo "Done"
 echo "Upload finished InfoPlist files"

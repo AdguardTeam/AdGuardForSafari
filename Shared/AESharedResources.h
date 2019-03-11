@@ -145,9 +145,35 @@ extern NSString * const AEDefaultsLastReportUrl;
  */
 + (void)setBlockingContentRulesJson:(NSData *)jsonData completion:(void (^)(void))completion;
 /**
+ Saves advanced blocking content rules JSON in shared storage.
+ Completion is executed on global concurent queue.
+
+ @param jsonData Rules json, may be nil.
+ @param completion May be nil.
+ */
++ (void)setAdvancedBlockingContentRulesJson:(NSData *)jsonData completion:(void (^)(void))completion;
+/**
+ Notifies advanced blocking extension
+ */
++ (void)notifyAdvancedBlockingExtension;
+/**
+ Register listener for advanced blocking extension.
+ 
+ @param block Performed on internal thread when catched notification.
+ */
++ (void)setListenerOnAdvancedBlocking:(AESListenerBlock)block;
+/**
  Gets URL of the blocking content rules JSON from shared storage.
  */
 + (NSURL *)blockingContentRulesUrl;
+/**
+ Gets URL of the advanced blocking content rules JSON from shared storage.
+ */
++ (NSURL *)advancedBlockingContentRulesUrl;
+/**
+ Gets URL string of the advanced blocking content rules JSON from shared storage.
+ */
++ (NSString *)advancedBlockingContentRulesUrlString;
 /**
  Saves the whitelist domains in shared storage.
  Completion is executed on global concurent queue.
