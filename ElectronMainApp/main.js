@@ -116,12 +116,15 @@ app.on('ready', (() => {
     startup.init(showWindow);
     uiEventListener.init();
 
+    // As we don't have an option to detect if app was opened at login,
+    // for now we gonna open it in foreground all the time.
+    // https://github.com/adguardteam/adguardforsafari/issues/118
+    createWindow();
+    uiEventListener.register(mainWindow);
+
     mainMenuController.initMenu();
     tray = trayController.initTray(showWindow);
     toolbarController.initToolbarController(showWindow);
-    if (process.platform === 'darwin') {
-        app.dock.hide();
-    }
 }));
 
 /**
@@ -132,8 +135,7 @@ app.on('window-all-closed', () => {
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
         app.quit();
-    }
-    else {
+    } else {
         app.dock.hide();
     }
 });
