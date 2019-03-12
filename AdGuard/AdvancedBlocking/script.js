@@ -11,6 +11,10 @@
  * @param {string} scripts Scripts array to execute
  */
 const executeScripts = function (scripts) {
+    // Wrap with try catch
+    scripts.unshift('( function () { try {');
+    scripts.push("} catch (ex) { console.error('Error executing AG js: ' + ex); } })();");
+
     const scriptTag = document.createElement('script');
     scriptTag.setAttribute('type', 'text/javascript');
     scriptTag.textContent = scripts.join('\r\n');
