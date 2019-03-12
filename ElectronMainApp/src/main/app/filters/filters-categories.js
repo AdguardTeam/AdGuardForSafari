@@ -1,6 +1,5 @@
 const subscriptions = require('./subscriptions');
 const tagService = require('./filters-tags');
-const config = require('config');
 const collections = require('../utils/collections');
 const {app} = require('electron');
 
@@ -93,12 +92,7 @@ module.exports = (() => {
     };
 
     // https://github.com/AdguardTeam/AdGuardForSafari/issues/57
-    const isOfferedFilter = (filter, langSuitableFilters, safariFilterId) => {
-        // we always enable safari filter in safari extension
-        if (safariFilterId === filter.filterId) {
-            return true;
-        }
-
+    const isOfferedFilter = (filter, langSuitableFilters) => {
         // if filter doesn't has recommended tag we don't enable it
         if (!tagService.isRecommendedFilter(filter)) {
             return false;
@@ -123,7 +117,6 @@ module.exports = (() => {
      */
     const getRecommendedFilterIdsByGroupId = groupId => {
         const metadata = getFiltersMetadata();
-        const filtersId = config.get('AntiBannerFiltersId');
         const langSuitableFilters = subscriptions.getFilterIdsForLanguage(app.getLocale());
 
         const result = [];
@@ -131,7 +124,7 @@ module.exports = (() => {
             const category = metadata.categories[i];
             if (category.groupId === groupId) {
                 category.filters.forEach(filter => {
-                    if (isOfferedFilter(filter, langSuitableFilters, filtersId.SAFARI_FILTER_ID)) {
+                    if (isOfferedFilter(filter, langSuitableFilters)) {
                         result.push(filter.filterId);
                     }
                 });
