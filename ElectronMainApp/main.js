@@ -1,6 +1,7 @@
 const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
 const path = require('path');
+const os = require('os');
 
 /* Reconfigure path to config */
 process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
@@ -116,12 +117,25 @@ app.on('ready', (() => {
     startup.init(showWindow);
     uiEventListener.init();
 
+    // We don't have a proper way to detect if app was opened at login,
+    // so as a workaround for now we will take system uptime as an indicator.
+    // Less than a minute from login means the app was launched at login.
+    // https://github.com/AdguardTeam/AdGuardForSafari/issues/141
+    // https://github.com/adguardteam/adguardforsafari/issues/118
+    const isOpenedAtLogin = os.uptime() < 60;
+    if (!isOpenedAtLogin) {
+        createWindow();
+        uiEventListener.register(mainWindow);
+    } else {
+        // Open in background at login
+        if (process.platform === 'darwin') {
+            app.dock.hide();
+        }
+    }
+
     mainMenuController.initMenu();
     tray = trayController.initTray(showWindow);
     toolbarController.initToolbarController(showWindow);
-    if (process.platform === 'darwin') {
-        app.dock.hide();
-    }
 }));
 
 /**
@@ -132,8 +146,7 @@ app.on('window-all-closed', () => {
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
         app.quit();
-    }
-    else {
+    } else {
         app.dock.hide();
     }
 });
