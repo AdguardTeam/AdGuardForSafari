@@ -1,6 +1,7 @@
 const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
 const path = require('path');
+const os = require('os');
 
 /* Reconfigure path to config */
 process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
@@ -116,11 +117,21 @@ app.on('ready', (() => {
     startup.init(showWindow);
     uiEventListener.init();
 
-    // As we don't have an option to detect if app was opened at login,
-    // for now we gonna open it in foreground all the time.
-    // https://github.com/adguardteam/adguardforsafari/issues/118
-    createWindow();
-    uiEventListener.register(mainWindow);
+    // We don't have a proper way to detect if app was opened at login,
+    // so as a workaround for now we will take system uptime as an indicator.
+    // Less than a minute from login means the app was launched at login.
+    // https://github.com/AdguardTeam/AdGuardForSafari/issues/141
+    const isOpenedAtLogin = os.uptime() < 60;
+    if (isOpenedAtLogin) {
+        // Open in foreground at login
+        // https://github.com/adguardteam/adguardforsafari/issues/118
+        createWindow();
+        uiEventListener.register(mainWindow);
+    } else {
+        if (process.platform === 'darwin') {
+            app.dock.hide();
+        }
+    }
 
     mainMenuController.initMenu();
     tray = trayController.initTray(showWindow);
