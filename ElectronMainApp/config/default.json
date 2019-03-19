@@ -18,7 +18,8 @@
     "AD_BLOCKING_ID": 1,
     "PRIVACY_ID": 2,
     "OTHER_ID": 6,
-    "LANGUAGE_SPECIFIC_ID": 7
+    "LANGUAGE_SPECIFIC_ID": 7,
+    "CUSTOM_FILTERS_GROUP_ID": 0
   },
   "backendUrl": "https://chrome.adtidy.org",
   "backendApiKey": "4DDBE80A3DA94D819A00523252FB6380",
