@@ -121,13 +121,13 @@ app.on('ready', (() => {
     // so as a workaround for now we will take system uptime as an indicator.
     // Less than a minute from login means the app was launched at login.
     // https://github.com/AdguardTeam/AdGuardForSafari/issues/141
+    // https://github.com/adguardteam/adguardforsafari/issues/118
     const isOpenedAtLogin = os.uptime() < 60;
-    if (isOpenedAtLogin) {
-        // Open in foreground at login
-        // https://github.com/adguardteam/adguardforsafari/issues/118
+    if (!isOpenedAtLogin) {
         createWindow();
         uiEventListener.register(mainWindow);
     } else {
+        // Open in background at login
         if (process.platform === 'darwin') {
             app.dock.hide();
         }
