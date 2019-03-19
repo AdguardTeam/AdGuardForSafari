@@ -21,10 +21,11 @@ module.exports = (() => {
             title,
             subtitle,
             body,
-            onClick
+            onClick,
+            silent
         } = params;
 
-        let notification = new Notification({ title, subtitle, body });
+        let notification = new Notification({ title, subtitle, body, silent });
 
         if (onClick) {
             notification.addListener("click", (e) => {
@@ -50,9 +51,9 @@ module.exports = (() => {
             .replace('$1', options.currentVersion);
         const subtitle = options.isMajorUpdate ?
             i18n.__("options_popup_version_update_description_major.message") :
-            i18n.__("options_popup_version_update_description_minor.message")
+            i18n.__("options_popup_version_update_description_minor.message");
 
-        showNotification({ title, subtitle });
+        showNotification({ title, subtitle, silent: false });
     };
 
     const getFiltersUpdateResultMessage = (success, updatedFilters) => {
@@ -132,7 +133,8 @@ module.exports = (() => {
         showNotification({ 
             title,
             subtitle: text,
-            onClick: getShowFiltersTabOnClick(showMainWindow)
+            onClick: getShowFiltersTabOnClick(showMainWindow),
+            silent: true
         });
     };
 
@@ -148,7 +150,8 @@ module.exports = (() => {
         showNotification({ 
             title,
             subtitle,
-            onClick: getShowFiltersTabOnClick(showMainWindow)
+            onClick: getShowFiltersTabOnClick(showMainWindow),
+            silent: false
         });
     };
 
@@ -166,7 +169,8 @@ module.exports = (() => {
             title,
             subtitle,
             body,
-            onClick: getShowUserFilterTabOnClick(showMainWindow)
+            onClick: getShowUserFilterTabOnClick(showMainWindow),
+            silent: true
         });
     };
 
