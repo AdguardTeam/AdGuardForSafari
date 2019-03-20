@@ -1,3 +1,4 @@
+const config = require('config');
 const serviceClient = require('./service-client');
 const i18n = require('../utils/i18n');
 const versionUtils = require('../utils/version');
@@ -21,7 +22,7 @@ module.exports = (function () {
      *
      * @type {number}
      */
-    const CUSTOM_FILTERS_GROUP_ID = 0;
+    const CUSTOM_FILTERS_GROUP_ID = config.get('AntiBannerFilterGroupsId').CUSTOM_FILTERS_GROUP_ID;
 
     /**
      * Custom filters group display number
@@ -480,7 +481,7 @@ module.exports = (function () {
     const getGroup = (groupId) => groupsMap[groupId];
 
     /**
-     * If group has enabled status true or false
+     * If group's status was ever enabled or disabled
      *
      * @param groupId
      * @returns {boolean}

@@ -151,10 +151,14 @@ module.exports = (() => {
         filter.enabled = true;
 
         /**
-         * We enable group if it was never enabled or disabled early
+         * We enable group if it wasn't ever enabled or disabled
+         * with exceptions of custom filters and SEARCH_AND_SELF_PROMO_FILTER_ID
          */
         const groupId = filter.groupId;
-        if (!subscriptions.groupHasEnabledStatus(filter.groupId)) {
+        if (!subscriptions.groupHasEnabledStatus(groupId)) {
+            enableGroup(groupId);
+        } else if (filterId === config.get('AntiBannerFiltersId').SEARCH_AND_SELF_PROMO_FILTER_ID
+            || groupId === config.get('AntiBannerFilterGroupsId').CUSTOM_FILTERS_GROUP_ID) {
             enableGroup(groupId);
         }
 
