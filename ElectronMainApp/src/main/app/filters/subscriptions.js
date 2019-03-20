@@ -212,23 +212,9 @@ module.exports = (function () {
             const tags = [0];
             let rulesCount = rules.filter(rule => rule.trim().indexOf('!') !== 0).length;
 
-            // Check if filter from this url was added before
-            let filter = filters.find(function (f) {
-                return f.customUrl === url;
-            });
-
-            if (filter) {
-                if (version && !versionUtils.isGreaterVersion(version, filter.version)) {
-                    log.warn('Update version is not greater');
-                    callback();
-                    return;
-                }
-            }
-
-            filter = new SubscriptionFilter(null, groupId, name, description, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
+            const filter = new SubscriptionFilter(null, groupId, name, description, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
 
             filter.loaded = true;
-            // custom filters have special fields
             filter.customUrl = url;
             filter.rulesCount = rulesCount;
 
