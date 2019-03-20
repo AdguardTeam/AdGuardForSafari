@@ -189,20 +189,72 @@ module.exports = (function () {
         return max >= 1000 ? max + 1 : 1000;
     };
 
+    const getCustomFilterInfo = (url, options, callback) => {
+        const { title } = options;
+
+        serviceClient.loadFilterRulesBySubscriptionUrl(url, function (rules) {
+            let {
+                name,
+                description,
+                homepage,
+                version,
+                expires,
+                timeUpdated,
+            } = parseFilterDataFromHeader(rules);
+
+            name = name || title;
+            timeUpdated = timeUpdated || new Date().toISOString();
+
+            const groupId = CUSTOM_FILTERS_GROUP_ID;
+            const subscriptionUrl = url;
+            const languages = [];
+            const displayNumber = 0;
+            const tags = [0];
+            let rulesCount = rules.filter(rule => rule.trim().indexOf('!') !== 0).length;
+
+            // Check if filter from this url was added before
+            let filter = filters.find(function (f) {
+                return f.customUrl === url;
+            });
+
+            if (filter) {
+                if (version && !versionUtils.isGreaterVersion(version, filter.version)) {
+                    log.warn('Update version is not greater');
+                    callback();
+                    return;
+                }
+            }
+
+            filter = new SubscriptionFilter(null, groupId, name, description, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
+
+            filter.loaded = true;
+            // custom filters have special fields
+            filter.customUrl = url;
+            filter.rulesCount = rulesCount;
+
+            callback({ filter });
+        }, function (cause) {
+            log.error(`Error download filter by url ${url}, cause: ${cause || ''}`);
+            callback();
+        });
+    };
+
     /**
      * Adds or updates custom filter
      *
      * @param url subscriptionUrl
+     * @param options
      * @param callback
      */
-    const updateCustomFilter = (url, callback) => {
+    const updateCustomFilter = (url, options, callback) => {
+        const { title } = options;
 
         serviceClient.loadFilterRulesBySubscriptionUrl(url, function (rules) {
             const filterData = parseFilterDataFromHeader(rules);
 
             const filterId = addFilterId();
             const groupId = CUSTOM_FILTERS_GROUP_ID;
-            const defaultName = filterData.name;
+            const defaultName = title;
             const defaultDescription = filterData.description;
             const homepage = filterData.homepage;
             const version = filterData.version;
@@ -221,7 +273,7 @@ module.exports = (function () {
 
             if (filter) {
                 if (version && !versionUtils.isGreaterVersion(version, filter.version)) {
-                    //Update version is not greater
+                    log.warn('Update version is not greater');
                     callback();
                     return;
                 }
@@ -528,6 +580,7 @@ module.exports = (function () {
         getFilter: getFilter,
         createSubscriptionFilterFromJSON: createSubscriptionFilterFromJSON,
         updateCustomFilter: updateCustomFilter,
+        getCustomFilterInfo: getCustomFilterInfo,
         removeCustomFilter: removeCustomFilter,
     };
 

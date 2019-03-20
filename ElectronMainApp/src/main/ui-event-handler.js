@@ -68,8 +68,16 @@ module.exports.init = function () {
                 filters.removeFilter(message.filterId);
                 break;
             case 'loadCustomFilterInfo':
-                filters.loadCustomFilter(message.url, (filter) => event.sender.send('loadCustomFilterInfoResponse', filter),
-                    () => event.sender.send('loadCustomFilterInfoResponse', null));
+                filters.loadCustomFilterInfo(message.url, { title: message.title },
+                    (filter) => event.sender.send('loadCustomFilterInfoResponse', filter),
+                    () => event.sender.send('loadCustomFilterInfoResponse', null)
+                );
+                break;
+            case 'subscribeToCustomFilter':
+                const { url, title } = message;
+                filters.subscribeToCustomFilter(url, { title }, (filter) => {
+                    filters.addAndEnableFilters([filter.filterId]);
+                });
                 break;
             case 'checkContentBlockerExtension':
                 safariToolbar.extensionContentBlockerState((result) => {

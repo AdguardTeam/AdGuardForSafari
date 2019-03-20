@@ -361,10 +361,11 @@ module.exports = (() => {
      * These custom filters will have special attribute customUrl, from there it could be downloaded and updated.
      *
      * @param url custom url, there rules are
+     * @param options object containing title of custom filter
      * @param successCallback
      * @param errorCallback
      */
-    const loadCustomFilter = (url, successCallback, errorCallback) => {
+    const subscribeToCustomFilter = (url, options, successCallback, errorCallback) => {
         log.info('Downloading custom filter from {0}', url);
 
         errorCallback = errorCallback || function () { };
@@ -374,7 +375,7 @@ module.exports = (() => {
             return;
         }
 
-        subscriptions.updateCustomFilter(url, filterId => {
+        subscriptions.updateCustomFilter(url, options, filterId => {
             if (filterId) {
                 log.info('Custom filter info downloaded');
 
@@ -386,6 +387,36 @@ module.exports = (() => {
             } else {
                 errorCallback();
             }
+        });
+    };
+
+    /**
+     * Loads custom filter info from url, but doesn't save filter to storage
+     *
+     * @param url
+     * @param options
+     * @param successCallback
+     * @param errorCallback
+     */
+    const loadCustomFilterInfo = (url, options, successCallback, errorCallback) => {
+        log.info(`Downloading custom filter info from ${url}`);
+
+        errorCallback = errorCallback || function () { };
+
+        if (!url) {
+            errorCallback();
+            return;
+        }
+
+        subscriptions.getCustomFilterInfo(url, options, (result = {}) => {
+            const { error, filter } = result;
+            if (filter) {
+                log.info('Custom filter data downloaded');
+                successCallback(filter);
+                return;
+            }
+
+            errorCallback(error);
         });
     };
 
@@ -406,7 +437,8 @@ module.exports = (() => {
         disableFiltersGroup,
 
         offerGroupsAndFilters,
-        loadCustomFilter,
+        subscribeToCustomFilter,
+        loadCustomFilterInfo,
 
         checkAntiBannerFiltersUpdate,
     };
