@@ -1252,6 +1252,32 @@ var jsonFromFilters = (function () {
         'use strict';
 
         /**
+         * Filters unsupported rules from third-party sources
+         *
+         * @param ruleText
+         */
+        const filterUnsupportedRules = function (ruleText) {
+            // uBO HTML filters
+            if (ruleText.includes('##^')) {
+                return false;
+            }
+
+            // uBO scriptlet injections
+            if (ruleText.includes('##script:inject(') || ruleText.includes('##+js(')) {
+                return false;
+            }
+
+            // Check ABP-snippets
+            if (ruleText.includes('#$#')) {
+                if (!/#\$#.+{.*}\s*$/.test(ruleText)) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+
+        /**
          * Method that parses rule text and creates object of a suitable class.
          *
          * @param ruleText Rule text
@@ -1275,6 +1301,10 @@ var jsonFromFilters = (function () {
                     StringUtils.contains(ruleText, api.FilterRule.MASK_JS_RULE)) {
                     // Empty or comment, ignore
                     // Content rules are not supported
+                    return null;
+                }
+
+                if (!filterUnsupportedRules(ruleText)) {
                     return null;
                 }
 
