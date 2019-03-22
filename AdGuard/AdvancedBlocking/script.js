@@ -36,7 +36,7 @@ const applyScripts = function (scripts) {
     }
 
     console.log('(AdGuard Advanced Blocking) scripts length: ' + scripts.length);
-    executeScripts(scripts);
+    executeScripts(scripts.reverse());
 };
 
 /**
@@ -54,7 +54,7 @@ const applyExtendedCss = function (extendedCss) {
         styleSheet: extendedCss
             .filter(s => s.length > 0)
             .map(s => s.trim())
-            .map(s => s[s.length] !== '}' ? `${s} {display:none!important;}` : s)
+            .map(s => s[s.length - 1] !== '}' ? `${s} {display:none!important;}` : s)
             .join("\n")
     });
     extcss.apply();

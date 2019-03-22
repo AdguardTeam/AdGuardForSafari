@@ -1,6 +1,6 @@
 /**
  * AdGuard -> Safari Content Blocker converter
- * Version 4.0.1
+ * Version 4.0.2
  * License: https://github.com/AdguardTeam/SafariContentBlockerConverterCompiler/blob/master/LICENSE
  */
 
@@ -1252,6 +1252,32 @@ var jsonFromFilters = (function () {
         'use strict';
 
         /**
+         * Filters unsupported rules from third-party sources
+         *
+         * @param ruleText
+         */
+        const filterUnsupportedRules = function (ruleText) {
+            // uBO HTML filters
+            if (ruleText.includes('##^')) {
+                return false;
+            }
+
+            // uBO scriptlet injections
+            if (ruleText.includes('##script:inject(') || ruleText.includes('##+js(')) {
+                return false;
+            }
+
+            // Check ABP-snippets
+            if (ruleText.includes('#$#')) {
+                if (!/#\$#.+{.*}\s*$/.test(ruleText)) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+
+        /**
          * Method that parses rule text and creates object of a suitable class.
          *
          * @param ruleText Rule text
@@ -1275,6 +1301,10 @@ var jsonFromFilters = (function () {
                     StringUtils.contains(ruleText, api.FilterRule.MASK_JS_RULE)) {
                     // Empty or comment, ignore
                     // Content rules are not supported
+                    return null;
+                }
+
+                if (!filterUnsupportedRules(ruleText)) {
                     return null;
                 }
 
@@ -2393,7 +2423,7 @@ var jsonFromFilters = (function () {
         /**
          * Safari content blocking format rules converter.
          */
-        const CONVERTER_VERSION = '4.0.1';
+        const CONVERTER_VERSION = '4.0.2';
         // Max number of CSS selectors per rule (look at compactCssRules function)
         const MAX_SELECTORS_PER_WIDE_RULE = 250;
 
@@ -2731,12 +2761,6 @@ var jsonFromFilters = (function () {
              * @return {*}
              */
             const convertCssFilterRule = rule => {
-
-                if (rule.isInjectRule && rule.isInjectRule === true) {
-                    // There is no way to convert these rules to safari format
-                    throw new Error("CSS-injection rule " + rule.ruleText + " cannot be converted");
-                }
-
                 const result = {
                     trigger: {
                         "url-filter": URL_FILTER_CSS_RULES
@@ -2746,7 +2770,7 @@ var jsonFromFilters = (function () {
                     action: {}
                 };
 
-                if (rule.extendedCss) {
+                if (rule.extendedCss || (rule.isInjectRule && rule.isInjectRule === true)) {
                     result.action.type = "css";
                     result.action.css = rule.cssSelector;
                 } else {
