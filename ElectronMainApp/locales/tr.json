@@ -160,8 +160,8 @@
     },
     "options_popup_update_updated_more": {
         "message": {
-            "one": "%s filter updated: $2",
-            "other": "%s filtre g\u00fcncellendi : $2"
+            "one": "%s filtre g\u00fcncellendi: $2",
+            "other": "%s filtre g\u00fcncellendi: $2"
         }
     },
     "options_popup_version_update_title": {
@@ -277,7 +277,7 @@
     },
     "options_filters_update_period_number": {
         "message": {
-            "one": "Every hour",
+            "one": "Her saat",
             "other": "Her %s saatte"
         }
     },
