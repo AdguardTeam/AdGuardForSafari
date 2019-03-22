@@ -36,7 +36,7 @@ const applyScripts = function (scripts) {
     }
 
     console.log('(AdGuard Advanced Blocking) scripts length: ' + scripts.length);
-    executeScripts(scripts);
+    executeScripts(scripts.reverse());
 };
 
 /**
