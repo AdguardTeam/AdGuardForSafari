@@ -118,6 +118,10 @@ static AESListenerBlock _onAdvancedBlockingBlock;
     return AG_EXTENSION_BUNDLEID;
 }
 
++ (NSString *)advancedBlockingBundleId {
+    return AG_ADVANCED_BLOCKING_BUNDLEID;
+}
+
 + (void)initLogger {
     [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
 #if DEBUG

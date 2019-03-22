@@ -54,6 +54,11 @@ extern NSString * const AEDefaultsLastReportUrl;
 @property (class, readonly) NSString *extensionBundleId;
 
 /**
+ Bundle id of Advanced Blocking Safari app extension.
+ */
+@property (class, readonly) NSString *advancedBlockingBundleId;
+
+/**
  Initializes logger. After that we may use log macros.
  */
 + (void)initLogger;

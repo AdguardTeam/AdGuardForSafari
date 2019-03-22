@@ -84,9 +84,16 @@ module.exports.init = function () {
                     event.sender.send('checkContentBlockerExtensionResponse', result);
                 });
                 break;
-            case 'checkSafariIconExtension':
+            case 'checkSafariExtensions':
                 safariToolbar.extensionSafariIconState((result) => {
-                    event.sender.send('checkSafariIconExtensionResponse', result);
+                    if (!result) {
+                        event.sender.send('checkSafariExtensionsResponse', result);
+                        return;
+                    }
+
+                    safariToolbar.extensionAdvancedBlockingState((result) => {
+                        event.sender.send('checkSafariExtensionsResponse', result);
+                    });
                 });
                 break;
             case 'openSafariExtensionsPrefs':

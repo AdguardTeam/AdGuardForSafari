@@ -1509,7 +1509,7 @@ PageController.prototype = {
         });
 
         this._initBoardingScreen();
-        this._initSafariIconMessage();
+        this._initSafariExtensionsMessage();
     },
 
     _initBoardingScreen: function () {
@@ -1530,17 +1530,17 @@ PageController.prototype = {
         window.addEventListener("focus", () => this._checkContentBlockerExtension());
     },
 
-    _initSafariIconMessage: function() {
-        const enableIconNotification = document.getElementById('enableIconNotification');
-        ipcRenderer.on('checkSafariIconExtensionResponse', (e, arg) => {
-            enableIconNotification.style.display = arg ? 'none' : 'block';
+    _initSafariExtensionsMessage: function() {
+        const enableExtensionsNotification = document.getElementById('enableExtensionsNotification');
+        ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
+            enableExtensionsNotification.style.display = arg ? 'none' : 'block';
         });
 
-        this._checkSafariIconExtension();
-        window.addEventListener("focus", () => this._checkSafariIconExtension());
+        this._checkSafariExtensions();
+        window.addEventListener("focus", () => this._checkSafariExtensions());
 
-        const notificationEnableIconLink = document.getElementById('notificationEnableIconLink');
-        notificationEnableIconLink && notificationEnableIconLink.addEventListener('click', (e) => {
+        const notificationEnableExtensionsLink = document.getElementById('notificationEnableIconLink');
+        notificationEnableExtensionsLink && notificationEnableExtensionsLink.addEventListener('click', (e) => {
             e.preventDefault();
             this._openSafariExtensionsPrefs();
         })
@@ -1552,9 +1552,9 @@ PageController.prototype = {
         }));
     },
 
-    _checkSafariIconExtension: function() {
+    _checkSafariExtensions: function() {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'checkSafariIconExtension'
+            'type': 'checkSafariExtensions'
         }));
     },
 
