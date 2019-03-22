@@ -152,11 +152,20 @@ module.exports = (() => {
 
     /**
     * Getting state of the icon of Safari app extension.
-    * Returns true in callback if both extension enabled, else returns false.
+    * Returns true in callback if extension enabled, else returns false.
     * @param callback = (enabled as bool) => {}
     */
     const extensionSafariIconState = (callback) => {
         addon.extensionSafariIconState(callback);
+    };
+
+    /**
+     * Getting state of Advanced Blocking Safari extension.
+     * Returns true in callback if extension enabled, else returns false.
+     * @param callback = (enabled as bool) => {}
+     */
+    const extensionAdvancedBlockingState = (callback) => {
+        addon.extensionAdvancedBlockingState(callback);
     };
 
     /**
@@ -185,6 +194,7 @@ module.exports = (() => {
         userFilter: userFilter,
         extensionContentBlockerState: extensionContentBlockerState,
         extensionSafariIconState: extensionSafariIconState,
+        extensionAdvancedBlockingState: extensionAdvancedBlockingState,
         openExtensionsPreferenses: openExtensionsPreferenses,
         debugLog: debugLog
     };

@@ -422,6 +422,38 @@ NAN_METHOD(extensionSafariIconState){
     }];
 }
 
+NAN_METHOD(extensionAdvancedBlockingState){
+
+	if (info.Length() < 1) {
+		ThrowTypeError("Wrong number of arguments");
+		return;
+	}
+
+	if (!info[0]->IsFunction()) {
+		ThrowTypeError("Wrong arguments");
+		return;
+	}
+
+	Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
+
+	void (^resultBlock)(BOOL result)  = ^void(BOOL result) {
+
+		dispatch_sync(dispatch_get_main_queue(), ^{
+			Nan::HandleScope scope;
+
+			v8::Local<v8::Value> argv[1] = {Nan::New((bool)result)};
+
+			Nan::Call(*cb, 1, argv);
+			delete cb;
+		});
+	};
+
+	[SFSafariExtensionManager getStateOfSafariExtensionWithIdentifier:AESharedResources.advancedBlockingBundleId
+	completionHandler:^(SFSafariExtensionState * _Nullable state, NSError * _Nullable error) {
+		resultBlock(error == nil && state.enabled);
+	}];
+}
+
 NAN_METHOD(openExtensionsPreferenses){
 
      if (info.Length() < 1) {
@@ -664,6 +696,9 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("extensionSafariIconState").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(extensionSafariIconState)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("extensionAdvancedBlockingState").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(extensionAdvancedBlockingState)).ToLocalChecked());
 
   Nan::Set(target, New<String>("openExtensionsPreferenses").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(openExtensionsPreferenses)).ToLocalChecked());
