@@ -1,4 +1,7 @@
 {
+    "options_popup_title_placeholder": {
+        "message": "Enter filter name"
+    },
     "main_menu_hide": {
         "message": "Verstecken"
     },
@@ -12,7 +15,7 @@
         "message": "Un\u00fcbertroffene Werbeblocker-Erweiterung gegen Werbung und Pop-ups. Blockiert Anzeigen auf Facebook, YouTube und allen anderen Webseiten."
     },
     "options_settings": {
-        "message": "AdGuard Einstellungen"
+        "message": "AdGuard f\u00fcr Safari - Einstellungen"
     },
     "options_general_settings": {
         "message": "Allgemeine"
@@ -21,7 +24,7 @@
         "message": "AdGuard f\u00fcr Safari ist eine freie Open-Source-Software. Wir freuen uns \u00fcber Ihr Feedback und Ihre Beitr\u00e4ge. Falls Sie einen Fehler melden oder eine Funktion anfragen m\u00f6chten, gehen Sie bitte zu <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>unserem GitHub-Repository<\/a>."
     },
     "options_allow_acceptable_ads": {
-        "message": "Werbeanzeigen in Suchvorg\u00e4ngen und Eigen-Werbung der Webseiten erlauben<a target='_blank' href='https:\/\/kb.adguard.com\/general\/search-ads-and-self-promotion?utm_source=extension&aid=16593' class='sp-table-row-info'>Mehr erfahren<\/a>"
+        "message": "Werbeanzeigen in Suchvorg\u00e4ngen und Eigen-Werbung der Webseiten erlauben"
     },
     "options_export_settings": {
         "message": "Einstellungen exportieren"
@@ -33,7 +36,7 @@
         "message": "Filter"
     },
     "options_antibanner_info": {
-        "message": "%s Filter"
+        "message": "%s Filter %s Regeln"
     },
     "options_filters_enabled": {
         "message": "Aktiviert"
@@ -141,7 +144,7 @@
         "message": "\u00dcber Updates der Erweiterung benachrichtigen"
     },
     "options_use_optimized_filters": {
-        "message": "Optimierte Filter verwenden<span class='sp-table-row-info'>F\u00fcr mobile Ger\u00e4te vereinfachte Filterliste<\/span>"
+        "message": "Optimierte Filter verwenden<span class='sp-table-row-info'>F\u00fcr Safari Inhaltsblockierungs-API optimierte Filterlisten<\/span>"
     },
     "options_popup_update_title": {
         "message": "Filter erfolgreich aktualisiert"
@@ -165,7 +168,7 @@
         }
     },
     "options_popup_version_update_title": {
-        "message": "Die AdGuard Browsererweiterung wurde gerade auf Version $1 aktualisiert."
+        "message": "AdGuard f\u00fcr Safari wurde gerade auf Version $1 aktualisiert."
     },
     "options_popup_version_update_description_minor": {
         "message": "Diese Version enth\u00e4lt haupts\u00e4chlich Bugfixes und kleine Verbesserungen."
@@ -183,7 +186,7 @@
         "message": "Zu viele Filter aktiviert. Safari kann nicht mehr als 50 000 Regeln verarbeiten."
     },
     "options_filters_list_search_placeholder": {
-        "message": "Geben Sie den Suchbegriff ein"
+        "message": "Suchen"
     },
     "options_editor_indicator_editing": {
         "message": "Bearbeiten..."
@@ -237,7 +240,7 @@
         "message": "\u00dcber"
     },
     "options_compare_btn": {
-        "message": "Wie werden sie verglichen?"
+        "message": "Wie sie verglichen werden"
     },
     "options_compare_title": {
         "message": "Probieren Sie AdGuard Premium f\u00fcr einen besseren Schutz aus!"
@@ -291,10 +294,10 @@
         "message": "AdGuard f\u00fcr Safari beim Anmelden starten"
     },
     "settings_notification_title": {
-        "message": "Achtung! Das AdGuard-Symbol wurde deaktiviert."
+        "message": "Achtung! Die AdGuard-Erweiterungen wurden deaktiviert"
     },
     "settings_notification_text": {
-        "message": "Sie k\u00f6nnen dieses Symbol verwenden, um die Einstellungen von AdGuard f\u00fcr Safari zu verwalten, z.B. das Blockieren auf einer Webseite anzuhalten oder eine Anzeige manuell zu blockieren. Sie k\u00f6nnen das AdGuard-Symbol <a href='#' id='notificationEnableIconLink'>hier<\/a> aktivieren."
+        "message": "Sie k\u00f6nnen diese Erweiterungen verwenden, um die Einstellungen von AdGuard f\u00fcr Safari zu verwalten, z.B. das Blockieren auf einer Webseite anzuhalten oder eine Anzeige manuell zu blockieren. Sie k\u00f6nnen das AdGuard-Symbol und die erweiterte Blockierung <a href='#' id='notificationEnableIconLink'>hier<\/a> aktivieren."
     },
     "settings_notification_protection_title": {
         "message": "Achtung! Der Schutz wurde deaktiviert."

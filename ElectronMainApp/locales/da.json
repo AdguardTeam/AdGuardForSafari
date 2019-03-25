@@ -1,4 +1,7 @@
 {
+    "options_popup_title_placeholder": {
+        "message": "Indtast filternavn"
+    },
     "main_menu_hide": {
         "message": "Skjul"
     },
@@ -291,10 +294,10 @@
         "message": "Start AdGuard til Safari ved Login"
     },
     "settings_notification_title": {
-        "message": "Opm\u00e6rksomhed! AdGuard ikonet blev deaktiveret"
+        "message": "Opm\u00e6rksomhed! AdGuard udvidelserne er deaktiveret"
     },
     "settings_notification_text": {
-        "message": "Du kan bruge dette ikon til at administrere AdGuard til Safari indstillingerne. For eksempel, pause blokeringen p\u00e5 en hjemmeside eller blokere en annonce manuelt.\nDu kan aktivere AdGuard Ikonet <a href='#' id='notificationEnableIconLink'>her<\/a>."
+        "message": "Du kan bruge disse udvidelser til at administrere AdGuard til Safari. For eksempel, pause blokeringen p\u00e5 en hjemmeside eller blokere en annonce manuelt.\nDu kan aktivere AdGuard Ikonet og Avanceret Blokering <a href='#' id='notificationEnableIconLink'>her<\/a>."
     },
     "settings_notification_protection_title": {
         "message": "Opm\u00e6rksomhed! Beskyttelsen blev deaktiveret"

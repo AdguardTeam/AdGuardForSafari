@@ -1,4 +1,7 @@
 {
+    "options_popup_title_placeholder": {
+        "message": "\u8f38\u5165\u904e\u6ffe\u5668\u540d\u7a31"
+    },
     "main_menu_hide": {
         "message": "\u96b1\u85cf"
     },
@@ -289,10 +292,10 @@
         "message": "\u5728\u767b\u5165\u6642\u555f\u52d5AdGuard for Safari"
     },
     "settings_notification_title": {
-        "message": "\u6ce8\u610f\uff01AdGuard\u5716\u50cf\u5df2\u88ab\u7981\u7528"
+        "message": "\u6ce8\u610f\uff01AdGuard\u5ef6\u4f38\u529f\u80fd\u88ab\u7981\u7528"
     },
     "settings_notification_text": {
-        "message": "\u60a8\u53ef\u4f7f\u7528\u8a72\u5716\u50cf\u4ee5\u7ba1\u7406AdGuard for Safari\u8a2d\u5b9a\u3002\u4f8b\u5982\uff0c\u66ab\u505c\u65bc\u7db2\u7ad9\u4e0a\u4e4b\u5c01\u9396\u6216\u624b\u52d5\u5730\u5c01\u9396\u5ee3\u544a\u3002<a href='#' id='notificationEnableIconLink'>\u65bc\u6b64<\/a>\u60a8\u53ef\u555f\u7528AdGuard\u5716\u50cf\u3002"
+        "message": "\u60a8\u53ef\u4f7f\u7528\u9019\u4e9b\u5ef6\u4f38\u529f\u80fd\u4ee5\u7ba1\u7406AdGuard for Safari\u3002\u4f8b\u5982\uff0c\u66ab\u505c\u65bc\u7db2\u7ad9\u4e0a\u4e4b\u5c01\u9396\uff0c\u6216\u624b\u52d5\u5730\u5c01\u9396\u5ee3\u544a\u3002<a href='#' id='notificationEnableIconLink'>\u65bc\u6b64<\/a>\u60a8\u53ef\u555f\u7528AdGuard\u5716\u50cf\u548c\u9032\u968e\u7684\u5c01\u9396\u3002"
     },
     "settings_notification_protection_title": {
         "message": "\u6ce8\u610f\uff01\u9632\u8b77\u5df2\u88ab\u7981\u7528"
