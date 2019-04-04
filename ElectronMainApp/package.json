@@ -1,8 +1,9 @@
 {
     "name": "AdGuardSafariApp",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "",
     "main": "./main.js",
+    "repository": "github:Mizzick/AdGuardForSafari",
     "scripts": {
         "start": "electron .",
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,12 +16,15 @@
     "dependencies": {
         "config": "^1.31.0",
         "electron-debug": "^2.0.0",
+        "electron-osx-sign": "^0.4.11",
         "electron-reload": "^1.3.0",
         "electron-store": "^2.0.0",
+        "electron-updater": "^4.0.6",
         "filters-downloader": "git+https://github.com/AdguardTeam/FiltersDownloader.git#a7d2177",
         "i18n": "^0.8.3",
         "request-promise": "^4.2.2",
         "safari-ext": "./safari-ext",
+        "update-electron-app": "^1.3.0",
         "xmlhttprequest": "^1.8.0"
     },
     "devDependencies": {

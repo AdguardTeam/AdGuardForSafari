@@ -21,6 +21,8 @@ const mainMenuController = require('./src/main/main-menu.controller');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+// Check updates
+require('update-electron-app')();
 
 // This package opens devtools only in devmode
 // No need to delete this line
