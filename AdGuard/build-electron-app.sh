@@ -44,7 +44,7 @@ OPT="--asar"
 yarn install --force || exit 1
 else
 echo "skip"
-#yarn upgrade --force -P safari-ext || exit 1
+yarn upgrade --force -P safari-ext || exit 1
 fi
 
 # Rebuild safari-ext and other node packages
@@ -58,12 +58,11 @@ electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=2.0.17 --platfor
 --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
 ${OPT} || exit 1
 
-#APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
 APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-darwin-${ARCH}/${PRODUCT_NAME}.app"
 FRAMEWORKS="${APP}/Contents/Frameworks"
 
 # Sign electron app
-electron-osx-sign "${APP}" --platform=mas --type=development --identity="Mac Developer: Dimitry Kolyshev (48FKR7G468)" --entitlements="${AG_ELECTRON_CHILD_ENT}" || exit 1
+electron-osx-sign "${APP}" --platform=${PLATFORM} --type=development --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_ELECTRON_CHILD_ENT}" || exit 1
 
 codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Electron Framework" || exit 1
 codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib" || exit 1
