@@ -1,14 +1,13 @@
 #!/bin/bash
 
-#  build-electron-app.sh
-#  AdGuard
-#
-#  Created by Roman Sokolov on 14.08.2018.
-#  Copyright © 2018 Adguard Software Ltd. All rights reserved.
+echo "Building electron app with config:"
+echo "CONFIGURATION: ${CONFIGURATION}"
+echo "AG_STANDALONE: ${AG_STANDALONE}"
+echo "AG_STANDALONE_BETA: ${AG_STANDALONE_BETA}"
 
+# Fix nvm incompatibility
 . ~/.nvm/nvm.sh
 nvm use v8.9.4 || exit 1
-#nvm use v10.9.0 || exit 1
 
 # Installing dependencies
 #npm install -g electron-osx-sign
@@ -32,6 +31,7 @@ fi
 #node-gyp configure --verbose --debug|| exit 1
 #node-gyp rebuild --verbose|| exit 1
 #
+
 mkdir -vp "${SRC}/safari-ext/shared"
 cp -v "${BUILT_PRODUCTS_DIR}/libshared.a" "${SRC}/safari-ext/shared/" || exit 1
 rsync -avm --include='*.h' -f 'hide,! */' "${SHAREDSRC}/" "${SRC}/safari-ext/shared/"
@@ -39,11 +39,11 @@ rsync -avm --include='*.h' -f 'hide,! */' "${SHAREDSRC}/" "${SRC}/safari-ext/sha
 # Rebuild electron app
 OPT=""
 cd "${SRC}"
-if [ ${CONFIGURATION} == "Release" ]; then
+if [ ${CONFIGURATION} != "Debug" ]; then
 OPT="--asar"
 yarn install --force || exit 1
 else
-echo "skip"
+#echo "skip"
 yarn upgrade --force -P safari-ext || exit 1
 fi
 
@@ -54,15 +54,24 @@ fi
 
 codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
 
-electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=2.0.17 --platform=darwin --app-bundle-id="${AG_BUNDLEID}" \
+PACKAGER_PLATFORM="mas"
+if [ ${AG_STANDALONE} == "true" ]; then
+echo "Changing standalone build platform"
+PACKAGER_PLATFORM="darwin"
+fi
+
+electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=2.0.17 --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
 --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
 ${OPT} || exit 1
 
-APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-darwin-${ARCH}/${PRODUCT_NAME}.app"
+APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-${PACKAGER_PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
 FRAMEWORKS="${APP}/Contents/Frameworks"
 
 # Sign electron app
+if [ ${AG_STANDALONE} == "true" ]; then
+echo "Signing standalone build"
 electron-osx-sign "${APP}" --platform=${PLATFORM} --type=development --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_ELECTRON_CHILD_ENT}" || exit 1
+fi
 
 codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Electron Framework" || exit 1
 codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib" || exit 1
@@ -71,7 +80,10 @@ codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_E
 codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper EH.app" || exit 1
 codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper NP.app" || exit 1
 codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper.app" || exit 1
-#codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_LOGINHELPER_ENT}" "${APP}/Contents/Library/LoginItems/${PRODUCT_NAME} Login Helper.app" || exit 1
+
+if [ ${AG_STANDALONE} != "true" ]; then
+codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_LOGINHELPER_ENT}" "${APP}/Contents/Library/LoginItems/${PRODUCT_NAME} Login Helper.app" || exit 1
+fi
 
 # Move products
 DST_DIR="${BUILT_PRODUCTS_DIR}"

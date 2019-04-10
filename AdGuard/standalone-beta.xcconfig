@@ -1,10 +1,10 @@
 AG_COPYRIGHT = Copyright © 2019 Adguard Software Ltd. All rights reserved.
-AG_NAME = AdGuard for Safari
+AG_NAME = AdGuard for Safari Beta
 AG_VERSION = 1.2.3
 AG_BUILD = 11
 
-AG_STANDALONE = false
-AG_STANDALONE_BETA = false
+AG_STANDALONE = true
+AG_STANDALONE_BETA = true
 
 AG_BUNDLEID = com.adguard.safari.AdGuard
 AG_EXTENSION_BUNDLEID = $(AG_BUNDLEID).Extension
@@ -15,10 +15,8 @@ AG_SIGN = <YOUR APPLE DEVELOPER COMMON NAME>
 
 AG_GROUP = TC3Q7MAJXF.com.adguard.safari.AdGuard
 
-
 GCC_PREPROCESSOR_DEFINITIONS = AG_GROUP=@\"$(AG_GROUP)\" AG_BUNDLEID=@\"$(AG_BUNDLEID)\" AG_EXTENSION_BUNDLEID=@\"$(AG_EXTENSION_BUNDLEID)\" AG_BLOCKER_BUNDLEID=@\"$(AG_BLOCKER_BUNDLEID)\" AG_ADVANCED_BLOCKING_BUNDLEID=@\"$(AG_ADVANCED_BLOCKING_BUNDLEID)\"
 
-
-AG_APP_ENT = ${SRCROOT}/AdGuard/AdGuard.entitlements
-AG_ELECTRON_CHILD_ENT = ${SRCROOT}/AdGuard/ElectronChild.entitlements
-AG_ELECTRON_LOGINHELPER_ENT = ${SRCROOT}/AdGuard/ElectronLoginItem.entitlements
+AG_APP_ENT = ${SRCROOT}/AdGuard/standalone/AdGuard.entitlements
+AG_ELECTRON_CHILD_ENT = ${SRCROOT}/AdGuard/standalone/ElectronChild.entitlements
+AG_ELECTRON_LOGINHELPER_ENT = ${SRCROOT}/AdGuard/standalone/ElectronLoginItem.entitlements
