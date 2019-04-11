@@ -1,5 +1,5 @@
 AG_COPYRIGHT = Copyright © 2019 Adguard Software Ltd. All rights reserved.
-AG_NAME = AdGuard for Safari Beta
+AG_NAME = AdGuard for Safari
 AG_VERSION = 1.2.3
 AG_BUILD = 11
 
@@ -11,7 +11,7 @@ AG_EXTENSION_BUNDLEID = $(AG_BUNDLEID).Extension
 AG_BLOCKER_BUNDLEID = $(AG_BUNDLEID).BlockerExtension
 AG_ADVANCED_BLOCKING_BUNDLEID = $(AG_BUNDLEID).AdvancedBlocking
 
-AG_SIGN = <YOUR APPLE DEVELOPER COMMON NAME>
+AG_SIGN = Mac Developer: Dimitry Kolyshev (48FKR7G468)
 
 AG_GROUP = TC3Q7MAJXF.com.adguard.safari.AdGuard
 
