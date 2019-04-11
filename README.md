@@ -183,5 +183,5 @@ Change `.` to path to your project if you not in the root.
 - update version `Config.xcconfig` and `package.json`
 - select xcode build configuration (Standalone-beta or Standalone)
 - build apps
-- publish release on GitHub
+- publish release on Github
 - refresh `updates/updates.json` and `release.json` in gh-pages branch
