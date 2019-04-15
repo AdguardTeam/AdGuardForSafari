@@ -11,7 +11,7 @@ AG_EXTENSION_BUNDLEID = $(AG_BUNDLEID).Extension
 AG_BLOCKER_BUNDLEID = $(AG_BUNDLEID).BlockerExtension
 AG_ADVANCED_BLOCKING_BUNDLEID = $(AG_BUNDLEID).AdvancedBlocking
 
-AG_SIGN = Mac Developer: Dimitry Kolyshev (48FKR7G468)
+AG_SIGN = Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)
 
 AG_GROUP = TC3Q7MAJXF.com.adguard.safari.AdGuard
 
