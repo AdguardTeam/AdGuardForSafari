@@ -810,9 +810,9 @@ electron-localshortcut@^3.1.0:
     keyboardevent-from-electron-accelerator "^1.1.0"
     keyboardevents-areequal "^0.2.1"
 
-electron-osx-sign@^0.4.11:
+"electron-osx-sign@github:electron-userland/electron-osx-sign#timestamp-server":
   version "0.4.11"
-  resolved "https://registry.yarnpkg.com/electron-osx-sign/-/electron-osx-sign-0.4.11.tgz#8377732fe7b207969f264b67582ee47029ce092f"
+  resolved "https://codeload.github.com/electron-userland/electron-osx-sign/tar.gz/cd843facffc0121913f9c996d841e706da69afe1"
   dependencies:
     bluebird "^3.5.0"
     compare-version "^0.1.2"

@@ -12,6 +12,7 @@ nvm use v8.9.4 || exit 1
 # Installing dependencies
 #npm install -g electron-osx-sign
 #npm install -g node-gyp
+npm install -g electron-userland/electron-osx-sign#timestamp-server
 
 PLATFORM=mas
 ARCH=x64
@@ -74,7 +75,8 @@ FRAMEWORKS="${APP}/Contents/Frameworks"
 # Sign electron app
 if [ ${AG_STANDALONE} == "true" ]; then
 echo "Signing standalone build"
-electron-osx-sign "${APP}" --platform=${PLATFORM} --type=distribution --timestamp="" --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_ELECTRON_CHILD_ENT}" || exit 1
+#codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "$APP" || exit 1
+electron-osx-sign "${APP}" --platform=${PLATFORM} --timestamp="" --type=distribution --hardened-runtime --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_ELECTRON_CHILD_ENT}" || exit 1
 fi
 
 codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Electron Framework" || exit 1
@@ -90,7 +92,7 @@ codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDE
 codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
 codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework/Versions/A/Resources/ShipIt" || exit 1
 codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework" || exit 1
-#codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "$APP" || exit 1
+codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "$APP/Contents/MacOS/AdGuard for Safari" || exit 1
 fi
 
 if [ ${AG_STANDALONE} != "true" ]; then

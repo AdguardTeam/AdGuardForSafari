@@ -203,3 +203,8 @@ xcrun stapler staple AdGuard\ for\ Safari.app.zip
 
 #### Common issues
 https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/resolving_common_notarization_issues
+
+Use fixed `electron-osx-sign`
+```
+npm install -g electron-userland/electron-osx-sign#timestamp-server
+```
