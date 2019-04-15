@@ -1710,6 +1710,7 @@
 		F41DA7ED2201C81700C63708 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
 				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
@@ -1739,6 +1740,7 @@
 		F41DA7EE2201C81700C63708 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
 				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
@@ -1934,6 +1936,7 @@
 		F46D131F225E93A400282566 /* Standalone Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
 				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
@@ -2153,6 +2156,7 @@
 		F46D132A225E944700282566 /* Standalone Prod */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
 				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
