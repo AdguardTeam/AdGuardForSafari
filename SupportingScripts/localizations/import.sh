@@ -141,6 +141,8 @@ do
 
             if [ $oneskyfile = "adv_blocking_extension_${file}" ]; then
                 folder=${ADVANCED_BLOCKING_EXTENSION}
+                sed -i "" "s/NSHumanReadableDescriptionAdvBlocking/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
+                sed -i "" "s/NSHumanReadableDescriptionAdvBlocking/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
             fi
 
             echo $folder
