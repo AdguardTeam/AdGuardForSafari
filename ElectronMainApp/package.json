@@ -1,8 +1,11 @@
 {
     "name": "AdGuardSafariApp",
-    "version": "1.2.1",
+    "version": "1.2.3",
     "description": "",
     "main": "./main.js",
+    "repository": "github:AdguardTeam/AdGuardForSafari",
+    "standalone-build": "AG_STANDALONE_BUILD",
+    "standalone-beta": "AG_STANDALONE_BETA",
     "scripts": {
         "start": "electron .",
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,7 +19,9 @@
         "config": "^1.31.0",
         "electron-debug": "^2.0.0",
         "electron-reload": "^1.3.0",
+        "electron-simple-updater": "^1.5.0",
         "electron-store": "^2.0.0",
+        "electron-updater": "^4.0.6",
         "filters-downloader": "git+https://github.com/AdguardTeam/FiltersDownloader.git#a7d2177",
         "i18n": "^0.8.3",
         "request-promise": "^4.2.2",
@@ -26,6 +31,7 @@
     "devDependencies": {
         "devtron": "^1.4.0",
         "electron": "^2.0.12",
+        "electron-osx-sign": "github:electron-userland/electron-osx-sign#timestamp-server",
         "electron-rebuild": "^1.8.2",
         "find-in-files": "^0.5.0",
         "gulp": "^4.0.0",
