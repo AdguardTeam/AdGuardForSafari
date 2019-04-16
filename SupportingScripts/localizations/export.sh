@@ -115,6 +115,8 @@ python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}
 
 find "${BLOCKEREXTENSION}" -name \*.m | xargs genstrings -o "${BLOCKEREXTENSION}"
 cp -fv "${BLOCKEREXTENSION}/en.lproj/${file}" "${PROJECT_TEMP_DIR}/blockerextension_${file}"
+sed -i "" "s/NSHumanReadableDescription/NSHumanReadableDescriptionBlocker/g" "${PROJECT_TEMP_DIR}/blockerextension_${file}"
+sed -i "" "s/CFBundleDisplayName/CFBundleDisplayNameBlocker/g" "${PROJECT_TEMP_DIR}/blockerextension_${file}"
 python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}/blockerextension_${file}" -r IOS_STRINGS
 # rm "${PROJECT_TEMP_DIR}/blockerextension_${file}"
 

@@ -137,6 +137,8 @@ do
             folder=${EXTENSION}
             if [ $oneskyfile = "blockerextension_${file}" ]; then
                 folder=${BLOCKEREXTENSION}
+                sed -i "" "s/NSHumanReadableDescriptionBlocker/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
+                sed -i "" "s/NSHumanReadableDescriptionBlocker/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
             fi
 
             if [ $oneskyfile = "adv_blocking_extension_${file}" ]; then
