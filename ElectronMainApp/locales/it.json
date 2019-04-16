@@ -1,12 +1,12 @@
 {
     "options_popup_title_placeholder": {
-        "message": "Enter filter name"
+        "message": "Inserisci il nome del filtro"
     },
     "main_menu_hide": {
-        "message": "Hide"
+        "message": "Nascondi"
     },
     "main_menu_close_window": {
-        "message": "Close window"
+        "message": "Chiudi la finestra"
     },
     "name": {
         "message": "Blocco annunci AdGuard"
@@ -144,7 +144,7 @@
         "message": "Notica aggiornamenti estensione"
     },
     "options_use_optimized_filters": {
-        "message": "Usa filtri ottimizzati<span class='sp-table-row-info'>Liste filtri leggeri ottimizzati per Safari Content Blocking API.<\/span>"
+        "message": "Usa filtri ottimizzati<span class='sp-table-row-info'>Liste dei filtri leggeri ottimizzate per Safari Content Blocking API.<\/span>"
     },
     "options_popup_update_title": {
         "message": "Filtri aggiornati con successo"
@@ -163,8 +163,8 @@
     },
     "options_popup_update_updated_more": {
         "message": {
-            "one": "%s filter updated: $2",
-            "other": "%s filters updated: $2"
+            "one": "%s filtro aggiornato: $2",
+            "other": "%s filtri aggiornati: $2"
         }
     },
     "options_popup_version_update_title": {
@@ -189,13 +189,13 @@
         "message": "Ricerca"
     },
     "options_editor_indicator_editing": {
-        "message": "Editing..."
+        "message": "Modifica in corso..."
     },
     "options_editor_indicator_saving": {
-        "message": "Saving..."
+        "message": "Salvataggio in corso..."
     },
     "options_editor_indicator_saved": {
-        "message": "Saved"
+        "message": "Salvato"
     },
     "main_menu_edit": {
         "message": "Modifica"
@@ -231,7 +231,7 @@
         "message": "Abbandona"
     },
     "tray_menu_protection_start": {
-        "message": "Enable AdGuard"
+        "message": "Attiva AdGuard"
     },
     "options_last_update": {
         "message": "Ultimo aggiornamento"
@@ -276,33 +276,33 @@
         "message": "Una nuova regola \u00e8 stata aggiunta al filtro utente"
     },
     "options_filters_update_period": {
-        "message": "Update interval"
+        "message": "Intervallo di aggiornamento"
     },
     "options_filters_update_period_number": {
         "message": {
-            "one": "Every hour",
-            "other": "Every %s hours"
+            "one": "Ogni ora",
+            "other": "Ogni %s ore"
         }
     },
     "options_filters_period_not_update": {
-        "message": "Do not update"
+        "message": "Non aggiornare"
     },
     "options_show_tray_icon": {
-        "message": "Show AdGuard for Safari in the menu bar"
+        "message": "Mostra AdGuard per Safari nella barra del menu"
     },
     "options_launch_at_login": {
-        "message": "Launch AdGuard for Safari at Login"
+        "message": "Avvia AdGuard per Safari al Login"
     },
     "settings_notification_title": {
-        "message": "Attention! AdGuard extensions are disabled"
+        "message": "Attenzione! Le estensioni AdGuard sono disabilitate"
     },
     "settings_notification_text": {
-        "message": "You can use these extensions to manage AdGuard for Safari. For instance, pause blocking on a website, or block an ad manually. You can enable AdGuard Icon and Advanced Blocking <a href='#' id='notificationEnableIconLink'>here<\/a>."
+        "message": "Puoi usare queste estensioni per gestire AdGuard per Safari. Ad esempio puoi sospendere il blocco su un sito web o bloccare manualmente un annuncio. \u00c8 possibile abilitare l'Icona AdGuard e il Blocco Avanzato <a href='#' id='notificationEnableIconLink'>here<\/a>."
     },
     "settings_notification_protection_title": {
-        "message": "Attention! Protection was disabled"
+        "message": "Attenzione! La protezione \u00e8 stata disabilitata"
     },
     "settings_notification_protection_text": {
-        "message": "AdGuard protection is paused. <a href='#' id='notificationEnableProtectionLink'>Enable AdGuard<\/a>."
+        "message": "La protezione AdGuard \u00e8 stata messa in pausa. <a href='#' id='notificationEnableProtectionLink'>Enable AdGuard<\/a>."
     }
 }

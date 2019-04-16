@@ -1,6 +1,6 @@
 {
     "options_popup_title_placeholder": {
-        "message": "Enter filter name"
+        "message": "Wpisz nazw\u0119 filtra"
     },
     "main_menu_hide": {
         "message": "Ukryj "
@@ -163,10 +163,10 @@
     },
     "options_popup_update_updated_more": {
         "message": {
-            "one": "%s filter updated: $2",
-            "few": "%s filters updated: $2",
-            "many": "%s filters updated: $2",
-            "other": "%s filters updated: $2"
+            "one": "%s filtr zaktualizowany: $2",
+            "few": "%s filtr\u00f3w zaktualizowanych: $2",
+            "many": "%s filtr\u00f3w zaktualizowanych: $2",
+            "other": "%s filtry zaktualizowane: $2"
         }
     },
     "options_popup_version_update_title": {

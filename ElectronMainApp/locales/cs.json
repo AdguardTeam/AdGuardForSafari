@@ -1,6 +1,6 @@
 {
     "options_popup_title_placeholder": {
-        "message": "Enter filter name"
+        "message": "Zadejte n\u00e1zev filtru"
     },
     "main_menu_hide": {
         "message": "Skr\u00fdt"
@@ -163,10 +163,10 @@
     },
     "options_popup_update_updated_more": {
         "message": {
-            "one": "%s filter updated: $2",
-            "few": "%s filters updated: $2",
-            "many": "%s filters updated: $2",
-            "other": "%s filters updated: $2"
+            "one": "%s filtr aktualizov\u00e1n: $2",
+            "few": "%s filtry aktualizov\u00e1ny: $2",
+            "many": "%s filtr\u016f aktualizov\u00e1no: $2",
+            "other": "%s filtr\u016f aktualizov\u00e1no: $2"
         }
     },
     "options_popup_version_update_title": {
@@ -298,10 +298,10 @@
         "message": "Spustit AdGuard pro Safari p\u0159i p\u0159ihl\u00e1\u0161en\u00ed"
     },
     "settings_notification_title": {
-        "message": "Pozor! Ikona AdGuardu byla zak\u00e1z\u00e1na"
+        "message": "Pozor! Roz\u0161\u00ed\u0159en\u00ed AdGuardu jsou zak\u00e1z\u00e1na"
     },
     "settings_notification_text": {
-        "message": "Tuto ikonu m\u016f\u017eete pou\u017e\u00edt ke spr\u00e1v\u011b AdGuardu pro nastaven\u00ed Safari. Nap\u0159\u00edklad pozastavit blokov\u00e1n\u00ed na t\u00e9to str\u00e1nce nebo blokovat reklamy ru\u010dn\u011b. M\u016f\u017eete povolit ikonu AdGuardu <a href='#' id='notificationEnableIconLink'>zde<\/a>."
+        "message": "Tato roz\u0161\u00ed\u0159en\u00ed m\u016f\u017eete pou\u017e\u00edt ke spr\u00e1v\u011b AdGuardu pro nastaven\u00ed Safari. Nap\u0159\u00edklad pozastavit blokov\u00e1n\u00ed na t\u00e9to str\u00e1nce nebo blokovat reklamy ru\u010dn\u011b. M\u016f\u017eete povolit ikonu AdGuardu a pokro\u010dil\u00e9 blokov\u00e1n\u00ed <a href='#' id='notificationEnableIconLink'>zde<\/a>."
     },
     "settings_notification_protection_title": {
         "message": "Pozor! Ochrana byla vypnuta"
