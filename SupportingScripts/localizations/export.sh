@@ -121,11 +121,11 @@ python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}
 # rm "${PROJECT_TEMP_DIR}/blockerextension_${file}"
 
 find "${ADVANCED_BLOCKING_EXTENSION}" -name \*.m | xargs genstrings -o "${ADVANCED_BLOCKING_EXTENSION}"
-cp -fv "${ADVANCED_BLOCKING_EXTENSION}/en.lproj/${file}" "${PROJECT_TEMP_DIR}/adv_blocking_extension_${file}"
-sed -i "" "s/NSHumanReadableDescription/NSHumanReadableDescriptionAdvBlocking/g" "${PROJECT_TEMP_DIR}/adv_blocking_extension_${file}"
-sed -i "" "s/CFBundleDisplayName/CFBundleDisplayNameAdvBlocking/g" "${PROJECT_TEMP_DIR}/adv_blocking_extension_${file}"
-python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}/adv_blocking_extension_${file}" -r IOS_STRINGS
-# rm "${PROJECT_TEMP_DIR}/adv_blocking_extension_${file}"
+cp -fv "${ADVANCED_BLOCKING_EXTENSION}/en.lproj/${file}" "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}"
+sed -i "" "s/NSHumanReadableDescription/NSHumanReadableDescriptionAdvBlocking/g" "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}"
+sed -i "" "s/CFBundleDisplayName/CFBundleDisplayNameAdvBlocking/g" "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}"
+python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}" -r IOS_STRINGS
+# rm "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}"
 
 echo "Done"
 echo "Upload finished InfoPlist files"

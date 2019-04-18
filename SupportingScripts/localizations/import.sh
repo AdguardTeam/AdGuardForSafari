@@ -126,7 +126,7 @@ echo "========================= UPDATING InfoPlist FILES =======================
 
 file="InfoPlist.strings"
 
-oneskyfiles="extension_${file} blockerextension_${file} adv_blocking_extension_${file}"
+oneskyfiles="extension_${file} blockerextension_${file} adv_blocking_extension_mod_${file}"
 
 for oneskyfile in $oneskyfiles
 do
@@ -141,7 +141,7 @@ do
                 sed -i "" "s/NSHumanReadableDescriptionBlocker/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
             fi
 
-            if [ $oneskyfile = "adv_blocking_extension_${file}" ]; then
+            if [ $oneskyfile = "adv_blocking_extension_mod_${file}" ]; then
                 folder=${ADVANCED_BLOCKING_EXTENSION}
                 sed -i "" "s/NSHumanReadableDescriptionAdvBlocking/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
                 sed -i "" "s/NSHumanReadableDescriptionAdvBlocking/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
