@@ -39,7 +39,8 @@ module.exports = (function () {
                 clearFilters();
                 listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
                     rulesCount: 0,
-                    rulesOverLimit: false
+                    rulesOverLimit: false,
+                    advancedBlockingRulesCount: 0
                 });
 
                 return;
@@ -50,7 +51,8 @@ module.exports = (function () {
             setSafariContentBlocker(json, advancedBlocking);
             listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
                 rulesCount: json.length,
-                rulesOverLimit: result.overLimit
+                rulesOverLimit: result.overLimit,
+                advancedBlockingRulesCount: advancedBlocking.length
             });
 
         });

@@ -1225,7 +1225,10 @@ const AntiBannerFilters = function (options) {
 
     function updateRulesCountInfo(info) {
         document.querySelector('#filtersRulesInfo').textContent =
-            i18n.__("options_antibanner_info.message", loadedFiltersInfo.getEnabledFiltersCount(), String(info.rulesCount || 0));
+            i18n.__("options_antibanner_info.message",
+                loadedFiltersInfo.getEnabledFiltersCount(),
+                String(info.rulesCount || 0),
+                String(info.advancedBlockingRulesCount || 0));
 
         checkSafariContentBlockerRulesLimit(info.rulesOverLimit);
     }
