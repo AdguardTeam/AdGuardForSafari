@@ -1681,6 +1681,9 @@ const initPage = function (response) {
                 case EventNotifierTypes.SHOW_OPTIONS_USER_FILTER_TAB:
                     window.location.hash = 'userfilter';
                     break;
+                case EventNotifierTypes.SHOW_OPTIONS_ABOUT_TAB:
+                    window.location.hash = 'about';
+                    break;
                 case EventNotifierTypes.LAUNCH_AT_LOGIN_UPDATED:
                     controller.settings.updateLaunchAtLoginCheckbox(options);
                     break;
