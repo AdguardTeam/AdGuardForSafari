@@ -5,6 +5,12 @@
     "main_menu_close_window": {
         "message": "Close window"
     },
+    "main_menu_about": {
+        "message": "About AdGuard for Safari"
+    },
+    "main_menu_check_updates": {
+        "message": "Check for updates"
+    },
     "name": {
         "message": "AdGuard AdBlocker"
     },
@@ -175,6 +181,18 @@
     },
     "options_popup_version_update_description_major": {
         "message": "This is a major extension upgrade that brings a lot of new features and improvements."
+    },
+    "options_popup_app_no_update_title": {
+        "message": "Updates not found"
+    },
+    "options_popup_app_no_update_description": {
+        "message": "Application updates not available"
+    },
+    "options_popup_app_update_title": {
+        "message": "Updates available"
+    },
+    "options_popup_app_update_description": {
+        "message": "Version $1 will be downloaded shortly"
     },
     "notification_content_blocker_overlimit_title": {
         "message": "Warning"

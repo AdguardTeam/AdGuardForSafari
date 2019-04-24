@@ -56,6 +56,33 @@ module.exports = (() => {
         showNotification({ title, subtitle, silent: false });
     };
 
+    /**
+     * Shows app update not found notification
+     */
+    const showAppUpdateNotFoundNotification = () => {
+        const title = i18n.__("options_popup_app_no_update_title.message");
+        const subtitle = i18n.__("options_popup_app_no_update_description.message");
+
+        showNotification({ title, subtitle, silent: false });
+    };
+
+    /**
+     * Shows app update found notification
+     *
+     * @param options
+     */
+    const showAppUpdateAvailableNotification = (options) => {
+        if (!options) {
+            return;
+        }
+
+        const title = i18n.__("options_popup_app_update_title.message");
+        const subtitle = i18n.__("options_popup_app_update_description.message")
+            .replace('$1', options.version);
+
+        showNotification({ title, subtitle, silent: false });
+    };
+
     const getFiltersUpdateResultMessage = (success, updatedFilters) => {
         const title = success
             ? i18n.__("options_popup_update_title.message")
@@ -185,6 +212,10 @@ module.exports = (() => {
                 showFiltersUpdatedNotification(options, showWindow);
             } else if (event === events.APPLICATION_UPDATED) {
                 showAppUpdatedNotification(options);
+            } else if (event === events.APPLICATION_UPDATE_FOUND) {
+                showAppUpdateAvailableNotification(options);
+            } else if (event === events.APPLICATION_UPDATE_NOT_FOUND) {
+                showAppUpdateNotFoundNotification();
             } else if (event === events.CONTENT_BLOCKER_UPDATED) {
                 if (options.rulesOverLimit) {
                     showRulesOverLimitNotification(showWindow);
