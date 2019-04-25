@@ -108,7 +108,7 @@
         "message": "N\u00famero de reglas:"
     },
     "options_filters_custom_step_final_filter_homepage": {
-        "message": "P\u00e1gina web:"
+        "message": "P\u00e1gina de inicio:"
     },
     "options_filters_custom_step_final_filter_url": {
         "message": "URL:"
@@ -123,7 +123,7 @@
         "message": "Suscribirse"
     },
     "options_filters_check_filters_update": {
-        "message": "Comprobar las actualizaciones de filtros"
+        "message": "Buscar actualizaciones de filtros"
     },
     "options_whitelist": {
         "message": "Lista blanca"
@@ -141,13 +141,13 @@
         "message": "Puede agregar sus propias reglas en&nbsp;este filtro. Esta opci\u00f3n es&nbsp;recomendada para usuarios avanzados que sepan HTML\/CSS. Lea <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>el tutorial<\/a> para&nbsp;saber como&nbsp;crear sus reglas."
     },
     "options_show_app_updated_notification": {
-        "message": "Notificar sobre las actualizaciones de las extensiones"
+        "message": "Notificar sobre las actualizaciones de la extensi\u00f3n"
     },
     "options_use_optimized_filters": {
         "message": "Usar filtros optimizados<span class='sp-table-row-info'>Listas de filtros optimizadas para el blockeo de contenido de Safari.<\/span>"
     },
     "options_popup_update_title": {
-        "message": "Filtros han sido actualizados"
+        "message": "Filtros actualizados correctamente"
     },
     "options_popup_update_error_title": {
         "message": "Error al actualizar los filtros"
@@ -255,10 +255,10 @@
         "message": "Reconocimiento"
     },
     "options_github": {
-        "message": "Github"
+        "message": "GitHub"
     },
     "onboarding_safari_desc": {
-        "message": "Marque la casilla cerca de \"AdGuard Safari Icon\" y \"AdGuard\" en preferencias de Safari"
+        "message": "Marque la casilla cerca del \"Icono de AdGuard Safari\" y \"AdGuard\" en las preferencias de Safari"
     },
     "onboarding_safari_btn": {
         "message": "Abrir preferencias"
