@@ -1,14 +1,5 @@
-/* 
-  InfoPlist.strings
-  AdGuard
-
-  Created by Dimitry Kolyshev on 21.02.2019.
-  Copyright © 2019 Adguard Software Ltd. All rights reserved.
-*/
-
 /* (No Comment) */
-"NSHumanReadableDescription" = "This extension manages injected script and extended css rules.";
+"NSHumanReadableDescription" = "此扩展程序应用Safari内容阻止API不支持的高级拦截规则。";
 
 /* Bundle display name */
-"CFBundleDisplayName" = "AdGuard Advanced Blocking";
-
+"CFBundleDisplayName" = "Adguard 高级拦截";
