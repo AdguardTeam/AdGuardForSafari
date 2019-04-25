@@ -137,14 +137,14 @@ do
             folder=${EXTENSION}
             if [ $oneskyfile = "blockerextension_${file}" ]; then
                 folder=${BLOCKEREXTENSION}
-                sed -i "" "s/NSHumanReadableDescriptionBlocker/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
-                sed -i "" "s/NSHumanReadableDescriptionBlocker/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
+                LC_CTYPE=C sed -i "" "s/NSHumanReadableDescriptionBlocker/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
+                LC_CTYPE=C sed -i "" "s/CFBundleDisplayNameBlocker/CFBundleDisplayName/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
             fi
 
             if [ $oneskyfile = "adv_blocking_extension_mod_${file}" ]; then
                 folder=${ADVANCED_BLOCKING_EXTENSION}
-                sed -i "" "s/NSHumanReadableDescriptionAdvBlocking/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
-                sed -i "" "s/NSHumanReadableDescriptionAdvBlocking/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
+                LC_CTYPE=C sed -i "" "s/NSHumanReadableDescriptionAdvBlocking/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
+                LC_CTYPE=C sed -i "" "s/CFBundleDisplayNameAdvBlocking/CFBundleDisplayName/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
             fi
 
             echo $folder
