@@ -178,3 +178,33 @@ sh SupportingScripts/localizations/import.sh .
 ```
 
 Change `.` to path to your project if you not in the root.
+
+## How to release standalone builds
+- update version `Config.xcconfig` and `package.json`
+- select xcode build configuration (Standalone-beta or Standalone)
+- build apps
+- notarize builds
+- publish release on Github
+- refresh `updates/updates.json` and `release.json` in gh-pages branch
+
+### Notarization commands
+#### Notarize request
+```
+xcrun altool --notarize-app --primary-bundle-id "com.adguard.safari.AdGuard" --username <ICLOUD_USERNAME> --password "@keychain:altool_access" --asc-provider <TEAM_ID> --file AdGuard\ for\ Safari.app.zip
+```
+#### Get notarization result
+```
+xcrun altool --notarization-info <REQUEST_ID -u <ICLOUD_USERNAME> --password "@keychain:altool_access"
+```
+#### Staple
+```
+xcrun stapler staple AdGuard\ for\ Safari.app.zip
+```
+
+#### Common issues
+https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/resolving_common_notarization_issues
+
+Use fixed `electron-osx-sign`
+```
+npm install -g electron-userland/electron-osx-sign#timestamp-server
+```
