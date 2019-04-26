@@ -1438,6 +1438,10 @@ li.active .toggler:before {
   animation: clockwise 2s linear infinite;
 }
 
+.about-updates--done:after {
+  display: none;
+}
+
 .onboarding {
   position: absolute;
   display: none;
