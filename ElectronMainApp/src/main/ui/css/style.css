@@ -1434,11 +1434,11 @@ li.active .toggler:before {
   }
 }
 
-.about-updates--updating:after {
+.about-updates--rotate:after {
   animation: clockwise 2s linear infinite;
 }
 
-.about-updates--done:after {
+.about-updates--hidden:after {
   display: none;
 }
 
