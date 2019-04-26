@@ -127,6 +127,7 @@ echo "========================= UPDATING InfoPlist FILES =======================
 file="InfoPlist.strings"
 
 oneskyfiles="extension_${file} blockerextension_${file} adv_blocking_extension_mod_${file}"
+oneskyfiles="blockerextension_${file}"
 
 for oneskyfile in $oneskyfiles
 do
@@ -137,14 +138,14 @@ do
             folder=${EXTENSION}
             if [ $oneskyfile = "blockerextension_${file}" ]; then
                 folder=${BLOCKEREXTENSION}
-                LC_CTYPE=C sed -i "" "s/NSHumanReadableDescriptionBlocker/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
-                LC_CTYPE=C sed -i "" "s/CFBundleDisplayNameBlocker/CFBundleDisplayName/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
+                node ./SupportingScripts/localizations/Resources/replace.js "NSHumanReadableDescriptionBlocker" "NSHumanReadableDescription" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
+                node ./SupportingScripts/localizations/Resources/replace.js "CFBundleDisplayNameBlocker" "CFBundleDisplayName" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
             fi
 
             if [ $oneskyfile = "adv_blocking_extension_mod_${file}" ]; then
                 folder=${ADVANCED_BLOCKING_EXTENSION}
-                LC_CTYPE=C sed -i "" "s/NSHumanReadableDescriptionAdvBlocking/NSHumanReadableDescription/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
-                LC_CTYPE=C sed -i "" "s/CFBundleDisplayNameAdvBlocking/CFBundleDisplayName/g" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
+                node ./SupportingScripts/localizations/Resources/replace.js "NSHumanReadableDescriptionAdvBlocking" "NSHumanReadableDescription" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
+                node ./SupportingScripts/localizations/Resources/replace.js "CFBundleDisplayNameAdvBlocking" "CFBundleDisplayName" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
             fi
 
             echo $folder
