@@ -31,6 +31,13 @@ module.exports = (function () {
      */
     const CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER = 99;
 
+    /**
+     * Custom filters ids range start
+     *
+     * @type {number}
+     */
+    const CUSTOM_FILTERS_START_ID = 1000;
+
     let tags = [];
     let groups = [];
     let groupsMap = {};
@@ -186,7 +193,7 @@ module.exports = (function () {
             }
         });
 
-        return max >= 1000 ? max + 1 : 1000;
+        return max >= CUSTOM_FILTERS_START_ID ? max + 1 : CUSTOM_FILTERS_START_ID;
     };
 
     const getCustomFilterInfo = (url, options, callback) => {
@@ -233,7 +240,7 @@ module.exports = (function () {
      * @param callback
      */
     const updateCustomFilter = (url, options, callback) => {
-        const { title } = options;
+        const { title, trusted } = options;
 
         serviceClient.loadFilterRulesBySubscriptionUrl(url, function (rules) {
             const filterData = parseFilterDataFromHeader(rules);
@@ -269,6 +276,7 @@ module.exports = (function () {
                 //custom filters have special fields
                 filter.customUrl = url;
                 filter.rulesCount = rulesCount;
+                filter.trusted = trusted;
 
                 filters.push(filter);
                 filtersMap[filter.filterId] = filter;
@@ -376,6 +384,7 @@ module.exports = (function () {
                 filter.customUrl = f.customUrl;
                 filter.rulesCount = f.rulesCount;
                 filter.removed = f.removed;
+                filter.trusted = f.trusted;
 
                 filters.push(filter);
                 filtersMap[filter.filterId] = filter;
@@ -555,6 +564,20 @@ module.exports = (function () {
         return filterIds;
     };
 
+    /**
+     * Is filter trusted
+     *
+     * @param filterId
+     * @return {boolean}
+     */
+    const isTrustedFilter = (filterId) => {
+        if (filterId < CUSTOM_FILTERS_START_ID) {
+            return true;
+        }
+        const filter = filtersMap[filterId];
+        return !!(filter && filter.trusted && filter.trusted === true);
+    };
+
     return {
         init: init,
         getFilterIdsForLanguage: getFilterIdsForLanguage,
@@ -568,6 +591,7 @@ module.exports = (function () {
         updateCustomFilter: updateCustomFilter,
         getCustomFilterInfo: getCustomFilterInfo,
         removeCustomFilter: removeCustomFilter,
+        isTrustedFilter: isTrustedFilter
     };
 
 })();

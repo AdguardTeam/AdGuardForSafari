@@ -104,10 +104,39 @@ module.exports = (() => {
         });
     };
 
+    const MASK_SCRIPT_RULE = "#%#";
+    const OPTIONS_DELIMITER = "$";
+    const REPLACE_OPTION = "replace";
+
+    /**
+     * If rules is trusted or not
+     * Untrusted rules are $replace or JS, css rules with urls in style text
+     *
+     * @param ruleText
+     */
+    const isTrustedRule = (ruleText) => {
+        if (ruleText.includes(MASK_SCRIPT_RULE)) {
+            return false;
+        }
+
+        const optionsDelimiterIndex = ruleText.indexOf(OPTIONS_DELIMITER);
+        if (optionsDelimiterIndex >= 0) {
+            const replaceOptionIndex = ruleText.indexOf(REPLACE_OPTION + '=');
+            if (replaceOptionIndex > optionsDelimiterIndex) {
+                return false;
+            }
+        }
+
+        //TODO: Add css url
+
+        return true;
+    };
+
     return {
-        loadFilterRulesFromStorage: loadFilterRulesFromStorage,
-        loadUserRules: loadUserRules,
-        processSaveFilterRulesToStorageEvents: processSaveFilterRulesToStorageEvents
+        loadFilterRulesFromStorage,
+        loadUserRules,
+        processSaveFilterRulesToStorageEvents,
+        isTrustedRule
     };
 })();
 

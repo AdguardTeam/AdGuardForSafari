@@ -170,8 +170,9 @@ module.exports = (() => {
          *
          * @param filterId Filter identifier
          * @param rulesTexts Array with filter rules
+         * @param isTrustedFilter custom filter can be trusted and untrusted, default is true
          */
-        const addRules = function (filterId, rulesTexts) {
+        const addRules = function (filterId, rulesTexts, isTrustedFilter = true) {
             if (!rulesTexts || !collections.isArray(rulesTexts)) {
                 log.debug('Something wrong with rules:' + rulesTexts);
                 return;
@@ -186,7 +187,9 @@ module.exports = (() => {
                     continue;
                 }
                 uniqueRules[ruleText] = true;
-                newRequestFilter.rules.push(ruleText);
+                if (isTrustedFilter || filterRules.isTrustedRule(ruleText)) {
+                    newRequestFilter.rules.push(ruleText);
+                }
             }
         };
 
@@ -202,7 +205,8 @@ module.exports = (() => {
                 filterId = filterId - 0;
                 if (filterId !== USER_FILTER_ID) {
                     const rulesTexts = rulesFilterMap[filterId];
-                    addRules(filterId, rulesTexts);
+                    const isTrustedFilter = subscriptions.isTrustedFilter(filterId);
+                    addRules(filterId, rulesTexts, isTrustedFilter);
                 }
             }
 
