@@ -36,6 +36,11 @@ module.exports = (() => {
             log.info('Updates not found');
             listeners.notifyListeners(events.APPLICATION_UPDATE_NOT_FOUND);
         });
+
+        updater.on('update-downloaded', () => {
+            log.info('Update downloaded');
+            listeners.notifyListeners(events.APPLICATION_UPDATE_DOWNLOADED);
+        });
     };
 
     /**

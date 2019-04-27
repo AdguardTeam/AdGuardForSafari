@@ -1508,8 +1508,22 @@ PageController.prototype = {
             }.bind(this)
         });
 
+        this.aboutUpdatesBlock = document.getElementById('about-updates');
+
         this._initBoardingScreen();
         this._initSafariExtensionsMessage();
+        this._initUpdatesBlock();
+    },
+
+    _initUpdatesBlock: function () {
+        if (!environmentOptions.updatesPermitted) {
+            return;
+        }
+
+        this.aboutUpdatesBlock.style.display = 'block';
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            type: 'checkUpdates'
+        }));
     },
 
     _initBoardingScreen: function () {
@@ -1616,6 +1630,24 @@ PageController.prototype = {
             event.preventDefault();
             return false;
         }, false);
+    },
+
+    onAppUpdateFound: function () {
+        this.aboutUpdatesBlock.innerText = i18n.__("options_about_updating.message");
+    },
+
+    onAppUpdateNotFound: function () {
+        this.aboutUpdatesBlock.classList.remove('about-updates--rotate');
+        this.aboutUpdatesBlock.classList.add('about-updates--hidden');
+        this.aboutUpdatesBlock.innerText = i18n.__("options_about_updates_not_found.message");
+    },
+
+    onAppUpdateDownloaded: function () {
+        this.aboutUpdatesBlock.classList.remove('about-updates--rotate');
+        this.aboutUpdatesBlock.classList.add('about-updates--hidden');
+        this.aboutUpdatesBlock.innerText = i18n.__("options_about_update_downloaded.message");
+
+        //TODO: Add relaunch button
     }
 };
 
@@ -1689,6 +1721,15 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.PROTECTION_STATUS_CHANGED:
                     controller.settings.showProtectionStatusWarning(options);
+                    break;
+                case EventNotifierTypes.APPLICATION_UPDATE_FOUND:
+                    controller.onAppUpdateFound(options);
+                    break;
+                case EventNotifierTypes.APPLICATION_UPDATE_NOT_FOUND:
+                    controller.onAppUpdateNotFound(options);
+                    break;
+                case EventNotifierTypes.APPLICATION_UPDATE_DOWNLOADED:
+                    controller.onAppUpdateDownloaded(options);
                     break;
             }
         });
