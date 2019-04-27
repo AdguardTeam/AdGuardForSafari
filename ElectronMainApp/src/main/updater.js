@@ -54,7 +54,8 @@ module.exports = (() => {
 
     return {
         initUpdater,
-        checkForUpdates }
+        checkForUpdates,
+    }
 })();
 
 
