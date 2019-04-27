@@ -1508,7 +1508,7 @@ PageController.prototype = {
             }.bind(this)
         });
 
-        //this._initBoardingScreen();
+        this._initBoardingScreen();
         this._initSafariExtensionsMessage();
     },
 
