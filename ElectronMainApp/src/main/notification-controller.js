@@ -1,4 +1,5 @@
-const { Notification } = require('electron');
+const { Notification, shell } = require('electron');
+const config = require('config');
 
 const listeners = require('./notifier');
 const events = require('./events');
@@ -52,8 +53,12 @@ module.exports = (() => {
         const subtitle = options.isMajorUpdate ?
             i18n.__("options_popup_version_update_description_major.message") :
             i18n.__("options_popup_version_update_description_minor.message");
+        const url = config.get('repoReleasesUrl');
+        const onClick = () => {
+            shell.openExternal(url);
+        };
 
-        showNotification({ title, subtitle, silent: false });
+        showNotification({ title, subtitle, onClick, silent: false });
     };
 
     const getFiltersUpdateResultMessage = (success, updatedFilters) => {
