@@ -1,7 +1,6 @@
 const { app, Menu, BrowserWindow } = require('electron');
 const updater = require('./updater');
 const i18n = require('../utils/i18n');
-const packageJson = require('../../package.json');
 const listeners = require('./notifier');
 const events = require('./events');
 
@@ -28,8 +27,6 @@ module.exports = (() => {
      * @param showMainWindow
      */
     const initMenu = (showMainWindow) => {
-        const isStandaloneBuild = packageJson["standalone-build"] === 'true';
-
         const template = [
             { 
                 label: 'AdGuard for Safari',
@@ -37,11 +34,6 @@ module.exports = (() => {
                     {
                         label: i18n.__('main_menu_about.message'),
                         click() { onAboutClicked(showMainWindow); }
-                    },
-                    {
-                        label: i18n.__('main_menu_check_updates.message'),
-                        click() { updater.checkForUpdates(); },
-                        visible: isStandaloneBuild
                     },
                     { type: 'separator' },
                     {

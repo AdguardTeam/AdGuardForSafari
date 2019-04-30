@@ -1410,6 +1410,7 @@ li.active .toggler:before {
   margin-bottom: 10px;
   cursor: pointer;
   position: relative;
+  display: none;
 }
 
 .about-updates:after {

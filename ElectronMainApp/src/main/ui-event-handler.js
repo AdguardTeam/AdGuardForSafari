@@ -10,6 +10,7 @@ const antibanner = require('./app/antibanner');
 const app = require('./app/app');
 const safariToolbar = require('safari-ext');
 const applicationApi = require('./api');
+const updater = require('./updater');
 
 /**
  * Initializes event listener
@@ -107,6 +108,9 @@ module.exports.init = function () {
             case  'enableProtection':
                 applicationApi.start();
                 break;
+            case  'checkUpdates':
+                updater.checkForUpdates();
+                break;
         }
     });
 
@@ -157,7 +161,8 @@ function processInitializeFrameScriptRequest() {
                 locale: app.getLocale(),
                 mobile: false
             },
-            appVersion: app.getVersion()
+            appVersion: app.getVersion(),
+            updatesPermitted: updater.isUpdatePermitted()
         },
         constants: {
             AntiBannerFiltersId: AntiBannerFiltersId

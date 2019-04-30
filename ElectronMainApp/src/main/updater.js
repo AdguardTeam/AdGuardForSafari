@@ -10,13 +10,11 @@ const events = require('./events');
  */
 module.exports = (() => {
 
-    let silent = true;
-
     /**
      * Initialize
      */
     const initUpdater = () => {
-        if (packageJson["standalone-build"] !== 'true') {
+        if (!isUpdatePermitted()) {
             return;
         }
 
@@ -31,16 +29,17 @@ module.exports = (() => {
 
         updater.on('update-available', (meta) => {
             log.info(`Update found version ${meta.version} at ${meta.update}`);
-            if (!silent) {
-                listeners.notifyListeners(events.APPLICATION_UPDATE_FOUND, meta);
-            }
+            listeners.notifyListeners(events.APPLICATION_UPDATE_FOUND, meta);
         });
 
         updater.on('update-not-available', () => {
             log.info('Updates not found');
-            if (!silent) {
-                listeners.notifyListeners(events.APPLICATION_UPDATE_NOT_FOUND);
-            }
+            listeners.notifyListeners(events.APPLICATION_UPDATE_NOT_FOUND);
+        });
+
+        updater.on('update-downloaded', () => {
+            log.info('Update downloaded');
+            listeners.notifyListeners(events.APPLICATION_UPDATE_DOWNLOADED);
         });
     };
 
@@ -48,13 +47,23 @@ module.exports = (() => {
      * Checks for updates with result notifications
      */
     const checkForUpdates = () => {
-        silent = false;
         updater.checkForUpdates();
+    };
+
+    /**
+     * Checks if updates are permitted
+     *
+     * @return {boolean}
+     */
+    const isUpdatePermitted = () => {
+        return packageJson["standalone-build"] === 'true';
     };
 
     return {
         initUpdater,
-        checkForUpdates }
+        checkForUpdates,
+        isUpdatePermitted,
+    }
 })();
 
 
