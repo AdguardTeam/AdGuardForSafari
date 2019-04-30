@@ -183,7 +183,7 @@
                         <div class="option-popup__content">
                             <div class="option-popup__table">
                                 <div class="option-popup__table-row">
-                                    <div class="option-popup__table-cell" i18n="options_filters_custom_step_final_filter_title"></div>
+                                    <div class="option-popup__table-cell option-popup__table-cell--title" i18n="options_filters_custom_step_final_filter_title"></div>
                                     <input id="custom-filter-popup-added-title" type="text" class="option-popup__input" i18n-plhr="options_popup_title_placeholder" placeholder="Enter a filter name">
                                 </div>
                                 <div class="option-popup__table-row">
@@ -214,6 +214,20 @@
                                         <a id="custom-filter-popup-added-url" href="#" target="_blank">
                                         </a>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="option-popup__checkbox">
+                                <div class="option-popup__table-row">
+                                    <input class="settings-checkboxes__checkbox"
+                                           id="custom-filter-popup-trusted"
+                                           type="checkbox">
+                                    <label class="settings-checkboxes__label"
+                                           for="custom-filter-popup-trusted"
+                                           i18n="options_popup_trusted_filter_title">
+                                    </label>
+                                </div>
+                                <div class="option-popup__table-row">
+                                    <div class="option-popup__desc option-popup__desc--filter" i18n="options_popup_trusted_filter_description"></div>
                                 </div>
                             </div>
                         </div>

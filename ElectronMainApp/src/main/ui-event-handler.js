@@ -74,8 +74,8 @@ module.exports.init = function () {
                 );
                 break;
             case 'subscribeToCustomFilter':
-                const { url, title } = message;
-                filters.subscribeToCustomFilter(url, { title }, (filter) => {
+                const { url, title, trusted } = message;
+                filters.subscribeToCustomFilter(url, { title, trusted }, (filter) => {
                     filters.addAndEnableFilters([filter.filterId]);
                 });
                 break;

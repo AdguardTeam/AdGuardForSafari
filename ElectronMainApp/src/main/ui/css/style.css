@@ -818,9 +818,8 @@ li.active .toggler:before {
 }
 .settings-checkboxes__label {
   position: relative;
-  padding-left: 40px;
-  font-size: 14px;
-  font-weight: 600;
+  padding-left: 35px;
+  font-size: 16px;
 }
 .settings-checkboxes__label:before {
   content: "";
@@ -1055,6 +1054,13 @@ li.active .toggler:before {
   color: rgba(27, 27, 27, 0.9);
 }
 
+.option-popup__desc--filter {
+  color: rgb(136, 136, 136);
+  font-size: 12px;
+  line-height: 15px;
+  padding-left: 35px;
+}
+
 .option-popup__desc--tac {
   text-align: center;
 }
@@ -1115,7 +1121,8 @@ li.active .toggler:before {
 }
 
 .option-popup__table-cell {
-  font-size: 14px;
+  color: rgb(77, 77, 77);
+  font-size: 16px;
   line-height: 22px;
 }
 
@@ -1131,6 +1138,10 @@ li.active .toggler:before {
   flex-grow: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
+}
+
+.option-popup__table-cell--title {
+  padding-top: 7px;
 }
 
 .empty-filters {
