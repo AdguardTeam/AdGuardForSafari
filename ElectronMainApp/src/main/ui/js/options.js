@@ -1522,15 +1522,19 @@ PageController.prototype = {
         }
 
         this.aboutUpdatesBlock.style.display = 'block';
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            type: 'checkUpdates'
-        }));
-
         this.aboutUpdatesRelaunch.addEventListener('click', (e) => {
             e.preventDefault();
             ipcRenderer.send('renderer-to-main', JSON.stringify({
                 type: 'updateRelaunch'
             }));
+        });
+
+        window.addEventListener('hashchange', () => {
+            if (document.location.hash === '#about') {
+                ipcRenderer.send('renderer-to-main', JSON.stringify({
+                    type: 'checkUpdates'
+                }));
+            }
         });
     },
 
