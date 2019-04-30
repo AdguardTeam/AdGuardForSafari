@@ -1442,6 +1442,19 @@ li.active .toggler:before {
   display: none;
 }
 
+.about-btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  margin-bottom: 10px;
+  color: #66b574;
+  text-decoration: underline;
+}
+
+.about-btn--hidden {
+  display: none;
+}
+
 .onboarding {
   position: absolute;
   display: none;
