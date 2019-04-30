@@ -1,5 +1,8 @@
 const { app, Menu, BrowserWindow } = require('electron');
+const updater = require('./updater');
 const i18n = require('../utils/i18n');
+const listeners = require('./notifier');
+const events = require('./events');
 
 /**
  * Module Menu
@@ -9,14 +12,30 @@ const i18n = require('../utils/i18n');
  */
 module.exports = (() => {
     /**
+     * On about clicked
+     */
+    const onAboutClicked = (showMainWindow) => {
+        showMainWindow(() => {
+            listeners.notifyListeners(events.SHOW_OPTIONS_ABOUT_TAB);
+        });
+    };
+
+    /**
      * Initialization method
      * Should be execute when the app is ready
+     *
+     * @param showMainWindow
      */
-    function initMenu() {
+    const initMenu = (showMainWindow) => {
         const template = [
             { 
                 label: 'AdGuard for Safari',
                 submenu: [
+                    {
+                        label: i18n.__('main_menu_about.message'),
+                        click() { onAboutClicked(showMainWindow); }
+                    },
+                    { type: 'separator' },
                     {
                         label: i18n.__('main_menu_hide.message'),
                         accelerator: 'cmd+h',
@@ -69,7 +88,7 @@ module.exports = (() => {
         ];
 
         Menu.setApplicationMenu(Menu.buildFromTemplate(template));
-    }
+    };
 
     return { initMenu }
 })();

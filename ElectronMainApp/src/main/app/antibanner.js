@@ -495,6 +495,7 @@ module.exports = (() => {
     const updateContentBlockerInfo = info => {
         contentBlockerInfo.rulesCount = info.rulesCount;
         contentBlockerInfo.rulesOverLimit = info.rulesOverLimit;
+        contentBlockerInfo.advancedBlockingRulesCount = info.advancedBlockingRulesCount;
     };
 
     /**
