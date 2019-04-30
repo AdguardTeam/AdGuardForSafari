@@ -51,6 +51,13 @@ module.exports = (() => {
     };
 
     /**
+     * Relaunch and install updates
+     */
+    const quitAndInstall = () => {
+        updater.quitAndInstall();
+    };
+
+    /**
      * Checks if updates are permitted
      *
      * @return {boolean}
@@ -63,6 +70,7 @@ module.exports = (() => {
         initUpdater,
         checkForUpdates,
         isUpdatePermitted,
+        quitAndInstall,
     }
 })();
 

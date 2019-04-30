@@ -111,6 +111,9 @@ module.exports.init = function () {
             case  'checkUpdates':
                 updater.checkForUpdates();
                 break;
+            case  'updateRelaunch':
+                updater.quitAndInstall();
+                break;
         }
     });
 

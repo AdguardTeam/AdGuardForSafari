@@ -1509,6 +1509,7 @@ PageController.prototype = {
         });
 
         this.aboutUpdatesBlock = document.getElementById('about-updates');
+        this.aboutUpdatesRelaunch = document.getElementById('about-updates-relaunch');
 
         this._initBoardingScreen();
         this._initSafariExtensionsMessage();
@@ -1524,6 +1525,13 @@ PageController.prototype = {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             type: 'checkUpdates'
         }));
+
+        this.aboutUpdatesRelaunch.addEventListener('click', (e) => {
+            e.preventDefault();
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                type: 'updateRelaunch'
+            }));
+        });
     },
 
     _initBoardingScreen: function () {
@@ -1647,7 +1655,7 @@ PageController.prototype = {
         this.aboutUpdatesBlock.classList.add('about-updates--hidden');
         this.aboutUpdatesBlock.innerText = i18n.__("options_about_update_downloaded.message");
 
-        //TODO: Add relaunch button
+        this.aboutUpdatesRelaunch.classList.remove('about-btn--hidden');
     }
 };
 
