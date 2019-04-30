@@ -9,7 +9,7 @@ const events = require('./events');
 const storage = require('./app/storage/storage');
 const settings = require('./app/settings-manager');
 
-const { app, shell, Tray, Menu } = require('electron');
+const { app, Tray, Menu } = require('electron');
 
 /**
  * Tray controller.
@@ -46,6 +46,15 @@ module.exports = (() => {
                 applicationApi.pause();
             }
         }
+    };
+
+    /**
+     * On about clicked
+     */
+    const onAboutClicked = () => {
+        tray.showMainWindow(() => {
+            listeners.notifyListeners(events.SHOW_OPTIONS_ABOUT_TAB);
+        });
     };
 
     /**
@@ -126,9 +135,7 @@ module.exports = (() => {
         const contextMenu = Menu.buildFromTemplate([
             {
                 label: i18n.__('tray_menu_about.message'),
-                click: () => {
-                    shell.openExternal('https://github.com/AdguardTeam/AdGuardForSafari');
-                }
+                click: onAboutClicked
             },
             {
                 label: i18n.__('tray_menu_preferences.message'),
