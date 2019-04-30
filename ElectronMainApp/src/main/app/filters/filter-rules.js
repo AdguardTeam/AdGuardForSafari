@@ -105,6 +105,7 @@ module.exports = (() => {
     };
 
     const MASK_SCRIPT_RULE = "#%#";
+    const MASK_CSS_COSMETIC_RULE = "#$#";
     const OPTIONS_DELIMITER = "$";
     const REPLACE_OPTION = "replace";
 
@@ -127,7 +128,11 @@ module.exports = (() => {
             }
         }
 
-        //TODO: Add css url
+        if (ruleText.includes(MASK_CSS_COSMETIC_RULE)) {
+            if (ruleText.toLowerCase().includes('url(')) {
+                return false;
+            }
+        }
 
         return true;
     };
