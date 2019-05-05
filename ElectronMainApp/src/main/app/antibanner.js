@@ -188,7 +188,9 @@ module.exports = (() => {
                 }
                 uniqueRules[ruleText] = true;
                 if (isTrustedFilter || filterRules.isTrustedRule(ruleText)) {
-                    newRequestFilter.rules.push(ruleText);
+                    if (!filterRules.isBannedRule(ruleText)) {
+                        newRequestFilter.rules.push(ruleText);
+                    }
                 }
             }
         };
