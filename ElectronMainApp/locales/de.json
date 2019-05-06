@@ -1,4 +1,34 @@
 {
+    "main_menu_about": {
+        "message": "\u00dcber AdGuard f\u00fcr Safari"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "Vertraut"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "Die Filter, die als vertrauensw\u00fcrdig markiert wurden, k\u00f6nnen leistungsstarke Filterregel-Modifikatoren verwenden, die in den falschen H\u00e4nden gef\u00e4hrlich sein k\u00f6nnen. Aktivieren Sie dieses Kontrollk\u00e4stchen nur, wenn Sie dem Filter vertrauen."
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "vertraut"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "Sie haben entschieden, diesem Filter zu vertrauen"
+    },
+    "options_about_update_check": {
+        "message": "\u00dcberpr\u00fcfe auf Updates"
+    },
+    "options_about_updating": {
+        "message": "Aktualisiere AdGuard f\u00fcr Safari"
+    },
+    "options_about_updates_not_found": {
+        "message": "AdGuard f\u00fcr Safari ist aktuell"
+    },
+    "options_about_update_downloaded": {
+        "message": "Fast auf dem neuesten Stand! Starten Sie AdGuard f\u00fcr Safari neu, um das Update abzuschlie\u00dfen."
+    },
+    "options_about_update_relaunch": {
+        "message": "Neu starten"
+    },
     "options_popup_title_placeholder": {
         "message": "Filternamen eingeben"
     },
@@ -36,7 +66,7 @@
         "message": "Filter"
     },
     "options_antibanner_info": {
-        "message": "%s Filter %s Regeln"
+        "message": "%s Filter %s Regeln %s erweiterte Regeln"
     },
     "options_filters_enabled": {
         "message": "Aktiviert"

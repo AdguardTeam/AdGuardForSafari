@@ -1,4 +1,34 @@
 {
+    "main_menu_about": {
+        "message": "\u95dc\u65bc AdGuard for Safari"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "\u53d7\u4fe1\u4efb\u7684"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "\u53d7\u4fe1\u4efb\u7684\u904e\u6ffe\u5668\u53ef\u4f7f\u7528\u5728\u932f\u8aa4\u7684\u624b\u4e2d\u53ef\u80fd\u662f\u5371\u96aa\u7684\u4e4b\u5f37\u5927\u7684\u904e\u6ffe\u898f\u5247\u4fee\u98fe\u8a9e\u3002\u9664\u975e\u60a8\u5b8c\u5168\u5730\u4fe1\u4efb\u5b83\uff0c\u5426\u5247\u52ff\u52fe\u9078\u8a72\u6838\u53d6\u6846\u3002"
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "\u53d7\u4fe1\u4efb\u7684"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "\u60a8\u5df2\u9078\u64c7\u4fe1\u4efb\u8a72\u904e\u6ffe\u5668"
+    },
+    "options_about_update_check": {
+        "message": "\u6b63\u5728\u6aa2\u67e5\u66f4\u65b0"
+    },
+    "options_about_updating": {
+        "message": "\u6b63\u5728\u66f4\u65b0AdGuard for Safari"
+    },
+    "options_about_updates_not_found": {
+        "message": "AdGuard for Safari\u70ba\u6700\u65b0\u7684"
+    },
+    "options_about_update_downloaded": {
+        "message": "\u5e7e\u4e4e\u70ba\u6700\u65b0\u7684\uff01\u91cd\u65b0\u555f\u52d5AdGuard for Safari\u4ee5\u5b8c\u6210\u66f4\u65b0\u3002"
+    },
+    "options_about_update_relaunch": {
+        "message": "\u91cd\u65b0\u555f\u52d5"
+    },
     "options_popup_title_placeholder": {
         "message": "\u8f38\u5165\u904e\u6ffe\u5668\u540d\u7a31"
     },
@@ -36,7 +66,7 @@
         "message": "\u904e\u6ffe\u5668"
     },
     "options_antibanner_info": {
-        "message": "%s \u904e\u6ffe\u5668 %s \u898f\u5247"
+        "message": "%s \u904e\u6ffe\u5668 %s \u898f\u5247 %s \u9032\u968e\u7684\u898f\u5247"
     },
     "options_filters_enabled": {
         "message": "\u5df2\u555f\u7528\uff1a"
@@ -230,7 +260,7 @@
         "message": "\u9000\u51fa"
     },
     "tray_menu_protection_start": {
-        "message": "\u555f\u7528AdGuard"
+        "message": "\u555f\u7528 AdGuard"
     },
     "options_last_update": {
         "message": "\u6700\u8fd1\u7684\u66f4\u65b0\uff1a"
