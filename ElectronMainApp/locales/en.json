@@ -5,6 +5,9 @@
     "main_menu_close_window": {
         "message": "Close window"
     },
+    "main_menu_about": {
+        "message": "About AdGuard for Safari"
+    },
     "name": {
         "message": "AdGuard AdBlocker"
     },
@@ -238,6 +241,21 @@
     },
     "options_about": {
         "message": "About"
+    },
+    "options_about_update_check": {
+        "message": "Checking for updates"
+    },
+    "options_about_updating": {
+        "message": "Updating AdGuard for Safari"
+    },
+    "options_about_updates_not_found": {
+        "message": "AdGuard for Safari is up to date"
+    },
+    "options_about_update_downloaded": {
+        "message": "Nearly up to date! Relaunch AdGuard for Safari to finish updating."
+    },
+    "options_about_update_relaunch": {
+        "message": "Relaunch"
     },
     "options_compare_btn": {
         "message": "How they compare"

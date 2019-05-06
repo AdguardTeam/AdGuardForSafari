@@ -1405,6 +1405,57 @@ li.active .toggler:before {
   text-decoration: underline;
 }
 
+.about-updates {
+  color: #252525;
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+  display: none;
+}
+
+.about-updates:after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  width: 18px;
+  right: 15px;
+  height: 15px;
+  background-image: url(../images/reload-ico-green.svg);
+}
+
+@-webkit-keyframes clockwise {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.about-updates--rotate:after {
+  animation: clockwise 2s linear infinite;
+}
+
+.about-updates--hidden:after {
+  display: none;
+}
+
+.about-btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  margin-bottom: 10px;
+  color: #66b574;
+  text-decoration: underline;
+}
+
+.about-btn--hidden {
+  display: none;
+}
+
 .onboarding {
   position: absolute;
   display: none;

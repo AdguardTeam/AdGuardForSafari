@@ -22,14 +22,7 @@ const mainMenuController = require('./src/main/main-menu.controller');
 let mainWindow;
 
 // Check updates
-const packageJson = require('./package.json');
-if (packageJson["standalone-build"] === 'true') {
-    const updater = require('electron-simple-updater');
-    updater.init({
-        channel: packageJson["standalone-beta"] === 'true' ? 'beta' : 'prod',
-        url: 'https://adguardteam.github.io/AdGuardForSafari/updates/updates.json'
-    });
-}
+require('./src/main/updater').initUpdater();
 
 // This package opens devtools only in devmode
 // No need to delete this line
@@ -142,7 +135,7 @@ app.on('ready', (() => {
         }
     }
 
-    mainMenuController.initMenu();
+    mainMenuController.initMenu(showWindow);
     tray = trayController.initTray(showWindow);
     toolbarController.initToolbarController(showWindow);
 }));
