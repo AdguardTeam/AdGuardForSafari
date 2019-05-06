@@ -105,8 +105,6 @@ module.exports = (() => {
     };
 
     const MASK_SCRIPT_RULE = "#%#";
-    const MASK_CSS_COSMETIC_RULE = "#$#";
-    const MASK_CSS_COSMETIC_RULE_EXCEPTION = "#@$#";
     const OPTIONS_DELIMITER = "$";
     const REPLACE_OPTION = "replace";
 
@@ -134,30 +132,11 @@ module.exports = (() => {
         return true;
     };
 
-    /**
-     * If rules is banned
-     * css rules with urls in style text
-     *
-     * @param ruleText
-     */
-    const isBannedRule = (ruleText) => {
-        if (ruleText.includes(MASK_CSS_COSMETIC_RULE) ||
-            ruleText.includes(MASK_CSS_COSMETIC_RULE_EXCEPTION)) {
-            if (ruleText.toLowerCase().includes('url(')) {
-                log.debug(`Rule ${ruleText} is not banned`);
-                return true;
-            }
-        }
-
-        return false;
-    };
-
     return {
         loadFilterRulesFromStorage,
         loadUserRules,
         processSaveFilterRulesToStorageEvents,
-        isTrustedRule,
-        isBannedRule
+        isTrustedRule
     };
 })();
 
