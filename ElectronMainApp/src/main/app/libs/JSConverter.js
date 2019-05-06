@@ -1,6 +1,6 @@
 /**
  * AdGuard -> Safari Content Blocker converter
- * Version 4.0.2
+ * Version 4.0.3
  * License: https://github.com/AdguardTeam/SafariContentBlockerConverterCompiler/blob/master/LICENSE
  */
 
@@ -2423,7 +2423,7 @@ var jsonFromFilters = (function () {
         /**
          * Safari content blocking format rules converter.
          */
-        const CONVERTER_VERSION = '4.0.2';
+        const CONVERTER_VERSION = '4.0.3';
         // Max number of CSS selectors per rule (look at compactCssRules function)
         const MAX_SELECTORS_PER_WIDE_RULE = 250;
 
@@ -2781,7 +2781,21 @@ var jsonFromFilters = (function () {
                 setWhiteList(rule, result);
                 addDomainOptions(result.trigger, rule);
 
+                validateCssFilterRule(result);
+
                 return result;
+            };
+
+            /**
+             * Validates url blocking rule and discards rules considered dangerous or invalid.
+             *
+             * @param rule
+             */
+            const validateCssFilterRule = rule => {
+                if (rule.action.type === "css" &&
+                    rule.action.css.includes("url(")) {
+                    throw new Error("Urls are not allowed in css styles");
+                }
             };
 
             /**
