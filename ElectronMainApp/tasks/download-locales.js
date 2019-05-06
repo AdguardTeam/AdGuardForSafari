@@ -17,9 +17,9 @@ const LOCALE_PAIRS = {
      */
     nb: 'no',
     /**
-     * Belarusian language locale code in oneskyapp is 'be-BY'
-     * chrome doesn't recognize belarusian language at all
-     * firefox regognizes 'be' code
+     * Belarussian language locale code in oneskyapp is 'be-BY'
+     * chrome doesn't recognize belarussian language at all
+     * firefox recognizes 'be' code
      */
     be: 'be-BY',
 };
@@ -93,7 +93,7 @@ const request = (url, locale) => {
             console.log(err);
             return locale + ' - Not OK';
         });
-}
+};
 
 /**
  * Download locales
@@ -120,6 +120,6 @@ const download = done => {
             done();
         })
         .catch(err => done(err));
-}
+};
 
 gulp.task('download-locales', download);

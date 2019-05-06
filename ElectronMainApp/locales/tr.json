@@ -1,4 +1,37 @@
 {
+    "main_menu_about": {
+        "message": "About AdGuard for Safari"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "Trusted"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "Trusted filters can use powerful filtering rules modifiers which can be dangerous in the wrong hands. Do not check this box unless you fully trust it."
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "trusted"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "You chose to trust this filter"
+    },
+    "options_about_update_check": {
+        "message": "Checking for updates"
+    },
+    "options_about_updating": {
+        "message": "Updating AdGuard for Safari"
+    },
+    "options_about_updates_not_found": {
+        "message": "AdGuard for Safari is up to date"
+    },
+    "options_about_update_downloaded": {
+        "message": "Nearly up to date! Relaunch AdGuard for Safari to finish updating."
+    },
+    "options_about_update_relaunch": {
+        "message": "Relaunch"
+    },
+    "options_popup_title_placeholder": {
+        "message": "Filtre ad\u0131 girin"
+    },
     "main_menu_hide": {
         "message": "Gizle"
     },
@@ -160,8 +193,8 @@
     },
     "options_popup_update_updated_more": {
         "message": {
-            "one": "%s filter updated: $2",
-            "other": "%s filtre g\u00fcncellendi : $2"
+            "one": "%s filtre g\u00fcncellendi: $2",
+            "other": "%s filtre g\u00fcncellendi: $2"
         }
     },
     "options_popup_version_update_title": {
@@ -277,7 +310,7 @@
     },
     "options_filters_update_period_number": {
         "message": {
-            "one": "Every hour",
+            "one": "Her saat",
             "other": "Her %s saatte"
         }
     },
@@ -291,10 +324,10 @@
         "message": "Oturum a\u00e7mada Safari i\u00e7in AdGuard'\u0131 ba\u015flat"
     },
     "settings_notification_title": {
-        "message": "Dikkat! AdGuard simgesi devre d\u0131\u015f\u0131"
+        "message": "Dikkat! AdGuard eklentileri devre d\u0131\u015f\u0131"
     },
     "settings_notification_text": {
-        "message": "Safari i\u00e7in AdGuard ayarlar\u0131n\u0131 y\u00f6netmek i\u00e7in bu simgeyi kullanabiilirsin. \u00d6rne\u011fin bir sitede reklam engellemek ya da bir reklam\u0131 el ile engellemek i\u00e7in. AdGuard Icon'\u0131 buradan <a href='#' id='notificationEnableIconLink'> aktifle\u015ftirebilirsin<\/a>."
+        "message": "Safari i\u00e7in AdGuard ayarlar\u0131n\u0131 y\u00f6netmek i\u00e7in bu eklentiyi kullanabilirsin. \u00d6rne\u011fin korumay\u0131 duraklatmak veya bir reklam\u0131 elle engellemek gibi. AdGuard simgesini ve Geli\u015fmi\u015f Engellemeyi <a href='#' id='notificationEnableIconLink'>buradan<\/a> etkinle\u015ftirebilirsiniz."
     },
     "settings_notification_protection_title": {
         "message": "Dikkat! Koruma devre d\u0131\u015f\u0131 b\u0131rak\u0131ld\u0131"

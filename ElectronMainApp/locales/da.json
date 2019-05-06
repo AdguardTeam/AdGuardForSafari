@@ -1,4 +1,37 @@
 {
+    "main_menu_about": {
+        "message": "Om AdGuard til Safari"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "Har tillid til"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "Filtre som du har tillid til, kan \u00e6ndre kraftige filtreringsregler, der kan v\u00e6re farlige i de forkerte h\u00e6nder. Afkryds ikke boksen medmindre du stoler p\u00e5 det."
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "har tillid til"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "Du har valgt at have tillid til dette filter"
+    },
+    "options_about_update_check": {
+        "message": "S\u00f8ger efter opdateringer"
+    },
+    "options_about_updating": {
+        "message": "Opdaterer AdGuard til Safari"
+    },
+    "options_about_updates_not_found": {
+        "message": "AdGuard til Safari er opdateret"
+    },
+    "options_about_update_downloaded": {
+        "message": "N\u00e6sten opdateret! Genstart AdGuard til Safari for at afslutte opdateringen."
+    },
+    "options_about_update_relaunch": {
+        "message": "Genstart"
+    },
+    "options_popup_title_placeholder": {
+        "message": "Indtast filternavn"
+    },
     "main_menu_hide": {
         "message": "Skjul"
     },
@@ -33,7 +66,7 @@
         "message": "Filtre"
     },
     "options_antibanner_info": {
-        "message": "%s filtre %s regler"
+        "message": "%s filtre %s regler %s avancerede regler"
     },
     "options_filters_enabled": {
         "message": "Aktiveret:"
@@ -291,10 +324,10 @@
         "message": "Start AdGuard til Safari ved Login"
     },
     "settings_notification_title": {
-        "message": "Opm\u00e6rksomhed! AdGuard ikonet blev deaktiveret"
+        "message": "Opm\u00e6rksomhed! AdGuard udvidelserne er deaktiveret"
     },
     "settings_notification_text": {
-        "message": "Du kan bruge dette ikon til at administrere AdGuard til Safari indstillingerne. For eksempel, pause blokeringen p\u00e5 en hjemmeside eller blokere en annonce manuelt.\nDu kan aktivere AdGuard Ikonet <a href='#' id='notificationEnableIconLink'>her<\/a>."
+        "message": "Du kan bruge disse udvidelser til at administrere AdGuard til Safari. For eksempel, pause blokeringen p\u00e5 en hjemmeside eller blokere en annonce manuelt.\nDu kan aktivere AdGuard Ikonet og Avanceret Blokering <a href='#' id='notificationEnableIconLink'>her<\/a>."
     },
     "settings_notification_protection_title": {
         "message": "Opm\u00e6rksomhed! Beskyttelsen blev deaktiveret"

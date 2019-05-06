@@ -1,4 +1,37 @@
 {
+    "main_menu_about": {
+        "message": "About AdGuard for Safari"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "Trusted"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "Trusted filters can use powerful filtering rules modifiers which can be dangerous in the wrong hands. Do not check this box unless you fully trust it."
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "trusted"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "You chose to trust this filter"
+    },
+    "options_about_update_check": {
+        "message": "Checking for updates"
+    },
+    "options_about_updating": {
+        "message": "Updating AdGuard for Safari"
+    },
+    "options_about_updates_not_found": {
+        "message": "AdGuard for Safari is up to date"
+    },
+    "options_about_update_downloaded": {
+        "message": "Nearly up to date! Relaunch AdGuard for Safari to finish updating."
+    },
+    "options_about_update_relaunch": {
+        "message": "Relaunch"
+    },
+    "options_popup_title_placeholder": {
+        "message": "Entrez le nom du filtre"
+    },
     "main_menu_hide": {
         "message": "Cacher"
     },
@@ -12,7 +45,7 @@
         "message": "Extension Adblock in\u00e9gal\u00e9e contre la publicit\u00e9 et les pop-ups. Bloque les publicit\u00e9s sur Facebook, Youtube et tous les autres sites."
     },
     "options_settings": {
-        "message": "Param\u00e8tres AdGuard pour Safari"
+        "message": "AdGuard pour Safari - Param\u00e9trages"
     },
     "options_general_settings": {
         "message": "G\u00e9n\u00e9ral"
