@@ -118,6 +118,7 @@ module.exports = (() => {
      */
     const isTrustedRule = (ruleText) => {
         if (ruleText.includes(MASK_SCRIPT_RULE)) {
+            log.debug(`Rule ${ruleText} is not trusted`);
             return false;
         }
 
@@ -125,6 +126,7 @@ module.exports = (() => {
         if (optionsDelimiterIndex >= 0) {
             const replaceOptionIndex = ruleText.indexOf(REPLACE_OPTION + '=');
             if (replaceOptionIndex > optionsDelimiterIndex) {
+                log.debug(`Rule ${ruleText} is not trusted`);
                 return false;
             }
         }
@@ -142,6 +144,7 @@ module.exports = (() => {
         if (ruleText.includes(MASK_CSS_COSMETIC_RULE) ||
             ruleText.includes(MASK_CSS_COSMETIC_RULE_EXCEPTION)) {
             if (ruleText.toLowerCase().includes('url(')) {
+                log.debug(`Rule ${ruleText} is not banned`);
                 return true;
             }
         }
