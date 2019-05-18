@@ -379,8 +379,6 @@ module.exports = (() => {
                 log.info('Custom filter info downloaded');
 
                 const filter = subscriptions.getFilter(filterId);
-                //In case filter is loaded again and was removed before
-                delete filter.removed;
 
                 successCallback(filter);
             } else {
