@@ -338,7 +338,6 @@ module.exports = (() => {
         let groupIds = [
             antiBannerFilterGroupsId.AD_BLOCKING_ID,
             antiBannerFilterGroupsId.PRIVACY_ID,
-            antiBannerFilterGroupsId.OTHER_ID,
             antiBannerFilterGroupsId.LANGUAGE_SPECIFIC_ID
         ];
 
@@ -380,8 +379,6 @@ module.exports = (() => {
                 log.info('Custom filter info downloaded');
 
                 const filter = subscriptions.getFilter(filterId);
-                //In case filter is loaded again and was removed before
-                delete filter.removed;
 
                 successCallback(filter);
             } else {

@@ -270,6 +270,10 @@ module.exports = (function () {
                     callback();
                     return;
                 }
+
+                //In case filter is loaded again and was removed before
+                delete filter.removed;
+                restoreCustomFilter(filter);
             } else {
                 filter = new SubscriptionFilter(filterId, groupId, defaultName, defaultDescription, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
                 filter.loaded = true;
@@ -307,6 +311,22 @@ module.exports = (function () {
     const saveCustomFilter = (filter) => {
         let customFilters = loadCustomFilters();
         customFilters.push(filter);
+
+        localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(customFilters));
+    };
+
+    /**
+     * Updates custom filter in storage
+     *
+     * @param filter
+     */
+    const restoreCustomFilter = (filter) => {
+        let customFilters = loadCustomFilters();
+        customFilters.forEach(f => {
+            if (f.filterId === filter.filterId) {
+                delete f.removed;
+            }
+        });
 
         localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(customFilters));
     };
