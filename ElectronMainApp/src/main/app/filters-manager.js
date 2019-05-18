@@ -338,7 +338,6 @@ module.exports = (() => {
         let groupIds = [
             antiBannerFilterGroupsId.AD_BLOCKING_ID,
             antiBannerFilterGroupsId.PRIVACY_ID,
-            antiBannerFilterGroupsId.OTHER_ID,
             antiBannerFilterGroupsId.LANGUAGE_SPECIFIC_ID
         ];
 
