@@ -82,6 +82,7 @@
 		F41DA7DD2201C81700C63708 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */; };
 		F41DA7E52201C81700C63708 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = F41DA7E42201C81700C63708 /* script.js */; };
 		F41DA7EB2201C81700C63708 /* AdvancedBlocking.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F41DA7D92201C81700C63708 /* AdvancedBlocking.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F44937BC2291D72500BAEFED /* scriptlets.js in Resources */ = {isa = PBXBuildFile; fileRef = F44937BB2291D72500BAEFED /* scriptlets.js */; };
 		F46D1322225E940B00282566 /* standalone.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F46D1321225E940B00282566 /* standalone.xcconfig */; };
 		F46D132D225E946500282566 /* standalone-beta.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F46D132C225E946500282566 /* standalone-beta.xcconfig */; };
 		F4757500222FF92200DE28C3 /* adv-blocking-content-rules.json in Resources */ = {isa = PBXBuildFile; fileRef = F47574FF222FF92200DE28C3 /* adv-blocking-content-rules.json */; };
@@ -383,6 +384,7 @@
 		F41DA7E32201C81700C63708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F41DA7E42201C81700C63708 /* script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
 		F41DA7E82201C81700C63708 /* AdvancedBlocking.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdvancedBlocking.entitlements; sourceTree = "<group>"; };
+		F44937BB2291D72500BAEFED /* scriptlets.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = scriptlets.js; sourceTree = "<group>"; };
 		F44ABA9821D4CE21004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/SafariExtensionViewController.strings"; sourceTree = "<group>"; };
 		F44ABA9921D4CE21004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		F44ABA9A21D4CE21004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 				F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */,
 				F41DA7E32201C81700C63708 /* Info.plist */,
 				F41DA7E42201C81700C63708 /* script.js */,
+				F44937BB2291D72500BAEFED /* scriptlets.js */,
 				F4F479FB221A05B600A68681 /* extended-css.js */,
 				F41DA7E82201C81700C63708 /* AdvancedBlocking.entitlements */,
 				F4D590122201C8D3002DCC2C /* ContentBlockerController.swift */,
@@ -1052,6 +1055,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4F479FC221A05B600A68681 /* extended-css.js in Resources */,
+				F44937BC2291D72500BAEFED /* scriptlets.js in Resources */,
 				F49E3FE6221F4D72001B9E86 /* InfoPlist.strings in Resources */,
 				F41DA7E52201C81700C63708 /* script.js in Resources */,
 			);

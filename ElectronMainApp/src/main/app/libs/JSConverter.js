@@ -1,6 +1,6 @@
 /**
  * AdGuard -> Safari Content Blocker converter
- * Version 4.0.3
+ * Version 4.1.0
  * License: https://github.com/AdguardTeam/SafariContentBlockerConverterCompiler/blob/master/LICENSE
  */
 
@@ -614,6 +614,16 @@ var jsonFromFilters = (function () {
                     buf.push(array[i]);
                 }
                 return buf.join(separator);
+            },
+
+            /**
+             * Get string before regexp first match
+             * @param {string} str
+             * @param {RegExp} rx
+             */
+            getBeforeRegExp: function (str, rx) {
+                let index = str.search(rx);
+                return str.substring(0, index);
             },
 
             /**
@@ -1246,6 +1256,150 @@ var jsonFromFilters = (function () {
 
     })(adguard, adguard.rules);
     /** end of base-filter-rule.js */
+    /** start of rule-converter.js */
+    (function (adguard, api) {
+        const stringUtils = adguard.utils.strings;
+        /**
+         * AdGuard scriptlet mask
+         */
+        const ADGUARD_SCRIPTLET_MASK = '${domains}#%#//scriptlet(${args})';
+        /**
+         * uBlock scriptlet rule mask
+         */
+        const UBO_SCRIPTLET_MASK_REG = /##script\:inject|##\s*\+js/;
+        const UBO_SCRIPTLET_MASK_1 = '##+js';
+        const UBO_SCRIPTLET_MASK_2 = '##script:inject';
+        /**
+         * AdBlock Plus snippet rule mask
+         */
+        const ABP_SCRIPTLET_MASK = '#$#';
+        /**
+         * AdGuard CSS rule mask
+         */
+        const ADG_CSS_MASK_REG = /#\$#.+?\s*\{.*\}\s*$/g;
+
+        /**
+         * Return array of strings separated by space which not in quotes
+         * @param {string} str
+         */
+        function getSentences(str) {
+            const reg = /'.*?'|".*?"|\S+/g;
+            return str.match(reg);
+        }
+
+        /**
+         * Returns substring enclosed in the widest braces
+         * @param {string} str
+         */
+        function getStringInBraces(str) {
+            const firstIndex = str.indexOf('(');
+            const lastIndex = str.lastIndexOf(')');
+            return str.substring(firstIndex + 1, lastIndex);
+        }
+
+        /**
+         * Wrap str in double qoutes and replaces single quotes if need
+         * @param {string} str
+         */
+        function wrapInDoubleQuotes(str) {
+            if (str[0] === '\'' && str[str.length - 1] === '\'') {
+                str = str.substring(1, str.length - 1);
+                str = str.replace(/\"/g, '\\"');
+            } else if (str[0] === '"' && str[str.length - 1] === '"') {
+                str = str.substring(1, str.length - 1);
+                str = str.replace(/\'/g, '\\\'');
+            }
+            return `"${str}"`
+        }
+
+
+        /**
+         * Replace string with data by placeholders
+         * @param {string} str
+         * @param {Object} data where keys is placeholdes names
+         */
+        function replacePlaceholders(str, data) {
+            return Object.keys(data).reduce((acc, key) => {
+                const reg = new RegExp(`\\$\\{${key}\\}`, 'g');
+                acc = acc.replace(reg, data[key]);
+                return acc;
+            }, str);
+        }
+
+        /**
+         * Convert string of UBO scriptlet rule to AdGuard scritlet rule
+         * @param {string} rule UBO scriptlet rule
+         */
+        function convertUBOScriptletRule(rule) {
+            const domains = stringUtils.getBeforeRegExp(rule, UBO_SCRIPTLET_MASK_REG);
+            const args = getStringInBraces(rule)
+                .split(/, /g)
+                .map((arg, index) => index === 0 ? `ubo-${arg}` : arg)
+                .map(arg => wrapInDoubleQuotes(arg))
+                .join(', ');
+
+            return replacePlaceholders(
+                ADGUARD_SCRIPTLET_MASK,
+                { domains, args }
+            );
+        }
+
+        /**
+         * Convert string of ABP scriptlet rule to AdGuard scritlet rule
+         * @param {string} rule UBO scriptlet rule
+         */
+        function convertABPSnippetRule(rule) {
+            const SEMICOLON_DIVIDER = /;(?=(?:(?:[^"]*"){2})*[^"]*$)/g;
+            const domains = stringUtils.substringBefore(rule, ABP_SCRIPTLET_MASK);
+            let args = stringUtils.substringAfter(rule, ABP_SCRIPTLET_MASK);
+            return args.split(SEMICOLON_DIVIDER)
+                .map(args => getSentences(args)
+                    .filter(arg => arg)
+                    .map((arg, index) => index === 0 ? `abp-${arg}` : arg)
+                    .map(arg => wrapInDoubleQuotes(arg))
+                    .join(', ')
+                )
+                .map(args => replacePlaceholders(ADGUARD_SCRIPTLET_MASK, { domains, args }))
+        }
+
+        /**
+         * Check is uBO scriptlet rule
+         * @param {string} rule rule text
+         */
+        function isUBOScriptletRule(rule) {
+            return (
+                    rule.indexOf(UBO_SCRIPTLET_MASK_1) > -1
+                    || rule.indexOf(UBO_SCRIPTLET_MASK_2) > -1
+                )
+                && UBO_SCRIPTLET_MASK_REG.test(rule);
+        };
+
+        /**
+         * Check is AdBlock Plus snippet
+         * @param {string} rule rule text
+         */
+        function isABPSnippetRule(rule) {
+            return rule.indexOf(ABP_SCRIPTLET_MASK) > -1 && rule.search(ADG_CSS_MASK_REG) === -1;
+        };
+
+        /**
+         * Convert external scriptlet rule to AdGuard scriptlet syntax
+         * @param {string} rule convert rule
+         */
+        function convertRule(rule) {
+            if (isUBOScriptletRule(rule)) {
+                return convertUBOScriptletRule(rule);
+            }
+            if (isABPSnippetRule(rule)) {
+                return convertABPSnippetRule(rule);
+            }
+            return rule;
+        }
+
+        api.ruleConverter = { convertRule };
+
+    })(adguard, adguard.rules);
+    /** end of rule-converter.js */
     /** start of filter-rule-builder.js */
     (function (adguard, api) {
 
@@ -1262,18 +1416,6 @@ var jsonFromFilters = (function () {
                 return false;
             }
 
-            // uBO scriptlet injections
-            if (ruleText.includes('##script:inject(') || ruleText.includes('##+js(')) {
-                return false;
-            }
-
-            // Check ABP-snippets
-            if (ruleText.includes('#$#')) {
-                if (!/#\$#.+{.*}\s*$/.test(ruleText)) {
-                    return false;
-                }
-            }
-
             return true;
         };
 
@@ -1283,7 +1425,7 @@ var jsonFromFilters = (function () {
          * @param ruleText Rule text
          * @returns Filter rule object.
          */
-        const createRule = function (ruleText) {
+        const _createRule = function (ruleText) {
 
             ruleText = ruleText ? ruleText.trim() : null;
             if (!ruleText) {
@@ -1317,7 +1459,9 @@ var jsonFromFilters = (function () {
                 }
 
                 if (api.FilterRule.findRuleMarker(ruleText, api.ScriptFilterRule.RULE_MARKERS, api.ScriptFilterRule.RULE_MARKER_FIRST_CHAR)) {
-                    return new api.ScriptFilterRule(ruleText);
+                    return api.ScriptletRule.isAdguardScriptletRule(ruleText)
+                        ? new api.ScriptletRule(ruleText)
+                        : new api.ScriptFilterRule(ruleText);
                 }
 
                 return new api.UrlFilterRule(ruleText);
@@ -1326,6 +1470,22 @@ var jsonFromFilters = (function () {
             }
 
             return null;
+        };
+
+        /**
+         * Convert rules to AdGuard syntax and create rule
+         *
+         * @param {string} ruleText Rule text
+         * @returns Filter rule object. Either UrlFilterRule or CssFilterRule or ScriptFilterRule.
+         */
+        const createRule = (ruleText) => {
+            const convertedRule = api.ruleConverter.convertRule(ruleText);
+            if (Array.isArray(convertedRule)) {
+                const rules = convertedRule.map(rt => _createRule(rt));
+                return new api.CompositeRule(ruleText, rules);
+            }
+
+            return _createRule(convertedRule);
         };
 
         api.builder = {
@@ -2413,6 +2573,196 @@ var jsonFromFilters = (function () {
 
     })(adguard, adguard.rules);
     /** end of script-filter-rule.js */
+    /** start of scriptlet-rule.js */
+    (function (adguard, api) {
+        const stringUtils = adguard.utils.strings;
+
+        /**
+         * AdGuard scriptlet rule mask
+         */
+        const ADG_SCRIPTLET_MASK = '//scriptlet';
+
+        /**
+         * Helper to accumulate an array of strings char by char
+         */
+        function wordSaver() {
+            let str = '';
+            let strs = [];
+            const saveSymb = (s) => str += s;
+            const saveStr = () => {
+                strs.push(str);
+                str = '';
+            };
+            const getAll = () => [...strs];
+            return { saveSymb, saveStr, getAll };
+        };
+
+        /**
+         * Iterate over iterable argument and evaluate current state with transitions
+         * @param {string} init first transition name
+         * @param {Array|Collection|string} iterable
+         * @param {Object} transitions transtion functions
+         * @param {any} args arguments which should be passed to transition functions
+         */
+        function iterateWithTransitions(iterable, transitions, init, args) {
+            let state = init || Object.keys(transitions)[0];
+            for (let i = 0; i < iterable.length; i++) {
+                state = transitions[state](iterable, i, args);
+            }
+            return state;
+        }
+
+        /**
+         * Parse and validate scriptlet rule
+         * @param {*} ruleText
+         * @returns {{name: string, args: Array<string>}}
+         */
+        function parseRule(ruleText) {
+            ruleText = stringUtils.substringAfter(ruleText, ADG_SCRIPTLET_MASK);
+            /**
+             * Transition names
+             */
+            const TRANSITION = {
+                OPENED: 'opened',
+                PARAM: 'param',
+                CLOSED: 'closed',
+            };
+
+            /**
+             * Transition function: the current index position in start, end or between params
+             * @param {string} rule
+             * @param {number} index
+             * @param {Object} Object
+             * @property {Object} Object.sep contains prop symb with current separator char
+             */
+            const opened = (rule, index, { sep }) => {
+                const char = rule[index];
+                switch (char) {
+                    case ' ':
+                    case '(':
+                    case ',':
+                        return TRANSITION.OPENED;
+                    case '\'':
+                    case '"':
+                        sep.symb = char;
+                        return TRANSITION.PARAM
+                    case ')':
+                        return index === rule.length - 1
+                            ? TRANSITION.CLOSED
+                            : TRANSITION.OPENED;
+                };
+            };
+            /**
+             * Transition function: the current index position inside param
+             * @param {string} rule
+             * @param {number} index
+             * @param {Object} Object
+             * @property {Object} Object.sep contains prop `symb` with current separator char
+             * @property {Object} Object.saver helper which allow to save strings by car by char
+             */
+            const param = (rule, index, { saver, sep }) => {
+                const char = rule[index];
+                switch (char) {
+                    case '\'':
+                    case '"':
+                        const before = rule[index - 1];
+                        if (char === sep.symb && before !== '\\') {
+                            sep.symb = null;
+                            saver.saveStr();
+                            return TRANSITION.OPENED;
+                        }
+                    default:
+                        saver.saveSymb(char);
+                        return TRANSITION.PARAM;
+                }
+            };
+            const transitions = {
+                [TRANSITION.OPENED]: opened,
+                [TRANSITION.PARAM]: param,
+                [TRANSITION.CLOSED]: () => { }
+            };
+            const sep = { symb: null };
+            const saver = wordSaver();
+            const state = iterateWithTransitions(ruleText, transitions, TRANSITION.OPENED, { sep, saver });
+            if (state !== 'closed') {
+                throw new Error(`Invalid scriptlet rule ${ruleText}`);
+            }
+
+            const args = saver.getAll();
+            return {
+                name: args[0],
+                args: args.slice(1)
+            };
+        }
+
+
+        /**
+         * JS Scriplet rule constructor
+         * @constructor ScriptletRule
+         * @property {string} ruleText
+         */
+        function ScriptletRule(ruleText) {
+            this.ruleText = ruleText;
+            this.whiteListRule = ruleText.includes(api.FilterRule.MASK_SCRIPT_EXCEPTION_RULE);
+            const mask = this.whiteListRule
+                ? api.FilterRule.MASK_SCRIPT_EXCEPTION_RULE
+                : api.FilterRule.MASK_SCRIPT_RULE;
+            const domain = adguard.utils.strings.substringBefore(ruleText, mask);
+            domain && this.loadDomains(domain);
+            const parseResult = parseRule(ruleText);
+            this.scriptlet = parseResult.name;
+            this.scriptletParam =  JSON.stringify(parseResult);
+        };
+
+        /**
+         * Check is AdGuard scriptlet rule
+         * @static
+         */
+        ScriptletRule.isAdguardScriptletRule = rule => rule.indexOf(ADG_SCRIPTLET_MASK) > -1;
+
+        /**
+         * Extends BaseFilterRule
+         */
+        ScriptletRule.prototype = Object.create(api.FilterRule.prototype);
+        ScriptletRule.prototype.constructor = ScriptletRule;
+
+        /**
+         * @static ScriptletRule
+         */
+        api.ScriptletRule = ScriptletRule;
+
+    })(adguard, adguard.rules);
+    /** end of scriptlet-rule.js */
+    /** start of composite-rule.js */
+    (function (api) {
+
+        /**
+         * This rule may contain a list of rules generated from one complex ruleText
+         * @constructor
+         *
+         * @example
+         * input
+         * ABP snippet rule
+         * `example.org#$#hide-if-has-and-matches-style someSelector; hide-if-contains someSelector2`
+         *
+         * output
+         * Adguard scriptlet rules
+         * `example.org#%#//scriptlet("hide-if-has-and-matches-style", "someSelector")`
+         * `example.org#%#//scriptlet("hide-if-contains", "someSelector2")`
+         *
+         */
+        function CompositeRule(ruleText, rules) {
+            this.ruleText = ruleText;
+            this.rules = rules;
+        };
+
+        /**
+         * @static ScriptletRule
+         */
+        api.CompositeRule = CompositeRule;
+
+    })(adguard.rules);
+    /** end of composite-rule.js */
     /** start of converter.js */
     /**
      * Converts URLs in the AdGuard format to the format supported by Safari
@@ -2423,7 +2773,7 @@ var jsonFromFilters = (function () {
         /**
          * Safari content blocking format rules converter.
          */
-        const CONVERTER_VERSION = '4.0.3';
+        const CONVERTER_VERSION = '4.1.0';
         // Max number of CSS selectors per rule (look at compactCssRules function)
         const MAX_SELECTORS_PER_WIDE_RULE = 250;
 
@@ -2445,6 +2795,7 @@ var jsonFromFilters = (function () {
          */
         const URL_FILTER_CSS_RULES = ".*";
         const URL_FILTER_SCRIPT_RULES = ".*";
+        const URL_FILTER_SCRIPTLET_RULES = ".*";
 
         /**
          * Converter implementation.
@@ -2971,12 +3322,36 @@ var jsonFromFilters = (function () {
                 return result;
             };
 
+            /**
+             * Converts scriptlet rule
+             *
+             * @param rule
+             */
+            const convertScriptletRule = rule => {
+                const result = {
+                    trigger: {
+                        "url-filter": URL_FILTER_SCRIPTLET_RULES
+                    },
+                    action: {
+                        type: "scriptlet",
+                        scriptlet: rule.scriptlet,
+                        scriptletParam: rule.scriptletParam
+                    }
+                };
+
+                setWhiteList(rule, result);
+                addDomainOptions(result.trigger, rule);
+
+                return result;
+            };
+
             // Expose AGRuleConverter API
             return {
-                convertCssFilterRule: convertCssFilterRule,
-                convertUrlFilterRule: convertUrlFilterRule,
-                convertScriptFilterRule: convertScriptFilterRule,
-                isSingleOption: isSingleOption
+                convertCssFilterRule,
+                convertUrlFilterRule,
+                convertScriptFilterRule,
+                convertScriptletRule,
+                isSingleOption
             }
         })();
 
@@ -3066,6 +3441,8 @@ var jsonFromFilters = (function () {
                 result = AGRuleConverter.convertUrlFilterRule(rule);
             } else if (rule instanceof adguard.rules.ScriptFilterRule) {
                 result = AGRuleConverter.convertScriptFilterRule(rule);
+            } else if (rule instanceof adguard.rules.ScriptletRule) {
+                result = AGRuleConverter.convertScriptletRule(rule);
             } else {
                 throw new Error('Rule is not supported: ' + rule);
             }
@@ -3314,7 +3691,11 @@ var jsonFromFilters = (function () {
                     if (rule.isBadFilter && rule.isBadFilter()) {
                         badFilterExceptions.push(rule.badFilter);
                     } else {
-                        agRules.push(rule);
+                        if (rule instanceof adguard.rules.CompositeRule) {
+                            rule.rules.forEach(r => agRules.push(r));
+                        } else {
+                            agRules.push(rule);
+                        }
                     }
                 }
             }
@@ -3368,6 +3749,8 @@ var jsonFromFilters = (function () {
                 extendedCssBlockingGenericDomainSensitive: [],
                 // Elemhide rules (##) with domain restrictions
                 extendedCssBlockingDomainSensitive: [],
+                // Scriptlet rules (#%#//scriptlet)
+                scriptlets: [],
                 // Errors
                 errors: []
             };
@@ -3382,6 +3765,10 @@ var jsonFromFilters = (function () {
             // Script rules (#%#)
             let scriptRules = [];
             const scriptExceptionRules = [];
+
+            // Scriptlets
+            let scriptlets = [];
+            const scriptletsExceptions = [];
 
             const parsedRules = parseAGRules(rules, contentBlocker.errors);
 
@@ -3418,6 +3805,11 @@ var jsonFromFilters = (function () {
                     } else if (item.action.type === 'ignore-previous-rules' && agRule.script) {
                         // #@%# rules
                         scriptExceptionRules.push(item);
+                    } else if (item.action.type === 'scriptlet' && advancedBlocking) {
+                        scriptlets.push(item);
+                    } else if (item.action.type === 'ignore-previous-rules' && agRule.scriptlet) {
+                        // #@%#//scriptlet
+                        scriptletsExceptions.push(item);
                     } else if (item.action.type === 'ignore-previous-rules' &&
                         (item.action.selector && item.action.selector !== '')) {
                         // #@# rules
@@ -3469,6 +3861,9 @@ var jsonFromFilters = (function () {
                 // Applying script exceptions
                 scriptRules = applyActionExceptions(scriptRules, scriptExceptionRules, 'script');
                 contentBlocker.script = scriptRules;
+
+                scriptlets = applyActionExceptions(scriptlets, scriptletsExceptions, 'scriptlet');
+                contentBlocker.scriptlets = scriptlets;
             }
 
             const convertedCount = rules.length - contentBlocker.errors.length;
@@ -3480,6 +3875,7 @@ var jsonFromFilters = (function () {
             message += '\nExceptions Elemhide (wide): ' + contentBlocker.cssBlockingGenericHideExceptions.length;
             message += '\nElemhide rules (domain-sensitive): ' + contentBlocker.cssBlockingDomainSensitive.length;
             message += '\nScript rules: ' + contentBlocker.script.length;
+            message += '\nScriptlets rules: ' + contentBlocker.scriptlets.length;
             message += '\nExtended Css Elemhide rules (wide): ' + contentBlocker.extendedCssBlockingWide.length;
             message += '\nExtended Css Elemhide rules (generic domain sensitive): ' + contentBlocker.extendedCssBlockingGenericDomainSensitive.length;
             message += '\nExtended Css Elemhide rules (domain-sensitive): ' + contentBlocker.extendedCssBlockingDomainSensitive.length;
@@ -3539,6 +3935,7 @@ var jsonFromFilters = (function () {
             if (advancedBlocking) {
                 let advancedBlocker = [];
                 advancedBlocker = advancedBlocker.concat(contentBlocker.script);
+                advancedBlocker = advancedBlocker.concat(contentBlocker.scriptlets);
                 advancedBlocker = advancedBlocker.concat(contentBlocker.scriptJsInjectExceptions);
                 advancedBlocker = advancedBlocker.concat(contentBlocker.extendedCssBlockingWide);
                 advancedBlocker = advancedBlocker.concat(contentBlocker.extendedCssBlockingGenericDomainSensitive);

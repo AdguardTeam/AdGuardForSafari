@@ -273,6 +273,7 @@ module.exports = (function () {
 
                 //In case filter is loaded again and was removed before
                 delete filter.removed;
+                filter.trusted = trusted;
                 restoreCustomFilter(filter);
             } else {
                 filter = new SubscriptionFilter(filterId, groupId, defaultName, defaultDescription, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
@@ -325,6 +326,7 @@ module.exports = (function () {
         customFilters.forEach(f => {
             if (f.filterId === filter.filterId) {
                 delete f.removed;
+                f.trusted = filter.trusted;
             }
         });
 
@@ -595,6 +597,7 @@ module.exports = (function () {
             return true;
         }
         const filter = filtersMap[filterId];
+        console.log(filter.trusted);
         return !!(filter && filter.trusted && filter.trusted === true);
     };
 

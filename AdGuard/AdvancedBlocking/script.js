@@ -62,6 +62,24 @@
     };
 
     /**
+     * Applies scriptlets
+     *
+     * @param scriptletsData Array with scriptlets data
+     */
+    const applyScriptlets = function (scriptletsData) {
+        if (!scriptletsData || !scriptletsData.length) {
+            return;
+        }
+
+        console.log('(AdGuard Advanced Blocking) scriptlets length: ' + scriptletsData.length);
+        scriptletsData.forEach(function (s) {
+            const param = JSON.parse(s);
+            param.engine = "safari-extension";
+            scriptlets && scriptlets.invoke(param);
+        });
+    };
+
+    /**
      * Applies injected script and css
      *
      * @param data
@@ -71,6 +89,7 @@
 
         applyScripts(data.scripts);
         applyExtendedCss(data.css);
+        applyScriptlets(data.scriptlets);
 
         console.log('(AdGuard Advanced Blocking) Applying scripts and css - done');
     };
