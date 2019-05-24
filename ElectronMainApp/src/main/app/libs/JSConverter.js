@@ -1479,13 +1479,36 @@ var jsonFromFilters = (function () {
          * @returns Filter rule object. Either UrlFilterRule or CssFilterRule or ScriptFilterRule.
          */
         const createRule = (ruleText) => {
-            const convertedRule = api.ruleConverter.convertRule(ruleText);
-            if (Array.isArray(convertedRule)) {
-                const rules = convertedRule.map(rt => _createRule(rt));
-                return new api.CompositeRule(ruleText, rules);
+            let conversionResult = null;
+            try {
+                conversionResult = api.ruleConverter.convertRule(ruleText);
+            } catch (ex) {
+                adguard.console.debug('Cannot convert rule: {1}, cause {2}', ruleText, ex);
             }
 
-            return _createRule(convertedRule);
+            if (!conversionResult) {
+                return null;
+            }
+
+            if (Array.isArray(conversionResult)) {
+                const rules = conversionResult
+                    .map(rt => _createRule(rt))
+                    .filter(rule => rule !== null);
+
+                // composite rule shouldn't be with without rules inside it
+                if (rules.length === 0) {
+                    return null;
+                }
+
+                return new api.CompositeRule(ruleText, rules);
+            }
+            const rule = _createRule(conversionResult);
+            if (conversionResult !== ruleText) {
+                rule.ruleText = ruleText;
+                rule.convertedRuleText = conversionResult;
+            }
+
+            return rule;
         };
 
         api.builder = {
