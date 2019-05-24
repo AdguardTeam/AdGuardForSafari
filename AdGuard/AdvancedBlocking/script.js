@@ -9,7 +9,7 @@
 (() => {
     /**
      * Execute scripts in a page context and cleanup itself when execution completes
-     * @param {string} scripts Scripts array to execute
+     * @param [string] scripts Scripts array to execute
      */
     const executeScripts = function (scripts) {
         // Wrap with try catch
@@ -72,11 +72,15 @@
         }
 
         console.log('(AdGuard Advanced Blocking) scriptlets length: ' + scriptletsData.length);
-        scriptletsData.forEach(function (s) {
-            const param = JSON.parse(s);
-            param.engine = "safari-extension";
-            scriptlets && scriptlets.invoke(param);
-        });
+        const scriptletExecutableScripts = scriptletsData
+            .map((s) => {
+                const param = JSON.parse(s);
+                param.engine = "safari-extension";
+                const code = scriptlets && scriptlets.invoke(param);
+                return code ? code : '';
+            });
+
+        executeScripts(scriptletExecutableScripts);
     };
 
     /**
