@@ -711,7 +711,7 @@ const AntiBannerFilters = function (options) {
         });
 
         if (filter.trusted) {
-            tagDetails += `<div class="opt-name__tag"
+            tagDetails += `<div class="opt-name__tag tag-trusted"
                                 data-tooltip="${i18n.__('options_filters_filter_trusted_tag_desc.message')}">
                                 #${i18n.__('options_filters_filter_trusted_tag.message')}
                            </div>`;
@@ -737,7 +737,7 @@ const AntiBannerFilters = function (options) {
                                     ${i18n.__('options_filters_updated.message', timeUpdatedText)}
                                 </div>
                             </div>
-                            <div class="opt-name__info-labels opt-name__info-labels--tags">
+                            <div class="opt-name__info-labels opt-name__info-labels--tags tags-container">
                                 ${tagDetails}
                             </div>
                         </div>
@@ -1285,6 +1285,19 @@ const AntiBannerFilters = function (options) {
 
             filterEl.querySelector('.last-update-time').textContent = `${i18n.__('options_filters_updated.message', timeUpdatedText)}`;
             filterEl.querySelector('.filter-version-desc').textContent = `${i18n.__('options_filters_version.message', filter.version)}`;
+            filterEl.querySelector('.title').textContent = filter.name;
+
+            if (!filter.trusted) {
+                filterEl.querySelector('.tags-container').removeChild(filterEl.querySelector('.tag-trusted'));
+            } else {
+                if (!filterEl.querySelector('.tag-trusted')) {
+                    const tagTrusted = `<div class="opt-name__tag tag-trusted"
+                                        data-tooltip="${i18n.__('options_filters_filter_trusted_tag_desc.message')}">
+                                        #${i18n.__('options_filters_filter_trusted_tag.message')}
+                                   </div>`;
+                    filterEl.querySelector('.tags-container').appendChild(Utils.htmlToElement(tagTrusted));
+                }
+            }
         }
     }
 
