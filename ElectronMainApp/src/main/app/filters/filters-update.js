@@ -303,7 +303,7 @@ module.exports = (() => {
 
             dfds.push((function (filter, filters) {
                 return new Promise((resolve) => {
-                    subscriptions.updateCustomFilter(filter.customUrl, function (filterId) {
+                    subscriptions.updateCustomFilter(filter.customUrl, { title: filter.name, trusted: filter.trusted }, function (filterId) {
                         if (filterId) {
                             filters.push(filter);
                         }

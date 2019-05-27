@@ -265,15 +265,21 @@ module.exports = (function () {
             });
 
             if (filter) {
+
+                //In case filter was removed and is loading again now
+                delete filter.removed;
+                filter.trusted = trusted;
+                filter.name = title;
+
+                restoreCustomFilter(filter);
+
+                listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
+
                 if (version && !versionUtils.isGreaterVersion(version, filter.version)) {
                     log.warn('Update version is not greater');
                     callback();
                     return;
                 }
-
-                //In case filter is loaded again and was removed before
-                delete filter.removed;
-                restoreCustomFilter(filter);
             } else {
                 filter = new SubscriptionFilter(filterId, groupId, defaultName, defaultDescription, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
                 filter.loaded = true;
@@ -325,6 +331,8 @@ module.exports = (function () {
         customFilters.forEach(f => {
             if (f.filterId === filter.filterId) {
                 delete f.removed;
+                f.trusted = filter.trusted;
+                f.title = filter.title;
             }
         });
 
