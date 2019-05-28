@@ -19,8 +19,12 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             
             // Content script requests scripts and css for current page
             if (messageName == "getAdvancedBlockingData") {
-                let data: [String : Any]? = ["data": self.contentBlockerController.getData(url: properties?.url)];
-                page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data);
+                do {
+                    let data: [String : Any]? = ["data": try self.contentBlockerController.getData(url: properties?.url)];
+                    page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data);
+                } catch {
+                    NSLog("Error handling message (\(messageName)) from a script injected into (\(String(describing: properties?.url))) with userInfo (\(userInfo ?? [:])): \(error)");
+                }
             }
         }
     }
