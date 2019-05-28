@@ -139,7 +139,7 @@ module.exports = (() => {
             title,
             subtitle: text,
             onClick: getShowFiltersTabOnClick(showMainWindow),
-            silent: true
+            silent: !options.forceUpdate
         });
     };
 

@@ -67,19 +67,17 @@ module.exports = (() => {
      */
     const checkAntiBannerFiltersUpdate = (forceUpdate, filters) => {
         const onSuccess = (updatedFilters) => {
-            if (forceUpdate) {
-                listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
-                    success: true,
-                    updatedFilters: updatedFilters
-                });
-            }
+            listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
+                success: true,
+                updatedFilters: updatedFilters,
+                forceUpdate: forceUpdate
+            });
         };
         const onError = () => {
-            if (forceUpdate) {
-                listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
-                    success: false
-                });
-            }
+            listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
+                success: false,
+                forceUpdate: forceUpdate
+            });
         };
 
         log.info("Start checking filters updates..");
@@ -303,7 +301,7 @@ module.exports = (() => {
 
             dfds.push((function (filter, filters) {
                 return new Promise((resolve) => {
-                    subscriptions.updateCustomFilter(filter.customUrl, function (filterId) {
+                    subscriptions.updateCustomFilter(filter.customUrl, { title: filter.name, trusted: filter.trusted }, function (filterId) {
                         if (filterId) {
                             filters.push(filter);
                         }
