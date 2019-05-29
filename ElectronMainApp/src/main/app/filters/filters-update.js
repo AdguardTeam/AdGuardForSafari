@@ -67,19 +67,17 @@ module.exports = (() => {
      */
     const checkAntiBannerFiltersUpdate = (forceUpdate, filters) => {
         const onSuccess = (updatedFilters) => {
-            if (forceUpdate) {
-                listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
-                    success: true,
-                    updatedFilters: updatedFilters
-                });
-            }
+            listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
+                success: true,
+                updatedFilters: updatedFilters,
+                forceUpdate: forceUpdate
+            });
         };
         const onError = () => {
-            if (forceUpdate) {
-                listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
-                    success: false
-                });
-            }
+            listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
+                success: false,
+                forceUpdate: forceUpdate
+            });
         };
 
         log.info("Start checking filters updates..");

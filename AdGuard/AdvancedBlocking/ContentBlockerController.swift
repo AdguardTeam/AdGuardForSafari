@@ -59,7 +59,7 @@ class ContentBlockerController {
     }
     
     // Returns requested scripts and css for specified url
-    func getData(url: URL?) -> String {
+    func getData(url: URL?) throws -> String {
         let cacheKey = (url?.absoluteString)!;
         let cached = blockerDataCache[cacheKey];
         if cached != nil {
