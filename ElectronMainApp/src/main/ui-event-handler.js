@@ -26,7 +26,9 @@ module.exports.init = function () {
                 event.sender.send('initializeOptionsPageResponse', processInitializeFrameScriptRequest());
                 break;
             case 'getFiltersMetadata':
-                event.sender.send('getFiltersMetadataResponse', filterCategories.getFiltersMetadata());
+                const filtersMetadata = filterCategories.getFiltersMetadata();
+                filtersMetadata.rulesInfo = antibanner.getContentBlockerInfo();
+                event.sender.send('getFiltersMetadataResponse', filtersMetadata);
                 break;
             case 'changeUserSetting':
                 settings.setProperty(message.key, message.value);
