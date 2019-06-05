@@ -1429,6 +1429,7 @@ const Settings = function () {
 
     checkboxes.push(new Checkbox('#showTrayIcon', userSettings.names.SHOW_TRAY_ICON));
     checkboxes.push(new Checkbox('#launchAtLogin', userSettings.names.LAUNCH_AT_LOGIN));
+    checkboxes.push(new Checkbox('#verboseLogging', userSettings.names.VERBOSE_LOGGING));
 
     const initUpdateFiltersPeriodSelect = () => {
         const periods = [48, 24, 12, 6, 1]; // in hours
