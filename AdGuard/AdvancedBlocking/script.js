@@ -65,8 +65,9 @@
      * Applies scriptlets
      *
      * @param scriptletsData Array with scriptlets data
+     * @param verbose logging
      */
-    const applyScriptlets = function (scriptletsData) {
+    const applyScriptlets = function (scriptletsData, verbose) {
         if (!scriptletsData || !scriptletsData.length) {
             return;
         }
@@ -76,6 +77,10 @@
             .map((s) => {
                 const param = JSON.parse(s);
                 param.engine = "safari-extension";
+                if (!!verbose) {
+                    param.verbose = true;
+                }
+
                 const code = scriptlets && scriptlets.invoke(param);
                 return code ? code : '';
             });
@@ -87,13 +92,14 @@
      * Applies injected script and css
      *
      * @param data
+     * @param verbose
      */
-    const applyAdvancedBlockingData = function (data) {
+    const applyAdvancedBlockingData = function (data, verbose) {
         console.log('(AdGuard Advanced Blocking) Applying scripts and css..');
 
         applyScripts(data.scripts);
         applyExtendedCss(data.css);
-        applyScriptlets(data.scriptlets);
+        applyScriptlets(data.scriptlets, verbose);
 
         console.log('(AdGuard Advanced Blocking) Applying scripts and css - done');
     };
@@ -109,7 +115,8 @@
         if (event.name === "advancedBlockingData") {
             try {
                 const data = JSON.parse(event.message["data"]);
-                applyAdvancedBlockingData(data);
+                const verbose = JSON.parse(event.message["verbose"])
+                applyAdvancedBlockingData(data, verbose);
             } catch (e) {
                 console.error(e);
             }
