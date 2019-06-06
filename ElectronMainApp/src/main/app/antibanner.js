@@ -28,7 +28,8 @@ module.exports = (() => {
      */
     const contentBlockerInfo = {
         rulesCount: 0,
-        rulesOverLimit: false
+        rulesOverLimit: false,
+        advancedBlockingRulesCount: 0
     };
 
     /**
