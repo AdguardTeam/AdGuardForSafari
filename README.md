@@ -180,7 +180,7 @@ sh SupportingScripts/localizations/import.sh .
 Change `.` to path to your project if you not in the root.
 
 ## How to release standalone builds
-- update version `Config.xcconfig` and `package.json`
+- update version `package.json` and `AdGuard/standalone.xcconfig` or `AdGuard/standalone-beta.xcconfig`
 - select xcode build configuration (Standalone-beta or Standalone)
 - build apps
 - notarize builds
