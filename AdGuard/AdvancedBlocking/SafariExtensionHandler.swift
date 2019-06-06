@@ -34,6 +34,6 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
     
     // Returns true if verbose logging setting is enabled
     private func isVerboseLoggingEnabled() -> Bool {
-        return true;
+        return AESharedResources.sharedDefaults.bool(forKey: AEDefaultsVerboseLogging);
     }
 }

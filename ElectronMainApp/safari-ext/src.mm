@@ -269,6 +269,22 @@ NAN_METHOD(setBusy) {
     [AESharedResources notifyBusyChanged];
 }
 
+NAN_METHOD(setVerboseLogging) {
+	if (info.Length() < 1) {
+		ThrowTypeError("Wrong number of arguments");
+		return;
+	}
+
+	if (!info[0]->IsBoolean()) {
+		ThrowTypeError("Wrong arguments");
+		return;
+	}
+
+	BOOL val = info[0]->BooleanValue();
+	[[AESharedResources sharedDefaults] setBool:val forKey:AEDefaultsVerboseLogging];
+	[AESharedResources notifyVerboseLoggingChanged];
+}
+
 NAN_METHOD(setProtection) {
 
     if (info.Length() < 1) {
@@ -662,10 +678,10 @@ NAN_METHOD(debugLog) {
 
 NAN_MODULE_INIT(Init) {
 
-    [AESharedResources initLogger];
+  [AESharedResources initLogger];
 
-	Nan::Set(target, New<String>("setBusy").ToLocalChecked(),
-	GetFunction(New<FunctionTemplate>(setBusy)).ToLocalChecked());
+  Nan::Set(target, New<String>("setBusy").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setBusy)).ToLocalChecked());
 
   Nan::Set(target, New<String>("setProtectionEnabled").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setProtection)).ToLocalChecked());
@@ -726,6 +742,9 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("reportUrl").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(reportUrl)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("setVerboseLogging").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setVerboseLogging)).ToLocalChecked());
 }
 
 // macro to load the module when require'd

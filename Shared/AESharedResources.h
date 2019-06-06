@@ -14,6 +14,7 @@ typedef void (^AESListenerBlock)(void);
 
 extern NSString * const AEDefaultsEnabled;
 extern NSString * const AEDefaultsMainAppBusy;
+extern NSString * const AEDefaultsVerboseLogging;
 extern NSString * const AEDefaultsLastReportUrl;
 
 /////////////////////////////////////////////////////////////////////
@@ -110,6 +111,16 @@ extern NSString * const AEDefaultsLastReportUrl;
  @param block Performed on internal thread when catched notification.
  */
 + (void)setListenerOnBusyChanged:(AESListenerBlock)block;
+/**
+ Notifies all, that verbose logging was changed.
+ */
++ (void)notifyVerboseLoggingChanged;
+/**
+ Register listener for changing verbose logging.
+
+ @param block Performed on internal thread when catched notification.
+ */
++ (void)setListenerOnVerboseLoggingChanged:(AESListenerBlock)block;
 /**
  Notifies, that user wants to see the prerefences window.
  */
