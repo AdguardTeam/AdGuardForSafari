@@ -17,10 +17,19 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
         page.getPropertiesWithCompletionHandler { properties in
             NSLog("The extension received a message (\(messageName)) from a script injected into (\(String(describing: properties?.url))) with userInfo (\(userInfo ?? [:]))")
             
+            if (properties == nil) {
+                return;
+            }
+            
             // Content script requests scripts and css for current page
             if (messageName == "getAdvancedBlockingData") {
                 do {
-                    let data: [String : Any]? = ["data": try self.contentBlockerController.getData(url: properties?.url)];
+                    let url = properties?.url;
+                    if (url == nil) {
+                        return;
+                    }
+                    
+                    let data: [String : Any]? = ["data": try self.contentBlockerController.getData(url: url)];
                     page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data);
                 } catch {
                     NSLog("Error handling message (\(messageName)) from a script injected into (\(String(describing: properties?.url))) with userInfo (\(userInfo ?? [:])): \(error)");
