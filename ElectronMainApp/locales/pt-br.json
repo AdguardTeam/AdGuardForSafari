@@ -1,33 +1,33 @@
 {
     "main_menu_about": {
-        "message": "About AdGuard for Safari"
+        "message": "Sobre o AdGuard para Safari"
     },
     "options_popup_trusted_filter_title": {
-        "message": "Trusted"
+        "message": "Confi\u00e1vel"
     },
     "options_popup_trusted_filter_description": {
-        "message": "Trusted filters can use powerful filtering rules modifiers which can be dangerous in the wrong hands. Do not check this box unless you fully trust it."
+        "message": "Filtros confi\u00e1veis podem usar modificadores poderosos nas regras de filtragem, o que pode ser perigoso em m\u00e3os erradas. N\u00e3o marque esta caixa a menos que voc\u00ea confie totalmente nela."
     },
     "options_filters_filter_trusted_tag": {
-        "message": "trusted"
+        "message": "confi\u00e1vel"
     },
     "options_filters_filter_trusted_tag_desc": {
-        "message": "You chose to trust this filter"
+        "message": "Voc\u00ea escolheu confiar neste filtro"
     },
     "options_about_update_check": {
-        "message": "Checking for updates"
+        "message": "Verificando atualiza\u00e7\u00f5es"
     },
     "options_about_updating": {
-        "message": "Updating AdGuard for Safari"
+        "message": "Atualizando o AdGuard para Safari"
     },
     "options_about_updates_not_found": {
-        "message": "AdGuard for Safari is up to date"
+        "message": "O AdGuard para Safari est\u00e1 atualizado"
     },
     "options_about_update_downloaded": {
-        "message": "Nearly up to date! Relaunch AdGuard for Safari to finish updating."
+        "message": "Quase atualizado! Reinicie o AdGuard para Safari para concluir a atualiza\u00e7\u00e3o."
     },
     "options_about_update_relaunch": {
-        "message": "Relaunch"
+        "message": "Reiniciar"
     },
     "options_popup_title_placeholder": {
         "message": "Digite o nome do filtro"
@@ -66,7 +66,7 @@
         "message": "Filtros"
     },
     "options_antibanner_info": {
-        "message": "%s filtros %s regras"
+        "message": "%s filtros %s regras %s regras avan\u00e7adas"
     },
     "options_filters_enabled": {
         "message": "Ativado:"
