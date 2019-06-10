@@ -1,4 +1,4 @@
-/*! AdGuard Assistant - v4.3.8 - 2019-01-15
+/*! AdGuard Assistant - v4.3.13 - 2019-06-03
 * https://github.com/AdguardTeam/AdguardAssistant
 * Copyright (c) 2019; Licensed LGPL 3.0 */
 
@@ -22,7 +22,7 @@ var HTML = {
     'settings_menu': "<div class=\"main\"><div class=\"close\"></div><div class=\"head\"><div i18n=\"assistant_settings\" class=\"head_title\"></div><div i18n=\"settings_choose_size_and_position\" class=\"head_text head_text--mobile-h\"></div></div><div class=\"content\"><div class=\"settings settings__horizontal\"><div class=\"settings_fieldset\"><div i18n=\"settings_position_save\" class=\"settings_fieldset_lbl\"></div><div class=\"settings_fieldset_val\"><div class=\"position-save\"><div class=\"position-save_group\"><div class=\"position-save_field\"><input class=\"form-ui-control\" id=\"all-site\" type=\"radio\" name=\"position-save\"> <label class=\"form-ui\" for=\"all-site\"><span i18n=\"settings_position_save_all\" class=\"form-ui-txt\"></span></label></div><div class=\"position-save_field\"><input class=\"form-ui-control\" id=\"this-site\" type=\"radio\" name=\"position-save\"> <label class=\"form-ui\" for=\"this-site\"><span i18n=\"settings_position_save_this\" class=\"form-ui-txt\"></span></label></div></div></div></div></div><div class=\"settings_fieldset\"><div i18n=\"settings_icon_size\" class=\"settings_fieldset_lbl\"></div><div class=\"settings_fieldset_val\"><div class=\"choice-size\"><div class=\"choice-size_group\"><div class=\"choice-size_field\"><input class=\"choice-size_input form-ui-control\" id=\"size-small\" type=\"radio\" name=\"radio\"> <label class=\"form-ui\" for=\"size-small\"><span i18n=\"settings_small\" class=\"form-ui-txt\"></span></label><div class=\"adguard-assistant-button-main-logo choice-size_logo logo__small\"></div></div><div class=\"choice-size_field\"><input class=\"choice-size_input form-ui-control\" id=\"size-big\" type=\"radio\" name=\"radio\"> <label class=\"form-ui\" for=\"size-big\"><span i18n=\"settings_big\" class=\"form-ui-txt\"></span></label><div class=\"adguard-assistant-button-main-logo choice-size_logo\"></div></div></div></div></div></div><div class=\"settings_fieldset\"><div i18n=\"settings_position\" class=\"settings_fieldset_lbl settings_fieldset_lbl__pos\"></div><div class=\"settings_fieldset_val\"><div class=\"change-position\"><div class=\"change-position_i\"><input type=\"radio\" name=\"position\" class=\"change-position_input\" id=\"position-top-left\"> <label class=\"change-position_label\" for=\"position-top-left\"><span class=\"s-position-arr-top-left\"></span></label><div i18n=\"settings_left_top\" class=\"change-position_val\"></div></div><div class=\"change-position_i\"><input type=\"radio\" name=\"position\" class=\"change-position_input\" id=\"position-top-right\"> <label class=\"change-position_label\" for=\"position-top-right\"><span class=\"s-position-arr-top-right\"></span></label><div i18n=\"settings_right_top\" class=\"change-position_val\"></div></div><div class=\"change-position_i\"><input type=\"radio\" name=\"position\" class=\"change-position_input\" id=\"position-bottom-left\"> <label class=\"change-position_label\" for=\"position-bottom-left\"><span class=\"s-position-arr-bottom-left\"></span></label><div i18n=\"settings_left_bottom\" class=\"change-position_val\"></div></div><div class=\"change-position_i\"><input type=\"radio\" name=\"position\" class=\"change-position_input\" id=\"position-bottom-right\"> <label class=\"change-position_label\" for=\"position-bottom-right\"><span class=\"s-position-arr-bottom-right\"></span></label><div i18n=\"settings_right_bottom\" class=\"change-position_val\"></div></div></div></div></div></div></div><div class=\"foot\"><div class=\"foot_action\"><div class=\"foot_action_btn\"><button i18n=\"settings_cancel\" class=\"btn btn-default\" type=\"button\" id=\"cancel\"></button> <button i18n=\"settings_save\" class=\"btn btn-primary\" type=\"button\" id=\"save-settings\"></button></div></div><div class=\"cf\"></div></div></div>",
     'slider_menu': "<div class=\"main\"><div class=\"close adg-close\"></div><div class=\"head head--slider\"><div class=\"head_in head_in--slider\"><div i18n=\"assistant_block_element\" class=\"head_title head_title--slider\" id=\"head_title\"></div><div class=\"element-rule_more element-rule_more--mobile\"><span class=\"element-rule_expand-link\" id=\"ExtendedSettingsText\"></span> <button i18n=\"assistant_block\" type=\"button\" class=\"btn btn-cancel\" id=\"adg-accept\"></button> <button i18n=\"assistant_another_element\" type=\"button\" class=\"btn btn-default\" id=\"adg-cancel\"></button></div></div><div class=\"adg-slide-btns\"><div class=\"adg-slide-btn adg-slide-btn--minus\"></div><div class=\"adg-slide-btn adg-slide-btn--plus\"></div></div><div i18n=\"assistant_block_element_explain\" class=\"head_text head_text--mobile-h\" id=\"head_text\"></div></div><div class=\"content\" id=\"slider-area\"><div class=\"element-rule element-rule--slider\"><div i18n=\"assistant_slider_explain\" class=\"element-rule_text element-rule_text--slider\"></div><div class=\"element-rule_slider\"><div class=\"adg-slide\" id=\"slider\"><div i18n=\"assistant_slider_max\" class=\"adg-slide-clue-max\"></div><div i18n=\"assistant_slider_min\" class=\"adg-slide-clue-min\"></div></div></div><div class=\"element-rule_more\"><span class=\"element-rule_expand-link\" id=\"ExtendedSettingsText\"><span i18n=\"assistant_extended_settings\" class=\"element-rule_expand-link_txt\"></span> <span class=\"element-rule_expand-link_arr\"></span></span></div><div class=\"element-rule_form\" id=\"advanced-settings\"><div class=\"element-rule_form-cont\"><div class=\"element-rule_fieldset\" id=\"one-domain-checkbox-block\"><input class=\"form-ui-control\" id=\"one-domain-checkbox\" type=\"checkbox\"> <label for=\"one-domain-checkbox\" class=\"form-ui\"><span i18n=\"assistant_apply_rule_to_all_sites\" class=\"form-ui-txt\"></span></label></div><div style=\"display:none\" class=\"element-rule_fieldset\" id=\"block-by-url-checkbox-block\"><input class=\"form-ui-control\" id=\"block-by-url-checkbox\" type=\"checkbox\"> <label for=\"block-by-url-checkbox\" class=\"form-ui\"><span i18n=\"assistant_block_by_reference\" class=\"form-ui-txt\"></span></label></div><div style=\"display:none\" class=\"element-rule_fieldset\" id=\"block-similar-checkbox-block\"><input class=\"form-ui-control\" id=\"block-similar-checkbox\" type=\"checkbox\"> <label for=\"block-similar-checkbox\" class=\"form-ui\"><span i18n=\"assistant_block_similar\" class=\"form-ui-txt\"></span></label></div><div class=\"element-rule_fieldset\"><input class=\"form-control\" id=\"filter-rule\" type=\"text\"></div></div></div></div></div><div class=\"foot foot--slider\"><button i18n=\"assistant_another_element\" type=\"button\" class=\"btn btn-default btn-another-el\" id=\"adg-cancel\"></button><div class=\"foot_action\"><div class=\"foot_action_btn\"><button i18n=\"assistant_preview\" type=\"button\" class=\"btn btn-primary\" id=\"adg-preview\"></button> <button i18n=\"assistant_block\" type=\"button\" class=\"btn btn-cancel\" id=\"adg-accept\"></button></div></div></div></div>",
     'preview': "<div class=\"main\"><div class=\"close\"></div><div class=\"head\"><div i18n=\"assistant_preview_header\" class=\"head_title\"></div><div i18n=\"assistant_preview_header_info\" class=\"head_text\"></div></div><div class=\"foot\"><button i18n=\"assistant_another_element\" class=\"btn btn-default\" id=\"select-another-element\" type=\"button\"></button><div class=\"foot_action\"><div class=\"foot_action_btn\"><button i18n=\"assistant_preview_end\" class=\"btn btn-primary\" id=\"end-preview\" type=\"button\"></button> <button i18n=\"assistant_block\" class=\"btn btn-cancel\" id=\"block-element\" type=\"button\"></button></div></div></div></div>",
-    'popup': "<div class=\"main mobile main-popup\"><div class=\"main-popup__logo adguard-assistant-button-main-logo\"></div><h2 class=\"mobile-title main-popup__title\" i18n=\"assistant_select_element\"></h2><div class=\"content main-popup__content\" i18n=\"assistant_select_element_text\"></div><div class=\"footer\"><button i18n=\"assistant_select_element_start\" class=\"btn btn-active start-select-mode main-popup__btn main-popup__btn--green\"></button> <button i18n=\"assistant_select_element_cancel\" class=\"btn cancel-select-mode main-popup__btn\"></button></div><i class=\"main-version\">v4.3.8</i></div>",
+    'popup': "<div class=\"main mobile main-popup\"><div class=\"main-popup__logo adguard-assistant-button-main-logo\"></div><h2 class=\"mobile-title main-popup__title\" i18n=\"assistant_select_element\"></h2><div class=\"content main-popup__content\" i18n=\"assistant_select_element_text\"></div><div class=\"footer\"><button i18n=\"assistant_select_element_start\" class=\"btn btn-active start-select-mode main-popup__btn main-popup__btn--green\"></button> <button i18n=\"assistant_select_element_cancel\" class=\"btn cancel-select-mode main-popup__btn\"></button></div><i class=\"main-version\">v4.3.13</i></div>",
     'mobile_menu': "<div class=\"main mobile main-menu\"><button i18n-title=\"assistant_block\" class=\"adg-accept main-menu__btn main-menu__btn--accept\">accept</button> <button i18n-title=\"assistant_preview\" class=\"adg-preview main-menu__btn main-menu__btn--preview\">preview</button> <button i18n-title=\"plus\" class=\"adg-plus main-menu__btn main-menu__btn--plus\">plus</button> <button i18n-title=\"minus\" class=\"adg-minus main-menu__btn main-menu__btn--minus\">minus</button> <button i18n-title=\"close\" class=\"adg-close main-menu__btn main-menu__btn--close\">close</button></div>"
 };
 
@@ -108,22 +108,22 @@ var en = {
         "message": "Exit preview"
     },
     "wot_unknown_description": {
-        "message": "This website's reputation is not defined by"
+        "message": "This website's reputation is not defined by $1"
     },
     "wot_bad_description": {
-        "message": "This website has a very bad reputation\naccording to "
+        "message": "This website has a very bad reputation\naccording to $1"
     },
     "wot_poor_description": {
-        "message": "This website has a bad reputation \naccording to "
+        "message": "This website has a bad reputation \naccording to $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "This website has a poor reputation\naccording to "
+        "message": "This website has a poor reputation\naccording to $1"
     },
     "wot_good_description": {
-        "message": "This website has a good reputation\naccording to "
+        "message": "This website has a good reputation\naccording to $1"
     },
     "wot_excellent_description": {
-        "message": "This website has an excellent reputation\naccording to "
+        "message": "This website has an excellent reputation\naccording to $1"
     },
     "settings_choose_size_and_position": {
         "message": "Adjust AdGuard Assistant size and position"
@@ -241,22 +241,22 @@ var ru = {
         "message": "\u0417\u0430\u043a\u043e\u043d\u0447\u0438\u0442\u044c \u043f\u0440\u0435\u0434\u043f\u0440\u043e\u0441\u043c\u043e\u0442\u0440"
     },
     "wot_unknown_description": {
-        "message": "\u0420\u0435\u043f\u0443\u0442\u0430\u0446\u0438\u044f \u043d\u0435 \u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u0430"
+        "message": "\u0420\u0435\u043f\u0443\u0442\u0430\u0446\u0438\u044f \u043d\u0435 \u043e\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u0430 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u0435\u043c $1"
     },
     "wot_bad_description": {
-        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u043e\u0447\u0435\u043d\u044c \u043f\u043b\u043e\u0445\u0430\u044f \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0438\u044f \u043f\u043e \u0434\u0430\u043d\u043d\u044b\u043c "
+        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u043e\u0447\u0435\u043d\u044c \u043f\u043b\u043e\u0445\u0430\u044f \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0438\u044f \u043f\u043e \u0434\u0430\u043d\u043d\u044b\u043c $1"
     },
     "wot_poor_description": {
-        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u043f\u043b\u043e\u0445\u0430\u044f \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0438\u044f \u043f\u043e \u0434\u0430\u043d\u043d\u044b\u043c "
+        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u043f\u043b\u043e\u0445\u0430\u044f \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0438\u044f \u043f\u043e \u0434\u0430\u043d\u043d\u044b\u043c $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u043d\u0435\u0443\u0434\u043e\u0432\u043b\u0435\u0442\u0432\u043e\u0440\u0438\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0438\u044f \u043f\u043e \u0434\u0430\u043d\u043d\u044b\u043c "
+        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u043d\u0435\u0443\u0434\u043e\u0432\u043b\u0435\u0442\u0432\u043e\u0440\u0438\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0438\u044f \u043f\u043e \u0434\u0430\u043d\u043d\u044b\u043c $1"
     },
     "wot_good_description": {
-        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u0445\u043e\u0440\u043e\u0448\u0430\u044f \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0438\u044f \u043f\u043e \u0434\u0430\u043d\u043d\u044b\u043c "
+        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u0445\u043e\u0440\u043e\u0448\u0430\u044f \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0438\u044f \u043f\u043e \u0434\u0430\u043d\u043d\u044b\u043c $1"
     },
     "wot_excellent_description": {
-        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u043e\u0442\u043b\u0438\u0447\u043d\u0430\u044f \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0438\u044f \u043f\u043e \u0434\u0430\u043d\u043d\u044b\u043c "
+        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u043e\u0442\u043b\u0438\u0447\u043d\u0430\u044f \u0440\u0435\u0443\u0442\u0430\u0446\u0438\u044f \u043f\u043e \u0434\u0430\u043d\u043d\u044b\u043c $1"
     },
     "settings_choose_size_and_position": {
         "message": "\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u0442\u0435 \u0440\u0430\u0437\u043c\u0435\u0440 \u0438 \u043f\u043e\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u043f\u043e\u043c\u043e\u0449\u043d\u0438\u043a\u0430 AdGuard"
@@ -377,19 +377,19 @@ var uk = {
         "message": "\u0420\u0435\u043f\u0443\u0442\u0430\u0446\u0456\u044f \u0446\u044c\u043e\u0433\u043e \u0432\u0435\u0431-\u0441\u0430\u0439\u0442\u0443 \u043d\u0435 \u0432\u0438\u0437\u043d\u0430\u0447\u0435\u043d\u0430"
     },
     "wot_bad_description": {
-        "message": "\u0426\u0435\u0439 \u0441\u0430\u0439\u0442 \u043c\u0430\u0454 \u0434\u0443\u0436\u0435 \u043f\u043e\u0433\u0430\u043d\u0443 \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0456\u044e\n\u0437\u0430 \u0432\u0435\u0440\u0441\u0456\u0454\u044e "
+        "message": "\u0426\u0435\u0439 \u0441\u0430\u0439\u0442 \u043c\u0430\u0454 \u0434\u0443\u0436\u0435 \u043f\u043e\u0433\u0430\u043d\u0443 \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0456\u044e\n\u0437\u0430 \u0432\u0435\u0440\u0441\u0456\u0454\u044e $1"
     },
     "wot_poor_description": {
-        "message": "\u0426\u0435\u0439 \u0441\u0430\u0439\u0442 \u043c\u0430\u0454 \u043f\u043e\u0433\u0430\u043d\u0443 \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0456\u044e\n\u0437\u0430 \u0432\u0435\u0440\u0441\u0456\u0454\u044e "
+        "message": "\u0426\u0435\u0439 \u0441\u0430\u0439\u0442 \u043c\u0430\u0454 \u043f\u043e\u0433\u0430\u043d\u0443 \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0456\u044e\n\u0437\u0430 \u0432\u0435\u0440\u0441\u0456\u0454\u044e $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "\u0426\u0435\u0439 \u0441\u0430\u0439\u0442 \u043c\u0430\u0454 \u043d\u0435\u0437\u0430\u0434\u043e\u0432\u0456\u043b\u044c\u043d\u0443 \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0456\u044e\n\u0437\u0430 \u0432\u0435\u0440\u0441\u0456\u0454\u044e "
+        "message": "\u0426\u0435\u0439 \u0441\u0430\u0439\u0442 \u043c\u0430\u0454 \u043d\u0435\u0437\u0430\u0434\u043e\u0432\u0456\u043b\u044c\u043d\u0443 \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0456\u044e\n\u0437\u0430 \u0432\u0435\u0440\u0441\u0456\u0454\u044e $1"
     },
     "wot_good_description": {
-        "message": "\u0426\u0435\u0439 \u0441\u0430\u0439\u0442 \u043c\u0430\u0454 \u0434\u043e\u0431\u0440\u0443 \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0456\u044e\n\u0437\u0430 \u0432\u0435\u0440\u0441\u0456\u0454\u044e "
+        "message": "\u0426\u0435\u0439 \u0441\u0430\u0439\u0442 \u043c\u0430\u0454 \u0434\u043e\u0431\u0440\u0443 \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0456\u044e\n\u0437\u0430 \u0432\u0435\u0440\u0441\u0456\u0454\u044e $1"
     },
     "wot_excellent_description": {
-        "message": "\u0426\u0435\u0439 \u0441\u0430\u0439\u0442 \u043c\u0430\u0454 \u0434\u0443\u0436\u0435 \u0432\u0456\u0434\u043c\u0456\u043d\u043d\u0443 \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0456\u044e\n\u0437\u0430 \u0432\u0435\u0440\u0441\u0456\u0454\u044e "
+        "message": "\u0426\u0435\u0439 \u0441\u0430\u0439\u0442 \u043c\u0430\u0454 \u0434\u0443\u0436\u0435 \u0432\u0456\u0434\u043c\u0456\u043d\u043d\u0443 \u0440\u0435\u043f\u0443\u0442\u0430\u0446\u0456\u044e\n\u0437\u0430 \u0432\u0435\u0440\u0441\u0456\u0454\u044e $1"
     },
     "settings_choose_size_and_position": {
         "message": "\u041d\u0430\u043b\u0430\u0448\u0442\u0443\u0439\u0442\u0435 \u0440\u043e\u0437\u043c\u0456\u0440 \u0456 \u043f\u043e\u043b\u043e\u0436\u0435\u043d\u043d\u044f \u043f\u043e\u043c\u0456\u0447\u043d\u0438\u043a\u0430 AdGuard"
@@ -510,19 +510,19 @@ var pl = {
         "message": "Reputacja nie jest zdefiniowana"
     },
     "wot_bad_description": {
-        "message": "Ta strona internetowa ma bardzo z\u0142\u0105 reputacj\u0119 zgodnie z"
+        "message": "Ta strona internetowa ma bardzo z\u0142\u0105 reputacj\u0119 zgodnie z $1"
     },
     "wot_poor_description": {
-        "message": "Ta strona internetowa ma z\u0142\u0105 reputacj\u0119 zgodnie z"
+        "message": "Ta strona internetowa ma z\u0142\u0105 reputacj\u0119 zgodnie z $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "Ta strona internetowa ma s\u0142ab\u0105 reputacj\u0119 zgodnie z"
+        "message": "Ta strona internetowa ma s\u0142ab\u0105 reputacj\u0119 zgodnie z $1"
     },
     "wot_good_description": {
-        "message": "Ta strona internetowa ma dobr\u0105 reputacj\u0119 zgodnie z"
+        "message": "Ta strona internetowa ma dobr\u0105 reputacj\u0119 zgodnie z $1"
     },
     "wot_excellent_description": {
-        "message": "Ta strona internetowa ma doskona\u0142\u0105 reputacj\u0119 zgodnie z"
+        "message": "Ta strona internetowa ma doskona\u0142\u0105 reputacj\u0119 zgodnie z $1"
     },
     "settings_choose_size_and_position": {
         "message": "Dostosuj rozmiar i pozycj\u0119 Asystenta AdGuarda"
@@ -640,22 +640,22 @@ var de = {
         "message": "Vorschau beenden"
     },
     "wot_unknown_description": {
-        "message": "Kein Ruf festgelegt"
+        "message": "Der Ruf dieser Webseite wird nicht durch $1 festgelegt"
     },
     "wot_bad_description": {
-        "message": "Diese Webseite hat einen sehr schlechten Ruf laut "
+        "message": "Diese Webseite hat einen sehr schlechten Ruf laut $1"
     },
     "wot_poor_description": {
-        "message": "Diese Webseite hat einen schlechten Ruf laut "
+        "message": "Diese Webseite hat einen schlechten Ruf laut $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "Diese Webseite hat einen schlechten Ruf laut "
+        "message": "Diese Webseite hat einen schlechten Ruf laut $1"
     },
     "wot_good_description": {
-        "message": "Diese Webseite hat einen guten Ruf laut "
+        "message": "Diese Webseite hat einen guten Ruf laut $1"
     },
     "wot_excellent_description": {
-        "message": "Diese Webseite hat einen exzellenten Ruf laut "
+        "message": "Diese Webseite hat einen exzellenten Ruf laut $1"
     },
     "settings_choose_size_and_position": {
         "message": "Anpassen der Gr\u00f6\u00dfe und Position des AdGuard-Assistenten"
@@ -864,7 +864,7 @@ var zh_TW = {
         "message": "\u8abf\u6574\u5143\u4ef6\u5c01\u9396\u898f\u5247"
     },
     "assistant_slider_explain": {
-        "message": "\u79fb\u52d5\u6ed1\u6a19\u4ee5\u66f4\u6539\u6846\u67b6\u7684\u5c3a\u5bf8\u3002\u65b0\u7684\u898f\u5247\u5c07\u4f5c\u7528\u65bc\uff1a"
+        "message": "\u79fb\u52d5\u8a72\u6ed1\u6a19\u4ee5\u66f4\u6539\u65b0\u7684\u898f\u5247\u5c07\u4f5c\u7528\u65bc\u7684\u6846\u67b6\u4e4b\u5c3a\u5bf8\uff1a"
     },
     "assistant_slider_min": {
         "message": "\u6700\u5c0f"
@@ -906,22 +906,22 @@ var zh_TW = {
         "message": "\u96e2\u958b\u9810\u89bd"
     },
     "wot_unknown_description": {
-        "message": "\u8a72\u7db2\u7ad9\u7684\u4fe1\u8b7d\u672a\u88ab\u754c\u5b9a"
+        "message": "\u8a72\u7db2\u7ad9\u7684\u4fe1\u8b7d\u672a\u88ab $1 \u754c\u5b9a"
     },
     "wot_bad_description": {
-        "message": "\u8a72\u7db2\u7ad9\u6709\u975e\u5e38\u58de\u7684\u4fe1\u8b7d\uff0c\u6839\u64da"
+        "message": "\u6839\u64da $1 \uff0c\u8a72\u7db2\u7ad9\u6709\u975e\u5e38\u58de\u7684\u4fe1\u8b7d"
     },
     "wot_poor_description": {
-        "message": "\u8a72\u7db2\u7ad9\u6709\u58de\u7684\u4fe1\u8b7d\uff0c\u6839\u64da"
+        "message": "\u6839\u64da $1 \uff0c\u8a72\u7db2\u7ad9\u6709\u58de\u7684\u4fe1\u8b7d"
     },
     "wot_unsatisfactory_description": {
-        "message": "\u8a72\u7db2\u7ad9\u6709\u4e0d\u597d\u7684\u4fe1\u8b7d\uff0c\u6839\u64da"
+        "message": "\u6839\u64da $1 \uff0c\u8a72\u7db2\u7ad9\u6709\u4e0d\u597d\u7684\u4fe1\u8b7d"
     },
     "wot_good_description": {
-        "message": "\u8a72\u7db2\u7ad9\u6709\u597d\u7684\u4fe1\u8b7d\uff0c\u6839\u64da"
+        "message": "\u6839\u64da $1 \uff0c\u8a72\u7db2\u7ad9\u6709\u597d\u7684\u4fe1\u8b7d"
     },
     "wot_excellent_description": {
-        "message": "\u8a72\u7db2\u7ad9\u6709\u6975\u597d\u7684\u4fe1\u8b7d\uff0c\u6839\u64da"
+        "message": "\u6839\u64da $1 \uff0c\u8a72\u7db2\u7ad9\u6709\u6975\u597d\u7684\u4fe1\u8b7d"
     },
     "settings_choose_size_and_position": {
         "message": "\u8abf\u6574 AdGuard \u52a9\u7406 \u5c3a\u5bf8\u548c\u4f4d\u7f6e"
@@ -1172,22 +1172,22 @@ var it = {
         "message": "Esci dall'anteprima"
     },
     "wot_unknown_description": {
-        "message": "La reputazione non \u00e8 definita"
+        "message": "La reputazione di questo sito web non \u00e8 definita da $1"
     },
     "wot_bad_description": {
-        "message": "Questo sito ha una pessima reputazione\n\nsecondo "
+        "message": "Questo sito web ha una pessima reputazione secondo $1"
     },
     "wot_poor_description": {
-        "message": "Questo sito ha una cattiva reputazione\n\nsecondo "
+        "message": "Questo sito ha una reputazione cattiva secondo $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "Questo sito ha una discreta reputazione\n\nsecondo "
+        "message": "Questo sito web ha una reputazione mediocre secondo $1"
     },
     "wot_good_description": {
-        "message": "Questo sito ha una buona reputazione\n\nsecondo "
+        "message": "Questo sito ha una buona reputazione secondo $1"
     },
     "wot_excellent_description": {
-        "message": "Questo sito ha un'ottima reputazione\n\nsecondo "
+        "message": "Questo sito ha un'ottima reputazione secondo $1"
     },
     "settings_choose_size_and_position": {
         "message": "Regola dimensione e posizione di Assistente AdGuard"
@@ -1438,22 +1438,22 @@ var tr = {
         "message": "\u00d6nizlemeden \u00e7\u0131k"
     },
     "wot_unknown_description": {
-        "message": "Bu sitenin itibar\u0131 hen\u00fcz belirlenmemi\u015f"
+        "message": "Bu sitenin itibar\u0131 $1 taraf\u0131ndan hen\u00fcz belirlenmemi\u015f"
     },
     "wot_bad_description": {
-        "message": "Bu site \u00e7ok k\u00f6t\u00fc bir itibara sahip "
+        "message": "Bu site $1 de\u011ferlendirmesine g\u00f6re\n\u00e7ok k\u00f6t\u00fc bir itibara sahip"
     },
     "wot_poor_description": {
-        "message": "Bu site k\u00f6t\u00fc bir itibara sahip "
+        "message": "Bu site $1 de\u011ferlendirmesine g\u00f6re\nk\u00f6t\u00fc bir itibara sahip"
     },
     "wot_unsatisfactory_description": {
-        "message": "Bu site zay\u0131f bir itibara sahip "
+        "message": "Bu site $1 de\u011ferlendirmesine g\u00f6re\nzay\u0131f bir itibara sahip"
     },
     "wot_good_description": {
-        "message": "Bu site iyi bir itibara sahip "
+        "message": "Bu site $1 de\u011ferlendirmesine g\u00f6re\niyi bir itibara sahip"
     },
     "wot_excellent_description": {
-        "message": "Bu site m\u00fckemmel bir itibara sahip "
+        "message": "Bu site $1 de\u011ferlendirmesine g\u00f6re\nm\u00fckemmel bir itibara sahip"
     },
     "settings_choose_size_and_position": {
         "message": "AdGuard Assistant'\u0131n boyut ve konumunu ayarla"
@@ -1707,19 +1707,19 @@ var es = {
         "message": "La reputaci\u00f3n no est\u00e1 definida"
     },
     "wot_bad_description": {
-        "message": "Este sitio web tiene muy mala reputaci\u00f3n\nde acuerdo a "
+        "message": "Este sitio web tiene muy mala reputaci\u00f3n\nde acuerdo a $1"
     },
     "wot_poor_description": {
-        "message": "Este sitio web tiene mala reputaci\u00f3n\nde acuerdo a "
+        "message": "Este sitio web tiene mala reputaci\u00f3n\nde acuerdo a $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "Este sitio web tiene mala reputaci\u00f3n\nde acuerdo a "
+        "message": "Este sitio web tiene mala reputaci\u00f3n\nde acuerdo a $1"
     },
     "wot_good_description": {
-        "message": "Este sitio web tiene buena reputaci\u00f3n\nde acuerdo a "
+        "message": "Este sitio web tiene buena reputaci\u00f3n\nde acuerdo a $1"
     },
     "wot_excellent_description": {
-        "message": "Este sitio web tiene excelente reputaci\u00f3n\nde acuerdo a "
+        "message": "Este sitio web tiene excelente reputaci\u00f3n\nde acuerdo a $1"
     },
     "settings_choose_size_and_position": {
         "message": "Ajuste el tama\u00f1o y la posici\u00f3n del Asistente de AdGuard"
@@ -1837,22 +1837,22 @@ var pt_BR = {
         "message": "Sair da pr\u00e9via"
     },
     "wot_unknown_description": {
-        "message": "A reputa\u00e7\u00e3o deste site ainda n\u00e3o foi definida por"
+        "message": "A reputa\u00e7\u00e3o deste site ainda n\u00e3o foi definida por $1"
     },
     "wot_bad_description": {
-        "message": "Este site tem uma reputa\u00e7\u00e3o muito ruim\nde acordo com "
+        "message": "Este site tem uma reputa\u00e7\u00e3o muito ruim\nde acordo com $1"
     },
     "wot_poor_description": {
-        "message": "Este site tem uma m\u00e1 reputa\u00e7\u00e3o\nde acordo com "
+        "message": "Este site tem uma m\u00e1 reputa\u00e7\u00e3o\nde acordo com $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "Este site tem uma reputa\u00e7\u00e3o ruim\nde acordo com "
+        "message": "Este site tem uma reputa\u00e7\u00e3o ruim\nde acordo com $1"
     },
     "wot_good_description": {
-        "message": "Este site tem uma boa reputa\u00e7\u00e3o\nde acordo com "
+        "message": "Este site tem uma boa reputa\u00e7\u00e3o\nde acordo com $1"
     },
     "wot_excellent_description": {
-        "message": "Este site tem uma excelente reputa\u00e7\u00e3o\nde acordo com "
+        "message": "Este site tem uma excelente reputa\u00e7\u00e3o\nde acordo com $1"
     },
     "settings_choose_size_and_position": {
         "message": "Ajuste o tamanho e posi\u00e7\u00e3o do Assistente do AdGuard"
@@ -1970,22 +1970,22 @@ var pt_PT = {
         "message": "Sair da previsualiza\u00e7\u00e3o"
     },
     "wot_unknown_description": {
-        "message": "A reputa\u00e7\u00e3o deste site n\u00e3o est\u00e1 definida por"
+        "message": "A reputa\u00e7\u00e3o deste site n\u00e3o est\u00e1 definida por $1"
     },
     "wot_bad_description": {
-        "message": "Este site tem uma p\u00e9ssima reputa\u00e7\u00e3o\nde acordo com"
+        "message": "Este site tem uma p\u00e9ssima reputa\u00e7\u00e3o\nde acordo com $1"
     },
     "wot_poor_description": {
-        "message": "Este site tem uma m\u00e1 reputa\u00e7\u00e3o\nde acordo com "
+        "message": "Este site tem uma m\u00e1 reputa\u00e7\u00e3o\nde acordo com $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "Este site tem uma fr\u00e1gil reputa\u00e7\u00e3o\nde acordo com "
+        "message": "Este site tem uma fr\u00e1gil reputa\u00e7\u00e3o\nde acordo com $1"
     },
     "wot_good_description": {
-        "message": "Este site tem uma boa reputa\u00e7\u00e3o\nde acordo com"
+        "message": "Este site tem uma boa reputa\u00e7\u00e3o\nde acordo com $1"
     },
     "wot_excellent_description": {
-        "message": "Este site tem uma excelente reputa\u00e7\u00e3o\nde acordo com "
+        "message": "Este site tem uma excelente reputa\u00e7\u00e3o\nde acordo com $1"
     },
     "settings_choose_size_and_position": {
         "message": "Ajustar o tamanho e a posi\u00e7\u00e3o do Assistente do AdGuard"
@@ -2369,22 +2369,22 @@ var sk = {
         "message": "Ukon\u010denie n\u00e1h\u013eadu"
     },
     "wot_unknown_description": {
-        "message": "Reput\u00e1cia tejto webovej str\u00e1nky nebola definovan\u00e1"
+        "message": "Reput\u00e1cia tejto webovej str\u00e1nky nie je v $1 definovan\u00e1"
     },
     "wot_bad_description": {
-        "message": "Str\u00e1nka m\u00e1 ve\u013emi zl\u00fa reput\u00e1ciu\npod\u013ea "
+        "message": "T\u00e1to str\u00e1nka m\u00e1 pod\u013ea $1\nve\u013emi zl\u00fa reput\u00e1ciu"
     },
     "wot_poor_description": {
-        "message": "Str\u00e1nka m\u00e1 zl\u00fa reput\u00e1ciu\npod\u013ea "
+        "message": "T\u00e1to str\u00e1nka m\u00e1 pod\u013ea $1\nzl\u00fa reput\u00e1ciu"
     },
     "wot_unsatisfactory_description": {
-        "message": "Str\u00e1nka m\u00e1 slab\u00fa reput\u00e1ciu\npod\u013ea "
+        "message": "T\u00e1to str\u00e1nka m\u00e1 pod\u013ea $1\nslab\u00fa reput\u00e1ciu"
     },
     "wot_good_description": {
-        "message": "Str\u00e1nka m\u00e1 dobr\u00fa reput\u00e1ciu\npod\u013ea "
+        "message": "T\u00e1to str\u00e1nka m\u00e1 pod\u013ea $1\ndobr\u00fa reput\u00e1ciu"
     },
     "wot_excellent_description": {
-        "message": "Str\u00e1nka m\u00e1 v\u00fdborn\u00fa reput\u00e1ciu\npod\u013ea "
+        "message": "T\u00e1to str\u00e1nka m\u00e1 pod\u013ea $1\nv\u00fdborn\u00fa reput\u00e1ciu"
     },
     "settings_choose_size_and_position": {
         "message": "Prisp\u00f4sobi\u0165 ve\u013ekos\u0165 a polohu AdGuard asistenta"
@@ -2505,19 +2505,19 @@ var no = {
         "message": "Rykte er ikke definert"
     },
     "wot_bad_description": {
-        "message": "Denne nettsiden har et veldig d\u00e5rlig rykte\ni f\u00f8lge "
+        "message": "Denne nettsiden har et veldig d\u00e5rlig rykte\ni f\u00f8lge $1"
     },
     "wot_poor_description": {
-        "message": "Denne nettsiden har et d\u00e5rlig rykte\ni f\u00f8lge "
+        "message": "Denne nettsiden har et d\u00e5rlig rykte\ni f\u00f8lge $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "Denne nettsiden har et d\u00e5rlig rykte\ni f\u00f8lge "
+        "message": "Denne nettsiden har et d\u00e5rlig rykte\ni f\u00f8lge $1"
     },
     "wot_good_description": {
-        "message": "Denne nettsiden har et godt rykte\ni f\u00f8lge "
+        "message": "Denne nettsiden har et godt rykte\ni f\u00f8lge $1"
     },
     "wot_excellent_description": {
-        "message": "Denne nettsiden har et utmerket rykte\ni f\u00f8lge "
+        "message": "Denne nettsiden har et utmerket rykte\ni f\u00f8lge $1"
     },
     "settings_choose_size_and_position": {
         "message": "Juster st\u00f8rrelsen og posisjonen til AdGuard-assistent"
@@ -2635,22 +2635,22 @@ var da = {
         "message": "Exit forh\u00e5ndsvisning"
     },
     "wot_unknown_description": {
-        "message": "Hjemmesidens omd\u00f8mme er ikke defineret af"
+        "message": "Hjemmesidens omd\u00f8mme er ikke defineret af $1"
     },
     "wot_bad_description": {
-        "message": "Denne hjemmeside har et meget d\u00e5rligt omd\u00f8mme if\u00f8lge "
+        "message": "Denne hjemmeside har et meget d\u00e5rligt omd\u00f8mme if\u00f8lge $1"
     },
     "wot_poor_description": {
-        "message": "Denne hjemmeside har et d\u00e5rligt omd\u00f8mme if\u00f8lge "
+        "message": "Denne hjemmeside har et d\u00e5rligt omd\u00f8mme if\u00f8lge $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "Denne hjemmeside har et d\u00e5rligt omd\u00f8mme if\u00f8lge "
+        "message": "Denne hjemmeside har et d\u00e5rligt omd\u00f8mme if\u00f8lge $1"
     },
     "wot_good_description": {
-        "message": "Denne hjemmeside har et godt omd\u00f8mme if\u00f8lge "
+        "message": "Denne hjemmeside har et godt omd\u00f8mme if\u00f8lge $1"
     },
     "wot_excellent_description": {
-        "message": "Denne hjemmeside har et fremragende omd\u00f8mme if\u00f8lge "
+        "message": "Denne hjemmeside har et fremragende omd\u00f8mme \nif\u00f8lge $1"
     },
     "settings_choose_size_and_position": {
         "message": "Juster AdGuard Assistent st\u00f8rrelse og position"
@@ -2768,22 +2768,22 @@ var fr = {
         "message": "Sortir de la previsualisation "
     },
     "wot_unknown_description": {
-        "message": "Aucune d\u00e9finition de r\u00e9putation de ce site web selon "
+        "message": "La d\u00e9finition de la r\u00e9putation de ce site web n'est pas d\u00e9finie par $1"
     },
     "wot_bad_description": {
-        "message": "Ce site web a tr\u00e8s mauvaise r\u00e9putation selon"
+        "message": "Ce site web a tr\u00e8s mauvaise r\u00e9putation selon $1"
     },
     "wot_poor_description": {
-        "message": "Ce site web a une r\u00e9putation m\u00e9diocre selon"
+        "message": "Ce site web a mauvaise r\u00e9putation selon $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "Ce site web a mauvaise reputation selon"
+        "message": "Ce site web a une reputation m\u00e9diocre selon $1"
     },
     "wot_good_description": {
-        "message": "Ce site a bonne r\u00e9putation selon"
+        "message": "Ce site a bonne r\u00e9putation selon $1"
     },
     "wot_excellent_description": {
-        "message": "Ce site a une excellente r\u00e9putation selon"
+        "message": "Ce site a une r\u00e9putation excellente selon $1"
     },
     "settings_choose_size_and_position": {
         "message": "Affiner la taille et la position de l'assistant AdGuard "
@@ -2904,19 +2904,19 @@ var id = {
         "message": "Reputasi tidak terdefinisi"
     },
     "wot_bad_description": {
-        "message": "Situs ini mempunyai reputasi sangat buruk\nberdasarkan "
+        "message": "Situs ini mempunyai reputasi sangat buruk\nberdasarkan $1"
     },
     "wot_poor_description": {
-        "message": "Situs ini mempunyai reputasi buruk\nberdasarkan "
+        "message": "Situs ini mempunyai reputasi buruk\nberdasarkan $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "Situs ini mempunyai reputasi biasa \nberdasarkan "
+        "message": "Situs ini mempunyai reputasi biasa \nberdasarkan $1"
     },
     "wot_good_description": {
-        "message": "Situs ini mempunyai reputasi baik \nberdasarkan "
+        "message": "Situs ini mempunyai reputasi baik \nberdasarkan $1"
     },
     "wot_excellent_description": {
-        "message": "Situs ini mempunyai reputasi sempurna \nberdasarkan "
+        "message": "Situs ini mempunyai reputasi sempurna \nberdasarkan $1"
     },
     "settings_choose_size_and_position": {
         "message": "Atur ukuran dan posisi AdGuard Assistant"
@@ -2965,7 +2965,7 @@ var sv = {
         "message": "Pausa filtrering 30 sekunder"
     },
     "menu_block_ad_on_site": {
-        "message": "Block ad on this website"
+        "message": "Blockera annons p\u00e5 den h\u00e4r webbplatsen"
     },
     "menu_report_abuse": {
         "message": "Rapportera webbplatsen"
@@ -3034,22 +3034,22 @@ var sv = {
         "message": "Avsluta f\u00f6rhandsgranskningen"
     },
     "wot_unknown_description": {
-        "message": "Den h\u00e4r sajtens anseende \u00e4r inte klarlagd av"
+        "message": "Den h\u00e4r sajtens anseende \u00e4r inte klarlagd av $1"
     },
     "wot_bad_description": {
-        "message": "Webbplatsen har ett mycket d\u00e5ligt anseende\nenligt "
+        "message": "Webbplatsen har ett mycket d\u00e5ligt anseende\nenligt $1"
     },
     "wot_poor_description": {
-        "message": "Webbplatsen har d\u00e5ligt anseende\nenligt "
+        "message": "Webbplatsen har d\u00e5ligt anseende\nenligt $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "Webbplatsen har tveksamt anseende\nenligt "
+        "message": "Webbplatsen har tveksamt anseende\nenligt $1"
     },
     "wot_good_description": {
-        "message": "Webbplatsen har gott anseende\nenligt "
+        "message": "Webbplatsen har gott anseende\nenligt $1"
     },
     "wot_excellent_description": {
-        "message": "Webbplatsen har ett mycket gott anseende\nenligt "
+        "message": "Webbplatsen har ett mycket gott anseende\nenligt $1"
     },
     "settings_choose_size_and_position": {
         "message": "Anpassas storlek och l\u00e4ge f\u00f6r AdGuardassistenten"
@@ -3300,22 +3300,22 @@ var cs = {
         "message": "Ukon\u010dit n\u00e1hled"
     },
     "wot_unknown_description": {
-        "message": "Pov\u011bst t\u00e9to webov\u00e9 str\u00e1nky nen\u00ed definov\u00e1na podle"
+        "message": "Pov\u011bst t\u00e9to webov\u00e9 str\u00e1nky nen\u00ed definov\u00e1na podle $1"
     },
     "wot_bad_description": {
-        "message": "Tato webov\u00e1 str\u00e1nka m\u00e1 velmi \u0161patnou pov\u011bst \npodle "
+        "message": "Tato webov\u00e1 str\u00e1nka m\u00e1 velmi \u0161patnou pov\u011bst \npodle $1"
     },
     "wot_poor_description": {
-        "message": "Tato webov\u00e1 str\u00e1nka m\u00e1 \u0161patnou pov\u011bst \npodle  "
+        "message": "Tato webov\u00e1 str\u00e1nka m\u00e1 \u0161patnou pov\u011bst \npodle $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "Tato webov\u00e1 str\u00e1nka m\u00e1 \u0161patnou pov\u011bst \npodle  "
+        "message": "Tato webov\u00e1 str\u00e1nka m\u00e1 \u0161patnou pov\u011bst \npodle $1"
     },
     "wot_good_description": {
-        "message": "Tato webov\u00e1 str\u00e1nka m\u00e1 dobrou pov\u011bst \npodle  "
+        "message": "Tato webov\u00e1 str\u00e1nka m\u00e1 dobrou pov\u011bst \npodle $1"
     },
     "wot_excellent_description": {
-        "message": "Tato webov\u00e1 str\u00e1nka m\u00e1 v\u00fdbornou pov\u011bst \npodle  "
+        "message": "Tato webov\u00e1 str\u00e1nka m\u00e1 v\u00fdbornou pov\u011bst \npodle $1"
     },
     "settings_choose_size_and_position": {
         "message": "Upravit velikost a pozici AdGuard Asistenta"
@@ -3436,19 +3436,19 @@ var sl_SI = {
         "message": "Ugled te spletne strani ni opredeljen"
     },
     "wot_bad_description": {
-        "message": "Ta spletna stran ima zelo slab ugled\nglede na "
+        "message": "Ta spletna stran ima zelo slab ugled\nglede na $1"
     },
     "wot_poor_description": {
-        "message": "Ta spletna stran ima zelo slab ugled\nglede na "
+        "message": "Ta spletna stran ima zelo slab ugled\nglede na $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "Ta spletna stran ima zelo slab ugled\nglede na "
+        "message": "Ta spletna stran ima zelo slab ugled\nglede na $1"
     },
     "wot_good_description": {
-        "message": "Ta spletna stran ima zelo slab ugled\nglede na "
+        "message": "Ta spletna stran ima zelo slab ugled\nglede na $1"
     },
     "wot_excellent_description": {
-        "message": "Ta spletna stran ima zelo slab ugled\nglede na "
+        "message": "Ta spletna stran ima zelo slab ugled\nglede na $1"
     },
     "settings_choose_size_and_position": {
         "message": "Prilagodi velikost in polo\u017eaj AdGuard Assistanta"
@@ -3569,19 +3569,19 @@ var be_BY = {
         "message": "\u0420\u044d\u043f\u0443\u0442\u0430\u0446\u044b\u044f \u043d\u0435 \u0432\u044b\u0437\u043d\u0430\u0447\u0430\u043d\u0430"
     },
     "wot_bad_description": {
-        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u0432\u0435\u043b\u044c\u043c\u0456 \u0434\u0440\u044d\u043d\u043d\u0430\u044f \u0440\u044d\u043f\u0443\u0442\u0430\u0446\u044b\u044f \u043f\u0430 \u0434\u0430\u0434\u0437\u0435\u043d\u044b\u0445 "
+        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u0432\u0435\u043b\u044c\u043c\u0456 \u0434\u0440\u044d\u043d\u043d\u0430\u044f \u0440\u044d\u043f\u0443\u0442\u0430\u0446\u044b\u044f \u043f\u0430 \u0434\u0430\u0434\u0437\u0435\u043d\u044b\u0445 $1"
     },
     "wot_poor_description": {
-        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u0434\u0440\u044d\u043d\u043d\u0430\u044f \u0440\u044d\u043f\u0443\u0442\u0430\u0446\u044b\u044f \u043f\u0430 \u0434\u0430\u0434\u0437\u0435\u043d\u044b\u0445 "
+        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u0434\u0440\u044d\u043d\u043d\u0430\u044f \u0440\u044d\u043f\u0443\u0442\u0430\u0446\u044b\u044f \u043f\u0430 \u0434\u0430\u0434\u0437\u0435\u043d\u044b\u0445 $1"
     },
     "wot_unsatisfactory_description": {
-        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u043d\u0435\u0437\u0434\u0430\u0432\u0430\u043b\u044c\u043d\u044f\u043b\u044c\u043d\u0430\u044f \u0440\u044d\u043f\u0443\u0442\u0430\u0446\u044b\u044f \u043f\u0430 \u0434\u0430\u0434\u0437\u0435\u043d\u044b\u0445 "
+        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u043d\u0435\u0437\u0434\u0430\u0432\u0430\u043b\u044c\u043d\u044f\u043b\u044c\u043d\u0430\u044f \u0440\u044d\u043f\u0443\u0442\u0430\u0446\u044b\u044f \u043f\u0430 \u0434\u0430\u0434\u0437\u0435\u043d\u044b\u0445 $1"
     },
     "wot_good_description": {
-        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u0434\u043e\u0431\u0440\u0430\u044f \u0440\u044d\u043f\u0443\u0442\u0430\u0446\u044b\u044f \u043f\u0430 \u0434\u0430\u0434\u0437\u0435\u043d\u044b\u0445 "
+        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u0434\u043e\u0431\u0440\u0430\u044f \u0440\u044d\u043f\u0443\u0442\u0430\u0446\u044b\u044f \u043f\u0430 \u0434\u0430\u0434\u0437\u0435\u043d\u044b\u0445 $1"
     },
     "wot_excellent_description": {
-        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u0432\u044b\u0434\u0430\u0442\u043d\u0430\u044f \u0440\u044d\u043f\u0443\u0442\u0430\u0446\u044b\u044f \u043f\u0430 \u0434\u0430\u0434\u0437\u0435\u043d\u044b\u0445 "
+        "message": "\u0423 \u0441\u0430\u0439\u0442\u0430 \u0432\u044b\u0434\u0430\u0442\u043d\u0430\u044f \u0440\u044d\u043f\u0443\u0442\u0430\u0446\u044b\u044f \u043f\u0430 \u0434\u0430\u0434\u0437\u0435\u043d\u044b\u0445 $1"
     },
     "settings_choose_size_and_position": {
         "message": "\u041d\u0430\u043b\u0430\u0434\u0437\u044c\u0446\u0435 \u043f\u0430\u043c\u0435\u0440 \u0456 \u0441\u0442\u0430\u043d\u043e\u0432\u0456\u0448\u0447\u0430 \u043f\u0430\u043c\u043e\u0447\u043d\u0456\u043a\u0430 AdGuard"
@@ -7178,6 +7178,7 @@ var Wot = function () { // jshint ignore:line
 
 var Localization = function () { // jshint ignore:line
     var currentLocale = null, locale;
+    // keys should be in the lowercase, because values will be get by found lowercased locale
     var SupportedLocales = {
         'en': en,
         'ru': ru,
@@ -7185,7 +7186,7 @@ var Localization = function () { // jshint ignore:line
         'pl': pl,
         'de': de,
         'zh': zh_CN,
-        'zh-TW': zh_TW,
+        'zh-tw': zh_TW,
         'he': he,
         'it': it,
         'fa': fa,
@@ -7193,7 +7194,7 @@ var Localization = function () { // jshint ignore:line
         'ja': ja,
         'ar': ar,
         'es': es,
-        'pt-PT': pt_PT,
+        'pt-pt': pt_PT,
         'pt': pt_BR,
         'ko': ko,
         'sk': sk,
@@ -7462,9 +7463,8 @@ var DetailedMenuController = function($, wot, localization, gmApi, settings, log
 
             contentDocument.getElementsByClassName('wot-indicator')[0].href = wot.getWotScorecardUrl(domain);
             wotIndication.addClass(wotReputationSettings.class);
-            var wotLogo = protectedApi.createElement('<span id="WotLogo"><span class="wot-logo"></span></span>');
-            wotDescriptionText.textContent = wotReputationSettings.text;
-            wotDescriptionText.appendChild(wotLogo);
+            var wotLogo = '<span id="WotLogo"><span class="wot-logo"></span></span>';
+            wotDescriptionText.innerHTML = wotReputationSettings.text.replace('$1', wotLogo);
 
             var wotConfidenceClass = getWotConfidenceClass(wotData);
             confidenceIndication.addClass(wotConfidenceClass);
