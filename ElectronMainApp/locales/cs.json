@@ -1,33 +1,33 @@
 {
     "main_menu_about": {
-        "message": "About AdGuard for Safari"
+        "message": "O AdGuardu pro Safari"
     },
     "options_popup_trusted_filter_title": {
-        "message": "Trusted"
+        "message": "D\u016fv\u011bryhodn\u00fd"
     },
     "options_popup_trusted_filter_description": {
-        "message": "Trusted filters can use powerful filtering rules modifiers which can be dangerous in the wrong hands. Do not check this box unless you fully trust it."
+        "message": "D\u016fv\u011bryhodn\u00e9 filtry m\u016f\u017eou pou\u017e\u00edvat siln\u00e9 modifik\u00e1tory pravidel filtrov\u00e1n\u00ed, kter\u00e9 m\u016f\u017eou b\u00fdt v nespr\u00e1vn\u00fdch rukou nebezpe\u010dn\u00e9. Toto pol\u00ed\u010dko neza\u0161krtn\u011bte, pokud tomu ned\u016fv\u011b\u0159ujete."
     },
     "options_filters_filter_trusted_tag": {
-        "message": "trusted"
+        "message": "d\u016fv\u011bryhodn\u00fd"
     },
     "options_filters_filter_trusted_tag_desc": {
-        "message": "You chose to trust this filter"
+        "message": "Zvolili jste si d\u016fv\u011b\u0159ovat tomuto filtru"
     },
     "options_about_update_check": {
-        "message": "Checking for updates"
+        "message": "Kontroluji aktualizace"
     },
     "options_about_updating": {
-        "message": "Updating AdGuard for Safari"
+        "message": "Aktualizuji AdGuard pro Safari"
     },
     "options_about_updates_not_found": {
-        "message": "AdGuard for Safari is up to date"
+        "message": "AdGuard pro Safari je aktu\u00e1ln\u00ed"
     },
     "options_about_update_downloaded": {
-        "message": "Nearly up to date! Relaunch AdGuard for Safari to finish updating."
+        "message": "T\u00e9m\u011b\u0159 aktu\u00e1ln\u00ed! Spus\u0165te znovu AdGuard pro Safari a dokon\u010dete aktualizaci."
     },
     "options_about_update_relaunch": {
-        "message": "Relaunch"
+        "message": "Znovu spustit"
     },
     "options_popup_title_placeholder": {
         "message": "Zadejte n\u00e1zev filtru"
@@ -66,7 +66,7 @@
         "message": "Filtry"
     },
     "options_antibanner_info": {
-        "message": "%s filtr\u016f %s pravidel"
+        "message": "%s filtr\u016f %s pravidel %s pokro\u010dil\u00fdch pravidel"
     },
     "options_filters_enabled": {
         "message": "Povoleno"
