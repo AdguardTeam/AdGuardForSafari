@@ -48,6 +48,6 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>$(AG_COPYRIGHT)</string>
 	<key>NSHumanReadableDescription</key>
-	<string>This extension manages injected script and extended css rules.</string>
+	<string>This extension applies advanced blocking rules which are not supported by Safari Content Blocking API.</string>
 </dict>
 </plist>

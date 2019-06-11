@@ -1723,7 +1723,6 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_ADVANCED_BLOCKING_BUNDLEID)";
@@ -1753,7 +1752,6 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_ADVANCED_BLOCKING_BUNDLEID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1949,7 +1947,6 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_FAST_MATH = YES;
 				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_ADVANCED_BLOCKING_BUNDLEID)";
@@ -1976,7 +1973,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = mizzick.AdvancedBlockingUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2169,7 +2165,6 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_FAST_MATH = YES;
 				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_ADVANCED_BLOCKING_BUNDLEID)";
@@ -2196,7 +2191,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = mizzick.AdvancedBlockingUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2219,7 +2213,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = mizzick.AdvancedBlockingUnitTests;
@@ -2243,7 +2236,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = mizzick.AdvancedBlockingUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
