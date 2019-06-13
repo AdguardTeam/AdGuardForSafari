@@ -1,33 +1,33 @@
 {
     "main_menu_about": {
-        "message": "About AdGuard for Safari"
+        "message": "\u00c0 propos d'AdGuard pour Safari"
     },
     "options_popup_trusted_filter_title": {
-        "message": "Trusted"
+        "message": "Fiable"
     },
     "options_popup_trusted_filter_description": {
-        "message": "Trusted filters can use powerful filtering rules modifiers which can be dangerous in the wrong hands. Do not check this box unless you fully trust it."
+        "message": "Les filtres fiables peuvent utiliser de puissants modificateurs de r\u00e8gles de filtrage pouvant \u00eatre dangereux entre de mauvaises mains. Ne cochez pas cette case si vous n'\u00eates pas s\u00fbr."
     },
     "options_filters_filter_trusted_tag": {
-        "message": "trusted"
+        "message": "fiable"
     },
     "options_filters_filter_trusted_tag_desc": {
-        "message": "You chose to trust this filter"
+        "message": "Vous avez choisi de faire confiance \u00e0 ce filtre"
     },
     "options_about_update_check": {
-        "message": "Checking for updates"
+        "message": "V\u00e9rification des mises \u00e0 jour"
     },
     "options_about_updating": {
-        "message": "Updating AdGuard for Safari"
+        "message": "Mise \u00e0 jour d'AdGuard pour Safari"
     },
     "options_about_updates_not_found": {
-        "message": "AdGuard for Safari is up to date"
+        "message": "AdGuard pour Safari est \u00e0 jour"
     },
     "options_about_update_downloaded": {
-        "message": "Nearly up to date! Relaunch AdGuard for Safari to finish updating."
+        "message": "Presque \u00e0 jour! Relancez AdGuard pour Safari pour terminer la mise \u00e0 jour."
     },
     "options_about_update_relaunch": {
-        "message": "Relaunch"
+        "message": "Relancer"
     },
     "options_popup_title_placeholder": {
         "message": "Entrez le nom du filtre"
@@ -66,7 +66,7 @@
         "message": "Filtres"
     },
     "options_antibanner_info": {
-        "message": "%s filtres %s r\u00e8gles"
+        "message": "%s filtres %s r\u00e8gles %s r\u00e8gles avanc\u00e9es"
     },
     "options_filters_enabled": {
         "message": "Activ\u00e9 :"
@@ -193,8 +193,8 @@
     },
     "options_popup_update_updated_more": {
         "message": {
-            "one": "%s filter updated: $2",
-            "other": "%s filters updated: $2"
+            "one": "%s filtre mis \u00e0 jour: $2",
+            "other": "%s filtres mis \u00e0 jour: $2"
         }
     },
     "options_popup_version_update_title": {
@@ -324,10 +324,10 @@
         "message": "Lancer AdGuard pour Safari d\u00e8s la connexion"
     },
     "settings_notification_title": {
-        "message": "Attention ! L'ic\u00f4ne AdGuard a \u00e9t\u00e9 d\u00e9sactiv\u00e9e"
+        "message": "Attention! Les extensions AdGuard sont d\u00e9sactiv\u00e9es"
     },
     "settings_notification_text": {
-        "message": "Vous pouvez acc\u00e8der aux r\u00e8glages d'AdGuard pour Safari par aide de cette ic\u00f4ne : d\u00e9sactiver le blocage sur un site Web particulier ou masquer une pub \u00e0 la main. Vous pouvez activer l'Ic\u00f4ne AdGuard <a href='#' id='notificationEnableIconLink'>ici<\/a>"
+        "message": "Vous pouvez utilisez ces extensions pour param\u00e9trer AdGuard pour Safari. Par exemple, mettre en pause le blocage sur un site particulier ou bloquer une publicit\u00e9 manuellement. Vous pouvez activer l'ic\u00f4ne AdGuard et le Blocage Avanc\u00e9  <a href='#' id='notificationEnableIconLink'>ici<\/a>."
     },
     "settings_notification_protection_title": {
         "message": "Attention ! Protection d\u00e9sactiv\u00e9e"
