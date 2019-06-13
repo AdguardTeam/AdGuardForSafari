@@ -1263,16 +1263,26 @@ var jsonFromFilters = (function () {
          * AdGuard scriptlet mask
          */
         const ADGUARD_SCRIPTLET_MASK = '${domains}#%#//scriptlet(${args})';
+
+        /**
+         * AdGuard scriptlet exception mask
+         */
+        const ADGUARD_SCRIPTLET_EXCEPTION_MASK = '${domains}#@%#//scriptlet(${args})';
+
         /**
          * uBlock scriptlet rule mask
          */
-        const UBO_SCRIPTLET_MASK_REG = /##script\:inject|##\s*\+js/;
+        const UBO_SCRIPTLET_MASK_REG = /##script\:inject|#@?#\s*\+js/;
         const UBO_SCRIPTLET_MASK_1 = '##+js';
         const UBO_SCRIPTLET_MASK_2 = '##script:inject';
+        const UBO_SCRIPTLET_EXCEPTION_MASK_1 = '#@#+js';
+        const UBO_SCRIPTLET_EXCEPTION_MASK_2 = '#@#script:inject';
         /**
          * AdBlock Plus snippet rule mask
          */
         const ABP_SCRIPTLET_MASK = '#$#';
+        const ABP_SCRIPTLET_EXCEPTION_MASK = '#@$#';
+
         /**
          * AdGuard CSS rule mask
          */
@@ -1309,7 +1319,7 @@ var jsonFromFilters = (function () {
                 str = str.substring(1, str.length - 1);
                 str = str.replace(/\'/g, '\\\'');
             }
-            return `"${str}"`
+            return `"${str}"`;
         }
 
 
@@ -1330,16 +1340,23 @@ var jsonFromFilters = (function () {
          * Convert string of UBO scriptlet rule to AdGuard scritlet rule
          * @param {string} rule UBO scriptlet rule
          */
-        function convertUBOScriptletRule(rule) {
+        function convertUboScriptletRule(rule) {
             const domains = stringUtils.getBeforeRegExp(rule, UBO_SCRIPTLET_MASK_REG);
+            const mask = rule.match(UBO_SCRIPTLET_MASK_REG)[0];
+            let template;
+            if (mask.indexOf('@') > -1) {
+                template = ADGUARD_SCRIPTLET_EXCEPTION_MASK;
+            } else {
+                template = ADGUARD_SCRIPTLET_MASK;
+            }
             const args = getStringInBraces(rule)
                 .split(/, /g)
-                .map((arg, index) => index === 0 ? `ubo-${arg}` : arg)
+                .map((arg, index) => (index === 0 ? `ubo-${arg}` : arg))
                 .map(arg => wrapInDoubleQuotes(arg))
                 .join(', ');
 
             return replacePlaceholders(
-                ADGUARD_SCRIPTLET_MASK,
+                template,
                 { domains, args }
             );
         }
@@ -1348,56 +1365,135 @@ var jsonFromFilters = (function () {
          * Convert string of ABP scriptlet rule to AdGuard scritlet rule
          * @param {string} rule UBO scriptlet rule
          */
-        function convertABPSnippetRule(rule) {
+        function convertAbpSnippetRule(rule) {
             const SEMICOLON_DIVIDER = /;(?=(?:(?:[^"]*"){2})*[^"]*$)/g;
-            const domains = stringUtils.substringBefore(rule, ABP_SCRIPTLET_MASK);
-            let args = stringUtils.substringAfter(rule, ABP_SCRIPTLET_MASK);
+            const mask = rule.indexOf(ABP_SCRIPTLET_MASK) > -1
+                ? ABP_SCRIPTLET_MASK
+                : ABP_SCRIPTLET_EXCEPTION_MASK;
+            const template = mask === ABP_SCRIPTLET_MASK
+                ? ADGUARD_SCRIPTLET_MASK
+                : ADGUARD_SCRIPTLET_EXCEPTION_MASK;
+            const domains = stringUtils.substringBefore(rule, mask);
+            const args = stringUtils.substringAfter(rule, mask);
             return args.split(SEMICOLON_DIVIDER)
                 .map(args => getSentences(args)
                     .filter(arg => arg)
-                    .map((arg, index) => index === 0 ? `abp-${arg}` : arg)
+                    .map((arg, index) => (index === 0 ? `abp-${arg}` : arg))
                     .map(arg => wrapInDoubleQuotes(arg))
-                    .join(', ')
-                )
-                .map(args => replacePlaceholders(ADGUARD_SCRIPTLET_MASK, { domains, args }))
+                    .join(', '))
+                .map(args => replacePlaceholders(template, { domains, args }));
         }
 
         /**
          * Check is uBO scriptlet rule
          * @param {string} rule rule text
          */
-        function isUBOScriptletRule(rule) {
+        function isUboScriptletRule(rule) {
             return (
                     rule.indexOf(UBO_SCRIPTLET_MASK_1) > -1
                     || rule.indexOf(UBO_SCRIPTLET_MASK_2) > -1
+                    || rule.indexOf(UBO_SCRIPTLET_EXCEPTION_MASK_1) > -1
+                    || rule.indexOf(UBO_SCRIPTLET_EXCEPTION_MASK_2) > -1
                 )
                 && UBO_SCRIPTLET_MASK_REG.test(rule);
-        };
+        }
 
         /**
          * Check is AdBlock Plus snippet
          * @param {string} rule rule text
          */
-        function isABPSnippetRule(rule) {
-            return rule.indexOf(ABP_SCRIPTLET_MASK) > -1 && rule.search(ADG_CSS_MASK_REG) === -1;
-        };
+        function isAbpSnippetRule(rule) {
+            return (
+                    rule.indexOf(ABP_SCRIPTLET_MASK) > -1
+                    || rule.indexOf(ABP_SCRIPTLET_EXCEPTION_MASK) > -1
+                ) && rule.search(ADG_CSS_MASK_REG) === -1;
+        }
+
+        /**
+         * Returns false or converted rule
+         *
+         * Example:
+         * "example.com##h1:style(background-color: blue !important)"
+         * -> "example.com##h1 {background-color: blue !important}"
+         *
+         * @param {string} ruleText - rule text to check if should be checked and if necessary converted
+         * @return {string|boolean} - converted rule text or false
+         */
+        function convertUboCssStyleRule(ruleText) {
+            const UBO_CSS_RULE_MARKERS = {
+                MASK_CSS_RULE: '##',
+                MASK_CSS_EXCEPTION_RULE: '#@#',
+                MASK_CSS_EXTENDED_CSS_RULE: '#?#',
+                MASK_CSS_EXCEPTION_EXTENDED_CSS_RULE: '#@?#',
+            };
+
+            const CSS_TO_INJECT_PAIRS = {
+                [UBO_CSS_RULE_MARKERS.MASK_CSS_RULE]: '#$#',
+                [UBO_CSS_RULE_MARKERS.MASK_CSS_EXCEPTION_RULE]: '#@$#',
+                [UBO_CSS_RULE_MARKERS.MASK_CSS_EXTENDED_CSS_RULE]: '#$?#',
+                [UBO_CSS_RULE_MARKERS.MASK_CSS_EXCEPTION_EXTENDED_CSS_RULE]: '#@$?#',
+            };
+
+            const RULE_MARKER_FIRST_CHAR = '#';
+
+            const UBO_CSS_STYLE_PSEUDO_CLASS = ':style(';
+
+            const uboMarkers = Object.keys(UBO_CSS_RULE_MARKERS).map(key => UBO_CSS_RULE_MARKERS[key]);
+
+            const mask = api.FilterRule.findRuleMarker(
+                ruleText,
+                uboMarkers,
+                RULE_MARKER_FIRST_CHAR
+            );
+            if (!mask) {
+                return false;
+            }
+            const maskIndex = ruleText.indexOf(mask);
+            const cssContent = ruleText.substring(maskIndex + mask.length);
+            const shouldConvert = cssContent.indexOf(UBO_CSS_STYLE_PSEUDO_CLASS) > -1;
+            if (!shouldConvert) {
+                return false;
+            }
+
+            const domainsPart = ruleText.substring(0, maskIndex);
+            const regex = /:style\s*\(\s*(\S+.*\S)\s*\)/;
+            const subst = ' { $1 }';
+            const convertedCssContent = cssContent.replace(regex, subst);
+            if (convertedCssContent === cssContent) {
+                throw new Error(`Empty :style pseudo class: ${cssContent}`);
+            }
+            return domainsPart + CSS_TO_INJECT_PAIRS[mask] + convertedCssContent;
+        }
+
+        /**
+         * Checks if rule text is comment e.g. !!example.org##+js(set-constant.js, test, false)
+         * @param {string} rule
+         * @return {boolean}
+         */
+        const isComment = rule => stringUtils.startWith(rule, api.FilterRule.COMMENT);
 
         /**
          * Convert external scriptlet rule to AdGuard scriptlet syntax
          * @param {string} rule convert rule
          */
         function convertRule(rule) {
-            if (isUBOScriptletRule(rule)) {
-                return convertUBOScriptletRule(rule);
+            if (isComment(rule)) {
+                return rule;
             }
-            if (isABPSnippetRule(rule)) {
-                return convertABPSnippetRule(rule);
+            if (isUboScriptletRule(rule)) {
+                return convertUboScriptletRule(rule);
+            }
+            if (isAbpSnippetRule(rule)) {
+                return convertAbpSnippetRule(rule);
+            }
+            const uboCssStyleRule = convertUboCssStyleRule(rule);
+            if (uboCssStyleRule) {
+                return uboCssStyleRule;
             }
             return rule;
         }
 
         api.ruleConverter = { convertRule };
-
     })(adguard, adguard.rules);
     /** end of rule-converter.js */
     /** start of filter-rule-builder.js */
