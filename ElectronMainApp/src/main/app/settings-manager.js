@@ -23,7 +23,8 @@ module.exports = (function () {
         DISABLE_SHOW_APP_UPDATED_NOTIFICATION: 'show-app-updated-disabled',
         UPDATE_FILTERS_PERIOD: 'update-filters-period',
         SHOW_TRAY_ICON: 'show-tray-icon',
-        LAUNCH_AT_LOGIN: 'launch-at-login'
+        LAUNCH_AT_LOGIN: 'launch-at-login',
+        VERBOSE_LOGGING: 'verbose-logging'
     };
 
     const properties = Object.create(null);
@@ -51,6 +52,7 @@ module.exports = (function () {
                 defaults[settings.UPDATE_FILTERS_PERIOD] = 48;
                 defaults[settings.SHOW_TRAY_ICON] = true;
                 defaults[settings.LAUNCH_AT_LOGIN] = false;
+                defaults[settings.VERBOSE_LOGGING] = false;
 
                 return defaults;
             });
@@ -176,6 +178,10 @@ module.exports = (function () {
         return getProperty(settings.LAUNCH_AT_LOGIN);
     };
 
+    const isVerboseLoggingEnabled = function () {
+        return getProperty(settings.VERBOSE_LOGGING);
+    };
+
     const api = {};
 
     // Expose settings to api
@@ -206,6 +212,7 @@ module.exports = (function () {
     api.getUpdateFiltersPeriod = getUpdateFiltersPeriod;
     api.changeLaunchAtLogin = changeLaunchAtLogin;
     api.isLaunchAtLoginEnabled = isLaunchAtLoginEnabled;
+    api.isVerboseLoggingEnabled = isVerboseLoggingEnabled;
 
     app.setLoginItemSettings({
         openAtLogin: getProperty(settings.LAUNCH_AT_LOGIN)

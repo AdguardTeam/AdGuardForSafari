@@ -180,6 +180,15 @@ module.exports = (() => {
         addon.debugLog(msg);
     };
 
+    /**
+     * Sets verbose logging
+     *
+     * @param enabled
+     */
+    const setVerboseLogging = (enabled) => {
+        addon.setVerboseLogging(enabled);
+    };
+
     return {
         init: init,
         sendReady: sendReady,
@@ -196,7 +205,8 @@ module.exports = (() => {
         extensionSafariIconState: extensionSafariIconState,
         extensionAdvancedBlockingState: extensionAdvancedBlockingState,
         openExtensionsPreferenses: openExtensionsPreferenses,
-        debugLog: debugLog
+        debugLog: debugLog,
+        setVerboseLogging: setVerboseLogging
     };
 
 })();

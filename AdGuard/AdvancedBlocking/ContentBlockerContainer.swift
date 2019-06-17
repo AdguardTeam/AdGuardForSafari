@@ -21,6 +21,7 @@ class ContentBlockerContainer {
     func setJson(json: String) throws {
         // Parse "content-blocker" json
         contentBlockerJson = try parseJsonString(json: json);
+
         // Parse shortcuts
         for i in 0 ..< contentBlockerJson.count {
             contentBlockerJson[i].trigger.setShortcut(shortcutValue: parseShortcut(urlMask: contentBlockerJson[i].trigger.urlFilter));
@@ -190,6 +191,8 @@ class ContentBlockerContainer {
             blockerData.addCss(style: blockerEntry.action.css);
         } else if blockerEntry.action.type == "script" {
             blockerData.addScript(script: blockerEntry.action.script);
+        } else if blockerEntry.action.type == "scriptlet" {
+            blockerData.addScriptlet(scriptlet: blockerEntry.action.scriptletParam);
         }
     }
     
@@ -236,6 +239,8 @@ class ContentBlockerContainer {
             let type: String
             let css: String?
             let script: String?
+            let scriptlet: String?
+            let scriptletParam: String?
         }
     }
     
@@ -243,6 +248,7 @@ class ContentBlockerContainer {
     class BlockerData: Encodable {
         var scripts = [String]()
         var css = [String]()
+        var scriptlets = [String]()
         
         func addScript(script: String?) {
             if (script != nil && script != "") {
@@ -256,9 +262,16 @@ class ContentBlockerContainer {
             }
         }
         
+        func addScriptlet(scriptlet: String?) {
+            if (scriptlet != nil && scriptlet != "") {
+                scriptlets.append(scriptlet!);
+            }
+        }
+        
         func clear() {
             scripts = [];
             css = [];
+            scriptlets = [];
         }
     }
 }

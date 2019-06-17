@@ -28,7 +28,7 @@ exit 0
 fi
 
 # Rebuild safari-ext
-#cd "${SHAREDSRC}"
+#cd "${SRC}/safari-ext"
 #node-gyp configure --verbose --debug|| exit 1
 #node-gyp rebuild --verbose|| exit 1
 #

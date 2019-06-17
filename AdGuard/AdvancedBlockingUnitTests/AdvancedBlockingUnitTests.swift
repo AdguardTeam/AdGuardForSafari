@@ -42,6 +42,16 @@ class AdvancedBlockingTests: XCTestCase {
                         "type": "css",
                         "css": "#included-css:has(div) { height: 5px; }"
                     }
+                },
+                {
+                    "trigger": {
+                        "url-filter": ".*"
+                    },
+                    "action": {
+                        "type": "scriptlet",
+                        "scriptlet": "abp-hide-if-contains",
+                        "scriptletParam": "{\\"name\\":\\"abort-on-property-read\\",\\"args\\":[\\"I10C\\"]}"
+                    }
                 }
             ]
         """;
@@ -51,6 +61,7 @@ class AdvancedBlockingTests: XCTestCase {
         
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
+        XCTAssert(data.scriptlets[0] == "{\"name\":\"abort-on-property-read\",\"args\":[\"I10C\"]}");
     }
     
     func testTriggerUrlFilterAll() {
@@ -91,6 +102,7 @@ class AdvancedBlockingTests: XCTestCase {
         
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
+        XCTAssert(data.scriptlets.count == 0);
     }
     
     func testTriggerUrlFilter() {
@@ -122,6 +134,7 @@ class AdvancedBlockingTests: XCTestCase {
         
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css.count == 0);
+        XCTAssert(data.scriptlets.count == 0);
     }
     
     func testUrlFilterIfDomain() {
@@ -159,6 +172,7 @@ class AdvancedBlockingTests: XCTestCase {
         
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css.count == 0);
+        XCTAssert(data.scriptlets.count == 0);
     }
     
     func testUrlFilterIfSubDomain() {
@@ -196,6 +210,7 @@ class AdvancedBlockingTests: XCTestCase {
         
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css.count == 0);
+        XCTAssert(data.scriptlets.count == 0);
     }
     
     func testUrlFilterUnlessDomain() {
@@ -231,6 +246,7 @@ class AdvancedBlockingTests: XCTestCase {
         
         XCTAssert(data.scripts.count == 0);
         XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
+        XCTAssert(data.scriptlets.count == 0);
     }
     
     func testIgnorePreviousRules() {
@@ -273,12 +289,14 @@ class AdvancedBlockingTests: XCTestCase {
         
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css.count == 0);
+        XCTAssert(data.scriptlets.count == 0);
         
         data = try! contentBlockerContainer.getData(url: URL(string:"http://test.com")) as! ContentBlockerContainer.BlockerData;
         
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.scripts[1] == "example-ignored-script");
         XCTAssert(data.css.count == 0);
+        XCTAssert(data.scriptlets.count == 0);
     }
     
     func testUrlFilterShortcuts() {
@@ -340,6 +358,7 @@ class AdvancedBlockingTests: XCTestCase {
         
         XCTAssert(data.scripts.count == 0);
         XCTAssert(data.css.count == 0);
+        XCTAssert(data.scriptlets.count == 0);
         
         // Unsupported action
         contentBlockerJsonString = """
@@ -361,6 +380,7 @@ class AdvancedBlockingTests: XCTestCase {
         
         XCTAssert(data.scripts.count == 0);
         XCTAssert(data.css.count == 0);
+        XCTAssert(data.scriptlets.count == 0);
         
         // Invalid action
         contentBlockerJsonString = """
@@ -381,6 +401,7 @@ class AdvancedBlockingTests: XCTestCase {
         
         XCTAssert(data.scripts.count == 0);
         XCTAssert(data.css.count == 0);
+        XCTAssert(data.scriptlets.count == 0);
         
         // Invalid regexp
         contentBlockerJsonString = """
@@ -402,6 +423,7 @@ class AdvancedBlockingTests: XCTestCase {
         
         XCTAssert(data.scripts.count == 0);
         XCTAssert(data.css.count == 0);
+        XCTAssert(data.scriptlets.count == 0);
     }
     
     func testPerformanceEmptyList() {
@@ -568,6 +590,7 @@ class AdvancedBlockingTests: XCTestCase {
                 
                 XCTAssert(data.scripts.count == 11);
                 XCTAssert(data.css.count == 0);
+                XCTAssert(data.scriptlets.count == 0);
             }
         }
         
