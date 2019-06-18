@@ -16,8 +16,11 @@
     <a href="https://agrd.io/safari">
         <img src="https://img.shields.io/badge/download-app%20store-blue.svg" alt="Download on the AppStore" />
     </a>
+    <a href="https://github.com/AdguardTeam/AdguardForSafari/releases/latest">
+        <img src="https://img.shields.io/github/release/AdguardTeam/AdguardForSafari.svg" alt="Latest release" />
+    </a>
     <a href="https://github.com/AdguardTeam/AdguardForSafari/releases">
-        <img src="https://img.shields.io/github/release/AdguardTeam/AdguardForSafari/all.svg" alt="Latest release" />
+        <img src="https://img.shields.io/github/release-pre/AdguardTeam/AdguardForSafari.svg?label=beta" alt="Latest beta" />
     </a>
 </p>
 
