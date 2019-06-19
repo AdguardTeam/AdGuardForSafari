@@ -1427,9 +1427,9 @@ li.active .toggler:before {
 .about-updates:after {
   content: '';
   position: absolute;
+  margin-left: 2px;
   top: -1px;
   width: 18px;
-  right: 15px;
   height: 15px;
   background-image: url(../images/reload-ico-green.svg);
 }
