@@ -9,9 +9,9 @@
 (() => {
     /**
      * Execute scripts in a page context and cleanup itself when execution completes
-     * @param [string] scripts Scripts array to execute
+     * @param scripts Scripts array to execute
      */
-    const executeScripts = function (scripts) {
+    const executeScripts = scripts => {
         // Wrap with try catch
         scripts.unshift('( function () { try {');
         scripts.push("} catch (ex) { console.error('Error executing AG js: ' + ex); } })();");
@@ -30,13 +30,14 @@
     /**
      * Applies JS injections.
      * @param scripts Array with JS scripts
+     * @param verbose logging
      */
-    const applyScripts = function (scripts) {
+    const applyScripts = (scripts, verbose) => {
         if (!scripts || scripts.length === 0) {
             return;
         }
 
-        console.log('(AdGuard Advanced Blocking) scripts length: ' + scripts.length);
+        logMessage(verbose, 'scripts length: ' + scripts.length);
         executeScripts(scripts.reverse());
     };
 
@@ -44,13 +45,14 @@
      * Applies Extended Css stylesheet
      *
      * @param extendedCss Array with ExtendedCss stylesheets
+     * @param verbose logging
      */
-    const applyExtendedCss = function (extendedCss) {
+    const applyExtendedCss = (extendedCss, verbose) => {
         if (!extendedCss || !extendedCss.length) {
             return;
         }
 
-        console.log('(AdGuard Advanced Blocking) extended css length: ' + extendedCss.length);
+        logMessage(verbose, 'extended css length: ' + extendedCss.length);
         const extcss = new ExtendedCss({
             styleSheet: extendedCss
                 .filter(s => s.length > 0)
@@ -67,12 +69,12 @@
      * @param scriptletsData Array with scriptlets data
      * @param verbose logging
      */
-    const applyScriptlets = function (scriptletsData, verbose) {
+    const applyScriptlets = (scriptletsData, verbose) => {
         if (!scriptletsData || !scriptletsData.length) {
             return;
         }
 
-        console.log('(AdGuard Advanced Blocking) scriptlets length: ' + scriptletsData.length);
+        logMessage(verbose, 'scriptlets length: ' + scriptletsData.length);
         const scriptletExecutableScripts = scriptletsData
             .map((s) => {
                 const param = JSON.parse(s);
@@ -94,14 +96,26 @@
      * @param data
      * @param verbose
      */
-    const applyAdvancedBlockingData = function (data, verbose) {
-        console.log('(AdGuard Advanced Blocking) Applying scripts and css..');
+    const applyAdvancedBlockingData = (data, verbose) => {
+        logMessage(verbose, 'Applying scripts and css..');
 
-        applyScripts(data.scripts);
-        applyExtendedCss(data.css);
+        applyScripts(data.scripts, verbose);
+        applyExtendedCss(data.css, verbose);
         applyScriptlets(data.scriptlets, verbose);
 
-        console.log('(AdGuard Advanced Blocking) Applying scripts and css - done');
+        logMessage(verbose, 'Applying scripts and css - done');
+    };
+
+    /**
+     * Logs a message if verbose is true
+     *
+     * @param verbose
+     * @param message
+     */
+    const logMessage = (verbose, message) => {
+        if (verbose) {
+            console.log(`(AdGuard Advanced Blocking) ${message}`);
+        }
     };
 
     /**
@@ -109,13 +123,11 @@
      *
      * @param event
      */
-    const handleMessage = function (event) {
-        console.log("(AdGuard Advanced Blocking) Received message from extension: %s.", event.name);
-
+    const handleMessage = event => {
         if (event.name === "advancedBlockingData") {
             try {
                 const data = JSON.parse(event.message["data"]);
-                const verbose = JSON.parse(event.message["verbose"])
+                const verbose = JSON.parse(event.message["verbose"]);
                 applyAdvancedBlockingData(data, verbose);
             } catch (e) {
                 console.error(e);
@@ -125,15 +137,10 @@
 
 
     if (window.top === window) {
-        console.log("(AdGuard Advanced Blocking) Loading in main frame..");
-
         safari.self.addEventListener("message", handleMessage);
-        console.log("(AdGuard Advanced Blocking) Added Listener for messages from app extension.");
 
         // Request advanced blocking data
         safari.extension.dispatchMessage("getAdvancedBlockingData");
-
-        console.log("(AdGuard Advanced Blocking) Loading in main frame - done");
     }
 })();
 

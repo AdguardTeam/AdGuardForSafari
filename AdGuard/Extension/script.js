@@ -1,45 +1,64 @@
+/**
+ * AdGuard Extension Script
+ *
+ * This content-script serves some assistant requests.
+ */
+
+/* global safari */
+
 if (window.top === window) {
-    console.log("(AdGuard Ext) Loading in main frame.");
 
-    var handleMessage = function (event) {
-        console.log("(AdGuard Ext) Get message from extention %s.",event.name);
-        switch (event.name) {
-            case "blockElementPing":
-                safari.extension.dispatchMessage("blockElementPong");
-                break;
+    (() => {
 
-            case "blockElement":
-                if ( ! document.getElementById("adguard.assistant.embedded")){
-                    //Insert Assistant
-                    var newElement = document.createElement("script");
-                    newElement.src = safari.extension.baseURI + "assistant.embedded.js";
-                    newElement.id = "adguard.assistant.embedded";
-                    document.head.appendChild(newElement);
+        /**
+         * Handles extension message
+         * @param event
+         */
+        const handleMessage = event => {
+            try {
+                switch (event.name) {
+                    case "blockElementPing":
+                        safari.extension.dispatchMessage("blockElementPong");
+                        break;
+                    case "blockElement":
+                        handleBlockElement();
+                        break;
+
+                    default:
+                        break;
                 }
-                // reinsert runner
-                var runner = document.getElementById("adguard.assistant.embedded.runner");
-                if (runner && runner.parentNode) {
-                    runner.parentNode.removeChild(runner);
-                }
-                var newElement = document.createElement("script");
-                newElement.src = safari.extension.baseURI + "assistant.runner.js";
-                newElement.id = "adguard.assistant.embedded.runner";
-                newElement.addEventListener("assistant.runner-response", (event) => {
-                                            console.log("(AdGuard Ext) Get response from runner");
-                                            safari.extension.dispatchMessage("ruleResponse", event.detail);
-                                            });
+            } catch (e) {
+                console.error(e);
+            }
+        };
+
+        const handleBlockElement = () => {
+            if (!document.getElementById("adguard.assistant.embedded")) {
+                // Insert Assistant
+                const newElement = document.createElement("script");
+                newElement.src = safari.extension.baseURI + "assistant.embedded.js";
+                newElement.id = "adguard.assistant.embedded";
                 document.head.appendChild(newElement);
+            }
 
-                break;
+            // Reinsert runner
+            const runner = document.getElementById("adguard.assistant.embedded.runner");
+            if (runner && runner.parentNode) {
+                runner.parentNode.removeChild(runner);
+            }
 
-            default:
-                break;
-        }
-    }
+            const runnerElement = document.createElement("script");
+            runnerElement.src = safari.extension.baseURI + "assistant.runner.js";
+            runnerElement.id = "adguard.assistant.embedded.runner";
+            runnerElement.addEventListener("assistant.runner-response", (event) => {
+                safari.extension.dispatchMessage("ruleResponse", event.detail);
+            });
+            document.head.appendChild(runnerElement);
+        };
 
-    document.addEventListener("DOMContentLoaded", function(event) {
-                              safari.self.addEventListener("message", handleMessage);
-                              console.log("(AdGuard Ext) Added Listener for messages from app extension.");
-                              });
+        document.addEventListener("DOMContentLoaded", function () {
+            safari.self.addEventListener("message", handleMessage);
+        });
+    })();
 }
 
