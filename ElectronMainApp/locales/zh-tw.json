@@ -65,8 +65,20 @@
     "options_antibanner": {
         "message": "\u904e\u6ffe\u5668"
     },
-    "options_antibanner_info": {
-        "message": "%s \u904e\u6ffe\u5668 %s \u898f\u5247 %s \u9032\u968e\u7684\u898f\u5247"
+    "options_antibanner_info_filters": {
+        "message": {
+            "other": "%s filters"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "other": "%s rules"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "other": "%s advanced rules"
+        }
     },
     "options_filters_enabled": {
         "message": "\u5df2\u555f\u7528\uff1a"
@@ -287,7 +299,7 @@
         "message": "GitHub"
     },
     "onboarding_safari_desc": {
-        "message": "\u5728 Safari \u504f\u597d\u8a2d\u5b9a\u4e2d\u52fe\u9078\u7dca\u9130\u8457 \"AdGuard Safari \u5716\u50cf\" \u548c \"AdGuard\" \u4e4b\u6838\u53d6\u6846"
+        "message": "\u5728 Safari \u504f\u597d\u8a2d\u5b9a\u4e2d\u52fe\u9078\u7dca\u9130\u8457 \"AdGuard Safari \u5716\u50cf\"\u3001\"AdGuard \u9032\u968e\u7684\u5c01\u9396\"\u548c \"AdGuard\" \u4e4b\u6838\u53d6\u6846"
     },
     "onboarding_safari_btn": {
         "message": "\u958b\u555f\u504f\u597d\u8a2d\u5b9a"
