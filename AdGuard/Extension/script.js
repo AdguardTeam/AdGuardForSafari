@@ -32,6 +32,9 @@ if (window.top === window) {
             }
         };
 
+        /**
+         * Handles assistant requests
+         */
         const handleBlockElement = () => {
             if (!document.getElementById("adguard.assistant.embedded")) {
                 // Insert Assistant
@@ -56,6 +59,9 @@ if (window.top === window) {
             document.head.appendChild(runnerElement);
         };
 
+        /**
+         * Add event listener
+         */
         document.addEventListener("DOMContentLoaded", function () {
             safari.self.addEventListener("message", handleMessage);
         });
