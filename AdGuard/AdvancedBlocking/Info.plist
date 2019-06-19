@@ -32,6 +32,10 @@
 		<array>
 			<dict>
 				<key>Script</key>
+				<string>scriptlets.js</string>
+			</dict>
+			<dict>
+				<key>Script</key>
 				<string>extended-css.js</string>
 			</dict>
 			<dict>

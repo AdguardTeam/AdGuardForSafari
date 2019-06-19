@@ -28,6 +28,7 @@
 #define NOTIFICATION_WHITELIST                  AG_BUNDLEID @".notify.whitelist"
 #define NOTIFICATION_USERFILTER                 AG_BUNDLEID @".notify.userfilter"
 #define NOTIFICATION_BUSY                       AG_BUNDLEID @".notify.busy"
+#define NOTIFICATION_VERBOSE_LOGGING            AG_BUNDLEID @".notify.verbose"
 #define NOTIFICATION_SHOW_PREFS                 AG_BUNDLEID @".notify.showprefs"
 #define NOTIFICATION_READY                      AG_BUNDLEID @".notify.ready"
 #define NOTIFICATION_REPORT                     AG_BUNDLEID @".notify.report"
@@ -39,6 +40,7 @@
 
 NSString * const AEDefaultsEnabled = @"AEDefaultsEnabled";
 NSString * const AEDefaultsMainAppBusy = @"AEDefaultsMainAppBusy";
+NSString * const AEDefaultsVerboseLogging = @"AEDefaultsVerboseLogging";
 NSString * const AEDefaultsLastReportUrl = @"AEDefaultsLastReportUrl";
 
 /////////////////////////////////////////////////////////////////////
@@ -59,6 +61,7 @@ static AESListenerBlock _onDefaultsChangedBlock;
 static AESListenerBlock _onWhitelistChangedBlock;
 static AESListenerBlock _onUserFilterChangedBlock;
 static AESListenerBlock _onBusyChangedBlock;
+static AESListenerBlock _onVerboseLoggingChangedBlock;
 static AESListenerBlock _onShowPreferences;
 static AESListenerBlock _onReady;
 static AESListenerBlock _onReport;
@@ -80,6 +83,7 @@ static AESListenerBlock _onAdvancedBlockingBlock;
         _onWhitelistChangedBlock = NULL;
         _onUserFilterChangedBlock = NULL;
         _onBusyChangedBlock = NULL;
+        _onVerboseLoggingChangedBlock = NULL;
         _onShowPreferences = NULL;
     }
 }
@@ -203,6 +207,17 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 + (void)setListenerOnBusyChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_BUSY
                             blockPtr:&_onBusyChangedBlock
+                               block:block];
+}
+
++ (void)notifyVerboseLoggingChanged {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_VERBOSE_LOGGING, NULL, NULL, YES);
+    });
+}
++ (void)setListenerOnVerboseLoggingChanged:(AESListenerBlock)block {
+    [self setListenerForNotification:NOTIFICATION_VERBOSE_LOGGING
+                            blockPtr:&_onVerboseLoggingChangedBlock
                                block:block];
 }
 
@@ -456,6 +471,9 @@ static void onChangedNotify(CFNotificationCenterRef center, void *observer, CFSt
     }
     else if ([nName isEqualToString:NOTIFICATION_BUSY]){
         block = _onBusyChangedBlock;
+    }
+    else if ([nName isEqualToString:NOTIFICATION_VERBOSE_LOGGING]){
+        block = _onVerboseLoggingChangedBlock;
     }
     else if ([nName isEqualToString:NOTIFICATION_SHOW_PREFS]){
         block = _onShowPreferences;
