@@ -20,7 +20,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             if (properties == nil) {
                 return;
             }
-            
+
             // Content script requests scripts and css for current page
             if (messageName == "getAdvancedBlockingData") {
                 do {
@@ -28,13 +28,21 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
                     if (url == nil) {
                         return;
                     }
-                    
-                    let data: [String : Any]? = ["data": try self.contentBlockerController.getData(url: url)];
+
+                    let data: [String : Any]? = [
+                        "data": try self.contentBlockerController.getData(url: url),
+                        "verbose": self.isVerboseLoggingEnabled()
+                    ];
                     page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data);
                 } catch {
                     NSLog("Error handling message (\(messageName)) from a script injected into (\(String(describing: properties?.url))) with userInfo (\(userInfo ?? [:])): \(error)");
                 }
             }
         }
+    }
+
+    // Returns true if verbose logging setting is enabled
+    private func isVerboseLoggingEnabled() -> Bool {
+        return AESharedResources.sharedDefaults.bool(forKey: AEDefaultsVerboseLogging);
     }
 }

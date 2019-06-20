@@ -734,13 +734,13 @@ ace.define("ace/mode/csp_highlight_rules",[], function(require, exports, module)
         this.$rules = {
             start: [{
                 token: "string.link",
-                regex: /https?:[^;\s]*/
+                regex: /https?:[^;\s,]*/
             }, {
                 token: "operator.punctuation",
                 regex: /;/
             }, {
                 token: keywordMapper,
-                regex: /[^\s;]+/
+                regex: /[^\s;,]+/
             }]
         };
     };
@@ -770,6 +770,11 @@ ace.define("ace/mode/adguard_highlight_rules",[], function (require, exports, mo
           token: "keyword.control"
         },
         {
+          regex: /#@?#\+js/,
+          next: "javascript-start",
+          token: "constant"
+        },
+        {
           regex: /#@?\$\??#/,
           next: "css-start",
           token: "constant"
@@ -778,6 +783,11 @@ ace.define("ace/mode/adguard_highlight_rules",[], function (require, exports, mo
           regex: /#@?\??#/,
           next: "elemhide-start",
           token: "constant"
+        },
+        {
+            regex: /#@?%#\/\//,
+            next: "javascript-start",
+            token: "constant"
         },
         {
           regex: /#@?%#/,
@@ -945,6 +955,9 @@ ace.define("ace/mode/adguard_highlight_rules",[], function (require, exports, mo
       token: "text",
       regex: /\}?$/,
       next: "start"
+    }, {
+        token: "keyword.control",
+        regex: /scriptlet/,
     }]);
 
     this.normalizeRules();

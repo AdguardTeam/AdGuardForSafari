@@ -2,6 +2,7 @@ const safariToolbar = require('safari-ext');
 const applicationApi = require('./api');
 const listeners = require('./notifier');
 const events = require('./events');
+const settings = require('./app/settings-manager');
 const log = require('./app/utils/log');
 const app = require('./app/app');
 const { shell } = require('electron');
@@ -105,6 +106,12 @@ module.exports = (() => {
             }
         });
 
+        settings.onUpdated.addListener(function (setting) {
+            if (setting === settings.VERBOSE_LOGGING) {
+                setVerboseLogging(settings.isVerboseLoggingEnabled());
+            }
+        });
+
         setProtectionEnabled(true);
 
         log.debug('Initializing toolbar controller ok.');
@@ -171,6 +178,15 @@ module.exports = (() => {
         safariToolbar.setUserFilter(rules, () => {
             //Do nothing, we wait for CONTENT_BLOCKER_UPDATE_REQUIRED event to set busy off
         });
+    };
+
+    /**
+     * Sets verbose logging
+     *
+     * @param enabled
+     */
+    const setVerboseLogging = (enabled) => {
+        safariToolbar.setVerboseLogging(enabled);
     };
 
     return {
