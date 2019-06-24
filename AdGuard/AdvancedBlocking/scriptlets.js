@@ -1,7 +1,7 @@
 
 /**
  * AdGuard Scriptlets
- * Version 1.0.4
+ * Version 1.0.5
  */
 
 (function () {
@@ -297,8 +297,10 @@
 
     function preventSetTimeout(source, match, delay) {
         var nativeTimeout = window.setTimeout;
+        var nativeIsNaN = Number.isNaN || window.isNaN; // eslint-disable-line compat/compat
+
         delay = parseInt(delay, 10);
-        delay = Number.isNaN(delay) ? null : delay;
+        delay = nativeIsNaN(delay) ? null : delay;
         match = match ? toRegExp(match) : toRegExp('/.?/');
 
         var timeoutWrapper = function timeoutWrapper(cb, d) {
@@ -330,8 +332,10 @@
 
     function preventSetInterval(source, match, interval) {
         var nativeInterval = window.setInterval;
+        var nativeIsNaN = Number.isNaN || window.isNaN; // eslint-disable-line compat/compat
+
         interval = parseInt(interval, 10);
-        interval = Number.isNaN(interval) ? null : interval;
+        interval = nativeIsNaN(interval) ? null : interval;
         match = match ? toRegExp(match) : toRegExp('/.?/');
 
         var intervalWrapper = function intervalWrapper(cb, d) {
@@ -359,11 +363,9 @@
      * @param {string} [match] matching with URL
      */
 
-    function preventWindowOpen(source) {
-        var inverse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-        var match = arguments.length > 2 ? arguments[2] : undefined;
+    function preventWindowOpen(source, inverse, match) {
         var nativeOpen = window.open;
-        inverse = inverse ? !+inverse : inverse;
+        inverse = inverse ? !+inverse : !!inverse;
         match = match ? toRegExp(match) : toRegExp('/.?/'); // eslint-disable-next-line consistent-return
 
         var openWrapper = function openWrapper(str) {
@@ -391,11 +393,12 @@
 
         var getCurrentScript = function getCurrentScript() {
             if (!document.currentScript) {
+                // eslint-disable-line compat/compat
                 var scripts = document.getElementsByTagName('script');
                 return scripts[scripts.length - 1];
             }
 
-            return document.currentScript;
+            return document.currentScript; // eslint-disable-line compat/compat
         };
 
         var ourScript = getCurrentScript();
@@ -457,6 +460,8 @@
             return;
         }
 
+        var nativeIsNaN = Number.isNaN || window.isNaN; // eslint-disable-line compat/compat
+
         var constantValue;
 
         if (value === 'undefined') {
@@ -480,7 +485,7 @@
         } else if (/^\d+$/.test(value)) {
             constantValue = parseFloat(value);
 
-            if (Number.isNaN(constantValue)) {
+            if (nativeIsNaN(constantValue)) {
                 return;
             }
 
@@ -672,7 +677,7 @@
 
                 for (var j = 0; j < tokens.length; j += 1) {
                     var token = tokens[j];
-                    var found = token instanceof RegExp ? token.test(str) : str.includes(token);
+                    var found = token instanceof RegExp ? token.test(str) : str.indexOf(token) > -1;
 
                     if (found) {
                         match += 1;
@@ -735,13 +740,13 @@
             hit(source, "Document tried to create an RTCPeerConnection: ".concat(config));
         };
 
-        var noop$$1 = function noop$$1() {};
+        var noop = function noop() {};
 
         rtcReplacement.prototype = {
-            close: noop$$1,
-            createDataChannel: noop$$1,
-            createOffer: noop$$1,
-            setRemoteDescription: noop$$1
+            close: noop,
+            createDataChannel: noop,
+            createOffer: noop,
+            setRemoteDescription: noop
         };
         var rtc = window[propertyName];
         window[propertyName] = rtcReplacement;
@@ -749,8 +754,8 @@
         if (rtc.prototype) {
             rtc.prototype.createDataChannel = function (a, b) {
                 return {
-                    close: noop$$1,
-                    send: noop$$1
+                    close: noop,
+                    send: noop
                 };
             }.bind(null);
         }
@@ -1073,7 +1078,14 @@
 
             data = data.join('');
             var decodedURL = window.atob(data).slice(16, -16);
-            window.stop();
+            /* eslint-disable compat/compat */
+
+            if (window.stop) {
+                window.stop();
+            }
+            /* eslint-enable compat/compat */
+
+
             window.onbeforeunload = null;
             window.location.href = decodedURL;
         };
@@ -1112,6 +1124,387 @@
     preventAdfly.injections = [setPropertyAccess, hit];
 
     /**
+     * Call debugger on property reading
+     *
+     * @param {Source} source
+     * @param {string} property property name
+     */
+
+    function debugOnPropertyRead(source, property) {
+        if (!property) {
+            return;
+        }
+
+        var rid = randomId();
+
+        var abort = function abort() {
+            hit(source); // eslint-disable-next-line no-debugger
+
+            debugger;
+        };
+
+        var setChainPropAccess = function setChainPropAccess(owner, property) {
+            var chainInfo = getPropertyInChain(owner, property);
+            var base = chainInfo.base;
+            var prop = chainInfo.prop,
+                chain = chainInfo.chain;
+
+            if (chain) {
+                var setter = function setter(a) {
+                    base = a;
+
+                    if (a instanceof Object) {
+                        setChainPropAccess(a, chain);
+                    }
+                };
+
+                Object.defineProperty(owner, prop, {
+                    get: function get() {
+                        return base;
+                    },
+                    set: setter
+                });
+                return;
+            }
+
+            setPropertyAccess(base, prop, {
+                get: abort,
+                set: function set() {}
+            });
+        };
+
+        setChainPropAccess(window, property);
+        window.onerror = createOnErrorHandler(rid).bind();
+    }
+    debugOnPropertyRead.names = ['debug-on-property-read'];
+    debugOnPropertyRead.injections = [randomId, setPropertyAccess, getPropertyInChain, createOnErrorHandler, hit];
+
+    /**
+     * Call debugger on property writing
+     *
+     * @param {Source} source
+     * @param {string} property propery name
+     */
+
+    function debugOnPropertyWrite(source, property) {
+        if (!property) {
+            return;
+        }
+
+        var rid = randomId();
+
+        var abort = function abort() {
+            hit(source); // eslint-disable-next-line no-debugger
+
+            debugger;
+        };
+
+        var setChainPropAccess = function setChainPropAccess(owner, property) {
+            var chainInfo = getPropertyInChain(owner, property);
+            var base = chainInfo.base;
+            var prop = chainInfo.prop,
+                chain = chainInfo.chain;
+
+            if (chain) {
+                var setter = function setter(a) {
+                    base = a;
+
+                    if (a instanceof Object) {
+                        setChainPropAccess(a, chain);
+                    }
+                };
+
+                Object.defineProperty(owner, prop, {
+                    get: function get() {
+                        return base;
+                    },
+                    set: setter
+                });
+                return;
+            }
+
+            setPropertyAccess(base, prop, {
+                set: abort
+            });
+        };
+
+        setChainPropAccess(window, property);
+        window.onerror = createOnErrorHandler(rid).bind();
+    }
+    debugOnPropertyWrite.names = ['debug-on-property-write'];
+    debugOnPropertyWrite.injections = [randomId, setPropertyAccess, getPropertyInChain, createOnErrorHandler, hit];
+
+    /* eslint-disable no-new-func */
+    function debugCurrentInlineScript(source, property) {
+        var search = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+        var regex = search ? toRegExp(search) : null;
+        var rid = randomId();
+
+        var getCurrentScript = function getCurrentScript() {
+            if (!document.currentScript) {
+                // eslint-disable-line compat/compat
+                var scripts = document.getElementsByTagName('script');
+                return scripts[scripts.length - 1];
+            }
+
+            return document.currentScript; // eslint-disable-line compat/compat
+        };
+
+        var ourScript = getCurrentScript();
+
+        var abort = function abort() {
+            var scriptEl = getCurrentScript();
+
+            if (scriptEl instanceof HTMLScriptElement && scriptEl.textContent.length > 0 && scriptEl !== ourScript && (!regex || regex.test(scriptEl.textContent))) {
+                hit(source); // eslint-disable-next-line no-debugger
+
+                debugger;
+            }
+        };
+
+        var setChainPropAccess = function setChainPropAccess(owner, property) {
+            var chainInfo = getPropertyInChain(owner, property);
+            var base = chainInfo.base;
+            var prop = chainInfo.prop,
+                chain = chainInfo.chain;
+
+            if (chain) {
+                var setter = function setter(a) {
+                    base = a;
+
+                    if (a instanceof Object) {
+                        setChainPropAccess(a, chain);
+                    }
+                };
+
+                Object.defineProperty(owner, prop, {
+                    get: function get() {
+                        return base;
+                    },
+                    set: setter
+                });
+                return;
+            }
+
+            var currentValue = base[prop];
+            setPropertyAccess(base, prop, {
+                set: function set(value) {
+                    abort();
+                    currentValue = value;
+                },
+                get: function get() {
+                    abort();
+                    return currentValue;
+                }
+            });
+        };
+
+        setChainPropAccess(window, property);
+        window.onerror = createOnErrorHandler(rid).bind();
+    }
+    debugCurrentInlineScript.names = ['debug-current-inline-script'];
+    debugCurrentInlineScript.injections = [randomId, setPropertyAccess, getPropertyInChain, toRegExp, createOnErrorHandler, hit];
+
+    /**
+     * Removes attributes from DOM nodes. Will run only once after page load.
+     *
+     * @param {Source} source
+     * @param {string} attrs attributes names separated by `|` which should be removed
+     * @param {string} selector CSS selector specifies nodes from which attributes should be removed
+     */
+
+    function removeAttr(source, attrs, selector) {
+        if (!attrs) {
+            return;
+        }
+
+        attrs = attrs.split(/\s*\|\s*/);
+
+        if (!selector) {
+            selector = "[".concat(attrs.join('],['), "]");
+        }
+
+        var rmattr = function rmattr(ev) {
+            if (ev) {
+                window.removeEventListener(ev.type, rmattr, true);
+            }
+
+            var nodes = [].slice.call(document.querySelectorAll(selector));
+            var removed = false;
+            nodes.forEach(function (node) {
+                attrs.forEach(function (attr) {
+                    node.removeAttribute(attr);
+                    removed = true;
+                });
+            });
+
+            if (removed) {
+                hit(source);
+            }
+        };
+
+        if (document.readyState === 'loading') {
+            window.addEventListener('DOMContentLoaded', rmattr, true);
+        } else {
+            rmattr();
+        }
+    }
+    removeAttr.names = ['remove-attr', 'ubo-remove-attr.js'];
+    removeAttr.injections = [hit];
+
+    /**
+     * Prevents opening new tabs and windows if there is `target` attribute in element
+     *
+     * @param {Source} source
+     */
+
+    function disableNewtabLinks(source) {
+        document.addEventListener('click', function (ev) {
+            var target = ev.target;
+
+            while (target !== null) {
+                if (target.localName === 'a' && target.hasAttribute('target')) {
+                    ev.stopPropagation();
+                    ev.preventDefault();
+                    hit(source);
+                    break;
+                }
+
+                target = target.parentNode;
+            }
+        });
+    }
+    disableNewtabLinks.names = ['disable-newtab-links', 'ubo-disable-newtab-links.js'];
+    disableNewtabLinks.injections = [hit];
+
+    /**
+     * Adjusts interval for specified setInterval() callbacks.
+     * @param {Source} source
+     * @param {string|RegExp} match matching in string of callback function
+     * @param {string|number} interval matching interval
+     * @param {string|number} boost interval multiplier
+     */
+
+    function adjustSetInterval(source, match, interval, boost) {
+        var nativeInterval = window.setInterval;
+        var nativeIsNaN = Number.isNaN || window.isNaN; // eslint-disable-line compat/compat
+
+        var nativeIsFinite = Number.isFinite || window.isFinite; // eslint-disable-line compat/compat
+
+        interval = parseInt(interval, 10);
+        interval = nativeIsNaN(interval) ? 1000 : interval;
+        boost = parseInt(boost, 10);
+        boost = nativeIsNaN(interval) || !nativeIsFinite(boost) ? 0.05 : boost;
+        match = match ? toRegExp(match) : toRegExp('/.?/');
+
+        if (boost < 0.02) {
+            boost = 0.02;
+        }
+
+        if (boost > 50) {
+            boost = 50;
+        }
+
+        var intervalWrapper = function intervalWrapper(cb, d) {
+            if (d === interval && match.test(cb.toString())) {
+                d *= boost;
+                hit(source);
+            }
+
+            for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+                args[_key - 2] = arguments[_key];
+            }
+
+            return nativeInterval.apply(window, [cb, d].concat(args));
+        };
+
+        window.setInterval = intervalWrapper;
+    }
+    adjustSetInterval.names = ['adjust-setInterval', 'ubo-nano-setInterval-booster.js'];
+    adjustSetInterval.injections = [toRegExp, hit];
+
+    /**
+     * Adjusts timeout for specified setTimout() callbacks.
+     * @param {Source} source
+     * @param {string|RegExp} match matching in string of callback function
+     * @param {string|number} timeout matching timeout
+     * @param {string|number} boost timeout multiplier
+     */
+
+    function adjustSetTimeout(source, match, timeout, boost) {
+        var nativeTimeout = window.setTimeout;
+        var nativeIsNaN = Number.isNaN || window.isNaN; // eslint-disable-line compat/compat
+
+        var nativeIsFinite = Number.isFinite || window.isFinite; // eslint-disable-line compat/compat
+
+        timeout = parseInt(timeout, 10);
+        timeout = nativeIsNaN(timeout) ? 1000 : timeout;
+        boost = parseInt(boost, 10);
+        boost = nativeIsNaN(timeout) || !nativeIsFinite(boost) ? 0.05 : boost;
+        match = match ? toRegExp(match) : toRegExp('/.?/');
+
+        if (boost < 0.02) {
+            boost = 0.02;
+        }
+
+        if (boost > 50) {
+            boost = 50;
+        }
+
+        var timeoutWrapper = function timeoutWrapper(cb, d) {
+            if (d === timeout && match.test(cb.toString())) {
+                d *= boost;
+                hit(source);
+            }
+
+            for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+                args[_key - 2] = arguments[_key];
+            }
+
+            return nativeTimeout.apply(window, [cb, d].concat(args));
+        };
+
+        window.setTimeout = timeoutWrapper;
+    }
+    adjustSetTimeout.names = ['adjust-setTimeout', 'ubo-nano-setTimeout-booster.js'];
+    adjustSetTimeout.injections = [toRegExp, hit];
+
+    /**
+     * Wraps the `console.dir` API to call the `toString`
+     * method of the argument.
+     * @param {Source} source
+     * @param {string|number} times the number of times to call the
+     * `toString` method of the argument to `console.dir`.
+     */
+
+    function dirString(source, times) {
+        var _console = console,
+            dir = _console.dir;
+        times = parseInt(times, 10);
+
+        function dirWrapper(object) {
+            // eslint-disable-next-line no-unused-vars
+            var temp;
+
+            for (var i = 0; i < times; i += 1) {
+                // eslint-disable-next-line no-unused-expressions
+                temp = "".concat(object);
+            }
+
+            if (typeof dir === 'function') {
+                dir.call(this, object);
+            }
+
+            hit(source, temp);
+        } // eslint-disable-next-line no-console
+
+
+        console.dir = dirWrapper;
+    }
+    dirString.names = ['dir-string', 'abp-dir-string'];
+    dirString.injections = [hit];
+
+    /**
      * This file must export all scriptlets which should be accessible
      */
 
@@ -1137,7 +1530,15 @@
         preventFab: preventFab,
         setPopadsDummy: setPopadsDummy,
         preventPopadsNet: preventPopadsNet,
-        preventAdfly: preventAdfly
+        preventAdfly: preventAdfly,
+        debugOnPropertyRead: debugOnPropertyRead,
+        debugOnPropertyWrite: debugOnPropertyWrite,
+        debugCurrentInlineScript: debugCurrentInlineScript,
+        removeAttr: removeAttr,
+        disableNewtabLinks: disableNewtabLinks,
+        adjustSetInterval: adjustSetInterval,
+        adjustSetTimeout: adjustSetTimeout,
+        dirString: dirString
     });
 
     /**
@@ -1212,7 +1613,7 @@
             return scriptletList[key];
         });
         return scriptlets.find(function (s) {
-            return s.names && s.names.includes(name);
+            return s.names && s.names.indexOf(name) > -1;
         });
     }
     /**
