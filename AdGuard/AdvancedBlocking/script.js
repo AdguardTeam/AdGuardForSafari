@@ -112,21 +112,15 @@
     const handleMessage = function (event) {
         console.log("(AdGuard Advanced Blocking) Received message from extension: %s.", event.name);
 
-        console.timeEnd('getAdvancedBlockingData');
-
-        console.time('getAdvancedBlockingDataApply');
-
         if (event.name === "advancedBlockingData") {
             try {
                 const data = JSON.parse(event.message["data"]);
-                const verbose = JSON.parse(event.message["verbose"])
+                const verbose = JSON.parse(event.message["verbose"]);
                 applyAdvancedBlockingData(data, verbose);
             } catch (e) {
                 console.error(e);
             }
         }
-
-        console.timeEnd('getAdvancedBlockingDataApply');
     };
 
 
@@ -135,8 +129,6 @@
 
         safari.self.addEventListener("message", handleMessage);
         console.log("(AdGuard Advanced Blocking) Added Listener for messages from app extension.");
-
-        console.time('getAdvancedBlockingData');
 
         // Request advanced blocking data
         safari.extension.dispatchMessage("getAdvancedBlockingData");

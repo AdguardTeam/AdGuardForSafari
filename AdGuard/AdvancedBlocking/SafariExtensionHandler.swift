@@ -10,7 +10,7 @@ import SafariServices
 
 class SafariExtensionHandler: SFSafariExtensionHandler {
     
-    private var contentBlockerController: ContentBlockerController = ContentBlockerController();
+    private var contentBlockerController: ContentBlockerController = ContentBlockerController.shared;
     
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {
         // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").

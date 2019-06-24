@@ -14,13 +14,16 @@ import Foundation
 
 class ContentBlockerController {
     
+    // Singleton instance
+    static let shared = ContentBlockerController();
+    
     private var contentBlockerContainer: ContentBlockerContainer;
-    private var blockerDataCache: [String: String];
+    private var blockerDataCache: NSCache<NSString, NSString>;
     
     // Constructor
-    init() {
+    private init() {
         contentBlockerContainer = ContentBlockerContainer();
-        blockerDataCache = [:];
+        blockerDataCache = NSCache<NSString, NSString>();
         
         AESharedResources.setListenerOnAdvancedBlocking({
             NSLog("AG AdvancedBlocking json updated - download and setup new version");
@@ -38,7 +41,7 @@ class ContentBlockerController {
     // Downloads and sets up json from shared resources
     func setupJson() {
         // Drop cache
-        blockerDataCache = [:];
+        blockerDataCache = NSCache<NSString, NSString>();
         
         do {
             try initJson();
@@ -60,16 +63,18 @@ class ContentBlockerController {
     
     // Returns requested scripts and css for specified url
     func getData(url: URL?) throws -> String {
-        let cacheKey = (url?.absoluteString)!;
-        let cached = blockerDataCache[cacheKey];
-        if cached != nil {
-            return cached!;
+        let cacheKey = (url?.absoluteString)! as NSString;
+        if let cachedVersion = blockerDataCache.object(forKey: cacheKey) {
+            NSLog("AG AdvancedBlocking: Return cached version");
+            return cachedVersion as String;
         }
         
         var data = "";
         do {
             data = try getBlockerData(url: url);
-            blockerDataCache[cacheKey] = data;
+            blockerDataCache.setObject(data as NSString, forKey: cacheKey);
+            
+            NSLog("AG AdvancedBlocking: Return data");
         } catch {
             NSLog("AG AdvancedBlocking: Error getting data: \(error)");
         }
