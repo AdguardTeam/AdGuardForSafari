@@ -38,7 +38,7 @@ class ContentBlockerContainer {
         var mask = urlMask!;
         
         // Skip all url templates
-        if mask == ".*" || mask == "^[htpsw]+://" {
+        if mask == ".*" || mask == "^[htpsw]+:\\/\\/" {
             return nil;
         }
         
@@ -168,7 +168,7 @@ class ContentBlockerContainer {
     // Checks url-filter or cached regexp
     private func matchesUrlFilter(text: String, trigger: inout BlockerEntry.Trigger) -> Bool {
         let pattern = trigger.urlFilter;
-        if (pattern == ".*" || pattern == "^[htpsw]+://") {
+        if (pattern == ".*" || pattern == "^[htpsw]+:\\/\\/") {
             return true;
         }
         

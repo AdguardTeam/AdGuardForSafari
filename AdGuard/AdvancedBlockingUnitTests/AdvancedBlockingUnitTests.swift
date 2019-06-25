@@ -299,6 +299,34 @@ class AdvancedBlockingTests: XCTestCase {
         XCTAssert(data.scriptlets.count == 0);
     }
     
+    func testIgnorePreviousRulesExtended() {
+        let contentBlockerJsonString = """
+            [{
+                "trigger": {"url-filter": ".*", "if-domain": ["*example-more.com", "*example.org"]},
+                "action": {"type": "script", "script": "alert(1);"}
+            }, {
+                "trigger": {"url-filter": "^[htpsw]+:\\/\\/", "if-domain": ["*example.org"]},
+                "action": {"type": "ignore-previous-rules"}
+            }, {
+                "trigger": {"url-filter": "^[htpsw]+:\\/\\/", "if-domain": ["*example.org"]},
+                "action": {"type": "ignore-previous-rules"}
+            }]
+        """;
+        
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        var data: ContentBlockerContainer.BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.org")) as! ContentBlockerContainer.BlockerData;
+        
+        XCTAssert(data.scripts.count == 0);
+        XCTAssert(data.css.count == 0);
+        XCTAssert(data.scriptlets.count == 0);
+        
+        data = try! contentBlockerContainer.getData(url: URL(string:"http://example-more.com")) as! ContentBlockerContainer.BlockerData;
+        
+        XCTAssert(data.scripts[0] == "alert(1);");
+        XCTAssert(data.css.count == 0);
+        XCTAssert(data.scriptlets.count == 0);
+    }
+    
     func testUrlFilterShortcuts() {
         let contentBlockerJsonString = """
             [
