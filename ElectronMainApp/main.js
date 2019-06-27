@@ -2,6 +2,7 @@ const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
 const path = require('path');
 const os = require('os');
+const execSync = require('child_process').execSync;
 
 /* Reconfigure path to config */
 process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
@@ -105,6 +106,30 @@ function showWindow(onWindowLoaded) {
     }
 }
 
+// We don't have a proper way to detect if app was opened at login,
+// so as a workaround for now we will parse login time from shell command
+// or we will take system uptime as an indicator.
+// Less than a minute from login means the app was launched at login.
+// https://github.com/AdguardTeam/AdGuardForSafari/issues/141
+// https://github.com/adguardteam/adguardforsafari/issues/118
+function isOpenedAtLogin() {
+    const SECONDS_FROM_LOGIN = 60;
+
+    try {
+        const stdout = execSync('who | grep -i "$USER.*console"', { timeout: 100}).toString();
+        //Output format: userName console  Jun 20 18:14
+        const now = new Date();
+        const loginDateTime = Date.parse(`${stdout} ${now.getFullYear()}`);
+        if (!isNaN(loginDateTime)) {
+            return now.getTime() - loginDateTime < 2 * SECONDS_FROM_LOGIN * 1000;
+        }
+    } catch (e) {
+        // Ignore
+    }
+
+    return os.uptime() < SECONDS_FROM_LOGIN;
+}
+
 // Keep a global reference of the tray object, if you don't, the tray icon will
 // be hidden automatically when the JavaScript object is garbage collected.
 let tray;
@@ -119,20 +144,14 @@ app.on('ready', (() => {
     startup.init(showWindow);
     uiEventListener.init();
 
-    // We don't have a proper way to detect if app was opened at login,
-    // so as a workaround for now we will take system uptime as an indicator.
-    // Less than a minute from login means the app was launched at login.
-    // https://github.com/AdguardTeam/AdGuardForSafari/issues/141
-    // https://github.com/adguardteam/adguardforsafari/issues/118
-    const isOpenedAtLogin = os.uptime() < 60;
-    if (!isOpenedAtLogin) {
-        createWindow();
-        uiEventListener.register(mainWindow);
-    } else {
+    if (isOpenedAtLogin()) {
         // Open in background at login
         if (process.platform === 'darwin') {
             app.dock.hide();
         }
+    } else {
+        createWindow();
+        uiEventListener.register(mainWindow);
     }
 
     mainMenuController.initMenu(showWindow);
