@@ -81,7 +81,7 @@ class ContentBlockerContainer {
     }
     
     // Returns scripts and css wrapper object for current url
-    func getData(url: URL?) throws -> Any {
+    func getData(url: URL) throws -> Any {
         let blockerData = BlockerData();
         for i in (0 ..< contentBlockerJson.count).reversed() {
             var entry = contentBlockerJson[i];
@@ -98,13 +98,9 @@ class ContentBlockerContainer {
     }
     
     // Checks if trigger content is suitable for current url
-    private func isEntryTriggered(trigger: inout BlockerEntry.Trigger, url: URL?) -> Bool {
-        if url == nil {
-            return true;
-        }
-        
-        let host = url!.host;
-        let absoluteUrl = url!.absoluteString;
+    private func isEntryTriggered(trigger: inout BlockerEntry.Trigger, url: URL) -> Bool {
+        let host = url.host;
+        let absoluteUrl = url.absoluteString;
         
         if trigger.urlFilter != nil && trigger.urlFilter != "" {
             if trigger.shortcut != nil && !absoluteUrl.lowercased().contains(trigger.shortcut) {

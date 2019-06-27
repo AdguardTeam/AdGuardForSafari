@@ -24,8 +24,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             // Content script requests scripts and css for current page
             if (messageName == "getAdvancedBlockingData") {
                 do {
-                    let url = properties?.url;
-                    if (url == nil) {
+                    guard let url = properties?.url else {
                         return;
                     }
 

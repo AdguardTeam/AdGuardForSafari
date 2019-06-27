@@ -51,7 +51,7 @@ class ContentBlockerController {
         }
     }
     
-    func getBlockerData(url: URL?) throws -> String {
+    func getBlockerData(url: URL) throws -> String {
         let data: ContentBlockerContainer.BlockerData = try contentBlockerContainer.getData(url: url) as! ContentBlockerContainer.BlockerData;
         
         let encoder = JSONEncoder();
@@ -62,8 +62,8 @@ class ContentBlockerController {
     }
     
     // Returns requested scripts and css for specified url
-    func getData(url: URL?) throws -> String {
-        let cacheKey = (url?.absoluteString)! as NSString;
+    func getData(url: URL) throws -> String {
+        let cacheKey = url.absoluteString as NSString;
         if let cachedVersion = blockerDataCache.object(forKey: cacheKey) {
             NSLog("AG AdvancedBlocking: Return cached version");
             return cachedVersion as String;
