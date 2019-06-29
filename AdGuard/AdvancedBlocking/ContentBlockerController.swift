@@ -52,7 +52,7 @@ class ContentBlockerController {
     }
     
     func getBlockerData(url: URL) throws -> String {
-        let data: ContentBlockerContainer.BlockerData = try contentBlockerContainer.getData(url: url) as! ContentBlockerContainer.BlockerData;
+        let data: BlockerData = try contentBlockerContainer.getData(url: url) as! BlockerData;
         
         let encoder = JSONEncoder();
         encoder.outputFormatting = .prettyPrinted

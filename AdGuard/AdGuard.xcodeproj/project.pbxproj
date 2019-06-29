@@ -79,6 +79,12 @@
 		65D151C42139A5080014BE79 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D151A72139A5080014BE79 /* DDAbstractDatabaseLogger.h */; };
 		65FA408D215E8B6B000196EC /* LinkButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FA408C215E8B6B000196EC /* LinkButton.m */; };
 		F4185B3622C7BC4600EFA0B2 /* top-sites.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4185B3522C7BC4600EFA0B2 /* top-sites.txt */; };
+		F4185B3822C7D13300EFA0B2 /* NetworkEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4185B3722C7D13300EFA0B2 /* NetworkEngine.swift */; };
+		F4185B3A22C7D2CA00EFA0B2 /* BlockerEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4185B3922C7D2CA00EFA0B2 /* BlockerEntry.swift */; };
+		F4185B3C22C7D30C00EFA0B2 /* BlockerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4185B3B22C7D30C00EFA0B2 /* BlockerData.swift */; };
+		F4185B3D22C7D55C00EFA0B2 /* NetworkEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4185B3722C7D13300EFA0B2 /* NetworkEngine.swift */; };
+		F4185B3E22C7D55C00EFA0B2 /* BlockerEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4185B3922C7D2CA00EFA0B2 /* BlockerEntry.swift */; };
+		F4185B3F22C7D55C00EFA0B2 /* BlockerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4185B3B22C7D30C00EFA0B2 /* BlockerData.swift */; };
 		F41DA7DA2201C81700C63708 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
 		F41DA7DD2201C81700C63708 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */; };
 		F41DA7E52201C81700C63708 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = F41DA7E42201C81700C63708 /* script.js */; };
@@ -381,6 +387,9 @@
 		65FA408B215E8B6B000196EC /* LinkButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkButton.h; sourceTree = "<group>"; };
 		65FA408C215E8B6B000196EC /* LinkButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkButton.m; sourceTree = "<group>"; };
 		F4185B3522C7BC4600EFA0B2 /* top-sites.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "top-sites.txt"; sourceTree = "<group>"; };
+		F4185B3722C7D13300EFA0B2 /* NetworkEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEngine.swift; sourceTree = "<group>"; };
+		F4185B3922C7D2CA00EFA0B2 /* BlockerEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerEntry.swift; sourceTree = "<group>"; };
+		F4185B3B22C7D30C00EFA0B2 /* BlockerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerData.swift; sourceTree = "<group>"; };
 		F41DA7D92201C81700C63708 /* AdvancedBlocking.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdvancedBlocking.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
 		F41DA7E32201C81700C63708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -695,6 +704,9 @@
 				F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */,
 				F4FE8817220CCBF700B79CBE /* AdvancedBlocking-Bridging-Header.h */,
 				F49E3FE8221F4D72001B9E86 /* InfoPlist.strings */,
+				F4185B3722C7D13300EFA0B2 /* NetworkEngine.swift */,
+				F4185B3922C7D2CA00EFA0B2 /* BlockerEntry.swift */,
+				F4185B3B22C7D30C00EFA0B2 /* BlockerData.swift */,
 			);
 			path = AdvancedBlocking;
 			sourceTree = "<group>";
@@ -1144,6 +1156,7 @@
 			files = (
 				F4FE8824220CCFAF00B79CBE /* ACLExecuteBlockDelayed.m in Sources */,
 				F4FE882F220CCFFA00B79CBE /* DDFileLogger.m in Sources */,
+				F4185B3822C7D13300EFA0B2 /* NetworkEngine.swift in Sources */,
 				F4D590152201C8F8002DCC2C /* ContentBlockerContainer.swift in Sources */,
 				F4FE8827220CCFB700B79CBE /* NSException+Utils.m in Sources */,
 				F4D590132201C8D3002DCC2C /* ContentBlockerController.swift in Sources */,
@@ -1151,6 +1164,7 @@
 				F4FE881F220CCF9B00B79CBE /* ACLWildcard.m in Sources */,
 				F4FE8828220CCFBA00B79CBE /* NSStringPunycodeAdditions.m in Sources */,
 				F4FE882D220CCFF200B79CBE /* CLIColor.m in Sources */,
+				F4185B3C22C7D30C00EFA0B2 /* BlockerData.swift in Sources */,
 				F4FE8832220CD00700B79CBE /* DDMultiFormatter.m in Sources */,
 				F4FE882E220CCFF700B79CBE /* DDASLLogCapture.m in Sources */,
 				F4FE8831220CD00200B79CBE /* DDDispatchQueueLogFormatter.m in Sources */,
@@ -1167,6 +1181,7 @@
 				F4FE8820220CCFA000B79CBE /* NSURL+Utils.m in Sources */,
 				F41DA7DD2201C81700C63708 /* SafariExtensionHandler.swift in Sources */,
 				F4FE8834220CD01A00B79CBE /* ACObject.m in Sources */,
+				F4185B3A22C7D2CA00EFA0B2 /* BlockerEntry.swift in Sources */,
 				F4FE882A220CCFC500B79CBE /* DDAbstractDatabaseLogger.m in Sources */,
 				F4FE881B220CCF4200B79CBE /* AESharedResources.m in Sources */,
 			);
@@ -1182,6 +1197,7 @@
 				F4FE8841220CD09900B79CBE /* ACLFileLogger.m in Sources */,
 				F4FE8839220CD08A00B79CBE /* NSDate+Utils.m in Sources */,
 				F4FE8845220CD0A600B79CBE /* DDASLLogger.m in Sources */,
+				F4185B3F22C7D55C00EFA0B2 /* BlockerData.swift in Sources */,
 				F4FE883F220CD09200B79CBE /* NSStringPunycodeAdditions.m in Sources */,
 				F4FE883E220CD09200B79CBE /* NSException+Utils.m in Sources */,
 				F4FE883A220CD09200B79CBE /* ACLFileLocker.m in Sources */,
@@ -1190,12 +1206,14 @@
 				F4FE8837220CD08100B79CBE /* NSURL+Utils.m in Sources */,
 				F4FE884B220CD0B000B79CBE /* DDDispatchQueueLogFormatter.m in Sources */,
 				F4FE8847220CD0A600B79CBE /* DDFileLogger.m in Sources */,
+				F4185B3D22C7D55C00EFA0B2 /* NetworkEngine.swift in Sources */,
 				F4FE8836220CD07C00B79CBE /* ACLWildcard.m in Sources */,
 				F4FE883D220CD09200B79CBE /* ACLLogger.m in Sources */,
 				F4FE8838220CD08700B79CBE /* ACLJobController.m in Sources */,
 				F4FE8842220CD0A600B79CBE /* DDLog.m in Sources */,
 				F4FE8848220CD0A600B79CBE /* DDTTYLogger.m in Sources */,
 				F4FE8846220CD0A600B79CBE /* DDASLLogCapture.m in Sources */,
+				F4185B3E22C7D55C00EFA0B2 /* BlockerEntry.swift in Sources */,
 				F4FE884C220CD0B000B79CBE /* DDMultiFormatter.m in Sources */,
 				F4FE8844220CD0A600B79CBE /* DDOSLogger.m in Sources */,
 				F4FE883C220CD09200B79CBE /* NSString+Utils.m in Sources */,

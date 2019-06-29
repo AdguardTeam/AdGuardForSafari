@@ -10,22 +10,28 @@ import Foundation
 
 // Storage and parser
 class ContentBlockerContainer {
-    private var contentBlockerJson: Array<BlockerEntry>;
+    private var blockerEntries: Array<BlockerEntry>;
+    private var networkEngine: NetworkEngine;
     
     // Constructor
     init() {
-        contentBlockerJson = [];
+        blockerEntries = [];
+        networkEngine = NetworkEngine();
     }
     
     // Parses and saves json
     func setJson(json: String) throws {
         // Parse "content-blocker" json
-        contentBlockerJson = try parseJsonString(json: json);
+        blockerEntries = try parseJsonString(json: json);
 
         // Parse shortcuts
-        for i in 0 ..< contentBlockerJson.count {
-            contentBlockerJson[i].trigger.setShortcut(shortcutValue: parseShortcut(urlMask: contentBlockerJson[i].trigger.urlFilter));
+        for i in 0 ..< blockerEntries.count {
+            blockerEntries[i].trigger.setShortcut(shortcutValue: parseShortcut(urlMask: blockerEntries[i].trigger.urlFilter));
         }
+        
+        // Init network engine
+        networkEngine = NetworkEngine();
+        networkEngine.addRules(entries: blockerEntries);
     }
     
     // Parses url shortcuts
@@ -83,8 +89,20 @@ class ContentBlockerContainer {
     // Returns scripts and css wrapper object for current url
     func getData(url: URL) throws -> Any {
         let blockerData = BlockerData();
-        for i in (0 ..< contentBlockerJson.count).reversed() {
-            var entry = contentBlockerJson[i];
+        
+        // Check lookup tables
+        var selectedIndexes = networkEngine.lookupRules(url: url);
+        selectedIndexes.sort();
+        
+        // Get entries for indexes
+        var selectedEntries: Array<BlockerEntry> = [];
+        for i in selectedIndexes {
+            selectedEntries.append(blockerEntries[i]);
+        }
+        
+        // Iterate reversed to apply actions or ignore next rules
+        for i in (0 ..< selectedEntries.count).reversed() {
+            var entry = selectedEntries[i];
             if (isEntryTriggered(trigger: &entry.trigger, url: url)) {
                 if entry.action.type == "ignore-previous-rules" {
                     return blockerData;
@@ -200,74 +218,5 @@ class ContentBlockerContainer {
         let parsedData = try decoder.decode([BlockerEntry].self, from: data);
         
         return parsedData;
-    }
-    
-    // Json decoded object description
-    struct BlockerEntry: Codable {
-        var trigger: Trigger
-        let action: Action
-        
-        struct Trigger : Codable {
-            let ifDomain: [String]?
-            let urlFilter: String?
-            let unlessDomain: [String]?
-            
-            var shortcut: String?
-            var regex: NSRegularExpression?
-            
-            enum CodingKeys: String, CodingKey {
-                case ifDomain = "if-domain"
-                case urlFilter = "url-filter"
-                case unlessDomain = "unless-domain"
-                case shortcut = "url-shortcut"
-            }
-            
-            mutating func setShortcut(shortcutValue: String?) {
-                self.shortcut = shortcutValue;
-            }
-            
-            mutating func setRegex(regex: NSRegularExpression?) {
-                self.regex = regex;
-            }
-        }
-        
-        struct Action : Codable {
-            let type: String
-            let css: String?
-            let script: String?
-            let scriptlet: String?
-            let scriptletParam: String?
-        }
-    }
-    
-    // Wrapper result class
-    class BlockerData: Encodable {
-        var scripts = [String]()
-        var css = [String]()
-        var scriptlets = [String]()
-        
-        func addScript(script: String?) {
-            if (script != nil && script != "") {
-                scripts.append(script!);
-            }
-        }
-        
-        func addCss(style: String?) {
-            if (style != nil && style != "") {
-                css.append(style!);
-            }
-        }
-        
-        func addScriptlet(scriptlet: String?) {
-            if (scriptlet != nil && scriptlet != "") {
-                scriptlets.append(scriptlet!);
-            }
-        }
-        
-        func clear() {
-            scripts = [];
-            css = [];
-            scriptlets = [];
-        }
     }
 }
