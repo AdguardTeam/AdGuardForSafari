@@ -78,6 +78,7 @@
 		65D151C32139A5080014BE79 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A62139A5080014BE79 /* DDTTYLogger.m */; };
 		65D151C42139A5080014BE79 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D151A72139A5080014BE79 /* DDAbstractDatabaseLogger.h */; };
 		65FA408D215E8B6B000196EC /* LinkButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FA408C215E8B6B000196EC /* LinkButton.m */; };
+		F4185B3622C7BC4600EFA0B2 /* top-sites.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4185B3522C7BC4600EFA0B2 /* top-sites.txt */; };
 		F41DA7DA2201C81700C63708 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
 		F41DA7DD2201C81700C63708 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */; };
 		F41DA7E52201C81700C63708 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = F41DA7E42201C81700C63708 /* script.js */; };
@@ -379,6 +380,7 @@
 		65D151A72139A5080014BE79 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		65FA408B215E8B6B000196EC /* LinkButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkButton.h; sourceTree = "<group>"; };
 		65FA408C215E8B6B000196EC /* LinkButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkButton.m; sourceTree = "<group>"; };
+		F4185B3522C7BC4600EFA0B2 /* top-sites.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "top-sites.txt"; sourceTree = "<group>"; };
 		F41DA7D92201C81700C63708 /* AdvancedBlocking.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdvancedBlocking.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
 		F41DA7E32201C81700C63708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -713,6 +715,7 @@
 				F47574FF222FF92200DE28C3 /* adv-blocking-content-rules.json */,
 				F4D5901C2201C965002DCC2C /* AdvancedBlockingUnitTests.swift */,
 				F4D5901E2201C965002DCC2C /* Info.plist */,
+				F4185B3522C7BC4600EFA0B2 /* top-sites.txt */,
 			);
 			path = AdvancedBlockingUnitTests;
 			sourceTree = "<group>";
@@ -1067,6 +1070,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4757500222FF92200DE28C3 /* adv-blocking-content-rules.json in Resources */,
+				F4185B3622C7BC4600EFA0B2 /* top-sites.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -624,4 +624,29 @@ class AdvancedBlockingTests: XCTestCase {
         
     }
     
+    // Base + Russian filters on top sites
+    func testPerformanceTopSitesFilter() {
+        let bundle = Bundle(for: type(of:self));
+        let path = bundle.path(forResource: "adv-blocking-content-rules", ofType: "json");
+        let topSitesPath = bundle.path(forResource: "top-sites", ofType: "txt");
+        
+        let content = try! String(contentsOfFile: path!, encoding: String.Encoding.utf8);
+        
+        try! contentBlockerContainer.setJson(json: content);
+        
+        let topSites = try! String(contentsOfFile: topSitesPath!, encoding: String.Encoding.utf8);
+        let topSitesArr = topSites.split(separator: "\n");
+        
+        self.measure {
+            //for _ in 1...10 {
+                for site in topSitesArr {
+                    let url = "http://" + site;
+                    let data = try! contentBlockerContainer.getData(url: URL(string: url)) as! ContentBlockerContainer.BlockerData;
+                    XCTAssert(data.scripts.count >= 0);
+                }
+            //}
+        }
+        
+    }
+    
 }
