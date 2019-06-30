@@ -65,8 +65,23 @@
     "options_antibanner": {
         "message": "Filter"
     },
-    "options_antibanner_info": {
-        "message": "%s Filter %s Regeln %s erweiterte Regeln"
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s Filter",
+            "other": "%s Filter"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s Regel",
+            "other": "%s Regeln"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s erweiterte Regel",
+            "other": "%s erweiterte Regeln"
+        }
     },
     "options_filters_enabled": {
         "message": "Aktiviert"
@@ -288,7 +303,7 @@
         "message": "Github"
     },
     "onboarding_safari_desc": {
-        "message": "Aktivieren Sie das Kontrollk\u00e4stchen neben dem \"AdGuard Safari\" Symbol und \"AdGuard\" in den Safari-Einstellungen"
+        "message": "Aktivieren Sie das Kontrollk\u00e4stchen neben dem \"AdGuard Safari Symbol\", \"AdGuard Erweiterte Blockierung und \"AdGuard\" in den Safari-Einstellungen"
     },
     "onboarding_safari_btn": {
         "message": "Einstellungen \u00f6ffnen"

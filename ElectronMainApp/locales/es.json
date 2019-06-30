@@ -65,8 +65,23 @@
     "options_antibanner": {
         "message": "Filtros"
     },
-    "options_antibanner_info": {
-        "message": "%s filtros %s reglas"
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s filter",
+            "other": "%s filters"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s rule",
+            "other": "%s rules"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s advanced rule",
+            "other": "%s advanced rules"
+        }
     },
     "options_filters_enabled": {
         "message": "Habilitado:"
@@ -162,7 +177,7 @@
         "message": "AdGuard no filtra sitios web de la lista blanca."
     },
     "options_whitelist_inverse": {
-        "message": "Invertir lista blanca<span class='sp-table-row-info'>Desbloquear anuncios en todas partes<i>excepto<\/i> en la lista blanca<\/span>"
+        "message": "Invertir lista blanca<span class='sp-table-row-info'>Desbloquea anuncios en todas partes <i>excepto<\/i> en la lista blanca<\/span>"
     },
     "options_userfilter": {
         "message": "Filtro del usuario"

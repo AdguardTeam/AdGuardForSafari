@@ -1,33 +1,33 @@
 {
     "main_menu_about": {
-        "message": "About AdGuard for Safari"
+        "message": "Riguardo AdGuard per Safari"
     },
     "options_popup_trusted_filter_title": {
-        "message": "Trusted"
+        "message": "Verificato"
     },
     "options_popup_trusted_filter_description": {
-        "message": "Trusted filters can use powerful filtering rules modifiers which can be dangerous in the wrong hands. Do not check this box unless you fully trust it."
+        "message": "I filtri verificati possono utilizzare gestori delle regole di filtraggio molto potenti, che potrebbero essere pericolose se in mani sbagliate. Non spuntare questa casella a meno che non hai piena fiducia."
     },
     "options_filters_filter_trusted_tag": {
-        "message": "trusted"
+        "message": "verificato"
     },
     "options_filters_filter_trusted_tag_desc": {
-        "message": "You chose to trust this filter"
+        "message": "Hai scelto di affidarti a questo filtro"
     },
     "options_about_update_check": {
-        "message": "Checking for updates"
+        "message": "Controllo degli aggiornamenti"
     },
     "options_about_updating": {
-        "message": "Updating AdGuard for Safari"
+        "message": "Aggiorna AdGuard per Safari."
     },
     "options_about_updates_not_found": {
-        "message": "AdGuard for Safari is up to date"
+        "message": "AdGuard per Safari \u00e8 aggiornato."
     },
     "options_about_update_downloaded": {
-        "message": "Nearly up to date! Relaunch AdGuard for Safari to finish updating."
+        "message": "Hai quasi finito! Riavvia AdGuard per Safari per completare l'aggiornamento."
     },
     "options_about_update_relaunch": {
-        "message": "Relaunch"
+        "message": "Riavvia."
     },
     "options_popup_title_placeholder": {
         "message": "Inserisci il nome del filtro"
@@ -42,13 +42,13 @@
         "message": "Blocco annunci AdGuard"
     },
     "description": {
-        "message": "Eccezionale estensione blocca annunci contro pubblicit\u00e0 e pop-up. Blocca annunci su Facebook, Youtube e tutti gli altri siti internet."
+        "message": "Un'estensione inarrivabile contro pubblicit\u00e0 e pop-up. Blocca gli annunci pubblicitari su Facebook, YouTube a tutti gli altri siti web."
     },
     "options_settings": {
         "message": "AdGuard per Safari - Impostazioni"
     },
     "options_general_settings": {
-        "message": "Generale"
+        "message": "Impostazioni Generali"
     },
     "options_general_desc": {
         "message": "AdGuard per Safari \u00e8 un software gratuito e open source. Incoraggiamo i tuoi commenti e contributi. Se vuoi riportare un errore, invialo a <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo<\/a>."
@@ -65,8 +65,23 @@
     "options_antibanner": {
         "message": "Filtri"
     },
-    "options_antibanner_info": {
-        "message": "%s filtri %s regole"
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s filter",
+            "other": "%s filters"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s rule",
+            "other": "%s rules"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s advanced rule",
+            "other": "%s advanced rules"
+        }
     },
     "options_filters_enabled": {
         "message": "Abilitato:"

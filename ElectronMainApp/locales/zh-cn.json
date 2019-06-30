@@ -65,8 +65,20 @@
     "options_antibanner": {
         "message": "\u8fc7\u6ee4\u5668"
     },
-    "options_antibanner_info": {
-        "message": "%s \u4e2a\u8fc7\u6ee4\u5668 %s \u6761\u89c4\u5219"
+    "options_antibanner_info_filters": {
+        "message": {
+            "other": "%s filters"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "other": "%s rules"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "other": "%s advanced rules"
+        }
     },
     "options_filters_enabled": {
         "message": "\u5df2\u5f00\u542f\uff1a"
