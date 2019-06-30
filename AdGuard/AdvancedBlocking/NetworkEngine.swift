@@ -58,7 +58,7 @@ class NetworkEngine {
             //}
         }
         
-        return result
+        return result;
     }
     
     // matchDomainsLookupTable finds all matching rules from the domains lookup table
@@ -69,7 +69,7 @@ class NetworkEngine {
             return result
         }
     
-        var domains = getSubdomains(hostname: host);
+        let domains = getSubdomains(hostname: host);
         for domain in domains {
             let hash = fastHash(str: domain);
             guard let rules = domainsLookupTable[hash] else {
@@ -82,11 +82,11 @@ class NetworkEngine {
                 //}
             }
         }
-        return result
+        return result;
     }
     
     private func getSubdomains(hostname: String) -> Array<String> {
-        var parts = hostname.split(separator: ".");
+        let parts = hostname.split(separator: ".");
         var subdomains = Array<String>();
         var domain = "";
         for part in parts.reversed() {
@@ -169,7 +169,7 @@ class NetworkEngine {
         rulesIndexes!.append(index);
         shortcutsLookupTable[shortcutHash] = rulesIndexes;
         
-        return true
+        return true;
     }
     
     // getRuleShortcuts returns a list of shortcuts that can be used for the lookup table
