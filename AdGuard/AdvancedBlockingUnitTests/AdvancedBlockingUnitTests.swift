@@ -612,6 +612,7 @@ class AdvancedBlockingTests: XCTestCase {
         
         try! contentBlockerContainer.setJson(json: content);
         
+        // Average time 0.125
         self.measure {
             for _ in 1...10 {
                 let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://mail.ru")!) as! BlockerData;
@@ -637,14 +638,13 @@ class AdvancedBlockingTests: XCTestCase {
         let topSites = try! String(contentsOfFile: topSitesPath!, encoding: String.Encoding.utf8);
         let topSitesArr = topSites.split(separator: "\n");
         
+        // Average time 0.175
         self.measure {
-            //for _ in 1...10 {
-                for site in topSitesArr {
-                    let url = "http://" + site;
-                    let data = try! contentBlockerContainer.getData(url: URL(string: url)!) as! BlockerData;
-                    XCTAssert(data.scripts.count >= 0);
-                }
-            //}
+            for site in topSitesArr {
+                let url = "http://" + site;
+                let data = try! contentBlockerContainer.getData(url: URL(string: url)!) as! BlockerData;
+                XCTAssert(data.scripts.count >= 0);
+            }
         }
         
     }

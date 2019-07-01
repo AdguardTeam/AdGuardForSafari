@@ -50,12 +50,8 @@ class NetworkEngine {
         }
         
         // Add all other rules
-        // TODO: We probably could check it here aswell
         for index in otherRules {
-            //rule := n.otherRules[i]
-            //if rule.Match(r) {
             result.append(index);
-            //}
         }
         
         return result;
@@ -77,9 +73,7 @@ class NetworkEngine {
             }
             
             for ruleIdx in rules {
-                //if rule != nil && rule.Match(r) {
                 result.append(ruleIdx);
-                //}
             }
         }
         return result;
@@ -112,9 +106,7 @@ class NetworkEngine {
             }
             
             for ruleIdx in rules {
-                //if rule != nil && rule.Match(r) {
-                    result.append(ruleIdx);
-                //}
+                result.append(ruleIdx);
             }
         }
         
