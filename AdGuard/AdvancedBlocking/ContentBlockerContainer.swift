@@ -41,20 +41,44 @@ class ContentBlockerContainer {
             return nil;
         }
         
-        var mask = urlMask!;
-        
+        let mask = urlMask!;
+    
         // Skip all url templates
-        if mask == ".*" || mask == "^[htpsw]+:\\/\\/" {
+        if (mask == ".*" || mask == "^[htpsw]+://") {
             return nil;
         }
         
-        let specialCharacter = "...";
+        var shortcut: String? = "";
+        let isRegexRule = mask.hasPrefix("/") && mask.hasSuffix("/");
+        if (isRegexRule) {
+            shortcut = findRegexpShortcut(pattern: mask);
+        } else {
+            shortcut = findShortcut(pattern: mask);
+        }
+        
+        // shortcut needs to be at least longer than 1 character
+        if shortcut != nil && shortcut!.count > 1 {
+            return shortcut;
+        } else {
+            return nil;
+        }
+    }
+    
+    // findRegexpShortcut searches for a shortcut inside of a regexp pattern.
+    // Shortcut in this case is a longest string with no REGEX special characters
+    // Also, we discard complicated regexps right away.
+    private func findRegexpShortcut(pattern: String) -> String? {
+        // strip backslashes
+        var mask = String(pattern.dropFirst(1).dropLast(1));
         
         if (mask.contains("?")) {
             // Do not mess with complex expressions which use lookahead
             // And with those using ? special character: https://github.com/AdguardTeam/AdguardBrowserExtension/issues/978
             return nil;
         }
+        
+        // placeholder for a special character
+        let specialCharacter = "...";
         
         // (Dirty) prepend specialCharacter for the following replace calls to work properly
         mask = specialCharacter + mask;
@@ -77,6 +101,20 @@ class ContentBlockerContainer {
         
         var longest = "";
         let parts = mask.components(separatedBy: ["*", ".", "^", "|", "+", "?", "$", "[", "]", "(", ")", "{", "}"]);
+        for part in parts {
+            if (part.count > longest.count) {
+                longest = part;
+            }
+        }
+        
+        return longest != "" ? longest.lowercased() : nil;
+    }
+    
+    // Searches for the longest substring of the pattern that
+    // does not contain any special characters: *,^,|.
+    private func findShortcut(pattern: String) -> String? {
+        var longest = "";
+        let parts = pattern.components(separatedBy: ["*", "^", "|"]);
         for part in parts {
             if (part.count > longest.count) {
                 longest = part;
