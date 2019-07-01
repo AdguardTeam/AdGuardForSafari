@@ -65,8 +65,23 @@
     "options_antibanner": {
         "message": "Filter"
     },
-    "options_antibanner_info": {
-        "message": "%s filter %s regler"
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s filter",
+            "other": "%s filters"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s rule",
+            "other": "%s rules"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s advanced rule",
+            "other": "%s advanced rules"
+        }
     },
     "options_filters_enabled": {
         "message": "Inkopplade:"

@@ -11,6 +11,8 @@ const app = require('./app/app');
 const safariToolbar = require('safari-ext');
 const applicationApi = require('./api');
 const updater = require('./updater');
+const log = require('./app/utils/log');
+
 
 /**
  * Initializes event listener
@@ -23,12 +25,12 @@ module.exports.init = function () {
         const message = JSON.parse(arg);
         switch (message.type) {
             case 'initializeOptionsPage':
-                event.sender.send('initializeOptionsPageResponse', processInitializeFrameScriptRequest());
+                sendResponse(event, 'initializeOptionsPageResponse', processInitializeFrameScriptRequest());
                 break;
             case 'getFiltersMetadata':
                 const filtersMetadata = filterCategories.getFiltersMetadata();
                 filtersMetadata.rulesInfo = antibanner.getContentBlockerInfo();
-                event.sender.send('getFiltersMetadataResponse', filtersMetadata);
+                sendResponse(event, 'getFiltersMetadataResponse', filtersMetadata);
                 break;
             case 'changeUserSetting':
                 settings.setProperty(message.key, message.value);
@@ -58,7 +60,7 @@ module.exports.init = function () {
                 break;
             case 'getUserRules':
                 userrules.getUserRulesText(function (content) {
-                    event.sender.send('getUserRulesResponse', {content: content});
+                    sendResponse(event, 'getUserRulesResponse', {content: content});
                 });
                 break;
             case 'saveUserRules':
@@ -72,8 +74,8 @@ module.exports.init = function () {
                 break;
             case 'loadCustomFilterInfo':
                 filters.loadCustomFilterInfo(message.url, { title: message.title },
-                    (filter) => event.sender.send('loadCustomFilterInfoResponse', filter),
-                    () => event.sender.send('loadCustomFilterInfoResponse', null)
+                    (filter) => sendResponse(event, 'loadCustomFilterInfoResponse', filter),
+                    () => sendResponse(event, 'loadCustomFilterInfoResponse', null)
                 );
                 break;
             case 'subscribeToCustomFilter':
@@ -84,18 +86,18 @@ module.exports.init = function () {
                 break;
             case 'checkContentBlockerExtension':
                 safariToolbar.extensionContentBlockerState((result) => {
-                    event.sender.send('checkContentBlockerExtensionResponse', result);
+                    sendResponse(event, 'checkContentBlockerExtensionResponse', result);
                 });
                 break;
             case 'checkSafariExtensions':
                 safariToolbar.extensionSafariIconState((result) => {
                     if (!result) {
-                        event.sender.send('checkSafariExtensionsResponse', result);
+                        sendResponse(event, 'checkSafariExtensionsResponse', result);
                         return;
                     }
 
                     safariToolbar.extensionAdvancedBlockingState((result) => {
-                        event.sender.send('checkSafariExtensionsResponse', result);
+                        sendResponse(event, 'checkSafariExtensionsResponse', result);
                     });
                 });
                 break;
@@ -121,12 +123,39 @@ module.exports.init = function () {
 
 };
 
+/**
+ * Send response to event
+ *
+ * @param event
+ * @param message
+ * @param payload
+ */
+function sendResponse(event, message, payload) {
+    try {
+        if (event.sender) {
+            event.sender.send(message, payload);
+        }
+    } catch (e) {
+        log.error(e);
+    }
+}
+
+/**
+ * Retranslate messages to renderer process
+ *
+ * @param win
+ * @return {Function}
+ */
 function eventHandler(win) {
     return function () {
-        win.webContents.send('main-to-renderer', {
-            type: 'message',
-            args: Array.prototype.slice.call(arguments)
-        });
+        try {
+            win.webContents.send('main-to-renderer', {
+                type: 'message',
+                args: Array.prototype.slice.call(arguments)
+            });
+        } catch (e) {
+            log.error(e);
+        }
     };
 }
 

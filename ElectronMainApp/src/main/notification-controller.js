@@ -134,6 +134,11 @@ module.exports = (() => {
             return;
         }
 
+        if (!options.forceUpdate) {
+            // Do not show notification for background updates
+            return;
+        }
+
         const { title, text } = getFiltersUpdateResultMessage(options.success, options.updatedFilters);
         showNotification({ 
             title,

@@ -65,8 +65,29 @@
     "options_antibanner": {
         "message": "Filtry"
     },
-    "options_antibanner_info": {
-        "message": "%s filtr\u016f %s pravidel %s pokro\u010dil\u00fdch pravidel"
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s filter",
+            "few": "%s filters",
+            "many": "%s filters",
+            "other": "%s filters"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s rule",
+            "few": "%s rules",
+            "many": "%s rules",
+            "other": "%s rules"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s advanced rule",
+            "few": "%s advanced rules",
+            "many": "%s advanced rules",
+            "other": "%s advanced rules"
+        }
     },
     "options_filters_enabled": {
         "message": "Povoleno"
@@ -290,7 +311,7 @@
         "message": "Github"
     },
     "onboarding_safari_desc": {
-        "message": "Za\u0161krtn\u011bte pol\u00ed\u010dko \"Ikona AdGuard Safari\" a \"AdGuard\" v p\u0159edvolb\u00e1ch Safari"
+        "message": "Za\u0161krtn\u011bte pol\u00ed\u010dko \"Ikona AdGuard Safari\", \"Pokro\u010dil\u00e9 blokov\u00e1n\u00ed AdGuard\" a \"AdGuard\" v p\u0159edvolb\u00e1ch Safari"
     },
     "onboarding_safari_btn": {
         "message": "Otev\u0159\u00edt p\u0159edvolby"

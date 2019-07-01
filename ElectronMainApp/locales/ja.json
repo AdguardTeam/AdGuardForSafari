@@ -1,36 +1,36 @@
 {
     "main_menu_about": {
-        "message": "About AdGuard for Safari"
+        "message": "AdGuard for Safari\u306b\u3064\u3044\u3066"
     },
     "options_popup_trusted_filter_title": {
-        "message": "Trusted"
+        "message": "\u4fe1\u983c\u3067\u304d\u308b"
     },
     "options_popup_trusted_filter_description": {
-        "message": "Trusted filters can use powerful filtering rules modifiers which can be dangerous in the wrong hands. Do not check this box unless you fully trust it."
+        "message": "\u4fe1\u983c\u3067\u304d\u308b\u3068\u30de\u30fc\u30af\u3055\u308c\u305f\u30d5\u30a3\u30eb\u30bf\u306b\u306f\u3001\u60aa\u610f\u306e\u3042\u308b\u4eba\u306b\u4f7f\u308f\u305b\u308b\u3068\u5371\u967a\u3067\u3042\u308b\u5f37\u529b\u306a\u30d5\u30a3\u30eb\u30bf\u30eb\u30fc\u30eb\u4fee\u98fe\u5b50\u3092\u4f7f\u7528\u3059\u308b\u3053\u3068\u304c\u8a31\u53ef\u3055\u308c\u307e\u3059\u3002 \u5b8c\u5168\u306b\u4fe1\u983c\u3057\u3066\u3044\u306a\u3044\u9650\u308a\u3001\u3053\u306e\u30dc\u30c3\u30af\u30b9\u306b\u30c1\u30a7\u30c3\u30af\u3092\u5165\u308c\u306a\u3044\u3067\u304f\u3060\u3055\u3044\u3002"
     },
     "options_filters_filter_trusted_tag": {
-        "message": "trusted"
+        "message": "\u4fe1\u983c\u3067\u304d\u308b"
     },
     "options_filters_filter_trusted_tag_desc": {
-        "message": "You chose to trust this filter"
+        "message": "\u3042\u306a\u305f\u306f\u3053\u306e\u30d5\u30a3\u30eb\u30bf\u3092\u4fe1\u983c\u3059\u308b\u3088\u3046\u306b\u3057\u307e\u3057\u305f"
     },
     "options_about_update_check": {
-        "message": "Checking for updates"
+        "message": "\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8\u3092\u78ba\u8a8d\u4e2d"
     },
     "options_about_updating": {
-        "message": "Updating AdGuard for Safari"
+        "message": "AdGuard for Safari\u3092\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8\u4e2d"
     },
     "options_about_updates_not_found": {
-        "message": "AdGuard for Safari is up to date"
+        "message": "AdGuard for Safari\u306f\u6700\u65b0\u72b6\u614b\u3067\u3059\u3002"
     },
     "options_about_update_downloaded": {
-        "message": "Nearly up to date! Relaunch AdGuard for Safari to finish updating."
+        "message": "\u6700\u65b0\u72b6\u614b\u307e\u3067\u3042\u3068\u4e00\u6b69\u3002\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8\u3092\u5b8c\u4e86\u3055\u305b\u308b\u306b\u306f\u3001AdGuard for Safari\u3092\u518d\u8d77\u52d5\u3057\u3066\u304f\u3060\u3055\u3044\u3002"
     },
     "options_about_update_relaunch": {
-        "message": "Relaunch"
+        "message": "\u518d\u8d77\u52d5"
     },
     "options_popup_title_placeholder": {
-        "message": "Enter filter name"
+        "message": "\u30d5\u30a3\u30eb\u30bf\u540d\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044"
     },
     "main_menu_hide": {
         "message": "\u96a0\u3059"
@@ -65,8 +65,20 @@
     "options_antibanner": {
         "message": "\u30d5\u30a3\u30eb\u30bf"
     },
-    "options_antibanner_info": {
-        "message": "\u30d5\u30a3\u30eb\u30bf %s \u500b\u3000\u30eb\u30fc\u30eb %s \u4ef6"
+    "options_antibanner_info_filters": {
+        "message": {
+            "other": "\u30d5\u30a3\u30eb\u30bf %s\u500b"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "other": "\u30eb\u30fc\u30eb %s\u4ef6"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "other": "\u9ad8\u5ea6\u30eb\u30fc\u30eb %s\u4ef6"
+        }
     },
     "options_filters_enabled": {
         "message": "\u6709\u52b9\uff1a"
@@ -193,7 +205,7 @@
     },
     "options_popup_update_updated_more": {
         "message": {
-            "other": "%s filters updated: $2"
+            "other": "\u66f4\u65b0\u6e08\u307f\u30d5\u30a3\u30eb\u30bf%s\u500b\uff1a$2"
         }
     },
     "options_popup_version_update_title": {

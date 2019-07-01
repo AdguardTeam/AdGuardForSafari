@@ -30,7 +30,7 @@
         "message": "Relancer"
     },
     "options_popup_title_placeholder": {
-        "message": "Entrez le nom du filtre"
+        "message": "Saisissez le nom du filtre"
     },
     "main_menu_hide": {
         "message": "Cacher"
@@ -65,8 +65,23 @@
     "options_antibanner": {
         "message": "Filtres"
     },
-    "options_antibanner_info": {
-        "message": "%s filtres %s r\u00e8gles %s r\u00e8gles avanc\u00e9es"
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s filtre",
+            "other": "%s filtres"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s r\u00e8gle",
+            "other": "%s r\u00e8gles"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s r\u00e8gle avanc\u00e9e",
+            "other": "%s r\u00e8gles avanc\u00e9es"
+        }
     },
     "options_filters_enabled": {
         "message": "Activ\u00e9 :"
@@ -84,7 +99,7 @@
         "message": "version %s"
     },
     "options_filters_updated": {
-        "message": "updated: %s"
+        "message": "mis \u00e0 jour : %s"
     },
     "options_filters_empty_custom_filters": {
         "message": "D\u00e9sol\u00e9, mais vous n'avez pas de filtres personnalis\u00e9s actifs pour le moment"
@@ -117,7 +132,7 @@
         "message": "Une erreur est survenue"
     },
     "options_filters_custom_step_three_desc": {
-        "message": "Malheureusement, votre filtre ne peux pas \u00eatre ajout\u00e9 en raison d'une erreur inattendue."
+        "message": "Malheureusement, votre filtre ne peut pas \u00eatre ajout\u00e9 en raison d'une erreur inattendue."
     },
     "options_filters_custom_step_three_try_again": {
         "message": "Essayez \u00e0 nouveau"
@@ -201,13 +216,13 @@
         "message": "AdGuard pour Safari a \u00e9t\u00e9 mis \u00e0 jour \u00e0 la version $1."
     },
     "options_popup_version_update_description_minor": {
-        "message": "Cette version contient des corrections des bogues et am\u00e9liorations mineures."
+        "message": "Cette version contient des corrections de bogues et des am\u00e9liorations mineures."
     },
     "options_popup_version_update_description_major": {
         "message": "C'est une mise \u00e0 jour majeure comportant beaucoup d'am\u00e9liorations et des fonctionnalit\u00e9s nouvelles."
     },
     "notification_content_blocker_overlimit_title": {
-        "message": "Avertissement "
+        "message": "Alerte"
     },
     "notification_content_blocker_overlimit_desc": {
         "message": "Trop de filtres activ\u00e9s. Safari ne peut pas utiliser plus de 50000 r\u00e8gles la fois."
@@ -288,7 +303,7 @@
         "message": "Github"
     },
     "onboarding_safari_desc": {
-        "message": "Cochez la case \u00e0 c\u00f4t\u00e9 de l'ic\u00f4ne \"AdGuard Safari icon\" et \"AdGuard\" dans les pr\u00e9f\u00e9rences de Safari"
+        "message": "Cochez la case \u00e0 c\u00f4t\u00e9 de l'ic\u00f4ne \"AdGuard Safari Icon\", \"AdGuard Advanced Blocking\" et \"AdGuard\" dans les pr\u00e9f\u00e9rences de Safari"
     },
     "onboarding_safari_btn": {
         "message": "Ouvrir les pr\u00e9f\u00e9rences"
@@ -318,7 +333,7 @@
         "message": "Ne pas mettre \u00e0 jour"
     },
     "options_show_tray_icon": {
-        "message": "Afficher AdGuard pour safari dans la barre du menu"
+        "message": "Afficher AdGuard pour Safari dans la barre du menu"
     },
     "options_launch_at_login": {
         "message": "Lancer AdGuard pour Safari d\u00e8s la connexion"
@@ -327,12 +342,12 @@
         "message": "Attention! Les extensions AdGuard sont d\u00e9sactiv\u00e9es"
     },
     "settings_notification_text": {
-        "message": "Vous pouvez utilisez ces extensions pour param\u00e9trer AdGuard pour Safari. Par exemple, mettre en pause le blocage sur un site particulier ou bloquer une publicit\u00e9 manuellement. Vous pouvez activer l'ic\u00f4ne AdGuard et le Blocage Avanc\u00e9  <a href='#' id='notificationEnableIconLink'>ici<\/a>."
+        "message": "Vous pouvez utiliser ces extensions pour param\u00e9trer AdGuard pour Safari. Par exemple, mettre en pause le blocage sur un site particulier ou bloquer une publicit\u00e9 manuellement. Vous pouvez activer l'ic\u00f4ne AdGuard et le Blocage Avanc\u00e9  <a href='#' id='notificationEnableIconLink'>ici<\/a>."
     },
     "settings_notification_protection_title": {
         "message": "Attention ! Protection d\u00e9sactiv\u00e9e"
     },
     "settings_notification_protection_text": {
-        "message": "La protection AdGuard est en pause. <a href='#' id='notificationEnableProtectionLink'>Activer AdGuard<\/a>."
+        "message": "La protection AdGuard est mise en pause. <a href='#' id='notificationEnableProtectionLink'>Activer AdGuard<\/a>."
     }
 }
