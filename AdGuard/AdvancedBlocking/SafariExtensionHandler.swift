@@ -15,26 +15,22 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {
         // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").
         page.getPropertiesWithCompletionHandler { properties in
-            NSLog("The extension received a message (\(messageName)) from a script injected into (\(String(describing: properties?.url))) with userInfo (\(userInfo ?? [:]))")
-            
-            if (properties == nil) {
+            guard let url = properties?.url else {
                 return;
             }
+            
+            NSLog("The extension received a message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:]))");
 
             // Content script requests scripts and css for current page
             if (messageName == "getAdvancedBlockingData") {
                 do {
-                    guard let url = properties?.url else {
-                        return;
-                    }
-
                     let data: [String : Any]? = [
                         "data": try self.contentBlockerController.getData(url: url),
                         "verbose": self.isVerboseLoggingEnabled()
                     ];
                     page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data);
                 } catch {
-                    NSLog("Error handling message (\(messageName)) from a script injected into (\(String(describing: properties?.url))) with userInfo (\(userInfo ?? [:])): \(error)");
+                    NSLog("Error handling message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:])): \(error)");
                 }
             }
         }

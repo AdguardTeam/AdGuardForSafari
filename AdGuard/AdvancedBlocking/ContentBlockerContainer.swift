@@ -163,7 +163,7 @@ class ContentBlockerContainer {
                 return false;
             }
             
-            if (!checkDomains(trigger: trigger, host: host!)) {
+            if (host == nil || !checkDomains(trigger: trigger, host: host!)) {
                 return false;
             }
             
