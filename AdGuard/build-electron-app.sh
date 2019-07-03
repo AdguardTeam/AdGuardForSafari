@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ ${CONFIGURATION} == "Debug" ]; then
+exit 0
+fi
+
 echo "Building electron app with config:"
 echo "CONFIGURATION: ${CONFIGURATION}"
 echo "AG_STANDALONE: ${AG_STANDALONE}"
