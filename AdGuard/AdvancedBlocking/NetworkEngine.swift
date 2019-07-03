@@ -244,21 +244,18 @@ class NetworkEngine {
         return true;
     }
     
-    // djb2 hash algorithm
+    // Return hash function from string
     private func fastHashBetween(str: String, begin: Int, end: Int) -> UInt32 {
-        var hash = UInt32(5381);
-        for i in begin ..< end {
-            let idx = str.index(str.startIndex, offsetBy: i);
-            let character: UnicodeScalar = str.unicodeScalars[idx];
-            let intValue = character.value;
-            let uintValue = UInt32(intValue);
-            hash = UInt32(hash) ^ uintValue;
-        }
+        let startIndex = str.index(str.startIndex, offsetBy: begin);
+        let endIndex = str.index(str.startIndex, offsetBy: end);
+        let range = startIndex..<endIndex;
         
-        return hash;
+        let mySubstring = str[range];
+        let hash = String(mySubstring).hashValue;
+        return UInt32(truncatingIfNeeded: hash);
     }
     
-    // djb2 hash algorithm
+    // Return hash function from string
     private func fastHash(str: String) -> UInt32 {
         if str == "" {
             return 0;
