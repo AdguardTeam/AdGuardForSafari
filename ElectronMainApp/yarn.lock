@@ -828,7 +828,7 @@ electron-localshortcut@^3.1.0:
     minimist "^1.2.0"
     plist "^3.0.1"
 
-electron-rebuild@^1.8.2:
+electron-rebuild@^1.8.5:
   version "1.8.5"
   resolved "https://registry.yarnpkg.com/electron-rebuild/-/electron-rebuild-1.8.5.tgz#d15d0aa7f2151eb3f2935a596a92c0348984ba55"
   dependencies:
