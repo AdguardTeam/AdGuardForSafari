@@ -67,17 +67,17 @@
     },
     "options_antibanner_info_filters": {
         "message": {
-            "other": "%s filters"
+            "other": "%s \u904e\u6ffe\u5668"
         }
     },
     "options_antibanner_info_rules": {
         "message": {
-            "other": "%s rules"
+            "other": "%s \u898f\u5247"
         }
     },
     "options_antibanner_info_adv_rules": {
         "message": {
-            "other": "%s advanced rules"
+            "other": "%s \u9032\u968e\u7684\u898f\u5247"
         }
     },
     "options_filters_enabled": {
@@ -332,6 +332,12 @@
     },
     "options_launch_at_login": {
         "message": "\u5728\u767b\u5165\u6642\u555f\u52d5 AdGuard for Safari"
+    },
+    "options_verbose_logging": {
+        "message": "Verbose logging"
+    },
+    "options_verbose_logging_desc": {
+        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
     "settings_notification_title": {
         "message": "\u6ce8\u610f\uff01AdGuard \u5ef6\u4f38\u529f\u80fd\u88ab\u7981\u7528"

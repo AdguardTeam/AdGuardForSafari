@@ -57,8 +57,7 @@ yarn upgrade --force -P safari-ext || exit 1
 fi
 
 # Rebuild safari-ext and other node packages
-#Run this binary file to rebuild node packages for electron
-"${SRC}/node_modules/.bin/electron-rebuild"
+yarn electron-rebuild
 
 if [ ${CONFIGURATION} == "Release" ]; then
     echo "Building release MAS version"

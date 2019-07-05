@@ -67,20 +67,20 @@
     },
     "options_antibanner_info_filters": {
         "message": {
-            "one": "%s filter",
-            "other": "%s filters"
+            "one": "%s filtro",
+            "other": "%s filtros"
         }
     },
     "options_antibanner_info_rules": {
         "message": {
-            "one": "%s rule",
-            "other": "%s rules"
+            "one": "%s regra",
+            "other": "%s regras"
         }
     },
     "options_antibanner_info_adv_rules": {
         "message": {
-            "one": "%s advanced rule",
-            "other": "%s advanced rules"
+            "one": "%s regra avan\u00e7ada",
+            "other": "%s regras avan\u00e7adas"
         }
     },
     "options_filters_enabled": {
@@ -303,7 +303,7 @@
         "message": "GitHub"
     },
     "onboarding_safari_desc": {
-        "message": "Marque as caixas ao lado de \"\u00cdcone do AdGuard no Safari\" e \"AdGuard\" nas prefer\u00eancias do Safari"
+        "message": "Marque as caixas ao lado de \"\u00cdcone do AdGuard no Safari\", \"Bloqueio avan\u00e7ado do AdGuard\" e \"AdGuard\" nas prefer\u00eancias do Safari"
     },
     "onboarding_safari_btn": {
         "message": "Abrir prefer\u00eancias"
@@ -337,6 +337,12 @@
     },
     "options_launch_at_login": {
         "message": "Executar o AdGuard no Logon"
+    },
+    "options_verbose_logging": {
+        "message": "Verbose logging"
+    },
+    "options_verbose_logging_desc": {
+        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
     "settings_notification_title": {
         "message": "Aten\u00e7\u00e3o! A extens\u00e3o do AdGuard est\u00e1 desativada"

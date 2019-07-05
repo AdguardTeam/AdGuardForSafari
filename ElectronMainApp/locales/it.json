@@ -338,6 +338,12 @@
     "options_launch_at_login": {
         "message": "Avvia AdGuard per Safari al Login"
     },
+    "options_verbose_logging": {
+        "message": "Verbose logging"
+    },
+    "options_verbose_logging_desc": {
+        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
+    },
     "settings_notification_title": {
         "message": "Attenzione! Le estensioni AdGuard sono disabilitate"
     },

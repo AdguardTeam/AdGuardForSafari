@@ -333,6 +333,12 @@
     "options_launch_at_login": {
         "message": "\u5728\u542f\u52a8\u65f6\u8fd0\u884cAdGuard for Safari"
     },
+    "options_verbose_logging": {
+        "message": "Verbose logging"
+    },
+    "options_verbose_logging_desc": {
+        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
+    },
     "settings_notification_title": {
         "message": "\u6ce8\u610f\uff01AdGuard \u6269\u5c55\u5df2\u7981\u7528"
     },

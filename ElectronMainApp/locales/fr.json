@@ -42,7 +42,7 @@
         "message": "Bloqueur de pub AdGuard"
     },
     "description": {
-        "message": "Extension Adblock in\u00e9gal\u00e9e contre la publicit\u00e9 et les pop-ups. Bloque les publicit\u00e9s sur Facebook, Youtube et tous les autres sites."
+        "message": "Unmatched adblock extension against advertising and pop-ups. Blocks ads on Facebook, Youtube and all other websites."
     },
     "options_settings": {
         "message": "AdGuard pour Safari - Param\u00e9trages"
@@ -337,6 +337,12 @@
     },
     "options_launch_at_login": {
         "message": "Lancer AdGuard pour Safari d\u00e8s la connexion"
+    },
+    "options_verbose_logging": {
+        "message": "Verbose logging"
+    },
+    "options_verbose_logging_desc": {
+        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
     "settings_notification_title": {
         "message": "Attention! Les extensions AdGuard sont d\u00e9sactiv\u00e9es"
