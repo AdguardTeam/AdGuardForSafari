@@ -68,19 +68,19 @@
     "options_antibanner_info_filters": {
         "message": {
             "one": "%s filter",
-            "other": "%s filters"
+            "other": "%s filtre"
         }
     },
     "options_antibanner_info_rules": {
         "message": {
-            "one": "%s rule",
-            "other": "%s rules"
+            "one": "%s regel",
+            "other": "%s regler"
         }
     },
     "options_antibanner_info_adv_rules": {
         "message": {
-            "one": "%s advanced rule",
-            "other": "%s advanced rules"
+            "one": "%s avanceret regel",
+            "other": "%s avancerede regler"
         }
     },
     "options_filters_enabled": {
@@ -303,7 +303,7 @@
         "message": "Github"
     },
     "onboarding_safari_desc": {
-        "message": "Afkryds boksen ved siden af \"AdGuard Safari ikonet\" og \"AdGuard\" i Safari pr\u00e6ferencerne"
+        "message": "Afkryds boksen ved siden af \"AdGuard Safari ikonet\", \"AdGuard Avanceret Blokering\" og \"AdGuard\" i Safari indstillingerne"
     },
     "onboarding_safari_btn": {
         "message": "\u00c5ben pr\u00e6ferencer"
