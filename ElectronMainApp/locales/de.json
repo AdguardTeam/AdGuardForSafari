@@ -338,6 +338,12 @@
     "options_launch_at_login": {
         "message": "AdGuard f\u00fcr Safari beim Anmelden starten"
     },
+    "options_verbose_logging": {
+        "message": "Ausf\u00fchrliche Protokollierung"
+    },
+    "options_verbose_logging_desc": {
+        "message": "Falls Ausf\u00fchrliche Protokollierung aktiviert ist, geben die AdGuard-Browsererweiterungen f\u00fcr Safari zus\u00e4tzliche Informationen in die Browser-Konsole ein."
+    },
     "settings_notification_title": {
         "message": "Achtung! Die AdGuard-Erweiterungen wurden deaktiviert"
     },

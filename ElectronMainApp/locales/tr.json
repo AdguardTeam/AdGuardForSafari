@@ -338,6 +338,12 @@
     "options_launch_at_login": {
         "message": "Oturum a\u00e7mada Safari i\u00e7in AdGuard'\u0131 ba\u015flat"
     },
+    "options_verbose_logging": {
+        "message": "Verbose logging"
+    },
+    "options_verbose_logging_desc": {
+        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
+    },
     "settings_notification_title": {
         "message": "Dikkat! AdGuard eklentileri devre d\u0131\u015f\u0131"
     },

@@ -338,6 +338,12 @@
     "options_launch_at_login": {
         "message": "Start AdGuard til Safari ved Login"
     },
+    "options_verbose_logging": {
+        "message": "Detaljeret logning"
+    },
+    "options_verbose_logging_desc": {
+        "message": "Hvis Detaljeret logning er aktiveret, vil AdGuards Safari udvidelser udskrive yderligere oplysninger til browserens konsol"
+    },
     "settings_notification_title": {
         "message": "Opm\u00e6rksomhed! AdGuard udvidelserne er deaktiveret"
     },

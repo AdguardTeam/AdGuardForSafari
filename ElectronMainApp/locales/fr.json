@@ -338,6 +338,12 @@
     "options_launch_at_login": {
         "message": "Lancer AdGuard pour Safari d\u00e8s la connexion"
     },
+    "options_verbose_logging": {
+        "message": "Verbose logging"
+    },
+    "options_verbose_logging_desc": {
+        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
+    },
     "settings_notification_title": {
         "message": "Attention! Les extensions AdGuard sont d\u00e9sactiv\u00e9es"
     },
