@@ -1,3 +1,5 @@
+const logImpl = require('electron-log');
+
 /**
  * Simple logger with log levels
  */
@@ -48,9 +50,7 @@ module.exports = (() => {
             return match;
         });
 
-        const now = new Date();
-        formatted = now.toISOString() + ": " + formatted;
-        console[method](formatted);
+        logImpl[method](formatted);
     };
 
     /**

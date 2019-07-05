@@ -817,6 +817,10 @@ electron-localshortcut@^3.1.0:
     keyboardevent-from-electron-accelerator "^1.1.0"
     keyboardevents-areequal "^0.2.1"
 
+electron-log@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-3.0.6.tgz#2291375572f6be5889f06fb32a35eab2930a1728"
+
 "electron-osx-sign@github:electron-userland/electron-osx-sign#timestamp-server":
   version "0.4.11"
   resolved "https://codeload.github.com/electron-userland/electron-osx-sign/tar.gz/cd843facffc0121913f9c996d841e706da69afe1"
