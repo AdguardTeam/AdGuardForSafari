@@ -4,8 +4,8 @@
     "description": "",
     "main": "./main.js",
     "repository": "github:AdguardTeam/AdGuardForSafari",
-    "standalone-build": "AG_STANDALONE_BUILD",
-    "standalone-beta": "AG_STANDALONE_BETA",
+    "standalone-build": "false",
+    "standalone-beta": "false",
     "scripts": {
         "start": "electron .",
         "test": "echo \"Error: no test specified\" && exit 1",
