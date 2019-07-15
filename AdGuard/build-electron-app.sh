@@ -50,8 +50,8 @@ cd "${SRC}"
 #OPT="--asar"
 ##### Поломано end ###
 echo "yarn install"
+yarn install --force || exit 1
 ##### Поломано ###
-#yarn install --force || exit 1
 #else
 #echo "yarn upgrade"
 #yarn upgrade --force -P safari-ext || exit 1
@@ -76,7 +76,7 @@ yarn electron-rebuild
 
 electron-osx-sign "${APP}" --platform=${PLATFORM} --type=distribution --hardened-runtime --version=5.0.6 --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_APP_ENT}" || exit 1
 
-##### Поломано ### НО может это и не нужно после electron-osx-sign 
+##### Поломано ### НО может это и не нужно после electron-osx-sign
 #    codesign --verbose --force  --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper.app" || exit 1
 #    codesign --verbose --force  --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_LOGINHELPER_ENT}" "${APP}/Contents/Library/LoginItems/${PRODUCT_NAME} Login Helper.app" || exit 1
 #    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib" || exit 1
