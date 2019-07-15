@@ -354,6 +354,9 @@
 		65975C9C2148266C007F766E /* toolbar-on.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "toolbar-on.pdf"; path = "../../MediaResources/toolbar-on.pdf"; sourceTree = "<group>"; };
 		65975C9E21484E13007F766E /* GreenButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GreenButtonCell.h; sourceTree = "<group>"; };
 		65975C9F21484E13007F766E /* GreenButtonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GreenButtonCell.m; sourceTree = "<group>"; };
+		65C41D3422D8B0DF0001AFBA /* ElectronChild.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ElectronChild.entitlements; sourceTree = "<group>"; };
+		65C41D3522D8B0DF0001AFBA /* AdGuard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuard.entitlements; sourceTree = "<group>"; };
+		65C41D3622D8B0DF0001AFBA /* ElectronLoginItem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ElectronLoginItem.entitlements; sourceTree = "<group>"; };
 		65C8B03B2146635B00B2E7FD /* assistant.embedded.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = assistant.embedded.js; sourceTree = "<group>"; };
 		65C8B03D21467AF500B2E7FD /* assistant.runner.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = assistant.runner.js; sourceTree = "<group>"; };
 		65D151832139771A0014BE79 /* defaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
@@ -622,6 +625,9 @@
 		65720AB421219AC900B2381C /* AdGuard */ = {
 			isa = PBXGroup;
 			children = (
+				65C41D3522D8B0DF0001AFBA /* AdGuard.entitlements */,
+				65C41D3422D8B0DF0001AFBA /* ElectronChild.entitlements */,
+				65C41D3622D8B0DF0001AFBA /* ElectronLoginItem.entitlements */,
 				F46D132E225E950A00282566 /* standalone */,
 				65720ABD21219ACB00B2381C /* Info.plist */,
 			);
@@ -948,7 +954,7 @@
 								enabled = 1;
 							};
 							com.apple.Sandbox = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -1402,7 +1408,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = N33TQXN8C7;
+				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				INFOPLIST_FILE = AdGuardTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1426,7 +1432,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = N33TQXN8C7;
+				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				INFOPLIST_FILE = AdGuardTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1494,6 +1500,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Extension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1658,6 +1666,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_EXPAND_BUILD_SETTINGS = YES;
 				INFOPLIST_FILE = AdGuard/Info.plist;
@@ -1682,7 +1691,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_EXPAND_BUILD_SETTINGS = YES;
 				INFOPLIST_FILE = AdGuard/Info.plist;
@@ -1705,7 +1716,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BlockerExtension/BlockerExtension.entitlements;
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = BlockerExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1725,8 +1735,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BlockerExtension/BlockerExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = BlockerExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1747,9 +1758,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
-				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = AdvancedBlocking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1776,9 +1785,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
-				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = AdvancedBlocking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1941,7 +1950,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = N33TQXN8C7;
+				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				INFOPLIST_FILE = AdGuardTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2003,7 +2012,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2UQZLU4666;
+				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				INFOPLIST_FILE = AdvancedBlockingUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2162,7 +2171,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = N33TQXN8C7;
+				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				INFOPLIST_FILE = AdGuardTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2224,7 +2233,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2UQZLU4666;
+				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				INFOPLIST_FILE = AdvancedBlockingUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2246,7 +2255,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2UQZLU4666;
+				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				INFOPLIST_FILE = AdvancedBlockingUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2269,7 +2278,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2UQZLU4666;
+				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				INFOPLIST_FILE = AdvancedBlockingUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
