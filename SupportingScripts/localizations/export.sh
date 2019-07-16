@@ -67,7 +67,7 @@ echo "${THEBASE}/${filename}.xib"
 
 ibtool --generate-strings-file "${FILE}" "${THEBASE}/${filename}.xib"
 curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=en" -F "filename=${filename}.strings" -F "project=safari" -F "file=@${FILE}"
-rm "${FILE}"
+#rm "${FILE}"
 }
 
 
