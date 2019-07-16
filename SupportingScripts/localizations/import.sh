@@ -76,7 +76,6 @@ for locale in $LOCALES
 do
 echo "Download $filename for $locale locale"
 
-#python "${SCRIPTDIR}/Resources/download.py" -l $locale -o "${PROJECT_TEMP_DIR}/${locale}_${filename}" -f "${filename}.strings"
 curl "${SERVICE_URL}download?format=strings&language=${locale}&filename=${filename}.strings&project=safari" -o "${PROJECT_TEMP_DIR}/${locale}_${filename}"
 if [ $? == 0 ]; then
 mv -vf "${PROJECT_TEMP_DIR}/${locale}_${filename}" "${LOCALROOT}/$locale.lproj/${filename}.strings"

@@ -1,38 +1,20 @@
 const gulp = require('gulp');
 const path = require('path');
-const md5 = require('gulp-hash-creator');
 const fs = require('fs');
 const request = require('request-promise');
-const { LOCALES_DIR, PRIVATE_FILES } = require('./consts');
-
-/**
- * Hash content
- * 
- * @param {string} content 
- */
-const hashString = content => md5({ content });
+const { LOCALES_DIR, TRANSLATION_SERVICE_URL } = require('./consts');
 
 /**
  * Prepare post params
  */
 const prepare = () => {
-    let oneskyapp;
-    try {
-        oneskyapp = JSON.parse(fs.readFileSync(path.resolve(PRIVATE_FILES, 'oneskyapp.json')));
-    } catch (err) {
-        throw new Error(err);
-    }
-
-    const url = oneskyapp.url + oneskyapp.projectId + '/files';
-    const timestamp = Math.round(new Date().getTime() / 1000);
+    const url = TRANSLATION_SERVICE_URL + 'upload';
     const formData = {
-        timestamp,
-        file: fs.createReadStream(path.resolve(LOCALES_DIR, 'en.json')),
-        file_format: 'HIERARCHICAL_JSON',
-        locale: 'en',
-        is_keeping_all_strings: 'false',
-        api_key: oneskyapp.apiKey,
-        dev_hash: hashString(timestamp + oneskyapp.secretKey)  
+        format: 'json',
+        language: 'en',
+        filename: 'en.json',
+        project: 'safari',
+        file: fs.createReadStream(path.resolve(LOCALES_DIR, 'en.json'))
     };
 
     return { url, formData };

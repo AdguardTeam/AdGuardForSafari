@@ -3,6 +3,7 @@
 mainWorkspace="AdGuard.xcworkspace"
 projectRootFolder="Adguard"
 PROJECT_TEMP_DIR="/tmp/dev/ios.com.adguard/export-script-tmp-dir"
+SERVICE_URL="https://twosky.adtidy.org/api/v1/"
 #====================================================
 
 usage()
@@ -64,7 +65,8 @@ echo "File for processing:"
 echo "${THEBASE}/${filename}.xib"
 
 ibtool --generate-strings-file "${FILE}" "${THEBASE}/${filename}.xib"
-python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${FILE}" -r IOS_STRINGS
+curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=en" -F "filename=${filename}.strings" -F "project=safari" -F "file=${FILE}"
+#python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${FILE}" -r IOS_STRINGS
 rm "${FILE}"
 }
 
@@ -88,7 +90,8 @@ echo "Main App strings uploading.. "
 
 file="Localizable.strings"
 find "${EXTENSION}" -name \*.m | xargs genstrings -o "${EXTENSION}"
-python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${EXTENSION}/Base.lproj/${file}" -r IOS_STRINGS
+#python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${EXTENSION}/Base.lproj/${file}" -r IOS_STRINGS
+curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=en" -F "filename=${file}" -F "project=safari" -F "file=${EXTENSION}/Base.lproj/${file}"
 
 echo "Done"
 echo "Upload finished Native string files"
@@ -109,23 +112,22 @@ echo "========================= UPLOAD INFOPLIST FILE ==========================
 
 file="InfoPlist.strings"
 find "${EXTENSION}" -name \*.m | xargs genstrings -o "${EXTENSION}"
-cp -fv "${EXTENSION}/en.lproj/${file}" "${PROJECT_TEMP_DIR}/extension_${file}"
-python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}/extension_${file}" -r IOS_STRINGS
-# rm "${PROJECT_TEMP_DIR}/extension_${file}"
+cp -fv "${EXTENSION}/en.lproj/${file}" "${PROJECT_TEMP_DIR}/${file}"
+curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=en" -F "filename=${file}" -F "project=safari" -F "file=${PROJECT_TEMP_DIR}/${file}"
+#python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}/${file}" -r IOS_STRINGS
+rm "${PROJECT_TEMP_DIR}/extension_${file}"
 
 find "${BLOCKEREXTENSION}" -name \*.m | xargs genstrings -o "${BLOCKEREXTENSION}"
 cp -fv "${BLOCKEREXTENSION}/en.lproj/${file}" "${PROJECT_TEMP_DIR}/blockerextension_${file}"
-LC_CTYPE=C sed -i "" "s/NSHumanReadableDescription/NSHumanReadableDescriptionBlocker/g" "${PROJECT_TEMP_DIR}/blockerextension_${file}"
-LC_CTYPE=C sed -i "" "s/CFBundleDisplayName/CFBundleDisplayNameBlocker/g" "${PROJECT_TEMP_DIR}/blockerextension_${file}"
-python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}/blockerextension_${file}" -r IOS_STRINGS
-# rm "${PROJECT_TEMP_DIR}/blockerextension_${file}"
+curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=en" -F "filename=${file}" -F "project=safari" -F "file=${PROJECT_TEMP_DIR}/blockerextension_${file}"
+#python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}/blockerextension_${file}" -r IOS_STRINGS
+rm "${PROJECT_TEMP_DIR}/blockerextension_${file}"
 
 find "${ADVANCED_BLOCKING_EXTENSION}" -name \*.m | xargs genstrings -o "${ADVANCED_BLOCKING_EXTENSION}"
 cp -fv "${ADVANCED_BLOCKING_EXTENSION}/en.lproj/${file}" "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}"
-LC_CTYPE=C sed -i "" "s/NSHumanReadableDescription/NSHumanReadableDescriptionAdvBlocking/g" "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}"
-LC_CTYPE=C sed -i "" "s/CFBundleDisplayName/CFBundleDisplayNameAdvBlocking/g" "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}"
-python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}" -r IOS_STRINGS
-# rm "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}"
+curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=en" -F "filename=${file}" -F "project=safari" -F "file=${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}"
+#python "${SCRIPTDIR}/Resources/upload.py" -l en_US_POSIX -f "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}" -r IOS_STRINGS
+rm "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}"
 
 echo "Done"
 echo "Upload finished InfoPlist files"
