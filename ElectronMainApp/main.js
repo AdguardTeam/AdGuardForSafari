@@ -56,7 +56,10 @@ function createWindow(onWindowLoaded) {
         minHeight: 768,
         center: true,
         icon: './src/main/ui/images/128x128.png',
-        resizable: true
+        resizable: true,
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
 
     mainWindow.loadFile('./src/main/ui/options.html');
