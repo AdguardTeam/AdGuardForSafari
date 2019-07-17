@@ -31,7 +31,7 @@
     },
     "devDependencies": {
         "devtron": "^1.4.0",
-        "electron": "^2.0.12",
+        "electron": "^5.0.6",
         "electron-osx-sign": "github:electron-userland/electron-osx-sign#timestamp-server",
         "electron-rebuild": "^1.8.5",
         "find-in-files": "^0.5.0",

@@ -264,7 +264,7 @@ NAN_METHOD(setBusy) {
         return;
     }
 
-    BOOL val = info[0]->BooleanValue(); 
+    BOOL val = info[0].As<v8::Boolean>()->Value(); 
     [[AESharedResources sharedDefaults] setBool:val forKey:AEDefaultsMainAppBusy];
     [AESharedResources notifyBusyChanged];
 }
@@ -280,7 +280,7 @@ NAN_METHOD(setVerboseLogging) {
 		return;
 	}
 
-	BOOL val = info[0]->BooleanValue();
+	BOOL val = info[0].As<v8::Boolean>()->Value();
 	[[AESharedResources sharedDefaults] setBool:val forKey:AEDefaultsVerboseLogging];
 	[AESharedResources notifyVerboseLoggingChanged];
 }
@@ -297,7 +297,7 @@ NAN_METHOD(setProtection) {
         return;
     }
 
-    BOOL val = info[0]->BooleanValue(); 
+    BOOL val = info[0].As<v8::Boolean>()->Value(); 
     [[AESharedResources sharedDefaults] setBool:val forKey:AEDefaultsEnabled];
 }
 
