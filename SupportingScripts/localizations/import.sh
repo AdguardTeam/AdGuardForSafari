@@ -6,6 +6,7 @@
 mainWorkspace="AdGuard.xcworkspace"
 projectRootFolder="Adguard"
 PROJECT_TEMP_DIR="/tmp/dev/ios.com.adguard/import-script-tmp-dir"
+SERVICE_URL="https://twosky.adtidy.org/api/v1/"
 #====================================================
 
 usage()
@@ -75,7 +76,7 @@ for locale in $LOCALES
 do
 echo "Download $filename for $locale locale"
 
-python "${SCRIPTDIR}/Resources/download.py" -l $locale -o "${PROJECT_TEMP_DIR}/${locale}_${filename}" -f "${filename}.strings"
+curl "${SERVICE_URL}download?format=strings&language=${locale}&filename=${filename}.strings&project=safari" -o "${PROJECT_TEMP_DIR}/${locale}_${filename}"
 if [ $? == 0 ]; then
 mv -vf "${PROJECT_TEMP_DIR}/${locale}_${filename}" "${LOCALROOT}/$locale.lproj/${filename}.strings"
 fi
@@ -104,7 +105,7 @@ file="Localizable.strings"
 for locale in $LOCALES
 do
 echo "Download Main Application Strings for $locale locale"
-python "${SCRIPTDIR}/Resources/download.py" -l $locale -o "${PROJECT_TEMP_DIR}/${locale}_${file}" -f "${file}"
+curl "${SERVICE_URL}download?format=strings&language=${locale}&filename=${file}&project=safari" -o "${PROJECT_TEMP_DIR}/${locale}_${file}"
 if [ $? == 0 ]; then
 cp -fv "${PROJECT_TEMP_DIR}/${locale}_${file}" "${EXTENSION}/$locale.lproj/$file"
 rm "${PROJECT_TEMP_DIR}/${locale}_${file}"
@@ -126,25 +127,21 @@ echo "========================= UPDATING InfoPlist FILES =======================
 
 file="InfoPlist.strings"
 
-oneskyfiles="extension_${file} blockerextension_${file} adv_blocking_extension_mod_${file}"
+oneskyfiles="${file} blockerextension_${file} adv_blocking_extension_mod_${file}"
 
 for oneskyfile in $oneskyfiles
 do
     for locale in $LOCALES 
     do
-        python "${SCRIPTDIR}/Resources/download.py" -l $locale -o "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}" -f "${oneskyfile}"
+        curl "${SERVICE_URL}download?format=strings&language=${locale}&filename=${oneskyfile}&project=safari" -o "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
         if [ $? == 0 ]; then
             folder=${EXTENSION}
             if [ $oneskyfile = "blockerextension_${file}" ]; then
                 folder=${BLOCKEREXTENSION}
-                node ./SupportingScripts/localizations/Resources/replace.js "NSHumanReadableDescriptionBlocker" "NSHumanReadableDescription" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
-                node ./SupportingScripts/localizations/Resources/replace.js "CFBundleDisplayNameBlocker" "CFBundleDisplayName" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
             fi
 
             if [ $oneskyfile = "adv_blocking_extension_mod_${file}" ]; then
                 folder=${ADVANCED_BLOCKING_EXTENSION}
-                node ./SupportingScripts/localizations/Resources/replace.js "NSHumanReadableDescriptionAdvBlocking" "NSHumanReadableDescription" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
-                node ./SupportingScripts/localizations/Resources/replace.js "CFBundleDisplayNameAdvBlocking" "CFBundleDisplayName" "${PROJECT_TEMP_DIR}/${locale}_${oneskyfile}"
             fi
 
             echo $folder

@@ -158,18 +158,6 @@ cd ElectronMainApp
 yarn install
 ```
 
-Create directory `private` in the root of the project and put file `oneskyapp.json` in it. 
-
-Example of `oneskyapp.json`
-```
-{
-    "url": "https://platform.api.onesky.io/1/projects/",
-    "projectId": <PROJECT ID>,
-    "apiKey": <API KEY>,
-    "secretKey": <SECRET KEY>
-}
-```
-
 #### Exporting translations
 ```
 sh SupportingScripts/localizations/export.sh .

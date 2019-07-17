@@ -1,52 +1,21 @@
 const fs = require('fs');
 const path = require('path');
 const gulp = require('gulp');
-const md5 = require('gulp-hash-creator');
 const requestPromise = require('request-promise');
-const { LOCALES_DIR, PRIVATE_FILES } = require('./consts');
+const { LOCALES_DIR, TRANSLATION_SERVICE_URL } = require('./consts');
 const { LOCALES } = require('../locales/locales');
-
-/**
- * We use this pairs because we have different locale codes in the onesky and the extension
- */
-const LOCALE_PAIRS = {
-    /**
-     * Norvegian language locale code in oneskyapp is 'no'
-     * chrome recognizes both locale code 'nb' and 'no',
-     * but firefox recognizes only 'nb'
-     */
-    nb: 'no',
-    /**
-     * Belarussian language locale code in oneskyapp is 'be-BY'
-     * chrome doesn't recognize belarussian language at all
-     * firefox recognizes 'be' code
-     */
-    be: 'be-BY',
-};
-
-/**
- * Hash content
- * @param {string} content 
- */
-const hashString = content => md5({ content });
 
 /**
  * Prepare params to get translations from oneskyapp
  * @param {string} locale language shortcut
- * @param {object} oneskyapp config oneskyapp
  */
-const prepare = (locale, oneskyapp) => {
-    const timestamp = Math.round(new Date().getTime() / 1000);
-    const oneSkyLocalization = LOCALE_PAIRS[locale] || locale;
-
+const prepare = (locale) => {
     let url = [];
-    url.push(oneskyapp.url + oneskyapp.projectId);
-    url.push('/translations?locale=' + oneSkyLocalization);
-    url.push('&source_file_name=' + 'en.json');
-    url.push('&export_file_name=' + oneSkyLocalization + '.json');
-    url.push('&api_key=' + oneskyapp.apiKey);
-    url.push('&timestamp=' + timestamp);
-    url.push('&dev_hash=' + hashString(timestamp + oneskyapp.secretKey));
+    url.push(TRANSLATION_SERVICE_URL);
+    url.push('download?format=json');
+    url.push('&project=safari');
+    url.push('&language=' + locale);
+    url.push('&filename=en.json');
     url = url.join('');
 
     return url;
@@ -100,16 +69,8 @@ const request = (url, locale) => {
  * @param {function} done
  */
 const download = done => {
-    const locales = LOCALES;
-    let oneskyapp;
-    try {
-        oneskyapp = JSON.parse(fs.readFileSync(path.resolve(PRIVATE_FILES, 'oneskyapp.json')));
-    } catch (err) {
-        throw new Error(err);
-    }
-
-    const requests = locales.map(locale => {
-        const url = prepare(locale, oneskyapp);
+    const requests = LOCALES.map(locale => {
+        const url = prepare(locale);
         return request(url, locale);
     });
 

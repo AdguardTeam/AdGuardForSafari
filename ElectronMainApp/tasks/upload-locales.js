@@ -1,54 +1,39 @@
 const gulp = require('gulp');
 const path = require('path');
-const md5 = require('gulp-hash-creator');
 const fs = require('fs');
 const request = require('request-promise');
-const { LOCALES_DIR, PRIVATE_FILES } = require('./consts');
-
-/**
- * Hash content
- * 
- * @param {string} content 
- */
-const hashString = content => md5({ content });
+const { LOCALES_DIR, TRANSLATION_SERVICE_URL } = require('./consts');
+const FormData = require('form-data');
+const axios = require('axios');
 
 /**
  * Prepare post params
  */
 const prepare = () => {
-    let oneskyapp;
-    try {
-        oneskyapp = JSON.parse(fs.readFileSync(path.resolve(PRIVATE_FILES, 'oneskyapp.json')));
-    } catch (err) {
-        throw new Error(err);
-    }
+    const url = TRANSLATION_SERVICE_URL + 'upload';
 
-    const url = oneskyapp.url + oneskyapp.projectId + '/files';
-    const timestamp = Math.round(new Date().getTime() / 1000);
-    const formData = {
-        timestamp,
-        file: fs.createReadStream(path.resolve(LOCALES_DIR, 'en.json')),
-        file_format: 'HIERARCHICAL_JSON',
-        locale: 'en',
-        is_keeping_all_strings: 'false',
-        api_key: oneskyapp.apiKey,
-        dev_hash: hashString(timestamp + oneskyapp.secretKey)  
+    const formData = new FormData();
+    formData.append('format', 'json');
+    formData.append('language', 'en');
+    formData.append('filename', 'en.json');
+    formData.append('project', 'safari');
+    formData.append('file', fs.createReadStream(path.resolve(LOCALES_DIR, 'en.json')));
+    const headers = {
+        ...formData.getHeaders(),
     };
 
-    return { url, formData };
+    return { formData, url, headers };
 };
 
-/**
- * Make request to onesky to upload new json
- * 
- * @param {function} done callback to run when the process end
- */
-const upload = done => {
-    const { url, formData } = prepare();
-    request
-        .post({ url, formData })
-        .then(() => done())
-        .catch(err => done(err));
+const uploadLocal = async () => {
+    const { url, formData, headers } = prepare();
+
+    try {
+        const response = await axios.post(url, formData, { headers });
+        console.log(`Upload successful! Server responded with: ${JSON.stringify(response.data)}`);
+    } catch (e) {
+        console.error(JSON.stringify(e.response.data));
+    }
 };
 
-gulp.task('upload-locales', upload);
+gulp.task('upload-locales', uploadLocal);
