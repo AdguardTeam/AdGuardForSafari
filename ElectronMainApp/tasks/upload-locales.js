@@ -3,34 +3,37 @@ const path = require('path');
 const fs = require('fs');
 const request = require('request-promise');
 const { LOCALES_DIR, TRANSLATION_SERVICE_URL } = require('./consts');
+const FormData = require('form-data');
+const axios = require('axios');
 
 /**
  * Prepare post params
  */
 const prepare = () => {
     const url = TRANSLATION_SERVICE_URL + 'upload';
-    const formData = {
-        format: 'json',
-        language: 'en',
-        filename: 'en.json',
-        project: 'safari',
-        file: fs.createReadStream(path.resolve(LOCALES_DIR, 'en.json'))
+
+    const formData = new FormData();
+    formData.append('format', 'json');
+    formData.append('language', 'en');
+    formData.append('filename', 'en.json');
+    formData.append('project', 'safari');
+    formData.append('file', fs.createReadStream(path.resolve(LOCALES_DIR, 'en.json')));
+    const headers = {
+        ...formData.getHeaders(),
     };
 
-    return { url, formData };
+    return { formData, url, headers };
 };
 
-/**
- * Make request to onesky to upload new json
- * 
- * @param {function} done callback to run when the process end
- */
-const upload = done => {
-    const { url, formData } = prepare();
-    request
-        .post({ url, formData })
-        .then(() => done())
-        .catch(err => done(err));
+const uploadLocal = async () => {
+    const { url, formData, headers } = prepare();
+
+    try {
+        const response = await axios.post(url, formData, { headers });
+        console.log(`Upload successful! Server responded with: ${JSON.stringify(response.data)}`);
+    } catch (e) {
+        console.error(JSON.stringify(e.response.data));
+    }
 };
 
-gulp.task('upload-locales', upload);
+gulp.task('upload-locales', uploadLocal);
