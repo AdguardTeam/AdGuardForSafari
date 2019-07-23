@@ -41,7 +41,24 @@ module.exports = (() => {
         }
 
         i18n.setLocale(resultLocale);
-    }
+    };
+
+    /**
+     * Override __ method for missing translations fallback
+     */
+    const original = i18n.__;
+    i18n.__ = function () {
+        const res = original.apply(this, arguments);
+        if (res !== arguments[0]) {
+            return res;
+        } else {
+            const list = i18n.__h.apply(this, arguments);
+            const resDefaultLocale = list.find(i => i['en']);
+
+            return resDefaultLocale ? resDefaultLocale['en'] : res;
+        }
+    };
+
 
     return i18n;
 
