@@ -1031,6 +1031,11 @@
 					};
 					F41308E522EA125D006B4D93 = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.HardenedRuntime = {
+								enabled = 1;
+							};
+						};
 					};
 					F41DA7D82201C81700C63708 = {
 						CreatedOnToolsVersion = 10.0;
@@ -1845,6 +1850,7 @@
 				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = BlockerPrivacyExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1869,6 +1875,7 @@
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = TC3Q7MAJXF;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = BlockerPrivacyExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1892,6 +1899,7 @@
 				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = BlockerPrivacyExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1915,6 +1923,7 @@
 				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = BlockerPrivacyExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
