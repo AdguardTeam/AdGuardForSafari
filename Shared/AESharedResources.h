@@ -157,9 +157,10 @@ extern NSString * const AEDefaultsLastReportUrl;
  Completion is executed on global concurent queue.
 
  @param jsonData Rules json, may be nil.
+ @param bundleId Bundle identfier
  @param completion May be nil.
  */
-+ (void)setBlockingContentRulesJson:(NSData *)jsonData completion:(void (^)(void))completion;
++ (void)setBlockingContentRulesJson:(NSData *)jsonData bundleId:(NSString *)bundleId completion:(void (^)(void))completion;
 /**
  Saves advanced blocking content rules JSON in shared storage.
  Completion is executed on global concurent queue.
@@ -182,6 +183,22 @@ extern NSString * const AEDefaultsLastReportUrl;
  Gets URL of the blocking content rules JSON from shared storage.
  */
 + (NSURL *)blockingContentRulesUrl;
+/**
+ Gets URL of the blocking content rules JSON from shared storage.
+ */
++ (NSURL *)blockingContentPrivacyUrl;
+/**
+ Gets URL of the blocking content rules JSON from shared storage.
+ */
++ (NSURL *)blockingContentSocialUrl;
+/**
+ Gets URL of the blocking content rules JSON from shared storage.
+ */
++ (NSURL *)blockingContentOtherUrl;
+/**
+ Gets URL of the blocking content rules JSON from shared storage.
+ */
++ (NSURL *)blockingContentCustomUrl;
 /**
  Gets URL of the advanced blocking content rules JSON from shared storage.
  */

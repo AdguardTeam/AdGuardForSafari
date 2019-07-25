@@ -33,12 +33,12 @@ module.exports = (function () {
      * Rules groups to extension bundle identifiers dictionary
      */
     const rulesGroupsBundles = {
-        general: "com.adguard.cb.general",
-        privacy: "com.adguard.cb.privacy",
-        socialWidgetsAndAnnoyances: "",
-        other: "",
-        custom: "",
-        advancedBlocking: "com.adguard.adv"
+        general: "com.adguard.safari.AdGuard.BlockerExtension",
+        privacy: "com.adguard.safari.AdGuard.BlockerPrivacy",
+        socialWidgetsAndAnnoyances: "com.adguard.safari.AdGuard.BlockerSocial",
+        other: "com.adguard.safari.AdGuard.BlockerOther",
+        custom: "com.adguard.safari.AdGuard.BlockerCustom",
+        advancedBlocking: "com.adguard.safari.AdGuard.AdvancedBlocking"
     };
 
     /**

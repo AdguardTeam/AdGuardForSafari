@@ -168,27 +168,31 @@ NAN_METHOD(setUserFilter) {
 
 NAN_METHOD(setContentBlockingJson) {
 
-    if (info.Length() < 2) {
+    if (info.Length() < 3) {
         ThrowTypeError("Wrong number of arguments");
         return;
     }
 
-    if (!info[0]->IsString() || !info[1]->IsFunction()) {
+    if (!info[0]->IsString() || !info[1]->IsString() || !info[2]->IsFunction()) {
         ThrowTypeError("Wrong arguments");
         return;
     }
+
     NSData *data = [NSData new];
-    Nan::Utf8String msg (info[0]);
+    Nan::Utf8String msg (info[1]);
     if (msg.length() > 0) {
         data = [NSData dataWithBytes:*msg length:msg.length()];
-     }
+ 	}
 
-    Nan::Callback *cb = new Nan::Callback(info[1].As<Function>());
+	Nan::Utf8String message (info[0]);
+	NSString *bundleId = [NSString stringWithCString:*message encoding:NSUTF8StringEncoding];
 
-    [AESharedResources setBlockingContentRulesJson:data completion:^{
+    Nan::Callback *cb = new Nan::Callback(info[2].As<Function>());
+
+    [AESharedResources setBlockingContentRulesJson:data bundleId:bundleId completion:^{
       DDLogCDebug(@"Json updated in file. Notify the content blocker extension.");
       [SFContentBlockerManager 
-      reloadContentBlockerWithIdentifier:AESharedResources.blockerBundleId
+      reloadContentBlockerWithIdentifier:bundleId
       completionHandler:^(NSError * _Nullable error) {
         DDLogCDebug(@"Notifying completion with error: %@", error ?: @"[no error]");
         NSString *jsonResult = @"{\"result\":\"success\"}";

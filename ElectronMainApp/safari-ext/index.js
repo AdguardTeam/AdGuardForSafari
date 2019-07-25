@@ -74,27 +74,19 @@ module.exports = (() => {
     /**
      * Sets content blocker json
      *
+     * @param bundleId - string extension bundle identifier
      * @param jsonString - string with content blocking json
      * @param callback = (result) => {}
      * result contains json string with two types of a values:
      * {"result":"success"}
      * {"result":"error", "error":{"domain":"ErrorDomain", "code":100, "descr":"Error Description IF Available"}}
      */
-    const setContentBlockingJson = (jsonString, callback) => {
-        addon.setContentBlockingJson(jsonString, callback);
-    };
-
-    /**
-     * Sets advanced blocking json
-     *
-     * @param jsonString - string with content blocking json
-     * @param callback = (result) => {}
-     * result contains json string with two types of a values:
-     * {"result":"success"}
-     * {"result":"error", "error":{"domain":"ErrorDomain", "code":100, "descr":"Error Description IF Available"}}
-     */
-    const setAdvancedBlockingJson = (jsonString, callback) => {
-        addon.setAdvancedBlockingJson(jsonString, callback);
+    const setContentBlockingJson = (bundleId, jsonString, callback) => {
+        if (bundleId === "com.adguard.safari.AdGuard.AdvancedBlocking") {
+            addon.setAdvancedBlockingJson(jsonString, callback);
+        } else {
+            addon.setContentBlockingJson(bundleId, jsonString, callback);
+        }
     };
 
     /**
@@ -194,7 +186,6 @@ module.exports = (() => {
         sendReady: sendReady,
         busyStatus: busyStatus,
         setContentBlockingJson: setContentBlockingJson,
-        setAdvancedBlockingJson: setAdvancedBlockingJson,
         setProtectionEnabled: setProtectionEnabled,
         protectionEnabled: protectionEnabled,
         setWhitelistDomains: setWhitelistDomains,
