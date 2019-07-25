@@ -17,6 +17,9 @@
   "AntiBannerFilterGroupsId": {
     "AD_BLOCKING_ID": 1,
     "PRIVACY_ID": 2,
+    "SOCIAL_ID": 3,
+    "ANNOYANCES_ID": 4,
+    "SECURITY_ID": 5,
     "OTHER_ID": 6,
     "LANGUAGE_SPECIFIC_ID": 7,
     "CUSTOM_FILTERS_GROUP_ID": 0
