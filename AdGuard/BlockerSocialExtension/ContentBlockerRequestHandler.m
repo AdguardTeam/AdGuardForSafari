@@ -20,7 +20,7 @@
     NSItemProvider *attachment;
     
     if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsEnabled]) {
-        attachment = [[NSItemProvider alloc] initWithContentsOfURL:AESharedResources.blockingContentPrivacyUrl];
+        attachment = [[NSItemProvider alloc] initWithContentsOfURL:AESharedResources.blockingContentSocialUrl];
     } else {
         attachment = [[NSItemProvider alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:AES_BLOCKING_CONTENT_EMPTY_RESOURCE withExtension:@"json"]];
     }
