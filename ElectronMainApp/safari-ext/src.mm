@@ -183,10 +183,12 @@ NAN_METHOD(setContentBlockingJson) {
     if (msg.length() > 0) {
         data = [NSData dataWithBytes:*msg length:msg.length()];
  	}
+    DDLogCDebug(@"(setContentBlockingJson) Data parameter length: %lu", data.length);
 
 	Nan::Utf8String message (info[0]);
 	NSString *bundleId = [NSString stringWithCString:*message encoding:NSUTF8StringEncoding];
-
+    DDLogCDebug(@"(setContentBlockingJson) BundleId parameter: %@", bundleId);
+    
     Nan::Callback *cb = new Nan::Callback(info[2].As<Function>());
 
     [AESharedResources setBlockingContentRulesJson:data bundleId:bundleId completion:^{
