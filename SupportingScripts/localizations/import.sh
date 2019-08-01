@@ -45,6 +45,11 @@ BLOCKEREXTENSION="${SRCROOT}/BlockerExtension"
 # Project root directory of Advanced Blocking Extension
 ADVANCED_BLOCKING_EXTENSION="${SRCROOT}/AdvancedBlocking"
 
+BLOCKEREXTENSION_CUSTOM="${SRCROOT}/BlockerCustomExtension"
+BLOCKEREXTENSION_OTHER="${SRCROOT}/BlockerOtherExtension"
+BLOCKEREXTENSION_PRIVACY="${SRCROOT}/BlockerPrivacyExtension"
+BLOCKEREXTENSION_SOCIAL="${SRCROOT}/BlockerSocialExtension"
+
 # XIB FILES LIST PATH
 XIBFILESLIST="${SCRIPTDIR}/Resources/xib-files-list.txt"
 
@@ -127,7 +132,7 @@ echo "========================= UPDATING InfoPlist FILES =======================
 
 file="InfoPlist.strings"
 
-oneskyfiles="${file} blockerextension_${file} adv_blocking_extension_mod_${file}"
+oneskyfiles="${file} blockerextension_${file} blockerextension_custom_${file} blockerextension_other_${file} blockerextension_privacy_${file} blockerextension_social_${file} adv_blocking_extension_mod_${file}"
 
 for oneskyfile in $oneskyfiles
 do
@@ -142,6 +147,22 @@ do
 
             if [ $oneskyfile = "adv_blocking_extension_mod_${file}" ]; then
                 folder=${ADVANCED_BLOCKING_EXTENSION}
+            fi
+
+            if [ $oneskyfile = "blockerextension_custom_${file}" ]; then
+                folder=${BLOCKEREXTENSION_CUSTOM}
+            fi
+
+            if [ $oneskyfile = "blockerextension_other_${file}" ]; then
+                folder=${BLOCKEREXTENSION_OTHER}
+            fi
+
+            if [ $oneskyfile = "blockerextension_privacy_${file}" ]; then
+                folder=${BLOCKEREXTENSION_PRIVACY}
+            fi
+
+            if [ $oneskyfile = "blockerextension_social_${file}" ]; then
+                folder=${BLOCKEREXTENSION_SOCIAL}
             fi
 
             echo $folder
