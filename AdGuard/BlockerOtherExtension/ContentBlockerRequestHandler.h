@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AEContentBlockerRequestHandlerBase.h"
 
-@interface ContentBlockerRequestHandler : NSObject <NSExtensionRequestHandling>
+@interface ContentBlockerRequestHandler : AEContentBlockerRequestHandlerBase
 
 @end
