@@ -20,7 +20,7 @@ fi
 
 # for faster build we can disable notarize
 # ./build.sh beta --notarize=0
-NOTARIZE_DISABLED="${3}"
+NOTARIZE_DISABLED="${2}"
 if [ "$NOTARIZE_DISABLED" == "--notarize=0" ]; then
     echo "Build without notarize"
 fi
