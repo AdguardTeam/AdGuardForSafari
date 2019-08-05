@@ -9,8 +9,6 @@
 #import "AEContentBlockerRequestHandlerBase.h"
 #import "AESharedResources.h"
 
-#define AES_BLOCKING_CONTENT_EMPTY_RESOURCE     @"blockerList"
-
 @interface AEContentBlockerRequestHandlerBase ()
 
 @end
@@ -24,7 +22,7 @@
         attachment = [[NSItemProvider alloc] initWithContentsOfURL:self.blockingContentRulesUrl];
     }
     else {
-        attachment = [[NSItemProvider alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:self.blockingContentEmptyResource withExtension:@"json"]];
+        attachment = [[NSItemProvider alloc] initWithContentsOfURL:self.blockingContentEmptyResourceUrl];
     }
     if (attachment) {
         NSExtensionItem *item = [[NSExtensionItem alloc] init];
@@ -41,8 +39,8 @@
     return AESharedResources.blockingContentRulesUrl;
 }
 
-- (NSString *)blockingContentEmptyResource {
-    return AES_BLOCKING_CONTENT_EMPTY_RESOURCE;
+- (NSURL *)blockingContentEmptyResourceUrl {
+    return AESharedResources.blockingContentRulesEmptyUrl;
 }
 
 @end

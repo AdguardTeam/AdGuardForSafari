@@ -180,6 +180,10 @@ extern NSString * const AEDefaultsLastReportUrl;
  */
 + (void)setListenerOnAdvancedBlocking:(AESListenerBlock)block;
 /**
+ Gets URL of the blocking content rules empty JSON from shared storage.
+ */
++ (NSURL *)blockingContentRulesEmptyUrl;
+/**
  Gets URL of the blocking content rules JSON from shared storage.
  */
 + (NSURL *)blockingContentRulesUrl;

@@ -78,12 +78,10 @@
 		65D151C42139A5080014BE79 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D151A72139A5080014BE79 /* DDAbstractDatabaseLogger.h */; };
 		65FA408D215E8B6B000196EC /* LinkButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FA408C215E8B6B000196EC /* LinkButton.m */; };
 		F410563022EA2521003871C5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
-		F410563322EA2521003871C5 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = F410563222EA2521003871C5 /* blockerList.json */; };
 		F410563622EA2521003871C5 /* ContentBlockerRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F410563522EA2521003871C5 /* ContentBlockerRequestHandler.m */; };
 		F410563B22EA2521003871C5 /* BlockerSocialExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F410562F22EA2521003871C5 /* BlockerSocialExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F410564122EA262C003871C5 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 652735B2212D77A3005C35BF /* libshared.a */; };
 		F41308E722EA125D006B4D93 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
-		F41308EA22EA125D006B4D93 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = F41308E922EA125D006B4D93 /* blockerList.json */; };
 		F41308ED22EA125D006B4D93 /* ContentBlockerRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F41308EC22EA125D006B4D93 /* ContentBlockerRequestHandler.m */; };
 		F41308F222EA125D006B4D93 /* BlockerPrivacyExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F41308E622EA125D006B4D93 /* BlockerPrivacyExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F41308F822EA14FF006B4D93 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 652735B2212D77A3005C35BF /* libshared.a */; };
@@ -101,29 +99,26 @@
 		F44937BC2291D72500BAEFED /* scriptlets.js in Resources */ = {isa = PBXBuildFile; fileRef = F44937BB2291D72500BAEFED /* scriptlets.js */; };
 		F4581B6E22F363960069FA94 /* AEContentBlockerRequestHandlerBase.h in Headers */ = {isa = PBXBuildFile; fileRef = F4581B6D22F363960069FA94 /* AEContentBlockerRequestHandlerBase.h */; };
 		F4581B7022F364AA0069FA94 /* AEContentBlockerRequestHandlerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F4581B6F22F364AA0069FA94 /* AEContentBlockerRequestHandlerBase.m */; };
-		F4581B7222F36AD70069FA94 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = F4581B7122F36AD70069FA94 /* blockerList.json */; };
 		F4581B7522F36F720069FA94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4581B7722F36F720069FA94 /* InfoPlist.strings */; };
 		F4581B8B22F370420069FA94 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4581B8A22F370420069FA94 /* Info.plist */; };
 		F4581B8E22F370960069FA94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4581B9022F370960069FA94 /* InfoPlist.strings */; };
 		F4581BA222F370EB0069FA94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4581BA422F370EB0069FA94 /* InfoPlist.strings */; };
 		F4581BB622F371420069FA94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4581BB822F371420069FA94 /* InfoPlist.strings */; };
 		F4581BCD22F85C610069FA94 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
-		F4581BD022F85C610069FA94 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = F4581BCF22F85C610069FA94 /* blockerList.json */; };
 		F4581BD322F85C610069FA94 /* ContentBlockerRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F4581BD222F85C610069FA94 /* ContentBlockerRequestHandler.m */; };
 		F4581BD822F85C610069FA94 /* BlockerSecurityExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F4581BCC22F85C610069FA94 /* BlockerSecurityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F4581BE022F85EFE0069FA94 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 652735B2212D77A3005C35BF /* libshared.a */; };
 		F4581BE122F85FC50069FA94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4581BE322F85FC50069FA94 /* InfoPlist.strings */; };
+		F4581BF422F8A2430069FA94 /* blocker-content-rules-empty.json in Resources */ = {isa = PBXBuildFile; fileRef = F4581BF322F8A2430069FA94 /* blocker-content-rules-empty.json */; };
 		F46D1322225E940B00282566 /* standalone.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F46D1321225E940B00282566 /* standalone.xcconfig */; };
 		F46D132D225E946500282566 /* standalone-beta.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F46D132C225E946500282566 /* standalone-beta.xcconfig */; };
 		F4757500222FF92200DE28C3 /* adv-blocking-content-rules.json in Resources */ = {isa = PBXBuildFile; fileRef = F47574FF222FF92200DE28C3 /* adv-blocking-content-rules.json */; };
 		F49E3FE6221F4D72001B9E86 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F49E3FE8221F4D72001B9E86 /* InfoPlist.strings */; };
 		F4B2150622EA298300E2EA16 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
-		F4B2150922EA298300E2EA16 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = F4B2150822EA298300E2EA16 /* blockerList.json */; };
 		F4B2150C22EA298300E2EA16 /* ContentBlockerRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B2150B22EA298300E2EA16 /* ContentBlockerRequestHandler.m */; };
 		F4B2151122EA298300E2EA16 /* BlockerOtherExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F4B2150522EA298300E2EA16 /* BlockerOtherExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F4B2151722EA29C800E2EA16 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 652735B2212D77A3005C35BF /* libshared.a */; };
 		F4B2151D22EA2A2D00E2EA16 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
-		F4B2152022EA2A2D00E2EA16 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = F4B2151F22EA2A2D00E2EA16 /* blockerList.json */; };
 		F4B2152322EA2A2D00E2EA16 /* ContentBlockerRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B2152222EA2A2D00E2EA16 /* ContentBlockerRequestHandler.m */; };
 		F4B2152822EA2A2D00E2EA16 /* BlockerCustomExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F4B2151C22EA2A2D00E2EA16 /* BlockerCustomExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F4B2152E22EA2A9500E2EA16 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 652735B2212D77A3005C35BF /* libshared.a */; };
@@ -462,12 +457,10 @@
 		65FA408B215E8B6B000196EC /* LinkButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkButton.h; sourceTree = "<group>"; };
 		65FA408C215E8B6B000196EC /* LinkButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkButton.m; sourceTree = "<group>"; };
 		F410562F22EA2521003871C5 /* BlockerSocialExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BlockerSocialExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		F410563222EA2521003871C5 /* blockerList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
 		F410563422EA2521003871C5 /* ContentBlockerRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentBlockerRequestHandler.h; sourceTree = "<group>"; };
 		F410563522EA2521003871C5 /* ContentBlockerRequestHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentBlockerRequestHandler.m; sourceTree = "<group>"; };
 		F410563822EA2521003871C5 /* BlockerSocialExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlockerSocialExtension.entitlements; sourceTree = "<group>"; };
 		F41308E622EA125D006B4D93 /* BlockerPrivacyExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BlockerPrivacyExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		F41308E922EA125D006B4D93 /* blockerList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
 		F41308EB22EA125D006B4D93 /* ContentBlockerRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentBlockerRequestHandler.h; sourceTree = "<group>"; };
 		F41308EC22EA125D006B4D93 /* ContentBlockerRequestHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentBlockerRequestHandler.m; sourceTree = "<group>"; };
 		F41308EE22EA125D006B4D93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -488,7 +481,6 @@
 		F44ABA9B21D4CE22004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		F4581B6D22F363960069FA94 /* AEContentBlockerRequestHandlerBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEContentBlockerRequestHandlerBase.h; sourceTree = "<group>"; };
 		F4581B6F22F364AA0069FA94 /* AEContentBlockerRequestHandlerBase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEContentBlockerRequestHandlerBase.m; sourceTree = "<group>"; };
-		F4581B7122F36AD70069FA94 /* blockerList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
 		F4581B7622F36F720069FA94 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F4581B7822F36F840069FA94 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F4581B7922F36F900069FA94 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -555,7 +547,6 @@
 		F4581BC622F3715A0069FA94 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F4581BC722F3715B0069FA94 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		F4581BCC22F85C610069FA94 /* BlockerSecurityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BlockerSecurityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4581BCF22F85C610069FA94 /* blockerList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
 		F4581BD122F85C610069FA94 /* ContentBlockerRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentBlockerRequestHandler.h; sourceTree = "<group>"; };
 		F4581BD222F85C610069FA94 /* ContentBlockerRequestHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentBlockerRequestHandler.m; sourceTree = "<group>"; };
 		F4581BD422F85C610069FA94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -576,6 +567,7 @@
 		F4581BF022F85FE30069FA94 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F4581BF122F85FE40069FA94 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F4581BF222F85FE90069FA94 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		F4581BF322F8A2430069FA94 /* blocker-content-rules-empty.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "blocker-content-rules-empty.json"; sourceTree = "<group>"; };
 		F46D1321225E940B00282566 /* standalone.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = standalone.xcconfig; sourceTree = "<group>"; };
 		F46D132C225E946500282566 /* standalone-beta.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "standalone-beta.xcconfig"; sourceTree = "<group>"; };
 		F47574FF222FF92200DE28C3 /* adv-blocking-content-rules.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "adv-blocking-content-rules.json"; sourceTree = "<group>"; };
@@ -596,13 +588,11 @@
 		F49E3FF6221F4D88001B9E86 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F49E3FF7221F4D89001B9E86 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		F4B2150522EA298300E2EA16 /* BlockerOtherExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BlockerOtherExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4B2150822EA298300E2EA16 /* blockerList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
 		F4B2150A22EA298300E2EA16 /* ContentBlockerRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentBlockerRequestHandler.h; sourceTree = "<group>"; };
 		F4B2150B22EA298300E2EA16 /* ContentBlockerRequestHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentBlockerRequestHandler.m; sourceTree = "<group>"; };
 		F4B2150D22EA298300E2EA16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4B2150E22EA298300E2EA16 /* BlockerOtherExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlockerOtherExtension.entitlements; sourceTree = "<group>"; };
 		F4B2151C22EA2A2D00E2EA16 /* BlockerCustomExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BlockerCustomExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4B2151F22EA2A2D00E2EA16 /* blockerList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
 		F4B2152122EA2A2D00E2EA16 /* ContentBlockerRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentBlockerRequestHandler.h; sourceTree = "<group>"; };
 		F4B2152222EA2A2D00E2EA16 /* ContentBlockerRequestHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentBlockerRequestHandler.m; sourceTree = "<group>"; };
 		F4B2152422EA2A2D00E2EA16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -822,6 +812,7 @@
 		65720AA921219AC900B2381C = {
 			isa = PBXGroup;
 			children = (
+				F4581BF322F8A2430069FA94 /* blocker-content-rules-empty.json */,
 				657215562121F30600B2381C /* Config.xcconfig */,
 				F46D1321225E940B00282566 /* standalone.xcconfig */,
 				F46D132C225E946500282566 /* standalone-beta.xcconfig */,
@@ -879,7 +870,6 @@
 		6584716F2136B373005C74E8 /* BlockerExtension */ = {
 			isa = PBXGroup;
 			children = (
-				F4581B7122F36AD70069FA94 /* blockerList.json */,
 				658471722136B373005C74E8 /* ContentBlockerRequestHandler.h */,
 				658471732136B373005C74E8 /* ContentBlockerRequestHandler.m */,
 				658471752136B373005C74E8 /* Info.plist */,
@@ -943,7 +933,6 @@
 			isa = PBXGroup;
 			children = (
 				F4581B8A22F370420069FA94 /* Info.plist */,
-				F410563222EA2521003871C5 /* blockerList.json */,
 				F410563422EA2521003871C5 /* ContentBlockerRequestHandler.h */,
 				F410563522EA2521003871C5 /* ContentBlockerRequestHandler.m */,
 				F410563822EA2521003871C5 /* BlockerSocialExtension.entitlements */,
@@ -955,7 +944,6 @@
 		F41308E822EA125D006B4D93 /* BlockerPrivacyExtension */ = {
 			isa = PBXGroup;
 			children = (
-				F41308E922EA125D006B4D93 /* blockerList.json */,
 				F41308EB22EA125D006B4D93 /* ContentBlockerRequestHandler.h */,
 				F41308EC22EA125D006B4D93 /* ContentBlockerRequestHandler.m */,
 				F41308EE22EA125D006B4D93 /* Info.plist */,
@@ -988,7 +976,6 @@
 		F4581BCE22F85C610069FA94 /* BlockerSecurityExtension */ = {
 			isa = PBXGroup;
 			children = (
-				F4581BCF22F85C610069FA94 /* blockerList.json */,
 				F4581BD122F85C610069FA94 /* ContentBlockerRequestHandler.h */,
 				F4581BD222F85C610069FA94 /* ContentBlockerRequestHandler.m */,
 				F4581BD422F85C610069FA94 /* Info.plist */,
@@ -1011,7 +998,6 @@
 		F4B2150722EA298300E2EA16 /* BlockerOtherExtension */ = {
 			isa = PBXGroup;
 			children = (
-				F4B2150822EA298300E2EA16 /* blockerList.json */,
 				F4B2150A22EA298300E2EA16 /* ContentBlockerRequestHandler.h */,
 				F4B2150B22EA298300E2EA16 /* ContentBlockerRequestHandler.m */,
 				F4B2150D22EA298300E2EA16 /* Info.plist */,
@@ -1024,7 +1010,6 @@
 		F4B2151E22EA2A2D00E2EA16 /* BlockerCustomExtension */ = {
 			isa = PBXGroup;
 			children = (
-				F4B2151F22EA2A2D00E2EA16 /* blockerList.json */,
 				F4B2152122EA2A2D00E2EA16 /* ContentBlockerRequestHandler.h */,
 				F4B2152222EA2A2D00E2EA16 /* ContentBlockerRequestHandler.m */,
 				F4B2152422EA2A2D00E2EA16 /* Info.plist */,
@@ -1485,6 +1470,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4581BF422F8A2430069FA94 /* blocker-content-rules-empty.json in Resources */,
 				65975C9421481540007F766E /* Assets.xcassets in Resources */,
 				F46D132D225E946500282566 /* standalone-beta.xcconfig in Resources */,
 				65D151842139771A0014BE79 /* defaults.plist in Resources */,
@@ -1515,7 +1501,6 @@
 				65D151862139771A0014BE79 /* defaults.plist in Resources */,
 				6582EECA2183435C007DC151 /* InfoPlist.strings in Resources */,
 				65975C9621481540007F766E /* Assets.xcassets in Resources */,
-				F4581B7222F36AD70069FA94 /* blockerList.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1525,7 +1510,6 @@
 			files = (
 				F4581B8B22F370420069FA94 /* Info.plist in Resources */,
 				F4581B8E22F370960069FA94 /* InfoPlist.strings in Resources */,
-				F410563322EA2521003871C5 /* blockerList.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1533,7 +1517,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F41308EA22EA125D006B4D93 /* blockerList.json in Resources */,
 				F4581B7522F36F720069FA94 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1553,7 +1536,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4581BD022F85C610069FA94 /* blockerList.json in Resources */,
 				F4581BE122F85FC50069FA94 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1562,7 +1544,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4B2150922EA298300E2EA16 /* blockerList.json in Resources */,
 				F4581BA222F370EB0069FA94 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1571,7 +1552,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4B2152022EA2A2D00E2EA16 /* blockerList.json in Resources */,
 				F4581BB622F371420069FA94 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
