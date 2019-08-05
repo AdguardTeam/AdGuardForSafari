@@ -85,3 +85,11 @@ fi
 
 echo "Step 5: Build version.txt"
 printf "version=$version\nbuild_number=$build_number\n" >$BUILD_DIR/$VERSION_FILE
+
+
+if [ "$CHANNEL" != "mas" ]; then
+    exit 0;
+fi
+
+echo "Step 6: Upload archive to app store"
+xcodebuild -exportArchive -archivePath "$ARCHIVE_PATH" -exportOptionsPlist ./Scripts/ExportOptions.plist -exportPath "$BUILD_DIR"
