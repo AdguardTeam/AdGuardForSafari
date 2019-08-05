@@ -170,27 +170,31 @@ sh SupportingScripts/localizations/import.sh .
 
 Change `.` to path to your project if you not in the root.
 
-## How to release standalone builds
-- update version `package.json` and `AdGuard/standalone.xcconfig` or `AdGuard/standalone-beta.xcconfig`
-- select xcode build configuration (Standalone-beta or Standalone)
-- build apps
-- notarize builds
-- publish release on Github
-- refresh `updates/updates.json` and `release.json` in gh-pages branch
+## Preparing and building Adguard.
 
-### Notarization commands
-#### Notarize request
-```
-xcrun altool --notarize-app --primary-bundle-id "com.adguard.safari.AdGuard" --username <ICLOUD_USERNAME> --password "@keychain:altool_access" --asc-provider <TEAM_ID> --file AdGuard\ for\ Safari.app.zip
-```
-#### Get notarization result
-```
-xcrun altool --notarization-info <REQUEST_ID -u <ICLOUD_USERNAME> --password "@keychain:altool_access"
-```
-#### Staple
-```
-xcrun stapler staple AdGuard\ for\ Safari.app.zip
-```
+### Environment requirements
+
+- MacOS 10.14.4+
+- Xcode 10.2+
+- Dev account on developer.apple.com and `Adguard Software Limited` membership, enabled `App Store Connect`
+- Certificates `Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)` and `Developer ID Installer: Adguard Software Limited (TC3Q7MAJXF)` in `keychain`
+
+### Building
+
+In case we need to notarize the app, we will need to do it.
+
+#### Preparation - notarization
+
+Register in `App Connect` and create a password for `altool`.
+
+> "Because App Store Connect now requires two-factor authentication (2FA) on all accounts, you must create an app-specific password for altool, as described in [Using app-specific passwords](https://support.apple.com/en-us/HT204397).
+> To avoid including your password as cleartext in a script, you can provide a reference to a keychain item, as shown in the previous example. This assumes the keychain holds a keychain item named `altool_access` with an account value matching the username `dev_acc@icloud.com`. Note that altool can’t access your iCloud keychain for security reasons, so the item must be in your login keychain. You can add a new keychain item using the Keychain Access app, or from the command line using the security utility:
+>
+> ```
+> security add-generic-password -a "dev_acc@icloud.com" -w <secret_password> -s "altool_access"
+> ```
+
+Create `Scripts/.devconfig.json` with created username and keychain item.
 
 #### Common issues
 https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/resolving_common_notarization_issues
@@ -199,3 +203,31 @@ Use fixed `electron-osx-sign`
 ```
 npm install -g electron-userland/electron-osx-sign#timestamp-server
 ```
+
+#### How to release standalone builds
+- update version `package.json` and `AdGuard/standalone.xcconfig` or `AdGuard/standalone-beta.xcconfig`
+- build apps
+- notarize builds
+- publish release on Github
+- refresh `updates/updates.json` and `release.json` in gh-pages branch
+
+#### Build application
+
+```
+./build.sh <channel> [--notarize=0]
+```
+
+Arguments:
+
+- `<channel>` -- updates channel:
+  - `mas` -- Mac App Store
+  - `beta` -- standalone beta
+  - `release` -- standalone release
+- `[--notarize=0]` -- optional parameter to skip notarization  
+
+Output directory `build` contains:
+
+- `Adguard for Safari.app` -- signed and notarized app.
+- `Adguard for Safari.xcarchive` -- app archive.
+- `Adguard for Safari.xcarchive.zip` -- zip of app archive
+- `version.txt` -- version info (CI requirement).
