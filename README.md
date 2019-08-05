@@ -179,6 +179,8 @@ Change `.` to path to your project if you not in the root.
 - Dev account on developer.apple.com and `Adguard Software Limited` membership, enabled `App Store Connect`
 - Certificates `Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)` and `Developer ID Installer: Adguard Software Limited (TC3Q7MAJXF)` in `keychain`
 
+Check certificates names in Scripts/ExportOptions.plist
+
 ### Building
 
 In case we need to notarize the app, we will need to do it.
