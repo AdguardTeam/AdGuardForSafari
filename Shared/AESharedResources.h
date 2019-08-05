@@ -190,6 +190,10 @@ extern NSString * const AEDefaultsLastReportUrl;
 /**
  Gets URL of the blocking content rules JSON from shared storage.
  */
++ (NSURL *)blockingContentSecurityUrl;
+/**
+ Gets URL of the blocking content rules JSON from shared storage.
+ */
 + (NSURL *)blockingContentSocialUrl;
 /**
  Gets URL of the blocking content rules JSON from shared storage.

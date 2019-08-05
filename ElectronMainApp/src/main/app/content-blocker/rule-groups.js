@@ -17,7 +17,7 @@ module.exports = (function () {
     /**
      * Rules groups
      *
-     * @type {{general: {filterGroups: [*]}, privacy: {filterGroups: [*]}, socialWidgetsAndAnnoyances: {filterGroups: [*]}, other: {filterGroups: [*]}, custom: {filterGroups: [*]}}}
+     * @type {{*}}
      */
     const groups = {
         general: {
@@ -26,11 +26,14 @@ module.exports = (function () {
         privacy: {
             filterGroups: [AntiBannerFilterGroupsId.PRIVACY_ID]
         },
+        security: {
+            filterGroups: [AntiBannerFilterGroupsId.SECURITY_ID]
+        },
         socialWidgetsAndAnnoyances: {
             filterGroups: [AntiBannerFilterGroupsId.SOCIAL_ID, AntiBannerFilterGroupsId.ANNOYANCES_ID]
         },
         other: {
-            filterGroups: [AntiBannerFilterGroupsId.OTHER_ID, AntiBannerFilterGroupsId.SECURITY_ID]
+            filterGroups: [AntiBannerFilterGroupsId.OTHER_ID]
         },
         custom: {
             filterGroups: [AntiBannerFilterGroupsId.CUSTOM_FILTERS_GROUP_ID]
@@ -40,15 +43,16 @@ module.exports = (function () {
     /**
      * Affinity blocks
      *
-     * @type {{general: [*], privacy: [*], social: [*], other: [*], custom: [*], all: [*]}}
+     * @type {{*}}
      */
     const groupsByAffinity = {
         general: [groups.general],
         privacy: [groups.privacy],
+        security: [groups.security],
         social: [groups.socialWidgetsAndAnnoyances],
         other: [groups.other],
         custom: [groups.custom],
-        all: [groups.general, groups.privacy, groups.socialWidgetsAndAnnoyances, groups.other, groups.custom]
+        all: [groups.general, groups.privacy, groups.security, groups.socialWidgetsAndAnnoyances, groups.other, groups.custom]
     };
 
     /**

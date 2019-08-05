@@ -36,6 +36,7 @@ module.exports = (function () {
         general: "com.adguard.safari.AdGuard.BlockerExtension",
         privacy: "com.adguard.safari.AdGuard.BlockerPrivacy",
         socialWidgetsAndAnnoyances: "com.adguard.safari.AdGuard.BlockerSocial",
+        security: "com.adguard.safari.AdGuard.BlockerSecurity",
         other: "com.adguard.safari.AdGuard.BlockerOther",
         custom: "com.adguard.safari.AdGuard.BlockerCustom",
         advancedBlocking: "com.adguard.safari.AdGuard.AdvancedBlocking"

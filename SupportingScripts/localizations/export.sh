@@ -48,6 +48,8 @@ BLOCKEREXTENSION_OTHER="${SRCROOT}/BlockerOtherExtension"
 BLOCKEREXTENSION_PRIVACY="${SRCROOT}/BlockerPrivacyExtension"
 BLOCKEREXTENSION_SOCIAL="${SRCROOT}/BlockerSocialExtension"
 
+# TODO: Add security extension
+
 # XIB FILES LIST PATH
 XIBFILESLIST="${SCRIPTDIR}/Resources/xib-files-list.txt"
 

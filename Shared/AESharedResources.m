@@ -21,6 +21,7 @@
 
 #define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"
 #define AES_BLOCKING_CONTENT_RULES_PRIVACY_RESOURCE     @"blocking-content-rules-privacy.json"
+#define AES_BLOCKING_CONTENT_RULES_SECURITY_RESOURCE     @"blocking-content-rules-security.json"
 #define AES_BLOCKING_CONTENT_RULES_SOCIAL_RESOURCE     @"blocking-content-rules-social.json"
 #define AES_BLOCKING_CONTENT_RULES_OTHER_RESOURCE     @"blocking-content-rules-other.json"
 #define AES_BLOCKING_CONTENT_RULES_CUSTOM_RESOURCE     @"blocking-content-rules-custom.json"
@@ -260,6 +261,7 @@ static AESListenerBlock _onAdvancedBlockingBlock;
             NSDictionary *d = @{
                                 AG_BLOCKER_BUNDLEID: AES_BLOCKING_CONTENT_RULES_RESOURCE,
                                 AG_BLOCKER_PRIVACY_BUNDLEID: AES_BLOCKING_CONTENT_RULES_PRIVACY_RESOURCE,
+                                AG_BLOCKER_SECURITY_BUNDLEID: AES_BLOCKING_CONTENT_RULES_SECURITY_RESOURCE,
                                 AG_BLOCKER_SOCIAL_BUNDLEID: AES_BLOCKING_CONTENT_RULES_SOCIAL_RESOURCE,
                                 AG_BLOCKER_OTHER_BUNDLEID: AES_BLOCKING_CONTENT_RULES_OTHER_RESOURCE,
                                 AG_BLOCKER_CUSTOM_BUNDLEID: AES_BLOCKING_CONTENT_RULES_CUSTOM_RESOURCE
@@ -294,6 +296,11 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 + (NSURL *)blockingContentPrivacyUrl {
     return  [_containerFolderUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_RULES_PRIVACY_RESOURCE];
 }
+
++ (NSURL *)blockingContentSecurityUrl {
+    return  [_containerFolderUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_RULES_SECURITY_RESOURCE];
+}
+
 
 + (NSURL *)blockingContentSocialUrl {
     return  [_containerFolderUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_RULES_SOCIAL_RESOURCE];
