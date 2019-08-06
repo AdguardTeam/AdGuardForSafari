@@ -1,369 +1,359 @@
 {
     "main_menu_about": {
-        "message": "\u041e\u0431 AdGuard \u0434\u043b\u044f Safari"
+        "message": "Об AdGuard для Safari"
     },
     "options_popup_trusted_filter_title": {
-        "message": "\u0414\u043e\u0432\u0435\u0440\u0435\u043d\u043d\u044b\u0439"
+        "message": "Доверенный"
     },
     "options_popup_trusted_filter_description": {
-        "message": "\u0414\u043e\u0432\u0435\u0440\u0435\u043d\u043d\u044b\u0435 \u0444\u0438\u043b\u044c\u0442\u0440\u044b \u043c\u043e\u0433\u0443\u0442 \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c \u043c\u043e\u0449\u043d\u044b\u0435 \u043c\u043e\u0434\u0438\u0444\u0438\u043a\u0430\u0442\u043e\u0440\u044b \u043f\u0440\u0430\u0432\u0438\u043b \u0444\u0438\u043b\u044c\u0442\u0440\u0430\u0446\u0438\u0438, \u043a\u043e\u0442\u043e\u0440\u044b\u0435 \u043c\u043e\u0433\u0443\u0442 \u0431\u044b\u0442\u044c \u043e\u043f\u0430\u0441\u043d\u044b, \u043d\u0430\u0445\u043e\u0434\u044f\u0441\u044c \u0432 \u043d\u0435\u043d\u0430\u0434\u0435\u0436\u043d\u044b\u0445 \u0440\u0443\u043a\u0430\u0445. \u041d\u0435 \u0443\u0441\u0442\u0430\u043d\u0430\u0432\u043b\u0438\u0432\u0430\u0439\u0442\u0435 \u044d\u0442\u043e\u0442 \u0444\u043b\u0430\u0436\u043e\u043a, \u0435\u0441\u043b\u0438 \u043f\u043e\u043b\u043d\u043e\u0441\u0442\u044c\u044e \u043d\u0435 \u0434\u043e\u0432\u0435\u0440\u044f\u0435\u0442\u0435 \u0444\u0438\u043b\u044c\u0442\u0440\u0443."
+        "message": "Доверенные фильтры могут использовать мощные модификаторы правил фильтрации, которые могут быть опасны, находясь в ненадежных руках. Не устанавливайте этот флажок, если полностью не доверяете фильтру."
     },
     "options_filters_filter_trusted_tag": {
-        "message": "\u0434\u043e\u0432\u0435\u0440\u0435\u043d\u043d\u044b\u0439"
+        "message": "доверенный"
     },
     "options_filters_filter_trusted_tag_desc": {
-        "message": "\u0412\u044b \u0440\u0435\u0448\u0438\u043b\u0438 \u0434\u043e\u0432\u0435\u0440\u044f\u0442\u044c \u044d\u0442\u043e\u043c\u0443 \u0444\u0438\u043b\u044c\u0442\u0440\u0443"
+        "message": "Вы решили доверять этому фильтру"
     },
     "options_about_update_check": {
-        "message": "\u041f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0439"
+        "message": "Проверка обновлений"
     },
     "options_about_updating": {
-        "message": "\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0435 AdGuard \u0434\u043b\u044f Safari"
+        "message": "Обновление AdGuard для Safari"
     },
     "options_about_updates_not_found": {
-        "message": "AdGuard \u0434\u043b\u044f Safari \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d"
+        "message": "AdGuard для Safari обновлен"
     },
     "options_about_update_downloaded": {
-        "message": "\u041f\u043e\u0447\u0442\u0438 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u043e! \u041f\u0435\u0440\u0435\u0437\u0430\u043f\u0443\u0441\u0442\u0438\u0442\u0435 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u0435 AdGuard \u0434\u043b\u044f Safari, \u0447\u0442\u043e\u0431\u044b \u0437\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044c \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0435."
+        "message": "Почти обновлено! Перезапустите расширение AdGuard для Safari, чтобы завершить обновление."
     },
     "options_about_update_relaunch": {
-        "message": "\u041f\u0435\u0440\u0435\u0437\u0430\u043f\u0443\u0441\u0442\u0438\u0442\u044c"
+        "message": "Перезапустить"
     },
     "options_popup_title_placeholder": {
-        "message": "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u0444\u0438\u043b\u044c\u0442\u0440\u0430"
+        "message": "Введите название фильтра"
     },
     "main_menu_hide": {
-        "message": "\u0421\u043a\u0440\u044b\u0442\u044c"
+        "message": "Скрыть"
     },
     "main_menu_close_window": {
-        "message": "\u0417\u0430\u043a\u0440\u044b\u0442\u044c \u043e\u043a\u043d\u043e"
+        "message": "Закрыть окно"
     },
     "name": {
-        "message": "AdGuard \u0410\u043d\u0442\u0438\u0431\u0430\u043d\u043d\u0435\u0440"
+        "message": "AdGuard Антибаннер"
     },
     "description": {
-        "message": "\u041d\u0435\u043f\u0440\u0435\u0432\u0437\u043e\u0439\u0434\u0435\u043d\u043d\u0430\u044f \u0437\u0430\u0449\u0438\u0442\u0430 \u043e\u0442 \u0440\u0435\u043a\u043b\u0430\u043c\u044b \u0438 \u0432\u0441\u043f\u043b\u044b\u0432\u0430\u044e\u0449\u0438\u0445 \u043e\u043a\u043e\u043d. \u0411\u043b\u043e\u043a\u0438\u0440\u0443\u0435\u0442 \u0440\u0435\u043a\u043b\u0430\u043c\u0443 \u0432 Facebook, \u043d\u0430 Youtube \u0438 \u0434\u0440\u0443\u0433\u0438\u0445 \u0441\u0430\u0439\u0442\u0430\u0445."
+        "message": "Непревзойденная защита от рекламы и всплывающих окон. Блокирует рекламу в Facebook, на Youtube и других сайтах."
     },
     "options_settings": {
-        "message": "\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438 AdGuard \u0434\u043b\u044f Safari"
+        "message": "Настройки AdGuard для Safari"
     },
     "options_general_settings": {
-        "message": "\u041e\u0431\u0449\u0438\u0435"
+        "message": "Общие"
     },
     "options_general_desc": {
-        "message": "AdGuard \u0434\u043b\u044f Safari - \u044d\u0442\u043e \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e\u0435 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u043d\u043e\u0435 \u043e\u0431\u0435\u0441\u043f\u0435\u0447\u0435\u043d\u0438\u0435 \u0441 \u043e\u0442\u043a\u0440\u044b\u0442\u044b\u043c \u0438\u0441\u0445\u043e\u0434\u043d\u044b\u043c \u043a\u043e\u0434\u043e\u043c. \u041c\u044b \u043f\u0440\u0438\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u0435\u043c \u0432\u0430\u0448\u0438 \u043e\u0442\u0437\u044b\u0432\u044b \u0438 \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0435\u043d\u0438\u044f. \u0415\u0441\u043b\u0438 \u0432\u044b \u0445\u043e\u0442\u0438\u0442\u0435 \u0441\u043e\u043e\u0431\u0449\u0438\u0442\u044c \u043e\u0431 \u043e\u0448\u0438\u0431\u043a\u0435 \u0438\u043b\u0438 \u0437\u0430\u043f\u0440\u043e\u0441\u0438\u0442\u044c \u0444\u0443\u043d\u043a\u0446\u0438\u044e, \u043f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u044f\u0439\u0442\u0435\u0441\u044c \u0432 <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>\u043d\u0430\u0448 \u0440\u0435\u043f\u043e\u0437\u0438\u0442\u043e\u0440\u0438\u0439 \u043d\u0430 GitHub<\/a>."
+        "message": "AdGuard для Safari - это бесплатное программное обеспечение с открытым исходным кодом. Мы приветствуем ваши отзывы и предложения. Если вы хотите сообщить об ошибке или запросить функцию, пожалуйста, отправляйтесь в <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>наш репозиторий на GitHub<\/a>."
     },
     "options_allow_acceptable_ads": {
-        "message": "\u0420\u0430\u0437\u0440\u0435\u0448\u0438\u0442\u044c \u043f\u043e\u0438\u0441\u043a\u043e\u0432\u0443\u044e \u0440\u0435\u043a\u043b\u0430\u043c\u0443 \u0438 \u0441\u0430\u043c\u043e\u0440\u0435\u043a\u043b\u0430\u043c\u0443 \u0441\u0430\u0439\u0442\u043e\u0432"
+        "message": "Разрешить поисковую рекламу и саморекламу сайтов"
     },
     "options_export_settings": {
-        "message": "\u042d\u043a\u0441\u043f\u043e\u0440\u0442\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438"
+        "message": "Экспортировать настройки"
     },
     "options_import_settings": {
-        "message": "\u0418\u043c\u043f\u043e\u0440\u0442\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438"
+        "message": "Импортировать настройки"
     },
     "options_antibanner": {
-        "message": "\u0424\u0438\u043b\u044c\u0442\u0440\u044b"
+        "message": "Фильтры"
     },
     "options_antibanner_info_filters": {
         "message": {
-            "one": "%s \u0444\u0438\u043b\u044c\u0442\u0440",
-            "few": "%s \u0444\u0438\u043b\u044c\u0442\u0440\u0430",
-            "many": "%s \u0444\u0438\u043b\u044c\u0442\u0440\u043e\u0432",
-            "other": "%s \u0444\u0438\u043b\u044c\u0442\u0440\u043e\u0432"
+            "one": "%s фильтр",
+            "other": "%s фильтров"
         }
     },
     "options_antibanner_info_rules": {
         "message": {
-            "one": "%s \u043f\u0440\u0430\u0432\u0438\u043b\u043e",
-            "few": "%s \u043f\u0440\u0430\u0432\u0438\u043b\u0430",
-            "many": "%s \u043f\u0440\u0430\u0432\u0438\u043b",
-            "other": "%s \u043f\u0440\u0430\u0432\u0438\u043b"
+            "one": "%s правило",
+            "other": "%s правил"
         }
     },
     "options_antibanner_info_adv_rules": {
         "message": {
-            "one": "%s \u043f\u0440\u043e\u0434\u0432\u0438\u043d\u0443\u0442\u043e\u0435 \u043f\u0440\u0430\u0432\u0438\u043b\u043e",
-            "few": "%s \u043f\u0440\u043e\u0434\u0432\u0438\u043d\u0443\u0442\u044b\u0445 \u043f\u0440\u0430\u0432\u0438\u043b\u0430",
-            "many": "%s \u043f\u0440\u043e\u0434\u0432\u0438\u043d\u0443\u0442\u044b\u0445 \u043f\u0440\u0430\u0432\u0438\u043b",
-            "other": "%s \u043f\u0440\u043e\u0434\u0432\u0438\u043d\u0443\u0442\u044b\u0445 \u043f\u0440\u0430\u0432\u0438\u043b"
+            "one": "%s продвинутое правило",
+            "other": "%s продвинутых правил"
         }
     },
     "options_filters_enabled": {
-        "message": "\u0412\u043a\u043b\u044e\u0447\u0435\u043d\u044b:"
+        "message": "Включены:"
     },
     "options_filters_enabled_and_more_divider": {
-        "message": "%s \u0438 \u0435\u0449\u0435 %s"
+        "message": "%s и еще %s"
     },
     "options_filters_enabled_and_divider": {
-        "message": "%s \u0438 %s"
+        "message": "%s и %s"
     },
     "options_filters_no_enabled": {
-        "message": "\u0424\u0438\u043b\u044c\u0442\u0440\u044b \u043d\u0435 \u0432\u043a\u043b\u044e\u0447\u0435\u043d\u044b"
+        "message": "Фильтры не включены"
     },
     "options_filters_version": {
-        "message": "\u0432\u0435\u0440\u0441\u0438\u044f %s"
+        "message": "версия %s"
     },
     "options_filters_updated": {
-        "message": "\u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0430: %s"
+        "message": "обновлена: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "\u0418\u0437\u0432\u0438\u043d\u0438\u0442\u0435, \u043d\u043e \u0443 \u0412\u0430\u0441 \u043f\u043e\u043a\u0430 \u043d\u0435\u0442 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0445 \u0444\u0438\u043b\u044c\u0442\u0440\u043e\u0432"
+        "message": "Извините, но у Вас пока нет пользовательских фильтров"
     },
     "options_filters_empty_custom_add_button": {
-        "message": "\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0444\u0438\u043b\u044c\u0442\u0440"
+        "message": "Добавить пользовательский фильтр"
     },
     "options_filters_custom_step_one_title": {
-        "message": "\u041d\u043e\u0432\u0430\u044f \u043f\u043e\u0434\u043f\u0438\u0441\u043a\u0430 \u043d\u0430 \u0444\u0438\u043b\u044c\u0442\u0440"
+        "message": "Новая подписка на фильтр"
     },
     "options_filters_custom_step_one_input_placeholder": {
-        "message": "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 URL \u0444\u0438\u043b\u044c\u0442\u0440\u0430"
+        "message": "Введите URL фильтра"
     },
     "options_filters_custom_step_one_url_desc": {
-        "message": "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0439 URL-\u0430\u0434\u0440\u0435\u0441 \u043f\u043e\u0434\u043f\u0438\u0441\u043a\u0438."
+        "message": "Введите действительный URL-адрес подписки."
     },
     "options_filters_custom_step_one_url_desc_more": {
-        "message": "AdGuard \u0434\u043e\u0431\u0430\u0432\u0438\u0442 \u044d\u0442\u0443 \u043f\u043e\u0434\u043f\u0438\u0441\u043a\u0443 \u043d\u0430 \u0444\u0438\u043b\u044c\u0442\u0440."
+        "message": "AdGuard добавит эту подписку на фильтр."
     },
     "options_filters_custom_step_one_cancel": {
-        "message": "\u041e\u0442\u043c\u0435\u043d\u0430"
+        "message": "Отмена"
     },
     "options_filters_custom_step_one_next": {
-        "message": "\u0414\u0430\u043b\u0435\u0435"
+        "message": "Далее"
     },
     "options_filters_custom_step_two_checking": {
-        "message": "\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0444\u0438\u043b\u044c\u0442\u0440\u0430"
+        "message": "Загрузка фильтра"
     },
     "options_filters_custom_step_three_title": {
-        "message": "\u041f\u0440\u043e\u0438\u0437\u043e\u0448\u043b\u0430 \u043e\u0448\u0438\u0431\u043a\u0430"
+        "message": "Произошла ошибка"
     },
     "options_filters_custom_step_three_desc": {
-        "message": "\u041a \u0441\u043e\u0436\u0430\u043b\u0435\u043d\u0438\u044e, \u0432\u0430\u0448 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0444\u0438\u043b\u044c\u0442\u0440 \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d \u0438\u0437-\u0437\u0430 \u043d\u0435\u043f\u0440\u0435\u0434\u0432\u0438\u0434\u0435\u043d\u043d\u043e\u0439 \u043e\u0448\u0438\u0431\u043a\u0438."
+        "message": "К сожалению, ваш пользовательский фильтр не может быть добавлен из-за непредвиденной ошибки."
     },
     "options_filters_custom_step_three_try_again": {
-        "message": "\u041f\u043e\u043f\u0440\u043e\u0431\u043e\u0432\u0430\u0442\u044c \u0441\u043d\u043e\u0432\u0430"
+        "message": "Попробовать снова"
     },
     "options_filters_custom_step_final_title": {
-        "message": "\u041d\u043e\u0432\u0430\u044f \u043f\u043e\u0434\u043f\u0438\u0441\u043a\u0430 \u043d\u0430 \u0444\u0438\u043b\u044c\u0442\u0440"
+        "message": "Новая подписка на фильтр"
     },
     "options_filters_custom_step_final_filter_title": {
-        "message": "\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435:"
+        "message": "Название:"
     },
     "options_filters_custom_step_final_filter_description": {
-        "message": "\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435:"
+        "message": "Описание:"
     },
     "options_filters_custom_step_final_filter_version": {
-        "message": "\u0412\u0435\u0440\u0441\u0438\u044f:"
+        "message": "Версия:"
     },
     "options_filters_custom_step_final_filter_rules_count": {
-        "message": "\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043f\u0440\u0430\u0432\u0438\u043b:"
+        "message": "Количество правил:"
     },
     "options_filters_custom_step_final_filter_homepage": {
-        "message": "\u0414\u043e\u043c\u0430\u0448\u043d\u044f\u044f \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430:"
+        "message": "Домашняя страница:"
     },
     "options_filters_custom_step_final_filter_url": {
         "message": "URL:"
     },
     "options_filters_custom_step_final_back": {
-        "message": "\u041d\u0430\u0437\u0430\u0434"
+        "message": "Назад"
     },
     "options_filters_custom_step_final_cancel": {
-        "message": "\u041e\u0442\u043c\u0435\u043d\u0430"
+        "message": "Отмена"
     },
     "options_filters_custom_step_final_commit": {
-        "message": "\u041f\u043e\u0434\u043f\u0438\u0441\u0430\u0442\u044c\u0441\u044f"
+        "message": "Подписаться"
     },
     "options_filters_check_filters_update": {
-        "message": "\u041f\u0440\u043e\u0432\u0435\u0440\u0438\u0442\u044c \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f \u0444\u0438\u043b\u044c\u0442\u0440\u043e\u0432"
+        "message": "Проверить обновления фильтров"
     },
     "options_whitelist": {
-        "message": "\u0411\u0435\u043b\u044b\u0439 \u0441\u043f\u0438\u0441\u043e\u043a"
+        "message": "Белый список"
     },
     "options_whitelist_description": {
-        "message": "AdGuard \u043d\u0435 \u0444\u0438\u043b\u044c\u0442\u0440\u0443\u0435\u0442 \u0440\u0435\u043a\u043b\u0430\u043c\u0443 \u043d\u0430 \u0441\u0430\u0439\u0442\u0430\u0445, \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u043d\u044b\u0445 \u0432 \u0431\u0435\u043b\u044b\u0439 \u0441\u043f\u0438\u0441\u043e\u043a."
+        "message": "AdGuard не фильтрует рекламу на сайтах, добавленных в белый список."
     },
     "options_whitelist_inverse": {
-        "message": "\u0418\u043d\u0432\u0435\u0440\u0442\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0431\u0435\u043b\u044b\u0439 \u0441\u043f\u0438\u0441\u043e\u043a<span class='sp-table-row-info'>\u0420\u0430\u0437\u0431\u043b\u043e\u043a\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0440\u0435\u043a\u043b\u0430\u043c\u0443 \u043d\u0430 \u0432\u0441\u0435\u0445 \u0441\u0430\u0439\u0442\u0430\u0445, <i>\u043a\u0440\u043e\u043c\u0435<\/i> \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u043d\u044b\u0445 \u0432 \u0431\u0435\u043b\u044b\u0439 \u0441\u043f\u0438\u0441\u043e\u043a<\/span>"
+        "message": "Инвертировать белый список<span class='sp-table-row-info'>Разблокировать рекламу на всех сайтах, <i>кроме<\/i> добавленных в белый список<\/span>"
     },
     "options_userfilter": {
-        "message": "\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0444\u0438\u043b\u044c\u0442\u0440"
+        "message": "Пользовательский фильтр"
     },
     "options_userfilter_description": {
-        "message": "\u0412\u044b \u043c\u043e\u0436\u0435\u0442\u0435 \u0434\u043e\u0431\u0430\u0432\u043b\u044f\u0442\u044c \u0441\u0432\u043e\u0438 \u0441\u043e\u0431\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u0435 \u043f\u0440\u0430\u0432\u0438\u043b\u0430 \u0444\u0438\u043b\u044c\u0442\u0440\u0430\u0446\u0438\u0438 \u0441&nbsp;\u043f\u043e\u043c\u043e\u0449\u044c\u044e \u044d\u0442\u043e\u0433\u043e \u0444\u0438\u043b\u044c\u0442\u0440\u0430. \u0420\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0443\u0435\u0442\u0441\u044f \u0442\u043e\u043b\u044c\u043a\u043e \u0434\u043b\u044f \u043e\u043f\u044b\u0442\u043d\u044b\u0445 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u0435\u0439, \u0437\u043d\u0430\u043a\u043e\u043c\u044b\u0445 \u0441&nbsp;HTML\/CSS. \u041f\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u043f\u043e&nbsp;<a class='spl-user-descr-link' href='https:\/\/adguard.com\/filterrules.html?utm_source=extension&aid=16593' target='_blank'>\u0441\u0441\u044b\u043b\u043a\u0435<\/a>, \u0447\u0442\u043e\u0431\u044b \u0443\u0437\u043d\u0430\u0442\u044c, \u043a\u0430\u043a \u0441\u043e\u0441\u0442\u0430\u0432\u043b\u044f\u0442\u044c \u043f\u0440\u0430\u0432\u0438\u043b\u0430 \u0444\u0438\u043b\u044c\u0442\u0440\u0430\u0446\u0438\u0438."
+        "message": "Вы можете добавлять свои собственные правила фильтрации с&nbsp;помощью этого фильтра. Рекомендуется только для опытных пользователей, знакомых с&nbsp;HTML\/CSS. Перейдите по&nbsp;<a class='spl-user-descr-link' href='https:\/\/adguard.com\/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ссылке<\/a>, чтобы узнать, как составлять правила фильтрации."
     },
     "options_show_app_updated_notification": {
-        "message": "\u0423\u0432\u0435\u0434\u043e\u043c\u043b\u044f\u0442\u044c \u043e\u0431 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f\u0445 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u044f"
+        "message": "Уведомлять об обновлениях расширения"
     },
     "options_use_optimized_filters": {
-        "message": "\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c \u043e\u043f\u0442\u0438\u043c\u0438\u0437\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0435 \u0444\u0438\u043b\u044c\u0442\u0440\u044b<span class='sp-table-row-info'>\u0421\u043f\u0438\u0441\u043a\u0438 \u0444\u0438\u043b\u044c\u0442\u0440\u043e\u0432, \u043e\u043f\u0442\u0438\u043c\u0438\u0437\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0445 \u0434\u043b\u044f \u0431\u043b\u043e\u043a\u0438\u0440\u043e\u0432\u0449\u0438\u043a\u0430 \u0440\u0435\u043a\u043b\u0430\u043c\u044b \u0432 Safari.<\/span>"
+        "message": "Использовать оптимизированные фильтры<span class='sp-table-row-info'>Списки фильтров, оптимизированных для блокировщика рекламы в Safari.<\/span>"
     },
     "options_popup_update_title": {
-        "message": "\u0424\u0438\u043b\u044c\u0442\u0440\u044b \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u044b"
+        "message": "Фильтры успешно обновлены"
     },
     "options_popup_update_error_title": {
-        "message": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f \u0444\u0438\u043b\u044c\u0442\u0440\u043e\u0432"
+        "message": "Ошибка обновления фильтров"
     },
     "options_popup_update_not_found": {
-        "message": "\u041e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u044b"
+        "message": "Обновления не найдены"
     },
     "options_popup_update_error": {
-        "message": "\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f. \u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043f\u043e\u0432\u0442\u043e\u0440\u0438\u0442\u0435 \u043f\u043e\u043f\u044b\u0442\u043a\u0443 \u043f\u043e\u0437\u0436\u0435."
+        "message": "Не удалось получить обновления. Пожалуйста, повторите попытку позже."
     },
     "options_popup_update_updated": {
-        "message": "\"$1\" \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d \u0434\u043e \u0432\u0435\u0440\u0441\u0438\u0438 $2"
+        "message": "\"$1\" обновлен до версии $2"
     },
     "options_popup_update_updated_more": {
         "message": {
-            "one": "%s \u0444\u0438\u043b\u044c\u0442\u0440 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d: $2",
-            "few": "%s \u0444\u0438\u043b\u044c\u0442\u0440\u0430 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u043e: $2",
-            "many": "%s \u0444\u0438\u043b\u044c\u0442\u0440\u043e\u0432 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u043e: $2",
-            "other": "%s \u0444\u0438\u043b\u044c\u0442\u0440\u043e\u0432 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u043e: $2"
+            "one": "%s фильтр обновлен: $2",
+            "other": "%s фильтров обновлено: $2"
         }
     },
     "options_popup_version_update_title": {
-        "message": "\u0420\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u0435 AdGuard \u0434\u043b\u044f Safari \u0431\u044b\u043b\u043e \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u043e \u0434\u043e \u0432\u0435\u0440\u0441\u0438\u0438 $1."
+        "message": "Расширение AdGuard для Safari было обновлено до версии $1."
     },
     "options_popup_version_update_description_minor": {
-        "message": "\u042d\u0442\u0430 \u0432\u0435\u0440\u0441\u0438\u044f \u0441\u043e\u0434\u0435\u0440\u0436\u0438\u0442 \u0432 \u043e\u0441\u043d\u043e\u0432\u043d\u043e\u043c \u0438\u0441\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u043e\u0448\u0438\u0431\u043e\u043a \u0438 \u043d\u0435\u0437\u043d\u0430\u0447\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u044f."
+        "message": "Эта версия содержит в основном исправления ошибок и незначительные улучшения."
     },
     "options_popup_version_update_description_major": {
-        "message": "\u042d\u0442\u043e \u043c\u0430\u0441\u0448\u0442\u0430\u0431\u043d\u043e\u0435 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0435 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u044f, \u0441\u043e\u0434\u0435\u0440\u0436\u0430\u0449\u0435\u0435 \u043c\u043d\u043e\u0436\u0435\u0441\u0442\u0432\u043e \u043d\u043e\u0432\u044b\u0445 \u0444\u0443\u043d\u043a\u0446\u0438\u0439 \u0438 \u0443\u043b\u0443\u0447\u0448\u0435\u043d\u0438\u0439."
+        "message": "Это масштабное обновление расширения, содержащее множество новых функций и улучшений."
     },
     "notification_content_blocker_overlimit_title": {
-        "message": "\u041f\u0440\u0435\u0434\u0443\u043f\u0440\u0435\u0436\u0434\u0435\u043d\u0438\u0435"
+        "message": "Предупреждение"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "\u0410\u043a\u0442\u0438\u0432\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0441\u043b\u0438\u0448\u043a\u043e\u043c \u043c\u043d\u043e\u0433\u043e \u0444\u0438\u043b\u044c\u0442\u0440\u043e\u0432. Safari \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c \u0431\u043e\u043b\u0435\u0435 50 000 \u043f\u0440\u0430\u0432\u0438\u043b."
+        "message": "Активировано слишком много фильтров. Safari не может использовать более 50 000 правил."
     },
     "options_content_blocker_overlimit": {
-        "message": "\u0410\u043a\u0442\u0438\u0432\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0441\u043b\u0438\u0448\u043a\u043e\u043c \u043c\u043d\u043e\u0433\u043e \u0444\u0438\u043b\u044c\u0442\u0440\u043e\u0432. Safari \u043d\u0435 \u043c\u043e\u0436\u0435\u0442 \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c \u0431\u043e\u043b\u0435\u0435 50 000 \u043f\u0440\u0430\u0432\u0438\u043b."
+        "message": "Активировано слишком много фильтров. Safari не может использовать более 50 000 правил."
     },
     "options_filters_list_search_placeholder": {
-        "message": "\u041f\u043e\u0438\u0441\u043a"
+        "message": "Поиск"
     },
     "options_editor_indicator_editing": {
-        "message": "\u0420\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435..."
+        "message": "Редактирование..."
     },
     "options_editor_indicator_saving": {
-        "message": "\u0421\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u0435..."
+        "message": "Сохранение..."
     },
     "options_editor_indicator_saved": {
-        "message": "\u0421\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u043e"
+        "message": "Сохранено"
     },
     "main_menu_edit": {
-        "message": "\u0420\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u0442\u044c"
+        "message": "Редактировать"
     },
     "main_menu_undo": {
-        "message": "\u041e\u0442\u043c\u0435\u043d\u0438\u0442\u044c"
+        "message": "Отменить"
     },
     "main_menu_cut": {
-        "message": "\u0412\u044b\u0440\u0435\u0437\u0430\u0442\u044c"
+        "message": "Вырезать"
     },
     "main_menu_copy": {
-        "message": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c"
+        "message": "Копировать"
     },
     "main_menu_paste": {
-        "message": "\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c"
+        "message": "Вставить"
     },
     "main_menu_select-all": {
-        "message": "\u0412\u044b\u0431\u0440\u0430\u0442\u044c \u0432\u0441\u0435"
+        "message": "Выбрать все"
     },
     "tray_menu_about": {
-        "message": "\u041e \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0435"
+        "message": "О программе"
     },
     "tray_menu_preferences": {
-        "message": "\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438"
+        "message": "Настройки"
     },
     "tray_menu_check_updates": {
-        "message": "\u041f\u0440\u043e\u0432\u0435\u0440\u0438\u0442\u044c \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f \u0444\u0438\u043b\u044c\u0442\u0440\u043e\u0432"
+        "message": "Проверить обновления фильтров"
     },
     "tray_menu_launch_at_startup": {
-        "message": "\u0417\u0430\u043f\u0443\u0441\u043a\u0430\u0442\u044c AdGuard \u043f\u0440\u0438 \u0441\u0442\u0430\u0440\u0442\u0435 \u0441\u0438\u0441\u0442\u0435\u043c\u044b"
+        "message": "Запускать AdGuard при старте системы"
     },
     "tray_menu_quit": {
-        "message": "\u0412\u044b\u0445\u043e\u0434"
+        "message": "Выход"
     },
     "tray_menu_protection_start": {
-        "message": "\u0412\u043a\u043b\u044e\u0447\u0438\u0442\u044c AdGuard"
+        "message": "Включить AdGuard"
     },
     "options_last_update": {
-        "message": "\u041f\u043e\u0441\u043b\u0435\u0434\u043d\u0435\u0435 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u0435:"
+        "message": "Последнее обновление:"
     },
     "options_about": {
-        "message": "\u041e \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0435"
+        "message": "О программе"
     },
     "options_compare_btn": {
-        "message": "\u0421\u0440\u0430\u0432\u043d\u0438\u0442\u044c"
+        "message": "Сравнить"
     },
     "options_compare_title": {
-        "message": "\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 AdGuard \u041f\u0440\u0435\u043c\u0438\u0443\u043c \u0434\u043b\u044f \u043b\u0443\u0447\u0448\u0435\u0439 \u0437\u0430\u0449\u0438\u0442\u044b!"
+        "message": "Установите AdGuard Премиум для лучшей защиты!"
     },
     "options_license_agreement": {
-        "message": "\u041b\u0438\u0446\u0435\u043d\u0437\u0438\u043e\u043d\u043d\u043e\u0435 \u0441\u043e\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u0435"
+        "message": "Лицензионное соглашение"
     },
     "options_privacy_policy": {
-        "message": "\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u043a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u0438"
+        "message": "Политика конфиденциальности"
     },
     "options_acknowledgment": {
-        "message": "\u0411\u043b\u0430\u0433\u043e\u0434\u0430\u0440\u043d\u043e\u0441\u0442\u0438"
+        "message": "Благодарности"
     },
     "options_github": {
         "message": "Github"
     },
     "onboarding_safari_desc": {
-        "message": "\u041f\u043e\u0441\u0442\u0430\u0432\u044c\u0442\u0435 \u0433\u0430\u043b\u043e\u0447\u043a\u0438 \u043d\u0430\u043f\u0440\u043e\u0442\u0438\u0432 \"\u0418\u043a\u043e\u043d\u043a\u0430 AdGuard Safari\", \"\u0420\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u043d\u0430\u044f \u0431\u043b\u043e\u043a\u0438\u0440\u043e\u0432\u043a\u0430 AdGuard\" \u0438 \"AdGuard\" \u0432 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430\u0445 Safari"
+        "message": "Поставьте галочки напротив \"Иконка AdGuard Safari\", \"Расширенная блокировка AdGuard\" и \"AdGuard\" в настройках Safari"
     },
     "onboarding_safari_btn": {
-        "message": "\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438"
+        "message": "Открыть настройки"
     },
     "options_learn_more": {
-        "message": "\u0423\u0437\u043d\u0430\u0442\u044c \u0431\u043e\u043b\u044c\u0448\u0435"
+        "message": "Узнать больше"
     },
     "options_about_version": {
-        "message": "\u0412\u0435\u0440\u0441\u0438\u044f %s"
+        "message": "Версия %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0444\u0438\u043b\u044c\u0442\u0440 \u043e\u0431\u043d\u043e\u0432\u043b\u0451\u043d"
+        "message": "Пользовательский фильтр обновлён"
     },
     "notification_user_filter_updated_desc": {
-        "message": "\u041d\u043e\u0432\u043e\u0435 \u043f\u0440\u0430\u0432\u0438\u043b\u043e \u0431\u044b\u043b\u043e \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u043e \u0432 \u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0444\u0438\u043b\u044c\u0442\u0440:"
+        "message": "Новое правило было добавлено в Пользовательский фильтр:"
     },
     "options_filters_update_period": {
-        "message": "\u0418\u043d\u0442\u0435\u0440\u0432\u0430\u043b \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f"
+        "message": "Интервал обновления"
     },
     "options_filters_update_period_number": {
         "message": {
-            "one": "\u041a\u0430\u0436\u0434\u044b\u0439 \u0447\u0430\u0441",
-            "few": "\u041a\u0430\u0436\u0434\u044b\u0435 %s \u0447\u0430\u0441\u0430",
-            "many": "\u041a\u0430\u0436\u0434\u044b\u0435 %s \u0447\u0430\u0441\u043e\u0432",
-            "other": "\u041a\u0430\u0436\u0434\u044b\u0435 %s \u0447\u0430\u0441\u043e\u0432"
+            "one": "Каждый час",
+            "other": "Каждые %s часов"
         }
     },
     "options_filters_period_not_update": {
-        "message": "\u041d\u0435 \u043e\u0431\u043d\u043e\u0432\u043b\u044f\u0442\u044c"
+        "message": "Не обновлять"
     },
     "options_show_tray_icon": {
-        "message": "\u041f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0442\u044c AdGuard \u0434\u043b\u044f Safari \u0432 \u0441\u0442\u0440\u043e\u043a\u0435 \u043c\u0435\u043d\u044e"
+        "message": "Показывать AdGuard для Safari в строке меню"
     },
     "options_launch_at_login": {
-        "message": "\u0417\u0430\u043f\u0443\u0441\u043a\u0430\u0442\u044c AdGuard \u0434\u043b\u044f Safari \u043f\u0440\u0438 \u0432\u0445\u043e\u0434\u0435 \u0432 \u0441\u0438\u0441\u0442\u0435\u043c\u0443"
+        "message": "Запускать AdGuard для Safari при входе в систему"
     },
     "options_verbose_logging": {
-        "message": "\u041f\u043e\u0434\u0440\u043e\u0431\u043d\u043e\u0435 \u043b\u043e\u0433\u0433\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435"
+        "message": "Подробное логгирование"
     },
     "options_verbose_logging_desc": {
-        "message": "\u0415\u0441\u043b\u0438 \u0430\u043a\u0442\u0438\u0432\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u043f\u043e\u0434\u0440\u043e\u0431\u043d\u043e\u0435 \u043b\u043e\u0433\u0433\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435, \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u044f AdGuard \u0434\u043b\u044f Safari \u0431\u0443\u0434\u0443\u0442 \u0432\u0432\u043e\u0434\u0438\u0442\u044c \u0434\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u0443\u044e \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u0432 \u043a\u043e\u043d\u0441\u043e\u043b\u044c \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430. "
+        "message": "Если активировано подробное логгирование, расширения AdGuard для Safari будут вводить дополнительную информацию в консоль браузера. "
     },
     "settings_notification_title": {
-        "message": "\u0412\u043d\u0438\u043c\u0430\u043d\u0438\u0435! \u0420\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u044f AdGuard \u043e\u0442\u043a\u043b\u044e\u0447\u0435\u043d\u044b."
+        "message": "Внимание! Расширения AdGuard отключены."
     },
     "settings_notification_text": {
-        "message": "\u0412\u044b \u043c\u043e\u0436\u0435\u0442\u0435 \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c \u044d\u0442\u0438 \u0440\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u044f \u0434\u043b\u044f \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430\u043c\u0438 AdGuard \u0434\u043b\u044f Safari. \u041d\u0430\u043f\u0440\u0438\u043c\u0435\u0440, \u043f\u0440\u0438\u043e\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u044c \u0431\u043b\u043e\u043a\u0438\u0440\u043e\u0432\u043a\u0443 \u043d\u0430 \u0441\u0430\u0439\u0442\u0435 \u0438\u043b\u0438 \u0437\u0430\u0431\u043b\u043e\u043a\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0440\u0435\u043a\u043b\u0430\u043c\u0443 \u0432\u0440\u0443\u0447\u043d\u0443\u044e. \u0412\u044b \u043c\u043e\u0436\u0435\u0442\u0435 \u0432\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u0437\u043d\u0430\u0447\u043e\u043a AdGuard <a href='#' id='notificationEnableIconLink'>\u0437\u0434\u0435\u0441\u044c<\/a>."
+        "message": "Вы можете использовать эти расширения для управления настройками AdGuard для Safari. Например, приостановить блокировку на сайте или заблокировать рекламу вручную. Вы можете включить значок AdGuard <a href='#' id='notificationEnableIconLink'>здесь<\/a>."
     },
     "settings_notification_protection_title": {
-        "message": "\u0412\u043d\u0438\u043c\u0430\u043d\u0438\u0435! \u0417\u0430\u0449\u0438\u0442\u0430 \u043e\u0442\u043a\u043b\u044e\u0447\u0435\u043d\u0430."
+        "message": "Внимание! Защита отключена."
     },
     "settings_notification_protection_text": {
-        "message": "\u0417\u0430\u0449\u0438\u0442\u0430 AdGuard \u043e\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u0430. <a href='#' id='notificationEnableProtectionLink'>\u0412\u043a\u043b\u044e\u0447\u0438\u0442\u044c AdGuard<\/a>."
+        "message": "Защита AdGuard остановлена. <a href='#' id='notificationEnableProtectionLink'>Включить AdGuard<\/a>."
     }
 }
