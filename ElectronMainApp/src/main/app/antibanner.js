@@ -189,7 +189,10 @@ module.exports = (() => {
                 }
                 uniqueRules[ruleText] = true;
                 if (isTrustedFilter || filterRules.isTrustedRule(ruleText)) {
-                    newRequestFilter.rules.push(ruleText);
+                    newRequestFilter.rules.push({
+                        filterId,
+                        ruleText
+                    });
                 }
             }
         };

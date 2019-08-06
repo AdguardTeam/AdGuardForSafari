@@ -6,6 +6,7 @@ const {jsonFromFilters} = require('../libs/JSConverter');
 const whitelist = require('../whitelist');
 const log = require('../utils/log');
 const concurrent = require('../utils/concurrent');
+const {groupRules} = require('./rule-groups');
 
 /**
  * Safari Content Blocker Adapter
@@ -29,29 +30,47 @@ module.exports = (function () {
     ];
 
     /**
+     * Rules groups to extension bundle identifiers dictionary
+     */
+    const rulesGroupsBundles = {
+        general: "com.adguard.safari.AdGuard.BlockerExtension",
+        privacy: "com.adguard.safari.AdGuard.BlockerPrivacy",
+        socialWidgetsAndAnnoyances: "com.adguard.safari.AdGuard.BlockerSocial",
+        security: "com.adguard.safari.AdGuard.BlockerSecurity",
+        other: "com.adguard.safari.AdGuard.BlockerOther",
+        custom: "com.adguard.safari.AdGuard.BlockerCustom",
+        advancedBlocking: "com.adguard.safari.AdGuard.AdvancedBlocking"
+    };
+
+    /**
      * Load content blocker
      */
     const updateContentBlocker = () => {
 
-        loadAndConvertRules(RULES_LIMIT, result => {
+        loadRules(rules => {
 
-            if (!result) {
-                clearFilters();
-                listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
-                    rulesCount: 0,
-                    rulesOverLimit: false,
-                    advancedBlockingRulesCount: 0
-                });
+            const grouped = groupRules(rules);
+            let overlimit = false;
 
-                return;
+            for (let group of grouped) {
+                let json = emptyBlockerJSON;
+
+                const result = jsonFromFilters(group.rules.map(x => x.ruleText), RULES_LIMIT, false, false);
+                if (result && result.converted) {
+                    json = JSON.parse(result.converted);
+                    if (result.overLimit) {
+                        overlimit = true;
+                    }
+                }
+
+                setSafariContentBlocker(rulesGroupsBundles[group.key], json);
             }
 
-            const json = JSON.parse(result.converted);
-            const advancedBlocking = JSON.parse(result.advancedBlocking);
-            setSafariContentBlocker(json, advancedBlocking);
+            const advancedBlocking = setAdvancedBlocking(rules.map(x => x.ruleText));
+
             listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
-                rulesCount: json.length,
-                rulesOverLimit: result.overLimit,
+                rulesCount: rules.length,
+                rulesOverLimit: overlimit,
                 advancedBlockingRulesCount: advancedBlocking.length
             });
 
@@ -59,18 +78,25 @@ module.exports = (function () {
     };
 
     /**
-     * Disables content blocker
-     * @private
+     * Activates advanced blocking json
+     *
+     * @param rules
+     * @return {Array}
      */
-    const clearFilters = () => {
-        setSafariContentBlocker(emptyBlockerJSON);
+    const setAdvancedBlocking = (rules) => {
+        const result = jsonFromFilters(rules, RULES_LIMIT, false, true);
+        const advancedBlocking = result ? JSON.parse(result.advancedBlocking) : [];
+
+        setSafariContentBlocker(rulesGroupsBundles["advancedBlocking"], advancedBlocking);
+
+        return advancedBlocking;
     };
 
     /**
-     * Load rules from requestFilter and WhiteListService and convert for ContentBlocker
+     * Load rules from requestFilter and WhiteListService
      * @private
      */
-    const loadAndConvertRules = concurrent.debounce((rulesLimit, callback) => {
+    const loadRules = concurrent.debounce((callback) => {
 
         if (settings.isFilteringDisabled()) {
             log.info('Disabling content blocker.');
@@ -84,39 +110,36 @@ module.exports = (function () {
 
         log.info('Rules loaded: {0}', rules.length);
         if (settings.isDefaultWhiteListMode()) {
-            rules = rules.concat(whitelist.getRules());
+            rules = rules.concat(whitelist.getRules().map(r => {
+                return { filterId: 0, ruleText: r }
+            }));
         } else {
             const invertedWhitelistRule = constructInvertedWhitelistRule();
             if (invertedWhitelistRule) {
-                rules = rules.concat(invertedWhitelistRule);
+                rules = rules.concat({
+                    filterId: 0, ruleText: invertedWhitelistRule
+                });
             }
         }
 
-        const result = jsonFromFilters(rules, rulesLimit, false, true);
-        if (result && result.converted) {
-            callback(result);
-        } else {
-            callback(null);
-        }
+        callback(rules);
 
     }, DEBOUNCE_PERIOD);
 
     /**
-     * Activates content blocker json
+     * Activates json for bundle
      *
-     * @param contentBlocker json
-     * @param advancedBlocking json
+     * @param bundleId
+     * @param json
      */
-    const setSafariContentBlocker = (contentBlocker, advancedBlocking) => {
+    const setSafariContentBlocker = (bundleId, json) => {
         try {
-            log.info(`Setting content blocker. Length=${contentBlocker.length}; Advanced Blocking Length=${advancedBlocking.length}`);
+            log.info(`Setting content blocker json for ${bundleId}. Length=${json.length};`);
 
             listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, {
-                contentBlocker,
-                advancedBlocking
+                bundleId,
+                json
             });
-
-            log.info('Content blocker has been set.');
         } catch (ex) {
             log.error('Error while setting content blocker: ' + ex);
         }
@@ -147,8 +170,7 @@ module.exports = (function () {
     };
 
     return {
-        updateContentBlocker: updateContentBlocker,
-        setSafariContentBlocker: setSafariContentBlocker
+        updateContentBlocker
     };
 
 })();

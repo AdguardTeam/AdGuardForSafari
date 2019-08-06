@@ -47,7 +47,7 @@ module.exports = (() => {
      *
      * @param groupId
      * @param filters
-     * @returns {{recommendedFilters, otherFilters: *}}
+     * @returns []
      */
     const selectFiltersByGroupId = (groupId, filters) => {
         return filters.filter(filter => filter.groupId === groupId);
@@ -136,9 +136,20 @@ module.exports = (() => {
         return result;
     };
 
+    /**
+     * Returns filters for group
+     *
+     * @param groupId
+     * @return []
+     */
+    const getFiltersByGroupId = groupId => {
+        return selectFiltersByGroupId(groupId, getFilters());
+    };
+
     return {
-        getFiltersMetadata: getFiltersMetadata,
-        getRecommendedFilterIdsByGroupId: getRecommendedFilterIdsByGroupId
+        getFiltersMetadata,
+        getRecommendedFilterIdsByGroupId,
+        getFiltersByGroupId
     };
 })();
 

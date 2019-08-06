@@ -43,6 +43,13 @@ BLOCKEREXTENSION="${SRCROOT}/BlockerExtension"
 # Project root directory of Advanced Blocking Extension
 ADVANCED_BLOCKING_EXTENSION="${SRCROOT}/AdvancedBlocking"
 
+BLOCKEREXTENSION_CUSTOM="${SRCROOT}/BlockerCustomExtension"
+BLOCKEREXTENSION_OTHER="${SRCROOT}/BlockerOtherExtension"
+BLOCKEREXTENSION_PRIVACY="${SRCROOT}/BlockerPrivacyExtension"
+BLOCKEREXTENSION_SOCIAL="${SRCROOT}/BlockerSocialExtension"
+
+# TODO: Add security extension
+
 # XIB FILES LIST PATH
 XIBFILESLIST="${SCRIPTDIR}/Resources/xib-files-list.txt"
 
@@ -116,14 +123,34 @@ curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=${BASE_LOCAL
 rm "${PROJECT_TEMP_DIR}/${file}"
 
 find "${BLOCKEREXTENSION}" -name \*.m | xargs genstrings -o "${BLOCKEREXTENSION}"
-cp -fv "${BLOCKEREXTENSION}/${BASE_LOCALE}.lproj/${file}" "${PROJECT_TEMP_DIR}/blockerextension_${file}"
-curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=${BASE_LOCALE}" -F "filename=blockerextension_${file}" -F "project=safari" -F "file=@${PROJECT_TEMP_DIR}/blockerextension_${file}"
-rm "${PROJECT_TEMP_DIR}/blockerextension_${file}"
+cp -fv "${EXTENSION}/${BASE_LOCALE}.lproj/${file}" "${PROJECT_TEMP_DIR}/${file}"
+curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=${BASE_LOCALE}" -F "filename=blockerextension_${file}" -F "project=safari" -F "file=@${PROJECT_TEMP_DIR}/${file}"
+rm "${PROJECT_TEMP_DIR}/${file}"
+
+find "${BLOCKEREXTENSION_CUSTOM}" -name \*.m | xargs genstrings -o "${BLOCKEREXTENSION_CUSTOM}"
+cp -fv "${EXTENSION}/${BASE_LOCALE}.lproj/${file}" "${PROJECT_TEMP_DIR}/${file}"
+curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=${BASE_LOCALE}" -F "filename=blockerextension_custom_${file}" -F "project=safari" -F "file=@${PROJECT_TEMP_DIR}/${file}"
+rm "${PROJECT_TEMP_DIR}/${file}"
+
+find "${BLOCKEREXTENSION_OTHER}" -name \*.m | xargs genstrings -o "${BLOCKEREXTENSION_OTHER}"
+cp -fv "${EXTENSION}/${BASE_LOCALE}.lproj/${file}" "${PROJECT_TEMP_DIR}/${file}"
+curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=${BASE_LOCALE}" -F "filename=blockerextension_other_${file}" -F "project=safari" -F "file=@${PROJECT_TEMP_DIR}/${file}"
+rm "${PROJECT_TEMP_DIR}/${file}"
+
+find "${BLOCKEREXTENSION_PRIVACY}" -name \*.m | xargs genstrings -o "${BLOCKEREXTENSION_PRIVACY}"
+cp -fv "${EXTENSION}/${BASE_LOCALE}.lproj/${file}" "${PROJECT_TEMP_DIR}/${file}"
+curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=${BASE_LOCALE}" -F "filename=blockerextension_privacy_${file}" -F "project=safari" -F "file=@${PROJECT_TEMP_DIR}/${file}"
+rm "${PROJECT_TEMP_DIR}/${file}"
+
+find "${BLOCKEREXTENSION_SOCIAL}" -name \*.m | xargs genstrings -o "${BLOCKEREXTENSION_SOCIAL}"
+cp -fv "${EXTENSION}/${BASE_LOCALE}.lproj/${file}" "${PROJECT_TEMP_DIR}/${file}"
+curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=${BASE_LOCALE}" -F "filename=blockerextension_social_${file}" -F "project=safari" -F "file=@${PROJECT_TEMP_DIR}/${file}"
+rm "${PROJECT_TEMP_DIR}/${file}"
 
 find "${ADVANCED_BLOCKING_EXTENSION}" -name \*.m | xargs genstrings -o "${ADVANCED_BLOCKING_EXTENSION}"
-cp -fv "${ADVANCED_BLOCKING_EXTENSION}/${BASE_LOCALE}.lproj/${file}" "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}"
-curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=${BASE_LOCALE}" -F "filename=adv_blocking_extension_mod_${file}" -F "project=safari" -F "file=@${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}"
-rm "${PROJECT_TEMP_DIR}/adv_blocking_extension_mod_${file}"
+cp -fv "${EXTENSION}/${BASE_LOCALE}.lproj/${file}" "${PROJECT_TEMP_DIR}/${file}"
+curl -XPOST "${SERVICE_URL}upload" -F "format=strings" -F "language=${BASE_LOCALE}" -F "filename=adv_blocking_extension_mod_${file}" -F "project=safari" -F "file=@${PROJECT_TEMP_DIR}/${file}"
+rm "${PROJECT_TEMP_DIR}/${file}"
 
 echo "Done"
 echo "Upload finished InfoPlist files"
