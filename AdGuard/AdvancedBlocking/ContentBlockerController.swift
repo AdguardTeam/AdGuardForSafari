@@ -29,7 +29,7 @@ class ContentBlockerController {
             NSLog("AG AdvancedBlocking json updated - download and setup new version");
             self.setupJson();
         });
-        
+
         setupJson();
     }
     
