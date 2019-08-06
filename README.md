@@ -148,28 +148,6 @@ cd ElectronMainApp
 yarn test
 ```
 
-#### How to update translations
-
-Before updating translations you need to install dependencies.
-
-To do this, you can build project in xCode or run the following commands:
-```
-cd ElectronMainApp
-yarn install
-```
-
-#### Exporting translations
-```
-sh SupportingScripts/localizations/export.sh .
-```
-
-#### Importing translations
-```
-sh SupportingScripts/localizations/import.sh .
-```
-
-Change `.` to path to your project if you not in the root.
-
 ## Preparing and building Adguard.
 
 ### Environment requirements
