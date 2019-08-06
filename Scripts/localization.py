@@ -44,15 +44,15 @@ LOCALES.append("zh-Hant")  # Chinese Traditional (Taiwan)
 # Keep this list up-to-date
 #
 LOCALIZABLE_FILES = []
-LOCALIZABLE_FILES.append("Extension/Base.lproj/Localizable.strings")
-LOCALIZABLE_FILES.append("Extension/Base.lproj/InfoPlist.strings")
-LOCALIZABLE_FILES.append("AdvancedBlocking/en.lproj/InfoPlist.strings")
-LOCALIZABLE_FILES.append("BlockerCustomExtension/en.lproj/InfoPlist.strings")
-LOCALIZABLE_FILES.append("BlockerExtension/en.lproj/InfoPlist.strings")
-LOCALIZABLE_FILES.append("BlockerOtherExtension/en.lproj/InfoPlist.strings")
-LOCALIZABLE_FILES.append("BlockerPrivacyExtension/en.lproj/InfoPlist.strings")
-LOCALIZABLE_FILES.append("BlockerSecurityExtension/en.lproj/InfoPlist.strings")
-LOCALIZABLE_FILES.append("BlockerSocialExtension/en.lproj/InfoPlist.strings")
+LOCALIZABLE_FILES.append("Extension/Localizable.strings")
+LOCALIZABLE_FILES.append("Extension/InfoPlist.strings")
+LOCALIZABLE_FILES.append("AdvancedBlocking/InfoPlist.strings")
+LOCALIZABLE_FILES.append("BlockerCustomExtension/InfoPlist.strings")
+LOCALIZABLE_FILES.append("BlockerExtension/InfoPlist.strings")
+LOCALIZABLE_FILES.append("BlockerOtherExtension/InfoPlist.strings")
+LOCALIZABLE_FILES.append("BlockerPrivacyExtension/InfoPlist.strings")
+LOCALIZABLE_FILES.append("BlockerSecurityExtension/InfoPlist.strings")
+LOCALIZABLE_FILES.append("BlockerSocialExtension/InfoPlist.strings")
 
 #
 # In case we have to use many InfoPlist.strings files we have to rename.
@@ -230,7 +230,7 @@ def export_xib(path):
     return
 
 
-def export_localizable_file(path, locale):
+def export_localizable_file(path, locale, dir_name):
     """Uploads the specified localizable file to the translation system"""
     print("Exporting {0}".format(path))
 
@@ -241,8 +241,7 @@ def export_localizable_file(path, locale):
     file_ext = os.path.splitext(file_name)[1][1:]
 
     if file_name == "InfoPlist.strings":
-        extension_name = os.path.dirname(path)
-        file_name = INFO_PLIST_DICTIONARY[extension_name]
+        file_name = INFO_PLIST_DICTIONARY[dir_name]
 
     # Now upload the file
     upload_file(path, file_ext, locale, file_name)
@@ -264,7 +263,7 @@ def export_json_file(path, locale):
     return
 
 
-def import_localizable_file(path, locale):
+def import_localizable_file(path, locale, dir_name):
     """Imports the specified localizable file from the translation system"""
     print("Importing {0}".format(path))
 
@@ -272,8 +271,7 @@ def import_localizable_file(path, locale):
     file_ext = os.path.splitext(file_name)[1][1:]
 
     if file_name == "InfoPlist.strings":
-        extension_name = os.path.dirname(path)
-        file_name = INFO_PLIST_DICTIONARY[extension_name]
+        file_name = INFO_PLIST_DICTIONARY[dir_name]
 
     # Download the file
     download_file(file_name, locale, file_ext, path)
@@ -312,8 +310,10 @@ def export_localizations():
         export_xib(file_path)
 
     for path in LOCALIZABLE_FILES:
-        file_path = os.path.join(CURRENT_DIR, BASE_PATH, "{0}.lproj".format(API_BASELOCALE), path)
-        export_localizable_file(file_path, API_BASELOCALE)
+        file_name = os.path.basename(path)
+        dir_name = os.path.dirname(path)
+        file_path = os.path.join(CURRENT_DIR, BASE_PATH, dir_name, "{0}.lproj".format(API_BASELOCALE), file_name)
+        export_localizable_file(file_path, API_BASELOCALE, dir_name)
 
     for path in JSON_FILES:
         file_path = os.path.join(CURRENT_DIR, BASE_PATH, path, "{0}.json".format(API_BASELOCALE))
@@ -361,11 +361,13 @@ def import_localization(locale):
     for path in XIB_FILES:
         translation_path = get_xib_translation_path(path, locale)
         file_path = os.path.join(CURRENT_DIR, BASE_PATH, translation_path)
-        import_localizable_file(file_path, locale)
+        import_localizable_file(file_path, locale, "")
 
     for path in LOCALIZABLE_FILES:
-        file_path = os.path.join(CURRENT_DIR, BASE_PATH, "{0}.lproj".format(locale), path)
-        import_localizable_file(file_path, locale)
+        file_name = os.path.basename(path)
+        dir_name = os.path.dirname(path)
+        file_path = os.path.join(CURRENT_DIR, BASE_PATH, dir_name, "{0}.lproj".format(API_BASELOCALE), file_name)
+        import_localizable_file(file_path, locale, dir_name)
 
     for path in JSON_FILES:
         file_path = os.path.join(CURRENT_DIR, BASE_PATH, path, "{0}.json".format(locale))
