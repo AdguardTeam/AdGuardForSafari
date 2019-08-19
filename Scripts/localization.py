@@ -7,52 +7,40 @@ import tempfile
 import shutil
 import requests
 import json
+import glob
+
+#
+# Runtime variables
+#
+TEMP_DIR = tempfile.mkdtemp()
+# Directory of this python file
+CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 #
 # Configuration
 #
 API_UPLOAD_URL = "https://twosky.adtidy.org/api/v1/upload"
 API_DOWNLOAD_URL = "https://twosky.adtidy.org/api/v1/download"
-API_PROJECTID = "safari"
-API_BASELOCALE = "en"
 # Base directory of the project files
 BASE_PATH = "../Adguard"
 
-#
-# Locales we support in the app
-#
-LOCALES = []
-LOCALES.append("en")  # English, base language
-LOCALES.append("cs")  # Chech
-LOCALES.append("da")  # Danish
-LOCALES.append("de")  # German
-LOCALES.append("es")  # Spanish
-LOCALES.append("fr")  # French
-LOCALES.append("it")  # Italian
-LOCALES.append("ja")  # Japanese
-LOCALES.append("pl")  # Polish
-LOCALES.append("pt-BR")  # Portuguese (Brazil)
-LOCALES.append("pt-PT")  # Portuguese
-LOCALES.append("ru")  # Russian
-LOCALES.append("sv")  # Sweden
-LOCALES.append("tr")  # Turkish
-LOCALES.append("zh-Hans")  # Chinese Simplified (mainland China)
-LOCALES.append("zh-Hant")  # Chinese Traditional (Taiwan)
+# Loads twosky configuration from .twosky.json.
+# This configuration file contains:
+# * languages -- the list of languages we support
+# * project_id -- twosky project ID
+# * base_locale -- base language of our app
+# * localizable_files -- list of localizable files masks
+with open(os.path.join(CURRENT_DIR, "../.twosky.json"), 'r') as f:
+    TWOSKY_CONFIG = json.load(f)[0]
 
+API_BASELOCALE = TWOSKY_CONFIG["base_locale"]
 #
 # This is the list of non-XIB files to localize.
-# Keep this list up-to-date
 #
 LOCALIZABLE_FILES = []
-LOCALIZABLE_FILES.append("Extension/Localizable.strings")
-LOCALIZABLE_FILES.append("Extension/InfoPlist.strings")
-LOCALIZABLE_FILES.append("AdvancedBlocking/InfoPlist.strings")
-LOCALIZABLE_FILES.append("BlockerCustomExtension/InfoPlist.strings")
-LOCALIZABLE_FILES.append("BlockerExtension/InfoPlist.strings")
-LOCALIZABLE_FILES.append("BlockerOtherExtension/InfoPlist.strings")
-LOCALIZABLE_FILES.append("BlockerPrivacyExtension/InfoPlist.strings")
-LOCALIZABLE_FILES.append("BlockerSecurityExtension/InfoPlist.strings")
-LOCALIZABLE_FILES.append("BlockerSocialExtension/InfoPlist.strings")
+for path in TWOSKY_CONFIG["localizable_files"]:
+    LOCALIZABLE_FILES.append(path)
+
 
 #
 # In case we have to use many InfoPlist.strings files we have to rename.
@@ -73,21 +61,16 @@ INFO_PLIST_DICTIONARY = {
 # Keep this list up-to-date
 #
 JSON_FILES = []
-JSON_FILES.append("../ElectronMainApp/locales")
+for path in TWOSKY_CONFIG["json_files"]:
+    JSON_FILES.append(path)
 
 #
 # This is the list of XIB files to localize.
 # Keep this list up-to-date
 #
 XIB_FILES = []
-XIB_FILES.append("Extension/Base.lproj/SafariExtensionViewController.xib")
-
-#
-# Runtime variables
-#
-TEMP_DIR = tempfile.mkdtemp()
-# Directory of this python file
-CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
+for path in TWOSKY_CONFIG["xib_files"]:
+    XIB_FILES.append(path)
 
 
 def upload_file(path, format, language, file_name):
@@ -104,7 +87,7 @@ def upload_file(path, format, language, file_name):
         "format": format,
         "language": language,
         "filename": file_name,
-        "project": API_PROJECTID
+        "project": TWOSKY_CONFIG["project_id"]
     }
 
     print("Uploading {0}/{1} to the translation system".format(language, file_name))
@@ -135,7 +118,7 @@ def download_file(file_name, language, format, path):
     params = {
         "filename": file_name,
         "format": format,
-        "project": API_PROJECTID,
+        "project": TWOSKY_CONFIG["project_id"],
         "language": language
     }
     result = requests.get(API_DOWNLOAD_URL, params=params)
@@ -348,7 +331,7 @@ def export_translations(locale):
 def export_all_translations():
     """Entry point for the exporting ALL translations process"""
     print("Start exporting ALL translations")
-    for locale in LOCALES:
+    for locale in TWOSKY_CONFIG["languages"]:
         export_translations(locale)
     print("Finihed exporting ALL translations")
     return
@@ -380,7 +363,7 @@ def import_localization(locale):
 def import_localizations():
     """Entry point for the importing localizations process"""
     print("Start importing localizations")
-    for locale in LOCALES:
+    for locale in TWOSKY_CONFIG["languages"]:
         import_localization(locale)
     print("Finished importing localizations")
     return
@@ -437,7 +420,7 @@ def main():
     elif command.startswith("--import="):
         parts = command.split("=", 2)
         locale = parts[1]
-        if LOCALES.index(locale) == -1:
+        if not locale in TWOSKY_CONFIG["languages"]:
             raise ValueError("Invalid locale: {0}".format(locale))
         import_localization(locale)
     elif command == "--update-strings":
