@@ -366,7 +366,7 @@ def import_localization(locale):
     for path in LOCALIZABLE_FILES:
         file_name = os.path.basename(path)
         dir_name = os.path.dirname(path)
-        file_path = os.path.join(CURRENT_DIR, BASE_PATH, dir_name, "{0}.lproj".format(API_BASELOCALE), file_name)
+        file_path = os.path.join(CURRENT_DIR, BASE_PATH, dir_name, "{0}.lproj".format(locale), file_name)
         import_localizable_file(file_path, locale, dir_name)
 
     for path in JSON_FILES:
