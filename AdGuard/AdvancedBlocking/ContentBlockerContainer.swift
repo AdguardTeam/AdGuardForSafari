@@ -43,6 +43,7 @@ class ContentBlockerContainer {
         
         let mask = urlMask!;
     
+        
         // Skip all url templates
         if (mask == ".*" || mask == "^[htpsw]+://") {
             return nil;

@@ -887,8 +887,8 @@ electron-updater@^4.0.6:
     semver "^6.2.0"
 
 electron@^5.0.6:
-  version "5.0.9"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-5.0.9.tgz#d7000dcb69b74a85b81cb168e7ffdcac254464e5"
+  version "5.0.10"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-5.0.10.tgz#a3819c3ff8d05ee57315bfabe2d61d3529f5659c"
   dependencies:
     "@types/node" "^10.12.18"
     electron-download "^4.1.0"

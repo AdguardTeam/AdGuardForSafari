@@ -83,7 +83,11 @@ else
     python3 -u Scripts/notarize.py --path="../$APP_PATH" --bundle-id="$APP_BUNDLE_ID"
 fi
 
-echo "Step 5: Build version.txt"
+echo "Step 5: Archive the app"
+# zip the archive so that we could use it as a build artifact
+/usr/bin/ditto -c -k --keepParent "$APP_PATH" "$APP_PATH.zip"
+
+echo "Step 6: Build version.txt"
 printf "version=$version\nbuild_number=$build_number\n" >$BUILD_DIR/$VERSION_FILE
 
 
@@ -91,5 +95,5 @@ if [ "$CHANNEL" != "mas" ]; then
     exit 0;
 fi
 
-echo "Step 6: Upload archive to app store"
+echo "Step 7: Upload archive to app store"
 xcodebuild -exportArchive -archivePath "$ARCHIVE_PATH" -exportOptionsPlist ./Scripts/ExportOptions.plist -exportPath "$BUILD_DIR"
