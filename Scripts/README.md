@@ -24,11 +24,10 @@ Please take a look at `.devconfig.json.template` to find out what exactly should
 
 Localization process consists of multiple phases. Please read what's done on each step.
 
-> **IMPORTANT:** For localization to work you must keep track of all localizable files in the `localization.py` file.
+> **IMPORTANT:** For localization to work you must keep track of all localizable files in the `.twosky.json` file.
 > Whenever you need to add a new localizable file, don't forget to add it there.
-> Look for `LOCALIZABLE_FILES` and `XIB_FILES` lists in the python file.
 
-Also, you will need to keep the list of languages up-to-date, look for the `LOCALES` variable in the python file.
+Also, you will need to keep the list of languages up-to-date in the `.twosky.json` file in the repository root.
 
 ### <a id="git-diff"></a> How to make git diff work with .strings files
 
