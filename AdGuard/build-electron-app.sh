@@ -61,6 +61,9 @@ yarn electron-rebuild
 
 if [ ${CONFIGURATION} == "Release" ]; then
     echo "Building release MAS version"
+
+    OPT="--asar.unpack=*.node"
+
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
 
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=5.0.6 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
