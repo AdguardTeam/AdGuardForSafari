@@ -6,13 +6,13 @@
         "message": "Zaufany"
     },
     "options_popup_trusted_filter_description": {
-        "message": "Zaufane filtry mog\u0105 korzysta\u0107 z pot\u0119\u017cnych modyfikator\u00f3w regu\u0142 filtrowania, kt\u00f3re mog\u0105 by\u0107 niebezpieczne w niew\u0142a\u015bciwych r\u0119kach. Nie zaznaczaj tego pola, chyba \u017ce w pe\u0142ni mu ufasz."
+        "message": "Zaufane filtry mogą korzystać z potężnych modyfikatorów reguł filtrowania, które mogą być niebezpieczne w niewłaściwych rękach. Nie zaznaczaj tego pola, chyba że w pełni mu ufasz."
     },
     "options_filters_filter_trusted_tag": {
         "message": "zaufany"
     },
     "options_filters_filter_trusted_tag_desc": {
-        "message": "Zdecydowa\u0142e\u015b si\u0119 zaufa\u0107 temu filtrowi"
+        "message": "Zdecydowałeś się zaufać temu filtrowi"
     },
     "options_about_update_check": {
         "message": "Sprawdzanie aktualizacji"
@@ -21,16 +21,16 @@
         "message": "Aktualizacja AdGuard dla Safari"
     },
     "options_about_updates_not_found": {
-        "message": "AdGuard dla Safari zosta\u0142 zaktualizowany"
+        "message": "AdGuard dla Safari został zaktualizowany"
     },
     "options_about_update_downloaded": {
-        "message": "Prawie zaktualizowany! Uruchom ponownie AdGuard dla Safari, aby zako\u0144czy\u0107 aktualizacj\u0119."
+        "message": "Prawie zaktualizowany! Uruchom ponownie AdGuard dla Safari, aby zakończyć aktualizację."
     },
     "options_about_update_relaunch": {
         "message": "Uruchom ponownie"
     },
     "options_popup_title_placeholder": {
-        "message": "Wpisz nazw\u0119 filtra"
+        "message": "Wpisz nazwę filtra"
     },
     "main_menu_hide": {
         "message": "Ukryj "
@@ -42,19 +42,19 @@
         "message": "Bloker reklam AdGuard"
     },
     "description": {
-        "message": "Niezr\u00f3wnane rozszerzenie blokuj\u0105ce reklamy i wyskakuj\u0105ce okienka. Blokuje reklamy na Facebooku, Youtube i wszystkich innych stronach internetowych."
+        "message": "Niezrównane rozszerzenie blokujące reklamy i wyskakujące okienka. Blokuje reklamy na Facebooku, Youtube i wszystkich innych stronach internetowych."
     },
     "options_settings": {
         "message": "AdGuard dla Safari - Ustawienia"
     },
     "options_general_settings": {
-        "message": "G\u0142\u00f3wne "
+        "message": "Główne "
     },
     "options_general_desc": {
-        "message": "AdGuard dla Safari to darmowe oprogramowanie o otwartym kodzie \u017ar\u00f3d\u0142owym. Czekamy na Wasze opinie i uwagi. Je\u015bli chcesz zg\u0142osi\u0107 b\u0142\u0105d lub poprosi\u0107 o funkcj\u0119, przejd\u017a do <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nasze repozytorium Github<\/a>."
+        "message": "AdGuard dla Safari to darmowe oprogramowanie o otwartym kodzie źródłowym. Czekamy na Wasze opinie i uwagi. Jeśli chcesz zgłosić błąd lub poprosić o funkcję, przejdź do <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nasze repozytorium Github<\/a>."
     },
     "options_allow_acceptable_ads": {
-        "message": "Zezwalaj na reklamy podczas wyszukiwania i autopromocj\u0119 witryn"
+        "message": "Zezwalaj na reklamy podczas wyszukiwania i autopromocję witryn"
     },
     "options_export_settings": {
         "message": "Eksportuj ustawienia"
@@ -68,38 +68,32 @@
     "options_antibanner_info_filters": {
         "message": {
             "one": "%s filter",
-            "few": "%s filters",
-            "many": "%s filters",
             "other": "%s filters"
         }
     },
     "options_antibanner_info_rules": {
         "message": {
             "one": "%s rule",
-            "few": "%s rules",
-            "many": "%s rules",
             "other": "%s rules"
         }
     },
     "options_antibanner_info_adv_rules": {
         "message": {
             "one": "%s advanced rule",
-            "few": "%s advanced rules",
-            "many": "%s advanced rules",
             "other": "%s advanced rules"
         }
     },
     "options_filters_enabled": {
-        "message": "W\u0142\u0105czony"
+        "message": "Włączony"
     },
     "options_filters_enabled_and_more_divider": {
-        "message": "%s i %s wi\u0119cej"
+        "message": "%s i %s więcej"
     },
     "options_filters_enabled_and_divider": {
         "message": "%s i %s"
     },
     "options_filters_no_enabled": {
-        "message": "Brak w\u0142\u0105czonych filtr\u00f3w"
+        "message": "Brak włączonych filtrów"
     },
     "options_filters_version": {
         "message": "wersja %s"
@@ -108,7 +102,7 @@
         "message": "zaktualizowano: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "Przepraszam, ale nie masz jeszcze \u017cadnych niestandardowych filtr\u00f3w"
+        "message": "Przepraszam, ale nie masz jeszcze żadnych niestandardowych filtrów"
     },
     "options_filters_empty_custom_add_button": {
         "message": "Dodaj niestandardowy filtr"
@@ -117,13 +111,13 @@
         "message": "Nowa subskrypcja filtra"
     },
     "options_filters_custom_step_one_input_placeholder": {
-        "message": "Wprowad\u017a adres URL filtra"
+        "message": "Wprowadź adres URL filtra"
     },
     "options_filters_custom_step_one_url_desc": {
-        "message": "Wprowad\u017a poprawny adres URL subskrypcji filtru."
+        "message": "Wprowadź poprawny adres URL subskrypcji filtru."
     },
     "options_filters_custom_step_one_url_desc_more": {
-        "message": "AdGuard doda t\u0119 subskrypcj\u0119 filtru."
+        "message": "AdGuard doda tę subskrypcję filtru."
     },
     "options_filters_custom_step_one_cancel": {
         "message": "Anuluj"
@@ -135,13 +129,13 @@
         "message": "Pobieranie filtra"
     },
     "options_filters_custom_step_three_title": {
-        "message": "Wyst\u0105pi\u0142 b\u0142\u0105d"
+        "message": "Wystąpił błąd"
     },
     "options_filters_custom_step_three_desc": {
-        "message": "Niestety, niestandardowy filtr nie mo\u017ce zosta\u0107 dodany z powodu nieoczekiwanego b\u0142\u0119du."
+        "message": "Niestety, niestandardowy filtr nie może zostać dodany z powodu nieoczekiwanego błędu."
     },
     "options_filters_custom_step_three_try_again": {
-        "message": "Spr\u00f3buj ponownie"
+        "message": "Spróbuj ponownie"
     },
     "options_filters_custom_step_final_title": {
         "message": "Nowa subskrypcja filtra"
@@ -156,7 +150,7 @@
         "message": "Wersja:"
     },
     "options_filters_custom_step_final_filter_rules_count": {
-        "message": "Licznik Regu\u0142:"
+        "message": "Licznik Reguł:"
     },
     "options_filters_custom_step_final_filter_homepage": {
         "message": "Strona domowa:"
@@ -165,7 +159,7 @@
         "message": "URL:"
     },
     "options_filters_custom_step_final_back": {
-        "message": "Wr\u00f3\u0107"
+        "message": "Wróć"
     },
     "options_filters_custom_step_final_cancel": {
         "message": "Anuluj"
@@ -174,40 +168,40 @@
         "message": "Subskrybuj"
     },
     "options_filters_check_filters_update": {
-        "message": "Sprawd\u017a aktualizacje filtr\u00f3w"
+        "message": "Sprawdź aktualizacje filtrów"
     },
     "options_whitelist": {
-        "message": "Bia\u0142a lista"
+        "message": "Biała lista"
     },
     "options_whitelist_description": {
-        "message": "AdGuard nie filtruje stron znajduj\u0105cych si\u0119 na bia\u0142ej li\u015bcie."
+        "message": "AdGuard nie filtruje stron znajdujących się na białej liście."
     },
     "options_whitelist_inverse": {
-        "message": "Odwr\u00f3\u0107 bia\u0142\u0105 list\u0119<span class='sp-table-row-info'>Odblokuj reklamy wsz\u0119dzie <i>z wyj\u0105tkiem<\/i> bia\u0142ej listy<\/span>"
+        "message": "Odwróć białą listę<span class='sp-table-row-info'>Odblokuj reklamy wszędzie <i>z wyjątkiem<\/i> białej listy<\/span>"
     },
     "options_userfilter": {
-        "message": "Filtr u\u017cytkownika"
+        "message": "Filtr użytkownika"
     },
     "options_userfilter_description": {
-        "message": "Mo\u017cesz doda\u0107 w\u0142asne regu\u0142y do&nbsp;tego filtra. Ta opcja jest&nbsp;zalecana dla zaawansowanych u\u017cytkownik\u00f3w znaj\u0105cych  HTML\/CSS. Przeczytaj <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>samouczek regu\u0142 filtrowania<\/a> to&nbsp;dowiedz si\u0119, jak&nbsp;napisa\u0107 w\u0142asne regu\u0142y filtrowania."
+        "message": "Możesz dodać własne reguły do&nbsp;tego filtra. Ta opcja jest&nbsp;zalecana dla zaawansowanych użytkowników znających  HTML\/CSS. Przeczytaj <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>samouczek reguł filtrowania<\/a> to&nbsp;dowiedz się, jak&nbsp;napisać własne reguły filtrowania."
     },
     "options_show_app_updated_notification": {
         "message": "Powiadamiaj o aktualizacjach rozszerzenia"
     },
     "options_use_optimized_filters": {
-        "message": "U\u017cywaj zoptymalizowanych filtr\u00f3w<span class='sp-table-row-info'>Listy filtr\u00f3w lekkich zoptymalizowanych dla API Blokera Zawarto\u015bci Safari.<\/span>"
+        "message": "Używaj zoptymalizowanych filtrów<span class='sp-table-row-info'>Listy filtrów lekkich zoptymalizowanych dla API Blokera Zawartości Safari.<\/span>"
     },
     "options_popup_update_title": {
-        "message": "Filtry zosta\u0142y pomy\u015blnie zaktualizowane"
+        "message": "Filtry zostały pomyślnie zaktualizowane"
     },
     "options_popup_update_error_title": {
-        "message": "B\u0142\u0105d aktualizacji filtra"
+        "message": "Błąd aktualizacji filtra"
     },
     "options_popup_update_not_found": {
         "message": "Nie znaleziono aktualizacji"
     },
     "options_popup_update_error": {
-        "message": "Nie uda\u0142o si\u0119 pobra\u0107 aktualizacji. Prosz\u0119 spr\u00f3bowa\u0107 ponownie p\u00f3\u017aniej."
+        "message": "Nie udało się pobrać aktualizacji. Proszę spróbować ponownie później."
     },
     "options_popup_update_updated": {
         "message": "\"$1\" zaktualizowano do wersji $2"
@@ -215,37 +209,35 @@
     "options_popup_update_updated_more": {
         "message": {
             "one": "%s filtr zaktualizowany: $2",
-            "few": "%s filtr\u00f3w zaktualizowanych: $2",
-            "many": "%s filtr\u00f3w zaktualizowanych: $2",
             "other": "%s filtry zaktualizowane: $2"
         }
     },
     "options_popup_version_update_title": {
-        "message": "AdGuard dla Safari zosta\u0142 w\u0142a\u015bnie zaktualizowany do wersji 1$."
+        "message": "AdGuard dla Safari został właśnie zaktualizowany do wersji 1$."
     },
     "options_popup_version_update_description_minor": {
-        "message": "Ta wersja zawiera g\u0142\u00f3wnie poprawki b\u0142\u0119d\u00f3w i drobne usprawnienia."
+        "message": "Ta wersja zawiera głównie poprawki błędów i drobne usprawnienia."
     },
     "options_popup_version_update_description_major": {
-        "message": "Jest to wa\u017cna aktualizacja rozszerzenia, kt\u00f3ra przynosi wiele nowych funkcji i usprawnie\u0144."
+        "message": "Jest to ważna aktualizacja rozszerzenia, która przynosi wiele nowych funkcji i usprawnień."
     },
     "notification_content_blocker_overlimit_title": {
-        "message": "Ostrze\u017cenie"
+        "message": "Ostrzeżenie"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Uruchomiono zbyt wiele filtr\u00f3w. Safari nie mo\u017ce korzysta\u0107 z wi\u0119cej ni\u017c 50 000 regu\u0142."
+        "message": "Uruchomiono zbyt wiele filtrów. Safari nie może korzystać z więcej niż 50 000 reguł."
     },
     "options_content_blocker_overlimit": {
-        "message": "W\u0142\u0105czono zbyt wiele filtr\u00f3w. Safari nie mo\u017ce korzysta\u0107 z wi\u0119cej ni\u017c 50000 regu\u0142."
+        "message": "Włączono zbyt wiele filtrów. Safari nie może korzystać z więcej niż 50000 reguł."
     },
     "options_filters_list_search_placeholder": {
         "message": "Wyszukaj"
     },
     "options_editor_indicator_editing": {
-        "message": "Edytuj\u0119..."
+        "message": "Edytuję..."
     },
     "options_editor_indicator_saving": {
-        "message": "Zapisuj\u0119..."
+        "message": "Zapisuję..."
     },
     "options_editor_indicator_saved": {
         "message": "Zapisano"
@@ -275,7 +267,7 @@
         "message": "Preferencje"
     },
     "tray_menu_check_updates": {
-        "message": "Sprawd\u017a aktualizacje filtr\u00f3w"
+        "message": "Sprawdź aktualizacje filtrów"
     },
     "tray_menu_launch_at_startup": {
         "message": "Uruchom AdGuard przy logowaniu"
@@ -284,7 +276,7 @@
         "message": "Zamknij"
     },
     "tray_menu_protection_start": {
-        "message": "W\u0142\u0105cz AdGuard"
+        "message": "Włącz AdGuard"
     },
     "options_last_update": {
         "message": "Ostatnia aktualizacja:"
@@ -293,19 +285,19 @@
         "message": "O rozszerzeniu"
     },
     "options_compare_btn": {
-        "message": "Jak si\u0119 por\u00f3wnuj\u0105"
+        "message": "Jak się porównują"
     },
     "options_compare_title": {
-        "message": "Wypr\u00f3buj AdGuard Premium dla lepszej ochrony!"
+        "message": "Wypróbuj AdGuard Premium dla lepszej ochrony!"
     },
     "options_license_agreement": {
         "message": "Umowa licencyjna"
     },
     "options_privacy_policy": {
-        "message": "Polityka prywatno\u015bci"
+        "message": "Polityka prywatności"
     },
     "options_acknowledgment": {
-        "message": "Podzi\u0119kowania"
+        "message": "Podziękowania"
     },
     "options_github": {
         "message": "Github"
@@ -314,28 +306,26 @@
         "message": "Zaznacz pole \"ikona AdGuard Safari\" i \"AdGuard\" w ustawieniach Safari"
     },
     "onboarding_safari_btn": {
-        "message": "Otw\u00f3rz ustawienia"
+        "message": "Otwórz ustawienia"
     },
     "options_learn_more": {
-        "message": "Dowiedz si\u0119 wi\u0119cej o tym"
+        "message": "Dowiedz się więcej o tym"
     },
     "options_about_version": {
         "message": "Wersja %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "Zaktualizowano filtr u\u017cytkownika"
+        "message": "Zaktualizowano filtr użytkownika"
     },
     "notification_user_filter_updated_desc": {
-        "message": "Nowa regu\u0142a zosta\u0142a dodana do filtru u\u017cytkownika:"
+        "message": "Nowa reguła została dodana do filtru użytkownika:"
     },
     "options_filters_update_period": {
         "message": "Okres aktualizacji "
     },
     "options_filters_update_period_number": {
         "message": {
-            "one": "Co godzin\u0119",
-            "few": "Co %s godzin",
-            "many": "Co %s godzin",
+            "one": "Co godzinę",
             "other": "Co %s godzin"
         }
     },
@@ -343,7 +333,7 @@
         "message": "Nie aktualizuj"
     },
     "options_show_tray_icon": {
-        "message": "Poka\u017c AdGuard dla Safari na pasku menu"
+        "message": "Pokaż AdGuard dla Safari na pasku menu"
     },
     "options_launch_at_login": {
         "message": "Uruchom AdGuard dla Safari przy logowaniu"
@@ -355,15 +345,15 @@
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
     "settings_notification_title": {
-        "message": "Uwaga! Ikona AdGuard zosta\u0142a wy\u0142\u0105czona"
+        "message": "Uwaga! Ikona AdGuard została wyłączona"
     },
     "settings_notification_text": {
-        "message": "Mo\u017cesz u\u017cy\u0107 tej ikony do zarz\u0105dzania AdGuard dla ustawie\u0144 Safari. Na przyk\u0142ad wstrzymaj blokowanie w witrynie lub zablokuj reklam\u0119 r\u0119cznie. Mo\u017cesz w\u0142\u0105czy\u0107 ikon\u0119 AdGuard <a href='#' id='notificationEnableIconLink'>tutaj<\/a>."
+        "message": "Możesz użyć tej ikony do zarządzania AdGuard dla ustawień Safari. Na przykład wstrzymaj blokowanie w witrynie lub zablokuj reklamę ręcznie. Możesz włączyć ikonę AdGuard <a href='#' id='notificationEnableIconLink'>tutaj<\/a>."
     },
     "settings_notification_protection_title": {
-        "message": "Uwaga! Ochrona zosta\u0142a wy\u0142\u0105czona"
+        "message": "Uwaga! Ochrona została wyłączona"
     },
     "settings_notification_protection_text": {
-        "message": "Ochrona AdGuard zosta\u0142a wstrzymana. <a href='#' id='notificationEnableProtectionLink'>W\u0142\u0105cz AdGuard<\/a>."
+        "message": "Ochrona AdGuard została wstrzymana. <a href='#' id='notificationEnableProtectionLink'>Włącz AdGuard<\/a>."
     }
 }

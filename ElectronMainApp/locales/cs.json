@@ -3,16 +3,16 @@
         "message": "O AdGuardu pro Safari"
     },
     "options_popup_trusted_filter_title": {
-        "message": "D\u016fv\u011bryhodn\u00fd"
+        "message": "Důvěryhodný"
     },
     "options_popup_trusted_filter_description": {
-        "message": "D\u016fv\u011bryhodn\u00e9 filtry m\u016f\u017eou pou\u017e\u00edvat siln\u00e9 modifik\u00e1tory pravidel filtrov\u00e1n\u00ed, kter\u00e9 m\u016f\u017eou b\u00fdt v nespr\u00e1vn\u00fdch rukou nebezpe\u010dn\u00e9. Toto pol\u00ed\u010dko neza\u0161krtn\u011bte, pokud tomu ned\u016fv\u011b\u0159ujete."
+        "message": "Důvěryhodné filtry můžou používat silné modifikátory pravidel filtrování, které můžou být v nesprávných rukou nebezpečné. Toto políčko nezaškrtněte, pokud tomu nedůvěřujete."
     },
     "options_filters_filter_trusted_tag": {
-        "message": "d\u016fv\u011bryhodn\u00fd"
+        "message": "důvěryhodný"
     },
     "options_filters_filter_trusted_tag_desc": {
-        "message": "Zvolili jste si d\u016fv\u011b\u0159ovat tomuto filtru"
+        "message": "Zvolili jste si důvěřovat tomuto filtru"
     },
     "options_about_update_check": {
         "message": "Kontroluji aktualizace"
@@ -21,40 +21,40 @@
         "message": "Aktualizuji AdGuard pro Safari"
     },
     "options_about_updates_not_found": {
-        "message": "AdGuard pro Safari je aktu\u00e1ln\u00ed"
+        "message": "AdGuard pro Safari je aktuální"
     },
     "options_about_update_downloaded": {
-        "message": "T\u00e9m\u011b\u0159 aktu\u00e1ln\u00ed! Spus\u0165te znovu AdGuard pro Safari a dokon\u010dete aktualizaci."
+        "message": "Téměř aktuální! Spusťte znovu AdGuard pro Safari a dokončete aktualizaci."
     },
     "options_about_update_relaunch": {
         "message": "Znovu spustit"
     },
     "options_popup_title_placeholder": {
-        "message": "Zadejte n\u00e1zev filtru"
+        "message": "Zadejte název filtru"
     },
     "main_menu_hide": {
-        "message": "Skr\u00fdt"
+        "message": "Skrýt"
     },
     "main_menu_close_window": {
-        "message": "Zav\u0159\u00edt okno"
+        "message": "Zavřít okno"
     },
     "name": {
         "message": "AdGuard AdBlocker"
     },
     "description": {
-        "message": "Nep\u0159ekonan\u00e9 roz\u0161\u00ed\u0159en\u00ed proti reklam\u00e1m a vyskakovac\u00edm okn\u016fm. Blokuje reklamy na Facebooku, Youtube a v\u0161ech ostatn\u00edch str\u00e1nk\u00e1ch."
+        "message": "Nepřekonané rozšíření proti reklamám a vyskakovacím oknům. Blokuje reklamy na Facebooku, Youtube a všech ostatních stránkách."
     },
     "options_settings": {
-        "message": "AdGuard pro Safari - Nastaven\u00ed"
+        "message": "AdGuard pro Safari - Nastavení"
     },
     "options_general_settings": {
-        "message": "Obecn\u00e9"
+        "message": "Obecné"
     },
     "options_general_desc": {
-        "message": "AdGuard pro Safari je open source a bezpatn\u00fd software. Va\u0161e p\u0159ipom\u00ednky a p\u0159\u00edsp\u011bvky jsou v\u00edt\u00e1ny. Chcete-li nahl\u00e1sit chybu nebo po\u017e\u00e1dat o funkci, p\u0159ejd\u011bte na str\u00e1nku <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo<\/a>."
+        "message": "AdGuard pro Safari je open source a bezpatný software. Vaše připomínky a příspěvky jsou vítány. Chcete-li nahlásit chybu nebo požádat o funkci, přejděte na stránku <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo<\/a>."
     },
     "options_allow_acceptable_ads": {
-        "message": "Zobrazovat u\u017eite\u010dn\u00e9 reklamy"
+        "message": "Zobrazovat užitečné reklamy"
     },
     "options_export_settings": {
         "message": "Export settings"
@@ -68,86 +68,80 @@
     "options_antibanner_info_filters": {
         "message": {
             "one": "%s filtr",
-            "few": "%s filtry",
-            "many": "%s filtr\u016f",
-            "other": "%s filtr\u016f"
+            "other": "%s filtrů"
         }
     },
     "options_antibanner_info_rules": {
         "message": {
             "one": "%s pravidlo",
-            "few": "%s pravidla",
-            "many": "%s pravidel",
             "other": "%s pravidel"
         }
     },
     "options_antibanner_info_adv_rules": {
         "message": {
-            "one": "%s pokro\u010dil\u00e9 pravidlo",
-            "few": "%s pokro\u010dil\u00e1 pravidla",
-            "many": "%s pokro\u010dil\u00fdch pravidel",
-            "other": "%s pokro\u010dil\u00fdch pravidel"
+            "one": "%s pokročilé pravidlo",
+            "other": "%s pokročilých pravidel"
         }
     },
     "options_filters_enabled": {
         "message": "Povoleno"
     },
     "options_filters_enabled_and_more_divider": {
-        "message": "%s a %s dal\u0161\u00ed"
+        "message": "%s a %s další"
     },
     "options_filters_enabled_and_divider": {
         "message": "%s a %s"
     },
     "options_filters_no_enabled": {
-        "message": "Nebyly povoleny \u017e\u00e1dn\u00e9 filtry"
+        "message": "Nebyly povoleny žádné filtry"
     },
     "options_filters_version": {
         "message": "Verze %s"
     },
     "options_filters_updated": {
-        "message": "aktualizov\u00e1no: %s"
+        "message": "aktualizováno: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "Je n\u00e1m l\u00edto, ale zat\u00edm nem\u00e1te \u017e\u00e1dn\u00e9 vlastn\u00ed filtry"
+        "message": "Je nám líto, ale zatím nemáte žádné vlastní filtry"
     },
     "options_filters_empty_custom_add_button": {
-        "message": "P\u0159idat vlastn\u00ed filtr"
+        "message": "Přidat vlastní filtr"
     },
     "options_filters_custom_step_one_title": {
-        "message": "Odb\u011br nov\u00e9ho filtru"
+        "message": "Odběr nového filtru"
     },
     "options_filters_custom_step_one_input_placeholder": {
         "message": "Zadejte URL filtru"
     },
     "options_filters_custom_step_one_url_desc": {
-        "message": "Zadejte platnou URL pro odb\u011br filtru."
+        "message": "Zadejte platnou URL pro odběr filtru."
     },
     "options_filters_custom_step_one_url_desc_more": {
-        "message": "AdGuard p\u0159id\u00e1 tento odb\u011br filtru."
+        "message": "AdGuard přidá tento odběr filtru."
     },
     "options_filters_custom_step_one_cancel": {
-        "message": "Zru\u0161it"
+        "message": "Zrušit"
     },
     "options_filters_custom_step_one_next": {
-        "message": "Dal\u0161\u00ed"
+        "message": "Další"
     },
     "options_filters_custom_step_two_checking": {
-        "message": "Stahov\u00e1n\u00ed filtru"
+        "message": "Stahování filtru"
     },
     "options_filters_custom_step_three_title": {
         "message": "Vyskytla se chyba"
     },
     "options_filters_custom_step_three_desc": {
-        "message": "V\u00e1\u0161 vlastn\u00ed filtr nelze p\u0159idat kv\u016fli neo\u010dek\u00e1van\u00e9 chyb\u011b."
+        "message": "Váš vlastní filtr nelze přidat kvůli neočekávané chybě."
     },
     "options_filters_custom_step_three_try_again": {
         "message": "Zkusit znovu"
     },
     "options_filters_custom_step_final_title": {
-        "message": "Odb\u011br nov\u00e9ho filtru"
+        "message": "Odběr nového filtru"
     },
     "options_filters_custom_step_final_filter_title": {
-        "message": "N\u00e1zev:"
+        "message": "Název:"
     },
     "options_filters_custom_step_final_filter_description": {
         "message": "Popis:"
@@ -156,87 +150,85 @@
         "message": "Verze:"
     },
     "options_filters_custom_step_final_filter_rules_count": {
-        "message": "Po\u010det pravidel:"
+        "message": "Počet pravidel:"
     },
     "options_filters_custom_step_final_filter_homepage": {
-        "message": "Domovsk\u00e1 str\u00e1nka:"
+        "message": "Domovská stránka:"
     },
     "options_filters_custom_step_final_filter_url": {
         "message": "URL:"
     },
     "options_filters_custom_step_final_back": {
-        "message": "Zp\u011bt"
+        "message": "Zpět"
     },
     "options_filters_custom_step_final_cancel": {
-        "message": "Zru\u0161it"
+        "message": "Zrušit"
     },
     "options_filters_custom_step_final_commit": {
-        "message": "Odeb\u00edrat"
+        "message": "Odebírat"
     },
     "options_filters_check_filters_update": {
-        "message": "Vyhledat aktualizace filtr\u016f"
+        "message": "Vyhledat aktualizace filtrů"
     },
     "options_whitelist": {
         "message": "Whitelist"
     },
     "options_whitelist_description": {
-        "message": "AdGuard neblokuje reklamy na t\u011bchto str\u00e1nk\u00e1ch"
+        "message": "AdGuard neblokuje reklamy na těchto stránkách"
     },
     "options_whitelist_inverse": {
-        "message": "Invertovat Whitelist <span class='sp-table-row-info'>. Blokuje reklamy v\u0161ude <i> , krom\u011b <\/i> str\u00e1nek uveden\u00fdch ve whitelistu<\/span>."
+        "message": "Invertovat Whitelist <span class='sp-table-row-info'>. Blokuje reklamy všude <i> , kromě <\/i> stránek uvedených ve whitelistu<\/span>."
     },
     "options_userfilter": {
-        "message": "U\u017eivatelsk\u00fd filtr"
+        "message": "Uživatelský filtr"
     },
     "options_userfilter_description": {
-        "message": "Do tohoto filtru m\u016f\u017eete p\u0159idat vlastn\u00ed pravidla. Tato mo\u017enost je doporu\u010dena pro pokro\u010dil\u00e9 u\u017eivatele, kte\u0159\u00ed jsou obezn\u00e1meni s HTML\/CSS. Chcete-li se neu\u010dit ps\u00e1t sv\u00e1 vlastn\u00ed filtrovac\u00ed pravidla, p\u0159e\u010dt\u011bte si <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>n\u00e1vod filtrovac\u00edch pravidel<\/a>."
+        "message": "Do tohoto filtru můžete přidat vlastní pravidla. Tato možnost je doporučena pro pokročilé uživatele, kteří jsou obeznámeni s HTML\/CSS. Chcete-li se neučit psát svá vlastní filtrovací pravidla, přečtěte si <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>návod filtrovacích pravidel<\/a>."
     },
     "options_show_app_updated_notification": {
-        "message": "Upozornit na aktualizace roz\u0161\u00ed\u0159en\u00ed"
+        "message": "Upozornit na aktualizace rozšíření"
     },
     "options_use_optimized_filters": {
-        "message": "Pou\u017e\u00edt optimalizovan\u00e9 filtry<span class='sp-table-row-info'>Zjednodu\u0161en\u00e9 filtry optimalizovan\u00e9 pro Safari Content Blocking API.<\/span>"
+        "message": "Použít optimalizované filtry<span class='sp-table-row-info'>Zjednodušené filtry optimalizované pro Safari Content Blocking API.<\/span>"
     },
     "options_popup_update_title": {
-        "message": "Filtry \u00fasp\u011b\u0161n\u011b aktualizov\u00e1ny"
+        "message": "Filtry úspěšně aktualizovány"
     },
     "options_popup_update_error_title": {
-        "message": "Chyba aktualizace filtr\u016f"
+        "message": "Chyba aktualizace filtrů"
     },
     "options_popup_update_not_found": {
-        "message": "Nenalezeny \u017e\u00e1dn\u00e9 aktualizace"
+        "message": "Nenalezeny žádné aktualizace"
     },
     "options_popup_update_error": {
-        "message": "Nepovedlo se z\u00edskat aktualizace. Pros\u00edm opakujte pozd\u011bji."
+        "message": "Nepovedlo se získat aktualizace. Prosím opakujte později."
     },
     "options_popup_update_updated": {
-        "message": "\"$1\" aktualizov\u00e1n na verzi $2"
+        "message": "\"$1\" aktualizován na verzi $2"
     },
     "options_popup_update_updated_more": {
         "message": {
-            "one": "%s filtr aktualizov\u00e1n: $2",
-            "few": "%s filtry aktualizov\u00e1ny: $2",
-            "many": "%s filtr\u016f aktualizov\u00e1no: $2",
-            "other": "%s filtr\u016f aktualizov\u00e1no: $2"
+            "one": "%s filtr aktualizován: $2",
+            "other": "%s filtrů aktualizováno: $2"
         }
     },
     "options_popup_version_update_title": {
-        "message": "AdGuard pro Safari byl pr\u00e1v\u011b aktualizov\u00e1n na verzi $1."
+        "message": "AdGuard pro Safari byl právě aktualizován na verzi $1."
     },
     "options_popup_version_update_description_minor": {
-        "message": "Tato verze obsahuje v\u011bt\u0161inou opravy chyb a drobn\u00e1 vylep\u0161en\u00ed."
+        "message": "Tato verze obsahuje většinou opravy chyb a drobná vylepšení."
     },
     "options_popup_version_update_description_major": {
-        "message": "Jedn\u00e1 se o z\u00e1sadn\u00ed aktualizaci roz\u0161\u00ed\u0159en\u00ed, kter\u00e1 p\u0159in\u00e1\u0161\u00ed spoustu nov\u00fdch funkc\u00ed a vylep\u0161en\u00ed."
+        "message": "Jedná se o zásadní aktualizaci rozšíření, která přináší spoustu nových funkcí a vylepšení."
     },
     "notification_content_blocker_overlimit_title": {
-        "message": "Varov\u00e1n\u00ed"
+        "message": "Varování"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "P\u0159\u00edli\u0161 mnoho povolen\u00fdch filtr\u016f. Safari nen\u00ed schopno pou\u017e\u00edvat v\u00edce ne\u017e 50 000 pravidel."
+        "message": "Příliš mnoho povolených filtrů. Safari není schopno používat více než 50 000 pravidel."
     },
     "options_content_blocker_overlimit": {
-        "message": "P\u0159\u00edli\u0161 mnoho povolen\u00fdch filtr\u016f. Safari nen\u00ed schopno pou\u017e\u00edvat v\u00edce ne\u017e 50 000 pravidel."
+        "message": "Příliš mnoho povolených filtrů. Safari není schopno používat více než 50 000 pravidel."
     },
     "options_filters_list_search_placeholder": {
         "message": "Hledat"
@@ -245,108 +237,106 @@
         "message": "Editace..."
     },
     "options_editor_indicator_saving": {
-        "message": "Ukl\u00e1d\u00e1n\u00ed..."
+        "message": "Ukládání..."
     },
     "options_editor_indicator_saved": {
-        "message": "Ulo\u017eeno"
+        "message": "Uloženo"
     },
     "main_menu_edit": {
         "message": "Upravit"
     },
     "main_menu_undo": {
-        "message": "Zp\u011bt"
+        "message": "Zpět"
     },
     "main_menu_cut": {
         "message": "Vyjmout"
     },
     "main_menu_copy": {
-        "message": "Kop\u00edrovat"
+        "message": "Kopírovat"
     },
     "main_menu_paste": {
-        "message": "Vlo\u017eit"
+        "message": "Vložit"
     },
     "main_menu_select-all": {
-        "message": "Vybrat v\u0161e"
+        "message": "Vybrat vše"
     },
     "tray_menu_about": {
         "message": "O programu"
     },
     "tray_menu_preferences": {
-        "message": "P\u0159edvolby"
+        "message": "Předvolby"
     },
     "tray_menu_check_updates": {
-        "message": "Vyhledat aktualizace filtr\u016f"
+        "message": "Vyhledat aktualizace filtrů"
     },
     "tray_menu_launch_at_startup": {
-        "message": "Spustit AdGuard p\u0159i p\u0159ihl\u00e1\u0161en\u00ed"
+        "message": "Spustit AdGuard při přihlášení"
     },
     "tray_menu_quit": {
-        "message": "Ukon\u010dit"
+        "message": "Ukončit"
     },
     "tray_menu_protection_start": {
         "message": "Zapnout AdGuard"
     },
     "options_last_update": {
-        "message": "Posledn\u00ed aktualizace:"
+        "message": "Poslední aktualizace:"
     },
     "options_about": {
         "message": "O programu"
     },
     "options_compare_btn": {
-        "message": "Jak porovn\u00e1vaj\u00ed"
+        "message": "Jak porovnávají"
     },
     "options_compare_title": {
-        "message": "Zkuste AdGuard Premium pro lep\u0161\u00ed ochranu!"
+        "message": "Zkuste AdGuard Premium pro lepší ochranu!"
     },
     "options_license_agreement": {
-        "message": "Licen\u010dn\u00ed smlouva s koncov\u00fdm u\u017eivatelem"
+        "message": "Licenční smlouva s koncovým uživatelem"
     },
     "options_privacy_policy": {
-        "message": "Z\u00e1sady ochrany osobn\u00edch \u00fadaj\u016f"
+        "message": "Zásady ochrany osobních údajů"
     },
     "options_acknowledgment": {
-        "message": "Pod\u011bkov\u00e1n\u00ed"
+        "message": "Poděkování"
     },
     "options_github": {
         "message": "Github"
     },
     "onboarding_safari_desc": {
-        "message": "Za\u0161krtn\u011bte pol\u00ed\u010dko \"Ikona AdGuard Safari\", \"Pokro\u010dil\u00e9 blokov\u00e1n\u00ed AdGuard\" a \"AdGuard\" v p\u0159edvolb\u00e1ch Safari"
+        "message": "Zaškrtněte políčko \"Ikona AdGuard Safari\", \"Pokročilé blokování AdGuard\" a \"AdGuard\" v předvolbách Safari"
     },
     "onboarding_safari_btn": {
-        "message": "Otev\u0159\u00edt p\u0159edvolby"
+        "message": "Otevřít předvolby"
     },
     "options_learn_more": {
-        "message": "Zjistit v\u00edce"
+        "message": "Zjistit více"
     },
     "options_about_version": {
         "message": "Verze %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "U\u017eivatelsk\u00fd filtr byl aktualizov\u00e1n"
+        "message": "Uživatelský filtr byl aktualizován"
     },
     "notification_user_filter_updated_desc": {
-        "message": "Do u\u017eivatelsk\u00e9ho filtru bylo p\u0159id\u00e1no nov\u00e9 pravidlo:"
+        "message": "Do uživatelského filtru bylo přidáno nové pravidlo:"
     },
     "options_filters_update_period": {
         "message": "Interval aktualizace"
     },
     "options_filters_update_period_number": {
         "message": {
-            "one": "Ka\u017edou hodinu",
-            "few": "Ka\u017ed\u00e9 %s hodiny",
-            "many": "Ka\u017ed\u00fdch %s hodin",
-            "other": "Ka\u017ed\u00fdch %s hodin"
+            "one": "Každou hodinu",
+            "other": "Každých %s hodin"
         }
     },
     "options_filters_period_not_update": {
         "message": "Neaktualizovat"
     },
     "options_show_tray_icon": {
-        "message": "V li\u0161t\u011b menu zobrazit AdGuard pro Safari"
+        "message": "V liště menu zobrazit AdGuard pro Safari"
     },
     "options_launch_at_login": {
-        "message": "Spustit AdGuard pro Safari p\u0159i p\u0159ihl\u00e1\u0161en\u00ed"
+        "message": "Spustit AdGuard pro Safari při přihlášení"
     },
     "options_verbose_logging": {
         "message": "Verbose logging"
@@ -355,10 +345,10 @@
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
     "settings_notification_title": {
-        "message": "Pozor! Roz\u0161\u00ed\u0159en\u00ed AdGuardu jsou zak\u00e1z\u00e1na"
+        "message": "Pozor! Rozšíření AdGuardu jsou zakázána"
     },
     "settings_notification_text": {
-        "message": "Tato roz\u0161\u00ed\u0159en\u00ed m\u016f\u017eete pou\u017e\u00edt ke spr\u00e1v\u011b AdGuardu pro nastaven\u00ed Safari. Nap\u0159\u00edklad pozastavit blokov\u00e1n\u00ed na t\u00e9to str\u00e1nce nebo blokovat reklamy ru\u010dn\u011b. M\u016f\u017eete povolit ikonu AdGuardu a pokro\u010dil\u00e9 blokov\u00e1n\u00ed <a href='#' id='notificationEnableIconLink'>zde<\/a>."
+        "message": "Tato rozšíření můžete použít ke správě AdGuardu pro nastavení Safari. Například pozastavit blokování na této stránce nebo blokovat reklamy ručně. Můžete povolit ikonu AdGuardu a pokročilé blokování <a href='#' id='notificationEnableIconLink'>zde<\/a>."
     },
     "settings_notification_protection_title": {
         "message": "Pozor! Ochrana byla vypnuta"
