@@ -111,10 +111,10 @@ Options:
 
 ## <a id="updates"></a> Updates json
 
-We made a special script that updates version in json file
+We made a special script that updates version value in updates.json file
 
 ```
-Usage: notarize.py [options]
+Usage: update_version.py [options]
 
 Options:
   -h, --help            show this help message and exit
