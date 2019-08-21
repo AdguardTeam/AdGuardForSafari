@@ -88,7 +88,7 @@ echo "Step 5: Archive the app"
 /usr/bin/ditto -c -k --keepParent "$APP_PATH" "$APP_PATH.zip"
 
 echo "Step 6: Build version.txt"
-printf "version=$version\nbuild_number=$build_number\n" >$BUILD_DIR/$VERSION_FILE
+printf "version=$version\nbuild_number=$build_number\nchannel=$CHANNEL\n" >$BUILD_DIR/$VERSION_FILE
 
 echo "Step 7: Build updates json files"
 # creates release.json and edits updates.json
