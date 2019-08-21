@@ -208,6 +208,9 @@ Arguments:
 Output directory `build` contains:
 
 - `Adguard for Safari.app` -- signed and notarized app.
+- `Adguard for Safari.app.zip` -- zip of signed and notarized app.
 - `Adguard for Safari.xcarchive` -- app archive.
 - `Adguard for Safari.xcarchive.zip` -- zip of app archive
 - `version.txt` -- version info (CI requirement).
+- `updates.json` -- json file with updates info.
+- `release.json` -- json file with updates info.

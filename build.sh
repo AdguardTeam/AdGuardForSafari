@@ -90,6 +90,25 @@ echo "Step 5: Archive the app"
 echo "Step 6: Build version.txt"
 printf "version=$version\nbuild_number=$build_number\n" >$BUILD_DIR/$VERSION_FILE
 
+echo "Step 7: Build updates json files"
+# creates release.json and edits updates.json
+buildFileName="Adguard for Safari.app.zip"
+if [ "$CHANNEL" == "beta" ]; then
+    buildFileName="Adguard for Safari Beta.app.zip"
+fi
+
+printf "{
+  \"url\": \"https://static.adguard.com/safari/$CHANNEL/$buildFileName\",
+  \"name\": \"$version-$build_number\",
+  \"notes\": \"Updates\",
+  \"pub_date\": \"$(date)\"
+}" >$BUILD_DIR/release.json
+
+curl "https://static.adguard.com/safari/updates-11.json" > $BUILD_DIR/updates.json
+
+# python script parameters should be relative to the script location
+python3 -u Scripts/update_version.py --path="../$BUILD_DIR/updates.json" --channel="$CHANNEL" --version="$version"
+
 
 if [ "$CHANNEL" != "mas" ]; then
     exit 0;

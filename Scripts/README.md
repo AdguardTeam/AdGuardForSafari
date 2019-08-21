@@ -11,6 +11,7 @@ This project is supposed to automate some standard tasks.
   - [Updating XIB files (from .strings files)](#xib-from-strings)
   - [Exporting translations](#export-all)
 - [Notarization](#notarization)
+- [Updates json](#updates)
 
 ## <a id="requirements"></a> Requirements
 
@@ -106,4 +107,19 @@ Options:
   -p PATH, --path=PATH  path to the file or app to notarize.
   -b BUNDLE_ID, --bundle-id=BUNDLE_ID
                         bundle ID for the notary service.
+```
+
+## <a id="updates"></a> Updates json
+
+We made a special script that updates version value in updates.json file
+
+```
+Usage: update_version.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  --path=PATH           path to the json file
+  --channel=CHANNEL     channel (beta or prod)
+  --version=VERSION     sem version 
+                        
 ```
