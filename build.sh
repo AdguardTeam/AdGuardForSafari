@@ -33,7 +33,7 @@ echo "Building AdGuard, update channel $CHANNEL"
 
 WORKSPACE="Adguard.xcworkspace"
 CODE_SIGN_IDENTITY="Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)"
-ARCHIVE_NAME="Adguard for Safari.xcarchive"
+ARCHIVE_NAME="AdGuard_Safari.xcarchive"
 ARCHIVE_PATH="$BUILD_DIR/$ARCHIVE_NAME"
 APP_NAME="Adguard for Safari.app"
 ARCHIVE_APP_PATH="$ARCHIVE_PATH/Products/Applications/$APP_NAME"
@@ -92,9 +92,9 @@ printf "version=$version\nbuild_number=$build_number\nchannel=$CHANNEL\n" >$BUIL
 
 echo "Step 7: Build updates json files"
 # creates release.json and edits updates.json
-buildFileName="Adguard for Safari.app.zip"
+buildFileName="AdGuard_Safari.app.zip"
 if [ "$CHANNEL" == "beta" ]; then
-    buildFileName="Adguard for Safari Beta.app.zip"
+    buildFileName="AdGuard_Safari_Beta.app.zip"
 fi
 
 printf "{
@@ -104,7 +104,7 @@ printf "{
   \"pub_date\": \"$(date)\"
 }" >$BUILD_DIR/release.json
 
-curl "https://static.adguard.com/safari/updates-11.json" > $BUILD_DIR/updates.json
+curl "https://static.adguard.com/safari/updates.json" > $BUILD_DIR/updates.json
 
 # python script parameters should be relative to the script location
 python3 -u Scripts/update_version.py --path="../$BUILD_DIR/updates.json" --channel="$CHANNEL" --version="$version"
