@@ -1,14 +1,5 @@
-/* 
-  InfoPlist.strings
-  AdGuard
-
-  Created by Dimitry Kolyshev on 21.02.2019.
-  Copyright © 2019 Adguard Software Ltd. All rights reserved.
-*/
-
 /* (No Comment) */
 "NSHumanReadableDescription" = "Это расширение применяет дополнительные правила блокировки, которые не поддерживаются Safari Content Blocking API.";
 
 /* Bundle display name */
 "CFBundleDisplayName" = "AdGuard Advanced Blocking";
-

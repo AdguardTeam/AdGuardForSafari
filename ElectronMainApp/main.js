@@ -1,5 +1,6 @@
 const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
+const log = require('./src/main/app/utils/log');
 const path = require('path');
 const os = require('os');
 const execSync = require('child_process').execSync;
@@ -56,7 +57,10 @@ function createWindow(onWindowLoaded) {
         minHeight: 768,
         center: true,
         icon: './src/main/ui/images/128x128.png',
-        resizable: true
+        resizable: true,
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
 
     mainWindow.loadFile('./src/main/ui/options.html');
@@ -118,15 +122,19 @@ function isOpenedAtLogin() {
     try {
         const stdout = execSync('who | grep -i "$USER.*console"', { timeout: 100}).toString();
         //Output format: userName console  Jun 20 18:14
+        log.info('Checking open at login user console: {0}', stdout);
         const now = new Date();
         const loginDateTime = Date.parse(`${stdout} ${now.getFullYear()}`);
+        log.info('Checking open at login login date: {0}', loginDateTime);
         if (!isNaN(loginDateTime)) {
+            log.info('Checking open at login, comparing times');
             return now.getTime() - loginDateTime < 2 * SECONDS_FROM_LOGIN * 1000;
         }
     } catch (e) {
-        // Ignore
+        log.info('Error: {0}', e);
     }
 
+    log.info('Checking open at login, fallback comparing os uptime: {0}', os.uptime());
     return os.uptime() < SECONDS_FROM_LOGIN;
 }
 
@@ -144,12 +152,16 @@ app.on('ready', (() => {
     startup.init(showWindow);
     uiEventListener.init();
 
+    log.info('App ready - creating browser windows');
+
     if (isOpenedAtLogin()) {
+        log.info('App is opened at login');
         // Open in background at login
         if (process.platform === 'darwin') {
             app.dock.hide();
         }
     } else {
+        log.info('App is opened');
         createWindow();
         uiEventListener.register(mainWindow);
     }

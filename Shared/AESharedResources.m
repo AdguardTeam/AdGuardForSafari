@@ -19,7 +19,13 @@
 #import "CommonLib/ACLang.h"
 #import <SafariServices/SafariServices.h>
 
+#define AES_BLOCKING_CONTENT_EMPTY_RESOURCE     @"blocking-content-rules-empty.json"
 #define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"
+#define AES_BLOCKING_CONTENT_RULES_PRIVACY_RESOURCE     @"blocking-content-rules-privacy.json"
+#define AES_BLOCKING_CONTENT_RULES_SECURITY_RESOURCE     @"blocking-content-rules-security.json"
+#define AES_BLOCKING_CONTENT_RULES_SOCIAL_RESOURCE     @"blocking-content-rules-social.json"
+#define AES_BLOCKING_CONTENT_RULES_OTHER_RESOURCE     @"blocking-content-rules-other.json"
+#define AES_BLOCKING_CONTENT_RULES_CUSTOM_RESOURCE     @"blocking-content-rules-custom.json"
 #define AES_ADV_BLOCKING_CONTENT_RULES_RESOURCE @"adv-blocking-content-rules.json"
 #define AES_WHITELIST_DOMAINS                   @"whitelist-domains.data"
 #define AES_USERFILTER_RULES                    @"userfilter-rules.data"
@@ -247,12 +253,23 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 /////////////////////////////////////////////////////////////////////
 #pragma mark Access to shared resources (public methods)
 
-+ (void)setBlockingContentRulesJson:(NSData *)jsonData completion:(void (^)(void))completion {
++ (void)setBlockingContentRulesJson:(NSData *)jsonData bundleId:(NSString *)bundleId completion:(void (^)(void))completion {
 
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
         @autoreleasepool {
             NSData *data = jsonData ?: [NSData data];
-            [self saveData:data toFileRelativePath:AES_BLOCKING_CONTENT_RULES_RESOURCE];
+            
+            NSDictionary *d = @{
+                                AG_BLOCKER_BUNDLEID: AES_BLOCKING_CONTENT_RULES_RESOURCE,
+                                AG_BLOCKER_PRIVACY_BUNDLEID: AES_BLOCKING_CONTENT_RULES_PRIVACY_RESOURCE,
+                                AG_BLOCKER_SECURITY_BUNDLEID: AES_BLOCKING_CONTENT_RULES_SECURITY_RESOURCE,
+                                AG_BLOCKER_SOCIAL_BUNDLEID: AES_BLOCKING_CONTENT_RULES_SOCIAL_RESOURCE,
+                                AG_BLOCKER_OTHER_BUNDLEID: AES_BLOCKING_CONTENT_RULES_OTHER_RESOURCE,
+                                AG_BLOCKER_CUSTOM_BUNDLEID: AES_BLOCKING_CONTENT_RULES_CUSTOM_RESOURCE
+                                };
+            
+            NSString *path = d[bundleId];
+            [self saveData:data toFileRelativePath:path];
             if (completion) {
                 completion();
             }
@@ -273,8 +290,33 @@ static AESListenerBlock _onAdvancedBlockingBlock;
     });
 }
 
++ (NSURL *)blockingContentRulesEmptyUrl {
+    return [NSURL fileURLWithPath:AES_BLOCKING_CONTENT_EMPTY_RESOURCE];
+}
+
 + (NSURL *)blockingContentRulesUrl {
     return  [_containerFolderUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_RULES_RESOURCE];
+}
+
++ (NSURL *)blockingContentPrivacyUrl {
+    return  [_containerFolderUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_RULES_PRIVACY_RESOURCE];
+}
+
++ (NSURL *)blockingContentSecurityUrl {
+    return  [_containerFolderUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_RULES_SECURITY_RESOURCE];
+}
+
+
++ (NSURL *)blockingContentSocialUrl {
+    return  [_containerFolderUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_RULES_SOCIAL_RESOURCE];
+}
+
++ (NSURL *)blockingContentOtherUrl {
+    return  [_containerFolderUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_RULES_OTHER_RESOURCE];
+}
+
++ (NSURL *)blockingContentCustomUrl {
+    return  [_containerFolderUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_RULES_CUSTOM_RESOURCE];
 }
 
 + (NSURL *)advancedBlockingContentRulesUrl {

@@ -1,30 +1,30 @@
 {
     "main_menu_about": {
-        "message": "Om AdGuard f\u00f6r Safari"
+        "message": "Om AdGuard för Safari"
     },
     "options_popup_trusted_filter_title": {
-        "message": "Tillf\u00f6rlitlig"
+        "message": "Tillförlitlig"
     },
     "options_popup_trusted_filter_description": {
         "message": "Trusted filters can use powerful filtering rules modifiers which can be dangerous in the wrong hands. Do not check this box unless you fully trust it."
     },
     "options_filters_filter_trusted_tag": {
-        "message": "tillf\u00f6rlitlig"
+        "message": "tillförlitlig"
     },
     "options_filters_filter_trusted_tag_desc": {
-        "message": "Du valde att lita p\u00e5 detta filter"
+        "message": "Du valde att lita på detta filter"
     },
     "options_about_update_check": {
         "message": "Kontrollerar uppdateringar"
     },
     "options_about_updating": {
-        "message": "Uppdaterar AdGuard f\u00f6r Safari"
+        "message": "Uppdaterar AdGuard för Safari"
     },
     "options_about_updates_not_found": {
-        "message": "AdGuard f\u00f6r Safari \u00e4r uppdaterat"
+        "message": "AdGuard för Safari är uppdaterat"
     },
     "options_about_update_downloaded": {
-        "message": "N\u00e4stan uppdaterad! Starta om AdGuard f\u00f6r Safari f\u00f6r att slutf\u00f6ra uppdateringen"
+        "message": "Nästan uppdaterad! Starta om AdGuard för Safari för att slutföra uppdateringen"
     },
     "options_about_update_relaunch": {
         "message": "Starta om"
@@ -33,28 +33,28 @@
         "message": "Skriv in filternamn"
     },
     "main_menu_hide": {
-        "message": "D\u00f6lj"
+        "message": "Dölj"
     },
     "main_menu_close_window": {
-        "message": "St\u00e4ng f\u00f6nster"
+        "message": "Stäng fönster"
     },
     "name": {
         "message": "AdGuard AdBlocker"
     },
     "description": {
-        "message": "O\u00f6vertr\u00e4ffat till\u00e4gg f\u00f6r blockering av annonser och popups. Blockerar annonser p\u00e5 Facebook, Youtube och p\u00e5 alla andra webbplatser."
+        "message": "Oöverträffat tillägg för blockering av annonser och popups. Blockerar annonser på Facebook, Youtube och på alla andra webbplatser."
     },
     "options_settings": {
-        "message": "AdGuard f\u00f6r Safari - Inst\u00e4llningar"
+        "message": "AdGuard för Safari - Inställningar"
     },
     "options_general_settings": {
-        "message": "Allm\u00e4nt"
+        "message": "Allmänt"
     },
     "options_general_desc": {
-        "message": "AdGuard f\u00f6r Safari \u00e4r en kostnadsfri mjukvara i \u00d6ppen k\u00e4llkod. Vi v\u00e4lkomnar kommentarer och bidrag. Om du vill skicka in en buggrapport eller efterfr\u00e5ga en funktion var sn\u00e4ll och g\u00e5 till <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo<\/a>."
+        "message": "AdGuard för Safari är en kostnadsfri mjukvara i Öppen källkod. Vi välkomnar kommentarer och bidrag. Om du vill skicka in en buggrapport eller efterfråga en funktion var snäll och gå till <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo<\/a>."
     },
     "options_allow_acceptable_ads": {
-        "message": "Till\u00e5t s\u00f6kannonser och reklam f\u00f6r den egna hemsidan."
+        "message": "Tillåt sökannonser och reklam för den egna hemsidan."
     },
     "options_export_settings": {
         "message": "Export settings"
@@ -102,28 +102,28 @@
         "message": "uppdaterade: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "Beklagar men du har \u00e4nnu inga egna filter"
+        "message": "Beklagar men du har ännu inga egna filter"
     },
     "options_filters_empty_custom_add_button": {
-        "message": "L\u00e4gg till ett eget filter"
+        "message": "Lägg till ett eget filter"
     },
     "options_filters_custom_step_one_title": {
         "message": "Ny filterbeskrivning"
     },
     "options_filters_custom_step_one_input_placeholder": {
-        "message": "Skriv in URL f\u00f6r filtret"
+        "message": "Skriv in URL för filtret"
     },
     "options_filters_custom_step_one_url_desc": {
         "message": "Skriv in ett giltig webbadress eller ett filterabonnemang."
     },
     "options_filters_custom_step_one_url_desc_more": {
-        "message": "AdGuard kommer att l\u00e4gga till filterabonnemanget"
+        "message": "AdGuard kommer att lägga till filterabonnemanget"
     },
     "options_filters_custom_step_one_cancel": {
         "message": "Avbryt"
     },
     "options_filters_custom_step_one_next": {
-        "message": "N\u00e4sta"
+        "message": "Nästa"
     },
     "options_filters_custom_step_two_checking": {
         "message": "Laddar ner filtret"
@@ -132,10 +132,10 @@
         "message": "Fel uppstod"
     },
     "options_filters_custom_step_three_desc": {
-        "message": "Beklagligtvis kunde inte ditt filter l\u00e4ggas till pga ett ov\u00e4ntat fel."
+        "message": "Beklagligtvis kunde inte ditt filter läggas till pga ett oväntat fel."
     },
     "options_filters_custom_step_three_try_again": {
-        "message": "F\u00f6rs\u00f6k igen"
+        "message": "Försök igen"
     },
     "options_filters_custom_step_final_title": {
         "message": "Nytt filterabonemang"
@@ -183,13 +183,13 @@
         "message": "Egna filter"
     },
     "options_userfilter_description": {
-        "message": "Du kan l\u00e4gga till egna filterregler till&nbsp;det h\u00e4r filtret. Alternativet &nbsp;rekommenderas f\u00f6r anv\u00e4ndare som \u00e4r bekanta med HTML\/CSS. L\u00e4s <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filterregelsgudien<\/a> f\u00f6r att &nbsp;l\u00e4ra dig hur du&nbsp;skapar egna filterregler."
+        "message": "Du kan lägga till egna filterregler till&nbsp;det här filtret. Alternativet &nbsp;rekommenderas för användare som är bekanta med HTML\/CSS. Läs <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filterregelsgudien<\/a> för att &nbsp;lära dig hur du&nbsp;skapar egna filterregler."
     },
     "options_show_app_updated_notification": {
-        "message": "Avisera om till\u00e4ggsuppdateringar"
+        "message": "Avisera om tilläggsuppdateringar"
     },
     "options_use_optimized_filters": {
-        "message": "Anv\u00e4nd optimerade filter<span class='sp-table-row-info'>Effektiv filterlista, optimerad f\u00f6r Safari Content Blocking API.<\/span>"
+        "message": "Använd optimerade filter<span class='sp-table-row-info'>Effektiv filterlista, optimerad för Safari Content Blocking API.<\/span>"
     },
     "options_popup_update_title": {
         "message": "Filtren uppdaterades korrekt"
@@ -201,37 +201,37 @@
         "message": "Inga uppdateringar funna"
     },
     "options_popup_update_error": {
-        "message": "Det gick inte att h\u00e4mta uppdateringar. Prova igen lite senare."
+        "message": "Det gick inte att hämta uppdateringar. Prova igen lite senare."
     },
     "options_popup_update_updated": {
         "message": "\"$1\" uppdaterad till version $2"
     },
     "options_popup_update_updated_more": {
         "message": {
-            "one": "K\u00e4llspr\u00e5ket har inte den h\u00e4r pluralformen",
+            "one": "Källspråket har inte den här pluralformen",
             "other": "%s filter uppdaterade: $2"
         }
     },
     "options_popup_version_update_title": {
-        "message": "AdGuard f\u00f6r Safari uppdaterades till version $1."
+        "message": "AdGuard för Safari uppdaterades till version $1."
     },
     "options_popup_version_update_description_minor": {
-        "message": "Uppdateringen inneh\u00e5ller mest korrigeringar av buggar och sm\u00e4rre f\u00f6rb\u00e4ttringar."
+        "message": "Uppdateringen innehåller mest korrigeringar av buggar och smärre förbättringar."
     },
     "options_popup_version_update_description_major": {
-        "message": "Det h\u00e4r \u00e4r en st\u00f6rre uppdatering med flera nya funktioner och f\u00f6rb\u00e4ttringar."
+        "message": "Det här är en större uppdatering med flera nya funktioner och förbättringar."
     },
     "notification_content_blocker_overlimit_title": {
         "message": "Varning"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "F\u00f6r m\u00e5nga valda filter. Safari kan endast hantera 50 000 regler."
+        "message": "För många valda filter. Safari kan endast hantera 50 000 regler."
     },
     "options_content_blocker_overlimit": {
-        "message": "F\u00f6r m\u00e5nga valda filter. Safari kan endast hantera 50 000 regler."
+        "message": "För många valda filter. Safari kan endast hantera 50 000 regler."
     },
     "options_filters_list_search_placeholder": {
-        "message": "S\u00f6k"
+        "message": "Sök"
     },
     "options_editor_indicator_editing": {
         "message": "Redigerar..."
@@ -246,7 +246,7 @@
         "message": "Redigera"
     },
     "main_menu_undo": {
-        "message": "\u00c5ngra"
+        "message": "Ångra"
     },
     "main_menu_cut": {
         "message": "Klipp ut"
@@ -264,7 +264,7 @@
         "message": "Om"
     },
     "tray_menu_preferences": {
-        "message": "Inst\u00e4llningar..."
+        "message": "Inställningar..."
     },
     "tray_menu_check_updates": {
         "message": "Kontrollera om det finns filteruppdateringar"
@@ -285,31 +285,31 @@
         "message": "Om"
     },
     "options_compare_btn": {
-        "message": "J\u00e4mf\u00f6r dem"
+        "message": "Jämför dem"
     },
     "options_compare_title": {
-        "message": "Prova AdGuard Premium f\u00f6r ett \u00e4nnu b\u00e4ttre skydd."
+        "message": "Prova AdGuard Premium för ett ännu bättre skydd."
     },
     "options_license_agreement": {
-        "message": "Slutanv\u00e4ndaravtal"
+        "message": "Slutanvändaravtal"
     },
     "options_privacy_policy": {
         "message": "Integritetspolicy"
     },
     "options_acknowledgment": {
-        "message": "Erk\u00e4nnanden"
+        "message": "Erkännanden"
     },
     "options_github": {
         "message": "Github"
     },
     "onboarding_safari_desc": {
-        "message": "S\u00e4tt bock i rutan intill \"AdGuard Safariikon\" och i \"AdGuard\" i Safaris Inst\u00e4llningar"
+        "message": "Sätt bock i rutan intill \"AdGuard Safariikon\" och i \"AdGuard\" i Safaris Inställningar"
     },
     "onboarding_safari_btn": {
-        "message": "\u00d6ppna Inst\u00e4llningar"
+        "message": "Öppna Inställningar"
     },
     "options_learn_more": {
-        "message": "L\u00e4s mer om det"
+        "message": "Läs mer om det"
     },
     "options_about_version": {
         "message": "Version %s"
@@ -333,10 +333,10 @@
         "message": "Uppdatera inte"
     },
     "options_show_tray_icon": {
-        "message": "Visa AdGuard f\u00f6r Safari p\u00e5 menyraden"
+        "message": "Visa AdGuard för Safari på menyraden"
     },
     "options_launch_at_login": {
-        "message": "Starta AdGuard f\u00f6r Safari vid inloggningen"
+        "message": "Starta AdGuard för Safari vid inloggningen"
     },
     "options_verbose_logging": {
         "message": "Verbose logging"
@@ -345,10 +345,10 @@
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
     "settings_notification_title": {
-        "message": "Observera! AdGuardstill\u00e4gget \u00e4r avaktiverat."
+        "message": "Observera! AdGuardstillägget är avaktiverat."
     },
     "settings_notification_text": {
-        "message": "Du kan anv\u00e4nda de h\u00e4r till\u00e4ggen f\u00f6r att hantera inst\u00e4llningarna  i AdGuard f\u00f6r Safari. Du kan t.ex. pausa blockeringen p\u00e5 en webbsida eller manuellt blockera en annons. Du kan kan aktivera AdGuard-ikonen <a href='#' id='notificationEnableIconLink'>h\u00e4r<\/a>."
+        "message": "Du kan använda de här tilläggen för att hantera inställningarna  i AdGuard för Safari. Du kan t.ex. pausa blockeringen på en webbsida eller manuellt blockera en annons. Du kan kan aktivera AdGuard-ikonen <a href='#' id='notificationEnableIconLink'>här<\/a>."
     },
     "settings_notification_protection_title": {
         "message": "Observera! Skyddet kopplades bort"

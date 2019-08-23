@@ -1,0 +1,41 @@
+[
+  {
+    "project_id": "safari",
+    "base_locale": "en",
+    "languages": {
+      "en": "English",
+      "cs": "Chech",
+      "da": "Danish",
+      "de": "German",
+      "es": "Spanish",
+      "fr": "French",
+      "it": "Italian",
+      "ja": "Japanese",
+      "pl": "Polish",
+      "pt-BR": "Portuguese (Brazil)",
+      "pt-PT": "Portuguese",
+      "ru": "Russian",
+      "sv": "Sweden",
+      "tr": "Turkish",
+      "zh-Hans": "Chinese Simplified (mainland China)",
+      "zh-Hant": "Chinese Traditional (Taiwan)"
+    },
+    "localizable_files": [
+      "Extension/Localizable.strings",
+      "Extension/InfoPlist.strings",
+      "AdvancedBlocking/InfoPlist.strings",
+      "BlockerCustomExtension/InfoPlist.strings",
+      "BlockerExtension/InfoPlist.strings",
+      "BlockerOtherExtension/InfoPlist.strings",
+      "BlockerPrivacyExtension/InfoPlist.strings",
+      "BlockerSecurityExtension/InfoPlist.strings",
+      "BlockerSocialExtension/InfoPlist.strings"
+    ],
+    "json_files": [
+      "../ElectronMainApp/locales"
+    ],
+    "xib_files": [
+      "Extension/Base.lproj/SafariExtensionViewController.xib"
+    ]
+  }
+]
