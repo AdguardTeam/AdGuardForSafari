@@ -12,6 +12,7 @@
 @implementation ContentBlockerRequestHandler
 
 - (NSURL *)blockingContentRulesUrl {
+    
     return AESharedResources.blockingContentSecurityUrl;
 }
 
