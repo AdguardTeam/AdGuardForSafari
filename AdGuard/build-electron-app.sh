@@ -16,7 +16,7 @@ nvm use v12.6.0 || exit 1
 # Installing dependencies
 #npm install -g electron-osx-sign
 #npm install -g node-gyp
-npm install -g electron-userland/electron-osx-sign#timestamp-server
+#npm install -g electron-userland/electron-osx-sign#timestamp-server
 
 PLATFORM=mas
 ARCH=x64
