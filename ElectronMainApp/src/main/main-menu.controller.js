@@ -21,6 +21,16 @@ module.exports = (() => {
     };
 
     /**
+     * On close window
+     */
+    const onCloseWinClicked = () => {
+        const win = BrowserWindow.getFocusedWindow();
+        if (win) {
+            win.close();
+        }
+    };
+
+    /**
      * Initialization method
      * Should be execute when the app is ready
      *
@@ -44,7 +54,7 @@ module.exports = (() => {
                     {
                         label: i18n.__('main_menu_close_window.message'),
                         accelerator: 'cmd+w',
-                        click() { BrowserWindow.getFocusedWindow().close(); }
+                        click() { onCloseWinClicked(); }
                     },
                     { type: 'separator' },
                     {
