@@ -141,7 +141,7 @@ module.exports = (function () {
                 json
             });
         } catch (ex) {
-            log.error('Error while setting content blocker: ' + ex);
+            log.error(`Error while setting content blocker ${bundleId}: ` + ex);
         }
     };
 

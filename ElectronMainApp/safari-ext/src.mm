@@ -197,21 +197,40 @@ NAN_METHOD(setContentBlockingJson) {
       reloadContentBlockerWithIdentifier:bundleId
       completionHandler:^(NSError * _Nullable error) {
         DDLogCDebug(@"Notifying completion with error: %@", error ?: @"[no error]");
-        NSString *jsonResult = @"{\"result\":\"success\"}";
-          if (error) {
-              jsonResult = [NSString stringWithFormat:@"{\"result\":\"error\", \"error\":{\"domain\":\"%@\", \"code\":%ld, \"descr\":\"%@\"}", 
-              error.domain, error.code, error.localizedDescription];
-          }
+        NSString *jsonResult = [NSString stringWithFormat:@"{\"result\":\"success\", \"dataLenght\":\"%lu\"}", data.length];
+		if (error) {
+			DDLogCDebug(@"Try once more on error");
+			[SFContentBlockerManager
+			reloadContentBlockerWithIdentifier:bundleId
+			completionHandler:^(NSError * _Nullable error) {
+				DDLogCDebug(@"Notifying completion with error: %@", error ?: @"[no error]");
+				NSString *jsonResult = [NSString stringWithFormat:@"{\"result\":\"success\", \"dataLenght\":\"%lu\"}", data.length];
+				if (error) {
+					jsonResult = [NSString stringWithFormat:@"{\"result\":\"error\", \"error\":{\"domain\":\"%@\", \"code\":%ld, \"descr\":\"%@\"}",
+					error.domain, error.code, error.localizedDescription];
+				}
 
-        auto *info = new CallbackInfo();
-        info->type = CallbackTypeForBlockingContentRules;
-        info->result = (void *)CFBridgingRetain(jsonResult);
-        info->callback = cb;
+				auto *info = new CallbackInfo();
+				info->type = CallbackTypeForBlockingContentRules;
+				info->result = (void *)CFBridgingRetain(jsonResult);
+				info->callback = cb;
 
-        auto *async = new uv_async_t();
-        async->data = info;
-        uv_async_init(uv_default_loop(), async, (uv_async_cb)AsyncSendHandler);
-        uv_async_send(async);
+				auto *async = new uv_async_t();
+				async->data = info;
+				uv_async_init(uv_default_loop(), async, (uv_async_cb)AsyncSendHandler);
+				uv_async_send(async);
+			}];
+		} else {
+			auto *info = new CallbackInfo();
+			info->type = CallbackTypeForBlockingContentRules;
+			info->result = (void *)CFBridgingRetain(jsonResult);
+			info->callback = cb;
+
+			auto *async = new uv_async_t();
+			async->data = info;
+			uv_async_init(uv_default_loop(), async, (uv_async_cb)AsyncSendHandler);
+			uv_async_send(async);
+		}
       }];
     }];
 }

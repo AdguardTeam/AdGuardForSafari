@@ -87,12 +87,12 @@ module.exports = (() => {
 
         log.debug('Initializing toolbar controller..');
 
-        //Subscribe to toolbar events
+        // Subscribe to toolbar events
         safariToolbar.init(onProtectionChangedCallback, onWhitelistChangedCallback,
             onUserFilterChangedCallback, onShowPreferencesCallback(showWindow),
             onReportCallback);
 
-        //Subscribe to application events
+        // Subscribe to application events
         listeners.addListener(function (event, info) {
             if (event === events.CONTENT_BLOCKER_UPDATE_REQUIRED) {
                 setContentBlockingJson(info.bundleId, JSON.stringify(info.json));
@@ -122,7 +122,7 @@ module.exports = (() => {
     const setContentBlockingJson = (bundleId, jsonString) => {
         safariToolbar.busyStatus(true);
         safariToolbar.setContentBlockingJson(bundleId, jsonString, (result) => {
-            log.info('Content-blocker set result: ' + result);
+            log.info(`Content-blocker ${bundleId} set result : ${result}`);
 
             //TODO: Handle error result
 
@@ -130,7 +130,6 @@ module.exports = (() => {
                 safariToolbar.busyStatus(false);
             }, 1000);
         });
-
     };
 
     /**
