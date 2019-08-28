@@ -206,8 +206,8 @@ NAN_METHOD(setContentBlockingJson) {
 				DDLogCDebug(@"Notifying completion with error: %@", error ?: @"[no error]");
 				NSString *jsonResult = [NSString stringWithFormat:@"{\"result\":\"success\", \"dataLenght\":\"%lu\"}", data.length];
 				if (error) {
-					jsonResult = [NSString stringWithFormat:@"{\"result\":\"error\", \"error\":{\"domain\":\"%@\", \"code\":%ld, \"descr\":\"%@\"}",
-					error.domain, error.code, error.localizedDescription];
+					jsonResult = [NSString stringWithFormat:@"{\"result\":\"error\", \"error\":{\"domain\":\"%@\", \"code\":%ld, \"descr\":\"%@\", \"userInfo\":\"%@\"}",
+					error.domain, error.code, error.localizedDescription, error.userInfo];
 				}
 
 				auto *info = new CallbackInfo();
