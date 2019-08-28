@@ -1,22 +1,25 @@
-! Checksum: VyXF6HJmnScClpJAtGdz7g
+! Checksum: 8mZrJvSKu2lJNRcakN2QkQ
 ! Title: AdGuard Japanese filter
 ! Description: Filter that enables ad blocking on websites in Japanese language.
-! Version: 2.0.0.91
-! TimeUpdated: 2018-07-12T18:14:55+00:00
+! Version: 2.0.2.18
+! TimeUpdated: 2019-08-26T21:30:50+03:00
 ! Expires: 2 days (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
 #%#var AG_removeElementBySelector = function(selector) { if (!document.querySelectorAll) { return; } var nodes = document.querySelectorAll(selector); if (nodes) { for (var i = 0; i < nodes.length; i++) { if (nodes[i] && nodes[i].parentNode) { nodes[i].parentNode.removeChild(nodes[i]); } } } };
 #%#var AG_each = function(selector, fn) { if (!document.querySelectorAll) return; var elements = document.querySelectorAll(selector); for (var i = 0; i < elements.length; i++) { fn(elements[i]); }; };
 #%#var AG_removeParent = function(el, fn) { while (el && el.parentNode) { if (fn(el)) { el.parentNode.removeChild(el); return; } el = el.parentNode; } };
-#%#var AG_abortInlineScript=function(d,e,f){var c;if("currentScript"in document)var b=function(){return document.currentScript};else b=function(){var a=document.getElementsByTagName("script");return a[a.length-1]},window.addEventListener("DOMContentLoaded",function(){b=function(){return null}});AG_defineProperty(e,{beforeGet:function(){var a=b();if(a&&a!==c&&(c=a,""===a.src&&d.test(a.textContent)))throw setTimeout(function(){console.warn("AdGuard aborted an execution of an inline script")}),null;}},f)};
-#%#var AG_defineProperty=function(){var k,l=Object.defineProperty;if("function"==typeof WeakMap)k=WeakMap;else{var m=0,n=function(){this.a=(m+=Math.random()).toString()};n.prototype.set=function(a,b){var c=a[this.a];c&&c[0]===a?c[1]=b:l(a,this.a,{value:[a,b],writable:!0});return this};n.prototype.get=function(a){var b;return(b=a[this.a])&&b[0]===a?b[1]:void 0};n.prototype.has=function(a){var b=a[this.a];return b?b[0]===a:!1};k=n}function r(a){this.b=a;this.h=Object.create(null)}function t(a,b,c,d){this.a=a;this.i=b;this.c=c;this.g=d}function u(){this.a=new k}function v(a,b,c){var d=b.i,e=b.c,f=new r(e.b),g;for(g in e.h)v(a,e.h[g],f);d=new t(c,d,f,b.g);c.h[d.i]=d;"undefined"!==typeof c.b&&(e=w(c.b,d.i),d.f=e,f=x(d.g)||y(a,d),!e||e.configurable?(l(c.b,d.i,f),e&&z(e)&&(A(c.b,f,e.value),B(a,e.value,b.c))):B(a,c.b[d.i],b.c))}function y(a,b){return{get:function(){var c=b.g;c&&c.beforeGet&&c.beforeGet.call(this,b.a.b);a:if(c=b.f)c=z(c)?c.value:c.get?c.get.call(this):void 0;else{c=b.a.b;if(b.i in c&&(c=C(c),null!==c)){var d=D.call(c,b.i);c=d?d.call(this):c[b.i];break a}c=void 0}(this===b.a.b||E.call(b.a.b,this))&&B(a,c,b.c);return c},set:function(c){if(this===b.a.b||E.call(b.a.b,this)){b.g&&b.g.beforeSet&&(c=b.g.beforeSet.call(this,c,this));var d=b.f;d&&z(d)&&d.value===c?c=!0:(d=F(b,c,this),G(c)&&(c=H(a,c),I(a,c,b.c)),c=d)}else c=F(b,c,this);return c},enumerable:b.f?b.f.enumerable:!0}}function I(a,b,c){for(var d in c.h){var e=c.h[d];if(b.h[d]){var f=a,g=b.h[d];!e.g||g.g||"undefined"===typeof g.a.b||g.f||(g.f=x(e.g));g.c&&e.c&&g.c!==e.c&&I(f,g.c,e.c)}else v(a,e,b)}}function B(a,b,c){G(b)&&(b=H(a,b),I(a,b,c))}function A(a,b,c){return z(b)?b.writable?(b.value=c,!0):!1:b.set?b.set.call(a,c):!1}function F(a,b,c){var d=a.f;if(!d){d=C(a.a.b);if(null!==d&&(d=J.call(d,a.i)))return d.call(c,b);if(!K(a.a.b))return!1;a.f={value:b,configurable:!0,writable:!0,enumerable:!0};return!0}return A(c,d,b)}function z(a){return"undefined"!==typeof a.writable}function x(a){if(a){for(var b={},c=L,d=!1;c--;){var e=M[c];N.call(a,e)&&(d=!0,b[e]=a[e])}return d?b:void 0}}function H(a,b){var c=a.a.get(b);c||(c=new r(b),a.a.set(b,c));return c}var M="value get set writable configurable enumerable".split(" "),L=6,w=Object.getOwnPropertyDescriptor,K=Object.isExtensible,C=Object.getPrototypeOf,N=Object.prototype.hasOwnProperty,E=Object.prototype.isPrototypeOf,D=Object.prototype.__lookupGetter__||function(a){return(a=O(this,a))&&a.get?a.get:void 0},J=Object.prototype.__lookupSetter__||function(a){return(a=O(this,a))&&a.set?a.set:void 0};function O(a,b){if(b in a){for(;!N.call(a,b);)a=C(a);return w(a,b)}}function G(a){var b=typeof a;return"function"===b||"object"===b&&null!==a?!0:!1}var P;return function(a,b,c){P||(P=new u);var d=P;c=c||window;var e=new r;a+=".";var f=e||new r;for(var g=d.f||(d.f=/^([^\\\.]|\\.)*?\./),h,p,q;a;){h=g.exec(a);if(null===h)throw 1;h=h[0].length;p=a.slice(0,h-1);a=a.slice(h);(h=f.h[p])?q=h.c:(q=new r,h=new t(f,p,q),f.h[p]=h);f=q}if(!h)throw 1;a=h;a.g=b;B(d,c,e)};}();
+#%#var AG_removeCookie=function(a){var e=/./;/^\/.+\/$/.test(a)?e=new RegExp(a.slice(1,-1)):""!==a&&(e=new RegExp(a.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")));a=function(){for(var a=document.cookie.split(";"),g=a.length;g--;){cookieStr=a[g];var d=cookieStr.indexOf("=");if(-1!==d&&(d=cookieStr.slice(0,d).trim(),e.test(d)))for(var h=document.location.hostname.split("."),f=0;f<h.length-1;f++){var b=h.slice(f).join(".");if(b){var c=d+"=",k="; domain="+b;b="; domain=."+b;document.cookie=c+"; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+k+"; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+b+"; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+"; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+k+"; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+b+"; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"}}}};a();window.addEventListener("beforeunload",a)};
+#%#var AG_defineProperty=function(){var p,q=Object.defineProperty;if("function"==typeof WeakMap)p=WeakMap;else{var r=0,t=function(){this.a=(r+=Math.random()).toString()};t.prototype.set=function(a,b){var d=a[this.a];d&&d[0]===a?d[1]=b:q(a,this.a,{value:[a,b],writable:!0});return this};t.prototype.get=function(a){var b;return(b=a[this.a])&&b[0]===a?b[1]:void 0};t.prototype.has=function(a){var b=a[this.a];return b?b[0]===a:!1};p=t}function u(a){this.b=a;this.h=Object.create(null)}function v(a,b,d,e){this.a=a;this.i=b;this.c=d;this.f=e}function w(){this.g=/^([^\\\.]|\\.)*?\./;this.j=/\\(.)/g;this.a=new p}function x(a,b){var d=b.f;if(d&&!("beforeGet"in d||"beforeSet"in d))return z(d);var e={get:function(){var c=b.f;c&&c.beforeGet&&c.beforeGet.call(this,b.a.b);a:if(c=b.g)c=A(c)?c.value:c.get?c.get.call(this):void 0;else{c=b.a.b;if(b.i in c&&(c=B(c),null!==c)){var d=C.call(c,b.i);c=d?d.call(this):c[b.i];break a}c=void 0}(this===b.a.b||D.call(b.a.b,this))&&E(a,c,b.c);return c},set:function(c){if(this===b.a.b||D.call(b.a.b,this)){b.f&&b.f.beforeSet&&(c=b.f.beforeSet.call(this,c,this));var d=b.g;d&&A(d)&&d.value===c?c=!0:(d=F(b,c,this),G(c)&&(c=H(a,c),I(a,c,b.c)),c=d)}else c=F(b,c,this);return c}};d&&J(d,e,K);return e}function I(a,b,d){for(var e in d.h){var c=d.h[e];if(b.h[e]){var h=a,g=b.h[e],k=c;!k.f||g.f||"undefined"===typeof g.a.b||g.g||(g.g=z(k.f));g.c&&k.c&&g.c!==k.c&&I(h,g.c,k.c)}else{g=h=void 0;k=a;var f=b,l=c.i,m="undefined"!==typeof f.b,y=!1;m&&(g=L(f.b,l))&&!g.configurable&&(y=!0,h=f.b[l]);var n=y?H(k,h):new u(c.c.b);I(k,n,c.c);n=new v(f,l,n,c.f);f.h[l]=n;m&&(n.g=g,m=x(k,n),y?E(k,h,c.c):(q(f.b,l,m),g&&A(g)&&(M(m,g.value,f.b),E(k,g.value,c.c))))}}}function E(a,b,d){G(b)&&(b=H(a,b),I(a,b,d))}function F(a,b,d){var e=a.g;if(!e){e=B(a.a.b);if(null!==e&&(e=N.call(e,a.i)))return e.call(d,b);if(!O(a.a.b))return!1;a.g={value:b,configurable:!0,writable:!0,enumerable:!0};return!0}return M(e,b,d)}function H(a,b){var d=a.a.get(b);d||(d=new u(b),a.a.set(b,d));return d}function A(a){return"undefined"!==typeof a.writable}function J(a,b,d){for(var e=0,c=d.length;e<c;e++){var h=d[e];h in a&&(b[h]=a[h])}}function z(a){if(a){var b={};J(a,b,P);return b}}function M(a,b,d){if(A(a))return a.writable?(a.value=b,!0):!1;if(!a.set)return!1;a.set.call(d,b);return!0}var P="configurable enumerable value get set writable".split(" "),K=P.slice(0,2),L=Object.getOwnPropertyDescriptor,O=Object.isExtensible,B=Object.getPrototypeOf,D=Object.prototype.isPrototypeOf,C=Object.prototype.__lookupGetter__||function(a){return(a=Q(this,a))&&a.get?a.get:void 0},N=Object.prototype.__lookupSetter__||function(a){return(a=Q(this,a))&&a.set?a.set:void 0};function Q(a,b){if(b in a){for(;!w.hasOwnProperty.call(a,b);)a=B(a);return L(a,b)}}function G(a){var b=typeof a;return"function"===b||"object"===b&&null!==a?!0:!1}var R;return function(a,b,d){R||(R=new w);var e=R;d=d||window;var c=new u;a+=".";var h=c||new u;for(var g=e.g,k=e.j,f,l,m;a;){f=g.exec(a);if(null===f)throw 1;f=f[0].length;l=a.slice(0,f-1).replace(k,"$1");a=a.slice(f);(f=h.h[l])?m=f.c:(m=new u,f=new v(h,l,m),h.h[l]=f);h=m}if(!f)throw 1;a=f;a.f=b;E(e,d,c)};}();
+#%#var AG_abortOnPropertyWrite=function(a,b){var c=Math.random().toString(36).substr(2,8);AG_defineProperty(a,{beforeSet:function(){b&&console.warn("AdGuard aborted property write: "+a);throw new ReferenceError(c);}});var d=window.onerror;window.onerror=function(e){if("string"===typeof e&&-1!==e.indexOf(c))return b&&console.warn("AdGuard has caught window.onerror: "+a),!0;if(d instanceof Function)return d.apply(this,arguments)}};
+#%#var AG_abortOnPropertyRead=function(a,b){var c=Math.random().toString(36).substr(2,8);AG_defineProperty(a,{beforeGet:function(){b&&console.warn("AdGuard aborted property read: "+a);throw new ReferenceError(c);}});var d=window.onerror;window.onerror=function(e){if("string"===typeof e&&-1!==e.indexOf(c))return b&&console.warn("AdGuard has caught window.onerror: "+a),!0;if(d instanceof Function)return d.apply(this,arguments)}};
+#%#var AG_abortInlineScript=function(g,b,c){var d=function(){if("currentScript"in document)return document.currentScript;var a=document.getElementsByTagName("script");return a[a.length-1]},e=Math.random().toString(36).substr(2,8),h=d();AG_defineProperty(b,{beforeGet:function(){var a=d();if(a instanceof HTMLScriptElement&&a!==h&&""===a.src&&g.test(a.textContent))throw c&&console.warn("AdGuard aborted execution of an inline script"),new ReferenceError(e);}});var f=window.onerror;window.onerror=function(a){if("string"===typeof a&&-1!==a.indexOf(e))return c&&console.warn("AdGuard has caught window.onerror: "+b),!0;if(f instanceof Function)return f.apply(this,arguments)}};
+#%#var AG_setConstant=function(e,a){if("undefined"===a)a=void 0;else if("false"===a)a=!1;else if("true"===a)a=!0;else if("noopFunc"===a)a=function(){};else if("trueFunc"===a)a=function(){return!0};else if("falseFunc"===a)a=function(){return!1};else if(/^\d+$/.test(a)){if(a=parseFloat(a),isNaN(a)||32767<Math.abs(a))return}else return;var b=!1;AG_defineProperty(e,{get:function(){return a},set:function(c){if(b)var d=!0;else void 0!==c&&void 0!==a&&typeof c!==typeof a&&(b=!0),d=b;d&&(a=c)}})};
 ||promotionalads.yahoo.co.jp^
 ||adserver.yahoo.co.jp^
 ||smartads.mobile.yahoo.co.jp^
 ||rd.yahoo.co.jp^
 ||ard.yahoo.co.jp^
-||b*.yahoo.co.jp^
 ||bc.geocities.yahoo.co.jp^
 ||ov.yahoo.co.jp^
 ||yeas.yahoo.co.jp^
@@ -24,6 +27,7 @@
 ||yads.yahoo.co.jp^
 ||yads.yjtag.yahoo.co.jp^
 ||yjaxc.yahoo.co.jp^
+||socdm.com^
 ||adm.shinobi.jp^
 ||adf.shinobi.jp^
 ||axad.shinobi.jp^
@@ -34,7 +38,7 @@
 ||affiliate.rakuten.co.jp^$third-party
 ||afl.rakuten.co.jp^
 ||ias.rakuten.co.jp^
-||rd.rakuten.co.jp^
+||rd.rakuten.co.jp^$third-party
 ||ranking.rakuten.co.jp^
 ||bizad.nikkeibp.co.jp^
 ||ads.nikkeibp.co.jp^
@@ -50,6 +54,28 @@
 ||adimp.excite.co.jp^
 ||adimpkwd.excite.co.jp^
 ||adingo.jp.eimg.jp^
+||speee-ad.akamaized.net^$third-party
+||candy.smv.to^$third-party
+||aaacompany.net^$third-party
+||ad.adpon.jp^$third-party
+||sdqoi2d.com^$third-party
+||v4dwkcv.com^$third-party
+||appollo-plus.com^$third-party
+||fam-ad.com^$third-party
+||ap.ad-feed.com^$third-party
+||b16.nakanohito.jp^$third-party
+||bs.nakanohito.jp^$third-party
+||cs.nakanohito.jp^$third-party
+||uh.nakanohito.jp^$third-party
+||c.nakanohito.jp^$third-party
+||rec.x-lift.jp^$third-party
+||cdn.x-lift.jp^$third-party
+||blog.livelog.biz^$third-party
+||ad-nex.com^$third-party
+||js.isboost.co.jp^$third-party
+||appollo.jp^$third-party
+||ad-tag.biz^$third-party
+||reseireejoch.info^
 ||ad-trip.com^
 ||ad-shot.com^
 ||ad-sell.com^
@@ -83,7 +109,6 @@
 ||liveads.jp^
 ||maio.jp^
 ||maist.jp^
-||mcnt.jp^$third-party
 ||mdotm.com^
 ||media-rep.com^
 ||mediad.co.jp^
@@ -91,10 +116,8 @@
 ||moba8.net^
 ||mopo.jp^
 ||myiads.com^
-||nakanohito.jp^$third-party
 ||adpriv.nikkei.com^
 ||adb.nikkei.co.jp^
-||ads.nicovideo.jp^
 ||november-lax.com^
 ||octopuspop.com^$third-party
 ||servedby.openxmarket.jp^
@@ -138,7 +161,6 @@
 ||67.43.170.16/ad/$third-party
 ||9vad.com^$third-party
 ||a-pagerank.net^$third-party
-||ab.auone-net.jp^$third-party
 ||ac8.i2i.jp^
 ||accesstrade.net^$third-party
 ||agilemedia.jp^
@@ -170,6 +192,7 @@
 ||ads.meropar.jp^$third-party
 ||ads.metropolis.co.jp^
 ||ads.mixi.jp^
+||ads.nicovideo.jp^
 ||adstatic.ameba.jp^
 ||affili.dmm.com^$third-party
 ||affiliate-b.com^$third-party
@@ -223,6 +246,7 @@
 ||m.shanbara.jp^$third-party
 ||magma-analytics.com^$third-party
 ||match.seesaa.jp^$third-party
+||mcnt.jp^$third-party
 ||microad.jp^
 ||mmaaxx.com^$image,~image,popup
 ||mobalyzer.net^$third-party
@@ -244,7 +268,6 @@
 ||aag.yahooapis.jp^$third-party
 ||entrypoint.search.yahooapis.jp^$third-party
 ||siteanalytics.jp^$third-party
-||socdm.com^
 ||sundayomg.blogspot.com^$image,~image,popup
 ||tag.nifty.com^
 ||thatsping.jp^$third-party
@@ -259,12 +282,47 @@
 ||uad-api.nicovideo.jp^
 ||web-jp.ad-v.jp^
 ||webantenna.info^$third-party
-||weblio.jp^$third-party
 ||webtracker.jp^
 ||widget.zenback.jp^$third-party
 ||w.zenback.jp^$third-party
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+@@||vacation-et.work^$generichide
+itpassportsiken.com#$?#.adsbygoogle { remove: true; }
+itpassportsiken.com#%#(function(){var b=window.setTimeout;window.setTimeout=function(a,c){if(!/'opacity:\.05/.test(a.toString()))return b(a,c)};})();
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+itpassportsiken.com#@#.adsbygoogle
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=itpassportsiken.com
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+@@||teachios.com^$generichide
+fe-siken.com#$?#.adsbygoogle { remove: true; }
+fe-siken.com#%#(function(){var b=window.setTimeout;window.setTimeout=function(a,c){if(!/'opacity:\.05/.test(a.toString()))return b(a,c)};})();
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+fe-siken.com#@#.adsbygoogle
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=fe-siken.com
+!+ PLATFORM(ext_ff, ext_opera, ios, ext_android_cb, ext_safari, ext_ublock)
+@@||xn--f9jh4f4b4993b66s.tokyo^$generichide
+!+ PLATFORM(ext_ff, ext_opera, ios, ext_android_cb, ext_safari, ext_ublock)
+@@||xn--f9jh4f4b4993b66s.tokyo/wp-content/*.png#
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+@@||ronron-blog.com^$generichide
+@@||wpteq.org/wp-content/plugins/wp-adblock-dedect/js/dedect.js
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+@@||wpteq.org^$generichide
+||javusb.com/wp-content/uploads/*/*.js
+gadgetdamage.blog.fc2.com#%#AG_onLoad(function() { AG_removeElementBySelector('.adsbygoogle'); });
+video.tv-tokyo.co.jp#@#.adspace
+video.tv-tokyo.co.jp#@##adspace
+@@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=video.tv-tokyo.co.jp
+@@||pubads.g.doubleclick.net/gampad/ads?*/video.tv-tokyo.co.jp$domain=video.tv-tokyo.co.jp
+380cc.cc#%#Object.defineProperty(window, 'myaabpfun12', { get: function() { return; } });
+380cc.cc#$##playertopads { height: 51px!important; position: absolute!important; left: -3000px!important; }
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+@@||d-navi004.com^$generichide
 avgirl.online#@#.google-ad
-@@||avgle.com^$generichide
+@@||avgle.com/video/$genericblock,generichide
+@@||avgle.com/embed/$genericblock,generichide
 avgle.com#@#.adsBox
 avgle.com#@#.pub_300x250
 avgle.com#@#.pub_300x250m
@@ -281,35 +339,37 @@ avgle.com#@#iframe[width="300"][height="250"]
 avgle.com#@#iframe[width="728"][height="90"]
 avgle.com#@#a[href^="http://www.poweredbyliquidfire.mobi/"]
 avgle.com#@#a[href^="http://bongacams.com/track?"]
-@@||avgle.com/templates/frontend/p2p.js
-@@||avgle.com/avideos.php
-@@||avgle.com/avideos.js
-@@||avgle.com/images.php
-@@||avgle.com/av^$image
-@@||pussl48.com^$domain=avgle.com
-@@||ads.exoclick.com/ads.js$domain=avgle.com
-@@||ads.exosrv.com/ads.js$domain=avgle.com
-@@||syndication.exosrv.com/ads-iframe-display.php^$domain=avgle.com
-@@||adserver.juicyads.com/js/jads.js$domain=avgle.com
-@@||isafe.pro/img/b_a.gif^$domain=avgle.com
-@@||adserver.juicyads.com/adshow.php$domain=avgle.com
-@@||boudja.com^$domain=avgle.com
-@@||*.club^$domain=avgle.com
-@@||*.info^$domain=avgle.com
-@@||ie8eamus.com/sfp.js$domain=avgle.com
+@@||avgle.com/include/ajax/related_videos.php
 @@||*.info/sc?u=
 @@||*.club/sc?u=
+@@||unrestern.info^
 socom.yokohama#@#.an-advert-banner
 socom.yokohama#@##adsense
 socom.yokohama#@#.an-sponsored
 @@||eikaiwamastery.blogspot.jp^$generichide
 nasubiblog.com,kyukyoku-matome.com##.widget_pc_ad
-wakudan.seesaa.net,kamikiyuki.hatenablog.com,omutulove.seesaa.net,omutulove.blog.fc2.com,akb48gnittimatome.com,gtoys.blog48.fc2.com,halchim.jp#%#AG_abortInlineScript(/google_ad_client/, 'document.addEventListener');
 @@||mushinavi.com^$generichide
 off-soft.net#@#.adsbygoogle
-nazolog.com#%#(function(b){Object.defineProperty(Element.prototype,"innerHTML",{get:function(){return b.get.call(this)},set:function(a){/^(?:<([abisuq]) id="[^"]*"><\/\1>)*$/.test(a)||b.set.call(this,a)},enumerable:!0,configurable:!0})})(Object.getOwnPropertyDescriptor(Element.prototype,"innerHTML"));
 anipo.jp#@#.adbanner
+blogs.yahoo.co.jp##.timelineArticle > ul.timelineArticle__list > li.timelineArticle__item:has(> div[id^="ad"]:empty)
+sankei.com##.entry_column > .entry_list > .entry:has(> .entry_content > .entry_meta > i.yellow:contains(Sponsored))
+erogazou-s.com###sougo:has(> div.eromannga)
+withnews.jp##.articleList > .articleBox:has(> #ad1)
+withnews.jp##.articleList > .articleBox:has(> #ad_article)
+withnews.jp##section > .sInner > .boxmatome:not([id]):has(> .OUTBRAIN)
+toyokeizai.net###sub-column > #information:has(> .title-parts > span.ad)
+toyokeizai.net###main-column > #trend-library:has(> .title-parts > span.ad)
+toyokeizai.net###article-body > #topic-board.subsection:has(> .title-parts > span.ad)
+toyokeizai.net###article-bottom > #trend-library.subsection:has(> .title-parts > span.ad)
+appllio.com###main-content > #content > .block.odd:has(aside[id^="div-gpt-ad"])
+appllio.com##.sidebar > .region-inner > .block.odd:has(div[id^="div-gpt-ad"])
+mindhack2ch.com##.article-body > .ad:has(> .adsbygoogle)
+mindhack2ch.com##.article-body > .rss:has(> script)
+mindhack2ch.com##.article-post-bottom > .rss-article:has(> .rss-article-item)
+nijinchu.com#?#article > div.entry_content > h3:contains(おすすめ商品)
+melos.media##.x1_article > .x1_articleArea[-ext-has='div.x1_siteTitle:contains([PR])']
 repeat-drama.info##.side_inner > .box:contains(スポンサーリンク)
+momon-ga.com##.repo-title:has(> strong)
 ###AD1line
 ###AD2line
 ###ADInterest
@@ -382,7 +442,14 @@ repeat-drama.info##.side_inner > .box:contains(スポンサーリンク)
 ##.yahoo_ad
 ##a[href^="http://ad2.trafficgate.net/"]
 ##a[href^="http://www.rssad.jp/"]
+xbooks.to#%#document.cookie = "pop=1";
+blog.esuteru.com#$#.siteContent { margin-top: 0!important; }
+blog.esuteru.com#$#.siteRanking-main { margin-left: 0!important; }
+hostlove.com#$##index_nav > h1 { padding-top: 30px!important; }
+appllio.com#$#body > #page-upper { min-height: 0!important; }
+weblio.jp#$#body[onload=""] { padding-bottom: 0!important; }
 ogeji.hatenablog.com#$#.sleeping-ads {position: absolute!important; left: -3000px!important; }
+iza.ne.jp#$#.sideFixedWrapper { position: relative!important; }
 .com/ufo/$script
 .com/Zen?
 .jp/ads/$image
@@ -419,7 +486,6 @@ ogeji.hatenablog.com#$#.sleeping-ads {position: absolute!important; left: -3000p
 /analysis2.
 /banana/600x
 /banimg/*
-/banner/banner_
 /beacon.php3?
 /beacon.php?
 /clicktrack/*
@@ -449,6 +515,257 @@ ogeji.hatenablog.com#$#.sleeping-ads {position: absolute!important; left: -3000p
 /top/head_s_bnr
 /yaad.js
 _ds_adtag_
+headlines.yahoo.co.jp###lrec
+||vipsister23.com/vipsister.html
+yomiuri.co.jp###rt_popup_overlay_yolyp_popup
+yomiuri.co.jp###yolyp_popup
+nijinchu.com##div[class*="adv"]
+||cdn.exaf.jp/dmm/js^$domain=nijinchu.com
+vipsister23.com###share2
+av.movie##div[class*="-banner"]
+av.movie##[class$="-ads"]
+av.movie##a[href^="https://theporndude.com/"]
+85cc.net##a[href*="mm786.com/"]
+85cc.net##.menu > a.item[target="_blank"]
+creive.me###sidebar1 > .add > #custom_html-2
+sojson.com##div[class^="pl0 pr0 banner"]
+mudainodocument.com##a[href^="https://recott.me/"]
+ibbs.info##.ad_data
+embed.share-videos.se###ad_html
+smv.to##.pc_content_tt_adsterra
+smv.to##div[style^="width:900px;"][style*="height: 250px;"]
+smv.to##.ad_movieupdown
+blog.esuteru.com,jin115.com###gStickyAd
+news-us.org##.adspc
+news-us.org##.ps-300-250
+news-us.org##div[itemtype="https://schema.org/WPAdBlock"]
+blog.esuteru.com##a.jackFix
+blog.esuteru.com##.ad-aside > a[target="_blank"]
+blog.esuteru.com##.ad-siteRanking
+blog.esuteru.com##.article-main .rss.clearfix
+shopping.yahoo.co.jp##.mdNorthBuyee
+||macotakara.jp/banaer/
+macotakara.jp##iframe[src^="http://ad.jp.ap.valuecommerce.com"]
+javmix.tv##.__isboostOverContent
+top.togeko.net##a[href^="https://book.dmm.co.jp"]
+||top.togeko.net/*/randomad*.js
+||cowboy.blog.jp/main/rss*.html
+matome.naver.jp###yads_pc_overlay
+||free-video-movie.com/link
+hostlove.com###ad_fix
+hostlove.com###ad_mega
+channel-jk.com###fam_rectp
+channel-jk.com##.rss2-iframe
+channel-jk.com##.blogroll_wrapper
+channel-jk.com##.blogroll_wrapper_kizisita
+||js.blozoo.info/js/rsstool/blogparts.js
+hosyusokuhou.jp##div.abox
+vippers.jp##a[href^="https://track.affiliate-b.com"]
+kirari-media.net##div[id][style="height:250px; width:300px;"]
+huyosoku.com###header-feed
+huyosoku.com###pickup-feed
+huyosoku.com###a-pickup-feed
+huyosoku.com###footer-feed.blogroll
+workingnews.blog117.fc2.com###mainBlock > div.free_area
+cherio199.blog120.fc2.com##.free_space_body
+cherio199.blog120.fc2.com##center > table[width="750"][bordercolor="8b0000"][cellpadding="6"]
+mindhack2ch.com##.free-area > aside.rss
+mindhack2ch.com##.ad
+||mv-mindhack2ch.up.seesaa.net/common/image_feed.js
+localplace.jp###bannerList
+karapaia.com##.ads
+hoikuen-ranking.com##.banner
+oricon.co.jp##aside.top-inline-banner
+oricon.co.jp##aside.block-header-banner
+.info/*/*/*/*/$domain=avgle.com
+/:\/\/sub\.avgle\.com\/.+\/[0-9a-h]{20,}\.js/$domain=avgle.com
+erogazo-ngo.com##p > a[rel="nofollow"]
+erogazo-ngo.com##a[href^="http://newmofu.doorblog.jp/archives/"]
+dot.asahi.com##section.gAreaTrendAd
+dot.asahi.com##.sidebar1 #mnavAreaTrend
+kyoko-np.net##div[class^="col-"] > div.ad
+sankei.com###sponsored
+ganganonline.com##header#sqexHeader-black_rsp
+asahi.com##.AdMod
+japanese.engadget.com##p.partner_container
+japanese.engadget.com##aside#ldrBoardAd
+togetter.com##.promotion
+togetter.com##.ad_topics_custom
+j-cast.com##.ad_entry_toptext
+trafficnews.jp##.ad-large-big
+yahoo.co.jp##.adUltra
+yahoo.co.jp##p[style="margin:0;padding:5px 0px 5px 10px;font-size:13px;"]
+yahoo.co.jp##a[href^="https://ard.yahoo.co.jp/"]
+yahoo.co.jp##a[href="https://premono.yahoo.co.jp"]
+adulti25.com##section[id="about"] a[target="_blank"] > img
+momon-ga.com##.article-body > div[class="check"]
+dailyanime.news##.centerBanner
+shibukoi.com##div[class="home_widget top mobile cf"]
+||srv*.aaacompany.net/*/load.js$domain=javynow.com
+||ura.one/ad/link.js
+||javym.net/video.js
+||erry.one/video_2.js
+||sugirl.info/link/video.js
+||coinch.me/js/link.js
+||kabooo.net/js/link.js
+javynow.com##.fam_ad
+thesaurus.weblio.jp##.kwydn-wrap
+||weblio.hs.llnwd.net/e7/script/include/foot_ad_pc.js
+iqoo.me##article.ad_article
+eropasture.com##.access-t
+eropasture.com##.sp_head_box
+||appollo-plus.com/assets/*.js$domain=eropasture.com
+||eropasture.com/ad_ero/ad_kijisita3.js
+||sda.seesaa.jp/frame/
+||seesaa.net/common/kijinaka.js
+||seesaa.net/common/kijisita.js
+hostlove.com###ad_index_fr
+hostlove.com###ad_index
+kanto.hostlove.com###vip2_2
+hostlove.com##.menu_ad
+hostlove.com###ad_head3
+hostlove.com##.job_ad_list_in
+hostlove.com##aside.ads
+erogazou-s.com##a[href*="//kir023105.kir.jp/ad_get_sp/adg.php?"]
+erogazou-s.com##a[href*="//eromovie-s.com/movie.php?"]
+erogazou-s.com###sougo > div.eromannga
+web-ace.jp##.bnr-sakuhin-info
+lineblog.me##.content > div[style="text-align:center;height:100px;overflow:hidden;margin-bottom:10px;"]
+otakomu.jp###m_ad3
+||0taku.livedoor.biz/JS/blogroll.js
+||blog.livedoor.jp/*/js/kijisita.js
+||blog.livedoor.jp/*/js/top_post.js
+blog.livedoor.jp##.blogroll_ads
+blog.livedoor.jp##a[href*="ad-nex.com/link.php?"]
+blog.livedoor.jp##a[href*="ad-feed.com/link/click"]
+blog.livedoor.jp##a.box-border[href*="//bit.ly/"]
+blog.livedoor.jp##div.t_h   > span[style="color: rgb(255, 0, 0);"] > b
+kensaku.itmedia.co.jp###ads_content_top
+||nakanohito.jp/b*/b*.js
+||nakanohito.jp/*/?uisv=
+karapaia.com###right > a[target="_blank"] > img
+karapaia.com##.widget-content > .readmore-header
+karapaia.com##.ads-label-inverse
+karapaia.com##.ads-label-inverse + div.ads
+karapaia.com###article-contents > div[style="margin: 10px 0 0;color:#999;text-align:center"]
+karapaia.com###article-contents > div[style="margin: 10px 0 0;color:#999;text-align:center"] + div[style="clear:both;margin:0 -21px 10px;text-align:center"]
+karapaia.com###article-contents > #article_mid
+karapaia.com###article-contents > center > div[style]:not([class]):not([id])
+android-smart.com###sidebar a > img[width="300"][height="250"]
+android-smart.com##.post-body > .pstft
+android-smart.com###sidebar > #abox
+toyokeizai.net##ul > li.block-pr
+appllio.com##body > #page-upper .region-header > .region-inner > #block-block-82.even
+zakzak.co.jp##amp-embed[type="outbrain"]
+tokyomotion.net##.nva-center
+4gamer.net##.large_banner
+||pc-koubou.jp^$domain=ascii.jp,image
+ascii.jp###sideR > .ban
+ascii.jp##.banR
+ascii.jp##body:not(#jpHome) > #jpWrap > #header
+gendai.ismedia.jp###GB_pc_inread_mov + div[style="min-height: 250px; overflow: hidden;"]
+gendai.ismedia.jp###GB_pc_inread_mov
+famitsu.com##.ad-super-jack-link-container
+bengo4.com###entryDetailSide__frame--sideBanner
+bengo4.com###entryFooterAd
+juggly.cn##a[href^="http://agilemedia.jp"]
+gunji.blog.jp##a[title*="_300x250_"]
+||gunji.blog.jp/settings/lite2/ads.js
+dailyanime.news##.advInsArea
+dailyanime.news##.advTable_L
+afpbb.com##.bnr
+afpbb.com##.pr-text
+gamespark.jp##.itx-widget
+||widget.iid-network.jp/assets/widget.js
+weblio.jp##.adBannerHdWrp
+weblio.jp##.adSmpBnrFtBtSp
+weblio.jp##.adBkOverlayClr
+new-akiba.com###bannerB2
+iza.ne.jp##.header-link > ul > li > a[href="http://www.sankei-digital.co.jp/"]
+||prt.iza.ne.jp/common/css/v2/images/bg_header_003.png
+||prt.iza.ne.jp/common/images/v1/basic/banner_sankeiPhoto.png
+iza.ne.jp##article.article-detail-section > .tool > .credit
+iza.ne.jp##.sideFixedWrapper > div[style="width:300px;height:600px;"]
+iza.ne.jp##aside[class^="ad-"]
+jin115.com##.btn-ldb-bottomAdd
+gadgetdamage.blog.fc2.com##.wrecbox
+gadgetdamage.blog.fc2.com##.topimg > .rtbox_triple_rec
+gadgetdamage.blog.fc2.com##.topimg > ul.admin > li > span[style="font-size:75%;float:left;"]
+gadgetdamage.blog.fc2.com##.topimg > .fc2aspace:empty
+gadgetdamage.blog.fc2.com##.right > .top_more_bottom > span
+gadgetdamage.blog.fc2.com##center > span[style="font-size:75%;"]
+mindhack2ch.com##.main > .popular-ranking
+mindhack2ch.com##.main > section.module > .rss-blogroll
+mindhack2ch.com##.main > section.module > .wrapper > .blogroll-channel-wrapper
+mindhack2ch.com##.main > div.rss-blogroll4
+mindhack2ch.com##.article__footer > div.rss-blogroll4
+mindhack2ch.com##.article__footer > .article-rss
+f1-gate.com###menubarcontainer > .swiper-container
+xbooks.to###ad_tsuibi
+xbooks.to###ad_tsuibi2
+xbooks.to##.movie-in-ad
+xbooks.to###wrap > div[style="width:900px; height:250px; margin: -15px auto 15px auto;"]
+||gum.xbooks.to/js/pc/pc_2.js
+||gum.xbooks.to/js/pc/pc_tsuibi*.js
+||gum.xbooks.to/js/pc/pc_main_900_250.js
+smhn.info###related > div[style^="width:100%;height:305px;"]:not([class]):not([id])
+smhn.info###related > div[style^="height:300px !important;overflow:hidden;"]:not([class]):not([id])
+smhn.info###content > .entry_under_ads
+smhn.info###content > .entry_under_fb
+unjyou.com###gfweb_adbox_inner
+unjyou.com###my-footer > p[style="text-align: center; font-size: 75%;"]
+||gamefeat.net/js/api/requestAds.v*.js
+avhub.jp###adcontainer-0
+avhub.jp###adcontainer-1
+okkisokuho.com##img[width="192"][height="580"]
+okkisokuho.com##.onaho_kk
+erogazo-ngo.com###text-32.free-widget
+erogazo-ngo.com###text-41.free-widget
+sonicch.com##div[id^="livedoor_blogroll_widget"]
+bakufu.jp###prBox
+||momon-ga.com/pickup1.html
+||momon-ga.com/pickup2.html
+||momon-ga.com/pickup3.html
+momon-ga.com###main-inner > .rss2
+momon-ga.com###main-inner > .rss3
+momon-ga.com###article-contents > .post-footer
+momon-ga.com##.container-inner > section[id^="comments-"] ~ div[style*="margin-bottom"]:not([id]):not([class])
+||livelog.biz^$domain=momon-ga.com
+momon-ga.com##.blogroll_entries
+momon-ga.com##a[href^="//appollo.jp"]
+||blog-sokuhou.com^$domain=momon-ga.com,image
+momon-ga.com##div[class^="ad"]
+||momon-ga.com/post/new*.js
+nlab.itmedia.co.jp###globalHeader > #globalHeaderMiddle
+anond.hatelabo.jp##.double-rectangle
+headlines.yahoo.co.jp##div[id^="taboola-below-article-thumbnails-"]
+togetter.com##.ad_custom
+togetter.com##.ad_list_top
+||b*.yahoo.co.jp/b?
+||b*.yahoo.co.jp/s?
+himado.in##.movie-Ad_01
+himado.in###player_ad_window
+||himado.in/player_ad.php
+||d3b4x0ran5qs0c.cloudfront.net/iframes/300250/hm-pc-lc.html
+crediblecar.life##a[rel="nofollow"] > img[style]
+auctions.yahoo.co.jp##.bannerFrame
+daily.co.jp##aside.add
+xbooks.to###ad_interstitial_wrap
+xbooks.to##.ad_overlay
+||gum.xbooks.to/js/sp/sp_interstitial_move4.js
+||gum.xbooks.to/js/sp/access_overlay_avt_03.js
+||gum.xbooks.to/js/sp/sp_interstitial.js
+||gum.xbooks.to/js/sp^
+||uratube.com/js/ad^
+pandora.tv##a[href^="https://play.google.com/"][target="_blank"]:not([class]):not([id]) > img
+melos.media##.x1_ad
+watch.impress.co.jp##.ad.billboard
+||juicyads.com^$domain=adserver.juicyads.com
+||ads.adxadserv.com^$domain=adserver.juicyads.com
+gagetmatome.com###ad-bottom-oya
+||rationalan.pro^$domain=avgle.com
+/sound?cver*refer*avgle.com$popup
+||avgle.com$popup,domain=avgle.com
 ||blog.livedoor.jp/diet2channel/js/adarea.js
 jin115.com##.dix_ad_n
 vippers.jp##.ad
@@ -596,6 +913,8 @@ newsonjapan.com###squarebanner_text300x250
 rakuten.co.jp###srEsper
 rakuten.co.jp###srEsperHead
 rakuten.co.jp###srNaviSponcer
+rakuten.co.jp##a[href^="https://ad2.trafficgate.net/"]
+rakuten.co.jp##a[href^="https://www.jpcert.or.jp"]
 infoseek.co.jp###srchls
 jiji.com###sumai_banner
 google.co.jp###tadsb
@@ -774,7 +1093,6 @@ yahoo.co.jp##ul[class^="sponsor"]
 ||kau.li/ad.js
 ||kau.li/yad.js
 ||kazenoashiato.jp/file/index/FILECD/
-||komachi.yomiuri.co.jp^
 ||land.to/ad/
 ||livedoor.com^*/banner/
 ||livedoor.jp^*/amazon.js
@@ -815,10 +1133,24 @@ yahoo.co.jp##ul[class^="sponsor"]
 ||xrea.com/banner
 ||y-bbs.net/k/
 ||yahoo.co.jp/js/sq.js
-||yimg.jp/bdv/$image,object,subdocument
 ||yimg.jp/images/*img/banner
+||yjaxc.yahoo.co.jp^
 ||yomiuri.co.jp/ad/
 ||zenback.jp^*/tracking.html
+!+ NOT_OPTIMIZED
+||yimg.jp/bdv/
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+teachios.com##.adsbygoogle
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+ronron-blog.com##.adsbygoogle
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+d-navi004.com##.adsbygoogle
+@@||fresheye.com^$domain=m-search.sponichi.co.jp
+edy.rakuten.co.jp#@#div[id^="div-gpt-ad"]
+@@||ias.rakuten.co.jp/ctrl/$domain=edy.rakuten.co.jp
+@@||securepubads.g.doubleclick.net/gpt/pubads_impl_*.js$domain=edy.rakuten.co.jp
+@@||securepubads.g.doubleclick.net/gampad/ads?gdfp_req=1$domain=edy.rakuten.co.jp
+@@||lprs*.fr/assets/js/app/modules/popin.js$domain=leparisien.fr
 @@||blogs.yahoo.co.jp^
 tver.jp#@#.adspace
 @@||nazolog.com^$generichide
@@ -839,10 +1171,6 @@ publicdomainq.net#@#.adsbygoogle
 @@||rcm-jp.amazon.co.jp^$domain=toscana.sakura.ne.jp
 @@||res.nimg.jp/js/ads.js?$domain=nicovideo.jp
 @@||yimg.jp/bdv/yahoo/javascript/gyao/clover.js$domain=gyao.yahoo.co.jp
-!+ NOT_PLATFORM(windows, mac, android, ios)
-@@||avgle.com/embed/$genericblock,generichide,badfilter
-!+ NOT_PLATFORM(windows, mac, android, ios)
-@@||avgle.com/video/$genericblock,generichide,badfilter
 !+ NOT_PLATFORM(windows, mac, android, ios)
 @@||avgle.com^$elemhide,badfilter
 !+ NOT_PLATFORM(windows, mac, android, ios)
