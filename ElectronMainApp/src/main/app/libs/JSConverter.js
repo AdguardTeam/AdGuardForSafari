@@ -1,6 +1,6 @@
 /**
  * AdGuard -> Safari Content Blocker converter
- * Version 4.1.0
+ * Version 4.1.1
  * License: https://github.com/AdguardTeam/SafariContentBlockerConverterCompiler/blob/master/LICENSE
  */
 
@@ -2892,7 +2892,7 @@ var jsonFromFilters = (function () {
         /**
          * Safari content blocking format rules converter.
          */
-        const CONVERTER_VERSION = '4.1.0';
+        const CONVERTER_VERSION = '4.1.1';
         // Max number of CSS selectors per rule (look at compactCssRules function)
         const MAX_SELECTORS_PER_WIDE_RULE = 250;
 
@@ -3917,14 +3917,14 @@ var jsonFromFilters = (function () {
                         }
                     } else if (item.action.type === 'css-display-none') {
                         cssBlocking.push(item);
-                    } else if (item.action.type === 'css' && advancedBlocking) {
+                    } else if (item.action.type === 'css') {
                         extendedCssBlocking.push(item);
-                    } else if (item.action.type === 'script' && advancedBlocking) {
+                    } else if (item.action.type === 'script') {
                         scriptRules.push(item);
                     } else if (item.action.type === 'ignore-previous-rules' && agRule.script) {
                         // #@%# rules
                         scriptExceptionRules.push(item);
-                    } else if (item.action.type === 'scriptlet' && advancedBlocking) {
+                    } else if (item.action.type === 'scriptlet') {
                         scriptlets.push(item);
                     } else if (item.action.type === 'ignore-previous-rules' && agRule.scriptlet) {
                         // #@%#//scriptlet
@@ -3941,8 +3941,7 @@ var jsonFromFilters = (function () {
                         // elemhide rules
                         contentBlocker.cssElemhide.push(item);
                     } else if (item.action.type === 'ignore-previous-rules' &&
-                        AGRuleConverter.isSingleOption(agRule, adguard.rules.UrlFilterRule.options.JSINJECT) &&
-                        advancedBlocking) {
+                        AGRuleConverter.isSingleOption(agRule, adguard.rules.UrlFilterRule.options.JSINJECT)) {
                         // jsinject rules
                         contentBlocker.scriptJsInjectExceptions.push(item);
                     } else {
@@ -4092,7 +4091,7 @@ var jsonFromFilters = (function () {
                 }
 
                 if (rules.length === 0) {
-                    adguard.console.info('No rules presented for convertation');
+                    adguard.console.info('No rules presented for conversion');
                     return null;
                 }
 

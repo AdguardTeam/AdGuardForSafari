@@ -95,7 +95,7 @@ module.exports = (() => {
         // Subscribe to application events
         listeners.addListener(function (event, info) {
             if (event === events.CONTENT_BLOCKER_UPDATE_REQUIRED) {
-                queueContentBlockerUpdate(info.bundleId, JSON.stringify(info.json));
+                setContentBlockingJson(info.bundleId, JSON.stringify(info.json));
             } else if (event === events.UPDATE_USER_FILTER_RULES) {
                 applicationApi.getUserFilterRules((rules) => {
                     setUserFilter(rules);
@@ -117,44 +117,9 @@ module.exports = (() => {
     };
 
     /**
-     * Content blocker update jobs queue
-     *
-     * @type {Array}
-     */
-    const queue = [];
-    let busy = false;
-
-    /**
-     * Queue content blocker update job
-     *
-     * @param bundleId content blocker extension bundle
-     * @param jsonString json
-     */
-    const queueContentBlockerUpdate = (bundleId, jsonString) => {
-        if (!busy) {
-            busy = true;
-
-            setContentBlockingJson(bundleId, jsonString, () => {
-                busy = false;
-
-                // Take next job from queue
-                const next = queue.shift();
-                if (next) {
-                    queueContentBlockerUpdate(next.bundleId, next.jsonString);
-                }
-            });
-        } else {
-            queue.push({
-                bundleId,
-                jsonString
-            });
-        }
-    };
-
-    /**
      * Sets content blocker json
      */
-    const setContentBlockingJson = (bundleId, jsonString, callback) => {
+    const setContentBlockingJson = (bundleId, jsonString) => {
         safariToolbar.busyStatus(true);
         log.info(`Content-blocker updating ${bundleId}`);
         safariToolbar.setContentBlockingJson(bundleId, jsonString, (result) => {
@@ -164,7 +129,6 @@ module.exports = (() => {
 
             setTimeout(() => {
                 safariToolbar.busyStatus(false);
-                callback();
             }, 1000);
         });
     };
