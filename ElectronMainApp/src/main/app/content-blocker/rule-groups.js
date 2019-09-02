@@ -1,5 +1,6 @@
 const config = require('config');
 const categories = require('../filters/filters-categories');
+const log = require('../utils/log');
 
 /**
  * Rules groups for multi content blockers
@@ -21,21 +22,27 @@ module.exports = (function () {
      */
     const groups = {
         general: {
+            key: "general",
             filterGroups: [AntiBannerFilterGroupsId.AD_BLOCKING_ID, AntiBannerFilterGroupsId.LANGUAGE_SPECIFIC_ID]
         },
         privacy: {
+            key: "privacy",
             filterGroups: [AntiBannerFilterGroupsId.PRIVACY_ID]
         },
         security: {
+            key: "security",
             filterGroups: [AntiBannerFilterGroupsId.SECURITY_ID]
         },
         socialWidgetsAndAnnoyances: {
+            key: "socialWidgetsAndAnnoyances",
             filterGroups: [AntiBannerFilterGroupsId.SOCIAL_ID, AntiBannerFilterGroupsId.ANNOYANCES_ID]
         },
         other: {
+            key: "other",
             filterGroups: [AntiBannerFilterGroupsId.OTHER_ID]
         },
         custom: {
+            key: "custom",
             filterGroups: [AntiBannerFilterGroupsId.CUSTOM_FILTERS_GROUP_ID]
         }
     };
@@ -94,7 +101,9 @@ module.exports = (function () {
         }
 
         const result = [];
-        for (let key in groups) {
+        for (let groupName in groups) {
+            const key = groups[groupName].key;
+
             if (rulesByAffinityBlocks[key]) {
                 rulesByGroup[key] = rulesByGroup[key].concat(rulesByAffinityBlocks[key]);
             }
@@ -103,6 +112,8 @@ module.exports = (function () {
                 key: key,
                 rules: rulesByGroup[key]
             });
+
+            log.info(`Affinity block ${key}: rules length: ${rulesByGroup[key].length}`);
         }
 
         return result;
@@ -127,15 +138,16 @@ module.exports = (function () {
             let ruleText = rule.ruleText;
 
             if (ruleText.startsWith(AFFINITY_DIRECTIVE_START)) {
-                currentBlockGroups = parseGroupsByAffinity(ruleText)
+                currentBlockGroups = parseGroupsByAffinity(ruleText);
             } else if (ruleText.startsWith(AFFINITY_DIRECTIVE)) {
                 currentBlockGroups = [];
             } else if (currentBlockGroups.length > 0) {
                 for (let group of currentBlockGroups) {
-                    if (rulesByAffinityBlocks[group.key]) {
+                    if (!rulesByAffinityBlocks[group.key]) {
                         rulesByAffinityBlocks[group.key] = [];
                     }
 
+                    log.debug(`Rule ${ruleText} sorted to ${group.key}`);
                     rulesByAffinityBlocks[group.key].push(rule);
                 }
             } else {
@@ -154,12 +166,15 @@ module.exports = (function () {
 
         let result = [];
 
-        const startIndex = AFFINITY_DIRECTIVE.count + 1;
+        const startIndex = AFFINITY_DIRECTIVE.length + 1;
         const stripped = ruleText.substring(startIndex, ruleText.length - 1);
         const list = stripped.split(",");
         for (let affinityBlock of list) {
             const block = affinityBlock.trim();
-            result = result.concat(groupsByAffinity[block]);
+            const affinityGroups = groupsByAffinity[block];
+            if (affinityGroups && affinityGroups.length > 0) {
+                result = result.concat(affinityGroups);
+            }
         }
 
         return result;
