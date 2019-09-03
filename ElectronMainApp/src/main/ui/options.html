@@ -62,22 +62,33 @@
         <div id="boarding-screen-placeholder" class="onboarding" style="display: none;">
             <div class="onboarding__pic"></div>
             <div class="onboarding__desc" i18n="onboarding_safari_desc"></div>
-            <button id="open-safari-extensions-settings-btn" class="button button--green onboarding__btn" i18n="onboarding_safari_btn"></button>
+            <button id="open-safari-extensions-settings-btn" class="button button--green onboarding__btn open-safari-extensions-settings-btn" i18n="onboarding_safari_btn"></button>
         </div>
         <div id="general-settings" class="settings-content settings-content--general tab-pane">
             <div class="settings-body">
                 <div class="subtitle settings-body-subtitle" i18n="options_general_settings"></div>
-                <div class="settings-notification settings-notification--cols">
+                <div class="settings-notification settings-notification--cols" id="enableExtensionsNotification">
                     <div class="settings-notification__desc">
-                        <div class="settings-notification__title">
-                            Some AdGuard extensions are disabled!
+                        <div class="settings-notification__title"
+                             i18n="settings_notification_extensions_title">
                         </div>
-                        <div class="settings-notification__text">
-                            You should enable all AdGuard extensions for correctly ad blocking in Safari
+                        <div class="settings-notification__text"
+                             i18n="settings_notification_extensions_text">
                         </div>
                     </div>
-                    <button class="button button--orange settings-notification__btn">
-                        Fix it
+                    <button class="button button--orange settings-notification__btn open-safari-extensions-settings-btn"
+                            i18n="settings_notification_extensions_button_text">
+                    </button>
+                </div>
+                <div class="settings-notification settings-notification--cols" id="enableProtectionNotification">
+                    <div class="settings-notification__desc">
+                        <div class="settings-notification__title" i18n="settings_notification_protection_title">
+                        </div>
+                        <div class="settings-notification__text" i18n="settings_notification_protection_text">
+                        </div>
+                    </div>
+                    <button class="button button--orange settings-notification__btn" id="notificationEnableProtectionLink"
+                            i18n="settings_notification_protection_button_text">
                     </button>
                 </div>
                 <ul class="opts-list">
@@ -163,14 +174,6 @@
                     <!--<a href="#" id="importSettingsFile" i18n="options_import_settings" class="button button&#45;&#45;green-bd button&#45;&#45;link"></a>-->
                 <!--</div>-->
             <!--</div>-->
-            <div class="settings-notification" id="enableExtensionsNotification">
-                <h3 class="settings-notification__title" i18n="settings_notification_title"></h3>
-                <p class="settings-notification__text" i18n="settings_notification_text"></p>
-            </div>
-            <div class="settings-notification" id="enableProtectionNotification">
-                <h3 class="settings-notification__title" i18n="settings_notification_protection_title"></h3>
-                <p class="settings-notification__text" i18n="settings_notification_protection_text"></p>
-            </div>
             <div class="settings-content__desc" i18n="options_general_desc"></div>
         </div>
 

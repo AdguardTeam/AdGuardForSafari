@@ -1471,7 +1471,7 @@ const Settings = function () {
         if (protectionEnabled) {
             enableProtectionNotification.style.display = 'none';
         } else {
-            enableProtectionNotification.style.display = 'block';
+            enableProtectionNotification.style.display = 'flex';
         }
     };
 
@@ -1572,24 +1572,18 @@ PageController.prototype = {
             const contentBlockersEnabled = arg.contentBlockersEnabled;
             const minorExtensionsEnabled = arg.minorExtensionsEnabled;
 
-            // TODO: Uncomment
-            // body.style.overflow = contentBlockersEnabled ? 'auto' : 'hidden';
-            // onBoardingScreenEl.style.display = contentBlockersEnabled ? 'none' : 'flex';
+            body.style.overflow = contentBlockersEnabled ? 'auto' : 'hidden';
+            onBoardingScreenEl.style.display = contentBlockersEnabled ? 'none' : 'flex';
 
-            // TODO: Show new notification instead
-            enableExtensionsNotification.style.display = minorExtensionsEnabled ? 'none' : 'block';
+            enableExtensionsNotification.style.display = minorExtensionsEnabled ? 'none' : 'flex';
         });
 
-        const openSafariSettingsButton = document.querySelector('#open-safari-extensions-settings-btn');
-        openSafariSettingsButton && openSafariSettingsButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            this._openSafariExtensionsPrefs();
-        });
-
-        const notificationEnableExtensionsLink = document.getElementById('notificationEnableIconLink');
-        notificationEnableExtensionsLink && notificationEnableExtensionsLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            this._openSafariExtensionsPrefs();
+        const openSafariSettingsButtons = document.querySelectorAll('.open-safari-extensions-settings-btn');
+        openSafariSettingsButtons.forEach((but) => {
+             but.addEventListener('click', (e) => {
+                 e.preventDefault();
+                 this._openSafariExtensionsPrefs();
+             });
         });
 
         this._checkSafariExtensions();
