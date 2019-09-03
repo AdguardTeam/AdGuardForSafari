@@ -364,5 +364,44 @@
     },
     "settings_notification_extensions_text": {
         "message": "You should enable all AdGuard extensions for correctly ad blocking in Safari"
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard General"
+    },
+    "options_cb_general_desc": {
+        "message": "AdGuard Base filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard Privacy"
+    },
+    "options_cb_privacy_desc": {
+        "message": "Description"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard Social"
+    },
+    "options_cb_social_desc": {
+        "message": "Description"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard Security"
+    },
+    "options_cb_security_desc": {
+        "message": "Description"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard Other"
+    },
+    "options_cb_other_desc": {
+        "message": "Description"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard Custom"
+    },
+    "options_cb_custom_desc": {
+        "message": "Description"
+    },
+    "options_cb_disabled_warning": {
+        "message": "Disabled in Safari settings"
     }
 }

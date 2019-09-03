@@ -211,6 +211,7 @@ module.exports = (() => {
                 minorExtensionsEnabled
             };
 
+            //TODO: Clean up
             log.info(JSON.stringify(result));
             callback(result);
         });

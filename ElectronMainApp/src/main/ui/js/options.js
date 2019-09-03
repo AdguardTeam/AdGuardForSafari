@@ -1508,6 +1508,68 @@ const Settings = function () {
 };
 
 /**
+ * Content blockers tab
+ *
+ * @returns {*}
+ * @constructor
+ */
+const ContentBlockersScreen = function () {
+    'use strict';
+
+    const extensionElements = {
+        "com.adguard.safari.AdGuard.BlockerExtension": "cb_general",
+        "com.adguard.safari.AdGuard.BlockerPrivacy": "cb_privacy",
+        "com.adguard.safari.AdGuard.BlockerSocial": "cb_social",
+        "com.adguard.safari.AdGuard.BlockerSecurity": "cb_security",
+        "com.adguard.safari.AdGuard.BlockerOther": "cb_other",
+        "com.adguard.safari.AdGuard.BlockerCustom": "cb_custom"
+    };
+
+    /**
+     * Updates content blockers info
+     *
+     * @param info
+     */
+    const updateContentBlockers = (info) => {
+        for (let extensionId in info.extensions) {
+            const state = info.extensions[extensionId];
+
+            const elementId = extensionElements[extensionId];
+            if (elementId) {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    const icon = element.querySelector('.extension-block-ico');
+                    const warning = element.querySelector('.cb_disabled_warning');
+
+                    icon.classList.remove("block-type__ico-info--load");
+
+                    icon.classList.add(state ? "block-type__ico-info--check" : "block-type__ico-info--warning");
+                    warning.style.display = state ? 'none' : 'flex';
+                }
+            }
+        }
+    };
+
+    /**
+     * Sets loading state for extensions
+     */
+    const setLoading = () => {
+        const extensionsIcons = document.querySelectorAll('.extension-block-ico');
+        extensionsIcons.forEach((ext) => {
+            ext.classList.remove("block-type__ico-info--warning");
+            ext.classList.remove("block-type__ico-info--check");
+
+            ext.classList.add("block-type__ico-info--load");
+        });
+    };
+
+    return {
+        updateContentBlockers,
+        setLoading
+    };
+};
+
+/**
  * Page controller
  *
  * @constructor
@@ -1568,6 +1630,7 @@ PageController.prototype = {
         let onBoardingScreenEl = body.querySelector('#boarding-screen-placeholder');
         const enableExtensionsNotification = document.getElementById('enableExtensionsNotification');
 
+        let self = this;
         ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
             const contentBlockersEnabled = arg.contentBlockersEnabled;
             const minorExtensionsEnabled = arg.minorExtensionsEnabled;
@@ -1576,6 +1639,8 @@ PageController.prototype = {
             onBoardingScreenEl.style.display = contentBlockersEnabled ? 'none' : 'flex';
 
             enableExtensionsNotification.style.display = minorExtensionsEnabled ? 'none' : 'flex';
+
+            self.contentBlockers.updateContentBlockers(arg);
         });
 
         const openSafariSettingsButtons = document.querySelectorAll('.open-safari-extensions-settings-btn');
@@ -1588,11 +1653,11 @@ PageController.prototype = {
 
         this._checkSafariExtensions();
         window.addEventListener("focus", () => this._checkSafariExtensions());
-
-        // TODO: Update content blockers tab
     },
 
     _checkSafariExtensions: function() {
+        this.contentBlockers.setLoading();
+
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'getSafariExtensionsState'
         }));
@@ -1642,6 +1707,9 @@ PageController.prototype = {
         // Initialize AntiBanner filters
         this.antiBannerFilters = new AntiBannerFilters({ rulesInfo: contentBlockerInfo });
         this.antiBannerFilters.render();
+
+        // Initialize Content blockers
+        this.contentBlockers = new ContentBlockersScreen();
 
         document.querySelector('#about-version-placeholder').textContent = i18n.__("options_about_version.message", environmentOptions.appVersion);
     },
