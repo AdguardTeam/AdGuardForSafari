@@ -55,7 +55,7 @@ module.exports = (function () {
             for (let group of grouped) {
                 let json = emptyBlockerJSON;
 
-                const result = jsonFromFilters(group.rules.map(x => x.ruleText), RULES_LIMIT, false, true);
+                const result = jsonFromFilters(group.rules.map(x => x.ruleText), RULES_LIMIT, false, false);
                 if (result && result.converted) {
                     json = JSON.parse(result.converted);
                     if (result.overLimit) {
