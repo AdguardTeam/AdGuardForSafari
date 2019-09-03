@@ -1541,8 +1541,8 @@ PageController.prototype = {
         this.aboutUpdatesBlock = document.getElementById('about-updates');
         this.aboutUpdatesRelaunch = document.getElementById('about-updates-relaunch');
 
-        //this._initBoardingScreen();
-        //this._initSafariExtensionsMessage();
+        this._initBoardingScreen();
+        this._initSafariExtensionsMessage();
         this._initUpdatesBlock();
     },
 
