@@ -721,6 +721,10 @@ const AntiBannerFilters = function (options) {
         if (showDeleteButton) {
             deleteButton = `<a href="#" filterid="${filter.filterId}" class="remove-custom-filter-button">remove</a>`;
         }
+        let homeButton = '';
+        if (filter.homepage) {
+            homeButton = `<a class="icon-home" target="_blank" href="${filter.homepage}"></a>`;
+        }
 
         return `
             <li id="filter${filter.filterId}">
@@ -746,7 +750,7 @@ const AntiBannerFilters = function (options) {
                 <div class="opt-state">
                     <div class="preloader"></div>
                     ${deleteButton}
-                    <a class="icon-home" target="_blank" href="${filter.homepage}"></a>
+                    ${homeButton}
                     <input type="checkbox" name="filterId" value="${filter.filterId}" ${enabled ? 'checked="checked"' : ''}>
                 </div>
             </li>`;
@@ -1537,8 +1541,8 @@ PageController.prototype = {
         this.aboutUpdatesBlock = document.getElementById('about-updates');
         this.aboutUpdatesRelaunch = document.getElementById('about-updates-relaunch');
 
-        this._initBoardingScreen();
-        this._initSafariExtensionsMessage();
+        //this._initBoardingScreen();
+        //this._initSafariExtensionsMessage();
         this._initUpdatesBlock();
     },
 
