@@ -1,3 +1,4 @@
+const config = require('config');
 const listeners = require('../../notifier');
 const events = require('../../events');
 const settings = require('../settings-manager');
@@ -14,6 +15,8 @@ const {groupRules} = require('./rule-groups');
  * @type {{updateContentBlocker}}
  */
 module.exports = (function () {
+
+    const SafariExtensionBundles = config.get('SafariExtensionBundles');
 
     const RULES_LIMIT = 50000;
     const DEBOUNCE_PERIOD = 500;
@@ -33,13 +36,13 @@ module.exports = (function () {
      * Rules groups to extension bundle identifiers dictionary
      */
     const rulesGroupsBundles = {
-        general: "com.adguard.safari.AdGuard.BlockerExtension",
-        privacy: "com.adguard.safari.AdGuard.BlockerPrivacy",
-        socialWidgetsAndAnnoyances: "com.adguard.safari.AdGuard.BlockerSocial",
-        security: "com.adguard.safari.AdGuard.BlockerSecurity",
-        other: "com.adguard.safari.AdGuard.BlockerOther",
-        custom: "com.adguard.safari.AdGuard.BlockerCustom",
-        advancedBlocking: "com.adguard.safari.AdGuard.AdvancedBlocking"
+        general: SafariExtensionBundles.GENERAL,
+        privacy: SafariExtensionBundles.PRIVACY,
+        socialWidgetsAndAnnoyances: SafariExtensionBundles.SOCIAL_WIDGETS_AND_ANNOYANCES,
+        security: SafariExtensionBundles.SECURITY,
+        other: SafariExtensionBundles.OTHER,
+        custom: SafariExtensionBundles.CUSTOM,
+        advancedBlocking: SafariExtensionBundles.ADVANCED_BLOCKING
     };
 
     /**

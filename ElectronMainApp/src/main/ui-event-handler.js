@@ -12,6 +12,7 @@ const safariToolbar = require('safari-ext');
 const applicationApi = require('./api');
 const updater = require('./updater');
 const log = require('./app/utils/log');
+const toolbarController = require('./toolbar-controller');
 
 
 /**
@@ -84,21 +85,9 @@ module.exports.init = function () {
                     filters.addAndEnableFilters([filter.filterId]);
                 });
                 break;
-            case 'checkContentBlockerExtension':
-                safariToolbar.extensionContentBlockerState((result) => {
-                    sendResponse(event, 'checkContentBlockerExtensionResponse', result);
-                });
-                break;
-            case 'checkSafariExtensions':
-                safariToolbar.extensionSafariIconState((result) => {
-                    if (!result) {
-                        sendResponse(event, 'checkSafariExtensionsResponse', result);
-                        return;
-                    }
-
-                    safariToolbar.extensionAdvancedBlockingState((result) => {
-                        sendResponse(event, 'checkSafariExtensionsResponse', result);
-                    });
+            case 'getSafariExtensionsState':
+                toolbarController.getExtensionsState((result) => {
+                    sendResponse(event, 'getSafariExtensionsStateResponse', result);
                 });
                 break;
             case 'openSafariExtensionsPrefs':

@@ -1538,7 +1538,6 @@ PageController.prototype = {
         this.aboutUpdatesRelaunch = document.getElementById('about-updates-relaunch');
 
         this._initBoardingScreen();
-        this._initSafariExtensionsMessage();
         this._initUpdatesBlock();
     },
 
@@ -1567,46 +1566,41 @@ PageController.prototype = {
     _initBoardingScreen: function () {
         let body = document.querySelector('body');
         let onBoardingScreenEl = body.querySelector('#boarding-screen-placeholder');
-        ipcRenderer.on('checkContentBlockerExtensionResponse', (e, arg) => {
-            body.style.overflow = arg ? 'auto' : 'hidden';
-            onBoardingScreenEl.style.display = arg ? 'none' : 'flex';
+        const enableExtensionsNotification = document.getElementById('enableExtensionsNotification');
+
+        ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
+            const contentBlockersEnabled = arg.contentBlockersEnabled;
+            const minorExtensionsEnabled = arg.minorExtensionsEnabled;
+
+            // TODO: Uncomment
+            // body.style.overflow = contentBlockersEnabled ? 'auto' : 'hidden';
+            // onBoardingScreenEl.style.display = contentBlockersEnabled ? 'none' : 'flex';
+
+            // TODO: Show new notification instead
+            enableExtensionsNotification.style.display = minorExtensionsEnabled ? 'none' : 'block';
         });
 
-        let openSafariSettingsButton = document.querySelector('#open-safari-extensions-settings-btn');
+        const openSafariSettingsButton = document.querySelector('#open-safari-extensions-settings-btn');
         openSafariSettingsButton && openSafariSettingsButton.addEventListener('click', (e) => {
             e.preventDefault();
             this._openSafariExtensionsPrefs();
         });
 
-        this._checkContentBlockerExtension();
-        window.addEventListener("focus", () => this._checkContentBlockerExtension());
-    },
-
-    _initSafariExtensionsMessage: function() {
-        const enableExtensionsNotification = document.getElementById('enableExtensionsNotification');
-        ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
-            enableExtensionsNotification.style.display = arg ? 'none' : 'block';
+        const notificationEnableExtensionsLink = document.getElementById('notificationEnableIconLink');
+        notificationEnableExtensionsLink && notificationEnableExtensionsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            this._openSafariExtensionsPrefs();
         });
 
         this._checkSafariExtensions();
         window.addEventListener("focus", () => this._checkSafariExtensions());
 
-        const notificationEnableExtensionsLink = document.getElementById('notificationEnableIconLink');
-        notificationEnableExtensionsLink && notificationEnableExtensionsLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            this._openSafariExtensionsPrefs();
-        })
-    },
-
-    _checkContentBlockerExtension: function () {
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'checkContentBlockerExtension'
-        }));
+        // TODO: Update content blockers tab
     },
 
     _checkSafariExtensions: function() {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'checkSafariExtensions'
+            'type': 'getSafariExtensionsState'
         }));
     },
 

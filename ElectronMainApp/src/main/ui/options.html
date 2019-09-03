@@ -45,6 +45,11 @@
                     </a>
                 </li>
                 <li>
+                    <a class="nav__item" href="#" data-tab="#content-blockers">
+                        <span i18n="options_content_blockers"></span>
+                    </a>
+                </li>
+                <li>
                     <a class="nav__item" href="#" data-tab="#about">
                         <span i18n="options_about"></span>
                     </a>
@@ -75,56 +80,6 @@
                         Fix it
                     </button>
                 </div>
-                <ul class="opts-list">
-                    <li class="active">
-                        <div class="block-type">
-                            <div class="block-type__ico-info block-type__ico-info--warning"></div>
-                            <div class="block-type__desc">
-                                <div class="block-type__info-title">
-                                    AdGuard General
-                                </div>
-                                <div class="block-type__info-desc">
-                                    Disabled in Safari settings
-                                </div>
-                                <div class="block-type__info-desc">
-                                    AdGuard Base filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="active">
-                        <div class="block-type">
-                            <div class="block-type__ico-info block-type__ico-info--load"></div>
-                            <div class="block-type__desc">
-                                <div class="block-type__info-title">
-                                    AdGuard Icon
-                                </div>
-                                <div class="block-type__info-desc">
-                                    This extension applies advanced blocking rules which are not supported by Safari Content Blocking API
-                                </div>
-                                <div class="block-type__info-desc">
-                                    AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="active">
-                        <div class="block-type">
-                            <div class="block-type__ico-info block-type__ico-info--check"></div>
-                            <div class="block-type__desc">
-                                <div class="block-type__info-title">
-                                    AdGuard Advanced
-                                </div>
-                                <div class="block-type__info-desc">
-                                    This extension applies advanced blocking rules which are not supported by Safari Content Blocking API
-                                </div>
-                                <div class="block-type__info-desc">
-                                    AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filte
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
                 <ul class="opts-list">
                     <li class="active">
                         <div class="opts-desc">
@@ -389,6 +344,60 @@
                     <div class="filter-rules__label" id="userRulesSaveIndicator"></div>
                 </div>
             </div>
+        </div>
+
+        <div id="content-blockers" class="settings-content tab-pane">
+            <div class="subtitle settings-body-subtitle" i18n="options_content_blockers"></div>
+            <ul class="opts-list">
+                <li class="active">
+                    <div class="block-type">
+                        <div class="block-type__ico-info block-type__ico-info--warning"></div>
+                        <div class="block-type__desc">
+                            <div class="block-type__info-title">
+                                AdGuard General
+                            </div>
+                            <div class="block-type__info-desc">
+                                Disabled in Safari settings
+                            </div>
+                            <div class="block-type__info-desc">
+                                AdGuard Base filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="active">
+                    <div class="block-type">
+                        <div class="block-type__ico-info block-type__ico-info--load"></div>
+                        <div class="block-type__desc">
+                            <div class="block-type__info-title">
+                                AdGuard Icon
+                            </div>
+                            <div class="block-type__info-desc">
+                                This extension applies advanced blocking rules which are not supported by Safari Content Blocking API
+                            </div>
+                            <div class="block-type__info-desc">
+                                AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="active">
+                    <div class="block-type">
+                        <div class="block-type__ico-info block-type__ico-info--check"></div>
+                        <div class="block-type__desc">
+                            <div class="block-type__info-title">
+                                AdGuard Advanced
+                            </div>
+                            <div class="block-type__info-desc">
+                                This extension applies advanced blocking rules which are not supported by Safari Content Blocking API
+                            </div>
+                            <div class="block-type__info-desc">
+                                AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filter, AdGuard Mobile Ads filte
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
 
         <div id="about" class="settings-content tab-pane">

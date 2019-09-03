@@ -9,6 +9,9 @@ const addon = require('bindings')('safari_ext_addon');
  */
 module.exports = (() => {
 
+    const ADVANCED_BLOCKING_BUNDLE_ID = "com.adguard.safari.AdGuard.AdvancedBlocking";
+    const ICON_EXTENSION_BUNDLE_ID = "com.adguard.safari.AdGuard.Extension";
+
     /**
      * Initializes toolbar
      *
@@ -134,30 +137,18 @@ module.exports = (() => {
     };
 
     /**
-    * Getting state of the content blocker extension.
-    * Returns true in callback if extension enabled, else returns false.
-    * @param callback = (enabled as bool) => {}
-    */
-    const extensionContentBlockerState = (callback) => {
-        addon.extensionContentBlockerState(callback);
-    };
-
-    /**
-    * Getting state of the icon of Safari app extension.
-    * Returns true in callback if extension enabled, else returns false.
-    * @param callback = (enabled as bool) => {}
-    */
-    const extensionSafariIconState = (callback) => {
-        addon.extensionSafariIconState(callback);
-    };
-
-    /**
-     * Getting state of Advanced Blocking Safari extension.
-     * Returns true in callback if extension enabled, else returns false.
-     * @param callback = (enabled as bool) => {}
+     * Get safari extensions states info
+     * @param bundleId extension bundle identifier
+     * @param callback {*}
      */
-    const extensionAdvancedBlockingState = (callback) => {
-        addon.extensionAdvancedBlockingState(callback);
+    const getExtensionState = (bundleId, callback) => {
+        if (bundleId === ADVANCED_BLOCKING_BUNDLE_ID) {
+            addon.extensionAdvancedBlockingState(callback);
+        } else if (bundleId === ICON_EXTENSION_BUNDLE_ID) {
+            addon.extensionSafariIconState(callback);
+        } else {
+            addon.getExtensionContentBlockerState(bundleId, callback);
+        }
     };
 
     /**
@@ -192,9 +183,7 @@ module.exports = (() => {
         whitelistDomains: whitelistDomains,
         setUserFilter: setUserFilter,
         userFilter: userFilter,
-        extensionContentBlockerState: extensionContentBlockerState,
-        extensionSafariIconState: extensionSafariIconState,
-        extensionAdvancedBlockingState: extensionAdvancedBlockingState,
+        getExtensionState: getExtensionState,
         openExtensionsPreferenses: openExtensionsPreferenses,
         debugLog: debugLog,
         setVerboseLogging: setVerboseLogging

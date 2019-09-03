@@ -6,6 +6,7 @@ const log = require('./app/utils/log');
 const contentBlockerListener = require('./app/content-blocker/content-blocker-listener');
 const notificationController = require('./notification-controller');
 const safariToolbar = require('safari-ext');
+const toolbarController = require('./toolbar-controller');
 
 /**
  * Application startup
@@ -45,9 +46,9 @@ module.exports = (() => {
             safariToolbar.sendReady();
 
             // Check safari extensions
-            safariToolbar.extensionContentBlockerState((result) => {
-                if (!result) {
-                    log.warn('Safari extension content blocker is turned off!');
+            toolbarController.getExtensionsState((result) => {
+                if (!result || !result.contentBlockersEnabled) {
+                    log.warn('Safari content blockers are turned off!');
 
                     showWindow();
                 }
