@@ -1551,6 +1551,24 @@ const ContentBlockersScreen = function () {
     };
 
     /**
+     * Updates extension rules count
+     *
+     * @param info
+     */
+    const updateExtensionState = (info) => {
+        const elementId = extensionElements[info.bundleId];
+        if (elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                const rulesInfoElement = element.querySelector('.cb_rules_count');
+                rulesInfoElement.textContent = i18n.__("options_cb_rules_info.message", info.rulesCount);
+
+                //TODO: We might show rules overlimit here
+            }
+        }
+    };
+
+    /**
      * Sets loading state for extensions
      */
     const setLoading = () => {
@@ -1565,7 +1583,8 @@ const ContentBlockersScreen = function () {
 
     return {
         updateContentBlockers,
-        setLoading
+        setLoading,
+        updateExtensionState
     };
 };
 
@@ -1800,6 +1819,9 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.CONTENT_BLOCKER_UPDATED:
                     controller.antiBannerFilters.updateRulesCountInfo(options);
+                    break;
+                case EventNotifierTypes.CONTENT_BLOCKER_EXTENSION_UPDATED:
+                    controller.contentBlockers.updateExtensionState(options);
                     break;
                 case EventNotifierTypes.SHOW_OPTIONS_FILTERS_TAB:
                     window.location.hash = 'antibanner';

@@ -67,6 +67,11 @@ module.exports = (function () {
                 }
 
                 setSafariContentBlocker(rulesGroupsBundles[group.key], json);
+
+                listeners.notifyListeners(events.CONTENT_BLOCKER_EXTENSION_UPDATED, {
+                    rulesCount: group.rules.length,
+                    bundleId: rulesGroupsBundles[group.key]
+                });
             }
 
             const advancedBlocking = setAdvancedBlocking(rules.map(x => x.ruleText));

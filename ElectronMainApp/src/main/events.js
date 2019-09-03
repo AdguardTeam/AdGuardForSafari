@@ -27,6 +27,7 @@ const EventNotifierTypes = module.exports = {
     NOTIFY_UPDATE_USER_FILTER_RULES: "event.notify.update.user.filter.rules",
     UPDATE_WHITELIST_FILTER_RULES: "event.update.whitelist.filter.rules",
     CONTENT_BLOCKER_UPDATED: "event.content.blocker.updated",
+    CONTENT_BLOCKER_EXTENSION_UPDATED: "event.content.blocker.extension.updated",
     CONTENT_BLOCKER_UPDATE_REQUIRED: "event.content.blocker.update.required",
     SHOW_OPTIONS_FILTERS_TAB: "event.show.options.filters",
     SHOW_OPTIONS_USER_FILTER_TAB: "event.show.options.user.filter",
