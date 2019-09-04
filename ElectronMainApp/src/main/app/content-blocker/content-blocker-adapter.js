@@ -7,7 +7,7 @@ const {jsonFromFilters} = require('../libs/JSConverter');
 const whitelist = require('../whitelist');
 const log = require('../utils/log');
 const concurrent = require('../utils/concurrent');
-const {groupRules} = require('./rule-groups');
+const {groupRules, rulesGroupsBundles} = require('./rule-groups');
 
 /**
  * Safari Content Blocker Adapter
@@ -15,8 +15,6 @@ const {groupRules} = require('./rule-groups');
  * @type {{updateContentBlocker}}
  */
 module.exports = (function () {
-
-    const SafariExtensionBundles = config.get('SafariExtensionBundles');
 
     const RULES_LIMIT = 50000;
     const DEBOUNCE_PERIOD = 500;
@@ -31,19 +29,6 @@ module.exports = (function () {
             }
         }
     ];
-
-    /**
-     * Rules groups to extension bundle identifiers dictionary
-     */
-    const rulesGroupsBundles = {
-        general: SafariExtensionBundles.GENERAL,
-        privacy: SafariExtensionBundles.PRIVACY,
-        socialWidgetsAndAnnoyances: SafariExtensionBundles.SOCIAL_WIDGETS_AND_ANNOYANCES,
-        security: SafariExtensionBundles.SECURITY,
-        other: SafariExtensionBundles.OTHER,
-        custom: SafariExtensionBundles.CUSTOM,
-        advancedBlocking: SafariExtensionBundles.ADVANCED_BLOCKING
-    };
 
     /**
      * Load content blocker
@@ -70,7 +55,9 @@ module.exports = (function () {
 
                 listeners.notifyListeners(events.CONTENT_BLOCKER_EXTENSION_UPDATED, {
                     rulesCount: group.rules.length,
-                    bundleId: rulesGroupsBundles[group.key]
+                    bundleId: rulesGroupsBundles[group.key],
+                    overlimit: result.overLimit,
+                    filterGroups: group.filterGroups
                 });
             }
 

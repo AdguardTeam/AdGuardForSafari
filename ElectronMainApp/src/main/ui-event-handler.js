@@ -13,6 +13,7 @@ const applicationApi = require('./api');
 const updater = require('./updater');
 const log = require('./app/utils/log');
 const toolbarController = require('./toolbar-controller');
+const {filterGroupsBundles} = require('./app/content-blocker/rule-groups');
 
 
 /**
@@ -89,6 +90,9 @@ module.exports.init = function () {
                 toolbarController.getExtensionsState((result) => {
                     sendResponse(event, 'getSafariExtensionsStateResponse', result);
                 });
+                break;
+            case 'getContentBlockersMetadata':
+                sendResponse(event, 'getContentBlockersMetadataResponse', filterGroupsBundles());
                 break;
             case 'openSafariExtensionsPrefs':
                 safariToolbar.openExtensionsPreferenses(()=> {
