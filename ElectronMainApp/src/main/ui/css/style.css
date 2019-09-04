@@ -519,6 +519,9 @@
   color: #888;
   margin-bottom: 10px;
 }
+.cb_disabled_warning {
+  color: #9C1D00;
+}
 .block-type__info-desc:last-child {
   margin-bottom: 0;
 }

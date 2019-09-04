@@ -365,6 +365,12 @@
     "settings_notification_extensions_text": {
         "message": "You should enable all AdGuard extensions for correctly ad blocking in Safari"
     },
+    "settings_notification_cb_extensions_title": {
+        "message": "Some AdGuard content blocker extensions are disabled!"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "You should enable all AdGuard content blocker extensions for correctly ad blocking in Safari"
+    },
     "options_cb_general_title": {
         "message": "AdGuard General"
     },
@@ -403,5 +409,8 @@
     },
     "options_cb_rules_info": {
         "message": "%s rules used"
+    },
+    "options_cb_disabled_warning": {
+        "message": "Disabled in Safari"
     }
 }

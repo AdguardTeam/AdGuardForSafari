@@ -192,15 +192,21 @@ module.exports = (() => {
         }
 
         Promise.all(dfds).then(function () {
+            let allContentBlockersDisabled = true;
             let contentBlockersEnabled = true;
             let minorExtensionsEnabled = true;
 
             for (let extension in extensions) {
-                if (!extensions[extension]) {
+                const extensionEnabled = extensions[extension];
+                if (!extensionEnabled) {
                     if (ContentBlockerExtensions.indexOf(extension) >= 0) {
                         contentBlockersEnabled = false;
                     } else {
                         minorExtensionsEnabled = false;
+                    }
+                } else {
+                    if (ContentBlockerExtensions.indexOf(extension) >= 0) {
+                        allContentBlockersDisabled = false;
                     }
                 }
             }
@@ -208,11 +214,10 @@ module.exports = (() => {
             const result = {
                 extensions,
                 contentBlockersEnabled,
-                minorExtensionsEnabled
+                minorExtensionsEnabled,
+                allContentBlockersDisabled
             };
 
-            //TODO: Clean up
-            log.info(JSON.stringify(result));
             callback(result);
         });
     };

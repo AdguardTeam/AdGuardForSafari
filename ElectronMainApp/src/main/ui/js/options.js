@@ -1516,6 +1516,11 @@ const Settings = function () {
 const ContentBlockersScreen = function () {
     'use strict';
 
+    /**
+     * Elements to extension bundles dictionary
+     *
+     * @type {{*}}
+     */
     const extensionElements = {
         "com.adguard.safari.AdGuard.BlockerExtension": "cb_general",
         "com.adguard.safari.AdGuard.BlockerPrivacy": "cb_privacy",
@@ -1523,6 +1528,21 @@ const ContentBlockersScreen = function () {
         "com.adguard.safari.AdGuard.BlockerSecurity": "cb_security",
         "com.adguard.safari.AdGuard.BlockerOther": "cb_other",
         "com.adguard.safari.AdGuard.BlockerCustom": "cb_custom"
+    };
+
+    /**
+     * Extension element for bundle identifier
+     *
+     * @param bundleId
+     * @return {*}
+     */
+    const getExtensionElement = (bundleId) => {
+        const elementId = extensionElements[bundleId];
+        if (elementId) {
+            return document.getElementById(elementId);
+        }
+
+        return null;
     };
 
     /**
@@ -1534,18 +1554,18 @@ const ContentBlockersScreen = function () {
         for (let extensionId in info.extensions) {
             const state = info.extensions[extensionId];
 
-            const elementId = extensionElements[extensionId];
-            if (elementId) {
-                const element = document.getElementById(elementId);
-                if (element) {
-                    const icon = element.querySelector('.extension-block-ico');
-                    const warning = element.querySelector('.cb_disabled_warning');
+            const element = getExtensionElement(extensionId);
+            if (element) {
+                const icon = element.querySelector('.extension-block-ico');
+                const warning = element.querySelector('.cb_disabled_warning');
+                const rulesCount = element.querySelector('.cb_rules_count');
 
-                    icon.classList.remove("block-type__ico-info--load");
+                icon.classList.remove("block-type__ico-info--load");
 
-                    icon.classList.add(state ? "block-type__ico-info--check" : "block-type__ico-info--warning");
-                    warning.style.display = state ? 'none' : 'flex';
-                }
+                icon.classList.add(state ? "block-type__ico-info--check" : "block-type__ico-info--warning");
+                warning.style.display = state ? 'none' : 'flex';
+
+                rulesCount.style.display = state ? 'flex' : 'none';
             }
         }
     };
@@ -1556,15 +1576,12 @@ const ContentBlockersScreen = function () {
      * @param info
      */
     const updateExtensionState = (info) => {
-        const elementId = extensionElements[info.bundleId];
-        if (elementId) {
-            const element = document.getElementById(elementId);
-            if (element) {
-                const rulesInfoElement = element.querySelector('.cb_rules_count');
-                rulesInfoElement.textContent = i18n.__("options_cb_rules_info.message", info.rulesCount);
+        const element = getExtensionElement(info.bundleId);
+        if (element) {
+            const rulesInfoElement = element.querySelector('.cb_rules_count');
+            rulesInfoElement.textContent = i18n.__("options_cb_rules_info.message", info.rulesCount);
 
-                //TODO: We might show rules overlimit here
-            }
+            //TODO: We might show rules overlimit here
         }
     };
 
@@ -1648,16 +1665,19 @@ PageController.prototype = {
         let body = document.querySelector('body');
         let onBoardingScreenEl = body.querySelector('#boarding-screen-placeholder');
         const enableExtensionsNotification = document.getElementById('enableExtensionsNotification');
+        const enableCbExtensionsNotification = document.getElementById('enableCbExtensionsNotification');
 
         let self = this;
         ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
+            const allContentBlockersDisabled = arg.allContentBlockersDisabled;
             const contentBlockersEnabled = arg.contentBlockersEnabled;
             const minorExtensionsEnabled = arg.minorExtensionsEnabled;
 
-            body.style.overflow = contentBlockersEnabled ? 'auto' : 'hidden';
-            onBoardingScreenEl.style.display = contentBlockersEnabled ? 'none' : 'flex';
+            body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
+            onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
 
-            enableExtensionsNotification.style.display = minorExtensionsEnabled ? 'none' : 'flex';
+            enableExtensionsNotification.style.display = (contentBlockersEnabled && minorExtensionsEnabled) ? 'none' : 'flex';
+            enableCbExtensionsNotification.style.display = contentBlockersEnabled ? 'none' : 'flex';
 
             self.contentBlockers.updateContentBlockers(arg);
         });
