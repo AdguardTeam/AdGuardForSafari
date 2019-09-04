@@ -395,6 +395,9 @@
   padding-right: 70px;
   opacity: 0.5;
 }
+.opts-list--content-blocker .block-type {
+  cursor: default;
+}
 .opts-list li.active .block-type {
   opacity: 1;
 }
@@ -429,6 +432,7 @@
   text-transform: uppercase;
   height: 48px;
   border-radius: 8px;
+  outline: none;
 }
 .block-type__desc {
   display: flex;
