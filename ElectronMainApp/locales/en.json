@@ -390,7 +390,10 @@
         "message": "AdGuard Custom"
     },
     "options_cb_rules_info": {
-        "message": "%s rules used"
+        "message": {
+            "one": "%s rule used",
+            "other": "%s rules used"
+        }
     },
     "options_cb_disabled_warning": {
         "message": "Disabled in Safari"

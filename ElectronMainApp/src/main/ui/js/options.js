@@ -1616,7 +1616,7 @@ const ContentBlockersScreen = function (antiBannerFilters) {
         if (element) {
             if (info) {
                 const rulesInfoElement = element.querySelector('.cb_rules_count');
-                rulesInfoElement.textContent = i18n.__("options_cb_rules_info.message", info.rulesCount);
+                rulesInfoElement.textContent = i18n.__n("options_cb_rules_info.message", info.rulesCount);
 
                 //TODO: We might show rules overlimit here
             }
