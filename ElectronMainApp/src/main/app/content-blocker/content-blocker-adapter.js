@@ -56,7 +56,7 @@ module.exports = (function () {
                 listeners.notifyListeners(events.CONTENT_BLOCKER_EXTENSION_UPDATED, {
                     rulesCount: group.rules.length,
                     bundleId: rulesGroupsBundles[group.key],
-                    overlimit: result.overLimit,
+                    overlimit: result && result.overLimit,
                     filterGroups: group.filterGroups
                 });
             }
