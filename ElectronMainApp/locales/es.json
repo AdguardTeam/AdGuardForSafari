@@ -57,10 +57,10 @@
         "message": "Permitir anuncios de búsqueda y la autopromoción de sitios web"
     },
     "options_export_settings": {
-        "message": "Exportar ajustes"
+        "message": "Exportar configuración"
     },
     "options_import_settings": {
-        "message": "Importar ajustes"
+        "message": "Importar configuración"
     },
     "options_antibanner": {
         "message": "Filtros"
@@ -297,7 +297,7 @@
         "message": "Política de privacidad"
     },
     "options_acknowledgment": {
-        "message": "Reconocimientos"
+        "message": "Agradecimientos"
     },
     "options_github": {
         "message": "GitHub"
@@ -339,7 +339,7 @@
         "message": "Ejecutar AdGuard para Safari al inicio de sesión"
     },
     "options_verbose_logging": {
-        "message": "Verbose logging"
+        "message": "Registro detallado"
     },
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
