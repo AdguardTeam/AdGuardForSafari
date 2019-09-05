@@ -15,6 +15,7 @@
   line-height: 42px;
   transition: 0.3s ease background-color;
   font-weight: 600;
+  outline: none;
 }
 .button--green {
   padding: 0 30px;
