@@ -1,3 +1,4 @@
+const config = require('config');
 const listeners = require('../../notifier');
 const events = require('../../events');
 const settings = require('../settings-manager');
@@ -6,7 +7,7 @@ const {jsonFromFilters} = require('../libs/JSConverter');
 const whitelist = require('../whitelist');
 const log = require('../utils/log');
 const concurrent = require('../utils/concurrent');
-const {groupRules} = require('./rule-groups');
+const {groupRules, rulesGroupsBundles} = require('./rule-groups');
 
 /**
  * Safari Content Blocker Adapter
@@ -30,19 +31,6 @@ module.exports = (function () {
     ];
 
     /**
-     * Rules groups to extension bundle identifiers dictionary
-     */
-    const rulesGroupsBundles = {
-        general: "com.adguard.safari.AdGuard.BlockerExtension",
-        privacy: "com.adguard.safari.AdGuard.BlockerPrivacy",
-        socialWidgetsAndAnnoyances: "com.adguard.safari.AdGuard.BlockerSocial",
-        security: "com.adguard.safari.AdGuard.BlockerSecurity",
-        other: "com.adguard.safari.AdGuard.BlockerOther",
-        custom: "com.adguard.safari.AdGuard.BlockerCustom",
-        advancedBlocking: "com.adguard.safari.AdGuard.AdvancedBlocking"
-    };
-
-    /**
      * Load content blocker
      */
     const updateContentBlocker = () => {
@@ -64,6 +52,13 @@ module.exports = (function () {
                 }
 
                 setSafariContentBlocker(rulesGroupsBundles[group.key], json);
+
+                listeners.notifyListeners(events.CONTENT_BLOCKER_EXTENSION_UPDATED, {
+                    rulesCount: group.rules.length,
+                    bundleId: rulesGroupsBundles[group.key],
+                    overlimit: result && result.overLimit,
+                    filterGroups: group.filterGroups
+                });
             }
 
             const advancedBlocking = setAdvancedBlocking(rules.map(x => x.ruleText));

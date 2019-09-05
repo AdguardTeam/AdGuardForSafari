@@ -956,6 +956,10 @@ const AntiBannerFilters = function (options) {
             if (hash && hash.indexOf('#antibanner') === 0) {
                 TopMenu.toggleTab();
             }
+
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'getContentBlockersMetadata'
+            }));
         });
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
@@ -1305,13 +1309,39 @@ const AntiBannerFilters = function (options) {
         }
     }
 
+    /**
+     * Creates filters info string
+     *
+     * @param groupIds [] array of enabled groups
+     */
+    const getFiltersInfo = (groupIds) => {
+        if (!groupIds || groupIds.length === 0) {
+            return null;
+        }
+
+        if (loadedFiltersInfo.filters.length === 0) {
+            return null;
+        }
+
+        let filters = [];
+        for (let groupId of groupIds) {
+            if (loadedFiltersInfo.isCategoryEnabled(groupId)) {
+                const groupFilters = getFiltersByGroupId(groupId, loadedFiltersInfo.filters);
+                filters = filters.concat(groupFilters);
+            }
+        }
+
+        return generateFiltersNamesDescription(filters);
+    };
+
     return {
         render: renderCategoriesAndFilters,
         updateRulesCountInfo: updateRulesCountInfo,
         onFilterStateChanged: onFilterStateChanged,
         onCategoryStateChanged: onCategoryStateChanged,
         onFilterDownloadStarted: onFilterDownloadStarted,
-        onFilterDownloadFinished: onFilterDownloadFinished
+        onFilterDownloadFinished: onFilterDownloadFinished,
+        getFiltersInfo: getFiltersInfo
     };
 };
 
@@ -1475,7 +1505,7 @@ const Settings = function () {
         if (protectionEnabled) {
             enableProtectionNotification.style.display = 'none';
         } else {
-            enableProtectionNotification.style.display = 'block';
+            enableProtectionNotification.style.display = 'flex';
         }
     };
 
@@ -1512,6 +1542,127 @@ const Settings = function () {
 };
 
 /**
+ * Content blockers tab
+ *
+ * @returns {*}
+ * @constructor
+ */
+const ContentBlockersScreen = function (antiBannerFilters) {
+    'use strict';
+
+    /**
+     * Elements to extension bundles dictionary
+     *
+     * @type {{*}}
+     */
+    const extensionElements = {
+        "com.adguard.safari.AdGuard.BlockerExtension": "cb_general",
+        "com.adguard.safari.AdGuard.BlockerPrivacy": "cb_privacy",
+        "com.adguard.safari.AdGuard.BlockerSocial": "cb_social",
+        "com.adguard.safari.AdGuard.BlockerSecurity": "cb_security",
+        "com.adguard.safari.AdGuard.BlockerOther": "cb_other",
+        "com.adguard.safari.AdGuard.BlockerCustom": "cb_custom"
+    };
+
+    /**
+     * Extension element for bundle identifier
+     *
+     * @param bundleId
+     * @return {*}
+     */
+    const getExtensionElement = (bundleId) => {
+        const elementId = extensionElements[bundleId];
+        if (elementId) {
+            return document.getElementById(elementId);
+        }
+
+        return null;
+    };
+
+    /**
+     * Updates content blockers info
+     *
+     * @param info
+     */
+    const updateContentBlockers = (info) => {
+        for (let extensionId in info.extensions) {
+            const state = info.extensions[extensionId];
+
+            const element = getExtensionElement(extensionId);
+            if (element) {
+                const icon = element.querySelector('.extension-block-ico');
+                const warning = element.querySelector('.cb_disabled_warning');
+                const rulesCount = element.querySelector('.cb_rules_count');
+
+                icon.classList.remove("block-type__ico-info--load");
+
+                icon.classList.add(state ? "block-type__ico-info--check" : "block-type__ico-info--warning");
+                warning.style.display = state ? 'none' : 'flex';
+
+                rulesCount.style.display = state ? 'flex' : 'none';
+            }
+        }
+    };
+
+    /**
+     * Updates extension rules count
+     *
+     * @param bundleId
+     * @param info
+     * @param filtersInfo
+     */
+    const updateExtensionState = (bundleId, info, filtersInfo) => {
+        const element = getExtensionElement(bundleId);
+        if (element) {
+            if (info) {
+                const rulesInfoElement = element.querySelector('.cb_rules_count');
+                rulesInfoElement.textContent = i18n.__("options_cb_rules_info.message", info.rulesCount);
+
+                //TODO: We might show rules overlimit here
+            }
+
+            if (filtersInfo) {
+                const filtersInfoElement = element.querySelector('.cb_filters_info');
+                filtersInfoElement.textContent = filtersInfo;
+            }
+        }
+    };
+
+    /**
+     * Sets loading state for extensions
+     */
+    const setLoading = () => {
+        const extensionsIcons = document.querySelectorAll('.extension-block-ico');
+        extensionsIcons.forEach((ext) => {
+            ext.classList.remove("block-type__ico-info--warning");
+            ext.classList.remove("block-type__ico-info--check");
+
+            ext.classList.add("block-type__ico-info--load");
+        });
+    };
+
+    /**
+     * Initialize
+     *
+     */
+    const init = () => {
+        ipcRenderer.on('getContentBlockersMetadataResponse', (e, response) => {
+            for (let extension of response) {
+                const filtersInfo = antiBannerFilters.getFiltersInfo(extension.groupIds);
+                updateExtensionState(extension.bundleId, null, filtersInfo);
+            }
+        });
+    };
+
+    return {
+        updateContentBlockers,
+        setLoading,
+        updateExtensionState,
+        init
+    };
+};
+
+/**
  * Page controller
  *
  * @constructor
@@ -1542,7 +1693,6 @@ PageController.prototype = {
         this.aboutUpdatesRelaunch = document.getElementById('about-updates-relaunch');
 
         this._initBoardingScreen();
-        this._initSafariExtensionsMessage();
         this._initUpdatesBlock();
     },
 
@@ -1571,46 +1721,41 @@ PageController.prototype = {
     _initBoardingScreen: function () {
         let body = document.querySelector('body');
         let onBoardingScreenEl = body.querySelector('#boarding-screen-placeholder');
-        ipcRenderer.on('checkContentBlockerExtensionResponse', (e, arg) => {
-            body.style.overflow = arg ? 'auto' : 'hidden';
-            onBoardingScreenEl.style.display = arg ? 'none' : 'flex';
-        });
-
-        let openSafariSettingsButton = document.querySelector('#open-safari-extensions-settings-btn');
-        openSafariSettingsButton && openSafariSettingsButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            this._openSafariExtensionsPrefs();
-        });
-
-        this._checkContentBlockerExtension();
-        window.addEventListener("focus", () => this._checkContentBlockerExtension());
-    },
-
-    _initSafariExtensionsMessage: function() {
         const enableExtensionsNotification = document.getElementById('enableExtensionsNotification');
-        ipcRenderer.on('checkSafariExtensionsResponse', (e, arg) => {
-            enableExtensionsNotification.style.display = arg ? 'none' : 'block';
+        const enableCbExtensionsNotification = document.getElementById('enableCbExtensionsNotification');
+
+        let self = this;
+        ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
+            const allContentBlockersDisabled = arg.allContentBlockersDisabled;
+            const contentBlockersEnabled = arg.contentBlockersEnabled;
+            const minorExtensionsEnabled = arg.minorExtensionsEnabled;
+
+            body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
+            onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
+
+            enableExtensionsNotification.style.display = (contentBlockersEnabled && minorExtensionsEnabled) ? 'none' : 'flex';
+            enableCbExtensionsNotification.style.display = contentBlockersEnabled ? 'none' : 'flex';
+
+            self.contentBlockers.updateContentBlockers(arg);
         });
 
-        this._checkSafariExtensions();
-        window.addEventListener("focus", () => this._checkSafariExtensions());
+        const openSafariSettingsButtons = document.querySelectorAll('.open-safari-extensions-settings-btn');
+        openSafariSettingsButtons.forEach((but) => {
+             but.addEventListener('click', (e) => {
+                 e.preventDefault();
+                 this._openSafariExtensionsPrefs();
+             });
+        });
 
-        const notificationEnableExtensionsLink = document.getElementById('notificationEnableIconLink');
-        notificationEnableExtensionsLink && notificationEnableExtensionsLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            this._openSafariExtensionsPrefs();
-        })
+        this.checkSafariExtensions();
+        window.addEventListener("focus", () => this.checkSafariExtensions());
     },
 
-    _checkContentBlockerExtension: function () {
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'checkContentBlockerExtension'
-        }));
-    },
+    checkSafariExtensions: function() {
+        this.contentBlockers.setLoading();
 
-    _checkSafariExtensions: function() {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'checkSafariExtensions'
+            'type': 'getSafariExtensionsState'
         }));
     },
 
@@ -1658,6 +1803,10 @@ PageController.prototype = {
         // Initialize AntiBanner filters
         this.antiBannerFilters = new AntiBannerFilters({ rulesInfo: contentBlockerInfo });
         this.antiBannerFilters.render();
+
+        // Initialize Content blockers
+        this.contentBlockers = new ContentBlockersScreen(this.antiBannerFilters);
+        this.contentBlockers.init();
 
         document.querySelector('#about-version-placeholder').textContent = i18n.__("options_about_version.message", environmentOptions.appVersion);
     },
@@ -1726,12 +1875,14 @@ const initPage = function (response) {
                 case EventNotifierTypes.FILTER_ENABLE_DISABLE:
                     controller.antiBannerFilters.onFilterStateChanged(options);
                     controller.settings.updateAcceptableAdsCheckbox(options);
+                    controller.contentBlockers.setLoading();
                     break;
                 case EventNotifierTypes.FILTER_ADD_REMOVE:
                     controller.antiBannerFilters.render();
                     break;
                 case EventNotifierTypes.FILTER_GROUP_ENABLE_DISABLE:
                     controller.antiBannerFilters.onCategoryStateChanged(options);
+                    controller.contentBlockers.setLoading();
                     break;
                 case EventNotifierTypes.START_DOWNLOAD_FILTER:
                     controller.antiBannerFilters.onFilterDownloadStarted(options);
@@ -1742,12 +1893,19 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.UPDATE_USER_FILTER_RULES:
                     controller.userFilter.updateUserFilterRules();
+                    controller.contentBlockers.setLoading();
                     break;
                 case EventNotifierTypes.UPDATE_WHITELIST_FILTER_RULES:
                     controller.whiteListFilter.updateWhiteListDomains();
+                    controller.contentBlockers.setLoading();
                     break;
                 case EventNotifierTypes.CONTENT_BLOCKER_UPDATED:
                     controller.antiBannerFilters.updateRulesCountInfo(options);
+                    controller.checkSafariExtensions();
+                    break;
+                case EventNotifierTypes.CONTENT_BLOCKER_EXTENSION_UPDATED:
+                    const filtersInfo = controller.antiBannerFilters.getFiltersInfo(options.filterGroups);
+                    controller.contentBlockers.updateExtensionState(options.bundleId, options, filtersInfo);
                     break;
                 case EventNotifierTypes.SHOW_OPTIONS_FILTERS_TAB:
                     window.location.hash = 'antibanner';

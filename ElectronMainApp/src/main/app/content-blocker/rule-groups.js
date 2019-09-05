@@ -15,6 +15,8 @@ module.exports = (function () {
     const AntiBannerFilterGroupsId = config.get('AntiBannerFilterGroupsId');
     const AntiBannerFiltersId = config.get('AntiBannerFiltersId');
 
+    const SafariExtensionBundles = config.get('SafariExtensionBundles');
+
     /**
      * Rules groups
      *
@@ -63,6 +65,19 @@ module.exports = (function () {
     };
 
     /**
+     * Rules groups to extension bundle identifiers dictionary
+     */
+    const rulesGroupsBundles = {
+        general: SafariExtensionBundles.GENERAL,
+        privacy: SafariExtensionBundles.PRIVACY,
+        socialWidgetsAndAnnoyances: SafariExtensionBundles.SOCIAL_WIDGETS_AND_ANNOYANCES,
+        security: SafariExtensionBundles.SECURITY,
+        other: SafariExtensionBundles.OTHER,
+        custom: SafariExtensionBundles.CUSTOM,
+        advancedBlocking: SafariExtensionBundles.ADVANCED_BLOCKING
+    };
+
+    /**
      * Groups provided rules
      *
      * @param rules
@@ -103,6 +118,7 @@ module.exports = (function () {
         const result = [];
         for (let groupName in groups) {
             const key = groups[groupName].key;
+            const filterGroups = groups[groupName].filterGroups;
 
             if (rulesByAffinityBlocks[key]) {
                 rulesByGroup[key] = rulesByGroup[key].concat(rulesByAffinityBlocks[key]);
@@ -110,7 +126,8 @@ module.exports = (function () {
 
             result.push({
                 key: key,
-                rules: rulesByGroup[key]
+                rules: rulesByGroup[key],
+                filterGroups: filterGroups
             });
 
             log.info(`Affinity block ${key}: rules length: ${rulesByGroup[key].length}`);
@@ -180,9 +197,32 @@ module.exports = (function () {
         return result;
     };
 
+    let bundleGroups;
+    const filterGroupsBundles = () => {
+        if (bundleGroups) {
+            return bundleGroups;
+        }
+
+        const result = [];
+
+        for (let key in rulesGroupsBundles) {
+            if (groups[key]) {
+                result.push({
+                    bundleId: rulesGroupsBundles[key],
+                    groupIds: groups[key].filterGroups
+                });
+            }
+        }
+
+        bundleGroups = result;
+        return result;
+    };
+
     return {
         groupRules,
-        groups
+        groups,
+        rulesGroupsBundles,
+        filterGroupsBundles
     };
 
 })();

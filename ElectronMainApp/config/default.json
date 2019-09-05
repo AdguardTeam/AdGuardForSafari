@@ -24,6 +24,16 @@
     "LANGUAGE_SPECIFIC_ID": 7,
     "CUSTOM_FILTERS_GROUP_ID": 0
   },
+  "SafariExtensionBundles": {
+    "GENERAL": "com.adguard.safari.AdGuard.BlockerExtension",
+    "PRIVACY": "com.adguard.safari.AdGuard.BlockerPrivacy",
+    "SOCIAL_WIDGETS_AND_ANNOYANCES": "com.adguard.safari.AdGuard.BlockerSocial",
+    "SECURITY": "com.adguard.safari.AdGuard.BlockerSecurity",
+    "OTHER": "com.adguard.safari.AdGuard.BlockerOther",
+    "CUSTOM": "com.adguard.safari.AdGuard.BlockerCustom",
+    "ADVANCED_BLOCKING": "com.adguard.safari.AdGuard.AdvancedBlocking",
+    "ICON": "com.adguard.safari.AdGuard.Extension"
+  },
   "backendUrl": "https://chrome.adtidy.org",
   "backendApiKey": "4DDBE80A3DA94D819A00523252FB6380",
   "filtersUrl": "https://filters.adtidy.org/extension/safari",

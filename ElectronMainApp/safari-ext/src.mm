@@ -399,19 +399,22 @@ NAN_METHOD(whitelistDomains) {
     }];
 }
 
-NAN_METHOD(extensionContentBlockerState){
+NAN_METHOD(getExtensionContentBlockerState){
 
-    if (info.Length() < 1) {
-        ThrowTypeError("Wrong number of arguments");
-        return;
-    }
+	if (info.Length() < 2) {
+		ThrowTypeError("Wrong number of arguments");
+		return;
+	}
 
-    if (!info[0]->IsFunction()) {
-        ThrowTypeError("Wrong arguments");
-        return;
-    }
+	if (!info[0]->IsString() || !info[1]->IsFunction()) {
+		ThrowTypeError("Wrong arguments");
+		return;
+	}
 
-    Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
+	Nan::Utf8String message (info[0]);
+	NSString *bundleId = [NSString stringWithCString:*message encoding:NSUTF8StringEncoding];
+
+    Nan::Callback *cb = new Nan::Callback(info[1].As<Function>());
 
     void (^resultBlock)(BOOL result)  = ^void(BOOL result) {
 
@@ -425,7 +428,7 @@ NAN_METHOD(extensionContentBlockerState){
         });
     };
 
-    [SFContentBlockerManager getStateOfContentBlockerWithIdentifier:AESharedResources.blockerBundleId
+    [SFContentBlockerManager getStateOfContentBlockerWithIdentifier:bundleId
     completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
         resultBlock(error == nil && state.enabled);
     }];
@@ -732,8 +735,8 @@ NAN_MODULE_INIT(Init) {
   Nan::Set(target, New<String>("whitelistDomains").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(whitelistDomains)).ToLocalChecked());
 
-  Nan::Set(target, New<String>("extensionContentBlockerState").ToLocalChecked(),
-  GetFunction(New<FunctionTemplate>(extensionContentBlockerState)).ToLocalChecked());
+  Nan::Set(target, New<String>("getExtensionContentBlockerState").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(getExtensionContentBlockerState)).ToLocalChecked());
 
   Nan::Set(target, New<String>("extensionSafariIconState").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(extensionSafariIconState)).ToLocalChecked());

@@ -1,3 +1,4 @@
+const config = require('config');
 const safariToolbar = require('safari-ext');
 const applicationApi = require('./api');
 const listeners = require('./notifier');
@@ -12,6 +13,16 @@ const { shell } = require('electron');
  * Handles safari-ext events and setups its view state.
  */
 module.exports = (() => {
+
+    const SafariExtensionBundles = config.get('SafariExtensionBundles');
+    const ContentBlockerExtensions = [
+        SafariExtensionBundles.GENERAL,
+        SafariExtensionBundles.PRIVACY,
+        SafariExtensionBundles.SOCIAL_WIDGETS_AND_ANNOYANCES,
+        SafariExtensionBundles.SECURITY,
+        SafariExtensionBundles.OTHER,
+        SafariExtensionBundles.CUSTOM
+    ];
 
     /**
      * Protection status has been changed from toolbar
@@ -163,6 +174,55 @@ module.exports = (() => {
     };
 
     /**
+     * Get safari extensions states info
+     * @param callback {*}
+     */
+    const getExtensionsState = (callback) => {
+        const dfds = [];
+        const extensions = {};
+
+        for (let bundle in SafariExtensionBundles) {
+            const bundleId = SafariExtensionBundles[bundle];
+            dfds.push(new Promise((resolve) => {
+                safariToolbar.getExtensionState(bundleId, (info) => {
+                    extensions[bundleId] = info;
+                    resolve();
+                });
+            }));
+        }
+
+        Promise.all(dfds).then(function () {
+            let allContentBlockersDisabled = true;
+            let contentBlockersEnabled = true;
+            let minorExtensionsEnabled = true;
+
+            for (let extension in extensions) {
+                const extensionEnabled = extensions[extension];
+                if (!extensionEnabled) {
+                    if (ContentBlockerExtensions.indexOf(extension) >= 0) {
+                        contentBlockersEnabled = false;
+                    } else {
+                        minorExtensionsEnabled = false;
+                    }
+                } else {
+                    if (ContentBlockerExtensions.indexOf(extension) >= 0) {
+                        allContentBlockersDisabled = false;
+                    }
+                }
+            }
+
+            const result = {
+                extensions,
+                contentBlockersEnabled,
+                minorExtensionsEnabled,
+                allContentBlockersDisabled
+            };
+
+            callback(result);
+        });
+    };
+
+    /**
      * Sets verbose logging
      *
      * @param enabled
@@ -172,7 +232,8 @@ module.exports = (() => {
     };
 
     return {
-        initToolbarController
+        initToolbarController,
+        getExtensionsState
     };
 
 })();
