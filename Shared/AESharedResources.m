@@ -40,6 +40,8 @@
 #define NOTIFICATION_REPORT                     AG_BUNDLEID @".notify.report"
 #define NOTIFICATION_ADVANCED_BLOCKING          AG_BUNDLEID @".notify.advancedblocking"
 
+#define NOTIFICATION_EXTENSIONS_ENABLED         AG_BUNDLEID @".notify.allExtentionsEnabled"
+#define REQUEST_EXTENSIONS_ENABLED              AG_BUNDLEID @".request.allExtentionsEnabled"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources Constants
@@ -48,6 +50,7 @@ NSString * const AEDefaultsEnabled = @"AEDefaultsEnabled";
 NSString * const AEDefaultsMainAppBusy = @"AEDefaultsMainAppBusy";
 NSString * const AEDefaultsVerboseLogging = @"AEDefaultsVerboseLogging";
 NSString * const AEDefaultsLastReportUrl = @"AEDefaultsLastReportUrl";
+NSString * const AEDefaultsAllExtensionsEnabled = @"AEDefaultsAllExtensionsEnabled";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -63,20 +66,16 @@ static void onChangedNotify(CFNotificationCenterRef center, void *observer, CFSt
 static NSURL *_containerFolderUrl;
 static NSUserDefaults *_sharedUserDefaults;
 
-static AESListenerBlock _onDefaultsChangedBlock;
-static AESListenerBlock _onWhitelistChangedBlock;
-static AESListenerBlock _onUserFilterChangedBlock;
-static AESListenerBlock _onBusyChangedBlock;
-static AESListenerBlock _onVerboseLoggingChangedBlock;
-static AESListenerBlock _onShowPreferences;
-static AESListenerBlock _onReady;
-static AESListenerBlock _onReport;
-static AESListenerBlock _onAdvancedBlockingBlock;
+static NSMutableDictionary<NSString *, AESListenerBlock> *ListenerHolder;
+
+//internal processed blocks
+static AESListenerBlock _onAllExtensionEnabledRequestBlock;
 
 + (void)initialize{
     
     if (self == [AESharedResources class]) {
         
+        ListenerHolder = [NSMutableDictionary new];
         _containerFolderUrl = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:AG_GROUP];
         _sharedUserDefaults = [[NSUserDefaults alloc] initWithSuiteName:AG_GROUP];
 
@@ -84,13 +83,6 @@ static AESListenerBlock _onAdvancedBlockingBlock;
         NSDictionary * defs = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"defaults" ofType:@"plist"]];
         if (defs)
         [_sharedUserDefaults registerDefaults:defs];
-
-        _onDefaultsChangedBlock = NULL;
-        _onWhitelistChangedBlock = NULL;
-        _onUserFilterChangedBlock = NULL;
-        _onBusyChangedBlock = NULL;
-        _onVerboseLoggingChangedBlock = NULL;
-        _onShowPreferences = NULL;
     }
 }
 
@@ -120,10 +112,6 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 }
 
 
-+ (NSString *)blockerBundleId {
-    return AG_BLOCKER_BUNDLEID;
-}
-
 + (NSString *)extensionBundleId {
     return AG_EXTENSION_BUNDLEID;
 }
@@ -131,12 +119,30 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 + (NSString *)advancedBlockingBundleId {
     return AG_ADVANCED_BLOCKING_BUNDLEID;
 }
++ (NSString *)blockerBundleId {
+    return AG_BLOCKER_BUNDLEID;
+}
++ (NSString *)blockerPrivacyBundleId{
+    return AG_BLOCKER_PRIVACY_BUNDLEID;
+}
++ (NSString *)blockerSecurityBundleId{
+    return AG_BLOCKER_SECURITY_BUNDLEID;
+}
++ (NSString *)blockerSocialBundleId{
+    return AG_BLOCKER_SOCIAL_BUNDLEID;
+}
++ (NSString *)blockerOtherBundleId{
+    return AG_BLOCKER_OTHER_BUNDLEID;
+}
++ (NSString *)blockerCustomBundleId{
+    return AG_BLOCKER_CUSTOM_BUNDLEID;
+}
 
 + (void)initLogger {
     [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
-#if DEBUG
+//#if DEBUG
     [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
-#endif
+//#endif
 
 }
 
@@ -150,6 +156,25 @@ static AESListenerBlock _onAdvancedBlockingBlock;
     [_sharedUserDefaults synchronize];
 }
 
++ (void)requestAllExtensionEnabled {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)REQUEST_EXTENSIONS_ENABLED, NULL, NULL, YES);
+    });
+}
++ (void)setListenerOnAllExtensionEnabledRequest:(AESListenerBlock)block {
+    [self setListenerForNotification:REQUEST_EXTENSIONS_ENABLED
+                               block:block];
+}
++ (void)responseAllExtensionEnabled {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_EXTENSIONS_ENABLED, NULL, NULL, YES);
+    });
+}
++ (void)setListenerOnAllExtensionEnabledResponse:(AESListenerBlock)block {
+    [self setListenerForNotification:NOTIFICATION_EXTENSIONS_ENABLED
+                               block:block];
+}
+
 + (void)notifyDefaultsChanged {
     dispatch_async(dispatch_get_main_queue(), ^{
         CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_DEFAULTS, NULL, NULL, YES);
@@ -157,7 +182,6 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 }
 + (void)setListenerOnDefaultsChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_DEFAULTS
-                            blockPtr:&_onDefaultsChangedBlock
                                block:block];
 }
 
@@ -168,7 +192,6 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 }
 + (void)setListenerOnWhitelistChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_WHITELIST
-                            blockPtr:&_onWhitelistChangedBlock
                                block:block];
 }
 
@@ -179,7 +202,6 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 }
 + (void)setListenerOnUserFilterChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_USERFILTER
-                            blockPtr:&_onUserFilterChangedBlock
                                block:block];
 }
 
@@ -190,7 +212,6 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 }
 + (void)setListenerOnShowPreferences:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_SHOW_PREFS
-                            blockPtr:&_onShowPreferences
                                block:block];
 }
 
@@ -201,7 +222,6 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 }
 + (void)setListenerOnReady:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_READY
-                            blockPtr:&_onReady
                                block:block];
 }
 
@@ -212,7 +232,6 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 }
 + (void)setListenerOnBusyChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_BUSY
-                            blockPtr:&_onBusyChangedBlock
                                block:block];
 }
 
@@ -223,7 +242,6 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 }
 + (void)setListenerOnVerboseLoggingChanged:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_VERBOSE_LOGGING
-                            blockPtr:&_onVerboseLoggingChangedBlock
                                block:block];
 }
 
@@ -234,7 +252,6 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 }
 + (void)setListenerOnReport:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_REPORT
-                            blockPtr:&_onReport
                                block:block];
 }
 
@@ -246,7 +263,6 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 
 + (void)setListenerOnAdvancedBlocking:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_ADVANCED_BLOCKING
-                            blockPtr:&_onAdvancedBlockingBlock
                                block:block];
 }
 
@@ -350,9 +366,10 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 #pragma mark Helper methods (private)
 
 + (void)setListenerForNotification:(NSString *)notificationName
-                          blockPtr:(__strong AESListenerBlock *)blockPtr
                              block:(AESListenerBlock)block {
-    if (*blockPtr) {
+    
+    AESListenerBlock prevBlock = ListenerHolder[notificationName];
+    if (prevBlock) {
         //Observer was registered
         if (! block) {
             //unregister observer
@@ -372,7 +389,7 @@ static AESListenerBlock _onAdvancedBlockingBlock;
                                         NULL,
                                         CFNotificationSuspensionBehaviorDeliverImmediately);
     }
-    *blockPtr = block;
+    ListenerHolder[notificationName] = block;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -501,35 +518,7 @@ static AESListenerBlock _onAdvancedBlockingBlock;
 
 static void onChangedNotify(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
     NSString *nName = (__bridge NSString *)name;
-    AESListenerBlock block = nil;
-    if ([nName isEqualToString:NOTIFICATION_DEFAULTS]) {
-        block = _onDefaultsChangedBlock;
-    }
-    else if ([nName isEqualToString:NOTIFICATION_WHITELIST]){
-        block = _onWhitelistChangedBlock;
-    }
-    else if ([nName isEqualToString:NOTIFICATION_USERFILTER]){
-        block = _onUserFilterChangedBlock;
-    }
-    else if ([nName isEqualToString:NOTIFICATION_BUSY]){
-        block = _onBusyChangedBlock;
-    }
-    else if ([nName isEqualToString:NOTIFICATION_VERBOSE_LOGGING]){
-        block = _onVerboseLoggingChangedBlock;
-    }
-    else if ([nName isEqualToString:NOTIFICATION_SHOW_PREFS]){
-        block = _onShowPreferences;
-    }
-    else if ([nName isEqualToString:NOTIFICATION_READY]){
-        block = _onReady;
-    }
-    else if ([nName isEqualToString:NOTIFICATION_REPORT]){
-        block = _onReport;
-    }
-    else if ([nName isEqualToString:NOTIFICATION_ADVANCED_BLOCKING]){
-        block = _onAdvancedBlockingBlock;
-    }
-
+    AESListenerBlock block = ListenerHolder[nName];
     if (block) {
         block();
     }

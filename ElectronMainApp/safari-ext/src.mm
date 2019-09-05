@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <SafariServices/SafariServices.h>
 #import "shared/AESharedResources.h"
+#import "shared/AEMainAppServices.h"
 #import "shared/CommonLib/ACLang.h"
 #include <nan.h>
 
@@ -707,7 +708,8 @@ NAN_METHOD(debugLog) {
 NAN_MODULE_INIT(Init) {
 
   [AESharedResources initLogger];
-
+    [AEMainAppServices startListenerForRequestsToMainApp];
+    
   Nan::Set(target, New<String>("setBusy").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setBusy)).ToLocalChecked());
 

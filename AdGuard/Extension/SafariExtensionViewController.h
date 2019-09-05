@@ -39,6 +39,7 @@
 @property NSURL *currentPageUrl;
 @property BOOL busy;
 @property (nonatomic) BOOL mainAppRunning;
+@property BOOL allExtensionEnabled;
 @property (readonly) BOOL showDisabledUI;
 
 - (void)setEnabledButton;
