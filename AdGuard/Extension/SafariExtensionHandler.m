@@ -43,6 +43,14 @@ static BOOL _mainAppReady;
                 [_onReadyBlocks removeAllObjects];
             }
         }];
+        [AESharedResources setListenerOnAllExtensionEnabledResponse:^{
+            DDLogDebugTrace();
+            dispatch_async(dispatch_get_main_queue(), ^{
+                SafariExtensionViewController.sharedController.allExtensionEnabled =
+                [AESharedResources.sharedDefaults boolForKey:AEDefaultsAllExtensionsEnabled];
+                DDLogDebug(@"Received OnAllExtensionEnabledResponse with value: %d", SafariExtensionViewController.sharedController.allExtensionEnabled);
+            });
+        }];
     }
 }
 
@@ -123,7 +131,9 @@ static BOOL _mainAppReady;
     DDLogDebugTrace();
     [self setMainAppRunning];
     SafariExtensionViewController.sharedController.busy = [AESharedResources.sharedDefaults boolForKey:AEDefaultsMainAppBusy];
+    SafariExtensionViewController.sharedController.allExtensionEnabled = [AESharedResources.sharedDefaults boolForKey:AEDefaultsAllExtensionsEnabled];
     [SafariExtensionViewController.sharedController setEnabledButton]; //this call peforms tuning all views
+    [AESharedResources requestAllExtensionEnabled];
 }
 
 - (void)messageReceivedFromContainingAppWithName:(NSString *)messageName userInfo:(NSDictionary<NSString *,id> *)userInfo {
