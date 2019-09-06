@@ -285,7 +285,7 @@
         "message": "Om"
     },
     "options_content_blockers": {
-        "message": ""
+        "message": "Indholdsblockere"
     },
     "options_compare_btn": {
         "message": "Hvordan de sammenligner"
@@ -348,10 +348,7 @@
         "message": "Hvis Detaljeret logning er aktiveret, vil AdGuards Safari udvidelser udskrive yderligere oplysninger til browserens konsol"
     },
     "settings_notification_protection_title": {
-        "message": "Opmærksomhed! Beskyttelsen blev deaktiveret"
-    },
-    "settings_notification_protection_text": {
-        "message": "AdGuard beskyttelsen er midlertidigt afbrudt. <a href='#' id='notificationEnableProtectionLink'>Aktiver AdGuard<\/a>."
+        "message": "Beskyttelsen er pauset"
     },
     "settings_notification_protection_button_text": {
         "message": ""
@@ -360,7 +357,7 @@
         "message": ""
     },
     "settings_notification_extensions_title": {
-        "message": ""
+        "message": "Nogle AdGuard-udvidelser er deaktiveret"
     },
     "settings_notification_extensions_text": {
         "message": ""
@@ -372,30 +369,30 @@
         "message": ""
     },
     "options_cb_general_title": {
-        "message": ""
+        "message": "AdGuard Generelt"
     },
     "options_cb_privacy_title": {
-        "message": ""
+        "message": "AdGuard Privatliv"
     },
     "options_cb_social_title": {
-        "message": ""
+        "message": "AdGuard Social"
     },
     "options_cb_security_title": {
-        "message": ""
+        "message": "AdGuard Sikkerhed"
     },
     "options_cb_other_title": {
-        "message": ""
+        "message": "AdGuard Andre"
     },
     "options_cb_custom_title": {
-        "message": ""
+        "message": "AdGuard Brugerdefineret"
     },
     "options_cb_rules_info": {
         "message": {
-            "one": "",
-            "other": ""
+            "one": "%s regel brugt",
+            "other": "%s regler brugt"
         }
     },
     "options_cb_disabled_warning": {
-        "message": ""
+        "message": "Deaktiveret i Safari"
     }
 }

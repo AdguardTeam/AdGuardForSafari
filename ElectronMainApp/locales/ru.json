@@ -348,10 +348,7 @@
         "message": "Если активировано подробное логгирование, расширения AdGuard для Safari будут вводить дополнительную информацию в консоль браузера. "
     },
     "settings_notification_protection_title": {
-        "message": "Внимание! Защита отключена."
-    },
-    "settings_notification_protection_text": {
-        "message": "Защита AdGuard остановлена."
+        "message": "Защита приостановлена"
     },
     "settings_notification_protection_button_text": {
         "message": "Исправить"
@@ -360,13 +357,13 @@
         "message": "Исправить"
     },
     "settings_notification_extensions_title": {
-        "message": "Некоторые расширения AdGuard отключены!"
+        "message": "Некоторые расширения AdGuard отключены"
     },
     "settings_notification_extensions_text": {
         "message": "Вам необходимо включить все расширения AdGuard для корректной блокировки рекламы в Safari"
     },
     "settings_notification_cb_extensions_title": {
-        "message": "Некоторые расширения-блокировщики контента от AdGuard отключены!"
+        "message": "Некоторые расширения-блокировщики контента от AdGuard отключены"
     },
     "settings_notification_cb_extensions_text": {
         "message": "Вам необходимо включить все расширения-блокировщики контента от AdGuard для корректной блокировки рекламы в Safari"

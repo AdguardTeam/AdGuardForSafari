@@ -350,9 +350,6 @@
     "settings_notification_protection_title": {
         "message": "Uwaga! Ochrona została wyłączona"
     },
-    "settings_notification_protection_text": {
-        "message": "Ochrona AdGuard została wstrzymana. <a href='#' id='notificationEnableProtectionLink'>Włącz AdGuard<\/a>."
-    },
     "settings_notification_protection_button_text": {
         "message": "Napraw to"
     },
@@ -360,13 +357,13 @@
         "message": "Napraw to"
     },
     "settings_notification_extensions_title": {
-        "message": "Niektóre rozszerzenia AdGuard są wyłączone!"
+        "message": "Niektóre rozszerzenia AdGuard są wyłączone"
     },
     "settings_notification_extensions_text": {
         "message": "Należy włączyć wszystkie rozszerzenia AdGuard w celu prawidłowego blokowania reklam w Safari"
     },
     "settings_notification_cb_extensions_title": {
-        "message": "Niektóre rozszerzenia blokowania treści AdGuard są wyłączone!"
+        "message": "Niektóre rozszerzenia blokowania treści AdGuard są wyłączone"
     },
     "settings_notification_cb_extensions_text": {
         "message": "Włącz wszystkie blokery treści AdGuard do poprawnego blokowania reklam w przeglądarce Safari"

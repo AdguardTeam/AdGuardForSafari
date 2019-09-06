@@ -350,9 +350,6 @@
     "settings_notification_protection_title": {
         "message": "Atenção! A protecção foi desativada"
     },
-    "settings_notification_protection_text": {
-        "message": "A proteção do AdGuard está em pausa."
-    },
     "settings_notification_protection_button_text": {
         "message": "Corrigir"
     },
@@ -360,13 +357,13 @@
         "message": "Corrigir"
     },
     "settings_notification_extensions_title": {
-        "message": "Algumas extensões do AdGuard estão desactivadas!"
+        "message": "Algumas extensões do AdGuard estão desactivadas"
     },
     "settings_notification_extensions_text": {
         "message": "Deve activar todas as extensões do AdGuard para o correcto bloqueio de anúncios no Safari"
     },
     "settings_notification_cb_extensions_title": {
-        "message": "Algumas extensões do bloqueador de conteúdo do AdGuard estão desactivadas!"
+        "message": "Algumas extensões do bloqueador de conteúdo do AdGuard estão desactivadas"
     },
     "settings_notification_cb_extensions_text": {
         "message": "Deve activar todas as extensões do bloqueio de conteúdo do AdGuard para o correcto bloqueio de anúncios no Safari"

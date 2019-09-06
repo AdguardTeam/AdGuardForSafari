@@ -350,9 +350,6 @@
     "settings_notification_protection_title": {
         "message": "【注意】保護は無効になりました"
     },
-    "settings_notification_protection_text": {
-        "message": "AdGuardによる保護は一時停止中です。"
-    },
     "settings_notification_protection_button_text": {
         "message": "修正する"
     },
@@ -360,13 +357,13 @@
         "message": "修正する"
     },
     "settings_notification_extensions_title": {
-        "message": "AdGuard拡張機能の一部が無効になっています！"
+        "message": "AdGuard拡張機能の一部が無効になっています"
     },
     "settings_notification_extensions_text": {
         "message": "Safari広告ブロックが正しく動作するには、AdGuard拡張機能をすべて有効にする必要があります。"
     },
     "settings_notification_cb_extensions_title": {
-        "message": "AdGuardコンテンツブロッカー拡張機能の一部が無効になっています！"
+        "message": "AdGuardコンテンツブロッカー拡張機能の一部が無効になっています"
     },
     "settings_notification_cb_extensions_text": {
         "message": "Safari広告ブロックが正しく動作するには、AdGuardコンテンツブロッカー拡張機能をすべて有効にする必要があります。"

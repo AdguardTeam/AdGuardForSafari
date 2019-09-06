@@ -350,9 +350,6 @@
     "settings_notification_protection_title": {
         "message": "Dikkat! Koruma devre dışı bırakıldı"
     },
-    "settings_notification_protection_text": {
-        "message": "AdGuard koruması duraklatıldı. AdGuard'ı aktifleştir <a href='#' id='notificationEnableProtectionLink'>"
-    },
     "settings_notification_protection_button_text": {
         "message": "Düzelt"
     },
@@ -360,13 +357,13 @@
         "message": "Düzelt"
     },
     "settings_notification_extensions_title": {
-        "message": "Bazı AdGuard eklentileri devre dışıdır!"
+        "message": "Bazı AdGuard eklentileri devre dışıdır"
     },
     "settings_notification_extensions_text": {
         "message": "Safari'de düzgün bir reklam engellemesi için bütün AdGuard eklentilerini devreye sokmalısınız"
     },
     "settings_notification_cb_extensions_title": {
-        "message": "Bazı AdGuard içerik engelleyicisi eklentileri devre dışıdır!"
+        "message": "Bazı AdGuard içerik engelleyicisi eklentileri devre dışıdır"
     },
     "settings_notification_cb_extensions_text": {
         "message": "Safari'de düzgün bir reklam engellemesi için bütün AdGuard içerik engelleyicisi eklentilerini devreye sokmalısınız"
