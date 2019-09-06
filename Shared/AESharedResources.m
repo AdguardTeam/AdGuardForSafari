@@ -140,9 +140,9 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
 
 + (void)initLogger {
     [[ACLLogger singleton] initLogger:[AESharedResources sharedAppLogsURL]];
-//#if DEBUG
+#if DEBUG
     [[ACLLogger singleton] setLogLevel:ACLLVerboseLevel];
-//#endif
+#endif
 
 }
 
