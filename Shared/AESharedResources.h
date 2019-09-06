@@ -16,6 +16,7 @@ extern NSString * const AEDefaultsEnabled;
 extern NSString * const AEDefaultsMainAppBusy;
 extern NSString * const AEDefaultsVerboseLogging;
 extern NSString * const AEDefaultsLastReportUrl;
+extern NSString * const AEDefaultsAllExtensionsEnabled;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -58,6 +59,27 @@ extern NSString * const AEDefaultsLastReportUrl;
  Bundle id of Advanced Blocking Safari app extension.
  */
 @property (class, readonly) NSString *advancedBlockingBundleId;
+/**
+ BundleId of the Privacy content blocker extension.
+ */
+@property (class, readonly) NSString *blockerPrivacyBundleId;
+/**
+ BundleId of the Security content blocker extension.
+ */
+@property (class, readonly) NSString *blockerSecurityBundleId;
+/**
+ BundleId of the Social content blocker extension.
+ */
+@property (class, readonly) NSString *blockerSocialBundleId;
+/**
+ BundleId of the Other content blocker extension.
+ */
+@property (class, readonly) NSString *blockerOtherBundleId;
+/**
+ BundleId of the Custom content blocker extension.
+ */
+@property (class, readonly) NSString *blockerCustomBundleId;
+
 
 /**
  Initializes logger. After that we may use log macros.
@@ -67,7 +89,27 @@ extern NSString * const AEDefaultsLastReportUrl;
  Performs flush of the shared user defaults.
  */
 + (void)synchronizeSharedDefaults;
+/**
+ Request of status that all extensions are enabled.
+ Used by extensions.
+ */
++ (void)requestAllExtensionEnabled;
+/**
+ Register listener for request extensions status.
 
+ @param block Performed on internal thread when catched notification.
+ */
++ (void)setListenerOnAllExtensionEnabledRequest:(AESListenerBlock)block;
+/**
+ Notifies listeners that response on request `AllExtensionEnabled` ready.
+ */
++ (void)responseAllExtensionEnabled;
+/**
+ Register listener for response extensions status.
+
+ @param block Performed on internal thread when catched notification.
+ */
++ (void)setListenerOnAllExtensionEnabledResponse:(AESListenerBlock)block;
 /**
  Notifies all, that a user defaults was changed, like that - AEDefaultsEnabled.
  */

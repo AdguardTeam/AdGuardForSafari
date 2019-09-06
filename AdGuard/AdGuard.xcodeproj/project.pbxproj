@@ -10,6 +10,8 @@
 		65024EA92126C80D00342E3C /* AdGuardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65024EA82126C80D00342E3C /* AdGuardTests.m */; };
 		65024EAF2126C82E00342E3C /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65024EAE2126C82E00342E3C /* SafariServices.framework */; };
 		6504C1102136EA2D007E9674 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6504C10F2136EA2D007E9674 /* PopupView.m */; };
+		651A4FAE232149E4002DAD0A /* AEMainAppServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 651A4FAC232149E4002DAD0A /* AEMainAppServices.h */; };
+		651A4FAF232149E4002DAD0A /* AEMainAppServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 651A4FAD232149E4002DAD0A /* AEMainAppServices.m */; };
 		65216A03212436EA00ABF7D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
 		65216A07212436EA00ABF7D0 /* SafariExtensionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 65216A06212436EA00ABF7D0 /* SafariExtensionHandler.m */; };
 		65216A0A212436EA00ABF7D0 /* SafariExtensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65216A09212436EA00ABF7D0 /* SafariExtensionViewController.m */; };
@@ -356,6 +358,8 @@
 		6504C10C2136CD37007E9674 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SafariExtensionViewController.strings; sourceTree = "<group>"; };
 		6504C10E2136EA2D007E9674 /* PopupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopupView.h; sourceTree = "<group>"; };
 		6504C10F2136EA2D007E9674 /* PopupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopupView.m; sourceTree = "<group>"; };
+		651A4FAC232149E4002DAD0A /* AEMainAppServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEMainAppServices.h; sourceTree = "<group>"; };
+		651A4FAD232149E4002DAD0A /* AEMainAppServices.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEMainAppServices.m; sourceTree = "<group>"; };
 		652169F721231AA100ABF7D0 /* build-electron-app.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "build-electron-app.sh"; sourceTree = "<group>"; };
 		65216A00212436E900ABF7D0 /* AdGuardForSafariExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdGuardForSafariExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		65216A02212436EA00ABF7D0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -755,6 +759,8 @@
 				655C862A212AE6C200CB6DAE /* AESharedResources.h */,
 				F4581B6D22F363960069FA94 /* AEContentBlockerRequestHandlerBase.h */,
 				F4581B6F22F364AA0069FA94 /* AEContentBlockerRequestHandlerBase.m */,
+				651A4FAC232149E4002DAD0A /* AEMainAppServices.h */,
+				651A4FAD232149E4002DAD0A /* AEMainAppServices.m */,
 			);
 			name = Shared;
 			path = ../Shared;
@@ -1046,6 +1052,7 @@
 				65D151AC2139A5080014BE79 /* DDLogMacros.h in Headers */,
 				65D151C12139A5080014BE79 /* DDAssertMacros.h in Headers */,
 				65D151C02139A5080014BE79 /* DDDispatchQueueLogFormatter.h in Headers */,
+				651A4FAE232149E4002DAD0A /* AEMainAppServices.h in Headers */,
 				65D151AA2139A5080014BE79 /* DDASLLogCapture.h in Headers */,
 				65D151B92139A5080014BE79 /* DDLog.h in Headers */,
 				65D151B32139A5080014BE79 /* CocoaLumberjack.h in Headers */,
@@ -1607,6 +1614,7 @@
 				652735C5212D788E005C35BF /* NSURL+Utils.m in Sources */,
 				652735C9212D788E005C35BF /* ACLJobController.m in Sources */,
 				652735CA212D788E005C35BF /* NSDate+Utils.m in Sources */,
+				651A4FAF232149E4002DAD0A /* AEMainAppServices.m in Sources */,
 				652735CB212D788E005C35BF /* ACLFileLocker.m in Sources */,
 				65D151AF2139A5080014BE79 /* DDAbstractDatabaseLogger.m in Sources */,
 				65D151B62139A5080014BE79 /* CLIColor.m in Sources */,
