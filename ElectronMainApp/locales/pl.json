@@ -284,6 +284,9 @@
     "options_about": {
         "message": "O rozszerzeniu"
     },
+    "options_content_blockers": {
+        "message": "Blokowanie treści"
+    },
     "options_compare_btn": {
         "message": "Jak się porównują"
     },
@@ -344,16 +347,55 @@
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
-    "settings_notification_title": {
-        "message": "Uwaga! Ikona AdGuard została wyłączona"
-    },
-    "settings_notification_text": {
-        "message": "Możesz użyć tej ikony do zarządzania AdGuard dla ustawień Safari. Na przykład wstrzymaj blokowanie w witrynie lub zablokuj reklamę ręcznie. Możesz włączyć ikonę AdGuard <a href='#' id='notificationEnableIconLink'>tutaj<\/a>."
-    },
     "settings_notification_protection_title": {
         "message": "Uwaga! Ochrona została wyłączona"
     },
     "settings_notification_protection_text": {
         "message": "Ochrona AdGuard została wstrzymana. <a href='#' id='notificationEnableProtectionLink'>Włącz AdGuard<\/a>."
+    },
+    "settings_notification_protection_button_text": {
+        "message": "Napraw to"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Napraw to"
+    },
+    "settings_notification_extensions_title": {
+        "message": "Niektóre rozszerzenia AdGuard są wyłączone!"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Należy włączyć wszystkie rozszerzenia AdGuard w celu prawidłowego blokowania reklam w Safari"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "Niektóre rozszerzenia blokowania treści AdGuard są wyłączone!"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Włącz wszystkie blokery treści AdGuard do poprawnego blokowania reklam w przeglądarce Safari"
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard Ustawienia"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard Prywatność"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard Funkcje społecznościowe"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard Bezpieczeństwo"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard Inne"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard Własne reguły"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s reguła użyta",
+            "other": "%s reguł użytych"
+        }
+    },
+    "options_cb_disabled_warning": {
+        "message": "Wyłączone w Safari"
     }
 }

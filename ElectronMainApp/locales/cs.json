@@ -284,6 +284,9 @@
     "options_about": {
         "message": "O programu"
     },
+    "options_content_blockers": {
+        "message": "Blokátory obsahu"
+    },
     "options_compare_btn": {
         "message": "Jak porovnávají"
     },
@@ -303,7 +306,7 @@
         "message": "Github"
     },
     "onboarding_safari_desc": {
-        "message": "Zaškrtněte políčko \"Ikona AdGuard Safari\", \"Pokročilé blokování AdGuard\" a \"AdGuard\" v předvolbách Safari"
+        "message": "Zaškrtněte políčko „Ikona AdGuard Safari“, „Pokročilé blokování AdGuard“ a „AdGuard“ v předvolbách Safari"
     },
     "onboarding_safari_btn": {
         "message": "Otevřít předvolby"
@@ -344,16 +347,55 @@
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
-    "settings_notification_title": {
-        "message": "Pozor! Rozšíření AdGuardu jsou zakázána"
-    },
-    "settings_notification_text": {
-        "message": "Tato rozšíření můžete použít ke správě AdGuardu pro nastavení Safari. Například pozastavit blokování na této stránce nebo blokovat reklamy ručně. Můžete povolit ikonu AdGuardu a pokročilé blokování <a href='#' id='notificationEnableIconLink'>zde<\/a>."
-    },
     "settings_notification_protection_title": {
         "message": "Pozor! Ochrana byla vypnuta"
     },
     "settings_notification_protection_text": {
-        "message": "Ochrana AdGuardem je pozastavena. <a href='#' id='notificationEnableProtectionLink'>Zapnout AdGuard<\/a>."
+        "message": "Ochrana AdGuard je pozastavena."
+    },
+    "settings_notification_protection_button_text": {
+        "message": "Opravit"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Opravit"
+    },
+    "settings_notification_extensions_title": {
+        "message": "Některá rozšíření AdGuardu jsou vypnuta!"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Pro správné blokování reklam v prohlížeči Safari, byste měli zapnout všechna rozšíření AdGuardu"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "Některá rozšíření Blokátoru obsahu AdGuard jsou vypnuta!"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Pro správné blokování reklam v prohlížeči Safari, byste měli zapnout všechna rozšíření Blokátoru obsahu AdGuard"
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard – Všeobecné"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard – Soukromí"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard – Sociální"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard – Zabezpečení"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard – Ostatní"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard – Vlastní"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "Použito pravidel: %s",
+            "other": "Použito pravidel: %s"
+        }
+    },
+    "options_cb_disabled_warning": {
+        "message": "Vypnuto v Safari"
     }
 }

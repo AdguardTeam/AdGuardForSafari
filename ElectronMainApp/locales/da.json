@@ -284,6 +284,9 @@
     "options_about": {
         "message": "Om"
     },
+    "options_content_blockers": {
+        "message": ""
+    },
     "options_compare_btn": {
         "message": "Hvordan de sammenligner"
     },
@@ -344,16 +347,55 @@
     "options_verbose_logging_desc": {
         "message": "Hvis Detaljeret logning er aktiveret, vil AdGuards Safari udvidelser udskrive yderligere oplysninger til browserens konsol"
     },
-    "settings_notification_title": {
-        "message": "Opmærksomhed! AdGuard udvidelserne er deaktiveret"
-    },
-    "settings_notification_text": {
-        "message": "Du kan bruge disse udvidelser til at administrere AdGuard til Safari. For eksempel, pause blokeringen på en hjemmeside eller blokere en annonce manuelt.\nDu kan aktivere AdGuard Ikonet og Avanceret Blokering <a href='#' id='notificationEnableIconLink'>her<\/a>."
-    },
     "settings_notification_protection_title": {
         "message": "Opmærksomhed! Beskyttelsen blev deaktiveret"
     },
     "settings_notification_protection_text": {
         "message": "AdGuard beskyttelsen er midlertidigt afbrudt. <a href='#' id='notificationEnableProtectionLink'>Aktiver AdGuard<\/a>."
+    },
+    "settings_notification_protection_button_text": {
+        "message": ""
+    },
+    "settings_notification_extensions_button_text": {
+        "message": ""
+    },
+    "settings_notification_extensions_title": {
+        "message": ""
+    },
+    "settings_notification_extensions_text": {
+        "message": ""
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": ""
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": ""
+    },
+    "options_cb_general_title": {
+        "message": ""
+    },
+    "options_cb_privacy_title": {
+        "message": ""
+    },
+    "options_cb_social_title": {
+        "message": ""
+    },
+    "options_cb_security_title": {
+        "message": ""
+    },
+    "options_cb_other_title": {
+        "message": ""
+    },
+    "options_cb_custom_title": {
+        "message": ""
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "",
+            "other": ""
+        }
+    },
+    "options_cb_disabled_warning": {
+        "message": ""
     }
 }

@@ -284,6 +284,9 @@
     "options_about": {
         "message": "Hakkında"
     },
+    "options_content_blockers": {
+        "message": "İçerik engelleyicileri"
+    },
     "options_compare_btn": {
         "message": "Nasıl karşılaştırıyorlar"
     },
@@ -344,16 +347,55 @@
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
-    "settings_notification_title": {
-        "message": "Dikkat! AdGuard eklentileri devre dışı"
-    },
-    "settings_notification_text": {
-        "message": "Safari için AdGuard ayarlarını yönetmek için bu eklentiyi kullanabilirsin. Örneğin korumayı duraklatmak veya bir reklamı elle engellemek gibi. AdGuard simgesini ve Gelişmiş Engellemeyi <a href='#' id='notificationEnableIconLink'>buradan<\/a> etkinleştirebilirsiniz."
-    },
     "settings_notification_protection_title": {
         "message": "Dikkat! Koruma devre dışı bırakıldı"
     },
     "settings_notification_protection_text": {
         "message": "AdGuard koruması duraklatıldı. AdGuard'ı aktifleştir <a href='#' id='notificationEnableProtectionLink'>"
+    },
+    "settings_notification_protection_button_text": {
+        "message": "Düzelt"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Düzelt"
+    },
+    "settings_notification_extensions_title": {
+        "message": "Bazı AdGuard eklentileri devre dışıdır!"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Safari'de düzgün bir reklam engellemesi için bütün AdGuard eklentilerini devreye sokmalısınız"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "Bazı AdGuard içerik engelleyicisi eklentileri devre dışıdır!"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Safari'de düzgün bir reklam engellemesi için bütün AdGuard içerik engelleyicisi eklentilerini devreye sokmalısınız"
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard Genel"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard Gizlilik"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard Sosyal"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard Güvenlik"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard Diğerleri"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard Özel"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s adet kural kullanıldı",
+            "other": "%s adet kural kullanıldı"
+        }
+    },
+    "options_cb_disabled_warning": {
+        "message": "Safari'de devre dışı"
     }
 }

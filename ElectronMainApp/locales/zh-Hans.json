@@ -67,19 +67,19 @@
     },
     "options_antibanner_info_filters": {
         "message": {
-            "one": "",
+            "one": "%s 过滤器",
             "other": "%s filters"
         }
     },
     "options_antibanner_info_rules": {
         "message": {
-            "one": "",
+            "one": "%s 规则",
             "other": "%s rules"
         }
     },
     "options_antibanner_info_adv_rules": {
         "message": {
-            "one": "",
+            "one": "%s 高级规则",
             "other": "%s advanced rules"
         }
     },
@@ -208,7 +208,7 @@
     },
     "options_popup_update_updated_more": {
         "message": {
-            "one": "",
+            "one": "%s 规则已更新：$2",
             "other": "%s 个已更新：$2"
         }
     },
@@ -284,6 +284,9 @@
     "options_about": {
         "message": "关于"
     },
+    "options_content_blockers": {
+        "message": ""
+    },
     "options_compare_btn": {
         "message": "两者对比"
     },
@@ -325,7 +328,7 @@
     },
     "options_filters_update_period_number": {
         "message": {
-            "one": "",
+            "one": "每小时",
             "other": "每 %s 小时"
         }
     },
@@ -344,16 +347,55 @@
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
-    "settings_notification_title": {
-        "message": "注意！AdGuard 扩展已禁用"
-    },
-    "settings_notification_text": {
-        "message": "您可使用这些扩展以管理 AdGuard for Safari。例如，暂停在某网站上的拦截，手动拦截广告。您可<a href='#' id='notificationEnableIconLink'>在此<\/a>开启  AdGuard 图标和高级拦截。"
-    },
     "settings_notification_protection_title": {
         "message": "注意! 保护已被禁用"
     },
     "settings_notification_protection_text": {
         "message": "AdGuard保护已被暂停。<a href='#' id='notificationEnableProtectionLink'>启动AdGuard<\/a>。"
+    },
+    "settings_notification_protection_button_text": {
+        "message": ""
+    },
+    "settings_notification_extensions_button_text": {
+        "message": ""
+    },
+    "settings_notification_extensions_title": {
+        "message": ""
+    },
+    "settings_notification_extensions_text": {
+        "message": ""
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": ""
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": ""
+    },
+    "options_cb_general_title": {
+        "message": ""
+    },
+    "options_cb_privacy_title": {
+        "message": ""
+    },
+    "options_cb_social_title": {
+        "message": ""
+    },
+    "options_cb_security_title": {
+        "message": ""
+    },
+    "options_cb_other_title": {
+        "message": ""
+    },
+    "options_cb_custom_title": {
+        "message": ""
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s 规则已使用",
+            "other": "%s 规则已使用"
+        }
+    },
+    "options_cb_disabled_warning": {
+        "message": ""
     }
 }

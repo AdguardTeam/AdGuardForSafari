@@ -284,6 +284,9 @@
     "options_about": {
         "message": "О программе"
     },
+    "options_content_blockers": {
+        "message": "Блокировщики контента"
+    },
     "options_compare_btn": {
         "message": "Сравнить"
     },
@@ -303,7 +306,7 @@
         "message": "Github"
     },
     "onboarding_safari_desc": {
-        "message": "Поставьте галочки напротив \"Иконка AdGuard Safari\", \"Расширенная блокировка AdGuard\" и \"AdGuard\" в настройках Safari"
+        "message": "Поставьте галочки напротив расширений AdGuard в настройках Safari"
     },
     "onboarding_safari_btn": {
         "message": "Открыть настройки"
@@ -344,16 +347,55 @@
     "options_verbose_logging_desc": {
         "message": "Если активировано подробное логгирование, расширения AdGuard для Safari будут вводить дополнительную информацию в консоль браузера. "
     },
-    "settings_notification_title": {
-        "message": "Внимание! Расширения AdGuard отключены."
-    },
-    "settings_notification_text": {
-        "message": "Вы можете использовать эти расширения для управления настройками AdGuard для Safari. Например, приостановить блокировку на сайте или заблокировать рекламу вручную. Вы можете включить значок AdGuard <a href='#' id='notificationEnableIconLink'>здесь<\/a>."
-    },
     "settings_notification_protection_title": {
         "message": "Внимание! Защита отключена."
     },
     "settings_notification_protection_text": {
-        "message": "Защита AdGuard остановлена. <a href='#' id='notificationEnableProtectionLink'>Включить AdGuard<\/a>."
+        "message": "Защита AdGuard остановлена"
+    },
+    "settings_notification_protection_button_text": {
+        "message": "Исправить"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Исправить"
+    },
+    "settings_notification_extensions_title": {
+        "message": "Некоторые расширения AdGuard отключены!"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Вам необходимо включить все расширения AdGuard для корректной блокировки рекламы в Safari"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "Некоторые расширения-блокировщики контента от AdGuard отключены!"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Вам необходимо включить все расширения-блокировщики контента от AdGuard для корректной блокировки рекламы в Safari"
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard Общие"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard Конфиденциальность"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard Social"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard Безопасность"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard Другое"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard Custom"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s правило используется",
+            "other": "Используется правил: %s"
+        }
+    },
+    "options_cb_disabled_warning": {
+        "message": "Отключено в Safari"
     }
 }

@@ -284,6 +284,9 @@
     "options_about": {
         "message": "關於"
     },
+    "options_content_blockers": {
+        "message": "內容阻擋器"
+    },
     "options_compare_btn": {
         "message": "它們如何比較"
     },
@@ -303,7 +306,7 @@
         "message": "GitHub"
     },
     "onboarding_safari_desc": {
-        "message": "在 Safari 偏好設定中勾選緊鄰著 \"AdGuard Safari 圖像\"、\"AdGuard 進階的封鎖\"和 \"AdGuard\" 之核取框"
+        "message": "在 Safari 偏好設定中勾選緊鄰著 AdGuard 延伸功能之核取框"
     },
     "onboarding_safari_btn": {
         "message": "開啟偏好設定"
@@ -344,16 +347,55 @@
     "options_verbose_logging_desc": {
         "message": "如果詳細記錄被啟用，AdGuard Safari 延伸功能將列印額外的資訊到瀏覽器控制台"
     },
-    "settings_notification_title": {
-        "message": "注意！AdGuard 延伸功能被禁用"
-    },
-    "settings_notification_text": {
-        "message": "您可使用這些延伸功能以管理 AdGuard for Safari。例如，暫停於網站上之封鎖，或手動地封鎖廣告。<a href='#' id='notificationEnableIconLink'>於此<\/a>您可啟用 AdGuard 圖像和進階的封鎖。"
-    },
     "settings_notification_protection_title": {
         "message": "注意！防護已被禁用"
     },
     "settings_notification_protection_text": {
-        "message": "AdGuard 防護被暫停。<a href='#' id='notificationEnableProtectionLink'>啟用 AdGuard<\/a>。"
+        "message": "AdGuard 防護被暫停。"
+    },
+    "settings_notification_protection_button_text": {
+        "message": "修復它"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "修復它"
+    },
+    "settings_notification_extensions_title": {
+        "message": "某些 AdGuard 延伸功能被禁用！"
+    },
+    "settings_notification_extensions_text": {
+        "message": "為了正確地封鎖在 Safari 中的廣告，您應啟用所有的 AdGuard 延伸功能"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "某些 AdGuard 內容阻擋器延伸功能被禁用！"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "為了正確地封鎖在 Safari 中的廣告，您應啟用所有的 AdGuard 內容阻擋器延伸功能"
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard 一般的"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard 隱私"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard 社群"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard 安全性"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard 其它的"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard 自訂的"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s 規則被使用",
+            "other": "%s 規則被使用"
+        }
+    },
+    "options_cb_disabled_warning": {
+        "message": "已在 Safari 中禁用"
     }
 }
