@@ -24,87 +24,83 @@
 #pragma mark Internal processed request (private)
 
 + (void)performAllExtensionEnabledRequest {
-    void (^badBlock)(void)  = ^(void) { //Block which sets bad result for this checking
-        [AESharedResources.sharedDefaults
-         setBool:NO
-         forKey:AEDefaultsAllExtensionsEnabled];
-        [AESharedResources synchronizeSharedDefaults];
-        [AESharedResources responseAllExtensionEnabled];
-        DDLogDebug(@"Checking enabled extensions finished with failure.");
-    };
     DDLogDebug(@"Checking enabled extensions...");
-    [SFSafariExtensionManager
-     getStateOfSafariExtensionWithIdentifier:AESharedResources.advancedBlockingBundleId  // Advanced
-     completionHandler:^(SFSafariExtensionState * _Nullable state, NSError * _Nullable error) {
-         DDLogVerbose(@"Enabled extensions '%@': %d, error %@, userInfo: %@", AESharedResources.advancedBlockingBundleId, state.enabled, error, error.userInfo);
+    [self checkExtension:AESharedResources.advancedBlockingBundleId // Advanced
+    ifSuccess:^{
+        [self checkBlocker:AESharedResources.blockerBundleId // Base blocker
+        ifSuccess:^{
+            [self checkBlocker:AESharedResources.blockerPrivacyBundleId // Privacy blocker
+            ifSuccess:^{
+                [self checkBlocker:AESharedResources.blockerSecurityBundleId // Security blocker
+                ifSuccess:^{
+                    [self checkBlocker:AESharedResources.blockerOtherBundleId // Other blocker
+                    ifSuccess:^{
+                        [self checkBlocker:AESharedResources.blockerCustomBundleId // Custom blocker
+                        ifSuccess:^{
+                            [self checkBlocker:AESharedResources.blockerSocialBundleId // Social blocker
+                            ifSuccess:^{
+                                //Save good result of the checking
+                                [AESharedResources.sharedDefaults
+                                 setBool:YES
+                                 forKey:AEDefaultsAllExtensionsEnabled];
+                                [AESharedResources synchronizeSharedDefaults];
+                                [AESharedResources responseAllExtensionEnabled];
+                                DDLogDebug(@"Checking enabled extensions finished with success.");
+                            }];
+                            
+                        }];
+                        
+                    }];
+                    
+                }];
+                
+            }];
+            
+        }];
+    }];
+}
+
+/////////////////////////////////////////////////////////////////////
+#pragma mark Helper methods (private)
+
++ (void)checkBlocker:(NSString *)blockerName ifSuccess:(void (^)(void))block;{
+    [SFContentBlockerManager
+     getStateOfContentBlockerWithIdentifier:blockerName
+     completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
+         DDLogVerbose(@"Enabled extensions '%@': %d, error %@, userInfo: %@", blockerName, state.enabled, error, error.userInfo);
          if (error == nil && state.enabled) {
-                 [SFContentBlockerManager
-                  getStateOfContentBlockerWithIdentifier:AESharedResources.blockerBundleId // Base blocker
-                  completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
-                      DDLogVerbose(@"Enabled extensions '%@': %d, error %@, userInfo: %@", AESharedResources.blockerBundleId, state.enabled, error, error.userInfo);
-                      if (error == nil && state.enabled) {
-                              [SFContentBlockerManager
-                               getStateOfContentBlockerWithIdentifier:AESharedResources.blockerPrivacyBundleId // Privacy blocker
-                               completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
-                                   DDLogVerbose(@"Enabled extensions '%@': %d, error %@, userInfo: %@", AESharedResources.blockerPrivacyBundleId, state.enabled, error, error.userInfo);
-                                   if (error == nil && state.enabled) {
-                                           [SFContentBlockerManager
-                                            getStateOfContentBlockerWithIdentifier:AESharedResources.blockerSecurityBundleId // Security blocker
-                                            completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
-                                                DDLogVerbose(@"Enabled extensions '%@': %d, error %@, userInfo: %@", AESharedResources.blockerSecurityBundleId, state.enabled, error, error.userInfo);
-                                                if (error == nil && state.enabled) {
-                                                        [SFContentBlockerManager
-                                                         getStateOfContentBlockerWithIdentifier:AESharedResources.blockerOtherBundleId // Other blocker
-                                                         completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
-                                                             DDLogVerbose(@"Enabled extensions '%@': %d, error %@, userInfo: %@", AESharedResources.blockerOtherBundleId, state.enabled, error, error.userInfo);
-                                                             if (error == nil && state.enabled) {
-                                                                     [SFContentBlockerManager
-                                                                      getStateOfContentBlockerWithIdentifier:AESharedResources.blockerCustomBundleId // Custom blocker
-                                                                      completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
-                                                                          DDLogVerbose(@"Enabled extensions '%@': %d, error %@, userInfo: %@", AESharedResources.blockerCustomBundleId, state.enabled, error, error.userInfo);
-                                                                          if (error == nil && state.enabled) {
-                                                                                  [SFContentBlockerManager
-                                                                                   getStateOfContentBlockerWithIdentifier:AESharedResources.blockerSocialBundleId // Social blocker
-                                                                                   completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
-                                                                                       DDLogVerbose(@"Enabled extensions '%@': %d, error %@, userInfo: %@", AESharedResources.blockerSocialBundleId, state.enabled, error, error.userInfo);
-                                                                                       if (error == nil && state.enabled) {
-                                                                                           dispatch_async(dispatch_get_main_queue(), ^{ //Save good result of the checking
-                                                                                               [AESharedResources.sharedDefaults
-                                                                                                setBool:YES
-                                                                                                forKey:AEDefaultsAllExtensionsEnabled];
-                                                                                               [AESharedResources synchronizeSharedDefaults];
-                                                                                               [AESharedResources responseAllExtensionEnabled];
-                                                                                               DDLogDebug(@"Checking enabled extensions finished with success.");
-                                                                                           });
-                                                                                           return;
-                                                                                       }
-                                                                                       badBlock();
-                                                                                   }];
-                                                                              return;
-                                                                          }
-                                                                          badBlock();
-                                                                      }];
-                                                                 return;
-                                                             }
-                                                             badBlock();
-                                                         }];
-                                                    return;
-                                                }
-                                                badBlock();
-                                            }];
-                                       return;
-                                   }
-                                   badBlock();
-                               }];
-                          return;
-                      }
-                      badBlock();
-                  }];
+             if (block) {
+                 block();
+             }
              return;
          }
-         badBlock();
+         [AESharedResources.sharedDefaults
+          setBool:NO
+          forKey:AEDefaultsAllExtensionsEnabled];
+         [AESharedResources synchronizeSharedDefaults];
+         [AESharedResources responseAllExtensionEnabled];
+         DDLogDebug(@"Checking enabled extensions finished with failure.");
      }];
 }
 
++ (void)checkExtension:(NSString *)extensionName ifSuccess:(void (^)(void))block;{
+    [SFSafariExtensionManager
+     getStateOfSafariExtensionWithIdentifier:extensionName
+     completionHandler:^(SFSafariExtensionState * _Nullable state, NSError * _Nullable error) {
+         DDLogVerbose(@"Enabled extensions '%@': %d, error %@, userInfo: %@", extensionName, state.enabled, error, error.userInfo);
+         if (error == nil && state.enabled) {
+             if (block) {
+                 block();
+             }
+             return;
+         }
+         [AESharedResources.sharedDefaults
+          setBool:NO
+          forKey:AEDefaultsAllExtensionsEnabled];
+         [AESharedResources synchronizeSharedDefaults];
+         [AESharedResources responseAllExtensionEnabled];
+         DDLogDebug(@"Checking enabled extensions finished with failure.");
+     }];
+}
 
 @end
