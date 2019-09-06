@@ -348,10 +348,7 @@
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
     "settings_notification_protection_title": {
-        "message": "Attention! Protection was disabled"
-    },
-    "settings_notification_protection_text": {
-        "message": "AdGuard protection is paused."
+        "message": "Protection is paused"
     },
     "settings_notification_protection_button_text": {
         "message": "Fix it"
@@ -360,13 +357,13 @@
         "message": "Fix it"
     },
     "settings_notification_extensions_title": {
-        "message": "Some AdGuard extensions are disabled!"
+        "message": "Some AdGuard extensions are disabled"
     },
     "settings_notification_extensions_text": {
         "message": "You should enable all AdGuard extensions for correct ad blocking in Safari"
     },
     "settings_notification_cb_extensions_title": {
-        "message": "Some AdGuard content blocker extensions are disabled!"
+        "message": "Some AdGuard content blocker extensions are disabled"
     },
     "settings_notification_cb_extensions_text": {
         "message": "You should enable all AdGuard content blocker extensions for correct ad blocking in Safari"
