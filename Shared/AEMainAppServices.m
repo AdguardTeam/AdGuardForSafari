@@ -74,12 +74,7 @@
              }
              return;
          }
-         [AESharedResources.sharedDefaults
-          setBool:NO
-          forKey:AEDefaultsAllExtensionsEnabled];
-         [AESharedResources synchronizeSharedDefaults];
-         [AESharedResources responseAllExtensionEnabled];
-         DDLogDebug(@"Checking enabled extensions finished with failure.");
+         [self checkExtensionsFailure];
      }];
 }
 
@@ -94,13 +89,17 @@
              }
              return;
          }
-         [AESharedResources.sharedDefaults
-          setBool:NO
-          forKey:AEDefaultsAllExtensionsEnabled];
-         [AESharedResources synchronizeSharedDefaults];
-         [AESharedResources responseAllExtensionEnabled];
-         DDLogDebug(@"Checking enabled extensions finished with failure.");
+         [self checkExtensionsFailure];
      }];
+}
+
++ (void)checkExtensionsFailure {
+    [AESharedResources.sharedDefaults
+     setBool:NO
+     forKey:AEDefaultsAllExtensionsEnabled];
+    [AESharedResources synchronizeSharedDefaults];
+    [AESharedResources responseAllExtensionEnabled];
+    DDLogDebug(@"Checking enabled extensions finished with failure.");
 }
 
 @end
