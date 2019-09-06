@@ -351,7 +351,7 @@
         "message": "Achtung! Der Schutz wurde deaktiviert."
     },
     "settings_notification_protection_text": {
-        "message": "Der Schutz ist angehalten. <a href='#' id='notificationEnableProtectionLink'>AdGuard aktivieren<\/a>."
+        "message": "Der Schutz ist angehalten."
     },
     "settings_notification_protection_button_text": {
         "message": "Beheben"
@@ -372,22 +372,22 @@
         "message": "Sie sollten alle Inhaltsblocker-Erweiterungen von AdGuard aktivieren, um ein erfolgreiches Sperren von Werbeanzeigen in Safari zu gewährleisten."
     },
     "options_cb_general_title": {
-        "message": "AdGuard Allgemein"
+        "message": "AdGuard Allgemeine"
     },
     "options_cb_privacy_title": {
         "message": "AdGuard Datenschutz"
     },
     "options_cb_social_title": {
-        "message": "AdGuard Soziales"
+        "message": "Widgets für soziale Netzwerke\n"
     },
     "options_cb_security_title": {
         "message": "AdGuard Sicherheit"
     },
     "options_cb_other_title": {
-        "message": "AdGuard Sonstiges"
+        "message": "AdGuard Sonstige"
     },
     "options_cb_custom_title": {
-        "message": "AdGuard Benutzerdefiniert"
+        "message": "AdGuard Benutzerdefinierte"
     },
     "options_cb_rules_info": {
         "message": {
