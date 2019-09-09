@@ -89,7 +89,6 @@
 }
 .settings-wrap .page-title .info {
   font-size: 13px;
-  line-height: normal;
   font-weight: 600;
   color: #4d4d4d;
   display: flex;
@@ -108,12 +107,13 @@
   font-size: 18px;
 }
 .upd-wr {
-    display: flex;
-    padding-right: 40px;
-    max-width: 300px;
-    text-align: right;
-    color: #888888;
-    position: relative;
+  display: flex;
+  padding-right: 40px;
+  max-width: 300px;
+  text-align: right;
+  color: #888888;
+  position: relative;
+  line-height: normal;
 }
 .settings-wrap .page-title .info .upd {
   font-weight: normal;
