@@ -406,6 +406,19 @@
 .opts-list li.active .block-type {
   opacity: 1;
 }
+.opts-list__item--arrow {
+  position: relative;
+}
+.opts-list__item--arrow:after {
+  content: '';
+  position: absolute;
+  right: 15px;
+  top: calc(50% - 7px);
+  width: 8px;
+  height: 14px;
+  background-repeat: no-repeat;
+  background-image: url(../images/arrow-right.svg);
+}
 .settings-notification {
   margin-top: auto;
   padding: 24px;

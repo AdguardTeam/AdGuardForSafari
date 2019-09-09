@@ -1533,11 +1533,21 @@ const Settings = function () {
         showProtectionStatusWarning(isProtectionRunning);
     };
 
+    const updateContentBlockersDescription = (info) => {
+        const cbDescription = document.getElementById('options_content_blockers_desc_container');
+        if (info.enabledContentBlockersCount === 0) {
+            cbDescription.textContent = i18n.__("options_content_blockers_disabled_desc.message");
+        } else {
+            cbDescription.textContent = i18n.__n("options_content_blockers_desc.message", info.enabledContentBlockersCount);
+        }
+    };
+
     return {
         render,
         updateAcceptableAdsCheckbox,
         updateLaunchAtLoginCheckbox,
         showProtectionStatusWarning,
+        updateContentBlockersDescription,
     };
 };
 
@@ -1737,6 +1747,7 @@ PageController.prototype = {
             enableCbExtensionsNotification.style.display = contentBlockersEnabled ? 'none' : 'flex';
 
             self.contentBlockers.updateContentBlockers(arg);
+            self.settings.updateContentBlockersDescription(arg);
         });
 
         const openSafariSettingsButtons = document.querySelectorAll('.open-safari-extensions-settings-btn');
