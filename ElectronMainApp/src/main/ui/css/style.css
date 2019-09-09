@@ -77,17 +77,14 @@
   padding-bottom: 50px;
 }
 .settings-wrap .page-title {
-  font-weight: 700;
-  font-size: 18px;
+  font-size: 36px;
   color: #454545;
-  line-height: 1.4;
+  margin-bottom: 30px;
 }
 .settings-wrap .page-title a {
   text-decoration: none;
 }
 .settings-wrap .page-title .back {
-  width: 10px;
-  margin-right: 20px;
   cursor: pointer;
 }
 .settings-wrap .page-title .info {
@@ -109,7 +106,6 @@
 }
 .info__label {
   font-size: 18px;
-  font-weight: 700;
 }
 .upd-wr {
   display: flex;
@@ -119,11 +115,21 @@
   font-weight: normal;
 }
 .settings-body-subtitle {
-  font-weight: 700;
-  font-size: 18px;
+  font-size: 36px;
   color: #4d4d4d;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   padding: 0 15px;
+}
+
+.back {
+  transform: rotate(180deg);
+  margin-right: 15px;
+  position: relative;
+  top: -4px;
+}
+
+.settings-body-subtitle a {
+  text-decoration: none;
 }
 .settings-sidebar {
   background-color: #fff;
@@ -149,7 +155,7 @@
   margin: 0;
   list-style: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-start;
   min-width: 705px;
 }
@@ -157,7 +163,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-left: 35px;
+  margin-left: 50px;
 }
 .settings-sidebar .nav span {
   display: inline-block;
@@ -176,9 +182,6 @@
   align-items: flex-start;
   transition: 0.3s ease transform;
   white-space: nowrap;
-}
-.settings-sidebar .nav a.active {
-  font-weight: 700;
 }
 .nav__item:hover {
   transform: translateY(2px);
@@ -408,6 +411,7 @@
 }
 .opts-list__item--arrow {
   position: relative;
+  cursor: pointer;
 }
 .opts-list__item--arrow:after {
   content: '';
@@ -417,7 +421,11 @@
   width: 8px;
   height: 14px;
   background-repeat: no-repeat;
-  background-image: url(../images/arrow-right.svg);
+  background-image: url(../images/arrow.svg);
+}
+.opts-list .opts-list__item--reset-padding {
+  padding-left: 0;
+  padding-right: 0;
 }
 .settings-notification {
   margin-top: auto;
@@ -593,21 +601,22 @@
   color: #58a273;
 }
 .opts-list li .opt-state__link {
-  color: #66b574;
+  color: #888888;
+  text-decoration: underline;
 }
 .opt-select {
   cursor: pointer;
   border: 0;
   font-size: 12px;
-  background-image: url(../images/triangle.svg);
+  background-image: url(../images/arrow-down.svg);
   background-size: 10px 5px;
-  background-position: 100% 50%;
+  background-position: calc(100% - 15px) 50%;
   background-repeat: no-repeat;
-  background-color: transparent;
   -webkit-appearance: none;
   outline: none;
-  padding-right: 15px;
   color: inherit;
+  background-color: #F3F3F3;
+  padding: 10px 47px;
 }
 .opts-list + .subtitle {
   margin-top: 50px;
