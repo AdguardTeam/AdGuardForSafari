@@ -287,6 +287,12 @@
     "options_content_blockers": {
         "message": "Блокировщики контента"
     },
+    "options_content_blockers_desc": {
+        "message": "Включено блокировщиков: %s из 6 (каждый может содержать до 50 000 правил)"
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": "Нет включённых блокировщиков"
+    },
     "options_compare_btn": {
         "message": "Сравнить"
     },

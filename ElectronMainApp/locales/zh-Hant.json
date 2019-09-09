@@ -287,6 +287,12 @@
     "options_content_blockers": {
         "message": "內容阻擋器"
     },
+    "options_content_blockers_desc": {
+        "message": ""
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": ""
+    },
     "options_compare_btn": {
         "message": "它們如何比較"
     },
@@ -348,7 +354,7 @@
         "message": "如果詳細記錄被啟用，AdGuard Safari 延伸功能將列印額外的資訊到瀏覽器控制台"
     },
     "settings_notification_protection_title": {
-        "message": "注意！防護已被禁用"
+        "message": "防護被暫停"
     },
     "settings_notification_protection_button_text": {
         "message": "修復它"
@@ -360,13 +366,13 @@
         "message": "某些 AdGuard 延伸功能被禁用"
     },
     "settings_notification_extensions_text": {
-        "message": "為了正確地封鎖在 Safari 中的廣告，您應啟用所有的 AdGuard 延伸功能"
+        "message": "為了在 Safari 中之正確的廣告封鎖，您應啟用所有的 AdGuard 延伸功能"
     },
     "settings_notification_cb_extensions_title": {
         "message": "某些 AdGuard 內容阻擋器延伸功能被禁用"
     },
     "settings_notification_cb_extensions_text": {
-        "message": "為了正確地封鎖在 Safari 中的廣告，您應啟用所有的 AdGuard 內容阻擋器延伸功能"
+        "message": "為了在 Safari 中之正確的廣告封鎖，您應啟用所有的 AdGuard 內容阻擋器延伸功能"
     },
     "options_cb_general_title": {
         "message": "AdGuard 一般的"
