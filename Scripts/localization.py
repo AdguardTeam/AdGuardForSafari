@@ -72,6 +72,15 @@ XIB_FILES = []
 for path in TWOSKY_CONFIG["xib_files"]:
     XIB_FILES.append(path)
 
+def changeEncoding(file):
+    print("change encoding of file {0} from utf-16 to utf-8".format(file))
+    """ Changes encoding of file from UTF-16 to UTF-8 
+    """
+    with open(file, "rb") as f:
+        with open("temp.strings", "wb") as f2:
+            content = f.read().decode('utf-16')
+            f2.write(content.lstrip().encode('utf-8'))
+    os.rename("temp.strings", file)
 
 def upload_file(path, format, language, file_name):
     """Uploads the specified file to the translation API
@@ -159,6 +168,9 @@ def xib_to_strings(xib_path, strings_path):
 
     if not os.path.exists(strings_path):
         raise FileNotFoundError(strings_path)
+
+    changeEncoding(strings_path)
+
     # Finished generating strings
     return
 
