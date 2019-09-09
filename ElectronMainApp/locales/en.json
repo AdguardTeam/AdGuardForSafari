@@ -287,6 +287,15 @@
     "options_content_blockers": {
         "message": "Content blockers"
     },
+    "options_content_blockers_desc": {
+        "message": {
+            "one": "You have enabled %s adblocker out of 6 (each can contain up to 50 000 rules)",
+            "other": "You have enabled %s adblockers out of 6 (each can contain up to 50 000 rules)"
+        }
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": "Adblockers are disabled"
+    },
     "options_compare_btn": {
         "message": "How they compare"
     },

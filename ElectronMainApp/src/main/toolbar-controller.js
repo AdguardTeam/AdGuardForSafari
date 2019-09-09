@@ -197,6 +197,7 @@ module.exports = (() => {
             let allContentBlockersDisabled = true;
             let contentBlockersEnabled = true;
             let minorExtensionsEnabled = true;
+            let enabledContentBlockersCount = 0;
 
             for (let extension in extensions) {
                 const extensionEnabled = extensions[extension];
@@ -208,6 +209,7 @@ module.exports = (() => {
                     }
                 } else {
                     if (ContentBlockerExtensions.indexOf(extension) >= 0) {
+                        enabledContentBlockersCount++;
                         allContentBlockersDisabled = false;
                     }
                 }
@@ -217,7 +219,8 @@ module.exports = (() => {
                 extensions,
                 contentBlockersEnabled,
                 minorExtensionsEnabled,
-                allContentBlockersDisabled
+                allContentBlockersDisabled,
+                enabledContentBlockersCount,
             };
 
             callback(result);
