@@ -811,10 +811,10 @@ const AntiBannerFilters = function (options) {
                 ${pageTitleEl}
                 <div class="settings-body settings-body--search">
                     <div class="filters-search">
-                        <input type="text" placeholder="${i18n.__('options_filters_list_search_placeholder.message')}" name="searchFiltersList"/>
                         <div class="icon-search">
                             <img src="images/magnifying-glass.svg" alt="">
                         </div>
+                        <input type="text" placeholder="${i18n.__('options_filters_list_search_placeholder.message')}" name="searchFiltersList"/>
                     </div>
                     <ul class="opts-list">
                         ${filtersList}
