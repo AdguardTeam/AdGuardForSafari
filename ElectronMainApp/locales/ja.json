@@ -67,19 +67,19 @@
     },
     "options_antibanner_info_filters": {
         "message": {
-            "one": "",
+            "one": "フィルタ%s個",
             "other": "フィルタ %s個"
         }
     },
     "options_antibanner_info_rules": {
         "message": {
-            "one": "",
+            "one": "ルール%s件",
             "other": "ルール %s件"
         }
     },
     "options_antibanner_info_adv_rules": {
         "message": {
-            "one": "",
+            "one": "高度ルール%s件",
             "other": "高度ルール %s件"
         }
     },
@@ -208,7 +208,7 @@
     },
     "options_popup_update_updated_more": {
         "message": {
-            "one": "",
+            "one": "更新済みフィルタ%s個：$2",
             "other": "更新済みフィルタ%s個：$2"
         }
     },
@@ -284,6 +284,15 @@
     "options_about": {
         "message": "このアプリについて"
     },
+    "options_content_blockers": {
+        "message": "コンテンツブロッカー"
+    },
+    "options_content_blockers_desc": {
+        "message": ""
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": ""
+    },
     "options_compare_btn": {
         "message": "製品比較を見る"
     },
@@ -303,7 +312,7 @@
         "message": "Github"
     },
     "onboarding_safari_desc": {
-        "message": "Safari環境設定の「AdGuard Safari Icon」と「AdGuard」の横にあるチェックボックスにチェックを入れてください"
+        "message": "Safari環境設定でAdGuard拡張機能の横にあるチェックボックスにチェックを入れてください。"
     },
     "onboarding_safari_btn": {
         "message": "環境設定を開く"
@@ -325,7 +334,7 @@
     },
     "options_filters_update_period_number": {
         "message": {
-            "one": "",
+            "one": "毎時",
             "other": "%s時間ごと"
         }
     },
@@ -344,16 +353,52 @@
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
-    "settings_notification_title": {
-        "message": "注意！AdGuardアイコンが無効になりました"
-    },
-    "settings_notification_text": {
-        "message": "このアイコンを使うと、閲覧中のサイトでのブロッキングを一時停止したり、要素を手動でブロックしたりなど、AdGuard for Safari の設定を管理できます。AdGuardアイコンは<a href='#' id='notificationEnableIconLink'>こちら<\/a>で有効にすることができます。"
-    },
     "settings_notification_protection_title": {
         "message": "【注意】保護は無効になりました"
     },
-    "settings_notification_protection_text": {
-        "message": "AdGuardによる保護は一時停止中です。<a href='#' id='notificationEnableProtectionLink'>AdGuardを有効にする<\/a>。"
+    "settings_notification_protection_button_text": {
+        "message": "修正する"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "修正する"
+    },
+    "settings_notification_extensions_title": {
+        "message": "AdGuard拡張機能の一部が無効になっています"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Safari広告ブロックが正しく動作するには、AdGuard拡張機能をすべて有効にする必要があります。"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "AdGuardコンテンツブロッカー拡張機能の一部が無効になっています"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Safari広告ブロックが正しく動作するには、AdGuardコンテンツブロッカー拡張機能をすべて有効にする必要があります。"
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard一般"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuardプライバシー"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuardソーシャル"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuardセキュリティ"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuardその他"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuardカスタム"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "使用ルール数：%s",
+            "other": "使用ルール数：%s"
+        }
+    },
+    "options_cb_disabled_warning": {
+        "message": "Safariで無効になっています"
     }
 }

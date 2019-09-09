@@ -284,6 +284,15 @@
     "options_about": {
         "message": "Über"
     },
+    "options_content_blockers": {
+        "message": "Inhaltsblocker"
+    },
+    "options_content_blockers_desc": {
+        "message": ""
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": ""
+    },
     "options_compare_btn": {
         "message": "Wie sie verglichen werden"
     },
@@ -344,16 +353,52 @@
     "options_verbose_logging_desc": {
         "message": "Falls Ausführliche Protokollierung aktiviert ist, geben die AdGuard-Browsererweiterungen für Safari zusätzliche Informationen in die Browser-Konsole ein."
     },
-    "settings_notification_title": {
-        "message": "Achtung! Die AdGuard-Erweiterungen wurden deaktiviert"
-    },
-    "settings_notification_text": {
-        "message": "Sie können diese Erweiterungen verwenden, um die Einstellungen von AdGuard für Safari zu verwalten, z.B. das Blockieren auf einer Webseite anzuhalten oder eine Anzeige manuell zu blockieren. Sie können das AdGuard-Symbol und die erweiterte Blockierung <a href='#' id='notificationEnableIconLink'>hier<\/a> aktivieren."
-    },
     "settings_notification_protection_title": {
-        "message": "Achtung! Der Schutz wurde deaktiviert."
+        "message": "Der Schutz ist angehalten"
     },
-    "settings_notification_protection_text": {
-        "message": "Der Schutz ist angehalten. <a href='#' id='notificationEnableProtectionLink'>AdGuard aktivieren<\/a>."
+    "settings_notification_protection_button_text": {
+        "message": "Beheben"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Beheben"
+    },
+    "settings_notification_extensions_title": {
+        "message": "Einige AdGuard-Erweiterungen sind deaktiviert"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Sie sollten alle AdGuard-Erweiterungen aktivieren, um ein erfolgreiches Sperren von Werbeanzeigen in Safari zu gewährleisten."
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "Einige Inhaltsblocker-Erweiterungen von AdGuard sind deaktiviert"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Sie sollten alle Inhaltsblocker-Erweiterungen von AdGuard aktivieren, um ein erfolgreiches Sperren von Werbeanzeigen in Safari zu gewährleisten."
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard Allgemeine"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard Datenschutz"
+    },
+    "options_cb_social_title": {
+        "message": "Widgets für soziale Netzwerke\n"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard Sicherheit"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard Sonstige"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard Benutzerdefinierte"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s Regel verwendet",
+            "other": "%s Regeln verwendet"
+        }
+    },
+    "options_cb_disabled_warning": {
+        "message": "In Safari deaktiviert"
     }
 }

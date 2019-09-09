@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -30,7 +29,7 @@
             </userGuides>
             <subviews>
                 <stackView orientation="horizontal" alignment="centerY" spacing="13" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtO-ks-TWg" userLabel="Stack Top Icons">
-                    <rect key="frame" x="0.0" y="273" width="247" height="31"/>
+                    <rect key="frame" x="0.0" y="263" width="247" height="31"/>
                     <edgeInsets key="edgeInsets" left="20" right="20" top="0.0" bottom="0.0"/>
                     <beginningViews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DHo-Vn-6on">
@@ -86,7 +85,7 @@
                     </customSpacing>
                 </stackView>
                 <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="qio-p6-Pqn">
-                    <rect key="frame" x="28" y="229" width="162" height="14"/>
+                    <rect key="frame" x="28" y="219" width="162" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="fBY-Nv-eMT"/>
                     </constraints>
@@ -123,7 +122,7 @@
                     </connections>
                 </button>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="CVr-v4-bDt">
-                    <rect key="frame" x="0.0" y="208" width="247" height="5"/>
+                    <rect key="frame" x="0.0" y="198" width="247" height="5"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="pQJ-d8-2Tr"/>
                     </constraints>
@@ -138,7 +137,7 @@
                     </connections>
                 </box>
                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="25" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJ8-Wf-pr8" userLabel="Stack Titles">
-                    <rect key="frame" x="20" y="126" width="118" height="59"/>
+                    <rect key="frame" x="20" y="116" width="118" height="59"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="du9-Ja-6bt">
                             <rect key="frame" x="-2" y="42" width="108" height="17"/>
@@ -176,7 +175,7 @@
                     </connections>
                 </stackView>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rhc-3f-Mmp" userLabel="Stack Buttons">
-                    <rect key="frame" x="158" y="123" width="69" height="62"/>
+                    <rect key="frame" x="158" y="113" width="69" height="62"/>
                     <subviews>
                         <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="0bc-P0-SgG">
                             <rect key="frame" x="-6" y="34" width="81" height="32"/>
@@ -258,7 +257,7 @@
                     </connections>
                 </stackView>
                 <textField horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WI5-OB-i6V">
-                    <rect key="frame" x="18" y="151" width="211" height="22"/>
+                    <rect key="frame" x="18" y="146" width="211" height="22"/>
                     <textFieldCell key="cell" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" id="F0e-9f-alD">
                         <font key="font" metaFont="system" size="18"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -302,7 +301,7 @@
                     </connections>
                 </button>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="LXA-5T-3Tr">
-                    <rect key="frame" x="0.0" y="96" width="247" height="5"/>
+                    <rect key="frame" x="0.0" y="86" width="247" height="5"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="SpI-nU-o1j"/>
                     </constraints>
@@ -317,10 +316,10 @@
                     </connections>
                 </box>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eUB-7s-Qmw">
-                    <rect key="frame" x="8" y="8" width="231" height="79"/>
+                    <rect key="frame" x="8" y="8" width="231" height="69"/>
                     <subviews>
                         <button horizontalHuggingPriority="750" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="jKb-oY-gyH" customClass="LinkButton">
-                            <rect key="frame" x="67" y="62" width="98" height="17"/>
+                            <rect key="frame" x="67" y="52" width="98" height="17"/>
                             <buttonCell key="cell" type="bevel" title="Pause AdGuard" bezelStyle="regularSquare" alignment="center" refusesFirstResponder="YES" inset="2" id="p92-iZ-Q5D" customClass="GreenButtonCell">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -371,20 +370,20 @@
                             </connections>
                         </button>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="rwO-WV-q0R">
-                            <rect key="frame" x="115" y="50" width="1" height="12"/>
+                            <rect key="frame" x="115" y="40" width="1" height="12"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="12" id="7a5-rG-bzX"/>
                                 <constraint firstAttribute="width" constant="1" id="Net-0c-yTf"/>
                             </constraints>
                         </customView>
                         <box verticalHuggingPriority="1000" boxType="custom" borderType="none" cornerRadius="4" translatesAutoresizingMaskIntoConstraints="NO" id="Wke-Zo-itT">
-                            <rect key="frame" x="0.0" y="0.0" width="231" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="231" height="40"/>
                             <view key="contentView" id="nCn-Ms-r56">
-                                <rect key="frame" x="0.0" y="0.0" width="231" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="231" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Gxi-0D-SJR">
-                                        <rect key="frame" x="38" y="9" width="189" height="32"/>
+                                        <rect key="frame" x="38" y="4" width="189" height="32"/>
                                         <textFieldCell key="cell" title="Some AdGuard extensions are disabled!" id="H2E-6z-orr">
                                             <font key="font" metaFont="cellTitle"/>
                                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -392,7 +391,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b1y-id-03Q">
-                                        <rect key="frame" x="11" y="21" width="18" height="18"/>
+                                        <rect key="frame" x="11" y="11" width="18" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="18" id="V0e-L0-qyZ"/>
                                             <constraint firstAttribute="height" constant="18" id="fEq-ze-cS2"/>

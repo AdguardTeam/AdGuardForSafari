@@ -57,10 +57,10 @@
         "message": "Permitir anuncios de búsqueda y la autopromoción de sitios web"
     },
     "options_export_settings": {
-        "message": "Exportar ajustes"
+        "message": "Exportar configuración"
     },
     "options_import_settings": {
-        "message": "Importar ajustes"
+        "message": "Importar configuración"
     },
     "options_antibanner": {
         "message": "Filtros"
@@ -284,6 +284,15 @@
     "options_about": {
         "message": "Acerca de"
     },
+    "options_content_blockers": {
+        "message": "Bloqueadores de contenido"
+    },
+    "options_content_blockers_desc": {
+        "message": ""
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": ""
+    },
     "options_compare_btn": {
         "message": "¿Cómo se comparan?"
     },
@@ -297,13 +306,13 @@
         "message": "Política de privacidad"
     },
     "options_acknowledgment": {
-        "message": "Reconocimientos"
+        "message": "Agradecimientos"
     },
     "options_github": {
         "message": "GitHub"
     },
     "onboarding_safari_desc": {
-        "message": "En las preferencias de Safari, marque la casillas \"Icono de AdGuard Safari\", \"Bloqueo avanzado de AdGuard\" y \"AdGuard\""
+        "message": "Marque las casillas junto a las extensiones de AdGuard en las preferencias de Safari"
     },
     "onboarding_safari_btn": {
         "message": "Abrir preferencias"
@@ -339,21 +348,57 @@
         "message": "Ejecutar AdGuard para Safari al inicio de sesión"
     },
     "options_verbose_logging": {
-        "message": "Verbose logging"
+        "message": "Registro detallado"
     },
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
-    "settings_notification_title": {
-        "message": "¡Atención! Las extensiones de AdGuard están deshabilitadas"
-    },
-    "settings_notification_text": {
-        "message": "Puede usar este icono para administrar AdGuard para Safari. Por ejemplo, pausar el bloqueo en algún sitio o bloquear un anuncio manualmente. Puede habilitar el icono de AdGuard y el bloqueo avanzado <a href='#' id='notificationEnableIconLink'>aquí<\/a>."
-    },
     "settings_notification_protection_title": {
         "message": "¡Atención! La protección fue deshabilitada"
     },
-    "settings_notification_protection_text": {
-        "message": "La protección de AdGuard está pausada. <a href='#' id='notificationEnableProtectionLink'>Habilitar AdGuard<\/a>."
+    "settings_notification_protection_button_text": {
+        "message": "Corregir"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Corregir"
+    },
+    "settings_notification_extensions_title": {
+        "message": "¡Algunas extensiones de AdGuard están deshabilitadas"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Debe habilitar todas las extensiones de AdGuard para bloquear correctamente los anuncios en Safari"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "¡Algunas extensiones para bloqueo de contenido de AdGuard están deshabilitadas"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Debe habilitar todas las extensiones para bloqueo de contenido de AdGuard, y así bloquear correctamente los anuncios en Safari"
+    },
+    "options_cb_general_title": {
+        "message": "General"
+    },
+    "options_cb_privacy_title": {
+        "message": "Privacidad"
+    },
+    "options_cb_social_title": {
+        "message": "Redes sociales"
+    },
+    "options_cb_security_title": {
+        "message": "Seguridad"
+    },
+    "options_cb_other_title": {
+        "message": "Otros"
+    },
+    "options_cb_custom_title": {
+        "message": "Personalizado"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s regla utilizada",
+            "other": "%s reglas utilizadas"
+        }
+    },
+    "options_cb_disabled_warning": {
+        "message": "Deshabilitado en Safari"
     }
 }

@@ -284,6 +284,15 @@
     "options_about": {
         "message": "Sobre"
     },
+    "options_content_blockers": {
+        "message": "Bloqueadores de conteúdo"
+    },
+    "options_content_blockers_desc": {
+        "message": ""
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": ""
+    },
     "options_compare_btn": {
         "message": "Como eles se comparam"
     },
@@ -303,7 +312,7 @@
         "message": "GitHub"
     },
     "onboarding_safari_desc": {
-        "message": "Marque as caixas ao lado de \"Ícone do AdGuard no Safari\", \"Bloqueio avançado do AdGuard\" e \"AdGuard\" nas preferências do Safari"
+        "message": "Marque as caixas de seleção ao lado das extensões do AdGuard nas preferências do Safari"
     },
     "onboarding_safari_btn": {
         "message": "Abrir preferências"
@@ -344,16 +353,52 @@
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
-    "settings_notification_title": {
-        "message": "Atenção! A extensão do AdGuard está desativada"
-    },
-    "settings_notification_text": {
-        "message": "Você pode usar este ícone para gerenciar as configurações do AdGuard para o Safari. Por exemplo, para pausar o bloqueio em um site ou bloquear um anúncio manualmente. Você pode ativar o ícone do AdGuard ou o Bloqueio Avançado <a href='#' id='notificationEnableIconLink'>aqui<\/a>."
-    },
     "settings_notification_protection_title": {
         "message": "Atenção! A proteçao foi desativada"
     },
-    "settings_notification_protection_text": {
-        "message": " A proteçao do AdGuard esta pausada.<a href='#' id='notificationEnableProtectionLink'>Ativar o AdGuard<\/a>."
+    "settings_notification_protection_button_text": {
+        "message": "Corrigir isto"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Corrigir isto"
+    },
+    "settings_notification_extensions_title": {
+        "message": "Algumas extensões do AdGuard estão desativadas"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Você deve ativar todas as extensões do AdGuard para bloquear anúncios corretamente no Safari"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "Algumas extensões do bloqueador de conteúdo do AdGuard estão desativadas"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Você deve ativar todas as extensões do bloqueio de conteúdo do AdGuard para bloquear anúncios corretamente no Safari"
+    },
+    "options_cb_general_title": {
+        "message": "Geral"
+    },
+    "options_cb_privacy_title": {
+        "message": "Privacidade"
+    },
+    "options_cb_social_title": {
+        "message": "Social"
+    },
+    "options_cb_security_title": {
+        "message": "Segurança"
+    },
+    "options_cb_other_title": {
+        "message": "Outro"
+    },
+    "options_cb_custom_title": {
+        "message": "Personalizado"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s regra usada",
+            "other": "%s regras usadas"
+        }
+    },
+    "options_cb_disabled_warning": {
+        "message": "Desativado no Safari"
     }
 }

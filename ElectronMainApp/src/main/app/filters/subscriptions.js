@@ -1,5 +1,6 @@
 const config = require('config');
 const serviceClient = require('./service-client');
+const i18 = require('../../../utils/i18n');
 const i18n = require('../utils/i18n');
 const versionUtils = require('../utils/version');
 const log = require('../utils/log');
@@ -398,12 +399,11 @@ module.exports = (function () {
                 groupsMap[group.groupId] = group;
             }
 
+            const localizedCustomGroupName = i18.__('filters_group_custom.message');
             const customFiltersGroup
-                = new SubscriptionGroup(CUSTOM_FILTERS_GROUP_ID, "Custom", CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER);
+                = new SubscriptionGroup(CUSTOM_FILTERS_GROUP_ID, localizedCustomGroupName, CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER);
             groups.push(customFiltersGroup);
             groupsMap[customFiltersGroup.groupId] = customFiltersGroup;
-
-            //TODO: Add localization for Custom group
 
             // Load custom filters
             const customFilters = loadCustomFilters();
