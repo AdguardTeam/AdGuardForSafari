@@ -108,8 +108,12 @@
   font-size: 18px;
 }
 .upd-wr {
-  display: flex;
-  padding-right: 40px;
+    display: flex;
+    padding-right: 40px;
+    max-width: 300px;
+    text-align: right;
+    color: #888888;
+    position: relative;
 }
 .settings-wrap .page-title .info .upd {
   font-weight: normal;
@@ -120,7 +124,9 @@
   margin-bottom: 30px;
   padding: 0 15px;
 }
-
+.settings-body-subtitle--reset-padding {
+    padding: 0;
+}
 .back {
   transform: rotate(180deg);
   margin-right: 15px;
@@ -248,8 +254,8 @@
 .settings-actions--update-filters {
   position: absolute;
   margin: 0;
-  right: 15px;
-  top: calc(50% - 12px);
+  right: 0;
+  top: calc(50% - 8px);
 }
 .settings-actions--update-filters a {
   font-size: 0;
@@ -281,17 +287,14 @@
   position: relative;
 }
 .icon-search {
-  padding: 0 5px 0 25px;
+  padding: 0 25px 0 5px;
 }
 .filters-list .filters-search {
-  position: absolute;
-  right: 0;
-  top: -50px;
-  width: 207px;
   display: flex;
   border: 1px solid #E7E7E7;
   border-width: 0 0 1px 0;
   padding: 0 0 10px 10px;
+  margin-bottom: 40px;
 }
 
 .filters-list .filters-search img {
@@ -308,7 +311,6 @@
   padding: 5px 0;
   font-size: 14px;
   margin-top: 20px;
-  text-align: right;
 }
 /* /st */
 /* th & st */
