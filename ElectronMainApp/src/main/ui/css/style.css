@@ -1372,9 +1372,13 @@ li.active .toggler:before {
   margin-left: 12px;
   margin-right: 15px;
   color: #df3812;
-  text-decoration: underline;
+  text-decoration: none;
   cursor: pointer;
   opacity: 0.5;
+}
+
+.opts-list li .remove-custom-filter-button:hover {
+  text-decoration: underline;
 }
 
 .opts-list li.active .remove-custom-filter-button {
