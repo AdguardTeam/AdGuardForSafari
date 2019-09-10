@@ -719,7 +719,9 @@ const AntiBannerFilters = function (options) {
 
         let deleteButton = '';
         if (showDeleteButton) {
-            deleteButton = `<a href="#" filterid="${filter.filterId}" class="remove-custom-filter-button">remove</a>`;
+            deleteButton = `<a href="#" filterid="${filter.filterId}" class="remove-custom-filter-button">
+                                ${i18n.__('options_filters_custom_remove.message')}
+                            </a>`;
         }
         let homeButton = '';
         if (filter.homepage) {
