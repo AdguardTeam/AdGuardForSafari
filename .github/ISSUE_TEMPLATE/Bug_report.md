@@ -30,7 +30,7 @@ Please answer the following questions for yourself before submitting an issue. *
 * **Environment name and version:**
   * <!-- (e.g. Safari 11.1.2 (13605.3.8)) -->
 * **Operating system and version:**
-  * <!-- (e.g. Ubuntu 18.04.1) -->
+  * <!-- (e.g. MacOS 10.14.6) -->
 * **Filters you use in AdGuard:**
   * <!-- (e.g. Base, Tracking Protection) -->
 * **Any other browser extensions you have installed:**
