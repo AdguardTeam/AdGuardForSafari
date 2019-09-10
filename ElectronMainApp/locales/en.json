@@ -225,10 +225,10 @@
         "message": "Warning"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Too many filters enabled. Safari cannot use more than 50 000 rules."
+        "message": "Too many filters enabled. Safari cannot use more than 50 000 rules in one group."
     },
     "options_content_blocker_overlimit": {
-        "message": "Too many filters enabled. Safari cannot use more than 50 000 rules."
+        "message": "Too many filters enabled. Safari cannot use more than 50 000 rules in one group."
     },
     "options_filters_list_search_placeholder": {
         "message": "Search"
@@ -340,6 +340,9 @@
     },
     "options_filters_period_not_update": {
         "message": "Do not update"
+    },
+    "options_filters_custom_remove": {
+        "message": "remove"
     },
     "options_show_tray_icon": {
         "message": "Show AdGuard for Safari in the menu bar"

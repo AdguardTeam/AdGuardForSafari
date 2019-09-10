@@ -719,7 +719,9 @@ const AntiBannerFilters = function (options) {
 
         let deleteButton = '';
         if (showDeleteButton) {
-            deleteButton = `<a href="#" filterid="${filter.filterId}" class="remove-custom-filter-button">remove</a>`;
+            deleteButton = `<a href="#" filterid="${filter.filterId}" class="remove-custom-filter-button">
+                                ${i18n.__('options_filters_custom_remove.message')}
+                            </a>`;
         }
         let homeButton = '';
         if (filter.homepage) {
@@ -1295,10 +1297,13 @@ const AntiBannerFilters = function (options) {
             filterEl.querySelector('.filter-version-desc').textContent = `${i18n.__('options_filters_version.message', filter.version)}`;
             filterEl.querySelector('.title').textContent = filter.name;
 
+            const tagTrusted = filterEl.querySelector('.tag-trusted');
             if (!filter.trusted) {
-                filterEl.querySelector('.tags-container').removeChild(filterEl.querySelector('.tag-trusted'));
+                if (tagTrusted) {
+                    filterEl.querySelector('.tags-container').removeChild(tagTrusted);
+                }
             } else {
-                if (!filterEl.querySelector('.tag-trusted')) {
+                if (!tagTrusted) {
                     const tagTrusted = `<div class="opt-name__tag tag-trusted"
                                         data-tooltip="${i18n.__('options_filters_filter_trusted_tag_desc.message')}">
                                         #${i18n.__('options_filters_filter_trusted_tag.message')}
