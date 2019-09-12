@@ -188,9 +188,6 @@
     "options_show_app_updated_notification": {
         "message": "通知扩展更新"
     },
-    "options_use_optimized_filters": {
-        "message": "使用优化的过滤器<span class='sp-table-row-info'>为 Safari 内容拦截 API 优化的轻量级过滤器列表。<\/span>"
-    },
     "options_popup_update_title": {
         "message": "过滤器更新成功"
     },
@@ -225,10 +222,10 @@
         "message": "警告"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "开启的过滤器过多。Safari 最多仅可使用 50000条规则。"
+        "message": ""
     },
     "options_content_blocker_overlimit": {
-        "message": "开启的过滤器过多。Safari 最多仅可使用 50000条规则。"
+        "message": ""
     },
     "options_filters_list_search_placeholder": {
         "message": "搜索"
@@ -341,6 +338,9 @@
     "options_filters_period_not_update": {
         "message": "不更新"
     },
+    "options_filters_custom_remove": {
+        "message": ""
+    },
     "options_show_tray_icon": {
         "message": "在菜单栏上显示AdGuard for Safari"
     },
@@ -398,7 +398,16 @@
             "other": "%s 规则已使用"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": {
+            "one": "",
+            "other": ""
+        }
+    },
     "options_cb_disabled_warning": {
+        "message": ""
+    },
+    "filters_group_custom": {
         "message": ""
     }
 }

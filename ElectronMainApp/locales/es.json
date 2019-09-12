@@ -188,9 +188,6 @@
     "options_show_app_updated_notification": {
         "message": "Notificar sobre las actualizaciones de la extensión"
     },
-    "options_use_optimized_filters": {
-        "message": "Usar filtros optimizados<span class='sp-table-row-info'>Listas de filtros optimizadas para el bloqueo de contenido de Safari.<\/span>"
-    },
     "options_popup_update_title": {
         "message": "Filtros actualizados correctamente"
     },
@@ -225,10 +222,10 @@
         "message": "Advertencia"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Demasiados filtros habilitados. Safari no puede usar más de 50 000 reglas."
+        "message": ""
     },
     "options_content_blocker_overlimit": {
-        "message": "Demasiados filtros habilitados. Safari no puede usar más de 50 000 reglas."
+        "message": ""
     },
     "options_filters_list_search_placeholder": {
         "message": "Búsqueda"
@@ -288,10 +285,10 @@
         "message": "Bloqueadores de contenido"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "Bloqueadores de anuncios habilitados: %s de 6 (cada uno puede contener hasta 50.000 reglas)"
     },
     "options_content_blockers_disabled_desc": {
-        "message": ""
+        "message": "Los bloqueadores de anuncios están deshabilitados"
     },
     "options_compare_btn": {
         "message": "¿Cómo se comparan?"
@@ -340,6 +337,9 @@
     },
     "options_filters_period_not_update": {
         "message": "No actualizar"
+    },
+    "options_filters_custom_remove": {
+        "message": ""
     },
     "options_show_tray_icon": {
         "message": "Mostrar AdGuard para Safari en la barra del menú"
@@ -398,7 +398,16 @@
             "other": "%s reglas utilizadas"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": {
+            "one": "",
+            "other": ""
+        }
+    },
     "options_cb_disabled_warning": {
         "message": "Deshabilitado en Safari"
+    },
+    "filters_group_custom": {
+        "message": "Personalizado"
     }
 }

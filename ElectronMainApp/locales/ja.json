@@ -188,9 +188,6 @@
     "options_show_app_updated_notification": {
         "message": "拡張機能のアップデートについて通知を受け取る"
     },
-    "options_use_optimized_filters": {
-        "message": "最適化されたフィルタを使用する<span class='sp-table-row-info'>SafariコンテンツブロッカーAPI向けに最適化された軽量版フィルタのリストです。<\/span>"
-    },
     "options_popup_update_title": {
         "message": "フィルタ更新完了"
     },
@@ -225,10 +222,10 @@
         "message": "警告"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "有効フィルタが多すぎています。Safari で使用できるルールの数は、50000までです。"
+        "message": ""
     },
     "options_content_blocker_overlimit": {
-        "message": "有効フィルタが多すぎています。Safari で使用できるルールの数は、50000までです。"
+        "message": ""
     },
     "options_filters_list_search_placeholder": {
         "message": "検索"
@@ -288,10 +285,10 @@
         "message": "コンテンツブロッカー"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "有効広告ブロッカー数：%s\/6（それぞれ最大50,000件づつのルール使用可）"
     },
     "options_content_blockers_disabled_desc": {
-        "message": ""
+        "message": "広告ブロッカーは無効です。"
     },
     "options_compare_btn": {
         "message": "製品比較を見る"
@@ -340,6 +337,9 @@
     },
     "options_filters_period_not_update": {
         "message": "更新しない"
+    },
+    "options_filters_custom_remove": {
+        "message": ""
     },
     "options_show_tray_icon": {
         "message": "AdGuard for Safariをメニューバーに表示する"
@@ -398,7 +398,16 @@
             "other": "使用ルール数：%s"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": {
+            "one": "",
+            "other": ""
+        }
+    },
     "options_cb_disabled_warning": {
         "message": "Safariで無効になっています"
+    },
+    "filters_group_custom": {
+        "message": "カスタム"
     }
 }

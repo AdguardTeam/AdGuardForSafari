@@ -188,9 +188,6 @@
     "options_show_app_updated_notification": {
         "message": "通知有關延伸功能更新"
     },
-    "options_use_optimized_filters": {
-        "message": "使用已最佳化的過濾器<span class='sp-table-row-info'>對於 Safari 內容阻擋應用程式介面（Content Blocking API）已最佳化之輕量的過濾器清單。<\/span>"
-    },
     "options_popup_update_title": {
         "message": "過濾器被成功地更新"
     },
@@ -225,10 +222,10 @@
         "message": "警告"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "太多已啟用的過濾器。Safari 無法使用超過 50,000 項規則。"
+        "message": "太多已啟用的過濾器。Safari 無法在一個群組中使用超過 50,000 項規則。"
     },
     "options_content_blocker_overlimit": {
-        "message": "太多已啟用的過濾器。Safari 無法使用超過 50,000 項規則。"
+        "message": "太多已啟用的過濾器。Safari 無法在一個群組中使用超過 50,000 項規則。"
     },
     "options_filters_list_search_placeholder": {
         "message": "搜尋"
@@ -341,6 +338,9 @@
     "options_filters_period_not_update": {
         "message": "不更新"
     },
+    "options_filters_custom_remove": {
+        "message": "移除"
+    },
     "options_show_tray_icon": {
         "message": "在選單列中顯示 AdGuard for Safari"
     },
@@ -398,7 +398,16 @@
             "other": "%s 規則被使用"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": {
+            "one": "",
+            "other": ""
+        }
+    },
     "options_cb_disabled_warning": {
         "message": "已在 Safari 中禁用"
+    },
+    "filters_group_custom": {
+        "message": "自訂的"
     }
 }

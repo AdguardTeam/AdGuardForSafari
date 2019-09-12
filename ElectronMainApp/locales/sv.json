@@ -188,9 +188,6 @@
     "options_show_app_updated_notification": {
         "message": "Avisera om tilläggsuppdateringar"
     },
-    "options_use_optimized_filters": {
-        "message": "Använd optimerade filter<span class='sp-table-row-info'>Effektiv filterlista, optimerad för Safari Content Blocking API.<\/span>"
-    },
     "options_popup_update_title": {
         "message": "Filtren uppdaterades korrekt"
     },
@@ -225,10 +222,10 @@
         "message": "Varning"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "För många valda filter. Safari kan endast hantera 50 000 regler."
+        "message": ""
     },
     "options_content_blocker_overlimit": {
-        "message": "För många valda filter. Safari kan endast hantera 50 000 regler."
+        "message": ""
     },
     "options_filters_list_search_placeholder": {
         "message": "Sök"
@@ -341,6 +338,9 @@
     "options_filters_period_not_update": {
         "message": "Uppdatera inte"
     },
+    "options_filters_custom_remove": {
+        "message": ""
+    },
     "options_show_tray_icon": {
         "message": "Visa AdGuard för Safari på menyraden"
     },
@@ -398,7 +398,16 @@
             "other": ""
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": {
+            "one": "",
+            "other": ""
+        }
+    },
     "options_cb_disabled_warning": {
+        "message": ""
+    },
+    "filters_group_custom": {
         "message": ""
     }
 }

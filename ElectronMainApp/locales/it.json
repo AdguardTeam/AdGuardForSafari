@@ -188,9 +188,6 @@
     "options_show_app_updated_notification": {
         "message": "Notica aggiornamenti estensione"
     },
-    "options_use_optimized_filters": {
-        "message": "Usa filtri ottimizzati<span class='sp-table-row-info'>Liste dei filtri leggeri ottimizzate per Safari Content Blocking API.<\/span>"
-    },
     "options_popup_update_title": {
         "message": "Filtri aggiornati con successo"
     },
@@ -225,10 +222,10 @@
         "message": "Attenzione"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Troppi filtri abilitati. Safari non può usare più di 50 000 regole."
+        "message": ""
     },
     "options_content_blocker_overlimit": {
-        "message": "Troppi filtri abilitati. Safari non può usare più di 50 000 regole."
+        "message": ""
     },
     "options_filters_list_search_placeholder": {
         "message": "Ricerca"
@@ -341,6 +338,9 @@
     "options_filters_period_not_update": {
         "message": "Non aggiornare"
     },
+    "options_filters_custom_remove": {
+        "message": ""
+    },
     "options_show_tray_icon": {
         "message": "Mostra AdGuard per Safari nella barra del menu"
     },
@@ -398,7 +398,16 @@
             "other": "%s regole utilizzate"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": {
+            "one": "",
+            "other": ""
+        }
+    },
     "options_cb_disabled_warning": {
         "message": "Disabilitato nel Safari"
+    },
+    "filters_group_custom": {
+        "message": ""
     }
 }

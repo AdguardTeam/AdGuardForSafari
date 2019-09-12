@@ -188,9 +188,6 @@
     "options_show_app_updated_notification": {
         "message": "Über Updates der Erweiterung benachrichtigen"
     },
-    "options_use_optimized_filters": {
-        "message": "Optimierte Filter verwenden<span class='sp-table-row-info'>Für Safari Inhaltsblockierungs-API optimierte Filterlisten<\/span>"
-    },
     "options_popup_update_title": {
         "message": "Filter erfolgreich aktualisiert"
     },
@@ -225,10 +222,10 @@
         "message": "Warnung"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Zu viele Filter aktiviert. Safari kann nicht mehr als 50 000 Regeln verarbeiten."
+        "message": ""
     },
     "options_content_blocker_overlimit": {
-        "message": "Zu viele Filter aktiviert. Safari kann nicht mehr als 50 000 Regeln verarbeiten."
+        "message": ""
     },
     "options_filters_list_search_placeholder": {
         "message": "Suchen"
@@ -341,6 +338,9 @@
     "options_filters_period_not_update": {
         "message": "Nicht updaten"
     },
+    "options_filters_custom_remove": {
+        "message": ""
+    },
     "options_show_tray_icon": {
         "message": "AdGuard für Safari in der Menüleiste zeigen"
     },
@@ -398,7 +398,16 @@
             "other": "%s Regeln verwendet"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": {
+            "one": "",
+            "other": ""
+        }
+    },
     "options_cb_disabled_warning": {
         "message": "In Safari deaktiviert"
+    },
+    "filters_group_custom": {
+        "message": ""
     }
 }

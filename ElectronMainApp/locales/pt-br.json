@@ -188,9 +188,6 @@
     "options_show_app_updated_notification": {
         "message": "Notificar sobre atualizações na extensão"
     },
-    "options_use_optimized_filters": {
-        "message": "Usar filtros otimizados<span class='sp-table-row-info'>Listas de filtros otimizados para API de bloqueio de conteúdo do Safari.<\/span>"
-    },
     "options_popup_update_title": {
         "message": "Filtros atualizados com sucesso"
     },
@@ -225,10 +222,10 @@
         "message": "Aviso"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Muitos filtros ativos. O Safari não pode usar mais do que 50 000 regras."
+        "message": ""
     },
     "options_content_blocker_overlimit": {
-        "message": "Muitos filtros ativos. O Safari não pode usar mais do que 50 000 regras."
+        "message": ""
     },
     "options_filters_list_search_placeholder": {
         "message": "Procurar"
@@ -288,10 +285,10 @@
         "message": "Bloqueadores de conteúdo"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "Bloqueadores de anúncios ativados: %s de 6 (cada um pode conter até 50 mil regras)"
     },
     "options_content_blockers_disabled_desc": {
-        "message": ""
+        "message": "Os bloqueadores de anúncios estão desativados"
     },
     "options_compare_btn": {
         "message": "Como eles se comparam"
@@ -340,6 +337,9 @@
     },
     "options_filters_period_not_update": {
         "message": "Não atualizar"
+    },
+    "options_filters_custom_remove": {
+        "message": ""
     },
     "options_show_tray_icon": {
         "message": "Mostrar AdGuard para Safari na barra de menus"
@@ -398,7 +398,16 @@
             "other": "%s regras usadas"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": {
+            "one": "",
+            "other": ""
+        }
+    },
     "options_cb_disabled_warning": {
         "message": "Desativado no Safari"
+    },
+    "filters_group_custom": {
+        "message": "Personalizados"
     }
 }

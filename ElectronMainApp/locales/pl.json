@@ -188,9 +188,6 @@
     "options_show_app_updated_notification": {
         "message": "Powiadamiaj o aktualizacjach rozszerzenia"
     },
-    "options_use_optimized_filters": {
-        "message": "Używaj zoptymalizowanych filtrów<span class='sp-table-row-info'>Listy filtrów lekkich zoptymalizowanych dla API Blokera Zawartości Safari.<\/span>"
-    },
     "options_popup_update_title": {
         "message": "Filtry zostały pomyślnie zaktualizowane"
     },
@@ -225,10 +222,10 @@
         "message": "Ostrzeżenie"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Uruchomiono zbyt wiele filtrów. Safari nie może korzystać z więcej niż 50 000 reguł."
+        "message": ""
     },
     "options_content_blocker_overlimit": {
-        "message": "Włączono zbyt wiele filtrów. Safari nie może korzystać z więcej niż 50000 reguł."
+        "message": ""
     },
     "options_filters_list_search_placeholder": {
         "message": "Wyszukaj"
@@ -341,6 +338,9 @@
     "options_filters_period_not_update": {
         "message": "Nie aktualizuj"
     },
+    "options_filters_custom_remove": {
+        "message": ""
+    },
     "options_show_tray_icon": {
         "message": "Pokaż AdGuard dla Safari na pasku menu"
     },
@@ -398,7 +398,16 @@
             "other": "%s reguł użytych"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": {
+            "one": "",
+            "other": ""
+        }
+    },
     "options_cb_disabled_warning": {
         "message": "Wyłączone w Safari"
+    },
+    "filters_group_custom": {
+        "message": ""
     }
 }

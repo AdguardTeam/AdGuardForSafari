@@ -188,9 +188,6 @@
     "options_show_app_updated_notification": {
         "message": "Upozornit na aktualizace rozšíření"
     },
-    "options_use_optimized_filters": {
-        "message": "Použít optimalizované filtry<span class='sp-table-row-info'>Zjednodušené filtry optimalizované pro Safari Content Blocking API.<\/span>"
-    },
     "options_popup_update_title": {
         "message": "Filtry úspěšně aktualizovány"
     },
@@ -225,10 +222,10 @@
         "message": "Varování"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Příliš mnoho povolených filtrů. Safari není schopno používat více než 50 000 pravidel."
+        "message": "Příliš mnoho povolených filtrů. Safari není schopno používat více než 50 000 pravidel v jedné skupině."
     },
     "options_content_blocker_overlimit": {
-        "message": "Příliš mnoho povolených filtrů. Safari není schopno používat více než 50 000 pravidel."
+        "message": "Příliš mnoho povolených filtrů. Safari není schopno používat více než 50 000 pravidel v jedné skupině."
     },
     "options_filters_list_search_placeholder": {
         "message": "Hledat"
@@ -288,10 +285,10 @@
         "message": "Blokátory obsahu"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "Zapnuté blokátory reklam: %s z 6 (každý může obsahovat až 50 000 pravidel)"
     },
     "options_content_blockers_disabled_desc": {
-        "message": ""
+        "message": "Blokátory reklam jsou vypnuty"
     },
     "options_compare_btn": {
         "message": "Jak porovnávají"
@@ -340,6 +337,9 @@
     },
     "options_filters_period_not_update": {
         "message": "Neaktualizovat"
+    },
+    "options_filters_custom_remove": {
+        "message": "odstranit"
     },
     "options_show_tray_icon": {
         "message": "V liště menu zobrazit AdGuard pro Safari"
@@ -398,7 +398,16 @@
             "other": "Použito pravidel: %s"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": {
+            "one": "",
+            "other": ""
+        }
+    },
     "options_cb_disabled_warning": {
         "message": "Vypnuto v Safari"
+    },
+    "filters_group_custom": {
+        "message": "Vlastní"
     }
 }

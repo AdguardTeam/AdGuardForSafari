@@ -188,9 +188,6 @@
     "options_show_app_updated_notification": {
         "message": "Уведомлять об обновлениях расширения"
     },
-    "options_use_optimized_filters": {
-        "message": "Использовать оптимизированные фильтры<span class='sp-table-row-info'>Списки фильтров, оптимизированных для блокировщика рекламы в Safari.<\/span>"
-    },
     "options_popup_update_title": {
         "message": "Фильтры успешно обновлены"
     },
@@ -399,6 +396,12 @@
         "message": {
             "one": "%s правило используется",
             "other": "Используется правил: %s"
+        }
+    },
+    "options_cb_rules_overlimit_info": {
+        "message": {
+            "one": "",
+            "other": ""
         }
     },
     "options_cb_disabled_warning": {

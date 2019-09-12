@@ -188,9 +188,6 @@
     "options_show_app_updated_notification": {
         "message": "Eklenti güncellemelerini bana bildir"
     },
-    "options_use_optimized_filters": {
-        "message": "İyileştirilmiş filtreleri kullan<span class='sp-table-row-info'>Safari İçerik Engelleme API'si için optimize edilerek hafifletilmiş filtre listeleri.<\/span>"
-    },
     "options_popup_update_title": {
         "message": "Filtreler başarıyla güncellendi"
     },
@@ -225,10 +222,10 @@
         "message": "Uyarı"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Çok fazla filtre seçildi. Safari 50000'den fazla kural kullanamaz."
+        "message": ""
     },
     "options_content_blocker_overlimit": {
-        "message": "Çok fazla filtre seçildi. Safari 50000'den fazla kural kullanamaz."
+        "message": ""
     },
     "options_filters_list_search_placeholder": {
         "message": "Ara"
@@ -341,6 +338,9 @@
     "options_filters_period_not_update": {
         "message": "Güncellemeyin"
     },
+    "options_filters_custom_remove": {
+        "message": ""
+    },
     "options_show_tray_icon": {
         "message": "Safari için AdGuard'ı menü çubuğunda göster"
     },
@@ -398,7 +398,16 @@
             "other": "%s adet kural kullanıldı"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": {
+            "one": "",
+            "other": ""
+        }
+    },
     "options_cb_disabled_warning": {
         "message": "Safari'de devre dışı"
+    },
+    "filters_group_custom": {
+        "message": ""
     }
 }
