@@ -1667,7 +1667,7 @@ const ContentBlockersScreen = function (antiBannerFilters) {
         ipcRenderer.on('getContentBlockersMetadataResponse', (e, response) => {
             for (let extension of response) {
                 const filtersInfo = antiBannerFilters.getFiltersInfo(extension.groupIds);
-                updateExtensionState(extension.bundleId, null, filtersInfo);
+                updateExtensionState(extension.bundleId, extension.rulesInfo, filtersInfo);
             }
         });
     };

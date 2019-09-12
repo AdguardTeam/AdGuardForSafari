@@ -7,7 +7,7 @@ const {jsonFromFilters} = require('../libs/JSConverter');
 const whitelist = require('../whitelist');
 const log = require('../utils/log');
 const concurrent = require('../utils/concurrent');
-const {groupRules, rulesGroupsBundles} = require('./rule-groups');
+const {groupRules, rulesGroupsBundles, filterGroupsBundles} = require('./rule-groups');
 
 /**
  * Safari Content Blocker Adapter
@@ -53,12 +53,15 @@ module.exports = (function () {
 
                 setSafariContentBlocker(rulesGroupsBundles[group.key], json);
 
-                listeners.notifyListeners(events.CONTENT_BLOCKER_EXTENSION_UPDATED, {
+                const info = {
                     rulesCount: group.rules.length,
                     bundleId: rulesGroupsBundles[group.key],
                     overlimit: result && result.overLimit,
                     filterGroups: group.filterGroups
-                });
+                };
+
+                saveContentBlockerInfo(rulesGroupsBundles[group.key], info);
+                listeners.notifyListeners(events.CONTENT_BLOCKER_EXTENSION_UPDATED, info);
             }
 
             const advancedBlocking = setAdvancedBlocking(rules.map(x => x.ruleText));
@@ -164,8 +167,38 @@ module.exports = (function () {
         return invertedWhitelistRule;
     };
 
+    /**
+     * Rules info cache object
+     *
+     * @type {{}}
+     */
+    const contentBlockersInfoCache = {};
+
+    /**
+     * Saves rules info
+     *
+     * @param bundleId
+     * @param info
+     */
+    const saveContentBlockerInfo = (bundleId, info) => {
+          contentBlockersInfoCache[bundleId] = info;
+    };
+
+    /**
+     * Returns rules info
+     */
+    const getContentBlockersInfo = () => {
+        const groupsBundles = filterGroupsBundles();
+        for (let extension of groupsBundles) {
+            extension.rulesInfo = contentBlockersInfoCache[extension.bundleId]
+        }
+
+        return groupsBundles;
+    };
+
     return {
-        updateContentBlocker
+        updateContentBlocker,
+        getContentBlockersInfo
     };
 
 })();

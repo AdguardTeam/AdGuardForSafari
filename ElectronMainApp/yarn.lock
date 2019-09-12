@@ -830,8 +830,8 @@ electron-log@^3.0.6:
   resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-3.0.7.tgz#bfdba9489c84b1301d6067028fce2f4cb2f89d7f"
 
 "electron-osx-sign@github:electron-userland/electron-osx-sign":
-  version "0.4.12"
-  resolved "https://codeload.github.com/electron-userland/electron-osx-sign/tar.gz/a6587bece1a6c78ee4aa8d74a3700bf26a8ffb2b"
+  version "0.4.13"
+  resolved "https://codeload.github.com/electron-userland/electron-osx-sign/tar.gz/a54325a972293b96161ebd929898de25ad868a66"
   dependencies:
     bluebird "^3.5.0"
     compare-version "^0.1.2"
