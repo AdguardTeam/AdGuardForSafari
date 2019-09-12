@@ -51,7 +51,7 @@
         "message": "Geral"
     },
     "options_general_desc": {
-        "message": "O AdGuard para o Safari é um software livre e de código aberto. Congratulamo-nos com o seu feedback e contribuições. Se quiser denunciar um bug ou solicitar um recurso, vá para <a target = '_ blank' href = 'https: \/\/adguard.com\/forward.html? Action = github & from = options_screen & app = safari_extension' class = 'link' >our Github repo<\/a>."
+        "message": "O AdGuard para o Safari é um software livre e de código aberto. Congratulamo-nos com o seu feedback e contribuições. Se quiser denunciar um bug ou solicitar um recurso, vá para <a target = '_ blank' href = 'https: //adguard.com/forward.html? Action = github & from = options_screen & app = safari_extension' class = 'link' >our Github repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Permitir anúncios de pesquisa e auto-promoção de sites"
@@ -177,13 +177,13 @@
         "message": "O AdGuard não irá filtrar nenhum site da lista branca."
     },
     "options_whitelist_inverse": {
-        "message": "Inverter lista branca<span class='sp-table-row-info'>Desbloquear toda a publicidade<i>excepto<\/i> a lista branca<\/span>"
+        "message": "Inverter lista branca<span class='sp-table-row-info'>Desbloquear toda a publicidade<i>excepto</i> a lista branca</span>"
     },
     "options_userfilter": {
         "message": "Filtro do Utilizador"
     },
     "options_userfilter_description": {
-        "message": "Pode adicionar as suas próprias regras ao &nbsp;este filtro. Esta opção é &nbsp;recomendada para utilizadores avançados familiarizados com HTML\/CSS. Leia o <a class='spl-user-descr-link'href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'> tutorial de regras de filtro <\/a > para &nbsp;aprender como &nbsp; escrever as suas próprias regras de filtro."
+        "message": "Pode adicionar as suas próprias regras ao &nbsp;este filtro. Esta opção é &nbsp;recomendada para utilizadores avançados familiarizados com HTML/CSS. Leia o <a class='spl-user-descr-link'href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'> tutorial de regras de filtro </a > para &nbsp;aprender como &nbsp; escrever as suas próprias regras de filtro."
     },
     "options_show_app_updated_notification": {
         "message": "Notificar actualização das extensões"
@@ -399,10 +399,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": {
-            "one": "",
-            "other": ""
-        }
+        "message": ""
     },
     "options_cb_disabled_warning": {
         "message": "Desactivado no Safari"

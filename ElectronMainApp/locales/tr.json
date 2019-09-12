@@ -51,7 +51,7 @@
         "message": "Genel"
     },
     "options_general_desc": {
-        "message": "Safari için AdGuard ücretsiz ve açık kaynaklı bir yazılımdır. Geri bildirimlerinizi ve katkılarınızı memnuniyetle bekleriz. Bir hata bildirmek veya bir özellik tavsiye etmek istiyorsanız, lütfen <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>bizim Github sayfamıza<\/a> gidin."
+        "message": "Safari için AdGuard ücretsiz ve açık kaynaklı bir yazılımdır. Geri bildirimlerinizi ve katkılarınızı memnuniyetle bekleriz. Bir hata bildirmek veya bir özellik tavsiye etmek istiyorsanız, lütfen <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>bizim Github sayfamıza</a> gidin."
     },
     "options_allow_acceptable_ads": {
         "message": "Arama sonucu reklamlarına ve sitelerin kendi tanıtım reklamlarına izin ver"
@@ -177,13 +177,13 @@
         "message": "AdGuard, beyazlistedeki sitelerde reklamları filtrelemez."
     },
     "options_whitelist_inverse": {
-        "message": "Beyazlisteyi içe aktar<span class='sp-table-row-info'>bu beyazliste harici tüm reklamları engelle <i><\/i> <\/span>"
+        "message": "Beyazlisteyi içe aktar<span class='sp-table-row-info'>bu beyazliste harici tüm reklamları engelle <i></i> </span>"
     },
     "options_userfilter": {
         "message": "Kullanıcı filtresi"
     },
     "options_userfilter_description": {
-        "message": "Bu filtreye kendi kurallarınızı ekleyebilirsiniz. Bu seçenek HTML\/CSS kodları hakkında bilgisi olan gelişmiş kullanıcılar için tavsiye edilir. Kendi filtre kurallarınızı yazmayı öğrenmek için <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filtre kuralları öğreticisi<\/a> bölümünü okuyun."
+        "message": "Bu filtreye kendi kurallarınızı ekleyebilirsiniz. Bu seçenek HTML/CSS kodları hakkında bilgisi olan gelişmiş kullanıcılar için tavsiye edilir. Kendi filtre kurallarınızı yazmayı öğrenmek için <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filtre kuralları öğreticisi</a> bölümünü okuyun."
     },
     "options_show_app_updated_notification": {
         "message": "Eklenti güncellemelerini bana bildir"
@@ -399,10 +399,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": {
-            "one": "",
-            "other": ""
-        }
+        "message": ""
     },
     "options_cb_disabled_warning": {
         "message": "Safari'de devre dışı"

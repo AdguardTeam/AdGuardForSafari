@@ -51,7 +51,7 @@
         "message": "常规"
     },
     "options_general_desc": {
-        "message": "AdGuard for Safari 是一款免费开源的软件。我们欢迎您反馈和贡献。如您要报告错误或请求新特性，请转到 <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>Github 以报告给我们<\/a>。"
+        "message": "AdGuard for Safari 是一款免费开源的软件。我们欢迎您反馈和贡献。如您要报告错误或请求新特性，请转到 <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>Github 以报告给我们</a>。"
     },
     "options_allow_acceptable_ads": {
         "message": "允许搜索广告和网站自宣传"
@@ -177,13 +177,13 @@
         "message": "AdGuard 不过滤白名单上的网站。"
     },
     "options_whitelist_inverse": {
-        "message": "颠倒白名单<span class='sp-table-row-info'>取消拦截所有网站的广告，白名单上的网站<i>除外<\/i><\/span>"
+        "message": "颠倒白名单<span class='sp-table-row-info'>取消拦截所有网站的广告，白名单上的网站<i>除外</i></span>"
     },
     "options_userfilter": {
         "message": "用户过滤器"
     },
     "options_userfilter_description": {
-        "message": "您可添加自己的规则到此过滤器。此选项推荐给那些熟悉 HTML\/CSS 的高级用户。阅读<a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>过滤器规则指南<\/a>以了解如何写您自己的过滤器规则。"
+        "message": "您可添加自己的规则到此过滤器。此选项推荐给那些熟悉 HTML/CSS 的高级用户。阅读<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>过滤器规则指南</a>以了解如何写您自己的过滤器规则。"
     },
     "options_show_app_updated_notification": {
         "message": "通知扩展更新"
@@ -399,10 +399,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": {
-            "one": "",
-            "other": ""
-        }
+        "message": ""
     },
     "options_cb_disabled_warning": {
         "message": ""

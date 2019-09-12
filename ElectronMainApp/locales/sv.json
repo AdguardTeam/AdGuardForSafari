@@ -51,7 +51,7 @@
         "message": "Allmänt"
     },
     "options_general_desc": {
-        "message": "AdGuard för Safari är en kostnadsfri mjukvara i Öppen källkod. Vi välkomnar kommentarer och bidrag. Om du vill skicka in en buggrapport eller efterfråga en funktion var snäll och gå till <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo<\/a>."
+        "message": "AdGuard för Safari är en kostnadsfri mjukvara i Öppen källkod. Vi välkomnar kommentarer och bidrag. Om du vill skicka in en buggrapport eller efterfråga en funktion var snäll och gå till <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Tillåt sökannonser och reklam för den egna hemsidan."
@@ -177,13 +177,13 @@
         "message": "AdGuard filtrerar inte webbsidor i Vitlistan."
     },
     "options_whitelist_inverse": {
-        "message": "Invertera Vitlista<span class='sp-table-row-info'>Unblock ads everywhere <i>except<\/i> the whitelist<\/span>"
+        "message": "Invertera Vitlista<span class='sp-table-row-info'>Unblock ads everywhere <i>except</i> the whitelist</span>"
     },
     "options_userfilter": {
         "message": "Egna filter"
     },
     "options_userfilter_description": {
-        "message": "Du kan lägga till egna filterregler till&nbsp;det här filtret. Alternativet &nbsp;rekommenderas för användare som är bekanta med HTML\/CSS. Läs <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filterregelsgudien<\/a> för att &nbsp;lära dig hur du&nbsp;skapar egna filterregler."
+        "message": "Du kan lägga till egna filterregler till&nbsp;det här filtret. Alternativet &nbsp;rekommenderas för användare som är bekanta med HTML/CSS. Läs <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filterregelsgudien</a> för att &nbsp;lära dig hur du&nbsp;skapar egna filterregler."
     },
     "options_show_app_updated_notification": {
         "message": "Avisera om tilläggsuppdateringar"
@@ -399,10 +399,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": {
-            "one": "",
-            "other": ""
-        }
+        "message": ""
     },
     "options_cb_disabled_warning": {
         "message": ""

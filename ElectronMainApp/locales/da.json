@@ -51,7 +51,7 @@
         "message": "Generelt"
     },
     "options_general_desc": {
-        "message": "AdGuard til Safari er et gratis og open source-software. Vi byder din feedback og dine bidrag velkommen. Hvis du gerne vil rapportere en fejl eller spørge efter en funktion, så gå venligst til <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>vores Github repo<\/a>."
+        "message": "AdGuard til Safari er et gratis og open source-software. Vi byder din feedback og dine bidrag velkommen. Hvis du gerne vil rapportere en fejl eller spørge efter en funktion, så gå venligst til <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>vores Github repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Tillad søgningsreklamer og selvpromovering af hjemmesider"
@@ -177,13 +177,13 @@
         "message": "AdGuard filtrerer ikke hjemmesider fra whitelisten."
     },
     "options_whitelist_inverse": {
-        "message": "Invertere whitelisten<span class='sp-table-row-info'>Fjern blokeringen af annoncer overalt <i>bortset fra<\/i> whitelisten<\/span>"
+        "message": "Invertere whitelisten<span class='sp-table-row-info'>Fjern blokeringen af annoncer overalt <i>bortset fra</i> whitelisten</span>"
     },
     "options_userfilter": {
         "message": "Brugerfilter"
     },
     "options_userfilter_description": {
-        "message": "Du kan tilføje dine egne regler til&nbsp;dette filter. Denne mulighed er&nbsp;anbefalet for avancerede brugere som kender HTML\/CSS. Læs <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>vejledningen for filterreglerne<\/a> for at&nbsp;lære hvordan du&nbsp;kan skrive dine egne filterregler."
+        "message": "Du kan tilføje dine egne regler til&nbsp;dette filter. Denne mulighed er&nbsp;anbefalet for avancerede brugere som kender HTML/CSS. Læs <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>vejledningen for filterreglerne</a> for at&nbsp;lære hvordan du&nbsp;kan skrive dine egne filterregler."
     },
     "options_show_app_updated_notification": {
         "message": "Underret om opdateringer til udvidelsen"
@@ -399,10 +399,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": {
-            "one": "%s regel brugt ($2 deaktiveret)",
-            "other": "%s regler brugt ($2 deaktiveret)"
-        }
+        "message": ""
     },
     "options_cb_disabled_warning": {
         "message": "Deaktiveret i Safari"

@@ -51,7 +51,7 @@
         "message": "Obecné"
     },
     "options_general_desc": {
-        "message": "AdGuard pro Safari je open source a bezpatný software. Vaše připomínky a příspěvky jsou vítány. Chcete-li nahlásit chybu nebo požádat o funkci, přejděte na stránku <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo<\/a>."
+        "message": "AdGuard pro Safari je open source a bezpatný software. Vaše připomínky a příspěvky jsou vítány. Chcete-li nahlásit chybu nebo požádat o funkci, přejděte na stránku <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Zobrazovat užitečné reklamy"
@@ -177,13 +177,13 @@
         "message": "AdGuard neblokuje reklamy na těchto stránkách"
     },
     "options_whitelist_inverse": {
-        "message": "Invertovat Whitelist <span class='sp-table-row-info'>. Blokuje reklamy všude <i> , kromě <\/i> stránek uvedených ve whitelistu<\/span>."
+        "message": "Invertovat Whitelist <span class='sp-table-row-info'>. Blokuje reklamy všude <i> , kromě </i> stránek uvedených ve whitelistu</span>."
     },
     "options_userfilter": {
         "message": "Uživatelský filtr"
     },
     "options_userfilter_description": {
-        "message": "Do tohoto filtru můžete přidat vlastní pravidla. Tato možnost je doporučena pro pokročilé uživatele, kteří jsou obeznámeni s HTML\/CSS. Chcete-li se neučit psát svá vlastní filtrovací pravidla, přečtěte si <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>návod filtrovacích pravidel<\/a>."
+        "message": "Do tohoto filtru můžete přidat vlastní pravidla. Tato možnost je doporučena pro pokročilé uživatele, kteří jsou obeznámeni s HTML/CSS. Chcete-li se neučit psát svá vlastní filtrovací pravidla, přečtěte si <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>návod filtrovacích pravidel</a>."
     },
     "options_show_app_updated_notification": {
         "message": "Upozornit na aktualizace rozšíření"
@@ -399,10 +399,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": {
-            "one": "",
-            "other": ""
-        }
+        "message": ""
     },
     "options_cb_disabled_warning": {
         "message": "Vypnuto v Safari"

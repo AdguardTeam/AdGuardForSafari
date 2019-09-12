@@ -51,7 +51,7 @@
         "message": "一般設定"
     },
     "options_general_desc": {
-        "message": "AdGuard for Safariは無料のオープンソースソフトウェアです。 ユーザー様のフィードバックと貢献を歓迎しております。 バグを報告したり、または機能をリクエストする場合は、<a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>私たちのGithubリポジトリ<\/a>へお進みください。"
+        "message": "AdGuard for Safariは無料のオープンソースソフトウェアです。 ユーザー様のフィードバックと貢献を歓迎しております。 バグを報告したり、または機能をリクエストする場合は、<a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>私たちのGithubリポジトリ</a>へお進みください。"
     },
     "options_allow_acceptable_ads": {
         "message": "有用な広告を表示する"
@@ -177,13 +177,13 @@
         "message": "AdGuard はホワイトリストにあるウェブサイトをフィルタリングしません。"
     },
     "options_whitelist_inverse": {
-        "message": "ホワイトリストを逆転させる<span class='sp-table-row-info'>ホワイトリスト<i>以外で<\/i>全ての広告をアンブロックする<\/span>"
+        "message": "ホワイトリストを逆転させる<span class='sp-table-row-info'>ホワイトリスト<i>以外で</i>全ての広告をアンブロックする</span>"
     },
     "options_userfilter": {
         "message": "ユーザーフィルタ"
     },
     "options_userfilter_description": {
-        "message": "このフィルタに独自のルールを追加できます。このオプションはHTML\/CSSに精通した上級者ユーザーにおすすめです。 <a class='spl-user-descr-link'href='https:\/\/adguard.com\/filterrules.html?utm_source=extension&aid=16593' target='_blank'>フィルタ・ルールのチュートリアル<\/a>を読むことで独自のフィルタ・ルールを作成する方法を学べます。"
+        "message": "このフィルタに独自のルールを追加できます。このオプションはHTML/CSSに精通した上級者ユーザーにおすすめです。 <a class='spl-user-descr-link'href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>フィルタ・ルールのチュートリアル</a>を読むことで独自のフィルタ・ルールを作成する方法を学べます。"
     },
     "options_show_app_updated_notification": {
         "message": "拡張機能のアップデートについて通知を受け取る"
@@ -285,7 +285,7 @@
         "message": "コンテンツブロッカー"
     },
     "options_content_blockers_desc": {
-        "message": "有効広告ブロッカー数：%s\/6（それぞれ最大50,000件づつのルール使用可）"
+        "message": "有効広告ブロッカー数：%s/6（それぞれ最大50,000件づつのルール使用可）"
     },
     "options_content_blockers_disabled_desc": {
         "message": "広告ブロッカーは無効です。"
@@ -399,10 +399,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": {
-            "one": "",
-            "other": ""
-        }
+        "message": ""
     },
     "options_cb_disabled_warning": {
         "message": "Safariで無効になっています"
