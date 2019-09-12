@@ -399,10 +399,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": {
-            "one": "%s rule used ($2 disabled)",
-            "other": "%s rules used ($2 disabled)"
-        }
+        "message": "The limit of 50,000 rules has been exceeded. Please disable unnecessary rules for the app to work correctly.<br/>Enabled rules at the moment: %s (disabled rules: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Disabled in Safari"

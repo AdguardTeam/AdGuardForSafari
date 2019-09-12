@@ -1639,9 +1639,9 @@ const ContentBlockersScreen = function (antiBannerFilters) {
                     icon.classList.add("block-type__ico-info--overlimit-warning");
 
                     rulesInfoElement.classList.add('cb_overlimit_warning');
-                    let textContent = i18n.__n("options_cb_rules_overlimit_info.message", info.rulesCount);
+                    let textContent = i18n.__("options_cb_rules_overlimit_info.message", info.rulesCount);
                     textContent = textContent.replace('$2', info.rulesCount - 50000);
-                    rulesInfoElement.textContent = textContent;
+                    rulesInfoElement.innerHTML = textContent;
                 } else {
                     icon.classList.remove("block-type__ico-info--overlimit-warning");
 
