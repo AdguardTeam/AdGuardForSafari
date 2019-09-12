@@ -147,6 +147,7 @@ const TopMenu = (function () {
     const GENERAL_SETTINGS = '#general-settings';
     const ANTIBANNER = '#antibanner';
     const WHITELIST = '#whitelist';
+    const CONTENT_BLOCKERS = '#content-blockers';
 
     let prevTabId;
     let onHashUpdatedCallback;
@@ -174,7 +175,9 @@ const TopMenu = (function () {
                     el.classList.remove('active');
                 });
             } else {
-                document.querySelector('[data-tab="' + prevTabId + '"]').classList.remove('active');
+                if (prevTabId !== CONTENT_BLOCKERS) {
+                    document.querySelector('[data-tab="' + prevTabId + '"]').classList.remove('active');
+                }
             }
 
             document.querySelector(prevTabId).style.display = 'none';
