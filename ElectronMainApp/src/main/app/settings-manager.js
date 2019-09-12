@@ -30,6 +30,8 @@ module.exports = (function () {
     const properties = Object.create(null);
     const propertyUpdateChannel = channels.newChannel();
 
+    const USE_OPTIMIZED_FILTERS = true;
+
     /**
      * Lazy default properties
      */
@@ -145,11 +147,7 @@ module.exports = (function () {
     };
 
     const isUseOptimizedFiltersEnabled = function () {
-        return getProperty(settings.USE_OPTIMIZED_FILTERS);
-    };
-
-    const changeUseOptimizedFiltersEnabled = function (enabled, options) {
-        setProperty(settings.USE_OPTIMIZED_FILTERS, !!enabled, options);
+        return USE_OPTIMIZED_FILTERS;
     };
 
     const changeDefaultWhiteListMode = function (enabled) {
@@ -206,7 +204,6 @@ module.exports = (function () {
     api.getSafebrowsingInfo = getSafebrowsingInfo;
     api.isDefaultWhiteListMode = isDefaultWhiteListMode;
     api.isUseOptimizedFiltersEnabled = isUseOptimizedFiltersEnabled;
-    api.changeUseOptimizedFiltersEnabled = changeUseOptimizedFiltersEnabled;
     api.changeDefaultWhiteListMode = changeDefaultWhiteListMode;
     api.changeUpdateFiltersPeriod = changeUpdateFiltersPeriod;
     api.getUpdateFiltersPeriod = getUpdateFiltersPeriod;
