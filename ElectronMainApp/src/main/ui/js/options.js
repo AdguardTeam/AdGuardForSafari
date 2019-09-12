@@ -1633,9 +1633,22 @@ const ContentBlockersScreen = function (antiBannerFilters) {
         if (element) {
             if (info) {
                 const rulesInfoElement = element.querySelector('.cb_rules_count');
-                rulesInfoElement.textContent = i18n.__n("options_cb_rules_info.message", info.rulesCount);
+                const icon = element.querySelector('.extension-block-ico');
 
-                //TODO: We might show rules overlimit here
+                if (info.overlimit) {
+                    icon.classList.add("block-type__ico-info--overlimit-warning");
+
+                    rulesInfoElement.classList.add('cb_overlimit_warning');
+                    let textContent = i18n.__n("options_cb_rules_overlimit_info.message", info.rulesCount);
+                    textContent = textContent.replace('$2', info.rulesCount - 50000);
+                    rulesInfoElement.textContent = textContent;
+                } else {
+                    icon.classList.remove("block-type__ico-info--overlimit-warning");
+
+                    rulesInfoElement.classList.remove('cb_overlimit_warning');
+                    rulesInfoElement.textContent = i18n.__n("options_cb_rules_info.message", info.rulesCount);
+                }
+
             }
 
             if (filtersInfo) {

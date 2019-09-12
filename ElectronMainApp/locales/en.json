@@ -398,6 +398,12 @@
             "other": "%s rules used"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": {
+            "one": "%s rule used ($2 disabled)",
+            "other": "%s rules used ($2 disabled)"
+        }
+    },
     "options_cb_disabled_warning": {
         "message": "Disabled in Safari"
     },
