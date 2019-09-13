@@ -102,7 +102,6 @@
 		F4581B6E22F363960069FA94 /* AEContentBlockerRequestHandlerBase.h in Headers */ = {isa = PBXBuildFile; fileRef = F4581B6D22F363960069FA94 /* AEContentBlockerRequestHandlerBase.h */; };
 		F4581B7022F364AA0069FA94 /* AEContentBlockerRequestHandlerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F4581B6F22F364AA0069FA94 /* AEContentBlockerRequestHandlerBase.m */; };
 		F4581B7522F36F720069FA94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4581B7722F36F720069FA94 /* InfoPlist.strings */; };
-		F4581B8B22F370420069FA94 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4581B8A22F370420069FA94 /* Info.plist */; };
 		F4581B8E22F370960069FA94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4581B9022F370960069FA94 /* InfoPlist.strings */; };
 		F4581BA222F370EB0069FA94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4581BA422F370EB0069FA94 /* InfoPlist.strings */; };
 		F4581BB622F371420069FA94 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4581BB822F371420069FA94 /* InfoPlist.strings */; };
@@ -1520,7 +1519,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4581B8B22F370420069FA94 /* Info.plist in Resources */,
 				F4581B8E22F370960069FA94 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
