@@ -51,7 +51,7 @@
         "message": "Общие"
     },
     "options_general_desc": {
-        "message": "AdGuard для Safari - это бесплатное программное обеспечение с открытым исходным кодом. Мы приветствуем ваши отзывы и предложения. Если вы хотите сообщить об ошибке или запросить функцию, пожалуйста, отправляйтесь в <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>наш репозиторий на GitHub<\/a>."
+        "message": "AdGuard для Safari - это бесплатное программное обеспечение с открытым исходным кодом. Мы приветствуем ваши отзывы и предложения. Если вы хотите сообщить об ошибке или запросить функцию, пожалуйста, отправляйтесь в <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>наш репозиторий на GitHub</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Разрешить поисковую рекламу и саморекламу сайтов"
@@ -177,19 +177,16 @@
         "message": "AdGuard не фильтрует рекламу на сайтах, добавленных в белый список."
     },
     "options_whitelist_inverse": {
-        "message": "Инвертировать белый список<span class='sp-table-row-info'>Разблокировать рекламу на всех сайтах, <i>кроме<\/i> добавленных в белый список<\/span>"
+        "message": "Инвертировать белый список<span class='sp-table-row-info'>Разблокировать рекламу на всех сайтах, <i>кроме</i> добавленных в белый список</span>"
     },
     "options_userfilter": {
         "message": "Пользовательский фильтр"
     },
     "options_userfilter_description": {
-        "message": "Вы можете добавлять свои собственные правила фильтрации с&nbsp;помощью этого фильтра. Рекомендуется только для опытных пользователей, знакомых с&nbsp;HTML\/CSS. Перейдите по&nbsp;<a class='spl-user-descr-link' href='https:\/\/adguard.com\/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ссылке<\/a>, чтобы узнать, как составлять правила фильтрации."
+        "message": "Вы можете добавлять свои собственные правила фильтрации с&nbsp;помощью этого фильтра. Рекомендуется только для опытных пользователей, знакомых с&nbsp;HTML/CSS. Перейдите по&nbsp;<a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ссылке</a>, чтобы узнать, как составлять правила фильтрации."
     },
     "options_show_app_updated_notification": {
         "message": "Уведомлять об обновлениях расширения"
-    },
-    "options_use_optimized_filters": {
-        "message": "Использовать оптимизированные фильтры<span class='sp-table-row-info'>Списки фильтров, оптимизированных для блокировщика рекламы в Safari.<\/span>"
     },
     "options_popup_update_title": {
         "message": "Фильтры успешно обновлены"
@@ -400,6 +397,9 @@
             "one": "%s правило используется",
             "other": "Используется правил: %s"
         }
+    },
+    "options_cb_rules_overlimit_info": {
+        "message": "Превышен лимит в 50 000 правил. Пожалуйста, отключите лишние правила для корректной работы приложения.<br/>В настоящий момент используется правил: %s (правил отключено: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Отключено в Safari"

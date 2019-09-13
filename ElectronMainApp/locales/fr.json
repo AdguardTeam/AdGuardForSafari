@@ -51,7 +51,7 @@
         "message": "Général"
     },
     "options_general_desc": {
-        "message": "AdGuard pour Safari est un logiciel gratuit à source ouverte. Nous accueillons volontiers vos avis et contributions. Si vous souhaitez reporter une bogue ou suggerer une nouvelle fonctionnalité, veuiller accéder à <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'> notre compte Github<\/a>."
+        "message": "AdGuard pour Safari est un logiciel gratuit à source ouverte. Nous accueillons volontiers vos avis et contributions. Si vous souhaitez reporter une bogue ou suggerer une nouvelle fonctionnalité, veuiller accéder à <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'> notre compte Github</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Autoriser les annonces de recherche et l'auto-promotion des sites Web"
@@ -177,19 +177,16 @@
         "message": "AdGuard ne filtre pas les sites Web sur la liste blanche."
     },
     "options_whitelist_inverse": {
-        "message": "Inverser la liste blanche<span class='sp-table-row-info'>Débloquer la publicité partout <i>excepté<\/i> la liste blanche<\/span>"
+        "message": "Inverser la liste blanche<span class='sp-table-row-info'>Débloquer la publicité partout <i>excepté</i> la liste blanche</span>"
     },
     "options_userfilter": {
         "message": "Filtre Utilisateur"
     },
     "options_userfilter_description": {
-        "message": "Vous pouvez ajouter vos propres règles à&nbsp;ce filtre. Cette option est&nbsp;recommandée pour les utilisateurs avancés familiers avec le langage HTML \/ CSS. Lisez le <a class='spl-user-descr-link' href='https:\/\/adguard.com\/filterrules.html?utm_source=extension&aid=16593' target='_blank'>tutoriel<\/a> pour&nbsp;apprendre à&nbsp;écrire vos propres règles."
+        "message": "Vous pouvez ajouter vos propres règles à&nbsp;ce filtre. Cette option est&nbsp;recommandée pour les utilisateurs avancés familiers avec le langage HTML / CSS. Lisez le <a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>tutoriel</a> pour&nbsp;apprendre à&nbsp;écrire vos propres règles."
     },
     "options_show_app_updated_notification": {
         "message": "Me notifier des mises à jour des extensions"
-    },
-    "options_use_optimized_filters": {
-        "message": "Utilisez des filtres optimisés : <span class='sp-table-row-info'>Listes de filtres légers optimisés pour l'API bloqueuse de contenus sur Safari.<\/span>"
     },
     "options_popup_update_title": {
         "message": "Filtres mis à jour"
@@ -288,10 +285,10 @@
         "message": "Bloqueurs de contenu"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "Bloqueurs de pubs activés : %s sur 6 (chacun peut contenir jusqu'à 50 000 règles)"
     },
     "options_content_blockers_disabled_desc": {
-        "message": ""
+        "message": "Les bloqueurs de pubs sont désactivés"
     },
     "options_compare_btn": {
         "message": "Quelle est la différence"
@@ -340,6 +337,9 @@
     },
     "options_filters_period_not_update": {
         "message": "Ne pas mettre à jour"
+    },
+    "options_filters_custom_remove": {
+        "message": "supprimer"
     },
     "options_show_tray_icon": {
         "message": "Afficher AdGuard pour Safari dans la barre du menu"
@@ -398,7 +398,13 @@
             "other": "%s règles utilisées"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": "La limite de 50 000 règles est dépassée. Veuillez désactiver les règles qui ne sont pas nécessaires pour le fonctionnement correct de l'application.<br/>Règles activées en ce moment : %s (règles désactivées: $2)"
+    },
     "options_cb_disabled_warning": {
         "message": "Désactivé dans Safari"
+    },
+    "filters_group_custom": {
+        "message": "Personnalisé"
     }
 }

@@ -51,7 +51,7 @@
         "message": "Generelt"
     },
     "options_general_desc": {
-        "message": "AdGuard til Safari er et gratis og open source-software. Vi byder din feedback og dine bidrag velkommen. Hvis du gerne vil rapportere en fejl eller spørge efter en funktion, så gå venligst til <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>vores Github repo<\/a>."
+        "message": "AdGuard til Safari er et gratis og open source-software. Vi byder din feedback og dine bidrag velkommen. Hvis du gerne vil rapportere en fejl eller spørge efter en funktion, så gå venligst til <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>vores Github repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Tillad søgningsreklamer og selvpromovering af hjemmesider"
@@ -177,19 +177,16 @@
         "message": "AdGuard filtrerer ikke hjemmesider fra whitelisten."
     },
     "options_whitelist_inverse": {
-        "message": "Invertere whitelisten<span class='sp-table-row-info'>Fjern blokeringen af annoncer overalt <i>bortset fra<\/i> whitelisten<\/span>"
+        "message": "Invertere whitelisten<span class='sp-table-row-info'>Fjern blokeringen af annoncer overalt <i>bortset fra</i> whitelisten</span>"
     },
     "options_userfilter": {
         "message": "Brugerfilter"
     },
     "options_userfilter_description": {
-        "message": "Du kan tilføje dine egne regler til&nbsp;dette filter. Denne mulighed er&nbsp;anbefalet for avancerede brugere som kender HTML\/CSS. Læs <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>vejledningen for filterreglerne<\/a> for at&nbsp;lære hvordan du&nbsp;kan skrive dine egne filterregler."
+        "message": "Du kan tilføje dine egne regler til&nbsp;dette filter. Denne mulighed er&nbsp;anbefalet for avancerede brugere som kender HTML/CSS. Læs <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>vejledningen for filterreglerne</a> for at&nbsp;lære hvordan du&nbsp;kan skrive dine egne filterregler."
     },
     "options_show_app_updated_notification": {
         "message": "Underret om opdateringer til udvidelsen"
-    },
-    "options_use_optimized_filters": {
-        "message": "Brug optimerede filtre<span class='sp-table-row-info'>Letvægts filterliste optimeret til Safari Indholdsblokerings API.<\/span>"
     },
     "options_popup_update_title": {
         "message": "Filtrene blev opdateret succesfuldt"
@@ -225,10 +222,10 @@
         "message": "Advarsel"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "For mange filtre er aktiveret. Safari kan ikke bruge mere end 50 000 regler."
+        "message": "For mange filtre er aktiveret. Safari kan ikke bruge mere end 50 000 regler på en gang."
     },
     "options_content_blocker_overlimit": {
-        "message": "For mange filtre er aktiveret. Safari kan ikke bruge mere end 50 000 regler."
+        "message": "For mange filtre er aktiveret. Safari kan ikke bruge mere end 50 000 regler på en gang."
     },
     "options_filters_list_search_placeholder": {
         "message": "Søg"
@@ -288,10 +285,10 @@
         "message": "Indholdsblockere"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "Aktiverede adblockere: %s ud af 6 (hver kan indeholde op til 50 000 regler)"
     },
     "options_content_blockers_disabled_desc": {
-        "message": ""
+        "message": "Adblockere er deaktiveret"
     },
     "options_compare_btn": {
         "message": "Hvordan de sammenligner"
@@ -341,6 +338,9 @@
     "options_filters_period_not_update": {
         "message": "Opdater ikke"
     },
+    "options_filters_custom_remove": {
+        "message": "fjern"
+    },
     "options_show_tray_icon": {
         "message": "Vis AdGuard til Safari i menulinjen"
     },
@@ -366,13 +366,13 @@
         "message": "Nogle AdGuard-udvidelser er deaktiveret"
     },
     "settings_notification_extensions_text": {
-        "message": ""
+        "message": "Du skal aktivere alle AdGuard-udvidelser for korrekt annonceblokering i Safari"
     },
     "settings_notification_cb_extensions_title": {
-        "message": ""
+        "message": "Nogle AdGuard Indholdsblocker-udvidelser er deaktiveret"
     },
     "settings_notification_cb_extensions_text": {
-        "message": ""
+        "message": "Du skal aktivere alle AdGuard Indholdsblocker-udvidelser for korrekt annonceblokering i Safari"
     },
     "options_cb_general_title": {
         "message": "AdGuard Generelt"
@@ -398,7 +398,13 @@
             "other": "%s regler brugt"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": ""
+    },
     "options_cb_disabled_warning": {
         "message": "Deaktiveret i Safari"
+    },
+    "filters_group_custom": {
+        "message": "Brugerdefineret"
     }
 }

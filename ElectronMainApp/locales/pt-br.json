@@ -51,7 +51,7 @@
         "message": "Geral"
     },
     "options_general_desc": {
-        "message": "O AdGuard para Safari é uma extensão gratuita e de código aberto. Sua contribuição e feedback são bem-vindos. Se você quiser reportar um problema ou solicitar um recurso, vá para <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nosso repositório do GitHub<\/a>."
+        "message": "O AdGuard para Safari é uma extensão gratuita e de código aberto. Sua contribuição e feedback são bem-vindos. Se você quiser reportar um problema ou solicitar um recurso, vá para <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nosso repositório do GitHub</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Permitir anúncios em pesquisa e autopromoção de sites"
@@ -177,19 +177,16 @@
         "message": "O AdGuard não irá filtrar os sites da lista branca."
     },
     "options_whitelist_inverse": {
-        "message": "Inverter lista branca<span class='sp-table-row-info'>Desbloquear todos anúncios <i>exceto<\/i> os da lista branca<\/span>"
+        "message": "Inverter lista branca<span class='sp-table-row-info'>Desbloquear todos anúncios <i>exceto</i> os da lista branca</span>"
     },
     "options_userfilter": {
         "message": "Filtro de usuário"
     },
     "options_userfilter_description": {
-        "message": "Você pode adicionar suas próprias regras para&nbsp;esse filtro. Essa opção é&nbsp;recomendada para usuários avançados familiarizados com HTML\/CSS. Leia nosso <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial das regras de filtragem<\/a> para&nbsp;aprender como&nbsp;escrever suas próprias regras de filtragem."
+        "message": "Você pode adicionar suas próprias regras para&nbsp;esse filtro. Essa opção é&nbsp;recomendada para usuários avançados familiarizados com HTML/CSS. Leia nosso <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial das regras de filtragem</a> para&nbsp;aprender como&nbsp;escrever suas próprias regras de filtragem."
     },
     "options_show_app_updated_notification": {
         "message": "Notificar sobre atualizações na extensão"
-    },
-    "options_use_optimized_filters": {
-        "message": "Usar filtros otimizados<span class='sp-table-row-info'>Listas de filtros otimizados para API de bloqueio de conteúdo do Safari.<\/span>"
     },
     "options_popup_update_title": {
         "message": "Filtros atualizados com sucesso"
@@ -225,10 +222,10 @@
         "message": "Aviso"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Muitos filtros ativos. O Safari não pode usar mais do que 50 000 regras."
+        "message": ""
     },
     "options_content_blocker_overlimit": {
-        "message": "Muitos filtros ativos. O Safari não pode usar mais do que 50 000 regras."
+        "message": ""
     },
     "options_filters_list_search_placeholder": {
         "message": "Procurar"
@@ -288,10 +285,10 @@
         "message": "Bloqueadores de conteúdo"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "Bloqueadores de anúncios ativados: %s de 6 (cada um pode conter até 50 mil regras)"
     },
     "options_content_blockers_disabled_desc": {
-        "message": ""
+        "message": "Os bloqueadores de anúncios estão desativados"
     },
     "options_compare_btn": {
         "message": "Como eles se comparam"
@@ -340,6 +337,9 @@
     },
     "options_filters_period_not_update": {
         "message": "Não atualizar"
+    },
+    "options_filters_custom_remove": {
+        "message": ""
     },
     "options_show_tray_icon": {
         "message": "Mostrar AdGuard para Safari na barra de menus"
@@ -398,7 +398,13 @@
             "other": "%s regras usadas"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": ""
+    },
     "options_cb_disabled_warning": {
         "message": "Desativado no Safari"
+    },
+    "filters_group_custom": {
+        "message": "Personalizados"
     }
 }

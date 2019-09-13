@@ -106,15 +106,6 @@ module.exports = (() => {
      * Subscribe to events which lead to filters update.
      */
     const subscribeToFiltersChangeEvents = () => {
-        // on USE_OPTIMIZED_FILTERS setting change we need to reload filters
-        const onUsedOptimizedFiltersChange = concurrent.debounce(reloadAntiBannerFilters, RELOAD_FILTERS_DEBOUNCE_PERIOD);
-
-        settings.onUpdated.addListener(function (setting) {
-            if (setting === settings.USE_OPTIMIZED_FILTERS) {
-                onUsedOptimizedFiltersChange();
-            }
-        });
-
         settings.onUpdated.addListener(function (setting) {
             if (setting === settings.UPDATE_FILTERS_PERIOD) {
                 filtersUpdate.rerunAutoUpdateTimer();

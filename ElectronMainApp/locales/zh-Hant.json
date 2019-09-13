@@ -51,7 +51,7 @@
         "message": "一般的"
     },
     "options_general_desc": {
-        "message": "AdGuard for Safari 是一款免費的且開源的軟體。我們歡迎您的回饋意見和貢獻。如果您想要報告程式錯誤或請求功能，請前往<a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>我們的 GitHub 儲存庫<\/a>。"
+        "message": "AdGuard for Safari 是一款免費的且開源的軟體。我們歡迎您的回饋意見和貢獻。如果您想要報告程式錯誤或請求功能，請前往<a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>我們的 GitHub 儲存庫</a>。"
     },
     "options_allow_acceptable_ads": {
         "message": "允許搜尋廣告和網站之自我推銷"
@@ -177,19 +177,16 @@
         "message": "AdGuard 不過濾來自白名單中的網站。"
     },
     "options_whitelist_inverse": {
-        "message": "反向白名單<span class='sp-table-row-info'><i>除<\/i>白名單之外，解除封鎖各處廣告<\/span>"
+        "message": "反向白名單<span class='sp-table-row-info'><i>除</i>白名單之外，解除封鎖各處廣告</span>"
     },
     "options_userfilter": {
         "message": "使用者過濾器"
     },
     "options_userfilter_description": {
-        "message": "您可增加您自己的規則至該過濾器。對於熟悉 HTML\/CSS 之進階的用戶，該選項是被建議的。閱讀<a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>過濾器規則導覽<\/a>以學習如何撰寫您自己的過濾器規則。"
+        "message": "您可增加您自己的規則至該過濾器。對於熟悉 HTML/CSS 之進階的用戶，該選項是被建議的。閱讀<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>過濾器規則導覽</a>以學習如何撰寫您自己的過濾器規則。"
     },
     "options_show_app_updated_notification": {
         "message": "通知有關延伸功能更新"
-    },
-    "options_use_optimized_filters": {
-        "message": "使用已最佳化的過濾器<span class='sp-table-row-info'>對於 Safari 內容阻擋應用程式介面（Content Blocking API）已最佳化之輕量的過濾器清單。<\/span>"
     },
     "options_popup_update_title": {
         "message": "過濾器被成功地更新"
@@ -225,10 +222,10 @@
         "message": "警告"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "太多已啟用的過濾器。Safari 無法使用超過 50,000 項規則。"
+        "message": "太多已啟用的過濾器。Safari 無法在一個群組中使用超過 50,000 項規則。"
     },
     "options_content_blocker_overlimit": {
-        "message": "太多已啟用的過濾器。Safari 無法使用超過 50,000 項規則。"
+        "message": "太多已啟用的過濾器。Safari 無法在一個群組中使用超過 50,000 項規則。"
     },
     "options_filters_list_search_placeholder": {
         "message": "搜尋"
@@ -341,6 +338,9 @@
     "options_filters_period_not_update": {
         "message": "不更新"
     },
+    "options_filters_custom_remove": {
+        "message": "移除"
+    },
     "options_show_tray_icon": {
         "message": "在選單列中顯示 AdGuard for Safari"
     },
@@ -398,7 +398,13 @@
             "other": "%s 規則被使用"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": "50,000 項規則的限制已被超過。請禁用不必要的規則以使應用程式正確地運作。<br/>此刻已啟用的規則：%s（已禁用的規則：$2）"
+    },
     "options_cb_disabled_warning": {
         "message": "已在 Safari 中禁用"
+    },
+    "filters_group_custom": {
+        "message": "自訂的"
     }
 }

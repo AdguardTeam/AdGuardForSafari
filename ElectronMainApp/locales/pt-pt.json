@@ -51,7 +51,7 @@
         "message": "Geral"
     },
     "options_general_desc": {
-        "message": "O AdGuard para o Safari é um software livre e de código aberto. Congratulamo-nos com o seu feedback e contribuições. Se quiser denunciar um bug ou solicitar um recurso, vá para <a target = '_ blank' href = 'https: \/\/adguard.com\/forward.html? Action = github & from = options_screen & app = safari_extension' class = 'link' >our Github repo<\/a>."
+        "message": "O AdGuard para o Safari é um software livre e de código aberto. Congratulamo-nos com o seu feedback e contribuições. Se quiser denunciar um bug ou solicitar um recurso, vá para <a target = '_ blank' href = 'https: //adguard.com/forward.html? Action = github & from = options_screen & app = safari_extension' class = 'link' >our Github repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Permitir anúncios de pesquisa e auto-promoção de sites"
@@ -177,19 +177,16 @@
         "message": "O AdGuard não irá filtrar nenhum site da lista branca."
     },
     "options_whitelist_inverse": {
-        "message": "Inverter lista branca<span class='sp-table-row-info'>Desbloquear toda a publicidade<i>excepto<\/i> a lista branca<\/span>"
+        "message": "Inverter lista branca<span class='sp-table-row-info'>Desbloquear toda a publicidade<i>excepto</i> a lista branca</span>"
     },
     "options_userfilter": {
         "message": "Filtro do Utilizador"
     },
     "options_userfilter_description": {
-        "message": "Pode adicionar as suas próprias regras ao &nbsp;este filtro. Esta opção é &nbsp;recomendada para utilizadores avançados familiarizados com HTML\/CSS. Leia o <a class='spl-user-descr-link'href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'> tutorial de regras de filtro <\/a > para &nbsp;aprender como &nbsp; escrever as suas próprias regras de filtro."
+        "message": "Pode adicionar as suas próprias regras ao &nbsp;este filtro. Esta opção é &nbsp;recomendada para utilizadores avançados familiarizados com HTML/CSS. Leia o <a class='spl-user-descr-link'href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'> tutorial de regras de filtro </a > para &nbsp;aprender como &nbsp; escrever as suas próprias regras de filtro."
     },
     "options_show_app_updated_notification": {
         "message": "Notificar actualização das extensões"
-    },
-    "options_use_optimized_filters": {
-        "message": "Use filtros optimizados <span class='sp-table-row-info'>Listas de filtros leves optimizadas para a API de bloqueio de conteúdo do Safari.<\/span>"
     },
     "options_popup_update_title": {
         "message": "Filtros actualizados com sucesso"
@@ -225,10 +222,10 @@
         "message": "Aviso"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Estão activados demasiados filtros. O Safari não pode usar mais do que 50000 regras."
+        "message": "Muitos filtros activados. O Safari não pode usar mais de 50.000 regras num grupo."
     },
     "options_content_blocker_overlimit": {
-        "message": "Estão activados demasiados filtros. O Safari não pode usar mais do que 50000 regras."
+        "message": "Muitos filtros activados. O Safari não pode usar mais de 50.000 regras num grupo."
     },
     "options_filters_list_search_placeholder": {
         "message": "Pesquisar"
@@ -341,6 +338,9 @@
     "options_filters_period_not_update": {
         "message": "Não atualizar"
     },
+    "options_filters_custom_remove": {
+        "message": "remover"
+    },
     "options_show_tray_icon": {
         "message": "Mostrar AdGuard para Safari na barra de menu"
     },
@@ -398,7 +398,13 @@
             "other": "%s regras usadas"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": "O limite de 50.000 regras foi excedido. Desactive as regras desnecessárias para que a aplicação funcione correctamente.<br/>Regras activadas no momento:%s (regras desactivadas: $2)"
+    },
     "options_cb_disabled_warning": {
         "message": "Desactivado no Safari"
+    },
+    "filters_group_custom": {
+        "message": "Personalizado"
     }
 }

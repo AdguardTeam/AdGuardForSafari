@@ -51,7 +51,7 @@
         "message": "Impostazioni Generali"
     },
     "options_general_desc": {
-        "message": "AdGuard per Safari è un software gratuito e open source. Incoraggiamo i tuoi commenti e contributi. Se vuoi riportare un errore, invialo a <a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo<\/a>."
+        "message": "AdGuard per Safari è un software gratuito e open source. Incoraggiamo i tuoi commenti e contributi. Se vuoi riportare un errore, invialo a <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Permetti annunci di ricerca e l'autopromozione dei siti"
@@ -177,19 +177,16 @@
         "message": "AdGuard non filtra i siti della whitelist"
     },
     "options_whitelist_inverse": {
-        "message": "Inverti whitelist<span class='sp-table-row-info'>Sblocca annunci dappertutto <i>tranne che<\/i> quelli della whitelist<\/span>"
+        "message": "Inverti whitelist<span class='sp-table-row-info'>Sblocca annunci dappertutto <i>tranne che</i> quelli della whitelist</span>"
     },
     "options_userfilter": {
         "message": "Flitro utente"
     },
     "options_userfilter_description": {
-        "message": "Puoi aggiungere le tue regole a&nbsp;questo fitro. Questa opzione è&nbsp;raccomandata per utenti avanzati esperti di HTML\/CSS. Leggi il <a class='spl-user-descr-link' href='https:\/\/adguard.com\/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial sulle regole per i filtri<\/a> per&nbsp;imparare a&nbsp;scrivere le tue regole per i filtri."
+        "message": "Puoi aggiungere le tue regole a&nbsp;questo fitro. Questa opzione è&nbsp;raccomandata per utenti avanzati esperti di HTML/CSS. Leggi il <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial sulle regole per i filtri</a> per&nbsp;imparare a&nbsp;scrivere le tue regole per i filtri."
     },
     "options_show_app_updated_notification": {
         "message": "Notica aggiornamenti estensione"
-    },
-    "options_use_optimized_filters": {
-        "message": "Usa filtri ottimizzati<span class='sp-table-row-info'>Liste dei filtri leggeri ottimizzate per Safari Content Blocking API.<\/span>"
     },
     "options_popup_update_title": {
         "message": "Filtri aggiornati con successo"
@@ -225,10 +222,10 @@
         "message": "Attenzione"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Troppi filtri abilitati. Safari non può usare più di 50 000 regole."
+        "message": "Troppi filtri abilitati. Safari non può usare più di 50 000 regole in un gruppo."
     },
     "options_content_blocker_overlimit": {
-        "message": "Troppi filtri abilitati. Safari non può usare più di 50 000 regole."
+        "message": "Troppi filtri abilitati. Safari non può usare più di 50 000 regole in un gruppo."
     },
     "options_filters_list_search_placeholder": {
         "message": "Ricerca"
@@ -288,10 +285,10 @@
         "message": "Blocchi di contenuto"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "Ad blocker abilitati: %s su 6 (ciascuna può contenere fino a 50 000 regole)"
     },
     "options_content_blockers_disabled_desc": {
-        "message": ""
+        "message": "Ad blockers sono disabilitati"
     },
     "options_compare_btn": {
         "message": "Come si comparano"
@@ -340,6 +337,9 @@
     },
     "options_filters_period_not_update": {
         "message": "Non aggiornare"
+    },
+    "options_filters_custom_remove": {
+        "message": "rimuovi"
     },
     "options_show_tray_icon": {
         "message": "Mostra AdGuard per Safari nella barra del menu"
@@ -398,7 +398,13 @@
             "other": "%s regole utilizzate"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": "Il limite di 50.000 regole è stato superato. Si prega di disabilitare le regole non necessarie per il funzionamento corretto dell'applicazione.<br/>Regole abilitate al momento: %s (regole disabilitate: $2)"
+    },
     "options_cb_disabled_warning": {
         "message": "Disabilitato nel Safari"
+    },
+    "filters_group_custom": {
+        "message": "Personalizzato"
     }
 }

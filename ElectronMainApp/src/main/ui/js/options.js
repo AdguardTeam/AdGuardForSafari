@@ -147,6 +147,7 @@ const TopMenu = (function () {
     const GENERAL_SETTINGS = '#general-settings';
     const ANTIBANNER = '#antibanner';
     const WHITELIST = '#whitelist';
+    const CONTENT_BLOCKERS = '#content-blockers';
 
     let prevTabId;
     let onHashUpdatedCallback;
@@ -174,7 +175,9 @@ const TopMenu = (function () {
                     el.classList.remove('active');
                 });
             } else {
-                document.querySelector('[data-tab="' + prevTabId + '"]').classList.remove('active');
+                if (prevTabId !== CONTENT_BLOCKERS) {
+                    document.querySelector('[data-tab="' + prevTabId + '"]').classList.remove('active');
+                }
             }
 
             document.querySelector(prevTabId).style.display = 'none';
@@ -1449,7 +1452,6 @@ const Settings = function () {
         };
     };
     const checkboxes = [];
-    checkboxes.push(new Checkbox('#useOptimizedFilters', userSettings.names.USE_OPTIMIZED_FILTERS));
     checkboxes.push(new Checkbox('#showAppUpdatedNotification', userSettings.names.DISABLE_SHOW_APP_UPDATED_NOTIFICATION, {
         negate: true
     }));
@@ -1631,9 +1633,22 @@ const ContentBlockersScreen = function (antiBannerFilters) {
         if (element) {
             if (info) {
                 const rulesInfoElement = element.querySelector('.cb_rules_count');
-                rulesInfoElement.textContent = i18n.__n("options_cb_rules_info.message", info.rulesCount);
+                const icon = element.querySelector('.extension-block-ico');
 
-                //TODO: We might show rules overlimit here
+                if (info.overlimit) {
+                    icon.classList.add("block-type__ico-info--overlimit-warning");
+
+                    rulesInfoElement.classList.add('cb_overlimit_warning');
+                    let textContent = i18n.__("options_cb_rules_overlimit_info.message", info.rulesCount);
+                    textContent = textContent.replace('$2', info.rulesCount - 50000);
+                    rulesInfoElement.innerHTML = textContent;
+                } else {
+                    icon.classList.remove("block-type__ico-info--overlimit-warning");
+
+                    rulesInfoElement.classList.remove('cb_overlimit_warning');
+                    rulesInfoElement.textContent = i18n.__n("options_cb_rules_info.message", info.rulesCount);
+                }
+
             }
 
             if (filtersInfo) {
@@ -1664,7 +1679,7 @@ const ContentBlockersScreen = function (antiBannerFilters) {
         ipcRenderer.on('getContentBlockersMetadataResponse', (e, response) => {
             for (let extension of response) {
                 const filtersInfo = antiBannerFilters.getFiltersInfo(extension.groupIds);
-                updateExtensionState(extension.bundleId, null, filtersInfo);
+                updateExtensionState(extension.bundleId, extension.rulesInfo, filtersInfo);
             }
         });
     };

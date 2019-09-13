@@ -51,7 +51,7 @@
         "message": "一般設定"
     },
     "options_general_desc": {
-        "message": "AdGuard for Safariは無料のオープンソースソフトウェアです。 ユーザー様のフィードバックと貢献を歓迎しております。 バグを報告したり、または機能をリクエストする場合は、<a target='_blank' href='https:\/\/adguard.com\/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>私たちのGithubリポジトリ<\/a>へお進みください。"
+        "message": "AdGuard for Safariは無料のオープンソースソフトウェアです。 ユーザー様のフィードバックと貢献を歓迎しております。 バグを報告したり、または機能をリクエストする場合は、<a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>私たちのGithubリポジトリ</a>へお進みください。"
     },
     "options_allow_acceptable_ads": {
         "message": "有用な広告を表示する"
@@ -177,19 +177,16 @@
         "message": "AdGuard はホワイトリストにあるウェブサイトをフィルタリングしません。"
     },
     "options_whitelist_inverse": {
-        "message": "ホワイトリストを逆転させる<span class='sp-table-row-info'>ホワイトリスト<i>以外で<\/i>全ての広告をアンブロックする<\/span>"
+        "message": "ホワイトリストを逆転させる<span class='sp-table-row-info'>ホワイトリスト<i>以外で</i>全ての広告をアンブロックする</span>"
     },
     "options_userfilter": {
         "message": "ユーザーフィルタ"
     },
     "options_userfilter_description": {
-        "message": "このフィルタに独自のルールを追加できます。このオプションはHTML\/CSSに精通した上級者ユーザーにおすすめです。 <a class='spl-user-descr-link'href='https:\/\/adguard.com\/filterrules.html?utm_source=extension&aid=16593' target='_blank'>フィルタ・ルールのチュートリアル<\/a>を読むことで独自のフィルタ・ルールを作成する方法を学べます。"
+        "message": "このフィルタに独自のルールを追加できます。このオプションはHTML/CSSに精通した上級者ユーザーにおすすめです。 <a class='spl-user-descr-link'href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>フィルタ・ルールのチュートリアル</a>を読むことで独自のフィルタ・ルールを作成する方法を学べます。"
     },
     "options_show_app_updated_notification": {
         "message": "拡張機能のアップデートについて通知を受け取る"
-    },
-    "options_use_optimized_filters": {
-        "message": "最適化されたフィルタを使用する<span class='sp-table-row-info'>SafariコンテンツブロッカーAPI向けに最適化された軽量版フィルタのリストです。<\/span>"
     },
     "options_popup_update_title": {
         "message": "フィルタ更新完了"
@@ -225,10 +222,10 @@
         "message": "警告"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "有効フィルタが多すぎています。Safari で使用できるルールの数は、50000までです。"
+        "message": "有効フィルタが多すぎています。Safariがひとグループで使用できるルール数は、50,000本までです。"
     },
     "options_content_blocker_overlimit": {
-        "message": "有効フィルタが多すぎています。Safari で使用できるルールの数は、50000までです。"
+        "message": "有効フィルタが多すぎています。Safariがひとグループで使用できるルール数は、50,000本までです。"
     },
     "options_filters_list_search_placeholder": {
         "message": "検索"
@@ -288,10 +285,10 @@
         "message": "コンテンツブロッカー"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "有効広告ブロッカー数：%s/6（それぞれ最大50,000件づつのルール使用可）"
     },
     "options_content_blockers_disabled_desc": {
-        "message": ""
+        "message": "広告ブロッカーは無効です。"
     },
     "options_compare_btn": {
         "message": "製品比較を見る"
@@ -340,6 +337,9 @@
     },
     "options_filters_period_not_update": {
         "message": "更新しない"
+    },
+    "options_filters_custom_remove": {
+        "message": ""
     },
     "options_show_tray_icon": {
         "message": "AdGuard for Safariをメニューバーに表示する"
@@ -398,7 +398,13 @@
             "other": "使用ルール数：%s"
         }
     },
+    "options_cb_rules_overlimit_info": {
+        "message": "ルール数制限50,000本を超えました。アプリが正しく機能するためには不要なルールを無効にしてください。<br/>現在有効なルール数：%s（無効ルール数：$2）"
+    },
     "options_cb_disabled_warning": {
         "message": "Safariで無効になっています"
+    },
+    "filters_group_custom": {
+        "message": "カスタム"
     }
 }
