@@ -222,7 +222,7 @@
         "message": "Alerte"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": ""
+        "message": "Trop de filtres activés. Safari ne peut pas utiliser plus de 50000 règles la fois."
     },
     "options_content_blocker_overlimit": {
         "message": "Trop de filtres activés. Safari ne peut pas utiliser plus de 50000 règles la fois."
@@ -399,7 +399,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "La limite de 50 000 règles est dépassée. Veuillez désactiver les règles qui ne sont pas nécessaires pour le fonctionnement correct de l'application.<br/>Règles activées en ce moment : %s (règles désactivées: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Désactivé dans Safari"

@@ -399,7 +399,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "Byl překročen limit 50 000 pravidel. Pro správné fungování aplikace vypněte nepotřebná pravidla. <br/>Počet momentálně zapnutých pravidel: %s (vypnutá pravidla: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Vypnuto v Safari"

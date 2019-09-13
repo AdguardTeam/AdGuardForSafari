@@ -222,10 +222,10 @@
         "message": "Attenzione"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": ""
+        "message": "Troppi filtri abilitati. Safari non può usare più di 50 000 regole in un gruppo."
     },
     "options_content_blocker_overlimit": {
-        "message": ""
+        "message": "Troppi filtri abilitati. Safari non può usare più di 50 000 regole in un gruppo."
     },
     "options_filters_list_search_placeholder": {
         "message": "Ricerca"
@@ -339,7 +339,7 @@
         "message": "Non aggiornare"
     },
     "options_filters_custom_remove": {
-        "message": ""
+        "message": "rimuovi"
     },
     "options_show_tray_icon": {
         "message": "Mostra AdGuard per Safari nella barra del menu"
@@ -399,12 +399,12 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "Il limite di 50.000 regole è stato superato. Si prega di disabilitare le regole non necessarie per il funzionamento corretto dell'applicazione.<br/>Regole abilitate al momento: %s (regole disabilitate: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Disabilitato nel Safari"
     },
     "filters_group_custom": {
-        "message": ""
+        "message": "Personalizzato"
     }
 }

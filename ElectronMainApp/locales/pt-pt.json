@@ -399,7 +399,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "O limite de 50.000 regras foi excedido. Desactive as regras desnecessárias para que a aplicação funcione correctamente.<br/>Regras activadas no momento:%s (regras desactivadas: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Desactivado no Safari"
