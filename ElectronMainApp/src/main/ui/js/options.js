@@ -1004,6 +1004,8 @@ const AntiBannerFilters = function (options) {
 
     function updateAntiBannerFilters(e) {
         e.preventDefault();
+        document.querySelector('.settings-actions--update-filters').classList.add('loading');
+
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'checkAntiBannerFiltersUpdate'
         }));
@@ -1288,6 +1290,10 @@ const AntiBannerFilters = function (options) {
         setLastUpdatedTimeText(filter.lastUpdateTime);
     }
 
+    function onFilterUpdatesFinished() {
+        document.querySelector('.settings-actions--update-filters').classList.remove('loading');
+    }
+
     function updateFilterMetadata(filter) {
         const filterEl = getFilterElement(filter.filterId);
         if (filterEl) {
@@ -1349,6 +1355,7 @@ const AntiBannerFilters = function (options) {
         onCategoryStateChanged: onCategoryStateChanged,
         onFilterDownloadStarted: onFilterDownloadStarted,
         onFilterDownloadFinished: onFilterDownloadFinished,
+        onFilterUpdatesFinished: onFilterUpdatesFinished,
         getFiltersInfo: getFiltersInfo
     };
 };
@@ -1961,6 +1968,9 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.APPLICATION_UPDATE_DOWNLOADED:
                     controller.onAppUpdateDownloaded(options);
+                    break;
+                case EventNotifierTypes.UPDATE_FILTERS_SHOW_POPUP:
+                    controller.antiBannerFilters.onFilterUpdatesFinished();
                     break;
             }
         });
