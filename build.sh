@@ -108,11 +108,3 @@ curl "https://static.adguard.com/safari/updates.json" > $BUILD_DIR/updates.json
 
 # python script parameters should be relative to the script location
 python3 -u Scripts/update_version.py --path="../$BUILD_DIR/updates.json" --channel="$CHANNEL" --version="$version"
-
-
-if [ "$CHANNEL" != "mas" ]; then
-    exit 0;
-fi
-
-echo "Step 7: Upload archive to app store"
-xcodebuild -exportArchive -archivePath "$ARCHIVE_PATH" -exportOptionsPlist ./Scripts/ExportOptions.plist -exportPath "$BUILD_DIR"
