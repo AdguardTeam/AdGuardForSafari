@@ -267,7 +267,7 @@
   background-repeat: no-repeat;
   background-image: url(../images/reload-ico.svg);
 }
-.settings-actions--update-filters a.active {
+.settings-actions--update-filters a.loading {
   animation: clockwise 2s linear infinite;
 }
 .settings-actions--saved {
