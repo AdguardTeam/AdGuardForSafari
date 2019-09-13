@@ -1004,7 +1004,7 @@ const AntiBannerFilters = function (options) {
 
     function updateAntiBannerFilters(e) {
         e.preventDefault();
-        document.querySelector('.settings-actions--update-filters').classList.add('loading');
+        document.querySelector('#updateAntiBannerFilters').classList.add('loading');
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'checkAntiBannerFiltersUpdate'
@@ -1291,7 +1291,7 @@ const AntiBannerFilters = function (options) {
     }
 
     function onFilterUpdatesFinished() {
-        document.querySelector('.settings-actions--update-filters').classList.remove('loading');
+        document.querySelector('#updateAntiBannerFilters').classList.remove('loading');
     }
 
     function updateFilterMetadata(filter) {
