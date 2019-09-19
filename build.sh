@@ -101,7 +101,7 @@ printf "{
   \"url\": \"https://static.adguard.com/safari/$CHANNEL/$buildFileName\",
   \"name\": \"$version-$build_number\",
   \"notes\": \"Updates\",
-  \"pub_date\": \"$(date)\"
+  \"pub_date\": \"$(date -u +%FT%TZ)\"
 }" >$BUILD_DIR/release.json
 
 curl "https://static.adguard.com/safari/updates.json" > $BUILD_DIR/updates.json
