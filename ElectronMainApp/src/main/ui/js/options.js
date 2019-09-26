@@ -339,14 +339,14 @@ const Saver = function (options) {
         }
     };
 
-    this.saveRules = function () {
+    this.saveRules = Utils.debounce(function () {
         this.omitRenderEventsCount += 1;
         const text = this.editor.getValue();
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             type: this.saveEventType,
             content: text,
         }));
-    };
+    }.bind(this), 1000);
 
     const setDirty = () => {
         setState(states.DIRTY);
