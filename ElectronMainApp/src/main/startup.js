@@ -45,10 +45,10 @@ module.exports = (() => {
             safariToolbar.busyStatus(false);
             safariToolbar.sendReady();
 
-            // Check safari extensions
+            // Check safari extensions - show main window only if all cb extensions are disabled
             toolbarController.getExtensionsState((result) => {
-                if (!result || !result.contentBlockersEnabled) {
-                    log.warn('Safari content blockers are turned off!');
+                if (!result || result.allContentBlockersDisabled) {
+                    log.warn('All Safari content blockers are turned off!');
 
                     showWindow();
                 }
