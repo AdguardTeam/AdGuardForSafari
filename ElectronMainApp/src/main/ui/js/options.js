@@ -493,8 +493,16 @@ const UserFilter = function () {
         saver.setDirty();
     });
 
+    /**
+     * returns true is user filter is empty
+     */
+    const isUserFilterEmpty = () => {
+        return !editor.getValue().trim();
+    };
+
     return {
-        updateUserFilterRules: updateUserFilterRules,
+        updateUserFilterRules,
+        isUserFilterEmpty,
     };
 };
 
@@ -1327,9 +1335,10 @@ const AntiBannerFilters = function (options) {
      * Creates filters info string
      *
      * @param groupIds [] array of enabled groups
+     * @param userFilterEnabled Boolean is user filter enabled
      */
-    const getFiltersInfo = (groupIds) => {
-        if (!groupIds || groupIds.length === 0) {
+    const getFiltersInfo = (groupIds, userFilterEnabled) => {
+        if (!groupIds) {
             return null;
         }
 
@@ -1343,6 +1352,13 @@ const AntiBannerFilters = function (options) {
                 const groupFilters = getFiltersByGroupId(groupId, loadedFiltersInfo.filters);
                 filters = filters.concat(groupFilters);
             }
+        }
+
+        if (userFilterEnabled) {
+            filters.push({
+                name: i18n.__("userfilter_name.message"),
+                enabled: true
+            });
         }
 
         return generateFiltersNamesDescription(filters);
@@ -1571,7 +1587,7 @@ const Settings = function () {
  * @returns {*}
  * @constructor
  */
-const ContentBlockersScreen = function (antiBannerFilters) {
+const ContentBlockersScreen = function (antiBannerFilters, userFilter) {
     'use strict';
 
     /**
@@ -1684,8 +1700,9 @@ const ContentBlockersScreen = function (antiBannerFilters) {
      */
     const init = () => {
         ipcRenderer.on('getContentBlockersMetadataResponse', (e, response) => {
+            const userFilterEnabled = !userFilter.isUserFilterEmpty();
             for (let extension of response) {
-                const filtersInfo = antiBannerFilters.getFiltersInfo(extension.groupIds);
+                const filtersInfo = antiBannerFilters.getFiltersInfo(extension.groupIds, userFilterEnabled);
                 updateExtensionState(extension.bundleId, extension.rulesInfo, filtersInfo);
             }
         });
@@ -1843,7 +1860,7 @@ PageController.prototype = {
         this.antiBannerFilters.render();
 
         // Initialize Content blockers
-        this.contentBlockers = new ContentBlockersScreen(this.antiBannerFilters);
+        this.contentBlockers = new ContentBlockersScreen(this.antiBannerFilters, this.userFilter);
         this.contentBlockers.init();
 
         document.querySelector('#about-version-placeholder').textContent = i18n.__("options_about_version.message", environmentOptions.appVersion);
@@ -1942,7 +1959,8 @@ const initPage = function (response) {
                     controller.checkSafariExtensions();
                     break;
                 case EventNotifierTypes.CONTENT_BLOCKER_EXTENSION_UPDATED:
-                    const filtersInfo = controller.antiBannerFilters.getFiltersInfo(options.filterGroups);
+                    const userFilterEnabled = !controller.userFilter.isUserFilterEmpty();
+                    const filtersInfo = controller.antiBannerFilters.getFiltersInfo(options.filterGroups, userFilterEnabled);
                     controller.contentBlockers.updateExtensionState(options.bundleId, options, filtersInfo);
                     break;
                 case EventNotifierTypes.SHOW_OPTIONS_FILTERS_TAB:
