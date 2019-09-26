@@ -51,13 +51,16 @@ module.exports = (function () {
                     }
                 }
 
-                setSafariContentBlocker(rulesGroupsBundles[group.key], json);
+                setSafariContentBlocker(rulesGroupsBundles[group.key], json + 'TODO: clean up');
+
+                //TODO: Save error message to info
 
                 const info = {
                     rulesCount: group.rules.length,
                     bundleId: rulesGroupsBundles[group.key],
                     overlimit: result && result.overLimit,
-                    filterGroups: group.filterGroups
+                    filterGroups: group.filterGroups,
+                    hasError: true
                 };
 
                 saveContentBlockerInfo(rulesGroupsBundles[group.key], info);
