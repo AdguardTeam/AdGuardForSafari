@@ -106,7 +106,7 @@ module.exports = (() => {
         // Subscribe to application events
         listeners.addListener(function (event, info) {
             if (event === events.CONTENT_BLOCKER_UPDATE_REQUIRED) {
-                setContentBlockingJson(info.bundleId, JSON.stringify(info.json));
+                setContentBlockingJson(info.bundleId, JSON.stringify(info.json), info.info);
             } else if (event === events.UPDATE_USER_FILTER_RULES) {
                 applicationApi.getUserFilterRules((rules) => {
                     setUserFilter(rules);
@@ -132,18 +132,38 @@ module.exports = (() => {
     /**
      * Sets content blocker json
      */
-    const setContentBlockingJson = (bundleId, jsonString) => {
+    const setContentBlockingJson = (bundleId, jsonString, info) => {
         safariToolbar.busyStatus(true);
         log.info(`Content-blocker updating ${bundleId}`);
         safariToolbar.setContentBlockingJson(bundleId, jsonString, (result) => {
             log.info(`Content-blocker ${bundleId} set result : ${result}`);
 
-            //TODO: Handle error result
+            if (info) {
+                if (parseError(result)) {
+                    info.hasError = true;
+                }
+
+                listeners.notifyListeners(events.CONTENT_BLOCKER_EXTENSION_UPDATED, info);
+            }
 
             setTimeout(() => {
                 safariToolbar.busyStatus(false);
             }, 1000);
         });
+    };
+
+    /**
+     * Checks if result contains error
+     *
+     * @param info
+     * @return {boolean}
+     */
+    const parseError = (info) => {
+        if (info) {
+            return info.indexOf('"result":"error"') >= 0;
+        }
+
+        return false;
     };
 
     /**

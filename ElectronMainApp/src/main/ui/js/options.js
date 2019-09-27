@@ -1646,22 +1646,22 @@ const ContentBlockersScreen = function (antiBannerFilters) {
                 if (info.overlimit) {
                     icon.classList.add("block-type__ico-info--overlimit-warning");
 
-                    rulesInfoElement.classList.add('cb_overlimit_warning');
-
                     let textContent = i18n.__("options_cb_rules_overlimit_info.message", info.rulesCount);
                     textContent = textContent.replace('$2', info.rulesCount - 50000);
+
+                    //rulesInfoElement.style.display = 'flex';
+                    rulesInfoElement.classList.add('cb_overlimit_warning');
                     rulesInfoElement.innerHTML = textContent;
                 } else if (info.hasError) {
-                    icon.classList.add("block-type__ico-info--warning");
+                    icon.classList.add("block-type__ico-info--overlimit-warning");
 
-                    rulesInfoElement.textContent = "";
-
-                    const warning = element.querySelector('.cb_warning');
-                    warning.style.display = 'flex';
-                    warning.textContent = i18n.__("options_cb_compilation_warning.message");
+                    //rulesInfoElement.style.display = 'flex';
+                    rulesInfoElement.classList.add('cb_overlimit_warning');
+                    rulesInfoElement.textContent = i18n.__("options_cb_compilation_warning.message");
                 } else {
                     icon.classList.remove("block-type__ico-info--overlimit-warning");
 
+                    //rulesInfoElement.style.display = 'flex';
                     rulesInfoElement.classList.remove('cb_overlimit_warning');
                     rulesInfoElement.textContent = i18n.__n("options_cb_rules_info.message", info.rulesCount);
                 }
@@ -1952,6 +1952,7 @@ const initPage = function (response) {
                     controller.checkSafariExtensions();
                     break;
                 case EventNotifierTypes.CONTENT_BLOCKER_EXTENSION_UPDATED:
+                    console.log(options);
                     const filtersInfo = controller.antiBannerFilters.getFiltersInfo(options.filterGroups);
                     controller.contentBlockers.updateExtensionState(options.bundleId, options, filtersInfo);
                     break;
