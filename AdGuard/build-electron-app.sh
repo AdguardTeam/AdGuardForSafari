@@ -58,7 +58,7 @@ fi
 
 # Compile electron-remote
 cd "node_modules/electron-remote"
-npm install
+yarn install
 cd ../..
 
 # Rebuild safari-ext and other node packages
