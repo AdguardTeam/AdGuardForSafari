@@ -249,7 +249,6 @@ module.exports = (() => {
                 const filter = filters[i];
                 const group = subscriptions.getGroup(filter.groupId);
                 if (filter.enabled && group.enabled) {
-                    // TODO: Slowdown #1 - storage
                     dfds.push(filterRules.loadFilterRulesFromStorage(filter.filterId, rulesFilterMap));
                 }
             }
