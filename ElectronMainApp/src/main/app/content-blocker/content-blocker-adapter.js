@@ -43,12 +43,7 @@ module.exports = (function () {
             for (let group of grouped) {
                 let json = emptyBlockerJSON;
 
-
-
-                // TODO: Slowdown #2 - converter
-                //const result = {};
-
-                const result = jsonFromFilters(group.rules.map(x => x.ruleText), RULES_LIMIT, false, false);
+                const result = jsonFromRules(group.rules.map(x => x.ruleText), false);
                 if (result && result.converted) {
                     json = JSON.parse(result.converted);
                     if (result.overLimit) {
@@ -81,13 +76,25 @@ module.exports = (function () {
     };
 
     /**
+     * Runs converter method for rules
+     *
+     * @param rules array of rules
+     * @param advancedBlocking if we need advanced blocking content
+     */
+    const jsonFromRules = (rules, advancedBlocking) => {
+        // TODO: Slowdown #2 - converter
+
+        return jsonFromFilters(rules, RULES_LIMIT, false, advancedBlocking);
+    };
+
+    /**
      * Activates advanced blocking json
      *
      * @param rules
      * @return {Array}
      */
     const setAdvancedBlocking = (rules) => {
-        const result = jsonFromFilters(rules, RULES_LIMIT, false, true);
+        const result = jsonFromRules(rules, true);
         const advancedBlocking = result ? JSON.parse(result.advancedBlocking) : [];
 
         setSafariContentBlocker(rulesGroupsBundles["advancedBlocking"], advancedBlocking);
