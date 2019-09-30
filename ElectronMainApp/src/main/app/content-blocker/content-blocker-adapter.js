@@ -3,11 +3,11 @@ const listeners = require('../../notifier');
 const events = require('../../events');
 const settings = require('../settings-manager');
 const antibanner = require('../antibanner');
-const {jsonFromFilters} = require('../libs/JSConverter');
 const whitelist = require('../whitelist');
 const log = require('../utils/log');
 const concurrent = require('../utils/concurrent');
 const {groupRules, rulesGroupsBundles, filterGroupsBundles} = require('./rule-groups');
+const {requireTaskPool} = require('electron-remote');
 
 /**
  * Safari Content Blocker Adapter
@@ -35,7 +35,7 @@ module.exports = (function () {
      */
     const updateContentBlocker = () => {
 
-        loadRules(rules => {
+        loadRules(async rules => {
 
             const grouped = groupRules(rules);
             let overlimit = false;
@@ -43,7 +43,8 @@ module.exports = (function () {
             for (let group of grouped) {
                 let json = emptyBlockerJSON;
 
-                const result = jsonFromRules(group.rules.map(x => x.ruleText), false);
+                const rulesTexts = group.rules.map(x => x.ruleText);
+                const result = await jsonFromRules(rulesTexts, false);
                 if (result && result.converted) {
                     json = JSON.parse(result.converted);
                     if (result.overLimit) {
@@ -64,7 +65,7 @@ module.exports = (function () {
                 listeners.notifyListeners(events.CONTENT_BLOCKER_EXTENSION_UPDATED, info);
             }
 
-            const advancedBlocking = setAdvancedBlocking(rules.map(x => x.ruleText));
+            const advancedBlocking = await setAdvancedBlocking(rules.map(x => x.ruleText));
 
             listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
                 rulesCount: rules.length,
@@ -81,10 +82,11 @@ module.exports = (function () {
      * @param rules array of rules
      * @param advancedBlocking if we need advanced blocking content
      */
-    const jsonFromRules = (rules, advancedBlocking) => {
-        // TODO: Slowdown #2 - converter
+    const jsonFromRules = async (rules, advancedBlocking) => {
+        const converterModule = requireTaskPool(require.resolve('../libs/JSConverter'));
 
-        return jsonFromFilters(rules, RULES_LIMIT, false, advancedBlocking);
+        const result = await converterModule.jsonFromFilters(rules, RULES_LIMIT, false, advancedBlocking);
+        return result;
     };
 
     /**
@@ -93,8 +95,8 @@ module.exports = (function () {
      * @param rules
      * @return {Array}
      */
-    const setAdvancedBlocking = (rules) => {
-        const result = jsonFromRules(rules, true);
+    const setAdvancedBlocking = async (rules) => {
+        const result = await jsonFromRules(rules, true);
         const advancedBlocking = result ? JSON.parse(result.advancedBlocking) : [];
 
         setSafariContentBlocker(rulesGroupsBundles["advancedBlocking"], advancedBlocking);

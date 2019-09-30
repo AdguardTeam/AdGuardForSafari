@@ -864,6 +864,17 @@ electron-reload@^1.3.0:
   dependencies:
     chokidar "^3.0.2"
 
+"electron-remote@git+https://github.com/Mizzick/electron-remote.git#cb3d295":
+  version "1.3.0"
+  resolved "git+https://github.com/Mizzick/electron-remote.git#cb3d295d5cdf8ca761e2daa0db7a7dd51365d90b"
+  dependencies:
+    debug "^2.5.1"
+    hashids "^1.1.1"
+    lodash.get "^4.4.2"
+    pify "^2.3.0"
+    rxjs "^5.0.0-beta.12"
+    xmlhttprequest "^1.8.0"
+
 electron-simple-updater@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/electron-simple-updater/-/electron-simple-updater-1.5.0.tgz#c69e13e5a25fbc189203a92bee169c41cf190782"
@@ -1503,6 +1514,10 @@ has-values@^1.0.0:
     is-number "^3.0.0"
     kind-of "^4.0.0"
 
+hashids@^1.1.1:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/hashids/-/hashids-1.2.2.tgz#28635c7f2f7360ba463686078eee837479e8eafb"
+
 highlight.js@^9.3.0:
   version "9.15.10"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.15.10.tgz#7b18ed75c90348c045eef9ed08ca1319a2219ad2"
@@ -1947,6 +1962,10 @@ locate-path@^3.0.0:
 lodash.assign@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.assign/-/lodash.assign-4.2.0.tgz#0d99f3ccd7a6d261d19bdaeb9245005d285808e7"
+
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
 
 lodash.isequal@^4.5.0:
   version "4.5.0"
@@ -2528,7 +2547,7 @@ picomatch@^2.0.4:
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.0.7.tgz#514169d8c7cd0bdbeecc8a2609e34a7163de69f6"
 
-pify@^2.0.0:
+pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
 
@@ -2840,6 +2859,12 @@ rimraf@2, rimraf@^2.6.1:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.7.1.tgz#35797f13a7fdadc566142c29d4f07ccad483e3ec"
   dependencies:
     glob "^7.1.3"
+
+rxjs@^5.0.0-beta.12:
+  version "5.5.12"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.12.tgz#6fa61b8a77c3d793dbaf270bee2f43f652d741cc"
+  dependencies:
+    symbol-observable "1.0.1"
 
 rxjs@^6.3.1:
   version "6.5.2"
@@ -3153,6 +3178,10 @@ sver-compat@^1.5.0:
   dependencies:
     es6-iterator "^2.0.1"
     es6-symbol "^3.1.1"
+
+symbol-observable@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.1.tgz#8340fc4702c3122df5d22288f88283f513d3fdd4"
 
 tar@^4, tar@^4.4.8:
   version "4.4.10"
