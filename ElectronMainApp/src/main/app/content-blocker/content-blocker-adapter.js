@@ -43,6 +43,11 @@ module.exports = (function () {
             for (let group of grouped) {
                 let json = emptyBlockerJSON;
 
+
+
+                // TODO: Slowdown #2 - converter
+                //const result = {};
+
                 const result = jsonFromFilters(group.rules.map(x => x.ruleText), RULES_LIMIT, false, false);
                 if (result && result.converted) {
                     json = JSON.parse(result.converted);
