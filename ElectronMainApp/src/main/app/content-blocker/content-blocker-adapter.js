@@ -51,17 +51,15 @@ module.exports = (function () {
                     }
                 }
 
-                setSafariContentBlocker(rulesGroupsBundles[group.key], json);
-
                 const info = {
                     rulesCount: group.rules.length,
                     bundleId: rulesGroupsBundles[group.key],
                     overlimit: result && result.overLimit,
-                    filterGroups: group.filterGroups
+                    filterGroups: group.filterGroups,
+                    hasError: false
                 };
 
-                saveContentBlockerInfo(rulesGroupsBundles[group.key], info);
-                listeners.notifyListeners(events.CONTENT_BLOCKER_EXTENSION_UPDATED, info);
+                setSafariContentBlocker(rulesGroupsBundles[group.key], json, info);
             }
 
             const advancedBlocking = setAdvancedBlocking(rules.map(x => x.ruleText));
@@ -129,14 +127,16 @@ module.exports = (function () {
      *
      * @param bundleId
      * @param json
+     * @param info
      */
-    const setSafariContentBlocker = (bundleId, json) => {
+    const setSafariContentBlocker = (bundleId, json, info) => {
         try {
             log.info(`Setting content blocker json for ${bundleId}. Length=${json.length};`);
 
             listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, {
                 bundleId,
-                json
+                json,
+                info
             });
         } catch (ex) {
             log.error(`Error while setting content blocker ${bundleId}: ` + ex);
@@ -195,6 +195,15 @@ module.exports = (function () {
 
         return groupsBundles;
     };
+
+    // Subscribe to cb extensions update event
+    listeners.addListener(function (event, info) {
+        if (event === events.CONTENT_BLOCKER_EXTENSION_UPDATED) {
+            if (info && info.bundleId) {
+                saveContentBlockerInfo(info.bundleId, info);
+            }
+        }
+    });
 
     return {
         updateContentBlocker,
