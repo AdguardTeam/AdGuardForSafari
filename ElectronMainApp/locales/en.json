@@ -404,6 +404,9 @@
     "options_cb_disabled_warning": {
         "message": "Disabled in Safari"
     },
+    "options_cb_compilation_warning": {
+        "message": "Compilation failed"
+    },
     "filters_group_custom": {
         "message": "Custom"
     }

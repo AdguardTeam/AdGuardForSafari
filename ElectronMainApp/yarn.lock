@@ -3,8 +3,8 @@
 
 
 "@types/node@^10.12.18":
-  version "10.14.16"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.14.16.tgz#4d690c96cbb7b2728afea0e260d680501b3da5cf"
+  version "10.14.19"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.14.19.tgz#f52742c7834a815dedf66edfc8a51547e2a67342"
 
 "@types/semver@^6.0.1":
   version "6.0.1"
@@ -826,12 +826,12 @@ electron-localshortcut@^3.1.0:
     keyboardevents-areequal "^0.2.1"
 
 electron-log@^3.0.6:
-  version "3.0.7"
-  resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-3.0.7.tgz#bfdba9489c84b1301d6067028fce2f4cb2f89d7f"
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-3.0.8.tgz#ea672dc40b560143ed5d887eff1ff1904fe9ef71"
 
 "electron-osx-sign@github:electron-userland/electron-osx-sign":
-  version "0.4.13"
-  resolved "https://codeload.github.com/electron-userland/electron-osx-sign/tar.gz/a54325a972293b96161ebd929898de25ad868a66"
+  version "0.4.14"
+  resolved "https://codeload.github.com/electron-userland/electron-osx-sign/tar.gz/ebc478e8329e7ad769bfd9bad8794f76b629cea4"
   dependencies:
     bluebird "^3.5.0"
     compare-version "^0.1.2"
@@ -887,8 +887,8 @@ electron-updater@^4.0.6:
     semver "^6.2.0"
 
 electron@^5.0.6:
-  version "5.0.10"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-5.0.10.tgz#a3819c3ff8d05ee57315bfabe2d61d3529f5659c"
+  version "5.0.11"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-5.0.11.tgz#764eb460aa84fbfcb3dc30385f5f9509cb724751"
   dependencies:
     "@types/node" "^10.12.18"
     electron-download "^4.1.0"
@@ -2592,7 +2592,11 @@ progress-stream@^1.1.0:
     speedometer "~0.1.2"
     through2 "~0.2.3"
 
-psl@^1.1.24, psl@^1.1.28:
+psl@^1.1.24:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/psl/-/psl-1.4.0.tgz#5dd26156cdb69fa1fdb8ab1991667d3f80ced7c2"
+
+psl@^1.1.28:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/psl/-/psl-1.3.0.tgz#e1ebf6a3b5564fa8376f3da2275da76d875ca1bd"
 
