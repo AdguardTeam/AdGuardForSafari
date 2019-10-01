@@ -170,104 +170,6 @@
         </div>
 
         <div id="antibanner" class="settings-content tab-pane">
-            <div id="add-custom-filter-popup" class="option-popup">
-                <div class="option-popup__in">
-                    <div id="custom-filter-popup-close" class="option-popup__cross"></div>
-                    <div id="add-custom-filter-step-1" class="option-popup__step">
-                        <div class="option-popup__title" i18n="options_filters_custom_step_one_title"></div>
-                        <div class="option-popup__content">
-                            <input id="custom-filter-popup-url" type="text" class="option-popup__input" i18n-plhr="options_filters_custom_step_one_input_placeholder">
-                            <div class="option-popup__desc" i18n="options_filters_custom_step_one_url_desc"></div>
-                            <div class="option-popup__desc" i18n="options_filters_custom_step_one_url_desc_more"></div>
-                        </div>
-                        <div class="option-popup__btns option-popup__btns--sb">
-                            <div class="option-popup__btns-in">
-                                <button id="custom-filter-popup-cancel" class="button button--transparent option-popup__btn" i18n="options_filters_custom_step_one_cancel"></button>
-                            </div>
-                            <button class="button button--green custom-filter-popup-next" i18n="options_filters_custom_step_one_next"></button>
-                        </div>
-                    </div>
-                    <div id="add-custom-filter-step-2" class="option-popup__step">
-                        <div class="option-popup__content">
-                            <div class="load option-popup__load"></div>
-                            <div class="option-popup__desc option-popup__desc--tac" i18n="options_filters_custom_step_two_checking"></div>
-                        </div>
-                    </div>
-                    <div id="add-custom-filter-step-3" class="option-popup__step">
-                        <div class="option-popup__content">
-                            <div class="option-popup__subtitle" i18n="options_filters_custom_step_three_title"></div>
-                            <div class="option-popup__desc option-popup__desc--false option-popup__desc--tac" i18n="options_filters_custom_step_three_desc"></div>
-                        </div>
-                        <div class="option-popup__btns option-popup__btns--center">
-                            <button class="button button--transparent custom-filter-popup-try-again" i18n="options_filters_custom_step_three_try_again"></button>
-                        </div>
-                    </div>
-                    <div id="add-custom-filter-step-4" class="option-popup__step">
-                        <div class="option-popup__title" i18n="options_filters_custom_step_final_title"></div>
-                        <div class="option-popup__content">
-                            <div class="option-popup__table">
-                                <div class="option-popup__table-row">
-                                    <div class="option-popup__table-cell option-popup__table-cell--title" i18n="options_filters_custom_step_final_filter_title"></div>
-                                    <input id="custom-filter-popup-added-title" type="text" class="option-popup__input" i18n-plhr="options_popup_title_placeholder" placeholder="Enter a filter name">
-                                </div>
-                                <div class="option-popup__table-row">
-                                    <div class="option-popup__table-cell" i18n="options_filters_custom_step_final_filter_description"></div>
-                                    <div id="custom-filter-popup-added-desc" class="option-popup__table-cell">
-                                    </div>
-                                </div>
-                                <div class="option-popup__table-row">
-                                    <div class="option-popup__table-cell" i18n="options_filters_custom_step_final_filter_version"></div>
-                                    <div id="custom-filter-popup-added-version" class="option-popup__table-cell">
-                                    </div>
-                                </div>
-                                <div class="option-popup__table-row">
-                                    <div class="option-popup__table-cell" i18n="options_filters_custom_step_final_filter_rules_count"></div>
-                                    <div id="custom-filter-popup-added-rules-count" class="option-popup__table-cell">
-                                    </div>
-                                </div>
-                                <div class="option-popup__table-row">
-                                    <div class="option-popup__table-cell" i18n="options_filters_custom_step_final_filter_homepage"></div>
-                                    <div class="option-popup__table-cell">
-                                        <a id="custom-filter-popup-added-homepage" href="#" target="_blank">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="option-popup__table-row">
-                                    <div class="option-popup__table-cell" i18n="options_filters_custom_step_final_filter_url"></div>
-                                    <div class="option-popup__table-cell">
-                                        <a id="custom-filter-popup-added-url" href="#" target="_blank">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="option-popup__checkbox">
-                                <div class="option-popup__table-row">
-                                    <input class="settings-checkboxes__checkbox"
-                                           id="custom-filter-popup-trusted"
-                                           type="checkbox">
-                                    <label class="settings-checkboxes__label"
-                                           for="custom-filter-popup-trusted"
-                                           i18n="options_popup_trusted_filter_title">
-                                    </label>
-                                </div>
-                                <div class="option-popup__table-row">
-                                    <div class="option-popup__desc option-popup__desc--filter" i18n="options_popup_trusted_filter_description"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="option-popup__btns option-popup__btns--sb">
-                            <div class="option-popup__btns-in">
-                                <button id="custom-filter-popup-added-back" class="button button--transparent option-popup__btn" i18n="options_filters_custom_step_final_back">
-                                </button>
-                                <button id="custom-filter-popup-remove" class="button button--transparent option-popup__btn" i18n="options_filters_custom_step_final_cancel">
-                                </button>
-                            </div>
-                            <button id="custom-filter-popup-added-subscribe" class="button button--green" i18n="options_filters_custom_step_final_commit">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="settings-content">
                 <div class="page-title">
                     <div class="info info--rules-current">
@@ -298,6 +200,105 @@
                 <div class="filters-check__in filters-check__in--upload">
                     <div class="filters-check__ico filters-check__ico--0"></div>
                     <div class="filters-check__label" i18n="options_filters_check_filters_update">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="add-custom-filter-popup" class="option-popup">
+            <div class="option-popup__in">
+                <div id="custom-filter-popup-close" class="option-popup__cross"></div>
+                <div id="add-custom-filter-step-1" class="option-popup__step">
+                    <div class="option-popup__title" i18n="options_filters_custom_step_one_title"></div>
+                    <div class="option-popup__content">
+                        <input id="custom-filter-popup-url" type="text" class="option-popup__input" i18n-plhr="options_filters_custom_step_one_input_placeholder">
+                        <div class="option-popup__desc" i18n="options_filters_custom_step_one_url_desc"></div>
+                        <div class="option-popup__desc" i18n="options_filters_custom_step_one_url_desc_more"></div>
+                    </div>
+                    <div class="option-popup__btns option-popup__btns--sb">
+                        <div class="option-popup__btns-in">
+                            <button id="custom-filter-popup-cancel" class="button button--transparent option-popup__btn" i18n="options_filters_custom_step_one_cancel"></button>
+                        </div>
+                        <button class="button button--green custom-filter-popup-next" i18n="options_filters_custom_step_one_next"></button>
+                    </div>
+                </div>
+                <div id="add-custom-filter-step-2" class="option-popup__step">
+                    <div class="option-popup__content">
+                        <div class="load option-popup__load"></div>
+                        <div class="option-popup__desc option-popup__desc--tac" i18n="options_filters_custom_step_two_checking"></div>
+                    </div>
+                </div>
+                <div id="add-custom-filter-step-3" class="option-popup__step">
+                    <div class="option-popup__content">
+                        <div class="option-popup__subtitle" i18n="options_filters_custom_step_three_title"></div>
+                        <div class="option-popup__desc option-popup__desc--false option-popup__desc--tac" i18n="options_filters_custom_step_three_desc"></div>
+                    </div>
+                    <div class="option-popup__btns option-popup__btns--center">
+                        <button class="button button--transparent custom-filter-popup-try-again" i18n="options_filters_custom_step_three_try_again"></button>
+                    </div>
+                </div>
+                <div id="add-custom-filter-step-4" class="option-popup__step">
+                    <div class="option-popup__title" i18n="options_filters_custom_step_final_title"></div>
+                    <div class="option-popup__content">
+                        <div class="option-popup__table">
+                            <div class="option-popup__table-row">
+                                <div class="option-popup__table-cell option-popup__table-cell--title" i18n="options_filters_custom_step_final_filter_title"></div>
+                                <input id="custom-filter-popup-added-title" type="text" class="option-popup__input" i18n-plhr="options_popup_title_placeholder" placeholder="Enter a filter name">
+                            </div>
+                            <div class="option-popup__table-row">
+                                <div class="option-popup__table-cell" i18n="options_filters_custom_step_final_filter_description"></div>
+                                <div id="custom-filter-popup-added-desc" class="option-popup__table-cell">
+                                </div>
+                            </div>
+                            <div class="option-popup__table-row">
+                                <div class="option-popup__table-cell" i18n="options_filters_custom_step_final_filter_version"></div>
+                                <div id="custom-filter-popup-added-version" class="option-popup__table-cell">
+                                </div>
+                            </div>
+                            <div class="option-popup__table-row">
+                                <div class="option-popup__table-cell" i18n="options_filters_custom_step_final_filter_rules_count"></div>
+                                <div id="custom-filter-popup-added-rules-count" class="option-popup__table-cell">
+                                </div>
+                            </div>
+                            <div class="option-popup__table-row">
+                                <div class="option-popup__table-cell" i18n="options_filters_custom_step_final_filter_homepage"></div>
+                                <div class="option-popup__table-cell">
+                                    <a id="custom-filter-popup-added-homepage" href="#" target="_blank">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="option-popup__table-row">
+                                <div class="option-popup__table-cell" i18n="options_filters_custom_step_final_filter_url"></div>
+                                <div class="option-popup__table-cell">
+                                    <a id="custom-filter-popup-added-url" href="#" target="_blank">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option-popup__checkbox">
+                            <div class="option-popup__table-row">
+                                <input class="settings-checkboxes__checkbox"
+                                       id="custom-filter-popup-trusted"
+                                       type="checkbox">
+                                <label class="settings-checkboxes__label"
+                                       for="custom-filter-popup-trusted"
+                                       i18n="options_popup_trusted_filter_title">
+                                </label>
+                            </div>
+                            <div class="option-popup__table-row">
+                                <div class="option-popup__desc option-popup__desc--filter" i18n="options_popup_trusted_filter_description"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option-popup__btns option-popup__btns--sb">
+                        <div class="option-popup__btns-in">
+                            <button id="custom-filter-popup-added-back" class="button button--transparent option-popup__btn" i18n="options_filters_custom_step_final_back">
+                            </button>
+                            <button id="custom-filter-popup-remove" class="button button--transparent option-popup__btn" i18n="options_filters_custom_step_final_cancel">
+                            </button>
+                        </div>
+                        <button id="custom-filter-popup-added-subscribe" class="button button--green" i18n="options_filters_custom_step_final_commit">
+                        </button>
                     </div>
                 </div>
             </div>
