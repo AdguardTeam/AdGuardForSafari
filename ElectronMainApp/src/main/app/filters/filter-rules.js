@@ -4,6 +4,7 @@ const rulesStorage = require('../storage/rules-storage');
 const collections = require('../utils/collections');
 const listeners = require('../../notifier');
 const events = require('../../events');
+const {requireTaskPool} = require('electron-remote');
 
 /**
  * Filter rules service
@@ -14,6 +15,8 @@ module.exports = (() => {
 
     const USER_FILTER_ID = config.get('AntiBannerFiltersId').USER_FILTER_ID;
 
+    const rulesStorageModule = requireTaskPool(require.resolve('../storage/rules-storage'));
+
     /**
      * Loads filter rules from storage
      *
@@ -22,8 +25,9 @@ module.exports = (() => {
      * @returns {*} Deferred object
      */
     const loadFilterRulesFromStorage = (filterId, rulesFilterMap) => {
+
         return new Promise((resolve) => {
-            rulesStorage.read(filterId, rulesText => {
+            rulesStorageModule.readSync(filterId).then(rulesText => {
                 if (rulesText) {
                     rulesFilterMap[filterId] = rulesText;
                 }
@@ -42,7 +46,7 @@ module.exports = (() => {
      */
     const loadUserRules = (rulesFilterMap) => {
         return new Promise((resolve) => {
-            rulesStorage.read(USER_FILTER_ID, rulesText => {
+            rulesStorageModule.readSync(USER_FILTER_ID).then(rulesText => {
                 if (!rulesText) {
                     resolve();
                     return;

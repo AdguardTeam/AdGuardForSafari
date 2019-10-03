@@ -25,6 +25,18 @@ module.exports = (() => {
         callback(lines);
     };
 
+    const readSync = (path) => {
+        const cached = cache[path];
+        if (cached) {
+            return cached;
+        }
+
+        const lines = store.get(getKey(path));
+        cache[path] = lines;
+
+        return lines;
+    };
+
     const write = (path, data, callback) => {
         cache[path] = data;
 
@@ -41,6 +53,7 @@ module.exports = (() => {
 
     return {
         read: read,
+        readSync: readSync,
         write: write,
         remove: remove
     };
