@@ -95,13 +95,12 @@ def get_notarization_info(request_uuid):
         account,
         "-p",
         "@keychain:{0}".format(keychain_record)
-    ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    ], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     if result.returncode != 0:
         print("out: {0}".format(result.stdout))
-        print("out: {0}".format(result.stderr))
         raise ChildProcessError("failed to check the submission status")
 
-    for line_bytes in result.stderr.splitlines():
+    for line_bytes in result.stdout.splitlines():
         line = line_bytes.decode("utf-8").strip()
         if line.startswith("Status:"):
             parts = line.split(":", 2)
@@ -109,7 +108,6 @@ def get_notarization_info(request_uuid):
             return status
 
     print("out: {0}".format(result.stdout.decode("utf-8")))
-    print("out: {0}".format(result.stderr.decode("utf-8")))
     raise ChildProcessError("got invalid response from the notary service")
 
 
@@ -138,13 +136,12 @@ def submit_to_notary(path, bundle_id):
         path,
         "-t",
         "osx"
-    ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    ], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     if result.returncode != 0:
         print("out: {0}".format(result.stdout))
-        print("out: {0}".format(result.stderr))
         raise ChildProcessError("failed to submit the archive")
 
-    for line_bytes in result.stderr.splitlines():
+    for line_bytes in result.stdout.splitlines():
         line = line_bytes.decode("utf-8").strip()
         if line.startswith("RequestUUID"):
             parts = line.split("=", 2)
@@ -152,7 +149,6 @@ def submit_to_notary(path, bundle_id):
             return request_uuid
 
     print("out: {0}".format(result.stdout.decode("utf-8")))
-    print("out: {0}".format(result.stderr.decode("utf-8")))
     raise ChildProcessError("cannot find RequestUUID in the notary service response")
 
 
@@ -180,10 +176,9 @@ def notarize(path, bundle_id):
         "stapler",
         "staple",
         path
-    ],  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    ],  stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
     print("out: {0}".format(result.stdout.decode("utf-8")))
-    print("out: {0}".format(result.stderr.decode("utf-8")))
 
     if result.returncode != 0:
         raise ChildProcessError("failed to staple the archive")
