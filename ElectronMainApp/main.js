@@ -75,7 +75,10 @@ function createWindow() {
  */
 function loadMainWindow(onWindowLoaded) {
 
-    mainWindow = createWindow();
+    if (!mainWindow) {
+        mainWindow = createWindow();
+    }
+
     mainWindow.loadFile('./src/main/ui/options.html');
 
     // Emitted when the window is closed.
