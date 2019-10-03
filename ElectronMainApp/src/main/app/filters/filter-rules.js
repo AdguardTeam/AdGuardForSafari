@@ -58,7 +58,7 @@ module.exports = (() => {
      * Saves updated filter rules to the storage.
      *
      * @param filterId Filter id
-     * @param events Events (what has changed?)
+     * @param eventsToProcess Events (what has changed?)
      * @private
      */
     const processSaveFilterRulesToStorageEvents = (filterId, eventsToProcess) => {

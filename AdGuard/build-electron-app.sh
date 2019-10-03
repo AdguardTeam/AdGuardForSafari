@@ -56,6 +56,11 @@ else
 yarn upgrade --force -P safari-ext || exit 1
 fi
 
+# Compile electron-remote
+cd "node_modules/electron-remote"
+yarn install
+cd ../..
+
 # Rebuild safari-ext and other node packages
 yarn electron-rebuild
 
