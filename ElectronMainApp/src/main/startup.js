@@ -16,7 +16,7 @@ module.exports = (() => {
     /**
      * Initialize application services
      */
-    const init = (showWindow) => {
+    const init = (showWindow, callback) => {
         log.info('Application initialization..');
 
         safariToolbar.busyStatus(true);
@@ -27,7 +27,7 @@ module.exports = (() => {
         notificationController.init(showWindow);
 
         antibanner.start({
-            onInstall: function (callback) {
+            onInstall: function () {
                 log.debug('On application install..');
 
                 // Retrieve filters and install them
@@ -38,6 +38,8 @@ module.exports = (() => {
                 showWindow();
 
                 log.info('Application installed');
+
+                callback();
             }
         }, function () {
             log.info('Application initialization finished');
@@ -53,6 +55,8 @@ module.exports = (() => {
                     showWindow();
                 }
             });
+
+            callback();
         });
     };
 
