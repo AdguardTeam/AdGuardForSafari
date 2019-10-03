@@ -2001,6 +2001,9 @@ const initPage = function (response) {
                     break;
             }
         });
+
+        // Hide loading content
+        document.getElementById('preloaderContainer').style.display = 'none';
     };
 
     if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
