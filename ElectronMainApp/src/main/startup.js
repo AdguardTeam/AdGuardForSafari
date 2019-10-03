@@ -35,11 +35,9 @@ module.exports = (() => {
                     groupIds.forEach(groupId => filters.enableFiltersGroup(groupId));
                 });
 
-                showWindow();
-
                 log.info('Application installed');
 
-                callback();
+                callback(true);
             }
         }, function () {
             log.info('Application initialization finished');
@@ -52,11 +50,11 @@ module.exports = (() => {
                 if (!result || result.allContentBlockersDisabled) {
                     log.warn('All Safari content blockers are turned off!');
 
-                    showWindow();
+                    callback(true);
+                } else {
+                    callback(false);
                 }
             });
-
-            callback();
         });
     };
 

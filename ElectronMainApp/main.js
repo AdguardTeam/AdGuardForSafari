@@ -48,7 +48,7 @@ app.disableHardwareAcceleration();
  * Creates browser window with default settings
  */
 function createWindow() {
-    return new BrowserWindow({
+    const browserWindow = new BrowserWindow({
         title: "AdGuard for Safari",
         width: 1024,
         height: 768,
@@ -57,10 +57,17 @@ function createWindow() {
         center: true,
         icon: './src/main/ui/images/128x128.png',
         resizable: true,
+        show: false,
         webPreferences: {
             nodeIntegration: true
         }
     });
+
+    browserWindow.once('ready-to-show', () => {
+        browserWindow.show();
+    });
+
+    return browserWindow;
 }
 
 /**
@@ -182,13 +189,18 @@ app.on('ready', (() => {
     if (isOpenedAtLogin()) {
         log.info('App is opened at login');
 
-        startup.init(showWindow);
-        uiEventListener.init();
-
         // Open in background at login
         if (process.platform === 'darwin') {
             app.dock.hide();
         }
+
+        startup.init(showWindow, (shouldShowMainWindow) => {
+            uiEventListener.init();
+
+            if (shouldShowMainWindow) {
+                loadMainWindow();
+            }
+        });
     } else {
         log.info('App is opened');
 
