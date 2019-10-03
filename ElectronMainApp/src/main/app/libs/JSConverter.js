@@ -1,6 +1,6 @@
 /**
  * AdGuard -> Safari Content Blocker converter
- * Version 4.1.1
+ * Version 4.2.0
  * License: https://github.com/AdguardTeam/SafariContentBlockerConverterCompiler/blob/master/LICENSE
  */
 
@@ -1257,16 +1257,23 @@ var jsonFromFilters = (function () {
     })(adguard, adguard.rules);
     /** end of base-filter-rule.js */
     /** start of rule-converter.js */
+    /**
+     * This source file and tests are copied from https://github.com/AdguardTeam/AdguardBrowserExtension/blob/master/Extension/lib/filter/rule-converter.js
+     * and https://github.com/AdguardTeam/AdguardBrowserExtension/blob/master/Extension/tests/rule-converter/test-rule-converter.js
+     */
+
     (function (adguard, api) {
         const stringUtils = adguard.utils.strings;
         /**
          * AdGuard scriptlet mask
          */
+            // eslint-disable-next-line no-template-curly-in-string
         const ADGUARD_SCRIPTLET_MASK = '${domains}#%#//scriptlet(${args})';
 
         /**
          * AdGuard scriptlet exception mask
          */
+            // eslint-disable-next-line no-template-curly-in-string
         const ADGUARD_SCRIPTLET_EXCEPTION_MASK = '${domains}#@%#//scriptlet(${args})';
 
         /**
@@ -1277,6 +1284,7 @@ var jsonFromFilters = (function () {
         const UBO_SCRIPTLET_MASK_2 = '##script:inject';
         const UBO_SCRIPTLET_EXCEPTION_MASK_1 = '#@#+js';
         const UBO_SCRIPTLET_EXCEPTION_MASK_2 = '#@#script:inject';
+        const UBO_SCRIPT_TAG_MASK = '##^script';
         /**
          * AdBlock Plus snippet rule mask
          */
@@ -1286,7 +1294,7 @@ var jsonFromFilters = (function () {
         /**
          * AdGuard CSS rule mask
          */
-        const ADG_CSS_MASK_REG = /#\$#.+?\s*\{.*\}\s*$/g;
+        const ADG_CSS_MASK_REG = /#@?\$#.+?\s*\{.*\}\s*$/g;
 
         /**
          * Return array of strings separated by space which not in quotes
@@ -1410,6 +1418,42 @@ var jsonFromFilters = (function () {
         }
 
         /**
+         * Converts UBO Script rule
+         * @param {string} ruleText rule text
+         * @returns {string} converted rule
+         */
+        function convertUboScriptTagRule(ruleText) {
+            if (ruleText.indexOf(UBO_SCRIPT_TAG_MASK) === -1) {
+                return null;
+            }
+
+            // We convert only one case ##^script:has-text at now
+            const uboHasTextRule = ':has-text';
+            const adgScriptTag = '$$script';
+            const uboScriptTag = '##^script';
+
+            const isRegExp = str => str[0] === '/' && str[str.length - 1] === '/';
+
+            const match = ruleText.split(uboHasTextRule);
+            if (match.length === 1) {
+                return null;
+            }
+
+            const domains = match[0].replace(uboScriptTag, '');
+            const rules = [];
+            for (let i = 1; i < match.length; i += 1) {
+                const attr = match[i].slice(1, -1);
+                if (isRegExp(attr)) {
+                    rules.push(`${domains}${uboScriptTag}${uboHasTextRule}(${attr})`);
+                } else {
+                    rules.push(`${domains}${adgScriptTag}[tag-content="${attr}"]`);
+                }
+            }
+
+            return rules;
+        }
+
+        /**
          * Returns false or converted rule
          *
          * Example:
@@ -1446,13 +1490,13 @@ var jsonFromFilters = (function () {
                 RULE_MARKER_FIRST_CHAR
             );
             if (!mask) {
-                return false;
+                return null;
             }
             const maskIndex = ruleText.indexOf(mask);
             const cssContent = ruleText.substring(maskIndex + mask.length);
             const shouldConvert = cssContent.indexOf(UBO_CSS_STYLE_PSEUDO_CLASS) > -1;
             if (!shouldConvert) {
-                return false;
+                return null;
             }
 
             const domainsPart = ruleText.substring(0, maskIndex);
@@ -1463,6 +1507,140 @@ var jsonFromFilters = (function () {
                 throw new Error(`Empty :style pseudo class: ${cssContent}`);
             }
             return domainsPart + CSS_TO_INJECT_PAIRS[mask] + convertedCssContent;
+        }
+
+        /**
+         * Converts abp rule into ag rule
+         * e.g.
+         * from:    "||example.org^$rewrite=abp-resource:blank-mp3"
+         * to:      "||example.org^$redirect:blank-mp3"
+         * @param {string} rule
+         * @returns {string|null}
+         */
+        function convertAbpRedirectRule(rule) {
+            const ABP_REDIRECT_KEYWORD = 'rewrite=abp-resource:';
+            const AG_REDIRECT_KEYWORD = 'redirect=';
+            if (!rule.includes(ABP_REDIRECT_KEYWORD)) {
+                return null;
+            }
+            return rule.replace(ABP_REDIRECT_KEYWORD, AG_REDIRECT_KEYWORD);
+        }
+
+        function convertOptions(rule) {
+            const OPTIONS_DELIMITER = '$';
+            const ESCAPE_CHARACTER = '\\';
+            const NAME_VALUE_SPLITTER = '=';
+            const EMPTY_OPTION = 'empty';
+            const MP4_OPTION = 'mp4';
+            const CSP_OPTION = 'csp';
+            const INLINE_SCRIPT_OPTION = 'inline-script';
+            const INLINE_FONT_OPTION = 'inline-font';
+            const MEDIA_OPTION = 'media';
+            const ALL_OPTION = 'all';
+            const POPUP_OPTION = 'popup';
+            const DOCUMENT_OPTION = 'document';
+
+            /* eslint-disable max-len */
+            const conversionMap = {
+                [EMPTY_OPTION]: 'redirect=nooptext',
+                [MP4_OPTION]: 'redirect=noopmp4-1s',
+                [INLINE_SCRIPT_OPTION]: `${CSP_OPTION}=script-src 'self' 'unsafe-eval' http: https: data: blob: mediastream: filesystem:`,
+                [INLINE_FONT_OPTION]: `${CSP_OPTION}=font-src 'self' 'unsafe-eval' http: https: data: blob: mediastream: filesystem:`,
+            };
+            /* eslint-enable max-len */
+
+            let options;
+            let domainPart;
+
+            // Start looking from the prev to the last symbol
+            // If dollar sign is the last symbol - we simply ignore it.
+            for (let i = (rule.length - 2); i >= 0; i -= 1) {
+                const currChar = rule.charAt(i);
+                if (currChar !== OPTIONS_DELIMITER) {
+                    continue;
+                }
+                if (i > 0 && rule.charAt(i - 1) !== ESCAPE_CHARACTER) {
+                    domainPart = rule.substring(0, i);
+                    options = rule.substring(i + 1);
+                    // Options delimiter was found, doing nothing
+                    break;
+                }
+            }
+            if (!options) {
+                return null;
+            }
+            const optionsParts = options.split(',');
+            let optionsConverted = false;
+
+            let updatedOptionsParts = optionsParts.map((optionsPart) => {
+                let convertedOptionsPart = conversionMap[optionsPart];
+
+                // if option is $mp4, than it should go with $media option together
+                // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/1452
+                if (optionsPart === MP4_OPTION) {
+                    // check if media is not already among options
+                    if (!optionsParts.some(option => option === MEDIA_OPTION)) {
+                        convertedOptionsPart = `${convertedOptionsPart},media`;
+                    }
+                }
+
+                if (convertedOptionsPart) {
+                    optionsConverted = true;
+                    return convertedOptionsPart;
+                }
+
+                return optionsPart;
+            });
+
+            // if has more than one csp modifiers, we merge them into one;
+            const cspParts = updatedOptionsParts.filter(optionsPart => stringUtils.startWith(optionsPart, CSP_OPTION));
+
+            if (cspParts.length > 1) {
+                const allButCsp = updatedOptionsParts
+                    .filter(optionsPart => !stringUtils.startWith(optionsPart, CSP_OPTION));
+
+                const cspValues = cspParts.map((cspPart) => {
+                    // eslint-disable-next-line no-unused-vars
+                    const [_, value] = cspPart.split(NAME_VALUE_SPLITTER);
+                    return value;
+                });
+
+                const updatedCspOption = `${CSP_OPTION}${NAME_VALUE_SPLITTER}${cspValues.join('; ')}`;
+                updatedOptionsParts = allButCsp.concat(updatedCspOption);
+            }
+
+            // options without all modifier
+            const hasAllOption = updatedOptionsParts.indexOf(ALL_OPTION) > -1;
+
+            if (hasAllOption) {
+                const allOptionReplacers = [
+                    DOCUMENT_OPTION,
+                    POPUP_OPTION,
+                    INLINE_SCRIPT_OPTION,
+                    INLINE_FONT_OPTION,
+                ];
+                return allOptionReplacers.map((replacer) => {
+                    // remove replacer and all option from the list
+                    const optionsButAllAndReplacer = updatedOptionsParts
+                        .filter(option => !(option === replacer || option === ALL_OPTION));
+
+                    // try get converted values, used for INLINE_SCRIPT_OPTION, INLINE_FONT_OPTION
+                    const convertedReplacer = conversionMap[replacer] || replacer;
+
+                    // add replacer to the list of options
+                    const updatedOptionsString = [convertedReplacer, ...optionsButAllAndReplacer].join(',');
+
+                    // create a new rule
+                    return `${domainPart}\$${updatedOptionsString}`;
+                });
+            }
+
+            if (optionsConverted) {
+                const updatedOptions = updatedOptionsParts.join(',');
+                return `${domainPart}\$${updatedOptions}`;
+            }
+
+            return null;
         }
 
         /**
@@ -1486,10 +1664,29 @@ var jsonFromFilters = (function () {
             if (isAbpSnippetRule(rule)) {
                 return convertAbpSnippetRule(rule);
             }
+
+            const uboScriptRule = convertUboScriptTagRule(rule);
+            if (uboScriptRule) {
+                return uboScriptRule;
+            }
+
             const uboCssStyleRule = convertUboCssStyleRule(rule);
             if (uboCssStyleRule) {
                 return uboCssStyleRule;
             }
+
+            // Convert abp redirect rule
+            const abpRedirectRule = convertAbpRedirectRule(rule);
+            if (abpRedirectRule) {
+                return abpRedirectRule;
+            }
+
+            // Convert options
+            const ruleWithConvertedOptions = convertOptions(rule);
+            if (ruleWithConvertedOptions) {
+                return ruleWithConvertedOptions;
+            }
+
             return rule;
         }
 
@@ -2892,7 +3089,7 @@ var jsonFromFilters = (function () {
         /**
          * Safari content blocking format rules converter.
          */
-        const CONVERTER_VERSION = '4.1.1';
+        const CONVERTER_VERSION = '4.2.0';
         // Max number of CSS selectors per rule (look at compactCssRules function)
         const MAX_SELECTORS_PER_WIDE_RULE = 250;
 
