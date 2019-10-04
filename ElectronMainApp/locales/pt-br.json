@@ -222,10 +222,10 @@
         "message": "Aviso"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": ""
+        "message": "Existem muitos filtros ativos. O Safari não pode usar mais do que 50 mil regras em um grupo."
     },
     "options_content_blocker_overlimit": {
-        "message": ""
+        "message": "Existem muitos filtros ativos. O Safari não pode usar mais do que 50 mil regras em um grupo."
     },
     "options_filters_list_search_placeholder": {
         "message": "Procurar"
@@ -339,7 +339,7 @@
         "message": "Não atualizar"
     },
     "options_filters_custom_remove": {
-        "message": ""
+        "message": "remover"
     },
     "options_show_tray_icon": {
         "message": "Mostrar AdGuard para Safari na barra de menus"
@@ -399,7 +399,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "O limite de 50 mil regras foi excedido. Desative regras sem utilização para que o aplicativo funcione corretamente.<br/>Regras ativadas no momento: %s (regras desativadas: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Desativado no Safari"

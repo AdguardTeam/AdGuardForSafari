@@ -399,7 +399,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "Grænsen på 50.000 regler er overskredet. Deaktiver unødvendige regler for, at appen kan fungere korrekt. <br/>Aktiverede regler i øjeblikket: %s (deaktiverede regler: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Deaktiveret i Safari"
