@@ -45,11 +45,10 @@ require('electron-reload')(__dirname, {
 app.disableHardwareAcceleration();
 
 /**
- * Creates main window
+ * Creates browser window with default settings
  */
-function createWindow(onWindowLoaded) {
-
-    mainWindow = new BrowserWindow({
+function createWindow() {
+    const browserWindow = new BrowserWindow({
         title: "AdGuard for Safari",
         width: 1024,
         height: 768,
@@ -58,10 +57,27 @@ function createWindow(onWindowLoaded) {
         center: true,
         icon: './src/main/ui/images/128x128.png',
         resizable: true,
+        show: false,
         webPreferences: {
             nodeIntegration: true
         }
     });
+
+    browserWindow.once('ready-to-show', () => {
+        browserWindow.show();
+    });
+
+    return browserWindow;
+}
+
+/**
+ * Creates main window
+ */
+function loadMainWindow(onWindowLoaded) {
+
+    if (!mainWindow) {
+        mainWindow = createWindow();
+    }
 
     mainWindow.loadFile('./src/main/ui/options.html');
 
@@ -93,6 +109,27 @@ function createWindow(onWindowLoaded) {
 }
 
 /**
+ * Loads splash screen while loading
+ */
+function loadSplashScreenWindow(onWindowLoaded) {
+    mainWindow = createWindow();
+    mainWindow.loadFile('./src/main/ui/loading.html');
+
+    if (onWindowLoaded) {
+        const onDidFinishLoad = () => {
+            mainWindow.webContents.removeListener('did-finish-load', onDidFinishLoad);
+
+            if (typeof onWindowLoaded === 'function') {
+                mainWindow.webContents.removeListener('did-finish-load', onDidFinishLoad);
+                onWindowLoaded();
+            }
+        };
+
+        mainWindow.webContents.addListener('did-finish-load', onDidFinishLoad);
+    }
+}
+
+/**
  * Shows main window
  *
  * @param onWindowLoaded callback on window created and loaded
@@ -105,7 +142,7 @@ function showWindow(onWindowLoaded) {
             onWindowLoaded();
         }
     } else {
-        createWindow(onWindowLoaded);
+        loadMainWindow(onWindowLoaded);
         uiEventListener.register(mainWindow);
     }
 }
@@ -149,21 +186,36 @@ let tray;
  */
 app.on('ready', (() => {
     i18n.setAppLocale(app.getLocale());
-    startup.init(showWindow);
-    uiEventListener.init();
 
     log.info('App ready - creating browser windows');
 
     if (isOpenedAtLogin()) {
         log.info('App is opened at login');
+
         // Open in background at login
         if (process.platform === 'darwin') {
             app.dock.hide();
         }
+
+        startup.init(showWindow, (shouldShowMainWindow) => {
+            uiEventListener.init();
+
+            if (shouldShowMainWindow) {
+                loadMainWindow();
+            }
+        });
     } else {
         log.info('App is opened');
-        createWindow();
-        uiEventListener.register(mainWindow);
+
+        loadSplashScreenWindow(() => {
+            log.info('Splash screen loaded');
+
+            startup.init(showWindow, () => {
+                uiEventListener.init();
+                loadMainWindow();
+                uiEventListener.register(mainWindow);
+            });
+        });
     }
 
     mainMenuController.initMenu(showWindow);
@@ -197,7 +249,7 @@ app.on('activate', () => {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {
-        createWindow();
+        loadMainWindow();
         uiEventListener.register(mainWindow);
     }
 });

@@ -6,15 +6,28 @@
     <meta charset="utf-8">
     <link type="text/css" rel="stylesheet" href="./css/main.css">
 
-    <script type="text/javascript" src="./js/libs/ace/ace.js"></script>
-    <script type="text/javascript" src="../events.js"></script>
-    <script type="text/javascript" src="./js/i18n/i18n-helper.js"></script>
-    <script type="text/javascript" src="./js/i18n/i18n.js"></script>
-    <script type="text/javascript" src="./js/options.js"></script>
-
     <link rel="shortcut icon" href="images/favicon.png"/>
+
+    <style>
+        #preloaderContainer {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
 </head>
 <body>
+<div id="preloaderContainer">
+    <img src="images/preloader-logo.png" alt="Loading...">
+</div>
+
+<script type="text/javascript" src="./js/libs/ace/ace.js"></script>
+<script type="text/javascript" src="../events.js"></script>
+<script type="text/javascript" src="./js/i18n/i18n-helper.js"></script>
+<script type="text/javascript" src="./js/i18n/i18n.js"></script>
+<script type="text/javascript" src="./js/options.js"></script>
+
 <div class="settings-wrap">
     <div id="too-many-subscriptions-warning" class="alert alert--warning">
         <div class="alert__cont" i18n="options_content_blocker_overlimit">

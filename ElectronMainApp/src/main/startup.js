@@ -16,7 +16,7 @@ module.exports = (() => {
     /**
      * Initialize application services
      */
-    const init = (showWindow) => {
+    const init = (showWindow, callback) => {
         log.info('Application initialization..');
 
         safariToolbar.busyStatus(true);
@@ -27,7 +27,7 @@ module.exports = (() => {
         notificationController.init(showWindow);
 
         antibanner.start({
-            onInstall: function (callback) {
+            onInstall: function () {
                 log.debug('On application install..');
 
                 // Retrieve filters and install them
@@ -35,9 +35,9 @@ module.exports = (() => {
                     groupIds.forEach(groupId => filters.enableFiltersGroup(groupId));
                 });
 
-                showWindow();
-
                 log.info('Application installed');
+
+                callback(true);
             }
         }, function () {
             log.info('Application initialization finished');
@@ -50,7 +50,9 @@ module.exports = (() => {
                 if (!result || result.allContentBlockersDisabled) {
                     log.warn('All Safari content blockers are turned off!');
 
-                    showWindow();
+                    callback(true);
+                } else {
+                    callback(false);
                 }
             });
         });
