@@ -357,7 +357,7 @@
         "message": "防護被暫停"
     },
     "settings_notification_protection_button_text": {
-        "message": "修復它"
+        "message": "恢復"
     },
     "settings_notification_extensions_button_text": {
         "message": "修復它"
@@ -404,7 +404,13 @@
     "options_cb_disabled_warning": {
         "message": "已在 Safari 中禁用"
     },
+    "options_cb_compilation_warning": {
+        "message": "編譯已失敗"
+    },
     "filters_group_custom": {
         "message": "自訂的"
+    },
+    "userfilter_name": {
+        "message": "使用者過濾器"
     }
 }

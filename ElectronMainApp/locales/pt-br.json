@@ -51,7 +51,7 @@
         "message": "Geral"
     },
     "options_general_desc": {
-        "message": "O AdGuard para Safari é uma extensão gratuita e de código aberto. Sua contribuição e feedback são bem-vindos. Se você quiser reportar um problema ou solicitar um recurso, vá para <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nosso repositório do GitHub</a>."
+        "message": "O AdGuard para Safari é uma extensão gratuita e de código aberto. Sua contribuição e feedback são bem-vindos. Se você quiser reportar um problema ou solicitar um recurso, vá para nosso <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>repositório do GitHub</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Permitir anúncios em pesquisa e autopromoção de sites"
@@ -357,7 +357,7 @@
         "message": "Atenção! A proteçao foi desativada"
     },
     "settings_notification_protection_button_text": {
-        "message": "Corrigir isto"
+        "message": "Retomar"
     },
     "settings_notification_extensions_button_text": {
         "message": "Corrigir isto"
@@ -404,7 +404,13 @@
     "options_cb_disabled_warning": {
         "message": "Desativado no Safari"
     },
+    "options_cb_compilation_warning": {
+        "message": "Falha na compilação"
+    },
     "filters_group_custom": {
         "message": "Personalizados"
+    },
+    "userfilter_name": {
+        "message": "Filtro de usuário"
     }
 }

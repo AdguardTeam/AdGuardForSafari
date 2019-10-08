@@ -306,7 +306,7 @@
         "message": "Poděkování"
     },
     "options_github": {
-        "message": "Github"
+        "message": "GitHub"
     },
     "onboarding_safari_desc": {
         "message": "Zaškrtněte políčko „Ikona AdGuard Safari“, „Pokročilé blokování AdGuard“ a „AdGuard“ v předvolbách Safari"
@@ -404,7 +404,13 @@
     "options_cb_disabled_warning": {
         "message": "Vypnuto v Safari"
     },
+    "options_cb_compilation_warning": {
+        "message": "Kompilace se nezdařila"
+    },
     "filters_group_custom": {
         "message": "Vlastní"
+    },
+    "userfilter_name": {
+        "message": "Uživatelský filtr"
     }
 }
