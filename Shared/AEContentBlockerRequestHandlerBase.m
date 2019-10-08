@@ -8,6 +8,7 @@
 
 #import "AEContentBlockerRequestHandlerBase.h"
 #import "AESharedResources.h"
+#import "CommonLib/ACLang.h"
 
 @interface AEContentBlockerRequestHandlerBase ()
 
@@ -16,6 +17,8 @@
 @implementation AEContentBlockerRequestHandlerBase
 
 - (void)beginRequestWithExtensionContext:(NSExtensionContext *)context {
+    DDLogInfo(@"AG: beginRequestWithExtensionContext");
+    
     NSItemProvider *attachment;
     
     if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsEnabled]) {

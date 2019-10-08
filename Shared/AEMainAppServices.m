@@ -17,14 +17,14 @@
     [AESharedResources setListenerOnAllExtensionEnabledRequest:^{
         [AEMainAppServices performAllExtensionEnabledRequest];
     }];
-    DDLogInfo(@"Set listener on AllExtensionEnabledRequest");
+    DDLogInfo(@"AG: Set listener on AllExtensionEnabledRequest");
 }
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark Internal processed request (private)
 
 + (void)performAllExtensionEnabledRequest {
-    DDLogDebug(@"Checking enabled extensions...");
+    DDLogInfo(@"AG: Checking enabled extensions...");
     [self checkExtension:AESharedResources.advancedBlockingBundleId // Advanced
     ifSuccess:^{
         [self checkBlocker:AESharedResources.blockerBundleId // Base blocker
@@ -45,7 +45,7 @@
                                  forKey:AEDefaultsAllExtensionsEnabled];
                                 [AESharedResources synchronizeSharedDefaults];
                                 [AESharedResources responseAllExtensionEnabled];
-                                DDLogDebug(@"Checking enabled extensions finished with success.");
+                                DDLogInfo(@"AG: Checking enabled extensions finished with success.");
                             }];
                             
                         }];
@@ -67,7 +67,7 @@
     [SFContentBlockerManager
      getStateOfContentBlockerWithIdentifier:blockerName
      completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
-         DDLogVerbose(@"Enabled extensions '%@': %d, error %@, userInfo: %@", blockerName, state.enabled, error, error.userInfo);
+         DDLogInfo(@"AG: Enabled extensions '%@': %d, error %@, userInfo: %@", blockerName, state.enabled, error, error.userInfo);
          if (error == nil && state.enabled) {
              if (block) {
                  block();
@@ -82,7 +82,7 @@
     [SFSafariExtensionManager
      getStateOfSafariExtensionWithIdentifier:extensionName
      completionHandler:^(SFSafariExtensionState * _Nullable state, NSError * _Nullable error) {
-         DDLogVerbose(@"Enabled extensions '%@': %d, error %@, userInfo: %@", extensionName, state.enabled, error, error.userInfo);
+         DDLogInfo(@"AG: Enabled extensions '%@': %d, error %@, userInfo: %@", extensionName, state.enabled, error, error.userInfo);
          if (error == nil && state.enabled) {
              if (block) {
                  block();
@@ -99,7 +99,7 @@
      forKey:AEDefaultsAllExtensionsEnabled];
     [AESharedResources synchronizeSharedDefaults];
     [AESharedResources responseAllExtensionEnabled];
-    DDLogDebug(@"Checking enabled extensions finished with failure.");
+    DDLogInfo(@"AG: Checking enabled extensions finished with failure.");
 }
 
 @end

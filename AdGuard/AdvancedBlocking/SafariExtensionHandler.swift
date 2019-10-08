@@ -19,7 +19,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
                 return;
             }
             
-            NSLog("The extension received a message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:]))");
+            NSLog("AG: The extension received a message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:]))");
 
             // Content script requests scripts and css for current page
             if (messageName == "getAdvancedBlockingData") {
@@ -30,7 +30,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
                     ];
                     page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data);
                 } catch {
-                    NSLog("Error handling message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:])): \(error)");
+                    NSLog("AG: Error handling message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:])): \(error)");
                 }
             }
         }

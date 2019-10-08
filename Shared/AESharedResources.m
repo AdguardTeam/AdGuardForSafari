@@ -75,6 +75,8 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
     
     if (self == [AESharedResources class]) {
         
+        DDLogInfo(@"Initializing AESharedResources");
+        
         ListenerHolder = [NSMutableDictionary new];
         _containerFolderUrl = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:AG_GROUP];
         _sharedUserDefaults = [[NSUserDefaults alloc] initWithSuiteName:AG_GROUP];
@@ -83,6 +85,8 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
         NSDictionary * defs = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"defaults" ofType:@"plist"]];
         if (defs)
         [_sharedUserDefaults registerDefaults:defs];
+        
+        DDLogInfo(@"Initializing AESharedResources - ok");
     }
 }
 
@@ -157,6 +161,8 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
 }
 
 + (void)requestAllExtensionEnabled {
+    DDLogInfo(@"AG: requestAllExtensionEnabled");
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)REQUEST_EXTENSIONS_ENABLED, NULL, NULL, YES);
     });
@@ -166,6 +172,8 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
                                block:block];
 }
 + (void)responseAllExtensionEnabled {
+    DDLogInfo(@"AG: responseAllExtensionEnabled");
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_EXTENSIONS_ENABLED, NULL, NULL, YES);
     });
@@ -273,6 +281,8 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
 
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
         @autoreleasepool {
+            DDLogInfo(@"AG: setBlockingContentRulesJson");
+            
             NSData *data = jsonData ?: [NSData data];
             
             NSDictionary *d = @{
@@ -286,6 +296,9 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
             
             NSString *path = d[bundleId];
             [self saveData:data toFileRelativePath:path];
+            
+            DDLogInfo(@"AG: setBlockingContentRulesJson - ok");
+            
             if (completion) {
                 completion();
             }
@@ -297,8 +310,12 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
 
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), ^{
         @autoreleasepool {
+            DDLogInfo(@"AG: setAdvancedBlockingContentRulesJson");
+            
             NSData *data = jsonData ?: [NSData data];
             [self saveData:data toFileRelativePath:AES_ADV_BLOCKING_CONTENT_RULES_RESOURCE];
+            
+            DDLogInfo(@"AG: setAdvancedBlockingContentRulesJson - ok");
             if (completion) {
                 completion();
             }
@@ -407,6 +424,8 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
             
             NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
             if (dataUrl) {
+                DDLogInfo(@"AG: loadDataFromFileRelativePath: %@", relativePath);
+                
                 ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
                 if ([locker lock]) {
                     
