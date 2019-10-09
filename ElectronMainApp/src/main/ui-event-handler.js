@@ -142,10 +142,6 @@ function sendResponse(event, message, payload) {
 function eventHandler(win) {
     return function () {
         try {
-            // if (!win) {
-            //     return;
-            // }
-
             win.webContents.send('main-to-renderer', {
                 type: 'message',
                 args: Array.prototype.slice.call(arguments)
