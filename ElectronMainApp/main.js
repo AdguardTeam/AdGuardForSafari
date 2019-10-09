@@ -232,13 +232,17 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit();
     } else {
+        log.info('Hiding application window');
         app.dock.hide();
     }
 });
 
 app.on('browser-window-created', () => {
     if (process.platform === 'darwin') {
-        app.dock.show();
+        if (!mainWindow) {
+            log.info('Opening application window');
+            app.dock.show();
+        }
     }
 });
 
