@@ -142,6 +142,10 @@ function sendResponse(event, message, payload) {
 function eventHandler(win) {
     return function () {
         try {
+            // if (!win) {
+            //     return;
+            // }
+
             win.webContents.send('main-to-renderer', {
                 type: 'message',
                 args: Array.prototype.slice.call(arguments)
@@ -152,9 +156,26 @@ function eventHandler(win) {
     };
 }
 
+/**
+ * Register window object
+ *
+ * @param win
+ */
 module.exports.register = (win) => {
-    //Retranslate messages to renderer process
-    listeners.addListener(eventHandler(win));
+    win.listenerId = listeners.addListener(eventHandler(win));
+};
+
+/**
+ * Unregister window object
+ *
+ * @param win
+ */
+module.exports.unregister = (win) => {
+    const listenerId = win.listenerId;
+    if (listenerId) {
+        log.info('Removing listener');
+        listeners.removeListener(listenerId);
+    }
 };
 
 /**
