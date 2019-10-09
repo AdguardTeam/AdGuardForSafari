@@ -41,12 +41,12 @@ module.exports = (function () {
             let overlimit = false;
 
             for (let group of grouped) {
-                let json = emptyBlockerJSON;
+                let json = JSON.stringify(emptyBlockerJSON);
 
                 const rulesTexts = group.rules.map(x => x.ruleText);
                 const result = await jsonFromRules(rulesTexts, false);
                 if (result && result.converted) {
-                    json = JSON.parse(result.converted);
+                    json = result.converted;
                     if (result.overLimit) {
                         overlimit = true;
                     }
@@ -95,7 +95,7 @@ module.exports = (function () {
      */
     const setAdvancedBlocking = async (rules) => {
         const result = await jsonFromRules(rules, true);
-        const advancedBlocking = result ? JSON.parse(result.advancedBlocking) : [];
+        const advancedBlocking = result ? result.advancedBlocking : "[]";
 
         setSafariContentBlocker(rulesGroupsBundles["advancedBlocking"], advancedBlocking);
 

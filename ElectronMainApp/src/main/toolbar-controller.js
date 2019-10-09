@@ -106,7 +106,7 @@ module.exports = (() => {
         // Subscribe to application events
         listeners.addListener(function (event, info) {
             if (event === events.CONTENT_BLOCKER_UPDATE_REQUIRED) {
-                setContentBlockingJson(info.bundleId, JSON.stringify(info.json), info.info);
+                setContentBlockingJson(info.bundleId, info.json, info.info);
             } else if (event === events.UPDATE_USER_FILTER_RULES) {
                 applicationApi.getUserFilterRules((rules) => {
                     setUserFilter(rules);
