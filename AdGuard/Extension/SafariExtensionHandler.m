@@ -22,11 +22,12 @@ static BOOL _mainAppReady;
 
 + (void)initialize {
     if (self == [SafariExtensionHandler class]) {
-        DDLogInfo(@"AG: Initialize SafariExtensionHandler");
-        
         _onReadyBlocks = [NSMutableArray new];
         _mainAppReady = NO;
         [AESharedResources initLogger];
+        
+        DDLogInfo(@"AG: Initialize SafariExtensionHandler");
+        
         [AESharedResources setListenerOnBusyChanged:^{
             DDLogDebugTrace();
             [SafariExtensionViewController.sharedController setEnabledButton]; //this call peforms tuning all views
