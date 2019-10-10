@@ -1,6 +1,6 @@
 /**
  * AdGuard -> Safari Content Blocker converter
- * Version 4.2.0
+ * Version 4.2.1
  * License: https://github.com/AdguardTeam/SafariContentBlockerConverterCompiler/blob/master/LICENSE
  */
 
@@ -4265,6 +4265,7 @@ var jsonFromFilters = (function () {
                 adguard.console.info('Advanced Blocking length: ' + advancedBlocker.length);
 
                 result.advancedBlocking = JSON.stringify(advancedBlocker, null, "\t");
+                result.advancedBlockingConvertedCount = advancedBlocker.length;
             }
 
             return result;
