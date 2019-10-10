@@ -51,7 +51,7 @@
         "message": "Generelt"
     },
     "options_general_desc": {
-        "message": "AdGuard til Safari er et gratis og open source-software. Vi byder din feedback og dine bidrag velkommen. Hvis du gerne vil rapportere en fejl eller spørge efter en funktion, så gå venligst til <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>vores Github repo</a>."
+        "message": "AdGuard til Safari er et gratis og open source-software. Vi byder din feedback og dine bidrag velkommen. Hvis du gerne vil rapportere en fejl eller spørge efter en funktion, så gå venligst til <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>vores GitHub repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Tillad søgningsreklamer og selvpromovering af hjemmesider"
@@ -306,7 +306,7 @@
         "message": "Anerkendelser"
     },
     "options_github": {
-        "message": "Github"
+        "message": "GitHub"
     },
     "onboarding_safari_desc": {
         "message": "Afkryds boksen ved siden af \"AdGuard Safari ikonet\", \"AdGuard Avanceret Blokering\" og \"AdGuard\" i Safari indstillingerne"
@@ -357,7 +357,7 @@
         "message": "Beskyttelsen er pauset"
     },
     "settings_notification_protection_button_text": {
-        "message": "Reparer"
+        "message": "Genoptag"
     },
     "settings_notification_extensions_button_text": {
         "message": "Reparer"
@@ -399,12 +399,18 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "Grænsen på 50.000 regler er overskredet. Deaktiver unødvendige regler for, at appen kan fungere korrekt. <br/>Aktiverede regler i øjeblikket: %s (deaktiverede regler: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Deaktiveret i Safari"
     },
+    "options_cb_compilation_warning": {
+        "message": "Kompilering mislykkedes"
+    },
     "filters_group_custom": {
         "message": "Brugerdefineret"
+    },
+    "userfilter_name": {
+        "message": "Brugerfilter"
     }
 }

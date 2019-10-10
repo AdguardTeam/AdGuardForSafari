@@ -51,7 +51,7 @@
         "message": "Główne "
     },
     "options_general_desc": {
-        "message": "AdGuard dla Safari to darmowe oprogramowanie o otwartym kodzie źródłowym. Czekamy na Wasze opinie i uwagi. Jeśli chcesz zgłosić błąd lub poprosić o funkcję, przejdź do <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nasze repozytorium Github</a>."
+        "message": "AdGuard dla Safari to darmowe oprogramowanie o otwartym kodzie źródłowym. Czekamy na Wasze opinie i uwagi. Jeśli chcesz zgłosić błąd lub poprosić o funkcję, przejdź do <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nasze repozytorium GitHub</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Zezwalaj na reklamy podczas wyszukiwania i autopromocję witryn"
@@ -222,10 +222,10 @@
         "message": "Ostrzeżenie"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": ""
+        "message": "Włączono zbyt wiele filtrów. Safari nie może używać więcej niż 50 000 reguł w jednej grupie."
     },
     "options_content_blocker_overlimit": {
-        "message": ""
+        "message": "Włączono zbyt wiele filtrów. Safari nie może używać więcej niż 50 000 reguł w jednej grupie."
     },
     "options_filters_list_search_placeholder": {
         "message": "Wyszukaj"
@@ -285,10 +285,10 @@
         "message": "Blokowanie treści"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "Włączone blokery reklam: %s z 6 (każdy może zawierać do 50 000 reguł)"
     },
     "options_content_blockers_disabled_desc": {
-        "message": ""
+        "message": "Blokery reklam są wyłączone"
     },
     "options_compare_btn": {
         "message": "Jak się porównują"
@@ -306,7 +306,7 @@
         "message": "Podziękowania"
     },
     "options_github": {
-        "message": "Github"
+        "message": "GitHub"
     },
     "onboarding_safari_desc": {
         "message": "Zaznacz pole \"ikona AdGuard Safari\" i \"AdGuard\" w ustawieniach Safari"
@@ -339,7 +339,7 @@
         "message": "Nie aktualizuj"
     },
     "options_filters_custom_remove": {
-        "message": ""
+        "message": "usuń"
     },
     "options_show_tray_icon": {
         "message": "Pokaż AdGuard dla Safari na pasku menu"
@@ -357,7 +357,7 @@
         "message": "Uwaga! Ochrona została wyłączona"
     },
     "settings_notification_protection_button_text": {
-        "message": "Napraw to"
+        "message": "Wznów"
     },
     "settings_notification_extensions_button_text": {
         "message": "Napraw to"
@@ -399,12 +399,18 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "Limit 50 000 reguł został przekroczony. Wyłącz niepotrzebne reguły, aby aplikacja działała poprawnie.<br/>Włączonych obecnie reguł: %s (wyłączone reguły: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Wyłączone w Safari"
     },
+    "options_cb_compilation_warning": {
+        "message": "Kompilacja nie powiodła się"
+    },
     "filters_group_custom": {
-        "message": ""
+        "message": "Niestandardowy"
+    },
+    "userfilter_name": {
+        "message": "Filtr użytkownika"
     }
 }

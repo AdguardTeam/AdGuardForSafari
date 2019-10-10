@@ -222,10 +222,10 @@
         "message": "Varning"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": ""
+        "message": "För många valda filter. Safari kan endast hantera 50 000 regler."
     },
     "options_content_blocker_overlimit": {
-        "message": ""
+        "message": "För många valda filter. Safari kan endast hantera 50 000 regler."
     },
     "options_filters_list_search_placeholder": {
         "message": "Sök"
@@ -354,7 +354,7 @@
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
     "settings_notification_protection_title": {
-        "message": ""
+        "message": "Observera! Skyddet kopplades bort"
     },
     "settings_notification_protection_button_text": {
         "message": ""
@@ -404,7 +404,13 @@
     "options_cb_disabled_warning": {
         "message": ""
     },
+    "options_cb_compilation_warning": {
+        "message": ""
+    },
     "filters_group_custom": {
+        "message": ""
+    },
+    "userfilter_name": {
         "message": ""
     }
 }

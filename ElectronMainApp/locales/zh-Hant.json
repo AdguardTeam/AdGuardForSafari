@@ -357,7 +357,7 @@
         "message": "防護被暫停"
     },
     "settings_notification_protection_button_text": {
-        "message": "修復它"
+        "message": "恢復"
     },
     "settings_notification_extensions_button_text": {
         "message": "修復它"
@@ -399,12 +399,18 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "50,000 項規則的限制已被超過。請禁用不必要的規則以使應用程式正確地運作。<br/>此刻已啟用的規則：%s（已禁用的規則：$2）"
+        "message": "50,000 項規則的限制已被超出。請禁用不必要的規則以使應用程式正確地運作。<br/>此刻已啟用的規則：%s（已禁用的規則：$2）"
     },
     "options_cb_disabled_warning": {
         "message": "已在 Safari 中禁用"
     },
+    "options_cb_compilation_warning": {
+        "message": "編譯已失敗"
+    },
     "filters_group_custom": {
         "message": "自訂的"
+    },
+    "userfilter_name": {
+        "message": "使用者過濾器"
     }
 }

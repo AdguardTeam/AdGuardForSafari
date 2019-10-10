@@ -1,33 +1,33 @@
 {
     "main_menu_about": {
-        "message": "Sobre AdGuard para Safari."
+        "message": "Sobre o AdGuard para Safari"
     },
     "options_popup_trusted_filter_title": {
-        "message": "Confiavel"
+        "message": "Confiável"
     },
     "options_popup_trusted_filter_description": {
-        "message": "Filtros confiáveis podem usar regras de filtros poderosas modificadoras, que podem ser perigosos nas mãos erradas. Não clique nessa caixa se não estiver completamente confiável.  "
+        "message": "Filtros confiáveis podem usar poderosos modificadores de regras de filtragem que podem ser perigosos nas mãos erradas. Não marque esta caixa a não ser que confie totalmente neles."
     },
     "options_filters_filter_trusted_tag": {
         "message": "confiável"
     },
     "options_filters_filter_trusted_tag_desc": {
-        "message": "Tu escolhes se confias nesse filtro."
+        "message": "Escolheu confiar neste filtro"
     },
     "options_about_update_check": {
         "message": "Procurando por Atualizações."
     },
     "options_about_updating": {
-        "message": "Atualizando AdGuard para Safari"
+        "message": "A actualizar o AdGuard para Safari"
     },
     "options_about_updates_not_found": {
-        "message": "AdGuard para Safari está atualizado."
+        "message": "O AdGuard para Safari está actualizado"
     },
     "options_about_update_downloaded": {
-        "message": "Atualização quase completa! Reabre AdGuard para safari para completar a atualização."
+        "message": "A actualização está quase completa! Abra novamente o AdGuard para safari para finalizar a actualização."
     },
     "options_about_update_relaunch": {
-        "message": "Reabre"
+        "message": "Abra novamente"
     },
     "options_popup_title_placeholder": {
         "message": "Insira o nome do filtro"
@@ -42,7 +42,7 @@
         "message": "Bloqueador de Publicidade AdGuard"
     },
     "description": {
-        "message": "Extensão de bloqueio de anúncios incomparável contra publicidade e popups. Bloqueia anúncios no Facebook, no Youtube e em todos os outros sites."
+        "message": "Extensão de bloqueador de publicidade inigualável contra publicidade e pop-ups. Bloqueia anúncios no Facebook, Youtube e todos os outros sites."
     },
     "options_settings": {
         "message": "AdGuard for Safari - Definições"
@@ -51,36 +51,36 @@
         "message": "Geral"
     },
     "options_general_desc": {
-        "message": "O AdGuard para o Safari é um software livre e de código aberto. Congratulamo-nos com o seu feedback e contribuições. Se quiser denunciar um bug ou solicitar um recurso, vá para <a target = '_ blank' href = 'https: //adguard.com/forward.html? Action = github & from = options_screen & app = safari_extension' class = 'link' >our Github repo</a>."
+        "message": "O AdGuard for Safari é um software gratuito e de código aberto. Agradecemos os seus comentários e contribuições. Se quiser comunicar um erro ou solicitar um recurso, vá até <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our GitHub repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Permitir anúncios de pesquisa e auto-promoção de sites"
     },
     "options_export_settings": {
-        "message": "Export settings"
+        "message": "Exportar definições"
     },
     "options_import_settings": {
-        "message": "Import settings"
+        "message": "Importar definições"
     },
     "options_antibanner": {
         "message": "Filtros"
     },
     "options_antibanner_info_filters": {
         "message": {
-            "one": "%s filter",
-            "other": "%s filters"
+            "one": "%s filtro",
+            "other": "%s filtros"
         }
     },
     "options_antibanner_info_rules": {
         "message": {
-            "one": "%s rule",
-            "other": "%s rules"
+            "one": "%s regra",
+            "other": "%s regras"
         }
     },
     "options_antibanner_info_adv_rules": {
         "message": {
-            "one": "%s advanced rule",
-            "other": "%s advanced rules"
+            "one": "%s regra avançada",
+            "other": "%s regras avançadas"
         }
     },
     "options_filters_enabled": {
@@ -306,7 +306,7 @@
         "message": "Agradecimentos"
     },
     "options_github": {
-        "message": "Github"
+        "message": "GitHub"
     },
     "onboarding_safari_desc": {
         "message": "Marque as caixas ao lado das extensões do AdGuard nas preferências do Safari"
@@ -357,7 +357,7 @@
         "message": "Atenção! A protecção foi desativada"
     },
     "settings_notification_protection_button_text": {
-        "message": "Corrigir"
+        "message": "Resumo"
     },
     "settings_notification_extensions_button_text": {
         "message": "Corrigir"
@@ -404,7 +404,13 @@
     "options_cb_disabled_warning": {
         "message": "Desactivado no Safari"
     },
+    "options_cb_compilation_warning": {
+        "message": "A compilação falhou"
+    },
     "filters_group_custom": {
         "message": "Personalizado"
+    },
+    "userfilter_name": {
+        "message": "Filtro do Utilizador"
     }
 }

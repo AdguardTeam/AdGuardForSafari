@@ -222,10 +222,10 @@
         "message": "Warning"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Too many filters enabled. Safari cannot use more than 50 000 rules in one group."
+        "message": "Too many filters enabled. Safari cannot use more than 50,000 rules in one group."
     },
     "options_content_blocker_overlimit": {
-        "message": "Too many filters enabled. Safari cannot use more than 50 000 rules in one group."
+        "message": "Too many filters enabled. Safari cannot use more than 50,000 rules in one group."
     },
     "options_filters_list_search_placeholder": {
         "message": "Search"
@@ -285,7 +285,7 @@
         "message": "Content blockers"
     },
     "options_content_blockers_desc": {
-        "message": "Enabled ad blockers: %s out of 6 (each can contain up to 50 000 rules)"
+        "message": "Enabled ad blockers: %s out of 6 (each can contain up to 50,000 rules)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Ad blockers are disabled"

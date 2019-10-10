@@ -348,16 +348,16 @@
         "message": "Lancer AdGuard pour Safari dès la connexion"
     },
     "options_verbose_logging": {
-        "message": "Verbose logging"
+        "message": "Journalisation avancée"
     },
     "options_verbose_logging_desc": {
-        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
+        "message": "Si cette option est activée, les extensions AdGuard pour Safari vont ajouter l'information supplémentaire à la console du navigateur"
     },
     "settings_notification_protection_title": {
         "message": "La protection est en pause"
     },
     "settings_notification_protection_button_text": {
-        "message": "Gérer"
+        "message": "Réactiver"
     },
     "settings_notification_extensions_button_text": {
         "message": "Gérer"
@@ -404,7 +404,13 @@
     "options_cb_disabled_warning": {
         "message": "Désactivé dans Safari"
     },
+    "options_cb_compilation_warning": {
+        "message": "Échec de la compilation"
+    },
     "filters_group_custom": {
         "message": "Personnalisé"
+    },
+    "userfilter_name": {
+        "message": "Filtre utilisateur"
     }
 }

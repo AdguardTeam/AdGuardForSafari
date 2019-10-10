@@ -222,10 +222,10 @@
         "message": "警告"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": ""
+        "message": "开启的过滤器过多。Safari 最多仅可使用 50000条规则。"
     },
     "options_content_blocker_overlimit": {
-        "message": ""
+        "message": "开启的过滤器过多。Safari 最多仅可使用 50000条规则。"
     },
     "options_filters_list_search_placeholder": {
         "message": "搜索"
@@ -282,10 +282,10 @@
         "message": "关于"
     },
     "options_content_blockers": {
-        "message": ""
+        "message": "内容拦截"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "已启用广告过滤器：6个当中的 %s（每个最高可包含 50,000 条规则）"
     },
     "options_content_blockers_disabled_desc": {
         "message": ""
@@ -404,7 +404,13 @@
     "options_cb_disabled_warning": {
         "message": ""
     },
+    "options_cb_compilation_warning": {
+        "message": ""
+    },
     "filters_group_custom": {
+        "message": ""
+    },
+    "userfilter_name": {
         "message": ""
     }
 }
