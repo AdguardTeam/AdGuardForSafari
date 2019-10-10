@@ -158,7 +158,7 @@ function isOpenedAtLogin() {
     const SECONDS_FROM_LOGIN = 60;
 
     try {
-        const stdout = execSync('who | grep -i "$USER.*console"', { timeout: 100}).toString();
+        const stdout = execSync('who | grep -i "$USER.*console"', { timeout: 500 }).toString();
         //Output format: userName console  Jun 20 18:14
         log.info('Checking open at login user console: {0}', stdout);
         const now = new Date();
