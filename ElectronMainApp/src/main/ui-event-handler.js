@@ -152,9 +152,26 @@ function eventHandler(win) {
     };
 }
 
+/**
+ * Register window object
+ *
+ * @param win
+ */
 module.exports.register = (win) => {
-    //Retranslate messages to renderer process
-    listeners.addListener(eventHandler(win));
+    win.listenerId = listeners.addListener(eventHandler(win));
+};
+
+/**
+ * Unregister window object
+ *
+ * @param win
+ */
+module.exports.unregister = (win) => {
+    const listenerId = win.listenerId;
+    if (listenerId) {
+        log.info('Removing listener');
+        listeners.removeListener(listenerId);
+    }
 };
 
 /**
