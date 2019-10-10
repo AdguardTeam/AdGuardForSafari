@@ -10,27 +10,32 @@ import SafariServices
 
 class SafariExtensionHandler: SFSafariExtensionHandler {
     
-    private var contentBlockerController: ContentBlockerController = ContentBlockerController.shared;
+    private var contentBlockerController: ContentBlockerController? = nil;
     
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {
         // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").
+        
+        if (self.contentBlockerController == nil) {
+            self.contentBlockerController = ContentBlockerController.shared;
+        }
+        
         page.getPropertiesWithCompletionHandler { properties in
             guard let url = properties?.url else {
                 return;
             }
             
-            NSLog("The extension received a message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:]))");
+            NSLog("AG: The extension received a message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:]))");
 
             // Content script requests scripts and css for current page
             if (messageName == "getAdvancedBlockingData") {
                 do {
                     let data: [String : Any]? = [
-                        "data": try self.contentBlockerController.getData(url: url),
+                        "data": try self.contentBlockerController!.getData(url: url),
                         "verbose": self.isVerboseLoggingEnabled()
                     ];
                     page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data);
                 } catch {
-                    NSLog("Error handling message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:])): \(error)");
+                    NSLog("AG: Error handling message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:])): \(error)");
                 }
             }
         }

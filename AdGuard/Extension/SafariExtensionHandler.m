@@ -25,6 +25,9 @@ static BOOL _mainAppReady;
         _onReadyBlocks = [NSMutableArray new];
         _mainAppReady = NO;
         [AESharedResources initLogger];
+        
+        DDLogInfo(@"AG: Initialize SafariExtensionHandler");
+        
         [AESharedResources setListenerOnBusyChanged:^{
             DDLogDebugTrace();
             [SafariExtensionViewController.sharedController setEnabledButton]; //this call peforms tuning all views
@@ -48,7 +51,7 @@ static BOOL _mainAppReady;
             dispatch_async(dispatch_get_main_queue(), ^{
                 SafariExtensionViewController.sharedController.allExtensionEnabled =
                 [AESharedResources.sharedDefaults boolForKey:AEDefaultsAllExtensionsEnabled];
-                DDLogDebug(@"Received OnAllExtensionEnabledResponse with value: %d", SafariExtensionViewController.sharedController.allExtensionEnabled);
+                DDLogInfo(@"AG: Received OnAllExtensionEnabledResponse with value: %d", SafariExtensionViewController.sharedController.allExtensionEnabled);
             });
         }];
     }
@@ -68,13 +71,13 @@ static BOOL _mainAppReady;
     @autoreleasepool {
         // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").
         [page getPagePropertiesWithCompletionHandler:^(SFSafariPageProperties *properties) {
-            DDLogInfo(@"The extension received a message (%@) from a script injected into (%@) with userInfo (%@)", messageName, properties.url, userInfo);
+            DDLogInfo(@"AG: The extension received a message (%@) from a script injected into (%@) with userInfo (%@)", messageName, properties.url, userInfo);
         }];
         if ([messageName isEqualToString:@"blockElementPong"]) {
             [page dispatchMessageToScriptWithName:@"blockElement" userInfo:NULL];
         }
         else if ([messageName isEqualToString:@"ruleResponse"]) {
-            DDLogInfo(@"Adding rule to user filter: %@", userInfo[@"rule"]);
+            DDLogInfo(@"AG: Adding rule to user filter: %@", userInfo[@"rule"]);
             NSString *newRule = userInfo[@"rule"];
             if (newRule.length) {
                 [AESharedResources userFilterRulesWithCompletion:^(NSArray<NSString *> *rules) {
