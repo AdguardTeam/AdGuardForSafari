@@ -63,12 +63,12 @@ module.exports = (function () {
                 setSafariContentBlocker(rulesGroupsBundles[group.key], json, info);
             }
 
-            const advancedBlocking = await setAdvancedBlocking(rules.map(x => x.ruleText));
+            const advancedBlockingRulesCount = await setAdvancedBlocking(rules.map(x => x.ruleText));
 
             listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
                 rulesCount: rules.length,
                 rulesOverLimit: overlimit,
-                advancedBlockingRulesCount: JSON.parse(advancedBlocking).length
+                advancedBlockingRulesCount: advancedBlockingRulesCount
             });
 
         });
@@ -90,8 +90,8 @@ module.exports = (function () {
     /**
      * Activates advanced blocking json
      *
-     * @param rules
-     * @return {Array}
+     * @param rules array of rules
+     * @return {int} rules count
      */
     const setAdvancedBlocking = async (rules) => {
         const result = await jsonFromRules(rules, true);
@@ -99,7 +99,7 @@ module.exports = (function () {
 
         setSafariContentBlocker(rulesGroupsBundles["advancedBlocking"], advancedBlocking);
 
-        return advancedBlocking;
+        return result ? result.advancedBlockingConvertedCount : 0;
     };
 
     /**
