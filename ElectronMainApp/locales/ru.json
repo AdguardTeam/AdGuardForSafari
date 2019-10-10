@@ -51,7 +51,7 @@
         "message": "Общие"
     },
     "options_general_desc": {
-        "message": "AdGuard для Safari - это бесплатное программное обеспечение с открытым исходным кодом. Мы приветствуем ваши отзывы и предложения. Если вы хотите сообщить об ошибке или запросить функцию, пожалуйста, отправляйтесь в <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>наш репозиторий на GitHub</a>."
+        "message": "AdGuard для Safari — это бесплатное программное обеспечение с открытым исходным кодом. Мы приветствуем ваши отзывы и предложения. Если вы хотите сообщить об ошибке или запросить функцию, пожалуйста, отправляйтесь в <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>наш репозиторий на GitHub</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Разрешить поисковую рекламу и саморекламу сайтов"
@@ -222,10 +222,10 @@
         "message": "Предупреждение"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Активировано слишком много фильтров. Safari не может использовать более 50 000 правил в одной группе."
+        "message": "Активировано слишком много фильтров. Safari не может использовать более 50,000 правил в одной группе."
     },
     "options_content_blocker_overlimit": {
-        "message": "Активировано слишком много фильтров. Safari не может использовать более 50 000 правил в одной группе."
+        "message": "Активировано слишком много фильтров. Safari не может использовать более 50 000 правил."
     },
     "options_filters_list_search_placeholder": {
         "message": "Поиск"
@@ -285,7 +285,7 @@
         "message": "Блокировщики контента"
     },
     "options_content_blockers_desc": {
-        "message": "Включено блокировщиков: %s из 6 (каждый может содержать до 50 000 правил)"
+        "message": "Включено блокировщиков: %s из 6 (каждый может содержать до 50,000 правил)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Нет включённых блокировщиков"
@@ -306,7 +306,7 @@
         "message": "Благодарности"
     },
     "options_github": {
-        "message": "Github"
+        "message": "GitHub"
     },
     "onboarding_safari_desc": {
         "message": "Поставьте галочки напротив расширений AdGuard в настройках Safari"
@@ -357,7 +357,7 @@
         "message": "Защита приостановлена"
     },
     "settings_notification_protection_button_text": {
-        "message": "Исправить"
+        "message": "Возобновить"
     },
     "settings_notification_extensions_button_text": {
         "message": "Исправить"
@@ -404,7 +404,13 @@
     "options_cb_disabled_warning": {
         "message": "Отключено в Safari"
     },
+    "options_cb_compilation_warning": {
+        "message": "Компиляция не удалась"
+    },
     "filters_group_custom": {
         "message": "Пользовательские"
+    },
+    "userfilter_name": {
+        "message": "Пользовательский фильтр"
     }
 }

@@ -404,7 +404,13 @@
     "options_cb_disabled_warning": {
         "message": "In Safari deaktiviert"
     },
+    "options_cb_compilation_warning": {
+        "message": "Kompilierung fehlgeschlagen"
+    },
     "filters_group_custom": {
         "message": "Benutzerdefiniert"
+    },
+    "userfilter_name": {
+      "message": "Benutzerfilter"
     }
 }

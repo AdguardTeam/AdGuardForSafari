@@ -285,7 +285,7 @@
         "message": "コンテンツブロッカー"
     },
     "options_content_blockers_desc": {
-        "message": "有効広告ブロッカー数：%s/6（それぞれ最大50,000件づつのルール使用可）"
+        "message": "有効広告ブロッカー数：%s/6（それぞれ50,000件づつのルールまで使用可）"
     },
     "options_content_blockers_disabled_desc": {
         "message": "広告ブロッカーは無効です。"
@@ -404,7 +404,13 @@
     "options_cb_disabled_warning": {
         "message": "Safariで無効になっています"
     },
+    "options_cb_compilation_warning": {
+        "message": ""
+    },
     "filters_group_custom": {
         "message": "カスタム"
+    },
+    "userfilter_name": {
+        "message": ""
     }
 }

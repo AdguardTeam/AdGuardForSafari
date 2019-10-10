@@ -222,10 +222,10 @@
         "message": "Uyarı"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": ""
+        "message": "Çok fazla filtre seçildi. Safari 50000'den fazla kural kullanamaz."
     },
     "options_content_blocker_overlimit": {
-        "message": ""
+        "message": "Çok fazla filtre seçildi. Safari 50000'den fazla kural kullanamaz."
     },
     "options_filters_list_search_placeholder": {
         "message": "Ara"
@@ -285,10 +285,10 @@
         "message": "İçerik engelleyicileri"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "Etkinleştirilen reklam engelleyicisi adeti: 6 tanenin %s tanesi (her biri 50.000 adete kadar kural içerebilir)"
     },
     "options_content_blockers_disabled_desc": {
-        "message": ""
+        "message": "Reklam engelleyicileri devre dışıdır"
     },
     "options_compare_btn": {
         "message": "Nasıl karşılaştırıyorlar"
@@ -339,7 +339,7 @@
         "message": "Güncellemeyin"
     },
     "options_filters_custom_remove": {
-        "message": ""
+        "message": "kaldır"
     },
     "options_show_tray_icon": {
         "message": "Safari için AdGuard'ı menü çubuğunda göster"
@@ -399,12 +399,18 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "50,000 adet kural sınırı aşıldı. Uygulamanın düzgün çalışması için gereksiz kuralları lütfen devre dışı bırakın.<br/>Şu anda etkinleştirilen kurallar: %s (devre dışı bırakılan kurallar: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Safari'de devre dışı"
     },
+    "options_cb_compilation_warning": {
+        "message": "Derleme başarısız oldu"
+    },
     "filters_group_custom": {
-        "message": ""
+        "message": "Özel"
+    },
+    "userfilter_name": {
+        "message": "Kullanıcı filtresi"
     }
 }
