@@ -68,7 +68,7 @@ module.exports = (function () {
             listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
                 rulesCount: rules.length,
                 rulesOverLimit: overlimit,
-                advancedBlockingRulesCount: advancedBlocking.length
+                advancedBlockingRulesCount: JSON.parse(advancedBlocking).length
             });
 
         });
