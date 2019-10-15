@@ -242,7 +242,7 @@ module.exports = (() => {
         serviceClient.loadFilterRules(
             filter.filterId,
             forceRemote,
-            settings.isUseOptimizedFiltersEnabled(),
+            true,
             successCallback,
             errorCallback
         );
