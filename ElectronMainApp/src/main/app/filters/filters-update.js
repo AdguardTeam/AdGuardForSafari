@@ -24,6 +24,11 @@ module.exports = (() => {
     const UPDATE_FILTERS_DELAY = 5 * 60 * 1000;
 
     /**
+     * Delay before doing filters reload -- 15 seconds
+     */
+    const RELOAD_FILTERS_DELAY = 15 * 1000;
+
+    /**
      * TImeout for recently updated filters and again enabled filters - 5 minutes
      */
     const ENABLED_FILTERS_SKIP_TIMEOUT = 5 * 60 * 1000;
@@ -354,6 +359,7 @@ module.exports = (() => {
 
         const filters = subscriptions.getFilters();
         for (let filter of filters) {
+            log.debug('Reset version for filter {0}', filter.filterId);
             filter.version = RESET_VERSION;
         }
     };
@@ -364,10 +370,13 @@ module.exports = (() => {
      * @private
      */
     const reloadAntiBannerFilters = () => {
-        log.info('Reloading filters..');
+        log.info('Schedule filters reload..');
 
-        resetFiltersVersion();
-        checkAntiBannerFiltersUpdate(true);
+        // Delay filters update
+        setTimeout(() => {
+            resetFiltersVersion();
+            checkAntiBannerFiltersUpdate(true)
+        }, RELOAD_FILTERS_DELAY);
     };
 
     listeners.addListener(function (event, filter) {
