@@ -346,6 +346,30 @@ module.exports = (() => {
         scheduleFiltersUpdate(false);
     };
 
+    /**
+     * Resets all filters versions
+     */
+    const resetFiltersVersion = () => {
+        const RESET_VERSION = "0.0.0.0";
+
+        const filters = subscriptions.getFilters();
+        for (let filter of filters) {
+            filter.version = RESET_VERSION;
+        }
+    };
+
+    /**
+     * Reloads filters from backend
+     *
+     * @private
+     */
+    const reloadAntiBannerFilters = () => {
+        log.info('Reloading filters..');
+
+        resetFiltersVersion();
+        checkAntiBannerFiltersUpdate(true);
+    };
+
     listeners.addListener(function (event, filter) {
         switch (event) {
             case events.FILTER_ENABLE_DISABLE:
@@ -361,6 +385,7 @@ module.exports = (() => {
         scheduleFiltersUpdate,
         loadFilterRules,
         rerunAutoUpdateTimer,
+        reloadAntiBannerFilters,
     };
 })();
 

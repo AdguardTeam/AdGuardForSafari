@@ -59,8 +59,8 @@ module.exports = (function () {
         if (!settings.getProperty('use-optimized-filters')) {
             settings.setProperty('use-optimized-filters', true);
 
-            log.info('Triggering filters update');
-            filtersUpdate.checkAntiBannerFiltersUpdate(true);
+            log.info('Triggering filters reload');
+            filtersUpdate.reloadAntiBannerFilters();
         }
     };
 
