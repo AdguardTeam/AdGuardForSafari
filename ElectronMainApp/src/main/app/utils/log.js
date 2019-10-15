@@ -5,9 +5,6 @@ const logImpl = require('electron-log');
  */
 module.exports = (() => {
 
-    // Force set app name for log file
-    logImpl.transports.file.appName = 'AdGuardForSafari';
-
     // Redefine if you need it
     const CURRENT_LEVEL = "INFO";
 
