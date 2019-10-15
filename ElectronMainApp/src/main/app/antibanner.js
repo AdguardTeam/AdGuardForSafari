@@ -38,7 +38,6 @@ module.exports = (() => {
     const APP_UPDATED_NOTIFICATION_DELAY = 10000;
 
     const FILTERS_CHANGE_DEBOUNCE_PERIOD = 1000;
-    const RELOAD_FILTERS_DEBOUNCE_PERIOD = 1000;
 
 
     /**
@@ -78,28 +77,6 @@ module.exports = (() => {
      */
     const loadFiltersVersionAndStateInfo = () => {
         filters.getFilters();
-    };
-
-    /**
-     * Resets all filters versions
-     */
-    const resetFiltersVersion = () => {
-        const RESET_VERSION = "0.0.0.0";
-
-        const filters = subscriptions.getFilters();
-        for (let filter of filters) {
-            filter.version = RESET_VERSION;
-        }
-    };
-
-    /**
-     * Reloads filters from backend
-     *
-     * @private
-     */
-    const reloadAntiBannerFilters = () => {
-        resetFiltersVersion();
-        filtersUpdate.checkAntiBannerFiltersUpdate(true);
     };
 
     /**

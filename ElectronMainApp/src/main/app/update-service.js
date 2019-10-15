@@ -1,6 +1,9 @@
 const app = require('./app');
 const localStorage = require('./storage/storage');
 const versionUtils = require('./utils/version');
+const settings = require('./settings-manager');
+const log = require('./utils/log');
+const filtersUpdate = require('./filters/filters-update');
 
 /**
  * Service that manages app version information and handles
@@ -50,13 +53,28 @@ module.exports = (function () {
         });
     };
 
+    const onUpdateUseOptimizedFilters = () => {
+        log.info('Execute update optimized filters procedure');
+
+        if (!settings.getProperty('use-optimized-filters')) {
+            settings.setProperty('use-optimized-filters', true);
+
+            log.info('Triggering filters reload');
+            filtersUpdate.reloadAntiBannerFilters();
+        }
+    };
+
     /**
      * Handle application update
      *
      * @param runInfo   Run info
      * @param callback  Called after update was handled
      */
-    const onUpdate = (runInfo, callback) =>{
+    const onUpdate = (runInfo, callback) => {
+        if (versionUtils.isGreaterVersion("1.6.0", runInfo.prevVersion)) {
+            onUpdateUseOptimizedFilters();
+        }
+
         callback();
     };
 

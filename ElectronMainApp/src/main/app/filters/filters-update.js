@@ -24,6 +24,11 @@ module.exports = (() => {
     const UPDATE_FILTERS_DELAY = 5 * 60 * 1000;
 
     /**
+     * Delay before doing filters reload -- 15 seconds
+     */
+    const RELOAD_FILTERS_DELAY = 15 * 1000;
+
+    /**
      * TImeout for recently updated filters and again enabled filters - 5 minutes
      */
     const ENABLED_FILTERS_SKIP_TIMEOUT = 5 * 60 * 1000;
@@ -242,7 +247,7 @@ module.exports = (() => {
         serviceClient.loadFilterRules(
             filter.filterId,
             forceRemote,
-            settings.isUseOptimizedFiltersEnabled(),
+            true,
             successCallback,
             errorCallback
         );
@@ -346,6 +351,34 @@ module.exports = (() => {
         scheduleFiltersUpdate(false);
     };
 
+    /**
+     * Resets all filters versions
+     */
+    const resetFiltersVersion = () => {
+        const RESET_VERSION = "0.0.0.0";
+
+        const filters = subscriptions.getFilters();
+        for (let filter of filters) {
+            log.debug('Reset version for filter {0}', filter.filterId);
+            filter.version = RESET_VERSION;
+        }
+    };
+
+    /**
+     * Reloads filters from backend
+     *
+     * @private
+     */
+    const reloadAntiBannerFilters = () => {
+        log.info('Schedule filters reload..');
+
+        // Delay filters update
+        setTimeout(() => {
+            resetFiltersVersion();
+            checkAntiBannerFiltersUpdate(true)
+        }, RELOAD_FILTERS_DELAY);
+    };
+
     listeners.addListener(function (event, filter) {
         switch (event) {
             case events.FILTER_ENABLE_DISABLE:
@@ -361,6 +394,7 @@ module.exports = (() => {
         scheduleFiltersUpdate,
         loadFilterRules,
         rerunAutoUpdateTimer,
+        reloadAntiBannerFilters,
     };
 })();
 

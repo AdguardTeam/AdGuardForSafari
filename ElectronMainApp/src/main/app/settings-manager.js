@@ -18,7 +18,6 @@ module.exports = (function () {
         DISABLE_SAFEBROWSING: 'safebrowsing-disabled',
         DISABLE_SEND_SAFEBROWSING_STATS: 'safebrowsing-stats-disabled',
         DISABLE_FILTERING: 'adguard-disabled',
-        USE_OPTIMIZED_FILTERS: 'use-optimized-filters',
         DEFAULT_WHITE_LIST_MODE: 'default-whitelist-mode',
         DISABLE_SHOW_APP_UPDATED_NOTIFICATION: 'show-app-updated-disabled',
         UPDATE_FILTERS_PERIOD: 'update-filters-period',
@@ -29,8 +28,6 @@ module.exports = (function () {
 
     const properties = Object.create(null);
     const propertyUpdateChannel = channels.newChannel();
-
-    const USE_OPTIMIZED_FILTERS = true;
 
     /**
      * Lazy default properties
@@ -49,7 +46,6 @@ module.exports = (function () {
                 defaults[settings.DISABLE_SAFEBROWSING] = true;
                 defaults[settings.DISABLE_SEND_SAFEBROWSING_STATS] = true;
                 defaults[settings.DEFAULT_WHITE_LIST_MODE] = true;
-                defaults[settings.USE_OPTIMIZED_FILTERS] = true;
                 defaults[settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION] = false;
                 defaults[settings.UPDATE_FILTERS_PERIOD] = 48;
                 defaults[settings.SHOW_TRAY_ICON] = true;
@@ -146,10 +142,6 @@ module.exports = (function () {
         return getProperty(settings.DEFAULT_WHITE_LIST_MODE);
     };
 
-    const isUseOptimizedFiltersEnabled = function () {
-        return USE_OPTIMIZED_FILTERS;
-    };
-
     const changeDefaultWhiteListMode = function (enabled) {
         setProperty(settings.DEFAULT_WHITE_LIST_MODE, enabled);
     };
@@ -203,7 +195,6 @@ module.exports = (function () {
     api.changeSendSafebrowsingStats = changeSendSafebrowsingStats;
     api.getSafebrowsingInfo = getSafebrowsingInfo;
     api.isDefaultWhiteListMode = isDefaultWhiteListMode;
-    api.isUseOptimizedFiltersEnabled = isUseOptimizedFiltersEnabled;
     api.changeDefaultWhiteListMode = changeDefaultWhiteListMode;
     api.changeUpdateFiltersPeriod = changeUpdateFiltersPeriod;
     api.getUpdateFiltersPeriod = getUpdateFiltersPeriod;
