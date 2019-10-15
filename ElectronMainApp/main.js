@@ -3,14 +3,14 @@ const i18n = require('./src/utils/i18n');
 const log = require('./src/main/app/utils/log');
 const path = require('path');
 const os = require('os');
-const execSync = require('child_process').execSync;
+const UtmpParser = require('samplx-utmp');
 
 /* Reconfigure path to config */
 process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
 
 /* global require, process */
 
-const { app, shell, BrowserWindow } = require('electron');
+const {app, shell, BrowserWindow} = require('electron');
 
 const uiEventListener = require('./src/main/ui-event-handler');
 const startup = require('./src/main/startup');
@@ -148,32 +148,77 @@ function showWindow(onWindowLoaded) {
     }
 }
 
+const SECONDS_FROM_LOGIN = 60;
+
+/**
+ * Fallback method for opened at login check
+ *
+ * @return {boolean}
+ */
+function compareOsUptime() {
+    log.info('Checking open at login: fallback comparing os uptime: {0}', os.uptime());
+    return os.uptime() < SECONDS_FROM_LOGIN;
+
+}
+
+/**
+ * Parses utmpx record:
+ * {"type":"USER_PROCESS","pid":35782,"line":"ttys000","id":808464499,"user":"dskolyshev","host":"","timestamp":"2019-10-09T14:32:51.000Z"}
+ * returns check if this record indicates process autostarted at login
+ */
+function parseRecord(data) {
+    if (!data) {
+        return false;
+    }
+
+    if (data.type === 'USER_PROCESS' &&
+        data.line === 'console') {
+        const timestamp = Date.parse(data.timestamp);
+        const now = new Date().getTime();
+        log.info('Checking open at login, comparing times now {0} and login: {1}', now, timestamp);
+        return now - timestamp < SECONDS_FROM_LOGIN * 1000;
+    }
+
+    return false;
+}
+
 // We don't have a proper way to detect if app was opened at login,
-// so as a workaround for now we will parse login time from shell command
+// so as a workaround for now we will parse login time from utmpx record
 // or we will take system uptime as an indicator.
 // Less than a minute from login means the app was launched at login.
 // https://github.com/AdguardTeam/AdGuardForSafari/issues/141
 // https://github.com/adguardteam/adguardforsafari/issues/118
-function isOpenedAtLogin() {
-    const SECONDS_FROM_LOGIN = 60;
+function isOpenedAtLogin(callback) {
 
     try {
-        const stdout = execSync('who | grep -i "$USER.*console"', { timeout: 100}).toString();
-        //Output format: userName console  Jun 20 18:14
-        log.info('Checking open at login user console: {0}', stdout);
-        const now = new Date();
-        const loginDateTime = Date.parse(`${stdout} ${now.getFullYear()}`);
-        log.info('Checking open at login login date: {0}', loginDateTime);
-        if (!isNaN(loginDateTime)) {
-            log.info('Checking open at login, comparing times');
-            return now.getTime() - loginDateTime < 2 * SECONDS_FROM_LOGIN * 1000;
-        }
-    } catch (e) {
-        log.info('Error: {0}', e);
-    }
+        let isAutostart = false;
 
-    log.info('Checking open at login, fallback comparing os uptime: {0}', os.uptime());
-    return os.uptime() < SECONDS_FROM_LOGIN;
+        const parser = new UtmpParser('/var/run/utmpx');
+        parser.on('data', (data) => {
+            log.info('Checking open at login: got utmpx data: {0}', data);
+            isAutostart = parseRecord(data);
+            if (isAutostart) {
+                log.info('Checking open at login: utmpx autostart');
+                parser.stop();
+
+                callback(true);
+            }
+        });
+        parser.on('error', (err) => {
+            throw err;
+        });
+        parser.on('end', () => {
+            if (!isAutostart) {
+                callback(compareOsUptime());
+            }
+        });
+
+        parser.run();
+
+    } catch (e) {
+        log.error('Checking open at login: utmpx data error: {0}', e);
+        callback(compareOsUptime());
+    }
 }
 
 // Keep a global reference of the tray object, if you don't, the tray icon will
@@ -190,34 +235,36 @@ app.on('ready', (() => {
 
     log.info('App ready - creating browser windows');
 
-    if (isOpenedAtLogin()) {
-        log.info('App is opened at login');
+    isOpenedAtLogin((isAutostart) => {
+        if (isAutostart) {
+            log.info('App is opened at login');
 
-        // Open in background at login
-        if (process.platform === 'darwin') {
-            app.dock.hide();
-        }
-
-        startup.init(showWindow, (shouldShowMainWindow) => {
-            uiEventListener.init();
-
-            if (shouldShowMainWindow) {
-                loadMainWindow();
+            // Open in background at login
+            if (process.platform === 'darwin') {
+                app.dock.hide();
             }
-        });
-    } else {
-        log.info('App is opened');
 
-        loadSplashScreenWindow(() => {
-            log.info('Splash screen loaded');
-
-            startup.init(showWindow, () => {
+            startup.init(showWindow, (shouldShowMainWindow) => {
                 uiEventListener.init();
-                loadMainWindow();
-                uiEventListener.register(mainWindow);
+
+                if (shouldShowMainWindow) {
+                    loadMainWindow();
+                }
             });
-        });
-    }
+        } else {
+            log.info('App is opened by user');
+
+            loadSplashScreenWindow(() => {
+                log.info('Splash screen loaded');
+
+                startup.init(showWindow, () => {
+                    uiEventListener.init();
+                    loadMainWindow();
+                    uiEventListener.register(mainWindow);
+                });
+            });
+        }
+    });
 
     mainMenuController.initMenu(showWindow);
     tray = trayController.initTray(showWindow);
