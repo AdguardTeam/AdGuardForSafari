@@ -283,6 +283,25 @@ def import_json_file(path, locale):
     download_file(file_name, locale, file_ext, path)
     return
 
+def workaround_json_file(file_path, locale, path):
+    """We don't have some locales in xcode, but we need it for Electron, such as zh-cn, zh-tw
+    So we gonna duplicate these files
+    Referenced issue: https://github.com/AdguardTeam/AdGuardForSafari/issues/256
+    """
+
+    ELECTRON_LOCALES_DICTIONARY = {
+        'zh-Hans' : 'zh-cn',
+        'zh-Hant' : 'zh-tw'
+    }
+
+    paired_locale = ELECTRON_LOCALES_DICTIONARY.get(locale, '')
+    if paired_locale != "":
+        print("Duplicate json for {0} - {1}".format(locale, paired_locale))
+        copy_path = os.path.join(CURRENT_DIR, BASE_PATH, path, "{0}.json".format(paired_locale))
+        shutil.copyfile(file_path, copy_path)
+
+    return
+
 
 def get_xib_translation_path(path, locale):
     """Gets path to the XIB file translation given it's relative path
@@ -367,6 +386,7 @@ def import_localization(locale):
     for path in JSON_FILES:
         file_path = os.path.join(CURRENT_DIR, BASE_PATH, path, "{0}.json".format(locale))
         import_json_file(file_path, locale)
+        workaround_json_file(file_path, locale, path)
 
     print("Finished importing translations to {0}".format(locale))
     return
