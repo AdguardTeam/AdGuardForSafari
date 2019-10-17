@@ -14,5 +14,9 @@ module.exports.LOCALES = [
     'pt-pt',
     'cs',
     'sv',
-    'tr'
+    'tr',
+    'ko',
+    'uk',
+    'sl',
+    'id'
 ];
