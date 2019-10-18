@@ -31,6 +31,43 @@ module.exports = (() => {
     };
 
     /**
+     * On export logs clicked
+     */
+    const onExportLogsClicked = (showMainWindow) => {
+        console.log('export logs');
+
+        //TODO: Add entitlement
+
+        const { dialog, app } = require('electron');
+        //TODO: Change def name
+        const options = {
+            defaultPath: app.getPath('documents') + '/adg_safari_DDMMYYYYMISS.zip',
+        };
+
+        dialog.showSaveDialog(null, options, (userPath) => {
+            console.log(userPath);
+
+            const log = require('./app/utils/log');
+            const logsPath = log.findLogPath();
+            console.log(logsPath);
+
+            if(userPath){
+                const fs = require('fs');
+
+                //TODO: Extract state
+                //TODO: zip
+                fs.copyFile(logsPath, userPath, (err) => {
+                    if (err) {
+                        throw err;
+                    }
+
+                    console.log("The file has been saved successfully");
+                });
+            }
+        });
+    };
+
+    /**
      * Initialization method
      * Should be execute when the app is ready
      *
@@ -55,6 +92,11 @@ module.exports = (() => {
                         label: i18n.__('main_menu_close_window.message'),
                         accelerator: 'cmd+w',
                         click() { onCloseWinClicked(); }
+                    },
+                    { type: 'separator' },
+                    {
+                        label: i18n.__('tray_menu_export_logs.message'),
+                        click() { onExportLogsClicked(showMainWindow); }
                     },
                     { type: 'separator' },
                     {

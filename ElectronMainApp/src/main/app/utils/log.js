@@ -54,6 +54,15 @@ module.exports = (() => {
     };
 
     /**
+     * Finds the path to log file
+     *
+     * @return {string}
+     */
+    const findLogPath = () => {
+        return logImpl.transports.file.findLogPath();
+    };
+
+    /**
      * Expose public API
      */
     return {
@@ -71,6 +80,7 @@ module.exports = (() => {
 
         error: function () {
             print("ERROR", "error", arguments);
-        }
+        },
+        findLogPath
     };
 })();
