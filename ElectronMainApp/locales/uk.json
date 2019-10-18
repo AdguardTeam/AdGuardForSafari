@@ -1,0 +1,416 @@
+{
+    "main_menu_about": {
+        "message": "Про AdGuard для Safari"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "Довірений"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "Довірені фільтри можуть використовувати потужні модифікатори правил фільтрування, що можуть бути небезпечними у невмілих руках. Не вмикайте цю функцію, якщо ви не цілком впевнені."
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "довірений"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "Ви встановили довіру цьому фільтру"
+    },
+    "options_about_update_check": {
+        "message": "Перевірка оновлень"
+    },
+    "options_about_updating": {
+        "message": "Оновлення AdGuard для Safari"
+    },
+    "options_about_updates_not_found": {
+        "message": "AdGuard для Safari оновлено"
+    },
+    "options_about_update_downloaded": {
+        "message": "Майже оновлено! Перезапустіть AdGuard для Safari, щоб застосувати оновлення."
+    },
+    "options_about_update_relaunch": {
+        "message": "Перезапустити"
+    },
+    "options_popup_title_placeholder": {
+        "message": "Введіть назву фільтру"
+    },
+    "main_menu_hide": {
+        "message": "Приховати"
+    },
+    "main_menu_close_window": {
+        "message": "Закрити вікно"
+    },
+    "name": {
+        "message": "AdGuard Антибанер"
+    },
+    "description": {
+        "message": "Неперевершений захист від реклами і спливаючих вікон. Блокує рекламу в Facebook, на Youtube і інших сайтах."
+    },
+    "options_settings": {
+        "message": "AdGuard для Safari - Налаштування"
+    },
+    "options_general_settings": {
+        "message": "Загальні"
+    },
+    "options_general_desc": {
+        "message": "AdGuard for Safari - безкоштовне програмне забезпечення з відкритим кодом. Ми вдячні за Ваші відгуки та пропозиції. Якщо ви хочете повідомити про помилку або надіслати запит на функцію, перейдіть на сторінку <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>наш репозіторій Github</a>."
+    },
+    "options_allow_acceptable_ads": {
+        "message": "Дозволити рекламу в результатах пошуку і саморекламу веб-сайтів"
+    },
+    "options_export_settings": {
+        "message": "Експорт налаштувань"
+    },
+    "options_import_settings": {
+        "message": "Імпорт налаштувань"
+    },
+    "options_antibanner": {
+        "message": "Фільтри"
+    },
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s фільтр",
+            "other": "%s фільтрів"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s правило",
+            "other": "%s правил"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s розширене правило",
+            "other": "%s розширених правил"
+        }
+    },
+    "options_filters_enabled": {
+        "message": "Увімкнено:"
+    },
+    "options_filters_enabled_and_more_divider": {
+        "message": "%s і ще %s"
+    },
+    "options_filters_enabled_and_divider": {
+        "message": "%s і %s"
+    },
+    "options_filters_no_enabled": {
+        "message": "Немає увімкнених фільтрів"
+    },
+    "options_filters_version": {
+        "message": "версія %s"
+    },
+    "options_filters_updated": {
+        "message": "оновлено: %s"
+    },
+    "options_filters_empty_custom_filters": {
+        "message": "Вибачте, але у вас поки що немає власних фільтрів"
+    },
+    "options_filters_empty_custom_add_button": {
+        "message": "Додати власний фільтр"
+    },
+    "options_filters_custom_step_one_title": {
+        "message": "Додавання нового фільтру"
+    },
+    "options_filters_custom_step_one_input_placeholder": {
+        "message": "Введіть URL-адресу фільтру"
+    },
+    "options_filters_custom_step_one_url_desc": {
+        "message": "Введіть дійсну URL-адресу підписки на фільтр."
+    },
+    "options_filters_custom_step_one_url_desc_more": {
+        "message": "AdGuard додасть цю підписку на фільтр."
+    },
+    "options_filters_custom_step_one_cancel": {
+        "message": "Скасувати"
+    },
+    "options_filters_custom_step_one_next": {
+        "message": "Далі"
+    },
+    "options_filters_custom_step_two_checking": {
+        "message": "Завантаження фільтру"
+    },
+    "options_filters_custom_step_three_title": {
+        "message": "Виникла помилка"
+    },
+    "options_filters_custom_step_three_desc": {
+        "message": "На жаль, не вдалося додати ваш власний фільтр, у зв'язку з неочікуваною помилкою."
+    },
+    "options_filters_custom_step_three_try_again": {
+        "message": "Спробувати знову"
+    },
+    "options_filters_custom_step_final_title": {
+        "message": "Додавання нового фільтру"
+    },
+    "options_filters_custom_step_final_filter_title": {
+        "message": "Назва:"
+    },
+    "options_filters_custom_step_final_filter_description": {
+        "message": "Опис:"
+    },
+    "options_filters_custom_step_final_filter_version": {
+        "message": "Версія:"
+    },
+    "options_filters_custom_step_final_filter_rules_count": {
+        "message": "Кількість правил:"
+    },
+    "options_filters_custom_step_final_filter_homepage": {
+        "message": "Домашня сторінка:"
+    },
+    "options_filters_custom_step_final_filter_url": {
+        "message": "URL:"
+    },
+    "options_filters_custom_step_final_back": {
+        "message": "Назад"
+    },
+    "options_filters_custom_step_final_cancel": {
+        "message": "Скасувати"
+    },
+    "options_filters_custom_step_final_commit": {
+        "message": "Підписатися"
+    },
+    "options_filters_check_filters_update": {
+        "message": "Перевірити оновлення фільтрів"
+    },
+    "options_whitelist": {
+        "message": "Білий список"
+    },
+    "options_whitelist_description": {
+        "message": "AdGuard не працює на сайтах, доданих у білий список."
+    },
+    "options_whitelist_inverse": {
+        "message": "Інвертувати білий список<span class='sp-table-row-info'>Розблокувати рекламу всюди, <i>за винятком</i> білого списку</span>"
+    },
+    "options_userfilter": {
+        "message": "Власний фільтр"
+    },
+    "options_userfilter_description": {
+        "message": "Ви можете додавати свої власні правила фільтрації за&nbsp;допомогою цього фільтру. Рекомендується тільки для досвідчених користувачів, знайомих з&nbsp;HTML/CSS. Перейдіть за&nbsp;<a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'> посиланням </a>, щоб дізнатися, як складати правила фільтрації."
+    },
+    "options_show_app_updated_notification": {
+        "message": "Сповіщати про оновлення розширення"
+    },
+    "options_popup_update_title": {
+        "message": "Оновлення фільтрів завершено"
+    },
+    "options_popup_update_error_title": {
+        "message": "Помилка оновлення фільтрів"
+    },
+    "options_popup_update_not_found": {
+        "message": "Оновлень не знайдено"
+    },
+    "options_popup_update_error": {
+        "message": "Не вдалося отримати оновлення. Будь ласка, спробуйте ще раз пізніше."
+    },
+    "options_popup_update_updated": {
+        "message": "\"$1\" оновлено до версії $2"
+    },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s фільтр оновлено: $2",
+            "other": "%s фільтрів оновлено: $2"
+        }
+    },
+    "options_popup_version_update_title": {
+        "message": "AdGuard для Safari було щойно оновлено до версії $1."
+    },
+    "options_popup_version_update_description_minor": {
+        "message": "Ця версія містить в основному виправлення помилок і незначні поліпшення."
+    },
+    "options_popup_version_update_description_major": {
+        "message": "Це важливе оновлення, що містить багато нових можливостей і вдосконалень."
+    },
+    "notification_content_blocker_overlimit_title": {
+        "message": "Попередження"
+    },
+    "notification_content_blocker_overlimit_desc": {
+        "message": "Активовано забагато фільтрів. Safari може використовувати не більше 50 000 правил в одній групі."
+    },
+    "options_content_blocker_overlimit": {
+        "message": "Активовано забагато фільтрів. Safari може використовувати не більше 50 000 правил в одній групі."
+    },
+    "options_filters_list_search_placeholder": {
+        "message": "Пошук"
+    },
+    "options_editor_indicator_editing": {
+        "message": "Редагування..."
+    },
+    "options_editor_indicator_saving": {
+        "message": "Збереження..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "Збережено"
+    },
+    "main_menu_edit": {
+        "message": "Редагувати"
+    },
+    "main_menu_undo": {
+        "message": "Скасувати"
+    },
+    "main_menu_cut": {
+        "message": "Вирізати"
+    },
+    "main_menu_copy": {
+        "message": "Скопіювати"
+    },
+    "main_menu_paste": {
+        "message": "Вставити"
+    },
+    "main_menu_select-all": {
+        "message": "Обрати все"
+    },
+    "tray_menu_about": {
+        "message": "Про додаток"
+    },
+    "tray_menu_preferences": {
+        "message": "Налаштування"
+    },
+    "tray_menu_check_updates": {
+        "message": "Перевірити оновлення фільтрів"
+    },
+    "tray_menu_launch_at_startup": {
+        "message": "Запускати AdGuard при вході"
+    },
+    "tray_menu_quit": {
+        "message": "Вихід"
+    },
+    "tray_menu_protection_start": {
+        "message": "Увімкнути AdGuard"
+    },
+    "options_last_update": {
+        "message": "Останнє оновлення"
+    },
+    "options_about": {
+        "message": "Про додаток"
+    },
+    "options_content_blockers": {
+        "message": "Блокувальники вмісту"
+    },
+    "options_content_blockers_desc": {
+        "message": "Увімкнено блокувальників: %s з 6 (кожен може містити до 50 000 правил)"
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": "Блокувальники реклами вимкнені"
+    },
+    "options_compare_btn": {
+        "message": "Чим вони відрізняються?"
+    },
+    "options_compare_title": {
+        "message": "Спробуйте AdGuard Premium для кращого захисту!"
+    },
+    "options_license_agreement": {
+        "message": "Ліцензійна угода з кінцевим користувачем"
+    },
+    "options_privacy_policy": {
+        "message": "Політика конфіденційності"
+    },
+    "options_acknowledgment": {
+        "message": "Подяки"
+    },
+    "options_github": {
+        "message": "GitHub"
+    },
+    "onboarding_safari_desc": {
+        "message": "Поставте позначки поряд з \"Піктограма AdGuard в Safari\", \"Розширене блокування AdGuard\" та \"AdGuard\" в налаштуваннях Safari"
+    },
+    "onboarding_safari_btn": {
+        "message": "Відкрити налаштування"
+    },
+    "options_learn_more": {
+        "message": "Дізнайтеся більше про це"
+    },
+    "options_about_version": {
+        "message": "Версія %s"
+    },
+    "notification_user_filter_updated_title": {
+        "message": "Власний фільтр оновлено"
+    },
+    "notification_user_filter_updated_desc": {
+        "message": "До власного фільтру додано нове правило:"
+    },
+    "options_filters_update_period": {
+        "message": "Інтервал оновлень"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "one": "Щогодини",
+            "other": "Кожні %s годин"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "Не оновлювати"
+    },
+    "options_filters_custom_remove": {
+        "message": "вилучити"
+    },
+    "options_show_tray_icon": {
+        "message": "Показувати AdGuard для Safari в панелі меню"
+    },
+    "options_launch_at_login": {
+        "message": "Запускати AdGuard для Safari при вході"
+    },
+    "options_verbose_logging": {
+        "message": "Детальний журнал"
+    },
+    "options_verbose_logging_desc": {
+        "message": "Якщо увімкнено детальний журнал, розширення AdGuard для Safari виводитимуть додаткову інформацію в консолі браузера"
+    },
+    "settings_notification_protection_title": {
+        "message": "Захист призупинено"
+    },
+    "settings_notification_protection_button_text": {
+        "message": "Виправити"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Виправити"
+    },
+    "settings_notification_extensions_title": {
+        "message": "Деякі розширення AdGuard вимкнені"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Вам слід увімкнути всі розширення AdGuard для правильного блокування в Safari"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "Деякі блокувальники вмісту AdGuard вимкнені"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Вам слід увімкнути всі розширення AdGuard для правильного блокування вмісту в Safari"
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard - Загальні"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard - Приватність"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard - Соціальні"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard - Безпека"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard - Інше"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard - Власні"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s правило використовується",
+            "other": "%s правил використовується"
+        }
+    },
+    "options_cb_rules_overlimit_info": {
+        "message": "Перевищено обмеження в 50000 правил. Будь ласка, вимкніть непотрібні правила для коректної роботи.<br/>Зараз увімкнено правил: %s (вимкнено правил: $2)"
+    },
+    "options_cb_disabled_warning": {
+        "message": "Вимкнено в Safari"
+    },
+    "options_cb_compilation_warning": {
+        "message": "Збій компіляції"
+    },
+    "filters_group_custom": {
+        "message": "Власні"
+    },
+    "userfilter_name": {
+        "message": "Власний фільтр"
+    }
+}

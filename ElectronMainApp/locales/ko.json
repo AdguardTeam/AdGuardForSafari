@@ -1,0 +1,416 @@
+{
+    "main_menu_about": {
+        "message": "Safari용 AdGuard에 대하여"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "신뢰함"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "신뢰할 수 있는 필터는 강력한 필터링 규칙을 사용할 수 있으나, 잘못 사용할 경우 위험할 수 있습니다. 완전히 신뢰하지 않는 한 이 옵션을 선택하지 마세요."
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "신뢰함"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "이 필터를 신뢰하셨습니다."
+    },
+    "options_about_update_check": {
+        "message": "업데이트 확인 중"
+    },
+    "options_about_updating": {
+        "message": "Safari용 AdGuard 업데이트 중"
+    },
+    "options_about_updates_not_found": {
+        "message": "Safari용 AdGuard는 최신 버전입니다"
+    },
+    "options_about_update_downloaded": {
+        "message": "곧 업데이트가 완료됩니다! Safari용 AdGuard를 재시작하여 업데이트를 완료하세요."
+    },
+    "options_about_update_relaunch": {
+        "message": "재시작"
+    },
+    "options_popup_title_placeholder": {
+        "message": "필터 이름 입력"
+    },
+    "main_menu_hide": {
+        "message": "숨기기"
+    },
+    "main_menu_close_window": {
+        "message": "창 닫기"
+    },
+    "name": {
+        "message": "AdGuard 광고차단기"
+    },
+    "description": {
+        "message": "광고, 팝업, Facebook이나 YouTube 등 사이트의 광고를 차단하는 타의 추종을 불허하는 광고 차단 확장 프로그램입니다."
+    },
+    "options_settings": {
+        "message": "Safari용 AdGuard - 설정"
+    },
+    "options_general_settings": {
+        "message": "일반"
+    },
+    "options_general_desc": {
+        "message": "Safari용 AdGuard는 무료 오픈소스 소프트웨어입니다. 저희는 여러분의 피드백과 기여를 환영합니다. 만약 버그 신고나 새 기능을 요청하고 싶으시다면, <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>저희의 Github 저장소</a>로 향하세요."
+    },
+    "options_allow_acceptable_ads": {
+        "message": "웹사이트의 광고와 셀프 프로모션 검색 허용"
+    },
+    "options_export_settings": {
+        "message": "설정 내보내기"
+    },
+    "options_import_settings": {
+        "message": "설정 불러오기"
+    },
+    "options_antibanner": {
+        "message": "필터"
+    },
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "필터 %s개",
+            "other": "필터 %s개"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "규칙 %s개",
+            "other": "규칙 %s개"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "고급 규칙 %s개",
+            "other": "고급 규칙 %s개"
+        }
+    },
+    "options_filters_enabled": {
+        "message": "활성화 됨:"
+    },
+    "options_filters_enabled_and_more_divider": {
+        "message": "%s외 %s개"
+    },
+    "options_filters_enabled_and_divider": {
+        "message": "%s, %s"
+    },
+    "options_filters_no_enabled": {
+        "message": "활성화된 필터 없음"
+    },
+    "options_filters_version": {
+        "message": "버전 %s"
+    },
+    "options_filters_updated": {
+        "message": "%s 업데이트 됨"
+    },
+    "options_filters_empty_custom_filters": {
+        "message": "죄송합니다, 아직 사용자 지정 필터가 없습니다."
+    },
+    "options_filters_empty_custom_add_button": {
+        "message": "사용자 정의 필터 추가"
+    },
+    "options_filters_custom_step_one_title": {
+        "message": "새로운 필터 구독"
+    },
+    "options_filters_custom_step_one_input_placeholder": {
+        "message": "필터 주소 입력"
+    },
+    "options_filters_custom_step_one_url_desc": {
+        "message": "유효한 필터 구독 주소 입력."
+    },
+    "options_filters_custom_step_one_url_desc_more": {
+        "message": "AdGuard가 이 필터 구독을 추가합니다."
+    },
+    "options_filters_custom_step_one_cancel": {
+        "message": "취소"
+    },
+    "options_filters_custom_step_one_next": {
+        "message": "다음"
+    },
+    "options_filters_custom_step_two_checking": {
+        "message": "필터 다운로드 중"
+    },
+    "options_filters_custom_step_three_title": {
+        "message": "오류가 발생하였습니다"
+    },
+    "options_filters_custom_step_three_desc": {
+        "message": "불행하게도, 귀하의 사용자 정의 필터는 예상치 못한 오류로 인해 추가될 수 없습니다."
+    },
+    "options_filters_custom_step_three_try_again": {
+        "message": "다시 시도해보세요"
+    },
+    "options_filters_custom_step_final_title": {
+        "message": "새로운 필터 구독"
+    },
+    "options_filters_custom_step_final_filter_title": {
+        "message": "이름:"
+    },
+    "options_filters_custom_step_final_filter_description": {
+        "message": "설명:"
+    },
+    "options_filters_custom_step_final_filter_version": {
+        "message": "버전:"
+    },
+    "options_filters_custom_step_final_filter_rules_count": {
+        "message": "규칙 개수:"
+    },
+    "options_filters_custom_step_final_filter_homepage": {
+        "message": "홈페이지:"
+    },
+    "options_filters_custom_step_final_filter_url": {
+        "message": "URL:"
+    },
+    "options_filters_custom_step_final_back": {
+        "message": "이전"
+    },
+    "options_filters_custom_step_final_cancel": {
+        "message": "취소"
+    },
+    "options_filters_custom_step_final_commit": {
+        "message": "구독"
+    },
+    "options_filters_check_filters_update": {
+        "message": "필터 업데이트 확인"
+    },
+    "options_whitelist": {
+        "message": "예외 목록"
+    },
+    "options_whitelist_description": {
+        "message": "AdGuard는 예외 목록에 있는 웹사이트를 필터링하지 않습니다."
+    },
+    "options_whitelist_inverse": {
+        "message": "예외 목록 반전<span class='sp-table-row-info'>예외 목록을 <i>제외한</i> 모든 곳의 광고를 차단 해제</span>"
+    },
+    "options_userfilter": {
+        "message": "사용자 필터"
+    },
+    "options_userfilter_description": {
+        "message": "이 필터에는 자신만의 규칙을&nbsp;추가할 수 있습니다. 이 설정은 &nbsp;HTML/CSS에 익숙한 고급 사용자에게 권장합니다. <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>필터 규칙 튜토리얼</a>를 읽어보고&nbsp; 사용자 지정 필터&nbsp;를 어떻게 사용하는지 알아보세요."
+    },
+    "options_show_app_updated_notification": {
+        "message": "필터 업데이트 알림"
+    },
+    "options_popup_update_title": {
+        "message": "필터가 성공적으로 업데이트 되었습니다"
+    },
+    "options_popup_update_error_title": {
+        "message": "필터 업데이트 에러"
+    },
+    "options_popup_update_not_found": {
+        "message": "업데이트 없음"
+    },
+    "options_popup_update_error": {
+        "message": "업데이트에 실패했습니다. 나중에 다시 시도해주세요."
+    },
+    "options_popup_update_updated": {
+        "message": "\"$1\"가 버전 $2로 업데이트 되었습니다"
+    },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "필터 %s가 업데이트 되었습니다: $2",
+            "other": "필터 %s가 업데이트 되었습니다: $2"
+        }
+    },
+    "options_popup_version_update_title": {
+        "message": "Safari용 AdGuard가 방금 버전 $1로 업데이트 되었습니다."
+    },
+    "options_popup_version_update_description_minor": {
+        "message": "이 버전은 버그 수정과 마이너한 기능 개선이 포함되어 있습니다."
+    },
+    "options_popup_version_update_description_major": {
+        "message": "이 주요 업데이트는 새로운 기능과 개선이 포함되어 있습니다."
+    },
+    "notification_content_blocker_overlimit_title": {
+        "message": "경고"
+    },
+    "notification_content_blocker_overlimit_desc": {
+        "message": "너무 많은 필터들이 활성화 되어 있습니다. Safari는 한 그룹에서 50,000개 이상의 규칙을 사용할 수 없습니다."
+    },
+    "options_content_blocker_overlimit": {
+        "message": "너무 많은 필터들이 활성화 되어 있습니다. Safari는 한 그룹에서 50,000개 이상의 규칙을 사용할 수 없습니다."
+    },
+    "options_filters_list_search_placeholder": {
+        "message": "검색"
+    },
+    "options_editor_indicator_editing": {
+        "message": "수정중..."
+    },
+    "options_editor_indicator_saving": {
+        "message": "저장중..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "저장됨"
+    },
+    "main_menu_edit": {
+        "message": "편집"
+    },
+    "main_menu_undo": {
+        "message": "되돌리기"
+    },
+    "main_menu_cut": {
+        "message": "잘라내기"
+    },
+    "main_menu_copy": {
+        "message": "복사"
+    },
+    "main_menu_paste": {
+        "message": "붙여넣기"
+    },
+    "main_menu_select-all": {
+        "message": "모두 선택"
+    },
+    "tray_menu_about": {
+        "message": "정보"
+    },
+    "tray_menu_preferences": {
+        "message": "환경 설정"
+    },
+    "tray_menu_check_updates": {
+        "message": "필터 업데이트 확인"
+    },
+    "tray_menu_launch_at_startup": {
+        "message": "로그인할 때 AdGuard 실행"
+    },
+    "tray_menu_quit": {
+        "message": "종료"
+    },
+    "tray_menu_protection_start": {
+        "message": "AdGuard 활성화"
+    },
+    "options_last_update": {
+        "message": "마지막 업데이트:"
+    },
+    "options_about": {
+        "message": "정보"
+    },
+    "options_content_blockers": {
+        "message": "콘텐츠 차단기"
+    },
+    "options_content_blockers_desc": {
+        "message": "사용 가능한 광고 차단기: 6개 중 %s (각 최대 50,000개의 규칙을 포함 할 수 있습니다)"
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": "광고 차단기가 비활성화되었습니다"
+    },
+    "options_compare_btn": {
+        "message": "비교 방법"
+    },
+    "options_compare_title": {
+        "message": "더 나은 보호를 위해 AdGuard 프리미엄을 사용해 보세요!"
+    },
+    "options_license_agreement": {
+        "message": "최종 사용자 라이선스 계약"
+    },
+    "options_privacy_policy": {
+        "message": "개인정보취급방침"
+    },
+    "options_acknowledgment": {
+        "message": "감사의 말"
+    },
+    "options_github": {
+        "message": "Github"
+    },
+    "onboarding_safari_desc": {
+        "message": "Safari 환경 설정에서 AdGuard 확장 옆에 있는 체크박스를 체크하세요."
+    },
+    "onboarding_safari_btn": {
+        "message": "환경 설정 열기"
+    },
+    "options_learn_more": {
+        "message": "자세히 알아보기"
+    },
+    "options_about_version": {
+        "message": "버전 %s"
+    },
+    "notification_user_filter_updated_title": {
+        "message": "사용자 필터가 업데이트 되었습니다"
+    },
+    "notification_user_filter_updated_desc": {
+        "message": "사용자 필터에 새 규칙이 추가됐습니다."
+    },
+    "options_filters_update_period": {
+        "message": "업데이트 주기"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "one": "한 시간 마다",
+            "other": "%s 시간 마다"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "업데이트 하지 않음"
+    },
+    "options_filters_custom_remove": {
+        "message": "제거"
+    },
+    "options_show_tray_icon": {
+        "message": "메뉴바에 Safari용 AdGuard 표시"
+    },
+    "options_launch_at_login": {
+        "message": "로그인 시 Safari용 AdGuard 실행"
+    },
+    "options_verbose_logging": {
+        "message": "자세한 로그"
+    },
+    "options_verbose_logging_desc": {
+        "message": "자세한 로그가 활성화 되어 있는 경우, AdGuard Safari 확장 프로그램은 브라우저 콘솔에 추가 정보를 출력합니다."
+    },
+    "settings_notification_protection_title": {
+        "message": "주의! 보호가 비활성화되어 있습니다"
+    },
+    "settings_notification_protection_button_text": {
+        "message": "수리"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "수리"
+    },
+    "settings_notification_extensions_title": {
+        "message": "몇몇 AdGuard 확장 프로그램이 비활성화 되었습니다"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Safari의 광고를 제대로 차단하기 위해서는 AdGuard 확장 프로그램을 모두 활성화 시켜야 합니다"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "몇몇 AdGuard 콘텐츠 차단 확장 프로그램이 비활성화 되어 있습니다"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Safari 의 광고를 제대로 차단하기 위해서는 AdGuard 콘텐츠 차단 확장 프로그램을 모두 활성화 시켜야 합니다"
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard 일반"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard 개인 정보 보호"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard 소셜"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard 보안"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard 기타"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard 커스텀"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "규칙이 %s개 사용되었습니다",
+            "other": "규칙이 %s개 사용되었습니다"
+        }
+    },
+    "options_cb_rules_overlimit_info": {
+        "message": "50,000개의 규칙 제한이 초과되었습니다. 앱이 올바르게 작동하기 위해 불필요한 규칙을 사용하지 않도록 설정하세요. <br/>현재 활성화된 규칙:%s (비활성화돤 규칙: $2)"
+    },
+    "options_cb_disabled_warning": {
+        "message": "사파리 비활성화"
+    },
+    "options_cb_compilation_warning": {
+        "message": "컴파일 실패"
+    },
+    "filters_group_custom": {
+        "message": "사용자"
+    },
+    "userfilter_name": {
+        "message": "사용자 필터"
+    }
+}
