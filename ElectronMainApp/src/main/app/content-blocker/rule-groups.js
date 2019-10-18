@@ -154,6 +154,10 @@ module.exports = (function () {
         for (let rule of filterRules) {
             let ruleText = rule.ruleText;
 
+            if (!ruleText) {
+                continue;
+            }
+
             if (ruleText.startsWith(AFFINITY_DIRECTIVE_START)) {
                 currentBlockGroups = parseGroupsByAffinity(ruleText);
             } else if (ruleText.startsWith(AFFINITY_DIRECTIVE)) {
