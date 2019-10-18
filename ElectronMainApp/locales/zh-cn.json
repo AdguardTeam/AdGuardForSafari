@@ -1,0 +1,416 @@
+{
+    "main_menu_about": {
+        "message": "关于 AdGuard for Safari"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "受信任的"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "受信任的过滤器可以使用强大的过滤规则修饰符，错误的使用会造成危险状况。除非您完全信任，否则请勿选中此框。"
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "受信任的"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "您选择信任此过滤器"
+    },
+    "options_about_update_check": {
+        "message": "检查更新"
+    },
+    "options_about_updating": {
+        "message": "更新 AdGuard for Safari"
+    },
+    "options_about_updates_not_found": {
+        "message": "AdGuard for Safari 已为最新版本"
+    },
+    "options_about_update_downloaded": {
+        "message": "更新近乎完成！请重启 AdGuard for Safari 以完成更新。"
+    },
+    "options_about_update_relaunch": {
+        "message": "重新启用"
+    },
+    "options_popup_title_placeholder": {
+        "message": "输入过滤器名称"
+    },
+    "main_menu_hide": {
+        "message": "隐藏视频"
+    },
+    "main_menu_close_window": {
+        "message": "关闭窗口"
+    },
+    "name": {
+        "message": "AdGuard 广告拦截器"
+    },
+    "description": {
+        "message": "无与伦比的针对广告和弹窗的广告拦截扩展。拦截 Facebook，Youtube 和其它所有网站上的广告。"
+    },
+    "options_settings": {
+        "message": "AdGuard for Safari - 设置"
+    },
+    "options_general_settings": {
+        "message": "常规"
+    },
+    "options_general_desc": {
+        "message": "AdGuard for Safari 是一款免费开源的软件。我们欢迎您反馈和贡献。如您要报告错误或请求新特性，请转到 <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>Github 以报告给我们</a>。"
+    },
+    "options_allow_acceptable_ads": {
+        "message": "允许搜索广告和网站自宣传"
+    },
+    "options_export_settings": {
+        "message": "Export settings"
+    },
+    "options_import_settings": {
+        "message": "Import settings"
+    },
+    "options_antibanner": {
+        "message": "过滤器"
+    },
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s 过滤器",
+            "other": "%s filters"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s 规则",
+            "other": "%s rules"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s 高级规则",
+            "other": "%s advanced rules"
+        }
+    },
+    "options_filters_enabled": {
+        "message": "已开启："
+    },
+    "options_filters_enabled_and_more_divider": {
+        "message": "%s 和 %s 更多"
+    },
+    "options_filters_enabled_and_divider": {
+        "message": "%s 和 %s"
+    },
+    "options_filters_no_enabled": {
+        "message": "未开启任何过滤器"
+    },
+    "options_filters_version": {
+        "message": "版本 %s"
+    },
+    "options_filters_updated": {
+        "message": "更新于：%s"
+    },
+    "options_filters_empty_custom_filters": {
+        "message": "抱歉，您没有任何自定义过滤器"
+    },
+    "options_filters_empty_custom_add_button": {
+        "message": "添加自定义过滤器"
+    },
+    "options_filters_custom_step_one_title": {
+        "message": "新过滤器订阅"
+    },
+    "options_filters_custom_step_one_input_placeholder": {
+        "message": "输入过滤器 URL"
+    },
+    "options_filters_custom_step_one_url_desc": {
+        "message": "输入过滤器的有效 URL 以订阅。"
+    },
+    "options_filters_custom_step_one_url_desc_more": {
+        "message": "AdGuard 将添加此过滤器订阅。"
+    },
+    "options_filters_custom_step_one_cancel": {
+        "message": "取消"
+    },
+    "options_filters_custom_step_one_next": {
+        "message": "下一步"
+    },
+    "options_filters_custom_step_two_checking": {
+        "message": "下载过滤器"
+    },
+    "options_filters_custom_step_three_title": {
+        "message": "发生错误"
+    },
+    "options_filters_custom_step_three_desc": {
+        "message": "由于非常意外错误，导致无法添加您的自定义过滤器。"
+    },
+    "options_filters_custom_step_three_try_again": {
+        "message": "再试"
+    },
+    "options_filters_custom_step_final_title": {
+        "message": "新过滤器订阅"
+    },
+    "options_filters_custom_step_final_filter_title": {
+        "message": "标题："
+    },
+    "options_filters_custom_step_final_filter_description": {
+        "message": "描述："
+    },
+    "options_filters_custom_step_final_filter_version": {
+        "message": "版本："
+    },
+    "options_filters_custom_step_final_filter_rules_count": {
+        "message": "规则数量："
+    },
+    "options_filters_custom_step_final_filter_homepage": {
+        "message": "主页："
+    },
+    "options_filters_custom_step_final_filter_url": {
+        "message": "URL："
+    },
+    "options_filters_custom_step_final_back": {
+        "message": "返回"
+    },
+    "options_filters_custom_step_final_cancel": {
+        "message": "取消"
+    },
+    "options_filters_custom_step_final_commit": {
+        "message": "订阅"
+    },
+    "options_filters_check_filters_update": {
+        "message": "检查过滤器更新"
+    },
+    "options_whitelist": {
+        "message": "白名单"
+    },
+    "options_whitelist_description": {
+        "message": "AdGuard 不过滤白名单上的网站。"
+    },
+    "options_whitelist_inverse": {
+        "message": "颠倒白名单<span class='sp-table-row-info'>取消拦截所有网站的广告，白名单上的网站<i>除外</i></span>"
+    },
+    "options_userfilter": {
+        "message": "用户过滤器"
+    },
+    "options_userfilter_description": {
+        "message": "您可添加自己的规则到此过滤器。此选项推荐给那些熟悉 HTML/CSS 的高级用户。阅读<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>过滤器规则指南</a>以了解如何写您自己的过滤器规则。"
+    },
+    "options_show_app_updated_notification": {
+        "message": "通知扩展更新"
+    },
+    "options_popup_update_title": {
+        "message": "过滤器更新成功"
+    },
+    "options_popup_update_error_title": {
+        "message": "过滤器更新错误"
+    },
+    "options_popup_update_not_found": {
+        "message": "未找到更新"
+    },
+    "options_popup_update_error": {
+        "message": "获取更新失败。请稍后再试。"
+    },
+    "options_popup_update_updated": {
+        "message": "\"$1\" 已更新到版本 $2"
+    },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s 规则已更新：$2",
+            "other": "%s 个已更新：$2"
+        }
+    },
+    "options_popup_version_update_title": {
+        "message": "AdGuard for Safari 刚刚更新至版本 $1。"
+    },
+    "options_popup_version_update_description_minor": {
+        "message": "此版本包含大量的错误修正和小的改善。"
+    },
+    "options_popup_version_update_description_major": {
+        "message": "这个主要扩展升级增加了大量新特性和性能改善。"
+    },
+    "notification_content_blocker_overlimit_title": {
+        "message": "警告"
+    },
+    "notification_content_blocker_overlimit_desc": {
+        "message": "开启的过滤器过多。Safari 最多仅可使用 50000条规则。"
+    },
+    "options_content_blocker_overlimit": {
+        "message": "开启的过滤器过多。Safari 最多仅可使用 50000条规则。"
+    },
+    "options_filters_list_search_placeholder": {
+        "message": "搜索"
+    },
+    "options_editor_indicator_editing": {
+        "message": "编辑中..."
+    },
+    "options_editor_indicator_saving": {
+        "message": "保存中..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "已保存"
+    },
+    "main_menu_edit": {
+        "message": "编辑"
+    },
+    "main_menu_undo": {
+        "message": "撤销"
+    },
+    "main_menu_cut": {
+        "message": "剪切"
+    },
+    "main_menu_copy": {
+        "message": "复制"
+    },
+    "main_menu_paste": {
+        "message": "粘贴"
+    },
+    "main_menu_select-all": {
+        "message": "选择全部"
+    },
+    "tray_menu_about": {
+        "message": "关于"
+    },
+    "tray_menu_preferences": {
+        "message": "首选项"
+    },
+    "tray_menu_check_updates": {
+        "message": "检查过滤器更新"
+    },
+    "tray_menu_launch_at_startup": {
+        "message": "启动系统时运行AdGuard"
+    },
+    "tray_menu_quit": {
+        "message": "退出"
+    },
+    "tray_menu_protection_start": {
+        "message": "启动 AdGuard"
+    },
+    "options_last_update": {
+        "message": "最后更新于："
+    },
+    "options_about": {
+        "message": "关于"
+    },
+    "options_content_blockers": {
+        "message": "内容拦截"
+    },
+    "options_content_blockers_desc": {
+        "message": "已启用广告过滤器：6个当中的 %s（每个最高可包含 50,000 条规则）"
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": ""
+    },
+    "options_compare_btn": {
+        "message": "两者对比"
+    },
+    "options_compare_title": {
+        "message": "使用 AdGuard Premium 以获取更佳保护！"
+    },
+    "options_license_agreement": {
+        "message": "最终用户许可协议"
+    },
+    "options_privacy_policy": {
+        "message": "隐私策略"
+    },
+    "options_acknowledgment": {
+        "message": "致谢"
+    },
+    "options_github": {
+        "message": "Github"
+    },
+    "onboarding_safari_desc": {
+        "message": "在 Safari 首选项页内，复选框紧邻  \"AdGuard Safari 图标\" 和 \"AdGuard\""
+    },
+    "onboarding_safari_btn": {
+        "message": "打开首选项"
+    },
+    "options_learn_more": {
+        "message": "了解更多信息"
+    },
+    "options_about_version": {
+        "message": "版本 %s"
+    },
+    "notification_user_filter_updated_title": {
+        "message": "用户过滤器已更新"
+    },
+    "notification_user_filter_updated_desc": {
+        "message": "新规则已添加至用户过滤器："
+    },
+    "options_filters_update_period": {
+        "message": "更新周期"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "one": "每小时",
+            "other": "每 %s 小时"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "不更新"
+    },
+    "options_filters_custom_remove": {
+        "message": ""
+    },
+    "options_show_tray_icon": {
+        "message": "在菜单栏上显示AdGuard for Safari"
+    },
+    "options_launch_at_login": {
+        "message": "在启动时运行AdGuard for Safari"
+    },
+    "options_verbose_logging": {
+        "message": "Verbose logging"
+    },
+    "options_verbose_logging_desc": {
+        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
+    },
+    "settings_notification_protection_title": {
+        "message": "注意! 保护已被禁用"
+    },
+    "settings_notification_protection_button_text": {
+        "message": ""
+    },
+    "settings_notification_extensions_button_text": {
+        "message": ""
+    },
+    "settings_notification_extensions_title": {
+        "message": ""
+    },
+    "settings_notification_extensions_text": {
+        "message": ""
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": ""
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": ""
+    },
+    "options_cb_general_title": {
+        "message": ""
+    },
+    "options_cb_privacy_title": {
+        "message": ""
+    },
+    "options_cb_social_title": {
+        "message": ""
+    },
+    "options_cb_security_title": {
+        "message": ""
+    },
+    "options_cb_other_title": {
+        "message": ""
+    },
+    "options_cb_custom_title": {
+        "message": ""
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s 规则已使用",
+            "other": "%s 规则已使用"
+        }
+    },
+    "options_cb_rules_overlimit_info": {
+        "message": ""
+    },
+    "options_cb_disabled_warning": {
+        "message": ""
+    },
+    "options_cb_compilation_warning": {
+        "message": ""
+    },
+    "filters_group_custom": {
+        "message": ""
+    },
+    "userfilter_name": {
+        "message": ""
+    }
+}
