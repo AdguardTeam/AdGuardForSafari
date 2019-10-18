@@ -84,7 +84,6 @@ module.exports = (function () {
      * @return {[*]}
      */
     const groupRules = (rules) => {
-
         const rulesByFilterId = {};
         rules.forEach(x => {
             if (!rulesByFilterId[x.filterId]) {
@@ -121,8 +120,13 @@ module.exports = (function () {
             const filterGroups = groups[groupName].filterGroups;
 
             if (rulesByAffinityBlocks[key]) {
+                log.debug(`Group rules for ${key} length: ${rulesByGroup[key].length}`);
+                log.debug(`Affinity rules for ${key} length: ${rulesByAffinityBlocks[key].length}`);
                 rulesByGroup[key] = rulesByGroup[key].concat(rulesByAffinityBlocks[key]);
             }
+
+            // Remove duplicates
+            rulesByGroup[key] = [...new Set(rulesByGroup[key])];
 
             result.push({
                 key: key,

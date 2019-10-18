@@ -134,7 +134,7 @@ module.exports = (() => {
      */
     const setContentBlockingJson = (bundleId, jsonString, info) => {
         safariToolbar.busyStatus(true);
-        log.info(`Content-blocker updating ${bundleId}`);
+        log.debug(`Content-blocker updating ${bundleId}`);
         safariToolbar.setContentBlockingJson(bundleId, jsonString, (result) => {
             log.info(`Content-blocker ${bundleId} set result : ${result}`);
 

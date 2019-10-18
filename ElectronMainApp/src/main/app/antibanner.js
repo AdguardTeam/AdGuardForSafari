@@ -112,9 +112,6 @@ module.exports = (() => {
             listeners.notifyListeners(events.APPLICATION_INITIALIZED);
         }
 
-        // Supplement object to make sure that we use only unique filter rules
-        const uniqueRules = Object.create(null);
-
         /**
          * STEP 3: Called when request filter has been filled with rules.
          * This is the last step of request filter initialization.
@@ -151,11 +148,6 @@ module.exports = (() => {
 
             for (let i = 0; i < rulesTexts.length; i++) {
                 const ruleText = rulesTexts[i];
-                if (ruleText in uniqueRules) {
-                    // Do not allow duplicates
-                    continue;
-                }
-                uniqueRules[ruleText] = true;
                 if (isTrustedFilter || filterRules.isTrustedRule(ruleText)) {
                     newRequestFilter.rules.push({
                         filterId,
