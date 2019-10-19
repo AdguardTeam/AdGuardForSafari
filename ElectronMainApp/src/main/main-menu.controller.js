@@ -1,8 +1,14 @@
-const { app, Menu, BrowserWindow } = require('electron');
+const { app, dialog, Menu, BrowserWindow } = require('electron');
+const fs = require('fs');
 const updater = require('./updater');
 const i18n = require('../utils/i18n');
 const listeners = require('./notifier');
 const events = require('./events');
+const log = require('./app/utils/log');
+const agApp = require('./app/app');
+const applicationApi = require('./api');
+const path = require('path');
+const AdmZip = require('adm-zip');
 
 /**
  * Module Menu
@@ -33,37 +39,39 @@ module.exports = (() => {
     /**
      * On export logs clicked
      */
-    const onExportLogsClicked = (showMainWindow) => {
-        console.log('export logs');
+    const onExportLogsClicked = () => {
+        log.info('Exporting log file..');
 
         //TODO: Add entitlement
 
-        const { dialog, app } = require('electron');
-        //TODO: Change def name
         const options = {
-            defaultPath: app.getPath('documents') + '/adg_safari_DDMMYYYYMISS.zip',
+            defaultPath: app.getPath('documents') + `/adg_safari_logs_${Date.now()}.zip`,
         };
 
         dialog.showSaveDialog(null, options, (userPath) => {
-            console.log(userPath);
-
-            const log = require('./app/utils/log');
-            const logsPath = log.findLogPath();
-            console.log(logsPath);
-
-            if(userPath){
-                const fs = require('fs');
-
-                //TODO: Extract state
-                //TODO: zip
-                fs.copyFile(logsPath, userPath, (err) => {
-                    if (err) {
-                        throw err;
-                    }
-
-                    console.log("The file has been saved successfully");
-                });
+            if (!userPath) {
+                return;
             }
+
+            const logsPath = log.findLogPath();
+            if (!logsPath) {
+                return;
+            }
+
+            log.info(`Log file path: ${logsPath}`);
+
+            const state = [];
+            state.push(`Application version: ${agApp.getVersion()}`);
+            state.push(`Application locale: ${agApp.getLocale()}`);
+            state.push(`Enabled filters: [ ${applicationApi.getEnabledFilterIds().join(',')} ]`);
+
+            const statePath = path.join(path.dirname(logsPath), 'state.txt');
+            fs.writeFileSync(statePath, state.join('\r\n'));
+
+            const zip = new AdmZip();
+            zip.addLocalFile(logsPath);
+            zip.addLocalFile(statePath);
+            zip.writeZip(userPath);
         });
     };
 
@@ -96,7 +104,7 @@ module.exports = (() => {
                     { type: 'separator' },
                     {
                         label: i18n.__('tray_menu_export_logs.message'),
-                        click() { onExportLogsClicked(showMainWindow); }
+                        click() { onExportLogsClicked(); }
                     },
                     { type: 'separator' },
                     {
