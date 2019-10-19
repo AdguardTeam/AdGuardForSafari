@@ -42,8 +42,6 @@ module.exports = (() => {
     const onExportLogsClicked = () => {
         log.info('Exporting log file..');
 
-        //TODO: Add entitlement
-
         const options = {
             defaultPath: app.getPath('documents') + `/adg_safari_logs_${Date.now()}.zip`,
         };
