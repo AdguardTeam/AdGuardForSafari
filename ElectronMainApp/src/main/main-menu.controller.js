@@ -60,6 +60,7 @@ module.exports = (() => {
 
             const state = [];
             state.push(`Application version: ${agApp.getVersion()}`);
+            state.push(`Application channel: ${agApp.getChannel()}`);
             state.push(`Application locale: ${agApp.getLocale()}`);
             state.push(`Enabled filters: [ ${applicationApi.getEnabledFilterIds().join(',')} ]`);
 
