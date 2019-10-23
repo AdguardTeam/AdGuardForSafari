@@ -53,7 +53,7 @@ module.exports = (function () {
                 }
 
                 const info = {
-                    rulesCount: group.rules.length,
+                    rulesCount: result ? result.totalConvertedCount : 0,
                     bundleId: rulesGroupsBundles[group.key],
                     overlimit: result && result.overLimit,
                     filterGroups: group.filterGroups,
@@ -97,7 +97,7 @@ module.exports = (function () {
         const result = await jsonFromRules(rules, true);
         const advancedBlocking = result ? result.advancedBlocking : "[]";
 
-        setSafariContentBlocker(rulesGroupsBundles["advancedBlocking"], advancedBlocking);
+        setSafariContentBlocker(rulesGroupsBundles["advancedBlocking"], advancedBlocking, {rulesCount: result ? result.totalConvertedCount : 0});
 
         return result ? result.advancedBlockingConvertedCount : 0;
     };
@@ -121,7 +121,7 @@ module.exports = (function () {
         log.info('Rules loaded: {0}', rules.length);
         if (settings.isDefaultWhiteListMode()) {
             rules = rules.concat(whitelist.getRules().map(r => {
-                return { filterId: 0, ruleText: r }
+                return {filterId: 0, ruleText: r}
             }));
         } else {
             const invertedWhitelistRule = constructInvertedWhitelistRule();
@@ -145,7 +145,7 @@ module.exports = (function () {
      */
     const setSafariContentBlocker = (bundleId, json, info) => {
         try {
-            log.info(`Setting content blocker json for ${bundleId}. Length=${json.length};`);
+            log.info(`Setting content blocker json for ${bundleId}. Rules count: ${info.rulesCount}. Json length=${json.length};`);
 
             listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, {
                 bundleId,
@@ -195,7 +195,7 @@ module.exports = (function () {
      * @param info
      */
     const saveContentBlockerInfo = (bundleId, info) => {
-          contentBlockersInfoCache[bundleId] = info;
+        contentBlockersInfoCache[bundleId] = info;
     };
 
     /**
