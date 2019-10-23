@@ -1,6 +1,6 @@
 /**
  * AdGuard -> Safari Content Blocker converter
- * Version 4.2.1
+ * Version 4.2.2
  * License: https://github.com/AdguardTeam/SafariContentBlockerConverterCompiler/blob/master/LICENSE
  */
 
@@ -3089,7 +3089,7 @@ var jsonFromFilters = (function () {
         /**
          * Safari content blocking format rules converter.
          */
-        const CONVERTER_VERSION = '4.2.0';
+        const CONVERTER_VERSION = '4.2.2';
         // Max number of CSS selectors per rule (look at compactCssRules function)
         const MAX_SELECTORS_PER_WIDE_RULE = 250;
 
@@ -4077,6 +4077,8 @@ var jsonFromFilters = (function () {
             const cssExceptions = [];
             // Extended css Elemhide rules (##)
             let extendedCssBlocking = [];
+            // Cosmetic css exceptions (#@$#)
+            const cosmeticCssExceptions = [];
 
             // Script rules (#%#)
             let scriptRules = [];
@@ -4131,6 +4133,9 @@ var jsonFromFilters = (function () {
                         // #@# rules
                         cssExceptions.push(item);
                     } else if (item.action.type === 'ignore-previous-rules' &&
+                        (item.action.css && item.action.css !== '')) {
+                        cosmeticCssExceptions.push(item);
+                    } else if (item.action.type === 'ignore-previous-rules' &&
                         AGRuleConverter.isSingleOption(agRule, adguard.rules.UrlFilterRule.options.GENERICHIDE)) {
                         contentBlocker.cssBlockingGenericHideExceptions.push(item);
                     } else if (item.action.type === 'ignore-previous-rules' &&
@@ -4165,7 +4170,7 @@ var jsonFromFilters = (function () {
 
             if (advancedBlocking) {
                 // Applying CSS exceptions for extended css rules
-                extendedCssBlocking = applyActionExceptions(extendedCssBlocking, cssExceptions, 'selector');
+                extendedCssBlocking = applyActionExceptions(extendedCssBlocking, cssExceptions.concat(cosmeticCssExceptions), 'selector');
                 const extendedCssCompact = compactCssRules(extendedCssBlocking);
                 if (!optimize) {
                     contentBlocker.extendedCssBlockingWide = extendedCssCompact.cssBlockingWide;
