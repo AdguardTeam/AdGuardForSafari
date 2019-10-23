@@ -1,5 +1,6 @@
 const localStorage = require('./storage/storage');
 const {app} = require('electron');
+const packageJson = require('../../../package.json');
 
 /**
  * Application
@@ -49,11 +50,30 @@ module.exports = (() => {
         return 'com.adguard.safari.application.dev';
     };
 
+    /**
+     * @returns {*|string} Application update channel
+     */
+    const getChannel = () => {
+        const isStandaloneBuild = packageJson["standalone-build"] === 'true';
+        const isStandaloneBeta = packageJson["standalone-beta"] === 'true';
+
+        if (isStandaloneBeta) {
+            return 'Standalone Beta';
+        }
+
+        if (isStandaloneBuild) {
+            return 'Standalone Release';
+        }
+
+        return 'MAS';
+    };
+
     return {
         getVersion: getVersion,
         getLocale: getLocale,
         getId: getId,
-        getClientId: getClientId
+        getClientId: getClientId,
+        getChannel: getChannel
     };
 
 })();
