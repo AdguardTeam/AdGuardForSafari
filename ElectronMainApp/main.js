@@ -190,6 +190,8 @@ function parseRecord(data) {
 // https://github.com/adguardteam/adguardforsafari/issues/118
 function isOpenedAtLogin(callback) {
 
+    // TODO: read env for LAUNCHED_AT_LOGIN
+
     try {
         let isAutostart = false;
 
