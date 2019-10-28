@@ -10,6 +10,7 @@
 #import "AESharedResources.h"
 #import "CommonLib/ACLang.h"
 #import <SafariServices/SafariServices.h>
+#import "AALaunchAtLogin.h"
 
 @implementation AEMainAppServices
 
@@ -18,6 +19,20 @@
         [AEMainAppServices performAllExtensionEnabledRequest];
     }];
     DDLogInfo(@"AG: Set listener on AllExtensionEnabledRequest");
+}
+
++ (void)setStartAtLogin:(BOOL)startAtLogin {
+    @autoreleasepool {
+        AALaunchAtLogin *loginItem = [[AALaunchAtLogin alloc] initWithIdentifier:AG_LOGIN_HELPER_BUNDLEID];
+        loginItem.startAtLogin = YES;
+    }
+}
++ (BOOL)startAtLogin {
+    @autoreleasepool {
+        AALaunchAtLogin *loginItem = [[AALaunchAtLogin alloc] initWithIdentifier:AG_LOGIN_HELPER_BUNDLEID];
+        BOOL result = loginItem.startAtLogin;
+        return result;
+    }
 }
 
 /////////////////////////////////////////////////////////////////////

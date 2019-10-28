@@ -333,7 +333,6 @@ NAN_METHOD(protectionEnabled) {
   info.GetReturnValue().Set(Nan::New((bool)result));
 }
 
-
 NAN_METHOD(userFilter) {
 
     if (info.Length() < 1) {
@@ -705,6 +704,28 @@ NAN_METHOD(debugLog) {
      }
 }
 
+NAN_METHOD(setStartAtLogin) {
+
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsBoolean()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+
+    BOOL val = info[0].As<v8::Boolean>()->Value();
+    AEMainAppServices.startAtLogin = val;
+}
+
+NAN_METHOD(startAtLogin) {
+
+  BOOL result = AEMainAppServices.startAtLogin;
+  info.GetReturnValue().Set(Nan::New((bool)result));
+}
+
 NAN_MODULE_INIT(Init) {
 
   [AESharedResources initLogger];
@@ -775,6 +796,13 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("setVerboseLogging").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setVerboseLogging)).ToLocalChecked());
+    
+  Nan::Set(target, New<String>("setStartAtLogin").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setStartAtLogin)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("startAtLogin").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(startAtLogin)).ToLocalChecked());
+
 }
 
 // macro to load the module when require'd
