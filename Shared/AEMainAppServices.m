@@ -24,7 +24,7 @@
 + (void)setStartAtLogin:(BOOL)startAtLogin {
     @autoreleasepool {
         AALaunchAtLogin *loginItem = [[AALaunchAtLogin alloc] initWithIdentifier:AG_LOGIN_HELPER_BUNDLEID];
-        loginItem.startAtLogin = YES;
+        loginItem.startAtLogin = startAtLogin;
     }
 }
 + (BOOL)startAtLogin {
