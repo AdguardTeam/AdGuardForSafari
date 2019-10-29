@@ -37,6 +37,9 @@ module.exports.init = function () {
             case 'changeUserSetting':
                 settings.setProperty(message.key, message.value);
                 break;
+            case 'changeLaunchAtLogin':
+                settings.changeLaunchAtLogin(message.value);
+                break;
             case 'addAndEnableFilter':
                 filters.addAndEnableFilters([message.filterId]);
                 break;

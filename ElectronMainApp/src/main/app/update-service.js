@@ -1,9 +1,11 @@
-const app = require('./app');
+const appApi = require('./app');
 const localStorage = require('./storage/storage');
 const versionUtils = require('./utils/version');
 const settings = require('./settings-manager');
 const log = require('./utils/log');
 const filtersUpdate = require('./filters/filters-update');
+
+const {app} = require('electron');
 
 /**
  * Service that manages app version information and handles
@@ -23,7 +25,7 @@ module.exports = (function () {
      *
      * @param version
      */
-    const setAppVersion = version =>{
+    const setAppVersion = version => {
         localStorage.setItem(APP_VERSION_KEY, version);
     };
 
@@ -35,7 +37,7 @@ module.exports = (function () {
     const getRunInfo = function (callback) {
 
         const prevVersion = getAppVersion();
-        const currentVersion = app.getVersion();
+        const currentVersion = appApi.getVersion();
         setAppVersion(currentVersion);
 
         const isFirstRun = (currentVersion !== prevVersion && !prevVersion);
@@ -53,6 +55,9 @@ module.exports = (function () {
         });
     };
 
+    /**
+     * Updates use optimized setting
+     */
     const onUpdateUseOptimizedFilters = () => {
         log.info('Execute update optimized filters procedure');
 
@@ -65,6 +70,17 @@ module.exports = (function () {
     };
 
     /**
+     * Move launch at login to AdGuard Login helper scheme
+     */
+    const onUpdateLaunchAtLogin = () => {
+        settings.changeLaunchAtLogin(settings.isLaunchAtLoginEnabled());
+
+        app.setLoginItemSettings({
+            openAtLogin: false
+        });
+    };
+
+    /**
      * Handle application update
      *
      * @param runInfo   Run info
@@ -73,6 +89,10 @@ module.exports = (function () {
     const onUpdate = (runInfo, callback) => {
         if (versionUtils.isGreaterVersion("1.6.0", runInfo.prevVersion)) {
             onUpdateUseOptimizedFilters();
+        }
+
+        if (versionUtils.isGreaterVersion("1.6.1", runInfo.prevVersion)) {
+            onUpdateLaunchAtLogin();
         }
 
         callback();

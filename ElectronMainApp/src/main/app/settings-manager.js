@@ -4,8 +4,8 @@ const log = require('./utils/log');
 const channels = require('./utils/channels');
 const listeners = require('../notifier');
 const events = require('../events');
+const safariToolbar = require('safari-ext');
 
-const { app } = require('electron');
 /**
  * Object that manages user settings.
  * @constructor
@@ -156,10 +156,7 @@ module.exports = (function () {
 
     const changeLaunchAtLogin = (value) => {
         setProperty(settings.LAUNCH_AT_LOGIN, value);
-
-        app.setLoginItemSettings({
-            openAtLogin: value
-        });
+        safariToolbar.setStartAtLogin(value);
 
         listeners.notifyListeners(events.LAUNCH_AT_LOGIN_UPDATED, value);
     };
@@ -201,10 +198,6 @@ module.exports = (function () {
     api.changeLaunchAtLogin = changeLaunchAtLogin;
     api.isLaunchAtLoginEnabled = isLaunchAtLoginEnabled;
     api.isVerboseLoggingEnabled = isVerboseLoggingEnabled;
-
-    app.setLoginItemSettings({
-        openAtLogin: getProperty(settings.LAUNCH_AT_LOGIN)
-    });
 
     return api;
 
