@@ -1447,13 +1447,18 @@ const Settings = function () {
 
         const element = document.querySelector(id);
         if (!hidden) {
-            element.addEventListener('change', function () {
-                ipcRenderer.send('renderer-to-main', JSON.stringify({
-                    'type': 'changeUserSetting',
-                    'key': property,
-                    'value': negate ? !this.checked : this.checked
-                }));
-            });
+            let listener = options.eventListener;
+            if (!listener) {
+                listener = function () {
+                    ipcRenderer.send('renderer-to-main', JSON.stringify({
+                        'type': 'changeUserSetting',
+                        'key': property,
+                        'value': negate ? !this.checked : this.checked
+                    }));
+                };
+            }
+
+            element.addEventListener('change', listener);
         }
 
         const render = function () {
@@ -1491,7 +1496,14 @@ const Settings = function () {
     });
 
     checkboxes.push(new Checkbox('#showTrayIcon', userSettings.names.SHOW_TRAY_ICON));
-    checkboxes.push(new Checkbox('#launchAtLogin', userSettings.names.LAUNCH_AT_LOGIN));
+    checkboxes.push(new Checkbox('#launchAtLogin', userSettings.names.LAUNCH_AT_LOGIN, {
+        eventListener: function () {
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'changeLaunchAtLogin',
+                'value': this.checked
+            }));
+        }
+    }));
     checkboxes.push(new Checkbox('#verboseLogging', userSettings.names.VERBOSE_LOGGING));
 
     const initUpdateFiltersPeriodSelect = () => {
