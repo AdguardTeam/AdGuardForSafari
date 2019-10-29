@@ -79,8 +79,6 @@
 		65D151C22139A5080014BE79 /* DDOSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D151A52139A5080014BE79 /* DDOSLogger.h */; };
 		65D151C32139A5080014BE79 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A62139A5080014BE79 /* DDTTYLogger.m */; };
 		65D151C42139A5080014BE79 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D151A72139A5080014BE79 /* DDAbstractDatabaseLogger.h */; };
-		65EF97A123672E15000CC845 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF97A023672E15000CC845 /* AppDelegate.m */; };
-		65EF97A623672E16000CC845 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65EF97A423672E16000CC845 /* MainMenu.xib */; };
 		65EF97A923672E16000CC845 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF97A823672E16000CC845 /* main.m */; };
 		65EF97B2236733DA000CC845 /* AALaunchAtLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF97B0236733DA000CC845 /* AALaunchAtLogin.m */; };
 		65EF97B3236733DA000CC845 /* AALaunchAtLogin.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF97B1236733DA000CC845 /* AALaunchAtLogin.h */; };
@@ -482,9 +480,6 @@
 		65D151A62139A5080014BE79 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
 		65D151A72139A5080014BE79 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		65EF979D23672E15000CC845 /* AdGuard Login Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AdGuard Login Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		65EF979F23672E15000CC845 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		65EF97A023672E15000CC845 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		65EF97A523672E16000CC845 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		65EF97A723672E16000CC845 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65EF97A823672E16000CC845 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		65EF97AA23672E16000CC845 /* AdGuard_Login_Helper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuard_Login_Helper.entitlements; sourceTree = "<group>"; };
@@ -1021,9 +1016,6 @@
 		65EF979E23672E15000CC845 /* AdGuard Login Helper */ = {
 			isa = PBXGroup;
 			children = (
-				65EF979F23672E15000CC845 /* AppDelegate.h */,
-				65EF97A023672E15000CC845 /* AppDelegate.m */,
-				65EF97A423672E16000CC845 /* MainMenu.xib */,
 				65EF97A723672E16000CC845 /* Info.plist */,
 				65EF97A823672E16000CC845 /* main.m */,
 				65EF97AA23672E16000CC845 /* AdGuard_Login_Helper.entitlements */,
@@ -1644,7 +1636,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65EF97A623672E16000CC845 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1780,7 +1771,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				65EF97A923672E16000CC845 /* main.m in Sources */,
-				65EF97A123672E15000CC845 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2086,14 +2076,6 @@
 				F491984D2358CCFE00723D64 /* ko */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		65EF97A423672E16000CC845 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				65EF97A523672E16000CC845 /* Base */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		F4581B7722F36F720069FA94 /* InfoPlist.strings */ = {
