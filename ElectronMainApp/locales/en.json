@@ -183,10 +183,10 @@
         "message": "Invert whitelist<span class='sp-table-row-info'>Unblock ads everywhere <i>except</i> the whitelist</span>"
     },
     "options_userfilter": {
-        "message": "User filter"
+        "message": "User Rules"
     },
     "options_userfilter_description": {
-        "message": "You can add your own rules to&nbsp;this filter. This option is&nbsp;recommended for advanced users familiar with HTML/CSS. Read the <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filter rules tutorial</a> to&nbsp;learn how to&nbsp;write your own filter rules."
+        "message": "You can add your own rules here. This option is&nbsp;recommended for advanced users familiar with HTML/CSS. Read the <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filter rules tutorial</a> to&nbsp;learn how to&nbsp;write your own filter rules."
     },
     "options_show_app_updated_notification": {
         "message": "Notify about extension updates"
@@ -324,10 +324,10 @@
         "message": "Version %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "User filter updated"
+        "message": "User rules updated"
     },
     "notification_user_filter_updated_desc": {
-        "message": "A new rule was added to user filter:"
+        "message": "A new rule was added to User rules:"
     },
     "options_filters_update_period": {
         "message": "Update interval"
@@ -414,6 +414,6 @@
         "message": "Custom"
     },
     "userfilter_name": {
-        "message": "User filter"
+        "message": "User rules"
     }
 }

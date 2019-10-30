@@ -183,10 +183,10 @@
         "message": "反向白名單<span class='sp-table-row-info'><i>除</i>白名單之外，解除封鎖各處廣告</span>"
     },
     "options_userfilter": {
-        "message": "使用者過濾器"
+        "message": "使用者規則"
     },
     "options_userfilter_description": {
-        "message": "您可增加您自己的規則至該過濾器。對於熟悉 HTML/CSS 之進階的用戶，該選項是被建議的。閱讀<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>過濾器規則導覽</a>以學習如何撰寫您自己的過濾器規則。"
+        "message": "您可於此增加您自己的規則。對於熟悉 HTML/CSS 之進階的用戶，該選項是被建議的。閱讀<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>過濾器規則導覽</a>以學習如何撰寫您自己的過濾器規則。"
     },
     "options_show_app_updated_notification": {
         "message": "通知有關延伸功能更新"
@@ -324,10 +324,10 @@
         "message": "版本 %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "使用者過濾器被更新"
+        "message": "使用者規則被更新"
     },
     "notification_user_filter_updated_desc": {
-        "message": "一項新的規則已被加至使用者過濾器中："
+        "message": "一項新的規則已被加至使用者規則中："
     },
     "options_filters_update_period": {
         "message": "更新間隔"
@@ -414,6 +414,6 @@
         "message": "自訂的"
     },
     "userfilter_name": {
-        "message": "使用者過濾器"
+        "message": "使用者規則"
     }
 }

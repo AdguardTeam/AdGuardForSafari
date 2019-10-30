@@ -38,6 +38,9 @@
     "main_menu_close_window": {
         "message": "Chiudi la finestra"
     },
+    "tray_menu_export_logs": {
+        "message": "Esporta registri e informazioni di sistema..."
+    },
     "name": {
         "message": "Blocco annunci AdGuard"
     },
@@ -405,7 +408,7 @@
         "message": "Disabilitato nel Safari"
     },
     "options_cb_compilation_warning": {
-        "message": ""
+        "message": "Compilazione fallita"
     },
     "filters_group_custom": {
         "message": "Personalizzato"

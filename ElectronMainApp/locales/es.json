@@ -38,6 +38,9 @@
     "main_menu_close_window": {
         "message": "Cerrar la ventana"
     },
+    "tray_menu_export_logs": {
+        "message": ""
+    },
     "name": {
         "message": "AdGuard AdBlocker"
     },
@@ -177,7 +180,7 @@
         "message": "AdGuard no filtra sitios web de la lista blanca."
     },
     "options_whitelist_inverse": {
-        "message": "Invertir lista blanca<span class='sp-table-row-info'>Desbloquea anuncios en todas partes <i>excepto</i> en la lista blanca</span>"
+        "message": "Invertir lista blanca<span class='sp-table-row-info'>Desbloquea anuncios en todas partes <i>excepto</i> en esta lista</span>"
     },
     "options_userfilter": {
         "message": "Filtro del usuario"
