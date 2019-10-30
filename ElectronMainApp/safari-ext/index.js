@@ -172,6 +172,22 @@ module.exports = (() => {
         addon.setVerboseLogging(enabled);
     };
 
+    /**
+    * Sets Start at user login
+    */
+    const setStartAtLogin = (isEnabled) => {
+      addon.setStartAtLogin(isEnabled);
+    };
+
+    /**
+    * Gets status of the "Start at user login"
+    * @return Returns boolean value.
+    */
+    const startAtLogin = () => {
+      return addon.startAtLogin();
+    };
+
+
     return {
         init: init,
         sendReady: sendReady,
@@ -186,7 +202,9 @@ module.exports = (() => {
         getExtensionState: getExtensionState,
         openExtensionsPreferenses: openExtensionsPreferenses,
         debugLog: debugLog,
-        setVerboseLogging: setVerboseLogging
+        setVerboseLogging: setVerboseLogging,
+        setStartAtLogin: setStartAtLogin,
+        startAtLogin: startAtLogin 
     };
 
 })();

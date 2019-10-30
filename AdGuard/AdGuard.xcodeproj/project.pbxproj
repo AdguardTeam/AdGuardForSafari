@@ -12,6 +12,7 @@
 		6504C1102136EA2D007E9674 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6504C10F2136EA2D007E9674 /* PopupView.m */; };
 		651A4FAE232149E4002DAD0A /* AEMainAppServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 651A4FAC232149E4002DAD0A /* AEMainAppServices.h */; };
 		651A4FAF232149E4002DAD0A /* AEMainAppServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 651A4FAD232149E4002DAD0A /* AEMainAppServices.m */; };
+		651D5DA523673D430025C72C /* AdGuard Login Helper.app in Copy Launch At Login Helper */ = {isa = PBXBuildFile; fileRef = 65EF979D23672E15000CC845 /* AdGuard Login Helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		65216A03212436EA00ABF7D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
 		65216A07212436EA00ABF7D0 /* SafariExtensionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 65216A06212436EA00ABF7D0 /* SafariExtensionHandler.m */; };
 		65216A0A212436EA00ABF7D0 /* SafariExtensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65216A09212436EA00ABF7D0 /* SafariExtensionViewController.m */; };
@@ -78,6 +79,9 @@
 		65D151C22139A5080014BE79 /* DDOSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D151A52139A5080014BE79 /* DDOSLogger.h */; };
 		65D151C32139A5080014BE79 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D151A62139A5080014BE79 /* DDTTYLogger.m */; };
 		65D151C42139A5080014BE79 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D151A72139A5080014BE79 /* DDAbstractDatabaseLogger.h */; };
+		65EF97A923672E16000CC845 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF97A823672E16000CC845 /* main.m */; };
+		65EF97B2236733DA000CC845 /* AALaunchAtLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF97B0236733DA000CC845 /* AALaunchAtLogin.m */; };
+		65EF97B3236733DA000CC845 /* AALaunchAtLogin.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF97B1236733DA000CC845 /* AALaunchAtLogin.h */; };
 		65FA408D215E8B6B000196EC /* LinkButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FA408C215E8B6B000196EC /* LinkButton.m */; };
 		F410563022EA2521003871C5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
 		F410563622EA2521003871C5 /* ContentBlockerRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F410563522EA2521003871C5 /* ContentBlockerRequestHandler.m */; };
@@ -214,6 +218,13 @@
 			remoteGlobalIDString = 6584716C2136B372005C74E8;
 			remoteInfo = BlockerExtension;
 		};
+		65EF97B423673C6E000CC845 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65720AAA21219AC900B2381C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65EF979C23672E15000CC845;
+			remoteInfo = "AdGuard Login Helper";
+		};
 		65FA4086215CE234000196EC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65720AAA21219AC900B2381C /* Project object */;
@@ -280,6 +291,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		651D5DA423673CFC0025C72C /* Copy Launch At Login Helper */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				651D5DA523673D430025C72C /* AdGuard Login Helper.app in Copy Launch At Login Helper */,
+			);
+			name = "Copy Launch At Login Helper";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65216A1A212436EA00ABF7D0 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -457,6 +479,12 @@
 		65D151A52139A5080014BE79 /* DDOSLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDOSLogger.h; sourceTree = "<group>"; };
 		65D151A62139A5080014BE79 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
 		65D151A72139A5080014BE79 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		65EF979D23672E15000CC845 /* AdGuard Login Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AdGuard Login Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		65EF97A723672E16000CC845 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65EF97A823672E16000CC845 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		65EF97AA23672E16000CC845 /* AdGuard_Login_Helper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuard_Login_Helper.entitlements; sourceTree = "<group>"; };
+		65EF97B0236733DA000CC845 /* AALaunchAtLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AALaunchAtLogin.m; sourceTree = "<group>"; };
+		65EF97B1236733DA000CC845 /* AALaunchAtLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AALaunchAtLogin.h; sourceTree = "<group>"; };
 		65FA408B215E8B6B000196EC /* LinkButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkButton.h; sourceTree = "<group>"; };
 		65FA408C215E8B6B000196EC /* LinkButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LinkButton.m; sourceTree = "<group>"; };
 		F410562F22EA2521003871C5 /* BlockerSocialExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BlockerSocialExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -683,6 +711,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		65EF979A23672E15000CC845 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F410562C22EA2521003871C5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -800,6 +835,8 @@
 				F4581B6F22F364AA0069FA94 /* AEContentBlockerRequestHandlerBase.m */,
 				651A4FAC232149E4002DAD0A /* AEMainAppServices.h */,
 				651A4FAD232149E4002DAD0A /* AEMainAppServices.m */,
+				65EF97B1236733DA000CC845 /* AALaunchAtLogin.h */,
+				65EF97B0236733DA000CC845 /* AALaunchAtLogin.m */,
 			);
 			name = Shared;
 			path = ../Shared;
@@ -866,6 +903,7 @@
 				65975C9321481540007F766E /* Assets.xcassets */,
 				655C8628212AE6C200CB6DAE /* Shared */,
 				65720AB421219AC900B2381C /* AdGuard */,
+				65EF979E23672E15000CC845 /* AdGuard Login Helper */,
 				65216A04212436EA00ABF7D0 /* Extension */,
 				6584716F2136B373005C74E8 /* BlockerExtension */,
 				65024EA72126C80D00342E3C /* AdGuardTests */,
@@ -896,6 +934,7 @@
 				F4B2150522EA298300E2EA16 /* BlockerOtherExtension.appex */,
 				F4B2151C22EA2A2D00E2EA16 /* BlockerCustomExtension.appex */,
 				F4581BCC22F85C610069FA94 /* BlockerSecurityExtension.appex */,
+				65EF979D23672E15000CC845 /* AdGuard Login Helper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -972,6 +1011,16 @@
 				65D151A32139A5080014BE79 /* DDDispatchQueueLogFormatter.h */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		65EF979E23672E15000CC845 /* AdGuard Login Helper */ = {
+			isa = PBXGroup;
+			children = (
+				65EF97A723672E16000CC845 /* Info.plist */,
+				65EF97A823672E16000CC845 /* main.m */,
+				65EF97AA23672E16000CC845 /* AdGuard_Login_Helper.entitlements */,
+			);
+			path = "AdGuard Login Helper";
 			sourceTree = "<group>";
 		};
 		F410563122EA2521003871C5 /* BlockerSocialExtension */ = {
@@ -1093,6 +1142,7 @@
 				65D151C02139A5080014BE79 /* DDDispatchQueueLogFormatter.h in Headers */,
 				651A4FAE232149E4002DAD0A /* AEMainAppServices.h in Headers */,
 				65D151AA2139A5080014BE79 /* DDASLLogCapture.h in Headers */,
+				65EF97B3236733DA000CC845 /* AALaunchAtLogin.h in Headers */,
 				65D151B92139A5080014BE79 /* DDLog.h in Headers */,
 				65D151B32139A5080014BE79 /* CocoaLumberjack.h in Headers */,
 				65D151AE2139A5080014BE79 /* DDLegacyMacros.h in Headers */,
@@ -1183,10 +1233,12 @@
 			buildPhases = (
 				652169FA21231D0400ABF7D0 /* Resources */,
 				65216A1A212436EA00ABF7D0 /* Embed App Extensions */,
+				651D5DA423673CFC0025C72C /* Copy Launch At Login Helper */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				65EF97B523673C6E000CC845 /* PBXTargetDependency */,
 				652169F921231BFB00ABF7D0 /* PBXTargetDependency */,
 				65216A15212436EA00ABF7D0 /* PBXTargetDependency */,
 				658471782136B373005C74E8 /* PBXTargetDependency */,
@@ -1219,6 +1271,23 @@
 			productName = BlockerExtension;
 			productReference = 6584716D2136B372005C74E8 /* AdGuardForSafariBlockerExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
+		};
+		65EF979C23672E15000CC845 /* AdGuard Login Helper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65EF97AF23672E16000CC845 /* Build configuration list for PBXNativeTarget "AdGuard Login Helper" */;
+			buildPhases = (
+				65EF979923672E15000CC845 /* Sources */,
+				65EF979A23672E15000CC845 /* Frameworks */,
+				65EF979B23672E15000CC845 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AdGuard Login Helper";
+			productName = "AdGuard Login Helper";
+			productReference = 65EF979D23672E15000CC845 /* AdGuard Login Helper.app */;
+			productType = "com.apple.product-type.application";
 		};
 		F410562E22EA2521003871C5 /* BlockerSocialExtension */ = {
 			isa = PBXNativeTarget;
@@ -1398,6 +1467,9 @@
 							};
 						};
 					};
+					65EF979C23672E15000CC845 = {
+						CreatedOnToolsVersion = 11.1;
+					};
 					F410562E22EA2521003871C5 = {
 						CreatedOnToolsVersion = 10.2.1;
 						SystemCapabilities = {
@@ -1509,6 +1581,7 @@
 				F4B2150422EA298300E2EA16 /* BlockerOtherExtension */,
 				F4B2151B22EA2A2D00E2EA16 /* BlockerCustomExtension */,
 				F4581BCB22F85C610069FA94 /* BlockerSecurityExtension */,
+				65EF979C23672E15000CC845 /* AdGuard Login Helper */,
 			);
 		};
 /* End PBXProject section */
@@ -1556,6 +1629,13 @@
 				65D151862139771A0014BE79 /* defaults.plist in Resources */,
 				6582EECA2183435C007DC151 /* InfoPlist.strings in Resources */,
 				65975C9621481540007F766E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65EF979B23672E15000CC845 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1671,6 +1751,7 @@
 				65D151BB2139A5080014BE79 /* DDContextFilterLogFormatter.m in Sources */,
 				65D151C32139A5080014BE79 /* DDTTYLogger.m in Sources */,
 				652735E6212D788E005C35BF /* ACObject.m in Sources */,
+				65EF97B2236733DA000CC845 /* AALaunchAtLogin.m in Sources */,
 				65D151B12139A5080014BE79 /* DDOSLogger.m in Sources */,
 				652735E7212D788E005C35BF /* ACLFileLogger.m in Sources */,
 				652735E8212D788E005C35BF /* AESharedResources.m in Sources */,
@@ -1682,6 +1763,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				658471742136B373005C74E8 /* ContentBlockerRequestHandler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65EF979923672E15000CC845 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65EF97A923672E16000CC845 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1825,6 +1914,11 @@
 			isa = PBXTargetDependency;
 			target = 6584716C2136B372005C74E8 /* AdGuardForSafariBlockerExtension */;
 			targetProxy = 658471772136B373005C74E8 /* PBXContainerItemProxy */;
+		};
+		65EF97B523673C6E000CC845 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65EF979C23672E15000CC845 /* AdGuard Login Helper */;
+			targetProxy = 65EF97B423673C6E000CC845 /* PBXContainerItemProxy */;
 		};
 		65FA4087215CE234000196EC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2500,6 +2594,81 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
+		};
+		65EF97AB23672E16000CC845 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "AdGuard Login Helper/AdGuard_Login_Helper.entitlements";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "AdGuard Login Helper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_LOGIN_HELPER_BUNDLEID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		65EF97AC23672E16000CC845 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "AdGuard Login Helper/AdGuard_Login_Helper.entitlements";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = TC3Q7MAJXF;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "AdGuard Login Helper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_LOGIN_HELPER_BUNDLEID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		65EF97AD23672E16000CC845 /* Standalone Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "AdGuard Login Helper/AdGuard_Login_Helper.entitlements";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "AdGuard Login Helper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_LOGIN_HELPER_BUNDLEID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Standalone Beta";
+		};
+		65EF97AE23672E16000CC845 /* Standalone Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "AdGuard Login Helper/AdGuard_Login_Helper.entitlements";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "AdGuard Login Helper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(AG_LOGIN_HELPER_BUNDLEID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Standalone Prod";
 		};
 		F410563C22EA2521003871C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3604,6 +3773,17 @@
 				6584717B2136B373005C74E8 /* Release */,
 				F46D131C225E93A400282566 /* Standalone Beta */,
 				F46D1327225E944700282566 /* Standalone Prod */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65EF97AF23672E16000CC845 /* Build configuration list for PBXNativeTarget "AdGuard Login Helper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65EF97AB23672E16000CC845 /* Debug */,
+				65EF97AC23672E16000CC845 /* Release */,
+				65EF97AD23672E16000CC845 /* Standalone Beta */,
+				65EF97AE23672E16000CC845 /* Standalone Prod */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

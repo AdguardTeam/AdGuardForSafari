@@ -2,8 +2,6 @@ const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
 const log = require('./src/main/app/utils/log');
 const path = require('path');
-const os = require('os');
-const UtmpParser = require('samplx-utmp');
 
 /* Reconfigure path to config */
 process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
@@ -148,77 +146,8 @@ function showWindow(onWindowLoaded) {
     }
 }
 
-const SECONDS_FROM_LOGIN = 60;
-
-/**
- * Fallback method for opened at login check
- *
- * @return {boolean}
- */
-function compareOsUptime() {
-    log.info('Checking open at login: fallback comparing os uptime: {0}', os.uptime());
-    return os.uptime() < SECONDS_FROM_LOGIN;
-
-}
-
-/**
- * Parses utmpx record:
- * {"type":"USER_PROCESS","pid":35782,"line":"ttys000","id":808464499,"user":"dskolyshev","host":"","timestamp":"2019-10-09T14:32:51.000Z"}
- * returns check if this record indicates process autostarted at login
- */
-function parseRecord(data) {
-    if (!data) {
-        return false;
-    }
-
-    if (data.type === 'USER_PROCESS' &&
-        data.line === 'console') {
-        const timestamp = Date.parse(data.timestamp);
-        const now = new Date().getTime();
-        log.info('Checking open at login, comparing times now {0} and login: {1}', now, timestamp);
-        return now - timestamp < SECONDS_FROM_LOGIN * 1000;
-    }
-
-    return false;
-}
-
-// We don't have a proper way to detect if app was opened at login,
-// so as a workaround for now we will parse login time from utmpx record
-// or we will take system uptime as an indicator.
-// Less than a minute from login means the app was launched at login.
-// https://github.com/AdguardTeam/AdGuardForSafari/issues/141
-// https://github.com/adguardteam/adguardforsafari/issues/118
-function isOpenedAtLogin(callback) {
-
-    try {
-        let isAutostart = false;
-
-        const parser = new UtmpParser('/var/run/utmpx');
-        parser.on('data', (data) => {
-            log.info('Checking open at login: got utmpx data: {0}', data);
-            isAutostart = parseRecord(data);
-            if (isAutostart) {
-                log.info('Checking open at login: utmpx autostart');
-                parser.stop();
-
-                callback(true);
-            }
-        });
-        parser.on('error', (err) => {
-            throw err;
-        });
-        parser.on('end', () => {
-            if (!isAutostart) {
-                callback(compareOsUptime());
-            }
-        });
-
-        parser.run();
-
-    } catch (e) {
-        log.error('Checking open at login: utmpx data error: {0}', e);
-        callback(compareOsUptime());
-    }
+function isOpenedAtLogin() {
+    return process.env['LAUNCHED_AT_LOGIN'];
 }
 
 // Keep a global reference of the tray object, if you don't, the tray icon will
@@ -235,36 +164,34 @@ app.on('ready', (() => {
 
     log.info('App ready - creating browser windows');
 
-    isOpenedAtLogin((isAutostart) => {
-        if (isAutostart) {
-            log.info('App is opened at login');
+    if (isOpenedAtLogin()) {
+        log.info('App is opened at login');
 
-            // Open in background at login
-            if (process.platform === 'darwin') {
-                app.dock.hide();
-            }
-
-            startup.init(showWindow, (shouldShowMainWindow) => {
-                uiEventListener.init();
-
-                if (shouldShowMainWindow) {
-                    loadMainWindow();
-                }
-            });
-        } else {
-            log.info('App is opened by user');
-
-            loadSplashScreenWindow(() => {
-                log.info('Splash screen loaded');
-
-                startup.init(showWindow, () => {
-                    uiEventListener.init();
-                    loadMainWindow();
-                    uiEventListener.register(mainWindow);
-                });
-            });
+        // Open in background at login
+        if (process.platform === 'darwin') {
+            app.dock.hide();
         }
-    });
+
+        startup.init(showWindow, (shouldShowMainWindow) => {
+            uiEventListener.init();
+
+            if (shouldShowMainWindow) {
+                loadMainWindow();
+            }
+        });
+    } else {
+        log.info('App is opened by user');
+
+        loadSplashScreenWindow(() => {
+            log.info('Splash screen loaded');
+
+            startup.init(showWindow, () => {
+                uiEventListener.init();
+                loadMainWindow();
+                uiEventListener.register(mainWindow);
+            });
+        });
+    }
 
     mainMenuController.initMenu(showWindow);
     tray = trayController.initTray(showWindow);
