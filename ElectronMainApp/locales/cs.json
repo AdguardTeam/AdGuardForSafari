@@ -38,6 +38,9 @@
     "main_menu_close_window": {
         "message": "Zavřít okno"
     },
+    "tray_menu_export_logs": {
+        "message": "Export protokolů a systémových informací..."
+    },
     "name": {
         "message": "AdGuard AdBlocker"
     },
@@ -180,10 +183,10 @@
         "message": "Invertovat Whitelist <span class='sp-table-row-info'>. Blokuje reklamy všude <i> , kromě </i> stránek uvedených ve whitelistu</span>."
     },
     "options_userfilter": {
-        "message": "Uživatelský filtr"
+        "message": "Uživatelská pravidla"
     },
     "options_userfilter_description": {
-        "message": "Do tohoto filtru můžete přidat vlastní pravidla. Tato možnost je doporučena pro pokročilé uživatele, kteří jsou obeznámeni s HTML/CSS. Chcete-li se neučit psát svá vlastní filtrovací pravidla, přečtěte si <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>návod filtrovacích pravidel</a>."
+        "message": "Zde můžete přidat vlastní pravidla. Tato možnost je doporučena pro pokročilé uživatele, kteří jsou obeznámeni s HTML/CSS. Chcete-li se neučit psát svá vlastní filtrovací pravidla, přečtěte si <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filter rules tutorial</a>návod filtrovacích pravidel</a>."
     },
     "options_show_app_updated_notification": {
         "message": "Upozornit na aktualizace rozšíření"
@@ -321,10 +324,10 @@
         "message": "Verze %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "Uživatelský filtr byl aktualizován"
+        "message": "Uživatelská pravidla byla aktualizována"
     },
     "notification_user_filter_updated_desc": {
-        "message": "Do uživatelského filtru bylo přidáno nové pravidlo:"
+        "message": "Do Uživatelských pravidel bylo přidáno nové pravidlo:"
     },
     "options_filters_update_period": {
         "message": "Interval aktualizace"
@@ -411,6 +414,6 @@
         "message": "Vlastní"
     },
     "userfilter_name": {
-        "message": "Uživatelský filtr"
+        "message": "Uživatelská pravidla"
     }
 }
