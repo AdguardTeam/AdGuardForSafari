@@ -183,7 +183,7 @@
         "message": "Inverter lista branca<span class='sp-table-row-info'>Desbloquear toda a publicidade<i>excepto</i> a lista branca</span>"
     },
     "options_userfilter": {
-        "message": "Filtro do Utilizador"
+        "message": "Regras do Utilizador"
     },
     "options_userfilter_description": {
         "message": "Pode adicionar as suas próprias regras ao &nbsp;este filtro. Esta opção é &nbsp;recomendada para utilizadores avançados familiarizados com HTML/CSS. Leia o <a class='spl-user-descr-link'href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'> tutorial de regras de filtro </a > para &nbsp;aprender como &nbsp; escrever as suas próprias regras de filtro."
@@ -324,10 +324,10 @@
         "message": "Versão %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "Filtro do Utilizador actualizado"
+        "message": "As regras de utilizador foram actualizadas"
     },
     "notification_user_filter_updated_desc": {
-        "message": "Uma nova regra foi adicionada ao filtro de utilizador:"
+        "message": "Uma nova regra foi adicionada às regras de Utilizador:"
     },
     "options_filters_update_period": {
         "message": "I​ntervalo entre atualizações "
@@ -414,6 +414,6 @@
         "message": "Personalizado"
     },
     "userfilter_name": {
-        "message": "Filtro do Utilizador"
+        "message": "Regras do utilizador"
     }
 }
