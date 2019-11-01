@@ -89,7 +89,7 @@
             // Compare the URLs for the current LoginItem and the app.
             itemUrl = CFBridgingRelease(itemURL);
             DDLogInfo("Сhecking old login item: item url: %@", itemUrl);
-            if ([itemUrl isEqual:appUrl]) {
+            if ([self oldLoginItemCompareUrl:appUrl itemUrl:itemUrl]) {
                 // Save the LoginItem reference.
                 itemRef = currentItemRef;
                 DDLogInfo("Сhecking old login item: item found");
@@ -111,6 +111,28 @@
     CFRelease(loginItemsRef);
     
     return result;
+}
+
++ (BOOL)oldLoginItemCompareUrl:(NSURL *)url itemUrl:(NSURL *)itemUrl {
+    if ([url isEqual:itemUrl]) {
+        return YES;
+    }
+    
+    //you may comment or remove a code below
+    NSArray *productNames = @[
+    @"Adguard for Safari Beta",
+    @"Adguard for Safari",
+    @"AdGuard for Safari Beta",
+    @"AdGuard for Safari"
+    ];
+    
+    NSString *name = [[itemUrl lastPathComponent] stringByDeletingPathExtension];
+    if (name.length) {
+        return [productNames containsObject:name];
+    }
+    //---------------------------
+    
+    return NO;
 }
 
 - (void)startAtLoginInternal {
