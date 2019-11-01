@@ -88,6 +88,7 @@
         if (itemURL) {
             // Compare the URLs for the current LoginItem and the app.
             itemUrl = CFBridgingRelease(itemURL);
+            DDLogInfo("Сhecking old login item: item url: %@", itemUrl);
             if ([itemUrl isEqual:appUrl]) {
                 // Save the LoginItem reference.
                 itemRef = currentItemRef;
