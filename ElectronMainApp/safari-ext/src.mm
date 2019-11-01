@@ -740,18 +740,6 @@ NAN_METHOD(removeOldLoginItem){
     
     Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
     
-    void (^resultBlock)(BOOL result)  = ^void(BOOL result) {
-        
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            Nan::HandleScope scope;
-            
-            v8::Local<v8::Value> argv[1] = {Nan::New((bool)result)};
-            
-            Nan::Call(*cb, 1, argv);
-            delete cb;
-        });
-    };
-
     [AEMainAppServices removeOldLoginItemWithCompletion:^(BOOL result){
             Nan::HandleScope scope;
             
