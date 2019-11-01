@@ -162,6 +162,7 @@ let tray;
 app.on('ready', (() => {
     i18n.setAppLocale(app.getLocale());
 
+    log.info(`Starting AdGuard v${app.getVersion()}`);
     log.info('App ready - creating browser windows');
 
     if (isOpenedAtLogin()) {
