@@ -77,6 +77,7 @@
     // Get the LoginItems list.
     LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
     if (loginItemsRef == nil) return result;
+    DDLogInfo("Сhecking old login item: loginItemsRef obtained");
     // Iterate over the LoginItems.
     NSArray *loginItems = (NSArray *)CFBridgingRelease(LSSharedFileListCopySnapshot(loginItemsRef, nil));
     
@@ -90,6 +91,7 @@
             if ([itemUrl isEqual:appUrl]) {
                 // Save the LoginItem reference.
                 itemRef = currentItemRef;
+                DDLogInfo("Сhecking old login item: item found");
             }
         }
         
