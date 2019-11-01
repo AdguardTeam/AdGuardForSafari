@@ -35,6 +35,17 @@
     }
 }
 
++ (void)removeOldLoginItemWithCompletion:(void (^)(BOOL result))completion{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        BOOL result = [AALaunchAtLogin removeOldLoginItem];
+        if (completion) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(result);
+            });
+        }
+    });
+
+}
 /////////////////////////////////////////////////////////////////////
 #pragma mark Internal processed request (private)
 

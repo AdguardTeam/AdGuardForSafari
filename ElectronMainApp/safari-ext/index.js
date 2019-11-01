@@ -187,6 +187,12 @@ module.exports = (() => {
       return addon.startAtLogin();
     };
 
+    /**
+     * @param callback = (result as bool) => {}
+     */
+    const removeOldLoginItem = (callback) => {
+        addon.removeOldLoginItem(callback);
+    };
 
     return {
         init: init,
@@ -204,7 +210,8 @@ module.exports = (() => {
         debugLog: debugLog,
         setVerboseLogging: setVerboseLogging,
         setStartAtLogin: setStartAtLogin,
-        startAtLogin: startAtLogin 
+        startAtLogin: startAtLogin,
+        removeOldLoginItem: removeOldLoginItem 
     };
 
 })();

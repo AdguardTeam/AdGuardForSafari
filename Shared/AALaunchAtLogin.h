@@ -18,4 +18,6 @@
 
 -(id)initWithIdentifier:(NSString*)identifier;
 
++ (BOOL)removeOldLoginItem;
+
 @end
