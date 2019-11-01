@@ -82,7 +82,7 @@ module.exports = (function () {
 
         // Remove electron login item
         safariToolbar.removeOldLoginItem((result)=>{
-            log.info(`Login item removed with ${result}`);
+            log.info(`Login item removed with result: ${result}`);
         });
     };
 
@@ -99,7 +99,7 @@ module.exports = (function () {
             onUpdateUseOptimizedFilters();
         }
 
-        if (versionUtils.isGreaterVersion("1.6.1", runInfo.prevVersion)) {
+        if (versionUtils.isGreaterVersion("1.6.2", runInfo.prevVersion)) {
             onUpdateLaunchAtLogin();
         }
 
