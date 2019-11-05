@@ -173,20 +173,36 @@ module.exports = (() => {
     };
 
     /**
-    * Sets Start at user login
-    */
+     * Sets Start at user login
+     * After a long story with electron login items API, we decided to move to our own Login Helper app,
+     * so this method sets up a flag to start at login or not.
+     *
+     * https://github.com/AdguardTeam/AdGuardForSafari/issues/204
+     * https://github.com/AdguardTeam/AdGuardForSafari/issues/265
+     *
+     */
     const setStartAtLogin = (isEnabled) => {
       addon.setStartAtLogin(isEnabled);
     };
 
     /**
-    * Gets status of the "Start at user login"
-    * @return Returns boolean value.
-    */
+     * Gets status of the "Start at user login"
+     *
+     * @return Returns boolean value.
+     */
     const startAtLogin = () => {
       return addon.startAtLogin();
     };
 
+    /**
+     * Removes electron app login item, see details:
+     * https://github.com/AdguardTeam/AdGuardForSafari/issues/293
+     *
+     * @param callback = (result as bool) => {}
+     */
+    const removeOldLoginItem = (callback) => {
+        addon.removeOldLoginItem(callback);
+    };
 
     return {
         init: init,
@@ -204,7 +220,8 @@ module.exports = (() => {
         debugLog: debugLog,
         setVerboseLogging: setVerboseLogging,
         setStartAtLogin: setStartAtLogin,
-        startAtLogin: startAtLogin 
+        startAtLogin: startAtLogin,
+        removeOldLoginItem: removeOldLoginItem 
     };
 
 })();

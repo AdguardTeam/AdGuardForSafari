@@ -15,22 +15,7 @@
 /////////////////////////////////////////////////////////////////////
 
 @implementation AALaunchAtLogin {
-    NSURL    *_url;
     BOOL _enabled;
-}
-
-+ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)theKey {
-    BOOL automatic = NO;
-    
-    if ([theKey isEqualToString:@"startAtLogin"]) {
-        automatic = NO;
-    } else if ([theKey isEqualToString:@"enabled"]) {
-        automatic = NO;
-    } else {
-        automatic=[super automaticallyNotifiesObserversForKey:theKey];
-    }
-    
-    return automatic;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -39,6 +24,7 @@
 -(id)initWithIdentifier:(NSString*)identifier {
     self = [self init];
     if(self) {
+        _enabled = NO;
         self.identifier = identifier;
     }
     return self;
@@ -46,45 +32,13 @@
 
 -(void)setIdentifier:(NSString *)identifier {
     _identifier = identifier;
-    [self startAtLogin];
+    [self startAtLoginInternal];
     DDLogInfo(@"Launcher '%@' %@ configured to start at login",
           self.identifier, (_enabled ? @"is" : @"is not"));
-    // try to remove old approuch
-    if (_enabled == NO) {
-        [self removeOldLoginItem];
-    }
-
 }
 
 - (BOOL)startAtLogin {
-    if (!_identifier)
-        return NO;
-    
-    BOOL isEnabled  = NO;
-    
-    // the easy and sane method (SMJobCopyDictionary) can pose problems when sandboxed. -_-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    CFArrayRef  cfJobDicts = SMCopyAllJobDictionaries(kSMDomainUserLaunchd);
-#pragma clang diagnostic pop
-    NSArray* jobDicts = CFBridgingRelease(cfJobDicts);
-    
-    if (jobDicts && [jobDicts count] > 0) {
-        for (NSDictionary* job in jobDicts) {
-            if ([_identifier isEqualToString:[job objectForKey:@"Label"]]) {
-                isEnabled = [[job objectForKey:@"OnDemand"] boolValue];
-                break;
-            }
-        }
-    }
-    
-    if (isEnabled != _enabled) {
-        [self willChangeValueForKey:@"enabled"];
-        _enabled = isEnabled;
-        [self didChangeValueForKey:@"enabled"];
-    }
-    
-    return isEnabled;
+    return _enabled;
 }
 
 - (void)setStartAtLogin:(BOOL)flag {
@@ -109,17 +63,21 @@
 }
 
 
-- (void)removeOldLoginItem {
-    /*
++ (BOOL)removeOldLoginItem {
+
     LSSharedFileListItemRef itemRef = nil;
     NSURL *itemUrl;
     CFURLRef itemURL = nil;
+    BOOL result = NO;
     
     // Get the app's URL.
     NSURL *appUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+    DDLogInfo("AppUrl for checking old login item: %@", appUrl);
+    
     // Get the LoginItems list.
     LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-    if (loginItemsRef == nil) return;
+    if (loginItemsRef == nil) return result;
+    DDLogInfo("Сhecking old login item: loginItemsRef obtained");
     // Iterate over the LoginItems.
     NSArray *loginItems = (NSArray *)CFBridgingRelease(LSSharedFileListCopySnapshot(loginItemsRef, nil));
     
@@ -130,9 +88,11 @@
         if (itemURL) {
             // Compare the URLs for the current LoginItem and the app.
             itemUrl = CFBridgingRelease(itemURL);
-            if ([itemUrl isEqual:appUrl]) {
+            DDLogInfo("Сhecking old login item: item url: %@", itemUrl);
+            if ([self oldLoginItemCompareUrl:appUrl itemUrl:itemUrl]) {
                 // Save the LoginItem reference.
                 itemRef = currentItemRef;
+                DDLogInfo("Сhecking old login item: item found");
             }
         }
         
@@ -141,10 +101,68 @@
     }
 
     if (itemRef != nil) {
-        LSSharedFileListItemRemove(loginItemsRef,itemRef);
+        OSStatus osResult = LSSharedFileListItemRemove(loginItemsRef,itemRef);
+        DDLogInfo(@"Remove old login item result: %d", osResult);
+        if (osResult == 0) {
+            result = YES;
+        }
+        
     }
     CFRelease(loginItemsRef);
-     */
+    
+    return result;
 }
+
++ (BOOL)oldLoginItemCompareUrl:(NSURL *)url itemUrl:(NSURL *)itemUrl {
+    if ([url isEqual:itemUrl]) {
+        return YES;
+    }
+    
+    //you may comment or remove a code below
+    NSArray *productNames = @[
+    @"Adguard for Safari Beta",
+    @"Adguard for Safari",
+    @"AdGuard for Safari Beta",
+    @"AdGuard for Safari"
+    ];
+    
+    NSString *name = [[itemUrl lastPathComponent] stringByDeletingPathExtension];
+    if (name.length) {
+        return [productNames containsObject:name];
+    }
+    //---------------------------
+    
+    return NO;
+}
+
+- (void)startAtLoginInternal {
+    if (!_identifier)
+        return;
+    
+    BOOL isEnabled  = NO;
+    
+    // the easy and sane method (SMJobCopyDictionary) can pose problems when sandboxed. -_-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    CFArrayRef  cfJobDicts = SMCopyAllJobDictionaries(kSMDomainUserLaunchd);
+#pragma clang diagnostic pop
+    NSArray* jobDicts = CFBridgingRelease(cfJobDicts);
+    
+    if (jobDicts && [jobDicts count] > 0) {
+        for (NSDictionary* job in jobDicts) {
+            if ([_identifier isEqualToString:[job objectForKey:@"Label"]]) {
+                isEnabled = [[job objectForKey:@"OnDemand"] boolValue];
+                break;
+            }
+        }
+    }
+    
+    if (isEnabled != _enabled) {
+        [self willChangeValueForKey:@"enabled"];
+        _enabled = isEnabled;
+        [self didChangeValueForKey:@"enabled"];
+    }
+}
+
 
 @end

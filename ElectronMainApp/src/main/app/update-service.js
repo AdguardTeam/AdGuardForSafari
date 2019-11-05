@@ -4,6 +4,7 @@ const versionUtils = require('./utils/version');
 const settings = require('./settings-manager');
 const log = require('./utils/log');
 const filtersUpdate = require('./filters/filters-update');
+const safariToolbar = require('safari-ext');
 
 const {app} = require('electron');
 
@@ -78,6 +79,11 @@ module.exports = (function () {
         app.setLoginItemSettings({
             openAtLogin: false
         });
+
+        // Remove electron login item
+        safariToolbar.removeOldLoginItem((result)=>{
+            log.info(`Login item removed with result: ${result}`);
+        });
     };
 
     /**
@@ -87,11 +93,13 @@ module.exports = (function () {
      * @param callback  Called after update was handled
      */
     const onUpdate = (runInfo, callback) => {
+        log.info(`On update from v${runInfo.prevVersion} to ${runInfo.currentVersion}`);
+
         if (versionUtils.isGreaterVersion("1.6.0", runInfo.prevVersion)) {
             onUpdateUseOptimizedFilters();
         }
 
-        if (versionUtils.isGreaterVersion("1.6.1", runInfo.prevVersion)) {
+        if (versionUtils.isGreaterVersion("1.6.2", runInfo.prevVersion)) {
             onUpdateLaunchAtLogin();
         }
 

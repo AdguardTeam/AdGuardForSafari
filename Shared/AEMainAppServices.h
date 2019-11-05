@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (class, nonatomic) BOOL startAtLogin;
 
+/// Try to remove old login item
+/// @param completion Called on main thread
++ (void)removeOldLoginItemWithCompletion:(void (^)(BOOL result))completion;
+
 @end
 
 NS_ASSUME_NONNULL_END
