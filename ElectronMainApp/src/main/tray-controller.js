@@ -94,29 +94,36 @@ module.exports = (() => {
         tray.showMainWindow = showMainWindow;
         tray.trayIcon = renderTray();
 
-        listeners.addListener((event, options) => {
+        listeners.addListener((event) => {
             if (event === events.PROTECTION_STATUS_CHANGED) {
-                setTrayProtectionStatusIcon(tray.trayIcon, options);
+                rerenderTray();
             }
         });
 
         settings.onUpdated.addListener(function (setting) {
             if (setting === settings.SHOW_TRAY_ICON ||
                 setting === settings.LAUNCH_AT_LOGIN) {
-                if (tray.skipRerender) {
-                    tray.skipRerender = false;
-                    return;
-                }
-
-                if (tray.trayIcon) {
-                    tray.trayIcon.destroy();
-                }
-
-                tray.trayIcon = renderTray();
+                rerenderTray();
             }
         });
 
         return tray;
+    };
+
+    /**
+     * Renders tray icon and menu
+     */
+    const rerenderTray = () => {
+        if (tray.skipRerender) {
+            tray.skipRerender = false;
+            return;
+        }
+
+        if (tray.trayIcon) {
+            tray.trayIcon.destroy();
+        }
+
+        tray.trayIcon = renderTray();
     };
 
     /**

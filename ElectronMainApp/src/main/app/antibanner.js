@@ -148,7 +148,8 @@ module.exports = (() => {
 
             for (let i = 0; i < rulesTexts.length; i++) {
                 const ruleText = rulesTexts[i];
-                if (isTrustedFilter || filterRules.isTrustedRule(ruleText)) {
+                if (ruleText &&
+                    (isTrustedFilter || filterRules.isTrustedRule(ruleText))) {
                     newRequestFilter.rules.push({
                         filterId,
                         ruleText
