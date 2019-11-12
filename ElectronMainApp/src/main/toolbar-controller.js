@@ -133,7 +133,6 @@ module.exports = (() => {
      * Sets content blocker json
      */
     const setContentBlockingJson = (bundleId, jsonString, info) => {
-        safariToolbar.busyStatus(true);
         log.debug(`Content-blocker updating ${bundleId}`);
         safariToolbar.setContentBlockingJson(bundleId, jsonString, (result) => {
             log.info(`Content-blocker ${bundleId} set result : ${result}`);
@@ -145,10 +144,6 @@ module.exports = (() => {
 
                 listeners.notifyListeners(events.CONTENT_BLOCKER_EXTENSION_UPDATED, info);
             }
-
-            setTimeout(() => {
-                safariToolbar.busyStatus(false);
-            }, 1000);
         });
     };
 
@@ -181,7 +176,7 @@ module.exports = (() => {
     const setWhitelistDomains = (domains) => {
         safariToolbar.busyStatus(true);
         safariToolbar.setWhitelistDomains(domains, () => {
-            //Do nothing, we wait for CONTENT_BLOCKER_UPDATE_REQUIRED event to set busy off
+            safariToolbar.busyStatus(false);
         });
     };
 
@@ -191,7 +186,7 @@ module.exports = (() => {
     const setUserFilter = (rules) => {
         safariToolbar.busyStatus(true);
         safariToolbar.setUserFilter(rules, () => {
-            //Do nothing, we wait for CONTENT_BLOCKER_UPDATE_REQUIRED event to set busy off
+            safariToolbar.busyStatus(false);
         });
     };
 

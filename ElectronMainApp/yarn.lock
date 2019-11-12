@@ -814,7 +814,7 @@ electron-log@^3.0.6:
 
 "electron-osx-sign@github:electron-userland/electron-osx-sign":
   version "0.4.14"
-  resolved "https://codeload.github.com/electron-userland/electron-osx-sign/tar.gz/f8aadaa65e0374e39aa33134784c7fbb99dd6346"
+  resolved "https://codeload.github.com/electron-userland/electron-osx-sign/tar.gz/bae6f5886f0a8d73ffdcff00a77c5d9834a22441"
   dependencies:
     bluebird "^3.5.0"
     compare-version "^0.1.2"

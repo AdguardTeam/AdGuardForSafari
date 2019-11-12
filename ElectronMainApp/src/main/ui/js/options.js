@@ -80,6 +80,7 @@ const CheckboxUtils = (() => {
 
             const el = document.createElement('div');
             el.classList.add('toggler');
+            el.setAttribute('role', 'checkbox');
             checkbox.parentNode.insertBefore(el, checkbox.nextSibling);
 
             el.addEventListener('click', () => {
