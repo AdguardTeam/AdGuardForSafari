@@ -145,12 +145,15 @@
         if (self.mainAppRunning) {
             self.runAdguardButton.title = NSLocalizedString(@"sae-popover-enabled-button-title", @"Safari App Extension, toolbar popover, title of the button for start protection.");
             self.warningMessageLabel.stringValue = NSLocalizedString(@"sae-popover-enabled-message", @"Safari App Extension, toolbar popover, message text for start protection.");
+            self.warningMessageDescription.stringValue = @"";
         }
         else {
             self.runAdguardButton.title = NSLocalizedString(@"sae-popover-run-adguard-button-title", @"Safari App Extension, toolbar popover, title of the button for running AdGuard.");
             self.warningMessageLabel.stringValue = NSLocalizedString(@"sae-popover-run-adguard-message", @"Safari App Extension, toolbar popover, message text for running AdGuard.");
+            self.warningMessageDescription.stringValue = NSLocalizedString(@"sae-popover-run-adguard-description", @"Safari App Extension, toolbar popover, description text for running AdGuard.");
         }
         [self.warningMessageLabel invalidateIntrinsicContentSize];
+        [self.warningMessageDescription invalidateIntrinsicContentSize];
         [self.view setNeedsUpdateConstraints:YES];
     }
     else {

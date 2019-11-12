@@ -21,6 +21,7 @@
 @property (weak) IBOutlet NSButton *whitelistButton;
 @property (weak) IBOutlet NSButton *assistantButton;
 @property (weak) IBOutlet NSTextField *warningMessageLabel;
+@property (weak) IBOutlet NSTextField *warningMessageDescription;
 @property (weak) IBOutlet NSButton *runAdguardButton;
 
 //////////////////////////////////////////////////////////////////////////
