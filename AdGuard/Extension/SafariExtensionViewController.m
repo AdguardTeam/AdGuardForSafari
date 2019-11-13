@@ -97,11 +97,23 @@
         [self startProtection];
     }
     else {
-        //start app
-        [[NSWorkspace sharedWorkspace] launchAppWithBundleIdentifier:AG_BUNDLEID
-                                                             options:(NSWorkspaceLaunchWithoutActivation | NSWorkspaceLaunchAndHide)
-                                      additionalEventParamDescriptor:nil
-                                                    launchIdentifier:NULL];
+        //start app in background
+        NSURL * appURL = [[NSWorkspace sharedWorkspace] URLForApplicationWithBundleIdentifier:AG_BUNDLEID];
+        if (appURL == nil) {
+            DDLogDebug(@"Can't obtain URL for Main App.");
+        }
+        else {
+            NSError *lError = nil;
+            NSRunningApplication *app = [[NSWorkspace sharedWorkspace] launchApplicationAtURL:appURL
+                                                                                      options:0
+                                                                                configuration:@{NSWorkspaceLaunchConfigurationEnvironment:
+                                                                                                    @{@"LAUNCHED_BACKGROUND": @"1"}}
+                                                                                        error:&lError];
+            if (app == nil && lError != nil) {
+                DDLogDebug(@"Error occurs when running: %@", lError);
+            }
+        }
+        
         [SafariExtensionHandler onReady:^{
             if (! [AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]) {
                 [self startProtection];

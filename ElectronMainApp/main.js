@@ -146,6 +146,25 @@ function showWindow(onWindowLoaded) {
     }
 }
 
+/**
+ * Should app launch silent in background
+ *
+ * @return {*}
+ */
+function shouldOpenSilent() {
+    if (isOpenedAtLogin()) {
+        log.info('App is opened at login');
+        return true;
+    }
+
+    return process.env['LAUNCHED_BACKGROUND'];
+}
+
+/**
+ * Checks if app is launched at login
+ *
+ * @return {string|undefined}
+ */
 function isOpenedAtLogin() {
     return process.env['LAUNCHED_AT_LOGIN'];
 }
@@ -165,10 +184,10 @@ app.on('ready', (() => {
     log.info(`Starting AdGuard v${app.getVersion()}`);
     log.info('App ready - creating browser windows');
 
-    if (isOpenedAtLogin()) {
-        log.info('App is opened at login');
+    if (shouldOpenSilent()) {
+        log.info('App is launching in background');
 
-        // Open in background at login
+        // Open in background
         if (process.platform === 'darwin') {
             app.dock.hide();
         }
@@ -181,10 +200,10 @@ app.on('ready', (() => {
             }
         });
     } else {
-        log.info('App is opened by user');
+        log.info('App is launching in foreground');
 
         loadSplashScreenWindow(() => {
-            log.info('Splash screen loaded');
+            log.debug('Splash screen loaded');
 
             startup.init(showWindow, () => {
                 uiEventListener.init();
