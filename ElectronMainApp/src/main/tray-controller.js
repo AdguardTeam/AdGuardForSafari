@@ -139,7 +139,23 @@ module.exports = (() => {
         const trayIcon = new Tray(trayImageOff);
         trayIcon.setPressedImage(trayImageOff);
 
+        const isProtectionRunning = antibanner.isRunning();
+
         const contextMenu = Menu.buildFromTemplate([
+            {
+                label: isProtectionRunning ? i18n.__('tray_menu_protection_start.message') : i18n.__('tray_menu_protection_stop.message'),
+                type: "checkbox",
+                checked: isProtectionRunning,
+                click: onProtectionToggleClicked
+            },
+            { type: "separator" },
+            {
+                label: i18n.__('tray_menu_launch_at_startup.message'),
+                type: "checkbox",
+                checked: isOpenAtLoginEnabled(),
+                click: onLaunchAdguardAtLoginClicked
+            },
+            { type: "separator" },
             {
                 label: i18n.__('tray_menu_about.message'),
                 click: onAboutClicked
@@ -151,20 +167,6 @@ module.exports = (() => {
             {
                 label: i18n.__('tray_menu_check_updates.message'),
                 click: onCheckFiltersUpdateClicked
-            },
-            { type: "separator" },
-            {
-                label: i18n.__('tray_menu_protection_start.message'),
-                type: "checkbox",
-                checked: antibanner.isRunning(),
-                click: onProtectionToggleClicked
-            },
-            { type: "separator" },
-            {
-                label: i18n.__('tray_menu_launch_at_startup.message'),
-                type: "checkbox",
-                checked: isOpenAtLoginEnabled(),
-                click: onLaunchAdguardAtLoginClicked
             },
             { type: "separator" },
             {
