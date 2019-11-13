@@ -100,7 +100,7 @@
         //start app in background
         NSURL * appURL = [[NSWorkspace sharedWorkspace] URLForApplicationWithBundleIdentifier:AG_BUNDLEID];
         if (appURL == nil) {
-            DDLogDebug(@"Can't obtain URL for Main App.");
+            DDLogError(@"Can't obtain URL for Main App.");
         }
         else {
             NSError *lError = nil;
@@ -110,7 +110,7 @@
                                                                                                     @{@"LAUNCHED_BACKGROUND": @"1"}}
                                                                                         error:&lError];
             if (app == nil && lError != nil) {
-                DDLogDebug(@"Error occurs when running: %@", lError);
+                DDLogError(@"Error occurs when running: %@", lError);
             }
         }
         
