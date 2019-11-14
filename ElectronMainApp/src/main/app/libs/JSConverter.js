@@ -1,6 +1,6 @@
 /**
  * AdGuard -> Safari Content Blocker converter
- * Version 4.2.3
+ * Version 4.2.4
  * License: https://github.com/AdguardTeam/SafariContentBlockerConverterCompiler/blob/master/LICENSE
  */
 
@@ -912,6 +912,41 @@ var jsonFromFilters = (function () {
         };
     })();
     /** end of log.js */
+    /** start of tld-list.js */
+    (function (api) {
+
+        /**
+         * Popular top level domains list
+         *
+         * @type {[*]}
+         */
+        const TOP_LEVEL_DOMAINS_LIST = [
+            "com",
+            "org",
+            "edu",
+            "gov",
+            "uk",
+            "net",
+            "ca",
+            "de",
+            "jp",
+            "fr",
+            "au",
+            "us",
+            "ru",
+            "ch",
+            "it",
+            "nl",
+            "se",
+            "no",
+            "es",
+            "mil",
+        ];
+
+        api.TOP_LEVEL_DOMAINS_LIST = TOP_LEVEL_DOMAINS_LIST;
+
+    })(adguard.utils);
+    /** end of tld-list.js */
     /** start of simple-regex.js */
     (function (api) {
 
@@ -3089,7 +3124,7 @@ var jsonFromFilters = (function () {
         /**
          * Safari content blocking format rules converter.
          */
-        const CONVERTER_VERSION = '4.2.3';
+        const CONVERTER_VERSION = '4.2.4';
         // Max number of CSS selectors per rule (look at compactCssRules function)
         const MAX_SELECTORS_PER_WIDE_RULE = 250;
 
@@ -3211,6 +3246,28 @@ var jsonFromFilters = (function () {
             };
 
             /**
+             * As a limited solution to support wildcard in tld, as there is no support for wildcards in "if-domain" property in CB
+             * we are going to use a list of popular domains.
+             * https://github.com/AdguardTeam/AdGuardForSafari/issues/248
+             *
+             * @param domains
+             */
+            const resolveTopLevelDomainWildcards = (domains) => {
+                let arr = [...domains];
+                domains.length = 0;
+                arr.forEach(d => {
+                    if (d.endsWith('.*')) {
+                        adguard.utils.TOP_LEVEL_DOMAINS_LIST.forEach(tld => {
+                            const domain = d.substring(0, d.length - 2);
+                            domains.push(`${domain}.${tld}`);
+                        });
+                    } else {
+                        domains.push(d);
+                    }
+                });
+            };
+
+            /**
              * Adds domains specification
              *
              * @param trigger
@@ -3220,6 +3277,8 @@ var jsonFromFilters = (function () {
                 const included = [];
                 const excluded = [];
                 parseDomains(rule, included, excluded);
+                resolveTopLevelDomainWildcards(included);
+                resolveTopLevelDomainWildcards(excluded);
                 writeDomainOptions(included, excluded, trigger);
             };
 
@@ -3539,6 +3598,8 @@ var jsonFromFilters = (function () {
                         const excluded = [];
 
                         included.push(domain);
+                        resolveTopLevelDomainWildcards(included);
+                        resolveTopLevelDomainWildcards(excluded);
                         writeDomainOptions(included, excluded, result.trigger);
 
                         result.trigger["url-filter"] = URL_FILTER_URL_RULES_EXCEPTIONS;
