@@ -1812,7 +1812,14 @@ PageController.prototype = {
             onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
 
             const hideExtensionsNotification = window.localStorage.getItem(hideExtensionsNotificationKey) === "true";
-            const shouldHide = hideExtensionsNotification || (contentBlockersEnabled && minorExtensionsEnabled);
+            const extensionsFlag = contentBlockersEnabled && minorExtensionsEnabled;
+            if (extensionsFlag) {
+                //extensions config had been changed - reset hide-extensions "cookie"
+                window.localStorage.setItem(hideExtensionsNotificationKey, false);
+            }
+
+            const shouldHide = hideExtensionsNotification || extensionsFlag;
+
             enableExtensionsNotification.style.display = shouldHide ? 'none' : 'flex';
             enableCbExtensionsNotification.style.display = contentBlockersEnabled ? 'none' : 'flex';
 
