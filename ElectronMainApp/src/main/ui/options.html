@@ -84,9 +84,12 @@
                              i18n="settings_notification_extensions_text">
                         </div>
                     </div>
-                    <button class="button button--orange settings-notification__btn open-safari-extensions-settings-btn"
+                    <div class="settings-notification__control">
+                        <button class="button button--orange settings-notification__btn open-safari-extensions-settings-btn"
                             i18n="settings_notification_extensions_button_text">
-                    </button>
+                        </button>
+                        <button id="enableExtensionsNotificationClose" class="settings-notification__close"></button>
+                    </div>
                 </div>
                 <div class="settings-notification settings-notification--cols" id="enableProtectionNotification">
                     <div class="settings-notification__desc">
@@ -474,27 +477,30 @@
 
         <div id="about" class="settings-content tab-pane">
             <div class="settings-content">
+                <div class="subtitle settings-body-subtitle" i18n="options_about"></div>
                 <div class="settings-body">
                     <div class="about-opt">
-                        <div class="logo about-opt__logo"><img src="images/logo.svg" alt=""></div>
-                        <div class="about-opt__desc">
-                            <div id="about-version-placeholder" class="about-opt__version">
-                            </div>
-                            <div id="about-updates" class="about-updates about-updates--rotate" i18n="options_about_update_check">
-                            </div>
-                            <button id="about-updates-relaunch" class="about-btn about-btn--hidden" i18n="options_about_update_relaunch">
-                            </button>
-                            <div class="about-opt__desc">
-                                <div class="about-opt__desc-item">
-                                    © 2009-2019 AdGuard Software Ltd.
-                                </div>
-                                <div class="about-opt__desc-item">
-                                    All rights reserved.
-                                    <a target="_blank" href="https://adguard.com">Adguard.com</a>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="about-opt__viking"><img src="images/viking.svg" alt=""></div>
                         <div class="about-opt__menu">
+                            <div class="about-opt__info">
+                                <div i18n="options_about_title" class="about-opt__title">
+                                </div>
+                                <div id="about-version-placeholder" class="about-opt__version">
+                                </div>
+                                <div id="about-updates" class="about-updates about-updates--rotate" i18n="options_about_update_check">
+                                </div>
+                                <button id="about-updates-relaunch" class="about-btn about-btn--hidden" i18n="options_about_update_relaunch">
+                                </button>
+                                <div class="about-opt__desc">
+                                    <div class="about-opt__desc-item">
+                                        © 2009-2019 AdGuard Software Ltd.
+                                    </div>
+                                    <div class="about-opt__desc-item">
+                                        All rights reserved.
+                                        <a target="_blank" href="https://adguard.com">Adguard.com</a>
+                                    </div>
+                                </div>
+                            </div>
                             <a target="_blank" href="https://adguard.com/forward.html?action=eula&from=options_screen&app=safari_extension" i18n="options_license_agreement" class="about-opt__menu-item"></a>
                             <a target="_blank" href="https://adguard.com/forward.html?action=privacy&from=options_screen&app=safari_extension" i18n="options_privacy_policy" class="about-opt__menu-item"></a>
                             <a target="_blank" href="https://adguard.com/forward.html?action=acknowledgments&from=options_screen&app=safari_extension#" i18n="options_acknowledgment" class="about-opt__menu-item"></a>

@@ -1795,6 +1795,8 @@ PageController.prototype = {
     },
 
     _initBoardingScreen: function () {
+        const hideExtensionsNotificationKey = 'hide-extensions-notification';
+
         let body = document.querySelector('body');
         let onBoardingScreenEl = body.querySelector('#boarding-screen-placeholder');
         const enableExtensionsNotification = document.getElementById('enableExtensionsNotification');
@@ -1809,7 +1811,16 @@ PageController.prototype = {
             body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
             onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
 
-            enableExtensionsNotification.style.display = (contentBlockersEnabled && minorExtensionsEnabled) ? 'none' : 'flex';
+            const hideExtensionsNotification = window.localStorage.getItem(hideExtensionsNotificationKey) === "true";
+            const extensionsFlag = contentBlockersEnabled && minorExtensionsEnabled;
+            if (extensionsFlag) {
+                //extensions config had been changed - reset hide-extensions "cookie"
+                window.localStorage.setItem(hideExtensionsNotificationKey, false);
+            }
+
+            const shouldHide = hideExtensionsNotification || extensionsFlag;
+
+            enableExtensionsNotification.style.display = shouldHide ? 'none' : 'flex';
             enableCbExtensionsNotification.style.display = contentBlockersEnabled ? 'none' : 'flex';
 
             self.contentBlockers.updateContentBlockers(arg);
@@ -1822,6 +1833,14 @@ PageController.prototype = {
                  e.preventDefault();
                  this._openSafariExtensionsPrefs();
              });
+        });
+
+        const enableExtensionsNotificationClose = document.getElementById('enableExtensionsNotificationClose');
+        enableExtensionsNotificationClose.addEventListener('click', (e) => {
+            e.preventDefault();
+            enableExtensionsNotification.style.display = 'none';
+
+            window.localStorage.setItem(hideExtensionsNotificationKey, true);
         });
 
         this.checkSafariExtensions();
