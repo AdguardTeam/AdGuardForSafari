@@ -276,7 +276,10 @@
         "message": "Salir"
     },
     "tray_menu_protection_start": {
-        "message": "Habilitar AdGuard"
+        "message": "El bloqueo de anuncios en Safari está activado"
+    },
+    "tray_menu_protection_stop": {
+        "message": "El bloqueo de anuncios en Safari está desactivado"
     },
     "options_last_update": {
         "message": "Última actualización:"

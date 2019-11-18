@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "Preverjanje obstoja posodobitev"
     },
+    "options_about_title": {
+        "message": "AdGuard za Safari"
+    },
     "options_about_updating": {
         "message": "Posodabljanje AdGuarda za Safari"
     },
@@ -183,10 +186,10 @@
         "message": "Obrni seznam dovoljenih<span class='sp-table-row-info'>Povsod dovoli oglase <i>razen</i> Seznamu dovoljenih</span>"
     },
     "options_userfilter": {
-        "message": "Uporabniški filter"
+        "message": "Uporabniška pravila"
     },
     "options_userfilter_description": {
-        "message": "Lahko dodate svoja lastna pravila za&nbsp;ta filter. Ta možnost je&nbsp;priporočena za napredne uporabnike, ki dobro poznajo HTML/CSS. Preberite <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>Vodič pravil filtriranja</a> da izveste&nbsp;kako&nbsp;pisati svoja lastna pravila filtriranja."
+        "message": "Tukaj lahko dodate svoja lastna pravila. Ta možnost je&nbsp;priporočena za napredne uporabnike, ki dobro poznajo HTML/CSS. Preberite <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>Vodič pravil filtriranja</a> da izveste&nbsp;kako&nbsp;pisati svoja lastna pravila filtriranja."
     },
     "options_show_app_updated_notification": {
         "message": "Obvesti o posodobitvah razširitve"
@@ -276,7 +279,10 @@
         "message": "Končaj"
     },
     "tray_menu_protection_start": {
-        "message": "Omogoči AdGuard"
+        "message": "Onemogočanje oglasov v Safariju je vključeno"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Onemogočanje oglasov v Safariju je izključeno"
     },
     "options_last_update": {
         "message": "Nazadnje posodobljeno:"
@@ -324,10 +330,10 @@
         "message": "Različica %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "Uporabniški filter je posodobljen"
+        "message": "Uporabniška pravila so posodobljena"
     },
     "notification_user_filter_updated_desc": {
-        "message": "V uporabniški filter je bilo dodano novo pravilo:"
+        "message": "V uporabniška pravila je bilo dodano novo pravilo:"
     },
     "options_filters_update_period": {
         "message": "Interval posodobitve"
@@ -414,6 +420,6 @@
         "message": "Po meri"
     },
     "userfilter_name": {
-        "message": "Uporabniški filter"
+        "message": "Uporabniška pravila"
     }
 }

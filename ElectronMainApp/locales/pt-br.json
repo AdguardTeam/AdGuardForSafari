@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "Verificando atualizações"
     },
+    "options_about_title": {
+        "message": "AdGuard para Safari"
+    },
     "options_about_updating": {
         "message": "Atualizando o AdGuard para Safari"
     },
@@ -183,7 +186,7 @@
         "message": "Inverter lista branca<span class='sp-table-row-info'>Desbloquear todos anúncios <i>exceto</i> os da lista branca</span>"
     },
     "options_userfilter": {
-        "message": "Filtro de usuário"
+        "message": "Regras de usuário"
     },
     "options_userfilter_description": {
         "message": "Você pode adicionar suas próprias regras para&nbsp;esse filtro. Essa opção é&nbsp;recomendada para usuários avançados familiarizados com HTML/CSS. Leia nosso <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial das regras de filtragem</a> para&nbsp;aprender como&nbsp;escrever suas próprias regras de filtragem."
@@ -276,7 +279,10 @@
         "message": "Sair"
     },
     "tray_menu_protection_start": {
-        "message": "Ative o AdGuard"
+        "message": "O bloqueio de anúncios no Safari está ativado"
+    },
+    "tray_menu_protection_stop": {
+        "message": "O bloqueio de anúncios no Safari está desativado"
     },
     "options_last_update": {
         "message": "Última atualização:"
@@ -324,10 +330,10 @@
         "message": "Versão %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "Filtro de usuário atualizado"
+        "message": "Regras de usuário atualizada"
     },
     "notification_user_filter_updated_desc": {
-        "message": "Uma nova regra foi adicionada ao filtro de usuário:"
+        "message": "Uma nova regra foi adicionada nas regras de usuário:"
     },
     "options_filters_update_period": {
         "message": "Período entre atualizações"
@@ -414,6 +420,6 @@
         "message": "Personalizados"
     },
     "userfilter_name": {
-        "message": "Filtro de usuário"
+        "message": "Regras de usuário"
     }
 }

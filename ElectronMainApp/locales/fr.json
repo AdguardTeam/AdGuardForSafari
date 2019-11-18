@@ -96,7 +96,7 @@
         "message": "%s et %s"
     },
     "options_filters_no_enabled": {
-        "message": "Pas de filtres activés"
+        "message": "Aucun filtre activé"
     },
     "options_filters_version": {
         "message": "version %s"
@@ -183,10 +183,10 @@
         "message": "Inverser la liste blanche<span class='sp-table-row-info'>Débloquer la publicité partout <i>excepté</i> la liste blanche</span>"
     },
     "options_userfilter": {
-        "message": "Filtre Utilisateur"
+        "message": "Règles d'utilisateur"
     },
     "options_userfilter_description": {
-        "message": "Vous pouvez ajouter vos propres règles à&nbsp;ce filtre. Cette option est&nbsp;recommandée pour les utilisateurs avancés familiers avec le langage HTML / CSS. Lisez le <a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>tutoriel</a> pour&nbsp;apprendre à&nbsp;écrire vos propres règles."
+        "message": "Vous pouvez ajouter vos propres règles ici. Cette option est&nbsp;recommandée pour les utilisateurs avancés familiers avec le langage HTML / CSS. Lisez le <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutoriel</a> pour&nbsp;apprendre à&nbsp;écrire vos propres règles."
     },
     "options_show_app_updated_notification": {
         "message": "Me notifier des mises à jour des extensions"
@@ -276,7 +276,10 @@
         "message": "Quitter"
     },
     "tray_menu_protection_start": {
-        "message": "Activer AdGuard"
+        "message": "Le blocage des publicités dans Safari est activé"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Le blocage des publicités dans Safari est désactivé"
     },
     "options_last_update": {
         "message": "Dernière mise à jour :"
@@ -324,10 +327,10 @@
         "message": "Version %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "Filtre Utilisateur mis à jour"
+        "message": "Règles utilisateur mises à jour"
     },
     "notification_user_filter_updated_desc": {
-        "message": "Une nouvelle régle a été ajoutée au Filtre Utilisateur :"
+        "message": "Une nouvelle règle a été ajoutée aux règles d'utilisateur :"
     },
     "options_filters_update_period": {
         "message": "Interval des mises à jour"
@@ -414,6 +417,6 @@
         "message": "Personnalisé"
     },
     "userfilter_name": {
-        "message": "Filtre utilisateur"
+        "message": "Règles d'utilisateur"
     }
 }

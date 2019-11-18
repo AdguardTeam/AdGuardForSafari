@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "Procurando por Atualizações."
     },
+    "options_about_title": {
+        "message": "AdGuard para Safari"
+    },
     "options_about_updating": {
         "message": "A actualizar o AdGuard para Safari"
     },
@@ -276,7 +279,10 @@
         "message": "Sair"
     },
     "tray_menu_protection_start": {
-        "message": "Activar o AdGuard"
+        "message": "O bloqueio de anúncios no Safari está ligado"
+    },
+    "tray_menu_protection_stop": {
+        "message": "O bloqueio de anúncios no Safari está desligado"
     },
     "options_last_update": {
         "message": "Ultima actualização:"
