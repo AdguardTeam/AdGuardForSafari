@@ -183,10 +183,10 @@
         "message": "Whitelist invertieren<span class='sp-table-row-info'>Anzeigen überall entsperren, <i>außer auf Webseiten</i> von der Whitelist </span>"
     },
     "options_userfilter": {
-        "message": "Benutzerfilter"
+        "message": "Benutzerregeln"
     },
     "options_userfilter_description": {
-        "message": "Sie können Ihre eigenen Regeln zu diesem Filter hinzufügen. Diese Option ist für die mit HTML/CSS vertrauten fortgeschrittenen Benutzer empfohlen. Lesen Sie <a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>die Filterregeln-Anleitung</a>, um zu erfahren, wie Sie Ihre eigenen Filterregeln schreiben können."
+        "message": "Sie können Ihre eigenen Regeln zu Benutzerregeln hinzufügen. Diese Option ist für die mit HTML/CSS vertrauten fortgeschrittenen Benutzer empfohlen. Lesen Sie <a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>die Filterregeln-Anleitung</a>, um zu erfahren, wie Sie Ihre eigenen Filterregeln schreiben können."
     },
     "options_show_app_updated_notification": {
         "message": "Über Updates der Erweiterung benachrichtigen"
@@ -276,7 +276,10 @@
         "message": "Beenden"
     },
     "tray_menu_protection_start": {
-        "message": "AdGuard aktivieren"
+        "message": "Die Blockierung in Safari ist aktiviert"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Die Blockierung in Safari ist deaktiviert"
     },
     "options_last_update": {
         "message": "Letztes Update:"
@@ -324,10 +327,10 @@
         "message": "Version %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "Benutzerfilter aktualisiert"
+        "message": "Benutzerregeln aktualisiert"
     },
     "notification_user_filter_updated_desc": {
-        "message": "Eine neue Regel wurde zum Benutzerfilter hinzugefügt:"
+        "message": "Eine neue Regel wurde zu Benutzerregeln hinzugefügt:"
     },
     "options_filters_update_period": {
         "message": "Update-Intervall\n"
@@ -414,6 +417,6 @@
         "message": "Benutzerdefiniert"
     },
     "userfilter_name": {
-        "message": "Benutzerfilter"
+        "message": "Benutzerregeln"
     }
 }

@@ -183,10 +183,10 @@
         "message": "Inverti whitelist<span class='sp-table-row-info'>Sblocca annunci dappertutto <i>tranne che</i> quelli della whitelist</span>"
     },
     "options_userfilter": {
-        "message": "Flitro utente"
+        "message": "Regole utente"
     },
     "options_userfilter_description": {
-        "message": "Puoi aggiungere le tue regole a&nbsp;questo fitro. Questa opzione è&nbsp;raccomandata per utenti avanzati esperti di HTML/CSS. Leggi il <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial sulle regole per i filtri</a> per&nbsp;imparare a&nbsp;scrivere le tue regole per i filtri."
+        "message": "Puoi aggiungere le tue regole qui. Questa opzione è&nbsp;raccomandata per utenti avanzati esperti di HTML/CSS. Leggi il <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial sulle regole per i filtri</a> per&nbsp;imparare a&nbsp;scrivere le tue regole per i filtri."
     },
     "options_show_app_updated_notification": {
         "message": "Notica aggiornamenti estensione"
@@ -276,7 +276,10 @@
         "message": "Abbandona"
     },
     "tray_menu_protection_start": {
-        "message": "Attiva AdGuard"
+        "message": "Il blocco degli annunci in Safari è attivo"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Il blocco degli annunci in Safari è disattivato"
     },
     "options_last_update": {
         "message": "Ultimo aggiornamento"
@@ -324,10 +327,10 @@
         "message": "Versione %s\n"
     },
     "notification_user_filter_updated_title": {
-        "message": "Filtro utente aggiornato"
+        "message": "Regole utente sono state aggiornate"
     },
     "notification_user_filter_updated_desc": {
-        "message": "Una nuova regola è stata aggiunta al filtro utente"
+        "message": "Una nuova regola è stata aggiunta alle regole utente:"
     },
     "options_filters_update_period": {
         "message": "Intervallo di aggiornamento"
@@ -414,6 +417,6 @@
         "message": "Personalizzato"
     },
     "userfilter_name": {
-        "message": ""
+        "message": "Regole utente"
     }
 }

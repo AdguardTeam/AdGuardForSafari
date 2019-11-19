@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "正在檢查更新"
     },
+    "options_about_title": {
+        "message": "AdGuard for Safari"
+    },
     "options_about_updating": {
         "message": "正在更新 AdGuard for Safari"
     },
@@ -276,7 +279,10 @@
         "message": "退出"
     },
     "tray_menu_protection_start": {
-        "message": "啟用 AdGuard"
+        "message": "在 Safari 中的廣告封鎖為開著"
+    },
+    "tray_menu_protection_stop": {
+        "message": "在 Safari 中的廣告封鎖為關著"
     },
     "options_last_update": {
         "message": "最近的更新："

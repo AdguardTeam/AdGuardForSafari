@@ -183,7 +183,7 @@
         "message": "ホワイトリストを逆転させる<span class='sp-table-row-info'>ホワイトリスト<i>以外で</i>全ての広告をアンブロックする</span>"
     },
     "options_userfilter": {
-        "message": "ユーザーフィルタ"
+        "message": "ユーザールール"
     },
     "options_userfilter_description": {
         "message": "このフィルタに独自のルールを追加できます。このオプションはHTML/CSSに精通した上級者ユーザーにおすすめです。 <a class='spl-user-descr-link'href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>フィルタ・ルールのチュートリアル</a>を読むことで独自のフィルタ・ルールを作成する方法を学べます。"
@@ -324,10 +324,10 @@
         "message": "バージョン %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "ユーザーフィルタ更新完了"
+        "message": "ユーザールール更新完了"
     },
     "notification_user_filter_updated_desc": {
-        "message": "ユーザーフィルタに新しいルールが追加されました："
+        "message": "ユーザールールに新しいルールが追加されました："
     },
     "options_filters_update_period": {
         "message": "更新頻度"

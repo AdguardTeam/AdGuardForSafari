@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "Søger efter opdateringer"
     },
+    "options_about_title": {
+        "message": "AdGuard til Safari"
+    },
     "options_about_updating": {
         "message": "Opdaterer AdGuard til Safari"
     },
@@ -183,10 +186,10 @@
         "message": "Invertere whitelisten<span class='sp-table-row-info'>Fjern blokeringen af annoncer overalt <i>bortset fra</i> whitelisten</span>"
     },
     "options_userfilter": {
-        "message": "Brugerfilter"
+        "message": "Brugerregler"
     },
     "options_userfilter_description": {
-        "message": "Du kan tilføje dine egne regler til&nbsp;dette filter. Denne mulighed er&nbsp;anbefalet for avancerede brugere som kender HTML/CSS. Læs <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>vejledningen for filterreglerne</a> for at&nbsp;lære hvordan du&nbsp;kan skrive dine egne filterregler."
+        "message": "Du kan tilføje dine egne regler her. Denne mulighed er&nbsp;anbefalet for avancerede brugere som kender HTML/CSS. Læs <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>vejledningen for filterreglerne</a> for at&nbsp;lære hvordan du&nbsp;kan skrive dine egne filterregler."
     },
     "options_show_app_updated_notification": {
         "message": "Underret om opdateringer til udvidelsen"
@@ -276,7 +279,10 @@
         "message": "Afslut"
     },
     "tray_menu_protection_start": {
-        "message": "Aktiver AdGuard"
+        "message": "Annonceblokering i Safari er slået til"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Annonceblokering i Safari er slået fra"
     },
     "options_last_update": {
         "message": "Sidst opdateret:"
@@ -324,10 +330,10 @@
         "message": "Version %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "Brugerfiltret er blevet opdateret"
+        "message": "Brugerregler opdateret"
     },
     "notification_user_filter_updated_desc": {
-        "message": "En ny regel blev tilføjet til brugerfiltret:"
+        "message": "En ny regel blev tilføjet til Brugerregler:"
     },
     "options_filters_update_period": {
         "message": "Opdateringsinterval"
@@ -414,6 +420,6 @@
         "message": "Brugerdefineret"
     },
     "userfilter_name": {
-        "message": "Brugerfilter"
+        "message": "Brugerregler"
     }
 }

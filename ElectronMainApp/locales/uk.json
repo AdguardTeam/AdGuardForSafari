@@ -183,10 +183,10 @@
         "message": "Інвертувати білий список<span class='sp-table-row-info'>Розблокувати рекламу всюди, <i>за винятком</i> білого списку</span>"
     },
     "options_userfilter": {
-        "message": "Власний фільтр"
+        "message": "Правила користувача"
     },
     "options_userfilter_description": {
-        "message": "Ви можете додавати свої власні правила фільтрації за&nbsp;допомогою цього фільтру. Рекомендується тільки для досвідчених користувачів, знайомих з&nbsp;HTML/CSS. Перейдіть за&nbsp;<a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'> посиланням </a>, щоб дізнатися, як складати правила фільтрації."
+        "message": "Тут ви можете додавати власні правила. Ця функція&nbsp;рекомендується лише для досвідчених користувачів, знайомих з HTML/CSS. Ознайомтеся з <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>настановами щодо правил фільтрування</a>, щоб&nbsp;навчитися створювати&nbsp;власні правила фільтрування."
     },
     "options_show_app_updated_notification": {
         "message": "Сповіщати про оновлення розширення"
@@ -276,7 +276,10 @@
         "message": "Вихід"
     },
     "tray_menu_protection_start": {
-        "message": "Увімкнути AdGuard"
+        "message": "Блокування реклами в Safari увімкнене"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Блокування реклами в Safari вимкнене"
     },
     "options_last_update": {
         "message": "Останнє оновлення"
@@ -324,10 +327,10 @@
         "message": "Версія %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "Власний фільтр оновлено"
+        "message": "Правила користувача оновлено"
     },
     "notification_user_filter_updated_desc": {
-        "message": "До власного фільтру додано нове правило:"
+        "message": "До правил користувача додано нове правило:"
     },
     "options_filters_update_period": {
         "message": "Інтервал оновлень"
@@ -414,6 +417,6 @@
         "message": "Власні"
     },
     "userfilter_name": {
-        "message": "Власний фільтр"
+        "message": "Правила користувача"
     }
 }

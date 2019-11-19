@@ -183,10 +183,10 @@
         "message": "Инвертировать белый список<span class='sp-table-row-info'>Разблокировать рекламу на всех сайтах, <i>кроме</i> добавленных в белый список</span>"
     },
     "options_userfilter": {
-        "message": "Пользовательский фильтр"
+        "message": "Пользовательские правила"
     },
     "options_userfilter_description": {
-        "message": "Вы можете добавлять свои собственные правила фильтрации с&nbsp;помощью этого фильтра. Рекомендуется только для опытных пользователей, знакомых с&nbsp;HTML/CSS. Перейдите по&nbsp;<a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ссылке</a>, чтобы узнать, как составлять правила фильтрации."
+        "message": "Вы можете добавлять свои собственные правила фильтрации в&nbsp;Пользовательские правила. Рекомендуется только для опытных пользователей, знакомых с&nbsp;HTML/CSS. Перейдите по&nbsp;<a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ссылке</a>, чтобы узнать, как составлять правила фильтрации."
     },
     "options_show_app_updated_notification": {
         "message": "Уведомлять об обновлениях расширения"
@@ -276,7 +276,10 @@
         "message": "Выход"
     },
     "tray_menu_protection_start": {
-        "message": "Включить AdGuard"
+        "message": "Блокировка в Safari включена"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Блокировка в Safari отключена"
     },
     "options_last_update": {
         "message": "Последнее обновление:"
@@ -324,10 +327,10 @@
         "message": "Версия %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "Пользовательский фильтр обновлён"
+        "message": "Пользовательские правила обновлены"
     },
     "notification_user_filter_updated_desc": {
-        "message": "Новое правило было добавлено в Пользовательский фильтр:"
+        "message": "Новое правило было добавлено в Пользовательские правила:"
     },
     "options_filters_update_period": {
         "message": "Интервал обновления"
@@ -414,6 +417,6 @@
         "message": "Пользовательские"
     },
     "userfilter_name": {
-        "message": "Пользовательский фильтр"
+        "message": "Пользовательские правила"
     }
 }
