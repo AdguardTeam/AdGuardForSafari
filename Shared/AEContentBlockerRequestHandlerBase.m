@@ -16,8 +16,15 @@
 
 @implementation AEContentBlockerRequestHandlerBase
 
++ (void)initialize {
+    if (self == [AEContentBlockerRequestHandlerBase class]) {
+        [AESharedResources initLogger];
+        DDLogInfo(@"AG: Initializing extension..");
+    }
+}
+
 - (void)beginRequestWithExtensionContext:(NSExtensionContext *)context {
-    NSLog(@"AG: Starting extension..");
+    DDLogDebug(@"AG: beginRequestWithExtensionContext..");
     
     NSItemProvider *attachment;
     
@@ -31,7 +38,7 @@
         NSExtensionItem *item = [[NSExtensionItem alloc] init];
         item.attachments = @[attachment];
         
-        NSLog(@"AG: Starting extension finished.");
+        DDLogDebug(@"AG: beginRequestWithExtensionContext done.");
         
         [context completeRequestReturningItems:@[item] completionHandler:nil];
         return;
