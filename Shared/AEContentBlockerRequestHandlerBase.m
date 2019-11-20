@@ -17,7 +17,7 @@
 @implementation AEContentBlockerRequestHandlerBase
 
 - (void)beginRequestWithExtensionContext:(NSExtensionContext *)context {
-    DDLogInfo(@"AG: beginRequestWithExtensionContext");
+    NSLog(@"AG: Starting extension..");
     
     NSItemProvider *attachment;
     
@@ -30,6 +30,8 @@
     if (attachment) {
         NSExtensionItem *item = [[NSExtensionItem alloc] init];
         item.attachments = @[attachment];
+        
+        NSLog(@"AG: Starting extension finished.");
         
         [context completeRequestReturningItems:@[item] completionHandler:nil];
         return;
