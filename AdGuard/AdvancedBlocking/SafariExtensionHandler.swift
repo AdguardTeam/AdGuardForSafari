@@ -35,7 +35,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
                     ];
                     page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data);
                 } catch {
-                    NSLog("AG: Error handling message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:])): \(error)");
+                    AESharedResources.ddLogError("AG: Error handling message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:])): \(error)");
                 }
             }
         }

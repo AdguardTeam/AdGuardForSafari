@@ -379,6 +379,15 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
     [self loadObjectWithKey:AES_USERFILTER_RULES class:[NSArray class] completion:completion];
 }
 
++ (void)DDLogInfo:(NSString *)message {
+    DDLogInfo(@"AG: %@", message);
+}
+
++ (void)DDLogError:(NSString *)message {
+    DDLogInfo(@"AG: %@", message);
+}
+
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark Helper methods (private)
 

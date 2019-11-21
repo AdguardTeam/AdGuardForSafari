@@ -284,4 +284,14 @@ extern NSString * const AEDefaultsAllExtensionsEnabled;
  */
 + (void)userFilterRulesWithCompletion:(void (^)(NSArray <NSString *> *rules))completion;
 
+/**
+  Log info wrapper
+ */
++ (void)DDLogInfo:(NSString *)message;
+
+/**
+  Log error wrapper
+ */
++ (void)DDLogError:(NSString *)message;
+
 @end
