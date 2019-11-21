@@ -37,12 +37,6 @@ require('electron-reload')(__dirname, {
 });
 
 /**
- * Disables hardware acceleration for this app.
- * https://github.com/AdguardTeam/AdGuardForSafari/issues/110
- */
-app.disableHardwareAcceleration();
-
-/**
  * Creates browser window with default settings
  */
 function createWindow() {
