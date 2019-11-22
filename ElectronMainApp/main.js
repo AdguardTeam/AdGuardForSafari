@@ -16,6 +16,7 @@ const startup = require('./src/main/startup');
 const trayController = require('./src/main/tray-controller');
 const toolbarController = require('./src/main/toolbar-controller');
 const mainMenuController = require('./src/main/main-menu.controller');
+const settings = require('./src/main/app/settings-manager');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -36,11 +37,13 @@ require('electron-reload')(__dirname, {
     electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
 });
 
-/**
- * Disables hardware acceleration for this app.
- * https://github.com/AdguardTeam/AdGuardForSafari/issues/110
- */
-app.disableHardwareAcceleration();
+if (settings.isHardwareAccelerationDisabled()) {
+    /**
+     * Disables hardware acceleration for this app.
+     * https://github.com/AdguardTeam/AdGuardForSafari/issues/110
+     */
+    app.disableHardwareAcceleration();
+}
 
 /**
  * Creates browser window with default settings

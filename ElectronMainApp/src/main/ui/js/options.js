@@ -1506,6 +1506,9 @@ const Settings = function () {
         }
     }));
     checkboxes.push(new Checkbox('#verboseLogging', userSettings.names.VERBOSE_LOGGING));
+    checkboxes.push(new Checkbox('#enableHardwareAcceleration', userSettings.names.DISABLE_HARDWARE_ACCELERATION, {
+        negate: true
+    }));
 
     const initUpdateFiltersPeriodSelect = () => {
         const periods = [48, 24, 12, 6, 1]; // in hours
@@ -1808,8 +1811,8 @@ PageController.prototype = {
             const contentBlockersEnabled = arg.contentBlockersEnabled;
             const minorExtensionsEnabled = arg.minorExtensionsEnabled;
 
-            body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
-            onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
+            //body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
+            //onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
 
             const hideExtensionsNotification = window.localStorage.getItem(hideExtensionsNotificationKey) === "true";
             const extensionsFlag = contentBlockersEnabled && minorExtensionsEnabled;

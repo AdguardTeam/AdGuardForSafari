@@ -22,13 +22,15 @@ class ContentBlockerController {
     
     // Constructor
     private init() {
-        NSLog("AG: AdvancedBlocking init ContentBlockerController");
+        AESharedResources.initLogger();
+        
+        AESharedResources.ddLogInfo("AG: AdvancedBlocking init ContentBlockerController");
         
         contentBlockerContainer = ContentBlockerContainer();
         blockerDataCache = NSCache<NSString, NSString>();
         
         AESharedResources.setListenerOnAdvancedBlocking({
-            NSLog("AG: AdvancedBlocking json updated - download and setup new version");
+            AESharedResources.ddLogInfo("AG: AdvancedBlocking json updated - download and setup new version");
             self.setupJson();
         });
 
@@ -47,9 +49,9 @@ class ContentBlockerController {
         
         do {
             try initJson();
-            NSLog("AG: AdvancedBlocking: Json setup successfully.");
+            AESharedResources.ddLogInfo("AG: AdvancedBlocking: Json setup successfully.");
         } catch {
-            NSLog("AG: AdvancedBlocking: Error setting json: \(error)");
+            AESharedResources.ddLogError("AG: AdvancedBlocking: Error setting json: \(error)");
         }
     }
     
@@ -78,7 +80,7 @@ class ContentBlockerController {
             
             NSLog("AG: AdvancedBlocking: Return data");
         } catch {
-            NSLog("AG: AdvancedBlocking: Error getting data: \(error)");
+            AESharedResources.ddLogError("AG: AdvancedBlocking: Error getting data: \(error)");
         }
         
         return data;
