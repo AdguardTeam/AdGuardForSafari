@@ -20,6 +20,7 @@ module.exports = (function () {
         DISABLE_FILTERING: 'adguard-disabled',
         DEFAULT_WHITE_LIST_MODE: 'default-whitelist-mode',
         DISABLE_SHOW_APP_UPDATED_NOTIFICATION: 'show-app-updated-disabled',
+        DISABLE_HARDWARE_ACCELERATION: 'hardware-acceleration-disabled',
         UPDATE_FILTERS_PERIOD: 'update-filters-period',
         SHOW_TRAY_ICON: 'show-tray-icon',
         LAUNCH_AT_LOGIN: 'launch-at-login',
@@ -47,6 +48,7 @@ module.exports = (function () {
                 defaults[settings.DISABLE_SEND_SAFEBROWSING_STATS] = true;
                 defaults[settings.DEFAULT_WHITE_LIST_MODE] = true;
                 defaults[settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION] = false;
+                defaults[settings.DISABLE_HARDWARE_ACCELERATION] = false;
                 defaults[settings.UPDATE_FILTERS_PERIOD] = 48;
                 defaults[settings.SHOW_TRAY_ICON] = true;
                 defaults[settings.LAUNCH_AT_LOGIN] = false;
@@ -169,6 +171,10 @@ module.exports = (function () {
         return getProperty(settings.VERBOSE_LOGGING);
     };
 
+    const isHardwareAccelerationDisabled = function () {
+        return getProperty(settings.DISABLE_HARDWARE_ACCELERATION);
+    };
+
     const api = {};
 
     // Expose settings to api
@@ -198,6 +204,7 @@ module.exports = (function () {
     api.changeLaunchAtLogin = changeLaunchAtLogin;
     api.isLaunchAtLoginEnabled = isLaunchAtLoginEnabled;
     api.isVerboseLoggingEnabled = isVerboseLoggingEnabled;
+    api.isHardwareAccelerationDisabled = isHardwareAccelerationDisabled;
 
     return api;
 
