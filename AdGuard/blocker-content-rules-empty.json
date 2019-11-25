@@ -1,1 +1,1 @@
-[{"trigger": {"url-filter": ".*","if-domain": ["domain.com"]},"action":{"type": "ignore-previous-rules"}}]
+[{"trigger": {"url-filter": ".*"},"action":{"type": "ignore-previous-rules"}}]
