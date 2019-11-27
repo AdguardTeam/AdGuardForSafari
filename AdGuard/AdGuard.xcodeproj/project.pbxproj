@@ -102,6 +102,12 @@
 		F41DA7DD2201C81700C63708 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41DA7DC2201C81700C63708 /* SafariExtensionHandler.swift */; };
 		F41DA7E52201C81700C63708 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = F41DA7E42201C81700C63708 /* script.js */; };
 		F41DA7EB2201C81700C63708 /* AdvancedBlocking.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F41DA7D92201C81700C63708 /* AdvancedBlocking.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F424E5C3238C3E5300C89E45 /* blocker-content-rules-empty.json in Resources */ = {isa = PBXBuildFile; fileRef = F4581BF322F8A2430069FA94 /* blocker-content-rules-empty.json */; };
+		F424E5C4238C3E5800C89E45 /* blocker-content-rules-empty.json in Resources */ = {isa = PBXBuildFile; fileRef = F4581BF322F8A2430069FA94 /* blocker-content-rules-empty.json */; };
+		F424E5C5238C3E5900C89E45 /* blocker-content-rules-empty.json in Resources */ = {isa = PBXBuildFile; fileRef = F4581BF322F8A2430069FA94 /* blocker-content-rules-empty.json */; };
+		F424E5C6238C3E5A00C89E45 /* blocker-content-rules-empty.json in Resources */ = {isa = PBXBuildFile; fileRef = F4581BF322F8A2430069FA94 /* blocker-content-rules-empty.json */; };
+		F424E5C7238C3E5B00C89E45 /* blocker-content-rules-empty.json in Resources */ = {isa = PBXBuildFile; fileRef = F4581BF322F8A2430069FA94 /* blocker-content-rules-empty.json */; };
+		F424E5C8238C3E5C00C89E45 /* blocker-content-rules-empty.json in Resources */ = {isa = PBXBuildFile; fileRef = F4581BF322F8A2430069FA94 /* blocker-content-rules-empty.json */; };
 		F44937BC2291D72500BAEFED /* scriptlets.js in Resources */ = {isa = PBXBuildFile; fileRef = F44937BB2291D72500BAEFED /* scriptlets.js */; };
 		F4581B6E22F363960069FA94 /* AEContentBlockerRequestHandlerBase.h in Headers */ = {isa = PBXBuildFile; fileRef = F4581B6D22F363960069FA94 /* AEContentBlockerRequestHandlerBase.h */; };
 		F4581B7022F364AA0069FA94 /* AEContentBlockerRequestHandlerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = F4581B6F22F364AA0069FA94 /* AEContentBlockerRequestHandlerBase.m */; };
@@ -1626,6 +1632,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F424E5C3238C3E5300C89E45 /* blocker-content-rules-empty.json in Resources */,
 				65D151862139771A0014BE79 /* defaults.plist in Resources */,
 				6582EECA2183435C007DC151 /* InfoPlist.strings in Resources */,
 				65975C9621481540007F766E /* Assets.xcassets in Resources */,
@@ -1643,6 +1650,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F424E5C5238C3E5900C89E45 /* blocker-content-rules-empty.json in Resources */,
 				F4581B8E22F370960069FA94 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1651,6 +1659,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F424E5C4238C3E5800C89E45 /* blocker-content-rules-empty.json in Resources */,
 				F4581B7522F36F720069FA94 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1670,6 +1679,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F424E5C8238C3E5C00C89E45 /* blocker-content-rules-empty.json in Resources */,
 				F4581BE122F85FC50069FA94 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1678,6 +1688,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F424E5C6238C3E5A00C89E45 /* blocker-content-rules-empty.json in Resources */,
 				F4581BA222F370EB0069FA94 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1686,6 +1697,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F424E5C7238C3E5B00C89E45 /* blocker-content-rules-empty.json in Resources */,
 				F4581BB622F371420069FA94 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -19,7 +19,7 @@
 #import "CommonLib/ACLang.h"
 #import <SafariServices/SafariServices.h>
 
-#define AES_BLOCKING_CONTENT_EMPTY_RESOURCE     @"blocking-content-rules-empty.json"
+#define AES_BLOCKING_CONTENT_EMPTY_RESOURCE     @"blocker-content-rules-empty.json"
 #define AES_BLOCKING_CONTENT_RULES_RESOURCE     @"blocking-content-rules.json"
 #define AES_BLOCKING_CONTENT_RULES_PRIVACY_RESOURCE     @"blocking-content-rules-privacy.json"
 #define AES_BLOCKING_CONTENT_RULES_SECURITY_RESOURCE     @"blocking-content-rules-security.json"
@@ -324,7 +324,8 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
 }
 
 + (NSURL *)blockingContentRulesEmptyUrl {
-    return [NSURL fileURLWithPath:AES_BLOCKING_CONTENT_EMPTY_RESOURCE];
+    NSURL *resourceUrl = [[NSBundle mainBundle] resourceURL];
+    return [resourceUrl URLByAppendingPathComponent:AES_BLOCKING_CONTENT_EMPTY_RESOURCE];
 }
 
 + (NSURL *)blockingContentRulesUrl {
