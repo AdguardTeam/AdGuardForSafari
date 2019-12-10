@@ -54,16 +54,16 @@
         "message": "Impostazioni Generali"
     },
     "options_general_desc": {
-        "message": "AdGuard per Safari è un software gratuito e open source. Incoraggiamo i tuoi commenti e contributi. Se vuoi riportare un errore, invialo a <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo</a>."
+        "message": "AdGuard per Safari è un software gratuito e open source. Incoraggiamo i tuoi commenti e contributi. Se vuoi riportare un errore, invialo a <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nostro repo su Github</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Permetti annunci di ricerca e l'autopromozione dei siti"
     },
     "options_export_settings": {
-        "message": "Export settings"
+        "message": "Esporta impostazioni"
     },
     "options_import_settings": {
-        "message": "Import settings"
+        "message": "Importa impostazioni"
     },
     "options_antibanner": {
         "message": "Filtri"
@@ -71,19 +71,19 @@
     "options_antibanner_info_filters": {
         "message": {
             "one": "%s filter",
-            "other": "%s filters"
+            "other": "%s filtri"
         }
     },
     "options_antibanner_info_rules": {
         "message": {
             "one": "%s rule",
-            "other": "%s rules"
+            "other": "%s regole"
         }
     },
     "options_antibanner_info_adv_rules": {
         "message": {
             "one": "%s advanced rule",
-            "other": "%s advanced rules"
+            "other": "%s regole avanzate"
         }
     },
     "options_filters_enabled": {
@@ -285,7 +285,7 @@
         "message": "Ultimo aggiornamento"
     },
     "options_about": {
-        "message": "Riguardo a"
+        "message": "Informazioni su"
     },
     "options_content_blockers": {
         "message": "Blocchi di contenuto"
@@ -357,7 +357,7 @@
         "message": "Verbose logging"
     },
     "options_verbose_logging_desc": {
-        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
+        "message": "Se Verbose logging è abilitato, l'estensione AdGuard per Safari extensions visualizzarà delle informazioni aggiuntive nella console del browser"
     },
     "settings_notification_protection_title": {
         "message": "La protezione è sospesa"
@@ -381,7 +381,7 @@
         "message": "È necessario abilitare tutte le estensioni di blocco di contenuto AdGuard per il corretto blocco degli annunci in Safari"
     },
     "options_cb_general_title": {
-        "message": "AdGuard General"
+        "message": "AdGuard Generale"
     },
     "options_cb_privacy_title": {
         "message": "AdGuard Privacy"
@@ -390,13 +390,13 @@
         "message": "AdGuard Social"
     },
     "options_cb_security_title": {
-        "message": "AdGuard Security"
+        "message": "AdGuard Sicurezza"
     },
     "options_cb_other_title": {
         "message": "AdGuard Altri"
     },
     "options_cb_custom_title": {
-        "message": "AdGuard Custom"
+        "message": "AdGuard Personalizzato"
     },
     "options_cb_rules_info": {
         "message": {
