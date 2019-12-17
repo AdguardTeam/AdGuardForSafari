@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "Buscando actualizaciones"
     },
+    "options_about_title": {
+        "message": "AdGuard para Safari"
+    },
     "options_about_updating": {
         "message": "Actualizando AdGuard para Safari"
     },
@@ -45,7 +48,7 @@
         "message": "AdGuard AdBlocker"
     },
     "description": {
-        "message": "Inigualable extensión de bloqueo de anuncios y ventanas emergentes. Bloquea anuncios en Facebook, YouTube y los demás sitios web."
+        "message": "Inigualable extensión para bloqueo de anuncios y ventanas emergentes. Bloquea anuncios en Facebook, YouTube y los demás sitios web."
     },
     "options_settings": {
         "message": "AdGuard para Safari - Configuración"
@@ -135,7 +138,7 @@
         "message": "Se ha producido un error"
     },
     "options_filters_custom_step_three_desc": {
-        "message": "Desafortunadamente, su filtro personalizado no se puede añadir debido a un error inesperado."
+        "message": "Desafortunadamente, tu filtro personalizado no se puede añadir debido a un error inesperado."
     },
     "options_filters_custom_step_three_try_again": {
         "message": "Volver a intentar"
@@ -180,7 +183,7 @@
         "message": "AdGuard no filtra sitios web de la lista blanca."
     },
     "options_whitelist_inverse": {
-        "message": "Invertir lista blanca<span class='sp-table-row-info'>Desbloquea anuncios en todas partes <i>excepto</i> en esta lista</span>"
+        "message": "Invertir lista blanca<span class='sp-table-row-info'>desbloquea anuncios en todas partes <i>excepto</i> en esta lista</span>"
     },
     "options_userfilter": {
         "message": "Reglas del usuario"
@@ -201,7 +204,7 @@
         "message": "No se han encontrado actualizaciones"
     },
     "options_popup_update_error": {
-        "message": "La descargas han fallado. Por favor, intentelo más tarde."
+        "message": "Error al obtener actualizaciones. Por favor, inténtelo de nuevo más tarde."
     },
     "options_popup_update_updated": {
         "message": "\"$1\" ha sido actualizado a la versión $2"
@@ -357,10 +360,16 @@
         "message": "Registro detallado"
     },
     "options_verbose_logging_desc": {
-        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
+        "message": "Si el registro detallado está habilitado, las extensiones de AdGuard Safari mostrarán información adicional en la consola del navegador"
+    },
+    "options_enable_hardware_acceleration": {
+        "message": "Habilitar la aceleración por hardware"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Permite la aceleración por hardware para la ventana de configuración, se requiere reiniciar la aplicación"
     },
     "settings_notification_protection_title": {
-        "message": "¡Atención! La protección fue deshabilitada"
+        "message": "Protección pausada"
     },
     "settings_notification_protection_button_text": {
         "message": "Reanudar"
@@ -369,34 +378,34 @@
         "message": "Corregir"
     },
     "settings_notification_extensions_title": {
-        "message": "¡Algunas extensiones de AdGuard están deshabilitadas"
+        "message": "¡Algunas extensiones de AdGuard están deshabilitadas!"
     },
     "settings_notification_extensions_text": {
         "message": "Debe habilitar todas las extensiones de AdGuard para bloquear correctamente los anuncios en Safari"
     },
     "settings_notification_cb_extensions_title": {
-        "message": "¡Algunas extensiones para bloqueo de contenido de AdGuard están deshabilitadas"
+        "message": "¡Algunas extensiones para bloqueo de contenido de AdGuard están deshabilitadas!"
     },
     "settings_notification_cb_extensions_text": {
         "message": "Debe habilitar todas las extensiones para bloqueo de contenido de AdGuard, y así bloquear correctamente los anuncios en Safari"
     },
     "options_cb_general_title": {
-        "message": "General"
+        "message": "AdGuard - General"
     },
     "options_cb_privacy_title": {
-        "message": "Privacidad"
+        "message": "AdGuard - Privacidad"
     },
     "options_cb_social_title": {
-        "message": "Redes sociales"
+        "message": "AdGuard - Redes sociales"
     },
     "options_cb_security_title": {
-        "message": "Seguridad"
+        "message": "AdGuard - Seguridad"
     },
     "options_cb_other_title": {
-        "message": "Otros"
+        "message": "AdGuard - Otros"
     },
     "options_cb_custom_title": {
-        "message": "Personalizado"
+        "message": "AdGuard - Personalizado"
     },
     "options_cb_rules_info": {
         "message": {

@@ -362,6 +362,12 @@
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
+    "options_enable_hardware_acceleration": {
+        "message": "Habilitar aceleração de hardware"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Habilita a aceleração de hardware para a janela de configurações, é necessário reiniciar o aplicativo"
+    },
     "settings_notification_protection_title": {
         "message": "Atenção! A proteçao foi desativada"
     },

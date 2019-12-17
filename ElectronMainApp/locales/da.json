@@ -362,6 +362,12 @@
     "options_verbose_logging_desc": {
         "message": "Hvis Detaljeret logning er aktiveret, vil AdGuards Safari udvidelser udskrive yderligere oplysninger til browserens konsol"
     },
+    "options_enable_hardware_acceleration": {
+        "message": "Aktivér hardwareacceleration"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Aktiverer hardwareacceleration for indstillingsvinduet, kræver genstart af programmet"
+    },
     "settings_notification_protection_title": {
         "message": "Beskyttelsen er pauset"
     },

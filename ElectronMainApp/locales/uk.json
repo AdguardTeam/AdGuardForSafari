@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "Перевірка оновлень"
     },
+    "options_about_title": {
+        "message": "AdGuard для Safari"
+    },
     "options_about_updating": {
         "message": "Оновлення AdGuard для Safari"
     },
@@ -358,6 +361,12 @@
     },
     "options_verbose_logging_desc": {
         "message": "Якщо увімкнено детальний журнал, розширення AdGuard для Safari виводитимуть додаткову інформацію в консолі браузера"
+    },
+    "options_enable_hardware_acceleration": {
+        "message": "Увімкнути апаратне прискорення"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Активує апаратне прискорення для вікна параметрів (необхідний перезапуск)"
     },
     "settings_notification_protection_title": {
         "message": "Захист призупинено"
