@@ -813,8 +813,8 @@ electron-log@^3.0.6:
   resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-3.0.9.tgz#53ff1fcdb2f3e4a73ea7096d2f7204121109ec6f"
 
 "electron-osx-sign@github:electron-userland/electron-osx-sign":
-  version "0.4.14"
-  resolved "https://codeload.github.com/electron-userland/electron-osx-sign/tar.gz/bae6f5886f0a8d73ffdcff00a77c5d9834a22441"
+  version "0.4.15"
+  resolved "https://codeload.github.com/electron-userland/electron-osx-sign/tar.gz/7d080dd81cbe830710abdbd24c04480f54737b21"
   dependencies:
     bluebird "^3.5.0"
     compare-version "^0.1.2"
@@ -881,9 +881,9 @@ electron-updater@^4.0.6:
     pako "^1.0.10"
     semver "^6.3.0"
 
-electron@^5.0.11:
-  version "5.0.12"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-5.0.12.tgz#2d5438f8e2b8b99ea99848b61238fc66c283e861"
+electron@^6.1.7:
+  version "6.1.7"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-6.1.7.tgz#a67695f81f5cb771e395bcf9711560520e347c54"
   dependencies:
     "@types/node" "^10.12.18"
     electron-download "^4.1.0"
