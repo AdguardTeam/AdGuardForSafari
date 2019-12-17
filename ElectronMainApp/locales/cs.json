@@ -207,11 +207,11 @@
         "message": "Nepovedlo se získat aktualizace. Prosím opakujte později."
     },
     "options_popup_update_updated": {
-        "message": "\"$1\" aktualizován na verzi $2"
+        "message": "„$1“ aktualizován na verzi $2"
     },
     "options_popup_update_updated_more": {
         "message": {
-            "one": "%s filtr aktualizován: $2",
+            "one": "Filtry (%s) aktualizovány: $2",
             "other": "%s filtrů aktualizováno: $2"
         }
     },
@@ -361,6 +361,12 @@
     },
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
+    },
+    "options_enable_hardware_acceleration": {
+        "message": "Zapnout hardwarovou akceleraci"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Zapne hardvarovou akceleraci pro okno nastavení. Vyžaduje restart aplikace"
     },
     "settings_notification_protection_title": {
         "message": "Pozor! Ochrana byla vypnuta"

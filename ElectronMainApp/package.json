@@ -1,6 +1,6 @@
 {
     "name": "AdGuardSafariApp",
-    "version": "1.6.3",
+    "version": "1.6.4",
     "description": "",
     "main": "./main.js",
     "repository": "github:AdguardTeam/AdGuardForSafari",
@@ -34,7 +34,7 @@
     "devDependencies": {
         "axios": "^0.19.0",
         "devtron": "^1.4.0",
-        "electron": "^5.0.11",
+        "electron": "^6.1.7",
         "electron-osx-sign": "github:electron-userland/electron-osx-sign",
         "electron-rebuild": "^1.8.5",
         "find-in-files": "^0.5.0",

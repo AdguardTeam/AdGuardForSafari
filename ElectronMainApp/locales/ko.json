@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "업데이트 확인 중"
     },
+    "options_about_title": {
+        "message": "Safari용 AdGuard"
+    },
     "options_about_updating": {
         "message": "Safari용 AdGuard 업데이트 중"
     },
@@ -183,10 +186,10 @@
         "message": "예외 목록 반전<span class='sp-table-row-info'>예외 목록을 <i>제외한</i> 모든 곳의 광고를 차단 해제</span>"
     },
     "options_userfilter": {
-        "message": "사용자 필터"
+        "message": "사용자 규칙"
     },
     "options_userfilter_description": {
-        "message": "이 필터에는 자신만의 규칙을&nbsp;추가할 수 있습니다. 이 설정은 &nbsp;HTML/CSS에 익숙한 고급 사용자에게 권장합니다. <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>필터 규칙 튜토리얼</a>를 읽어보고&nbsp; 사용자 지정 필터&nbsp;를 어떻게 사용하는지 알아보세요."
+        "message": "자신만의 규칙을&nbsp;추가할 수 있습니다. 이 설정은&nbsp;HTML/CSS에 익숙한 고급 사용자에게 권장합니다. <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>필터 규칙 튜토리얼</a>을 읽어보고&nbsp; 사용자 지정 필터 규칙&nbsp;을 어떻게 사용하는지 알아보세요."
     },
     "options_show_app_updated_notification": {
         "message": "필터 업데이트 알림"
@@ -327,10 +330,10 @@
         "message": "버전 %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "사용자 필터가 업데이트 되었습니다"
+        "message": "사용자 규칙이 업데이트 되었습니다"
     },
     "notification_user_filter_updated_desc": {
-        "message": "사용자 필터에 새 규칙이 추가됐습니다."
+        "message": "사용자 규칙에 새 규칙이 추가되었습니다:"
     },
     "options_filters_update_period": {
         "message": "업데이트 주기"
@@ -358,6 +361,12 @@
     },
     "options_verbose_logging_desc": {
         "message": "자세한 로그가 활성화 되어 있는 경우, AdGuard Safari 확장 프로그램은 브라우저 콘솔에 추가 정보를 출력합니다."
+    },
+    "options_enable_hardware_acceleration": {
+        "message": "하드웨어 가속 활성화"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "설정 창에 하드웨어 가속 활성화, 애플리케이션 재시작 필요"
     },
     "settings_notification_protection_title": {
         "message": "주의! 보호가 비활성화되어 있습니다"
@@ -417,6 +426,6 @@
         "message": "사용자"
     },
     "userfilter_name": {
-        "message": "사용자 필터"
+        "message": "사용자 규칙"
     }
 }

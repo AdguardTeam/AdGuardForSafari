@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "Checking for updates"
     },
+    "options_about_title": {
+        "message": "Safari için AdGuard"
+    },
     "options_about_updating": {
         "message": "Updating AdGuard for Safari"
     },
@@ -183,7 +186,7 @@
         "message": "Beyazlisteyi içe aktar<span class='sp-table-row-info'>bu beyazliste harici tüm reklamları engelle <i></i> </span>"
     },
     "options_userfilter": {
-        "message": "Kullanıcı filtresi"
+        "message": "Kullanıcı Filtresi"
     },
     "options_userfilter_description": {
         "message": "Bu filtreye kendi kurallarınızı ekleyebilirsiniz. Bu seçenek HTML/CSS kodları hakkında bilgisi olan gelişmiş kullanıcılar için tavsiye edilir. Kendi filtre kurallarınızı yazmayı öğrenmek için <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filtre kuralları öğreticisi</a> bölümünü okuyun."
@@ -276,7 +279,10 @@
         "message": "Çıkış"
     },
     "tray_menu_protection_start": {
-        "message": "AdGuard'ı etkinleştir"
+        "message": "Safari'de reklam engelleme açık"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Safari'de reklam engelleme kapalı"
     },
     "options_last_update": {
         "message": "Son güncelleme:"

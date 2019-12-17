@@ -362,6 +362,12 @@
     "options_verbose_logging_desc": {
         "message": "Če je omogočena 'Podrobno vodenje dnevnika', bodo razširitve AdGuard Safari natisnile dodatne informacije v konzoli brskalnika"
     },
+    "options_enable_hardware_acceleration": {
+        "message": "Omogoči pospeševanje strojne opreme"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Omogoča pospeševanje strojne opreme za okno z nastavitvami. Potreben je ponovni zagon aplikacije"
+    },
     "settings_notification_protection_title": {
         "message": "Zaščita je začasno ustavljena"
     },
