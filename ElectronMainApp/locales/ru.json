@@ -359,6 +359,12 @@
     "options_verbose_logging_desc": {
         "message": "Если активировано подробное логгирование, расширения AdGuard для Safari будут вводить дополнительную информацию в консоль браузера. "
     },
+    "options_enable_hardware_acceleration": {
+        "message": "Включить аппаратное ускорение"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Включить аппаратное ускорение для окна настроек. Требуется перезапуск"
+    },
     "settings_notification_protection_title": {
         "message": "Защита приостановлена"
     },
