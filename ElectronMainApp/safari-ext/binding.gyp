@@ -11,7 +11,7 @@
       ],
      "xcode_settings": {
        "OTHER_CPLUSPLUSFLAGS": ["-std=c++11", "-stdlib=libc++", "-mmacosx-version-min=10.12"],
-       "OTHER_LDFLAGS": ["-framework CoreFoundation -framework SafariServices -framework ServiceManagement"]
+       "OTHER_LDFLAGS": ["-framework CoreFoundation -framework SafariServices -framework ServiceManagement -framework StoreKit"]
      }
    }
  ]

@@ -25,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param completion Called on main thread
 + (void)removeOldLoginItemWithCompletion:(void (^)(BOOL result))completion;
 
+/// Requests user to review app in MAS
+///
++ (void)requestMASReview;
+
 @end
 
 NS_ASSUME_NONNULL_END
