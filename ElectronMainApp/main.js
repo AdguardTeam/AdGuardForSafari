@@ -144,6 +144,8 @@ function showWindow(onWindowLoaded) {
             onWindowLoaded();
         }
     } else {
+        app.dock.show();
+
         loadMainWindow(onWindowLoaded);
         uiEventListener.register(mainWindow);
     }
@@ -199,11 +201,15 @@ app.on('ready', (() => {
             uiEventListener.init();
 
             if (shouldShowMainWindow) {
+                app.dock.show();
+
                 loadMainWindow();
             }
         });
     } else {
         log.info('App is launching in foreground');
+
+        app.dock.show();
 
         loadSplashScreenWindow(() => {
             log.debug('Splash screen loaded');
@@ -230,17 +236,8 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit();
     } else {
-        log.info('Hiding application window');
+        log.info('Hiding dock item');
         app.dock.hide();
-    }
-});
-
-app.on('browser-window-created', () => {
-    if (process.platform === 'darwin') {
-        if (!mainWindow) {
-            log.info('Opening application window');
-            app.dock.show();
-        }
     }
 });
 
