@@ -6,6 +6,7 @@ const events = require('./events');
 const settings = require('./app/settings-manager');
 const log = require('./app/utils/log');
 const app = require('./app/app');
+const localStorage = require('./app/storage/storage');
 const { shell } = require('electron');
 
 /**
@@ -251,12 +252,70 @@ module.exports = (() => {
         safariToolbar.setVerboseLogging(enabled);
     };
 
-    const requestMASReview = () => {
-        // TODO: Only mas version
-        // TODO: Cases
+    const FIRST_MAS_REVIEW_CHECK = 'first-mas-review-check';
+    const LAST_MAS_REVIEW_CHECK = 'last-mas-review-check';
+    const TIME_SINCE_FIRST_CHECK = 24 * 60 * 60 * 1000; // 24 hours
+    const TIME_SINCE_LAST_CHECK = 3 * 24 * 60 * 60 * 1000; // 3 days
 
-        log.info('Requesting user for MAS review');
-        safariToolbar.requestMASUserReview();
+    /**
+     * Time of first check for mas review
+     *
+     * @return {number}
+     */
+    const getFirstCheckDate = () => {
+        if (localStorage.hasItem(FIRST_MAS_REVIEW_CHECK)) {
+            return localStorage.getItem(FIRST_MAS_REVIEW_CHECK);
+        }
+
+        const check = Date.now();
+        localStorage.setItem(check, FIRST_MAS_REVIEW_CHECK);
+        return check;
+    };
+
+    /**
+     * Time of last review check or now
+     *
+     * @return {number}
+     */
+    const getLastCheckDate = () => {
+        if (localStorage.hasItem(LAST_MAS_REVIEW_CHECK)) {
+            return localStorage.getItem(LAST_MAS_REVIEW_CHECK);
+        }
+
+        return Date.now();
+    };
+
+    /**
+     * Initiates request for MAS review
+     */
+    const requestMASReview = () => {
+        if (app.getChannel() !== 'MAS') {
+            // Only for MAS version
+            return;
+        }
+
+        if (Date.now() - getFirstCheckDate() < TIME_SINCE_FIRST_CHECK) {
+            // Some time should pass from install
+            return;
+        }
+
+        if (Date.now() - getLastCheckDate() <  TIME_SINCE_LAST_CHECK) {
+            // Some time passed from last request
+            return;
+        }
+
+        getExtensionsState((extensionsState)=> {
+            if (!extensionsState || !extensionsState.contentBlockersEnabled
+                || !extensionsState.minorExtensionsEnabled) {
+                // All extensions should be enabled
+                return;
+            }
+
+            localStorage.setItem(Date.now(), LAST_MAS_REVIEW_CHECK);
+
+            log.info('Requesting user for MAS review..');
+            safariToolbar.requestMASUserReview();
+        });
     };
 
     return {

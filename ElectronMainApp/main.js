@@ -212,12 +212,11 @@ app.on('ready', (() => {
                 uiEventListener.init();
                 loadMainWindow();
                 uiEventListener.register(mainWindow);
+
+                toolbarController.requestMASReview();
             });
         });
     }
-
-    // TODO: Move
-    toolbarController.requestMASReview();
 
     mainMenuController.initMenu(showWindow);
     tray = trayController.initTray(showWindow);
