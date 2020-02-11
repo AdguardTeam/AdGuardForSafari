@@ -1,14 +1,10 @@
-const { app, dialog, Menu, BrowserWindow } = require('electron');
-const fs = require('fs');
+const { app, Menu, BrowserWindow } = require('electron');
 const updater = require('./updater');
 const i18n = require('../utils/i18n');
 const listeners = require('./notifier');
 const events = require('./events');
-const log = require('./app/utils/log');
-const agApp = require('./app/app');
-const applicationApi = require('./api');
+
 const path = require('path');
-const AdmZip = require('adm-zip');
 
 /**
  * Module Menu
@@ -37,44 +33,6 @@ module.exports = (() => {
     };
 
     /**
-     * On export logs clicked
-     */
-    const onExportLogsClicked = () => {
-        log.info('Exporting log file..');
-
-        const options = {
-            defaultPath: app.getPath('documents') + `/adg_safari_logs_${Date.now()}.zip`,
-        };
-
-        dialog.showSaveDialog(null, options, (userPath) => {
-            if (!userPath) {
-                return;
-            }
-
-            const logsPath = log.findLogPath();
-            if (!logsPath) {
-                return;
-            }
-
-            log.info(`Log file path: ${logsPath}`);
-
-            const state = [];
-            state.push(`Application version: ${agApp.getVersion()}`);
-            state.push(`Application channel: ${agApp.getChannel()}`);
-            state.push(`Application locale: ${agApp.getLocale()}`);
-            state.push(`Enabled filters: [ ${applicationApi.getEnabledFilterIds().join(',')} ]`);
-
-            const statePath = path.join(path.dirname(logsPath), 'state.txt');
-            fs.writeFileSync(statePath, state.join('\r\n'));
-
-            const zip = new AdmZip();
-            zip.addLocalFile(logsPath);
-            zip.addLocalFile(statePath);
-            zip.writeZip(userPath);
-        });
-    };
-
-    /**
      * Initialization method
      * Should be execute when the app is ready
      *
@@ -99,11 +57,6 @@ module.exports = (() => {
                         label: i18n.__('main_menu_close_window.message'),
                         accelerator: 'cmd+w',
                         click() { onCloseWinClicked(); }
-                    },
-                    { type: 'separator' },
-                    {
-                        label: i18n.__('tray_menu_export_logs.message'),
-                        click() { onExportLogsClicked(); }
                     },
                     { type: 'separator' },
                     {
