@@ -215,9 +215,9 @@ module.exports = (function () {
         if (forceRemote || settings.localFilterIds.indexOf(filterId) < 0) {
             url = getUrlForDownloadFilterRules(filterId, useOptimizedFilters);
         } else {
-            url = settings.localFiltersFolder + "/filter_" + filterId + ".txt";
+            url = settings.localFiltersFolder + "/" + filterId + ".txt";
             if (useOptimizedFilters) {
-                url = settings.localFiltersFolder + "/filter_mobile_" + filterId + ".txt";
+                url = settings.localFiltersFolder + "/" + filterId + "_optimized.txt";
             }
 
             url = path.resolve(url);
