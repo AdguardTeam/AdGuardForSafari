@@ -1,6 +1,10 @@
 const appPack = require('../utils/app-pack');
 const i18n = require('../utils/i18n');
 
+const AdmZip = require('adm-zip');
+const path = require('path');
+const fs = require('fs');
+
 const applicationApi = require('./api');
 const filters = require('./app/filters-manager');
 const listeners = require('./notifier');
@@ -8,8 +12,11 @@ const antibanner = require('./app/antibanner');
 const events = require('./events');
 const storage = require('./app/storage/storage');
 const settings = require('./app/settings-manager');
+const log = require('./app/utils/log');
 
-const { app, Tray, Menu } = require('electron');
+const agApp = require('./app/app');
+
+const { app, dialog, Tray, Menu } = require('electron');
 
 /**
  * Tray controller.
@@ -54,6 +61,44 @@ module.exports = (() => {
     const onAboutClicked = () => {
         tray.showMainWindow(() => {
             listeners.notifyListeners(events.SHOW_OPTIONS_ABOUT_TAB);
+        });
+    };
+
+    /**
+     * On export logs clicked
+     */
+    const onExportLogsClicked = () => {
+        log.info('Exporting log file..');
+
+        const options = {
+            defaultPath: app.getPath('documents') + `/adg_safari_logs_${Date.now()}.zip`,
+        };
+
+        dialog.showSaveDialog(null, options, (userPath) => {
+            if (!userPath) {
+                return;
+            }
+
+            const logsPath = log.findLogPath();
+            if (!logsPath) {
+                return;
+            }
+
+            log.info(`Log file path: ${logsPath}`);
+
+            const state = [];
+            state.push(`Application version: ${agApp.getVersion()}`);
+            state.push(`Application channel: ${agApp.getChannel()}`);
+            state.push(`Application locale: ${agApp.getLocale()}`);
+            state.push(`Enabled filters: [ ${applicationApi.getEnabledFilterIds().join(',')} ]`);
+
+            const statePath = path.join(path.dirname(logsPath), 'state.txt');
+            fs.writeFileSync(statePath, state.join('\r\n'));
+
+            const zip = new AdmZip();
+            zip.addLocalFile(logsPath);
+            zip.addLocalFile(statePath);
+            zip.writeZip(userPath);
         });
     };
 
@@ -167,6 +212,11 @@ module.exports = (() => {
             {
                 label: i18n.__('tray_menu_check_updates.message'),
                 click: onCheckFiltersUpdateClicked
+            },
+            { type: "separator" },
+            {
+                label: i18n.__('tray_menu_export_logs.message'),
+                click: onExportLogsClicked
             },
             { type: "separator" },
             {
