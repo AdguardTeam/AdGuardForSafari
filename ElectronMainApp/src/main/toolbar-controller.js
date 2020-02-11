@@ -251,9 +251,18 @@ module.exports = (() => {
         safariToolbar.setVerboseLogging(enabled);
     };
 
+    const requestMASReview = () => {
+        // TODO: Only mas version
+        // TODO: Cases
+
+        log.info('Requesting user for MAS review');
+        safariToolbar.requestMASUserReview();
+    };
+
     return {
         initToolbarController,
-        getExtensionsState
+        getExtensionsState,
+        requestMASReview
     };
 
 })();

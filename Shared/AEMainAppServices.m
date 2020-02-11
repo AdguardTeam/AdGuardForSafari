@@ -50,6 +50,7 @@
 
 + (void)requestMASReview {
     if (@available(macOS 10.14, *)) {
+        DDLogInfo(@"AG: Requesting user review..");
         [SKStoreReviewController requestReview];
     } else {
         // Fallback on earlier versions

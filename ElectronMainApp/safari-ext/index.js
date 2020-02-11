@@ -204,6 +204,13 @@ module.exports = (() => {
         addon.removeOldLoginItem(callback);
     };
 
+    /**
+     * Initiates request for MAS user review
+     */
+    const requestMASUserReview = () => {
+        addon.requestMASUserReview();
+    };
+
     return {
         init: init,
         sendReady: sendReady,
@@ -221,7 +228,8 @@ module.exports = (() => {
         setVerboseLogging: setVerboseLogging,
         setStartAtLogin: setStartAtLogin,
         startAtLogin: startAtLogin,
-        removeOldLoginItem: removeOldLoginItem 
+        removeOldLoginItem: removeOldLoginItem,
+        requestMASUserReview: requestMASUserReview
     };
 
 })();

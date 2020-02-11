@@ -216,6 +216,9 @@ app.on('ready', (() => {
         });
     }
 
+    // TODO: Move
+    toolbarController.requestMASReview();
+
     mainMenuController.initMenu(showWindow);
     tray = trayController.initTray(showWindow);
     toolbarController.initToolbarController(showWindow);

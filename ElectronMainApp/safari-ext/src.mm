@@ -750,6 +750,11 @@ NAN_METHOD(removeOldLoginItem){
     }];
 }
 
+NAN_METHOD(requestMASUserReview) {
+
+	[AEMainAppServices requestMASReview];
+}
+
 NAN_MODULE_INIT(Init) {
 
   [AESharedResources initLogger];
@@ -829,6 +834,9 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("removeOldLoginItem").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(removeOldLoginItem)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("requestMASUserReview").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(requestMASUserReview)).ToLocalChecked());
 
 }
 
