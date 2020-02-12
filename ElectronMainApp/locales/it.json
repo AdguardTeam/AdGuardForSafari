@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "Controllo degli aggiornamenti"
     },
+    "options_about_title": {
+        "message": "AdGuard per Safari"
+    },
     "options_about_updating": {
         "message": "Aggiorna AdGuard per Safari."
     },
@@ -358,6 +361,12 @@
     },
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
+    },
+    "options_enable_hardware_acceleration": {
+        "message": "Abilita accelerazione hardware"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Abilita accelerazione hardware per la finestra delle impostazioni, è richiesto un riavvio dell'applicazione"
     },
     "settings_notification_protection_title": {
         "message": "La protezione è sospesa"

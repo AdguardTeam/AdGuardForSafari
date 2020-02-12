@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "检查更新"
     },
+    "options_about_title": {
+        "message": "AdGuard for Safari"
+    },
     "options_about_updating": {
         "message": "更新 AdGuard for Safari"
     },
@@ -278,6 +281,9 @@
     "tray_menu_protection_start": {
         "message": "启动 AdGuard"
     },
+    "tray_menu_protection_stop": {
+        "message": "Safari 中的广告拦截处于关闭状态"
+    },
     "options_last_update": {
         "message": "最后更新于："
     },
@@ -291,7 +297,7 @@
         "message": "已启用广告过滤器：6个当中的 %s（每个最高可包含 50,000 条规则）"
     },
     "options_content_blockers_disabled_desc": {
-        "message": ""
+        "message": "广告过滤器已禁用"
     },
     "options_compare_btn": {
         "message": "两者对比"
@@ -342,7 +348,7 @@
         "message": "不更新"
     },
     "options_filters_custom_remove": {
-        "message": ""
+        "message": "移除"
     },
     "options_show_tray_icon": {
         "message": "在菜单栏上显示AdGuard for Safari"
@@ -356,44 +362,50 @@
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
+    "options_enable_hardware_acceleration": {
+        "message": "启用硬件加速"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "为设置窗口启用硬件加速，需要重新启动应用程序"
+    },
     "settings_notification_protection_title": {
         "message": "注意! 保护已被禁用"
     },
     "settings_notification_protection_button_text": {
-        "message": ""
+        "message": "修复"
     },
     "settings_notification_extensions_button_text": {
-        "message": ""
+        "message": "修复"
     },
     "settings_notification_extensions_title": {
-        "message": ""
+        "message": "部分AdGuard扩展项被禁用"
     },
     "settings_notification_extensions_text": {
-        "message": ""
+        "message": "您需要开启AdGuard的所有扩展项以确保广告拦截在Safari中的正常运行"
     },
     "settings_notification_cb_extensions_title": {
-        "message": ""
+        "message": "部分AdGuard 内容拦截器的扩展项被禁用"
     },
     "settings_notification_cb_extensions_text": {
-        "message": ""
+        "message": "您需要开启AdGuard 内容拦截器的所有扩展项以确保广告拦截在Safari中的正常运行"
     },
     "options_cb_general_title": {
-        "message": ""
+        "message": "AdGuard 常用"
     },
     "options_cb_privacy_title": {
-        "message": ""
+        "message": "AdGuard 隐私"
     },
     "options_cb_social_title": {
-        "message": ""
+        "message": "AdGuard 社交"
     },
     "options_cb_security_title": {
-        "message": ""
+        "message": "AdGuard 安全"
     },
     "options_cb_other_title": {
-        "message": ""
+        "message": "AdGuard 其它"
     },
     "options_cb_custom_title": {
-        "message": ""
+        "message": "AdGuard 定制"
     },
     "options_cb_rules_info": {
         "message": {
@@ -402,18 +414,18 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "超过50000条规则的限制。 请禁用不必要的规则来使应用正常工作。<br/>此时已启用的规则： %s （已禁用规则： $2）"
     },
     "options_cb_disabled_warning": {
-        "message": ""
+        "message": "Safari中不可用"
     },
     "options_cb_compilation_warning": {
-        "message": ""
+        "message": "编译失败"
     },
     "filters_group_custom": {
-        "message": ""
+        "message": "自定义"
     },
     "userfilter_name": {
-        "message": ""
+        "message": "用户过滤器"
     }
 }
