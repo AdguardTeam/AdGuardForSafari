@@ -268,7 +268,7 @@ module.exports = (() => {
         }
 
         const check = Date.now();
-        localStorage.setItem(check, FIRST_MAS_REVIEW_CHECK);
+        localStorage.setItem(FIRST_MAS_REVIEW_CHECK, check);
         return check;
     };
 
@@ -311,7 +311,7 @@ module.exports = (() => {
                 return;
             }
 
-            localStorage.setItem(Date.now(), LAST_MAS_REVIEW_CHECK);
+            localStorage.setItem(LAST_MAS_REVIEW_CHECK, Date.now());
 
             log.info('Requesting user for MAS review..');
             safariToolbar.requestMASUserReview();
