@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "Überprüfe auf Updates"
     },
+    "options_about_title": {
+        "message": "AdGuard für Safari"
+    },
     "options_about_updating": {
         "message": "Aktualisiere AdGuard für Safari"
     },
@@ -358,6 +361,12 @@
     },
     "options_verbose_logging_desc": {
         "message": "Falls Ausführliche Protokollierung aktiviert ist, geben die AdGuard-Browsererweiterungen für Safari zusätzliche Informationen in die Browser-Konsole ein."
+    },
+    "options_enable_hardware_acceleration": {
+        "message": "Hardwarebeschleunigung aktivieren"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Aktiviert die Hardwarebeschleunigung für das Einstellungsfenster — Neustart der Anwendung erforderlich"
     },
     "settings_notification_protection_title": {
         "message": "Der Schutz ist angehalten"
