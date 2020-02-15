@@ -362,6 +362,12 @@
     "options_verbose_logging_desc": {
         "message": "Si cette option est activée, les extensions AdGuard pour Safari vont ajouter l'information supplémentaire à la console du navigateur"
     },
+    "options_enable_hardware_acceleration": {
+        "message": "Activer l'accélération matérielle"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Active l'accélération matérielle pour la fenêtre des paramètres. Vous devrez redémarrer l'application"
+    },
     "settings_notification_protection_title": {
         "message": "La protection est en pause"
     },

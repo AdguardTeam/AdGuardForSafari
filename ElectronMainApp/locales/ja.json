@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "アップデートを確認中"
     },
+    "options_about_title": {
+        "message": "AdGuard for Safari"
+    },
     "options_about_updating": {
         "message": "AdGuard for Safariをアップデート中"
     },
@@ -276,7 +279,10 @@
         "message": "終了"
     },
     "tray_menu_protection_start": {
-        "message": "AdGuardを有効にする"
+        "message": "Safari広告ブロックはオン"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Safari広告ブロックはオフ"
     },
     "options_last_update": {
         "message": "最新更新日時："
@@ -356,6 +362,12 @@
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
+    "options_enable_hardware_acceleration": {
+        "message": "ハードウェアアクセラレーションを有効にする"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "設定ウィンドウのハードウェアアクセラレーションを有効にします。※アプリケーションの再起動が必要です。"
+    },
     "settings_notification_protection_title": {
         "message": "【注意】保護は無効になりました"
     },
@@ -408,12 +420,12 @@
         "message": "Safariで無効になっています"
     },
     "options_cb_compilation_warning": {
-        "message": ""
+        "message": "コンパイル化が失敗しました"
     },
     "filters_group_custom": {
         "message": "カスタム"
     },
     "userfilter_name": {
-        "message": ""
+        "message": "ユーザールール"
     }
 }
