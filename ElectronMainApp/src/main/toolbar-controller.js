@@ -285,7 +285,7 @@ module.exports = (() => {
             return localStorage.getItem(LAST_MAS_REVIEW_CHECK);
         }
 
-        return Date.now();
+        return 0;
     };
 
     /**
