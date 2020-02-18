@@ -16,7 +16,7 @@ const log = require('./app/utils/log');
 
 const agApp = require('./app/app');
 
-const { app, dialog, Tray, Menu } = require('electron');
+const { app, dialog, Tray, Menu, BrowserWindow } = require('electron');
 
 /**
  * Tray controller.
@@ -74,31 +74,33 @@ module.exports = (() => {
             defaultPath: app.getPath('documents') + `/adg_safari_logs_${Date.now()}.zip`,
         };
 
-        dialog.showSaveDialog(null, options, (userPath) => {
-            if (!userPath) {
-                return;
-            }
+        tray.showMainWindow(() => {
+            dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), options, (userPath) => {
+                if (!userPath) {
+                    return;
+                }
 
-            const logsPath = log.findLogPath();
-            if (!logsPath) {
-                return;
-            }
+                const logsPath = log.findLogPath();
+                if (!logsPath) {
+                    return;
+                }
 
-            log.info(`Log file path: ${logsPath}`);
+                log.info(`Log file path: ${logsPath}`);
 
-            const state = [];
-            state.push(`Application version: ${agApp.getVersion()}`);
-            state.push(`Application channel: ${agApp.getChannel()}`);
-            state.push(`Application locale: ${agApp.getLocale()}`);
-            state.push(`Enabled filters: [ ${applicationApi.getEnabledFilterIds().join(',')} ]`);
+                const state = [];
+                state.push(`Application version: ${agApp.getVersion()}`);
+                state.push(`Application channel: ${agApp.getChannel()}`);
+                state.push(`Application locale: ${agApp.getLocale()}`);
+                state.push(`Enabled filters: [ ${applicationApi.getEnabledFilterIds().join(',')} ]`);
 
-            const statePath = path.join(path.dirname(logsPath), 'state.txt');
-            fs.writeFileSync(statePath, state.join('\r\n'));
+                const statePath = path.join(path.dirname(logsPath), 'state.txt');
+                fs.writeFileSync(statePath, state.join('\r\n'));
 
-            const zip = new AdmZip();
-            zip.addLocalFile(logsPath);
-            zip.addLocalFile(statePath);
-            zip.writeZip(userPath);
+                const zip = new AdmZip();
+                zip.addLocalFile(logsPath);
+                zip.addLocalFile(statePath);
+                zip.writeZip(userPath);
+            });
         });
     };
 
