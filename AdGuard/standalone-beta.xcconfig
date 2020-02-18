@@ -1,7 +1,7 @@
 #include "./Config.xcconfig"
 
 AG_VERSION = 1.7.0
-AG_BUILD = 31
+AG_BUILD = 33
 
 AG_STANDALONE = true
 AG_STANDALONE_BETA = true

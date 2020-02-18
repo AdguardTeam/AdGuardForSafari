@@ -11,6 +11,7 @@
 #import "CommonLib/ACLang.h"
 #import <SafariServices/SafariServices.h>
 #import "AALaunchAtLogin.h"
+#import <StoreKit/StoreKit.h>
 
 @implementation AEMainAppServices
 
@@ -45,6 +46,15 @@
         }
     });
 
+}
+
++ (void)requestMASReview {
+    if (@available(macOS 10.14, *)) {
+        DDLogInfo(@"AG: Requesting user review..");
+        [SKStoreReviewController requestReview];
+    } else {
+        // Fallback on earlier versions
+    }
 }
 /////////////////////////////////////////////////////////////////////
 #pragma mark Internal processed request (private)

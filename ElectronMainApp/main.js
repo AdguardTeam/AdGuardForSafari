@@ -218,6 +218,8 @@ app.on('ready', (() => {
                 uiEventListener.init();
                 loadMainWindow();
                 uiEventListener.register(mainWindow);
+
+                toolbarController.requestMASReview();
             });
         });
     }
