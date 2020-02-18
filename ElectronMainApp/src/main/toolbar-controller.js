@@ -254,11 +254,9 @@ module.exports = (() => {
 
     const FIRST_MAS_REVIEW_CHECK = 'first-mas-review-check';
     const LAST_MAS_REVIEW_CHECK = 'last-mas-review-check';
-    // TODO: Restore after testing
-    // const TIME_SINCE_FIRST_CHECK = 24 * 60 * 60 * 1000; // 24 hours
-    const TIME_SINCE_FIRST_CHECK = 60 * 1000; // 1 min
-    // const TIME_SINCE_LAST_CHECK = 3 * 24 * 60 * 60 * 1000; // 3 days
-    const TIME_SINCE_LAST_CHECK = 3 * 60 * 1000; // 3 min
+
+    const TIME_SINCE_FIRST_CHECK = 24 * 60 * 60 * 1000; // 24 hours
+    const TIME_SINCE_LAST_CHECK = 3 * 24 * 60 * 60 * 1000; // 3 days
 
     /**
      * Time of first check for mas review
@@ -294,11 +292,10 @@ module.exports = (() => {
     const requestMASReview = () => {
         log.info('Start requesting user for MAS review..');
 
-        // TODO: Restore after testing
-        // if (app.getChannel() !== 'MAS') {
-        //     // Only for MAS version
-        //     return;
-        // }
+        if (app.getChannel() !== 'MAS') {
+            // Only for MAS version
+            return;
+        }
 
         if (Date.now() - getFirstCheckDate() < TIME_SINCE_FIRST_CHECK) {
             // Some time should pass from install
