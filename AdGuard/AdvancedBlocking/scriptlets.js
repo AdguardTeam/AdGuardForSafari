@@ -1,7 +1,7 @@
 
 /**
  * AdGuard Scriptlets
- * Version 1.0.10
+ * Version 1.1.3
  */
 
 (function () {
@@ -40,14 +40,17 @@
     /**
      * Check is property exist in base object recursively
      *
-     * If property doesn't exist in base object
-     * defines this property and returns base, property name and remaining part of property chain
+     * If property doesn't exist in base object,
+     * defines this property (for addProp = true)
+     * and returns base, property name and remaining part of property chain
      *
      * @param {Object} base
      * @param {string} chain
+     * @param {Booleam} addProp - defines is nonexistent base property should be assigned as 'undefined'
      * @returns {Chain}
      */
     function getPropertyInChain(base, chain) {
+        var addProp = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
         var pos = chain.indexOf('.');
 
         if (pos === -1) {
@@ -62,7 +65,11 @@
         chain = chain.slice(pos + 1);
 
         if (own !== undefined) {
-            return getPropertyInChain(own, chain);
+            return getPropertyInChain(own, chain, addProp);
+        }
+
+        if (!addProp) {
+            return false;
         }
 
         Object.defineProperty(base, prop, {
@@ -97,6 +104,63 @@
 
         var escaped = str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         return new RegExp(escaped);
+    };
+    /**
+     * Get string before regexp first match
+     * @param {string} str
+     * @param {RegExp} rx
+     */
+
+    var getBeforeRegExp = function getBeforeRegExp(str, rx) {
+        var index = str.search(rx);
+        return str.substring(0, index);
+    };
+    var startsWith = function startsWith(str, prefix) {
+        return str && str.indexOf(prefix) === 0;
+    };
+    var substringAfter = function substringAfter(str, separator) {
+        if (!str) {
+            return str;
+        }
+
+        var index = str.indexOf(separator);
+        return index < 0 ? '' : str.substring(index + separator.length);
+    };
+    var substringBefore = function substringBefore(str, separator) {
+        if (!str || !separator) {
+            return str;
+        }
+
+        var index = str.indexOf(separator);
+        return index < 0 ? str : str.substring(0, index);
+    };
+    /**
+     * Wrap str in double qoutes and replaces single quotes if need
+     * @param {string} str
+     */
+
+    var wrapInDoubleQuotes = function wrapInDoubleQuotes(str) {
+        if (str[0] === '\'' && str[str.length - 1] === '\'') {
+            str = str.substring(1, str.length - 1); // eslint-disable-next-line no-useless-escape
+
+            str = str.replace(/\"/g, '\\"');
+        } else if (str[0] === '"' && str[str.length - 1] === '"') {
+            str = str.substring(1, str.length - 1); // eslint-disable-next-line no-useless-escape
+
+            str = str.replace(/\'/g, '\\\'');
+        }
+
+        return "\"".concat(str, "\"");
+    };
+    /**
+     * Returns substring enclosed in the widest braces
+     * @param {string} str
+     */
+
+    var getStringInBraces = function getStringInBraces(str) {
+        var firstIndex = str.indexOf('(');
+        var lastIndex = str.lastIndexOf(')');
+        return str.substring(firstIndex + 1, lastIndex);
     };
 
     /**
@@ -163,7 +227,7 @@
     /**
      * Hit used only for debug purposes now
      * @param {Source} source
-     * @param {String} message optional message
+     * @param {string} message optional message
      */
     var hit = function hit(source, message) {
         if (source.verbose !== true) {
@@ -173,18 +237,19 @@
         try {
             var log = console.log.bind(console);
             var trace = console.trace.bind(console);
+            var prefix = source.ruleText || '';
 
             if (message) {
-                log("".concat(source.ruleText, " message:\n").concat(message));
+                log("".concat(prefix, " message:\n").concat(message));
             }
 
-            log("".concat(source.ruleText, " trace start"));
+            log("".concat(prefix, " trace start"));
 
             if (trace) {
                 trace();
             }
 
-            log("".concat(source.ruleText, " trace end"));
+            log("".concat(prefix, " trace end"));
         } catch (e) {} // try catch for Edge 15
         // In according to this issue https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/14495220/
         // console.log throws an error
@@ -201,11 +266,18 @@
      */
 
     var dependencies = /*#__PURE__*/Object.freeze({
+        __proto__: null,
         randomId: randomId,
         setPropertyAccess: setPropertyAccess,
         getPropertyInChain: getPropertyInChain,
         escapeRegExp: escapeRegExp,
         toRegExp: toRegExp,
+        getBeforeRegExp: getBeforeRegExp,
+        startsWith: startsWith,
+        substringAfter: substringAfter,
+        substringBefore: substringBefore,
+        wrapInDoubleQuotes: wrapInDoubleQuotes,
+        getStringInBraces: getStringInBraces,
         createOnErrorHandler: createOnErrorHandler,
         noop: noop,
         noopNull: noopNull,
@@ -216,7 +288,298 @@
     });
 
     /**
-     * Abort property reading even if it doesn't exist in execution moment
+     * Concat dependencies to scriptlet code
+     * @param {string} scriptlet string view of scriptlet
+     */
+
+    function attachDependencies(scriptlet) {
+        var _scriptlet$injections = scriptlet.injections,
+            injections = _scriptlet$injections === void 0 ? [] : _scriptlet$injections;
+        return injections.reduce(function (accum, dep) {
+            return "".concat(accum, "\n").concat(dependencies[dep.name]);
+        }, scriptlet.toString());
+    }
+    /**
+     * Add scriptlet call to existing code
+     * @param {Function} scriptlet
+     * @param {string} code
+     */
+
+    function addCall(scriptlet, code) {
+        return "".concat(code, ";\n        const updatedArgs = args ? [].concat(source).concat(args) : [source];\n        ").concat(scriptlet.name, ".apply(this, updatedArgs);\n    ");
+    }
+    /**
+     * Wrap function into IIFE (Immediately invoked function expression)
+     *
+     * @param {Source} source - object with scriptlet properties
+     * @param {string} code - scriptlet source code with dependencies
+     *
+     * @returns {string} full scriptlet code
+     *
+     * @example
+     * const source = {
+     *      args: ["aaa", "bbb"],
+     *      name: 'noeval',
+     * };
+     * const code = "function noeval(source, args) { alert(source); } noeval.apply(this, args);"
+     * const result = wrapInIIFE(source, code);
+     *
+     * // result
+     * `(function(source, args) {
+     *      function noeval(source) { alert(source); }
+     *      noeval.apply(this, args);
+     * )({"args": ["aaa", "bbb"], "name":"noeval"}, ["aaa", "bbb"])`
+     */
+
+    function passSourceAndProps(source, code) {
+        if (source.hit) {
+            source.hit = source.hit.toString();
+        }
+
+        var sourceString = JSON.stringify(source);
+        var argsString = source.args ? "[".concat(source.args.map(JSON.stringify), "]") : undefined;
+        var params = argsString ? "".concat(sourceString, ", ").concat(argsString) : sourceString;
+        return "(function(source, args){\n".concat(code, "\n})(").concat(params, ");");
+    }
+    /**
+     * Wrap code in no name function
+     * @param {string} code which must be wrapped
+     */
+
+    function wrapInNonameFunc(code) {
+        return "function(source, args){\n".concat(code, "\n}");
+    }
+
+    function _arrayWithHoles(arr) {
+        if (Array.isArray(arr)) return arr;
+    }
+
+    var arrayWithHoles = _arrayWithHoles;
+
+    function _iterableToArray(iter) {
+        if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+    }
+
+    var iterableToArray = _iterableToArray;
+
+    function _nonIterableRest() {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+    }
+
+    var nonIterableRest = _nonIterableRest;
+
+    function _toArray(arr) {
+        return arrayWithHoles(arr) || iterableToArray(arr) || nonIterableRest();
+    }
+
+    var toArray = _toArray;
+
+    function _defineProperty(obj, key, value) {
+        if (key in obj) {
+            Object.defineProperty(obj, key, {
+                value: value,
+                enumerable: true,
+                configurable: true,
+                writable: true
+            });
+        } else {
+            obj[key] = value;
+        }
+
+        return obj;
+    }
+
+    var defineProperty = _defineProperty;
+
+    /**
+     * Iterate over iterable argument and evaluate current state with transitions
+     * @param {string} init first transition name
+     * @param {Array|Collection|string} iterable
+     * @param {Object} transitions transtion functions
+     * @param {any} args arguments which should be passed to transition functions
+     */
+    function iterateWithTransitions(iterable, transitions, init, args) {
+        var state = init || Object.keys(transitions)[0];
+
+        for (var i = 0; i < iterable.length; i += 1) {
+            state = transitions[state](iterable, i, args);
+        }
+
+        return state;
+    }
+    /**
+     * AdGuard scriptlet rule mask
+     */
+
+
+    var ADG_SCRIPTLET_MASK = '#//scriptlet';
+    /**
+     * Helper to accumulate an array of strings char by char
+     */
+
+    var wordSaver = function wordSaver() {
+        var str = '';
+        var strs = [];
+
+        var saveSymb = function saveSymb(s) {
+            str += s;
+            return str;
+        };
+
+        var saveStr = function saveStr() {
+            strs.push(str);
+            str = '';
+        };
+
+        var getAll = function getAll() {
+            return [].concat(strs);
+        };
+
+        return {
+            saveSymb: saveSymb,
+            saveStr: saveStr,
+            getAll: getAll
+        };
+    };
+
+    var substringAfter$1 = function substringAfter(str, separator) {
+        if (!str) {
+            return str;
+        }
+
+        var index = str.indexOf(separator);
+        return index < 0 ? '' : str.substring(index + separator.length);
+    };
+    /**
+     * Parse and validate scriptlet rule
+     * @param {*} ruleText
+     * @returns {{name: string, args: Array<string>}}
+     */
+
+
+    var parseRule = function parseRule(ruleText) {
+        var _transitions;
+
+        ruleText = substringAfter$1(ruleText, ADG_SCRIPTLET_MASK);
+        /**
+         * Transition names
+         */
+
+        var TRANSITION = {
+            OPENED: 'opened',
+            PARAM: 'param',
+            CLOSED: 'closed'
+        };
+        /**
+         * Transition function: the current index position in start, end or between params
+         * @param {string} rule
+         * @param {number} index
+         * @param {Object} Object
+         * @property {Object} Object.sep contains prop symb with current separator char
+         */
+
+        var opened = function opened(rule, index, _ref) {
+            var sep = _ref.sep;
+            var char = rule[index];
+            var transition;
+
+            switch (char) {
+                case ' ':
+                case '(':
+                case ',':
+                {
+                    transition = TRANSITION.OPENED;
+                    break;
+                }
+
+                case '\'':
+                case '"':
+                {
+                    sep.symb = char;
+                    transition = TRANSITION.PARAM;
+                    break;
+                }
+
+                case ')':
+                {
+                    transition = index === rule.length - 1 ? TRANSITION.CLOSED : TRANSITION.OPENED;
+                    break;
+                }
+
+                default:
+                {
+                    throw new Error('The rule is not a scriptlet');
+                }
+            }
+
+            return transition;
+        };
+        /**
+         * Transition function: the current index position inside param
+         * @param {string} rule
+         * @param {number} index
+         * @param {Object} Object
+         * @property {Object} Object.sep contains prop `symb` with current separator char
+         * @property {Object} Object.saver helper which allow to save strings by car by char
+         */
+
+
+        var param = function param(rule, index, _ref2) {
+            var saver = _ref2.saver,
+                sep = _ref2.sep;
+            var char = rule[index];
+
+            switch (char) {
+                case '\'':
+                case '"':
+                {
+                    var preIndex = index - 1;
+                    var before = rule[preIndex];
+
+                    if (char === sep.symb && before !== '\\') {
+                        sep.symb = null;
+                        saver.saveStr();
+                        return TRANSITION.OPENED;
+                    }
+                }
+                // eslint-disable-next-line no-fallthrough
+
+                default:
+                {
+                    saver.saveSymb(char);
+                    return TRANSITION.PARAM;
+                }
+            }
+        };
+
+        var transitions = (_transitions = {}, defineProperty(_transitions, TRANSITION.OPENED, opened), defineProperty(_transitions, TRANSITION.PARAM, param), defineProperty(_transitions, TRANSITION.CLOSED, function () {}), _transitions);
+        var sep = {
+            symb: null
+        };
+        var saver = wordSaver();
+        var state = iterateWithTransitions(ruleText, transitions, TRANSITION.OPENED, {
+            sep: sep,
+            saver: saver
+        });
+
+        if (state !== 'closed') {
+            throw new Error("Invalid scriptlet rule ".concat(ruleText));
+        }
+
+        var args = saver.getAll();
+        return {
+            name: args[0],
+            args: args.slice(1)
+        };
+    };
+
+    /* eslint-disable max-len */
+
+    /**
+     * @scriptlet abort-on-property-read
+     *
+     * @description
+     * Aborts a script when it attempts to **read** the specified property.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#abort-on-property-readjs-
@@ -224,9 +587,25 @@
      * Related ABP source:
      * https://github.com/adblockplus/adblockpluscore/blob/6b2a309054cc23432102b85d13f12559639ef495/lib/content/snippets.js#L864
      *
-     * @param {Source} source
-     * @param {string} property property name
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("abort-on-property-read", <property>)
+     * ```
+     *
+     * **Parameters**
+     * - `property` (required) path to a property (joined with `.` if needed). The property must be attached to `window`.
+     *
+     * **Examples**
+     * ```
+     * ! Aborts script when it tries to access `window.alert`
+     * example.org#%#//scriptlet("abort-on-property-read", "alert")
+     *
+     * ! Aborts script when it tries to access `navigator.language`
+     * example.org#%#//scriptlet("abort-on-property-read", "navigator.language")
+     * ```
      */
+
+    /* eslint-enable max-len */
 
     function abortOnPropertyRead(source, property) {
         if (!property) {
@@ -273,11 +652,16 @@
         setChainPropAccess(window, property);
         window.onerror = createOnErrorHandler(rid).bind();
     }
-    abortOnPropertyRead.names = ['abort-on-property-read', 'abort-on-property-read.js', 'ubo-abort-on-property-read.js', 'abp-abort-on-property-read'];
+    abortOnPropertyRead.names = ['abort-on-property-read', 'abort-on-property-read.js', 'ubo-abort-on-property-read.js', 'aopr.js', 'ubo-aopr.js', 'abp-abort-on-property-read'];
     abortOnPropertyRead.injections = [randomId, setPropertyAccess, getPropertyInChain, createOnErrorHandler, hit];
 
+    /* eslint-disable max-len */
+
     /**
-     * Abort property writing
+     * @scriptlet abort-on-property-write
+     *
+     * @description
+     * Aborts a script when it attempts to **write** the specified property.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#abort-on-property-writejs-
@@ -285,9 +669,23 @@
      * Related ABP source:
      * https://github.com/adblockplus/adblockpluscore/blob/6b2a309054cc23432102b85d13f12559639ef495/lib/content/snippets.js#L896
      *
-     * @param {Source} source
-     * @param {string} property propery name
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("abort-on-property-write", <property>)
+     * ```
+     *
+     * **Parameters**
+     * - `property` (required) path to a property (joined with `.` if needed). The property must be attached to `window`.
+     *
+     * **Examples**
+     * ```
+     * ! Aborts all inline scripts trying to access `window.alert`
+     * utils.escape('<script></script>')
+     * // => '&lt;script&gt;&lt;/script&gt;'
+     * ```
      */
+
+    /* eslint-enable max-len */
 
     function abortOnPropertyWrite(source, property) {
         if (!property) {
@@ -333,20 +731,57 @@
         setChainPropAccess(window, property);
         window.onerror = createOnErrorHandler(rid).bind();
     }
-    abortOnPropertyWrite.names = ['abort-on-property-write', 'abort-on-property-write.js', 'ubo-abort-on-property-write.js', 'abp-abort-on-property-write'];
+    abortOnPropertyWrite.names = ['abort-on-property-write', 'abort-on-property-write.js', 'ubo-abort-on-property-write.js', 'aopw.js', 'ubo-aopw.js', 'abp-abort-on-property-write'];
     abortOnPropertyWrite.injections = [randomId, setPropertyAccess, getPropertyInChain, createOnErrorHandler, hit];
 
+    /* eslint-disable max-len */
+
     /**
-     * Prevent calls to setTimeout for specified matching in passed callback and delay
-     * by setting callback to empty function
+     * @scriptlet prevent-setTimeout
+     *
+     * @description
+     * Prevents a `setTimeout` call if the text of the callback is matching the specified search string/regexp and (optionally) have the specified delay.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#settimeout-defuserjs-
      *
-     * @param {Source} source
-     * @param {string|RegExp} match matching in string of callback function
-     * @param {string|number} delay matching delay
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("prevent-setTimeout"[, <search>[, <delay>]])
+     * ```
+     *
+     * **Parameters**
+     * - `search` (optional) string or regular expression that must match the stringified callback . If not set, prevents all `setTimeout` calls.
+     * - `delay` (optional) must be an integer. If set, it matches the delay passed to the `setTimeout` call.
+     *
+     * **Examples**
+     *
+     * 1. Prevents `setTimeout` calls if the callback contains `value` and the delay is set to `300`.
+     *     ```
+     *     example.org#%#//scriptlet("prevent-setTimeout", "value", "300")
+     *     ```
+     *
+     *     For instance, the followiing call will be prevented:
+     *     ```javascript
+     *     setTimeout(function () {
+     *         window.test = "value";
+     *     }, 300);
+     *     ```
+     *
+     * 2. Prevents `setTimeout` calls if the callback matches `/\.test/` regardless of the delay.
+     *     ```bash
+     *     example.org#%#//scriptlet("prevent-setTimeout", "/\.test/")
+     *     ```
+     *
+     *     For instance, the followiing call will be prevented:
+     *     ```javascript
+     *     setTimeout(function () {
+     *         window.test = "value";
+     *     }, 100);
+     *     ```
      */
+
+    /* eslint-enable max-len */
 
     function preventSetTimeout(source, match, delay) {
         var nativeTimeout = window.setTimeout;
@@ -371,20 +806,57 @@
 
         window.setTimeout = timeoutWrapper;
     }
-    preventSetTimeout.names = ['prevent-setTimeout', 'setTimeout-defuser.js', 'ubo-setTimeout-defuser.js'];
+    preventSetTimeout.names = ['prevent-setTimeout', 'setTimeout-defuser.js', 'ubo-setTimeout-defuser.js', 'std.js', 'ubo-std.js'];
     preventSetTimeout.injections = [toRegExp, hit];
 
+    /* eslint-disable max-len */
+
     /**
-     * Prevent calls to setInterval for specified matching in passed callback and delay
-     * by setting callback to empty function
+     * @scriptlet prevent-setInterval
+     *
+     * @description
+     * Prevents a `setInterval` call if the text of the callback is matching the specified search string/regexp and (optionally) have the specified interval.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#setinterval-defuserjs-
      *
-     * @param {Source} source
-     * @param {string|RegExp} match matching in string of callback function
-     * @param {string|number} interval matching interval
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("prevent-setInterval"[, <search>[, <interval>]])
+     * ```
+     *
+     * **Parameters**
+     * - `search` (optional) string or regular expression that must match the stringified callback . If not set, prevents all `setInterval` calls.
+     * - `interval` (optional) must be an integer. If set, it matches the interval passed to the `setInterval` call.
+     *
+     * **Example**
+     *
+     * 1. Prevents `setInterval` calls if the callback contains `value` and the interval is set to `300`.
+     *     ```
+     *     example.org#%#//scriptlet("prevent-setInterval", "value", "300")
+     *     ```
+     *
+     *     For instance, the followiing call will be prevented:
+     *     ```javascript
+     *     setInterval(function () {
+     *         window.test = "value";
+     *     }, 300);
+     *     ```
+     *
+     * 2. Prevents `setInterval` calls if the callback matches `/\.test/` regardless of the interval.
+     *     ```
+     *     example.org#%#//scriptlet("prevent-setInterval", "/\.test/")
+     *     ```
+     *
+     *     For instance, the followiing call will be prevented:
+     *     ```javascript
+     *     setInterval(function () {
+     *         window.test = "value";
+     *     }, 100);
+     *     ```
      */
+
+    /* eslint-enable max-len */
 
     function preventSetInterval(source, match, interval) {
         var nativeInterval = window.setInterval;
@@ -409,19 +881,53 @@
 
         window.setInterval = intervalWrapper;
     }
-    preventSetInterval.names = ['prevent-setInterval', 'setInterval-defuser.js', 'ubo-setInterval-defuser.js'];
+    preventSetInterval.names = ['prevent-setInterval', 'setInterval-defuser.js', 'ubo-setInterval-defuser.js', 'sid.js', 'ubo-sid.js'];
     preventSetInterval.injections = [toRegExp, hit];
 
+    /* eslint-disable max-len */
+
     /**
-     * Prevent calls `window.open` when URL match or not match with passed params
+     * @scriptlet prevent-window-open
+     *
+     * @description
+     * Prevents `window.open` calls when URL either matches or not matches the specified string/regexp. Using it without parameters prevents all `window.open` calls.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#windowopen-defuserjs-
      *
-     * @param {Source} source
-     * @param {number|string} [inverse] inverse matching
-     * @param {string} [match] matching with URL
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("prevent-window-open"[, <match>[, <search>]])
+     * ```
+     *
+     * **Parameters**
+     * - `match` (optional) defaults to "matching", any positive number for "matching", 0 or any string for "not matching",
+     * - `search` (optional) string or regexp for matching the URL passed to `window.open` call.
+     *
+     * **Example**
+     *
+     * 1. Prevent all `window.open` calls:
+     * ```
+     *     example.org#%#//scriptlet("prevent-window-open")
+     * ```
+     *
+     * 2. Prevent `window.open` for all URLs containing `example`:
+     * ```
+     *     example.org#%#//scriptlet("prevent-window-open", "1", "example")
+     * ```
+     *
+     * 3. Prevent `window.open` for all URLs matching RegExp `/example\./`:
+     * ```
+     *     example.org#%#//scriptlet("prevent-window-open", "1", "/example\./")
+     * ```
+     *
+     * 4. Prevent `window.open` for all URLs **NOT** containing `example`:
+     * ```
+     *     example.org#%#//scriptlet("prevent-window-open", "0", "example")
+     * ```
      */
+
+    /* eslint-enable max-len */
 
     function preventWindowOpen(source, inverse, match) {
         var nativeOpen = window.open;
@@ -446,7 +952,12 @@
     preventWindowOpen.injections = [toRegExp, hit];
 
     /* eslint-disable no-new-func */
+    /* eslint-disable max-len */
+
     /**
+     * @scriptlet abort-current-inline-script
+     *
+     * @description
      * Aborts an inline script when it attempts to **read** the specified property
      * AND when the contents of the `<script>` element contains the specified
      * text or matches the regular expression.
@@ -457,10 +968,51 @@
      * Related ABP source:
      * https://github.com/adblockplus/adblockpluscore/blob/6b2a309054cc23432102b85d13f12559639ef495/lib/content/snippets.js#L928
      *
-     * @param {Source} source
-     * @param {string} property path to a property
-     * @param {string} search must match the inline script contents
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("abort-current-inline-script", <property> [, <search>])
+     * ```
+     *
+     * **Parameters**
+     * - `property` (required) path to a property (joined with `.` if needed). The property must be attached to `window`.
+     * - `search` (optional) string or regular expression that must match the inline script contents. If not set, abort all inline scripts which are trying to access the specified property.
+     *
+     * **Examples**
+     * 1. Aborts all inline scripts trying to access `window.alert`
+     *     ```
+     *     example.org#%#//scriptlet("abort-current-inline-script", "alert")
+     *     ```
+     *
+     * 2. Aborts inline scripts which are trying to access `window.alert` and contain `Hello, world`.
+     *     ```
+     *     example.org#%#//scriptlet("abort-current-inline-script", "alert", "Hello, world")
+     *     ```
+     *
+     *     For instance, the following script will be aborted
+     *     ```html
+     *     <script>alert("Hello, world");</script>
+     *     ```
+     *
+     * 3. Aborts inline scripts which are trying to access `window.alert` and match this regexp: `/Hello.+world/`.
+     *     ```
+     *     example.org#%#//scriptlet("abort-current-inline-script", "alert", "/Hello.+world/")
+     *     ```
+     *
+     *     For instance, the following scripts will be aborted:
+     *     ```html
+     *     <script>alert("Hello, big world");</script>
+     *     ```
+     *     ```html
+     *     <script>alert("Hello, little world");</script>
+     *     ```
+     *
+     *     This script will not be aborted:
+     *     ```html
+     *     <script>alert("Hi, little world");</script>
+     *     ```
      */
+
+    /* eslint-enable max-len */
 
     function abortCurrentInlineScript(source, property) {
         var search = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
@@ -534,19 +1086,53 @@
         setChainPropAccess(window, property);
         window.onerror = createOnErrorHandler(rid).bind();
     }
-    abortCurrentInlineScript.names = ['abort-current-inline-script', 'abort-current-inline-script.js', 'ubo-abort-current-inline-script.js', 'abp-abort-current-inline-script'];
+    abortCurrentInlineScript.names = ['abort-current-inline-script', 'abort-current-inline-script.js', 'ubo-abort-current-inline-script.js', 'acis.js', 'ubo-acis.js', 'abp-abort-current-inline-script'];
     abortCurrentInlineScript.injections = [randomId, setPropertyAccess, getPropertyInChain, toRegExp, createOnErrorHandler, hit];
 
+    /* eslint-disable max-len */
+
     /**
+     * @scriptlet set-constant
+     *
+     * @description
      * Creates a constant property and assigns it one of the values from the predefined list.
+     *
+     * > Actually, it's not a constant. Please note, that it can be rewritten with a value of a different type.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#set-constantjs-
      *
-     * @param {Source} source
-     * @param {string} property path to a property
-     * @param {string} value
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("set-constant", <property>, <value>)
+     * ```
+     *
+     * **Parameters**
+     * - `property` (required) path to a property (joined with `.` if needed). The property must be attached to `window`.
+     * - `value` (required). Possible values:
+     *     - positive decimal integer `<= 32767`
+     *     - one of the predefined constants:
+     *         - `undefined`
+     *         - `false`
+     *         - `true`
+     *         - `null`
+     *         - `noopFunc` - function with empty body
+     *         - `trueFunc` - function returning true
+     *         - `falseFunc` - function returning false
+     *         - `''` - empty string
+     *         - `-1` - number value `-1`
+     *
+     * **Examples**
+     * ```
+     * ! window.firstConst === false // this comparision will return true
+     * example.org#%#//scriptlet("set-constant", "firstConst", "false")
+     *
+     * ! window.secondConst() === true // call to the secondConst will return true
+     * example.org#%#//scriptlet("set-constant", "secondConst", "trueFunc")
+     * ```
      */
+
+    /* eslint-enable max-len */
 
     function setConstant(source, property, value) {
         if (!property) {
@@ -585,6 +1171,8 @@
             if (Math.abs(constantValue) > 0x7FFF) {
                 return;
             }
+        } else if (value === '-1') {
+            constantValue = -1;
         } else if (value === '') {
             constantValue = '';
         } else {
@@ -645,19 +1233,46 @@
 
         setChainPropAccess(window, property);
     }
-    setConstant.names = ['set-constant', 'set-constant.js', 'ubo-set-constant.js'];
+    setConstant.names = ['set-constant', 'set-constant.js', 'ubo-set-constant.js', 'set.js', 'ubo-set.js'];
     setConstant.injections = [getPropertyInChain, setPropertyAccess, hit];
 
+    /* eslint-disable max-len */
+
     /**
-     * Removes current page cookies specified by name.
-     * For current domain, subdomains on load and before unload.
+     * @scriptlet remove-cookie
+     *
+     * @description
+     * Removes current page cookies by passed string matching with name. For current domain and subdomains. Runs on load and before unload.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#cookie-removerjs-
      *
-     * @param {Source} source
-     * @param {string} match string for matching with cookie name
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("remove-cookie"[, match])
+     * ```
+     *
+     * **Parameters**
+     * - `match` (optional) String or regex matching the cookie name. If not specified all accessible cookies will be removed.
+     *
+     * **Examples**
+     * 1. Removes all cookies:
+     * ```
+     *     example.org#%#//scriptlet("remove-cookie")
+     * ```
+     *
+     * 2. Removes cookies which name contains `example` string.
+     * ```
+     *     example.org#%#//scriptlet("remove-cookie", "example")
+     * ```
+     *
+     *     For instance this cookie will be removed
+     *     ```javascript
+     *     document.cookie = '__example=randomValue';
+     *     ```
      */
+
+    /* eslint-enable max-len */
 
     function removeCookie(source, match) {
         var regex = match ? toRegExp(match) : toRegExp('/.?/');
@@ -709,16 +1324,46 @@
     removeCookie.names = ['remove-cookie', 'cookie-remover.js', 'ubo-cookie-remover.js'];
     removeCookie.injections = [toRegExp, hit];
 
+    /* eslint-disable max-len */
+
     /**
-     * Prevents adding event listeners
+     * @scriptlet prevent-addEventListener
+     *
+     * @description
+     * Prevents adding event listeners for the specified events and callbacks.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#addeventlistener-defuserjs-
      *
-     * @param {Source} source
-     * @param {string|RegExp} [event] - event name or regexp matching event name
-     * @param {string|RegExp} [funcStr] - string or regexp matching stringified handler function
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("prevent-addEventListener"[, eventSearch[, functionSearch]])
+     * ```
+     *
+     * **Parameters**
+     * - `eventSearch` (optional) String or regex matching the event name. If not specified, the scriptlets prevents all event listeners.
+     * - `functionSearch` (optional) String or regex matching the event listener function body. If not set, the scriptlet prevents all event listeners with event name matching `eventSearch`.
+     *
+     * **Examples**
+     * 1. Prevent all `click` listeners:
+     * ```
+     *     example.org#%#//scriptlet("prevent-addEventListener", "click")
+     * ```
+
+     2. Prevent 'click' listeners with the callback body containing `searchString`.
+     * ```
+     *     example.org#%#//scriptlet("prevent-addEventListener", "click", "searchString")
+     * ```
+     *
+     *     For instance, this listener will not be called:
+     * ```javascript
+     *     el.addEventListener('click', () => {
+     *         window.test = 'searchString';
+     *     });
+     * ```
      */
+
+    /* eslint-enable max-len */
 
     function preventAddEventListener(source, event, funcStr) {
         event = event ? toRegExp(event) : toRegExp('/.?/');
@@ -740,17 +1385,23 @@
 
         window.EventTarget.prototype.addEventListener = addEventListenerWrapper;
     }
-    preventAddEventListener.names = ['prevent-addEventListener', 'addEventListener-defuser.js', 'ubo-addEventListener-defuser.js'];
+    preventAddEventListener.names = ['prevent-addEventListener', 'addEventListener-defuser.js', 'ubo-addEventListener-defuser.js', 'aeld.js', 'ubo-aeld.js'];
     preventAddEventListener.injections = [toRegExp, hit];
 
     /* eslint-disable consistent-return, no-eval */
     /**
-     * Prevents BlockAdblock
+     * @scriptlet prevent-bab
+     *
+     * @description
+     * Prevents BlockAdblock script from detecting an ad blocker.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#bab-defuserjs-
      *
-     * @param {Source} source
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("prevent-bab")
+     * ```
      */
 
     function preventBab(source) {
@@ -816,18 +1467,28 @@
             }
         };
     }
-    preventBab.names = ['prevent-bab', 'bab-defuser.js', 'ubo-bab-defuser.js'];
+    preventBab.names = ['prevent-bab', 'bab-defuser.js', 'ubo-bab-defuser.js', 'nobab.js', 'ubo-nobab.js'];
     preventBab.injections = [hit];
 
     /* eslint-disable no-unused-vars, no-extra-bind, func-names */
+    /* eslint-disable max-len */
+
     /**
-     * Disables WebRTC via blocking calls to the RTCPeerConnection()
+     * @scriptlet nowebrtc
+     *
+     * @description
+     * Disables WebRTC by overriding `RTCPeerConnection`. The overriden function will log every attempt to create a new connection.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#nowebrtcjs-
      *
-     * @param {Source} source
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("nowebrtc")
+     * ```
      */
+
+    /* eslint-enable max-len */
 
     function nowebrtc(source) {
         var propertyName = '';
@@ -871,12 +1532,18 @@
 
     /* eslint-disable no-console */
     /**
-     * Logs add event listener calls
+     * @scriptlet log-addEventListener
+     *
+     * @description
+     * Logs all addEventListener calls to the console.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#addeventlistener-loggerjs-
      *
-     * @param {Source} source
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("log-addEventListener")
+     * ```
      */
 
     function logAddEventListener(source) {
@@ -896,17 +1563,23 @@
 
         window.EventTarget.prototype.addEventListener = addEventListenerWrapper;
     }
-    logAddEventListener.names = ['log-addEventListener', 'addEventListener-logger.js', 'ubo-addEventListener-logger.js'];
+    logAddEventListener.names = ['log-addEventListener', 'addEventListener-logger.js', 'ubo-addEventListener-logger.js', 'aell.js', 'ubo-aell.js'];
     logAddEventListener.injections = [hit];
 
     /* eslint-disable no-console */
     /**
-     * Logs setInterval calls
+     * @scriptlet log-setInterval
+     *
+     * @description
+     * Logs all setInterval calls to the console.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#setinterval-loggerjs-
      *
-     * @param {Source} source
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("log-setInterval")
+     * ```
      */
 
     function logSetInterval(source) {
@@ -931,12 +1604,18 @@
 
     /* eslint-disable no-console */
     /**
-     * Logs setTimeout calls
+     * @scriptlet log-setTimeout
+     *
+     * @description
+     * Logs all setTimeout call to the console.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#settimeout-loggerjs-
      *
-     * @param {Source} source
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("log-setTimeout")
+     * ```
      */
 
     function logSetTimeout(source) {
@@ -961,9 +1640,15 @@
 
     /* eslint-disable no-console, no-eval */
     /**
-     * Logs all eval() and Function() calls
+     * @scriptlet log-eval
      *
-     * @param {Source} source
+     * @description
+     * Logs all `eval()` or `new Function()` calls to the console.
+     *
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("log-eval")
+     * ```
      */
 
     function logEval(source) {
@@ -1000,8 +1685,15 @@
     logEval.injections = [hit];
 
     /**
-     * Log an array of passed arguments
-     * @param {string} args test arguments
+     * @scriptlet log
+     *
+     * @description
+     * A simple scriptlet which only purpose is to print arguments to console.
+     * This scriptlet can be helpful for debugging and troubleshooting other scriptlets.
+     * **Example**
+     * ```
+     * example.org#%#//scriptlet("log", "arg1", "arg2")
+     * ```
      */
     function log() {
         for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
@@ -1014,14 +1706,19 @@
 
     /* eslint-disable no-eval, no-extra-bind */
     /**
+     * @scriptlet noeval
+     *
+     * @description
      * Prevents page to use eval.
      * Notifies about attempts in the console
      *
-     * Related UBO scriptlets:
-     * https://github.com/gorhill/uBlock/wiki/Resources-Library#noevaljs-
-     * https://github.com/gorhill/uBlock/wiki/Resources-Library#silent-noevaljs-
+     * It is mostly used for `$redirect` rules.
+     * See [redirect description](../wiki/about-redirects.md#noeval).
      *
-     * @param {Source} source
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("noeval")
+     * ```
      */
 
     function noeval(source) {
@@ -1034,12 +1731,22 @@
 
     /* eslint-disable no-eval, no-extra-bind, func-names */
     /**
-     * Prevents page to use eval matching payload
+     * @scriptlet prevent-eval-if
+     *
+     * @description
+     * Prevents page to use eval matching payload.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#noeval-ifjs-
      *
-     * @param {Source} source
+     * **Parameters**
+     * - `search` string or regexp matching stringified eval payload
+     *
+     * **Examples**
+     * ```
+     * !
+     * ```
+     *
      * @param {string|RegExp} [search] string or regexp matching stringified eval payload
      */
 
@@ -1061,12 +1768,18 @@
 
     /* eslint-disable no-console, func-names, no-multi-assign */
     /**
-     * Fuckadblock 3.2.0 defuser
+     * @scriptlet prevent-fab-3.2.0
+     *
+     * @description
+     * Prevents execution of the FAB script v3.2.0.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#fuckadblockjs-320-
      *
-     * @param {Source} source
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("prevent-fab-3.2.0")
+     * ```
      */
 
     function preventFab(source) {
@@ -1100,17 +1813,23 @@
 
         window.fuckAdBlock = window.blockAdBlock = new Fab();
     }
-    preventFab.names = ['prevent-fab-3.2.0', 'fuckadblock.js-3.2.0', 'ubo-fuckadblock.js-3.2.0'];
+    preventFab.names = ['prevent-fab-3.2.0', 'fuckadblock.js-3.2.0', 'ubo-fuckadblock.js-3.2.0', 'nofab.js', 'ubo-nofab.js'];
     preventFab.injections = [noop, hit];
 
     /* eslint-disable no-console, func-names, no-multi-assign */
     /**
+     * @scriptlet set-popads-dummy
+     *
+     * @description
      * Sets static properties PopAds and popns.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#popads-dummyjs-
      *
-     * @param {Source} source
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("set-popads-dummy")
+     * ```
      */
 
     function setPopadsDummy(source) {
@@ -1135,12 +1854,18 @@
     setPopadsDummy.injections = [hit];
 
     /**
-     * Aborts on property write (PopAds, popns), throws reference error with random id
+     * @scriptlet prevent-popads-net
+     *
+     * @description
+     * Aborts on property write (PopAds, popns), throws reference error with random id.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#popadsnetjs-
      *
-     * @param {Source} source
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("prevent-popads-net")
+     * ```
      */
 
     function preventPopadsNet(source) {
@@ -1168,12 +1893,18 @@
 
     /* eslint-disable func-names */
     /**
+     * @scriptlet prevent-adfly
+     *
+     * @description
      * Prevents anti-adblock scripts on adfly short links.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#adfly-defuserjs-
      *
-     * @param {Source} source
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("prevent-adfly")
+     * ```
      */
 
     function preventAdfly(source) {
@@ -1260,12 +1991,24 @@
     preventAdfly.names = ['prevent-adfly', 'adfly-defuser.js', 'ubo-adfly-defuser.js'];
     preventAdfly.injections = [setPropertyAccess, hit];
 
+    /* eslint-disable max-len */
+
     /**
-     * Call debugger on property reading
+     * @scriptlet debug-on-property-read
      *
-     * @param {Source} source
-     * @param {string} property property name
+     * @description
+     * This scriptlet is basically the same as [abort-on-property-read](#abort-on-property-read), but instead of aborting it starts the debugger.
+     *
+     * **It is not supposed to be used in production filter lists!**
+     *
+     * **Syntax**
+     * ```
+     * ! Aborts script when it tries to access `window.alert`
+     * example.org#%#//scriptlet("debug-on-property-read", "alert")
+     * ```
      */
+
+    /* eslint-enable max-len */
 
     function debugOnPropertyRead(source, property) {
         if (!property) {
@@ -1316,12 +2059,24 @@
     debugOnPropertyRead.names = ['debug-on-property-read'];
     debugOnPropertyRead.injections = [randomId, setPropertyAccess, getPropertyInChain, createOnErrorHandler, hit];
 
+    /* eslint-disable max-len */
+
     /**
-     * Call debugger on property writing
+     * @scriptlet debug-on-property-write
      *
-     * @param {Source} source
-     * @param {string} property propery name
+     * @description
+     * This scriptlet is basically the same as [abort-on-property-write](#abort-on-property-write), but instead of aborting it starts the debugger.
+     *
+     * **It is not supposed to be used in production filter lists!**
+     *
+     * **Syntax**
+     * ```
+     * ! Aborts script when it tries to write in property `window.test`
+     * example.org#%#//scriptlet("debug-on-property-write", "test")
+     * ```
      */
+
+    /* eslint-enable max-len */
 
     function debugOnPropertyWrite(source, property) {
         if (!property) {
@@ -1372,13 +2127,24 @@
     debugOnPropertyWrite.injections = [randomId, setPropertyAccess, getPropertyInChain, createOnErrorHandler, hit];
 
     /* eslint-disable no-new-func */
+    /* eslint-disable max-len */
+
     /**
-     * Call debugger when script should be aborted
+     * @scriptlet debug-current-inline-script
      *
-     * @param {Source} source
-     * @param {string} property path to a property
-     * @param {string} search must match the inline script contents
+     * @description
+     * This scriptlet is basically the same as [abort-current-inline-script](#abort-current-inline-script), but instead of aborting it starts the debugger.
+     *
+     * **It is not supposed to be used in production filter lists!**
+     *
+     * **Syntax**
+     *```
+     * ! Aborts script when it tries to access `window.alert`
+     * example.org#%#//scriptlet("debug-current-inline-script", "alert")
+     * ```
      */
+
+    /* eslint-enable max-len */
 
     function debugCurrentInlineScript(source, property) {
         var search = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
@@ -1450,16 +2216,58 @@
     debugCurrentInlineScript.names = ['debug-current-inline-script'];
     debugCurrentInlineScript.injections = [randomId, setPropertyAccess, getPropertyInChain, toRegExp, createOnErrorHandler, hit];
 
+    /* eslint-disable max-len */
+
     /**
-     * Removes attributes from DOM nodes. Will run only once after page load.
+     * @scriptlet remove-attr
+     *
+     * @description
+     * Removes the specified attributes from DOM notes. This scriptlet runs only once after the page load (DOMContentLoaded).
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#remove-attrjs-
      *
-     * @param {Source} source
-     * @param {string} attrs attributes names separated by `|` which should be removed
-     * @param {string} selector CSS selector specifies nodes from which attributes should be removed
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("remove-attr", attrs[, selector])
+     * ```
+     *
+     * - `attrs` — required, attribute or list of attributes joined by '|';
+     * - `selector` — optional, CSS selector, specifies DOM nodes from which the attributes will be removed
+     *
+     * **Examples**
+     * 1.  Removes by attribute
+     *     ```
+     *     example.org#%#//scriptlet("remove-attr", "example|test")
+     *     ```
+     *
+     *     ```html
+     *     <!-- before  -->
+     *     <div example="true" test="true">Some text</div>
+     *
+     *     <!-- after -->
+     *     <div>Some text</div>
+     *     ```
+     *
+     * 2. Removes with specified selector
+     *     ```
+     *     example.org#%#//scriptlet("remove-attr", "example", ".inner")
+     *     ```
+     *
+     *     ```html
+     *     <!-- before -->
+     *     <div class="wrapper" example="true">
+     *         <div class="inner" example="true">Some text</div>
+     *     </div>
+     *
+     *     <!-- after -->
+     *     <div class="wrapper" example="true">
+     *         <div class="inner">Some text</div>
+     *     </div>
+     *     ```
      */
+
+    /* eslint-enable max-len */
 
     function removeAttr(source, attrs, selector) {
         if (!attrs) {
@@ -1497,16 +2305,138 @@
             rmattr();
         }
     }
-    removeAttr.names = ['remove-attr', 'remove-attr.js', 'ubo-remove-attr.js'];
+    removeAttr.names = ['remove-attr', 'remove-attr.js', 'ubo-remove-attr.js', 'ra.js', 'ubo-ra.js'];
     removeAttr.injections = [hit];
 
+    /* eslint-disable max-len */
+
     /**
-     * Prevents opening new tabs and windows if there is `target` attribute in element
+     * @scriptlet remove-class
+     *
+     * @description
+     * Removes the specified classes from DOM notes. This scriptlet runs only once after the page load (DOMContentLoaded).
+     *
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("remove-class", classes[, selector])
+     * ```
+     *
+     * - `classes` — required, class or list of classes separated by '|';
+     * - `selector` — optional, CSS selector, specifies DOM nodes from which the classes will be removed;
+     * if there is no selector, every class independently will be removed from all nodes which has one
+     *
+     * **Examples**
+     * 1.  Removes by classes
+     *     ```
+     *     example.org#%#//scriptlet("remove-class", "example|test")
+     *     ```
+     *
+     *     ```html
+     *     <!-- before  -->
+     *     <div id="first" class="nice test">Some text</div>
+     *     <div id="second" class="rare example for test">Some text</div>
+     *     <div id="third" class="testing better example">Some text</div>
+     *
+     *     <!-- after -->
+     *     <div id="first" class="nice">Some text</div>
+     *     <div id="second" class="rare for">Some text</div>
+     *     <div id="third" class="testing better">Some text</div>
+     *     ```
+     *
+     * 2. Removes with specified selector
+     *     ```
+     *     example.org#%#//scriptlet("remove-class", "branding", ".inner")
+     *     ```
+     *
+     *     ```html
+     *     <!-- before -->
+     *     <div class="wrapper true branding">
+     *         <div class="inner bad branding">Some text</div>
+     *     </div>
+     *
+     *     <!-- after -->
+     *     <div class="wrapper true branding">
+     *         <div class="inner bad">Some text</div>
+     *     </div>
+     *     ```
+     */
+
+    /* eslint-enable max-len */
+
+    function removeClass(source, classNames, selector) {
+        if (!classNames) {
+            return;
+        }
+
+        classNames = classNames.split(/\s*\|\s*/);
+        var selectors = [];
+
+        if (!selector) {
+            selectors = classNames.map(function (className) {
+                return ".".concat(className);
+            });
+        }
+
+        var removeClassHandler = function removeClassHandler(ev) {
+            if (ev) {
+                window.removeEventListener(ev.type, removeClassHandler, true);
+            }
+
+            var nodes = new Set();
+
+            if (selector) {
+                var foundedNodes = [].slice.call(document.querySelectorAll(selector));
+                foundedNodes.forEach(function (n) {
+                    return nodes.add(n);
+                });
+            } else if (selectors.length > 0) {
+                selectors.forEach(function (s) {
+                    var elements = document.querySelectorAll(s);
+
+                    for (var i = 0; i < elements.length; i += 1) {
+                        var element = elements[i];
+                        nodes.add(element);
+                    }
+                });
+            }
+
+            var removed = false;
+            nodes.forEach(function (node) {
+                classNames.forEach(function (className) {
+                    if (node.classList.contains(className)) {
+                        node.classList.remove(className);
+                        removed = true;
+                    }
+                });
+            });
+
+            if (removed) {
+                hit(source);
+            }
+        };
+
+        if (document.readyState === 'loading') {
+            window.addEventListener('DOMContentLoaded', removeClassHandler, true);
+        } else {
+            removeClassHandler();
+        }
+    }
+    removeClass.names = ['remove-class'];
+    removeClass.injections = [hit];
+
+    /**
+     * @scriptlet disable-newtab-links
+     *
+     * @description
+     * Prevents opening new tabs and windows if there is `target` attribute in element.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#disable-newtab-linksjs-
      *
-     * @param {Source} source
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("disable-newtab-links")
+     * ```
      */
 
     function disableNewtabLinks(source) {
@@ -1528,17 +2458,49 @@
     disableNewtabLinks.names = ['disable-newtab-links', 'disable-newtab-links.js', 'ubo-disable-newtab-links.js'];
     disableNewtabLinks.injections = [hit];
 
+    /* eslint-disable max-len */
+
     /**
+     * @scriptlet adjust-setInterval
+     *
+     * @description
      * Adjusts interval for specified setInterval() callbacks.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#nano-setinterval-boosterjs-
      *
-     * @param {Source} source
-     * @param {string|RegExp} match matching in string of callback function
-     * @param {string|number} interval matching interval
-     * @param {string|number} boost interval multiplier
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("adjust-setInterval"[, match [, interval[, boost]]])
+     * ```
+     *
+     * - `match` - optional, string/regular expression, matching in stringified callback function
+     * - `interval` - optional, defaults to 1000, decimal integer, matching interval
+     * - `boost` - optional, default to 0.05, float, capped at 50 times for up and down, interval multiplier
+     *
+     * **Examples**
+     * 1. Adjust all setInterval() x20 times where interval equal 1000ms:
+     *     ```
+     *     example.org#%#//scriptlet("adjust-setInterval")
+     *     ```
+     *
+     * 2. Adjust all setInterval() x20 times where callback mathed with `example` and interval equal 1000ms
+     *     ```
+     *     example.org#%#//scriptlet("adjust-setInterval", "example")
+     *     ```
+     *
+     * 3. Adjust all setInterval() x20 times where callback mathed with `example` and interval equal 400ms
+     *     ```
+     *     example.org#%#//scriptlet("adjust-setInterval", "example", "400")
+     *     ```
+     *
+     * 4. Slow down setInterval() x2 times where callback matched with `example` and interval equal 400ms
+     *     ```
+     *     example.org#%#//scriptlet("adjust-setInterval", "example", "400", "2")
+     *     ```
      */
+
+    /* eslint-enable max-len */
 
     function adjustSetInterval(source, match, interval, boost) {
         var nativeInterval = window.setInterval;
@@ -1575,20 +2537,52 @@
 
         window.setInterval = intervalWrapper;
     }
-    adjustSetInterval.names = ['adjust-setInterval', 'nano-setInterval-booster.js', 'ubo-nano-setInterval-booster.js'];
+    adjustSetInterval.names = ['adjust-setInterval', 'nano-setInterval-booster.js', 'ubo-nano-setInterval-booster.js', 'nano-sib.js', 'ubo-nano-sib.js'];
     adjustSetInterval.injections = [toRegExp, hit];
 
+    /* eslint-disable max-len */
+
     /**
+     * @scriptlet adjust-setTimeout
+     *
+     * @description
      * Adjusts timeout for specified setTimout() callbacks.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#nano-settimeout-boosterjs-
      *
-     * @param {Source} source
-     * @param {string|RegExp} match matching in string of callback function
-     * @param {string|number} timeout matching timeout
-     * @param {string|number} boost timeout multiplier
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("adjust-setTimeout"[, match [, timeout[, boost]]])
+     * ```
+     *
+     * - `match` - optional, string/regular expression, matching in stringified callback function
+     * - `timeout` - optional, defaults to 1000, decimal integer, matching interval
+     * - `boost` - optional, default to 0.05, float, capped at 50 times for up and down, interval multiplier
+     *
+     * **Examples**
+     * 1. Adjust all setTimeout() x20 times where interval equal 1000ms:
+     *     ```
+     *     example.org#%#//scriptlet("adjust-setTimeout")
+     *     ```
+     *
+     * 2. Adjust all setTimeout() x20 times where callback mathed with `example` and interval equal 1000ms
+     *     ```
+     *     example.org#%#//scriptlet("adjust-setTimeout", "example")
+     *     ```
+     *
+     * 3. Adjust all setTimeout() x20 times where callback mathed with `example` and interval equal 400ms
+     *     ```
+     *     example.org#%#//scriptlet("adjust-setTimeout", "example", "400")
+     *     ```
+     *
+     * 4. Slow down setTimeout() x2 times where callback matched with `example` and interval equal 400ms
+     *     ```
+     *     example.org#%#//scriptlet("adjust-setTimeout", "example", "400", "2")
+     *     ```
      */
+
+    /* eslint-enable max-len */
 
     function adjustSetTimeout(source, match, timeout, boost) {
         var nativeTimeout = window.setTimeout;
@@ -1625,20 +2619,38 @@
 
         window.setTimeout = timeoutWrapper;
     }
-    adjustSetTimeout.names = ['adjust-setTimeout', 'nano-setTimeout-booster.js', 'ubo-nano-setTimeout-booster.js'];
+    adjustSetTimeout.names = ['adjust-setTimeout', 'nano-setTimeout-booster.js', 'ubo-nano-setTimeout-booster.js', 'nano-stb.js', 'ubo-nano-stb.js'];
     adjustSetTimeout.injections = [toRegExp, hit];
 
+    /* eslint-disable max-len */
+
     /**
-     * Wraps the `console.dir` API to call the `toString`
-     * method of the argument.
+     * @scriptlet dir-string
+     *
+     * @description
+     * Wraps the `console.dir` API to call the `toString` method of the argument.
+     * There are several adblock circumvention systems that detect browser devtools
+     * and hide themselves. Therefore, if we force them to think
+     * that devtools are open (using this scrciptlet),
+     * it will automatically disable the adblock circumvention script.
      *
      * Related ABP source:
      * https://github.com/adblockplus/adblockpluscore/blob/6b2a309054cc23432102b85d13f12559639ef495/lib/content/snippets.js#L766
      *
-     * @param {Source} source
-     * @param {string|number} times the number of times to call the
-     * `toString` method of the argument to `console.dir`.
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("dir-string"[, times])
+     * ```
+     * - `times` - optional, the number of times to call the `toString` method of the argument to `console.dir`
+     *
+     * **Example**
+     * ```
+     * ! Run 2 times
+     * example.org#%#//scriptlet("dir-string", "2")
+     * ```
      */
+
+    /* eslint-enable max-len */
 
     function dirString(source, times) {
         var _console = console,
@@ -1667,604 +2679,123 @@
     dirString.names = ['dir-string', 'abp-dir-string'];
     dirString.injections = [hit];
 
+    /* eslint-disable max-len */
+
     /**
-     * Mocks Google AdSense API
+     * @scriptlet json-prune
      *
-     * Related UBO scriptlet:
-     * https://github.com/gorhill/uBlock/blob/a94df7f3b27080ae2dcb3b914ace39c0c294d2f6/src/web_accessible_resources/googlesyndication_adsbygoogle.js
+     * @description
+     * Removes specified properties from the result of calling JSON.parse and returns the caller
+     *
+     * **Syntax**
+     * ```
+     * example.org#%#//scriptlet("json-prune"[, propsToRemove [, obligatoryProps]])
+     * ```
+     *
+     * - `propsToRemove` - string of space-separated properties to remove
+     * - `obligatoryProps` - optional, string of space-separated properties which must be all present for the pruning to occur
+     *
+     * **Examples**
+     * 1. Removes property `example` from the results of JSON.parse call
+     *     ```
+     *     example.org#%#//scriptlet("json-prune", "example")
+     *     ```
+     *
+     *     For instance, the following call will return `{ one: 1}`
+     *
+     *     ```html
+     *     JSON.parse('{"one":1,"example":true}')
+     *     ```
+     *
+     * 2. If there are no specified properties in the result of JSON.parse call, pruning will NOT occur
+     *     ```
+     *     example.org#%#//scriptlet("json-prune", "one", "obligatoryProp")
+     *     ```
+     *
+     *     For instance, the following call will return `{ one: 1, two: 2}`
+     *
+     *     ```html
+     *     JSON.parse('{"one":1,"two":2}')
+     *     ```
+     *
+     * 3. A property in a list of properties can be a chain of properties
+     *
+     *     ```
+     *     example.org#%#//scriptlet("json-prune", "a.b", "adpath.url.first")
+     *     ```
+     *
+     * 4. Call with no arguments will log the current hostname and json payload at the console
+     *     ```
+     *     example.org#%#//scriptlet("json-prune")
+     *     ```
      */
 
-    function GoogleSyndicationAdsByGoogle(source) {
-        window.adsbygoogle = window.adsbygoogle || {
-                length: 0,
-                loaded: true,
-                push: function push() {
-                    this.length += 1;
-                }
-            };
-        var adElems = document.querySelectorAll('.adsbygoogle');
-        var css = 'height:1px!important;max-height:1px!important;max-width:1px!important;width:1px!important;';
-        var executed = false;
+    /* eslint-enable max-len */
 
-        for (var i = 0; i < adElems.length; i += 1) {
-            var frame = document.createElement('iframe');
-            frame.id = "aswift_".concat(i + 1);
-            frame.style = css;
-            var childFrame = document.createElement('iframe');
-            childFrame.id = "google_ads_frame".concat(i);
-            frame.appendChild(childFrame);
-            document.body.appendChild(frame);
-            executed = true;
+    function jsonPrune(source, propsToRemove, requiredInitialProps) {
+        // eslint-disable-next-line no-console
+        var log = console.log.bind(console);
+        var prunePaths = propsToRemove !== undefined && propsToRemove !== '' ? propsToRemove.split(/ +/) : [];
+        var needlePaths = requiredInitialProps !== undefined && requiredInitialProps !== '' ? requiredInitialProps.split(/ +/) : [];
+
+        function isPruningNeeded(root) {
+            if (!root) {
+                return false;
+            }
+
+            for (var i = 0; i < needlePaths.length; i += 1) {
+                var needlePath = needlePaths[i];
+                var details = getPropertyInChain(root, needlePath, false);
+                var nestedPropName = needlePath.split('').pop();
+
+                if (details && details.base[nestedPropName] === undefined) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
-        if (executed) {
+        var nativeParse = JSON.parse;
+
+        var parseWrapper = function parseWrapper() {
+            for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+                args[_key] = arguments[_key];
+            }
+
+            var r = nativeParse.apply(window, args);
+
+            if (prunePaths.length === 0) {
+                log(window.location.hostname, r);
+                return r;
+            }
+
+            if (isPruningNeeded(r) === false) {
+                return r;
+            }
+
+            prunePaths.forEach(function (path) {
+                var ownerObj = getPropertyInChain(r, path, false);
+
+                if (ownerObj !== undefined && ownerObj.base) {
+                    delete ownerObj.base[ownerObj.prop];
+                }
+            });
             hit(source);
-        }
+            return r;
+        };
+
+        JSON.parse = parseWrapper;
     }
-    GoogleSyndicationAdsByGoogle.names = ['googlesyndication-adsbygoogle', 'ubo-googlesyndication_adsbygoogle.js', 'googlesyndication_adsbygoogle.js'];
-    GoogleSyndicationAdsByGoogle.injections = [hit];
-
-    /**
-     * Mocks Google Tag Maneger API
-     *
-     * Related UBO scriptlet:
-     * https://github.com/gorhill/uBlock/blob/a94df7f3b27080ae2dcb3b914ace39c0c294d2f6/src/web_accessible_resources/googletagmanager_gtm.js
-     */
-
-    function GoogleTagManagerGtm(source) {
-        window.ga = window.ga || noop;
-        var _window = window,
-            dataLayer = _window.dataLayer;
-
-        if (dataLayer instanceof Object === false) {
-            return;
-        }
-
-        if (dataLayer.hide instanceof Object && typeof dataLayer.hide.end === 'function') {
-            dataLayer.hide.end();
-        }
-
-        if (typeof dataLayer.push === 'function') {
-            dataLayer.push = function (data) {
-                if (data instanceof Object && typeof data.eventCallback === 'function') {
-                    setTimeout(data.eventCallback, 1);
-                }
-            };
-        }
-
-        hit(source);
-    }
-    GoogleTagManagerGtm.names = ['googletagmanager-gtm', 'ubo-googletagmanager_gtm.js', 'googletagmanager_gtm.js'];
-    GoogleTagManagerGtm.injections = [hit, noop];
-
-    /**
-     * Mocks Google Analytics API
-     *
-     * Related UBO scriptlet:
-     * https://github.com/gorhill/uBlock/blob/a94df7f3b27080ae2dcb3b914ace39c0c294d2f6/src/web_accessible_resources/google-analytics_analytics.js
-     */
-
-    function GoogleAnalytics(source) {
-        // eslint-disable-next-line func-names
-        var Tracker = function Tracker() {}; // constructor
-
-
-        var proto = Tracker.prototype;
-        proto.get = noop;
-        proto.set = noop;
-        proto.send = noop;
-        var googleAnalyticsName = window.GoogleAnalyticsObject || 'ga';
-
-        function ga() {
-            var len = arguments.length;
-
-            if (len === 0) {
-                return;
-            } // eslint-disable-next-line prefer-rest-params
-
-
-            var lastArg = arguments[len - 1];
-
-            if (typeof lastArg !== 'object' || lastArg === null || typeof lastArg.hitCallback !== 'function') {
-                return;
-            }
-
-            try {
-                lastArg.hitCallback(); // eslint-disable-next-line no-empty
-            } catch (ex) {}
-        }
-
-        ga.create = function () {
-            return new Tracker();
-        };
-
-        ga.getByName = noopNull;
-
-        ga.getAll = function () {
-            return [];
-        };
-
-        ga.remove = noop;
-        ga.loaded = true;
-        window[googleAnalyticsName] = ga;
-        var _window = window,
-            dataLayer = _window.dataLayer;
-
-        if (dataLayer instanceof Object && dataLayer.hide instanceof Object && typeof dataLayer.hide.end === 'function') {
-            dataLayer.hide.end();
-        }
-
-        hit(source);
-    }
-    GoogleAnalytics.names = ['google-analytics', 'ubo-google-analytics_analytics.js', 'google-analytics_analytics.js'];
-    GoogleAnalytics.injections = [hit, noop, noopNull];
-
-    /**
-     * Mocks Scorecard Research API
-     *
-     * Related UBO scriptlet:
-     * https://github.com/gorhill/uBlock/blob/a94df7f3b27080ae2dcb3b914ace39c0c294d2f6/src/web_accessible_resources/scorecardresearch_beacon.js
-     */
-
-    function ScoreCardResearchBeacon(source) {
-        window.COMSCORE = {
-            purge: function purge() {
-                // eslint-disable-next-line no-underscore-dangle
-                window._comscore = [];
-            },
-            beacon: function beacon() {}
-        };
-        hit(source);
-    }
-    ScoreCardResearchBeacon.names = ['scorecardresearch-beacon', 'ubo-scorecardresearch_beacon.js', 'scorecardresearch_beacon.js'];
-    ScoreCardResearchBeacon.injections = [hit];
-
-    /* eslint-disable no-underscore-dangle */
-    /**
-     * Mocks old Google analytics library
-     *
-     * Related UBO scriptlet:
-     * https://github.com/gorhill/uBlock/blob/a94df7f3b27080ae2dcb3b914ace39c0c294d2f6/src/web_accessible_resources/google-analytics_ga.js
-     */
-
-    function GoogleAnalyticsGa(source) {
-        // Gaq constructor
-        function Gaq() {}
-
-        Gaq.prototype.Na = noop;
-        Gaq.prototype.O = noop;
-        Gaq.prototype.Sa = noop;
-        Gaq.prototype.Ta = noop;
-        Gaq.prototype.Va = noop;
-        Gaq.prototype._createAsyncTracker = noop;
-        Gaq.prototype._getAsyncTracker = noop;
-        Gaq.prototype._getPlugin = noop;
-
-        Gaq.prototype.push = function (data) {
-            if (typeof data === 'function') {
-                data();
-                return;
-            }
-
-            if (Array.isArray(data) === false) {
-                return;
-            } // https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiDomainDirectory#_gat.GA_Tracker_._link
-
-
-            if (data[0] === '_link' && typeof data[1] === 'string') {
-                window.location.assign(data[1]);
-            } // https://github.com/gorhill/uBlock/issues/2162
-
-
-            if (data[0] === '_set' && data[1] === 'hitCallback' && typeof data[2] === 'function') {
-                data[2]();
-            }
-        };
-
-        var gaq = new Gaq();
-        var asyncTrackers = window._gaq || [];
-
-        if (Array.isArray(asyncTrackers)) {
-            while (asyncTrackers[0]) {
-                gaq.push(asyncTrackers.shift());
-            }
-        } // eslint-disable-next-line no-multi-assign
-
-
-        window._gaq = gaq.qf = gaq; // Gat constructor
-
-        function Gat() {} // Mock tracker api
-
-
-        var api = ['_addIgnoredOrganic', '_addIgnoredRef', '_addItem', '_addOrganic', '_addTrans', '_clearIgnoredOrganic', '_clearIgnoredRef', '_clearOrganic', '_cookiePathCopy', '_deleteCustomVar', '_getName', '_setAccount', '_getAccount', '_getClientInfo', '_getDetectFlash', '_getDetectTitle', '_getLinkerUrl', '_getLocalGifPath', '_getServiceMode', '_getVersion', '_getVisitorCustomVar', '_initData', '_link', '_linkByPost', '_setAllowAnchor', '_setAllowHash', '_setAllowLinker', '_setCampContentKey', '_setCampMediumKey', '_setCampNameKey', '_setCampNOKey', '_setCampSourceKey', '_setCampTermKey', '_setCampaignCookieTimeout', '_setCampaignTrack', '_setClientInfo', '_setCookiePath', '_setCookiePersistence', '_setCookieTimeout', '_setCustomVar', '_setDetectFlash', '_setDetectTitle', '_setDomainName', '_setLocalGifPath', '_setLocalRemoteServerMode', '_setLocalServerMode', '_setReferrerOverride', '_setRemoteServerMode', '_setSampleRate', '_setSessionTimeout', '_setSiteSpeedSampleRate', '_setSessionCookieTimeout', '_setVar', '_setVisitorCookieTimeout', '_trackEvent', '_trackPageLoadTime', '_trackPageview', '_trackSocial', '_trackTiming', '_trackTrans', '_visitCode'];
-        var tracker = api.reduce(function (res, funcName) {
-            res[funcName] = noop;
-            return res;
-        }, {});
-
-        tracker._getLinkerUrl = function (a) {
-            return a;
-        };
-
-        Gat.prototype._anonymizeIP = noop;
-        Gat.prototype._createTracker = noop;
-        Gat.prototype._forceSSL = noop;
-        Gat.prototype._getPlugin = noop;
-
-        Gat.prototype._getTracker = function () {
-            return tracker;
-        };
-
-        Gat.prototype._getTrackerByName = function () {
-            return tracker;
-        };
-
-        Gat.prototype._getTrackers = noop;
-        Gat.prototype.aa = noop;
-        Gat.prototype.ab = noop;
-        Gat.prototype.hb = noop;
-        Gat.prototype.la = noop;
-        Gat.prototype.oa = noop;
-        Gat.prototype.pa = noop;
-        Gat.prototype.u = noop;
-        var gat = new Gat();
-        window._gat = gat;
-        hit(source);
-    }
-    GoogleAnalyticsGa.names = ['google-analytics-ga', 'ubo-google-analytics_ga.js', 'google-analytics_ga.js'];
-    GoogleAnalyticsGa.injections = [hit, noop];
-
-    /**
-     * Mocks Google Publisher Tag API
-     *
-     * Related UBO scriptlet:
-     * https://github.com/gorhill/uBlock/blob/a94df7f3b27080ae2dcb3b914ace39c0c294d2f6/src/web_accessible_resources/googletagservices_gpt.js
-     */
-
-    function GoogleTagServicesGpt(source) {
-        var companionAdsService = {
-            addEventListener: noopThis,
-            enableSyncLoading: noop,
-            setRefreshUnfilledSlots: noop
-        };
-        var contentService = {
-            addEventListener: noopThis,
-            setContent: noop
-        };
-
-        function PassbackSlot() {} // constructor
-
-
-        PassbackSlot.prototype.display = noop;
-        PassbackSlot.prototype.get = noopNull;
-        PassbackSlot.prototype.set = noopThis;
-        PassbackSlot.prototype.setClickUrl = noopThis;
-        PassbackSlot.prototype.setTagForChildDirectedTreatment = noopThis;
-        PassbackSlot.prototype.setTargeting = noopThis;
-        PassbackSlot.prototype.updateTargetingFromMap = noopThis;
-
-        function SizeMappingBuilder() {} // constructor
-
-
-        SizeMappingBuilder.prototype.addSize = noopThis;
-        SizeMappingBuilder.prototype.build = noopNull;
-
-        function Slot() {} // constructor
-
-
-        Slot.prototype.addService = noopThis;
-        Slot.prototype.clearCategoryExclusions = noopThis;
-        Slot.prototype.clearTargeting = noopThis;
-        Slot.prototype.defineSizeMapping = noopThis;
-        Slot.prototype.get = noopNull;
-        Slot.prototype.getAdUnitPath = noopArray;
-        Slot.prototype.getAttributeKeys = noopArray;
-        Slot.prototype.getCategoryExclusions = noopArray;
-        Slot.prototype.getDomId = noopStr;
-        Slot.prototype.getSlotElementId = noopStr;
-        Slot.prototype.getSlotId = noopThis;
-        Slot.prototype.getTargeting = noopArray;
-        Slot.prototype.getTargetingKeys = noopArray;
-        Slot.prototype.set = noopThis;
-        Slot.prototype.setCategoryExclusion = noopThis;
-        Slot.prototype.setClickUrl = noopThis;
-        Slot.prototype.setCollapseEmptyDiv = noopThis;
-        Slot.prototype.setTargeting = noopThis;
-        var pubAdsService = {
-            addEventListener: noopThis,
-            clear: noop,
-            clearCategoryExclusions: noopThis,
-            clearTagForChildDirectedTreatment: noopThis,
-            clearTargeting: noopThis,
-            collapseEmptyDivs: noop,
-            defineOutOfPagePassback: function defineOutOfPagePassback() {
-                return new PassbackSlot();
-            },
-            definePassback: function definePassback() {
-                return new PassbackSlot();
-            },
-            disableInitialLoad: noop,
-            display: noop,
-            enableAsyncRendering: noop,
-            enableSingleRequest: noop,
-            enableSyncRendering: noop,
-            enableVideoAds: noop,
-            get: noopNull,
-            getAttributeKeys: noopArray,
-            getTargeting: noop,
-            getTargetingKeys: noopArray,
-            getSlots: noopArray,
-            refresh: noop,
-            set: noopThis,
-            setCategoryExclusion: noopThis,
-            setCentering: noop,
-            setCookieOptions: noopThis,
-            setForceSafeFrame: noopThis,
-            setLocation: noopThis,
-            setPublisherProvidedId: noopThis,
-            setRequestNonPersonalizedAds: noopThis,
-            setSafeFrameConfig: noopThis,
-            setTagForChildDirectedTreatment: noopThis,
-            setTargeting: noopThis,
-            setVideoContent: noopThis,
-            updateCorrelator: noop
-        };
-        var _window = window,
-            _window$googletag = _window.googletag,
-            googletag = _window$googletag === void 0 ? {} : _window$googletag;
-        var _googletag$cmd = googletag.cmd,
-            cmd = _googletag$cmd === void 0 ? [] : _googletag$cmd;
-        googletag.apiReady = true;
-        googletag.cmd = [];
-
-        googletag.cmd.push = function (a) {
-            try {
-                a(); // eslint-disable-next-line no-empty
-            } catch (ex) {}
-
-            return 1;
-        };
-
-        googletag.companionAds = function () {
-            return companionAdsService;
-        };
-
-        googletag.content = function () {
-            return contentService;
-        };
-
-        googletag.defineOutOfPageSlot = function () {
-            return new Slot();
-        };
-
-        googletag.defineSlot = function () {
-            return new Slot();
-        };
-
-        googletag.destroySlots = noop;
-        googletag.disablePublisherConsole = noop;
-        googletag.display = noop;
-        googletag.enableServices = noop;
-        googletag.getVersion = noopStr;
-
-        googletag.pubads = function () {
-            return pubAdsService;
-        };
-
-        googletag.pubadsReady = true;
-        googletag.setAdIframeTitle = noop;
-
-        googletag.sizeMapping = function () {
-            return new SizeMappingBuilder();
-        };
-
-        window.googletag = googletag;
-
-        while (cmd.length !== 0) {
-            googletag.cmd.push(cmd.shift());
-        }
-
-        hit(source);
-    }
-    GoogleTagServicesGpt.names = ['googletagservices-gpt', 'ubo-googletagservices_gpt.js', 'googletagservices_gpt.js'];
-    GoogleTagServicesGpt.injections = [hit, noop, noopThis, noopNull, noopArray, noopStr];
-
-    /**
-     * Mocks the old Yandex Metrika API
-     *
-     * @param {Source} source
-     */
-
-    function metrikaYandexWatch(source) {
-        var cbName = 'yandex_metrika_callbacks';
-        /**
-         * Gets callback and its context from options and call it in async way
-         * @param {Object} options Yandex Metrika API options
-         */
-
-        var asyncCallbackFromOptions = function asyncCallbackFromOptions() {
-            var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-            var callback = options.callback;
-            var ctx = options.ctx;
-
-            if (typeof callback === 'function') {
-                callback = ctx !== undefined ? callback.bind(ctx) : callback;
-                setTimeout(function () {
-                    return callback();
-                });
-            }
-        };
-
-        function Metrika() {} // constructor
-        // Methods without options
-
-
-        Metrika.prototype.addFileExtension = noop;
-        Metrika.prototype.getClientID = noop;
-        Metrika.prototype.setUserID = noop;
-        Metrika.prototype.userParams = noop; // Methods with options
-        // The order of arguments should be kept in according to API
-
-        Metrika.prototype.extLink = function (url, options) {
-            asyncCallbackFromOptions(options);
-        };
-
-        Metrika.prototype.file = function (url, options) {
-            asyncCallbackFromOptions(options);
-        };
-
-        Metrika.prototype.hit = function (url, options) {
-            asyncCallbackFromOptions(options);
-        };
-
-        Metrika.prototype.reachGoal = function (target, params, cb, ctx) {
-            asyncCallbackFromOptions({
-                callback: cb,
-                ctx: ctx
-            });
-        };
-
-        Metrika.prototype.notBounce = asyncCallbackFromOptions;
-
-        if (window.Ya) {
-            window.Ya.Metrika = Metrika;
-        } else {
-            window.Ya = {
-                Metrika: Metrika
-            };
-        }
-
-        if (window[cbName] && Array.isArray(window[cbName])) {
-            window[cbName].forEach(function (func) {
-                if (typeof func === 'function') {
-                    func();
-                }
-            });
-        }
-
-        hit(source);
-    }
-    metrikaYandexWatch.names = ['metrika-yandex-watch'];
-    metrikaYandexWatch.injections = [hit, noop];
-
-    /**
-     * Mocks Yandex Metrika API
-     * https://yandex.ru/support/metrica/objects/method-reference.html
-     * @param {Source} source
-     */
-
-    function metrikaYandexTag(source) {
-        var asyncCallbackFromOptions = function asyncCallbackFromOptions(param) {
-            var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-            var callback = options.callback;
-            var ctx = options.ctx;
-
-            if (typeof callback === 'function') {
-                callback = ctx !== undefined ? callback.bind(ctx) : callback;
-                setTimeout(function () {
-                    return callback();
-                });
-            }
-        };
-
-        var init = noop;
-        /**
-         * https://yandex.ru/support/metrica/objects/addfileextension.html
-         */
-
-        var addFileExtension = noop;
-        /**
-         * https://yandex.ru/support/metrica/objects/extlink.html
-         */
-
-        var extLink = asyncCallbackFromOptions;
-        /**
-         * https://yandex.ru/support/metrica/objects/file.html
-         */
-
-        var file = asyncCallbackFromOptions;
-        /**
-         * https://yandex.ru/support/metrica/objects/get-client-id.html
-         * @param {Function} cb
-         */
-
-        var getClientID = function getClientID(cb) {
-            setTimeout(cb(null));
-        };
-        /**
-         * https://yandex.ru/support/metrica/objects/hit.html
-         */
-
-
-        var hitFunc = asyncCallbackFromOptions;
-        /**
-         * https://yandex.ru/support/metrica/objects/notbounce.html
-         */
-
-        var notBounce = asyncCallbackFromOptions;
-        /**
-         * https://yandex.ru/support/metrica/objects/params-method.html
-         */
-
-        var params = noop;
-        /**
-         * https://yandex.ru/support/metrica/objects/reachgoal.html
-         * @param {string} target
-         * @param {Object} params
-         * @param {Function} callback
-         * @param {any} ctx
-         */
-
-        var reachGoal = function reachGoal(target, params, callback, ctx) {
-            asyncCallbackFromOptions(null, {
-                callback: callback,
-                ctx: ctx
-            });
-        };
-        /**
-         * https://yandex.ru/support/metrica/objects/set-user-id.html
-         */
-
-
-        var setUserID = noop;
-        /**
-         * https://yandex.ru/support/metrica/objects/user-params.html
-         */
-
-        var userParams = noop;
-        var api = {
-            init: init,
-            addFileExtension: addFileExtension,
-            extLink: extLink,
-            file: file,
-            getClientID: getClientID,
-            hit: hitFunc,
-            notBounce: notBounce,
-            params: params,
-            reachGoal: reachGoal,
-            setUserID: setUserID,
-            userParams: userParams
-        };
-
-        function ym(id, funcName) {
-            for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-                args[_key - 2] = arguments[_key];
-            }
-
-            return api[funcName] && api[funcName].apply(api, args);
-        }
-
-        window.ym = ym;
-        hit(source);
-    }
-    metrikaYandexTag.names = ['metrika-yandex-tag'];
-    metrikaYandexTag.injections = [hit, noop];
+    jsonPrune.names = ['json-prune', 'json-prune.js', 'ubo-json-prune.js'];
+    jsonPrune.injections = [hit, getPropertyInChain];
 
     /**
      * This file must export all scriptlets which should be accessible
      */
 
-    var scriptletList = /*#__PURE__*/Object.freeze({
+    var scriptletsList = /*#__PURE__*/Object.freeze({
+        __proto__: null,
         abortOnPropertyRead: abortOnPropertyRead,
         abortOnPropertyWrite: abortOnPropertyWrite,
         preventSetTimeout: preventSetTimeout,
@@ -2291,129 +2822,252 @@
         debugOnPropertyWrite: debugOnPropertyWrite,
         debugCurrentInlineScript: debugCurrentInlineScript,
         removeAttr: removeAttr,
+        removeClass: removeClass,
         disableNewtabLinks: disableNewtabLinks,
         adjustSetInterval: adjustSetInterval,
         adjustSetTimeout: adjustSetTimeout,
         dirString: dirString,
-        GoogleSyndicationAdsByGoogle: GoogleSyndicationAdsByGoogle,
-        GoogleTagManagerGtm: GoogleTagManagerGtm,
-        GoogleAnalytics: GoogleAnalytics,
-        ScoreCardResearchBeacon: ScoreCardResearchBeacon,
-        GoogleAnalyticsGa: GoogleAnalyticsGa,
-        GoogleTagServicesGpt: GoogleTagServicesGpt,
-        metrikaYandexWatch: metrikaYandexWatch,
-        metrikaYandexTag: metrikaYandexTag
+        jsonPrune: jsonPrune
     });
 
+    var COMMENT_MARKER = '!';
     /**
-     * Concat dependencies to scriptlet code
-     * @param {string} scriptlet string view of scriptlet
+     * AdGuard scriptlet rule
      */
 
-    function attachDependencies(scriptlet) {
-        var _scriptlet$injections = scriptlet.injections,
-            injections = _scriptlet$injections === void 0 ? [] : _scriptlet$injections;
-        return injections.reduce(function (accum, dep) {
-            return "".concat(accum, "\n").concat(dependencies[dep.name]);
-        }, scriptlet.toString());
-    }
+    var ADGUARD_SCRIPTLET_MASK_REG = /#@?%#\/\/scriptlet\(.+\)/; // eslint-disable-next-line no-template-curly-in-string
+
+    var ADGUARD_SCRIPTLET_TEMPLATE = '${domains}#%#//scriptlet(${args})'; // eslint-disable-next-line no-template-curly-in-string
+
+    var ADGUARD_SCRIPTLET_EXCEPTION_TEMPLATE = '${domains}#@%#//scriptlet(${args})';
     /**
-     * Add scriptlet call to existing code
-     * @param {Function} scriptlet
-     * @param {string} code
+     * uBlock scriptlet rule mask
      */
 
-    function addScriptletCall(scriptlet, code) {
-        return "".concat(code, ";\n        const updatedArgs = args ? [].concat(source).concat(args) : [source];\n        ").concat(scriptlet.name, ".apply(this, updatedArgs);\n    ");
-    }
+    var UBO_SCRIPTLET_MASK_REG = /#@?#script:inject|#@?#\s*\+js/;
+    var UBO_SCRIPTLET_MASK_1 = '##+js';
+    var UBO_SCRIPTLET_MASK_2 = '##script:inject';
+    var UBO_SCRIPTLET_EXCEPTION_MASK_1 = '#@#+js';
+    var UBO_SCRIPTLET_EXCEPTION_MASK_2 = '#@#script:inject'; // eslint-disable-next-line no-template-curly-in-string
+
+    var UBO_SCRIPTLET_TEMPLATE = '${domains}##+js(${args})'; // eslint-disable-next-line no-template-curly-in-string
+
+    var UBO_SCRIPTLET_EXCEPTION_TEMPLATE = '${domains}#@#+js(${args})';
+    var UBO_ALIAS_NAME_MARKER = 'ubo-';
     /**
-     * Wrap function into IIFE (Immediately invoked function expression)
-     *
-     * @param {Source} source - object with scriptlet properties
-     * @param {string} code - scriptlet source code with dependencies
-     *
-     * @returns {string} full scriptlet code
-     *
-     * @example
-     * const source = {
-     *      args: ["aaa", "bbb"],
-     *      name: 'noeval',
-     * };
-     * const code = "function noeval(source, args) { alert(source); } noeval.apply(this, args);"
-     * const result = wrapInIIFE(source, code);
-     *
-     * // result
-     * `(function(source, args) {
-     *      function noeval(source) { alert(source); }
-     *      noeval.apply(this, args);
-     * )({"args": ["aaa", "bbb"], "name":"noeval"}, ["aaa", "bbb"])`
+     * AdBlock Plus snippet rule mask
      */
 
-    function passSourceAndPropsToScriptlet(source, code) {
-        if (source.hit) {
-            source.hit = source.hit.toString();
+    var ABP_SCRIPTLET_MASK = '#$#';
+    var ABP_SCRIPTLET_EXCEPTION_MASK = '#@$#';
+    /**
+     * AdGuard CSS rule mask
+     */
+
+    var ADG_CSS_MASK_REG = /#@?\$#.+?\s*\{.*\}\s*$/g;
+    /**
+     * Returns array of strings separated by space which not in quotes
+     * @param {string} str
+     */
+
+    var getSentences = function getSentences(str) {
+        var reg = /'.*?'|".*?"|\S+/g;
+        return str.match(reg);
+    };
+    /**
+     * Replaces string with data by placeholders
+     * @param {string} str
+     * @param {Object} data - where keys are placeholders names
+     */
+
+
+    var replacePlaceholders = function replacePlaceholders(str, data) {
+        return Object.keys(data).reduce(function (acc, key) {
+            var reg = new RegExp("\\$\\{".concat(key, "\\}"), 'g');
+            acc = acc.replace(reg, data[key]);
+            return acc;
+        }, str);
+    };
+    /**
+     * Checks if rule text is comment e.g. !!example.org##+js(set-constant.js, test, false)
+     * @param {string} rule
+     * @return {boolean}
+     */
+
+
+    var isComment = function isComment(rule) {
+        return startsWith(rule, COMMENT_MARKER);
+    };
+    /**
+     * Checks is AdGuard scriptlet rule
+     * @param {string} rule rule text
+     */
+
+
+    var isAdgScriptletRule = function isAdgScriptletRule(rule) {
+        return !isComment(rule) && rule.indexOf(ADG_SCRIPTLET_MASK) > -1;
+    };
+    /**
+     * Checks is uBO scriptlet rule
+     * @param {string} rule rule text
+     */
+
+    var isUboScriptletRule = function isUboScriptletRule(rule) {
+        return (rule.indexOf(UBO_SCRIPTLET_MASK_1) > -1 || rule.indexOf(UBO_SCRIPTLET_MASK_2) > -1 || rule.indexOf(UBO_SCRIPTLET_EXCEPTION_MASK_1) > -1 || rule.indexOf(UBO_SCRIPTLET_EXCEPTION_MASK_2) > -1) && UBO_SCRIPTLET_MASK_REG.test(rule) && !isComment(rule);
+    };
+    /**
+     * Checks is AdBlock Plus snippet
+     * @param {string} rule rule text
+     */
+
+    var isAbpSnippetRule = function isAbpSnippetRule(rule) {
+        return (rule.indexOf(ABP_SCRIPTLET_MASK) > -1 || rule.indexOf(ABP_SCRIPTLET_EXCEPTION_MASK) > -1) && rule.search(ADG_CSS_MASK_REG) === -1 && !isComment(rule);
+    };
+    /**
+     * Converts string of UBO scriptlet rule to AdGuard scritlet rule
+     * @param {string} rule - UBO scriptlet rule
+     * @returns {Array} - array with one AdGuard scriptlet rule
+     */
+
+    var convertUboToAdg = function convertUboToAdg(rule) {
+        var domains = getBeforeRegExp(rule, UBO_SCRIPTLET_MASK_REG);
+        var mask = rule.match(UBO_SCRIPTLET_MASK_REG)[0];
+        var template;
+
+        if (mask.indexOf('@') > -1) {
+            template = ADGUARD_SCRIPTLET_EXCEPTION_TEMPLATE;
+        } else {
+            template = ADGUARD_SCRIPTLET_TEMPLATE;
         }
 
-        var sourceString = JSON.stringify(source);
-        var argsString = source.args ? "[".concat(source.args.map(JSON.stringify), "]") : undefined;
-        var params = argsString ? "".concat(sourceString, ", ").concat(argsString) : sourceString;
-        return "(function(source, args){\n".concat(code, "\n})(").concat(params, ");");
-    }
-    /**
-     * Wrap code in no name function
-     * @param {string} code which must be wrapped
-     */
+        var args = getStringInBraces(rule).split(/, /g).map(function (arg, index) {
+            var outputArg;
 
-    function wrapInNonameFunc(code) {
-        return "function(source, args){\n".concat(code, "\n}");
-    }
-    /**
-     * Find scriptlet by it's name
-     * @param {string} name
-     */
+            if (index === 0) {
+                outputArg = arg.indexOf('.js') > -1 ? "ubo-".concat(arg) : "ubo-".concat(arg, ".js");
+            } else {
+                outputArg = arg;
+            }
 
-    function getScriptletByName(name) {
-        var scriptlets = Object.keys(scriptletList).map(function (key) {
-            return scriptletList[key];
+            return outputArg;
+        }).map(function (arg) {
+            return wrapInDoubleQuotes(arg);
+        }).join(', ');
+        var adgRule = replacePlaceholders(template, {
+            domains: domains,
+            args: args
         });
-        return scriptlets.find(function (s) {
-            return s.names && s.names.indexOf(name) > -1;
+        return [adgRule];
+    };
+    /**
+     * Convert string of ABP scriptlet rule to AdGuard scritlet rule
+     * @param {string} rule - ABP scriptlet rule
+     * @returns {Array} - array of AdGuard scriptlet rules -
+     * one or few items depends on Abp-rule
+     */
+
+    var convertAbpToAdg = function convertAbpToAdg(rule) {
+        var SEMICOLON_DIVIDER = /;(?=(?:(?:[^"]*"){2})*[^"]*$)/g;
+        var mask = rule.indexOf(ABP_SCRIPTLET_MASK) > -1 ? ABP_SCRIPTLET_MASK : ABP_SCRIPTLET_EXCEPTION_MASK;
+        var template = mask === ABP_SCRIPTLET_MASK ? ADGUARD_SCRIPTLET_TEMPLATE : ADGUARD_SCRIPTLET_EXCEPTION_TEMPLATE;
+        var domains = substringBefore(rule, mask);
+        var args = substringAfter(rule, mask);
+        return args.split(SEMICOLON_DIVIDER).map(function (args) {
+            return getSentences(args).filter(function (arg) {
+                return arg;
+            }).map(function (arg, index) {
+                return index === 0 ? "abp-".concat(arg) : arg;
+            }).map(function (arg) {
+                return wrapInDoubleQuotes(arg);
+            }).join(', ');
+        }).map(function (args) {
+            return replacePlaceholders(template, {
+                domains: domains,
+                args: args
+            });
         });
-    }
+    };
     /**
-     * Check is scriptlet params valid
-     * @param {Object} source
+     * Converts scriptlet rule to AdGuard one
+     * @param {string} rule
+     * @returns {Array} - array of AdGuard scriptlet rules -
+     * one item for Adg and Ubo or few items for Abp
      */
 
-    function isValidScriptletSource(source) {
-        if (!source.name) {
-            return false;
+    var convertScriptletToAdg = function convertScriptletToAdg(rule) {
+        var result;
+
+        if (isUboScriptletRule(rule)) {
+            result = convertUboToAdg(rule);
+        } else if (isAbpSnippetRule(rule)) {
+            result = convertAbpToAdg(rule);
+        } else if (isAdgScriptletRule(rule) || isComment(rule)) {
+            result = [rule];
         }
 
-        var scriptlet = getScriptletByName(source.name);
-
-        if (!scriptlet) {
-            return false;
-        }
-
-        return true;
-    }
-    /**
-     * Returns scriptlet code by param
-     * @param {Source} source
-     */
-
-    function getScriptletCode(source) {
-        if (!isValidScriptletSource(source)) {
-            return null;
-        }
-
-        var scriptlet = getScriptletByName(source.name);
-        var result = attachDependencies(scriptlet);
-        result = addScriptletCall(scriptlet, result);
-        result = source.engine === 'corelibs' ? wrapInNonameFunc(result) : passSourceAndPropsToScriptlet(source, result);
         return result;
-    }
+    };
+    /**
+     * Converts UBO scriptlet rule to AdGuard one
+     * @param {string} rule - AdGuard scriptlet rule
+     * @returns {string} - UBO scriptlet rule
+     */
+
+    var convertAdgToUbo = function convertAdgToUbo(rule) {
+        var res;
+
+        if (isAdgScriptletRule(rule)) {
+            var _parseRule = parseRule(rule),
+                parsedName = _parseRule.name,
+                parsedParams = _parseRule.args; // object of name and aliases for the Adg-scriptlet
+
+
+            var adgScriptletObject = Object.keys(scriptletsList).map(function (el) {
+                return scriptletsList[el];
+            }).map(function (s) {
+                var _s$names = toArray(s.names),
+                    name = _s$names[0],
+                    aliases = _s$names.slice(1);
+
+                return {
+                    name: name,
+                    aliases: aliases
+                };
+            }).find(function (el) {
+                return el.name === parsedName || el.aliases.indexOf(parsedName) >= 0;
+            });
+            var aliases = adgScriptletObject.aliases;
+
+            if (aliases.length > 0) {
+                var uboAlias = adgScriptletObject.aliases // eslint-disable-next-line no-restricted-properties
+                    .find(function (alias) {
+                        return alias.includes(UBO_ALIAS_NAME_MARKER);
+                    });
+
+                if (uboAlias) {
+                    var mask = rule.match(ADGUARD_SCRIPTLET_MASK_REG)[0];
+                    var template;
+
+                    if (mask.indexOf('@') > -1) {
+                        template = UBO_SCRIPTLET_EXCEPTION_TEMPLATE;
+                    } else {
+                        template = UBO_SCRIPTLET_TEMPLATE;
+                    }
+
+                    var domains = getBeforeRegExp(rule, ADGUARD_SCRIPTLET_MASK_REG);
+                    var uboName = uboAlias.replace(UBO_ALIAS_NAME_MARKER, '');
+                    var args = parsedParams.length > 0 ? "".concat(uboName, ", ").concat(parsedParams.join(', ')) : uboName;
+                    var uboRule = replacePlaceholders(template, {
+                        domains: domains,
+                        args: args
+                    });
+                    res = uboRule;
+                }
+            }
+        }
+
+        return res;
+    };
 
     /**
      * @typedef {Object} Source - scriptlet properties
@@ -2426,17 +3080,97 @@
      */
 
     /**
-     * Global scriptlet variable
-     *
-     * @returns {Object} object with method `invoke`
-     * `invoke` method receives one argument with `Source` type
+     * Find scriptlet by it's name
+     * @param {string} name
      */
 
-    scriptlets = function () {
-        return {
-            invoke: getScriptletCode
-        };
-    }(); // eslint-disable-line no-undef
+    function getScriptletByName(name) {
+        var scriptlets = Object.keys(scriptletsList).map(function (key) {
+            return scriptletsList[key];
+        });
+        return scriptlets.find(function (s) {
+            return s.names && s.names.indexOf(name) > -1;
+        });
+    }
+    /**
+     * Checks if the scriptlet name is valid
+     * @param {string} name - Scriptlet name
+     */
+
+
+    function isValidScriptletName(name) {
+        if (!name) {
+            return false;
+        }
+
+        var scriptlet = getScriptletByName(name);
+
+        if (!scriptlet) {
+            return false;
+        }
+
+        return true;
+    }
+    /**
+     * Returns scriptlet code by param
+     * @param {Source} source
+     */
+
+
+    function getScriptletCode(source) {
+        if (!isValidScriptletName(source.name)) {
+            return null;
+        }
+
+        var scriptlet = getScriptletByName(source.name);
+        var result = attachDependencies(scriptlet);
+        result = addCall(scriptlet, result);
+        result = source.engine === 'corelibs' ? wrapInNonameFunc(result) : passSourceAndProps(source, result);
+        return result;
+    }
+    /**
+     * Validates any scriptlet rule
+     * @param {string} input - can be Adguard or Ubo or Abp scriptlet rule
+     */
+
+
+    function isValidScriptletRule(input) {
+        if (!input) {
+            return false;
+        } // ABP 'input' rule may contain more than one snippet
+
+
+        var rulesArray = convertScriptletToAdg(input); // checking if each of parsed scriptlets is valid
+        // if at least one of them is not valid - whole 'input' rule is not valid too
+
+        var isValid = rulesArray.reduce(function (acc, rule) {
+            var parsedRule = parseRule(rule);
+            return isValidScriptletName(parsedRule.name) && acc;
+        }, true);
+        return isValid;
+    }
+    /**
+     * Global scriptlet variable
+     *
+     * @returns {Object} object with methods:
+     * `invoke` method receives one argument with `Source` type
+     * `validate` method receives one argument with `String` type
+     */
+
+    var scriptlets$1 = {
+        invoke: getScriptletCode,
+        validateName: isValidScriptletName,
+        validateRule: isValidScriptletRule,
+        isAdgScriptletRule: isAdgScriptletRule,
+        isUboScriptletRule: isUboScriptletRule,
+        isAbpSnippetRule: isAbpSnippetRule,
+        convertUboToAdg: convertUboToAdg,
+        convertAbpToAdg: convertAbpToAdg,
+        convertScriptletToAdg: convertScriptletToAdg,
+        convertAdgToUbo: convertAdgToUbo
+    };
+
+    scriptlets = scriptlets$1;
 
 }());
 
