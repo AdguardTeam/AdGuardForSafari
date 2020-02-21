@@ -72,6 +72,62 @@ function createWindow() {
 }
 
 /**
+ * Add a confirmation dialog on window close
+ */
+function onWindowClosed() {
+    log.info('On main window closed..');
+
+    const skipConfirmClose = mainWindow.skipConfirmClose;
+
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    uiEventListener.unregister(mainWindow);
+    mainWindow = null;
+
+    // Check if we have previously saved setting
+    const quitOnCloseWindow = settings.isQuitOnCloseWindow();
+    if (quitOnCloseWindow === 1) {
+        log.info('Saved setting - quit application');
+        app.quit();
+        return;
+    }
+    if (quitOnCloseWindow === 0){
+        log.info('Saved setting - close window');
+        return;
+    }
+
+    // If confirmation is force skipped, like on cmd+Q etc
+    if (skipConfirmClose) {
+        log.info('Close confirmation skipped');
+        return;
+    }
+
+    // TODO: localizations
+    dialog.showMessageBox({
+        type: "question",
+        message: "Keep AdGuard running in the background?",
+        detail: "This is crucial for AdGuard to keep the main process running in the background, otherwise it won't be able to automatically check filters updates and manage filtering.",
+        checkboxLabel: "Remember my choice",
+        buttons: ["Yes", "No"]
+    }).then((result) => {
+
+        const keepAppRunning = result.response === 0;
+
+        if (result.checkboxChecked) {
+            settings.changeQuitOnCloseWindow(keepAppRunning ? 0 : 1);
+        }
+
+        if (!keepAppRunning) {
+            log.info('Force quit application on close window');
+            app.exit();
+        } else {
+            log.info('Close window');
+        }
+    });
+}
+
+/**
  * Creates main window
  */
 function loadMainWindow(onWindowLoaded) {
@@ -83,55 +139,7 @@ function loadMainWindow(onWindowLoaded) {
     mainWindow.loadFile('./src/main/ui/options.html');
 
     // Emitted when the window is closed.
-    mainWindow.on('closed', () => {
-        log.info('On main window closed');
-
-        const skipConfirmClose = mainWindow.skipConfirmClose;
-
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        uiEventListener.unregister(mainWindow);
-        mainWindow = null;
-
-        const quitOnCloseWindow = settings.isQuitOnCloseWindow();
-        if (quitOnCloseWindow === 1) {
-            log.info('Remembered - quit application');
-            app.quit();
-            return;
-        } else if (quitOnCloseWindow === 0){
-            log.info('Remembered - close window');
-            return;
-        }
-
-        if (skipConfirmClose) {
-            log.info('Close confirmation skipped');
-            return;
-        }
-
-        // TODO: localizations
-        dialog.showMessageBox({
-            type: "question",
-            message: "Keep AdGuard running in the background?",
-            detail: "This is crucial for AdGuard to keep the main process running in the background, otherwise it won't be able to automatically check filters updates and manage filtering.",
-            checkboxLabel: "Remember my choice",
-            buttons: ["Yes", "No"]
-        }).then((result) => {
-
-            const keepAppRunning = result.response === 0;
-
-            if (result.checkboxChecked) {
-                settings.changeQuitOnCloseWindow(keepAppRunning ? 0 : 1);
-            }
-
-            if (!keepAppRunning) {
-                log.info('Quit application');
-                app.exit();
-            } else {
-                log.info('Close window');
-            }
-        });
-    });
+    mainWindow.on('closed', onWindowClosed);
 
     // Open _target=blank hrefs in external window
     mainWindow.webContents.on('new-window', function (event, url) {
