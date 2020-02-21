@@ -25,7 +25,7 @@ module.exports = (function () {
         SHOW_TRAY_ICON: 'show-tray-icon',
         LAUNCH_AT_LOGIN: 'launch-at-login',
         VERBOSE_LOGGING: 'verbose-logging',
-        QUIT_ON_CLOSE_WINDOW: 'quit-on-close-window-main-test-ff'
+        QUIT_ON_CLOSE_WINDOW: 'quit-on-close-main-window'
     };
 
     const properties = Object.create(null);

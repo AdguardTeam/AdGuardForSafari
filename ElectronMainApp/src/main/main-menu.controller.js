@@ -33,6 +33,18 @@ module.exports = (() => {
     };
 
     /**
+     * On app quit
+     */
+    const onAppQuit = () => {
+        const win = BrowserWindow.getFocusedWindow();
+        if (win) {
+            win.skipConfirmClose = true;
+        }
+
+        app.quit();
+    };
+
+    /**
      * Initialization method
      * Should be execute when the app is ready
      *
@@ -62,7 +74,7 @@ module.exports = (() => {
                     {
                         label: i18n.__('tray_menu_quit.message'),
                         accelerator: 'cmd+q',
-                        click() { app.quit(); }
+                        click() { onAppQuit(); }
                     }
                 ],
             },

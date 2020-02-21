@@ -105,6 +105,18 @@ module.exports = (() => {
     };
 
     /**
+     * On app quit clicked
+     */
+    const onAppQuitClicked = () => {
+        const win = BrowserWindow.getFocusedWindow();
+        if (win) {
+            win.skipConfirmClose = true;
+        }
+
+        app.quit();
+    };
+
+    /**
      * Sets tray icon according to protection status
      */
     const setTrayProtectionStatusIcon = (trayIcon, isRunning) => {
@@ -223,7 +235,7 @@ module.exports = (() => {
             { type: "separator" },
             {
                 label: i18n.__('tray_menu_quit.message'),
-                click: () => { app.quit(); }
+                click: onAppQuitClicked
             }
         ]);
 
