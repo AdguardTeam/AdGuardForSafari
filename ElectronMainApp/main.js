@@ -79,12 +79,6 @@ function onWindowClosed() {
 
     const skipConfirmClose = mainWindow.skipConfirmClose;
 
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    uiEventListener.unregister(mainWindow);
-    mainWindow = null;
-
     // Check if we have previously saved setting
     const quitOnCloseWindow = settings.isQuitOnCloseWindow();
     if (quitOnCloseWindow === 1) {
@@ -138,7 +132,15 @@ function loadMainWindow(onWindowLoaded) {
     mainWindow.loadFile('./src/main/ui/options.html');
 
     // Emitted when the window is closed.
-    mainWindow.on('closed', onWindowClosed);
+    mainWindow.on('closed', () => {
+        onWindowClosed();
+
+        // Dereference the window object, usually you would store windows
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
+        uiEventListener.unregister(mainWindow);
+        mainWindow = null;
+    });
 
     // Open _target=blank hrefs in external window
     mainWindow.webContents.on('new-window', function (event, url) {
