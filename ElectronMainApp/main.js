@@ -8,7 +8,7 @@ process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
 
 /* global require, process */
 
-const {app, shell, BrowserWindow} = require('electron');
+const {app, shell, BrowserWindow, dialog} = require('electron');
 
 const uiEventListener = require('./src/main/ui-event-handler');
 const startup = require('./src/main/startup');
@@ -84,11 +84,48 @@ function loadMainWindow(onWindowLoaded) {
 
     // Emitted when the window is closed.
     mainWindow.on('closed', () => {
+        log.info('On main window closed');
+
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         uiEventListener.unregister(mainWindow);
         mainWindow = null;
+
+        const quitOnCloseWindow = settings.isQuitOnCloseWindow();
+        log.info(quitOnCloseWindow);
+        if (quitOnCloseWindow === 1) {
+            log.info('Remembered - quit application');
+            app.quit();
+            return;
+        } else if (quitOnCloseWindow === 0){
+            log.info('Remembered - close window');
+            return;
+        }
+
+        // TODO: cmq + q
+        // TODO: localizations
+        dialog.showMessageBox({
+            type: "question",
+            message: "Keep AdGuard running in the background?",
+            detail: "This is crucial for AdGuard to keep the main process running in the background, otherwise it won't be able to automatically check filters updates and manage filtering.",
+            checkboxLabel: "Remember my choice",
+            buttons: ["Yes", "No"]
+        }).then((result) => {
+
+            const keepAppRunning = result.response === 0;
+
+            if (result.checkboxChecked) {
+                settings.changeQuitOnCloseWindow(keepAppRunning ? 0 : 1);
+            }
+
+            if (!keepAppRunning) {
+                log.info('Quit application');
+                app.exit();
+            } else {
+                log.info('Close window');
+            }
+        });
     });
 
     // Open _target=blank hrefs in external window
@@ -233,6 +270,8 @@ app.on('ready', (() => {
  * Quit when all windows are closed.
  */
 app.on('window-all-closed', () => {
+    log.debug('On window all closed');
+
     // On OS X it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
