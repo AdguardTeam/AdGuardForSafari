@@ -103,13 +103,12 @@ function onWindowClosed() {
         return;
     }
 
-    // TODO: localizations
     dialog.showMessageBox({
         type: "question",
-        message: "Keep AdGuard running in the background?",
-        detail: "This is crucial for AdGuard to keep the main process running in the background, otherwise it won't be able to automatically check filters updates and manage filtering.",
-        checkboxLabel: "Remember my choice",
-        buttons: ["Yes", "No"]
+        message: i18n.__('window_close_dialog_message.message'),
+        detail: i18n.__('window_close_dialog_detail.message'),
+        checkboxLabel: i18n.__('window_close_dialog_checkbox.message'),
+        buttons: [i18n.__('window_close_dialog_yes.message'), i18n.__('window_close_dialog_no.message')]
     }).then((result) => {
 
         const keepAppRunning = result.response === 0;
