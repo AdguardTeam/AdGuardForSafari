@@ -110,7 +110,7 @@ module.exports = (() => {
     const onAppQuitClicked = () => {
         const win = BrowserWindow.getFocusedWindow();
         if (win) {
-            win.skipConfirmClose = true;
+            win.forceClose = true;
         }
 
         app.quit();

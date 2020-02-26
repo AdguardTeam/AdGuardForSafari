@@ -74,26 +74,23 @@ function createWindow() {
 /**
  * Add a confirmation dialog on window close
  */
-function onWindowClosed() {
-    log.info('On main window closed..');
-
-    const skipConfirmClose = mainWindow.skipConfirmClose;
-
+function confirmWindowClose() {
     // Check if we have previously saved setting
     const quitOnCloseWindow = settings.isQuitOnCloseWindow();
     if (quitOnCloseWindow === 1) {
         log.info('Saved setting - quit application');
-        app.quit();
-        return;
-    }
-    if (quitOnCloseWindow === 0){
-        log.info('Saved setting - close window');
-        return;
-    }
 
-    // If confirmation is force skipped, like on cmd+Q etc
-    if (skipConfirmClose) {
-        log.info('Close confirmation skipped');
+        mainWindow.forceClose = true;
+        app.quit();
+
+        return;
+    }
+    if (quitOnCloseWindow === 0) {
+        log.info('Saved setting - close window');
+
+        mainWindow.forceClose = true;
+        mainWindow.close();
+
         return;
     }
 
@@ -102,11 +99,15 @@ function onWindowClosed() {
         message: i18n.__('window_close_dialog_message.message'),
         detail: i18n.__('window_close_dialog_detail.message'),
         checkboxLabel: i18n.__('window_close_dialog_checkbox.message'),
-        buttons: [i18n.__('window_close_dialog_yes.message'), i18n.__('window_close_dialog_no.message')],
-        defaultId: 0
+        buttons: [i18n.__('window_close_dialog_no.message'), i18n.__('window_close_dialog_yes.message'), i18n.__('window_close_dialog_cancel.message')],
+        defaultId: 1
     }).then((result) => {
+        if (result.response === 2) {
+            log.info('Confirmation cancelled');
+            return;
+        }
 
-        const keepAppRunning = result.response === 0;
+        const keepAppRunning = result.response === 1;
 
         if (result.checkboxChecked) {
             settings.changeQuitOnCloseWindow(keepAppRunning ? 0 : 1);
@@ -117,6 +118,8 @@ function onWindowClosed() {
             app.exit();
         } else {
             log.info('Close window');
+            mainWindow.forceClose = true;
+            mainWindow.close();
         }
     });
 }
@@ -132,9 +135,25 @@ function loadMainWindow(onWindowLoaded) {
 
     mainWindow.loadFile('./src/main/ui/options.html');
 
+    // on close
+    mainWindow.on('close', (e) => {
+        log.info('On main window close..');
+
+        if (mainWindow && mainWindow.forceClose) {
+            delete mainWindow.forceClose;
+
+            log.info('Close confirmation skipped');
+            return;
+        }
+
+        e.preventDefault();
+
+        confirmWindowClose();
+    });
+
     // Emitted when the window is closed.
     mainWindow.on('closed', () => {
-        onWindowClosed();
+        log.info('On main window closed..');
 
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
