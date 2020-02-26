@@ -102,7 +102,8 @@ function onWindowClosed() {
         message: i18n.__('window_close_dialog_message.message'),
         detail: i18n.__('window_close_dialog_detail.message'),
         checkboxLabel: i18n.__('window_close_dialog_checkbox.message'),
-        buttons: [i18n.__('window_close_dialog_yes.message'), i18n.__('window_close_dialog_no.message')]
+        buttons: [i18n.__('window_close_dialog_yes.message'), i18n.__('window_close_dialog_no.message')],
+        defaultId: 0
     }).then((result) => {
 
         const keepAppRunning = result.response === 0;
