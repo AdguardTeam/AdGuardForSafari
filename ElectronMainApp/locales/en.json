@@ -432,13 +432,13 @@
         "message": "Keep AdGuard running in the background?"
     },
     "window_close_dialog_detail": {
-        "message": "This is crucial for AdGuard to keep the main process running in the background, otherwise it won't be able to automatically check filters updates and manage filtering."
+        "message": "This is crucial for AdGuard to keep the main process running in the background, otherwise it won't be able to automatically check for filter updates and manage filtering."
     },
     "window_close_dialog_checkbox": {
         "message": "Remember my choice"
     },
     "window_close_dialog_yes": {
-        "message": "Yes"
+        "message": "Yes (recommended)"
     },
     "window_close_dialog_no": {
         "message": "No"
