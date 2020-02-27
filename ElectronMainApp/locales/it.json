@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "Regole utente"
+    },
+    "window_close_dialog_message": {
+        "message": "Mantenere AdGuard sullo sfondo?"
+    },
+    "window_close_dialog_detail": {
+        "message": "È cruciale per AdGuard mantenere il processo principale in esecuzione sullo sfondo, altrimenti non sarà in grado di controllare automaticamente gli aggiornamenti dei filtri e di gestire il filtraggio."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Ricordare la mia scelta"
+    },
+    "window_close_dialog_yes": {
+        "message": "Sì (raccomandato)"
+    },
+    "window_close_dialog_no": {
+        "message": "No"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Annulla"
     }
 }

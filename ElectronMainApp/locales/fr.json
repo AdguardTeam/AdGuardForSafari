@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "Règles d'utilisateur"
+    },
+    "window_close_dialog_message": {
+        "message": "Laisser AdGuard actif en arrière-plan ?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Il est essentiel pour AdGuard de maintenir le processus principal en arrière-plan, sinon il ne sera pas en mesure de vérifier automatiquement les mises à jour des filtres et de gérer le filtrage."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Retenir mon choix"
+    },
+    "window_close_dialog_yes": {
+        "message": "Oui (recommandé)"
+    },
+    "window_close_dialog_no": {
+        "message": "Non"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Annuler"
     }
 }

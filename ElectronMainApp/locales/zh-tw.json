@@ -105,7 +105,7 @@
         "message": "版本 %s"
     },
     "options_filters_updated": {
-        "message": "已更新：%s"
+        "message": "已更新於：%s"
     },
     "options_filters_empty_custom_filters": {
         "message": "抱歉，但您尚無任何自訂的過濾器"
@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "使用者規則"
+    },
+    "window_close_dialog_message": {
+        "message": "保持 AdGuard 在背景執行嗎？"
+    },
+    "window_close_dialog_detail": {
+        "message": "這對於要保持主程序在背景執行之 AdGuard 是至關重要的，否則它將無法自動地檢查過濾器更新和管理過濾。"
+    },
+    "window_close_dialog_checkbox": {
+        "message": "記住我的選擇"
+    },
+    "window_close_dialog_yes": {
+        "message": "是（被建議的）"
+    },
+    "window_close_dialog_no": {
+        "message": "否"
+    },
+    "window_close_dialog_cancel": {
+        "message": "取消"
     }
 }

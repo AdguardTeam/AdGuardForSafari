@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "Uporabniška pravila"
+    },
+    "window_close_dialog_message": {
+        "message": "Ali naj AdGuard deluje v ozadju?"
+    },
+    "window_close_dialog_detail": {
+        "message": "To je ključnega pomena izvajanje glavnega procesa AdGuarda v ozadju, sicer ne bo mogel samodejno preveriti posodobitev filtrov in upravljati filtriranja."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Zapomni si mojo izbiro"
+    },
+    "window_close_dialog_yes": {
+        "message": "Da (priporočeno)"
+    },
+    "window_close_dialog_no": {
+        "message": "Ne"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Prekliči"
     }
 }

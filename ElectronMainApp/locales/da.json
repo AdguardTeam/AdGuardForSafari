@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "Brugerregler"
+    },
+    "window_close_dialog_message": {
+        "message": "Behold AdGuard kørende i baggrunden?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Dette er afgørende for, at AdGuard kan holde hovedprocessen kørende i baggrunden, ellers kan den ikke automatisk søge efter filteropdateringer og administrere filtreringen."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Husk mit valg"
+    },
+    "window_close_dialog_yes": {
+        "message": "Ja (anbefalet)"
+    },
+    "window_close_dialog_no": {
+        "message": "Nej"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Annuller"
     }
 }

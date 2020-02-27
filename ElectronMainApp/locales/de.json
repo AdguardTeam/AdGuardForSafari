@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "Benutzerregeln"
+    },
+    "window_close_dialog_message": {
+        "message": "AdGuard im Hintergrund laufen lassen?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Dies ist entscheidend, damit AdGuard den Hauptprozess im Hintergrund ausgeführt lässt, da es sonst nicht möglich ist, automatisch nach Filteraktualisierungen zu suchen und die Filterung zu verwalten."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Auswahl merken"
+    },
+    "window_close_dialog_yes": {
+        "message": "Ja (empfohlen)"
+    },
+    "window_close_dialog_no": {
+        "message": "Nein"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Abbrechen"
     }
 }
