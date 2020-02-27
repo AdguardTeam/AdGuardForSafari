@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "ユーザールール"
+    },
+    "window_close_dialog_message": {
+        "message": "AdGuardをバックグラウンドで起動し続けますか？"
+    },
+    "window_close_dialog_detail": {
+        "message": "メインプロセスをバックグラウンドで実行し続けることはAdGuardに非常に重要です。そうしないと、フィルタ更新を自動的に確認したりフィルタリングを管理したりすることができなくなります。"
+    },
+    "window_close_dialog_checkbox": {
+        "message": "選択を記憶する"
+    },
+    "window_close_dialog_yes": {
+        "message": "はい（推奨）"
+    },
+    "window_close_dialog_no": {
+        "message": "いいえ"
+    },
+    "window_close_dialog_cancel": {
+        "message": "キャンセル"
     }
 }

@@ -108,7 +108,7 @@
         "message": "обновлена: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "Извините, но у Вас пока нет пользовательских фильтров"
+        "message": "Извините, но у вас пока нет пользовательских фильтров"
     },
     "options_filters_empty_custom_add_button": {
         "message": "Добавить пользовательский фильтр"
@@ -180,10 +180,10 @@
         "message": "Белый список"
     },
     "options_whitelist_description": {
-        "message": "AdGuard не фильтрует рекламу на сайтах, добавленных в белый список."
+        "message": "AdGuard не фильтрует рекламу на сайтах, добавленных в Белый список."
     },
     "options_whitelist_inverse": {
-        "message": "Инвертировать белый список<span class='sp-table-row-info'>Разблокировать рекламу на всех сайтах, <i>кроме</i> добавленных в белый список</span>"
+        "message": "Инвертировать белый список<span class='sp-table-row-info'>Разблокировать рекламу на всех сайтах, <i>кроме</i> добавленных в Белый список</span>"
     },
     "options_userfilter": {
         "message": "Пользовательские правила"
@@ -294,10 +294,10 @@
         "message": "Блокировщики контента"
     },
     "options_content_blockers_desc": {
-        "message": "Включено блокировщиков: %s из 6 (каждый может содержать до 50,000 правил)"
+        "message": "Включено блокировщиков: %s из 6 (каждый может содержать до 50 000 правил)"
     },
     "options_content_blockers_disabled_desc": {
-        "message": "Нет включённых блокировщиков"
+        "message": "Нет включенных блокировщиков"
     },
     "options_compare_btn": {
         "message": "Сравнить"
@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "Пользовательские правила"
+    },
+    "window_close_dialog_message": {
+        "message": "Продолжить работу AdGuard в фоновом режиме?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Очень важно, чтобы AdGuard работал в фоновом режиме, иначе он не сможет автоматически проверять обновления фильтров и управлять фильтрацией."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Запомнить мой выбор"
+    },
+    "window_close_dialog_yes": {
+        "message": "Да (рекомендуется)"
+    },
+    "window_close_dialog_no": {
+        "message": "Нет"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Отмена"
     }
 }

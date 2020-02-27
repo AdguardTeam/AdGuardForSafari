@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "Uživatelská pravidla"
+    },
+    "window_close_dialog_message": {
+        "message": "Ponechat AdGuard běžet na pozadí?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Pro AdGuard je důležité, aby byl hlavní proces spuštěn na pozadí, jinak nebude možné automaticky kontrolovat aktualizace filtrů a spravovat filtrování."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Zapamatovat moji volbu"
+    },
+    "window_close_dialog_yes": {
+        "message": "Ano (doporučeno)"
+    },
+    "window_close_dialog_no": {
+        "message": "Ne"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Zrušit"
     }
 }

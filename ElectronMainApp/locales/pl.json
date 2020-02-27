@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "Reguły użytkownika"
+    },
+    "window_close_dialog_message": {
+        "message": "Chcesz aby AdGuard działał w tle?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Jest to kluczowe dla AdGuard, aby główny proces działał w tle, w przeciwnym razie nie będzie mógł automatycznie sprawdzać aktualizacji filtrów i zarządzać filtrowaniem."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Zapamiętaj mój wybór"
+    },
+    "window_close_dialog_yes": {
+        "message": "Tak (zalecane)"
+    },
+    "window_close_dialog_no": {
+        "message": "Nie"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Anuluj"
     }
 }

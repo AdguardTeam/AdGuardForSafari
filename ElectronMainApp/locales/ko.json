@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "사용자 규칙"
+    },
+    "window_close_dialog_message": {
+        "message": "AdGuard를 백그라운드 실행 상태로 유지합니까?"
+    },
+    "window_close_dialog_detail": {
+        "message": "필터 업데이트를 자동으로 확인하고 필터링 관리하기 위해 AdGuard가 백그라운드에서 실행되고 있어야합니다."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "선택한 것을 기억하기"
+    },
+    "window_close_dialog_yes": {
+        "message": "네 (권장)"
+    },
+    "window_close_dialog_no": {
+        "message": "아니오"
+    },
+    "window_close_dialog_cancel": {
+        "message": "취소"
     }
 }

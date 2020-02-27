@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "Reglas del usuario"
+    },
+    "window_close_dialog_message": {
+        "message": "¿Mantener AdGuard funcionando en segundo plano?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Esto es crucial para que AdGuard mantenga el proceso principal funcionando en segundo plano, de lo contrario no podrá buscar automáticamente las actualizaciones de los filtros y administrar el filtrado."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Recordar mi elección"
+    },
+    "window_close_dialog_yes": {
+        "message": "Sí (recomendado)"
+    },
+    "window_close_dialog_no": {
+        "message": "No"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Cancelar"
     }
 }
