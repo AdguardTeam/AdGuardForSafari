@@ -24,7 +24,8 @@ module.exports = (function () {
         UPDATE_FILTERS_PERIOD: 'update-filters-period',
         SHOW_TRAY_ICON: 'show-tray-icon',
         LAUNCH_AT_LOGIN: 'launch-at-login',
-        VERBOSE_LOGGING: 'verbose-logging'
+        VERBOSE_LOGGING: 'verbose-logging',
+        QUIT_ON_CLOSE_WINDOW: 'quit-on-close-main-window'
     };
 
     const properties = Object.create(null);
@@ -53,6 +54,7 @@ module.exports = (function () {
                 defaults[settings.SHOW_TRAY_ICON] = true;
                 defaults[settings.LAUNCH_AT_LOGIN] = false;
                 defaults[settings.VERBOSE_LOGGING] = false;
+                defaults[settings.QUIT_ON_CLOSE_WINDOW] = -1;
 
                 return defaults;
             });
@@ -175,6 +177,14 @@ module.exports = (function () {
         return getProperty(settings.DISABLE_HARDWARE_ACCELERATION);
     };
 
+    const isQuitOnCloseWindow = function () {
+        return getProperty(settings.QUIT_ON_CLOSE_WINDOW);
+    };
+
+    const changeQuitOnCloseWindow = function (value) {
+        setProperty(settings.QUIT_ON_CLOSE_WINDOW, value);
+    };
+
     const api = {};
 
     // Expose settings to api
@@ -205,6 +215,8 @@ module.exports = (function () {
     api.isLaunchAtLoginEnabled = isLaunchAtLoginEnabled;
     api.isVerboseLoggingEnabled = isVerboseLoggingEnabled;
     api.isHardwareAccelerationDisabled = isHardwareAccelerationDisabled;
+    api.isQuitOnCloseWindow = isQuitOnCloseWindow;
+    api.changeQuitOnCloseWindow = changeQuitOnCloseWindow;
 
     return api;
 

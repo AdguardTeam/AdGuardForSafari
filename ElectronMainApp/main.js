@@ -8,7 +8,7 @@ process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
 
 /* global require, process */
 
-const {app, shell, BrowserWindow} = require('electron');
+const {app, shell, BrowserWindow, dialog} = require('electron');
 
 const uiEventListener = require('./src/main/ui-event-handler');
 const startup = require('./src/main/startup');
@@ -72,6 +72,59 @@ function createWindow() {
 }
 
 /**
+ * Add a confirmation dialog on window close
+ */
+function confirmWindowClose() {
+    // Check if we have previously saved setting
+    const quitOnCloseWindow = settings.isQuitOnCloseWindow();
+    if (quitOnCloseWindow === 1) {
+        log.info('Saved setting - quit application');
+
+        mainWindow.forceClose = true;
+        app.quit();
+
+        return;
+    }
+    if (quitOnCloseWindow === 0) {
+        log.info('Saved setting - close window');
+
+        mainWindow.forceClose = true;
+        mainWindow.close();
+
+        return;
+    }
+
+    dialog.showMessageBox({
+        type: "question",
+        message: i18n.__('window_close_dialog_message.message'),
+        detail: i18n.__('window_close_dialog_detail.message'),
+        checkboxLabel: i18n.__('window_close_dialog_checkbox.message'),
+        buttons: [i18n.__('window_close_dialog_no.message'), i18n.__('window_close_dialog_yes.message'), i18n.__('window_close_dialog_cancel.message')],
+        defaultId: 1
+    }).then((result) => {
+        if (result.response === 2) {
+            log.info('Confirmation cancelled');
+            return;
+        }
+
+        const keepAppRunning = result.response === 1;
+
+        if (result.checkboxChecked) {
+            settings.changeQuitOnCloseWindow(keepAppRunning ? 0 : 1);
+        }
+
+        if (!keepAppRunning) {
+            log.info('Force quit application on close window');
+            app.exit();
+        } else {
+            log.info('Close window');
+            mainWindow.forceClose = true;
+            mainWindow.close();
+        }
+    });
+}
+
+/**
  * Creates main window
  */
 function loadMainWindow(onWindowLoaded) {
@@ -82,8 +135,26 @@ function loadMainWindow(onWindowLoaded) {
 
     mainWindow.loadFile('./src/main/ui/options.html');
 
+    // on close
+    mainWindow.on('close', (e) => {
+        log.info('On main window close..');
+
+        if (mainWindow && mainWindow.forceClose) {
+            delete mainWindow.forceClose;
+
+            log.info('Close confirmation skipped');
+            return;
+        }
+
+        e.preventDefault();
+
+        confirmWindowClose();
+    });
+
     // Emitted when the window is closed.
     mainWindow.on('closed', () => {
+        log.info('On main window closed..');
+
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
@@ -233,6 +304,8 @@ app.on('ready', (() => {
  * Quit when all windows are closed.
  */
 app.on('window-all-closed', () => {
+    log.debug('On window all closed');
+
     // On OS X it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
