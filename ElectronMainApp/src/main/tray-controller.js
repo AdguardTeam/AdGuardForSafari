@@ -105,10 +105,28 @@ module.exports = (() => {
     };
 
     /**
+     * Return main window
+     */
+    const getMainWindow = () => {
+        const focusedWindow = BrowserWindow.getFocusedWindow();
+        if (focusedWindow) {
+            return focusedWindow;
+        }
+
+        // main window could be unfocused
+        const windows = BrowserWindow.getAllWindows();
+        if (windows.length > 0) {
+            return windows[windows.length - 1];
+        }
+
+        return null;
+    };
+
+    /**
      * On app quit clicked
      */
     const onAppQuitClicked = () => {
-        const win = BrowserWindow.getFocusedWindow();
+        const win = getMainWindow();
         if (win) {
             win.forceClose = true;
         }
