@@ -317,6 +317,17 @@ app.on('window-all-closed', () => {
 });
 
 /**
+ * Before app quit
+ */
+app.on('before-quit', () => {
+    log.debug('On app before-quit');
+
+    if (mainWindow) {
+        mainWindow.forceClose = true;
+    }
+});
+
+/**
  * On app activate
  */
 app.on('activate', () => {

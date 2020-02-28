@@ -126,11 +126,6 @@ module.exports = (() => {
      * On app quit clicked
      */
     const onAppQuitClicked = () => {
-        const win = getMainWindow();
-        if (win) {
-            win.forceClose = true;
-        }
-
         app.quit();
     };
 
