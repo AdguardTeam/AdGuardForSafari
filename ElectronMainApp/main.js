@@ -287,10 +287,10 @@ app.on('ready', (() => {
 
             startup.init(showWindow, () => {
                 uiEventListener.init();
-                loadMainWindow();
+                loadMainWindow(() => {
+                    toolbarController.requestMASReview();
+                });
                 uiEventListener.register(mainWindow);
-
-                toolbarController.requestMASReview();
             });
         });
     }
