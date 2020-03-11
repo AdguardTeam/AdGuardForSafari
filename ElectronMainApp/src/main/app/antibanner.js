@@ -106,9 +106,6 @@ module.exports = (() => {
             rules: []
         };
 
-        // Supplement object to make sure that we use only unique filter rules
-        const uniqueRules = Object.create(null);
-
         if (requestFilterInitTime === 0) {
             // Setting the time of request filter very first initialization
             requestFilterInitTime = new Date().getTime();
@@ -151,12 +148,6 @@ module.exports = (() => {
 
             for (let i = 0; i < rulesTexts.length; i++) {
                 const ruleText = rulesTexts[i];
-                if (ruleText in uniqueRules) {
-                    // Do not allow duplicates
-                    continue;
-                }
-                uniqueRules[ruleText] = true;
-
                 if (ruleText &&
                     (isTrustedFilter || filterRules.isTrustedRule(ruleText))) {
                     newRequestFilter.rules.push({
