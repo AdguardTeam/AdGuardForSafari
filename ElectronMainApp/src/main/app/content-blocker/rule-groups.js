@@ -126,7 +126,17 @@ module.exports = (function () {
             }
 
             // Remove duplicates
-            rulesByGroup[key] = [...new Set(rulesByGroup[key])];
+            const uniqueRules = Object.create(null);
+            const optimized = [];
+            for (const x of rulesByGroup[key]) {
+                if (!x || (x.ruleText in uniqueRules)) {
+                    // Do not allow duplicates
+                    continue;
+                }
+                uniqueRules[x.ruleText] = true;
+                optimized.push(x);
+            }
+            rulesByGroup[key] = optimized;
 
             result.push({
                 key: key,
