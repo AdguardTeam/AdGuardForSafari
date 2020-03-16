@@ -155,6 +155,8 @@ function loadMainWindow(onWindowLoaded) {
     mainWindow.on('closed', () => {
         log.info('On main window closed..');
 
+        app.dock.hide();
+
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
