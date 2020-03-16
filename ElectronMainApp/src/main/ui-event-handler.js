@@ -170,10 +170,12 @@ module.exports.register = (win) => {
  * @param win
  */
 module.exports.unregister = (win) => {
-    const listenerId = win.listenerId;
-    if (listenerId) {
-        log.info('Removing listener');
-        listeners.removeListener(listenerId);
+    if (win) {
+        const listenerId = win.listenerId;
+        if (listenerId) {
+            log.info('Removing listener');
+            listeners.removeListener(listenerId);
+        }
     }
 };
 

@@ -155,6 +155,8 @@ function loadMainWindow(onWindowLoaded) {
     mainWindow.on('closed', () => {
         log.info('On main window closed..');
 
+        app.dock.hide();
+
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
@@ -264,9 +266,7 @@ app.on('ready', (() => {
         log.info('App is launching in background');
 
         // Open in background
-        if (process.platform === 'darwin') {
-            app.dock.hide();
-        }
+        app.dock.hide();
 
         startup.init(showWindow, (shouldShowMainWindow) => {
             uiEventListener.init();
@@ -304,16 +304,12 @@ app.on('ready', (() => {
  * Quit when all windows are closed.
  */
 app.on('window-all-closed', () => {
-    log.debug('On window all closed');
+    log.info('On window all closed');
 
     // On OS X it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
-    if (process.platform !== 'darwin') {
-        app.quit();
-    } else {
-        log.info('Hiding dock item');
-        app.dock.hide();
-    }
+    log.info('Hiding dock item');
+    app.dock.hide();
 });
 
 /**
