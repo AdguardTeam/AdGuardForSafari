@@ -375,6 +375,8 @@ module.exports = (function () {
      */
     function loadMetadata(successCallback, errorCallback) {
 
+        log.info('Loading filters metadata..');
+
         serviceClient.loadLocalFiltersMetadata(metadata => {
 
             tags = [];
@@ -434,7 +436,11 @@ module.exports = (function () {
      */
     function loadMetadataI18n(successCallback, errorCallback) {
 
+        log.info('Loading filters i18n metadata..');
+
         serviceClient.loadLocalFiltersI18Metadata(i18nMetadata => {
+
+            log.info('Filters i18n metadata read');
 
             const tagsI18n = i18nMetadata.tags;
             const filtersI18n = i18nMetadata.filters;
@@ -444,13 +450,19 @@ module.exports = (function () {
                 applyFilterTagLocalization(tags[i], tagsI18n);
             }
 
+            log.debug('Filters i18n metadata - tags');
+
             for (let j = 0; j < filters.length; j++) {
                 applyFilterLocalization(filters[j], filtersI18n);
             }
 
+            log.debug('Filters i18n metadata - filters');
+
             for (let k = 0; k < groups.length; k++) {
                 applyGroupLocalization(groups[k], groupsI18n);
             }
+
+            log.debug('Filters i18n metadata - groups');
 
             log.info('Filters i18n metadata loaded');
             successCallback();

@@ -286,13 +286,20 @@ module.exports = (function () {
     const loadLocalFiltersI18Metadata = function (successCallback, errorCallback) {
 
         const url = settings.localFiltersFolder + '/filters_i18n.json';
+
+        log.debug(`Reading file from ${url}`);
+
         fs.readFile(url, "utf8", (err, data) => {
             if (err) {
                 log.error(err);
                 errorCallback();
             }
 
-            successCallback(parseJson(data));
+            log.debug('File read');
+            const json = parseJson(data);
+            log.debug('Json parsed');
+
+            successCallback(json);
         });
     };
 
