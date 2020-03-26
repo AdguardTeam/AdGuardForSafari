@@ -260,33 +260,12 @@ module.exports = (function () {
     };
 
     /**
-     * Loads filter groups metadata
+     * Reads file from url then parses json
      *
-     * @param successCallback   Called on success
-     * @param errorCallback     Called on error
+     * @param url
+     * @param successCallback
      */
-    const loadLocalFiltersMetadata = function (successCallback, errorCallback) {
-        const url = settings.localFiltersFolder + '/filters.json';
-        fs.readFile(url, "utf8", (err, data) => {
-            if (err) {
-                log.error(err);
-                errorCallback();
-            }
-
-            successCallback(parseJson(data));
-        });
-    };
-
-    /**
-     * Loads filter groups metadata from local file
-     *
-     * @param successCallback   Called on success
-     * @param errorCallback     Called on error
-     */
-    const loadLocalFiltersI18Metadata = function (successCallback, errorCallback) {
-
-        const url = settings.localFiltersFolder + '/filters_i18n.json';
-
+    const readJsonFile = function (url, successCallback) {
         log.debug(`Reading file from ${url}`);
 
         const data = fs.readFileSync(url, { encoding: 'utf8'});
@@ -296,6 +275,28 @@ module.exports = (function () {
         log.debug('Json parsed');
 
         successCallback(json);
+    };
+
+    /**
+     * Loads filter groups metadata
+     *
+     * @param successCallback   Called on success
+     * @param errorCallback     Called on error
+     */
+    const loadLocalFiltersMetadata = function (successCallback, errorCallback) {
+        const url = settings.localFiltersFolder + '/filters.json';
+        readJsonFile(url, successCallback);
+    };
+
+    /**
+     * Loads filter groups metadata from local file
+     *
+     * @param successCallback   Called on success
+     * @param errorCallback     Called on error
+     */
+    const loadLocalFiltersI18Metadata = function (successCallback, errorCallback) {
+        const url = settings.localFiltersFolder + '/filters_i18n.json';
+        readJsonFile(url, successCallback);
     };
 
     return {
