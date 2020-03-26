@@ -296,20 +296,6 @@ module.exports = (function () {
         log.debug('Json parsed');
 
         successCallback(json);
-
-
-        // fs.readFile(url, "utf8", (err, data) => {
-        //     if (err) {
-        //         log.error(err);
-        //         errorCallback();
-        //     }
-        //
-        //     log.debug('File read');
-        //     const json = parseJson(data);
-        //     log.debug('Json parsed');
-        //
-        //     successCallback(json);
-        // });
     };
 
     return {

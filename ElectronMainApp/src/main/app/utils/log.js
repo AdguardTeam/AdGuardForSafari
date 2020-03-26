@@ -6,7 +6,7 @@ const logImpl = require('electron-log');
 module.exports = (() => {
 
     // Redefine if you need it
-    const CURRENT_LEVEL = "DEBUG";
+    const CURRENT_LEVEL = "INFO";
 
     const LEVELS = {
         ERROR: 1,
