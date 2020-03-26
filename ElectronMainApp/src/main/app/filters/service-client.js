@@ -289,18 +289,27 @@ module.exports = (function () {
 
         log.debug(`Reading file from ${url}`);
 
-        fs.readFile(url, "utf8", (err, data) => {
-            if (err) {
-                log.error(err);
-                errorCallback();
-            }
+        const data = fs.readFileSync(url, { encoding: 'utf8'});
+        log.debug('Data read');
 
-            log.debug('File read');
-            const json = parseJson(data);
-            log.debug('Json parsed');
+        const json = parseJson(data);
+        log.debug('Json parsed');
 
-            successCallback(json);
-        });
+        successCallback(json);
+
+
+        // fs.readFile(url, "utf8", (err, data) => {
+        //     if (err) {
+        //         log.error(err);
+        //         errorCallback();
+        //     }
+        //
+        //     log.debug('File read');
+        //     const json = parseJson(data);
+        //     log.debug('Json parsed');
+        //
+        //     successCallback(json);
+        // });
     };
 
     return {
