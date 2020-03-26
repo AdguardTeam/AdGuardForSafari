@@ -260,6 +260,24 @@ module.exports = (function () {
     };
 
     /**
+     * Reads file from url then parses json
+     *
+     * @param url
+     * @param successCallback
+     */
+    const readJsonFile = function (url, successCallback) {
+        log.debug(`Reading file from ${url}`);
+
+        const data = fs.readFileSync(url, { encoding: 'utf8'});
+        log.debug('Data read');
+
+        const json = parseJson(data);
+        log.debug('Json parsed');
+
+        successCallback(json);
+    };
+
+    /**
      * Loads filter groups metadata
      *
      * @param successCallback   Called on success
@@ -267,14 +285,7 @@ module.exports = (function () {
      */
     const loadLocalFiltersMetadata = function (successCallback, errorCallback) {
         const url = settings.localFiltersFolder + '/filters.json';
-        fs.readFile(url, "utf8", (err, data) => {
-            if (err) {
-                log.error(err);
-                errorCallback();
-            }
-
-            successCallback(parseJson(data));
-        });
+        readJsonFile(url, successCallback);
     };
 
     /**
@@ -284,16 +295,8 @@ module.exports = (function () {
      * @param errorCallback     Called on error
      */
     const loadLocalFiltersI18Metadata = function (successCallback, errorCallback) {
-
         const url = settings.localFiltersFolder + '/filters_i18n.json';
-        fs.readFile(url, "utf8", (err, data) => {
-            if (err) {
-                log.error(err);
-                errorCallback();
-            }
-
-            successCallback(parseJson(data));
-        });
+        readJsonFile(url, successCallback);
     };
 
     return {

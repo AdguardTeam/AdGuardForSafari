@@ -269,9 +269,13 @@ app.on('ready', (() => {
         app.dock.hide();
 
         startup.init(showWindow, (shouldShowMainWindow) => {
+            log.info('Startup finished.');
+
             uiEventListener.init();
 
             if (shouldShowMainWindow) {
+                log.info('Loading main window..');
+
                 app.dock.show();
 
                 loadMainWindow();
@@ -298,6 +302,8 @@ app.on('ready', (() => {
     mainMenuController.initMenu(showWindow);
     tray = trayController.initTray(showWindow);
     toolbarController.initToolbarController(showWindow);
+
+    log.info('App on ready completed');
 }));
 
 /**
@@ -327,6 +333,7 @@ app.on('before-quit', () => {
  * On app activate
  */
 app.on('activate', () => {
+    log.info('On app activate');
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {

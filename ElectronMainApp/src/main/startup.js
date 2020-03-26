@@ -22,9 +22,16 @@ module.exports = (() => {
         safariToolbar.busyStatus(true);
 
         whitelist.init();
+        log.debug('Whitelist initialization completed');
+
         contentBlockerListener.init();
+        log.debug('Content blocker listener initialization completed');
+
         filterState.init();
+        log.debug('Filters state initialization completed');
+
         notificationController.init(showWindow);
+        log.debug('Notifications controller initialization completed');
 
         antibanner.start({
             onInstall: function () {

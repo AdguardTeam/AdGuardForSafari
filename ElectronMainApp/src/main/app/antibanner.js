@@ -355,10 +355,16 @@ module.exports = (() => {
          * It is used to recreate RequestFilter object.
          */
         const initRequestFilter = () => {
+            log.info('Init request filter..');
+
             loadFiltersVersionAndStateInfo();
             loadGroupsStateInfo();
+
+            log.debug('Create request filter');
             createRequestFilter(() => {
                 addFiltersChangeEventListener();
+
+                log.info('Init request filter completed');
                 callback();
             });
         };
@@ -368,7 +374,7 @@ module.exports = (() => {
          */
         const onSubscriptionLoaded = runInfo => {
 
-            // Subscribe to events which lead to update filters (e.g. switсh to optimized and back to default)
+            // Subscribe to events which lead to update filters (e.g. switch to optimized and back to default)
             subscribeToFiltersChangeEvents();
 
             if (runInfo.isFirstRun) {
@@ -399,7 +405,7 @@ module.exports = (() => {
          * Init extension common info.
          */
         updateService.getRunInfo(runInfo => {
-            // Load subscription from the storage
+            log.info('Load subscription metadata from the storage');
             subscriptions.init(onSubscriptionLoaded.bind(null, runInfo));
         });
     };
@@ -418,8 +424,12 @@ module.exports = (() => {
             return;
         }
 
+        log.debug('Set app running');
+
         applicationRunning = true;
         listeners.notifyListeners(events.PROTECTION_STATUS_CHANGED, true);
+
+        log.debug('Listeners notified');
 
         if (!applicationInitialized) {
             initialize(options, callback);
