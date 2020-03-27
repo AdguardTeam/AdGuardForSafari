@@ -32,11 +32,6 @@ require('electron-debug')({
     showDevTools: false
 });
 
-
-require('electron-reload')(__dirname, {
-    electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
-});
-
 if (settings.isHardwareAccelerationDisabled()) {
     /**
      * Disables hardware acceleration for this app.
