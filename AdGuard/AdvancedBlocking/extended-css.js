@@ -1,7 +1,7 @@
-/*! extended-css - v1.2.2 - Wed Feb 12 2020
- * https://github.com/AdguardTeam/ExtendedCss
- * Copyright (c) 2020 AdGuard ; Licensed LGPL-3.0
- */
+/*! extended-css - v1.2.5 - Fri Apr 24 2020
+* https://github.com/AdguardTeam/ExtendedCss
+* Copyright (c) 2020 AdGuard ; Licensed LGPL-3.0
+*/
 var ExtendedCss = (function () {
     'use strict';
 
@@ -21,7 +21,7 @@ var ExtendedCss = (function () {
      * limitations under the License.
      */
 
-  /* eslint-disable no-console */
+    /* eslint-disable no-console */
     const utils = {};
     utils.MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     /**
@@ -613,16 +613,16 @@ var ExtendedCss = (function () {
         };
     })();
 
-  /*!
-   * Sizzle CSS Selector Engine v2.3.4-pre-adguard
-   * https://sizzlejs.com/
-   *
-   * Copyright JS Foundation and other contributors
-   * Released under the MIT license
-   * https://js.foundation/
-   *
-   * Date: 2018-03-20
-   */
+    /*!
+     * Sizzle CSS Selector Engine v2.3.4-pre-adguard
+     * https://sizzlejs.com/
+     *
+     * Copyright JS Foundation and other contributors
+     * Released under the MIT license
+     * https://js.foundation/
+     *
+     * Date: 2018-03-20
+     */
 
     /**
      * Version of Sizzle patched by AdGuard in order to be used in the ExtendedCss module.
@@ -1132,8 +1132,8 @@ var ExtendedCss = (function () {
                             subWindow.attachEvent("onunload", unloadHandler);
                         }
                     }
-                  /* Attributes
-                   ---------------------------------------------------------------------- */
+                    /* Attributes
+            ---------------------------------------------------------------------- */
                     // Support: IE<8
                     // Verify that getAttribute really returns attributes and not properties
                     // (excepting IE8 booleans)
@@ -1143,8 +1143,8 @@ var ExtendedCss = (function () {
                         el.className = "i";
                         return !el.getAttribute("className");
                     });
-                  /* getElement(s)By*
-                   ---------------------------------------------------------------------- */
+                    /* getElement(s)By*
+            ---------------------------------------------------------------------- */
                     // Check if getElementsByTagName("*") returns only elements
 
                     support.getElementsByTagName = assert(function (el) {
@@ -1248,12 +1248,12 @@ var ExtendedCss = (function () {
                     }; // Class
 
                     Expr.find["CLASS"] = support.getElementsByClassName && function (className, context) {
-                            if (typeof context.getElementsByClassName !== "undefined" && documentIsHTML) {
-                                return context.getElementsByClassName(className);
-                            }
-                        };
-                  /* QSA/matchesSelector
-                   ---------------------------------------------------------------------- */
+                        if (typeof context.getElementsByClassName !== "undefined" && documentIsHTML) {
+                            return context.getElementsByClassName(className);
+                        }
+                    };
+                    /* QSA/matchesSelector
+            ---------------------------------------------------------------------- */
                     // QSA and matchesSelector support
                     // matchesSelector(:active) reports false when true (IE9/Opera 11.5)
 
@@ -1356,8 +1356,8 @@ var ExtendedCss = (function () {
 
                     rbuggyQSA = rbuggyQSA.length && new RegExp(rbuggyQSA.join("|"));
                     rbuggyMatches = rbuggyMatches.length && new RegExp(rbuggyMatches.join("|"));
-                  /* Contains
-                   ---------------------------------------------------------------------- */
+                    /* Contains
+            ---------------------------------------------------------------------- */
 
                     hasCompare = rnative.test(docElem.compareDocumentPosition); // Element contains another
                     // Purposefully self-exclusive
@@ -1378,8 +1378,8 @@ var ExtendedCss = (function () {
 
                         return false;
                     };
-                  /* Sorting
-                   ---------------------------------------------------------------------- */
+                    /* Sorting
+            ---------------------------------------------------------------------- */
                     // Document order sorting
 
                     sortOrder = hasCompare ? function (a, b) {
@@ -1622,16 +1622,16 @@ var ExtendedCss = (function () {
                             return match.slice(0, 4);
                         },
                         "CHILD": function (match) {
-                          /* matches from matchExpr["CHILD"]
-                           1 type (only|nth|...)
-                           2 what (child|of-type)
-                           3 argument (even|odd|\d*|\d*n([+-]\d+)?|...)
-                           4 xn-component of xn+y argument ([+-]?\d*n|)
-                           5 sign of xn-component
-                           6 x of xn-component
-                           7 sign of y-component
-                           8 y of y-component
-                           */
+                            /* matches from matchExpr["CHILD"]
+                	1 type (only|nth|...)
+                	2 what (child|of-type)
+                	3 argument (even|odd|\d*|\d*n([+-]\d+)?|...)
+                	4 xn-component of xn+y argument ([+-]?\d*n|)
+                	5 sign of xn-component
+                	6 x of xn-component
+                	7 sign of y-component
+                	8 y of y-component
+                */
                             match[1] = match[1].toLowerCase();
 
                             if (match[1].slice(0, 3) === "nth") {
@@ -1662,8 +1662,8 @@ var ExtendedCss = (function () {
                             if (match[3]) {
                                 match[2] = match[4] || match[5] || ""; // Strip excess characters from unquoted arguments
                             } else if (unquoted && rpseudo.test(unquoted) && ( // Get excess from tokenize (recursively)
-                                    excess = tokenize(unquoted, true)) && ( // advance to the next closing parenthesis
-                                    excess = unquoted.indexOf(")", unquoted.length - excess) - unquoted.length)) {
+                                excess = tokenize(unquoted, true)) && ( // advance to the next closing parenthesis
+                                excess = unquoted.indexOf(")", unquoted.length - excess) - unquoted.length)) {
                                 // excess is a negative index
                                 match[0] = match[0].slice(0, excess);
                                 match[2] = unquoted.slice(0, excess);
@@ -1685,8 +1685,8 @@ var ExtendedCss = (function () {
                         "CLASS": function (className) {
                             var pattern = classCache[className + " "];
                             return pattern || (pattern = new RegExp("(^|" + whitespace + ")" + className + "(" + whitespace + "|$)")) && classCache(className, function (elem) {
-                                    return pattern.test(typeof elem.className === "string" && elem.className || typeof elem.getAttribute !== "undefined" && elem.getAttribute("class") || "");
-                                });
+                                return pattern.test(typeof elem.className === "string" && elem.className || typeof elem.getAttribute !== "undefined" && elem.getAttribute("class") || "");
+                            });
                         },
                         "ATTR": function (name, operator, check) {
                             return function (elem) {
@@ -1759,7 +1759,7 @@ var ExtendedCss = (function () {
                                             node = nodeIndex && parent.childNodes[nodeIndex];
 
                                             while (node = ++nodeIndex && node && node[dir] || ( // Fallback to seeking `elem` from the start
-                                                    diff = nodeIndex = 0) || start.pop()) {
+                                                diff = nodeIndex = 0) || start.pop()) {
                                                 // When found, cache indexes on `parent` and break
                                                 if (node.nodeType === 1 && ++diff && node === elem) {
                                                     uniqueCache[type] = [dirruns, nodeIndex, diff];
@@ -2530,9 +2530,9 @@ var ExtendedCss = (function () {
                                 }
 
                                 return setMatcher(i > 1 && elementMatcher(matchers), i > 1 && toSelector( // If the preceding token was a descendant combinator, insert an implicit any-element `*`
-                                        tokens.slice(0, i - 1).concat({
-                                            value: tokens[i - 2].type === " " ? "*" : ""
-                                        })).replace(rtrim, "$1"), matcher, i < j && matcherFromTokens(tokens.slice(i, j)), j < len && matcherFromTokens(tokens = tokens.slice(j)), j < len && toSelector(tokens));
+                                    tokens.slice(0, i - 1).concat({
+                                        value: tokens[i - 2].type === " " ? "*" : ""
+                                    })).replace(rtrim, "$1"), matcher, i < j && matcherFromTokens(tokens.slice(i, j)), j < len && matcherFromTokens(tokens = tokens.slice(j)), j < len && toSelector(tokens));
                             }
 
                             matchers.push(matcher);
@@ -2777,9 +2777,9 @@ var ExtendedCss = (function () {
                 // https://msdn.microsoft.com/en-us/library/ms536429%28VS.85%29.aspx
 
                 if (!assert(function (el) {
-                        el.innerHTML = "<a href='#'></a>";
-                        return el.firstChild.getAttribute("href") === "#";
-                    })) {
+                    el.innerHTML = "<a href='#'></a>";
+                    return el.firstChild.getAttribute("href") === "#";
+                })) {
                     addHandle("type|href|height|width", function (elem, name, isXML) {
                         if (!isXML) {
                             return elem.getAttribute(name, name.toLowerCase() === "type" ? 1 : 2);
@@ -2790,10 +2790,10 @@ var ExtendedCss = (function () {
 
 
                 if (!support.attributes || !assert(function (el) {
-                        el.innerHTML = "<input/>";
-                        el.firstChild.setAttribute("value", "");
-                        return el.firstChild.getAttribute("value") === "";
-                    })) {
+                    el.innerHTML = "<input/>";
+                    el.firstChild.setAttribute("value", "");
+                    return el.firstChild.getAttribute("value") === "";
+                })) {
                     addHandle("value", function (elem, name, isXML) {
                         if (!isXML && elem.nodeName.toLowerCase() === "input") {
                             return elem.defaultValue;
@@ -2804,8 +2804,8 @@ var ExtendedCss = (function () {
 
 
                 if (!assert(function (el) {
-                        return el.getAttribute("disabled") == null;
-                    })) {
+                    return el.getAttribute("disabled") == null;
+                })) {
                     addHandle(booleans, function (elem, name, isXML) {
                         var val;
 
@@ -3022,7 +3022,7 @@ var ExtendedCss = (function () {
      */
 
     const ExtendedSelectorFactory = function () {
-        const PSEUDO_EXTENSIONS_MARKERS = [':has', ':contains', ':has-text', ':matches-css', ':-abp-has', ':-abp-has-text', ':if', ':if-not'];
+        const PSEUDO_EXTENSIONS_MARKERS = [':has', ':contains', ':has-text', ':matches-css', ':-abp-has', ':-abp-has-text', ':if', ':if-not', ':xpath', ':nth-ancestor'];
         let initialized = false;
         let Sizzle;
         /**
