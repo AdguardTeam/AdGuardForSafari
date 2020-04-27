@@ -50,7 +50,7 @@ module.exports = (function () {
         // URL for checking filter updates
         get filtersMetadataUrl() {
             const params = this.getExtensionParams();
-            return this.filtersUrl + '/filters.json?' + params.join('&');
+            return this.filtersUrl + '/filters.js?' + params.join('&');
         },
 
         // Folder that contains filters metadata and files with rules. 'filters' by default
