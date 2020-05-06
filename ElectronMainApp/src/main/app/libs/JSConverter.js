@@ -1,6 +1,6 @@
 /**
  * AdGuard -> Safari Content Blocker converter
- * Version 4.2.4
+ * Version 4.2.5
  * License: https://github.com/AdguardTeam/SafariContentBlockerConverterCompiler/blob/master/LICENSE
  */
 
@@ -1526,9 +1526,9 @@ var jsonFromFilters = (function () {
          */
         function isAbpSnippetRule(rule) {
             return (
-                    rule.indexOf(ABP_SCRIPTLET_MASK) > -1
-                    || rule.indexOf(ABP_SCRIPTLET_EXCEPTION_MASK) > -1
-                ) && rule.search(ADG_CSS_MASK_REG) === -1;
+                rule.indexOf(ABP_SCRIPTLET_MASK) > -1
+                || rule.indexOf(ABP_SCRIPTLET_EXCEPTION_MASK) > -1
+            ) && rule.search(ADG_CSS_MASK_REG) === -1;
         }
 
         /**
@@ -3203,7 +3203,7 @@ var jsonFromFilters = (function () {
         /**
          * Safari content blocking format rules converter.
          */
-        const CONVERTER_VERSION = '4.2.4';
+        const CONVERTER_VERSION = '4.2.5';
         // Max number of CSS selectors per rule (look at compactCssRules function)
         const MAX_SELECTORS_PER_WIDE_RULE = 250;
 
@@ -3437,12 +3437,12 @@ var jsonFromFilters = (function () {
                 if (hasContentType(rule, contentTypes.FONT)) {
                     types.push("font");
                 }
-                if (hasContentType(rule, contentTypes.SUBDOCUMENT)) {
+                if (hasContentType(rule, contentTypes.DOCUMENT)
+                    || hasContentType(rule, contentTypes.SUBDOCUMENT)) {
                     types.push("document");
                 }
                 if (rule.isBlockPopups()) {
-                    // Ignore other in case of $popup modifier
-                    types = ["popup"];
+                    types = ["document"];
                 }
 
                 // Not supported modificators
@@ -3611,15 +3611,22 @@ var jsonFromFilters = (function () {
             /**
              * Validates url blocking rule and discards rules considered dangerous or invalid.
              */
-            const validateUrlBlockingRule = rule => {
+            const validateUrlBlockingRule = (rule, originalRule) => {
 
-                if (rule.action.type === "block" &&
-                    rule.trigger["resource-type"] &&
-                    rule.trigger["resource-type"].indexOf("document") >= 0 &&
-                    !rule.trigger["if-domain"] &&
-                    (!rule.trigger["load-type"] || rule.trigger["load-type"].indexOf("third-party") === -1)) {
-                    // Due to https://github.com/AdguardTeam/AdguardBrowserExtension/issues/145
-                    throw new Error("Document blocking rules are allowed only along with third-party or if-domain modifiers");
+                if (hasContentType(originalRule, adguard.rules.UrlFilterRule.contentTypes.SUBDOCUMENT)) {
+                    if (rule.action.type === "block" &&
+                        rule.trigger["resource-type"] &&
+                        rule.trigger["resource-type"].indexOf("document") >= 0 &&
+                        !rule.trigger["if-domain"] &&
+                        (!rule.trigger["load-type"] || rule.trigger["load-type"].indexOf("third-party") === -1)) {
+                        // Due to https://github.com/AdguardTeam/AdguardBrowserExtension/issues/145
+                        throw new Error("Subdocument blocking rules are allowed only along with third-party or if-domain modifiers");
+                    }
+                }
+
+                if (rule.trigger["resource-type"] &&
+                    rule.trigger["resource-type"].includes("popup")) {
+                    throw new Error("$popup rules are not supported");
                 }
             };
 
@@ -3756,7 +3763,7 @@ var jsonFromFilters = (function () {
                 checkWhiteListExceptions(rule, result);
 
                 // Validate the rule
-                validateUrlBlockingRule(result);
+                validateUrlBlockingRule(result, rule);
 
                 return result;
             };
