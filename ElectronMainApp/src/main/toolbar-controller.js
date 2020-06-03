@@ -31,7 +31,7 @@ module.exports = (() => {
      * @param isEnabled
      */
     const onProtectionChangedCallback = (isEnabled) => {
-        log.debug('Protection status changed: {0}', isEnabled);
+        log.info('Protection status changed: {0}', isEnabled);
 
         if (isEnabled) {
             applicationApi.start();

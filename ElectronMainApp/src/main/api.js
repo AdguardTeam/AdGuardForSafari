@@ -55,9 +55,22 @@ module.exports = (() => {
     };
 
     /**
+     * Is protection running
+     *
+     * @return {boolean}
+     */
+    const isProtectionRunning = () => {
+        return antibanner.isRunning();
+    };
+
+    /**
      * Pauses protection
      */
     const pause = () => {
+        if (!isProtectionRunning()) {
+            return;
+        }
+
         antibanner.stop();
 
         log.info('Protection paused');
@@ -67,6 +80,10 @@ module.exports = (() => {
      * Starts protection
      */
     const start = () => {
+        if (isProtectionRunning()) {
+            return;
+        }
+
         antibanner.start({}, () => {
             log.info('Protection started');
         });
@@ -132,6 +149,7 @@ module.exports = (() => {
         getToolbarMenuData,
         enable,
         disable,
+        isProtectionRunning,
         pause,
         start,
         setWhitelist,
