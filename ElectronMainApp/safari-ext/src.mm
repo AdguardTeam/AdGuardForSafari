@@ -85,8 +85,9 @@ NAN_METHOD(setWhitelistDomains) {
     Local<Array> array = Local<Array>::Cast(info[0]);
     NSMutableArray *domains = [NSMutableArray new];
 
+    auto ctx = Nan::GetCurrentContext();
     for (unsigned int i = 0; i < array->Length(); i++ ) {
-      Local<Value> val = array->Get(i);
+        Local<Value> val = array->Get(ctx, i).ToLocalChecked();
       if (! val.IsEmpty()) {
         Nan::Utf8String item(val);
         if (item.length() > 0) {
@@ -135,8 +136,9 @@ NAN_METHOD(setUserFilter) {
     Local<Array> array = Local<Array>::Cast(info[0]);
     NSMutableArray *rules = [NSMutableArray new];
 
+    auto ctx = Nan::GetCurrentContext();
     for (unsigned int i = 0; i < array->Length(); i++ ) {
-      Local<Value> val = array->Get(i);
+        Local<Value> val = array->Get(ctx, i).ToLocalChecked();
       if (! val.IsEmpty()) {
         Nan::Utf8String item(val);
         if (item.length() > 0) {
@@ -354,9 +356,10 @@ NAN_METHOD(userFilter) {
 
             Local<Array> result = Nan::New<Array>();
 
+            auto ctx = Nan::GetCurrentContext();
             NSUInteger i = 0;
             for (NSString *item in rules) {
-                result->Set(i++, Nan::New(item.UTF8String).ToLocalChecked());
+                result->Set(ctx, i++, Nan::New(item.UTF8String).ToLocalChecked());
             }
             v8::Local<v8::Value> argv[1] = {result};
 
@@ -387,9 +390,10 @@ NAN_METHOD(whitelistDomains) {
 
             Local<Array> result = Nan::New<Array>();
 
+            auto ctx = Nan::GetCurrentContext();
             NSUInteger i = 0;
             for (NSString *item in domains) {
-                result->Set(i++, Nan::New(item.UTF8String).ToLocalChecked());
+                result->Set(ctx, i++, Nan::New(item.UTF8String).ToLocalChecked());
             }
             v8::Local<v8::Value> argv[1] = {result};
 
