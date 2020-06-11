@@ -8,7 +8,6 @@ const fs = require('fs');
 const applicationApi = require('./api');
 const filters = require('./app/filters-manager');
 const listeners = require('./notifier');
-const antibanner = require('./app/antibanner');
 const events = require('./events');
 const storage = require('./app/storage/storage');
 const settings = require('./app/settings-manager');
@@ -42,16 +41,10 @@ module.exports = (() => {
     };
 
     const onProtectionToggleClicked = (e) => {
-        const running = antibanner.isRunning();
-
         if (!!e.checked) {
-            if (!running) {
-                applicationApi.start();
-            }
+            applicationApi.start();
         } else {
-            if (running) {
-                applicationApi.pause();
-            }
+            applicationApi.pause();
         }
     };
 
@@ -211,7 +204,7 @@ module.exports = (() => {
         const trayIcon = new Tray(trayImageOff);
         trayIcon.setPressedImage(trayImageOff);
 
-        const isProtectionRunning = antibanner.isRunning();
+        const isProtectionRunning = applicationApi.isProtectionRunning();
 
         const contextMenu = Menu.buildFromTemplate([
             {
@@ -254,7 +247,7 @@ module.exports = (() => {
 
         trayIcon.setContextMenu(contextMenu);
 
-        setTrayProtectionStatusIcon(trayIcon, antibanner.isRunning());
+        setTrayProtectionStatusIcon(trayIcon, applicationApi.isProtectionRunning());
 
         return trayIcon;
     };
