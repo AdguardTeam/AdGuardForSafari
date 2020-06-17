@@ -75,8 +75,12 @@ module.exports = (() => {
         };
 
         tray.showMainWindow(() => {
-            dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), options, (userPath) => {
-                if (!userPath) {
+            dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), options).then(({cancelled, filePath}) => {
+                if (cancelled) {
+                    return;
+                }
+
+                if (!filePath) {
                     return;
                 }
 
@@ -99,7 +103,7 @@ module.exports = (() => {
                 const zip = new AdmZip();
                 zip.addLocalFile(logsPath);
                 zip.addLocalFile(statePath);
-                zip.writeZip(userPath);
+                zip.writeZip(filePath);
             });
         });
     };
