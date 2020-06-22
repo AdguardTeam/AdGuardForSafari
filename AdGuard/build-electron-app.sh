@@ -71,7 +71,7 @@ if [ ${CONFIGURATION} == "Release" ]; then
 
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
 
-    electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=7.3.1 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
+    electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=8.3.3 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
     --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
     ${OPT} || exit 1
 
@@ -82,7 +82,7 @@ if [ ${CONFIGURATION} == "Release" ]; then
     # https://github.com/AdguardTeam/AdGuardForSafari/issues/204
     rm -r "${APP}/Contents/Library/LoginItems/${PRODUCT_NAME} Login Helper.app" || exit 1
 
-    electron-osx-sign "${APP}" --platform=${PLATFORM} --type=distribution --hardened-runtime --version=7.3.1 --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_APP_ENT}" || exit 1
+    electron-osx-sign "${APP}" --platform=${PLATFORM} --type=distribution --hardened-runtime --version=8.3.3 --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_APP_ENT}" || exit 1
 
     codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Electron Framework" || exit 1
     codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib" || exit 1
@@ -102,7 +102,7 @@ else
       PACKAGER_PLATFORM="darwin"
     fi
 
-    electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=7.3.1 --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
+    electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=8.3.3 --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
     --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
     ${OPT} || exit 1
 
