@@ -11,7 +11,7 @@ echo "AG_STANDALONE_BETA: ${AG_STANDALONE_BETA}"
 
 # Fix nvm incompatibility
 . ~/.nvm/nvm.sh
-nvm use v12.12.0 || exit 1
+nvm use v12.8.1 || exit 1
 
 # Installing dependencies
 #npm install -g electron-osx-sign
