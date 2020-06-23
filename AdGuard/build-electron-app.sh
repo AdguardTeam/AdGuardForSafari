@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ${CONFIGURATION} == "Debug" ]; then
+if [[ ${CONFIGURATION} == "Debug" ]]; then
   exit 0
 fi
 
@@ -97,7 +97,7 @@ else
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
 
     PACKAGER_PLATFORM="mas"
-    if [ ${AG_STANDALONE} == "true" ]; then
+    if [[ ${AG_STANDALONE} == "true" ]]; then
       echo "Changing standalone build platform"
       PACKAGER_PLATFORM="darwin"
     fi
@@ -121,7 +121,7 @@ else
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Plugin).app" || exit 1
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Renderer).app" || exit 1
 
-    if [ ${AG_STANDALONE} == "true" ]; then
+    if [[ ${AG_STANDALONE} == "true" ]]; then
       codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Resources/crashpad_handler" || exit 1
       codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
       codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework/Versions/A/Resources/ShipIt" || exit 1
@@ -133,7 +133,7 @@ fi
 
 # Move products
 DST_DIR="${BUILT_PRODUCTS_DIR}"
-if [ ${ACTION} == "install" ]; then
+if [[ ${ACTION} == "install" ]]; then
   DST_DIR="${INSTALL_ROOT}/Applications/"
   mkdir -p "${DST_DIR}"
 fi
