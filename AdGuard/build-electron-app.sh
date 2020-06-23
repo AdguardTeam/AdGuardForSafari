@@ -64,7 +64,7 @@ cd ../..
 # Rebuild safari-ext and other node packages
 yarn electron-rebuild
 
-if [ ${CONFIGURATION} == "Release" ]; then
+if [[ ${CONFIGURATION} == "Release" ]]; then
     echo "Building release MAS version"
 
     OPT="--asar.unpack=*.node"
