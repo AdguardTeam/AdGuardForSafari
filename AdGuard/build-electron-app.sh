@@ -11,12 +11,12 @@ echo "AG_STANDALONE_BETA: ${AG_STANDALONE_BETA}"
 
 # Fix nvm incompatibility
 . ~/.nvm/nvm.sh
-nvm use v12.8.1 || exit 1
+nvm use v13.10.0 || exit 1
 
 # Installing dependencies
-#npm install -g electron-osx-sign
-#npm install -g node-gyp
-#npm install -g electron-userland/electron-osx-sign#timestamp-server
+yarn install -g electron-osx-sign
+yarn install -g node-gyp
+yarn install -g electron-userland/electron-osx-sign#timestamp-server
 
 PLATFORM=mas
 ARCH=x64

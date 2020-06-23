@@ -2907,7 +2907,7 @@ rxjs@^6.3.1:
     tslib "^1.9.0"
 
 safari-ext@./safari-ext:
-  version "1.0.26"
+  version "1.0.27"
   dependencies:
     bindings "^1.2.1"
     nan "^2.3.3"
