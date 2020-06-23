@@ -14,9 +14,9 @@ echo "AG_STANDALONE_BETA: ${AG_STANDALONE_BETA}"
 nvm use v13.10.0 || exit 1
 
 # Installing dependencies
-yarn install -g electron-osx-sign
-yarn install -g node-gyp
-yarn install -g electron-userland/electron-osx-sign#timestamp-server
+yarn global add electron-osx-sign
+yarn global add node-gyp
+yarn global add electron-userland/electron-osx-sign#timestamp-server
 
 PLATFORM=mas
 ARCH=x64
@@ -32,9 +32,9 @@ if [[ ${ACTION} == "clean" ]]; then
 fi
 
 # Rebuild safari-ext
-#cd "${SRC}/safari-ext"
-#node-gyp configure --verbose --debug|| exit 1
-#node-gyp rebuild --verbose|| exit 1
+cd "${SRC}/safari-ext"
+node-gyp configure --verbose --debug|| exit 1
+node-gyp rebuild --verbose|| exit 1
 #
 
 mkdir -vp "${SRC}/safari-ext/shared"
