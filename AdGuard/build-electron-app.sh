@@ -11,7 +11,7 @@ echo "AG_STANDALONE_BETA: ${AG_STANDALONE_BETA}"
 
 # Fix nvm incompatibility
 . ~/.nvm/nvm.sh
-nvm use v12.6.0 || exit 1
+nvm use v12.12.0 || exit 1
 
 # Installing dependencies
 #npm install -g electron-osx-sign
@@ -25,7 +25,7 @@ SRC="${SRCROOT}/../ElectronMainApp"
 SHAREDSRC="${SRCROOT}/../Shared"
 
 # Cleaning safari-ext
-if [ ${ACTION} == "clean" ]; then
+if [[ ${ACTION} == "clean" ]]; then
   cd "${SHAREDSRC}"
   node-gyp clean || exit 1
   exit 0
@@ -48,7 +48,7 @@ sed -i "" "s/AG_STANDALONE_BUILD/${AG_STANDALONE}/g" "${SRC}/package.json"
 # Rebuild electron app
 OPT=""
 cd "${SRC}"
-if [ ${CONFIGURATION} != "Debug" ]; then
+if [[ ${CONFIGURATION} != "Debug" ]]; then
   OPT="--asar"
   yarn install --force || exit 1
 else
