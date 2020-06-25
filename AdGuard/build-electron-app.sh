@@ -15,7 +15,7 @@ nvm use v13.10.0 || exit 1
 
 # Installing dependencies
 yarn global add electron-osx-sign
-yarn global add node-gyp
+yarn global add node-gyp@7.0.0
 yarn global add electron-userland/electron-osx-sign#timestamp-server
 
 PLATFORM=mas
@@ -51,7 +51,7 @@ cd "${SRC}"
 if [[ ${CONFIGURATION} != "Debug" ]]; then
   OPT="--asar"
   yarn install --force || exit 1
-  yarn electron-rebuild
+  yarn electron-rebuild --force
 else
   #echo "skip"
   yarn upgrade --force -P safari-ext || exit 1
