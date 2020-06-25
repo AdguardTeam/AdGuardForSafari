@@ -51,7 +51,6 @@ cd "${SRC}"
 if [[ ${CONFIGURATION} != "Debug" ]]; then
   OPT="--asar"
   yarn install --force || exit 1
-  yarn electron-rebuild --force
 else
   #echo "skip"
   yarn upgrade --force -P safari-ext || exit 1
@@ -63,7 +62,7 @@ cd "node_modules/electron-remote"
 cd ../..
 
 # Rebuild safari-ext and other node packages
-#yarn electron-rebuild
+yarn electron-rebuild -v 8.3.3
 
 if [[ ${CONFIGURATION} == "Release" ]]; then
     echo "Building release MAS version"
