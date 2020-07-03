@@ -353,6 +353,11 @@ const Saver = function (options) {
         setState(states.DIRTY);
     };
 
+    const forceSave = () => {
+        this.saveRules();
+        setState(states.SAVING);
+    };
+
     const setSaved = () => {
         if (this.omitRenderEventsCount > 0) {
             setState(states.SAVED);
@@ -365,6 +370,7 @@ const Saver = function (options) {
     return {
         setDirty: setDirty,
         setSaved: setSaved,
+        forceSave: forceSave,
     };
 };
 
@@ -411,15 +417,11 @@ const WhiteListFilter = function (options) {
         loadWhiteListDomains();
     }
 
-    const session = editor.getSession();
-    let initialChangeFired = false;
-    session.addEventListener('change', () => {
-        if (!initialChangeFired && hasContent) {
-            initialChangeFired = true;
-            return;
-        }
-        saver.setDirty();
-    });
+    const applyChangesBtn = document.querySelector('#whiteListFilterApplyChanges');
+    applyChangesBtn.onclick = (event) => {
+        event.preventDefault();
+        saver.forceSave();
+    };
 
     function changeDefaultWhiteListMode(e) {
         e.preventDefault();
@@ -484,15 +486,11 @@ const UserFilter = function () {
         loadUserRules();
     }
 
-    const session = editor.getSession();
-    let initialChangeFired = false;
-    session.addEventListener('change', () => {
-        if (!initialChangeFired && hasContent) {
-            initialChangeFired = true;
-            return;
-        }
-        saver.setDirty();
-    });
+    const applyChangesBtn = document.querySelector('#userFilterApplyChanges');
+    applyChangesBtn.onclick = (event) => {
+        event.preventDefault();
+        saver.forceSave();
+    };
 
     /**
      * returns true is user filter is empty

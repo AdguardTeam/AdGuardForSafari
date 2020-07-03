@@ -48,7 +48,7 @@
         "message": "AdGuard Антибаннер"
     },
     "description": {
-        "message": "Непревзойденная защита от рекламы и всплывающих окон. Блокирует рекламу в Facebook, на Youtube и других сайтах."
+        "message": "Непревзойденная защита от рекламы и всплывающих окон. Блокирует рекламу в Facebook, на YouTube и других сайтах."
     },
     "options_settings": {
         "message": "Настройки AdGuard для Safari"
@@ -111,7 +111,7 @@
         "message": "Извините, но у вас пока нет пользовательских фильтров"
     },
     "options_filters_empty_custom_add_button": {
-        "message": "Добавить пользовательский фильтр"
+        "message": "Добавить собственный фильтр"
     },
     "options_filters_custom_step_one_title": {
         "message": "Новая подписка на фильтр"
@@ -180,10 +180,10 @@
         "message": "Белый список"
     },
     "options_whitelist_description": {
-        "message": "AdGuard не фильтрует рекламу на сайтах, добавленных в Белый список."
+        "message": "AdGuard не фильтрует рекламу на сайтах, добавленных в белый список."
     },
     "options_whitelist_inverse": {
-        "message": "Инвертировать белый список<span class='sp-table-row-info'>Разблокировать рекламу на всех сайтах, <i>кроме</i> добавленных в Белый список</span>"
+        "message": "Инвертировать белый список<span class='sp-table-row-info'>Разблокировать рекламу на всех сайтах, <i>кроме</i> добавленных в белый список</span>"
     },
     "options_userfilter": {
         "message": "Пользовательские правила"
@@ -231,7 +231,7 @@
         "message": "Активировано слишком много фильтров. Safari не может использовать более 50,000 правил в одной группе."
     },
     "options_content_blocker_overlimit": {
-        "message": "Активировано слишком много фильтров. Safari не может использовать более 50 000 правил."
+        "message": "Активировано слишком много фильтров. Safari не может использовать более 50 000 правил в одной группе."
     },
     "options_filters_list_search_placeholder": {
         "message": "Поиск"
@@ -244,6 +244,9 @@
     },
     "options_editor_indicator_saved": {
         "message": "Сохранено"
+    },
+    "options_editor_save_button": {
+        "message": "Сохранить"
     },
     "main_menu_edit": {
         "message": "Редактировать"
@@ -357,10 +360,10 @@
         "message": "Запускать AdGuard для Safari при входе в систему"
     },
     "options_verbose_logging": {
-        "message": "Подробное логгирование"
+        "message": "Подробное логирование"
     },
     "options_verbose_logging_desc": {
-        "message": "Если активировано подробное логгирование, расширения AdGuard для Safari будут вводить дополнительную информацию в консоль браузера. "
+        "message": "Если активировано подробное логирование, расширения AdGuard для Safari будут вводить дополнительную информацию в консоль браузера. "
     },
     "options_enable_hardware_acceleration": {
         "message": "Включить аппаратное ускорение"
@@ -423,7 +426,7 @@
         "message": "Компиляция не удалась"
     },
     "filters_group_custom": {
-        "message": "Пользовательские"
+        "message": "Собственные"
     },
     "userfilter_name": {
         "message": "Пользовательские правила"
