@@ -358,6 +358,19 @@ const Saver = function (options) {
         setState(states.SAVING);
     };
 
+    const hotkeySave = (event) => {
+        if (event.ctrlKey && event.keyCode === 83) {
+            forceSave();
+        }
+    }
+    const addHotkeySaveListener = () => {
+        document.addEventListener('keydown', hotkeySave);
+    }
+
+    const removeHotkeySaveListener = () => {
+        document.removeEventListener('keydown', hotkeySave);
+    }
+
     const setSaved = () => {
         if (this.omitRenderEventsCount > 0) {
             setState(states.SAVED);
@@ -371,6 +384,8 @@ const Saver = function (options) {
         setDirty: setDirty,
         setSaved: setSaved,
         forceSave: forceSave,
+        addHotkeySaveListener: addHotkeySaveListener,
+        removeHotkeySaveListener: removeHotkeySaveListener,
     };
 };
 
@@ -417,11 +432,17 @@ const WhiteListFilter = function (options) {
         loadWhiteListDomains();
     }
 
+    const whiteListEditor = document.querySelector('#whiteListRules > textarea');
     const applyChangesBtn = document.querySelector('#whiteListFilterApplyChanges');
+
     applyChangesBtn.onclick = (event) => {
         event.preventDefault();
         saver.forceSave();
+        whiteListEditor.focus();
     };
+
+    whiteListEditor.onfocus = () => saver.addHotkeySaveListener();
+    whiteListEditor.onblur = () => saver.removeHotkeySaveListener();
 
     function changeDefaultWhiteListMode(e) {
         e.preventDefault();
@@ -486,11 +507,17 @@ const UserFilter = function () {
         loadUserRules();
     }
 
+    const userRulesEditor = document.querySelector('#userRules > textarea');
     const applyChangesBtn = document.querySelector('#userFilterApplyChanges');
+
     applyChangesBtn.onclick = (event) => {
         event.preventDefault();
         saver.forceSave();
+        userRulesEditor.focus();
     };
+
+    userRulesEditor.onfocus = () => saver.addHotkeySaveListener();
+    userRulesEditor.onblur = () => saver.removeHotkeySaveListener();
 
     /**
      * returns true is user filter is empty

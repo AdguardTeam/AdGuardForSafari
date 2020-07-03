@@ -1,4 +1,4 @@
-# AdGuard for Mac - Support scripts
+# AdGuard for Safari - Support scripts
 
 This project is supposed to automate some standard tasks.
 
