@@ -226,164 +226,71 @@ const TopMenu = (function () {
 })();
 
 const Saver = function (options) {
+    const HIDE_INDICATOR_TIMEOUT_MS = 2000;
+    const DEBOUNCE_TIME = 1000;
+
     this.indicatorElement = options.indicatorElement;
     this.editor = options.editor;
     this.saveEventType = options.saveEventType;
-    this.omitRenderEventsCount = 0;
 
     const states = {
-        CLEAR: 1 << 0,
-        DIRTY: 1 << 1,
-        SAVING: 1 << 2,
-        SAVED: 1 << 3,
+        SAVING: 'saving',
+        SAVED: 'saved',
     };
 
     const indicatorText = {
-        [states.CLEAR]: '',
-        [states.DIRTY]: i18n.__('options_editor_indicator_editing.message'),
         [states.SAVING]: i18n.__('options_editor_indicator_saving.message'),
         [states.SAVED]: i18n.__('options_editor_indicator_saved.message'),
     };
 
-    this.isSaving = function () {
-        return (this.currentState & states.SAVING) === states.SAVING;
-    };
-
-    this.isDirty = function () {
-        return (this.currentState & states.DIRTY) === states.DIRTY;
-    };
-
-    this.updateIndicator = function (state) {
-        this.indicatorElement.textContent = indicatorText[state];
+    const setState = (state) => {
         switch (state) {
-            case states.DIRTY:
-            case states.CLEAR:
             case states.SAVING:
+                this.indicatorElement.textContent = indicatorText[states.SAVING];
                 this.indicatorElement.classList.remove('filter-rules__label--saved');
                 break;
             case states.SAVED:
+                this.indicatorElement.textContent = indicatorText[states.SAVED];
                 this.indicatorElement.classList.add('filter-rules__label--saved');
+                setTimeout(() => {
+                    this.indicatorElement.textContent = '';
+                }, HIDE_INDICATOR_TIMEOUT_MS);
                 break;
             default:
                 break;
         }
     };
 
-    let timeout;
-
-    const setState = (state, skipManageState = false) => {
-        this.currentState |= state;
-        switch (state) {
-            case states.DIRTY:
-                this.currentState &= ~states.CLEAR;
-                break;
-            case states.CLEAR:
-                this.currentState &= ~states.DIRTY;
-                break;
-            case states.SAVING:
-                this.currentState &= ~states.SAVED;
-                break;
-            case states.SAVED:
-                this.currentState &= ~states.SAVING;
-                break;
-            default:
-                break;
-        }
-
-        if (!skipManageState) {
-            this.manageState();
-        }
-    };
-
-    this.manageState = function () {
-        const EDIT_TIMEOUT_MS = 1000;
-        const HIDE_INDICATOR_TIMEOUT_MS = 1500;
-
-        if (timeout) {
-            clearTimeout(timeout);
-        }
-
-        const self = this;
-
-        const isDirty = this.isDirty();
-        const isSaving = this.isSaving();
-
-        if (isDirty && !isSaving) {
-            this.updateIndicator(states.DIRTY);
-            timeout = setTimeout(() => {
-                self.saveRules();
-                setState(states.CLEAR, true);
-                setState(states.SAVING);
-            }, EDIT_TIMEOUT_MS);
-            return;
-        }
-
-        if (isDirty && isSaving) {
-            this.updateIndicator(states.DIRTY);
-            timeout = setTimeout(() => {
-                setState(states.CLEAR);
-                self.saveRules();
-            }, EDIT_TIMEOUT_MS);
-            return;
-        }
-
-        if (!isDirty && !isSaving && (this.omitRenderEventsCount === 1)) {
-            this.updateIndicator(states.SAVED);
-            timeout = setTimeout(() => {
-                self.updateIndicator(states.CLEAR);
-            }, HIDE_INDICATOR_TIMEOUT_MS);
-            return;
-        }
-
-        if (!isDirty && isSaving) {
-            this.updateIndicator(states.SAVING);
-        }
-    };
-
-    this.saveRules = Utils.debounce(function () {
-        this.omitRenderEventsCount += 1;
+    this.saveData = Utils.debounce(function () {
         const text = this.editor.getValue();
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             type: this.saveEventType,
             content: text,
         }));
-    }.bind(this), 1000);
+        setState(states.SAVED);
+    }.bind(this), DEBOUNCE_TIME);
 
-    const setDirty = () => {
-        setState(states.DIRTY);
-    };
-
-    const forceSave = () => {
-        this.saveRules();
+    const saveData = () => {
         setState(states.SAVING);
-    };
+        this.saveData();
+    }
 
     const hotkeySave = (event) => {
         if (event.ctrlKey && event.keyCode === 83) {
-            forceSave();
+            saveData();
         }
-    }
+    };
+
     const addHotkeySaveListener = () => {
         document.addEventListener('keydown', hotkeySave);
-    }
+    };
 
     const removeHotkeySaveListener = () => {
         document.removeEventListener('keydown', hotkeySave);
-    }
-
-    const setSaved = () => {
-        if (this.omitRenderEventsCount > 0) {
-            setState(states.SAVED);
-            this.omitRenderEventsCount -= 1;
-            return true;
-        }
-        return false;
     };
 
     return {
-        setDirty: setDirty,
-        setSaved: setSaved,
-        forceSave: forceSave,
+        saveData: saveData,
         addHotkeySaveListener: addHotkeySaveListener,
         removeHotkeySaveListener: removeHotkeySaveListener,
     };
@@ -393,7 +300,7 @@ const Saver = function (options) {
  * Whitelist block
  *
  * @param options
- * @returns {{updateWhiteListDomains: updateWhiteListDomains}}
+ * @returns {{updateWhiteListDomains: loadWhiteListDomains}}
  * @constructor
  */
 const WhiteListFilter = function (options) {
@@ -424,20 +331,12 @@ const WhiteListFilter = function (options) {
         editor.setValue(response.content || '');
     }
 
-    function updateWhiteListDomains() {
-        const omitRenderEvent = saver.setSaved();
-        if (omitRenderEvent) {
-            return;
-        }
-        loadWhiteListDomains();
-    }
-
     const whiteListEditor = document.querySelector('#whiteListRules > textarea');
     const applyChangesBtn = document.querySelector('#whiteListFilterApplyChanges');
 
     applyChangesBtn.onclick = (event) => {
         event.preventDefault();
-        saver.forceSave();
+        saver.saveData();
         whiteListEditor.focus();
     };
 
@@ -452,7 +351,7 @@ const WhiteListFilter = function (options) {
             enabled: !e.currentTarget.checked
         }));
 
-        updateWhiteListDomains();
+        loadWhiteListDomains();
     }
 
     changeDefaultWhiteListModeCheckbox.addEventListener('change', changeDefaultWhiteListMode);
@@ -460,14 +359,14 @@ const WhiteListFilter = function (options) {
     CheckboxUtils.updateCheckbox([changeDefaultWhiteListModeCheckbox], !options.defaultWhiteListMode);
 
     return {
-        updateWhiteListDomains: updateWhiteListDomains,
+        updateWhiteListDomains: loadWhiteListDomains,
     };
 };
 
 /**
  * User filter block
  *
- * @returns {{updateUserFilterRules: updateUserFilterRules}}
+ * @returns {{ updateUserFilterRules: loadUserRules, isUserFilterEmpty }}
  * @constructor
  */
 const UserFilter = function () {
@@ -499,20 +398,12 @@ const UserFilter = function () {
         });
     }
 
-    function updateUserFilterRules() {
-        const omitRenderEvent = saver.setSaved();
-        if (omitRenderEvent) {
-            return;
-        }
-        loadUserRules();
-    }
-
     const userRulesEditor = document.querySelector('#userRules > textarea');
     const applyChangesBtn = document.querySelector('#userFilterApplyChanges');
 
     applyChangesBtn.onclick = (event) => {
         event.preventDefault();
-        saver.forceSave();
+        saver.saveData();
         userRulesEditor.focus();
     };
 
@@ -527,7 +418,7 @@ const UserFilter = function () {
     };
 
     return {
-        updateUserFilterRules,
+        updateUserFilterRules: loadUserRules,
         isUserFilterEmpty,
     };
 };
