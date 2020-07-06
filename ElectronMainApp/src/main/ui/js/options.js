@@ -275,24 +275,8 @@ const Saver = function (options) {
         this.saveData();
     }
 
-    const hotkeySave = (event) => {
-        if (event.ctrlKey && event.keyCode === 83) {
-            saveData();
-        }
-    };
-
-    const addHotkeySaveListener = () => {
-        document.addEventListener('keydown', hotkeySave);
-    };
-
-    const removeHotkeySaveListener = () => {
-        document.removeEventListener('keydown', hotkeySave);
-    };
-
     return {
         saveData: saveData,
-        addHotkeySaveListener: addHotkeySaveListener,
-        removeHotkeySaveListener: removeHotkeySaveListener,
     };
 };
 
@@ -340,8 +324,11 @@ const WhiteListFilter = function (options) {
         whiteListEditor.focus();
     };
 
-    whiteListEditor.onfocus = () => saver.addHotkeySaveListener();
-    whiteListEditor.onblur = () => saver.removeHotkeySaveListener();
+    editor.commands.addCommand({
+        name: 'save',
+        bindKey: { win: 'Ctrl-S', 'mac': 'Cmd-S' },
+        exec: () => saver.saveData(),
+    });
 
     function changeDefaultWhiteListMode(e) {
         e.preventDefault();
@@ -407,8 +394,11 @@ const UserFilter = function () {
         userRulesEditor.focus();
     };
 
-    userRulesEditor.onfocus = () => saver.addHotkeySaveListener();
-    userRulesEditor.onblur = () => saver.removeHotkeySaveListener();
+    editor.commands.addCommand({
+        name: 'save',
+        bindKey: { win: 'Ctrl-S', 'mac': 'Cmd-S' },
+        exec: () => saver.saveData(),
+    });
 
     /**
      * returns true is user filter is empty
