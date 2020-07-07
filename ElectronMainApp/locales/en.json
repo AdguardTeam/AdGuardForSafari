@@ -177,13 +177,13 @@
         "message": "Check for filters updates"
     },
     "options_whitelist": {
-        "message": "Whitelist"
+        "message": "Allowlist"
     },
     "options_whitelist_description": {
-        "message": "AdGuard does not filter web sites from the Whitelist."
+        "message": "AdGuard does not filter web sites from the Allowlist."
     },
     "options_whitelist_inverse": {
-        "message": "Invert Whitelist<span class='sp-table-row-info'>Unblock ads everywhere <i>except for</i> the websites from the Whitelist</span>"
+        "message": "Invert Allowlist<span class='sp-table-row-info'>Unblock ads everywhere <i>except for</i> the websites from the Allowlist</span>"
     },
     "options_userfilter": {
         "message": "User rules"
