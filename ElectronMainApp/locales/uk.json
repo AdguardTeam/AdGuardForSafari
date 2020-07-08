@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "Правила користувача"
+    },
+    "window_close_dialog_message": {
+        "message": "Продовжувати роботу AdGuard у фоновому режимі?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Важливо, щоб AdGuard подовжував працювати у фоновому режимі, інакше він не зможе автоматично оновлювати фільтри та виконувати керування фільтруванням."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Запам'ятати мій вибір"
+    },
+    "window_close_dialog_yes": {
+        "message": "Так (рекомендовано)"
+    },
+    "window_close_dialog_no": {
+        "message": "Ні"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Скасувати"
     }
 }

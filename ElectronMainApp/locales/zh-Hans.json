@@ -186,10 +186,10 @@
         "message": "颠倒白名单<span class='sp-table-row-info'>取消拦截所有网站的广告，白名单上的网站<i>除外</i></span>"
     },
     "options_userfilter": {
-        "message": "用户过滤器"
+        "message": "用户规则"
     },
     "options_userfilter_description": {
-        "message": "您可添加自己的规则到此过滤器。此选项推荐给那些熟悉 HTML/CSS 的高级用户。阅读<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>过滤器规则指南</a>以了解如何写您自己的过滤器规则。"
+        "message": "你可在此处添加自己的规则&nbsp。给熟悉HTML/CSSp的高级用户推荐使用该选项。对&nbsp可以阅读<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>过滤规则教程</a> ; 学习&nbsp;如何编写自己的规则"
     },
     "options_show_app_updated_notification": {
         "message": "通知扩展更新"
@@ -279,7 +279,7 @@
         "message": "退出"
     },
     "tray_menu_protection_start": {
-        "message": "启动 AdGuard"
+        "message": "Safari 中的广告拦截处于开启状态"
     },
     "tray_menu_protection_stop": {
         "message": "Safari 中的广告拦截处于关闭状态"
@@ -330,10 +330,10 @@
         "message": "版本 %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "用户过滤器已更新"
+        "message": "用户规则已更新"
     },
     "notification_user_filter_updated_desc": {
-        "message": "新规则已添加至用户过滤器："
+        "message": "一条新规则被添加至用户规则中："
     },
     "options_filters_update_period": {
         "message": "更新周期"
@@ -427,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "用户过滤器"
+    },
+    "window_close_dialog_message": {
+        "message": "保持 AdGuard 在后台运行？"
+    },
+    "window_close_dialog_detail": {
+        "message": "保持 AdGuard 主程式在后台运行是非常重要的，否则将无法自动更新及管理过滤器。"
+    },
+    "window_close_dialog_checkbox": {
+        "message": "记住我的选择"
+    },
+    "window_close_dialog_yes": {
+        "message": "是（推荐）"
+    },
+    "window_close_dialog_no": {
+        "message": "否"
+    },
+    "window_close_dialog_cancel": {
+        "message": "取消"
     }
 }

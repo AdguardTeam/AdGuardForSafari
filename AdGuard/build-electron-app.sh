@@ -33,8 +33,8 @@ fi
 
 # Rebuild safari-ext
 cd "${SRC}/safari-ext"
-node-gyp configure --verbose --debug|| exit 1
-node-gyp rebuild --verbose|| exit 1
+#node-gyp configure --verbose --debug|| exit 1
+#node-gyp rebuild --verbose|| exit 1
 #
 
 mkdir -vp "${SRC}/safari-ext/shared"

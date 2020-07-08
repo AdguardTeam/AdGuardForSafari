@@ -22,7 +22,7 @@ CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 API_UPLOAD_URL = "https://twosky.adtidy.org/api/v1/upload"
 API_DOWNLOAD_URL = "https://twosky.adtidy.org/api/v1/download"
 # Base directory of the project files
-BASE_PATH = "../Adguard"
+BASE_PATH = "../AdGuard"
 
 # Loads twosky configuration from .twosky.json.
 # This configuration file contains:
@@ -74,7 +74,7 @@ for path in TWOSKY_CONFIG["xib_files"]:
 
 def changeEncoding(file):
     print("change encoding of file {0} from utf-16 to utf-8".format(file))
-    """ Changes encoding of file from UTF-16 to UTF-8 
+    """ Changes encoding of file from UTF-16 to UTF-8
     """
     with open(file, "rb") as f:
         with open("temp.strings", "wb") as f2:
