@@ -271,6 +271,7 @@ module.exports = (function () {
                 delete filter.removed;
                 filter.trusted = trusted;
                 filter.name = title;
+                filter.lastUpdateTime = timeUpdated;
 
                 restoreCustomFilter(filter);
 
