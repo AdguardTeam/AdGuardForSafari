@@ -25,6 +25,7 @@ module.exports.init = function () {
     ipcMain.on('renderer-to-main', function (event, arg) {
 
         const message = JSON.parse(arg);
+        const { title, trusted } = message;
         switch (message.type) {
             case 'initializeOptionsPage':
                 sendResponse(event, 'initializeOptionsPageResponse', processInitializeFrameScriptRequest());
@@ -84,8 +85,14 @@ module.exports.init = function () {
                 );
                 break;
             case 'subscribeToCustomFilter':
-                const { url, title, trusted } = message;
+                const { url } = message;
                 filters.subscribeToCustomFilter(url, { title, trusted }, (filter) => {
+                    filters.addAndEnableFilters([filter.filterId]);
+                });
+                break;
+            case 'subscribeToImportedFilter':
+                const { filterData } = message;
+                filters.subscribeToImportedFilter(filterData, { title, trusted }, (filter) => {
                     filters.addAndEnableFilters([filter.filterId]);
                 });
                 break;
