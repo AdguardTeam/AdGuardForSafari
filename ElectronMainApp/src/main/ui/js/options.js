@@ -1161,7 +1161,6 @@ const AntiBannerFilters = function (options) {
             reader.onload = function (e) {
                 const customFilterContent = e.target.result.split('\n');
                 const filterData = parseFilterDataFromHeader(filePath, customFilterContent);
-                // console.log(filterData);
                 renderStepFour(filterData);
             };
             reader.onerror = function (err) {
