@@ -105,6 +105,12 @@ module.exports = (function () {
         if (!domain) {
             return null;
         }
+
+        // https://github.com/AdguardTeam/AdGuardForSafari/issues/346
+        if (domain.startsWith('localhost')) {
+            return "@@" + domain + "$document";
+        }
+
         return "@@//" + domain + "$document";
     }
 
