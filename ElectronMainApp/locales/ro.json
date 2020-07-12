@@ -1,0 +1,449 @@
+{
+    "main_menu_about": {
+        "message": "Despre AdGuard pentru Safari"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "De încredere"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "Aceste filtre pot folosi modificatori puternici de reguli de filtrare, periculoși pe mâini greșite. Bifați casetă DOAR DACĂ vă încredeți total în ele."
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "de încredere"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "Ați ales să vă încredeți în acest filtru"
+    },
+    "options_about_update_check": {
+        "message": "Se caută actualizări"
+    },
+    "options_about_title": {
+        "message": "AdGuard pentru Safari"
+    },
+    "options_about_updating": {
+        "message": "Se actualizează AdGuard pentru Safari"
+    },
+    "options_about_updates_not_found": {
+        "message": "AdGuard pentru Safari este la zi"
+    },
+    "options_about_update_downloaded": {
+        "message": "Aproape la zi! Relansați AdGuard pentru ca Safari să termine actualizarea."
+    },
+    "options_about_update_relaunch": {
+        "message": "Reporniți"
+    },
+    "options_popup_title_placeholder": {
+        "message": "Introduceți numele filtrului"
+    },
+    "main_menu_hide": {
+        "message": "Ascunde"
+    },
+    "main_menu_close_window": {
+        "message": "Închide fereastra"
+    },
+    "tray_menu_export_logs": {
+        "message": "Exportați jurnale și info sistem..."
+    },
+    "name": {
+        "message": "AdGuard AdBlocker"
+    },
+    "description": {
+        "message": "Extensie fără egal de blocare reclame și pop-up-uri. Blochează reclame pe Facebook, YouTube și toate celelalte site-uri."
+    },
+    "options_settings": {
+        "message": "AdGuard pentru Safari - Setări"
+    },
+    "options_general_settings": {
+        "message": "General"
+    },
+    "options_general_desc": {
+        "message": "AdGuard pentru Safari este un software gratuit și open source. Vă mulțumim pentru feedback-ul și contribuțiile dvs.. Raportare de erori sau cereri de funcții pot fi făcute la <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>contul nostru GitHub</a>."
+    },
+    "options_allow_acceptable_ads": {
+        "message": "Lăsați reclame la căutare și auto-promovare site-uri"
+    },
+    "options_export_settings": {
+        "message": "Exportați setările"
+    },
+    "options_import_settings": {
+        "message": "Importați setările"
+    },
+    "options_antibanner": {
+        "message": "Filtre"
+    },
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s filtru",
+            "other": "%s filtre"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s regulă",
+            "other": "%s reguli"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s regulă avansată",
+            "other": "%s reguli avansate"
+        }
+    },
+    "options_filters_enabled": {
+        "message": "Activat:"
+    },
+    "options_filters_enabled_and_more_divider": {
+        "message": "%s și %s mai mult"
+    },
+    "options_filters_enabled_and_divider": {
+        "message": "%s și %s"
+    },
+    "options_filters_no_enabled": {
+        "message": "Niciun filtru activat"
+    },
+    "options_filters_version": {
+        "message": "versiune %s"
+    },
+    "options_filters_updated": {
+        "message": "actualizat: %s"
+    },
+    "options_filters_empty_custom_filters": {
+        "message": "Ne pare rău, dar nu aveți niciun filtru personalizat"
+    },
+    "options_filters_empty_custom_add_button": {
+        "message": "Adăugați filtru personalizat"
+    },
+    "options_filters_custom_step_one_title": {
+        "message": "Abonarea la un filtru nou"
+    },
+    "options_filters_custom_step_one_input_placeholder": {
+        "message": "Introduceți URL-ul filtrului"
+    },
+    "options_filters_custom_step_one_url_desc": {
+        "message": "Introduceți un URL valid de abonament la filtru."
+    },
+    "options_filters_custom_step_one_url_desc_more": {
+        "message": "AdGuard va adăuga acest abonament la filtru."
+    },
+    "options_filters_custom_step_one_cancel": {
+        "message": "Anulați"
+    },
+    "options_filters_custom_step_one_next": {
+        "message": "Următor"
+    },
+    "options_filters_custom_step_two_checking": {
+        "message": "Se descarcă filtrul"
+    },
+    "options_filters_custom_step_three_title": {
+        "message": "A apărut o eroare"
+    },
+    "options_filters_custom_step_three_desc": {
+        "message": "Din păcate, filtrul dvs. adaptat nu poate fi adăugat datorită unei erori neașteptate."
+    },
+    "options_filters_custom_step_three_try_again": {
+        "message": "Încercați din nou"
+    },
+    "options_filters_custom_step_final_title": {
+        "message": "Abonament la filtru nou"
+    },
+    "options_filters_custom_step_final_filter_title": {
+        "message": "Titlu:"
+    },
+    "options_filters_custom_step_final_filter_description": {
+        "message": "Descriere:"
+    },
+    "options_filters_custom_step_final_filter_version": {
+        "message": "Versiune:"
+    },
+    "options_filters_custom_step_final_filter_rules_count": {
+        "message": "Număr reguli:"
+    },
+    "options_filters_custom_step_final_filter_homepage": {
+        "message": "Homepage:"
+    },
+    "options_filters_custom_step_final_filter_url": {
+        "message": "URL:"
+    },
+    "options_filters_custom_step_final_back": {
+        "message": "Înapoi"
+    },
+    "options_filters_custom_step_final_cancel": {
+        "message": "Anulați"
+    },
+    "options_filters_custom_step_final_commit": {
+        "message": "Abonați-vă"
+    },
+    "options_filters_check_filters_update": {
+        "message": "Verifică actualizări filtre"
+    },
+    "options_whitelist": {
+        "message": "Lista albă"
+    },
+    "options_whitelist_description": {
+        "message": "AdGuard nu filtrează site-urile web din lista albă."
+    },
+    "options_whitelist_inverse": {
+        "message": "Lista albă inversată<span class = 'sp-table-row-info'>Deblochează reclame peste tot <i>cu excepția</i> listei albe</span>"
+    },
+    "options_userfilter": {
+        "message": "Reguli Utilizator"
+    },
+    "options_userfilter_description": {
+        "message": "Puteți adăuga propriile reguli aici. Această opțiune este&nbsp;recomandată pentru utilizatorii avansați familiarizați cu HTML/CSS. Citiți <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>ghidul</a> de&nbsp;urmat la&nbsp;scrierea propriilor reguli de filtrare."
+    },
+    "options_show_app_updated_notification": {
+        "message": "Notifică despre actualizare extensii"
+    },
+    "options_popup_update_title": {
+        "message": "Filtre actualizate cu succes"
+    },
+    "options_popup_update_error_title": {
+        "message": "Eroare actualizare filtru"
+    },
+    "options_popup_update_not_found": {
+        "message": "Nu s-au găsit actualizări"
+    },
+    "options_popup_update_error": {
+        "message": "Nu se pot obține actualizări. Vă rugăm încercați mai târziu."
+    },
+    "options_popup_update_updated": {
+        "message": "\"$1\" actualizat la versiunea $2"
+    },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s filtru actualizat: $2",
+            "other": "%s filtre actualizate: $2"
+        }
+    },
+    "options_popup_version_update_title": {
+        "message": "AdGuard pentru Safari a fost actualizat la versiunea 1$."
+    },
+    "options_popup_version_update_description_minor": {
+        "message": "Această versiune conține, corecții de erori și îmbunătățiri minore."
+    },
+    "options_popup_version_update_description_major": {
+        "message": "Această actualizare majoră a extensiei aduce o mulțime de funcții și îmbunătățiri noi."
+    },
+    "notification_content_blocker_overlimit_title": {
+        "message": "Atenție"
+    },
+    "notification_content_blocker_overlimit_desc": {
+        "message": "Prea multe filtre activate. Safari nu poate utiliza mai mult de 50.000 de reguli pe grup."
+    },
+    "options_content_blocker_overlimit": {
+        "message": "Prea multe filtre activate. Safari nu poate utiliza mai mult de 50.000 de reguli pe grup."
+    },
+    "options_filters_list_search_placeholder": {
+        "message": "Căutați"
+    },
+    "options_editor_indicator_editing": {
+        "message": "Se editează..."
+    },
+    "options_editor_indicator_saving": {
+        "message": "Se salvează..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "Salvat"
+    },
+    "main_menu_edit": {
+        "message": "Editare"
+    },
+    "main_menu_undo": {
+        "message": "Anulați"
+    },
+    "main_menu_cut": {
+        "message": "Tăiați"
+    },
+    "main_menu_copy": {
+        "message": "Copiați"
+    },
+    "main_menu_paste": {
+        "message": "Lipiți"
+    },
+    "main_menu_select-all": {
+        "message": "Selectați tot"
+    },
+    "tray_menu_about": {
+        "message": "Despre"
+    },
+    "tray_menu_preferences": {
+        "message": "Preferințe"
+    },
+    "tray_menu_check_updates": {
+        "message": "Verifică actualizări de filtre"
+    },
+    "tray_menu_launch_at_startup": {
+        "message": "Lansați AdGuard la Logare"
+    },
+    "tray_menu_quit": {
+        "message": "Părăsiți"
+    },
+    "tray_menu_protection_start": {
+        "message": "Blocarea reclamelor în Safari este activă"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Blocarea reclamelor în Safari este dezactivată"
+    },
+    "options_last_update": {
+        "message": "Ultima actualizare:"
+    },
+    "options_about": {
+        "message": "Despre"
+    },
+    "options_content_blockers": {
+        "message": "Blocante de conținut"
+    },
+    "options_content_blockers_desc": {
+        "message": "Blocante de reclame activate: %s din 6 (pot conține fiecare până la 50.000 de reguli)"
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": "Blocanții de reclame sunt dezactivați"
+    },
+    "options_compare_btn": {
+        "message": "Care este diferența"
+    },
+    "options_compare_title": {
+        "message": "Încercați AdGuard Premium pentru o mai bună protecție!"
+    },
+    "options_license_agreement": {
+        "message": "Acord de licență pentru utilizatorul final"
+    },
+    "options_privacy_policy": {
+        "message": "Politica confidențialitate"
+    },
+    "options_acknowledgment": {
+        "message": "Mulțumiri"
+    },
+    "options_github": {
+        "message": "GitHub"
+    },
+    "onboarding_safari_desc": {
+        "message": "Bifați casetele de lângă extensiile AdGuard în preferințele Safari"
+    },
+    "onboarding_safari_btn": {
+        "message": "Deschide preferințele"
+    },
+    "options_learn_more": {
+        "message": "Aflați mai multe despre asta"
+    },
+    "options_about_version": {
+        "message": "Versiune %s"
+    },
+    "notification_user_filter_updated_title": {
+        "message": "Reguli utilizator actualizate"
+    },
+    "notification_user_filter_updated_desc": {
+        "message": "O nouă regulă a fost adăugată la regulile utilizatorului:"
+    },
+    "options_filters_update_period": {
+        "message": "Interval de actualizare"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "one": "Fiecare oră",
+            "other": "Fiecare %s ore"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "Nu actualizați"
+    },
+    "options_filters_custom_remove": {
+        "message": "elimină"
+    },
+    "options_show_tray_icon": {
+        "message": "Afișați AdGuard pentru Safari în bara de meniu"
+    },
+    "options_launch_at_login": {
+        "message": "Lansați AdGuard pentru Safari la Logare"
+    },
+    "options_verbose_logging": {
+        "message": "Jurnalizare avansată"
+    },
+    "options_verbose_logging_desc": {
+        "message": "Dacă opțiunea este activată, extensiile AdGuard Safari vor tipări informații suplimentare în consola browserului"
+    },
+    "options_enable_hardware_acceleration": {
+        "message": "Activați accelerarea hardware-ului"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Permite accelerarea hardware-ului pentru fereastra de setări. Este necesară repornirea aplicației"
+    },
+    "settings_notification_protection_title": {
+        "message": "Protecția este în pauză"
+    },
+    "settings_notification_protection_button_text": {
+        "message": "Reluați"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Corectați"
+    },
+    "settings_notification_extensions_title": {
+        "message": "Unele extensii AdGuard sunt dezactivate"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Trebuie activate toate extensiile AdGuard pentru o filtrare corectă în Safari"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "Unele extensii de blocare de conținut AdGuard sunt dezactivate"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Trebuie activate TOATE extensiile de blocare conținut AdGuard pentru a filtra corect în Safari"
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard General"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard Privacy"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard Social"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard Security"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard Altele"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard Custom"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s regulă folosită",
+            "other": "%s reguli folosite"
+        }
+    },
+    "options_cb_rules_overlimit_info": {
+        "message": "Limita de 50.000 de reguli a fost depășită. Dezactivați regulile inutile pentru ca aplicația să funcționeze corect.<br/>În prezent, regulile activate: %s (reguli dezactivate: $2)"
+    },
+    "options_cb_disabled_warning": {
+        "message": "Dezactivat în Safari"
+    },
+    "options_cb_compilation_warning": {
+        "message": "Compilarea nu a reușit"
+    },
+    "filters_group_custom": {
+        "message": "Personalizat"
+    },
+    "userfilter_name": {
+        "message": "Filtre utilizator"
+    },
+    "window_close_dialog_message": {
+        "message": "Lăsați AdGuard să funcționeze în fundal?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Este esențial pentru AdGuard să mențină principalul proces pornit în fundal, altfel nu va putea să actualizeze automat filtrele și să gestioneze filtrarea."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Reține alegerea mea"
+    },
+    "window_close_dialog_yes": {
+        "message": "Da (recomandat)"
+    },
+    "window_close_dialog_no": {
+        "message": "Nu"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Anulare"
+    }
+}

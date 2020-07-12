@@ -1,0 +1,449 @@
+{
+    "main_menu_about": {
+        "message": "O AdGuardu za Safari"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "Pouzdano"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "Pouzdani filtri mogu koristiti snažne modifikatore pravila filtriranja, koji u pogrešnim rukama mogu biti opasni. Ne označavajte ako u potpunosti ne vjerujete."
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "pouzdano"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "Izabrali ste vjerovati ovom filtru"
+    },
+    "options_about_update_check": {
+        "message": "Provjera ažuriranja"
+    },
+    "options_about_title": {
+        "message": "AdGuard za Safari"
+    },
+    "options_about_updating": {
+        "message": "Ažuriranje AdGuarda za Safari"
+    },
+    "options_about_updates_not_found": {
+        "message": "AdGuard za Safari je ažuriran"
+    },
+    "options_about_update_downloaded": {
+        "message": "Skoro ažurirano! Ponovno pokrenite AdGuard za Safari za dovršetak ažuriranja."
+    },
+    "options_about_update_relaunch": {
+        "message": "Ponovno pokreni"
+    },
+    "options_popup_title_placeholder": {
+        "message": "Unesite naziv filtra"
+    },
+    "main_menu_hide": {
+        "message": "Sakrij"
+    },
+    "main_menu_close_window": {
+        "message": "Zatvori prozor"
+    },
+    "tray_menu_export_logs": {
+        "message": "Izvoz zapisa i informacija o sustavu..."
+    },
+    "name": {
+        "message": "AdGuard AdBlocker"
+    },
+    "description": {
+        "message": "Najbolje proširenje za blokadu oglasa i skočnih prozora. Blokira oglase na Facebook-u, YouTube-u i drugim web stranicama."
+    },
+    "options_settings": {
+        "message": "AdGuard za Safari - Postavke"
+    },
+    "options_general_settings": {
+        "message": "Općenito"
+    },
+    "options_general_desc": {
+        "message": "AdGuard za Safari je besplatni program, otvorenog kôda. Pozdravljamo vaše povratne informacije i doprinose. Ako želite prijaviti pogrešku ili zatražiti značajku, idite na adresu<a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>našeg GitHub repozitorija</a>."
+    },
+    "options_allow_acceptable_ads": {
+        "message": "Omogućite oglase kod pretraživača i kod samopromocijskih oglasa web stranica"
+    },
+    "options_export_settings": {
+        "message": "Izvoz postavki"
+    },
+    "options_import_settings": {
+        "message": "Uvoz postavki"
+    },
+    "options_antibanner": {
+        "message": "Filtri"
+    },
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s filtar",
+            "other": "%s filtra"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s pravilo",
+            "other": "%s pravila"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s napredno pravilo",
+            "other": "%s napredna pravila"
+        }
+    },
+    "options_filters_enabled": {
+        "message": "Omogućeno:"
+    },
+    "options_filters_enabled_and_more_divider": {
+        "message": "%s i još %s"
+    },
+    "options_filters_enabled_and_divider": {
+        "message": "%s i %s"
+    },
+    "options_filters_no_enabled": {
+        "message": "Nema omogućenih filtara"
+    },
+    "options_filters_version": {
+        "message": "verzija %s"
+    },
+    "options_filters_updated": {
+        "message": "ažurirano: %s"
+    },
+    "options_filters_empty_custom_filters": {
+        "message": "Nažalost, još nemate prilagođene filtre"
+    },
+    "options_filters_empty_custom_add_button": {
+        "message": "Dodaj prilagođeni filtar"
+    },
+    "options_filters_custom_step_one_title": {
+        "message": "Pretplata na novi filtar"
+    },
+    "options_filters_custom_step_one_input_placeholder": {
+        "message": "Unesite URL filtra"
+    },
+    "options_filters_custom_step_one_url_desc": {
+        "message": "Unesite valjani URL za pretplatu filtra."
+    },
+    "options_filters_custom_step_one_url_desc_more": {
+        "message": "AdGuard će dodati pretplatu na ovaj filtar."
+    },
+    "options_filters_custom_step_one_cancel": {
+        "message": "Poništi"
+    },
+    "options_filters_custom_step_one_next": {
+        "message": "Sljedeće"
+    },
+    "options_filters_custom_step_two_checking": {
+        "message": "Preuzimanje filtara"
+    },
+    "options_filters_custom_step_three_title": {
+        "message": "Došlo je do pogreške"
+    },
+    "options_filters_custom_step_three_desc": {
+        "message": "Nažalost, vaš prilagođeni filtar ne može biti dodan zbog ne očekivane pogreške."
+    },
+    "options_filters_custom_step_three_try_again": {
+        "message": "Pokušajte ponovno"
+    },
+    "options_filters_custom_step_final_title": {
+        "message": "Pretplata na novi filtar"
+    },
+    "options_filters_custom_step_final_filter_title": {
+        "message": "Naslov:"
+    },
+    "options_filters_custom_step_final_filter_description": {
+        "message": "Opis:"
+    },
+    "options_filters_custom_step_final_filter_version": {
+        "message": "Verzija:"
+    },
+    "options_filters_custom_step_final_filter_rules_count": {
+        "message": "Broj pravila:"
+    },
+    "options_filters_custom_step_final_filter_homepage": {
+        "message": "Početna stranica:"
+    },
+    "options_filters_custom_step_final_filter_url": {
+        "message": "URL:"
+    },
+    "options_filters_custom_step_final_back": {
+        "message": "Natrag"
+    },
+    "options_filters_custom_step_final_cancel": {
+        "message": "Poništi"
+    },
+    "options_filters_custom_step_final_commit": {
+        "message": "Pretplatite se"
+    },
+    "options_filters_check_filters_update": {
+        "message": "Provjeri ažuriranja za filtre"
+    },
+    "options_whitelist": {
+        "message": "Popis dopuštenih"
+    },
+    "options_whitelist_description": {
+        "message": "AdGuard ne filtrira web stranice iz popisa dopuštenih."
+    },
+    "options_whitelist_inverse": {
+        "message": "Izokrenite popis dopuštenih<span class='sp-table-row-info'>Odblokira oglase svugdje <i>osim</i> na popisu dopuštenih</span>"
+    },
+    "options_userfilter": {
+        "message": "Korisnička pravila"
+    },
+    "options_userfilter_description": {
+        "message": "Ovdje možete dodati svoja pravila. Ova opcija je&nbsp;preporučena naprednim korisnicima upoznatim s HTML/CSS. Pročitajte <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>upute pravila filtriranja</a> kako&nbsp;biste naučili&nbsp;pisati vlastita pravila filtriranja."
+    },
+    "options_show_app_updated_notification": {
+        "message": "Obavijesti o ažuriranjima proširenja"
+    },
+    "options_popup_update_title": {
+        "message": "Uspješno ažurirani filtri"
+    },
+    "options_popup_update_error_title": {
+        "message": "Pogreška pri ažuriranju filtara"
+    },
+    "options_popup_update_not_found": {
+        "message": "Nisu pronađena ažuriranja"
+    },
+    "options_popup_update_error": {
+        "message": "Ne uspješno ažuriranje. Pokušajte ponovno kasnije."
+    },
+    "options_popup_update_updated": {
+        "message": "\"$1\" ažurirano na verziju $2"
+    },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s filtara ažurirano: $2",
+            "other": "%s filtara ažurirano: $2"
+        }
+    },
+    "options_popup_version_update_title": {
+        "message": "AdGuard za Safari je ažuriran na verziju $1."
+    },
+    "options_popup_version_update_description_minor": {
+        "message": "Ova verzija uglavnom sadrži ispravke pogrešaka i manja poboljšanja."
+    },
+    "options_popup_version_update_description_major": {
+        "message": "Ovo je veliko ažuriranje proširenja koja donosi puno novih značajki i poboljšanja."
+    },
+    "notification_content_blocker_overlimit_title": {
+        "message": "Upozorenje"
+    },
+    "notification_content_blocker_overlimit_desc": {
+        "message": "Prevelik broj filtara je odabran. Safari ne može koristiti više od 50 000 pravila unutar jedne grupe."
+    },
+    "options_content_blocker_overlimit": {
+        "message": "Prevelik broj filtara je odabran. Safari ne može koristiti više od 50 000 pravila unutar jedne grupe."
+    },
+    "options_filters_list_search_placeholder": {
+        "message": "Pretraga"
+    },
+    "options_editor_indicator_editing": {
+        "message": "Uređivanje..."
+    },
+    "options_editor_indicator_saving": {
+        "message": "Spremanje..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "Spremljeno"
+    },
+    "main_menu_edit": {
+        "message": "Uredi"
+    },
+    "main_menu_undo": {
+        "message": "Poništi"
+    },
+    "main_menu_cut": {
+        "message": "Izreži"
+    },
+    "main_menu_copy": {
+        "message": "Kopiraj"
+    },
+    "main_menu_paste": {
+        "message": "Zalijepi"
+    },
+    "main_menu_select-all": {
+        "message": "Odaberi sve"
+    },
+    "tray_menu_about": {
+        "message": "O programu"
+    },
+    "tray_menu_preferences": {
+        "message": "Postavke"
+    },
+    "tray_menu_check_updates": {
+        "message": "Provjeri ažuriranja za filtre"
+    },
+    "tray_menu_launch_at_startup": {
+        "message": "Pokreni AdGuard pri prijavi"
+    },
+    "tray_menu_quit": {
+        "message": "Zatvori"
+    },
+    "tray_menu_protection_start": {
+        "message": "Uključeno je blokiranje oglasa u Safariju"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Isključeno je blokiranje oglasa u Safariju"
+    },
+    "options_last_update": {
+        "message": "Zadnje ažurirano:"
+    },
+    "options_about": {
+        "message": "O programu"
+    },
+    "options_content_blockers": {
+        "message": "Blokeri sadržaja"
+    },
+    "options_content_blockers_desc": {
+        "message": "Omogućeni blokeri oglasa: %s od 6 (svaki može sadržavati do 50 000 pravila)"
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": "Blokeri oglasa su onemogućeni"
+    },
+    "options_compare_btn": {
+        "message": "Kako se uspoređuju"
+    },
+    "options_compare_title": {
+        "message": "Isprobajte AdGuard Premium za bolju zaštitu!"
+    },
+    "options_license_agreement": {
+        "message": "Licencni ugovor za krajnjeg korisnika (EULA)"
+    },
+    "options_privacy_policy": {
+        "message": "Politika privatnosti"
+    },
+    "options_acknowledgment": {
+        "message": "Priznanja"
+    },
+    "options_github": {
+        "message": "GitHub"
+    },
+    "onboarding_safari_desc": {
+        "message": "Označite potvrdne okvire pokraj AdGuarda proširenja u postavkama Safarija"
+    },
+    "onboarding_safari_btn": {
+        "message": "Otvori postavke"
+    },
+    "options_learn_more": {
+        "message": "Saznajte više"
+    },
+    "options_about_version": {
+        "message": "Verzija %s"
+    },
+    "notification_user_filter_updated_title": {
+        "message": "Korisnička pravila su ažurirana"
+    },
+    "notification_user_filter_updated_desc": {
+        "message": "Novo pravilo je dodano u korisnička pravila:"
+    },
+    "options_filters_update_period": {
+        "message": "Interval ažuriranja"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "one": "Svaki sat",
+            "other": "Svakih %s sata/i"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "Ne ažuriraj"
+    },
+    "options_filters_custom_remove": {
+        "message": "ukloni"
+    },
+    "options_show_tray_icon": {
+        "message": "Prikaži AdGuard za Safari u izborniku"
+    },
+    "options_launch_at_login": {
+        "message": "Pokreni AdGuard za Safari pri pokretanju"
+    },
+    "options_verbose_logging": {
+        "message": "Opširno zapisivanje"
+    },
+    "options_verbose_logging_desc": {
+        "message": "Ako su opširni zapisi omogućeni, AdGuard Safari proširenja će ispisati dodatne informacije u konzoli preglednika"
+    },
+    "options_enable_hardware_acceleration": {
+        "message": "Omogući hardversko ubrzanje"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Omogućuje ubrzanje hardvera za prozor postavki. Potrebno je ponovno pokretanje aplikacije"
+    },
+    "settings_notification_protection_title": {
+        "message": "Zaštita je pauzirana"
+    },
+    "settings_notification_protection_button_text": {
+        "message": "Nastavi"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Popravi"
+    },
+    "settings_notification_extensions_title": {
+        "message": "Neka AdGuard proširenja su onemogućena"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Omogućite sva AdGuard proširenja za ispravno blokiranje oglasa u Safariju"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "Neka proširenja AdGuard Blokera sadržaja su onemogućena"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Omogućite sva proširenja AdGuard Blokera sadržaja, za ispravno blokiranje oglasa u Safariju"
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard Općenito"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard Privatnost"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard Društveno"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard Sigurnost"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard Ostalo"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard Prilagođeno"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s pravilo/a iskorišteno",
+            "other": "%s pravila iskorišteno"
+        }
+    },
+    "options_cb_rules_overlimit_info": {
+        "message": "Limit od 50 000 pravila je prekoračen. Onemogućite nepotrebna pravila kako bi aplikacija ispravno radila.<br/>Trenutno omogućena pravila: %s (onemogućena pravila: $2)"
+    },
+    "options_cb_disabled_warning": {
+        "message": "Onemogućeno u Safariju"
+    },
+    "options_cb_compilation_warning": {
+        "message": "Kompilacija nije uspjela"
+    },
+    "filters_group_custom": {
+        "message": "Prilagođeno"
+    },
+    "userfilter_name": {
+        "message": "Korisnička pravila"
+    },
+    "window_close_dialog_message": {
+        "message": "Neka AdGuard radi u pozadini?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Ovo je ključno za AdGuard kako bi glavni proces ostao u pozadini, jer u protivnom neće moći automatski provjeriti ažuriranja filtara i upravljati filtriranjem."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Zapamti moj izbor"
+    },
+    "window_close_dialog_yes": {
+        "message": "Da (preporučeno)"
+    },
+    "window_close_dialog_no": {
+        "message": "Ne"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Poništi"
+    }
+}
