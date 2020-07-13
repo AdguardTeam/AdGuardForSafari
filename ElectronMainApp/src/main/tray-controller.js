@@ -58,6 +58,15 @@ module.exports = (() => {
     };
 
     /**
+     * On preferences clicked
+     */
+    const onPreferencesClicked = () => {
+        tray.showMainWindow(() => {
+            listeners.notifyListeners(events.SHOW_OPTIONS_GENERAL_TAB);
+        });
+    };
+
+    /**
      * On export logs clicked
      */
     const onExportLogsClicked = () => {
@@ -231,7 +240,7 @@ module.exports = (() => {
             },
             {
                 label: i18n.__('tray_menu_preferences.message'),
-                click: () => { tray.showMainWindow(); }
+                click: onPreferencesClicked
             },
             {
                 label: i18n.__('tray_menu_check_updates.message'),
