@@ -10,6 +10,7 @@ const log = require('./utils/log');
 const i18n = require('./utils/i18n');
 const filtersUpdate = require('./filters/filters-update');
 const app = require('./app');
+const serviceClient = require('./filters/service-client');
 
 /**
  * Filters manager
@@ -262,11 +263,6 @@ module.exports = (() => {
             return;
         }
 
-        if (!filter.customUrl) {
-            log.error("Filter {0} is not custom and could not be removed", filter.filterId);
-            return;
-        }
-
         log.debug("Remove filter {0}", filter.filterId);
 
         filter.enabled = false;
@@ -276,7 +272,11 @@ module.exports = (() => {
         listeners.notifyListeners(events.FILTER_ENABLE_DISABLE, filter);
         listeners.notifyListeners(events.FILTER_ADD_REMOVE, filter);
 
-        subscriptions.removeCustomFilter(filter);
+        if (filter.customUrl) {
+            subscriptions.removeCustomFilter(filter);
+        } else {
+            subscriptions.removeFilter(filterId);
+        }
     };
 
     /**
@@ -345,6 +345,26 @@ module.exports = (() => {
     };
 
     /**
+     * Removes obsolete filters
+     * https://github.com/AdguardTeam/AdGuardForSafari/issues/134
+     */
+    const removeObsoleteFilters = () => {
+        serviceClient.loadLocalFiltersMetadata(localMetadata => {
+            serviceClient.loadRemoteFiltersMetadata(remoteMetadata => {
+                const obsoleteFiltersMetadata = localMetadata.filters.filter((localFilter) => (
+                    !remoteMetadata.filters.some((remoteFilter) => (
+                        remoteFilter.filterId === localFilter.filterId
+                    ))
+                ))
+                obsoleteFiltersMetadata.forEach((filter) => {
+                    filtersState.removeFilter(filter.filterId);
+                    removeFilter(filter.filterId);
+                });
+            });
+        });
+    }
+
+    /**
      * Checks filters updates.
      *
      * @param forceUpdate Normally we respect filter update period. But if this parameter is
@@ -352,6 +372,7 @@ module.exports = (() => {
      */
     const checkAntiBannerFiltersUpdate = (forceUpdate) => {
         filtersUpdate.checkAntiBannerFiltersUpdate(forceUpdate);
+        removeObsoleteFilters();
     };
 
     /**
@@ -438,6 +459,7 @@ module.exports = (() => {
         loadCustomFilterInfo,
 
         checkAntiBannerFiltersUpdate,
+        removeObsoleteFilters,
     };
 
 })();
