@@ -111,7 +111,7 @@ module.exports = (function () {
             return "@@" + domain + "$document";
         }
 
-        return "@@//" + domain + "$document";
+        return "@@||" + domain + "$document";
     }
 
     /**
