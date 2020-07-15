@@ -1043,23 +1043,12 @@ const AntiBannerFilters = function (options) {
                 const url = document.querySelector('#custom-filter-popup-added-url').href;
                 const title = document.querySelector('#custom-filter-popup-added-title').value || '';
                 const trustedCheckbox = document.querySelector('#custom-filter-popup-trusted');
-                if (url.startsWith('http')) {
-                    ipcRenderer.send('renderer-to-main', JSON.stringify({
-                        'type': 'subscribeToCustomFilter',
-                        url: url,
-                        title: title.trim(),
-                        trusted: trustedCheckbox.checked,
-                    }));
-                }
-                if (url.startsWith('file:')) {
-                    ipcRenderer.send('renderer-to-main', JSON.stringify({
-                        'type': 'subscribeToImportedFilter',
-                        filterData: filter,
-                        title: title.trim(),
-                        trusted: trustedCheckbox.checked,
-                    }));
-                }
-
+                ipcRenderer.send('renderer-to-main', JSON.stringify({
+                    'type': 'subscribeToCustomFilter',
+                    url: url,
+                    title: title.trim(),
+                    trusted: trustedCheckbox.checked,
+                }));
                 closePopup();
             };
             document.querySelector('#custom-filter-popup-added-subscribe').addEventListener('click', onSubscribeClicked);
@@ -1112,68 +1101,6 @@ const AntiBannerFilters = function (options) {
             renderStepTwo();
         }
 
-        /**
-         * Parses filter metadata from rules header
-         *
-         * @param filePath
-         * @param rules
-         * @returns object
-         */
-        const parseFilterDataFromHeader = (filePath, rules) => {
-            function parseTag(tagName) {
-                let result = '';
-
-                //Look up no more than 50 first lines
-                const maxLines = Math.min(50, rules.length);
-                for (let i = 0; i < maxLines; i++) {
-                    const r = rules[i];
-
-                    const search = '! ' + tagName + ': ';
-                    const indexOf = r.indexOf(search);
-                    if (indexOf >= 0) {
-                        result = r.substring(indexOf + search.length);
-                    }
-                }
-
-                return result;
-            }
-
-            const rulesCount = rules.filter(rule => rule.trim().indexOf('!') !== 0).length;
-
-            return {
-                name: parseTag('Title'),
-                description: parseTag('Description'),
-                homepage: parseTag('Homepage'),
-                version: parseTag('Version'),
-                expires: parseTag('Expires'),
-                timeUpdated: parseTag('TimeUpdated'),
-                rulesCount: rulesCount,
-                customUrl: filePath,
-                filterContent: rules,
-            };
-        };
-
-        const createFilterFromImportedFile = (event) => {
-            const fileInput = event.target;
-            const file = fileInput.files[0];
-            const filePath = `file://${file.path}`;
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const customFilterContent = e.target.result.split('\n');
-                const filterData = parseFilterDataFromHeader(filePath, customFilterContent);
-                renderStepFour(filterData);
-            };
-            reader.onerror = function (err) {
-                throw new Error(`${i18n.getMessage('options_popup_import_file_error_title')} ${err.message}`);
-            };
-            if (file) {
-                if (file.type !== 'text/plain') {
-                    throw new Error(i18n.getMessage('options_popup_import_file_error_title'));
-                }
-                reader.readAsText(file, 'utf-8');
-            }
-        };
-
         function bindEvents() {
             // Step one events
             document.querySelector("#custom-filter-popup-url").addEventListener('keyup', function (e) {
@@ -1191,15 +1118,21 @@ const AntiBannerFilters = function (options) {
             customFilterImportBtn.addEventListener('click', (event) => {
                 event.preventDefault();
                 importCustomFilterFile.click();
+                importCustomFilterFile.value = '';
             });
 
             importCustomFilterFile.addEventListener('change', (event) => {
-                try {
-                    createFilterFromImportedFile(event);
-                    importCustomFilterFile.value = '';
-                } catch (err) {
-                    renderStepThree();
-                }
+                const fileInput = event.target;
+                const file = fileInput.files[0];
+                const filePath = `file://${file.path}`;
+                ipcRenderer.send('renderer-to-main', JSON.stringify({
+                    'type': 'loadCustomFilterInfo',
+                    url: filePath
+                }));
+
+                ipcRenderer.on('loadCustomFilterInfoResponse', (e, arg) => {
+                    arg ? renderStepFour(arg) : renderStepThree();
+                });
             });
 
             // Step three events
@@ -1805,8 +1738,10 @@ PageController.prototype = {
             const contentBlockersEnabled = arg.contentBlockersEnabled;
             const minorExtensionsEnabled = arg.minorExtensionsEnabled;
 
-            body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
-            onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
+            // body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
+            // onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
+            body.style.overflow = 'auto';
+            onBoardingScreenEl.style.display = 'none';
 
             const hideExtensionsNotification = window.localStorage.getItem(hideExtensionsNotificationKey) === "true";
             const extensionsFlag = contentBlockersEnabled && minorExtensionsEnabled;

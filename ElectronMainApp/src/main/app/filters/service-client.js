@@ -256,6 +256,10 @@ module.exports = (function () {
             errorCallback(cause);
         };
 
+        if (url.startsWith('file://')) {
+            url = path.resolve(url.replace('file://', ''));
+        }
+
         filterDownloader.download(url, FilterCompilerConditionsConstants).then(success, error);
     };
 

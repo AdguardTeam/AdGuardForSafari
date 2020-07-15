@@ -388,35 +388,6 @@ module.exports = (() => {
     };
 
     /**
-     * Subscribes for imported custom filter
-     *
-     * @param filterData
-     * @param options object containing title of custom filter
-     * @param successCallback
-     * @param errorCallback
-     */
-    const subscribeToImportedFilter = (filterData, options, successCallback, errorCallback) => {
-        errorCallback = errorCallback || function () { };
-
-        if (!filterData) {
-            errorCallback();
-            return;
-        }
-
-        subscriptions.updateImportedFilter(filterData, options, filterId => {
-            if (filterId) {
-                log.info('Custom filter imported from file');
-
-                const filter = subscriptions.getFilter(filterId);
-
-                successCallback(filter);
-            } else {
-                errorCallback();
-            }
-        });
-    };
-
-    /**
      * Loads custom filter info from url, but doesn't save filter to storage
      *
      * @param url
@@ -464,7 +435,6 @@ module.exports = (() => {
 
         offerGroupsAndFilters,
         subscribeToCustomFilter,
-        subscribeToImportedFilter,
         loadCustomFilterInfo,
 
         checkAntiBannerFiltersUpdate,

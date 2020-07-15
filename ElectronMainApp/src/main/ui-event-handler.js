@@ -90,12 +90,6 @@ module.exports.init = function () {
                     filters.addAndEnableFilters([filter.filterId]);
                 });
                 break;
-            case 'subscribeToImportedFilter':
-                const { filterData } = message;
-                filters.subscribeToImportedFilter(filterData, { title, trusted }, (filter) => {
-                    filters.addAndEnableFilters([filter.filterId]);
-                });
-                break;
             case 'getSafariExtensionsState':
                 toolbarController.getExtensionsState((result) => {
                     sendResponse(event, 'getSafariExtensionsStateResponse', result);
