@@ -285,13 +285,13 @@ const Saver = function (options) {
  * @param editor
  * @param {String} editorId
  */
-const handleEditorResize = (editor, editorId) => {
+const handleEditorResize = (editor) => {
+    const editorId = editor.container.id;
     const DRAG_TIMEOUT_MS = 100;
     const editorParent = editor.container.parentNode;
 
     const saveSize = (editorParent) => {
-        const { width } = editorParent.style;
-        const { height } = editorParent.style;
+        const { width, height } = editorParent.style;
         if (width && height) {
             localStorage.setItem(editorId, JSON.stringify({ size: { width, height } }));
         }
@@ -343,7 +343,7 @@ const WhiteListFilter = function (options) {
 
     const editorId = 'whiteListRules';
     const editor = ace.edit(editorId);
-    handleEditorResize(editor, editorId);
+    handleEditorResize(editor);
 
     editor.setShowPrintMargin(false);
 
@@ -415,7 +415,7 @@ const UserFilter = function () {
 
     const editorId = 'userRules';
     const editor = ace.edit(editorId);
-    handleEditorResize(editor, editorId);
+    handleEditorResize(editor);
 
     editor.setShowPrintMargin(false);
 
