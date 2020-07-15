@@ -1970,6 +1970,9 @@ const initPage = function (response) {
                     const filtersInfo = controller.antiBannerFilters.getFiltersInfo(options.filterGroups, userFilterEnabled);
                     controller.contentBlockers.updateExtensionState(options.bundleId, options, filtersInfo);
                     break;
+                case EventNotifierTypes.SHOW_OPTIONS_GENERAL_TAB:
+                    window.location.hash = 'general-settings';
+                    break;
                 case EventNotifierTypes.SHOW_OPTIONS_FILTERS_TAB:
                     window.location.hash = 'antibanner';
                     break;
