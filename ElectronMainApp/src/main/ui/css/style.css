@@ -775,7 +775,8 @@ li.active .toggler:before {
 /* st */
 .user-rules {
   width: 100%;
-  height: 300px;
+  height: 100%;
+  border: 1px solid #EDEDED;
 }
 @-webkit-keyframes clockwise {
   0% {
@@ -952,7 +953,17 @@ li.active .toggler:before {
 }
 /* /st */
 .filter-rules {
-  border: 1px solid #EDEDED;
+  width: 100%;
+  height: 200px;
+  resize: both;
+  min-width: 100%;
+  min-height: 150px;
+  max-width: 600px;
+  max-height: 100%;
+  box-shadow: inset -10px 0 0 0 #f0f0f0;
+  position: relative;
+  overflow: hidden;
+  padding-right: 10px;
 }
 .filter-rules textarea {
   border: 0;
