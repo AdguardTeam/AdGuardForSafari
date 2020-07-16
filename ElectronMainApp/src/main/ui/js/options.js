@@ -960,6 +960,7 @@ const AntiBannerFilters = function (options) {
             document.querySelector('#add-custom-filter-step-2').classList.remove(POPUP_ACTIVE_CLASS);
             document.querySelector('#add-custom-filter-step-3').classList.remove(POPUP_ACTIVE_CLASS);
             document.querySelector('#add-custom-filter-step-4').classList.remove(POPUP_ACTIVE_CLASS);
+            document.querySelector('#add-custom-filter-step-5').classList.remove(POPUP_ACTIVE_CLASS);
 
             document.querySelector('#custom-filter-popup-close').style.display = 'block';
         }
@@ -1049,7 +1050,10 @@ const AntiBannerFilters = function (options) {
                     title: title.trim(),
                     trusted: trustedCheckbox.checked,
                 }));
-                closePopup();
+                renderStepFive();
+                ipcRenderer.on('subscribeToCustomFilterSuccessResponse', () => {
+                    closePopup();
+                });
             };
             document.querySelector('#custom-filter-popup-added-subscribe').addEventListener('click', onSubscribeClicked);
 
@@ -1079,6 +1083,12 @@ const AntiBannerFilters = function (options) {
                 closePopup();
             };
             document.querySelector('#custom-filter-popup-close').addEventListener('click', onPopupCloseClicked);
+        }
+
+        function renderStepFive() {
+            clearActiveStep();
+            document.querySelector('#add-custom-filter-step-5').classList.add(POPUP_ACTIVE_CLASS);
+            document.querySelector('#custom-filter-popup-close').style.display = 'none';
         }
 
         function submitUrl(e) {

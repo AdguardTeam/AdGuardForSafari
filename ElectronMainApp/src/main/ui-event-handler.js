@@ -87,6 +87,7 @@ module.exports.init = function () {
                 const { url, title, trusted } = message;
                 filters.subscribeToCustomFilter(url, { title, trusted }, (filter) => {
                     filters.addAndEnableFilters([filter.filterId]);
+                    sendResponse(event, 'subscribeToCustomFilterSuccessResponse');
                 });
                 break;
             case 'getSafariExtensionsState':
