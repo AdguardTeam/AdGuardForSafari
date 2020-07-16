@@ -25,7 +25,6 @@ module.exports.init = function () {
     ipcMain.on('renderer-to-main', function (event, arg) {
 
         const message = JSON.parse(arg);
-        const { title, trusted } = message;
         switch (message.type) {
             case 'initializeOptionsPage':
                 sendResponse(event, 'initializeOptionsPageResponse', processInitializeFrameScriptRequest());
@@ -85,7 +84,7 @@ module.exports.init = function () {
                 );
                 break;
             case 'subscribeToCustomFilter':
-                const { url } = message;
+                const { url, title, trusted } = message;
                 filters.subscribeToCustomFilter(url, { title, trusted }, (filter) => {
                     filters.addAndEnableFilters([filter.filterId]);
                 });

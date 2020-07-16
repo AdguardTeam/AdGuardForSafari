@@ -631,7 +631,7 @@ module.exports = (function () {
         updateCustomFilter: updateCustomFilter,
         getCustomFilterInfo: getCustomFilterInfo,
         removeCustomFilter: removeCustomFilter,
-        isTrustedFilter: isTrustedFilter,
+        isTrustedFilter: isTrustedFilter
     };
 
 })();
