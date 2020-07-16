@@ -1041,12 +1041,12 @@ const AntiBannerFilters = function (options) {
             }
             onSubscribeClicked = (e) => {
                 e.preventDefault();
-                const url = document.querySelector('#custom-filter-popup-added-url').href;
+                // const url = document.querySelector('#custom-filter-popup-added-url').href;
                 const title = document.querySelector('#custom-filter-popup-added-title').value || '';
                 const trustedCheckbox = document.querySelector('#custom-filter-popup-trusted');
                 ipcRenderer.send('renderer-to-main', JSON.stringify({
                     'type': 'subscribeToCustomFilter',
-                    url: url,
+                    url: filter.customUrl,
                     title: title.trim(),
                     trusted: trustedCheckbox.checked,
                 }));
@@ -1055,7 +1055,7 @@ const AntiBannerFilters = function (options) {
                     closePopup();
                 });
                 ipcRenderer.on('subscribeToCustomFilterErrorResponse', () => {
-                    closePopup();
+                    renderStepThree();
                 });
             };
             document.querySelector('#custom-filter-popup-added-subscribe').addEventListener('click', onSubscribeClicked);

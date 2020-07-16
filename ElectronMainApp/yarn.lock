@@ -1131,9 +1131,9 @@ fill-range@^4.0.0:
     repeat-string "^1.6.1"
     to-regex-range "^2.1.0"
 
-"filters-downloader@git+https://github.com/AdguardTeam/FiltersDownloader.git#a7d2177":
-  version "1.0.5"
-  resolved "git+https://github.com/AdguardTeam/FiltersDownloader.git#a7d21771d373c20bc03ae6746b9f94b5967df2bf"
+"filters-downloader@git+https://github.com/AdguardTeam/FiltersDownloader.git#v1.0.14":
+  version "1.0.14"
+  resolved "git+https://github.com/AdguardTeam/FiltersDownloader.git#cdeb139a07668f86a131e5155e86efe5ca534ed0"
   dependencies:
     axios "^0.18.0"
 
