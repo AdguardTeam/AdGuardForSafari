@@ -1717,8 +1717,10 @@ PageController.prototype = {
             const contentBlockersEnabled = arg.contentBlockersEnabled;
             const minorExtensionsEnabled = arg.minorExtensionsEnabled;
 
-            body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
-            onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
+            // body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
+            // onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
+            body.style.overflow = 'auto';
+            onBoardingScreenEl.style.display = 'none';
 
             const hideExtensionsNotification = window.localStorage.getItem(hideExtensionsNotificationKey) === "true";
             const extensionsFlag = contentBlockersEnabled && minorExtensionsEnabled;

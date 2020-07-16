@@ -554,7 +554,7 @@ module.exports = (function () {
     const getFilter = filterId => filtersMap[filterId];
 
     /**
-     * Removes filter from storage
+     * Removes filter metadata by id
      * @param filterId
      */
     const removeFilter = (filterId) => {
