@@ -104,10 +104,7 @@ module.exports = (function () {
             onUpdateLaunchAtLogin();
         }
 
-        if (versionUtils.isGreaterVersion("1.8.0", runInfo.prevVersion)) {
-            removeObsoleteFilters();
-        }
-
+        removeObsoleteFilters();
         callback();
     };
 
