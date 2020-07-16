@@ -235,6 +235,10 @@ module.exports = (function () {
      */
     const loadFilterRulesBySubscriptionUrl = function (url, successCallback, errorCallback) {
 
+        if (url.startsWith('file://')) {
+            url = path.resolve(url.replace('file://', ''));
+        }
+
         if (url in loadingSubscriptions) {
             return;
         }
@@ -255,10 +259,6 @@ module.exports = (function () {
             delete loadingSubscriptions[url];
             errorCallback(cause);
         };
-
-        if (url.startsWith('file://')) {
-            url = path.resolve(url.replace('file://', ''));
-        }
 
         filterDownloader.download(url, FilterCompilerConditionsConstants).then(success, error);
     };

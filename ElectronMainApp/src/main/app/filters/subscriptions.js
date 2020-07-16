@@ -308,50 +308,6 @@ module.exports = (function () {
         });
     };
 
-    // const updateImportedFilter = (filterData, options, callback) => {
-    //     const { title, trusted } = options;
-    //
-    //     const filterId = addFilterId();
-    //     const groupId = CUSTOM_FILTERS_GROUP_ID;
-    //     const defaultName = title;
-    //     const defaultDescription = filterData.description;
-    //     const homepage = filterData.homepage;
-    //     const version = filterData.version;
-    //     const timeUpdated = filterData.timeUpdated || new Date().toString();
-    //     const expires = filterData.expires;
-    //     const subscriptionUrl = filterData.customUrl;
-    //     const languages = [];
-    //     const displayNumber = 0;
-    //     const tags = [0];
-    //     const rulesCount = filterData.rulesCount;
-    //
-    //     let filter = filters.find((filter) => filter.customUrl === filterData.customUrl);
-    //     if (filter) {
-    //         removeCustomFilter(filter);
-    //         filters = filters.filter((filter) => filter.customUrl !== filterData.customUrl);
-    //     }
-    //
-    //     filter = new SubscriptionFilter(filterId, groupId, defaultName, defaultDescription, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
-    //     filter.loaded = true;
-    //     //custom filters have special fields
-    //     filter.customUrl = filterData.customUrl;
-    //     filter.rulesCount = rulesCount;
-    //     filter.trusted = trusted;
-    //
-    //     filters.push(filter);
-    //     filtersMap[filter.filterId] = filter;
-    //
-    //     // Save filter in separate storage
-    //     saveCustomFilter(filter);
-    //
-    //     listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
-    //
-    //     listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, filterData.filterContent);
-    //
-    //     callback(filter.filterId);
-    // };
-
-
     const CUSTOM_FILTERS_JSON_KEY = 'custom_filters';
 
     /**
