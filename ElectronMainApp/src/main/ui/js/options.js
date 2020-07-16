@@ -1128,7 +1128,6 @@ const AntiBannerFilters = function (options) {
             customFilterImportBtn.addEventListener('click', (event) => {
                 event.preventDefault();
                 importCustomFilterFile.click();
-                importCustomFilterFile.value = '';
             });
 
             importCustomFilterFile.addEventListener('change', (event) => {
@@ -1141,6 +1140,7 @@ const AntiBannerFilters = function (options) {
                 }));
 
                 ipcRenderer.on('loadCustomFilterInfoResponse', (e, arg) => {
+                    importCustomFilterFile.value = '';
                     arg ? renderStepFour(arg) : renderStepThree();
                 });
             });
