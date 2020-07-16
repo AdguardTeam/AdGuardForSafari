@@ -85,10 +85,14 @@ module.exports.init = function () {
                 break;
             case 'subscribeToCustomFilter':
                 const { url, title, trusted } = message;
-                filters.subscribeToCustomFilter(url, { title, trusted }, (filter) => {
-                    filters.addAndEnableFilters([filter.filterId]);
-                    sendResponse(event, 'subscribeToCustomFilterSuccessResponse');
-                });
+                filters.subscribeToCustomFilter(
+                    url,
+                    { title, trusted },
+                    (filter) => {
+                        filters.addAndEnableFilters([filter.filterId]);
+                        sendResponse(event, 'subscribeToCustomFilterSuccessResponse');
+                        },
+                    () => { sendResponse(event, 'subscribeToCustomFilterErrorResponse') });
                 break;
             case 'getSafariExtensionsState':
                 toolbarController.getExtensionsState((result) => {

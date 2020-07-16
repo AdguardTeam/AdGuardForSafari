@@ -1054,6 +1054,9 @@ const AntiBannerFilters = function (options) {
                 ipcRenderer.on('subscribeToCustomFilterSuccessResponse', () => {
                     closePopup();
                 });
+                ipcRenderer.on('subscribeToCustomFilterErrorResponse', () => {
+                    closePopup();
+                });
             };
             document.querySelector('#custom-filter-popup-added-subscribe').addEventListener('click', onSubscribeClicked);
 
@@ -1131,8 +1134,7 @@ const AntiBannerFilters = function (options) {
             });
 
             importCustomFilterFile.addEventListener('change', (event) => {
-                const fileInput = event.target;
-                const file = fileInput.files[0];
+                const file = event.target.files[0];
                 const filePath = `file://${file.path}`;
                 ipcRenderer.send('renderer-to-main', JSON.stringify({
                     'type': 'loadCustomFilterInfo',
