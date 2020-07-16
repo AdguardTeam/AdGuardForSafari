@@ -372,7 +372,6 @@ module.exports = (() => {
      */
     const checkAntiBannerFiltersUpdate = (forceUpdate) => {
         filtersUpdate.checkAntiBannerFiltersUpdate(forceUpdate);
-        removeObsoleteFilters();
     };
 
     /**
