@@ -104,7 +104,6 @@ module.exports = (() => {
     const removeFilter = (filterId) => {
         const filters = getFiltersState();
         delete filters[filterId];
-        localStorage.removeItem(FILTERS_STATE_PROP);
         localStorage.setItem(FILTERS_STATE_PROP, JSON.stringify(filters));
     };
 
