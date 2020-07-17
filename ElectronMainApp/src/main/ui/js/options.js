@@ -1033,6 +1033,7 @@ const AntiBannerFilters = function (options) {
         function renderStepFour(filter) {
             clearActiveStep();
             document.querySelector('#add-custom-filter-step-4').classList.add(POPUP_ACTIVE_CLASS);
+            document.querySelector('#custom-filter-popup-trusted').checked = false;
 
             fillLoadedFilterDetails(filter);
 
@@ -1041,7 +1042,6 @@ const AntiBannerFilters = function (options) {
             }
             onSubscribeClicked = (e) => {
                 e.preventDefault();
-                // const url = document.querySelector('#custom-filter-popup-added-url').href;
                 const title = document.querySelector('#custom-filter-popup-added-title').value || '';
                 const trustedCheckbox = document.querySelector('#custom-filter-popup-trusted');
                 ipcRenderer.send('renderer-to-main', JSON.stringify({
@@ -1750,8 +1750,10 @@ PageController.prototype = {
             const contentBlockersEnabled = arg.contentBlockersEnabled;
             const minorExtensionsEnabled = arg.minorExtensionsEnabled;
 
-            body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
-            onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
+            // body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
+            // onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
+            body.style.overflow = 'auto';
+            onBoardingScreenEl.style.display = 'none';
 
             const hideExtensionsNotification = window.localStorage.getItem(hideExtensionsNotificationKey) === "true";
             const extensionsFlag = contentBlockersEnabled && minorExtensionsEnabled;
