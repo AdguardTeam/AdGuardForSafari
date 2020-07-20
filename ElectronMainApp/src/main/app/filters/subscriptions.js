@@ -261,30 +261,24 @@ module.exports = (function () {
             const rulesCount = rules.length;
 
             //Check if filter from this url was added before
-            let filter = filters.find(function (f) {
+            let filter = loadCustomFilters().find(function (f) {
                 return f.customUrl === url;
             });
 
             if (filter) {
-
-                //In case filter was removed and is loading again now
-                delete filter.removed;
-                filter.trusted = trusted;
-                filter.name = title;
-
-                restoreCustomFilter(filter);
-
-                listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
 
                 if (version && !versionUtils.isGreaterVersion(version, filter.version)) {
                     log.warn('Update version is not greater');
                     listeners.notifyListeners(
                         events.UPDATE_CUSTOM_FILTER_ERROR,
                         { reason: i18.__('options_popup_update_version_error.message') }
-                        );
+                    );
                     callback();
                     return;
                 }
+                restoreCustomFilter(filter);
+                listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
+
             } else {
                 filter = new SubscriptionFilter(filterId, groupId, defaultName, defaultDescription, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
                 filter.loaded = true;
@@ -335,10 +329,11 @@ module.exports = (function () {
         let customFilters = loadCustomFilters();
         customFilters.forEach(f => {
             if (f.filterId === filter.filterId) {
-                delete f.removed;
                 f.trusted = filter.trusted;
                 f.title = filter.title;
+                f.timeUpdated = new Date();
             }
+            debugger;
         });
 
         localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(customFilters));
@@ -351,13 +346,9 @@ module.exports = (function () {
      */
     const removeCustomFilter = (filter) => {
         let customFilters = loadCustomFilters();
-        customFilters.forEach(f => {
-            if (f.filterId === filter.filterId) {
-                f.removed = true;
-            }
-        });
+        const updatedFilters = customFilters.filter(f => f.filterId !== filter.filterId);
 
-        localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(customFilters));
+        localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(updatedFilters));
     };
 
     /**
