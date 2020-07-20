@@ -1051,10 +1051,10 @@ const AntiBannerFilters = function (options) {
                     trusted: trustedCheckbox.checked,
                 }));
                 renderStepFive();
-                ipcRenderer.on('subscribeToCustomFilterSuccessResponse', () => {
+                ipcRenderer.once('subscribeToCustomFilterSuccessResponse', () => {
                     closePopup();
                 });
-                ipcRenderer.on('subscribeToCustomFilterErrorResponse', () => {
+                ipcRenderer.once('subscribeToCustomFilterErrorResponse', () => {
                     renderStepThree();
                 });
             };
@@ -1141,7 +1141,7 @@ const AntiBannerFilters = function (options) {
                     url: filePath
                 }));
 
-                ipcRenderer.on('loadCustomFilterInfoResponse', (e, arg) => {
+                ipcRenderer.once('loadCustomFilterInfoResponse', (e, arg) => {
                     importCustomFilterFile.value = '';
                     arg ? renderStepFour(arg) : renderStepThree();
                 });
