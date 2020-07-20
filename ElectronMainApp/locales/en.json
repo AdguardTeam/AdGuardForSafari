@@ -141,7 +141,7 @@
         "message": "Downloading the filter"
     },
     "options_filters_custom_step_two_subscribing": {
-        "message": "Subscribing for the filter"
+        "message": "Subscribing to the filter"
     },
     "options_filters_custom_step_three_title": {
         "message": "Error occurred"
@@ -210,7 +210,7 @@
         "message": "Filters' update error"
     },
     "options_popup_update_version_error": {
-        "message": "Update version is not greater"
+        "message": "The version of filter you're trying to update is older"
     },
     "options_popup_update_not_found": {
         "message": "No updates found"
