@@ -359,6 +359,7 @@ module.exports = (() => {
                 obsoleteFiltersMetadata.forEach((filter) => {
                     filtersState.removeFilter(filter.filterId);
                     removeFilter(filter.filterId);
+                    subscriptions.removeCustomFilter(filter);
                 });
             });
         });
