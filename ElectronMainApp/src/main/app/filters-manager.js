@@ -368,7 +368,7 @@ module.exports = (() => {
                 updateFiltersJson(remoteMetadata);
                 const obsoleteFiltersMetadata = localMetadata.filters.filter((localFilter) => (
                     !remoteMetadata.filters.some((remoteFilter) => (
-                        remoteFilter.filterId === localFilter.filterId
+                        remoteFilter.filterId === localFilter.filterId && remoteFilter.name === localFilter.name
                     ))
                 ))
                 obsoleteFiltersMetadata.forEach((filter) => {
@@ -386,7 +386,6 @@ module.exports = (() => {
      *                    true - we ignore it and check updates for all filters.
      */
     const checkAntiBannerFiltersUpdate = (forceUpdate) => {
-        removeObsoleteFilters();
         filtersUpdate.checkAntiBannerFiltersUpdate(forceUpdate);
     };
 
