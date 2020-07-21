@@ -11,6 +11,9 @@ const i18n = require('./utils/i18n');
 const filtersUpdate = require('./filters/filters-update');
 const app = require('./app');
 const serviceClient = require('./filters/service-client');
+const appPack = require('../../utils/app-pack');
+const fs = require('fs');
+const path = require('path');
 
 /**
  * Filters manager
@@ -267,7 +270,6 @@ module.exports = (() => {
 
         filter.enabled = false;
         filter.installed = false;
-        filter.removed = true;
 
         listeners.notifyListeners(events.FILTER_ENABLE_DISABLE, filter);
         listeners.notifyListeners(events.FILTER_ADD_REMOVE, filter);
@@ -345,12 +347,25 @@ module.exports = (() => {
     };
 
     /**
+     * Updates filters.json
+     * @param {object} metaData
+     */
+    const updateFiltersJson = (metaData) => {
+        const filtersJsonPath = path.resolve(appPack.resourcePath(config.get('localFiltersFolder')) + '/filters.json');
+        const updatedData = JSON.stringify(metaData, null, 4)
+
+        fs.writeFileSync(filtersJsonPath, updatedData);
+        log.info('Filters.json updated');
+    }
+
+    /**
      * Removes obsolete filters
      * https://github.com/AdguardTeam/AdGuardForSafari/issues/134
      */
     const removeObsoleteFilters = () => {
         serviceClient.loadLocalFiltersMetadata(localMetadata => {
             serviceClient.loadRemoteFiltersMetadata(remoteMetadata => {
+                updateFiltersJson(remoteMetadata);
                 const obsoleteFiltersMetadata = localMetadata.filters.filter((localFilter) => (
                     !remoteMetadata.filters.some((remoteFilter) => (
                         remoteFilter.filterId === localFilter.filterId
@@ -359,7 +374,6 @@ module.exports = (() => {
                 obsoleteFiltersMetadata.forEach((filter) => {
                     filtersState.removeFilter(filter.filterId);
                     removeFilter(filter.filterId);
-                    subscriptions.removeCustomFilter(filter);
                 });
             });
         });
@@ -372,6 +386,7 @@ module.exports = (() => {
      *                    true - we ignore it and check updates for all filters.
      */
     const checkAntiBannerFiltersUpdate = (forceUpdate) => {
+        removeObsoleteFilters();
         filtersUpdate.checkAntiBannerFiltersUpdate(forceUpdate);
     };
 
