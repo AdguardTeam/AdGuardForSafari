@@ -32,6 +32,7 @@ const EventNotifierTypes = module.exports = {
     CONTENT_BLOCKER_UPDATE_REQUIRED: "event.content.blocker.update.required",
     SHOW_OPTIONS_FILTERS_TAB: "event.show.options.filters",
     SHOW_OPTIONS_USER_FILTER_TAB: "event.show.options.user.filter",
+    SHOW_OPTIONS_GENERAL_TAB: "event.show.options.general",
     SHOW_OPTIONS_ABOUT_TAB: "event.show.options.about",
     LAUNCH_AT_LOGIN_UPDATED: "event.launch.login.updated",
     PROTECTION_STATUS_CHANGED: "event.protection.status.updated",

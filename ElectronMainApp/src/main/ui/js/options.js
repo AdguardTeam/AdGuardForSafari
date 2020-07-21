@@ -281,6 +281,57 @@ const Saver = function (options) {
 };
 
 /**
+ * Function changes editor size while user resizes editor parent node
+ * @param editor
+ * @param {String} editorId
+ */
+const handleEditorResize = (editor) => {
+    const editorId = editor.container.id;
+    const DRAG_TIMEOUT_MS = 100;
+    const editorParent = editor.container.parentNode;
+
+    const saveSize = (editorParent) => {
+        const { width, height } = editorParent.style;
+        if (width && height) {
+            localStorage.setItem(editorId, JSON.stringify({ size: { width, height } }));
+        }
+    };
+
+    const restoreSize = (editorParent) => {
+        const dataJson = localStorage.getItem(editorId);
+        if (!dataJson) {
+            return;
+        }
+        const { size } = JSON.parse(dataJson);
+        const { width, height } = size || {};
+        if (width && height) {
+            editorParent.style.width = width;
+            editorParent.style.height = height;
+        }
+    };
+
+    // restore size is it was set previously set;
+    restoreSize(editorParent);
+
+    const onMouseMove = Utils.debounce(() => {
+        editor.resize();
+    }, DRAG_TIMEOUT_MS);
+
+    const onMouseUp = () => {
+        saveSize(editorParent);
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    editorParent.addEventListener('mousedown', (e) => {
+        if (e.target === e.currentTarget) {
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        }
+    });
+};
+
+/**
  * Whitelist block
  *
  * @param options
@@ -290,7 +341,10 @@ const Saver = function (options) {
 const WhiteListFilter = function (options) {
     'use strict';
 
-    const editor = ace.edit('whiteListRules');
+    const editorId = 'whiteListRules';
+    const editor = ace.edit(editorId);
+    handleEditorResize(editor);
+
     editor.setShowPrintMargin(false);
 
     editor.$blockScrolling = Infinity;
@@ -359,7 +413,10 @@ const WhiteListFilter = function (options) {
 const UserFilter = function () {
     'use strict';
 
-    const editor = ace.edit('userRules');
+    const editorId = 'userRules';
+    const editor = ace.edit(editorId);
+    handleEditorResize(editor);
+
     editor.setShowPrintMargin(false);
 
     editor.$blockScrolling = Infinity;
@@ -1945,6 +2002,9 @@ const initPage = function (response) {
                     const userFilterEnabled = !controller.userFilter.isUserFilterEmpty();
                     const filtersInfo = controller.antiBannerFilters.getFiltersInfo(options.filterGroups, userFilterEnabled);
                     controller.contentBlockers.updateExtensionState(options.bundleId, options, filtersInfo);
+                    break;
+                case EventNotifierTypes.SHOW_OPTIONS_GENERAL_TAB:
+                    window.location.hash = 'general-settings';
                     break;
                 case EventNotifierTypes.SHOW_OPTIONS_FILTERS_TAB:
                     window.location.hash = 'antibanner';

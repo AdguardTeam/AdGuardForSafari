@@ -333,7 +333,6 @@ module.exports = (function () {
                 f.title = filter.title;
                 f.timeUpdated = new Date();
             }
-            debugger;
         });
 
         localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(customFilters));
