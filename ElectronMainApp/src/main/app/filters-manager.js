@@ -368,6 +368,8 @@ module.exports = (() => {
                 updateFiltersJson(remoteMetadata);
                 const obsoleteFiltersMetadata = localMetadata.filters.filter((localFilter) => (
                     !remoteMetadata.filters.some((remoteFilter) => (
+                        // compare filter's id and name for the case
+                        // if id of obsolete filter is given to another filter
                         remoteFilter.filterId === localFilter.filterId && remoteFilter.name === localFilter.name
                     ))
                 ))
