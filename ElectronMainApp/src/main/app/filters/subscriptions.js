@@ -547,6 +547,15 @@ module.exports = (function () {
     const getFilter = filterId => filtersMap[filterId];
 
     /**
+     * Removes filter metadata by id
+     * @param filterId
+     */
+    const removeFilter = (filterId) => {
+        filters = filters.filter((f) => f.filterId !== filterId);
+        delete filtersMap[filterId];
+    }
+
+    /**
      * @returns Array of Tags metadata
      */
     const getTags = () => tags;
@@ -612,6 +621,8 @@ module.exports = (function () {
         return !!(filter && filter.trusted && filter.trusted === true);
     };
 
+
+
     return {
         init: init,
         getFilterIdsForLanguage: getFilterIdsForLanguage,
@@ -625,7 +636,8 @@ module.exports = (function () {
         updateCustomFilter: updateCustomFilter,
         getCustomFilterInfo: getCustomFilterInfo,
         removeCustomFilter: removeCustomFilter,
-        isTrustedFilter: isTrustedFilter
+        isTrustedFilter: isTrustedFilter,
+        removeFilter: removeFilter
     };
 
 })();

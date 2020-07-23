@@ -98,6 +98,16 @@ module.exports = (() => {
     };
 
     /**
+     * Removes filter from the local storage
+     * @param filterId
+     */
+    const removeFilter = (filterId) => {
+        const filters = getFiltersState();
+        delete filters[filterId];
+        localStorage.setItem(FILTERS_STATE_PROP, JSON.stringify(filters));
+    };
+
+    /**
      * Updates group enable state in the local storage
      *
      * @param group - SubscriptionGroup object
@@ -139,7 +149,8 @@ module.exports = (() => {
         getGroupState,
         updateFilterVersion,
         updateFilterState,
-        updateGroupState
+        updateGroupState,
+        removeFilter
     };
 
 })();

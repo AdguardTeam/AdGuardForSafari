@@ -282,6 +282,30 @@ module.exports = (function () {
     };
 
     /**
+     * Load metadata of all filters
+     *
+     * @param successCallback   Called on success
+     * @param errorCallback     Called on error
+     */
+    const loadRemoteFiltersMetadata = function (successCallback, errorCallback) {
+
+        const success = function (response) {
+            if (response && response.responseText) {
+                let metadata = parseJson(response.responseText);
+                if (!metadata) {
+                    errorCallback(response, "invalid response");
+                    return;
+                }
+                successCallback(metadata);
+            } else {
+                errorCallback(response, "empty response");
+            }
+        };
+
+        executeRequestAsync(settings.filtersMetadataUrl, "application/json", success, errorCallback);
+    };
+
+    /**
      * Loads filter groups metadata
      *
      * @param successCallback   Called on success
@@ -312,6 +336,8 @@ module.exports = (function () {
 
         loadLocalFiltersMetadata: loadLocalFiltersMetadata,
         loadLocalFiltersI18Metadata: loadLocalFiltersI18Metadata,
+
+        loadRemoteFiltersMetadata: loadRemoteFiltersMetadata
     };
 
 })();

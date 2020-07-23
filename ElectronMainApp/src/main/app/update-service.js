@@ -4,6 +4,7 @@ const versionUtils = require('./utils/version');
 const settings = require('./settings-manager');
 const log = require('./utils/log');
 const filtersUpdate = require('./filters/filters-update');
+const { removeObsoleteFilters } = require('./filters-manager');
 const safariToolbar = require('safari-ext');
 
 const {app} = require('electron');
@@ -103,6 +104,7 @@ module.exports = (function () {
             onUpdateLaunchAtLogin();
         }
 
+        removeObsoleteFilters();
         callback();
     };
 
