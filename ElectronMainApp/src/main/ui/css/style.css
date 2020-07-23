@@ -789,6 +789,9 @@ li.active .toggler:before {
     transform: rotate(360deg);
   }
 }
+.ace_folding-enabled > .ace_gutter-cell {
+  padding-right: 19px;
+}
 .preloader {
   background: url(../images/reload-ico-green.svg) no-repeat;
   height: 18px;
