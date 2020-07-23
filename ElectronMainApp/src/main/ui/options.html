@@ -243,10 +243,12 @@
                         <div class="option-popup__desc" i18n="options_filters_custom_step_one_url_desc_more"></div>
                     </div>
                     <div class="option-popup__btns option-popup__btns--sb">
+                        <input type="file" id="importCustomFilterFile" style="display: none;" accept=".txt, text/plain"/>
+                        <button class="button button--green custom-filter-import-file" i18n="options_filters_custom_import_file"></button>
                         <div class="option-popup__btns-in">
                             <button id="custom-filter-popup-cancel" class="button button--transparent option-popup__btn" i18n="options_filters_custom_step_one_cancel"></button>
+                            <button class="button button--green custom-filter-popup-next" i18n="options_filters_custom_step_one_next"></button>
                         </div>
-                        <button class="button button--green custom-filter-popup-next" i18n="options_filters_custom_step_one_next"></button>
                     </div>
                 </div>
                 <div id="add-custom-filter-step-2" class="option-popup__step">
@@ -326,6 +328,12 @@
                         </div>
                         <button id="custom-filter-popup-added-subscribe" class="button button--green" i18n="options_filters_custom_step_final_commit">
                         </button>
+                    </div>
+                </div>
+                <div id="add-custom-filter-step-5" class="option-popup__step">
+                    <div class="option-popup__content">
+                        <div class="load option-popup__load"></div>
+                        <div class="option-popup__desc option-popup__desc--tac" i18n="options_filters_custom_step_two_subscribing"></div>
                     </div>
                 </div>
             </div>

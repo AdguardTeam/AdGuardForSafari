@@ -1224,6 +1224,10 @@ li.active .toggler:before {
   margin-left: 0;
 }
 
+#custom-filter-popup-cancel {
+  margin-right: 7px;
+}
+
 .option-popup__load {
   margin: 0 auto;
   margin-bottom: 30px;

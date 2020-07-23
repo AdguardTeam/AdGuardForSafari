@@ -113,6 +113,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "Добавить собственный фильтр"
     },
+    "options_filters_custom_import_file": {
+        "message": "Импортировать файл"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "Ошибка при импортировании файла"
+    },
     "options_filters_custom_step_one_title": {
         "message": "Новая подписка на фильтр"
     },
@@ -133,6 +139,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "Загрузка фильтра"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "Подписка на фильтр"
     },
     "options_filters_custom_step_three_title": {
         "message": "Произошла ошибка"

@@ -1017,6 +1017,7 @@ const AntiBannerFilters = function (options) {
             document.querySelector('#add-custom-filter-step-2').classList.remove(POPUP_ACTIVE_CLASS);
             document.querySelector('#add-custom-filter-step-3').classList.remove(POPUP_ACTIVE_CLASS);
             document.querySelector('#add-custom-filter-step-4').classList.remove(POPUP_ACTIVE_CLASS);
+            document.querySelector('#add-custom-filter-step-5').classList.remove(POPUP_ACTIVE_CLASS);
 
             document.querySelector('#custom-filter-popup-close').style.display = 'block';
         }
@@ -1089,6 +1090,7 @@ const AntiBannerFilters = function (options) {
         function renderStepFour(filter) {
             clearActiveStep();
             document.querySelector('#add-custom-filter-step-4').classList.add(POPUP_ACTIVE_CLASS);
+            document.querySelector('#custom-filter-popup-trusted').checked = false;
 
             fillLoadedFilterDetails(filter);
 
@@ -1097,18 +1099,21 @@ const AntiBannerFilters = function (options) {
             }
             onSubscribeClicked = (e) => {
                 e.preventDefault();
-                const url = document.querySelector('#custom-filter-popup-added-url').href;
                 const title = document.querySelector('#custom-filter-popup-added-title').value || '';
                 const trustedCheckbox = document.querySelector('#custom-filter-popup-trusted');
-
                 ipcRenderer.send('renderer-to-main', JSON.stringify({
                     'type': 'subscribeToCustomFilter',
-                    url: url,
+                    url: filter.customUrl,
                     title: title.trim(),
                     trusted: trustedCheckbox.checked,
                 }));
-
-                closePopup();
+                renderStepFive();
+                ipcRenderer.once('subscribeToCustomFilterSuccessResponse', () => {
+                    closePopup();
+                });
+                ipcRenderer.once('subscribeToCustomFilterErrorResponse', () => {
+                    renderStepThree();
+                });
             };
             document.querySelector('#custom-filter-popup-added-subscribe').addEventListener('click', onSubscribeClicked);
 
@@ -1138,6 +1143,12 @@ const AntiBannerFilters = function (options) {
                 closePopup();
             };
             document.querySelector('#custom-filter-popup-close').addEventListener('click', onPopupCloseClicked);
+        }
+
+        function renderStepFive() {
+            clearActiveStep();
+            document.querySelector('#add-custom-filter-step-5').classList.add(POPUP_ACTIVE_CLASS);
+            document.querySelector('#custom-filter-popup-close').style.display = 'none';
         }
 
         function submitUrl(e) {
@@ -1170,6 +1181,28 @@ const AntiBannerFilters = function (options) {
                 }
             });
             document.querySelector('.custom-filter-popup-next').addEventListener('click', submitUrl);
+
+            const importCustomFilterFile = document.querySelector('#importCustomFilterFile');
+            const customFilterImportBtn = document.querySelector('.custom-filter-import-file');
+
+            customFilterImportBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                importCustomFilterFile.click();
+            });
+
+            importCustomFilterFile.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                const filePath = `file://${file.path}`;
+                ipcRenderer.send('renderer-to-main', JSON.stringify({
+                    'type': 'loadCustomFilterInfo',
+                    url: filePath
+                }));
+
+                ipcRenderer.once('loadCustomFilterInfoResponse', (e, arg) => {
+                    importCustomFilterFile.value = '';
+                    arg ? renderStepFour(arg) : renderStepThree();
+                });
+            });
 
             // Step three events
             document.querySelector('.custom-filter-popup-try-again').addEventListener('click', renderStepOne);

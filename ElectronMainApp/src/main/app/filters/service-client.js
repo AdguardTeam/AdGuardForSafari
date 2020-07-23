@@ -235,6 +235,10 @@ module.exports = (function () {
      */
     const loadFilterRulesBySubscriptionUrl = function (url, successCallback, errorCallback) {
 
+        if (url.startsWith('file://')) {
+            url = path.resolve(url.replace('file://', ''));
+        }
+
         if (url in loadingSubscriptions) {
             return;
         }

@@ -113,6 +113,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "Add custom filter"
     },
+    "options_filters_custom_import_file": {
+        "message": "Import file"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "Import error"
+    },
     "options_filters_custom_step_one_title": {
         "message": "New filter subscription"
     },
@@ -133,6 +139,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "Downloading the filter"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "Subscribing to the filter"
     },
     "options_filters_custom_step_three_title": {
         "message": "Error occurred"
@@ -199,6 +208,9 @@
     },
     "options_popup_update_error_title": {
         "message": "Filters' update error"
+    },
+    "options_popup_update_version_error": {
+        "message": "The version of the filter you're trying to update is the same or older"
     },
     "options_popup_update_not_found": {
         "message": "No updates found"

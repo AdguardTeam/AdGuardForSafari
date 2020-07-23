@@ -16,6 +16,7 @@ const EventNotifierTypes = module.exports = {
     LOG_EVENT: "event.log.track",
     UPDATE_TAB_BUTTON_STATE: "event.update.tab.button.state",
     REQUEST_FILTER_UPDATED: "event.request.filter.updated",
+    UPDATE_CUSTOM_FILTER_ERROR: "event.update.custom.filter.error",
     APPLICATION_INITIALIZED: "event.application.initialized",
     APPLICATION_UPDATED: "event.application.updated",
     APPLICATION_UPDATE_FOUND: "event.application.update.found",
