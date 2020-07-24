@@ -2,13 +2,14 @@ const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
 const log = require('./src/main/app/utils/log');
 const path = require('path');
+const fs = require('fs');
 
 /* Reconfigure path to config */
 process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
 
 /* global require, process */
 
-const {app, shell, BrowserWindow, dialog} = require('electron');
+const { app, shell, BrowserWindow, dialog, nativeTheme } = require('electron');
 
 const uiEventListener = require('./src/main/ui-event-handler');
 const startup = require('./src/main/startup');
@@ -127,8 +128,14 @@ function loadMainWindow(onWindowLoaded) {
     if (!mainWindow) {
         mainWindow = createWindow();
     }
-
+    const cssDarkMode = path.resolve('./src/main/ui/css/colors-dark-mode.css');
+    const cssLightMode = path.resolve('./src/main/ui/css/colors-light-mode.css');
+    const cssMode = nativeTheme.shouldUseDarkColors ? cssDarkMode : cssLightMode;
+    const css = fs.readFileSync(cssMode, { encoding: 'utf8'});
     mainWindow.loadFile('./src/main/ui/options.html');
+    mainWindow.webContents.on('dom-ready', () => {
+            mainWindow.webContents.insertCSS(css);
+    });
 
     // on close
     mainWindow.on('close', (e) => {
