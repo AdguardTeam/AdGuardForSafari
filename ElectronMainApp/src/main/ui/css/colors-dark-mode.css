@@ -1,0 +1,326 @@
+@import "editor-dark-mode.css";
+
+body {
+	background-color: #323232;
+}
+#preloaderContainer {
+	background-color: #323232;
+}
+.container {
+	background-color: #323232;
+}
+.button--green {
+	background-color: #68bc86;
+	color: #ffffff;
+}
+.button--orange {
+	background-color: #eb9300;
+	color: #fff;
+}
+.button--green:hover {
+	background-color: #5ba575;
+}
+.button--transparent {
+	box-shadow: 0 0 0 1px rgba(216, 216, 216, .7);
+	color: #eeeeee;
+}
+.button--transparent:hover {
+	background-color: rgba(0, 0, 0, .05);
+}
+.button--link {
+	color: #fff;
+}
+.button--green-bd {
+	color: #66b574;
+	box-shadow: inset 0 0 0 1px #66b574;
+}
+.button--green-bd:hover {
+	background-color: rgba(239, 239, 239, 0.5);
+}
+.settings-wrap .page-title {
+	color: #eeeeee;
+}
+.settings-wrap .page-title .info {
+	color: #cccccc;
+}
+.settings-content__desc {
+	color: #888888;
+}
+.upd-wr {
+	color: #888888;
+}
+.settings-body-subtitle {
+	color: #cccccc;
+}
+.settings-sidebar {
+	background-color: #323232;
+}
+.settings-sidebar .logo {
+	background: url(../images/logo-white.svg) no-repeat;
+}
+.settings-sidebar .nav span {
+	color: #cccccc;
+}
+.settings-sidebar .nav a.active span:before {
+	background-color: #66b574;
+}
+.settings-content a {
+	color: #66b574;
+}
+.settings-content .manage-account-btn {
+	color: #ffffff;
+}
+.option-popup__subtitle,
+.settings-checkboxes__label {
+	color: #cccccc;
+}
+.setting-desc {
+	color: #767676;
+}
+.filters-list .filters-search {
+	border-bottom: 1px solid #444444;
+}
+.filters-list .filters-search input {
+	color: #eee;
+}
+.opts-list li {
+	color: #eeeeee;
+	border-bottom: 1px solid #444444;
+}
+.warn-message {
+	color: #e85037;
+}
+.opts-list li .warn-message{
+	color: #D6D6D6;
+}
+.opts-list li a{
+	color: #D6D6D6;
+}
+.opts-list li.active .opt-name__tag{
+	color: #66b574;
+}
+.opts-list li.active .block__link{
+	color: #66b574;
+}
+.opts-list li.active .warn-message{
+	color: #e85037;
+}
+.opts-list li .opts-desc-filter {
+	color: #adadad;
+}
+.opts-list li.active .opts-desc-filter {
+	color: #eeeeee;
+}
+.settings-notification {
+	background: #fff3df;
+}
+.settings-notification__title {
+	color: #cccccc;
+}
+.settings-notification__text {
+	color: #888888;
+}
+.block-type .block-type__desc .desc {
+	color: #eeeeee;
+}
+.block-type__desc-title {
+	color: #66b574;
+}
+.block-type__info-title {
+	color: #cccccc;
+}
+.block-type__info-desc {
+	color: #888;
+}
+.cb_warning {
+	color: #9C1D00;
+}
+.cb_overlimit_warning {
+	color: #9C1D00;
+}
+.desc--filters {
+	color: rgba(77, 77, 77, 0.5);
+}
+.opts-list .opt-state .desc {
+	color: #888888;
+}
+.opt-state__link:hover {
+	color: #58a273;
+}
+.opts-list li .opt-state__link {
+	color: #888888;
+}
+.opt-select {
+	background-color: #444444;
+}
+.toggler {
+	background-color: #F56F23;
+}
+.toggler:before {
+	background-color: #fff;
+}
+.toggler:after {
+	background-color: #444444;
+}
+.toggler.on,
+li.active .toggler {
+	background-color: #62c162;
+}
+.toggler.off {
+	background-color: #f68a23;
+}
+.settings-footer .btn-rate {
+	color: #6a6a6a;
+	border: 2px solid #D1D1D1;
+}
+.settings-footer .copy {
+	color: #fff;
+}
+.settings-footer .rate-row {
+	background-color: #F7F7F7;
+}
+.settings-footer .rate-row .text {
+	color: #505050;
+}
+.settings-footer .links-row {
+	background-color: #787878;
+}
+.settings-footer .links-row a {
+	color: rgba(255, 255, 255, 0.83);
+}
+.user-rules {
+	border: 1px solid #444444;
+}
+.tabs-bar .tab {
+	color: #cccccc;
+}
+.tabs-bar .tab.active:after {
+	background-color: #66b574;
+}
+.btn-inline-arrow {
+	color: #66b574;
+}
+.settings-actions .button--link {
+	color: #fff;
+}
+.settings-actions .button--green-bd {
+	color: #66b574;
+}
+.dropdown {
+	background-color: #ffffff;
+	box-shadow: 1px 1px 5px 0 rgba(192, 193, 193, .5);
+}
+.dropdown__item--active {
+	color: #68bc86;
+	background-color: rgba(102, 181, 116, .15);
+}
+.settings-form {
+	box-shadow: 0 -1px 0 0 rgba(216, 216, 216, .7);
+}
+.settings-form__input {
+	box-shadow: 0 1px 0 0 rgba(216, 216, 216, .7);
+}
+.settings-actions--update-filters a {
+	filter: brightness(3);
+}
+.settings-checkboxes__checkbox:checked + .settings-checkboxes__label:before{
+	background-color: #66b574;
+}
+.settings-checkboxes__label:before {
+	background-color: rgba(216, 216, 216, .7);
+}
+.filter-rules {
+	box-shadow: inset -10px 0 0 0 #444444;
+}
+.filter-rules textarea {
+	background-color: #fff;
+}
+.filter-download__header-logo{
+	background: url(../images/logo-white.svg) no-repeat;
+}
+.settings-page.downloading .sp-lists-user-descr:first-child {
+	color: #333;
+}
+.settings-page.downloading .sp-lists-user-descr {
+	color: #999;
+}
+.option-popup {
+	background-color: rgba(0, 0, 0, .1);
+}
+.option-popup__in {
+	background-color: #444444;
+}
+.option-popup__title {
+	color: #eeeeee;
+}
+.option-popup__input {
+	background: transparent;
+	border-bottom: 2px solid #66b574;
+	color: #eeeeee;
+}
+.option-popup__desc {
+	color: #cccccc;
+}
+.option-popup__desc--filter {
+	color: #cccccc;
+}
+.option-popup__table-cell {
+	color: rgb(77, 77, 77);
+}
+.opt-name__tag:after {
+	color: #fff;
+	text-shadow: 0 -1px 2px rgba(162, 161, 161, .3);
+}
+.opt-name__tag:before {
+	color:  rgba(77, 77, 77, 0.82);
+	background-color: #ffffff;
+	-webkit-box-shadow: 0 0 10px 1px rgba(162, 161, 161, 0.3);
+	box-shadow: 0 0 10px 1px rgba(162, 161, 161, 0.3);
+}
+.opts-list li .remove-custom-filter-button {
+	color: #df3812;
+}
+.try-premium__title {
+	color: #cccccc;
+}
+.try-premium__btn {
+	color: #fff;
+	background-color: #F5A623;
+}
+.try-premium:hover .try-premium__btn {
+	background-color: #d89019;
+}
+.alert {
+	background-color: #ffffff;
+}
+.alert--warning {
+	background-color: #F3F3F3;
+	color: #9C1D00;
+}
+.alert__link {
+	color: #66b574;
+}
+.about-opt__version {
+	color: #eeeeee;
+}
+.about-opt__desc {
+	color: #888888;
+}
+.about-opt__logo {
+	background: url(../images/logo-white.svg) no-repeat;
+}
+.settings-content .about-opt__menu-item {
+	color: #66b574;
+}
+.about-updates {
+	color: #252525;
+}
+.about-btn {
+	color: #66b574;
+}
+.onboarding {
+	background-color: #fff;
+}
+.settings-content .settings-content__save-btn {
+	color: #fff;
+}

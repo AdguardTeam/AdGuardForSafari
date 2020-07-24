@@ -1,0 +1,125 @@
+.ace-tm .ace_gutter {
+	background: #444444;
+	color: #8F908A;
+}
+
+.ace-tm .ace_print-margin {
+	width: 1px;
+	background: #555651;
+}
+
+.ace-tm {
+	background-color: #222222;
+	color: #F8F8F2;
+}
+
+.ace-tm .ace_cursor {
+	color: #F8F8F0;
+}
+
+.ace-tm .ace_marker-layer .ace_selection {
+	background: #49483E;
+}
+
+.ace.ace_multiselect .ace_selection.ace_start {
+	box-shadow: 0 0 3px 0px #272822;
+}
+
+.ace-tm .ace_marker-layer .ace_step {
+	background: rgb(102, 82, 0);
+}
+
+.ace-tm .ace_marker-layer .ace_bracket {
+	margin: -1px 0 0 -1px;
+	border: 1px solid #49483E;
+}
+
+.ace-tm .ace_marker-layer .ace_active-line {
+	background: #202020;
+}
+
+.ace-tm .ace_gutter-active-line {
+	background-color: #272727;
+}
+
+.ace-tm .ace_marker-layer .ace_selected-word {
+	border: 1px solid #49483E;
+}
+
+.ace-tm .ace_invisible {
+	color: #52524d;
+}
+
+.ace-tm .ace_entity.ace_name.ace_tag,
+.ace-tm .ace_keyword,
+.ace-tm .ace_meta.ace_tag,
+.ace-tm .ace_storage {
+	color: #66b574;
+}
+
+.ace-tm .ace_punctuation,
+.ace-tm .ace_punctuation.ace_tag {
+	color: #fff;
+}
+
+.ace-tm .ace_constant.ace_character,
+.ace-tm .ace_constant.ace_language,
+.ace-tm .ace_constant.ace_numeric,
+.ace-tm .ace_constant.ace_other {
+	color: #AE81FF;
+}
+
+.ace-tm .ace_constant {
+	color: #59bd00;
+}
+
+.ace-tm .ace_invalid {
+	color: #F8F8F0;
+	background-color: #F92672
+}
+
+.ace-tm .ace_invalid.ace_deprecated {
+	color: #F8F8F0;
+	background-color: #AE81FF;
+}
+
+.ace-tm .ace_support.ace_constant,
+.ace-tm .ace_support.ace_function {
+	color: #66D9EF;
+}
+
+.ace-tm .ace_fold {
+	background-color: #A6E22E;
+	border-color: #F8F8F2;
+}
+
+.ace-tm .ace_storage.ace_type,
+.ace-tm .ace_support.ace_class,
+.ace-tm .ace_support.ace_type {
+	font-style: italic;
+	color: #66D9EF;
+}
+
+.ace-tm .ace_entity.ace_name.ace_function,
+.ace-tm .ace_entity.ace_other,
+.ace-tm .ace_entity.ace_other.ace_attribute-name,
+.ace-tm .ace_variable {
+	color: #A6E22E;
+}
+
+.ace-tm .ace_variable.ace_parameter {
+	font-style: italic;
+	color: #FD971F;
+}
+
+.ace-tm .ace_string {
+	color: #E6DB74;
+}
+
+.ace-tm .ace_comment {
+	color: #75715E;
+}
+
+.ace-tm .ace_indent-guide {
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWPQ0FD0ZXBzd/wPAAjVAoxeSgNeAAAAAElFTkSuQmCC) right repeat-y;
+}
