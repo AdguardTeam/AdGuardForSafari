@@ -41,6 +41,8 @@ if (settings.isHardwareAccelerationDisabled()) {
     app.disableHardwareAcceleration();
 }
 
+const cssMode = nativeTheme.shouldUseDarkColors ? '#323232' : '#ffffff';
+
 /**
  * Creates browser window with default settings
  */
@@ -55,6 +57,7 @@ function createWindow() {
         icon: './src/main/ui/images/128x128.png',
         resizable: true,
         show: false,
+        backgroundColor: cssMode,
         webPreferences: {
             nodeIntegration: true
         }
@@ -128,14 +131,18 @@ function loadMainWindow(onWindowLoaded) {
     if (!mainWindow) {
         mainWindow = createWindow();
     }
-    const cssDarkMode = path.resolve('./src/main/ui/css/colors-dark-mode.css');
-    const cssLightMode = path.resolve('./src/main/ui/css/colors-light-mode.css');
-    const cssMode = nativeTheme.shouldUseDarkColors ? cssDarkMode : cssLightMode;
-    const css = fs.readFileSync(cssMode, { encoding: 'utf8'});
+    // const cssDarkMode = path.resolve('./src/main/ui/css/colors-dark-mode.css');
+    // const cssLightMode = path.resolve('./src/main/ui/css/colors-light-mode.css');
+    //
+    // const cssMode = nativeTheme.shouldUseDarkColors ? cssDarkMode : cssLightMode;
+    //
+    // const css = fs.readFileSync(cssMode, { encoding: 'utf8'});
+
     mainWindow.loadFile('./src/main/ui/options.html');
-    mainWindow.webContents.on('dom-ready', () => {
-            mainWindow.webContents.insertCSS(css);
-    });
+
+    // mainWindow.webContents.on('dom-ready', () => {
+    //         mainWindow.webContents.insertCSS(css);
+    // });
 
     // on close
     mainWindow.on('close', (e) => {

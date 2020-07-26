@@ -154,17 +154,17 @@ body {
 	background-color: #444444;
 }
 .toggler {
-	background-color: #F56F23;
+	background-color: #983f0c;
 }
 .toggler:before {
-	background-color: #fff;
+	background-color: #323232;
 }
 .toggler:after {
 	background-color: #444444;
 }
 .toggler.on,
 li.active .toggler {
-	background-color: #62c162;
+	background-color: #418041;
 }
 .toggler.off {
 	background-color: #f68a23;
@@ -243,6 +243,9 @@ li.active .toggler {
 }
 .settings-page.downloading .sp-lists-user-descr {
 	color: #999;
+}
+.settings-actions {
+	color: #eee;
 }
 .option-popup {
 	background-color: rgba(0, 0, 0, .1);
