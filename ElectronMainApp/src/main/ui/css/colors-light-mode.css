@@ -64,6 +64,9 @@ body {
 .setting-desc {
 	color: #767676;
 }
+.empty-filters__logo {
+	background: url(../images/empty-filters.svg) no-repeat;
+}
 .filters-list .filters-search {
 	border-bottom: 1px solid #E7E7E7;
 }
@@ -232,7 +235,7 @@ li.active .toggler {
 	background-color: #fff;
 }
 .option-popup__input {
-	border-bottom: 2px solid #66b574;
+	border-bottom: 2px solid #66b574 !important;
 }
 .option-popup__desc {
 	color: rgba(27, 27, 27, 0.9);

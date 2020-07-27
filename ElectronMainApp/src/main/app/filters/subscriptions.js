@@ -348,6 +348,7 @@ module.exports = (function () {
         const updatedFilters = customFilters.filter(f => f.filterId !== filter.filterId);
 
         localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(updatedFilters));
+        filters = filters.filter(f => f.filterId !== filter.filterId);
     };
 
     /**

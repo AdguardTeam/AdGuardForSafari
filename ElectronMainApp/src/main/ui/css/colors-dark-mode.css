@@ -83,6 +83,12 @@ body {
 .filters-list .filters-search input {
 	color: #eee;
 }
+.empty-filters__desc {
+	color: #eee;
+}
+.empty-filters__logo {
+	background: url(../images/empty-filters_white.svg) no-repeat;
+}
 .opts-list li {
 	color: #eeeeee;
 	border-bottom: 1px solid #444444;
@@ -258,7 +264,7 @@ li.active .toggler {
 }
 .option-popup__input {
 	background: transparent;
-	border-bottom: 2px solid #66b574;
+	border-bottom: 2px solid #66b574 !important;
 	color: #eeeeee;
 }
 .option-popup__desc {
@@ -268,7 +274,7 @@ li.active .toggler {
 	color: #cccccc;
 }
 .option-popup__table-cell {
-	color: rgb(77, 77, 77);
+	color: #ccc;
 }
 .opt-name__tag:after {
 	color: #fff;
