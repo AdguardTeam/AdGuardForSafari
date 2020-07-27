@@ -131,18 +131,12 @@ function loadMainWindow(onWindowLoaded) {
     if (!mainWindow) {
         mainWindow = createWindow();
     }
-    // const cssDarkMode = path.resolve('./src/main/ui/css/colors-dark-mode.css');
-    // const cssLightMode = path.resolve('./src/main/ui/css/colors-light-mode.css');
-    //
-    // const cssMode = nativeTheme.shouldUseDarkColors ? cssDarkMode : cssLightMode;
-    //
-    // const css = fs.readFileSync(cssMode, { encoding: 'utf8'});
-
     mainWindow.loadFile('./src/main/ui/options.html');
 
-    // mainWindow.webContents.on('dom-ready', () => {
-    //         mainWindow.webContents.insertCSS(css);
-    // });
+    // reloads page to update color theme if OS color theme has been changed
+    nativeTheme.on('updated', function theThemeHasChanged () {
+        mainWindow.webContents.reload();
+    });
 
     // on close
     mainWindow.on('close', (e) => {
