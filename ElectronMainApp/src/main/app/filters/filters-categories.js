@@ -14,7 +14,7 @@ module.exports = (() => {
      * @returns {Array.<*>} filters
      */
     const getFilters = () => {
-        const result = subscriptions.getFilters().filter(f => !f.removed);
+        const result = subscriptions.getFilters();
 
         const tags = tagService.getTags();
 
