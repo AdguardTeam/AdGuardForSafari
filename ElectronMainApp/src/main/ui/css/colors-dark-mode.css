@@ -154,7 +154,7 @@ body {
 	background-color: #444444;
 }
 .toggler {
-	background-color: #983f0c;
+	background-color: #964b20;
 }
 .toggler:before {
 	background-color: #323232;
@@ -164,7 +164,7 @@ body {
 }
 .toggler.on,
 li.active .toggler {
-	background-color: #418041;
+	background-color: #408a40;
 }
 .toggler.off {
 	background-color: #f68a23;
