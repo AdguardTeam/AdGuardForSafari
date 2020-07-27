@@ -1,8 +1,6 @@
 const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
 const log = require('./src/main/app/utils/log');
-const path = require('path');
-const fs = require('fs');
 
 /* Reconfigure path to config */
 process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");

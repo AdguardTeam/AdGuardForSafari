@@ -1803,7 +1803,7 @@ PageController.prototype = {
 
         let self = this;
         ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
-            // const allContentBlockersDisabled = arg.allContentBlockersDisabled;
+            const allContentBlockersDisabled = arg.allContentBlockersDisabled;
             const contentBlockersEnabled = arg.contentBlockersEnabled;
             const minorExtensionsEnabled = arg.minorExtensionsEnabled;
 
