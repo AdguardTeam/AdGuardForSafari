@@ -1,14 +1,13 @@
 const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
 const log = require('./src/main/app/utils/log');
-const path = require('path');
 
 /* Reconfigure path to config */
 process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
 
 /* global require, process */
 
-const {app, shell, BrowserWindow, dialog} = require('electron');
+const { app, shell, BrowserWindow, dialog, nativeTheme } = require('electron');
 
 const uiEventListener = require('./src/main/ui-event-handler');
 const startup = require('./src/main/startup');
@@ -40,6 +39,8 @@ if (settings.isHardwareAccelerationDisabled()) {
     app.disableHardwareAcceleration();
 }
 
+const cssMode = nativeTheme.shouldUseDarkColors ? '#323232' : '#ffffff';
+
 /**
  * Creates browser window with default settings
  */
@@ -54,6 +55,7 @@ function createWindow() {
         icon: './src/main/ui/images/128x128.png',
         resizable: true,
         show: false,
+        backgroundColor: cssMode,
         webPreferences: {
             nodeIntegration: true
         }
@@ -127,8 +129,12 @@ function loadMainWindow(onWindowLoaded) {
     if (!mainWindow) {
         mainWindow = createWindow();
     }
-
     mainWindow.loadFile('./src/main/ui/options.html');
+
+    // reloads page to update color theme if OS color theme has been changed
+    nativeTheme.on('updated', function theThemeHasChanged () {
+        mainWindow.webContents.reload();
+    });
 
     // on close
     mainWindow.on('close', (e) => {

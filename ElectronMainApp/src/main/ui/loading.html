@@ -4,8 +4,11 @@
     <title>AdGuard for Safari</title>
     <meta charset="utf-8">
 
-    <link rel="shortcut icon" href="images/favicon.png"/>
-
+    <script type="text/javascript">
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.style.background = '#323232';
+        }
+    </script>
     <style>
         .container {
             position: absolute;
@@ -14,6 +17,9 @@
             transform: translate(-50%, -50%);
         }
     </style>
+
+    <link rel="shortcut icon" href="images/favicon.png"/>
+
 </head>
 <body>
 <div class="container">
