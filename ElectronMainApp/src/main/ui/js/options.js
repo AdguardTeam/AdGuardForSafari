@@ -1,6 +1,10 @@
 /* global CheckboxUtils, ace, i18n, EventNotifierTypes */
 
 const { ipcRenderer } = require('electron');
+const path = require('path');
+const fs = require('fs');
+const electron = require('electron');
+const dialog = electron.remote.dialog;
 /**
  * Common utils
  *
@@ -361,6 +365,26 @@ const handleEditorResize = (editor) => {
 };
 
 /**
+ * Exports file with provided data
+ * @param {string} fileName
+ * @param {string} data
+ * @returns {Promise<void>}
+ */
+const exportFile = async (fileName, data) => {
+    const d = new Date();
+    const timeStamp = `${d.getFullYear()}${d.getMonth()}${d.getDate()}_${d.getHours()}${d.getMinutes()}${d.getSeconds()}`;
+    const exportFileName = `${fileName}-${timeStamp}.txt`;
+    const exportDialog = await dialog.showSaveDialog({
+        title: 'Select the File Path to save',
+        defaultPath: exportFileName,
+        buttonLabel: 'Save',
+    });
+    if (!exportDialog.canceled) {
+        fs.writeFileSync(exportDialog.filePath.toString(), data);
+    }
+}
+
+/**
  * Whitelist block
  *
  * @param options
@@ -512,10 +536,10 @@ const UserFilter = function () {
         importUserFiltersInput.click();
     });
 
-    importUserFiltersInput.addEventListener('change', (e) => {
+    importUserFiltersInput.addEventListener('change', (event) => {
         const handleFileInput = Utils.importFromFileIntoEditor(editor);
         try {
-            handleFileInput(e);
+            handleFileInput(event);
         } catch (err) {
             // ToDo: handle error
         }
@@ -523,14 +547,13 @@ const UserFilter = function () {
 
     exportUserFiltersBtn.addEventListener('click', (event) => {
         event.preventDefault();
-        const USER_FILTER_HASH = 'uf';
         if (exportUserFiltersBtn.classList.contains('disabled')) {
             return;
         }
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'openExportRulesTab',
-            'hash': USER_FILTER_HASH,
-        }));
+        exportFile('adguard-user-rules', editor.getValue())
+            .catch(err => {
+            // ToDo: handle error
+            });
     });
 
     return {

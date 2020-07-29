@@ -454,10 +454,6 @@ module.exports = (() => {
         });
     };
 
-    const openExportTab = (hash) => {
-        // ToDo: open tab with editor content and save to file
-    };
-
     return {
         getFilters,
         getGroups,
@@ -480,8 +476,6 @@ module.exports = (() => {
 
         checkAntiBannerFiltersUpdate,
         removeObsoleteFilters,
-
-        openExportTab,
     };
 
 })();

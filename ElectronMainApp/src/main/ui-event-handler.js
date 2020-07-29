@@ -119,9 +119,6 @@ module.exports.init = function () {
             case  'updateRelaunch':
                 updater.quitAndInstall();
                 break;
-            case 'openExportTab':
-                filters.openExportTab(message.hash);
-                break;
         }
     });
 
