@@ -1,7 +1,6 @@
 /* global CheckboxUtils, ace, i18n, EventNotifierTypes */
 
 const { ipcRenderer } = require('electron');
-
 /**
  * Common utils
  *
@@ -53,6 +52,36 @@ const Utils = {
         html = html.trim(); // Never return a text node of whitespace as the result
         template.innerHTML = html;
         return template.content.firstChild;
+    },
+
+    /**
+     * Imports rules from file into editor
+     * @param editor
+     */
+    importFromFileIntoEditor: function importFromFileIntoEditor(editor) {
+        return function (event) {
+            const fileInput = event.target;
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const oldRules = editor.getValue();
+                const newRules = `${oldRules}\n${e.target.result}`.split('\n');
+                const trimmedRules = newRules.map(rule => rule.trim());
+                const ruleSet = new Set(trimmedRules);
+                const uniqueRules = Array.from(ruleSet).join('\n');
+                editor.setValue(uniqueRules.trim());
+                fileInput.value = '';
+            };
+            reader.onerror = function (err) {
+                throw new Error(`${i18n.getMessage('options_userfilter_import_rules_error')} ${err.message}`);
+            };
+            const file = fileInput.files[0];
+            if (file) {
+                if (file.type !== 'text/plain') {
+                    throw new Error(i18n.__('options_popup_import_rules_wrong_file_extension'));
+                }
+                reader.readAsText(file, 'utf-8');
+            }
+        };
     }
 };
 
@@ -463,6 +492,46 @@ const UserFilter = function () {
     const isUserFilterEmpty = () => {
         return !editor.getValue().trim();
     };
+
+    const importUserFiltersInput = document.querySelector('#importUserFilterInput');
+    const importUserFiltersBtn = document.querySelector('#userFiltersImport');
+    const exportUserFiltersBtn = document.querySelector('#userFiltersExport');
+
+    const session = editor.getSession();
+
+    session.addEventListener('change', () => {
+        if (session.getValue().length > 0) {
+            exportUserFiltersBtn.classList.remove('disabled');
+        } else {
+            exportUserFiltersBtn.classList.add('disabled');
+        }
+    });
+
+    importUserFiltersBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        importUserFiltersInput.click();
+    });
+
+    importUserFiltersInput.addEventListener('change', (e) => {
+        const handleFileInput = Utils.importFromFileIntoEditor(editor);
+        try {
+            handleFileInput(e);
+        } catch (err) {
+            // ToDo: handle error
+        }
+    });
+
+    exportUserFiltersBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        const USER_FILTER_HASH = 'uf';
+        if (exportUserFiltersBtn.classList.contains('disabled')) {
+            return;
+        }
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'openExportRulesTab',
+            'hash': USER_FILTER_HASH,
+        }));
+    });
 
     return {
         updateUserFilterRules: loadUserRules,
@@ -1803,7 +1872,7 @@ PageController.prototype = {
 
         let self = this;
         ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
-            const allContentBlockersDisabled = arg.allContentBlockersDisabled;
+            // const allContentBlockersDisabled = arg.allContentBlockersDisabled;
             const contentBlockersEnabled = arg.contentBlockersEnabled;
             const minorExtensionsEnabled = arg.minorExtensionsEnabled;
 

@@ -26,6 +26,10 @@
 .button--green {
   padding: 0 30px;
 }
+.button--green-bd.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 .button--transparent {
   padding: 0 20px;
   background-color: transparent;
@@ -1516,9 +1520,8 @@ body {
 }
 
 .filter-rules__label {
-  position: absolute;
-  bottom: calc(50% - 11px);
-  right: 0;
+  float: left;
+  margin: 10px 0 0 25px;
   max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
@@ -1528,15 +1531,25 @@ body {
   line-height: 22px;
 }
 .filter-rules__label--saved {
-  padding-right: 20px;
+  padding-right: 22px;
+  background: url(../images/tick.svg) right center no-repeat;
+  background-size: 15px;
 }
 .filter-rules__label--saved:after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 4px;
-  background-image: url(../images/tick.svg);
-  background-size: cover;
-  width: 12px;
-  height: 12px;
+  /*content: '';*/
+  /*position: relative;*/
+  /*display: block;*/
+  /*top: 4px;*/
+  /*width: 12px;*/
+  /*height: 12px;*/
+  /*background-image: url(../images/tick.svg);*/
+  /*background-size: contain;*/
+}
+
+.settings-actions__save-button {
+  float: left;
+}
+
+.filter-rules__import-export {
+  float: right;
 }
