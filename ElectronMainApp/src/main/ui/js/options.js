@@ -1803,7 +1803,7 @@ PageController.prototype = {
 
         let self = this;
         ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
-            const allContentBlockersDisabled = arg.allContentBlockersDisabled;
+            // const allContentBlockersDisabled = arg.allContentBlockersDisabled;
             const contentBlockersEnabled = arg.contentBlockersEnabled;
             const minorExtensionsEnabled = arg.minorExtensionsEnabled;
 
@@ -1973,7 +1973,12 @@ const initPage = function (response) {
                     controller.contentBlockers.setLoading();
                     break;
                 case EventNotifierTypes.FILTER_ADD_REMOVE:
-                    controller.antiBannerFilters.render();
+                    // re-render fully only if custom filter was added,
+                    // if re-render every time, then filters move inconsistently because of sorting
+                    // on first filter enabling, when this event fires
+                    if (options && options.customUrl) {
+                        controller.antiBannerFilters.render();
+                    }
                     break;
                 case EventNotifierTypes.FILTER_GROUP_ENABLE_DISABLE:
                     controller.antiBannerFilters.onCategoryStateChanged(options);
