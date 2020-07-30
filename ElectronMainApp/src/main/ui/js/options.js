@@ -452,6 +452,45 @@ const WhiteListFilter = function (options) {
 
     CheckboxUtils.updateCheckbox([changeDefaultWhiteListModeCheckbox], !options.defaultWhiteListMode);
 
+    const importAllowlistInput = document.querySelector('#importAllowlistInput');
+    const importAllowlistBtn = document.querySelector('#allowlistImport');
+    const exportAllowlistBtn = document.querySelector('#allowlistExport');
+
+    const session = editor.getSession();
+
+    session.addEventListener('change', () => {
+        if (session.getValue().length > 0) {
+            exportAllowlistBtn.classList.remove('disabled');
+        } else {
+            exportAllowlistBtn.classList.add('disabled');
+        }
+    });
+
+    importAllowlistBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        importAllowlistInput.click();
+    });
+
+    importAllowlistInput.addEventListener('change', (event) => {
+        const handleFileInput = Utils.importFromFileIntoEditor(editor);
+        try {
+            handleFileInput(event);
+        } catch (err) {
+            // ToDo: handle error
+        }
+    });
+
+    exportAllowlistBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (exportAllowlistBtn.classList.contains('disabled')) {
+            return;
+        }
+        exportFile('adguard-allowlist', editor.getValue())
+            .catch(err => {
+                // ToDo: handle error
+            });
+    });
+
     return {
         updateWhiteListDomains: loadWhiteListDomains,
     };
