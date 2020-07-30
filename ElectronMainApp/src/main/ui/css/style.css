@@ -1553,3 +1553,12 @@ body {
 .filter-rules__import-export {
   float: right;
 }
+
+.settings__import-export {
+  display: block !important;
+  margin-top: 10px;
+}
+
+.settings__import-export a {
+  margin-right: 15px;
+}

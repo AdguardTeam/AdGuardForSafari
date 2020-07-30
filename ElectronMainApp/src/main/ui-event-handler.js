@@ -102,6 +102,9 @@ module.exports.init = function () {
             case 'getContentBlockersMetadata':
                 sendResponse(event, 'getContentBlockersMetadataResponse', getContentBlockersInfo());
                 break;
+            case 'getUserSettings':
+                sendResponse(event, 'getUserSettingsResponse', settings.getAllSettings());
+                break;
             case 'openSafariExtensionsPrefs':
                 safariToolbar.openExtensionsPreferenses(()=> {
                     //Do nothing

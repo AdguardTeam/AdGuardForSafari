@@ -64,9 +64,6 @@ body {
 .settings-sidebar .nav a.active span:before {
 	background-color: #66b574;
 }
-.settings-content a {
-	color: #66b574;
-}
 .settings-content .manage-account-btn {
 	color: #ffffff;
 }
@@ -332,4 +329,7 @@ li.active .toggler {
 }
 .settings-content .settings-content__save-btn {
 	color: #fff;
+}
+#settingsExport {
+	color: #66b574;
 }

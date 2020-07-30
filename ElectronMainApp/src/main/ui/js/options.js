@@ -1,10 +1,9 @@
 /* global CheckboxUtils, ace, i18n, EventNotifierTypes */
 
-const { ipcRenderer } = require('electron');
-const path = require('path');
+const { ipcRenderer, remote } = require('electron');
+const { dialog } = remote;
 const fs = require('fs');
-const electron = require('electron');
-const dialog = electron.remote.dialog;
+
 /**
  * Common utils
  *
@@ -86,6 +85,38 @@ const Utils = {
                 reader.readAsText(file, 'utf-8');
             }
         };
+    },
+
+    getExtension: function getExtension(filename) {
+        if (!filename) {
+            return undefined;
+        }
+        const parts = filename.split('.');
+        if (parts.length < 2) {
+            return undefined;
+        }
+        return parts[parts.length - 1];
+    },
+
+    handleImportSettings(event) {
+        const onFileLoaded = (content) => {
+            // ToDo: apply settings from json
+        };
+
+        const file = event.currentTarget.files[0];
+        if (file) {
+            if (this.getExtension(file.name) !== 'json') {
+                throw new Error(i18n.getMessage('options_settings_import_wrong_file_extension'));
+            }
+            const reader = new FileReader();
+            reader.readAsText(file, 'UTF-8');
+            reader.onload = function (evt) {
+                onFileLoaded(evt.target.result);
+            };
+            reader.onerror = function () {
+                throw new Error(i18n.getMessage('options_settings_import_error'));
+            };
+        }
     }
 };
 
@@ -367,13 +398,14 @@ const handleEditorResize = (editor) => {
 /**
  * Exports file with provided data
  * @param {string} fileName
+ * @param {string} fileType
  * @param {string} data
  * @returns {Promise<void>}
  */
-const exportFile = async (fileName, data) => {
+const exportFile = async (fileName, fileType, data) => {
     const d = new Date();
     const timeStamp = `${d.getFullYear()}${d.getMonth()}${d.getDate()}_${d.getHours()}${d.getMinutes()}${d.getSeconds()}`;
-    const exportFileName = `${fileName}-${timeStamp}.txt`;
+    const exportFileName = `${fileName}-${timeStamp}.${fileType}`;
     const exportDialog = await dialog.showSaveDialog({
         title: 'Select the File Path to save',
         defaultPath: exportFileName,
@@ -485,7 +517,7 @@ const WhiteListFilter = function (options) {
         if (exportAllowlistBtn.classList.contains('disabled')) {
             return;
         }
-        exportFile('adguard-allowlist', editor.getValue())
+        exportFile('adguard-allowlist', 'txt', editor.getValue())
             .catch(err => {
                 // ToDo: handle error
             });
@@ -589,7 +621,7 @@ const UserFilter = function () {
         if (exportUserFiltersBtn.classList.contains('disabled')) {
             return;
         }
-        exportFile('adguard-user-rules', editor.getValue())
+        exportFile('adguard-user-rules', 'txt', editor.getValue())
             .catch(err => {
             // ToDo: handle error
             });
@@ -1884,6 +1916,7 @@ PageController.prototype = {
 
         this._preventDragAndDrop();
         this._customizeText();
+        this._bindEvents();
         this._render();
 
         CheckboxUtils.toggleCheckbox(document.querySelectorAll(".opt-state input[type=checkbox]"));
@@ -1900,6 +1933,43 @@ PageController.prototype = {
 
         this._initBoardingScreen();
         this._initUpdatesBlock();
+    },
+
+    _bindEvents() {
+        const importSettingsBtn = document.querySelector('#settingsImport');
+        const exportSettingsBtn = document.querySelector('#settingsExport');
+        const importSettingsInput = document.querySelector('#importSettingsInput');
+
+        importSettingsBtn.addEventListener('click', this.importSettingsFile.bind(this));
+        exportSettingsBtn.addEventListener('click', this.exportSettingsFile.bind(this));
+
+        importSettingsInput.addEventListener('change', (event) => {
+            try {
+                Utils.handleImportSettings(event);
+            } catch (err) {
+                // ToDo: handle error
+            }
+            importSettingsInput.value = '';
+        });
+    },
+
+    importSettingsFile(event) {
+        event.preventDefault();
+        const importSettingsInput = document.querySelector('#importSettingsInput');
+        importSettingsInput.click();
+    },
+
+    exportSettingsFile(event) {
+        event.preventDefault();
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'getUserSettings'
+        }));
+        ipcRenderer.on('getUserSettingsResponse', (e, response) => {
+            exportFile('adguard-settings', 'json', JSON.stringify(response, null, 4))
+                .catch(err => {
+                    // ToDo: handle error
+                });
+        });
     },
 
     _initUpdatesBlock: function () {

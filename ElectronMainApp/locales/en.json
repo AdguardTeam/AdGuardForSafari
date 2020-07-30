@@ -53,6 +53,12 @@
     "options_settings": {
         "message": "AdGuard for Safari - Settings"
     },
+    "options_settings_import_wrong_file_extension": {
+        "message": "The file extension should be .json"
+    },
+    "options_settings_import_error": {
+        "message": "Error importing settings"
+    },
     "options_general_settings": {
         "message": "General"
     },
@@ -394,6 +400,12 @@
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "Enables hardware acceleration for settings window. Application restart is required"
+    },
+    "settings_import_button": {
+        "message": "Import settings"
+    },
+    "settings_export_button": {
+        "message": "Export settings"
     },
     "settings_notification_protection_title": {
         "message": "Protection is paused"
