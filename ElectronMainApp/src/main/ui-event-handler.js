@@ -1,6 +1,7 @@
 const {ipcMain} = require('electron');
 const config = require('config');
 const settings = require('./app/settings-manager');
+const settingsBackup = require('./app/settings-provider');
 const filters = require('./app/filters-manager');
 const filterCategories = require('./app/filters/filters-categories');
 const listeners = require('./notifier');
@@ -103,7 +104,9 @@ module.exports.init = function () {
                 sendResponse(event, 'getContentBlockersMetadataResponse', getContentBlockersInfo());
                 break;
             case 'getUserSettings':
-                sendResponse(event, 'getUserSettingsResponse', settings.getAllSettings());
+                settingsBackup.loadSettingsBackup((settings) => {
+                    sendResponse(event, 'getUserSettingsResponse', settings)
+                });
                 break;
             case 'openSafariExtensionsPrefs':
                 safariToolbar.openExtensionsPreferenses(()=> {
