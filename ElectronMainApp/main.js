@@ -133,7 +133,9 @@ function loadMainWindow(onWindowLoaded) {
 
     // reloads page to update color theme if OS color theme has been changed
     nativeTheme.on('updated', function theThemeHasChanged () {
-        mainWindow.webContents.reload();
+        if (mainWindow) {
+            mainWindow.webContents.reload();
+        }
     });
 
     // on close
