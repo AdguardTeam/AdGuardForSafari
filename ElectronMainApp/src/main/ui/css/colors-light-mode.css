@@ -303,3 +303,10 @@ li.active .toggler {
 .settings-content .settings-content__save-btn {
 	color: #fff;
 }
+.onboarding__pic {
+	background-image: url("../images/help_info.jpg");
+	background-size: cover;
+}
+.onboarding__desc {
+	color: #000000;
+}
