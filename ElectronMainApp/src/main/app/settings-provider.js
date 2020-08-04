@@ -4,6 +4,8 @@ const app = require('./app');
 const settingsManager = require('./settings-manager');
 const userRules = require('./userrules');
 const whitelist = require('./whitelist');
+const log = require('./utils/log');
+const config = require('config');
 
 /**
  * Application settings provider.
@@ -93,22 +95,22 @@ module.exports = (() => {
      * @param callback
      */
     const loadGeneralSettingsSection = (callback) => {
-        // const enabledFilterIds = collectEnabledFilterIds();
-        // const allowAcceptableAds = enabledFilterIds.indexOf(adguard.utils.filters.ids.SEARCH_AND_SELF_PROMO_FILTER_ID) >= 0;
+        const enabledFilterIds = collectEnabledFilterIds();
+        const allowAcceptableAds = enabledFilterIds.indexOf(config.get('AntiBannerFiltersId').SEARCH_AND_SELF_PROMO_FILTER_ID) >= 0;
 
         const section = {
             'general-settings': {
                 'app-language': app.getLocale(),
-                // 'allow-acceptable-ads': allowAcceptableAds,
-                'notify-about-extension-updates': settings.values['show-app-updated-disabled'],
-                'filters-update-period': settings.values['update-filters-period'],
+                'allow-acceptable-ads': allowAcceptableAds,
+                'show-app-updated-disabled': !settingsManager.isShowAppUpdatedNotification(),
+                'update-filters-period': settings.values['update-filters-period'],
                 // 'show-adguard-in-menu-bar': settings.values['...'],
                 'launch-adguard-at-login': settings.values['launch-at-login'],
                 'verbose-logging': settings.values['verbose-logging'],
-                'enable-hardware-acceleration': !settings.values['hardware-acceleration-disabled'],
+                'hardware-acceleration-disabled': settingsManager.isHardwareAccelerationDisabled(),
             },
         };
-
+        debugger;
         callback(section);
     };
 
@@ -117,40 +119,24 @@ module.exports = (() => {
      * @param section Section
      * @param callback Finish callback
      */
-    // const applyGeneralSettingsSection = function (section, callback) {
-    //     const set = section['general-settings'];
-    //
-    //     adguard.settings.changeShowPageStatistic(!!set['show-blocked-ads-count']);
-    //     adguard.settings.changeAutodetectFilters(!!set['autodetect-filters']);
-    //     adguard.settings.changeEnableSafebrowsing(!!set['safebrowsing-enabled']);
-    //     adguard.settings.setFiltersUpdatePeriod(set['filters-update-period']);
-    //
-    //     if (set['allow-acceptable-ads']) {
-    //         adguard.filters.addAndEnableFilters([adguard.utils.filters.ids.SEARCH_AND_SELF_PROMO_FILTER_ID], () => {
-    //             callback(true);
-    //         });
-    //     } else {
-    //         adguard.filters.disableFilters([adguard.utils.filters.ids.SEARCH_AND_SELF_PROMO_FILTER_ID]);
-    //         callback(true);
-    //     }
-    // };
+    const applyGeneralSettingsSection = function (section, callback) {
+        const set = section['general-settings'];
 
-    /**
-     * Applies extension specific section settings to application
-     * @param section
-     * @param callback
-     */
-    // const applyExtensionSpecificSettingsSection = function (section, callback) {
-    //     const set = section['extension-specific-settings'];
-    //
-    //     adguard.settings.changeUseOptimizedFiltersEnabled(!!set['use-optimized-filters']);
-    //     adguard.settings.changeCollectHitsCount(!!set['collect-hits-count']);
-    //     adguard.settings.changeShowContextMenu(!!set['show-context-menu']);
-    //     adguard.settings.changeShowInfoAboutAdguardFullVersion(!!set['show-info-about-adguard']);
-    //     adguard.settings.changeShowAppUpdatedNotification(!!set['show-app-updated-info']);
-    //
-    //     callback(true);
-    // };
+        settingsManager.changeShowAppUpdatedNotification(set['show-app-updated-disabled']);
+        settingsManager.changeUpdateFiltersPeriod(set['update-filters-period']);
+        settingsManager.changeLaunchAtLogin(set['launch-adguard-at-login']);
+        settingsManager.changeVerboseLogging(set['verbose-logging']);
+        settingsManager.changeHardwareAcceleration(set['hardware-acceleration-disabled']);
+
+        if (set['allow-acceptable-ads']) {
+            filters.addAndEnableFilters([config.get('AntiBannerFiltersId').SEARCH_AND_SELF_PROMO_FILTER_ID], () => {
+                callback(true);
+            });
+        } else {
+            filters.disableFilters([config.get('AntiBannerFiltersId').SEARCH_AND_SELF_PROMO_FILTER_ID]);
+            callback(true);
+        }
+    };
 
     /**
      * Initial data needed to add custom filter from the scratch
@@ -309,54 +295,56 @@ module.exports = (() => {
      * @param section Section
      * @param callback Finish callback
      */
-    // const applyFiltersSection = function (section, callback) {
-    //     const whiteListSection = section.filters['whitelist'] || {};
-    //     const whitelistDomains = whiteListSection.domains || [];
-    //     const blacklistDomains = whiteListSection['inverted-domains'] || [];
-    //
-    //     // Apply whitelist/blacklist domains and whitelist mode
-    //     adguard.whitelist.configure(whitelistDomains, blacklistDomains, !whiteListSection.inverted);
-    //
-    //     const userFilterSection = section.filters['user-filter'] || {};
-    //     const userRules = userFilterSection.rules || '';
-    //
-    //     // Apply user rules
-    //     adguard.userrules.updateUserRulesText(userRules);
-    //
-    //     // Apply custom filters
-    //     const customFiltersData = section.filters['custom-filters'] || [];
-    //
-    //     // STEP 1 sync custom filters
-    //     syncCustomFilters(customFiltersData)
-    //         .then((availableCustomFilters) => {
-    //             // STEP 2 get filters with enabled flag from export data
-    //             const customFilterIdsToEnable = availableCustomFilters
-    //                 .filter((availableCustomFilter) => {
-    //                     const filterData = customFiltersData
-    //                         .find((filter) => {
-    //                             if (!filter.customUrl) {
-    //                                 // eslint-disable-next-line max-len
-    //                                 throw new Error(`Custom filter should always have custom URL: ${JSON.stringify(filter)}`);
-    //                             }
-    //                             return filter.customUrl === availableCustomFilter.customUrl;
-    //                         });
-    //                     return filterData && filterData.enabled;
-    //                 })
-    //                 .map(filter => filter.filterId);
-    //             // STEP 3 sync enabled filters
-    //             const enabledFilterIds = section.filters['enabled-filters'] || [];
-    //             return syncEnabledFilters([...enabledFilterIds, ...customFilterIdsToEnable]);
-    //         })
-    //         .then(() => {
-    //             // STEP 4 sync enabled groups
-    //             const enabledGroups = section.filters['enabled-groups'] || [];
-    //             syncEnabledGroups(enabledGroups);
-    //             callback(true);
-    //         })
-    //         .catch((err) => {
-    //             adguard.console.error(err);
-    //         });
-    // };
+    const applyFiltersSection = function (section, callback) {
+        const whiteListSection = section.filters['whitelist'] || {};
+        const whitelistDomains = whiteListSection.domains || [];
+        const blacklistDomains = whiteListSection['inverted-domains'] || [];
+
+        // Apply whitelist/blacklist domains and whitelist mode
+        whitelist.configure(whitelistDomains, blacklistDomains, !whiteListSection.inverted);
+
+        const userFilterSection = section.filters['user-filter'] || {};
+        const userRules = userFilterSection.rules || '';
+
+        // Apply user rules
+        userRules.updateUserRulesText(userRules);
+
+        // Apply custom filters
+        const customFiltersData = section.filters['custom-filters'] || [];
+
+        callback(true); // temp
+
+        // STEP 1 sync custom filters
+        // syncCustomFilters(customFiltersData)
+        //     .then((availableCustomFilters) => {
+        //         // STEP 2 get filters with enabled flag from export data
+        //         const customFilterIdsToEnable = availableCustomFilters
+        //             .filter((availableCustomFilter) => {
+        //                 const filterData = customFiltersData
+        //                     .find((filter) => {
+        //                         if (!filter.customUrl) {
+        //                             // eslint-disable-next-line max-len
+        //                             throw new Error(`Custom filter should always have custom URL: ${JSON.stringify(filter)}`);
+        //                         }
+        //                         return filter.customUrl === availableCustomFilter.customUrl;
+        //                     });
+        //                 return filterData && filterData.enabled;
+        //             })
+        //             .map(filter => filter.filterId);
+        //         // STEP 3 sync enabled filters
+        //         const enabledFilterIds = section.filters['enabled-filters'] || [];
+        //         return syncEnabledFilters([...enabledFilterIds, ...customFilterIdsToEnable]);
+        //     })
+        //     .then(() => {
+        //         // STEP 4 sync enabled groups
+        //         const enabledGroups = section.filters['enabled-groups'] || [];
+        //         syncEnabledGroups(enabledGroups);
+        //         callback(true);
+        //     })
+        //     .catch((err) => {
+        //         adguard.console.error(err);
+        //     });
+    };
 
     /**
      * Exports settings set in json format
@@ -379,62 +367,51 @@ module.exports = (() => {
 
     /**
      * Imports settings set from json format
-     * @param {string} json
-     * @param {function} cb
+     * @param {string} settingsJson
      */
-    // const applySettingsBackupJson = function (json, cb) {
-    //     function onFinished(success) {
-    //         if (success) {
-    //             adguard.console.info('Settings import finished successfully');
-    //         } else {
-    //             adguard.console.error('Error importing settings');
-    //         }
-    //
-    //         adguard.listeners.notifyListeners(adguard.listeners.SETTINGS_UPDATED, success);
-    //
-    //         if (cb) {
-    //             cb(success);
-    //         }
-    //     }
-    //
-    //     let input = null;
-    //
-    //     try {
-    //         input = JSON.parse(json);
-    //     } catch (ex) {
-    //         adguard.console.error('Error parsing input json {0}, {1}', json, ex);
-    //         onFinished(false);
-    //         return;
-    //     }
-    //
-    //     if (!input || input['protocol-version'] !== BACKUP_PROTOCOL_VERSION) {
-    //         adguard.console.error('Json input is invalid {0}', json);
-    //         onFinished(false);
-    //         return;
-    //     }
-    //
-    //     applyGeneralSettingsSection(input, (success) => {
-    //         if (!success) {
-    //             onFinished(false);
-    //             return;
-    //         }
-    //
-    //         applyExtensionSpecificSettingsSection(input, (success) => {
-    //             if (!success) {
-    //                 onFinished(false);
-    //                 return;
-    //             }
-    //
-    //             applyFiltersSection(input, (success) => {
-    //                 onFinished(success);
-    //             });
-    //         });
-    //     });
-    // };
+    const applySettingsBackupJson = function (settingsJson) {
+        function onFinished(success) {
+            if (success) {
+                log.info('Settings import finished successfully');
+            } else {
+                log.error('Error importing settings');
+                return;
+            }
+
+            // adguard.listeners.notifyListeners(adguard.listeners.SETTINGS_UPDATED, success);
+        }
+
+        let input = null;
+
+        try {
+            input = JSON.parse(settingsJson);
+        } catch (error) {
+            log.error('Error parsing input json {0}, {1}', settingsJson, error);
+            onFinished(false);
+            return;
+        }
+
+        if (!input || input['protocol-version'] !== BACKUP_PROTOCOL_VERSION) {
+            log.error('Json input is invalid {0}', settingsJson);
+            onFinished(false);
+            return;
+        }
+
+        applyGeneralSettingsSection(input, (success) => {
+            if (!success) {
+                onFinished(false);
+                return;
+            }
+
+            applyFiltersSection(input, (success) => {
+                onFinished(success);
+            });
+        });
+    };
 
     return {
         loadSettingsBackup: loadSettingsBackupJson,
-        // applySettingsBackup: applySettingsBackupJson
+        applySettingsBackup: applySettingsBackupJson
     };
 
 })();

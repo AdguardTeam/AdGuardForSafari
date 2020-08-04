@@ -100,7 +100,10 @@ const Utils = {
 
     handleImportSettings(event) {
         const onFileLoaded = (content) => {
-            // ToDo: apply settings from json
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'applyUserSettings',
+                'settings': content
+            }));
         };
 
         const file = event.currentTarget.files[0];
@@ -623,7 +626,7 @@ const UserFilter = function () {
         }
         exportFile('adguard-user-rules', 'txt', editor.getValue())
             .catch(err => {
-            // ToDo: handle error
+                // ToDo: handle error
             });
     });
 
@@ -1560,8 +1563,8 @@ const Select = function (id, options, value) {
             .map((item) => typeof item === 'object'
                 && item.value !== undefined
                 && item.name !== undefined
-                    ? new Option(item.value, item.name, item.value === value)
-                    : new Option(item, item, item === value)
+                ? new Option(item.value, item.name, item.value === value)
+                : new Option(item, item, item === value)
             )
             .forEach(option => select.appendChild(option.render()));
     }
@@ -1704,6 +1707,26 @@ const Settings = function () {
         CheckboxUtils.updateCheckbox([launchAtLoginCheckbox], enabled);
     };
 
+    const notifyExtensionUpdatesCheckbox = document.querySelector("#showAppUpdatedNotification");
+    const updateNotifyExtensionUpdatesCheckbox = (disabled) => {
+        CheckboxUtils.updateCheckbox([notifyExtensionUpdatesCheckbox], !disabled);
+    };
+
+    const verboseLoggingCheckbox = document.querySelector("#verboseLogging");
+    const updateVerboseLoggingCheckbox = (enabled) => {
+        CheckboxUtils.updateCheckbox([verboseLoggingCheckbox], enabled);
+    };
+
+    const filterUpdatePeriodSelect = document.querySelector("#filterUpdatePeriod");
+    const updateFilterUpdatePeriodSelect = (period) => {
+        filterUpdatePeriodSelect.value = period;
+    };
+
+    const hardwareAccelerationCheckbox = document.querySelector("#enableHardwareAcceleration");
+    const updateHardwareAccelerationCheckbox = (disabled) => {
+        CheckboxUtils.updateCheckbox([hardwareAccelerationCheckbox], !disabled);
+    };
+
     const enableProtectionNotification = document.querySelector('#enableProtectionNotification');
     const showProtectionStatusWarning = function (protectionEnabled) {
         if (protectionEnabled) {
@@ -1750,6 +1773,10 @@ const Settings = function () {
         render,
         updateAcceptableAdsCheckbox,
         updateLaunchAtLoginCheckbox,
+        updateNotifyExtensionUpdatesCheckbox,
+        updateVerboseLoggingCheckbox,
+        updateFilterUpdatePeriodSelect,
+        updateHardwareAccelerationCheckbox,
         showProtectionStatusWarning,
         updateContentBlockersDescription,
     };
@@ -1964,7 +1991,7 @@ PageController.prototype = {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'getUserSettings'
         }));
-        ipcRenderer.on('getUserSettingsResponse', (e, response) => {
+        ipcRenderer.once('getUserSettingsResponse', (e, response) => {
             exportFile('adguard-settings', 'json', JSON.stringify(response, null, 4))
                 .catch(err => {
                     // ToDo: handle error
@@ -2029,10 +2056,10 @@ PageController.prototype = {
 
         const openSafariSettingsButtons = document.querySelectorAll('.open-safari-extensions-settings-btn');
         openSafariSettingsButtons.forEach((but) => {
-             but.addEventListener('click', (e) => {
-                 e.preventDefault();
-                 this._openSafariExtensionsPrefs();
-             });
+            but.addEventListener('click', (e) => {
+                e.preventDefault();
+                this._openSafariExtensionsPrefs();
+            });
         });
 
         const enableExtensionsNotificationClose = document.getElementById('enableExtensionsNotificationClose');
@@ -2218,6 +2245,18 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.LAUNCH_AT_LOGIN_UPDATED:
                     controller.settings.updateLaunchAtLoginCheckbox(options);
+                    break;
+                case EventNotifierTypes.NOTIFY_EXTENSION_UPDATES_UPDATED:
+                    controller.settings.updateNotifyExtensionUpdatesCheckbox(options);
+                    break;
+                case EventNotifierTypes.VERBOSE_LOGGING_UPDATED:
+                    controller.settings.updateVerboseLoggingCheckbox(options);
+                    break;
+                case EventNotifierTypes.FILTERS_PERIOD_UPDATED:
+                    controller.settings.updateFilterUpdatePeriodSelect(options);
+                    break;
+                case EventNotifierTypes.HARDWARE_ACCELERATION_UPDATED:
+                    controller.settings.updateHardwareAccelerationCheckbox(options);
                     break;
                 case EventNotifierTypes.PROTECTION_STATUS_CHANGED:
                     controller.settings.showProtectionStatusWarning(options);

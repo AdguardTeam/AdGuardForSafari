@@ -92,7 +92,7 @@ module.exports.init = function () {
                     (filter) => {
                         filters.addAndEnableFilters([filter.filterId]);
                         sendResponse(event, 'subscribeToCustomFilterSuccessResponse');
-                        },
+                    },
                     () => { sendResponse(event, 'subscribeToCustomFilterErrorResponse') });
                 break;
             case 'getSafariExtensionsState':
@@ -107,6 +107,9 @@ module.exports.init = function () {
                 settingsBackup.loadSettingsBackup((settings) => {
                     sendResponse(event, 'getUserSettingsResponse', settings)
                 });
+                break;
+            case 'applyUserSettings':
+                settingsBackup.applySettingsBackup(message.settings);
                 break;
             case 'openSafariExtensionsPrefs':
                 safariToolbar.openExtensionsPreferenses(()=> {

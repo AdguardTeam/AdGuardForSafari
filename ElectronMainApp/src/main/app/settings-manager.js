@@ -14,6 +14,8 @@ module.exports = (function () {
 
     'use strict';
 
+    const DEFAULT_FILTERS_UPDATE_PERIOD = -1;
+
     const settings = {
         DISABLE_SAFEBROWSING: 'safebrowsing-disabled',
         DISABLE_SEND_SAFEBROWSING_STATS: 'safebrowsing-stats-disabled',
@@ -123,8 +125,9 @@ module.exports = (function () {
         return !getProperty(settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION);
     };
 
-    const changeShowAppUpdatedNotification = function (show, options) {
-        setProperty(settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION, !show, options);
+    const changeShowAppUpdatedNotification = (value) => {
+        setProperty(settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION, value);
+        listeners.notifyListeners(events.NOTIFY_EXTENSION_UPDATES_UPDATED, value);
     };
 
     const changeEnableSafebrowsing = function (enabled) {
@@ -150,8 +153,13 @@ module.exports = (function () {
         setProperty(settings.DEFAULT_WHITE_LIST_MODE, enabled);
     };
 
-    const changeUpdateFiltersPeriod = (value) => {
-        setProperty(settings.UPDATE_FILTERS_PERIOD, value);
+    const changeUpdateFiltersPeriod = (period) => {
+        let periodNum = Number.parseInt(period, 10);
+        if (Number.isNaN(periodNum)) {
+            periodNum = DEFAULT_FILTERS_UPDATE_PERIOD;
+        }
+        setProperty(settings.UPDATE_FILTERS_PERIOD, periodNum);
+        listeners.notifyListeners(events.FILTERS_PERIOD_UPDATED, periodNum);
     };
 
     const getUpdateFiltersPeriod = () => {
@@ -173,8 +181,20 @@ module.exports = (function () {
         return getProperty(settings.VERBOSE_LOGGING);
     };
 
+    const changeVerboseLogging = (value) => {
+        setProperty(settings.VERBOSE_LOGGING, value);
+        safariToolbar.setVerboseLogging(value);
+
+        listeners.notifyListeners(events.VERBOSE_LOGGING_UPDATED, value);
+    };
+
     const isHardwareAccelerationDisabled = function () {
         return getProperty(settings.DISABLE_HARDWARE_ACCELERATION);
+    };
+
+    const changeHardwareAcceleration = (value) => {
+        setProperty(settings.DISABLE_HARDWARE_ACCELERATION, value);
+        listeners.notifyListeners(events.HARDWARE_ACCELERATION_UPDATED, value);
     };
 
     const isQuitOnCloseWindow = function () {
@@ -214,7 +234,9 @@ module.exports = (function () {
     api.changeLaunchAtLogin = changeLaunchAtLogin;
     api.isLaunchAtLoginEnabled = isLaunchAtLoginEnabled;
     api.isVerboseLoggingEnabled = isVerboseLoggingEnabled;
+    api.changeVerboseLogging = changeVerboseLogging;
     api.isHardwareAccelerationDisabled = isHardwareAccelerationDisabled;
+    api.changeHardwareAcceleration = changeHardwareAcceleration;
     api.isQuitOnCloseWindow = isQuitOnCloseWindow;
     api.changeQuitOnCloseWindow = changeQuitOnCloseWindow;
 
