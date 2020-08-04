@@ -381,6 +381,18 @@ module.exports = (() => {
     }
 
     /**
+     * Cleans out old removed custom filters
+     */
+    const cleanRemovedCustomFilters = () => {
+        subscriptions.loadCustomFilters()
+            .filter(filter => filter.removed)
+            .forEach((filter) => {
+                filtersState.removeFilter(filter.filterId);
+                removeFilter(filter.filterId);
+        });
+    };
+
+    /**
      * Checks filters updates.
      *
      * @param forceUpdate Normally we respect filter update period. But if this parameter is
@@ -475,6 +487,7 @@ module.exports = (() => {
 
         checkAntiBannerFiltersUpdate,
         removeObsoleteFilters,
+        cleanRemovedCustomFilters,
     };
 
 })();
