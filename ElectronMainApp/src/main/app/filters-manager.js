@@ -46,7 +46,6 @@ module.exports = (() => {
         const filtersVersionInfo = filtersState.getFiltersVersion();
         // Load filters state from the storage
         const filtersStateInfo = filtersState.getFiltersState();
-
         const filters = subscriptions.getFilters();
 
         for (let i = 0; i < filters.length; i++) {
@@ -262,7 +261,7 @@ module.exports = (() => {
     const removeFilter = function (filterId) {
 
         const filter = subscriptions.getFilter(filterId);
-        if (!filter || filter.removed) {
+        if (!filter) {
             return;
         }
 
