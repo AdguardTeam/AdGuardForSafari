@@ -183,7 +183,7 @@ li.active .toggler {
 	background-color: #F7F7F7;
 }
 .settings-footer .rate-row .text {
-	color: #505050;
+	color: #eeeeee;
 }
 .settings-footer .links-row {
 	background-color: #787878;
@@ -242,7 +242,7 @@ li.active .toggler {
 	background: url(../images/logo-white.svg) no-repeat;
 }
 .settings-page.downloading .sp-lists-user-descr:first-child {
-	color: #333;
+	color: #eeeeee;
 }
 .settings-page.downloading .sp-lists-user-descr {
 	color: #999;
@@ -319,16 +319,23 @@ li.active .toggler {
 	color: #66b574;
 }
 .about-updates {
-	color: #252525;
+	color: #eeeeee;
 }
 .about-btn {
 	color: #66b574;
 }
 .onboarding {
-	background-color: #fff;
+	background-color: #323232;
 }
 .settings-content .settings-content__save-btn {
 	color: #fff;
+}
+.onboarding__pic {
+	background: url("../images/help_info_dark.jpg") center center no-repeat;
+}
+
+.onboarding__desc {
+	color: #eeeeee;
 }
 #settingsExport {
 	color: #66b574;
