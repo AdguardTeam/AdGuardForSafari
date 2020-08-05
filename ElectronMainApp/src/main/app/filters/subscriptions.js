@@ -638,7 +638,8 @@ module.exports = (function () {
         getCustomFilterInfo: getCustomFilterInfo,
         removeCustomFilter: removeCustomFilter,
         isTrustedFilter: isTrustedFilter,
-        removeFilter: removeFilter
+        removeFilter: removeFilter,
+        loadCustomFilters: loadCustomFilters,
     };
 
 })();
