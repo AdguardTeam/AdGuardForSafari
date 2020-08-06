@@ -1537,16 +1537,6 @@ body {
   background: url(../images/tick.svg) right center no-repeat;
   background-size: 15px;
 }
-.filter-rules__label--saved:after {
-  /*content: '';*/
-  /*position: relative;*/
-  /*display: block;*/
-  /*top: 4px;*/
-  /*width: 12px;*/
-  /*height: 12px;*/
-  /*background-image: url(../images/tick.svg);*/
-  /*background-size: contain;*/
-}
 
 .settings-actions__save-button {
   float: left;

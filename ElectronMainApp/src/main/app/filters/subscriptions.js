@@ -642,6 +642,7 @@ module.exports = (function () {
         removeCustomFilter: removeCustomFilter,
         isTrustedFilter: isTrustedFilter,
         removeFilter: removeFilter,
+        loadCustomFilters: loadCustomFilters,
     };
 
 })();

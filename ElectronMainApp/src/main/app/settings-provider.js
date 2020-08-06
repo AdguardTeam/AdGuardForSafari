@@ -16,8 +16,6 @@ module.exports = (() => {
 
     const BACKUP_PROTOCOL_VERSION = '1.0';
 
-    const settings = settingsManager.getAllSettings();
-
     /**
      * Collect enabled filters ids without custom filters
      * @returns {Array}
@@ -102,10 +100,9 @@ module.exports = (() => {
                 'app-language': app.getLocale(),
                 'allow-acceptable-ads': allowAcceptableAds,
                 'show-app-updated-disabled': !settingsManager.isShowAppUpdatedNotification(),
-                'update-filters-period': settings.values['update-filters-period'],
-                // 'show-adguard-in-menu-bar': settings.values['...'],
-                'launch-adguard-at-login': settings.values['launch-at-login'],
-                'verbose-logging': settings.values['verbose-logging'],
+                'update-filters-period': settingsManager.getUpdateFiltersPeriod(),
+                'launch-at-login': settingsManager.isLaunchAtLoginEnabled(),
+                'verbose-logging': settingsManager.isVerboseLoggingEnabled(),
                 'hardware-acceleration-disabled': settingsManager.isHardwareAccelerationDisabled(),
             },
         };
@@ -122,7 +119,7 @@ module.exports = (() => {
 
         settingsManager.changeShowAppUpdatedNotification(set['show-app-updated-disabled']);
         settingsManager.changeUpdateFiltersPeriod(set['update-filters-period']);
-        settingsManager.changeLaunchAtLogin(set['launch-adguard-at-login']);
+        settingsManager.changeLaunchAtLogin(set['launch-at-login']);
         settingsManager.changeVerboseLogging(set['verbose-logging']);
         settingsManager.changeHardwareAcceleration(set['hardware-acceleration-disabled']);
 
