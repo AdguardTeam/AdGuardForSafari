@@ -112,7 +112,10 @@
 
 - (BOOL)isDark {
     if (@available(macOS 10.14, *)) {
-        return [self.controlView.effectiveAppearance.name isEqualToString:NSAppearanceNameDarkAqua];
+        return [self.controlView.effectiveAppearance.name isEqualToString:NSAppearanceNameDarkAqua ||
+                self.controlView.effectiveAppearance.name isEqualToString:NSAppearanceNameVibrantDark ||
+                self.controlView.effectiveAppearance.name isEqualToString:NSAppearanceNameAccessibilityHighContrastDarkAqua ||
+                self.controlView.effectiveAppearance.name isEqualToString:NSAppearanceNameAccessibilityHighContrastVibrantDark];
     }
     return NO;
 }
