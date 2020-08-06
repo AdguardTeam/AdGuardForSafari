@@ -407,6 +407,15 @@
     "settings_export_button": {
         "message": "Export settings"
     },
+    "settings_import": {
+        "message": "Settings import"
+    },
+    "settings_import_success": {
+        "message": "Settings import finished successfully"
+    },
+    "settings_import_error": {
+        "message": "An error occurred during settings import"
+    },
     "settings_notification_protection_title": {
         "message": "Protection is paused"
     },

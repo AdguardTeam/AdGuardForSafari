@@ -12,6 +12,7 @@ const EventNotifierTypes = module.exports = {
     START_DOWNLOAD_FILTER: "event.start.download.filter",
     SUCCESS_DOWNLOAD_FILTER: "event.success.download.filter",
     ERROR_DOWNLOAD_FILTER: "event.error.download.filter",
+    ERROR_IMPORT: "event.error.import",
     ENABLE_FILTER_SHOW_POPUP: "event.enable.filter.show.popup",
     LOG_EVENT: "event.log.track",
     UPDATE_TAB_BUTTON_STATE: "event.update.tab.button.state",
@@ -40,6 +41,7 @@ const EventNotifierTypes = module.exports = {
     VERBOSE_LOGGING_UPDATED: "event.verbose.logging.updated",
     FILTERS_PERIOD_UPDATED: "event.filters.period.updated",
     HARDWARE_ACCELERATION_UPDATED: "event.hardware.acceleration.updated",
+    SETTINGS_UPDATED: "event.settings.updated",
     // Log events
     TAB_ADDED: 'log.tab.added',
     TAB_CLOSE: 'log.tab.close',

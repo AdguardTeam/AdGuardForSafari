@@ -511,7 +511,7 @@ const WhiteListFilter = function (options) {
         try {
             handleFileInput(event);
         } catch (err) {
-            // ToDo: handle error
+            console.error(err.message);
         }
     });
 
@@ -522,7 +522,7 @@ const WhiteListFilter = function (options) {
         }
         exportFile('adguard-allowlist', 'txt', editor.getValue())
             .catch(err => {
-                // ToDo: handle error
+                console.error(err.message);
             });
     });
 
@@ -615,7 +615,7 @@ const UserFilter = function () {
         try {
             handleFileInput(event);
         } catch (err) {
-            // ToDo: handle error
+            console.error(err.message);
         }
     });
 
@@ -626,7 +626,7 @@ const UserFilter = function () {
         }
         exportFile('adguard-user-rules', 'txt', editor.getValue())
             .catch(err => {
-                // ToDo: handle error
+                console.error(err.message);
             });
     });
 
@@ -1974,7 +1974,7 @@ PageController.prototype = {
             try {
                 Utils.handleImportSettings(event);
             } catch (err) {
-                // ToDo: handle error
+                console.error(err.message);
             }
             importSettingsInput.value = '';
         });
@@ -1994,7 +1994,7 @@ PageController.prototype = {
         ipcRenderer.once('getUserSettingsResponse', (e, response) => {
             exportFile('adguard-settings', 'json', JSON.stringify(response, null, 4))
                 .catch(err => {
-                    // ToDo: handle error
+                    console.error(err.message);
                 });
         });
     },
@@ -2031,7 +2031,7 @@ PageController.prototype = {
 
         let self = this;
         ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
-            // const allContentBlockersDisabled = arg.allContentBlockersDisabled;
+            const allContentBlockersDisabled = arg.allContentBlockersDisabled;
             const contentBlockersEnabled = arg.contentBlockersEnabled;
             const minorExtensionsEnabled = arg.minorExtensionsEnabled;
 

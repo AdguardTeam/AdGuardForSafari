@@ -6,6 +6,8 @@ const userRules = require('./userrules');
 const whitelist = require('./whitelist');
 const log = require('./utils/log');
 const config = require('config');
+const listeners = require('../notifier');
+const events = require('../events');
 
 /**
  * Application settings provider.
@@ -32,8 +34,7 @@ module.exports = (() => {
      * @returns {CustomFilterInitial} - returns data enough to import custom filter
      */
     const collectCustomFiltersData = () => {
-        // const customFilters = filters.getFilters().filter(filter => filter.customUrl);
-        const customFilters = subscriptions.getCustomFilters();
+        const customFilters = filters.getCustomFilters();
         debugger;
         return customFilters.map(filter => ({
             filterId: filter.filterId,
@@ -210,7 +211,7 @@ module.exports = (() => {
      * @returns {Promise<any>} Promise object which represents array with filters
      */
     const syncCustomFilters = (customFiltersInitials) => {
-        const presentCustomFilters = subscriptions.loadCustomFilters();
+        const presentCustomFilters = filters.getCustomFilters();
 
         const enrichedFiltersInitials = customFiltersInitials.map((filterToAdd) => {
             presentCustomFilters.forEach((existingFilter) => {
@@ -366,10 +367,9 @@ module.exports = (() => {
                 log.info('Settings import finished successfully');
             } else {
                 log.error('Error importing settings');
-                return;
             }
 
-            // adguard.listeners.notifyListeners(adguard.listeners.SETTINGS_UPDATED, success);
+            listeners.notifyListeners(events.SETTINGS_UPDATED, { success });
         }
 
         let input = null;
@@ -377,13 +377,13 @@ module.exports = (() => {
         try {
             input = JSON.parse(settingsJson);
         } catch (error) {
-            log.error('Error parsing input json {0}, {1}', settingsJson, error);
+            log.error(`Error parsing input json ${settingsJson}, ${error}`);
             onFinished(false);
             return;
         }
 
         if (!input || input['protocol-version'] !== BACKUP_PROTOCOL_VERSION) {
-            log.error('Json input is invalid {0}', settingsJson);
+            log.error(`Json input is invalid ${settingsJson}`);
             onFinished(false);
             return;
         }

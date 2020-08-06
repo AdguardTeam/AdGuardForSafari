@@ -71,6 +71,11 @@ module.exports = (() => {
     const getEnabledFilters = () => getFilters().filter(f => f.enabled);
 
     /**
+     * Loads custom filters metadata
+     */
+    const getCustomFilters = () => getFilters().filter(f => f.customUrl);
+
+    /**
      * Updates groups state info
      * Loads state info from the storage and then updates adguard.subscription.groups properly
      */
@@ -472,6 +477,7 @@ module.exports = (() => {
         getGroups,
         isFilterEnabled,
         getEnabledFilters,
+        getCustomFilters,
 
         addAndEnableFilters,
         disableFilters,

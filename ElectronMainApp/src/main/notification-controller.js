@@ -197,6 +197,20 @@ module.exports = (() => {
         });
     };
 
+    /**
+     * Settings update notification
+     */
+    const showSettingsUpdateNotification = (options) => {
+        const title = i18n.__("settings_import.message");
+        const subtitle = options.success ?
+            i18n.__("settings_import_success.message") :
+            i18n.__("settings_import_error.message");
+        showNotification({
+            title,
+            subtitle,
+            silent: false
+        });
+    };
 
 
     /**
@@ -220,6 +234,9 @@ module.exports = (() => {
             }
             else if (event === events.UPDATE_CUSTOM_FILTER_ERROR) {
                 showCustomFilterUpdateErrorNotification(options);
+            }
+            else if (event === events.SETTINGS_UPDATED) {
+                showSettingsUpdateNotification(options);
             }
         });
     };
