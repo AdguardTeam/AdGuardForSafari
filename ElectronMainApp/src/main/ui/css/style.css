@@ -338,6 +338,7 @@
   font-weight: 600;
   padding-right: 30px;
   line-height: 22px;
+  word-break: break-all;
 }
 .opts-list .opt-name .desc {
   font-size: 13px;
@@ -876,6 +877,9 @@ li.active .toggler:before {
 }
 .sp-table-row-input{
   display: none;
+}
+.desc--filters {
+  word-break: break-all;
 }
 .filters-check__label {
   font-size: 14px;

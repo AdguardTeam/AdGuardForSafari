@@ -276,12 +276,14 @@ module.exports = (function () {
                     callback();
                     return;
                 }
-                restoreCustomFilter(filter);
+                restoreCustomFilter(filter, trusted);
                 listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
+                listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, rules);
 
             } else {
                 filter = new SubscriptionFilter(filterId, groupId, defaultName, defaultDescription, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
                 filter.loaded = true;
+                filter.enabled = true;
                 //custom filters have special fields
                 filter.customUrl = url;
                 filter.rulesCount = rulesCount;
@@ -324,12 +326,14 @@ module.exports = (function () {
      * Updates custom filter in storage
      *
      * @param filter
+     * @param trusted
      */
-    const restoreCustomFilter = (filter) => {
+    const restoreCustomFilter = (filter, trusted) => {
         let customFilters = loadCustomFilters();
         customFilters.forEach(f => {
             if (f.filterId === filter.filterId) {
-                f.trusted = filter.trusted;
+                f.trusted = trusted;
+                f.enabled = filter.enabled;
                 f.title = filter.title;
                 f.timeUpdated = new Date();
             }
@@ -408,7 +412,6 @@ module.exports = (function () {
                 const filter = createSubscriptionFilterFromJSON(f);
                 filter.customUrl = f.customUrl;
                 filter.rulesCount = f.rulesCount;
-                filter.removed = f.removed;
                 filter.trusted = f.trusted;
 
                 filters.push(filter);

@@ -43,7 +43,6 @@ module.exports = (() => {
         const filtersVersionInfo = filtersState.getFiltersVersion();
         // Load filters state from the storage
         const filtersStateInfo = filtersState.getFiltersState();
-
         const filters = subscriptions.getFilters();
 
         for (let i = 0; i < filters.length; i++) {
@@ -264,7 +263,7 @@ module.exports = (() => {
     const removeFilter = function (filterId) {
 
         const filter = subscriptions.getFilter(filterId);
-        if (!filter || filter.removed) {
+        if (!filter) {
             return;
         }
 
@@ -384,6 +383,18 @@ module.exports = (() => {
     }
 
     /**
+     * Cleans out old removed custom filters
+     */
+    const cleanRemovedCustomFilters = () => {
+        subscriptions.loadCustomFilters()
+            .filter(filter => filter.removed)
+            .forEach((filter) => {
+                filtersState.removeFilter(filter.filterId);
+                removeFilter(filter.filterId);
+        });
+    };
+
+    /**
      * Checks filters updates.
      *
      * @param forceUpdate Normally we respect filter update period. But if this parameter is
@@ -479,6 +490,7 @@ module.exports = (() => {
 
         checkAntiBannerFiltersUpdate,
         removeObsoleteFilters,
+        cleanRemovedCustomFilters,
     };
 
 })();
