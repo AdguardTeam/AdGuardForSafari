@@ -33,7 +33,7 @@ module.exports = (() => {
      */
     const collectCustomFiltersData = () => {
         // const customFilters = filters.getFilters().filter(filter => filter.customUrl);
-        const customFilters = subscriptions.loadCustomFilters();
+        const customFilters = subscriptions.getCustomFilters();
         debugger;
         return customFilters.map(filter => ({
             filterId: filter.filterId,

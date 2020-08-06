@@ -543,6 +543,11 @@ module.exports = (function () {
     const getFilters = () => filters;
 
     /**
+     * @returns Array of custom filters metadata
+     */
+    const getCustomFilters = () => filters.filter(f => f.customUrl);
+
+    /**
      * Gets filter metadata by filter identifier
      */
     const getFilter = filterId => filtersMap[filterId];
@@ -640,6 +645,7 @@ module.exports = (function () {
         isTrustedFilter: isTrustedFilter,
         removeFilter: removeFilter,
         loadCustomFilters: loadCustomFilters,
+        getCustomFilters: getCustomFilters,
     };
 
 })();
