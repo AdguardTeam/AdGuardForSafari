@@ -91,7 +91,6 @@ module.exports = (() => {
             loaded: filter.loaded,
             enabled: filter.enabled,
             installed: filter.installed,
-            removed: filter.removed
         };
 
         localStorage.setItem(FILTERS_STATE_PROP, JSON.stringify(filters));

@@ -276,6 +276,7 @@ module.exports = (function () {
                     callback();
                     return;
                 }
+                filter.enabled = true;
                 restoreCustomFilter(filter, trusted);
                 listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
                 listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, rules);
@@ -283,7 +284,6 @@ module.exports = (function () {
             } else {
                 filter = new SubscriptionFilter(filterId, groupId, defaultName, defaultDescription, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
                 filter.loaded = true;
-                filter.enabled = true;
                 //custom filters have special fields
                 filter.customUrl = url;
                 filter.rulesCount = rulesCount;
@@ -333,7 +333,6 @@ module.exports = (function () {
         customFilters.forEach(f => {
             if (f.filterId === filter.filterId) {
                 f.trusted = trusted;
-                f.enabled = filter.enabled;
                 f.title = filter.title;
                 f.timeUpdated = new Date();
             }
