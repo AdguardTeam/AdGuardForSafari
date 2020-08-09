@@ -1,4 +1,5 @@
 const config = require('config');
+const { requireTaskPool } = require('electron-remote');
 const listeners = require('../../notifier');
 const events = require('../../events');
 const settings = require('../settings-manager');
@@ -6,8 +7,7 @@ const antibanner = require('../antibanner');
 const whitelist = require('../whitelist');
 const log = require('../utils/log');
 const concurrent = require('../utils/concurrent');
-const {groupRules, rulesGroupsBundles, filterGroupsBundles} = require('./rule-groups');
-const {requireTaskPool} = require('electron-remote');
+const { groupRules, rulesGroupsBundles, filterGroupsBundles } = require('./rule-groups');
 
 /**
  * Safari Content Blocker Adapter
@@ -15,35 +15,32 @@ const {requireTaskPool} = require('electron-remote');
  * @type {{updateContentBlocker}}
  */
 module.exports = (function () {
-
     const RULES_LIMIT = 50000;
     const DEBOUNCE_PERIOD = 500;
 
     const emptyBlockerJSON = [
         {
-            "action": {
-                "type": "ignore-previous-rules"
+            'action': {
+                'type': 'ignore-previous-rules',
             },
-            "trigger": {
-                "url-filter": "none"
-            }
-        }
+            'trigger': {
+                'url-filter': 'none',
+            },
+        },
     ];
 
     /**
      * Load content blocker
      */
     const updateContentBlocker = () => {
-
-        loadRules(async rules => {
-
+        loadRules(async (rules) => {
             const grouped = groupRules(rules);
             let overlimit = false;
 
-            for (let group of grouped) {
+            for (const group of grouped) {
                 let json = JSON.stringify(emptyBlockerJSON);
 
-                const rulesTexts = group.rules.map(x => x.ruleText);
+                const rulesTexts = group.rules.map((x) => x.ruleText);
                 const result = await jsonFromRules(rulesTexts, false);
                 if (result && result.converted) {
                     json = result.converted;
@@ -57,20 +54,19 @@ module.exports = (function () {
                     bundleId: rulesGroupsBundles[group.key],
                     overlimit: result && result.overLimit,
                     filterGroups: group.filterGroups,
-                    hasError: false
+                    hasError: false,
                 };
 
                 setSafariContentBlocker(rulesGroupsBundles[group.key], json, info);
             }
 
-            const advancedBlockingRulesCount = await setAdvancedBlocking(rules.map(x => x.ruleText));
+            const advancedBlockingRulesCount = await setAdvancedBlocking(rules.map((x) => x.ruleText));
 
             listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
                 rulesCount: rules.length,
                 rulesOverLimit: overlimit,
-                advancedBlockingRulesCount: advancedBlockingRulesCount
+                advancedBlockingRulesCount,
             });
-
         });
     };
 
@@ -95,9 +91,9 @@ module.exports = (function () {
      */
     const setAdvancedBlocking = async (rules) => {
         const result = await jsonFromRules(rules, true);
-        const advancedBlocking = result ? result.advancedBlocking : "[]";
+        const advancedBlocking = result ? result.advancedBlocking : '[]';
 
-        setSafariContentBlocker(rulesGroupsBundles["advancedBlocking"], advancedBlocking, {rulesCount: result ? result.totalConvertedCount : 0});
+        setSafariContentBlocker(rulesGroupsBundles['advancedBlocking'], advancedBlocking, { rulesCount: result ? result.totalConvertedCount : 0 });
 
         return result ? result.advancedBlockingConvertedCount : 0;
     };
@@ -107,7 +103,6 @@ module.exports = (function () {
      * @private
      */
     const loadRules = concurrent.debounce((callback) => {
-
         if (settings.isFilteringDisabled()) {
             log.info('Disabling content blocker.');
             callback(null);
@@ -120,20 +115,19 @@ module.exports = (function () {
 
         log.info('Rules loaded: {0}', rules.length);
         if (settings.isDefaultWhiteListMode()) {
-            rules = rules.concat(whitelist.getRules().map(r => {
-                return {filterId: 0, ruleText: r}
+            rules = rules.concat(whitelist.getRules().map((r) => {
+                return { filterId: 0, ruleText: r };
             }));
         } else {
             const invertedWhitelistRule = constructInvertedWhitelistRule();
             if (invertedWhitelistRule) {
                 rules = rules.concat({
-                    filterId: 0, ruleText: invertedWhitelistRule
+                    filterId: 0, ruleText: invertedWhitelistRule,
                 });
             }
         }
 
         callback(rules);
-
     }, DEBOUNCE_PERIOD);
 
     /**
@@ -150,10 +144,10 @@ module.exports = (function () {
             listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, {
                 bundleId,
                 json,
-                info
+                info,
             });
         } catch (ex) {
-            log.error(`Error while setting content blocker ${bundleId}: ` + ex);
+            log.error(`Error while setting content blocker ${bundleId}: ${ex}`);
         }
     };
 
@@ -166,15 +160,15 @@ module.exports = (function () {
         const domains = whitelist.getWhiteListDomains();
         let invertedWhitelistRule = '@@||*$document';
         if (domains && domains.length > 0) {
-            invertedWhitelistRule += ",domain=";
+            invertedWhitelistRule += ',domain=';
             let i = 0;
             const len = domains.length;
-            for (; i < len; i++) {
+            for (; i < len; i += 1) {
                 if (i > 0) {
                     invertedWhitelistRule += '|';
                 }
 
-                invertedWhitelistRule += '~' + domains[i];
+                invertedWhitelistRule += `~${domains[i]}`;
             }
         }
 
@@ -203,15 +197,15 @@ module.exports = (function () {
      */
     const getContentBlockersInfo = () => {
         const groupsBundles = filterGroupsBundles();
-        for (let extension of groupsBundles) {
-            extension.rulesInfo = contentBlockersInfoCache[extension.bundleId]
+        for (const extension of groupsBundles) {
+            extension.rulesInfo = contentBlockersInfoCache[extension.bundleId];
         }
 
         return groupsBundles;
     };
 
     // Subscribe to cb extensions update event
-    listeners.addListener(function (event, info) {
+    listeners.addListener((event, info) => {
         if (event === events.CONTENT_BLOCKER_EXTENSION_UPDATED) {
             if (info && info.bundleId) {
                 saveContentBlockerInfo(info.bundleId, info);
@@ -221,8 +215,6 @@ module.exports = (function () {
 
     return {
         updateContentBlocker,
-        getContentBlockersInfo
+        getContentBlockersInfo,
     };
-
 })();
-

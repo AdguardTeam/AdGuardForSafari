@@ -3,8 +3,7 @@
  *
  * @type {{lazyGet, lazyGetClear}}
  */
-module.exports = (()=> {
-
+module.exports = (() => {
     /**
      * This function allows cache property in object. Use with javascript getter.
      *
@@ -23,7 +22,7 @@ module.exports = (()=> {
      * @returns {*}
      */
     const lazyGet = function (object, prop, calculateFunc) {
-        const cachedProp = '_' + prop;
+        const cachedProp = `_${prop}`;
         if (cachedProp in object) {
             return object[cachedProp];
         }
@@ -38,11 +37,11 @@ module.exports = (()=> {
      * @param prop Original property name
      */
     const lazyGetClear = function (object, prop) {
-        delete object['_' + prop];
+        delete object[`_${prop}`];
     };
 
     return {
-        lazyGet: lazyGet,
-        lazyGetClear: lazyGetClear
-    }
+        lazyGet,
+        lazyGetClear,
+    };
 })();

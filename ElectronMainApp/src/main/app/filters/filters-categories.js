@@ -1,13 +1,12 @@
+const { app } = require('electron');
 const subscriptions = require('./subscriptions');
 const tagService = require('./filters-tags');
 const collections = require('../utils/collections');
-const {app} = require('electron');
 
 /**
  * Filter categories service
  */
 module.exports = (() => {
-
     'use strict';
 
     /**
@@ -18,10 +17,10 @@ module.exports = (() => {
 
         const tags = tagService.getTags();
 
-        result.forEach(f => {
+        result.forEach((f) => {
             f.tagsDetails = [];
-            f.tags.forEach(tagId => {
-                const tagDetails = tags.find(tag => tag.tagId === tagId);
+            f.tags.forEach((tagId) => {
+                const tagDetails = tags.find((tag) => tag.tagId === tagId);
 
                 if (tagDetails) {
                     if (tagDetails.keyword.startsWith('reference:')) {
@@ -50,7 +49,7 @@ module.exports = (() => {
      * @returns []
      */
     const selectFiltersByGroupId = (groupId, filters) => {
-        return filters.filter(filter => filter.groupId === groupId);
+        return filters.filter((filter) => filter.groupId === groupId);
     };
 
     /**
@@ -64,7 +63,7 @@ module.exports = (() => {
 
         const categories = [];
 
-        for (let i = 0; i < groupsMeta.length; i++) {
+        for (let i = 0; i < groupsMeta.length; i += 1) {
             const category = groupsMeta[i];
             category.filters = selectFiltersByGroupId(category.groupId, filters);
             categories.push(category);
@@ -72,7 +71,7 @@ module.exports = (() => {
 
         return {
             filters: getFilters(),
-            categories: categories
+            categories,
         };
     };
 
@@ -103,9 +102,8 @@ module.exports = (() => {
             if (langSuitableFilters.includes(filter.filterId)) {
                 // in the end we check if filter is created for mobile device
                 return checkMobile(filter);
-            } else {
-                return false;
             }
+            return false;
         }
 
         return checkMobile(filter);
@@ -115,7 +113,7 @@ module.exports = (() => {
      * @param groupId
      * @returns {Array} recommended filters by groupId
      */
-    const getRecommendedFilterIdsByGroupId = groupId => {
+    const getRecommendedFilterIdsByGroupId = (groupId) => {
         const metadata = getFiltersMetadata();
         const langSuitableFilters = subscriptions.getFilterIdsForLanguage(app.getLocale());
 
@@ -123,7 +121,7 @@ module.exports = (() => {
         for (let i = 0; i < metadata.categories.length; i += 1) {
             const category = metadata.categories[i];
             if (category.groupId === groupId) {
-                category.filters.forEach(filter => {
+                category.filters.forEach((filter) => {
                     if (isOfferedFilter(filter, langSuitableFilters)) {
                         result.push(filter.filterId);
                     }
@@ -142,14 +140,13 @@ module.exports = (() => {
      * @param groupId
      * @return []
      */
-    const getFiltersByGroupId = groupId => {
+    const getFiltersByGroupId = (groupId) => {
         return selectFiltersByGroupId(groupId, getFilters());
     };
 
     return {
         getFiltersMetadata,
         getRecommendedFilterIdsByGroupId,
-        getFiltersByGroupId
+        getFiltersByGroupId,
     };
 })();
-

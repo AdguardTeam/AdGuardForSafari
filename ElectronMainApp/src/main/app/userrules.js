@@ -8,10 +8,9 @@ const rulesStorage = require('./storage/rules-storage');
  * Class for manage user rules
  */
 module.exports = (function () {
-
     'use strict';
 
-    const USER_FILTER_ID = config.get('AntiBannerFiltersId').USER_FILTER_ID;
+    const { USER_FILTER_ID } = config.get('AntiBannerFiltersId');
 
     const userFilter = { filterId: USER_FILTER_ID };
 
@@ -22,7 +21,7 @@ module.exports = (function () {
      */
     const updateUserRulesText = function (content, options) {
         const lines = content.split(/[\r\n]+/) || [];
-        rulesStorage.write(USER_FILTER_ID, lines, function () {
+        rulesStorage.write(USER_FILTER_ID, lines, () => {
             listeners.notifyListeners(events.UPDATE_USER_FILTER_RULES);
             listeners.notifyListeners(events.UPDATE_FILTER_RULES, userFilter, lines);
         });
@@ -33,7 +32,7 @@ module.exports = (function () {
      * @param callback Callback function
      */
     const getUserRulesText = function (callback) {
-        rulesStorage.read(USER_FILTER_ID, function (rulesText) {
+        rulesStorage.read(USER_FILTER_ID, (rulesText) => {
             const content = (rulesText || []).join('\n');
             if (callback) {
                 callback(content);
@@ -42,8 +41,7 @@ module.exports = (function () {
     };
 
     return {
-        updateUserRulesText: updateUserRulesText,
-        getUserRulesText: getUserRulesText,
+        updateUserRulesText,
+        getUserRulesText,
     };
-
 })();

@@ -1,11 +1,11 @@
 const Store = require('electron-store');
+
 const store = new Store();
 
 /**
  * Storage implementation
  */
 module.exports = (function () {
-
     const getItem = (key) => {
         return store.get(key);
     };
@@ -14,7 +14,7 @@ module.exports = (function () {
         store.set(key, value);
     };
 
-    const removeItem = key => {
+    const removeItem = (key) => {
         store.delete(key);
     };
 
@@ -23,10 +23,9 @@ module.exports = (function () {
     };
 
     return {
-        getItem: getItem,
-        setItem: setItem,
-        removeItem: removeItem,
-        hasItem: hasItem,
+        getItem,
+        setItem,
+        removeItem,
+        hasItem,
     };
-
 })();

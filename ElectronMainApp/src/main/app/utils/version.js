@@ -2,7 +2,6 @@
  * Version utils
  */
 module.exports = (() => {
-
     /**
      * Extension version (x.x.x)
      *
@@ -10,10 +9,9 @@ module.exports = (() => {
      * @constructor
      */
     const Version = function (version) {
-
         this.version = Object.create(null);
 
-        const parts = String(version || "").split(".");
+        const parts = String(version || '').split('.');
 
         function parseVersionPart(part) {
             if (isNaN(part)) {
@@ -33,10 +31,10 @@ module.exports = (() => {
      * @returns {number}
      */
     Version.prototype.compare = function (o) {
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 4; i += 1) {
             if (this.version[i] > o.version[i]) {
                 return 1;
-            } else if (this.version[i] < o.version[i]) {
+            } if (this.version[i] < o.version[i]) {
                 return -1;
             }
         }
@@ -58,7 +56,7 @@ module.exports = (() => {
      *
      * @param version
      */
-    const getMajorVersionNumber = version =>{
+    const getMajorVersionNumber = (version) => {
         const v = new Version(version);
         return v.version[0];
     };
@@ -68,15 +66,14 @@ module.exports = (() => {
      *
      * @param version
      */
-    const getMinorVersionNumber = version =>{
+    const getMinorVersionNumber = (version) => {
         const v = new Version(version);
         return v.version[1];
     };
 
     return {
-        isGreaterVersion: isGreaterVersion,
-        getMajorVersionNumber: getMajorVersionNumber,
-        getMinorVersionNumber: getMinorVersionNumber
+        isGreaterVersion,
+        getMajorVersionNumber,
+        getMinorVersionNumber,
     };
-
 })();

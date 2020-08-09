@@ -1,3 +1,5 @@
+const safariToolbar = require('safari-ext');
+const { app } = require('electron');
 const appApi = require('./app');
 const localStorage = require('./storage/storage');
 const versionUtils = require('./utils/version');
@@ -5,16 +7,12 @@ const settings = require('./settings-manager');
 const log = require('./utils/log');
 const filtersUpdate = require('./filters/filters-update');
 const { removeObsoleteFilters, cleanRemovedCustomFilters } = require('./filters-manager');
-const safariToolbar = require('safari-ext');
-
-const {app} = require('electron');
 
 /**
  * Service that manages app version information and handles
  * app update. For instance we may need to change storage schema on update.
  */
 module.exports = (function () {
-
     const APP_VERSION_KEY = 'app-version';
 
     /**
@@ -27,7 +25,7 @@ module.exports = (function () {
      *
      * @param version
      */
-    const setAppVersion = version => {
+    const setAppVersion = (version) => {
         localStorage.setItem(APP_VERSION_KEY, version);
     };
 
@@ -37,7 +35,6 @@ module.exports = (function () {
      * @param callback Run info callback with passed object {{isFirstRun: boolean, isUpdate: (boolean|*), currentVersion: (Prefs.version|*), prevVersion: *}}
      */
     const getRunInfo = function (callback) {
-
         const prevVersion = getAppVersion();
         const currentVersion = appApi.getVersion();
         setAppVersion(currentVersion);
@@ -45,15 +42,15 @@ module.exports = (function () {
         const isFirstRun = (currentVersion !== prevVersion && !prevVersion);
         const isUpdate = !!(currentVersion !== prevVersion && prevVersion);
 
-        const isMajorUpdate = versionUtils.getMajorVersionNumber(currentVersion) > versionUtils.getMajorVersionNumber(prevVersion) ||
-            versionUtils.getMinorVersionNumber(currentVersion) > versionUtils.getMinorVersionNumber(prevVersion);
+        const isMajorUpdate = versionUtils.getMajorVersionNumber(currentVersion) > versionUtils.getMajorVersionNumber(prevVersion)
+            || versionUtils.getMinorVersionNumber(currentVersion) > versionUtils.getMinorVersionNumber(prevVersion);
 
         callback({
-            isFirstRun: isFirstRun,
-            isUpdate: isUpdate,
-            currentVersion: currentVersion,
-            prevVersion: prevVersion,
-            isMajorUpdate: isMajorUpdate
+            isFirstRun,
+            isUpdate,
+            currentVersion,
+            prevVersion,
+            isMajorUpdate,
         });
     };
 
@@ -78,11 +75,11 @@ module.exports = (function () {
         settings.changeLaunchAtLogin(settings.isLaunchAtLoginEnabled());
 
         app.setLoginItemSettings({
-            openAtLogin: false
+            openAtLogin: false,
         });
 
         // Remove electron login item
-        safariToolbar.removeOldLoginItem((result)=>{
+        safariToolbar.removeOldLoginItem((result) => {
             log.info(`Login item removed with result: ${result}`);
         });
     };
@@ -96,11 +93,11 @@ module.exports = (function () {
     const onUpdate = (runInfo, callback) => {
         log.info(`On update from v${runInfo.prevVersion} to ${runInfo.currentVersion}`);
 
-        if (versionUtils.isGreaterVersion("1.6.0", runInfo.prevVersion)) {
+        if (versionUtils.isGreaterVersion('1.6.0', runInfo.prevVersion)) {
             onUpdateUseOptimizedFilters();
         }
 
-        if (versionUtils.isGreaterVersion("1.6.2", runInfo.prevVersion)) {
+        if (versionUtils.isGreaterVersion('1.6.2', runInfo.prevVersion)) {
             onUpdateLaunchAtLogin();
         }
 
@@ -110,11 +107,7 @@ module.exports = (function () {
     };
 
     return {
-        getRunInfo: getRunInfo,
-        onUpdate: onUpdate
+        getRunInfo,
+        onUpdate,
     };
-
 })();
-
-
-

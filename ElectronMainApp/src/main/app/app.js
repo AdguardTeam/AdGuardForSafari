@@ -1,29 +1,27 @@
+const { app } = require('electron');
 const localStorage = require('./storage/storage');
-const {app} = require('electron');
 const packageJson = require('../../../package.json');
 
 /**
  * Application
  */
 module.exports = (() => {
-
     /**
      * Client id
      */
     const getClientId = () => {
-
-        let clientId = localStorage.getItem("client-id");
+        let clientId = localStorage.getItem('client-id');
         if (!clientId) {
             const result = [];
             const suffix = (Date.now()) % 1e8;
             const symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890';
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 8; i += 1) {
                 const symbol = symbols[Math.floor(Math.random() * symbols.length)];
                 result.push(symbol);
             }
 
             clientId = result.join('') + suffix;
-            localStorage.setItem("client-id", clientId);
+            localStorage.setItem('client-id', clientId);
         }
 
         return clientId;
@@ -54,8 +52,8 @@ module.exports = (() => {
      * @returns {*|string} Application update channel
      */
     const getChannel = () => {
-        const isStandaloneBuild = packageJson["standalone-build"] === 'true';
-        const isStandaloneBeta = packageJson["standalone-beta"] === 'true';
+        const isStandaloneBuild = packageJson['standalone-build'] === 'true';
+        const isStandaloneBeta = packageJson['standalone-beta'] === 'true';
 
         if (isStandaloneBeta) {
             return 'Standalone Beta';
@@ -69,11 +67,10 @@ module.exports = (() => {
     };
 
     return {
-        getVersion: getVersion,
-        getLocale: getLocale,
-        getId: getId,
-        getClientId: getClientId,
-        getChannel: getChannel
+        getVersion,
+        getLocale,
+        getId,
+        getClientId,
+        getChannel,
     };
-
 })();

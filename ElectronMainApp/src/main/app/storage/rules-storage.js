@@ -1,15 +1,15 @@
 const Store = require('electron-store');
+
 const store = new Store();
 
 /**
  * Filter rules storage implementation
  */
 module.exports = (() => {
-
     const cache = Object.create(null);
 
     const getKey = (path) => {
-        return 'filter_' + path;
+        return `filter_${path}`;
     };
 
     const read = (path, callback) => {
@@ -52,10 +52,9 @@ module.exports = (() => {
     };
 
     return {
-        read: read,
-        readSync: readSync,
-        write: write,
-        remove: remove
+        read,
+        readSync,
+        write,
+        remove,
     };
-
 })();

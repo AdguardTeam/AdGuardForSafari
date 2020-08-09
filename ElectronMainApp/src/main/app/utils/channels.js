@@ -2,13 +2,10 @@
  * Simple publish-subscribe implementation
  */
 module.exports = (function () {
-
     const EventChannels = (function () {
-
         'use strict';
 
         const EventChannel = function () {
-
             let listeners = null;
             let listenerCallback = null;
 
@@ -46,7 +43,7 @@ module.exports = (function () {
                     return listenerCallback.apply(listenerCallback, arguments);
                 }
                 if (listeners !== null) {
-                    for (let i = 0; i < listeners.length; i++) {
+                    for (let i = 0; i < listeners.length; i += 1) {
                         const listener = listeners[i];
                         listener.apply(listener, arguments);
                     }
@@ -66,10 +63,10 @@ module.exports = (function () {
             };
 
             return {
-                addListener: addListener,
-                removeListener: removeListener,
-                notify: notify,
-                notifyInReverseOrder: notifyInReverseOrder
+                addListener,
+                removeListener,
+                notify,
+                notifyInReverseOrder,
             };
         };
 
@@ -90,13 +87,11 @@ module.exports = (function () {
         };
 
         return {
-            newChannel: newChannel,
-            newNamedChannel: newNamedChannel,
-            getNamedChannel: getNamedChannel
+            newChannel,
+            newNamedChannel,
+            getNamedChannel,
         };
-
     })();
 
     return EventChannels;
-
 })();

@@ -1,6 +1,8 @@
+const config = require('config');
+const fs = require('fs');
+const path = require('path');
 const listeners = require('../notifier');
 const events = require('../events');
-const config = require('config');
 const subscriptions = require('./filters/subscriptions');
 const categories = require('./filters/filters-categories');
 const filtersState = require('./filters/filters-state');
@@ -12,14 +14,11 @@ const filtersUpdate = require('./filters/filters-update');
 const app = require('./app');
 const serviceClient = require('./filters/service-client');
 const appPack = require('../../utils/app-pack');
-const fs = require('fs');
-const path = require('path');
 
 /**
  * Filters manager
  */
 module.exports = (() => {
-
     /**
      * Gets filter by ID.
      * Throws exception if filter not found.
@@ -29,9 +28,9 @@ module.exports = (() => {
      * @private
      */
     const getFilterById = (filterId) => {
-        let filter = subscriptions.getFilter(filterId);
+        const filter = subscriptions.getFilter(filterId);
         if (!filter) {
-            throw 'Filter with id ' + filterId + ' not found';
+            throw `Filter with id ${filterId} not found`;
         }
 
         return filter;
@@ -41,16 +40,15 @@ module.exports = (() => {
      * Loads filters metadata
      */
     const getFilters = () => {
-
         // Load filters metadata from the storage
         const filtersVersionInfo = filtersState.getFiltersVersion();
         // Load filters state from the storage
         const filtersStateInfo = filtersState.getFiltersState();
         const filters = subscriptions.getFilters();
 
-        for (let i = 0; i < filters.length; i++) {
+        for (let i = 0; i < filters.length; i += 1) {
             const filter = filters[i];
-            const filterId = filter.filterId;
+            const { filterId } = filter;
             const versionInfo = filtersVersionInfo[filterId];
             const stateInfo = filtersStateInfo[filterId];
             if (versionInfo) {
@@ -80,7 +78,7 @@ module.exports = (() => {
 
         for (let i = 0; i < groups.length; i += 1) {
             const group = groups[i];
-            const groupId = group.groupId;
+            const { groupId } = group;
             const stateInfo = groupsStateInfo[groupId];
             if (stateInfo) {
                 group.enabled = stateInfo.enabled;
@@ -150,14 +148,14 @@ module.exports = (() => {
             return;
         }
 
-        let filter = subscriptions.getFilter(filterId);
+        const filter = subscriptions.getFilter(filterId);
         filter.enabled = true;
 
         /**
          * We enable group if it wasn't ever enabled or disabled
          * with exceptions of custom filters and SEARCH_AND_SELF_PROMO_FILTER_ID
          */
-        const groupId = filter.groupId;
+        const { groupId } = filter;
         if (!subscriptions.groupHasEnabledStatus(groupId)) {
             enableGroup(groupId);
         } else if (filterId === config.get('AntiBannerFiltersId').SEARCH_AND_SELF_PROMO_FILTER_ID
@@ -206,7 +204,6 @@ module.exports = (() => {
      * @param filterIds
      */
     const addAndEnableFilters = (filterIds) => {
-
         if (!filterIds || filterIds.length === 0) {
             return;
         }
@@ -215,10 +212,10 @@ module.exports = (() => {
 
         const loadNextFilter = function () {
             if (filterIds.length === 0) {
-                return;
+
             } else {
                 const filterId = filterIds.shift();
-                addAntiBannerFilter(filterId, function (success) {
+                addAntiBannerFilter(filterId, (success) => {
                     if (success) {
                         enableFilter(filterId);
                     }
@@ -239,7 +236,7 @@ module.exports = (() => {
     const disableFilters = (filterIds) => {
         filterIds = collections.removeDuplicates(filterIds.slice(0));
 
-        for (let i = 0; i < filterIds.length; i++) {
+        for (let i = 0; i < filterIds.length; i += 1) {
             const filterId = filterIds[i];
             if (!isFilterEnabled(filterId)) {
                 return;
@@ -259,13 +256,12 @@ module.exports = (() => {
      * @param {Number} filterId Filter identifier
      */
     const removeFilter = function (filterId) {
-
         const filter = subscriptions.getFilter(filterId);
         if (!filter) {
             return;
         }
 
-        log.debug("Remove filter {0}", filter.filterId);
+        log.debug('Remove filter {0}', filter.filterId);
 
         filter.enabled = false;
         filter.installed = false;
@@ -336,10 +332,10 @@ module.exports = (() => {
      */
     const offerGroupsAndFilters = (callback) => {
         const antiBannerFilterGroupsId = config.get('AntiBannerFilterGroupsId');
-        let groupIds = [
+        const groupIds = [
             antiBannerFilterGroupsId.AD_BLOCKING_ID,
             antiBannerFilterGroupsId.PRIVACY_ID,
-            antiBannerFilterGroupsId.LANGUAGE_SPECIFIC_ID
+            antiBannerFilterGroupsId.LANGUAGE_SPECIFIC_ID,
         ];
 
         callback(groupIds);
@@ -350,20 +346,20 @@ module.exports = (() => {
      * @param {object} metaData
      */
     const updateFiltersJson = (metaData) => {
-        const filtersJsonPath = path.resolve(appPack.resourcePath(config.get('localFiltersFolder')) + '/filters.json');
-        const updatedData = JSON.stringify(metaData, null, 4)
+        const filtersJsonPath = path.resolve(`${appPack.resourcePath(config.get('localFiltersFolder'))}/filters.json`);
+        const updatedData = JSON.stringify(metaData, null, 4);
 
         fs.writeFileSync(filtersJsonPath, updatedData);
         log.info('Filters.json updated');
-    }
+    };
 
     /**
      * Removes obsolete filters
      * https://github.com/AdguardTeam/AdGuardForSafari/issues/134
      */
     const removeObsoleteFilters = () => {
-        serviceClient.loadLocalFiltersMetadata(localMetadata => {
-            serviceClient.loadRemoteFiltersMetadata(remoteMetadata => {
+        serviceClient.loadLocalFiltersMetadata((localMetadata) => {
+            serviceClient.loadRemoteFiltersMetadata((remoteMetadata) => {
                 updateFiltersJson(remoteMetadata);
                 const obsoleteFiltersMetadata = localMetadata.filters.filter((localFilter) => (
                     !remoteMetadata.filters.some((remoteFilter) => (
@@ -371,25 +367,25 @@ module.exports = (() => {
                         // if id of obsolete filter is given to another filter
                         remoteFilter.filterId === localFilter.filterId && remoteFilter.name === localFilter.name
                     ))
-                ))
+                ));
                 obsoleteFiltersMetadata.forEach((filter) => {
                     filtersState.removeFilter(filter.filterId);
                     removeFilter(filter.filterId);
                 });
             });
         });
-    }
+    };
 
     /**
      * Cleans out old removed custom filters
      */
     const cleanRemovedCustomFilters = () => {
         subscriptions.loadCustomFilters()
-            .filter(filter => filter.removed)
+            .filter((filter) => filter.removed)
             .forEach((filter) => {
                 filtersState.removeFilter(filter.filterId);
                 removeFilter(filter.filterId);
-        });
+            });
     };
 
     /**
@@ -422,7 +418,7 @@ module.exports = (() => {
             return;
         }
 
-        subscriptions.updateCustomFilter(url, options, filterId => {
+        subscriptions.updateCustomFilter(url, options, (filterId) => {
             if (filterId) {
                 log.info('Custom filter info downloaded');
 
@@ -489,5 +485,4 @@ module.exports = (() => {
         removeObsoleteFilters,
         cleanRemovedCustomFilters,
     };
-
 })();

@@ -5,8 +5,7 @@
  */
 const I18nHelper = {
 
-    translateElement: function (element, message) {
-
+    translateElement(element, message) {
         try {
             while (element.lastChild) {
                 element.removeChild(element.lastChild);
@@ -18,14 +17,12 @@ const I18nHelper = {
         }
     },
 
-    processString: function (str, element) {
-
+    processString(str, element) {
         let el;
 
         const match1 = /^([^]*?)<(a|strong|span|i)([^>]*)>(.*?)<\/\2>([^]*)$/m.exec(str);
         const match2 = /^([^]*?)<(br|input)([^>]*)\/?>([^]*)$/m.exec(str);
         if (match1) {
-
             this.processString(match1[1], element);
 
             el = this.createElement(match1[2], match1[3]);
@@ -34,35 +31,31 @@ const I18nHelper = {
             element.appendChild(el);
 
             this.processString(match1[5], element);
-
         } else if (match2) {
-
             this.processString(match2[1], element);
 
             el = this.createElement(match2[2], match2[3]);
             element.appendChild(el);
 
             this.processString(match2[4], element);
-
         } else {
             element.appendChild(document.createTextNode(str.replace(/&nbsp;/g, '\u00A0')));
         }
     },
 
     createElement: (tagName, attributes) => {
-
         const el = document.createElement(tagName);
         if (!attributes) {
             return el;
         }
 
         const attrs = attributes.split(/([a-z]+='[^']+')/);
-        for (let i = 0; i < attrs.length; i++) {
-            let attr = attrs[i].trim();
+        for (let i = 0; i < attrs.length; i += 1) {
+            const attr = attrs[i].trim();
             if (!attr) {
                 continue;
             }
-            const index = attr.indexOf("=");
+            const index = attr.indexOf('=');
             let attrName;
             let attrValue;
             if (index > 0) {
@@ -75,5 +68,5 @@ const I18nHelper = {
         }
 
         return el;
-    }
+    },
 };

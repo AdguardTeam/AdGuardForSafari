@@ -1,17 +1,16 @@
+const safariToolbar = require('safari-ext');
 const localStorage = require('./storage/storage');
 const cache = require('./utils/cache');
 const log = require('./utils/log');
 const channels = require('./utils/channels');
 const listeners = require('../notifier');
 const events = require('../events');
-const safariToolbar = require('safari-ext');
 
 /**
  * Object that manages user settings.
  * @constructor
  */
 module.exports = (function () {
-
     'use strict';
 
     const settings = {
@@ -25,7 +24,7 @@ module.exports = (function () {
         SHOW_TRAY_ICON: 'show-tray-icon',
         LAUNCH_AT_LOGIN: 'launch-at-login',
         VERBOSE_LOGGING: 'verbose-logging',
-        QUIT_ON_CLOSE_WINDOW: 'quit-on-close-main-window'
+        QUIT_ON_CLOSE_WINDOW: 'quit-on-close-main-window',
     };
 
     const properties = Object.create(null);
@@ -36,10 +35,10 @@ module.exports = (function () {
      */
     const defaultProperties = {
         get defaults() {
-            return cache.lazyGet(this, 'defaults', function () {
+            return cache.lazyGet(this, 'defaults', () => {
                 // Initialize default properties
                 const defaults = Object.create(null);
-                for (let name in settings) {
+                for (const name in settings) {
                     if (settings.hasOwnProperty(name)) {
                         defaults[settings[name]] = false;
                     }
@@ -58,7 +57,7 @@ module.exports = (function () {
 
                 return defaults;
             });
-        }
+        },
     };
 
     const getProperty = function (propertyName) {
@@ -92,10 +91,10 @@ module.exports = (function () {
     const getAllSettings = function () {
         const result = {
             names: Object.create(null),
-            values: Object.create(null)
+            values: Object.create(null),
         };
 
-        for (let key in settings) {
+        for (const key in settings) {
             if (settings.hasOwnProperty(key)) {
                 const setting = settings[key];
                 result.names[key] = setting;
@@ -138,7 +137,7 @@ module.exports = (function () {
     const getSafebrowsingInfo = function () {
         return {
             enabled: !getProperty(settings.DISABLE_SAFEBROWSING),
-            sendStats: !getProperty(settings.DISABLE_SEND_SAFEBROWSING_STATS)
+            sendStats: !getProperty(settings.DISABLE_SEND_SAFEBROWSING_STATS),
         };
     };
 
@@ -188,7 +187,7 @@ module.exports = (function () {
     const api = {};
 
     // Expose settings to api
-    for (let key in settings) {
+    for (const key in settings) {
         if (settings.hasOwnProperty(key)) {
             api[key] = settings[key];
         }
@@ -219,5 +218,4 @@ module.exports = (function () {
     api.changeQuitOnCloseWindow = changeQuitOnCloseWindow;
 
     return api;
-
 })();

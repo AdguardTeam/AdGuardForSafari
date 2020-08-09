@@ -2,14 +2,13 @@
  * Util class for work with collections
  */
 module.exports = (() => {
-
     return {
 
         remove: (collection, element) => {
             if (!element || !collection) {
                 return;
             }
-            var index = collection.indexOf(element);
+            const index = collection.indexOf(element);
             if (index >= 0) {
                 collection.splice(index, 1);
             }
@@ -19,7 +18,7 @@ module.exports = (() => {
             if (!element || !collection) {
                 return;
             }
-            for (var i = collection.length - 1; i >= 0; i--) {
+            for (let i = collection.length - 1; i >= 0; i--) {
                 if (collection[i] == element) {
                     collection.splice(i, 1);
                 }
@@ -30,26 +29,26 @@ module.exports = (() => {
             if (!rule || !collection) {
                 return;
             }
-            for (var i = collection.length - 1; i >= 0; i--) {
+            for (let i = collection.length - 1; i >= 0; i--) {
                 if (rule.ruleText === collection[i].ruleText) {
                     collection.splice(i, 1);
                 }
             }
         },
 
-        removeDuplicates: arr => {
+        removeDuplicates: (arr) => {
             if (!arr || arr.length == 1) {
                 return arr;
             }
             return arr.filter((elem, pos) => arr.indexOf(elem) == pos);
         },
 
-        getRulesText: collection => {
-            var text = [];
+        getRulesText: (collection) => {
+            const text = [];
             if (!collection) {
                 return text;
             }
-            for (var i = 0; i < collection.length; i++) {
+            for (let i = 0; i < collection.length; i += 1) {
                 text.push(collection[i].ruleText);
             }
             return text;
@@ -64,9 +63,9 @@ module.exports = (() => {
          */
         find: (array, property, value) => {
             if (typeof array.find === 'function') {
-                return array.find(a => a[property] === value);
+                return array.find((a) => a[property] === value);
             }
-            for (let i = 0; i < array.length; i++) {
+            for (let i = 0; i < array.length; i += 1) {
                 const elem = array[i];
                 if (elem[property] === value) {
                     return elem;
@@ -81,7 +80,7 @@ module.exports = (() => {
          * @param obj Object
          */
         isArray: Array.isArray || function (obj) {
-            return '' + obj === '[object Array]';
+            return `${obj}` === '[object Array]';
         },
 
         /**
@@ -90,12 +89,10 @@ module.exports = (() => {
          * @param a
          * @param b
          */
-        getArraySubtraction: function (a, b) {
-            return a.filter(function (i) {
+        getArraySubtraction(a, b) {
+            return a.filter((i) => {
                 return b.indexOf(i) < 0;
             });
-        }
+        },
     };
-
-
 })();
