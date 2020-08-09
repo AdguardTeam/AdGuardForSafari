@@ -11,7 +11,6 @@ const applicationApi = require('./api');
 const filters = require('./app/filters-manager');
 const listeners = require('./notifier');
 const events = require('./events');
-const storage = require('./app/storage/storage');
 const settings = require('./app/settings-manager');
 const log = require('./app/utils/log');
 

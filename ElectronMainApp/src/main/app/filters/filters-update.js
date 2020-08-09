@@ -130,7 +130,8 @@ module.exports = (() => {
                 for (let i = 0; i < filterMetadataList.length; i += 1) {
                     const filterMetadata = subscriptions.createSubscriptionFilterFromJSON(filterMetadataList[i]);
                     const filter = subscriptions.getFilter(filterMetadata.filterId);
-                    if (filter && filterMetadata.version && versionUtils.isGreaterVersion(filterMetadata.version, filter.version)) {
+                    if (filter && filterMetadata.version
+                        && versionUtils.isGreaterVersion(filterMetadata.version, filter.version)) {
                         log.info('Updating filter {0} to version {1}', filter.filterId, filterMetadata.version);
                         filterMetadataListToUpdate.push(filterMetadata);
                     }
@@ -160,12 +161,21 @@ module.exports = (() => {
         }
 
         const loadSuccess = function (filterMetadataList) {
-            log.debug('Retrieved response from server for {0} filters, result: {1} metadata', filterIds.length, filterMetadataList.length);
+            log.debug(
+                'Retrieved response from server for {0} filters, result: {1} metadata',
+                filterIds.length,
+                filterMetadataList.length
+            );
             callback(true, filterMetadataList);
         };
 
         const loadError = function (request, cause) {
-            log.error('Error retrieved response from server for filters {0}, cause: {1} {2}', filterIds, request.statusText, cause || '');
+            log.error(
+                'Error retrieved response from server for filters {0}, cause: {1} {2}',
+                filterIds,
+                request.statusText,
+                cause || ''
+            );
             callback(false);
         };
 
@@ -210,7 +220,8 @@ module.exports = (() => {
      * Loads filter rules
      *
      * @param filterMetadata Filter metadata
-     * @param forceRemote Force download filter rules from remote server (if false try to download local copy of rules if it's possible)
+     * @param forceRemote Force download filter rules from remote server
+     * (if false try to download local copy of rules if it's possible)
      * @param callback Called when filter rules have been loaded
      * @private
      */
@@ -221,7 +232,11 @@ module.exports = (() => {
         listeners.notifyListeners(events.START_DOWNLOAD_FILTER, filter);
 
         const successCallback = function (filterRules) {
-            log.info('Retrieved response from server for filter {0}, rules count: {1}', filter.filterId, filterRules.length);
+            log.info(
+                'Retrieved response from server for filter {0}, rules count: {1}',
+                filter.filterId,
+                filterRules.length
+            );
             delete filter._isDownloading;
             filter.version = filterMetadata.version;
             filter.lastUpdateTime = filterMetadata.timeUpdated;
@@ -266,7 +281,10 @@ module.exports = (() => {
         for (const filter of filters) {
             if (filter.installed && filter.enabled) {
                 // Check filters update period (or forceUpdate flag)
-                const needUpdate = forceUpdate || (!filter.lastCheckTime || (Date.now() - filter.lastCheckTime) >= updateFiltersPeriodInMs);
+                const needUpdate = forceUpdate
+                    || (!filter.lastCheckTime
+                    || (Date.now() - filter.lastCheckTime) >= updateFiltersPeriodInMs);
+
                 if (needUpdate) {
                     if (filter.customUrl) {
                         customFilterIds.push(filter.filterId);
@@ -302,13 +320,17 @@ module.exports = (() => {
 
             dfds.push((function (filter, filters) {
                 return new Promise((resolve) => {
-                    subscriptions.updateCustomFilter(filter.customUrl, { title: filter.name, trusted: filter.trusted }, (filterId) => {
-                        if (filterId) {
-                            filters.push(filter);
-                        }
+                    subscriptions.updateCustomFilter(
+                        filter.customUrl,
+                        { title: filter.name, trusted: filter.trusted },
+                        (filterId) => {
+                            if (filterId) {
+                                filters.push(filter);
+                            }
 
-                        resolve();
-                    });
+                            resolve();
+                        }
+                    );
                 });
             })(filter, filters));
         }

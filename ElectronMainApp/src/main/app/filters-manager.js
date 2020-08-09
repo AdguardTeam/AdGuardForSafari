@@ -6,12 +6,9 @@ const events = require('../events');
 const subscriptions = require('./filters/subscriptions');
 const categories = require('./filters/filters-categories');
 const filtersState = require('./filters/filters-state');
-const filtersTags = require('./filters/filters-tags');
 const collections = require('./utils/collections');
 const log = require('./utils/log');
-const i18n = require('./utils/i18n');
 const filtersUpdate = require('./filters/filters-update');
-const app = require('./app');
 const serviceClient = require('./filters/service-client');
 const appPack = require('../../utils/app-pack');
 

@@ -18,7 +18,7 @@ module.exports = (() => {
             if (!element || !collection) {
                 return;
             }
-            for (let i = collection.length - 1; i >= 0; i--) {
+            for (let i = collection.length - 1; i >= 0; i -= 1) {
                 if (collection[i] == element) {
                     collection.splice(i, 1);
                 }
@@ -29,7 +29,7 @@ module.exports = (() => {
             if (!rule || !collection) {
                 return;
             }
-            for (let i = collection.length - 1; i >= 0; i--) {
+            for (let i = collection.length - 1; i >= 0; i -= 1) {
                 if (rule.ruleText === collection[i].ruleText) {
                     collection.splice(i, 1);
                 }

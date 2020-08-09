@@ -20,7 +20,7 @@ module.exports = (() => {
             return Math.max(part - 0, 0);
         }
 
-        for (let i = 3; i >= 0; i--) {
+        for (let i = 3; i >= 0; i -= 1) {
             this.version[i] = parseVersionPart(parts[i]);
         }
     };

@@ -55,7 +55,7 @@ module.exports = (function () {
                     return listenerCallback.apply(listenerCallback, arguments);
                 }
                 if (listeners !== null) {
-                    for (let i = listeners.length - 1; i >= 0; i--) {
+                    for (let i = listeners.length - 1; i >= 0; i -= 1) {
                         const listener = listeners[i];
                         listener.apply(listener, arguments);
                     }

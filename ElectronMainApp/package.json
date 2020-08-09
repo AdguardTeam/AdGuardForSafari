@@ -14,7 +14,7 @@
         "download-locales": "gulp download-locales",
         "rebuild-locales": "gulp rebuild-locales",
         "electron-rebuild": "electron-rebuild",
-        "lint": "eslint ./src"
+        "lint": "eslint ./src/main"
     },
     "dependencies": {
         "adm-zip": "^0.4.13",
