@@ -282,10 +282,8 @@ module.exports = (function () {
             const groupId = CUSTOM_FILTERS_GROUP_ID;
             const defaultName = title;
             const defaultDescription = filterData.description;
-            const { homepage } = filterData;
-            const { version } = filterData;
+            const { homepage, version, expires } = filterData;
             const timeUpdated = filterData.timeUpdated || new Date().toString();
-            const { expires } = filterData;
             const subscriptionUrl = url;
             const languages = [];
             const displayNumber = 0;
@@ -307,6 +305,7 @@ module.exports = (function () {
                     callback();
                     return;
                 }
+                filter.enabled = true;
                 restoreCustomFilter(filter, trusted);
                 listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
                 listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, rules);
@@ -375,7 +374,6 @@ module.exports = (function () {
         customFilters.forEach((f) => {
             if (f.filterId === filter.filterId) {
                 f.trusted = trusted;
-                f.enabled = filter.enabled;
                 f.title = filter.title;
                 f.timeUpdated = new Date();
             }
