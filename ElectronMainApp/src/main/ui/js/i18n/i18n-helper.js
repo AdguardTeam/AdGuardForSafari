@@ -4,6 +4,7 @@
  * @type {{translateElement: I18nHelper.translateElement, processString: I18nHelper.processString,
  * createElement: ((p1?:*, p2?:*))}}
  */
+/* eslint-disable-next-line no-unused-vars */
 const I18nHelper = {
 
     translateElement(element, message) {
@@ -71,5 +72,3 @@ const I18nHelper = {
         return el;
     },
 };
-
-module.exports = I18nHelper;

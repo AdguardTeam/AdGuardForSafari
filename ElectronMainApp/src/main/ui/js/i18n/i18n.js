@@ -1,5 +1,5 @@
-const i18n = require('../../../../utils/i18n');
-const I18nHelper = require('./i18n-helper');
+/* eslint-disable-next-line import/no-unresolved */
+const i18n = require('../../utils/i18n');
 
 /**
  * Translate elements on document ready
@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('[i18n]').forEach((el) => {
         const message = i18n.__(`${el.getAttribute('i18n')}.message`);
+        /* eslint-disable-next-line no-undef */
         I18nHelper.translateElement(el, message);
     });
     document.querySelectorAll('[i18n-plhr]').forEach((el) => {

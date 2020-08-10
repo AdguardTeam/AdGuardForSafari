@@ -1843,9 +1843,7 @@ PageController.prototype = {
 
         const self = this;
         ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
-            const { allContentBlockersDisabled } = arg;
-            const { contentBlockersEnabled } = arg;
-            const { minorExtensionsEnabled } = arg;
+            const { contentBlockersEnabled, allContentBlockersDisabled, minorExtensionsEnabled } = arg;
 
             body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
             onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
