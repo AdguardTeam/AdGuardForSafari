@@ -162,13 +162,12 @@ module.exports = (() => {
          */
         const fillRequestFilterSync = function () {
             // Go through all filters in the map
-            for (let filterId in rulesFilterMap) { // jshint ignore:line
-                // To number
-                filterId -= 0;
+            for (const filterId in rulesFilterMap) {
+                const filterIdNum = parseInt(filterId, 10);
                 if (filterId !== USER_FILTER_ID) {
-                    const rulesTexts = rulesFilterMap[filterId];
-                    const isTrustedFilter = subscriptions.isTrustedFilter(filterId);
-                    addRules(filterId, rulesTexts, isTrustedFilter);
+                    const rulesTexts = rulesFilterMap[filterIdNum];
+                    const isTrustedFilter = subscriptions.isTrustedFilter(filterIdNum);
+                    addRules(filterIdNum, rulesTexts, isTrustedFilter);
                 }
             }
 
@@ -265,7 +264,7 @@ module.exports = (() => {
             }
 
             const dfds = [];
-            for (const filterId in eventsByFilter) { // jshint ignore:line
+            for (const filterId in eventsByFilter) {
                 const needSaveRulesToStorage = eventsByFilter[filterId].some(isSaveRulesToStorageEvent);
                 if (!needSaveRulesToStorage) {
                     continue;

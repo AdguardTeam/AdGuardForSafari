@@ -57,7 +57,7 @@ module.exports = (function () {
             if (!event || !(event in EventNotifierEventsMap)) {
                 throw new Error(`Illegal event: ${event}`);
             }
-            for (const listenerId in this.listenersMap) { // jshint ignore:line
+            for (const listenerId in this.listenersMap) {
                 try {
                     const listener = this.listenersMap[listenerId];
                     listener.apply(listener, arguments);
