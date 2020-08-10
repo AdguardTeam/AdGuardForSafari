@@ -16,6 +16,11 @@
         "electron-rebuild": "electron-rebuild",
         "lint": "eslint ./src/main"
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "yarn lint"
+        }
+    },
     "dependencies": {
         "adm-zip": "^0.4.13",
         "config": "^1.31.0",
@@ -43,6 +48,7 @@
         "find-in-files": "^0.5.0",
         "gulp": "^4.0.0",
         "gulp-hash-creator": "^0.2.0",
+        "husky": "^4.2.5",
         "request": "^2.88.0",
         "require-dir": "^1.0.0"
     }
