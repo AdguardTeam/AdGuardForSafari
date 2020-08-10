@@ -1,4 +1,5 @@
 const config = require('config');
+/* eslint-disable-next-line import/no-unresolved */
 const { requireTaskPool } = require('electron-remote');
 const log = require('../utils/log');
 const rulesStorage = require('../storage/rules-storage');

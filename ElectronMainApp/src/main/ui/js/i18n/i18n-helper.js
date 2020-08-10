@@ -1,7 +1,8 @@
 /**
  * i18n helper
  *
- * @type {{translateElement: I18nHelper.translateElement, processString: I18nHelper.processString, createElement: ((p1?:*, p2?:*))}}
+ * @type {{translateElement: I18nHelper.translateElement, processString: I18nHelper.processString,
+ * createElement: ((p1?:*, p2?:*))}}
  */
 const I18nHelper = {
 
@@ -70,3 +71,5 @@ const I18nHelper = {
         return el;
     },
 };
+
+module.exports = I18nHelper;

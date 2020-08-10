@@ -9,7 +9,8 @@ const log = require('./utils/log');
 /**
  * Whitelist
  *
- * @type {{init, getRules, getWhiteListDomains, getWhiteListedDomains, getBlockListedDomains, findWhiteListRule, whiteListUrl, unWhiteListUrl, updateWhiteListDomains, configure, isDefaultMode, changeDefaultWhiteListMode}}
+ * @type {{init, getRules, getWhiteListDomains, getWhiteListedDomains, getBlockListedDomains, findWhiteListRule,
+ * whiteListUrl, unWhiteListUrl, updateWhiteListDomains, configure, isDefaultMode, changeDefaultWhiteListMode}}
  */
 module.exports = (function () {
     const WHITE_LIST_DOMAINS_LS_PROP = 'white-list-domains';
@@ -89,6 +90,7 @@ module.exports = (function () {
         },
     };
 
+    /* eslint-disable-next-line no-unused-vars */
     function notifyWhiteListUpdated(options) {
         listeners.notifyListeners(events.UPDATE_WHITELIST_FILTER_RULES);
     }
@@ -367,7 +369,8 @@ module.exports = (function () {
      */
     const init = function () {
         /**
-         * Access to whitelist/blacklist domains before the proper initialization of localStorage leads to wrong caching of its values
+         * Access to whitelist/blacklist domains before the proper initialization of localStorage
+         * leads to wrong caching of its values
          * To prevent it we should clear cached values
          * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/933
          */

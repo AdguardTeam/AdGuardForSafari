@@ -32,7 +32,8 @@ module.exports = (function () {
     /**
      * Async returns extension run info
      *
-     * @param callback Run info callback with passed object {{isFirstRun: boolean, isUpdate: (boolean|*), currentVersion: (Prefs.version|*), prevVersion: *}}
+     * @param callback Run info callback with passed object
+     * {{isFirstRun: boolean, isUpdate: (boolean|*), currentVersion: (Prefs.version|*), prevVersion: *}}
      */
     const getRunInfo = function (callback) {
         const prevVersion = getAppVersion();
@@ -42,6 +43,7 @@ module.exports = (function () {
         const isFirstRun = (currentVersion !== prevVersion && !prevVersion);
         const isUpdate = !!(currentVersion !== prevVersion && prevVersion);
 
+        /* eslint-disable-next-line max-len */
         const isMajorUpdate = versionUtils.getMajorVersionNumber(currentVersion) > versionUtils.getMajorVersionNumber(prevVersion)
             || versionUtils.getMinorVersionNumber(currentVersion) > versionUtils.getMinorVersionNumber(prevVersion);
 

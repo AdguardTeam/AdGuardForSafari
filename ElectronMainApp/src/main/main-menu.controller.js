@@ -1,6 +1,4 @@
 const { app, Menu, BrowserWindow } = require('electron');
-const path = require('path');
-const updater = require('./updater');
 const i18n = require('../utils/i18n');
 const listeners = require('./notifier');
 const events = require('./events');

@@ -6,7 +6,6 @@ const events = require('../events');
 const filters = require('./filters-manager');
 const settings = require('./settings-manager');
 const collections = require('./utils/collections');
-const concurrent = require('./utils/concurrent');
 const updateService = require('./update-service');
 const filtersUpdate = require('./filters/filters-update');
 const filterRules = require('./filters/filter-rules');
@@ -124,7 +123,11 @@ module.exports = (() => {
             listeners.notifyListeners(events.REQUEST_FILTER_UPDATED);
             const rulesCount = newRequestFilter.rules ? newRequestFilter.rules.length : 0;
             log.debug('Rules count {0}', rulesCount);
-            log.info('Finished request filter initialization in {0} ms. Rules count: {1}', (new Date().getTime() - start), rulesCount);
+            log.info(
+                'Finished request filter initialization in {0} ms. Rules count: {1}',
+                (new Date().getTime() - start),
+                rulesCount
+            );
         };
 
         /**
@@ -272,7 +275,8 @@ module.exports = (() => {
             }
 
             if (needCreateRequestFilter) {
-                // Rules will be added to request filter lazy, listeners will be notified about REQUEST_FILTER_UPDATED later
+                // Rules will be added to request filter lazy,
+                // listeners will be notified about REQUEST_FILTER_UPDATED later
                 Promise.all(dfds).then(createRequestFilter);
             } else {
                 // Rules are already in request filter, notify listeners

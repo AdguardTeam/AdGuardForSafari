@@ -82,10 +82,11 @@ module.exports = (() => {
         const browser = 'Safari';
         const filters = applicationApi.getEnabledFilterIds();
 
-        const url = `https://reports.adguard.com/new_issue.html?product_type=Saf&product_version=${encodeURIComponent(app.getVersion())
-        }&browser=${encodeURIComponent(browser)
-        }&url=${encodeURIComponent(reportUrl)
-        }&filters=${encodeURIComponent(filters.join('.'))}`;
+        const url = `https://reports.adguard.com/new_issue.html?product_type=Saf&product_version=
+        ${encodeURIComponent(app.getVersion())
+    }&browser=${encodeURIComponent(browser)
+    }&url=${encodeURIComponent(reportUrl)
+    }&filters=${encodeURIComponent(filters.join('.'))}`;
 
         shell.openExternal(url);
     };
@@ -222,7 +223,7 @@ module.exports = (() => {
                         minorExtensionsEnabled = false;
                     }
                 } else if (ContentBlockerExtensions.indexOf(extension) >= 0) {
-                    enabledContentBlockersCount++;
+                    enabledContentBlockersCount += 1;
                     allContentBlockersDisabled = false;
                 }
             }

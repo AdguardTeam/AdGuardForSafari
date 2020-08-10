@@ -1,6 +1,8 @@
 /**
  * Events
  */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-multi-assign */
 const EventNotifierTypes = module.exports = {
     ADD_RULES: 'event.add.rules',
     REMOVE_RULE: 'event.remove.rule',

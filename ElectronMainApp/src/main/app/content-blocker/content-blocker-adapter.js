@@ -1,4 +1,4 @@
-const config = require('config');
+/* eslint-disable-next-line import/no-unresolved */
 const { requireTaskPool } = require('electron-remote');
 const listeners = require('../../notifier');
 const events = require('../../events');
@@ -41,6 +41,7 @@ module.exports = (function () {
                 let json = JSON.stringify(emptyBlockerJSON);
 
                 const rulesTexts = group.rules.map((x) => x.ruleText);
+                /* eslint-disable-next-line no-await-in-loop */
                 const result = await jsonFromRules(rulesTexts, false);
                 if (result && result.converted) {
                     json = result.converted;
@@ -93,7 +94,11 @@ module.exports = (function () {
         const result = await jsonFromRules(rules, true);
         const advancedBlocking = result ? result.advancedBlocking : '[]';
 
-        setSafariContentBlocker(rulesGroupsBundles['advancedBlocking'], advancedBlocking, { rulesCount: result ? result.totalConvertedCount : 0 });
+        setSafariContentBlocker(
+            rulesGroupsBundles['advancedBlocking'],
+            advancedBlocking,
+            { rulesCount: result ? result.totalConvertedCount : 0 }
+        );
 
         return result ? result.advancedBlockingConvertedCount : 0;
     };
@@ -139,7 +144,8 @@ module.exports = (function () {
      */
     const setSafariContentBlocker = (bundleId, json, info) => {
         try {
-            log.info(`Setting content blocker json for ${bundleId}. Rules count: ${info.rulesCount}. Json length=${json.length};`);
+            log.info(`Setting content blocker json for ${bundleId}.`
+                + `Rules count: ${info.rulesCount}. Json length=${json.length};`);
 
             listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, {
                 bundleId,

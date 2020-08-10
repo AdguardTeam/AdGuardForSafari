@@ -1,7 +1,6 @@
 const config = require('config');
 const listeners = require('../notifier');
 const events = require('../events');
-const antibanner = require('./antibanner');
 const rulesStorage = require('./storage/rules-storage');
 
 /**
@@ -17,9 +16,8 @@ module.exports = (function () {
     /**
      * Save user rules text to storage
      * @param content Rules text
-     * @param options
      */
-    const updateUserRulesText = function (content, options) {
+    const updateUserRulesText = function (content) {
         const lines = content.split(/[\r\n]+/) || [];
         rulesStorage.write(USER_FILTER_ID, lines, () => {
             listeners.notifyListeners(events.UPDATE_USER_FILTER_RULES);

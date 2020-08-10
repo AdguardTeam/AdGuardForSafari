@@ -359,6 +359,7 @@ const WhiteListFilter = function (options) {
         const response = ipcRenderer.sendSync('renderer-to-main', JSON.stringify({
             'type': 'getWhiteListDomains',
         }));
+        /* eslint-disable-next-line no-unused-vars */
         hasContent = !!response.content;
         editor.setValue(response.content || '');
     }
@@ -431,6 +432,7 @@ const UserFilter = function () {
         }));
 
         ipcRenderer.on('getUserRulesResponse', (e, arg) => {
+            /* eslint-disable-next-line no-unused-vars */
             hasContent = !!arg.content;
             editor.setValue(arg.content || '');
         });
@@ -473,6 +475,7 @@ const UserFilter = function () {
  * onFilterDownloadFinished: onFilterDownloadFinished}}
  * @constructor
  */
+/* eslint-disable-next-line no-unused-vars */
 const AntiBannerFilters = function (options) {
     'use strict';
 
@@ -626,7 +629,7 @@ const AntiBannerFilters = function (options) {
                 break;
             }
             case (length === 1): {
-                enabledFiltersNamesString = enabledFiltersNames[0];
+                [enabledFiltersNamesString] = enabledFiltersNames;
                 break;
             }
             default:
@@ -787,7 +790,8 @@ const AntiBannerFilters = function (options) {
 
         let addCustomFilterBtn = '';
         if (isCustomFilters) {
-            addCustomFilterBtn = `<button class="button button--green empty-filters__btn empty-filters__btn--list">${i18n.__('options_filters_empty_custom_add_button.message')}</button>`;
+            addCustomFilterBtn = '<button class="button button--green empty-filters__btn empty-filters__btn--list">'
+                + `${i18n.__('options_filters_empty_custom_add_button.message')}</button>`;
         }
 
         return Utils.htmlToElement(`
@@ -871,6 +875,7 @@ const AntiBannerFilters = function (options) {
                 try {
                     searchString = Utils.escapeRegExp(e.target.value.trim());
                 } catch (err) {
+                    /* eslint-disable-next-line no-console */
                     console.log(err.message);
                     return;
                 }
@@ -1048,6 +1053,7 @@ const AntiBannerFilters = function (options) {
             document.querySelector('#custom-filter-popup-added-url').setAttribute('href', filter.customUrl);
         }
 
+        /* eslint-disable-next-line no-unused-vars */
         function addAndEnableFilter(filterId) {
             ipcRenderer.send('renderer-to-main', JSON.stringify({
                 'type': 'addAndEnableFilter',
@@ -1140,7 +1146,8 @@ const AntiBannerFilters = function (options) {
                 .addEventListener('click', onSubscriptionCancel);
 
             if (onSubscribeBackClicked) {
-                document.querySelector('#custom-filter-popup-added-back').removeEventListener('click', onSubscribeBackClicked);
+                document.querySelector('#custom-filter-popup-added-back')
+                    .removeEventListener('click', onSubscribeBackClicked);
             }
             onSubscribeBackClicked = () => {
                 removeAntiBannerFilter(filter.filterId);
@@ -1217,6 +1224,7 @@ const AntiBannerFilters = function (options) {
 
                 ipcRenderer.once('loadCustomFilterInfoResponse', (e, arg) => {
                     importCustomFilterFile.value = '';
+                    /* eslint-disable-next-line no-unused-expressions */
                     arg ? renderStepFour(arg) : renderStepThree();
                 });
             });
@@ -1408,6 +1416,7 @@ const AntiBannerFilters = function (options) {
  */
 const Select = function (id, options, value) {
     if (!id) {
+        /* eslint-disable-next-line no-console */
         console.error(`SELECT with id=${id} not found`);
         return;
     }
@@ -1501,9 +1510,11 @@ const Settings = function () {
         };
     };
     const checkboxes = [];
-    checkboxes.push(new Checkbox('#showAppUpdatedNotification', userSettings.names.DISABLE_SHOW_APP_UPDATED_NOTIFICATION, {
-        negate: true,
-    }));
+    checkboxes.push(new Checkbox(
+        '#showAppUpdatedNotification',
+        userSettings.names.DISABLE_SHOW_APP_UPDATED_NOTIFICATION,
+        { negate: true }
+    ));
 
     const toggleAcceptableAdsFilter = Utils.debounce((enabled) => {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
@@ -1544,10 +1555,11 @@ const Settings = function () {
 
         const currentPeriodValue = userSettings.values[userSettings.names.UPDATE_FILTERS_PERIOD];
         const periodSelect = document.getElementById('filterUpdatePeriod');
+        /* eslint-disable-next-line no-unused-expressions */
         periodSelect && periodSelect.addEventListener('change', (event) => {
             ipcRenderer.send('renderer-to-main', JSON.stringify({
                 type: 'changeUpdateFiltersPeriod',
-                value: parseInt(event.target.value),
+                value: parseInt(event.target.value, 10),
             }));
         });
 
@@ -1576,6 +1588,7 @@ const Settings = function () {
     };
 
     const notificationEnableProtectionLink = document.getElementById('notificationEnableProtectionLink');
+    /* eslint-disable-next-line no-unused-expressions */
     notificationEnableProtectionLink && notificationEnableProtectionLink.addEventListener('click', (e) => {
         e.preventDefault();
 
@@ -1785,6 +1798,7 @@ PageController.prototype = {
 
         // Initialize top menu
         TopMenu.init({
+            /* eslint-disable-next-line no-unused-vars */
             onHashUpdated(tabId) {
                 // Doing nothing
             },

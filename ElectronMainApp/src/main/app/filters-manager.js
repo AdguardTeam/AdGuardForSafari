@@ -27,6 +27,7 @@ module.exports = (() => {
     const getFilterById = (filterId) => {
         const filter = subscriptions.getFilter(filterId);
         if (!filter) {
+            /* eslint-disable-next-line no-throw-literal */
             throw `Filter with id ${filterId} not found`;
         }
 
@@ -209,7 +210,7 @@ module.exports = (() => {
 
         const loadNextFilter = function () {
             if (filterIds.length === 0) {
-
+                // ...
             } else {
                 const filterId = filterIds.shift();
                 addAntiBannerFilter(filterId, (success) => {
@@ -278,6 +279,7 @@ module.exports = (() => {
      *
      * @param groupId
      */
+    /* eslint-disable-next-line no-unused-vars */
     const addAndEnableFiltersByGroupId = (groupId) => {
         const idsByTagId = categories.getRecommendedFilterIdsByGroupId(groupId);
 
@@ -289,6 +291,7 @@ module.exports = (() => {
      *
      * @param groupId
      */
+    /* eslint-disable-next-line no-unused-vars */
     const disableAntiBannerFiltersByGroupId = (groupId) => {
         const idsByTagId = categories.getRecommendedFilterIdsByGroupId(groupId);
 

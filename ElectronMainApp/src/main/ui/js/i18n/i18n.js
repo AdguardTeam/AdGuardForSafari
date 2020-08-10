@@ -1,4 +1,5 @@
-const i18n = require('../../utils/i18n');
+const i18n = require('../../../../utils/i18n');
+const I18nHelper = require('./i18n-helper');
 
 /**
  * Translate elements on document ready

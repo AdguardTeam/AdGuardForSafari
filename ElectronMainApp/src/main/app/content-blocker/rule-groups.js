@@ -60,7 +60,14 @@ module.exports = (function () {
         social: [groups.socialWidgetsAndAnnoyances],
         other: [groups.other],
         custom: [groups.custom],
-        all: [groups.general, groups.privacy, groups.security, groups.socialWidgetsAndAnnoyances, groups.other, groups.custom],
+        all: [
+            groups.general,
+            groups.privacy,
+            groups.security,
+            groups.socialWidgetsAndAnnoyances,
+            groups.other,
+            groups.custom,
+        ],
     };
 
     /**

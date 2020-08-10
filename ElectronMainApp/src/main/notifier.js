@@ -35,7 +35,8 @@ module.exports = (function () {
             if (typeof listener !== 'function') {
                 throw new Error('Illegal listener');
             }
-            const listenerId = this.listenerId++;
+            /* eslint-disable-next-line no-multi-assign */
+            const listenerId = this.listenerId += 1;
             this.listenersMap[listenerId] = listener;
             return listenerId;
         },

@@ -82,7 +82,18 @@ module.exports = (function () {
     /**
      * Filter metadata
      */
-    const SubscriptionFilter = function (filterId, groupId, name, description, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags) {
+    const SubscriptionFilter = function (filterId,
+        groupId,
+        name,
+        description,
+        homepage,
+        version,
+        timeUpdated,
+        displayNumber,
+        languages,
+        expires,
+        subscriptionUrl,
+        tags) {
         this.filterId = filterId;
         this.groupId = groupId;
         this.name = name;
@@ -143,7 +154,20 @@ module.exports = (function () {
             tags.push(0);
         }
 
-        return new SubscriptionFilter(filterId, groupId, defaultName, defaultDescription, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
+        return new SubscriptionFilter(
+            filterId,
+            groupId,
+            defaultName,
+            defaultDescription,
+            homepage,
+            version,
+            timeUpdated,
+            displayNumber,
+            languages,
+            expires,
+            subscriptionUrl,
+            tags
+        );
     };
 
     /**
@@ -196,6 +220,7 @@ module.exports = (function () {
         const { title } = options;
 
         serviceClient.loadFilterRulesBySubscriptionUrl(url, (rules) => {
+            /* eslint-disable prefer-const */
             let {
                 name,
                 description,
@@ -215,7 +240,20 @@ module.exports = (function () {
             const tags = [0];
             const rulesCount = rules.filter((rule) => rule.trim().indexOf('!') !== 0).length;
 
-            const filter = new SubscriptionFilter(null, groupId, name, description, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
+            const filter = new SubscriptionFilter(
+                null,
+                groupId,
+                name,
+                description,
+                homepage,
+                version,
+                timeUpdated,
+                displayNumber,
+                languages,
+                expires,
+                subscriptionUrl,
+                tags
+            );
 
             filter.loaded = true;
             filter.customUrl = url;
@@ -274,7 +312,20 @@ module.exports = (function () {
                 listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
                 listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, rules);
             } else {
-                filter = new SubscriptionFilter(filterId, groupId, defaultName, defaultDescription, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
+                filter = new SubscriptionFilter(
+                    filterId,
+                    groupId,
+                    defaultName,
+                    defaultDescription,
+                    homepage,
+                    version,
+                    timeUpdated,
+                    displayNumber,
+                    languages,
+                    expires,
+                    subscriptionUrl,
+                    tags
+                );
                 filter.loaded = true;
                 filter.enabled = true;
                 // custom filters have special fields
@@ -378,20 +429,24 @@ module.exports = (function () {
                 tags.push(createFilterTagFromJSON(metadata.tags[i]));
             }
 
-            for (let j = 0; j < metadata.filters.length; j++) {
+            for (let j = 0; j < metadata.filters.length; j += 1) {
                 const filter = createSubscriptionFilterFromJSON(metadata.filters[j]);
                 filters.push(filter);
                 filtersMap[filter.filterId] = filter;
             }
 
-            for (let k = 0; k < metadata.groups.length; k++) {
+            for (let k = 0; k < metadata.groups.length; k += 1) {
                 const group = createSubscriptionGroupFromJSON(metadata.groups[k]);
                 groups.push(group);
                 groupsMap[group.groupId] = group;
             }
 
             const localizedCustomGroupName = i18.__('filters_group_custom.message');
-            const customFiltersGroup = new SubscriptionGroup(CUSTOM_FILTERS_GROUP_ID, localizedCustomGroupName, CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER);
+            const customFiltersGroup = new SubscriptionGroup(
+                CUSTOM_FILTERS_GROUP_ID,
+                localizedCustomGroupName,
+                CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER
+            );
             groups.push(customFiltersGroup);
             groupsMap[customFiltersGroup.groupId] = customFiltersGroup;
 
@@ -436,13 +491,13 @@ module.exports = (function () {
 
             log.debug('Filters i18n metadata - tags');
 
-            for (let j = 0; j < filters.length; j++) {
+            for (let j = 0; j < filters.length; j += 1) {
                 applyFilterLocalization(filters[j], filtersI18n);
             }
 
             log.debug('Filters i18n metadata - filters');
 
-            for (let k = 0; k < groups.length; k++) {
+            for (let k = 0; k < groups.length; k += 1) {
                 applyGroupLocalization(groups[k], groupsI18n);
             }
 

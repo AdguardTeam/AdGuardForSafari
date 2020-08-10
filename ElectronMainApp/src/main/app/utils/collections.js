@@ -19,7 +19,7 @@ module.exports = (() => {
                 return;
             }
             for (let i = collection.length - 1; i >= 0; i -= 1) {
-                if (collection[i] == element) {
+                if (collection[i] === element) {
                     collection.splice(i, 1);
                 }
             }
@@ -37,10 +37,10 @@ module.exports = (() => {
         },
 
         removeDuplicates: (arr) => {
-            if (!arr || arr.length == 1) {
+            if (!arr || arr.length === 1) {
                 return arr;
             }
-            return arr.filter((elem, pos) => arr.indexOf(elem) == pos);
+            return arr.filter((elem, pos) => arr.indexOf(elem) === pos);
         },
 
         getRulesText: (collection) => {

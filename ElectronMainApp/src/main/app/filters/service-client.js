@@ -305,7 +305,7 @@ module.exports = (function () {
      * @param successCallback   Called on success
      * @param errorCallback     Called on error
      */
-    const loadLocalFiltersMetadata = function (successCallback, errorCallback) {
+    const loadLocalFiltersMetadata = function (successCallback) {
         const url = `${settings.localFiltersFolder}/filters.json`;
         readJsonFile(url, successCallback);
     };
@@ -316,7 +316,7 @@ module.exports = (function () {
      * @param successCallback   Called on success
      * @param errorCallback     Called on error
      */
-    const loadLocalFiltersI18Metadata = function (successCallback, errorCallback) {
+    const loadLocalFiltersI18Metadata = function (successCallback) {
         const url = `${settings.localFiltersFolder}/filters_i18n.json`;
         readJsonFile(url, successCallback);
     };

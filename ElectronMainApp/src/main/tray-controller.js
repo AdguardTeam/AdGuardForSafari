@@ -111,6 +111,7 @@ module.exports = (() => {
     /**
      * Return main window
      */
+    /* eslint-disable-next-line no-unused-vars */
     const getMainWindow = () => {
         const focusedWindow = BrowserWindow.getFocusedWindow();
         if (focusedWindow) {
@@ -218,7 +219,9 @@ module.exports = (() => {
 
         const contextMenu = Menu.buildFromTemplate([
             {
-                label: isProtectionRunning ? i18n.__('tray_menu_protection_start.message') : i18n.__('tray_menu_protection_stop.message'),
+                label: isProtectionRunning
+                    ? i18n.__('tray_menu_protection_start.message')
+                    : i18n.__('tray_menu_protection_stop.message'),
                 type: 'checkbox',
                 checked: isProtectionRunning,
                 click: onProtectionToggleClicked,

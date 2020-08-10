@@ -1,7 +1,6 @@
 const { app } = require('electron');
 const subscriptions = require('./subscriptions');
 const tagService = require('./filters-tags');
-const collections = require('../utils/collections');
 
 /**
  * Filter categories service

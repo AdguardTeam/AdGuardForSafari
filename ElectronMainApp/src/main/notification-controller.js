@@ -30,6 +30,7 @@ module.exports = (() => {
         });
 
         if (onClick) {
+            /* eslint-disable-next-line no-unused-vars */
             notification.addListener('click', (e) => {
                 onClick();
             });
