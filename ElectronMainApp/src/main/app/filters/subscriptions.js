@@ -114,7 +114,7 @@ module.exports = (function () {
      * @returns {FilterTag}
      */
     function createFilterTagFromJSON(tag) {
-        const tagId = tag.tagId - 0;
+        const tagId = parseInt(tag.tagId, 10);
         const { keyword } = tag;
 
         return new FilterTag(tagId, keyword);
@@ -126,9 +126,9 @@ module.exports = (function () {
      * @returns {SubscriptionGroup}
      */
     function createSubscriptionGroupFromJSON(group) {
-        const groupId = group.groupId - 0;
+        const groupId = parseInt(group.groupId, 10);
         const defaultGroupName = group.groupName;
-        const displayNumber = group.displayNumber - 0;
+        const displayNumber = parseInt(group.displayNumber, 10);
 
         return new SubscriptionGroup(groupId, defaultGroupName, displayNumber);
     }
@@ -138,16 +138,16 @@ module.exports = (function () {
      * @param filter Object
      */
     const createSubscriptionFilterFromJSON = (filter) => {
-        const filterId = filter.filterId - 0;
-        const groupId = filter.groupId - 0;
+        const filterId = parseInt(filter.filterId, 10);
+        const groupId = parseInt(filter.groupId, 10);
         const defaultName = filter.name;
         const defaultDescription = filter.description;
         const {
             homepage, version, subscriptionUrl, languages,
         } = filter;
         const timeUpdated = parseTimeUpdated(filter.timeUpdated);
-        const expires = filter.expires - 0;
-        const displayNumber = filter.displayNumber - 0;
+        const expires = parseInt(filter.expires, 10);
+        const displayNumber = parseInt(filter.displayNumber, 10);
         const { tags } = filter;
         if (tags.length === 0) {
             tags.push(0);
