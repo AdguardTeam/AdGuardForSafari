@@ -109,7 +109,6 @@ module.exports = (function () {
             request.open('GET', url);
             request.setRequestHeader('Content-type', contentType);
             request.setRequestHeader('Pragma', 'no-cache');
-            // request.overrideMimeType(contentType);
             request.mozBackgroundRequest = true;
             if (successCallback) {
                 request.onload = function () {

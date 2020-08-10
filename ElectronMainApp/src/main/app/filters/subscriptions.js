@@ -142,12 +142,11 @@ module.exports = (function () {
         const groupId = filter.groupId - 0;
         const defaultName = filter.name;
         const defaultDescription = filter.description;
-        const { homepage } = filter;
-        const { version } = filter;
+        const {
+            homepage, version, subscriptionUrl, languages,
+        } = filter;
         const timeUpdated = parseTimeUpdated(filter.timeUpdated);
         const expires = filter.expires - 0;
-        const { subscriptionUrl } = filter;
-        const { languages } = filter;
         const displayNumber = filter.displayNumber - 0;
         const { tags } = filter;
         if (tags.length === 0) {
