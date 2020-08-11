@@ -210,17 +210,16 @@ module.exports = (() => {
 
         const loadNextFilter = function () {
             if (filterIds.length === 0) {
-                // ...
-            } else {
-                const filterId = filterIds.shift();
-                addAntiBannerFilter(filterId, (success) => {
-                    if (success) {
-                        enableFilter(filterId);
-                    }
-
-                    loadNextFilter();
-                });
+                return;
             }
+            const filterId = filterIds.shift();
+            addAntiBannerFilter(filterId, (success) => {
+                if (success) {
+                    enableFilter(filterId);
+                }
+
+                loadNextFilter();
+            });
         };
 
         loadNextFilter();
