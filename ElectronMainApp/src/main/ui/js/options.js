@@ -1784,6 +1784,10 @@ PageController.prototype = {
             }));
         });
 
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            type: 'checkUpdates'
+        }));
+
         window.addEventListener('hashchange', () => {
             if (document.location.hash === '#about') {
                 ipcRenderer.send('renderer-to-main', JSON.stringify({
