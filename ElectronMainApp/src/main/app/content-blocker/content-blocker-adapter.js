@@ -83,7 +83,7 @@ module.exports = (function () {
     const jsonFromRules = async (rules, advancedBlocking) => {
         const converterModule = requireTaskPool(require.resolve('../libs/JSConverter'));
 
-        const result = await converterModule.jsonFromFilters(rules, RULES_LIMIT, false, advancedBlocking);
+        const result = await converterModule.jsonFromFilters(rules, RULES_LIMIT, false, advancedBlocking, 500);
         return result;
     };
 
