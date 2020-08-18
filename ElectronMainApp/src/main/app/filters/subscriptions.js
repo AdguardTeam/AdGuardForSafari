@@ -266,6 +266,17 @@ module.exports = (function () {
             });
 
             if (filter) {
+
+                if (version && !versionUtils.isGreaterVersion(version, filter.version)) {
+                    log.warn('Update version is not greater');
+                    listeners.notifyListeners(
+                        events.UPDATE_CUSTOM_FILTER_ERROR,
+                        { reason: i18.__('options_popup_update_version_error.message') }
+                    );
+                    callback();
+                    return;
+                }
+                filter.enabled = true;
                 restoreCustomFilter(filter, trusted);
                 listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
                 listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, rules);
@@ -323,7 +334,6 @@ module.exports = (function () {
         customFilters.forEach(f => {
             if (f.filterId === filter.filterId) {
                 f.trusted = trusted;
-                f.enabled = filter.enabled;
                 f.title = filter.title;
                 f.timeUpdated = new Date();
             }
