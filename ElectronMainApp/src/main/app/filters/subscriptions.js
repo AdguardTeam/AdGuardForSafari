@@ -284,7 +284,6 @@ module.exports = (function () {
             } else {
                 filter = new SubscriptionFilter(filterId, groupId, defaultName, defaultDescription, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
                 filter.loaded = true;
-                filter.enabled = true;
                 //custom filters have special fields
                 filter.customUrl = url;
                 filter.rulesCount = rulesCount;
