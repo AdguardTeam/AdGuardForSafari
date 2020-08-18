@@ -266,16 +266,6 @@ module.exports = (function () {
             });
 
             if (filter) {
-
-                if (version && !versionUtils.isGreaterVersion(version, filter.version)) {
-                    log.warn('Update version is not greater');
-                    listeners.notifyListeners(
-                        events.UPDATE_CUSTOM_FILTER_ERROR,
-                        { reason: i18.__('options_popup_update_version_error.message') }
-                    );
-                    callback();
-                    return;
-                }
                 restoreCustomFilter(filter, trusted);
                 listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
                 listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, rules);

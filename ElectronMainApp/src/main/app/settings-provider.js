@@ -206,7 +206,7 @@ module.exports = (() => {
      * @param {Array<CustomFilterInitial>} customFiltersInitials
      * @returns {Promise<any>} Promise object which represents array with filters
      */
-    const syncCustomFilters = (customFiltersInitials) => {
+    const syncCustomFilters = async (customFiltersInitials) => {
         const presentCustomFilters = filters.getCustomFilters();
 
         const enrichedFiltersInitials = customFiltersInitials.map((filterToAdd) => {
@@ -230,34 +230,30 @@ module.exports = (() => {
             return Promise.resolve(enrichedFiltersInitials);
         }
 
-        return addCustomFilters(customFiltersToAdd)
-            .then((customFiltersAddResult) => {
-                // get results without errors, in order to do not enable filters with errors
-                const addedCustomFiltersWithoutError = customFiltersAddResult
-                    .filter(f => f.error === null)
-                    .map(f => f.filter);
+        const customFiltersAddResult = await addCustomFilters(customFiltersToAdd);
+        // get results without errors, in order to do not enable filters with errors
+        const addedCustomFiltersWithoutError = customFiltersAddResult
+            .filter(f => f.error === null)
+            .map(f => f.filter);
 
-                const addedCustomFiltersIds = addedCustomFiltersWithoutError.map(f => f.filterId);
-                log.info(`Settings sync: Were added custom filters: ${addedCustomFiltersIds}`);
+        const addedCustomFiltersIds = addedCustomFiltersWithoutError.map(f => f.filterId);
+        log.info(`Settings sync: Were added custom filters: ${addedCustomFiltersIds}`);
 
-                return [...existingCustomFilters, ...addedCustomFiltersWithoutError];
-            });
+        return [...existingCustomFilters, ...addedCustomFiltersWithoutError];
     };
 
     /**
      * Enables filters by filterId and disables those filters which were not in the list of enabled filters
      * @param {array<number>} filterIds - ids to enable
-     * @returns {Promise<any>}
      */
-    const syncEnabledFilters = filterIds => new Promise((resolve) => {
+    const syncEnabledFilters = (filterIds) => {
         filters.addAndEnableFilters(filterIds);
         const enabledFilters = filters.getEnabledFilters();
         const filtersToDisable = enabledFilters
             .filter(enabledFilter => !filterIds.includes(enabledFilter.filterId))
             .map(filter => filter.filterId);
         filters.disableFilters(filtersToDisable);
-        resolve();
-    });
+    };
 
     /**
      * Enables groups by groupId and disable those groups which were not in the list
@@ -285,7 +281,7 @@ module.exports = (() => {
      * @param section Section
      * @param callback Finish callback
      */
-    const applyFiltersSection = function (section, callback) {
+    const applyFiltersSection = async (section, callback) => {
         const whiteListSection = section.filters['whitelist'] || {};
         const whitelistDomains = whiteListSection.domains || [];
         const blacklistDomains = whiteListSection['inverted-domains'] || [];
@@ -303,35 +299,31 @@ module.exports = (() => {
         const customFiltersData = section.filters['custom-filters'] || [];
 
         // STEP 1 sync custom filters
-        syncCustomFilters(customFiltersData)
-            .then((availableCustomFilters) => {
-                // STEP 2 get filters with enabled flag from export data
-                const customFilterIdsToEnable = availableCustomFilters
-                    .filter((availableCustomFilter) => {
-                        const filterData = customFiltersData
-                            .find((filter) => {
-                                if (!filter.customUrl) {
-                                    // eslint-disable-next-line max-len
-                                    throw new Error(`Custom filter should always have custom URL: ${JSON.stringify(filter)}`);
-                                }
-                                return filter.customUrl === availableCustomFilter.customUrl;
-                            });
-                        return filterData && filterData.enabled;
-                    })
-                    .map(filter => filter.filterId);
-                // STEP 3 sync enabled filters
-                const enabledFilterIds = section.filters['enabled-filters'] || [];
-                return syncEnabledFilters([...enabledFilterIds, ...customFilterIdsToEnable]);
+        const availableCustomFilters = await syncCustomFilters(customFiltersData);
+
+        // STEP 2 get filters with enabled flag from export data
+        const customFilterIdsToEnable = availableCustomFilters
+            .filter((availableCustomFilter) => {
+                const filterData = customFiltersData
+                    .find((filter) => {
+                        if (!filter.customUrl) {
+                            // eslint-disable-next-line max-len
+                            throw new Error(`Custom filter should always have custom URL: ${JSON.stringify(filter)}`);
+                        }
+                        return filter.customUrl === availableCustomFilter.customUrl;
+                    });
+                return filterData && filterData.enabled;
             })
-            .then(() => {
-                // STEP 4 sync enabled groups
-                const enabledGroups = section.filters['enabled-groups'] || [];
-                syncEnabledGroups(enabledGroups);
-                callback(true);
-            })
-            .catch((err) => {
-                log.error(err);
-            });
+            .map(filter => filter.filterId);
+
+        // STEP 3 sync enabled filters
+        const enabledFilterIds = section.filters['enabled-filters'] || [];
+        syncEnabledFilters([...enabledFilterIds, ...customFilterIdsToEnable]);
+
+        // STEP 4 sync enabled groups
+        const enabledGroups = section.filters['enabled-groups'] || [];
+        syncEnabledGroups(enabledGroups);
+        callback(true);
     };
 
     /**

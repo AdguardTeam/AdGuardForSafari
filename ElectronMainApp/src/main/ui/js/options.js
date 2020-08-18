@@ -58,21 +58,16 @@ const Utils = {
     },
 
     /**
-     * Imports rules from file into editor
-     * @param editor
+     * Imports rules from file
+     * @param event
      */
-    importFromFileIntoEditor: function importFromFileIntoEditor(editor) {
-        return function (event) {
+    importRulesFromFile: function importRulesFromFile(event) {
+        return new Promise ((resolve) => {
             const fileInput = event.target;
             const reader = new FileReader();
             reader.onload = function (e) {
-                const oldRules = editor.getValue();
-                const newRules = `${oldRules}\n${e.target.result}`.split('\n');
-                const trimmedRules = newRules.map(rule => rule.trim());
-                const ruleSet = new Set(trimmedRules);
-                const uniqueRules = Array.from(ruleSet).join('\n');
-                editor.setValue(uniqueRules.trim());
                 fileInput.value = '';
+                resolve(e.target.result);
             };
             reader.onerror = function (err) {
                 throw new Error(`${i18n.getMessage('options_userfilter_import_rules_error')} ${err.message}`);
@@ -84,7 +79,21 @@ const Utils = {
                 }
                 reader.readAsText(file, 'utf-8');
             }
-        };
+        })
+    },
+
+    /**
+     * Adds rules into editor
+     * @param editor
+     * @param rules
+     */
+    addRulesToEditor: function addRulesToEditor(editor, rules) {
+        const oldRules = editor.getValue();
+        const newRules = `${oldRules}\n${rules}`.split('\n');
+        const trimmedRules = newRules.map(rule => rule.trim());
+        const ruleSet = new Set(trimmedRules);
+        const uniqueRules = Array.from(ruleSet).join('\n');
+        editor.setValue(uniqueRules.trim());
     },
 
     getExtension: function getExtension(filename) {
@@ -410,9 +419,7 @@ const exportFile = async (fileName, fileType, data) => {
     const timeStamp = `${d.getFullYear()}${d.getMonth()}${d.getDate()}_${d.getHours()}${d.getMinutes()}${d.getSeconds()}`;
     const exportFileName = `${fileName}-${timeStamp}.${fileType}`;
     const exportDialog = await dialog.showSaveDialog({
-        title: 'Select the File Path to save',
         defaultPath: exportFileName,
-        buttonLabel: 'Save',
     });
     if (!exportDialog.canceled) {
         fs.writeFileSync(exportDialog.filePath.toString(), data);
@@ -506,10 +513,10 @@ const WhiteListFilter = function (options) {
         importAllowlistInput.click();
     });
 
-    importAllowlistInput.addEventListener('change', (event) => {
-        const handleFileInput = Utils.importFromFileIntoEditor(editor);
+    importAllowlistInput.addEventListener('change', async (event) => {
         try {
-            handleFileInput(event);
+            const importedDomains = await Utils.importRulesFromFile(event);
+            Utils.addRulesToEditor(editor, importedDomains);
         } catch (err) {
             console.error(err.message);
         }
@@ -610,10 +617,10 @@ const UserFilter = function () {
         importUserFiltersInput.click();
     });
 
-    importUserFiltersInput.addEventListener('change', (event) => {
-        const handleFileInput = Utils.importFromFileIntoEditor(editor);
+    importUserFiltersInput.addEventListener('change',  async (event) => {
         try {
-            handleFileInput(event);
+            const importedRules = await Utils.importRulesFromFile(event);
+            Utils.addRulesToEditor(editor, importedRules);
         } catch (err) {
             console.error(err.message);
         }
