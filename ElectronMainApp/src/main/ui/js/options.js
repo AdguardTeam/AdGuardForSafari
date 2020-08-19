@@ -70,7 +70,7 @@ const Utils = {
                 resolve(e.target.result);
             };
             reader.onerror = function (err) {
-                throw new Error(`${i18n.getMessage('options_userfilter_import_rules_error')} ${err.message}`);
+                throw new Error(`${i18n.__('options_userfilter_import_rules_error')} ${err.message}`);
             };
             const file = fileInput.files[0];
             if (file) {
@@ -118,7 +118,7 @@ const Utils = {
         const file = event.currentTarget.files[0];
         if (file) {
             if (this.getExtension(file.name) !== 'json') {
-                throw new Error(i18n.getMessage('options_settings_import_wrong_file_extension'));
+                throw new Error(i18n.__('options_settings_import_wrong_file_extension'));
             }
             const reader = new FileReader();
             reader.readAsText(file, 'UTF-8');
@@ -126,7 +126,7 @@ const Utils = {
                 onFileLoaded(evt.target.result);
             };
             reader.onerror = function () {
-                throw new Error(i18n.getMessage('options_settings_import_error'));
+                throw new Error(i18n.__('options_settings_import_error'));
             };
         }
     }
