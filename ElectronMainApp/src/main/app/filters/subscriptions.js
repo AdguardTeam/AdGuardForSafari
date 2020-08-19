@@ -246,7 +246,7 @@ module.exports = (function () {
         serviceClient.loadFilterRulesBySubscriptionUrl(url, function (rules) {
             const filterData = parseFilterDataFromHeader(rules);
 
-            const filterId = addFilterId();
+            const filterId = options.filterId ? options.filterId : addFilterId();
             const groupId = CUSTOM_FILTERS_GROUP_ID;
             const defaultName = title;
             const defaultDescription = filterData.description;
@@ -277,7 +277,7 @@ module.exports = (function () {
                     return;
                 }
                 filter.enabled = true;
-                restoreCustomFilter(filter, trusted);
+                refreshCustomFilter(filter, trusted);
                 listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
                 listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, rules);
 
@@ -328,7 +328,7 @@ module.exports = (function () {
      * @param filter
      * @param trusted
      */
-    const restoreCustomFilter = (filter, trusted) => {
+    const refreshCustomFilter = (filter, trusted) => {
         let customFilters = loadCustomFilters();
         customFilters.forEach(f => {
             if (f.filterId === filter.filterId) {

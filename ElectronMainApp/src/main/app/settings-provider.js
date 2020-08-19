@@ -142,107 +142,6 @@ module.exports = (() => {
      */
 
     /**
-     * Add a custom filter
-     * @param {CustomFilterInitial} customFilterData - initial data of imported custom filter
-     * @returns {Promise<any>} SubscriptionFilter
-     */
-    const addCustomFilter = (customFilterData) => {
-        const {
-            customUrl, title, trusted,
-        } = customFilterData;
-
-        return new Promise((resolve, reject) => {
-            const options = {title, trusted};
-            filters.loadCustomFilterInfo(
-                customUrl,
-                options,
-                (filter) => {
-                    resolve(filter);
-                },
-                () => {
-                    reject();
-                }
-            );
-        });
-    };
-
-    const addCustomFilters = absentCustomFiltersInitials => absentCustomFiltersInitials
-        .reduce((promiseAcc, customFilterInitial) => promiseAcc
-            .then(acc => addCustomFilter(customFilterInitial)
-                .then((customFilter) => {
-                    log.info(`Settings sync: Was added custom filter: ${customFilter.customUrl}`);
-                    return [...acc, {error: null, filter: customFilter}];
-                })
-                .catch(() => {
-                    const {customUrl} = customFilterInitial;
-                    const message = `Settings sync: Some error happened while downloading: ${customUrl}`;
-                    log.info(message);
-                    return [...acc, {error: message}];
-                })), Promise.resolve([]));
-
-    /**
-     * Removes existing custom filters before adding new custom filters
-     */
-    const removeCustomFilters = (filterIds) => {
-        filterIds.forEach((filterId) => {
-            filters.removeFilter(filterId);
-        });
-    };
-
-    /**
-     * Returns filterId which not listed in the filtersToAdd list, but listed in the existingFilters
-     * @param existingFilters
-     * @param filtersToAdd
-     * @returns {array<number>}
-     */
-    const getCustomFiltersToRemove = (existingFilters, filtersToAdd) => {
-        const customUrlsToAdd = filtersToAdd.map(f => f.customUrl);
-        const filtersToRemove = existingFilters.filter(f => !customUrlsToAdd.includes(f.customUrl));
-        return filtersToRemove.map(f => f.filterId);
-    };
-
-    /**
-     * Adds custom filters if there were not added one by one to the subscriptions list
-     * @param {Array<CustomFilterInitial>} customFiltersInitials
-     * @returns {Promise<any>} Promise object which represents array with filters
-     */
-    const syncCustomFilters = async (customFiltersInitials) => {
-        const presentCustomFilters = filters.getCustomFilters();
-
-        const enrichedFiltersInitials = customFiltersInitials.map((filterToAdd) => {
-            presentCustomFilters.forEach((existingFilter) => {
-                if (existingFilter.customUrl === filterToAdd.customUrl) {
-                    filterToAdd.filterId = existingFilter.filterId;
-                }
-            });
-            return filterToAdd;
-        });
-
-        const customFiltersToAdd = enrichedFiltersInitials.filter(f => !f.filterId);
-        const existingCustomFilters = enrichedFiltersInitials.filter(f => f.filterId);
-        const redundantExistingCustomFiltersIds = getCustomFiltersToRemove(presentCustomFilters, customFiltersInitials);
-
-        if (redundantExistingCustomFiltersIds.length > 0) {
-            removeCustomFilters(redundantExistingCustomFiltersIds);
-        }
-
-        if (customFiltersToAdd.length === 0) {
-            return Promise.resolve(enrichedFiltersInitials);
-        }
-
-        const customFiltersAddResult = await addCustomFilters(customFiltersToAdd);
-        // get results without errors, in order to do not enable filters with errors
-        const addedCustomFiltersWithoutError = customFiltersAddResult
-            .filter(f => f.error === null)
-            .map(f => f.filter);
-
-        const addedCustomFiltersIds = addedCustomFiltersWithoutError.map(f => f.filterId);
-        log.info(`Settings sync: Were added custom filters: ${addedCustomFiltersIds}`);
-
-        return [...existingCustomFilters, ...addedCustomFiltersWithoutError];
-    };
-
-    /**
      * Enables filters by filterId and disables those filters which were not in the list of enabled filters
      * @param {array<number>} filterIds - ids to enable
      */
@@ -298,29 +197,27 @@ module.exports = (() => {
         // Apply custom filters
         const customFiltersData = section.filters['custom-filters'] || [];
 
-        // STEP 1 sync custom filters
-        const availableCustomFilters = await syncCustomFilters(customFiltersData);
+        customFiltersData.forEach((customFilter) => {
+            if (!customFilter.customUrl) {
+                throw new Error(`Custom filter should always have custom URL: ${JSON.stringify(customFilter)}`);
+            }
+            subscriptions.updateCustomFilter(customFilter.customUrl, customFilter, (filterId) => {
+                if (filterId) {
+                    log.info(`Added custom filter: ${filterId}`);
+                    if (customFilter.enabled) {
+                        filters.addAndEnableFilters([filterId]);
+                    } else {
+                        filters.disableFilters([filterId]);
+                    }
+                }
+            });
+        })
 
-        // STEP 2 get filters with enabled flag from export data
-        const customFilterIdsToEnable = availableCustomFilters
-            .filter((availableCustomFilter) => {
-                const filterData = customFiltersData
-                    .find((filter) => {
-                        if (!filter.customUrl) {
-                            // eslint-disable-next-line max-len
-                            throw new Error(`Custom filter should always have custom URL: ${JSON.stringify(filter)}`);
-                        }
-                        return filter.customUrl === availableCustomFilter.customUrl;
-                    });
-                return filterData && filterData.enabled;
-            })
-            .map(filter => filter.filterId);
-
-        // STEP 3 sync enabled filters
+        // Sync enabled filters
         const enabledFilterIds = section.filters['enabled-filters'] || [];
-        syncEnabledFilters([...enabledFilterIds, ...customFilterIdsToEnable]);
+        syncEnabledFilters([...enabledFilterIds]);
 
-        // STEP 4 sync enabled groups
+        // Sync enabled groups
         const enabledGroups = section.filters['enabled-groups'] || [];
         syncEnabledGroups(enabledGroups);
         callback(true);
