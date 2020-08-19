@@ -3,6 +3,7 @@
 const { ipcRenderer, remote } = require('electron');
 const { dialog } = remote;
 const fs = require('fs');
+const path = require('path');
 
 /**
  * Common utils
@@ -100,11 +101,7 @@ const Utils = {
         if (!filename) {
             return undefined;
         }
-        const parts = filename.split('.');
-        if (parts.length < 2) {
-            return undefined;
-        }
-        return parts[parts.length - 1];
+        return path.extname(filename).substring(1);
     },
 
     handleImportSettings(event) {
