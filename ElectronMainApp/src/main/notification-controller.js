@@ -185,19 +185,6 @@ module.exports = (() => {
     };
 
     /**
-     * Custom filter update error notification
-     */
-    const showCustomFilterUpdateErrorNotification = (options) => {
-        const title = i18n.__("options_popup_update_error_title.message");
-        const subtitle = options.reason;
-        showNotification({
-            title,
-            subtitle,
-            silent: false
-        });
-    };
-
-    /**
      * Settings update notification
      */
     const showSettingsUpdateNotification = (options) => {
@@ -231,9 +218,6 @@ module.exports = (() => {
             } else if (event === events.NOTIFY_UPDATE_USER_FILTER_RULES) {
                 const newRule = options ? options.newRule : '';
                 showUserFilterUpdatedNotification(showWindow, newRule);
-            }
-            else if (event === events.UPDATE_CUSTOM_FILTER_ERROR) {
-                showCustomFilterUpdateErrorNotification(options);
             }
             else if (event === events.SETTINGS_UPDATED) {
                 showSettingsUpdateNotification(options);
