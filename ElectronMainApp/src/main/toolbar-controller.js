@@ -1,5 +1,6 @@
 const config = require('config');
 const safariToolbar = require('safari-ext');
+const { shell } = require('electron');
 const applicationApi = require('./api');
 const listeners = require('./notifier');
 const events = require('./events');
@@ -7,14 +8,12 @@ const settings = require('./app/settings-manager');
 const log = require('./app/utils/log');
 const app = require('./app/app');
 const localStorage = require('./app/storage/storage');
-const { shell } = require('electron');
 
 /**
  * Addon toolbar controller.
  * Handles safari-ext events and setups its view state.
  */
 module.exports = (() => {
-
     const SafariExtensionBundles = config.get('SafariExtensionBundles');
     const ContentBlockerExtensions = [
         SafariExtensionBundles.GENERAL,
@@ -22,7 +21,7 @@ module.exports = (() => {
         SafariExtensionBundles.SOCIAL_WIDGETS_AND_ANNOYANCES,
         SafariExtensionBundles.SECURITY,
         SafariExtensionBundles.OTHER,
-        SafariExtensionBundles.CUSTOM
+        SafariExtensionBundles.CUSTOM,
     ];
 
     /**
@@ -58,7 +57,7 @@ module.exports = (() => {
 
         applicationApi.setUserFilterRules(rules);
 
-        let newRule = rules[rules.length - 1];
+        const newRule = rules[rules.length - 1];
         listeners.notifyListeners(events.NOTIFY_UPDATE_USER_FILTER_RULES, { newRule });
     };
 
@@ -83,10 +82,11 @@ module.exports = (() => {
         const browser = 'Safari';
         const filters = applicationApi.getEnabledFilterIds();
 
-        const url = "https://reports.adguard.com/new_issue.html?product_type=Saf&product_version=" + encodeURIComponent(app.getVersion()) +
-            "&browser=" + encodeURIComponent(browser) +
-            "&url=" + encodeURIComponent(reportUrl) +
-            "&filters=" + encodeURIComponent(filters.join('.'));
+        const url = `https://reports.adguard.com/new_issue.html?product_type=Saf&product_version=
+        ${encodeURIComponent(app.getVersion())
+    }&browser=${encodeURIComponent(browser)
+    }&url=${encodeURIComponent(reportUrl)
+    }&filters=${encodeURIComponent(filters.join('.'))}`;
 
         shell.openExternal(url);
     };
@@ -96,7 +96,6 @@ module.exports = (() => {
      * Adds toolbar events listener and reacts on them.
      */
     const initToolbarController = (showWindow) => {
-
         log.debug('Initializing toolbar controller..');
 
         // Subscribe to toolbar events
@@ -105,7 +104,7 @@ module.exports = (() => {
             onReportCallback);
 
         // Subscribe to application events
-        listeners.addListener(function (event, info) {
+        listeners.addListener((event, info) => {
             if (event === events.CONTENT_BLOCKER_UPDATE_REQUIRED) {
                 setContentBlockingJson(info.bundleId, info.json, info.info);
             } else if (event === events.UPDATE_USER_FILTER_RULES) {
@@ -119,7 +118,7 @@ module.exports = (() => {
             }
         });
 
-        settings.onUpdated.addListener(function (setting) {
+        settings.onUpdated.addListener((setting) => {
             if (setting === settings.VERBOSE_LOGGING) {
                 setVerboseLogging(settings.isVerboseLoggingEnabled());
             }
@@ -199,7 +198,7 @@ module.exports = (() => {
         const dfds = [];
         const extensions = {};
 
-        for (let bundle in SafariExtensionBundles) {
+        for (const bundle in SafariExtensionBundles) {
             const bundleId = SafariExtensionBundles[bundle];
             dfds.push(new Promise((resolve) => {
                 safariToolbar.getExtensionState(bundleId, (info) => {
@@ -209,13 +208,13 @@ module.exports = (() => {
             }));
         }
 
-        Promise.all(dfds).then(function () {
+        Promise.all(dfds).then(() => {
             let allContentBlockersDisabled = true;
             let contentBlockersEnabled = true;
             let minorExtensionsEnabled = true;
             let enabledContentBlockersCount = 0;
 
-            for (let extension in extensions) {
+            for (const extension in extensions) {
                 const extensionEnabled = extensions[extension];
                 if (!extensionEnabled) {
                     if (ContentBlockerExtensions.indexOf(extension) >= 0) {
@@ -223,11 +222,9 @@ module.exports = (() => {
                     } else {
                         minorExtensionsEnabled = false;
                     }
-                } else {
-                    if (ContentBlockerExtensions.indexOf(extension) >= 0) {
-                        enabledContentBlockersCount++;
-                        allContentBlockersDisabled = false;
-                    }
+                } else if (ContentBlockerExtensions.indexOf(extension) >= 0) {
+                    enabledContentBlockersCount += 1;
+                    allContentBlockersDisabled = false;
                 }
             }
 
@@ -303,13 +300,13 @@ module.exports = (() => {
             return;
         }
 
-        if (Date.now() - getLastCheckDate() <  TIME_SINCE_LAST_CHECK) {
+        if (Date.now() - getLastCheckDate() < TIME_SINCE_LAST_CHECK) {
             // Some time passed from last request
             log.info('Some time passed from last request');
             return;
         }
 
-        getExtensionsState((extensionsState)=> {
+        getExtensionsState((extensionsState) => {
             if (!extensionsState || !extensionsState.contentBlockersEnabled
                 || !extensionsState.minorExtensionsEnabled) {
                 // All extensions should be enabled
@@ -327,7 +324,6 @@ module.exports = (() => {
     return {
         initToolbarController,
         getExtensionsState,
-        requestMASReview
+        requestMASReview,
     };
-
 })();

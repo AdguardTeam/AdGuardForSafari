@@ -1,4 +1,4 @@
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const { XMLHttpRequest } = require('xmlhttprequest');
 const fs = require('fs');
 const filterDownloader = require('filters-downloader');
 const config = require('config');
@@ -15,7 +15,6 @@ const appPack = require('../../../utils/app-pack');
  * http://adguard.com/en/privacy.html#browsers
  */
 module.exports = (function () {
-
     'use strict';
 
     /**
@@ -39,18 +38,18 @@ module.exports = (function () {
 
         // URL for downloading AG filters
         get filterRulesUrl() {
-            return this.filtersUrl + "/filters/{filter_id}.txt";
+            return `${this.filtersUrl}/filters/{filter_id}.txt`;
         },
 
         // URL for downloading optimized AG filters
         get optimizedFilterRulesUrl() {
-            return this.filtersUrl + "/filters/{filter_id}_optimized.txt";
+            return `${this.filtersUrl}/filters/{filter_id}_optimized.txt`;
         },
 
         // URL for checking filter updates
         get filtersMetadataUrl() {
             const params = this.getExtensionParams();
-            return this.filtersUrl + '/filters.js?' + params.join('&');
+            return `${this.filtersUrl}/filters.js?${params.join('&')}`;
         },
 
         // Folder that contains filters metadata and files with rules. 'filters' by default
@@ -65,19 +64,19 @@ module.exports = (function () {
         /**
          * Returns extension params: clientId, version and locale
          */
-        getExtensionParams: function () {
+        getExtensionParams() {
             const clientId = encodeURIComponent(app.getClientId());
             const locale = encodeURIComponent(app.getLocale());
             const version = encodeURIComponent(app.getVersion());
             const id = encodeURIComponent(app.getId());
 
             const params = [];
-            params.push('v=' + version);
-            params.push('cid=' + clientId);
-            params.push('lang=' + locale);
-            params.push('id=' + id);
+            params.push(`v=${version}`);
+            params.push(`cid=${clientId}`);
+            params.push(`lang=${locale}`);
+            params.push(`id=${id}`);
             return params;
-        }
+        },
     };
 
     /**
@@ -89,7 +88,7 @@ module.exports = (function () {
         adguard_ext_firefox: false,
         adguard_ext_edge: false,
         adguard_ext_safari: true,
-        adguard_ext_opera: false
+        adguard_ext_opera: false,
     };
 
     /**
@@ -105,13 +104,11 @@ module.exports = (function () {
      * @param errorCallback error callback
      */
     const executeRequestAsync = (url, contentType, successCallback, errorCallback) => {
-
         const request = new XMLHttpRequest();
         try {
             request.open('GET', url);
             request.setRequestHeader('Content-type', contentType);
             request.setRequestHeader('Pragma', 'no-cache');
-            //request.overrideMimeType(contentType);
             request.mozBackgroundRequest = true;
             if (successCallback) {
                 request.onload = function () {
@@ -168,7 +165,6 @@ module.exports = (function () {
      * @param errorCallback     Called on error
      */
     const loadFiltersMetadata = function (filterIds, successCallback, errorCallback) {
-
         if (!filterIds || filterIds.length === 0) {
             successCallback([]);
             return;
@@ -176,14 +172,14 @@ module.exports = (function () {
 
         const success = function (response) {
             if (response && response.responseText) {
-                let metadata = parseJson(response.responseText);
+                const metadata = parseJson(response.responseText);
                 if (!metadata) {
-                    errorCallback(response, "invalid response");
+                    errorCallback(response, 'invalid response');
                     return;
                 }
                 const filterMetadataList = [];
-                for (let i = 0; i < filterIds.length; i++) {
-                    const filter = metadata.filters.find(function(element) {
+                for (let i = 0; i < filterIds.length; i += 1) {
+                    const filter = metadata.filters.find((element) => {
                         return element.filterId === filterIds[i];
                     });
 
@@ -193,11 +189,11 @@ module.exports = (function () {
                 }
                 successCallback(filterMetadataList);
             } else {
-                errorCallback(response, "empty response");
+                errorCallback(response, 'empty response');
             }
         };
 
-        executeRequestAsync(settings.filtersMetadataUrl, "application/json", success, errorCallback);
+        executeRequestAsync(settings.filtersMetadataUrl, 'application/json', success, errorCallback);
     };
 
     /**
@@ -210,14 +206,13 @@ module.exports = (function () {
      * @param errorCallback        Called on error
      */
     const loadFilterRules = function (filterId, forceRemote, useOptimizedFilters, successCallback, errorCallback) {
-
         let url;
         if (forceRemote || settings.localFilterIds.indexOf(filterId) < 0) {
             url = getUrlForDownloadFilterRules(filterId, useOptimizedFilters);
         } else {
-            url = settings.localFiltersFolder + "/" + filterId + ".txt";
+            url = `${settings.localFiltersFolder}/${filterId}.txt`;
             if (useOptimizedFilters) {
-                url = settings.localFiltersFolder + "/" + filterId + "_optimized.txt";
+                url = `${settings.localFiltersFolder}/${filterId}_optimized.txt`;
             }
 
             url = path.resolve(url);
@@ -234,7 +229,6 @@ module.exports = (function () {
      * @param errorCallback     Called on error
      */
     const loadFilterRulesBySubscriptionUrl = function (url, successCallback, errorCallback) {
-
         if (url.startsWith('file://')) {
             url = path.resolve(url.replace('file://', ''));
         }
@@ -248,7 +242,7 @@ module.exports = (function () {
             delete loadingSubscriptions[url];
 
             if (lines[0].indexOf('[') === 0) {
-                //[Adblock Plus 2.0]
+                // [Adblock Plus 2.0]
                 lines.shift();
             }
 
@@ -272,7 +266,7 @@ module.exports = (function () {
     const readJsonFile = function (url, successCallback) {
         log.debug(`Reading file from ${url}`);
 
-        const data = fs.readFileSync(url, { encoding: 'utf8'});
+        const data = fs.readFileSync(url, { encoding: 'utf8' });
         log.debug('Data read');
 
         const json = parseJson(data);
@@ -288,21 +282,20 @@ module.exports = (function () {
      * @param errorCallback     Called on error
      */
     const loadRemoteFiltersMetadata = function (successCallback, errorCallback) {
-
         const success = function (response) {
             if (response && response.responseText) {
-                let metadata = parseJson(response.responseText);
+                const metadata = parseJson(response.responseText);
                 if (!metadata) {
-                    errorCallback(response, "invalid response");
+                    errorCallback(response, 'invalid response');
                     return;
                 }
                 successCallback(metadata);
             } else {
-                errorCallback(response, "empty response");
+                errorCallback(response, 'empty response');
             }
         };
 
-        executeRequestAsync(settings.filtersMetadataUrl, "application/json", success, errorCallback);
+        executeRequestAsync(settings.filtersMetadataUrl, 'application/json', success, errorCallback);
     };
 
     /**
@@ -311,8 +304,8 @@ module.exports = (function () {
      * @param successCallback   Called on success
      * @param errorCallback     Called on error
      */
-    const loadLocalFiltersMetadata = function (successCallback, errorCallback) {
-        const url = settings.localFiltersFolder + '/filters.json';
+    const loadLocalFiltersMetadata = function (successCallback) {
+        const url = `${settings.localFiltersFolder}/filters.json`;
         readJsonFile(url, successCallback);
     };
 
@@ -322,22 +315,21 @@ module.exports = (function () {
      * @param successCallback   Called on success
      * @param errorCallback     Called on error
      */
-    const loadLocalFiltersI18Metadata = function (successCallback, errorCallback) {
-        const url = settings.localFiltersFolder + '/filters_i18n.json';
+    const loadLocalFiltersI18Metadata = function (successCallback) {
+        const url = `${settings.localFiltersFolder}/filters_i18n.json`;
         readJsonFile(url, successCallback);
     };
 
     return {
 
-        loadFiltersMetadata: loadFiltersMetadata,
-        loadFilterRules: loadFilterRules,
+        loadFiltersMetadata,
+        loadFilterRules,
 
-        loadFilterRulesBySubscriptionUrl: loadFilterRulesBySubscriptionUrl,
+        loadFilterRulesBySubscriptionUrl,
 
-        loadLocalFiltersMetadata: loadLocalFiltersMetadata,
-        loadLocalFiltersI18Metadata: loadLocalFiltersI18Metadata,
+        loadLocalFiltersMetadata,
+        loadLocalFiltersI18Metadata,
 
-        loadRemoteFiltersMetadata: loadRemoteFiltersMetadata
+        loadRemoteFiltersMetadata,
     };
-
 })();

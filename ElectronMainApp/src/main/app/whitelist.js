@@ -1,4 +1,4 @@
-const settings  = require('./settings-manager');
+const settings = require('./settings-manager');
 const listeners = require('../notifier');
 const events = require('../events');
 const localStorage = require('./storage/storage');
@@ -9,10 +9,10 @@ const log = require('./utils/log');
 /**
  * Whitelist
  *
- * @type {{init, getRules, getWhiteListDomains, getWhiteListedDomains, getBlockListedDomains, findWhiteListRule, whiteListUrl, unWhiteListUrl, updateWhiteListDomains, configure, isDefaultMode, changeDefaultWhiteListMode}}
+ * @type {{init, getRules, getWhiteListDomains, getWhiteListedDomains, getBlockListedDomains, findWhiteListRule,
+ * whiteListUrl, unWhiteListUrl, updateWhiteListDomains, configure, isDefaultMode, changeDefaultWhiteListMode}}
  */
 module.exports = (function () {
-
     const WHITE_LIST_DOMAINS_LS_PROP = 'white-list-domains';
     const BLOCK_LIST_DOMAINS_LS_PROP = 'block-list-domains';
 
@@ -29,27 +29,26 @@ module.exports = (function () {
      * Retrieves hostname from URL
      */
     const getHost = function (url) {
-
         if (!url) {
             return null;
         }
 
-        let firstIdx = url.indexOf("//");
+        let firstIdx = url.indexOf('//');
         if (firstIdx === -1) {
             /**
              * It's non hierarchical structured URL (e.g. stun: or turn:)
              * https://tools.ietf.org/html/rfc4395#section-2.2
              * https://tools.ietf.org/html/draft-nandakumar-rtcweb-stun-uri-08#appendix-B
              */
-            firstIdx = url.indexOf(":");
+            firstIdx = url.indexOf(':');
             if (firstIdx === -1) {
                 return null;
             }
-            firstIdx = firstIdx - 1;
+            firstIdx -= 1;
         }
 
-        const nextSlashIdx = url.indexOf("/", firstIdx + 2);
-        const startParamsIdx = url.indexOf("?", firstIdx + 2);
+        const nextSlashIdx = url.indexOf('/', firstIdx + 2);
+        const startParamsIdx = url.indexOf('?', firstIdx + 2);
 
         let lastIdx = nextSlashIdx;
         if (startParamsIdx > 0 && (startParamsIdx < nextSlashIdx || nextSlashIdx < 0)) {
@@ -58,7 +57,7 @@ module.exports = (function () {
 
         const host = lastIdx === -1 ? url.substring(firstIdx + 2) : url.substring(firstIdx + 2, lastIdx);
 
-        const portIndex = host.indexOf(":");
+        const portIndex = host.indexOf(':');
         return portIndex === -1 ? host : host.substring(0, portIndex);
     };
 
@@ -67,30 +66,31 @@ module.exports = (function () {
      */
     const whiteListDomainsHolder = {
         get domains() {
-            return cache.lazyGet(whiteListDomainsHolder, 'domains', function () {
+            return cache.lazyGet(whiteListDomainsHolder, 'domains', () => {
                 return getDomainsFromLocalStorage(WHITE_LIST_DOMAINS_LS_PROP);
             });
         },
-        add: function (domain) {
+        add(domain) {
             if (this.domains.indexOf(domain) < 0) {
                 this.domains.push(domain);
             }
-        }
+        },
     };
 
     const blockListDomainsHolder = {
         get domains() {
-            return cache.lazyGet(blockListDomainsHolder, 'domains', function () {
+            return cache.lazyGet(blockListDomainsHolder, 'domains', () => {
                 return getDomainsFromLocalStorage(BLOCK_LIST_DOMAINS_LS_PROP);
             });
         },
-        add: function (domain) {
+        add(domain) {
             if (this.domains.indexOf(domain) < 0) {
                 this.domains.push(domain);
             }
-        }
+        },
     };
 
+    /* eslint-disable-next-line no-unused-vars */
     function notifyWhiteListUpdated(options) {
         listeners.notifyListeners(events.UPDATE_WHITELIST_FILTER_RULES);
     }
@@ -108,10 +108,10 @@ module.exports = (function () {
 
         // https://github.com/AdguardTeam/AdGuardForSafari/issues/346
         if (domain.startsWith('localhost')) {
-            return "@@" + domain + "$document";
+            return `@@${domain}$document`;
         }
 
-        return "@@||" + domain + "$document";
+        return `@@||${domain}$document`;
     }
 
     /**
@@ -175,7 +175,7 @@ module.exports = (function () {
                 domains = JSON.parse(json);
             }
         } catch (ex) {
-            log.error("Error retrieve whitelist domains {0}, cause {1}", prop, ex);
+            log.error('Error retrieve whitelist domains {0}, cause {1}', prop, ex);
         }
         return domains;
     }
@@ -252,7 +252,7 @@ module.exports = (function () {
         if (!domains) {
             return;
         }
-        for (let i = 0; i < domains.length; i++) {
+        for (let i = 0; i < domains.length; i += 1) {
             const domain = domains[i];
             whiteListDomainsHolder.add(domain);
         }
@@ -267,7 +267,7 @@ module.exports = (function () {
         if (!domains) {
             return;
         }
-        for (let i = 0; i < domains.length; i++) {
+        for (let i = 0; i < domains.length; i += 1) {
             const domain = domains[i];
             blockListDomainsHolder.add(domain);
         }
@@ -312,9 +312,8 @@ module.exports = (function () {
     const getWhiteListDomains = function () {
         if (isDefaultWhiteListMode()) {
             return whiteListDomainsHolder.domains;
-        } else {
-            return blockListDomainsHolder.domains;
         }
+        return blockListDomainsHolder.domains;
     };
 
     /**
@@ -335,10 +334,10 @@ module.exports = (function () {
      * Returns the array of loaded rules
      */
     const getRules = function () {
-        //TODO: blockListFilter
+        // TODO: blockListFilter
         const result = [];
         getWhiteListedDomains().forEach((d) => {
-            let rule = createWhiteListRule(d);
+            const rule = createWhiteListRule(d);
             if (rule) {
                 result.push(rule);
             }
@@ -361,9 +360,8 @@ module.exports = (function () {
 
         if (isDefaultWhiteListMode()) {
             return getWhiteListedDomains().indexOf(host) >= 0;
-        } else {
-            return !getBlockListedDomains().indexOf(host) >= 0;
         }
+        return !getBlockListedDomains().indexOf(host) >= 0;
     };
 
     /**
@@ -371,7 +369,8 @@ module.exports = (function () {
      */
     const init = function () {
         /**
-         * Access to whitelist/blacklist domains before the proper initialization of localStorage leads to wrong caching of its values
+         * Access to whitelist/blacklist domains before the proper initialization of localStorage
+         * leads to wrong caching of its values
          * To prevent it we should clear cached values
          * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/933
          */
@@ -381,25 +380,23 @@ module.exports = (function () {
 
     return {
 
-        init: init,
-        getRules: getRules,
-        getWhiteListDomains: getWhiteListDomains,
+        init,
+        getRules,
+        getWhiteListDomains,
 
-        getWhiteListedDomains: getWhiteListedDomains,
-        getBlockListedDomains: getBlockListedDomains,
+        getWhiteListedDomains,
+        getBlockListedDomains,
 
-        whiteListUrl: whiteListUrl,
-        unWhiteListUrl: unWhiteListUrl,
+        whiteListUrl,
+        unWhiteListUrl,
 
-        isWhitelisted: isWhitelisted,
+        isWhitelisted,
 
-        updateWhiteListDomains: updateWhiteListDomains,
+        updateWhiteListDomains,
 
-        configure: configure,
+        configure,
 
         isDefaultMode: isDefaultWhiteListMode,
-        changeDefaultWhiteListMode: changeDefaultWhiteListMode
+        changeDefaultWhiteListMode,
     };
-
 })();
-

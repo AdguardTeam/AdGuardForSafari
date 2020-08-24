@@ -1,3 +1,4 @@
+const safariToolbar = require('safari-ext');
 const whitelist = require('./app/whitelist');
 const filters = require('./app/filters-manager');
 const antibanner = require('./app/antibanner');
@@ -5,14 +6,12 @@ const filterState = require('./app/filters/filters-state');
 const log = require('./app/utils/log');
 const contentBlockerListener = require('./app/content-blocker/content-blocker-listener');
 const notificationController = require('./notification-controller');
-const safariToolbar = require('safari-ext');
 const toolbarController = require('./toolbar-controller');
 
 /**
  * Application startup
  */
 module.exports = (() => {
-
     /**
      * Initialize application services
      */
@@ -34,19 +33,19 @@ module.exports = (() => {
         log.debug('Notifications controller initialization completed');
 
         antibanner.start({
-            onInstall: function () {
+            onInstall() {
                 log.debug('On application install..');
 
                 // Retrieve filters and install them
-                filters.offerGroupsAndFilters(function (groupIds) {
-                    groupIds.forEach(groupId => filters.enableFiltersGroup(groupId));
+                filters.offerGroupsAndFilters((groupIds) => {
+                    groupIds.forEach((groupId) => filters.enableFiltersGroup(groupId));
                 });
 
                 log.info('Application installed');
 
                 callback(true);
-            }
-        }, function () {
+            },
+        }, () => {
             log.info('Application initialization finished');
 
             safariToolbar.busyStatus(false);
@@ -66,7 +65,6 @@ module.exports = (() => {
     };
 
     return {
-        init
+        init,
     };
-
 })();

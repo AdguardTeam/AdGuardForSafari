@@ -7,7 +7,6 @@ const log = require('../utils/log');
  * Helper class for working with filters metadata storage (local storage)
  */
 module.exports = (() => {
-
     const GROUPS_STATE_PROP = 'groups-state';
     const FILTERS_STATE_PROP = 'filters-state';
     const FILTERS_VERSION_PROP = 'filters-version';
@@ -24,7 +23,7 @@ module.exports = (() => {
                 filters = JSON.parse(json);
             }
         } catch (ex) {
-            log.error("Error retrieve filters version info, cause {0}", ex);
+            log.error('Error retrieve filters version info, cause {0}', ex);
         }
 
         return filters;
@@ -42,7 +41,7 @@ module.exports = (() => {
                 filters = JSON.parse(json);
             }
         } catch (ex) {
-            log.error("Error retrieve filters state info, cause {0}", ex);
+            log.error('Error retrieve filters state info, cause {0}', ex);
         }
 
         return filters;
@@ -69,12 +68,12 @@ module.exports = (() => {
      *
      * @param filter Filter version metadata
      */
-    const updateFilterVersion = filter => {
+    const updateFilterVersion = (filter) => {
         const filters = getFiltersVersion();
         filters[filter.filterId] = {
             version: filter.version,
             lastCheckTime: filter.lastCheckTime,
-            lastUpdateTime: filter.lastUpdateTime
+            lastUpdateTime: filter.lastUpdateTime,
         };
 
         localStorage.setItem(FILTERS_VERSION_PROP, JSON.stringify(filters));
@@ -85,7 +84,7 @@ module.exports = (() => {
      *
      * @param filter Filter state object
      */
-    const updateFilterState = filter => {
+    const updateFilterState = (filter) => {
         const filters = getFiltersState();
         filters[filter.filterId] = {
             loaded: filter.loaded,
@@ -112,7 +111,7 @@ module.exports = (() => {
      * @param group - SubscriptionGroup object
      */
     const updateGroupState = function (group) {
-        let groups = getGroupState();
+        const groups = getGroupState();
         groups[group.groupId] = {
             enabled: group.enabled,
         };
@@ -149,7 +148,6 @@ module.exports = (() => {
         updateFilterVersion,
         updateFilterState,
         updateGroupState,
-        removeFilter
+        removeFilter,
     };
-
 })();

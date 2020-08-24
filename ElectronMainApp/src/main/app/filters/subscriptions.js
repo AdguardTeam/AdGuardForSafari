@@ -15,7 +15,6 @@ const localStorage = require('../storage/storage');
  * In future we'll add an opportunity to update metadata along with filter rules update.
  */
 module.exports = (function () {
-
     'use strict';
 
     /**
@@ -23,7 +22,7 @@ module.exports = (function () {
      *
      * @type {number}
      */
-    const CUSTOM_FILTERS_GROUP_ID = config.get('AntiBannerFilterGroupsId').CUSTOM_FILTERS_GROUP_ID;
+    const { CUSTOM_FILTERS_GROUP_ID } = config.get('AntiBannerFilterGroupsId');
 
     /**
      * Custom filters group display number
@@ -54,7 +53,7 @@ module.exports = (function () {
         let timeUpdated = Date.parse(timeUpdatedString);
         if (isNaN(timeUpdated)) {
             // https://github.com/AdguardTeam/AdguardBrowserExtension/issues/478
-            timeUpdated = Date.parse(timeUpdatedString.replace(/\+(\d{2})(\d{2})$/, "+$1:$2"));
+            timeUpdated = Date.parse(timeUpdatedString.replace(/\+(\d{2})(\d{2})$/, '+$1:$2'));
         }
         if (isNaN(timeUpdated)) {
             timeUpdated = new Date().getTime();
@@ -83,8 +82,18 @@ module.exports = (function () {
     /**
      * Filter metadata
      */
-    const SubscriptionFilter = function (filterId, groupId, name, description, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags) {
-
+    const SubscriptionFilter = function (filterId,
+        groupId,
+        name,
+        description,
+        homepage,
+        version,
+        timeUpdated,
+        displayNumber,
+        languages,
+        expires,
+        subscriptionUrl,
+        tags) {
         this.filterId = filterId;
         this.groupId = groupId;
         this.name = name;
@@ -105,9 +114,8 @@ module.exports = (function () {
      * @returns {FilterTag}
      */
     function createFilterTagFromJSON(tag) {
-
-        const tagId = tag.tagId - 0;
-        const keyword = tag.keyword;
+        const tagId = parseInt(tag.tagId, 10);
+        const { keyword } = tag;
 
         return new FilterTag(tagId, keyword);
     }
@@ -118,10 +126,9 @@ module.exports = (function () {
      * @returns {SubscriptionGroup}
      */
     function createSubscriptionGroupFromJSON(group) {
-
-        const groupId = group.groupId - 0;
+        const groupId = parseInt(group.groupId, 10);
         const defaultGroupName = group.groupName;
-        const displayNumber = group.displayNumber - 0;
+        const displayNumber = parseInt(group.displayNumber, 10);
 
         return new SubscriptionGroup(groupId, defaultGroupName, displayNumber);
     }
@@ -130,25 +137,36 @@ module.exports = (function () {
      * Create filter from object
      * @param filter Object
      */
-    const createSubscriptionFilterFromJSON = filter => {
-
-        const filterId = filter.filterId - 0;
-        const groupId = filter.groupId - 0;
+    const createSubscriptionFilterFromJSON = (filter) => {
+        const filterId = parseInt(filter.filterId, 10);
+        const groupId = parseInt(filter.groupId, 10);
         const defaultName = filter.name;
         const defaultDescription = filter.description;
-        const homepage = filter.homepage;
-        const version = filter.version;
+        const {
+            homepage, version, subscriptionUrl, languages,
+        } = filter;
         const timeUpdated = parseTimeUpdated(filter.timeUpdated);
-        const expires = filter.expires - 0;
-        const subscriptionUrl = filter.subscriptionUrl;
-        const languages = filter.languages;
-        const displayNumber = filter.displayNumber - 0;
-        const tags = filter.tags;
+        const expires = parseInt(filter.expires, 10);
+        const displayNumber = parseInt(filter.displayNumber, 10);
+        const { tags } = filter;
         if (tags.length === 0) {
             tags.push(0);
         }
 
-        return new SubscriptionFilter(filterId, groupId, defaultName, defaultDescription, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
+        return new SubscriptionFilter(
+            filterId,
+            groupId,
+            defaultName,
+            defaultDescription,
+            homepage,
+            version,
+            timeUpdated,
+            displayNumber,
+            languages,
+            expires,
+            subscriptionUrl,
+            tags
+        );
     };
 
     /**
@@ -157,16 +175,16 @@ module.exports = (function () {
      * @param rules
      * @returns object
      */
-    const parseFilterDataFromHeader = rules => {
+    const parseFilterDataFromHeader = (rules) => {
         function parseTag(tagName) {
             let result = '';
 
-            //Look up no more than 50 first lines
+            // Look up no more than 50 first lines
             const maxLines = Math.min(50, rules.length);
-            for (let i = 0; i < maxLines; i++) {
+            for (let i = 0; i < maxLines; i += 1) {
                 const r = rules[i];
 
-                const search = '! ' + tagName + ': ';
+                const search = `! ${tagName}: `;
                 const indexOf = r.indexOf(search);
                 if (indexOf >= 0) {
                     result = r.substring(indexOf + search.length);
@@ -182,13 +200,13 @@ module.exports = (function () {
             homepage: parseTag('Homepage'),
             version: parseTag('Version'),
             expires: parseTag('Expires'),
-            timeUpdated: parseTag('TimeUpdated')
+            timeUpdated: parseTag('TimeUpdated'),
         };
     };
 
     const addFilterId = () => {
         let max = 0;
-        filters.forEach(f => {
+        filters.forEach((f) => {
             if (f.filterId > max) {
                 max = f.filterId;
             }
@@ -200,7 +218,8 @@ module.exports = (function () {
     const getCustomFilterInfo = (url, options, callback) => {
         const { title } = options;
 
-        serviceClient.loadFilterRulesBySubscriptionUrl(url, function (rules) {
+        serviceClient.loadFilterRulesBySubscriptionUrl(url, (rules) => {
+            /* eslint-disable prefer-const */
             let {
                 name,
                 description,
@@ -218,16 +237,29 @@ module.exports = (function () {
             const languages = [];
             const displayNumber = 0;
             const tags = [0];
-            let rulesCount = rules.filter(rule => rule.trim().indexOf('!') !== 0).length;
+            const rulesCount = rules.filter((rule) => rule.trim().indexOf('!') !== 0).length;
 
-            const filter = new SubscriptionFilter(null, groupId, name, description, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
+            const filter = new SubscriptionFilter(
+                null,
+                groupId,
+                name,
+                description,
+                homepage,
+                version,
+                timeUpdated,
+                displayNumber,
+                languages,
+                expires,
+                subscriptionUrl,
+                tags
+            );
 
             filter.loaded = true;
             filter.customUrl = url;
             filter.rulesCount = rulesCount;
 
             callback({ filter });
-        }, function (cause) {
+        }, (cause) => {
             log.error(`Error download filter by url ${url}, cause: ${cause || ''}`);
             callback();
         });
@@ -243,30 +275,27 @@ module.exports = (function () {
     const updateCustomFilter = (url, options, callback) => {
         const { title, trusted } = options;
 
-        serviceClient.loadFilterRulesBySubscriptionUrl(url, function (rules) {
+        serviceClient.loadFilterRulesBySubscriptionUrl(url, (rules) => {
             const filterData = parseFilterDataFromHeader(rules);
 
             const filterId = addFilterId();
             const groupId = CUSTOM_FILTERS_GROUP_ID;
             const defaultName = title;
             const defaultDescription = filterData.description;
-            const homepage = filterData.homepage;
-            const version = filterData.version;
+            const { homepage, version, expires } = filterData;
             const timeUpdated = filterData.timeUpdated || new Date().toString();
-            const expires = filterData.expires;
             const subscriptionUrl = url;
             const languages = [];
             const displayNumber = 0;
             const tags = [0];
             const rulesCount = rules.length;
 
-            //Check if filter from this url was added before
-            let filter = loadCustomFilters().find(function (f) {
+            // Check if filter from this url was added before
+            let filter = loadCustomFilters().find((f) => {
                 return f.customUrl === url;
             });
 
             if (filter) {
-
                 if (version && !versionUtils.isGreaterVersion(version, filter.version)) {
                     log.warn('Update version is not greater');
                     listeners.notifyListeners(
@@ -280,11 +309,24 @@ module.exports = (function () {
                 restoreCustomFilter(filter, trusted);
                 listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
                 listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, rules);
-
             } else {
-                filter = new SubscriptionFilter(filterId, groupId, defaultName, defaultDescription, homepage, version, timeUpdated, displayNumber, languages, expires, subscriptionUrl, tags);
+                filter = new SubscriptionFilter(
+                    filterId,
+                    groupId,
+                    defaultName,
+                    defaultDescription,
+                    homepage,
+                    version,
+                    timeUpdated,
+                    displayNumber,
+                    languages,
+                    expires,
+                    subscriptionUrl,
+                    tags
+                );
                 filter.loaded = true;
-                //custom filters have special fields
+                filter.enabled = true;
+                // custom filters have special fields
                 filter.customUrl = url;
                 filter.rulesCount = rulesCount;
                 filter.trusted = trusted;
@@ -301,9 +343,8 @@ module.exports = (function () {
             listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, rules);
 
             callback(filter.filterId);
-
-        }, function (request, cause) {
-            log.error("Error download filter by url {0}, cause: {1} {2}", url, request.statusText, cause || "");
+        }, (request, cause) => {
+            log.error('Error download filter by url {0}, cause: {1} {2}', url, request.statusText, cause || '');
             callback();
         });
     };
@@ -316,7 +357,7 @@ module.exports = (function () {
      * @param filter
      */
     const saveCustomFilter = (filter) => {
-        let customFilters = loadCustomFilters();
+        const customFilters = loadCustomFilters();
         customFilters.push(filter);
 
         localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(customFilters));
@@ -329,8 +370,8 @@ module.exports = (function () {
      * @param trusted
      */
     const restoreCustomFilter = (filter, trusted) => {
-        let customFilters = loadCustomFilters();
-        customFilters.forEach(f => {
+        const customFilters = loadCustomFilters();
+        customFilters.forEach((f) => {
             if (f.filterId === filter.filterId) {
                 f.trusted = trusted;
                 f.title = filter.title;
@@ -347,11 +388,11 @@ module.exports = (function () {
      * @param filter
      */
     const removeCustomFilter = (filter) => {
-        let customFilters = loadCustomFilters();
-        const updatedFilters = customFilters.filter(f => f.filterId !== filter.filterId);
+        const customFilters = loadCustomFilters();
+        const updatedFilters = customFilters.filter((f) => f.filterId !== filter.filterId);
 
         localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(updatedFilters));
-        filters = filters.filter(f => f.filterId !== filter.filterId);
+        filters = filters.filter((f) => f.filterId !== filter.filterId);
     };
 
     /**
@@ -360,7 +401,7 @@ module.exports = (function () {
      * @returns {Array}
      */
     const loadCustomFilters = () => {
-        let customFilters = localStorage.getItem(CUSTOM_FILTERS_JSON_KEY);
+        const customFilters = localStorage.getItem(CUSTOM_FILTERS_JSON_KEY);
         return customFilters ? JSON.parse(customFilters) : [];
     };
 
@@ -372,42 +413,43 @@ module.exports = (function () {
      * @private
      */
     function loadMetadata(successCallback, errorCallback) {
-
         log.info('Loading filters metadata..');
 
-        serviceClient.loadLocalFiltersMetadata(metadata => {
-
+        serviceClient.loadLocalFiltersMetadata((metadata) => {
             tags = [];
             groups = [];
             groupsMap = {};
             filters = [];
             filtersMap = {};
 
-            for (let i = 0; i < metadata.tags.length; i++) {
+            for (let i = 0; i < metadata.tags.length; i += 1) {
                 tags.push(createFilterTagFromJSON(metadata.tags[i]));
             }
 
-            for (let j = 0; j < metadata.filters.length; j++) {
+            for (let j = 0; j < metadata.filters.length; j += 1) {
                 const filter = createSubscriptionFilterFromJSON(metadata.filters[j]);
                 filters.push(filter);
                 filtersMap[filter.filterId] = filter;
             }
 
-            for (let k = 0; k < metadata.groups.length; k++) {
+            for (let k = 0; k < metadata.groups.length; k += 1) {
                 const group = createSubscriptionGroupFromJSON(metadata.groups[k]);
                 groups.push(group);
                 groupsMap[group.groupId] = group;
             }
 
             const localizedCustomGroupName = i18.__('filters_group_custom.message');
-            const customFiltersGroup
-                = new SubscriptionGroup(CUSTOM_FILTERS_GROUP_ID, localizedCustomGroupName, CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER);
+            const customFiltersGroup = new SubscriptionGroup(
+                CUSTOM_FILTERS_GROUP_ID,
+                localizedCustomGroupName,
+                CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER
+            );
             groups.push(customFiltersGroup);
             groupsMap[customFiltersGroup.groupId] = customFiltersGroup;
 
             // Load custom filters
             const customFilters = loadCustomFilters();
-            customFilters.forEach(f => {
+            customFilters.forEach((f) => {
                 const filter = createSubscriptionFilterFromJSON(f);
                 filter.customUrl = f.customUrl;
                 filter.rulesCount = f.rulesCount;
@@ -422,7 +464,6 @@ module.exports = (function () {
 
             log.info('Filters metadata loaded');
             successCallback();
-
         }, errorCallback);
     }
 
@@ -432,30 +473,28 @@ module.exports = (function () {
      * @param errorCallback
      */
     function loadMetadataI18n(successCallback, errorCallback) {
-
         log.info('Loading filters i18n metadata..');
 
-        serviceClient.loadLocalFiltersI18Metadata(i18nMetadata => {
-
+        serviceClient.loadLocalFiltersI18Metadata((i18nMetadata) => {
             log.info('Filters i18n metadata read');
 
             const tagsI18n = i18nMetadata.tags;
             const filtersI18n = i18nMetadata.filters;
             const groupsI18n = i18nMetadata.groups;
 
-            for (let i = 0; i < tags.length; i++) {
+            for (let i = 0; i < tags.length; i += 1) {
                 applyFilterTagLocalization(tags[i], tagsI18n);
             }
 
             log.debug('Filters i18n metadata - tags');
 
-            for (let j = 0; j < filters.length; j++) {
+            for (let j = 0; j < filters.length; j += 1) {
                 applyFilterLocalization(filters[j], filtersI18n);
             }
 
             log.debug('Filters i18n metadata - filters');
 
-            for (let k = 0; k < groups.length; k++) {
+            for (let k = 0; k < groups.length; k += 1) {
                 applyGroupLocalization(groups[k], groupsI18n);
             }
 
@@ -463,7 +502,6 @@ module.exports = (function () {
 
             log.info('Filters i18n metadata loaded');
             successCallback();
-
         }, errorCallback);
     }
 
@@ -474,7 +512,7 @@ module.exports = (function () {
      * @private
      */
     function applyFilterTagLocalization(tag, i18nMetadata) {
-        const tagId = tag.tagId;
+        const { tagId } = tag;
         const localizations = i18nMetadata[tagId];
         if (localizations) {
             const locale = i18n.normalize(localizations, app.getLocale());
@@ -493,7 +531,7 @@ module.exports = (function () {
      * @private
      */
     function applyGroupLocalization(group, i18nMetadata) {
-        const groupId = group.groupId;
+        const { groupId } = group;
         const localizations = i18nMetadata[groupId];
         if (localizations) {
             const locale = i18n.normalize(localizations, app.getLocale());
@@ -511,7 +549,7 @@ module.exports = (function () {
      * @private
      */
     function applyFilterLocalization(filter, i18nMetadata) {
-        const filterId = filter.filterId;
+        const { filterId } = filter;
         const localizations = i18nMetadata[filterId];
         if (localizations) {
             const locale = i18n.normalize(localizations, app.getLocale());
@@ -528,8 +566,7 @@ module.exports = (function () {
      *
      * @param callback Called on operation success
      */
-    const init = callback => {
-
+    const init = (callback) => {
         const errorCallback = (request, cause) => {
             log.error('Error loading metadata, cause: {0} {1}', request.statusText, cause);
         };
@@ -547,7 +584,7 @@ module.exports = (function () {
     /**
      * Gets filter metadata by filter identifier
      */
-    const getFilter = filterId => filtersMap[filterId];
+    const getFilter = (filterId) => filtersMap[filterId];
 
     /**
      * Removes filter metadata by id
@@ -556,7 +593,7 @@ module.exports = (function () {
     const removeFilter = (filterId) => {
         filters = filters.filter((f) => f.filterId !== filterId);
         delete filtersMap[filterId];
-    }
+    };
 
     /**
      * @returns Array of Tags metadata
@@ -590,15 +627,15 @@ module.exports = (function () {
      * @param locale Locale to check
      * @returns {Array} List of filters identifiers
      */
-    const getFilterIdsForLanguage = locale => {
+    const getFilterIdsForLanguage = (locale) => {
         if (!locale) {
             return [];
         }
 
         const filterIds = [];
-        for (let i = 0; i < filters.length; i++) {
+        for (let i = 0; i < filters.length; i += 1) {
             const filter = filters[i];
-            const languages = filter.languages;
+            const { languages } = filter;
             if (languages && languages.length > 0) {
                 const detectedLocale = i18n.normalize(languages, locale);
                 if (detectedLocale) {
@@ -624,25 +661,21 @@ module.exports = (function () {
         return !!(filter && filter.trusted && filter.trusted === true);
     };
 
-
-
     return {
-        init: init,
-        getFilterIdsForLanguage: getFilterIdsForLanguage,
-        getTags: getTags,
-        getGroups: getGroups,
-        getGroup: getGroup,
-        groupHasEnabledStatus: groupHasEnabledStatus,
-        getFilters: getFilters,
-        getFilter: getFilter,
-        createSubscriptionFilterFromJSON: createSubscriptionFilterFromJSON,
-        updateCustomFilter: updateCustomFilter,
-        getCustomFilterInfo: getCustomFilterInfo,
-        removeCustomFilter: removeCustomFilter,
-        isTrustedFilter: isTrustedFilter,
-        removeFilter: removeFilter,
-        loadCustomFilters: loadCustomFilters,
+        init,
+        getFilterIdsForLanguage,
+        getTags,
+        getGroups,
+        getGroup,
+        groupHasEnabledStatus,
+        getFilters,
+        getFilter,
+        createSubscriptionFilterFromJSON,
+        updateCustomFilter,
+        getCustomFilterInfo,
+        removeCustomFilter,
+        isTrustedFilter,
+        removeFilter,
+        loadCustomFilters,
     };
-
 })();
-

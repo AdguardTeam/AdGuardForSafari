@@ -13,7 +13,13 @@
         "upload-locales": "gulp upload-locales",
         "download-locales": "gulp download-locales",
         "rebuild-locales": "gulp rebuild-locales",
-        "electron-rebuild": "electron-rebuild"
+        "electron-rebuild": "electron-rebuild",
+        "lint": "eslint ./src/main"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "yarn lint"
+        }
     },
     "dependencies": {
         "adm-zip": "^0.4.13",
@@ -36,9 +42,13 @@
         "electron": "^8.3.3",
         "electron-osx-sign": "github:electron-userland/electron-osx-sign",
         "electron-rebuild": "^1.8.5",
+        "eslint": "^7.6.0",
+        "eslint-config-airbnb-base": "^14.2.0",
+        "eslint-plugin-import": "^2.22.0",
         "find-in-files": "^0.5.0",
         "gulp": "^4.0.0",
         "gulp-hash-creator": "^0.2.0",
+        "husky": "^4.2.5",
         "request": "^2.88.0",
         "require-dir": "^1.0.0"
     }
