@@ -1825,7 +1825,7 @@ PageController.prototype = {
         });
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
-            type: 'checkUpdates'
+            type: 'checkUpdates',
         }));
 
         window.addEventListener('hashchange', () => {
