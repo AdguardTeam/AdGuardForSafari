@@ -1,12 +1,11 @@
-const log = require('./utils/log');
 const config = require('config');
+const log = require('./utils/log');
 const subscriptions = require('./filters/subscriptions');
 const listeners = require('../notifier');
 const events = require('../events');
 const filters = require('./filters-manager');
 const settings = require('./settings-manager');
 const collections = require('./utils/collections');
-const concurrent = require('./utils/concurrent');
 const updateService = require('./update-service');
 const filtersUpdate = require('./filters/filters-update');
 const filterRules = require('./filters/filter-rules');
@@ -15,8 +14,7 @@ const filterRules = require('./filters/filter-rules');
  * Antibanner service
  */
 module.exports = (() => {
-
-    const USER_FILTER_ID = config.get('AntiBannerFiltersId').USER_FILTER_ID;
+    const { USER_FILTER_ID } = config.get('AntiBannerFiltersId');
 
     let applicationInitialized = false;
     let applicationRunning = false;
@@ -29,7 +27,7 @@ module.exports = (() => {
     const contentBlockerInfo = {
         rulesCount: 0,
         rulesOverLimit: false,
-        advancedBlockingRulesCount: 0
+        advancedBlockingRulesCount: 0,
     };
 
     /**
@@ -38,7 +36,6 @@ module.exports = (() => {
     const APP_UPDATED_NOTIFICATION_DELAY = 10000;
 
     const FILTERS_CHANGE_DEBOUNCE_PERIOD = 1000;
-
 
     /**
      * List of events which cause RequestFilter re-creation
@@ -64,7 +61,6 @@ module.exports = (() => {
         return SAVE_FILTER_RULES_TO_STORAGE_EVENTS.indexOf(el.event) >= 0;
     };
 
-
     /**
      * Triggers groups load
      */
@@ -83,7 +79,7 @@ module.exports = (() => {
      * Subscribe to events which lead to filters update.
      */
     const subscribeToFiltersChangeEvents = () => {
-        settings.onUpdated.addListener(function (setting) {
+        settings.onUpdated.addListener((setting) => {
             if (setting === settings.UPDATE_FILTERS_PERIOD) {
                 filtersUpdate.rerunAutoUpdateTimer();
             }
@@ -102,8 +98,8 @@ module.exports = (() => {
         log.info('Starting request filter initialization.');
 
         // Empty request filter
-        let newRequestFilter = {
-            rules: []
+        const newRequestFilter = {
+            rules: [],
         };
 
         if (requestFilterInitTime === 0) {
@@ -117,18 +113,21 @@ module.exports = (() => {
          * This is the last step of request filter initialization.
          */
         const requestFilterInitialized = function () {
-
             // Request filter is ready
             requestFilter = newRequestFilter;
 
-            if (callback && typeof callback === "function") {
+            if (callback && typeof callback === 'function') {
                 callback();
             }
 
             listeners.notifyListeners(events.REQUEST_FILTER_UPDATED);
-            let rulesCount = newRequestFilter.rules ? newRequestFilter.rules.length : 0;
+            const rulesCount = newRequestFilter.rules ? newRequestFilter.rules.length : 0;
             log.debug('Rules count {0}', rulesCount);
-            log.info("Finished request filter initialization in {0} ms. Rules count: {1}", (new Date().getTime() - start), rulesCount);
+            log.info(
+                'Finished request filter initialization in {0} ms. Rules count: {1}',
+                (new Date().getTime() - start),
+                rulesCount
+            );
         };
 
         /**
@@ -140,19 +139,19 @@ module.exports = (() => {
          */
         const addRules = function (filterId, rulesTexts, isTrustedFilter = true) {
             if (!rulesTexts || !collections.isArray(rulesTexts)) {
-                log.debug('Something wrong with rules:' + rulesTexts);
+                log.debug(`Something wrong with rules:${rulesTexts}`);
                 return;
             }
 
             log.debug('Adding rules for filter {0}, rules count: {1}', filterId, rulesTexts.length);
 
-            for (let i = 0; i < rulesTexts.length; i++) {
+            for (let i = 0; i < rulesTexts.length; i += 1) {
                 const ruleText = rulesTexts[i];
-                if (ruleText &&
-                    (isTrustedFilter || filterRules.isTrustedRule(ruleText))) {
+                if (ruleText
+                    && (isTrustedFilter || filterRules.isTrustedRule(ruleText))) {
                     newRequestFilter.rules.push({
                         filterId,
-                        ruleText
+                        ruleText,
                     });
                 }
             }
@@ -162,16 +161,13 @@ module.exports = (() => {
          * Synchronously fills request filter with rules
          */
         const fillRequestFilterSync = function () {
-
             // Go through all filters in the map
-            for (let filterId in rulesFilterMap) { // jshint ignore:line
-
-                // To number
-                filterId = filterId - 0;
+            for (const filterId in rulesFilterMap) {
+                const filterIdNum = parseInt(filterId, 10);
                 if (filterId !== USER_FILTER_ID) {
-                    const rulesTexts = rulesFilterMap[filterId];
-                    const isTrustedFilter = subscriptions.isTrustedFilter(filterId);
-                    addRules(filterId, rulesTexts, isTrustedFilter);
+                    const rulesTexts = rulesFilterMap[filterIdNum];
+                    const isTrustedFilter = subscriptions.isTrustedFilter(filterIdNum);
+                    addRules(filterIdNum, rulesTexts, isTrustedFilter);
                 }
             }
 
@@ -192,7 +188,6 @@ module.exports = (() => {
      * @private
      */
     const createRequestFilter = (callback) => {
-
         const start = new Date().getTime();
         log.info('Starting loading filter rules from the storage');
 
@@ -215,7 +210,7 @@ module.exports = (() => {
         const loadFilterRules = function () {
             const dfds = [];
             const filters = subscriptions.getFilters();
-            for (let i = 0; i < filters.length; i++) {
+            for (let i = 0; i < filters.length; i += 1) {
                 const filter = filters[i];
                 const group = subscriptions.getGroup(filter.groupId);
                 if (filter.enabled && group.enabled) {
@@ -252,7 +247,7 @@ module.exports = (() => {
             filterEventsHistory = [];
             onFilterChangeTimeout = null;
 
-            var needCreateRequestFilter = filterEvents.some(isUpdateRequestFilterEvent);
+            const needCreateRequestFilter = filterEvents.some(isUpdateRequestFilterEvent);
 
             // Split by filterId
             const eventsByFilter = Object.create(null);
@@ -269,7 +264,7 @@ module.exports = (() => {
             }
 
             const dfds = [];
-            for (let filterId in eventsByFilter) { // jshint ignore:line
+            for (const filterId in eventsByFilter) {
                 const needSaveRulesToStorage = eventsByFilter[filterId].some(isSaveRulesToStorageEvent);
                 if (!needSaveRulesToStorage) {
                     continue;
@@ -279,7 +274,8 @@ module.exports = (() => {
             }
 
             if (needCreateRequestFilter) {
-                // Rules will be added to request filter lazy, listeners will be notified about REQUEST_FILTER_UPDATED later
+                // Rules will be added to request filter lazy,
+                // listeners will be notified about REQUEST_FILTER_UPDATED later
                 Promise.all(dfds).then(createRequestFilter);
             } else {
                 // Rules are already in request filter, notify listeners
@@ -288,7 +284,7 @@ module.exports = (() => {
         };
 
         const processFilterEvent = function (event, filter, rules) {
-            filterEventsHistory.push({ event: event, filter: filter, rules: rules });
+            filterEventsHistory.push({ event, filter, rules });
 
             if (onFilterChangeTimeout !== null) {
                 clearTimeout(onFilterChangeTimeout);
@@ -298,7 +294,7 @@ module.exports = (() => {
         };
 
         const processGroupEvent = function (event, group) {
-            filterEventsHistory.push({ event: event, group: group });
+            filterEventsHistory.push({ event, group });
 
             if (onFilterChangeTimeout !== null) {
                 clearTimeout(onFilterChangeTimeout);
@@ -307,7 +303,7 @@ module.exports = (() => {
             onFilterChangeTimeout = setTimeout(processEventsHistory, FILTERS_CHANGE_DEBOUNCE_PERIOD);
         };
 
-        listeners.addListener(function (event, filter, rules) {
+        listeners.addListener((event, filter, rules) => {
             switch (event) {
                 case events.ADD_RULES:
                 case events.REMOVE_RULE:
@@ -320,7 +316,7 @@ module.exports = (() => {
             }
         });
 
-        listeners.addListener(function (event, group) {
+        listeners.addListener((event, group) => {
             switch (event) {
                 case events.FILTER_GROUP_ENABLE_DISABLE:
                     processGroupEvent(event, group);
@@ -338,13 +334,12 @@ module.exports = (() => {
      * @param callback
      */
     const initialize = (options, callback) => {
-
         /**
          * Waits and notifies listener with application updated event
          *
          * @param runInfo
          */
-        const notifyApplicationUpdated = runInfo => {
+        const notifyApplicationUpdated = (runInfo) => {
             setTimeout(() => {
                 listeners.notifyListeners(events.APPLICATION_UPDATED, runInfo);
             }, APP_UPDATED_NOTIFICATION_DELAY);
@@ -372,8 +367,7 @@ module.exports = (() => {
         /**
          * Callback for subscriptions loaded event
          */
-        const onSubscriptionLoaded = runInfo => {
-
+        const onSubscriptionLoaded = (runInfo) => {
             // Subscribe to events which lead to update filters (e.g. switch to optimized and back to default)
             subscribeToFiltersChangeEvents();
 
@@ -404,7 +398,7 @@ module.exports = (() => {
         /**
          * Init extension common info.
          */
-        updateService.getRunInfo(runInfo => {
+        updateService.getRunInfo((runInfo) => {
             log.info('Load subscription metadata from the storage');
             subscriptions.init(onSubscriptionLoaded.bind(null, runInfo));
         });
@@ -448,9 +442,9 @@ module.exports = (() => {
     const stop = () => {
         applicationRunning = false;
 
-        //Set empty request filter
+        // Set empty request filter
         requestFilter = {
-            rules: []
+            rules: [],
         };
 
         listeners.notifyListeners(events.REQUEST_FILTER_UPDATED);
@@ -467,7 +461,7 @@ module.exports = (() => {
      * We save state of content blocker for properly show in options page (converted rules count and over limit flag)
      * @param info Content blocker info
      */
-    const updateContentBlockerInfo = info => {
+    const updateContentBlockerInfo = (info) => {
         contentBlockerInfo.rulesCount = info.rulesCount;
         contentBlockerInfo.rulesOverLimit = info.rulesOverLimit;
         contentBlockerInfo.advancedBlockingRulesCount = info.advancedBlockingRulesCount;
@@ -479,11 +473,11 @@ module.exports = (() => {
     const getContentBlockerInfo = () => contentBlockerInfo;
 
     return {
-        start: start,
-        stop: stop,
-        isRunning: isRunning,
-        getRules: getRules,
-        updateContentBlockerInfo: updateContentBlockerInfo,
-        getContentBlockerInfo: getContentBlockerInfo
-    }
+        start,
+        stop,
+        isRunning,
+        getRules,
+        updateContentBlockerInfo,
+        getContentBlockerInfo,
+    };
 })();

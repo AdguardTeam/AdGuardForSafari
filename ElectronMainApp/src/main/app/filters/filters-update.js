@@ -10,7 +10,6 @@ const log = require('../utils/log');
  * Filters update service
  */
 module.exports = (() => {
-
     'use strict';
 
     /**
@@ -54,7 +53,7 @@ module.exports = (() => {
                 try {
                     checkAntiBannerFiltersUpdate();
                 } catch (ex) {
-                    log.error("Error update filters, cause {0}", ex);
+                    log.error('Error update filters, cause {0}', ex);
                 }
                 scheduleUpdate();
             }, updateFiltersPeriodInMs);
@@ -74,18 +73,18 @@ module.exports = (() => {
         const onSuccess = (updatedFilters) => {
             listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
                 success: true,
-                updatedFilters: updatedFilters,
-                forceUpdate: forceUpdate
+                updatedFilters,
+                forceUpdate,
             });
         };
         const onError = () => {
             listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
                 success: false,
-                forceUpdate: forceUpdate
+                forceUpdate,
             });
         };
 
-        log.info("Start checking filters updates..");
+        log.info('Start checking filters updates..');
 
         // Select filters for update
         const toUpdate = selectFilterIdsToUpdate(forceUpdate, filters);
@@ -98,21 +97,21 @@ module.exports = (() => {
             return;
         }
 
-        log.info("Checking updates for {0} filters", totalToUpdate);
+        log.info('Checking updates for {0} filters', totalToUpdate);
 
         // Load filters with changed version
-        const loadFiltersFromBackendCallback = filterMetadataList => {
+        const loadFiltersFromBackendCallback = (filterMetadataList) => {
             loadFiltersFromBackend(filterMetadataList, (success, filterIds) => {
                 if (success) {
                     const filters = [];
-                    for (let i = 0; i < filterIds.length; i++) {
+                    for (let i = 0; i < filterIds.length; i += 1) {
                         const filter = subscriptions.getFilter(filterIds[i]);
                         if (filter) {
                             filters.push(filter);
                         }
                     }
 
-                    updateCustomFilters(customFilterIdsToUpdate, function (customFilters) {
+                    updateCustomFilters(customFilterIdsToUpdate, (customFilters) => {
                         onSuccess(filters.concat(customFilters));
 
                         log.info('Filters updated successfully');
@@ -128,11 +127,12 @@ module.exports = (() => {
         const onLoadFilterMetadataList = (success, filterMetadataList) => {
             if (success) {
                 const filterMetadataListToUpdate = [];
-                for (let i = 0; i < filterMetadataList.length; i++) {
+                for (let i = 0; i < filterMetadataList.length; i += 1) {
                     const filterMetadata = subscriptions.createSubscriptionFilterFromJSON(filterMetadataList[i]);
                     const filter = subscriptions.getFilter(filterMetadata.filterId);
-                    if (filter && filterMetadata.version && versionUtils.isGreaterVersion(filterMetadata.version, filter.version)) {
-                        log.info("Updating filter {0} to version {1}", filter.filterId, filterMetadata.version);
+                    if (filter && filterMetadata.version
+                        && versionUtils.isGreaterVersion(filterMetadata.version, filter.version)) {
+                        log.info('Updating filter {0} to version {1}', filter.filterId, filterMetadata.version);
                         filterMetadataListToUpdate.push(filterMetadata);
                     }
                 }
@@ -155,19 +155,27 @@ module.exports = (() => {
      * @private
      */
     const loadFiltersMetadataFromBackend = (filterIds, callback) => {
-
         if (filterIds.length === 0) {
             callback(true, []);
             return;
         }
 
         const loadSuccess = function (filterMetadataList) {
-            log.debug("Retrieved response from server for {0} filters, result: {1} metadata", filterIds.length, filterMetadataList.length);
+            log.debug(
+                'Retrieved response from server for {0} filters, result: {1} metadata',
+                filterIds.length,
+                filterMetadataList.length
+            );
             callback(true, filterMetadataList);
         };
 
         const loadError = function (request, cause) {
-            log.error("Error retrieved response from server for filters {0}, cause: {1} {2}", filterIds, request.statusText, cause || "");
+            log.error(
+                'Error retrieved response from server for filters {0}, cause: {1} {2}',
+                filterIds,
+                request.statusText,
+                cause || ''
+            );
             callback(false);
         };
 
@@ -182,13 +190,12 @@ module.exports = (() => {
      * @private
      */
     const loadFiltersFromBackend = (filterMetadataList, callback) => {
-
         const dfds = [];
         const loadedFilters = [];
 
-        filterMetadataList.forEach(function (filterMetadata) {
+        filterMetadataList.forEach((filterMetadata) => {
             const dfd = new Promise((resolve, reject) => {
-                loadFilterRules(filterMetadata, true, function (success) {
+                loadFilterRules(filterMetadata, true, (success) => {
                     if (!success) {
                         reject();
                         return;
@@ -202,9 +209,9 @@ module.exports = (() => {
             dfds.push(dfd);
         });
 
-        Promise.all(dfds).then(function () {
+        Promise.all(dfds).then(() => {
             callback(true, loadedFilters);
-        }, function () {
+        }, () => {
             callback(false);
         });
     };
@@ -213,32 +220,36 @@ module.exports = (() => {
      * Loads filter rules
      *
      * @param filterMetadata Filter metadata
-     * @param forceRemote Force download filter rules from remote server (if false try to download local copy of rules if it's possible)
+     * @param forceRemote Force download filter rules from remote server
+     * (if false try to download local copy of rules if it's possible)
      * @param callback Called when filter rules have been loaded
      * @private
      */
     const loadFilterRules = (filterMetadata, forceRemote, callback) => {
-
         const filter = subscriptions.getFilter(filterMetadata.filterId);
 
         filter._isDownloading = true;
         listeners.notifyListeners(events.START_DOWNLOAD_FILTER, filter);
 
         const successCallback = function (filterRules) {
-            log.info("Retrieved response from server for filter {0}, rules count: {1}", filter.filterId, filterRules.length);
+            log.info(
+                'Retrieved response from server for filter {0}, rules count: {1}',
+                filter.filterId,
+                filterRules.length
+            );
             delete filter._isDownloading;
             filter.version = filterMetadata.version;
             filter.lastUpdateTime = filterMetadata.timeUpdated;
             filter.lastCheckTime = Date.now();
             filter.loaded = true;
-            //notify listeners
+            // notify listeners
             listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
             listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, filterRules);
             callback(true);
         };
 
         const errorCallback = function (cause) {
-            log.error("Error retrieved response from server for filter {0}, cause: {1}", filter.filterId, cause || "");
+            log.error('Error retrieved response from server for filter {0}, cause: {1}', filter.filterId, cause || '');
             delete filter._isDownloading;
             listeners.notifyListeners(events.ERROR_DOWNLOAD_FILTER, filter);
             callback(false);
@@ -267,10 +278,13 @@ module.exports = (() => {
         const filters = filtersToUpdate || subscriptions.getFilters();
         const updateFiltersPeriodInMs = settings.getUpdateFiltersPeriod() * 60 * 60 * 1000;
 
-        for (let filter of filters) {
+        for (const filter of filters) {
             if (filter.installed && filter.enabled) {
                 // Check filters update period (or forceUpdate flag)
-                const needUpdate = forceUpdate || (!filter.lastCheckTime || (Date.now() - filter.lastCheckTime) >= updateFiltersPeriodInMs);
+                const needUpdate = forceUpdate
+                    || (!filter.lastCheckTime
+                    || (Date.now() - filter.lastCheckTime) >= updateFiltersPeriodInMs);
+
                 if (needUpdate) {
                     if (filter.customUrl) {
                         customFilterIds.push(filter.filterId);
@@ -301,24 +315,28 @@ module.exports = (() => {
 
         const dfds = [];
         const filters = [];
-        for (let i = 0; i < customFilterIds.length; i++) {
+        for (let i = 0; i < customFilterIds.length; i += 1) {
             const filter = subscriptions.getFilter(customFilterIds[i]);
 
             dfds.push((function (filter, filters) {
                 return new Promise((resolve) => {
-                    subscriptions.updateCustomFilter(filter.customUrl, { title: filter.name, trusted: filter.trusted }, function (filterId) {
-                        if (filterId) {
-                            filters.push(filter);
-                        }
+                    subscriptions.updateCustomFilter(
+                        filter.customUrl,
+                        { title: filter.name, trusted: filter.trusted },
+                        (filterId) => {
+                            if (filterId) {
+                                filters.push(filter);
+                            }
 
-                        resolve();
-                    });
+                            resolve();
+                        }
+                    );
                 });
             })(filter, filters));
         }
 
-        Promise.all(dfds).then(function () {
-            log.info("Custom filters updated");
+        Promise.all(dfds).then(() => {
+            log.info('Custom filters updated');
             callback(filters);
         });
     };
@@ -355,10 +373,10 @@ module.exports = (() => {
      * Resets all filters versions
      */
     const resetFiltersVersion = () => {
-        const RESET_VERSION = "0.0.0.0";
+        const RESET_VERSION = '0.0.0.0';
 
         const filters = subscriptions.getFilters();
-        for (let filter of filters) {
+        for (const filter of filters) {
             log.debug('Reset version for filter {0}', filter.filterId);
             filter.version = RESET_VERSION;
         }
@@ -375,11 +393,11 @@ module.exports = (() => {
         // Delay filters update
         setTimeout(() => {
             resetFiltersVersion();
-            checkAntiBannerFiltersUpdate(true)
+            checkAntiBannerFiltersUpdate(true);
         }, RELOAD_FILTERS_DELAY);
     };
 
-    listeners.addListener(function (event, filter) {
+    listeners.addListener((event, filter) => {
         switch (event) {
             case events.FILTER_ENABLE_DISABLE:
                 checkFilterUpdate(filter);
@@ -397,4 +415,3 @@ module.exports = (() => {
         reloadAntiBannerFilters,
     };
 })();
-

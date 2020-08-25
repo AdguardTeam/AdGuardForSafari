@@ -8,7 +8,6 @@ const filtersManager = require('./app/filters-manager');
  * Api
  */
 module.exports = (() => {
-
     /**
      * Returns toolbar data for url
      *
@@ -25,11 +24,11 @@ module.exports = (() => {
         }
 
         return {
-            applicationFilteringDisabled: applicationFilteringDisabled,
-            urlFilteringDisabled: urlFilteringDisabled,
+            applicationFilteringDisabled,
+            urlFilteringDisabled,
 
-            isWhitelisted: isWhitelisted
-        }
+            isWhitelisted,
+        };
     };
 
     /**
@@ -133,7 +132,7 @@ module.exports = (() => {
     const getEnabledFilterIds = () => {
         const filters = filtersManager.getFilters();
         const enabledFilters = [];
-        for (let i = 0; i < filters.length; i++) {
+        for (let i = 0; i < filters.length; i += 1) {
             const filter = filters[i];
             if (filter.enabled) {
                 if (filtersManager.isGroupEnabled(filter.groupId)) {
@@ -156,7 +155,6 @@ module.exports = (() => {
         getWhitelist,
         setUserFilterRules,
         getUserFilterRules,
-        getEnabledFilterIds
+        getEnabledFilterIds,
     };
-
 })();

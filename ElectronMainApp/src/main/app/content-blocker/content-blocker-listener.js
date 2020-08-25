@@ -9,7 +9,6 @@ const antibanner = require('../antibanner');
  * @type {{init}}
  */
 module.exports = (() => {
-
     'use strict';
 
     /**
@@ -17,17 +16,15 @@ module.exports = (() => {
      */
     const init = () => {
         // Subscribe to events which lead to content blocker update
-        listeners.addListener(event => {
-
-            if (event === events.REQUEST_FILTER_UPDATED ||
-                event === events.UPDATE_WHITELIST_FILTER_RULES) {
-
+        listeners.addListener((event) => {
+            if (event === events.REQUEST_FILTER_UPDATED
+                || event === events.UPDATE_WHITELIST_FILTER_RULES) {
                 contentBlockerAdapter.updateContentBlocker();
             }
         });
 
         // When content blocker is updated we need to save finally converted rules count and over limit flag
-        listeners.addListener(function (event, info) {
+        listeners.addListener((event, info) => {
             if (event === events.CONTENT_BLOCKER_UPDATED) {
                 antibanner.updateContentBlockerInfo(info);
             }
@@ -35,7 +32,6 @@ module.exports = (() => {
     };
 
     return {
-        init: init
-    }
-
+        init,
+    };
 })();

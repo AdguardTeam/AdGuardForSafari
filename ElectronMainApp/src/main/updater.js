@@ -9,7 +9,6 @@ const events = require('./events');
  * Updater
  */
 module.exports = (() => {
-
     /**
      * Initialize
      */
@@ -19,8 +18,8 @@ module.exports = (() => {
         }
 
         updater.init({
-            channel: packageJson["standalone-beta"] === 'true' ? 'beta' : 'prod',
-            url: config.get('updatesUrl')
+            channel: packageJson['standalone-beta'] === 'true' ? 'beta' : 'prod',
+            url: config.get('updatesUrl'),
         });
 
         updater.on('checking-for-update', () => {
@@ -63,7 +62,7 @@ module.exports = (() => {
      * @return {boolean}
      */
     const isUpdatePermitted = () => {
-        return packageJson["standalone-build"] === 'true';
+        return packageJson['standalone-build'] === 'true';
     };
 
     return {
@@ -71,8 +70,5 @@ module.exports = (() => {
         checkForUpdates,
         isUpdatePermitted,
         quitAndInstall,
-    }
+    };
 })();
-
-
-

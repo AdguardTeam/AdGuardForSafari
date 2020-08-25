@@ -1,6 +1,6 @@
 /**
  * AdGuard -> Safari Content Blocker converter
- * Version 4.2.5
+ * Version 4.3.0
  * License: https://github.com/AdguardTeam/SafariContentBlockerConverterCompiler/blob/master/LICENSE
  */
 
@@ -11,6 +11,7 @@
  * @param {*} limit Max number of rules
  * @param {*} optimize True if we should apply additional optimization
  * @param {*} advancedBlocking True if we need advanced blocking json
+ * @param {*} chunkSize (optional) async load rules by chunks of size
  */
 var jsonFromFilters = (function () {
 
@@ -1020,6 +1021,7 @@ var jsonFromFilters = (function () {
             'to',
             'mobi',
             'gov.cn',
+            'sh'
         ];
 
         api.TOP_LEVEL_DOMAINS_LIST = TOP_LEVEL_DOMAINS_LIST;
@@ -3203,7 +3205,7 @@ var jsonFromFilters = (function () {
         /**
          * Safari content blocking format rules converter.
          */
-        const CONVERTER_VERSION = '4.2.5';
+        const CONVERTER_VERSION = '4.3.0';
         // Max number of CSS selectors per rule (look at compactCssRules function)
         const MAX_SELECTORS_PER_WIDE_RULE = 250;
 
@@ -4138,17 +4140,27 @@ var jsonFromFilters = (function () {
          *
          * @param rules
          * @param errors
+         * @param chunkSize
          * @return {{agRules: Array, badFilterExceptions: Array}}
          */
-        const parseAGRules = (rules, errors) => {
+        const parseAGRules = async (rules, errors, chunkSize) => {
             const agRules = [];
 
             // $badfilter rules
             const badFilterExceptions = [];
 
             for (let j = 0; j < rules.length; j++) {
-                let rule;
+                if (chunkSize && (j % chunkSize === 0)) {
+                    /**
+                     * In some cases UI thread becomes blocked while adding rules to engine,
+                     * that't why we create filter rules using chunks of the specified length
+                     * Rules creation is rather slow operation so we should
+                     * use setTimeout calls to give UI thread some time.
+                     */
+                    await new Promise((resolve) => setTimeout(resolve, 1));
+                }
 
+                let rule;
                 if (rules[j] !== null && rules[j].ruleText) {
                     rule = rules[j];
                 } else {
@@ -4180,9 +4192,10 @@ var jsonFromFilters = (function () {
          * @param rules array of strings or AG rules objects
          * @param optimize if true - ignore slow rules
          * @param advancedBlocking if true - convert advanced blocking rules (script and extended css)
+         * @param chunkSize if defined - converts rules async by chunks
          * @return {*} content blocker object with converted rules grouped by type
          */
-        const convertLines = (rules, optimize, advancedBlocking) =>{
+        const convertLines = async (rules, optimize, advancedBlocking, chunkSize) =>{
             adguard.console.info('Converting ' + rules.length + ' rules. Optimize=' + optimize);
 
             const contentBlocker = {
@@ -4240,11 +4253,21 @@ var jsonFromFilters = (function () {
             let scriptlets = [];
             const scriptletsExceptions = [];
 
-            const parsedRules = parseAGRules(rules, contentBlocker.errors);
+            const parsedRules = await parseAGRules(rules, contentBlocker.errors, chunkSize);
 
             let i = 0;
             const len = parsedRules.agRules.length;
             for (; i < len; i++) {
+                if (chunkSize && (i % chunkSize === 0)) {
+                    /**
+                     * In some cases UI thread becomes blocked while adding rules to engine,
+                     * that't why we create filter rules using chunks of the specified length
+                     * Rules creation is rather slow operation so we should
+                     * use setTimeout calls to give UI thread some time.
+                     */
+                    await new Promise((resolve) => setTimeout(resolve, 1));
+                }
+
                 const agRule = parsedRules.agRules[i];
                 if (parsedRules.badFilterExceptions.indexOf(agRule.ruleText) >= 0) {
                     // Removed with bad-filter
@@ -4435,8 +4458,9 @@ var jsonFromFilters = (function () {
          * @param limit over that limit rules will be ignored
          * @param optimize if true - "wide" rules will be ignored
          * @param advancedBlocking if true - advanced blocking json will be included
+         * @param chunkSize if defined - converts rules async by chunks
          */
-        const convertArray = (rules, limit, optimize, advancedBlocking) =>{
+        const convertArray = async (rules, limit, optimize, advancedBlocking, chunkSize) =>{
             printVersionMessage();
 
             try {
@@ -4450,7 +4474,7 @@ var jsonFromFilters = (function () {
                     return null;
                 }
 
-                const contentBlocker = convertLines(rules, !!optimize, advancedBlocking);
+                const contentBlocker = await convertLines(rules, !!optimize, advancedBlocking, chunkSize);
                 return createConversionResult(contentBlocker, limit, advancedBlocking);
             } catch (e) {
                 adguard.console.error('Unexpected error: ' + e);
@@ -4468,9 +4492,9 @@ var jsonFromFilters = (function () {
      * End of the dependencies content
      */
 
-    return function (rules, limit, optimize, advancedBlocking) {
+    return async function (rules, limit, optimize, advancedBlocking, chunkSize) {
         try {
-            return SafariContentBlockerConverter.convertArray(rules, limit, optimize, advancedBlocking);
+            return await SafariContentBlockerConverter.convertArray(rules, limit, optimize, advancedBlocking, chunkSize);
         } catch (ex) {
             console.log('Unexpected error: ' + ex);
         }

@@ -1,6 +1,8 @@
 /**
  * Events
  */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-multi-assign */
 const EventNotifierTypes = module.exports = {
     ADD_RULES: "event.add.rules",
     REMOVE_RULE: "event.remove.rule",
@@ -46,5 +48,5 @@ const EventNotifierTypes = module.exports = {
     TAB_UPDATE: 'log.tab.update',
     TAB_RESET: 'log.tab.reset',
     LOG_EVENT_ADDED: 'log.event.added',
-    LOG_EVENT_UPDATED: 'log.event.updated'
+    LOG_EVENT_UPDATED: 'log.event.updated',
 };

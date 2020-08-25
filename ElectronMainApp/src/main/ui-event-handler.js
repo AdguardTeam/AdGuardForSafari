@@ -1,5 +1,6 @@
-const {ipcMain} = require('electron');
+const { ipcMain } = require('electron');
 const config = require('config');
+const safariToolbar = require('safari-ext');
 const settings = require('./app/settings-manager');
 const settingsBackup = require('./app/settings-provider');
 const filters = require('./app/filters-manager');
@@ -9,22 +10,18 @@ const whitelist = require('./app/whitelist');
 const userrules = require('./app/userrules');
 const antibanner = require('./app/antibanner');
 const app = require('./app/app');
-const safariToolbar = require('safari-ext');
 const applicationApi = require('./api');
 const updater = require('./updater');
 const log = require('./app/utils/log');
 const toolbarController = require('./toolbar-controller');
-const {getContentBlockersInfo} = require('./app/content-blocker/content-blocker-adapter');
-
+const { getContentBlockersInfo } = require('./app/content-blocker/content-blocker-adapter');
 
 /**
  * Initializes event listener
  */
 module.exports.init = function () {
-
     // Handle messages from renderer process
-    ipcMain.on('renderer-to-main', function (event, arg) {
-
+    ipcMain.on('renderer-to-main', (event, arg) => {
         const message = JSON.parse(arg);
         switch (message.type) {
             case 'initializeOptionsPage':
@@ -55,7 +52,7 @@ module.exports.init = function () {
                 break;
             case 'getWhiteListDomains':
                 const whiteListDomains = whitelist.getWhiteListDomains();
-                event.returnValue = {content: whiteListDomains.join('\r\n')};
+                event.returnValue = { content: whiteListDomains.join('\r\n') };
                 break;
             case 'saveWhiteListDomains':
                 const domains = message.content.split(/[\r\n]+/);
@@ -65,8 +62,8 @@ module.exports.init = function () {
                 whitelist.changeDefaultWhiteListMode(message.enabled);
                 break;
             case 'getUserRules':
-                userrules.getUserRulesText(function (content) {
-                    sendResponse(event, 'getUserRulesResponse', {content: content});
+                userrules.getUserRulesText((content) => {
+                    sendResponse(event, 'getUserRulesResponse', { content });
                 });
                 break;
             case 'saveUserRules':
@@ -81,8 +78,7 @@ module.exports.init = function () {
             case 'loadCustomFilterInfo':
                 filters.loadCustomFilterInfo(message.url, { title: message.title },
                     (filter) => sendResponse(event, 'loadCustomFilterInfoResponse', filter),
-                    () => sendResponse(event, 'loadCustomFilterInfoResponse', null)
-                );
+                    () => sendResponse(event, 'loadCustomFilterInfoResponse', null));
                 break;
             case 'subscribeToCustomFilter':
                 const { url, title, trusted } = message;
@@ -112,25 +108,24 @@ module.exports.init = function () {
                 settingsBackup.applySettingsBackup(message.settings);
                 break;
             case 'openSafariExtensionsPrefs':
-                safariToolbar.openExtensionsPreferenses(()=> {
-                    //Do nothing
+                safariToolbar.openExtensionsPreferenses(() => {
+                    // Do nothing
                 });
                 break;
-            case  'changeUpdateFiltersPeriod':
+            case 'changeUpdateFiltersPeriod':
                 settings.changeUpdateFiltersPeriod(message.value);
                 break;
-            case  'enableProtection':
+            case 'enableProtection':
                 applicationApi.start();
                 break;
-            case  'checkUpdates':
+            case 'checkUpdates':
                 updater.checkForUpdates();
                 break;
-            case  'updateRelaunch':
+            case 'updateRelaunch':
                 updater.quitAndInstall();
                 break;
         }
     });
-
 };
 
 /**
@@ -161,7 +156,7 @@ function eventHandler(win) {
         try {
             win.webContents.send('main-to-renderer', {
                 type: 'message',
-                args: Array.prototype.slice.call(arguments)
+                args: Array.prototype.slice.call(arguments),
             });
         } catch (e) {
             log.error(e);
@@ -185,7 +180,7 @@ module.exports.register = (win) => {
  */
 module.exports.unregister = (win) => {
     if (win) {
-        const listenerId = win.listenerId;
+        const { listenerId } = win;
         if (listenerId) {
             log.info('Removing listener');
             listeners.removeListener(listenerId);
@@ -197,12 +192,11 @@ module.exports.unregister = (win) => {
  * Constructs data object for page presentation
  */
 function processInitializeFrameScriptRequest() {
-
     const enabledFilters = Object.create(null);
 
     const AntiBannerFiltersId = config.get('AntiBannerFiltersId');
 
-    for (let key in AntiBannerFiltersId) {
+    for (const key in AntiBannerFiltersId) {
         if (AntiBannerFiltersId.hasOwnProperty(key)) {
             const filterId = AntiBannerFiltersId[key];
             const enabled = filters.isFilterEnabled(filterId);
@@ -214,7 +208,7 @@ function processInitializeFrameScriptRequest() {
 
     return {
         userSettings: settings.getAllSettings(),
-        enabledFilters: enabledFilters,
+        enabledFilters,
         filtersMetadata: filters.getFilters(),
         contentBlockerInfo: antibanner.getContentBlockerInfo(),
         isProtectionRunning: antibanner.isRunning(),
@@ -222,13 +216,13 @@ function processInitializeFrameScriptRequest() {
             isMacOs: true,
             Prefs: {
                 locale: app.getLocale(),
-                mobile: false
+                mobile: false,
             },
             appVersion: app.getVersion(),
-            updatesPermitted: updater.isUpdatePermitted()
+            updatesPermitted: updater.isUpdatePermitted(),
         },
         constants: {
-            AntiBannerFiltersId: AntiBannerFiltersId
-        }
+            AntiBannerFiltersId,
+        },
     };
 }

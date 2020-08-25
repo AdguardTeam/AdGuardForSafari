@@ -8,9 +8,8 @@ const log = require('../utils/log');
  * @type {{updateContentBlocker}}
  */
 module.exports = (function () {
-
-    const AFFINITY_DIRECTIVE = "!#safari_cb_affinity";
-    const AFFINITY_DIRECTIVE_START = "!#safari_cb_affinity(";
+    const AFFINITY_DIRECTIVE = '!#safari_cb_affinity';
+    const AFFINITY_DIRECTIVE_START = '!#safari_cb_affinity(';
 
     const AntiBannerFilterGroupsId = config.get('AntiBannerFilterGroupsId');
     const AntiBannerFiltersId = config.get('AntiBannerFiltersId');
@@ -24,29 +23,29 @@ module.exports = (function () {
      */
     const groups = {
         general: {
-            key: "general",
-            filterGroups: [AntiBannerFilterGroupsId.AD_BLOCKING_ID, AntiBannerFilterGroupsId.LANGUAGE_SPECIFIC_ID]
+            key: 'general',
+            filterGroups: [AntiBannerFilterGroupsId.AD_BLOCKING_ID, AntiBannerFilterGroupsId.LANGUAGE_SPECIFIC_ID],
         },
         privacy: {
-            key: "privacy",
-            filterGroups: [AntiBannerFilterGroupsId.PRIVACY_ID]
+            key: 'privacy',
+            filterGroups: [AntiBannerFilterGroupsId.PRIVACY_ID],
         },
         security: {
-            key: "security",
-            filterGroups: [AntiBannerFilterGroupsId.SECURITY_ID]
+            key: 'security',
+            filterGroups: [AntiBannerFilterGroupsId.SECURITY_ID],
         },
         socialWidgetsAndAnnoyances: {
-            key: "socialWidgetsAndAnnoyances",
-            filterGroups: [AntiBannerFilterGroupsId.SOCIAL_ID, AntiBannerFilterGroupsId.ANNOYANCES_ID]
+            key: 'socialWidgetsAndAnnoyances',
+            filterGroups: [AntiBannerFilterGroupsId.SOCIAL_ID, AntiBannerFilterGroupsId.ANNOYANCES_ID],
         },
         other: {
-            key: "other",
-            filterGroups: [AntiBannerFilterGroupsId.OTHER_ID]
+            key: 'other',
+            filterGroups: [AntiBannerFilterGroupsId.OTHER_ID],
         },
         custom: {
-            key: "custom",
-            filterGroups: [AntiBannerFilterGroupsId.CUSTOM_FILTERS_GROUP_ID]
-        }
+            key: 'custom',
+            filterGroups: [AntiBannerFilterGroupsId.CUSTOM_FILTERS_GROUP_ID],
+        },
     };
 
     /**
@@ -61,7 +60,14 @@ module.exports = (function () {
         social: [groups.socialWidgetsAndAnnoyances],
         other: [groups.other],
         custom: [groups.custom],
-        all: [groups.general, groups.privacy, groups.security, groups.socialWidgetsAndAnnoyances, groups.other, groups.custom]
+        all: [
+            groups.general,
+            groups.privacy,
+            groups.security,
+            groups.socialWidgetsAndAnnoyances,
+            groups.other,
+            groups.custom,
+        ],
     };
 
     /**
@@ -74,7 +80,7 @@ module.exports = (function () {
         security: SafariExtensionBundles.SECURITY,
         other: SafariExtensionBundles.OTHER,
         custom: SafariExtensionBundles.CUSTOM,
-        advancedBlocking: SafariExtensionBundles.ADVANCED_BLOCKING
+        advancedBlocking: SafariExtensionBundles.ADVANCED_BLOCKING,
     };
 
     /**
@@ -85,9 +91,9 @@ module.exports = (function () {
      */
     const groupRules = (rules) => {
         const rulesByFilterId = {};
-        rules.forEach(x => {
+        rules.forEach((x) => {
             if (!rulesByFilterId[x.filterId]) {
-               rulesByFilterId[x.filterId] = [];
+                rulesByFilterId[x.filterId] = [];
             }
 
             rulesByFilterId[x.filterId].push(x);
@@ -96,13 +102,13 @@ module.exports = (function () {
         const rulesByGroup = {};
         const rulesByAffinityBlocks = {};
 
-        for (let key in groups) {
+        for (const key in groups) {
             const group = groups[key];
             const groupRules = [];
 
-            for (let filterGroupId of group.filterGroups) {
+            for (const filterGroupId of group.filterGroups) {
                 const filters = categories.getFiltersByGroupId(filterGroupId);
-                for (let f of filters) {
+                for (const f of filters) {
                     const filterRules = rulesByFilterId[f.filterId];
                     sortWithAffinityBlocks(filterRules, groupRules, rulesByAffinityBlocks);
                 }
@@ -115,9 +121,9 @@ module.exports = (function () {
         }
 
         const result = [];
-        for (let groupName in groups) {
-            const key = groups[groupName].key;
-            const filterGroups = groups[groupName].filterGroups;
+        for (const groupName in groups) {
+            const { key } = groups[groupName];
+            const { filterGroups } = groups[groupName];
 
             if (rulesByAffinityBlocks[key]) {
                 log.debug(`Group rules for ${key} length: ${rulesByGroup[key].length}`);
@@ -139,9 +145,9 @@ module.exports = (function () {
             rulesByGroup[key] = optimized;
 
             result.push({
-                key: key,
+                key,
                 rules: rulesByGroup[key],
-                filterGroups: filterGroups
+                filterGroups,
             });
 
             log.info(`Affinity block ${key}: rules length: ${rulesByGroup[key].length}`);
@@ -158,15 +164,14 @@ module.exports = (function () {
      * @param rulesByAffinityBlocks
      */
     const sortWithAffinityBlocks = (filterRules, groupRules, rulesByAffinityBlocks) => {
-
         if (!filterRules) {
             return;
         }
 
         let currentBlockGroups = [];
 
-        for (let rule of filterRules) {
-            let ruleText = rule.ruleText;
+        for (const rule of filterRules) {
+            const { ruleText } = rule;
 
             if (!ruleText) {
                 continue;
@@ -177,7 +182,7 @@ module.exports = (function () {
             } else if (ruleText.startsWith(AFFINITY_DIRECTIVE)) {
                 currentBlockGroups = [];
             } else if (currentBlockGroups.length > 0) {
-                for (let group of currentBlockGroups) {
+                for (const group of currentBlockGroups) {
                     if (!rulesByAffinityBlocks[group.key]) {
                         rulesByAffinityBlocks[group.key] = [];
                     }
@@ -198,13 +203,12 @@ module.exports = (function () {
      * @return {Array}
      */
     const parseGroupsByAffinity = (ruleText) => {
-
         let result = [];
 
         const startIndex = AFFINITY_DIRECTIVE.length + 1;
         const stripped = ruleText.substring(startIndex, ruleText.length - 1);
-        const list = stripped.split(",");
-        for (let affinityBlock of list) {
+        const list = stripped.split(',');
+        for (const affinityBlock of list) {
             const block = affinityBlock.trim();
             const affinityGroups = groupsByAffinity[block];
             if (affinityGroups && affinityGroups.length > 0) {
@@ -223,11 +227,11 @@ module.exports = (function () {
 
         const result = [];
 
-        for (let key in rulesGroupsBundles) {
+        for (const key in rulesGroupsBundles) {
             if (groups[key]) {
                 result.push({
                     bundleId: rulesGroupsBundles[key],
-                    groupIds: groups[key].filterGroups
+                    groupIds: groups[key].filterGroups,
                 });
             }
         }
@@ -240,7 +244,6 @@ module.exports = (function () {
         groupRules,
         groups,
         rulesGroupsBundles,
-        filterGroupsBundles
+        filterGroupsBundles,
     };
-
 })();

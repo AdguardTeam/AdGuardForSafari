@@ -4,7 +4,6 @@ const collections = require('./collections.js');
  * Simple i18n utils
  */
 module.exports = (() => {
-
     function isArrayElement(array, elem) {
         return array.indexOf(elem) >= 0;
     }
@@ -22,13 +21,12 @@ module.exports = (() => {
          * @returns matched locale from the locales collection or null
          */
         normalize: (locales, locale) => {
-
             if (!locale) {
                 return null;
             }
 
             // Transform Language-Country => Language_Country
-            locale = locale.replace("-", "_");
+            locale = locale.replace('-', '_');
 
             let search;
 
@@ -50,7 +48,6 @@ module.exports = (() => {
             }
 
             return null;
-        }
+        },
     };
-
 })();

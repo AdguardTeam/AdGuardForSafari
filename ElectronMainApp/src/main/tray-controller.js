@@ -1,31 +1,29 @@
-const appPack = require('../utils/app-pack');
-const i18n = require('../utils/i18n');
-
 const AdmZip = require('adm-zip');
 const path = require('path');
 const fs = require('fs');
+const {
+    app, dialog, Tray, Menu, BrowserWindow,
+} = require('electron');
+const appPack = require('../utils/app-pack');
+const i18n = require('../utils/i18n');
 
 const applicationApi = require('./api');
 const filters = require('./app/filters-manager');
 const listeners = require('./notifier');
 const events = require('./events');
-const storage = require('./app/storage/storage');
 const settings = require('./app/settings-manager');
 const log = require('./app/utils/log');
 
 const agApp = require('./app/app');
-
-const { app, dialog, Tray, Menu, BrowserWindow } = require('electron');
 
 /**
  * Tray controller.
  * Handles tray events and setups its view state.
  */
 module.exports = (() => {
-
     const imageFolder = appPack.resourcePath('/src/main/icons');
-    const trayImageOff = imageFolder + '/ext_pauseTemplate.png';
-    const trayImageOn = imageFolder + '/extTemplate.png';
+    const trayImageOff = `${imageFolder}/ext_pauseTemplate.png`;
+    const trayImageOn = `${imageFolder}/extTemplate.png`;
 
     const onCheckFiltersUpdateClicked = () => {
         filters.checkAntiBannerFiltersUpdate(true);
@@ -41,7 +39,7 @@ module.exports = (() => {
     };
 
     const onProtectionToggleClicked = (e) => {
-        if (!!e.checked) {
+        if (e.checked) {
             applicationApi.start();
         } else {
             applicationApi.pause();
@@ -73,11 +71,11 @@ module.exports = (() => {
         log.info('Exporting log file..');
 
         const options = {
-            defaultPath: app.getPath('documents') + `/adg_safari_logs_${Date.now()}.zip`,
+            defaultPath: `${app.getPath('documents')}/adg_safari_logs_${Date.now()}.zip`,
         };
 
         tray.showMainWindow(() => {
-            dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), options).then(({cancelled, filePath}) => {
+            dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), options).then(({ cancelled, filePath }) => {
                 if (cancelled) {
                     return;
                 }
@@ -113,6 +111,7 @@ module.exports = (() => {
     /**
      * Return main window
      */
+    /* eslint-disable-next-line no-unused-vars */
     const getMainWindow = () => {
         const focusedWindow = BrowserWindow.getFocusedWindow();
         if (focusedWindow) {
@@ -158,7 +157,7 @@ module.exports = (() => {
     let tray = {
         trayIcon: null,
         showMainWindow: null,
-        skipRerender: false
+        skipRerender: false,
     };
 
     /**
@@ -168,7 +167,6 @@ module.exports = (() => {
      * @returns {{tray: null, showMainWindow: null}}
      */
     const initTray = (showMainWindow) => {
-
         tray.showMainWindow = showMainWindow;
         tray.trayIcon = renderTray();
 
@@ -178,9 +176,9 @@ module.exports = (() => {
             }
         });
 
-        settings.onUpdated.addListener(function (setting) {
-            if (setting === settings.SHOW_TRAY_ICON ||
-                setting === settings.LAUNCH_AT_LOGIN) {
+        settings.onUpdated.addListener((setting) => {
+            if (setting === settings.SHOW_TRAY_ICON
+                || setting === settings.LAUNCH_AT_LOGIN) {
                 rerenderTray();
             }
         });
@@ -221,41 +219,43 @@ module.exports = (() => {
 
         const contextMenu = Menu.buildFromTemplate([
             {
-                label: isProtectionRunning ? i18n.__('tray_menu_protection_start.message') : i18n.__('tray_menu_protection_stop.message'),
-                type: "checkbox",
+                label: isProtectionRunning
+                    ? i18n.__('tray_menu_protection_start.message')
+                    : i18n.__('tray_menu_protection_stop.message'),
+                type: 'checkbox',
                 checked: isProtectionRunning,
-                click: onProtectionToggleClicked
+                click: onProtectionToggleClicked,
             },
-            { type: "separator" },
+            { type: 'separator' },
             {
                 label: i18n.__('tray_menu_launch_at_startup.message'),
-                type: "checkbox",
+                type: 'checkbox',
                 checked: isOpenAtLoginEnabled(),
-                click: onLaunchAdguardAtLoginClicked
+                click: onLaunchAdguardAtLoginClicked,
             },
-            { type: "separator" },
+            { type: 'separator' },
             {
                 label: i18n.__('tray_menu_about.message'),
-                click: onAboutClicked
+                click: onAboutClicked,
             },
             {
                 label: i18n.__('tray_menu_preferences.message'),
-                click: onPreferencesClicked
+                click: onPreferencesClicked,
             },
             {
                 label: i18n.__('tray_menu_check_updates.message'),
-                click: onCheckFiltersUpdateClicked
+                click: onCheckFiltersUpdateClicked,
             },
-            { type: "separator" },
+            { type: 'separator' },
             {
                 label: i18n.__('tray_menu_export_logs.message'),
-                click: onExportLogsClicked
+                click: onExportLogsClicked,
             },
-            { type: "separator" },
+            { type: 'separator' },
             {
                 label: i18n.__('tray_menu_quit.message'),
-                click: onAppQuitClicked
-            }
+                click: onAppQuitClicked,
+            },
         ]);
 
         trayIcon.setContextMenu(contextMenu);
@@ -266,7 +266,6 @@ module.exports = (() => {
     };
 
     return {
-        initTray: initTray
+        initTray,
     };
-
 })();
