@@ -67,12 +67,12 @@ module.exports = (() => {
     /**
      * Loads enabled filters metadata
      */
-    const getEnabledFilters = () => getFilters().filter(f => f.enabled);
+    const getEnabledFilters = () => getFilters().filter((f) => f.enabled);
 
     /**
      * Loads custom filters metadata
      */
-    const getCustomFilters = () => getFilters().filter(f => f.customUrl);
+    const getCustomFilters = () => getFilters().filter((f) => f.customUrl);
 
     /**
      * Updates groups state info

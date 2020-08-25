@@ -1,6 +1,7 @@
 /* global ace, i18n, EventNotifierTypes */
 
 const { ipcRenderer, remote } = require('electron');
+
 const { dialog } = remote;
 const fs = require('fs');
 const path = require('path');
@@ -64,7 +65,7 @@ const Utils = {
      * @param event
      */
     importRulesFromFile: function importRulesFromFile(event) {
-        return new Promise ((resolve) => {
+        return new Promise((resolve) => {
             const fileInput = event.target;
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -81,7 +82,7 @@ const Utils = {
                 }
                 reader.readAsText(file, 'utf-8');
             }
-        })
+        });
     },
 
     /**
@@ -92,7 +93,7 @@ const Utils = {
     addRulesToEditor: function addRulesToEditor(editor, rules) {
         const oldRules = editor.getValue();
         const newRules = `${oldRules}\n${rules}`.split('\n');
-        const trimmedRules = newRules.map(rule => rule.trim());
+        const trimmedRules = newRules.map((rule) => rule.trim());
         const ruleSet = new Set(trimmedRules);
         const uniqueRules = Array.from(ruleSet).join('\n');
         editor.setValue(uniqueRules.trim());
@@ -109,7 +110,7 @@ const Utils = {
         const onFileLoaded = (content) => {
             ipcRenderer.send('renderer-to-main', JSON.stringify({
                 'type': 'applyUserSettings',
-                'settings': content
+                'settings': content,
             }));
         };
 
@@ -127,7 +128,7 @@ const Utils = {
                 throw new Error(i18n.__('options_settings_import_error'));
             };
         }
-    }
+    },
 };
 
 /**
@@ -407,7 +408,8 @@ const handleEditorResize = (editor) => {
  */
 const exportFile = async (fileName, fileType, data) => {
     const d = new Date();
-    const timeStamp = `${d.getFullYear()}${d.getMonth()}${d.getDate()}_${d.getHours()}${d.getMinutes()}${d.getSeconds()}`;
+    const timeStamp = `${d.getFullYear()}${d.getMonth()}${d.getDate()}_${d.getHours()}`
+        + `${d.getMinutes()}${d.getSeconds()}`;
     const exportFileName = `${fileName}-${timeStamp}.${fileType}`;
     const exportDialog = await dialog.showSaveDialog({
         defaultPath: exportFileName,
@@ -415,7 +417,7 @@ const exportFile = async (fileName, fileType, data) => {
     if (!exportDialog.canceled) {
         fs.writeFileSync(exportDialog.filePath.toString(), data);
     }
-}
+};
 
 /**
  * Whitelist block
@@ -510,6 +512,7 @@ const WhiteListFilter = function (options) {
             const importedDomains = await Utils.importRulesFromFile(event);
             Utils.addRulesToEditor(editor, importedDomains);
         } catch (err) {
+            /* eslint-disable-next-line no-console */
             console.error(err.message);
         }
     });
@@ -520,7 +523,8 @@ const WhiteListFilter = function (options) {
             return;
         }
         exportFile('adguard-allowlist', 'txt', editor.getValue())
-            .catch(err => {
+            .catch((err) => {
+                /* eslint-disable-next-line no-console */
                 console.error(err.message);
             });
     });
@@ -610,11 +614,12 @@ const UserFilter = function () {
         importUserFiltersInput.click();
     });
 
-    importUserFiltersInput.addEventListener('change',  async (event) => {
+    importUserFiltersInput.addEventListener('change', async (event) => {
         try {
             const importedRules = await Utils.importRulesFromFile(event);
             Utils.addRulesToEditor(editor, importedRules);
         } catch (err) {
+            /* eslint-disable-next-line no-console */
             console.error(err.message);
         }
     });
@@ -625,7 +630,8 @@ const UserFilter = function () {
             return;
         }
         exportFile('adguard-user-rules', 'txt', editor.getValue())
-            .catch(err => {
+            .catch((err) => {
+                /* eslint-disable-next-line no-console */
                 console.error(err.message);
             });
     });
@@ -1606,7 +1612,7 @@ const Select = function (id, options, value) {
                 ? new Option(item.value, item.name, item.value === value)
                 : new Option(item, item, item === value)
             )
-            .forEach(option => select.appendChild(option.render()));
+                .forEach((option) => select.appendChild(option.render())));
     }
 
     const render = () => select;
@@ -1749,22 +1755,22 @@ const Settings = function () {
         CheckboxUtils.updateCheckbox([launchAtLoginCheckbox], enabled);
     };
 
-    const notifyExtensionUpdatesCheckbox = document.querySelector("#showAppUpdatedNotification");
+    const notifyExtensionUpdatesCheckbox = document.querySelector('#showAppUpdatedNotification');
     const updateNotifyExtensionUpdatesCheckbox = (disabled) => {
         CheckboxUtils.updateCheckbox([notifyExtensionUpdatesCheckbox], !disabled);
     };
 
-    const verboseLoggingCheckbox = document.querySelector("#verboseLogging");
+    const verboseLoggingCheckbox = document.querySelector('#verboseLogging');
     const updateVerboseLoggingCheckbox = (enabled) => {
         CheckboxUtils.updateCheckbox([verboseLoggingCheckbox], enabled);
     };
 
-    const filterUpdatePeriodSelect = document.querySelector("#filterUpdatePeriod");
+    const filterUpdatePeriodSelect = document.querySelector('#filterUpdatePeriod');
     const updateFilterUpdatePeriodSelect = (period) => {
         filterUpdatePeriodSelect.value = period;
     };
 
-    const hardwareAccelerationCheckbox = document.querySelector("#enableHardwareAcceleration");
+    const hardwareAccelerationCheckbox = document.querySelector('#enableHardwareAcceleration');
     const updateHardwareAccelerationCheckbox = (disabled) => {
         CheckboxUtils.updateCheckbox([hardwareAccelerationCheckbox], !disabled);
     };
@@ -2019,6 +2025,7 @@ PageController.prototype = {
             try {
                 Utils.handleImportSettings(event);
             } catch (err) {
+                /* eslint-disable-next-line no-console */
                 console.error(err.message);
             }
             importSettingsInput.value = '';
@@ -2034,17 +2041,18 @@ PageController.prototype = {
     exportSettingsFile(event) {
         event.preventDefault();
         ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'getUserSettings'
+            'type': 'getUserSettings',
         }));
         ipcRenderer.once('getUserSettingsResponse', (e, response) => {
             exportFile('adguard-settings', 'json', JSON.stringify(response, null, 4))
-                .catch(err => {
+                .catch((err) => {
+                    /* eslint-disable-next-line no-console */
                     console.error(err.message);
                 });
         });
     },
 
-    _initUpdatesBlock: function () {
+    _initUpdatesBlock() {
         if (!environmentOptions.updatesPermitted) {
             return;
         }
@@ -2058,7 +2066,7 @@ PageController.prototype = {
         });
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
-            type: 'checkUpdates'
+            type: 'checkUpdates',
         }));
 
         window.addEventListener('hashchange', () => {

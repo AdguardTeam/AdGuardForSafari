@@ -367,7 +367,7 @@ module.exports = (function () {
      */
     const refreshCustomFilter = (filter, trusted) => {
         let customFilters = loadCustomFilters();
-        customFilters.forEach(f => {
+        customFilters.forEach((f) => {
             if (f.filterId === filter.filterId) {
                 f.trusted = trusted;
                 f.title = filter.title;

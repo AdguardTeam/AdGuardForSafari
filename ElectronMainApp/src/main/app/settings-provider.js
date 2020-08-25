@@ -1,3 +1,4 @@
+const config = require('config');
 const filters = require('./filters-manager');
 const subscriptions = require('./filters/subscriptions');
 const app = require('./app');
@@ -5,7 +6,6 @@ const settingsManager = require('./settings-manager');
 const userRules = require('./userrules');
 const whitelist = require('./whitelist');
 const log = require('./utils/log');
-const config = require('config');
 const listeners = require('../notifier');
 const events = require('../events');
 
@@ -13,7 +13,6 @@ const events = require('../events');
  * Application settings provider.
  */
 module.exports = (() => {
-
     const BACKUP_PROTOCOL_VERSION = '1.0';
 
     /**
@@ -23,8 +22,8 @@ module.exports = (() => {
     const collectEnabledFilterIds = () => {
         const enabledFilters = filters.getFilters();
         return enabledFilters
-            .filter(filter => !filter.customUrl && filter.enabled)
-            .map(filter => filter.filterId);
+            .filter((filter) => !filter.customUrl && filter.enabled)
+            .map((filter) => filter.filterId);
     };
 
     /**
@@ -33,7 +32,7 @@ module.exports = (() => {
      */
     const collectCustomFiltersData = () => {
         const customFilters = filters.getCustomFilters();
-        return customFilters.map(filter => ({
+        return customFilters.map((filter) => ({
             filterId: filter.filterId,
             customUrl: filter.customUrl,
             enabled: filter.enabled,
@@ -45,8 +44,8 @@ module.exports = (() => {
     const collectEnabledGroupIds = () => {
         const groups = subscriptions.getGroups();
         return groups
-            .filter(group => group.enabled)
-            .map(group => group.groupId);
+            .filter((group) => group.enabled)
+            .map((group) => group.groupId);
     };
 
     /**
@@ -92,7 +91,8 @@ module.exports = (() => {
      */
     const loadGeneralSettingsSection = (callback) => {
         const enabledFilterIds = collectEnabledFilterIds();
-        const allowAcceptableAds = enabledFilterIds.indexOf(config.get('AntiBannerFiltersId').SEARCH_AND_SELF_PROMO_FILTER_ID) >= 0;
+        const allowAcceptableAds = enabledFilterIds
+            .indexOf(config.get('AntiBannerFiltersId').SEARCH_AND_SELF_PROMO_FILTER_ID) >= 0;
 
         const section = {
             'general-settings': {
@@ -149,8 +149,8 @@ module.exports = (() => {
         filters.addAndEnableFilters(filterIds);
         const enabledFilters = filters.getEnabledFilters();
         const filtersToDisable = enabledFilters
-            .filter(enabledFilter => !filterIds.includes(enabledFilter.filterId))
-            .map(filter => filter.filterId);
+            .filter((enabledFilter) => !filterIds.includes(enabledFilter.filterId))
+            .map((filter) => filter.filterId);
         filters.disableFilters(filtersToDisable);
     };
 
@@ -168,8 +168,8 @@ module.exports = (() => {
         const groups = subscriptions.getGroups();
 
         const groupIdsToDisable = groups
-            .map(group => group.groupId)
-            .filter(groupId => !enabledGroups.includes(groupId - 0));
+            .map((group) => group.groupId)
+            .filter((groupId) => !enabledGroups.includes(groupId - 0));
         groupIdsToDisable.forEach((groupId) => {
             filters.disableGroup(groupId);
         });
@@ -211,7 +211,7 @@ module.exports = (() => {
                     }
                 }
             });
-        })
+        });
 
         // Sync enabled filters
         const enabledFilterIds = section.filters['enabled-filters'] || [];
@@ -287,8 +287,6 @@ module.exports = (() => {
 
     return {
         loadSettingsBackup: loadSettingsBackupJson,
-        applySettingsBackup: applySettingsBackupJson
+        applySettingsBackup: applySettingsBackupJson,
     };
-
 })();
-

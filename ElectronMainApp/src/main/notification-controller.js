@@ -192,10 +192,10 @@ module.exports = (() => {
      * Settings update notification
      */
     const showSettingsUpdateNotification = (options) => {
-        const title = i18n.__("settings_import.message");
-        const subtitle = options.success ?
-            i18n.__("settings_import_success.message") :
-            i18n.__("settings_import_error.message");
+        const title = i18n.__('settings_import.message');
+        const subtitle = options.success
+            ? i18n.__('settings_import_success.message')
+            : i18n.__('settings_import_error.message');
         showNotification({
             title,
             subtitle,
@@ -221,8 +221,7 @@ module.exports = (() => {
             } else if (event === events.NOTIFY_UPDATE_USER_FILTER_RULES) {
                 const newRule = options ? options.newRule : '';
                 showUserFilterUpdatedNotification(showWindow, newRule);
-            }
-            else if (event === events.SETTINGS_UPDATED) {
+            } else if (event === events.SETTINGS_UPDATED) {
                 showSettingsUpdateNotification(options);
             }
         });
