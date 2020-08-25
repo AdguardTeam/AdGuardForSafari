@@ -1607,12 +1607,11 @@ const Select = function (id, options, value) {
     if (Array.isArray(options)) {
         options
             .map((item) => (typeof item === 'object'
-                && item.value !== undefined
-                && item.name !== undefined
+            && item.value !== undefined
+            && item.name !== undefined
                 ? new Option(item.value, item.name, item.value === value)
-                : new Option(item, item, item === value)
-            )
-                .forEach((option) => select.appendChild(option.render())));
+                : new Option(item, item, item === value)))
+            .forEach((option) => select.appendChild(option.render()));
     }
 
     const render = () => select;
