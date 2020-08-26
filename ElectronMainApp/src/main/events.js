@@ -35,12 +35,9 @@ const EventNotifierTypes = module.exports = {
     SHOW_OPTIONS_USER_FILTER_TAB: 'event.show.options.user.filter',
     SHOW_OPTIONS_GENERAL_TAB: 'event.show.options.general',
     SHOW_OPTIONS_ABOUT_TAB: 'event.show.options.about',
-    LAUNCH_AT_LOGIN_UPDATED: 'event.launch.login.updated',
     PROTECTION_STATUS_CHANGED: 'event.protection.status.updated',
-    NOTIFY_EXTENSION_UPDATES_UPDATED: 'event.notify.extension.updates.updated',
-    VERBOSE_LOGGING_UPDATED: 'event.verbose.logging.updated',
     FILTERS_PERIOD_UPDATED: 'event.filters.period.updated',
-    HARDWARE_ACCELERATION_UPDATED: 'event.hardware.acceleration.updated',
+    SETTING_UPDATED: 'event.update.setting.value',
     SETTINGS_UPDATED: 'event.settings.updated',
     // Log events
     TAB_ADDED: 'log.tab.added',

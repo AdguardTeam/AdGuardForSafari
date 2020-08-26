@@ -1749,29 +1749,27 @@ const Settings = function () {
         }
     }, 500);
 
-    const launchAtLoginCheckbox = document.querySelector('#launchAtLogin');
-    const updateLaunchAtLoginCheckbox = function (enabled) {
-        CheckboxUtils.updateCheckbox([launchAtLoginCheckbox], enabled);
+    const checkboxSelectors = {
+        'show-app-updated-disabled': '#showAppUpdatedNotification',
+        'hardware-acceleration-disabled': '#enableHardwareAcceleration',
+        'launch-at-login': '#launchAtLogin',
+        'verbose-logging': '#verboseLogging',
     };
 
-    const notifyExtensionUpdatesCheckbox = document.querySelector('#showAppUpdatedNotification');
-    const updateNotifyExtensionUpdatesCheckbox = (disabled) => {
-        CheckboxUtils.updateCheckbox([notifyExtensionUpdatesCheckbox], !disabled);
-    };
-
-    const verboseLoggingCheckbox = document.querySelector('#verboseLogging');
-    const updateVerboseLoggingCheckbox = (enabled) => {
-        CheckboxUtils.updateCheckbox([verboseLoggingCheckbox], enabled);
+    /**
+     * Updates checkbox value by selector name
+     * @param {string} propertyName
+     * @param {boolean} value
+     * @param {boolean} inverted
+     */
+    const updateCheckboxValue = (propertyName, value, inverted) => {
+        const checkbox = document.querySelector(checkboxSelectors[propertyName]);
+        CheckboxUtils.updateCheckbox([checkbox], inverted ? !value : value);
     };
 
     const filterUpdatePeriodSelect = document.querySelector('#filterUpdatePeriod');
     const updateFilterUpdatePeriodSelect = (period) => {
         filterUpdatePeriodSelect.value = period;
-    };
-
-    const hardwareAccelerationCheckbox = document.querySelector('#enableHardwareAcceleration');
-    const updateHardwareAccelerationCheckbox = (disabled) => {
-        CheckboxUtils.updateCheckbox([hardwareAccelerationCheckbox], !disabled);
     };
 
     const enableProtectionNotification = document.querySelector('#enableProtectionNotification');
@@ -1823,11 +1821,8 @@ const Settings = function () {
     return {
         render,
         updateAcceptableAdsCheckbox,
-        updateLaunchAtLoginCheckbox,
-        updateNotifyExtensionUpdatesCheckbox,
-        updateVerboseLoggingCheckbox,
+        updateCheckboxValue,
         updateFilterUpdatePeriodSelect,
-        updateHardwareAccelerationCheckbox,
         showProtectionStatusWarning,
         updateContentBlockersDescription,
     };
@@ -2301,20 +2296,15 @@ const initPage = function (response) {
                 case EventNotifierTypes.SHOW_OPTIONS_ABOUT_TAB:
                     window.location.hash = 'about';
                     break;
-                case EventNotifierTypes.LAUNCH_AT_LOGIN_UPDATED:
-                    controller.settings.updateLaunchAtLoginCheckbox(options);
-                    break;
-                case EventNotifierTypes.NOTIFY_EXTENSION_UPDATES_UPDATED:
-                    controller.settings.updateNotifyExtensionUpdatesCheckbox(options);
-                    break;
-                case EventNotifierTypes.VERBOSE_LOGGING_UPDATED:
-                    controller.settings.updateVerboseLoggingCheckbox(options);
+                case EventNotifierTypes.SETTING_UPDATED:
+                    controller.settings.updateCheckboxValue(
+                        options.propertyName,
+                        options.propertyValue,
+                        options.inverted
+                    );
                     break;
                 case EventNotifierTypes.FILTERS_PERIOD_UPDATED:
                     controller.settings.updateFilterUpdatePeriodSelect(options);
-                    break;
-                case EventNotifierTypes.HARDWARE_ACCELERATION_UPDATED:
-                    controller.settings.updateHardwareAccelerationCheckbox(options);
                     break;
                 case EventNotifierTypes.PROTECTION_STATUS_CHANGED:
                     controller.settings.showProtectionStatusWarning(options);

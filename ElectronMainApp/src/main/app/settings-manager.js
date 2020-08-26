@@ -126,7 +126,12 @@ module.exports = (function () {
 
     const changeShowAppUpdatedNotification = (value) => {
         setProperty(settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION, value);
-        listeners.notifyListeners(events.NOTIFY_EXTENSION_UPDATES_UPDATED, value);
+
+        listeners.notifyListeners(events.SETTING_UPDATED, {
+            propertyName: settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION,
+            propertyValue: value,
+            inverted: true,
+        });
     };
 
     const changeEnableSafebrowsing = function (enabled) {
@@ -169,7 +174,11 @@ module.exports = (function () {
         setProperty(settings.LAUNCH_AT_LOGIN, value);
         safariToolbar.setStartAtLogin(value);
 
-        listeners.notifyListeners(events.LAUNCH_AT_LOGIN_UPDATED, value);
+        listeners.notifyListeners(events.SETTING_UPDATED, {
+            propertyName: settings.LAUNCH_AT_LOGIN,
+            propertyValue: value,
+            inverted: false,
+        });
     };
 
     const isLaunchAtLoginEnabled = () => {
@@ -184,7 +193,11 @@ module.exports = (function () {
         setProperty(settings.VERBOSE_LOGGING, value);
         safariToolbar.setVerboseLogging(value);
 
-        listeners.notifyListeners(events.VERBOSE_LOGGING_UPDATED, value);
+        listeners.notifyListeners(events.SETTING_UPDATED, {
+            propertyName: settings.VERBOSE_LOGGING,
+            propertyValue: value,
+            inverted: false,
+        });
     };
 
     const isHardwareAccelerationDisabled = function () {
@@ -193,7 +206,12 @@ module.exports = (function () {
 
     const changeHardwareAcceleration = (value) => {
         setProperty(settings.DISABLE_HARDWARE_ACCELERATION, value);
-        listeners.notifyListeners(events.HARDWARE_ACCELERATION_UPDATED, value);
+
+        listeners.notifyListeners(events.SETTING_UPDATED, {
+            propertyName: settings.DISABLE_HARDWARE_ACCELERATION,
+            propertyValue: value,
+            inverted: true,
+        });
     };
 
     const isQuitOnCloseWindow = function () {

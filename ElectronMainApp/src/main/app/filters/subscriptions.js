@@ -371,7 +371,7 @@ module.exports = (function () {
             if (f.filterId === filter.filterId) {
                 f.trusted = trusted;
                 f.title = filter.title;
-                f.timeUpdated = new Date();
+                f.lastUpdateTime = new Date();
             }
         });
 
