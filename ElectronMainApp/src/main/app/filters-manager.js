@@ -341,15 +341,24 @@ module.exports = (() => {
     };
 
     /**
-     * Updates filters.json
+     * Writes metadata to filters.json
      * @param {object} metaData
      */
-    const updateFiltersJson = (metaData) => {
+    const writeFiltersJson = (metaData) => {
         const filtersJsonPath = path.resolve(`${appPack.resourcePath(config.get('localFiltersFolder'))}/filters.json`);
         const updatedData = JSON.stringify(metaData, null, 4);
 
         fs.writeFileSync(filtersJsonPath, updatedData);
         log.info('Filters.json updated');
+    };
+
+    /**
+     * Downloads filters metadata and writes filters.json
+     */
+    const updateFiltersJson = () => {
+        serviceClient.loadRemoteFiltersMetadata((metadata) => {
+            writeFiltersJson(metadata);
+        });
     };
 
     /**
@@ -359,7 +368,7 @@ module.exports = (() => {
     const removeObsoleteFilters = () => {
         serviceClient.loadLocalFiltersMetadata((localMetadata) => {
             serviceClient.loadRemoteFiltersMetadata((remoteMetadata) => {
-                updateFiltersJson(remoteMetadata);
+                writeFiltersJson(remoteMetadata);
                 const obsoleteFiltersMetadata = localMetadata.filters.filter((localFilter) => (
                     !remoteMetadata.filters.some((remoteFilter) => (
                         // compare filter's id and name for the case
@@ -395,6 +404,7 @@ module.exports = (() => {
      */
     const checkAntiBannerFiltersUpdate = (forceUpdate) => {
         filtersUpdate.checkAntiBannerFiltersUpdate(forceUpdate);
+        updateFiltersJson();
     };
 
     /**
