@@ -376,6 +376,7 @@ module.exports = (function () {
                 f.trusted = trusted;
                 f.title = filter.title;
                 f.lastUpdateTime = new Date();
+                f.timeUpdated = f.lastUpdateTime;
             }
         });
 
