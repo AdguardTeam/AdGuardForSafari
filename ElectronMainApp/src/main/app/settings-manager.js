@@ -199,7 +199,6 @@ module.exports = (function () {
 
     const changeShowTrayIcon = (value) => {
         setProperty(settings.SHOW_TRAY_ICON, value);
-        safariToolbar.setStartAtLogin(value);
 
         listeners.notifyListeners(events.SETTING_UPDATED, {
             propertyName: settings.SHOW_TRAY_ICON,
