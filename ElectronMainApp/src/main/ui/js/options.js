@@ -1755,6 +1755,7 @@ const Settings = function () {
         'launch-at-login': '#launchAtLogin',
         'show-tray-icon': '#showTrayIcon',
         'verbose-logging': '#verboseLogging',
+        'default-whitelist-mode': '#changeDefaultWhiteListMode',
     };
 
     /**

@@ -157,6 +157,14 @@ module.exports = (function () {
         setProperty(settings.DEFAULT_WHITE_LIST_MODE, enabled);
     };
 
+    const updateDefaultWhiteListMode = (value) => {
+        listeners.notifyListeners(events.SETTING_UPDATED, {
+            propertyName: settings.DEFAULT_WHITE_LIST_MODE,
+            propertyValue: value,
+            inverted: true,
+        });
+    };
+
     const changeUpdateFiltersPeriod = (period) => {
         let periodNum = Number.parseInt(period, 10);
         if (Number.isNaN(periodNum)) {
@@ -261,6 +269,7 @@ module.exports = (function () {
     api.getSafebrowsingInfo = getSafebrowsingInfo;
     api.isDefaultWhiteListMode = isDefaultWhiteListMode;
     api.changeDefaultWhiteListMode = changeDefaultWhiteListMode;
+    api.updateDefaultWhiteListMode = updateDefaultWhiteListMode;
     api.changeUpdateFiltersPeriod = changeUpdateFiltersPeriod;
     api.getUpdateFiltersPeriod = getUpdateFiltersPeriod;
     api.changeLaunchAtLogin = changeLaunchAtLogin;

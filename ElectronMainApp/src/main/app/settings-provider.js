@@ -189,6 +189,7 @@ module.exports = (() => {
 
         // Apply whitelist/blacklist domains and whitelist mode
         whitelist.configure(whitelistDomains, blacklistDomains, !whiteListSection.inverted);
+        settingsManager.updateDefaultWhiteListMode(!whiteListSection.inverted);
 
         const userFilterSection = section.filters['user-filter'] || {};
         const userRulesData = userFilterSection.rules || '';
