@@ -185,6 +185,21 @@ module.exports = (function () {
         return getProperty(settings.LAUNCH_AT_LOGIN);
     };
 
+    const isShowTrayIconEnabled = () => {
+        return getProperty(settings.SHOW_TRAY_ICON);
+    };
+
+    const changeShowTrayIcon = (value) => {
+        setProperty(settings.SHOW_TRAY_ICON, value);
+        safariToolbar.setStartAtLogin(value);
+
+        listeners.notifyListeners(events.SETTING_UPDATED, {
+            propertyName: settings.SHOW_TRAY_ICON,
+            propertyValue: value,
+            inverted: false,
+        });
+    };
+
     const isVerboseLoggingEnabled = function () {
         return getProperty(settings.VERBOSE_LOGGING);
     };
@@ -250,6 +265,8 @@ module.exports = (function () {
     api.getUpdateFiltersPeriod = getUpdateFiltersPeriod;
     api.changeLaunchAtLogin = changeLaunchAtLogin;
     api.isLaunchAtLoginEnabled = isLaunchAtLoginEnabled;
+    api.isShowTrayIconEnabled = isShowTrayIconEnabled;
+    api.changeShowTrayIcon = changeShowTrayIcon;
     api.isVerboseLoggingEnabled = isVerboseLoggingEnabled;
     api.changeVerboseLogging = changeVerboseLogging;
     api.isHardwareAccelerationDisabled = isHardwareAccelerationDisabled;

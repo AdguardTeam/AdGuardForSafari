@@ -100,6 +100,7 @@ module.exports = (() => {
                 'allow-acceptable-ads': allowAcceptableAds,
                 'show-app-updated-disabled': !settingsManager.isShowAppUpdatedNotification(),
                 'update-filters-period': settingsManager.getUpdateFiltersPeriod(),
+                'show-tray-icon': settingsManager.isShowTrayIconEnabled(),
                 'launch-at-login': settingsManager.isLaunchAtLoginEnabled(),
                 'verbose-logging': settingsManager.isVerboseLoggingEnabled(),
                 'hardware-acceleration-disabled': settingsManager.isHardwareAccelerationDisabled(),
@@ -118,6 +119,7 @@ module.exports = (() => {
 
         settingsManager.changeShowAppUpdatedNotification(set['show-app-updated-disabled']);
         settingsManager.changeUpdateFiltersPeriod(set['update-filters-period']);
+        settingsManager.changeShowTrayIcon(set['show-tray-icon']);
         settingsManager.changeLaunchAtLogin(set['launch-at-login']);
         settingsManager.changeVerboseLogging(set['verbose-logging']);
         settingsManager.changeHardwareAcceleration(set['hardware-acceleration-disabled']);

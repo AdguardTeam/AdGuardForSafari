@@ -1753,6 +1753,7 @@ const Settings = function () {
         'show-app-updated-disabled': '#showAppUpdatedNotification',
         'hardware-acceleration-disabled': '#enableHardwareAcceleration',
         'launch-at-login': '#launchAtLogin',
+        'show-tray-icon': '#showTrayIcon',
         'verbose-logging': '#verboseLogging',
     };
 
