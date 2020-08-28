@@ -2,7 +2,6 @@ const config = require('config');
 const serviceClient = require('./service-client');
 const i18 = require('../../../utils/i18n');
 const i18n = require('../utils/i18n');
-const versionUtils = require('../utils/version');
 const log = require('../utils/log');
 const listeners = require('../../notifier');
 const events = require('../../events');
@@ -278,9 +277,9 @@ module.exports = (function () {
         serviceClient.loadFilterRulesBySubscriptionUrl(url, (rules) => {
             const filterData = parseFilterDataFromHeader(rules);
 
-            const filterId = addFilterId();
+            const filterId = options.filterId || addFilterId();
             const groupId = CUSTOM_FILTERS_GROUP_ID;
-            const defaultName = title;
+            const defaultName = filterData.name || title;
             const defaultDescription = filterData.description;
             const { homepage, version, expires } = filterData;
             const timeUpdated = filterData.timeUpdated || new Date().toString();
@@ -290,56 +289,41 @@ module.exports = (function () {
             const tags = [0];
             const rulesCount = rules.length;
 
-            // Check if filter from this url was added before
-            let filter = loadCustomFilters().find((f) => {
-                return f.customUrl === url;
-            });
+            // Check if filter with the same url exists
+            let filter = loadCustomFilters().find((f) => f.customUrl === url);
 
             if (filter) {
-                if (version && !versionUtils.isGreaterVersion(version, filter.version)) {
-                    log.warn('Update version is not greater');
-                    listeners.notifyListeners(
-                        events.UPDATE_CUSTOM_FILTER_ERROR,
-                        { reason: i18.__('options_popup_update_version_error.message') }
-                    );
-                    callback();
-                    return;
-                }
-                filter.enabled = true;
-                restoreCustomFilter(filter, trusted);
-                listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
-                listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, rules);
-            } else {
-                filter = new SubscriptionFilter(
-                    filterId,
-                    groupId,
-                    defaultName,
-                    defaultDescription,
-                    homepage,
-                    version,
-                    timeUpdated,
-                    displayNumber,
-                    languages,
-                    expires,
-                    subscriptionUrl,
-                    tags
-                );
-                filter.loaded = true;
-                filter.enabled = true;
-                // custom filters have special fields
-                filter.customUrl = url;
-                filter.rulesCount = rulesCount;
-                filter.trusted = trusted;
-
-                filters.push(filter);
-                filtersMap[filter.filterId] = filter;
-
-                // Save filter in separate storage
-                saveCustomFilter(filter);
-
-                listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
+                removeCustomFilter(filter);
             }
 
+            filter = new SubscriptionFilter(
+                filterId,
+                groupId,
+                defaultName,
+                defaultDescription,
+                homepage,
+                version,
+                timeUpdated,
+                displayNumber,
+                languages,
+                expires,
+                subscriptionUrl,
+                tags
+            );
+            filter.loaded = true;
+            filter.enabled = true;
+            // custom filters have special fields
+            filter.customUrl = url;
+            filter.rulesCount = rulesCount;
+            filter.trusted = trusted;
+
+            filters.push(filter);
+            filtersMap[filter.filterId] = filter;
+
+            // Save filter in separate storage
+            saveCustomFilter(filter);
+
+            listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, filter);
             listeners.notifyListeners(events.UPDATE_FILTER_RULES, filter, rules);
 
             callback(filter.filterId);
@@ -359,25 +343,6 @@ module.exports = (function () {
     const saveCustomFilter = (filter) => {
         const customFilters = loadCustomFilters();
         customFilters.push(filter);
-
-        localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(customFilters));
-    };
-
-    /**
-     * Updates custom filter in storage
-     *
-     * @param filter
-     * @param trusted
-     */
-    const restoreCustomFilter = (filter, trusted) => {
-        const customFilters = loadCustomFilters();
-        customFilters.forEach((f) => {
-            if (f.filterId === filter.filterId) {
-                f.trusted = trusted;
-                f.title = filter.title;
-                f.timeUpdated = new Date();
-            }
-        });
 
         localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(customFilters));
     };

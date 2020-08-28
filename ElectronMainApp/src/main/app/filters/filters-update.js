@@ -331,6 +331,7 @@ module.exports = (() => {
                             resolve();
                         }
                     );
+                    listeners.notifyListeners(events.FILTER_ADD_REMOVE, filter);
                 });
             })(filter, filters));
         }
