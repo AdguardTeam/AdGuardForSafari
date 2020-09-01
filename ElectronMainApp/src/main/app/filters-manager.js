@@ -351,7 +351,7 @@ module.exports = (() => {
     };
 
     /**
-     * Updates filters.json
+     * Writes metadata to filters.json
      * @param {object} metaData
      */
     const updateFiltersJson = (metaData) => {
