@@ -63,8 +63,10 @@ module.exports = (function () {
 
             const advancedBlockingRulesCount = await setAdvancedBlocking(rules.map((x) => x.ruleText));
 
+            const rulesWithoutComments = rules.filter((rule) => !rule.ruleText.startsWith('!')).length;
+
             listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
-                rulesCount: rules.length,
+                rulesCount: rulesWithoutComments,
                 rulesOverLimit: overlimit,
                 advancedBlockingRulesCount,
             });
