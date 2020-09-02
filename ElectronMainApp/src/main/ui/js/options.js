@@ -1,6 +1,10 @@
 /* global ace, i18n, EventNotifierTypes */
 
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, remote } = require('electron');
+
+const { dialog } = remote;
+const fs = require('fs');
+const path = require('path');
 
 /**
  * Common utils
@@ -54,6 +58,76 @@ const Utils = {
         html = html.trim(); // Never return a text node of whitespace as the result
         template.innerHTML = html;
         return template.content.firstChild;
+    },
+
+    /**
+     * Imports rules from file
+     * @param event
+     */
+    importRulesFromFile: function importRulesFromFile(event) {
+        return new Promise((resolve) => {
+            const fileInput = event.target;
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                fileInput.value = '';
+                resolve(e.target.result);
+            };
+            reader.onerror = function (err) {
+                throw new Error(`${i18n.__('options_userfilter_import_rules_error')} ${err.message}`);
+            };
+            const file = fileInput.files[0];
+            if (file) {
+                if (file.type !== 'text/plain') {
+                    throw new Error(i18n.__('options_popup_import_rules_wrong_file_extension'));
+                }
+                reader.readAsText(file, 'utf-8');
+            }
+        });
+    },
+
+    /**
+     * Adds rules into editor
+     * @param editor
+     * @param rules
+     */
+    addRulesToEditor: function addRulesToEditor(editor, rules) {
+        const oldRules = editor.getValue();
+        const newRules = `${oldRules}\n${rules}`.split('\n');
+        const trimmedRules = newRules.map((rule) => rule.trim());
+        const ruleSet = new Set(trimmedRules);
+        const uniqueRules = Array.from(ruleSet).join('\n');
+        editor.setValue(uniqueRules.trim());
+    },
+
+    getExtension: function getExtension(filename) {
+        if (!filename) {
+            return undefined;
+        }
+        return path.extname(filename).substring(1);
+    },
+
+    handleImportSettings(event) {
+        const onFileLoaded = (content) => {
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'applyUserSettings',
+                'settings': content,
+            }));
+        };
+
+        const file = event.currentTarget.files[0];
+        if (file) {
+            if (this.getExtension(file.name) !== 'json') {
+                throw new Error(i18n.__('options_settings_import_wrong_file_extension'));
+            }
+            const reader = new FileReader();
+            reader.readAsText(file, 'UTF-8');
+            reader.onload = function (evt) {
+                onFileLoaded(evt.target.result);
+            };
+            reader.onerror = function () {
+                throw new Error(i18n.__('options_settings_import_error'));
+            };
+        }
     },
 };
 
@@ -326,6 +400,26 @@ const handleEditorResize = (editor) => {
 };
 
 /**
+ * Exports file with provided data
+ * @param {string} fileName
+ * @param {string} fileType
+ * @param {string} data
+ * @returns {Promise<void>}
+ */
+const exportFile = async (fileName, fileType, data) => {
+    const d = new Date();
+    const timeStamp = `${d.getFullYear()}${d.getMonth()}${d.getDate()}_${d.getHours()}`
+        + `${d.getMinutes()}${d.getSeconds()}`;
+    const exportFileName = `${fileName}-${timeStamp}.${fileType}`;
+    const exportDialog = await dialog.showSaveDialog({
+        defaultPath: exportFileName,
+    });
+    if (!exportDialog.canceled) {
+        fs.writeFileSync(exportDialog.filePath.toString(), data);
+    }
+};
+
+/**
  * Whitelist block
  *
  * @param options
@@ -394,6 +488,47 @@ const WhiteListFilter = function (options) {
 
     CheckboxUtils.updateCheckbox([changeDefaultWhiteListModeCheckbox], !options.defaultWhiteListMode);
 
+    const importAllowlistInput = document.querySelector('#importAllowlistInput');
+    const importAllowlistBtn = document.querySelector('#allowlistImport');
+    const exportAllowlistBtn = document.querySelector('#allowlistExport');
+
+    const session = editor.getSession();
+
+    session.addEventListener('change', () => {
+        if (session.getValue().length > 0) {
+            exportAllowlistBtn.classList.remove('disabled');
+        } else {
+            exportAllowlistBtn.classList.add('disabled');
+        }
+    });
+
+    importAllowlistBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        importAllowlistInput.click();
+    });
+
+    importAllowlistInput.addEventListener('change', async (event) => {
+        try {
+            const importedDomains = await Utils.importRulesFromFile(event);
+            Utils.addRulesToEditor(editor, importedDomains);
+        } catch (err) {
+            /* eslint-disable-next-line no-console */
+            console.error(err.message);
+        }
+    });
+
+    exportAllowlistBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (exportAllowlistBtn.classList.contains('disabled')) {
+            return;
+        }
+        exportFile('adguard-allowlist', 'txt', editor.getValue())
+            .catch((err) => {
+                /* eslint-disable-next-line no-console */
+                console.error(err.message);
+            });
+    });
+
     return {
         updateWhiteListDomains: loadWhiteListDomains,
     };
@@ -459,6 +594,47 @@ const UserFilter = function () {
     const isUserFilterEmpty = () => {
         return !editor.getValue().trim();
     };
+
+    const importUserFiltersInput = document.querySelector('#importUserFilterInput');
+    const importUserFiltersBtn = document.querySelector('#userFiltersImport');
+    const exportUserFiltersBtn = document.querySelector('#userFiltersExport');
+
+    const session = editor.getSession();
+
+    session.addEventListener('change', () => {
+        if (session.getValue().length > 0) {
+            exportUserFiltersBtn.classList.remove('disabled');
+        } else {
+            exportUserFiltersBtn.classList.add('disabled');
+        }
+    });
+
+    importUserFiltersBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        importUserFiltersInput.click();
+    });
+
+    importUserFiltersInput.addEventListener('change', async (event) => {
+        try {
+            const importedRules = await Utils.importRulesFromFile(event);
+            Utils.addRulesToEditor(editor, importedRules);
+        } catch (err) {
+            /* eslint-disable-next-line no-console */
+            console.error(err.message);
+        }
+    });
+
+    exportUserFiltersBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (exportUserFiltersBtn.classList.contains('disabled')) {
+            return;
+        }
+        exportFile('adguard-user-rules', 'txt', editor.getValue())
+            .catch((err) => {
+                /* eslint-disable-next-line no-console */
+                console.error(err.message);
+            });
+    });
 
     return {
         updateUserFilterRules: loadUserRules,
@@ -1431,8 +1607,8 @@ const Select = function (id, options, value) {
     if (Array.isArray(options)) {
         options
             .map((item) => (typeof item === 'object'
-                && item.value !== undefined
-                && item.name !== undefined
+            && item.value !== undefined
+            && item.name !== undefined
                 ? new Option(item.value, item.name, item.value === value)
                 : new Option(item, item, item === value)))
             .forEach((option) => select.appendChild(option.render()));
@@ -1573,9 +1749,29 @@ const Settings = function () {
         }
     }, 500);
 
-    const launchAtLoginCheckbox = document.querySelector('#launchAtLogin');
-    const updateLaunchAtLoginCheckbox = function (enabled) {
-        CheckboxUtils.updateCheckbox([launchAtLoginCheckbox], enabled);
+    const checkboxSelectors = {
+        'show-app-updated-disabled': '#showAppUpdatedNotification',
+        'hardware-acceleration-disabled': '#enableHardwareAcceleration',
+        'launch-at-login': '#launchAtLogin',
+        'show-tray-icon': '#showTrayIcon',
+        'verbose-logging': '#verboseLogging',
+        'default-whitelist-mode': '#changeDefaultWhiteListMode',
+    };
+
+    /**
+     * Updates checkbox value by selector name
+     * @param {string} propertyName
+     * @param {boolean} value
+     * @param {boolean} inverted
+     */
+    const updateCheckboxValue = (propertyName, value, inverted) => {
+        const checkbox = document.querySelector(checkboxSelectors[propertyName]);
+        CheckboxUtils.updateCheckbox([checkbox], inverted ? !value : value);
+    };
+
+    const filterUpdatePeriodSelect = document.querySelector('#filterUpdatePeriod');
+    const updateFilterUpdatePeriodSelect = (period) => {
+        filterUpdatePeriodSelect.value = period;
     };
 
     const enableProtectionNotification = document.querySelector('#enableProtectionNotification');
@@ -1627,7 +1823,8 @@ const Settings = function () {
     return {
         render,
         updateAcceptableAdsCheckbox,
-        updateLaunchAtLoginCheckbox,
+        updateCheckboxValue,
+        updateFilterUpdatePeriodSelect,
         showProtectionStatusWarning,
         updateContentBlockersDescription,
     };
@@ -1792,6 +1989,7 @@ PageController.prototype = {
     init() {
         this._preventDragAndDrop();
         this._customizeText();
+        this._bindEvents();
         this._render();
 
         CheckboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
@@ -1809,6 +2007,45 @@ PageController.prototype = {
 
         this._initBoardingScreen();
         this._initUpdatesBlock();
+    },
+
+    _bindEvents() {
+        const importSettingsBtn = document.querySelector('#settingsImport');
+        const exportSettingsBtn = document.querySelector('#settingsExport');
+        const importSettingsInput = document.querySelector('#importSettingsInput');
+
+        importSettingsBtn.addEventListener('click', this.importSettingsFile.bind(this));
+        exportSettingsBtn.addEventListener('click', this.exportSettingsFile.bind(this));
+
+        importSettingsInput.addEventListener('change', (event) => {
+            try {
+                Utils.handleImportSettings(event);
+            } catch (err) {
+                /* eslint-disable-next-line no-console */
+                console.error(err.message);
+            }
+            importSettingsInput.value = '';
+        });
+    },
+
+    importSettingsFile(event) {
+        event.preventDefault();
+        const importSettingsInput = document.querySelector('#importSettingsInput');
+        importSettingsInput.click();
+    },
+
+    exportSettingsFile(event) {
+        event.preventDefault();
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'getUserSettings',
+        }));
+        ipcRenderer.once('getUserSettingsResponse', (e, response) => {
+            exportFile('adguard-settings', 'json', JSON.stringify(response, null, 4))
+                .catch((err) => {
+                    /* eslint-disable-next-line no-console */
+                    console.error(err.message);
+                });
+        });
     },
 
     _initUpdatesBlock() {
@@ -2061,8 +2298,15 @@ const initPage = function (response) {
                 case EventNotifierTypes.SHOW_OPTIONS_ABOUT_TAB:
                     window.location.hash = 'about';
                     break;
-                case EventNotifierTypes.LAUNCH_AT_LOGIN_UPDATED:
-                    controller.settings.updateLaunchAtLoginCheckbox(options);
+                case EventNotifierTypes.SETTING_UPDATED:
+                    controller.settings.updateCheckboxValue(
+                        options.propertyName,
+                        options.propertyValue,
+                        options.inverted
+                    );
+                    break;
+                case EventNotifierTypes.FILTERS_PERIOD_UPDATED:
+                    controller.settings.updateFilterUpdatePeriodSelect(options);
                     break;
                 case EventNotifierTypes.PROTECTION_STATUS_CHANGED:
                     controller.settings.showProtectionStatusWarning(options);

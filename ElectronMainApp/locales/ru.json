@@ -197,6 +197,12 @@
     "options_userfilter": {
         "message": "Пользовательские правила"
     },
+    "options_userfilter_import": {
+        "message": "Импорт"
+    },
+    "options_userfilter_export": {
+        "message": "Экпорт"
+    },
     "options_userfilter_description": {
         "message": "Вы можете добавлять свои собственные правила фильтрации в&nbsp;Пользовательские правила. Рекомендуется только для опытных пользователей, знакомых с&nbsp;HTML/CSS. Перейдите по&nbsp;<a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ссылке</a>, чтобы узнать, как составлять правила фильтрации."
     },
