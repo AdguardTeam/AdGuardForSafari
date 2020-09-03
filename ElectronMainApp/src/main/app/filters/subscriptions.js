@@ -271,13 +271,21 @@ module.exports = (function () {
      * @param options
      * @param callback
      */
-    const updateCustomFilter = (url, options, callback) => {
+    const addCustomFilter = (url, options, callback) => {
         const { title, trusted } = options;
+
+        // Check if filter with the same url exists
+        let filter = loadCustomFilters().find((f) => f.customUrl === url);
+
+        if (filter) {
+            updateCustomFilter(filter);
+            return;
+        }
 
         serviceClient.loadFilterRulesBySubscriptionUrl(url, (rules) => {
             const filterData = parseFilterDataFromHeader(rules);
 
-            const filterId = options.filterId || addFilterId();
+            const filterId = addFilterId();
             const groupId = CUSTOM_FILTERS_GROUP_ID;
             const defaultName = filterData.name || title;
             const defaultDescription = filterData.description;
@@ -288,13 +296,6 @@ module.exports = (function () {
             const displayNumber = 0;
             const tags = [0];
             const rulesCount = rules.length;
-
-            // Check if filter with the same url exists
-            let filter = loadCustomFilters().find((f) => f.customUrl === url);
-
-            if (filter) {
-                removeCustomFilter(filter);
-            }
 
             filter = new SubscriptionFilter(
                 filterId,
@@ -358,6 +359,25 @@ module.exports = (function () {
 
         localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(updatedFilters));
         filters = filters.filter((f) => f.filterId !== filter.filterId);
+    };
+
+    /**
+     * Rewrites custom filter to storage
+     *
+     * @param filter
+     */
+    const updateCustomFilter = (filter) => {
+        removeCustomFilter(filter);
+        getCustomFilterInfo(
+            filter.customUrl,
+            { title: filter.name, trusted: filter.trusted },
+            (result = {}) => {
+                const { filter } = result;
+                if (filter) {
+                    saveCustomFilter(filter);
+                }
+            }
+        );
     };
 
     /**
@@ -636,6 +656,7 @@ module.exports = (function () {
         getFilters,
         getFilter,
         createSubscriptionFilterFromJSON,
+        addCustomFilter,
         updateCustomFilter,
         getCustomFilterInfo,
         removeCustomFilter,

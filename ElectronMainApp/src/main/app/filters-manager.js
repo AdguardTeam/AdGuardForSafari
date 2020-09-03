@@ -417,7 +417,7 @@ module.exports = (() => {
             return;
         }
 
-        subscriptions.updateCustomFilter(url, options, (filterId) => {
+        subscriptions.addCustomFilter(url, options, (filterId) => {
             if (filterId) {
                 log.info('Custom filter info downloaded');
 

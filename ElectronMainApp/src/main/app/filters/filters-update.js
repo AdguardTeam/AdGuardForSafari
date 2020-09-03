@@ -321,8 +321,7 @@ module.exports = (() => {
             dfds.push((function (filter, filters) {
                 return new Promise((resolve) => {
                     subscriptions.updateCustomFilter(
-                        filter.customUrl,
-                        { title: filter.name, trusted: filter.trusted },
+                        filter,
                         (filterId) => {
                             if (filterId) {
                                 filters.push(filter);
