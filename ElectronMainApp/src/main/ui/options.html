@@ -170,6 +170,11 @@
                             <input type="checkbox" class="sp-table-row-input" id="enableHardwareAcceleration"/>
                         </div>
                     </li>
+                    <li class="settings__import-export">
+                        <input type="file" id="importSettingsInput" style="display: none;" accept=".json"/>
+                        <a id="settingsImport" href="#" i18n="settings_import_button" class="button button--green button--link"></a>
+                        <a id="settingsExport" href="#" i18n="settings_export_button" class="button button--green-bd button--link"></a>
+                    </li>
                 </ul>
             </div>
             <!--<div class="settings-actions-wr">-->
@@ -352,8 +357,15 @@
                     </div>
                 </div>
                 <div class="settings-actions settings-actions--saved">
-                    <div class="filter-rules__label" id="whiteListRulesSaveIndicator"></div>
+                    <div class="settings-actions__save-button">
                       <a class="button button--green button--m settings-content__save-btn" id="whiteListFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
+                    </div>
+                    <div class="filter-rules__label" id="whiteListRulesSaveIndicator"></div>
+                    <div class="filter-rules__import-export">
+                        <input type="file" id="importAllowlistInput" style="display: none;" accept=".txt, text/plain"/>
+                        <a id="allowlistImport" href="#" i18n="options_userfilter_import" class="button button--green button--link"></a>
+                        <a id="allowlistExport" href="#" i18n="options_userfilter_export" class="button button--green-bd button--link disabled"></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -368,8 +380,15 @@
                     </div>
                 </div>
                 <div class="settings-actions settings-actions--saved">
+                    <div class="settings-actions__save-button">
+                        <a class="button button--green button--m settings-content__save-btn" id="userFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
+                    </div>
                     <div class="filter-rules__label" id="userRulesSaveIndicator"></div>
-                    <a class="button button--green button--m settings-content__save-btn" id="userFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
+                    <div class="filter-rules__import-export">
+                        <input type="file" id="importUserFilterInput" style="display: none;" accept=".txt, text/plain"/>
+                        <a id="userFiltersImport" href="#" i18n="options_userfilter_import" class="button button--green button--link"></a>
+                        <a id="userFiltersExport" href="#" i18n="options_userfilter_export" class="button button--green-bd button--link disabled"></a>
+                    </div>
                 </div>
             </div>
         </div>
