@@ -364,17 +364,21 @@ module.exports = (function () {
     /**
      * Rewrites custom filter to storage
      *
-     * @param filter
+     * @param customFilter
+     * @param callback
      */
-    const updateCustomFilter = (filter) => {
-        removeCustomFilter(filter);
+    const updateCustomFilter = (customFilter, callback) => {
+        removeCustomFilter(customFilter);
         getCustomFilterInfo(
-            filter.customUrl,
-            { title: filter.name, trusted: filter.trusted },
+            customFilter.customUrl,
+            { title: customFilter.name, trusted: customFilter.trusted },
             (result = {}) => {
                 const { filter } = result;
                 if (filter) {
                     saveCustomFilter(filter);
+                }
+                if (callback) {
+                    callback(filter.filterId);
                 }
             }
         );
