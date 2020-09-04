@@ -204,16 +204,20 @@ module.exports = (() => {
             if (!customFilter.customUrl) {
                 throw new Error(`Custom filter should always have custom URL: ${JSON.stringify(customFilter)}`);
             }
-            subscriptions.updateCustomFilter(customFilter.customUrl, customFilter, (filterId) => {
-                if (filterId) {
-                    log.info(`Added custom filter: ${filterId}`);
-                    if (customFilter.enabled) {
-                        filters.addAndEnableFilters([filterId]);
-                    } else {
-                        filters.disableFilters([filterId]);
+            subscriptions.addCustomFilter(
+                customFilter.customUrl,
+                { title: customFilter.name, trusted: customFilter.trusted },
+                (filterId) => {
+                    if (filterId) {
+                        log.info(`Added custom filter: ${filterId}`);
+                        if (customFilter.enabled) {
+                            filters.addAndEnableFilters([filterId]);
+                        } else {
+                            filters.disableFilters([filterId]);
+                        }
                     }
                 }
-            });
+            );
         });
 
         // Sync enabled filters

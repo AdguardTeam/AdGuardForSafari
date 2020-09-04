@@ -7,6 +7,8 @@ const testFilterOptions = {
     title: 'Test custom filter',
 };
 
+jest.mock('electron-store');
+
 describe('Custom filters management tests', () => {
     it('Add new custom filter and check is it trusted', () => {
         subscriptions.updateCustomFilter(

@@ -257,7 +257,7 @@ module.exports = (function () {
             filter.customUrl = url;
             filter.rulesCount = rulesCount;
 
-            callback({ filter });
+            callback({ filter, rules });
         }, (cause) => {
             log.error(`Error download filter by url ${url}, cause: ${cause || ''}`);
             callback();
@@ -278,7 +278,10 @@ module.exports = (function () {
         let filter = loadCustomFilters().find((f) => f.customUrl === url);
 
         if (filter) {
-            updateCustomFilter(filter);
+            updateCustomFilter(filter, (filterId) => {
+                log.info(`Custom filter with ID ${filterId} successfully updated`);
+                callback(filterId);
+            });
             return;
         }
 
@@ -368,17 +371,27 @@ module.exports = (function () {
      * @param callback
      */
     const updateCustomFilter = (customFilter, callback) => {
-        removeCustomFilter(customFilter);
         getCustomFilterInfo(
             customFilter.customUrl,
             { title: customFilter.name, trusted: customFilter.trusted },
             (result = {}) => {
-                const { filter } = result;
+                const { filter, rules } = result;
                 if (filter) {
-                    saveCustomFilter(filter);
-                }
-                if (callback) {
-                    callback(filter.filterId);
+                    const customFilters = loadCustomFilters();
+                    customFilters.forEach((f) => {
+                        if (f.customUrl === customFilter.customUrl) {
+                            f.name = filter.name;
+                            f.version = filter.version;
+                            f.timeUpdated = new Date().toISOString();
+                            f.lastUpdateTime = f.timeUpdated;
+                            f.trusted = customFilter.trusted;
+                            updateFilters(f);
+                            listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, f);
+                            listeners.notifyListeners(events.UPDATE_FILTER_RULES, f, rules);
+                        }
+                    });
+                    localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(customFilters));
+                    callback(customFilter.filterId);
                 }
             }
         );
@@ -582,6 +595,16 @@ module.exports = (function () {
     const removeFilter = (filterId) => {
         filters = filters.filter((f) => f.filterId !== filterId);
         delete filtersMap[filterId];
+    };
+
+    /**
+     * Updates filter metadata
+     * @param filter
+     */
+    const updateFilters = (filter) => {
+        removeFilter(filter.filterId);
+        filters.push(filter);
+        filtersMap[filter.filterId] = filter;
     };
 
     /**
