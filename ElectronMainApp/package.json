@@ -8,7 +8,7 @@
     "standalone-beta": "AG_STANDALONE_BETA",
     "scripts": {
         "start": "electron .",
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "jest",
         "inspect": "electron --inspect=5858 .",
         "upload-locales": "gulp upload-locales",
         "download-locales": "gulp download-locales",
@@ -49,6 +49,7 @@
         "gulp": "^4.0.0",
         "gulp-hash-creator": "^0.2.0",
         "husky": "^4.2.5",
+        "jest": "^26.4.2",
         "request": "^2.88.0",
         "require-dir": "^1.0.0"
     }
