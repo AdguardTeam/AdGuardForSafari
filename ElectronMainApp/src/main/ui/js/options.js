@@ -2083,13 +2083,21 @@ PageController.prototype = {
         const enableCbExtensionsNotification = document.getElementById('enableCbExtensionsNotification');
 
         const self = this;
-        ipcRenderer.once('getSafariExtensionsStateResponse', (e, arg) => {
+        ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
             const { contentBlockersEnabled, allContentBlockersDisabled, minorExtensionsEnabled } = arg;
+            const hideExtensionsNotification = !!window.sessionStorage.getItem(hideExtensionsNotificationKey);
 
-            body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
-            onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
+            if (!hideExtensionsNotification) {
+                body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
+                onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
+            }
 
             const extensionsFlag = contentBlockersEnabled && minorExtensionsEnabled;
+
+            if (extensionsFlag) {
+                // extensions config had been changed - reset hide-extensions "cookie"
+                window.sessionStorage.setItem(hideExtensionsNotificationKey, false);
+            }
 
             enableExtensionsNotification.style.display = extensionsFlag ? 'none' : 'flex';
             enableCbExtensionsNotification.style.display = contentBlockersEnabled ? 'none' : 'flex';
@@ -2111,6 +2119,7 @@ PageController.prototype = {
             e.preventDefault();
             body.style.overflow = 'auto';
             onBoardingScreenEl.style.display = 'none';
+            window.sessionStorage.setItem(hideExtensionsNotificationKey, true);
         });
 
         const enableExtensionsNotificationClose = document.getElementById('enableExtensionsNotificationClose');
@@ -2118,7 +2127,7 @@ PageController.prototype = {
             e.preventDefault();
             enableExtensionsNotification.style.display = 'none';
 
-            window.localStorage.setItem(hideExtensionsNotificationKey, true);
+            window.sessionStorage.setItem(hideExtensionsNotificationKey, true);
         });
 
         this.checkSafariExtensions();
