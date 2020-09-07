@@ -8,7 +8,7 @@ describe('Subscriptions tests', () => {
         const customFilters = subscriptions.loadCustomFilters();
         expect(customFilters).toHaveLength(0);
 
-        subscriptions.updateCustomFilter(testFilterPath, { title: 'Test filter', trusted: true }, (filterId) => {
+        subscriptions.addCustomFilter(testFilterPath, { title: 'Test filter', trusted: true }, (filterId) => {
             expect(filterId).toBe(1000);
             const updatedCustomFilters = subscriptions.loadCustomFilters();
             expect(updatedCustomFilters).toHaveLength(1);
