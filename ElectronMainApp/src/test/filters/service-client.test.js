@@ -1,7 +1,7 @@
 const serviceClient = require('../../main/app/filters/service-client');
 const path = require('path');
 
-const testFilterPath = path.resolve(__dirname, 'test-filter.txt');
+const testFilterPath = path.resolve(__dirname, '../resources', 'test-filter.txt');
 
 jest.mock('../../main/app/app');
 
