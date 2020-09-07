@@ -1,0 +1,8 @@
+! Title: Test custom filter
+! Expires: 01 September 2020
+! Version: 0.0.0.1
+!
+||test.com/widget$third-party
+example.com##.banner-ads
+test.com#%#//scriptlet('abort-on-property-read', 'Object.prototype.getBanner')
+||example.com^$script

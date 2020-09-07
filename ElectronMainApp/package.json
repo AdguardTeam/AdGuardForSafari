@@ -8,6 +8,7 @@
     "standalone-beta": "AG_STANDALONE_BETA",
     "scripts": {
         "start": "electron .",
+        "test": "NODE_ENV=default.json jest",
         "inspect": "electron --inspect=5858 .",
         "upload-locales": "gulp upload-locales",
         "download-locales": "gulp download-locales",
@@ -36,6 +37,7 @@
         "xmlhttprequest": "^1.8.0"
     },
     "devDependencies": {
+        "@jest-runner/electron": "^3.0.0",
         "axios": "^0.19.0",
         "devtron": "^1.4.0",
         "electron": "^8.3.3",
@@ -48,6 +50,7 @@
         "gulp": "^4.0.0",
         "gulp-hash-creator": "^0.2.0",
         "husky": "^4.2.5",
+        "jest": "^26.4.2",
         "request": "^2.88.0",
         "require-dir": "^1.0.0"
     }
