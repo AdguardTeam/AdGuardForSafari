@@ -1,0 +1,8 @@
+! Title: Test custom filter
+! Expires: 01 September 2020
+! Version: 0.0.0.1
+!
+||vk.com/widget_$third-party
+||apis.google.com/js/plusone.js
+||plus.google.com^$third-party
+||plusone.google.com^$third-party

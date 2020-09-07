@@ -5,16 +5,20 @@ class Store {
         this.localStore[key] = value;
     }
 
+    has(key) {
+        return !!this.localStore[key];
+    }
+
     get(key) {
-        return this.localStore[key];
+        if (this.has(key)) {
+            return this.localStore[key];
+        }
     }
 
     delete(key) {
-        delete this.localStore[key];
-    }
-
-    has(key) {
-        return !!this.localStore[key];
+        if (this.has(key)) {
+            delete this.localStore[key];
+        }
     }
 }
 
