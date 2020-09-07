@@ -2083,7 +2083,7 @@ PageController.prototype = {
         const enableCbExtensionsNotification = document.getElementById('enableCbExtensionsNotification');
 
         const self = this;
-        ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
+        ipcRenderer.once('getSafariExtensionsStateResponse', (e, arg) => {
             const { contentBlockersEnabled, allContentBlockersDisabled, minorExtensionsEnabled } = arg;
 
             body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
@@ -2111,6 +2111,13 @@ PageController.prototype = {
                 e.preventDefault();
                 this._openSafariExtensionsPrefs();
             });
+        });
+
+        const ignoreSafariSettingsButtons = document.querySelector('#ignore-safari-extensions-settings-btn');
+        ignoreSafariSettingsButtons.addEventListener('click', (e) => {
+            e.preventDefault();
+            body.style.overflow = 'auto';
+            onBoardingScreenEl.style.display = 'none';
         });
 
         const enableExtensionsNotificationClose = document.getElementById('enableExtensionsNotificationClose');

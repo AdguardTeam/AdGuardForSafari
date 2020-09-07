@@ -1485,7 +1485,7 @@ body {
 }
 
 .onboarding {
-  position: absolute;
+  position: fixed;
   display: none;
   top: 0;
   left: 0;
@@ -1509,6 +1509,15 @@ body {
   text-align: center;
   max-width: 540px;
   margin-bottom: 50px;
+}
+
+.onboarding__actions {
+  display: flex;
+  justify-content: center;
+}
+
+.onboarding__btn {
+  margin: 0 10px;
 }
 
 .settings-content .settings-content__save-btn {
