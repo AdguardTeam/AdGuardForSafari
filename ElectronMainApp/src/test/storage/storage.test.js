@@ -1,9 +1,3 @@
-jest.mock('electron-store');
-const electronStore = require('electron-store');
-const mockStore = require('./mock-electron-store');
-const store = jest.fn(() => new mockStore());
-electronStore.mockImplementation(store);
-
 const storage = require('../../main/app/storage/storage');
 const rulesStorage = require('../../main/app/storage/rules-storage');
 
