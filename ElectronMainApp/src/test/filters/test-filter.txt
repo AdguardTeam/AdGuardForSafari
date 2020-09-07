@@ -2,7 +2,7 @@
 ! Expires: 01 September 2020
 ! Version: 0.0.0.1
 !
-||vk.com/widget_$third-party
-||apis.google.com/js/plusone.js
-||plus.google.com^$third-party
-||plusone.google.com^$third-party
+||test.com/widget$third-party
+example.com##.banner-ads
+test.com#%#//scriptlet('abort-on-property-read', 'Object.prototype.getBanner')
+||example.com^$script

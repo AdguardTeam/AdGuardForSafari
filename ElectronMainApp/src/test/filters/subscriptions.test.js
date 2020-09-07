@@ -2,6 +2,7 @@ const path = require('path');
 const subscriptions = require('../../main/app/filters/subscriptions');
 
 const testFilterPath = path.resolve(__dirname, 'test-filter.txt');
+
 describe('Subscriptions tests', () => {
     it('Add custom filter', (done) => {
         const customFilters = subscriptions.loadCustomFilters();
