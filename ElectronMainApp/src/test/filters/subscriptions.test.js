@@ -23,6 +23,26 @@ describe('Subscriptions tests', () => {
         });
     });
 
+    it('Update custom filter', (done) => {
+        const customFilters = subscriptions.loadCustomFilters();
+        expect(customFilters).toHaveLength(1);
+        const testFilter = customFilters[0];
+
+        subscriptions.updateCustomFilter(testFilter, (filterId) => {
+            expect(filterId).toBe(1000);
+            const updatedCustomFilters = subscriptions.loadCustomFilters();
+            expect(updatedCustomFilters).toHaveLength(1);
+
+            const testFilterMeta = updatedCustomFilters[0];
+            expect(testFilterMeta.filterId).toEqual(filterId);
+            expect(testFilterMeta.enabled).toBeTruthy();
+
+            const isTrusted = subscriptions.isTrustedFilter(filterId);
+            expect(isTrusted).toBeTruthy();
+            done();
+        });
+    });
+
     it('Remove custom filter', () => {
         let customFilters = subscriptions.loadCustomFilters();
         expect(customFilters).toHaveLength(1);
