@@ -1,11 +1,11 @@
 const config = require('config');
 const serviceClient = require('./service-client');
-const filterMetadata = require('./filter-metadata');
 const localStorage = require('../storage/storage');
 const i18 = require('../../../utils/i18n');
 const i18n = require('../utils/i18n');
 const log = require('../utils/log');
 const app = require('../app');
+const { SubscriptionFilter, SubscriptionGroup, FilterTag } = require('./metadata');
 
 const { CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER, CUSTOM_FILTERS_JSON_KEY } = require('./constants');
 
@@ -47,23 +47,6 @@ module.exports = (function () {
 
         return timeUpdated;
     }
-
-    /**
-     * Tag metadata
-     */
-    const FilterTag = function (tagId, keyword) {
-        this.tagId = tagId;
-        this.keyword = keyword;
-    };
-
-    /**
-     * Group metadata
-     */
-    const SubscriptionGroup = function (groupId, groupName, displayNumber) {
-        this.groupId = groupId;
-        this.groupName = groupName;
-        this.displayNumber = displayNumber;
-    };
 
     /**
      * Create tag from object
@@ -110,7 +93,7 @@ module.exports = (function () {
             tags.push(0);
         }
 
-        return new filterMetadata.SubscriptionFilter(
+        return new SubscriptionFilter(
             filterId,
             groupId,
             defaultName,

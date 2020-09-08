@@ -1,7 +1,7 @@
 module.exports = (function () {
-/**
- * Filter metadata
- */
+    /**
+     * Filter metadata
+     */
     const SubscriptionFilter = function (filterId,
         groupId,
         name,
@@ -27,7 +27,27 @@ module.exports = (function () {
         this.subscriptionUrl = subscriptionUrl;
         this.tags = tags;
     };
+
+    /**
+     * Tag metadata
+     */
+    const FilterTag = function (tagId, keyword) {
+        this.tagId = tagId;
+        this.keyword = keyword;
+    };
+
+    /**
+     * Group metadata
+     */
+    const SubscriptionGroup = function (groupId, groupName, displayNumber) {
+        this.groupId = groupId;
+        this.groupName = groupName;
+        this.displayNumber = displayNumber;
+    };
+
     return {
         SubscriptionFilter,
+        SubscriptionGroup,
+        FilterTag,
     };
 })();

@@ -1,7 +1,7 @@
 const config = require('config');
 const subscriptions = require('./subscriptions');
 const serviceClient = require('./service-client');
-const filterMetadata = require('./filter-metadata');
+const { SubscriptionFilter } = require('./metadata');
 const localStorage = require('../storage/storage');
 const listeners = require('../../notifier');
 const events = require('../../events');
@@ -88,7 +88,7 @@ module.exports = (function () {
             const tags = [0];
             const rulesCount = rules.filter((rule) => rule.trim().indexOf('!') !== 0).length;
 
-            const filter = new filterMetadata.SubscriptionFilter(
+            const filter = new SubscriptionFilter(
                 null,
                 groupId,
                 name,
@@ -151,7 +151,7 @@ module.exports = (function () {
             const tags = [0];
             const rulesCount = rules.length;
 
-            filter = new filterMetadata.SubscriptionFilter(
+            filter = new SubscriptionFilter(
                 filterId,
                 groupId,
                 defaultName,
