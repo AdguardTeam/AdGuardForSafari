@@ -1,11 +1,16 @@
 const config = require('config');
 const subscriptions = require('./subscriptions');
 const serviceClient = require('./service-client');
+const filterMetadata = require('./filter-metadata');
 const localStorage = require('../storage/storage');
 const listeners = require('../../notifier');
 const events = require('../../events');
 const log = require('../utils/log');
-const { CUSTOM_FILTERS_START_ID, CUSTOM_FILTERS_JSON_KEY } = require('./constants');
+const {
+    CUSTOM_FILTERS_START_ID,
+    CUSTOM_FILTERS_JSON_KEY,
+    AMOUNT_OF_LINENS_TO_PARSE,
+} = require('./constants');
 
 /**
  * Custom filters group identifier
@@ -24,15 +29,13 @@ module.exports = (function () {
         function parseTag(tagName) {
             let result = '';
 
-            // Look up no more than 50 first lines
-            const maxLines = Math.min(50, rules.length);
+            const maxLines = Math.min(AMOUNT_OF_LINENS_TO_PARSE, rules.length);
+            const search = `! ${tagName}: `;
             for (let i = 0; i < maxLines; i += 1) {
                 const r = rules[i];
-
-                const search = `! ${tagName}: `;
-                const indexOf = r.indexOf(search);
-                if (indexOf >= 0) {
-                    result = r.substring(indexOf + search.length);
+                const index = r.indexOf(search);
+                if (index >= 0) {
+                    result = r.substring(index + search.length);
                 }
             }
 
@@ -85,7 +88,7 @@ module.exports = (function () {
             const tags = [0];
             const rulesCount = rules.filter((rule) => rule.trim().indexOf('!') !== 0).length;
 
-            const filter = new subscriptions.SubscriptionFilter(
+            const filter = new filterMetadata.SubscriptionFilter(
                 null,
                 groupId,
                 name,
@@ -148,7 +151,7 @@ module.exports = (function () {
             const tags = [0];
             const rulesCount = rules.length;
 
-            filter = new subscriptions.SubscriptionFilter(
+            filter = new filterMetadata.SubscriptionFilter(
                 filterId,
                 groupId,
                 defaultName,

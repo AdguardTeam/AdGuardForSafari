@@ -1,5 +1,6 @@
 const config = require('config');
 const serviceClient = require('./service-client');
+const filterMetadata = require('./filter-metadata');
 const localStorage = require('../storage/storage');
 const i18 = require('../../../utils/i18n');
 const i18n = require('../utils/i18n');
@@ -65,35 +66,6 @@ module.exports = (function () {
     };
 
     /**
-     * Filter metadata
-     */
-    const SubscriptionFilter = function (filterId,
-        groupId,
-        name,
-        description,
-        homepage,
-        version,
-        timeUpdated,
-        displayNumber,
-        languages,
-        expires,
-        subscriptionUrl,
-        tags) {
-        this.filterId = filterId;
-        this.groupId = groupId;
-        this.name = name;
-        this.description = description;
-        this.homepage = homepage;
-        this.version = version;
-        this.timeUpdated = timeUpdated;
-        this.displayNumber = displayNumber;
-        this.languages = languages;
-        this.expires = expires;
-        this.subscriptionUrl = subscriptionUrl;
-        this.tags = tags;
-    };
-
-    /**
      * Create tag from object
      * @param tag Object
      * @returns {FilterTag}
@@ -138,7 +110,7 @@ module.exports = (function () {
             tags.push(0);
         }
 
-        return new SubscriptionFilter(
+        return new filterMetadata.SubscriptionFilter(
             filterId,
             groupId,
             defaultName,
@@ -423,7 +395,6 @@ module.exports = (function () {
         getFilter,
         createSubscriptionFilterFromJSON,
         removeFilter,
-        SubscriptionFilter,
         updateFilters,
     };
 })();
