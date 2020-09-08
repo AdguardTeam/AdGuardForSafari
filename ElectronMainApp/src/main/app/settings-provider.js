@@ -1,6 +1,7 @@
 const config = require('config');
 const filters = require('./filters-manager');
 const subscriptions = require('./filters/subscriptions');
+const customFilters = require('./filters/custom-filters');
 const app = require('./app');
 const settingsManager = require('./settings-manager');
 const userRules = require('./userrules');
@@ -204,7 +205,7 @@ module.exports = (() => {
             if (!customFilter.customUrl) {
                 throw new Error(`Custom filter should always have custom URL: ${JSON.stringify(customFilter)}`);
             }
-            subscriptions.addCustomFilter(
+            customFilters.addCustomFilter(
                 customFilter.customUrl,
                 { title: customFilter.name, trusted: customFilter.trusted },
                 (filterId) => {

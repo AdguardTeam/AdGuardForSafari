@@ -1,4 +1,5 @@
 const subscriptions = require('./subscriptions');
+const customFilters = require('./custom-filters');
 const serviceClient = require('./service-client');
 const listeners = require('../../notifier');
 const events = require('../../events');
@@ -320,7 +321,7 @@ module.exports = (() => {
 
             dfds.push((function (filter, filters) {
                 return new Promise((resolve) => {
-                    subscriptions.updateCustomFilter(
+                    customFilters.updateCustomFilter(
                         filter,
                         (filterId) => {
                             if (filterId) {

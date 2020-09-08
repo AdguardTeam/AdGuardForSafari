@@ -4,6 +4,7 @@ const path = require('path');
 const listeners = require('../notifier');
 const events = require('../events');
 const subscriptions = require('./filters/subscriptions');
+const customFilters = require('./filters/custom-filters');
 const categories = require('./filters/filters-categories');
 const filtersState = require('./filters/filters-state');
 const collections = require('./utils/collections');
@@ -277,7 +278,7 @@ module.exports = (() => {
         listeners.notifyListeners(events.FILTER_ADD_REMOVE, filter);
 
         if (filter.customUrl) {
-            subscriptions.removeCustomFilter(filter);
+            customFilters.removeCustomFilter(filter);
         } else {
             subscriptions.removeFilter(filterId);
         }
@@ -389,7 +390,7 @@ module.exports = (() => {
      * Cleans out old removed custom filters
      */
     const cleanRemovedCustomFilters = () => {
-        subscriptions.loadCustomFilters()
+        customFilters.loadCustomFilters()
             .filter((filter) => filter.removed)
             .forEach((filter) => {
                 filtersState.removeFilter(filter.filterId);
@@ -427,7 +428,7 @@ module.exports = (() => {
             return;
         }
 
-        subscriptions.addCustomFilter(url, options, (filterId) => {
+        customFilters.addCustomFilter(url, options, (filterId) => {
             if (filterId) {
                 log.info('Custom filter info downloaded');
 
@@ -458,7 +459,7 @@ module.exports = (() => {
             return;
         }
 
-        subscriptions.getCustomFilterInfo(url, options, (result = {}) => {
+        customFilters.getCustomFilterInfo(url, options, (result = {}) => {
             const { error, filter } = result;
             if (filter) {
                 log.info('Custom filter data downloaded');
