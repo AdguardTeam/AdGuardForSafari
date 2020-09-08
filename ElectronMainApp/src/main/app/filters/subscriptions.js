@@ -1,7 +1,7 @@
 const config = require('config');
 const serviceClient = require('./service-client');
 const cache = require('./cache');
-const localStorage = require('../storage/storage');
+const customFilters = require('./custom-filters');
 const i18 = require('../../../utils/i18n');
 const i18n = require('../utils/i18n');
 const log = require('../utils/log');
@@ -10,7 +10,6 @@ const { SubscriptionFilter, SubscriptionGroup, FilterTag } = require('./metadata
 
 const {
     CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER,
-    CUSTOM_FILTERS_JSON_KEY,
     CUSTOM_FILTERS_START_ID,
 } = require('./constants');
 
@@ -151,8 +150,8 @@ module.exports = (function () {
             groupsMap[customFiltersGroup.groupId] = customFiltersGroup;
 
             // Load custom filters
-            const customFilters = JSON.parse(localStorage.getItem(CUSTOM_FILTERS_JSON_KEY));
-            customFilters.forEach((f) => {
+            const customFiltersData = customFilters.loadCustomFilters();
+            customFiltersData.forEach((f) => {
                 const filter = createSubscriptionFilterFromJSON(f);
                 filter.customUrl = f.customUrl;
                 filter.rulesCount = f.rulesCount;
