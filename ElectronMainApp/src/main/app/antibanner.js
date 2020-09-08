@@ -1,6 +1,7 @@
 const config = require('config');
 const log = require('./utils/log');
 const subscriptions = require('./filters/subscriptions');
+const cache = require('./filters/cache');
 const customFilters = require('./filters/custom-filters');
 const listeners = require('../notifier');
 const events = require('../events');
@@ -210,10 +211,10 @@ module.exports = (() => {
          */
         const loadFilterRules = function () {
             const dfds = [];
-            const filters = subscriptions.getFilters();
+            const filters = cache.getFilters();
             for (let i = 0; i < filters.length; i += 1) {
                 const filter = filters[i];
-                const group = subscriptions.getGroup(filter.groupId);
+                const group = cache.getGroup(filter.groupId);
                 if (filter.enabled && group.enabled) {
                     dfds.push(filterRules.loadFilterRulesFromStorage(filter.filterId, rulesFilterMap));
                 }

@@ -1,4 +1,4 @@
-const subscriptions = require('./subscriptions');
+const cache = require('./cache');
 
 /**
  * Filter tags service
@@ -23,7 +23,7 @@ module.exports = (() => {
     /**
      * All tags
      */
-    const getTags = () => subscriptions.getTags();
+    const getTags = () => cache.getTags();
 
     /**
      * Is filter recommended

@@ -1,5 +1,6 @@
 const config = require('config');
 const serviceClient = require('./service-client');
+const cache = require('./cache');
 const localStorage = require('../storage/storage');
 const i18 = require('../../../utils/i18n');
 const i18n = require('../utils/i18n');
@@ -23,12 +24,6 @@ module.exports = (function () {
      * @type {number}
      */
     const { CUSTOM_FILTERS_GROUP_ID } = config.get('AntiBannerFilterGroupsId');
-
-    let tags = [];
-    let groups = [];
-    let groupsMap = {};
-    let filters = [];
-    let filtersMap = {};
 
     /**
      * @param timeUpdatedString String in format 'yyyy-MM-dd'T'HH:mm:ssZ'
@@ -120,11 +115,11 @@ module.exports = (function () {
         log.info('Loading filters metadata..');
 
         serviceClient.loadLocalFiltersMetadata((metadata) => {
-            tags = [];
-            groups = [];
-            groupsMap = {};
-            filters = [];
-            filtersMap = {};
+            const tags = [];
+            const groups = [];
+            const groupsMap = {};
+            const filters = [];
+            const filtersMap = {};
 
             for (let i = 0; i < metadata.tags.length; i += 1) {
                 tags.push(createFilterTagFromJSON(metadata.tags[i]));
@@ -166,6 +161,10 @@ module.exports = (function () {
             filters.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
             groups.sort((f1, f2) => f1.displayNumber - f2.displayNumber);
 
+            cache.setData({
+                tags, groups, groupsMap, filters, filtersMap,
+            });
+
             log.info('Filters metadata loaded');
             successCallback();
         }, errorCallback);
@@ -178,6 +177,7 @@ module.exports = (function () {
      */
     function loadMetadataI18n(successCallback, errorCallback) {
         log.info('Loading filters i18n metadata..');
+        const { tags, groups, filters } = cache.getData();
 
         serviceClient.loadLocalFiltersI18Metadata((i18nMetadata) => {
             log.info('Filters i18n metadata read');
@@ -202,6 +202,7 @@ module.exports = (function () {
                 applyGroupLocalization(groups[k], groupsI18n);
             }
 
+            cache.setData({ tags, groups, filters });
             log.debug('Filters i18n metadata - groups');
 
             log.info('Filters i18n metadata loaded');
@@ -281,62 +282,13 @@ module.exports = (function () {
     };
 
     /**
-     * @returns Array of Filters metadata
-     */
-    const getFilters = () => filters;
-
-    /**
-     * @returns Object of Filters metadata
-     */
-    const getFiltersMap = () => filtersMap;
-
-    /**
-     * Gets filter metadata by filter identifier
-     */
-    const getFilter = (filterId) => filtersMap[filterId];
-
-    /**
-     * Removes filter metadata by id
-     * @param filterId
-     */
-    const removeFilter = (filterId) => {
-        filters = filters.filter((f) => f.filterId !== filterId);
-        delete filtersMap[filterId];
-    };
-
-    /**
-     * Updates filter metadata
-     * @param filter
-     */
-    const updateFilters = (filter) => {
-        removeFilter(filter.filterId);
-        filters.push(filter);
-        filtersMap[filter.filterId] = filter;
-    };
-
-    /**
-     * @returns Array of Tags metadata
-     */
-    const getTags = () => tags;
-
-    /**
-     * @returns Array of Groups metadata
-     */
-    const getGroups = () => groups;
-
-    /**
-     * @returns Group metadata
-     */
-    const getGroup = (groupId) => groupsMap[groupId];
-
-    /**
      * If group's status was ever enabled or disabled
      *
      * @param groupId
      * @returns {boolean}
      */
     const groupHasEnabledStatus = (groupId) => {
-        const group = groupsMap[groupId];
+        const group = cache.getGroupsMap[groupId];
         return group && typeof group.enabled !== 'undefined';
     };
 
@@ -351,6 +303,7 @@ module.exports = (function () {
             return [];
         }
 
+        const filters = cache.getFilters();
         const filterIds = [];
         for (let i = 0; i < filters.length; i += 1) {
             const filter = filters[i];
@@ -368,16 +321,9 @@ module.exports = (function () {
 
     return {
         init,
+        loadMetadata,
         getFilterIdsForLanguage,
-        getTags,
-        getGroups,
-        getGroup,
         groupHasEnabledStatus,
-        getFilters,
-        getFiltersMap,
-        getFilter,
         createSubscriptionFilterFromJSON,
-        removeFilter,
-        updateFilters,
     };
 })();

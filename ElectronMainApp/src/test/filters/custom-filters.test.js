@@ -1,6 +1,6 @@
 const path = require('path');
-const subscriptions = require('../../main/app/filters/subscriptions');
 const customFilters = require('../../main/app/filters/custom-filters');
+const cache = require('../../main/app/filters/cache');
 
 const testFilterPath = path.resolve(__dirname, '../resources', 'test-filter.txt');
 
@@ -21,7 +21,7 @@ describe('Custom filters tests', () => {
             const isTrusted = customFilters.isTrustedFilter(filterId);
             expect(isTrusted).toBeTruthy();
 
-            const filtersCache = subscriptions.getFilters();
+            const filtersCache = cache.getFilters();
             expect(filtersCache).toHaveLength(1);
 
             done();
@@ -49,7 +49,7 @@ describe('Custom filters tests', () => {
                 expect(isTrusted).toBeTruthy();
 
                 // check cache filters
-                const filtersCache = subscriptions.getFilters();
+                const filtersCache = cache.getFilters();
                 expect(filtersCache).toHaveLength(1);
 
                 const testFilterDate = new Date(testFilter.timeUpdated).getTime();
@@ -72,12 +72,12 @@ describe('Custom filters tests', () => {
         const testFilterMeta = filters[0];
         customFilters.removeCustomFilter(testFilterMeta);
         // remove from cache
-        subscriptions.removeFilter(testFilterMeta.filterId);
+        cache.removeFilter(testFilterMeta.filterId);
 
         filters = customFilters.loadCustomFilters();
         expect(filters).toHaveLength(0);
 
-        const filtersCache = subscriptions.getFilters();
+        const filtersCache = cache.getFilters();
         expect(filtersCache).toHaveLength(0);
     });
 });

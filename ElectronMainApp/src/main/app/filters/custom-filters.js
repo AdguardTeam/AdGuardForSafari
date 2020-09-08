@@ -1,5 +1,5 @@
 const config = require('config');
-const subscriptions = require('./subscriptions');
+const cache = require('./cache');
 const serviceClient = require('./service-client');
 const { SubscriptionFilter } = require('./metadata');
 const localStorage = require('../storage/storage');
@@ -54,7 +54,7 @@ module.exports = (function () {
 
     const addFilterId = () => {
         let max = 0;
-        const filters = subscriptions.getFilters();
+        const filters = cache.getFilters();
         filters.forEach((f) => {
             if (f.filterId > max) {
                 max = f.filterId;
@@ -172,7 +172,7 @@ module.exports = (function () {
             filter.rulesCount = rulesCount;
             filter.trusted = trusted;
 
-            subscriptions.updateFilters(filter);
+            cache.updateFilters(filter);
 
             // Save filter in separate storage
             saveCustomFilter(filter);
@@ -209,7 +209,7 @@ module.exports = (function () {
         const updatedFilters = customFilters.filter((f) => f.filterId !== filter.filterId);
 
         localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(updatedFilters));
-        subscriptions.removeFilter(filter.filterId);
+        cache.removeFilter(filter.filterId);
     };
 
     /**
@@ -233,7 +233,7 @@ module.exports = (function () {
                             f.timeUpdated = new Date().toString();
                             f.lastUpdateTime = f.timeUpdated;
                             f.trusted = customFilter.trusted;
-                            subscriptions.updateFilters(f);
+                            cache.updateFilters(f);
                             listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, f);
                             listeners.notifyListeners(events.UPDATE_FILTER_RULES, f, rules);
                         }
@@ -265,7 +265,7 @@ module.exports = (function () {
         if (filterId < CUSTOM_FILTERS_START_ID) {
             return true;
         }
-        const filtersMap = subscriptions.getFiltersMap();
+        const filtersMap = cache.getFiltersMap();
         const filter = filtersMap[filterId];
         return !!(filter && filter.trusted && filter.trusted === true);
     };

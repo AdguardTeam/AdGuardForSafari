@@ -1,4 +1,5 @@
 const subscriptions = require('./subscriptions');
+const cache = require('./cache');
 const customFilters = require('./custom-filters');
 const serviceClient = require('./service-client');
 const listeners = require('../../notifier');
@@ -106,7 +107,7 @@ module.exports = (() => {
                 if (success) {
                     const filters = [];
                     for (let i = 0; i < filterIds.length; i += 1) {
-                        const filter = subscriptions.getFilter(filterIds[i]);
+                        const filter = cache.getFilter(filterIds[i]);
                         if (filter) {
                             filters.push(filter);
                         }
@@ -130,7 +131,7 @@ module.exports = (() => {
                 const filterMetadataListToUpdate = [];
                 for (let i = 0; i < filterMetadataList.length; i += 1) {
                     const filterMetadata = subscriptions.createSubscriptionFilterFromJSON(filterMetadataList[i]);
-                    const filter = subscriptions.getFilter(filterMetadata.filterId);
+                    const filter = cache.getFilter(filterMetadata.filterId);
                     if (filter && filterMetadata.version
                         && versionUtils.isGreaterVersion(filterMetadata.version, filter.version)) {
                         log.info('Updating filter {0} to version {1}', filter.filterId, filterMetadata.version);
@@ -227,7 +228,7 @@ module.exports = (() => {
      * @private
      */
     const loadFilterRules = (filterMetadata, forceRemote, callback) => {
-        const filter = subscriptions.getFilter(filterMetadata.filterId);
+        const filter = cache.getFilter(filterMetadata.filterId);
 
         filter._isDownloading = true;
         listeners.notifyListeners(events.START_DOWNLOAD_FILTER, filter);
@@ -276,7 +277,7 @@ module.exports = (() => {
         const filterIds = [];
         const customFilterIds = [];
 
-        const filters = filtersToUpdate || subscriptions.getFilters();
+        const filters = filtersToUpdate || cache.getFilters();
         const updateFiltersPeriodInMs = settings.getUpdateFiltersPeriod() * 60 * 60 * 1000;
 
         for (const filter of filters) {
@@ -317,7 +318,7 @@ module.exports = (() => {
         const dfds = [];
         const filters = [];
         for (let i = 0; i < customFilterIds.length; i += 1) {
-            const filter = subscriptions.getFilter(customFilterIds[i]);
+            const filter = cache.getFilter(customFilterIds[i]);
 
             dfds.push((function (filter, filters) {
                 return new Promise((resolve) => {
@@ -376,7 +377,7 @@ module.exports = (() => {
     const resetFiltersVersion = () => {
         const RESET_VERSION = '0.0.0.0';
 
-        const filters = subscriptions.getFilters();
+        const filters = cache.getFilters();
         for (const filter of filters) {
             log.debug('Reset version for filter {0}', filter.filterId);
             filter.version = RESET_VERSION;

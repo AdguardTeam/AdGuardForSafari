@@ -1,6 +1,6 @@
 const config = require('config');
 const filters = require('./filters-manager');
-const subscriptions = require('./filters/subscriptions');
+const cache = require('./filters/cache');
 const customFilters = require('./filters/custom-filters');
 const app = require('./app');
 const settingsManager = require('./settings-manager');
@@ -43,7 +43,7 @@ module.exports = (() => {
     };
 
     const collectEnabledGroupIds = () => {
-        const groups = subscriptions.getGroups();
+        const groups = cache.getGroups();
         return groups
             .filter((group) => group.enabled)
             .map((group) => group.groupId);
@@ -168,7 +168,7 @@ module.exports = (() => {
         log.info(`Settings sync: Next groups were enabled: ${enabledGroups}`);
 
         // disable groups not listed in the imported list
-        const groups = subscriptions.getGroups();
+        const groups = cache.getGroups();
 
         const groupIdsToDisable = groups
             .map((group) => group.groupId)
