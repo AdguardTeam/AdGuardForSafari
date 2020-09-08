@@ -1,6 +1,7 @@
 const path = require('path');
 const customFilters = require('../../main/app/filters/custom-filters');
 const cache = require('../../main/app/filters/cache');
+const subscriptions = require('../../main/app/filters/subscriptions');
 
 const testFilterPath = path.resolve(__dirname, '../resources', 'test-filter.txt');
 
@@ -18,7 +19,7 @@ describe('Custom filters tests', () => {
             expect(testFilterMeta.filterId).toEqual(filterId);
             expect(testFilterMeta.enabled).toBeTruthy();
 
-            const isTrusted = customFilters.isTrustedFilter(filterId);
+            const isTrusted = subscriptions.isTrustedFilter(filterId);
             expect(isTrusted).toBeTruthy();
 
             const filtersCache = cache.getFilters();
@@ -42,7 +43,7 @@ describe('Custom filters tests', () => {
 
                 const testFilterMeta = updatedFilters[0];
                 expect(testFilterMeta.filterId).toEqual(filterId);
-                const isTrusted = customFilters.isTrustedFilter(filterId);
+                const isTrusted = subscriptions.isTrustedFilter(filterId);
 
                 // check filters state and options
                 expect(testFilterMeta.enabled).toBeTruthy();

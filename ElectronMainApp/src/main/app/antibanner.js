@@ -2,7 +2,6 @@ const config = require('config');
 const log = require('./utils/log');
 const subscriptions = require('./filters/subscriptions');
 const cache = require('./filters/cache');
-const customFilters = require('./filters/custom-filters');
 const listeners = require('../notifier');
 const events = require('../events');
 const filters = require('./filters-manager');
@@ -168,7 +167,7 @@ module.exports = (() => {
                 const filterIdNum = parseInt(filterId, 10);
                 if (filterId !== USER_FILTER_ID) {
                     const rulesTexts = rulesFilterMap[filterIdNum];
-                    const isTrustedFilter = customFilters.isTrustedFilter(filterIdNum);
+                    const isTrustedFilter = subscriptions.isTrustedFilter(filterIdNum);
                     addRules(filterIdNum, rulesTexts, isTrustedFilter);
                 }
             }

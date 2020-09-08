@@ -255,27 +255,11 @@ module.exports = (function () {
         return customFilters ? JSON.parse(customFilters) : [];
     };
 
-    /**
-     * Is filter trusted
-     *
-     * @param filterId
-     * @return {boolean}
-     */
-    const isTrustedFilter = (filterId) => {
-        if (filterId < CUSTOM_FILTERS_START_ID) {
-            return true;
-        }
-        const filtersMap = cache.getFiltersMap();
-        const filter = filtersMap[filterId];
-        return !!(filter && filter.trusted && filter.trusted === true);
-    };
-
     return {
         addCustomFilter,
         updateCustomFilter,
         getCustomFilterInfo,
         removeCustomFilter,
         loadCustomFilters,
-        isTrustedFilter,
     };
 })();
