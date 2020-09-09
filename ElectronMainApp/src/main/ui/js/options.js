@@ -2076,6 +2076,7 @@ PageController.prototype = {
 
     _initBoardingScreen() {
         const hideExtensionsNotificationKey = 'hide-extensions-notification';
+        const hideOnboardingScreenKey = 'hide-onboarding-screen';
 
         const body = document.querySelector('body');
         const onBoardingScreenEl = body.querySelector('#boarding-screen-placeholder');
@@ -2086,19 +2087,24 @@ PageController.prototype = {
         ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
             const { contentBlockersEnabled, allContentBlockersDisabled, minorExtensionsEnabled } = arg;
 
-            body.style.overflow = !allContentBlockersDisabled ? 'auto' : 'hidden';
-            onBoardingScreenEl.style.display = !allContentBlockersDisabled ? 'none' : 'flex';
+            const hideOnboardingScreen = !!window.sessionStorage.getItem(hideOnboardingScreenKey);
+            const shouldHideOnboardingScreen = !allContentBlockersDisabled || hideOnboardingScreen;
 
-            const hideExtensionsNotification = window.localStorage.getItem(hideExtensionsNotificationKey) === 'true';
+            body.style.overflow = shouldHideOnboardingScreen ? 'auto' : 'hidden';
+            onBoardingScreenEl.style.display = shouldHideOnboardingScreen ? 'none' : 'flex';
+
+            const hideExtensionsNotification = !!window.sessionStorage.getItem(hideExtensionsNotificationKey);
             const extensionsFlag = contentBlockersEnabled && minorExtensionsEnabled;
+
             if (extensionsFlag) {
                 // extensions config had been changed - reset hide-extensions "cookie"
-                window.localStorage.setItem(hideExtensionsNotificationKey, false);
+                window.sessionStorage.setItem(hideExtensionsNotificationKey, false);
+                window.sessionStorage.setItem(hideOnboardingScreenKey, false);
             }
 
-            const shouldHide = hideExtensionsNotification || extensionsFlag;
+            const shouldHideNotification = hideExtensionsNotification || extensionsFlag;
 
-            enableExtensionsNotification.style.display = shouldHide ? 'none' : 'flex';
+            enableExtensionsNotification.style.display = shouldHideNotification ? 'none' : 'flex';
             enableCbExtensionsNotification.style.display = contentBlockersEnabled ? 'none' : 'flex';
 
             self.contentBlockers.updateContentBlockers(arg);
@@ -2113,12 +2119,20 @@ PageController.prototype = {
             });
         });
 
+        const ignoreSafariSettingsButtons = document.querySelector('#ignore-safari-extensions-settings-btn');
+        ignoreSafariSettingsButtons.addEventListener('click', (e) => {
+            e.preventDefault();
+            body.style.overflow = 'auto';
+            onBoardingScreenEl.style.display = 'none';
+            window.sessionStorage.setItem(hideOnboardingScreenKey, true);
+        });
+
         const enableExtensionsNotificationClose = document.getElementById('enableExtensionsNotificationClose');
         enableExtensionsNotificationClose.addEventListener('click', (e) => {
             e.preventDefault();
             enableExtensionsNotification.style.display = 'none';
 
-            window.localStorage.setItem(hideExtensionsNotificationKey, true);
+            window.sessionStorage.setItem(hideExtensionsNotificationKey, true);
         });
 
         this.checkSafariExtensions();

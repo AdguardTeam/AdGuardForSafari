@@ -115,13 +115,13 @@ body {
 	color: #eeeeee;
 }
 .settings-notification {
-	background: #fff3df;
+	background: #777777;
 }
 .settings-notification__title {
 	color: #cccccc;
 }
 .settings-notification__text {
-	color: #888888;
+	color: #cccccc;
 }
 .block-type .block-type__desc .desc {
 	color: #eeeeee;
