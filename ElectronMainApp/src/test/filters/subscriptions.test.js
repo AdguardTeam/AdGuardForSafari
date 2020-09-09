@@ -18,18 +18,18 @@ const testFilter = {
 }
 
 describe('Subscriptions tests', () => {
-    it('Init tests', (done) => {
-        subscriptions.init(() => {
-            const filters = cache.getFilters();
-            expect(filters.length).toBeGreaterThan(50);
-            expect(filters[0]).toHaveProperty('filterId');
-            expect(filters[0].filterId).toBeDefined();
-            expect(filters[0]).toHaveProperty('groupId');
-            expect(filters[0].groupId).toBeDefined();
-
-            done();
-        });
-    });
+    // it('Init tests', (done) => {
+    //     subscriptions.init(() => {
+    //         const filters = cache.getFilters();
+    //         expect(filters.length).toBeGreaterThan(50);
+    //         expect(filters[0]).toHaveProperty('filterId');
+    //         expect(filters[0].filterId).toBeDefined();
+    //         expect(filters[0]).toHaveProperty('groupId');
+    //         expect(filters[0].groupId).toBeDefined();
+    //
+    //         done();
+    //     });
+    // });
 
     it('Create subscription filter from JSON tests', () => {
         const filter = subscriptions.createSubscriptionFilterFromJSON(testFilter);
