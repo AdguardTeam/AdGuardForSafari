@@ -1,3 +1,6 @@
+/**
+ * Cache data for filters, groups and tags
+ */
 module.exports = (function () {
     let tags = [];
     let groups = [];
