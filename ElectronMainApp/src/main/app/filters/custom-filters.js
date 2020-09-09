@@ -9,8 +9,13 @@ const log = require('../utils/log');
 const {
     CUSTOM_FILTERS_START_ID,
     CUSTOM_FILTERS_JSON_KEY,
-    AMOUNT_OF_LINENS_TO_PARSE,
 } = require('./constants');
+
+/**
+ * Amount of lines to parse metadata from filter's header
+ * @type {number}
+ */
+const AMOUNT_OF_LINES_TO_PARSE = 50;
 
 /**
  * Custom filters group identifier
@@ -29,7 +34,7 @@ module.exports = (function () {
         function parseTag(tagName) {
             let result = '';
 
-            const maxLines = Math.min(AMOUNT_OF_LINENS_TO_PARSE, rules.length);
+            const maxLines = Math.min(AMOUNT_OF_LINES_TO_PARSE, rules.length);
             const search = `! ${tagName}: `;
             for (let i = 0; i < maxLines; i += 1) {
                 const r = rules[i];

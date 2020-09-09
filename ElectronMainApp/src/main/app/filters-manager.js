@@ -14,6 +14,8 @@ const filtersUpdate = require('./filters/filters-update');
 const serviceClient = require('./filters/service-client');
 const appPack = require('../../utils/app-pack');
 
+const { CUSTOM_FILTERS_START_ID } = require('./filters/constants');
+
 /**
  * Filters manager
  */
@@ -175,6 +177,20 @@ module.exports = (() => {
 
         listeners.notifyListeners(events.FILTER_ENABLE_DISABLE, filter);
         log.info('Filter {0} enabled successfully', filterId);
+    };
+
+    /**
+     * Is filter trusted
+     *
+     * @param filterId
+     * @return {boolean}
+     */
+    const isTrustedFilter = (filterId) => {
+        if (filterId < CUSTOM_FILTERS_START_ID) {
+            return true;
+        }
+        const filter = getFilterById(filterId);
+        return !!(filter && filter.trusted && filter.trusted === true);
     };
 
     /**
@@ -476,6 +492,7 @@ module.exports = (() => {
         getFilters,
         getGroups,
         isFilterEnabled,
+        isTrustedFilter,
         getEnabledFilters,
         getCustomFilters,
 

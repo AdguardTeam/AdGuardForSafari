@@ -167,7 +167,7 @@ module.exports = (() => {
                 const filterIdNum = parseInt(filterId, 10);
                 if (filterId !== USER_FILTER_ID) {
                     const rulesTexts = rulesFilterMap[filterIdNum];
-                    const isTrustedFilter = subscriptions.isTrustedFilter(filterIdNum);
+                    const isTrustedFilter = filters.isTrustedFilter(filterIdNum);
                     addRules(filterIdNum, rulesTexts, isTrustedFilter);
                 }
             }

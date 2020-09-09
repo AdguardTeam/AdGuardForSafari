@@ -8,10 +8,7 @@ const log = require('../utils/log');
 const app = require('../app');
 const { SubscriptionFilter, SubscriptionGroup, FilterTag } = require('./metadata');
 
-const {
-    CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER,
-    CUSTOM_FILTERS_START_ID,
-} = require('./constants');
+const { CUSTOM_FILTERS_GROUP_DISPLAY_NUMBER } = require('./constants');
 
 /**
  * Service that loads and parses filters metadata from backend server.
@@ -322,26 +319,10 @@ module.exports = (function () {
         return filterIds;
     };
 
-    /**
-     * Is filter trusted
-     *
-     * @param filterId
-     * @return {boolean}
-     */
-    const isTrustedFilter = (filterId) => {
-        if (filterId < CUSTOM_FILTERS_START_ID) {
-            return true;
-        }
-        const filtersMap = cache.getFiltersMap();
-        const filter = filtersMap[filterId];
-        return !!(filter && filter.trusted && filter.trusted === true);
-    };
-
     return {
         init,
         getFilterIdsForLanguage,
         groupHasEnabledStatus,
         createSubscriptionFilterFromJSON,
-        isTrustedFilter,
     };
 })();
