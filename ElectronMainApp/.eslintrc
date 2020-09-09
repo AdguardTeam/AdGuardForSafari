@@ -110,5 +110,8 @@
       "code": 120
     }],
     "arrow-body-style": "off"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
   }
 }
