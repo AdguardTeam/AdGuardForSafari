@@ -41,11 +41,6 @@ module.exports = (function () {
     const getFilters = () => filters;
 
     /**
-     * @returns Object of Filters metadata
-     */
-    const getFiltersMap = () => filtersMap;
-
-    /**
      * Removes filter metadata by id
      * @param filterId
      */
@@ -89,7 +84,6 @@ module.exports = (function () {
         setData,
         getFilter,
         getFilters,
-        getFiltersMap,
         removeFilter,
         updateFilters,
         getGroup,
