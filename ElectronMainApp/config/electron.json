@@ -1,0 +1,44 @@
+{
+  "AntiBannerFiltersId": {
+    "USER_FILTER_ID": 0,
+    "RUSSIAN_FILTER_ID": 1,
+    "ENGLISH_FILTER_ID": 2,
+    "TRACKING_FILTER_ID": 3,
+    "SOCIAL_FILTER_ID": 4,
+    "SEARCH_AND_SELF_PROMO_FILTER_ID": 10,
+    "MOBILE_ADS_FILTER_ID": 11,
+    "SAFARI_FILTER_ID": 12,
+    "WHITE_LIST_FILTER_ID": 100,
+    "EASY_PRIVACY": 118,
+    "FANBOY_ANNOYANCES": 122,
+    "FANBOY_SOCIAL": 123,
+    "FANBOY_ENHANCED": 215
+  },
+  "AntiBannerFilterGroupsId": {
+    "AD_BLOCKING_ID": 1,
+    "PRIVACY_ID": 2,
+    "SOCIAL_ID": 3,
+    "ANNOYANCES_ID": 4,
+    "SECURITY_ID": 5,
+    "OTHER_ID": 6,
+    "LANGUAGE_SPECIFIC_ID": 7,
+    "CUSTOM_FILTERS_GROUP_ID": 0
+  },
+  "SafariExtensionBundles": {
+    "GENERAL": "com.adguard.safari.AdGuard.BlockerExtension",
+    "PRIVACY": "com.adguard.safari.AdGuard.BlockerPrivacy",
+    "SOCIAL_WIDGETS_AND_ANNOYANCES": "com.adguard.safari.AdGuard.BlockerSocial",
+    "SECURITY": "com.adguard.safari.AdGuard.BlockerSecurity",
+    "OTHER": "com.adguard.safari.AdGuard.BlockerOther",
+    "CUSTOM": "com.adguard.safari.AdGuard.BlockerCustom",
+    "ADVANCED_BLOCKING": "com.adguard.safari.AdGuard.AdvancedBlocking",
+    "ICON": "com.adguard.safari.AdGuard.Extension"
+  },
+  "backendUrl": "https://chrome.adtidy.org",
+  "backendApiKey": "4DDBE80A3DA94D819A00523252FB6380",
+  "filtersUrl": "https://filters.adtidy.org/extension/safari",
+  "localFiltersFolder": "../../../../filters",
+  "localFilterIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+  "updatesUrl": "https://static.adguard.com/safari/updates.json",
+  "repoReleasesUrl": "https://github.com/AdguardTeam/AdGuardForSafari/releases"
+}

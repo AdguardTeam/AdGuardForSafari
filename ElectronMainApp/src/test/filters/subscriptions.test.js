@@ -1,13 +1,5 @@
-const fs = require('fs-extra');
-const path = require('path');
 const subscriptions = require('../../main/app/filters/subscriptions');
 const cache = require('../../main/app/filters/cache');
-
-// copy filters to use in test environment
-fs.copySync(
-    path.resolve(__dirname, '../../../filters'),
-    path.resolve(__dirname, '../../../node_modules/@jest-runner/electron/build/filters')
-);
 
 jest.mock('../../main/app/app');
 
