@@ -40,7 +40,6 @@ describe('Custom filters tests', () => {
 
                 const testFilterMeta = updatedFilters[0];
                 expect(testFilterMeta.filterId).toEqual(filterId);
-                // const isTrusted = filtersManager.isTrustedFilter(filterId);
 
                 // check filters state and options
                 expect(testFilterMeta.enabled).toBeTruthy();
