@@ -29,7 +29,6 @@ describe('Subscriptions tests', () => {
     it('Init tests', (done) => {
         subscriptions.init(() => {
             const filters = cache.getFilters();
-            // console.log(filters);
             expect(true).toBeTruthy();
             expect(filters.length).toBeGreaterThan(50);
             expect(filters[0]).toHaveProperty('filterId');
