@@ -17,6 +17,9 @@
     "options_about_update_check": {
         "message": "Memeriksa pembaruan"
     },
+    "options_about_title": {
+        "message": "AdGuard untuk Safari"
+    },
     "options_about_updating": {
         "message": "Memperbarui AdGuard untuk Safari"
     },
@@ -37,6 +40,9 @@
     },
     "main_menu_close_window": {
         "message": "Tutup jendela"
+    },
+    "tray_menu_export_logs": {
+        "message": "Ekspor log dan info sistem..."
     },
     "name": {
         "message": "AdGuard AdBlocker"
@@ -275,6 +281,9 @@
     "tray_menu_protection_start": {
         "message": "Aktifkan AdGuard"
     },
+    "tray_menu_protection_stop": {
+        "message": "Pemblokir iklan Safari dimatikan"
+    },
     "options_last_update": {
         "message": "Pembaharuan Terakhir:"
     },
@@ -353,6 +362,12 @@
     "options_verbose_logging_desc": {
         "message": "Jika perincian log diaktifkan, ekstensi AdGuard Safari akan mencetak informasi tambahan ke konsol browser"
     },
+    "options_enable_hardware_acceleration": {
+        "message": "Aktifkan akselerasi perangkat keras"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Mengaktifkan akselerasi perangkat keras untuk jendela pengaturan. Diperlukan mulai ulang aplikasi"
+    },
     "settings_notification_protection_title": {
         "message": "Perhatian! Proteksi dinonaktifkan"
     },
@@ -412,5 +427,23 @@
     },
     "userfilter_name": {
         "message": "Penyaring pengguna"
+    },
+    "window_close_dialog_message": {
+        "message": "Biarkan AdGuard tetap berjalan dibelakang?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Ini penting bagi AdGuard untuk menjaga proses utama tetap berjalan di latar belakang, jika tidak maka tidak akan bisa secara otomatis memeriksa pembaruan filter dan mengelola filter."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Selalu ingat pilihan saya"
+    },
+    "window_close_dialog_yes": {
+        "message": "Ya (disarankan)"
+    },
+    "window_close_dialog_no": {
+        "message": "Tidak"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Batal"
     }
 }

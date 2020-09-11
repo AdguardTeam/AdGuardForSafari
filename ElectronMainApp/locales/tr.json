@@ -27,7 +27,7 @@
         "message": "AdGuard for Safari is up to date"
     },
     "options_about_update_downloaded": {
-        "message": "Nearly up to date! Relaunch AdGuard for Safari to finish updating."
+        "message": "Neredeyse güncel! Güncellemeyi bitirmek için Safari için Adguard'ı yeniden başlat."
     },
     "options_about_update_relaunch": {
         "message": "Relaunch"
@@ -73,8 +73,8 @@
     },
     "options_antibanner_info_filters": {
         "message": {
-            "one": "%s filter",
-            "other": "%s filters"
+            "one": "%s filtre",
+            "other": "%s filtre"
         }
     },
     "options_antibanner_info_rules": {
@@ -177,7 +177,7 @@
         "message": "Filtre güncellemelerini denetle"
     },
     "options_whitelist": {
-        "message": "Beyazliste"
+        "message": "Beyaz liste"
     },
     "options_whitelist_description": {
         "message": "AdGuard, beyazlistedeki sitelerde reklamları filtrelemez."
@@ -186,10 +186,10 @@
         "message": "Beyazlisteyi içe aktar<span class='sp-table-row-info'>bu beyazliste harici tüm reklamları engelle <i></i> </span>"
     },
     "options_userfilter": {
-        "message": "Kullanıcı Filtresi"
+        "message": "Kullanıcı kuralları"
     },
     "options_userfilter_description": {
-        "message": "Bu filtreye kendi kurallarınızı ekleyebilirsiniz. Bu seçenek HTML/CSS kodları hakkında bilgisi olan gelişmiş kullanıcılar için tavsiye edilir. Kendi filtre kurallarınızı yazmayı öğrenmek için <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filtre kuralları öğreticisi</a> bölümünü okuyun."
+        "message": "Burada kendi kurallarınızı ekleyebilirsiniz. Bu seçenek HTML/CSS kodları hakkında bilgi sahibi olan gelişmiş kullanıcılar için önerilir. Kendi filtre kurallarınızı nasıl yazacağınızı öğrenmek için <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filtre kuralları eğitimini</a> okuyun."
     },
     "options_show_app_updated_notification": {
         "message": "Eklenti güncellemelerini bana bildir"
@@ -309,10 +309,10 @@
         "message": "Son Kullanıcı Lisans Sözleşmesi"
     },
     "options_privacy_policy": {
-        "message": "Gizlilik Sözleşmesi"
+        "message": "Gizlilik Politikası"
     },
     "options_acknowledgment": {
-        "message": "Teşekkür"
+        "message": "Katkıda Bulunanlar"
     },
     "options_github": {
         "message": "Github"
@@ -330,10 +330,10 @@
         "message": "Sürüm %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "Kullanıcı filtresi güncellendi"
+        "message": "Kullanıcı kuralları güncellendi"
     },
     "notification_user_filter_updated_desc": {
-        "message": "Kullanıcı filtresine yeni bir kural eklendi:"
+        "message": "Kullanıcı kurallarına yeni bir kural eklendi:"
     },
     "options_filters_update_period": {
         "message": "Güncelleme aralığı"
@@ -354,7 +354,7 @@
         "message": "Safari için AdGuard'ı menü çubuğunda göster"
     },
     "options_launch_at_login": {
-        "message": "Oturum açmada Safari için AdGuard'ı başlat"
+        "message": "Giriş yaparken Safari için Adguard'ı başlat"
     },
     "options_verbose_logging": {
         "message": "Verbose logging"
@@ -369,7 +369,7 @@
         "message": "Ayarlar penceresi için donanımsal hızlandırmayı etkinleştirir, uygulamanın yeniden başlatılması gerekir"
     },
     "settings_notification_protection_title": {
-        "message": "Dikkat! Koruma devre dışı bırakıldı"
+        "message": "Koruma duraklatıldı"
     },
     "settings_notification_protection_button_text": {
         "message": "Düzelt"
@@ -426,6 +426,24 @@
         "message": "Özel"
     },
     "userfilter_name": {
-        "message": "Kullanıcı filtresi"
+        "message": "Kullanıcı kuralları"
+    },
+    "window_close_dialog_message": {
+        "message": "AdGuard arka planda çalışır durumda bırakılsın mı?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Bu, AdGuard'ın ana işlemi arka planda çalışır durumda bırakılması için çok önemlidir, aksi takdirde filtre güncellemelerini otomatik olarak kontrol edemez ve filtrelemeyi yönetemez."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Seçimimi hatırla"
+    },
+    "window_close_dialog_yes": {
+        "message": "Evet (tavsiye edilen)"
+    },
+    "window_close_dialog_no": {
+        "message": "Hayır"
+    },
+    "window_close_dialog_cancel": {
+        "message": "İptal"
     }
 }
