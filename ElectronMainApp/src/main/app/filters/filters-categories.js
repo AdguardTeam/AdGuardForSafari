@@ -1,5 +1,6 @@
 const { app } = require('electron');
 const subscriptions = require('./subscriptions');
+const cache = require('./cache');
 const tagService = require('./filters-tags');
 
 /**
@@ -12,7 +13,7 @@ module.exports = (() => {
      * @returns {Array.<*>} filters
      */
     const getFilters = () => {
-        const result = subscriptions.getFilters();
+        const result = cache.getFilters();
 
         const tags = tagService.getTags();
 
@@ -57,7 +58,7 @@ module.exports = (() => {
      * @returns {{filters: Array.<*>, categories: Array}}
      */
     const getFiltersMetadata = () => {
-        const groupsMeta = subscriptions.getGroups();
+        const groupsMeta = cache.getGroups();
         const filters = getFilters();
 
         const categories = [];

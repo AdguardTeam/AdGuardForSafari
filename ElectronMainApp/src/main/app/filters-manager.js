@@ -4,6 +4,8 @@ const path = require('path');
 const listeners = require('../notifier');
 const events = require('../events');
 const subscriptions = require('./filters/subscriptions');
+const cache = require('./filters/cache');
+const customFilters = require('./filters/custom-filters');
 const categories = require('./filters/filters-categories');
 const filtersState = require('./filters/filters-state');
 const collections = require('./utils/collections');
@@ -11,6 +13,8 @@ const log = require('./utils/log');
 const filtersUpdate = require('./filters/filters-update');
 const serviceClient = require('./filters/service-client');
 const appPack = require('../../utils/app-pack');
+
+const { CUSTOM_FILTERS_START_ID } = require('./filters/constants');
 
 /**
  * Filters manager
@@ -21,11 +25,11 @@ module.exports = (() => {
      * Throws exception if filter not found.
      *
      * @param filterId Filter identifier
-     * @returns {*} Filter got from adguard.subscriptions.getFilter
+     * @returns {*} Filter got from filters cache
      * @private
      */
     const getFilterById = (filterId) => {
-        const filter = subscriptions.getFilter(filterId);
+        const filter = cache.getFilter(filterId);
         if (!filter) {
             /* eslint-disable-next-line no-throw-literal */
             throw `Filter with id ${filterId} not found`;
@@ -42,7 +46,7 @@ module.exports = (() => {
         const filtersVersionInfo = filtersState.getFiltersVersion();
         // Load filters state from the storage
         const filtersStateInfo = filtersState.getFiltersState();
-        const filters = subscriptions.getFilters();
+        const filters = cache.getFilters();
 
         for (let i = 0; i < filters.length; i += 1) {
             const filter = filters[i];
@@ -82,7 +86,7 @@ module.exports = (() => {
         // Load groups state from the storage
         const groupsStateInfo = filtersState.getGroupState();
 
-        const groups = subscriptions.getGroups();
+        const groups = cache.getGroups();
 
         for (let i = 0; i < groups.length; i += 1) {
             const group = groups[i];
@@ -100,7 +104,7 @@ module.exports = (() => {
      * @param groupId
      */
     const enableGroup = function (groupId) {
-        const group = subscriptions.getGroup(groupId);
+        const group = cache.getGroup(groupId);
         if (!group || group.enabled) {
             return;
         }
@@ -115,7 +119,7 @@ module.exports = (() => {
      * @param groupId
      */
     const disableGroup = function (groupId) {
-        const group = subscriptions.getGroup(groupId);
+        const group = cache.getGroup(groupId);
         if (!group || !group.enabled) {
             return;
         }
@@ -129,7 +133,7 @@ module.exports = (() => {
      * @returns {Group|boolean|*} true if group is enabled
      */
     const isGroupEnabled = function (groupId) {
-        const group = subscriptions.getGroup(groupId);
+        const group = cache.getGroup(groupId);
         return group && group.enabled;
     };
 
@@ -140,7 +144,7 @@ module.exports = (() => {
      * @returns {*} true if enabled
      */
     const isFilterEnabled = (filterId) => {
-        const filter = subscriptions.getFilter(filterId);
+        const filter = cache.getFilter(filterId);
         const filtersStateInfo = filtersState.getFiltersState();
         const stateInfo = filtersStateInfo[filterId];
         return filter && stateInfo && stateInfo.enabled;
@@ -156,7 +160,7 @@ module.exports = (() => {
             return;
         }
 
-        const filter = subscriptions.getFilter(filterId);
+        const filter = cache.getFilter(filterId);
         filter.enabled = true;
 
         /**
@@ -173,6 +177,20 @@ module.exports = (() => {
 
         listeners.notifyListeners(events.FILTER_ENABLE_DISABLE, filter);
         log.info('Filter {0} enabled successfully', filterId);
+    };
+
+    /**
+     * Is filter trusted
+     *
+     * @param filterId
+     * @return {boolean}
+     */
+    const isTrustedFilter = (filterId) => {
+        if (filterId < CUSTOM_FILTERS_START_ID) {
+            return true;
+        }
+        const filter = getFilterById(filterId);
+        return !!(filter && filter.trusted && filter.trusted === true);
     };
 
     /**
@@ -249,7 +267,7 @@ module.exports = (() => {
                 return;
             }
 
-            const filter = subscriptions.getFilter(filterId);
+            const filter = cache.getFilter(filterId);
             filter.enabled = false;
             listeners.notifyListeners(events.FILTER_ENABLE_DISABLE, filter);
 
@@ -263,7 +281,7 @@ module.exports = (() => {
      * @param {Number} filterId Filter identifier
      */
     const removeFilter = function (filterId) {
-        const filter = subscriptions.getFilter(filterId);
+        const filter = cache.getFilter(filterId);
         if (!filter) {
             return;
         }
@@ -277,9 +295,9 @@ module.exports = (() => {
         listeners.notifyListeners(events.FILTER_ADD_REMOVE, filter);
 
         if (filter.customUrl) {
-            subscriptions.removeCustomFilter(filter);
+            customFilters.removeCustomFilter(filter);
         } else {
-            subscriptions.removeFilter(filterId);
+            cache.removeFilter(filterId);
         }
     };
 
@@ -317,7 +335,7 @@ module.exports = (() => {
      * @param {number} groupId
      */
     const enableFiltersGroup = function (groupId) {
-        const group = subscriptions.getGroup(groupId);
+        const group = cache.getGroup(groupId);
         if (group && typeof group.enabled === 'undefined') {
             const recommendedFiltersIds = categories.getRecommendedFilterIdsByGroupId(groupId);
             addAndEnableFilters(recommendedFiltersIds);
@@ -389,7 +407,7 @@ module.exports = (() => {
      * Cleans out old removed custom filters
      */
     const cleanRemovedCustomFilters = () => {
-        subscriptions.loadCustomFilters()
+        customFilters.loadCustomFilters()
             .filter((filter) => filter.removed)
             .forEach((filter) => {
                 filtersState.removeFilter(filter.filterId);
@@ -427,11 +445,11 @@ module.exports = (() => {
             return;
         }
 
-        subscriptions.updateCustomFilter(url, options, (filterId) => {
+        customFilters.addCustomFilter(url, options, (filterId) => {
             if (filterId) {
                 log.info('Custom filter info downloaded');
 
-                const filter = subscriptions.getFilter(filterId);
+                const filter = cache.getFilter(filterId);
 
                 successCallback(filter);
             } else {
@@ -458,7 +476,7 @@ module.exports = (() => {
             return;
         }
 
-        subscriptions.getCustomFilterInfo(url, options, (result = {}) => {
+        customFilters.getCustomFilterInfo(url, options, (result = {}) => {
             const { error, filter } = result;
             if (filter) {
                 log.info('Custom filter data downloaded');
@@ -474,6 +492,7 @@ module.exports = (() => {
         getFilters,
         getGroups,
         isFilterEnabled,
+        isTrustedFilter,
         getEnabledFilters,
         getCustomFilters,
 

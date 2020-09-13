@@ -1,38 +1,45 @@
-const path = require('path');
 const subscriptions = require('../../main/app/filters/subscriptions');
+const cache = require('../../main/app/filters/cache');
 
-const testFilterPath = path.resolve(__dirname, '../resources', 'test-filter.txt');
+jest.mock('../../main/app/app');
+
+const testFilter = {
+    filterId: 1100,
+    groupId: 0,
+    name: 'Test filter',
+    description: 'Lorem ipsum',
+    version: '0.0.0.3',
+    displayNumber: 1,
+    timeUpdated: '1778723998000',
+    expires: 345600,
+    subscriptionUrl: 'https://filters.adtidy.org/extension/safari/filters/14_optimized.txt',
+    languages: ['en'],
+    tags: [ 5, 10, 11 ],
+}
 
 describe('Subscriptions tests', () => {
-    it('Add custom filter', (done) => {
-        const customFilters = subscriptions.loadCustomFilters();
-        expect(customFilters).toHaveLength(0);
+    it('Init tests', (done) => {
+        subscriptions.init(() => {
+            const filters = cache.getFilters();
+            expect(true).toBeTruthy();
+            expect(filters.length).toBeGreaterThan(50);
+            expect(filters[0]).toHaveProperty('filterId');
+            expect(filters[0].filterId).toBeDefined();
+            expect(filters[0]).toHaveProperty('groupId');
+            expect(filters[0].groupId).toBeDefined();
 
-        subscriptions.updateCustomFilter(testFilterPath, { title: 'Test filter', trusted: true }, (filterId) => {
-            expect(filterId).toBe(1000);
-            const updatedCustomFilters = subscriptions.loadCustomFilters();
-            expect(updatedCustomFilters).toHaveLength(1);
-
-            const testFilterMeta = updatedCustomFilters[0];
-            expect(testFilterMeta.filterId).toEqual(filterId);
-            expect(testFilterMeta.enabled).toBeTruthy();
-
-            const isTrusted = subscriptions.isTrustedFilter(filterId);
-            expect(isTrusted).toBeTruthy();
             done();
         });
     });
 
-    it('Remove custom filter', () => {
-        let customFilters = subscriptions.loadCustomFilters();
-        expect(customFilters).toHaveLength(1);
-
-        const testFilterMeta = customFilters[0];
-        subscriptions.removeCustomFilter(testFilterMeta);
-        // remove from cache
-        subscriptions.removeFilter(testFilterMeta.filterId);
-
-        customFilters = subscriptions.loadCustomFilters();
-        expect(customFilters).toHaveLength(0);
+    it('Create subscription filter from JSON tests', () => {
+        const filter = subscriptions.createSubscriptionFilterFromJSON(testFilter);
+        expect(filter).toBeDefined();
+        expect(typeof filter).toBe('object');
+        expect(filter.filterId).toEqual(testFilter.filterId);
+        expect(filter.groupId).toEqual(testFilter.groupId);
+        expect(filter.version).toEqual(testFilter.version);
+        expect(filter.timeUpdated).not.toEqual(testFilter.timeUpdated);
+        expect(filter.subscriptionUrl).toEqual(testFilter.subscriptionUrl);
     });
 });

@@ -8,7 +8,7 @@
     "standalone-beta": "AG_STANDALONE_BETA",
     "scripts": {
         "start": "electron .",
-        "test": "NODE_ENV=default.json jest",
+        "test": "NODE_ENV=test jest --runInBand",
         "inspect": "electron --inspect=5858 .",
         "upload-locales": "gulp upload-locales",
         "download-locales": "gulp download-locales",
@@ -47,6 +47,7 @@
         "eslint-config-airbnb-base": "^14.2.0",
         "eslint-plugin-import": "^2.22.0",
         "find-in-files": "^0.5.0",
+        "fs-extra": "^9.0.1",
         "gulp": "^4.0.0",
         "gulp-hash-creator": "^0.2.0",
         "husky": "^4.2.5",

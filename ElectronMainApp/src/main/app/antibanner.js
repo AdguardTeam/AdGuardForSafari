@@ -1,6 +1,7 @@
 const config = require('config');
 const log = require('./utils/log');
 const subscriptions = require('./filters/subscriptions');
+const cache = require('./filters/cache');
 const listeners = require('../notifier');
 const events = require('../events');
 const filters = require('./filters-manager');
@@ -166,7 +167,7 @@ module.exports = (() => {
                 const filterIdNum = parseInt(filterId, 10);
                 if (filterId !== USER_FILTER_ID) {
                     const rulesTexts = rulesFilterMap[filterIdNum];
-                    const isTrustedFilter = subscriptions.isTrustedFilter(filterIdNum);
+                    const isTrustedFilter = filters.isTrustedFilter(filterIdNum);
                     addRules(filterIdNum, rulesTexts, isTrustedFilter);
                 }
             }
@@ -209,10 +210,10 @@ module.exports = (() => {
          */
         const loadFilterRules = function () {
             const dfds = [];
-            const filters = subscriptions.getFilters();
+            const filters = cache.getFilters();
             for (let i = 0; i < filters.length; i += 1) {
                 const filter = filters[i];
-                const group = subscriptions.getGroup(filter.groupId);
+                const group = cache.getGroup(filter.groupId);
                 if (filter.enabled && group.enabled) {
                     dfds.push(filterRules.loadFilterRulesFromStorage(filter.filterId, rulesFilterMap));
                 }
