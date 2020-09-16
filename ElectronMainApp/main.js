@@ -264,7 +264,7 @@ const checkIsInApplicationsFolder = () => {
             buttons: [i18n.__('folder_check_dialog_move.message'), i18n.__('folder_check_dialog_quit.message')],
             defaultId: 1,
         }).then((result) => {
-            if (result.response === 1) {
+            if (result.response === 0) {
                 const successfullyMoved = app.moveToApplicationsFolder();
                 if (successfullyMoved) {
                     log.warn('AdGuard for Safari was successfully moved to Applications folder');
