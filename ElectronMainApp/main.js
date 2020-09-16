@@ -17,13 +17,28 @@ const toolbarController = require('./src/main/toolbar-controller');
 const mainMenuController = require('./src/main/main-menu.controller');
 const settings = require('./src/main/app/settings-manager');
 
-// check if application is not running from Applications folder and move it there
+// check if application is running from Applications folder and move it there
 if (!app.isInApplicationsFolder()) {
-    log.error('AdGuard for Safari must start from Applications directory.');
-    const successfullyMoved = app.moveToApplicationsFolder();
-    if (successfullyMoved) {
-        log.warn('AdGuard for Safari was successfully moved to Applications directory.');
-    }
+    log.error('AdGuard for Safari has been run not from Application folder');
+    dialog.showMessageBox({
+        type: 'question',
+        message: i18n.__('folder_check_dialog_message.message'),
+        detail: i18n.__('folder_check_dialog_detail.message'),
+        buttons: [i18n.__('folder_check_dialog_move.message'), i18n.__('folder_check_dialog_quit.message')],
+        defaultId: 1,
+    }).then((result) => {
+        if (result.response === 1) {
+            const successfullyMoved = app.moveToApplicationsFolder();
+            if (successfullyMoved) {
+                log.warn('AdGuard for Safari was successfully moved to Applications folder');
+            }
+        } else {
+            log.info('Force quit application');
+            app.exit();
+            mainWindow.forceClose = true;
+            mainWindow.close();
+        }
+    });
 }
 
 // Keep a global reference of the window object, if you don't, the window will
