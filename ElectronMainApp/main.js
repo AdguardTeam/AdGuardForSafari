@@ -261,10 +261,10 @@ const checkIsInApplicationsFolder = () => {
             type: 'question',
             message: i18n.__('folder_check_dialog_message.message'),
             detail: i18n.__('folder_check_dialog_detail.message'),
-            buttons: [i18n.__('folder_check_dialog_move.message'), i18n.__('folder_check_dialog_quit.message')],
+            buttons: [i18n.__('folder_check_dialog_quit.message'), i18n.__('folder_check_dialog_move.message')],
             defaultId: 1,
         }).then((result) => {
-            if (result.response === 0) {
+            if (result.response === 1) {
                 const successfullyMoved = app.moveToApplicationsFolder();
                 if (successfullyMoved) {
                     log.warn('AdGuard for Safari was successfully moved to Applications folder');
@@ -322,9 +322,9 @@ app.on('ready', (() => {
             log.debug('Splash screen loaded');
 
             startup.init(showWindow, () => {
+                checkIsInApplicationsFolder();
                 uiEventListener.init();
                 loadMainWindow(() => {
-                    checkIsInApplicationsFolder();
                     toolbarController.requestMASReview();
                 });
                 uiEventListener.register(mainWindow);
