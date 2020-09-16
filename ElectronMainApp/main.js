@@ -17,6 +17,15 @@ const toolbarController = require('./src/main/toolbar-controller');
 const mainMenuController = require('./src/main/main-menu.controller');
 const settings = require('./src/main/app/settings-manager');
 
+// check if application is not running from Applications folder and move it there
+if (!app.isInApplicationsFolder()) {
+    log.error('AdGuard for Safari must start from Applications directory.');
+    const successfullyMoved = app.moveToApplicationsFolder();
+    if (successfullyMoved) {
+        log.warn('AdGuard for Safari was successfully moved to Applications directory.');
+    }
+}
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
