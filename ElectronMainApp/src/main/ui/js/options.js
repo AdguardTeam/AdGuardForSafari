@@ -1749,6 +1749,19 @@ const Settings = function () {
         }
     }, 500);
 
+    /**
+     * Updates `Allow search ads and the self-promotion` checkbox on `Other` group state change
+     */
+    const updateAcceptableAdsCheckboxByGroup = Utils.debounce((group) => {
+        if (group.groupId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID) {
+            const selfAdsFilter = group.filters.filter((f) => (
+                f.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
+            ));
+            const state = group.enabled && selfAdsFilter.enabled;
+            CheckboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], state);
+        }
+    }, 500);
+
     const checkboxSelectors = {
         'show-app-updated-disabled': '#showAppUpdatedNotification',
         'hardware-acceleration-disabled': '#enableHardwareAcceleration',
@@ -1823,6 +1836,7 @@ const Settings = function () {
     return {
         render,
         updateAcceptableAdsCheckbox,
+        updateAcceptableAdsCheckboxByGroup,
         updateCheckboxValue,
         updateFilterUpdatePeriodSelect,
         showProtectionStatusWarning,
@@ -2273,6 +2287,9 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.FILTER_GROUP_ENABLE_DISABLE:
                     controller.antiBannerFilters.onCategoryStateChanged(options);
+                    // const temp = options;
+                    // debugger;
+                    controller.settings.updateAcceptableAdsCheckboxByGroup(options);
                     controller.contentBlockers.setLoading();
                     break;
                 case EventNotifierTypes.START_DOWNLOAD_FILTER:
