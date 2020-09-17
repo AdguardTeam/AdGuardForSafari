@@ -272,8 +272,6 @@ const checkIsInApplicationsFolder = () => {
             } else {
                 log.info('Force quit application');
                 app.exit();
-                mainWindow.forceClose = true;
-                mainWindow.close();
             }
         });
     }

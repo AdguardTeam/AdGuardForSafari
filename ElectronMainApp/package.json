@@ -8,7 +8,7 @@
     "standalone-beta": "AG_STANDALONE_BETA",
     "scripts": {
         "start": "electron .",
-        "test": "NODE_ENV=test jest --runInBand",
+        "test": "NODE_ENV=test jest filters-state.test.js --runInBand",
         "inspect": "electron --inspect=5858 .",
         "upload-locales": "gulp upload-locales",
         "download-locales": "gulp download-locales",
