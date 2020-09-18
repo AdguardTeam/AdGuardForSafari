@@ -116,6 +116,7 @@ module.exports = (function () {
         log.info(`Conversion of ${rules.length} rules started..`);
 
         const toolPath = appPack.resourcePath('/libs/ConverterTool');
+        log.info(`Running converter from: ${toolPath}`);
 
         return new Promise((resolve) => {
             const child = runScript(toolPath, [
