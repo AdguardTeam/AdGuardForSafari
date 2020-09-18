@@ -235,6 +235,7 @@ module.exports = (function () {
                         if (f.customUrl === customFilter.customUrl) {
                             f.name = filter.name;
                             f.version = filter.version;
+                            f.description = filter.description;
                             f.timeUpdated = new Date().toString();
                             f.lastUpdateTime = f.timeUpdated;
                             f.trusted = customFilter.trusted;
