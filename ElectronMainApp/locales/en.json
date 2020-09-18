@@ -496,5 +496,17 @@
     },
     "window_close_dialog_cancel": {
         "message": "Cancel"
+    },
+    "folder_check_dialog_message": {
+        "message": "AdGuard for Safari should be launched from the Applications folder."
+    },
+    "folder_check_dialog_detail": {
+        "message": "Do you want to move it to the Applications folder now?"
+    },
+    "folder_check_dialog_move": {
+        "message": "Move"
+    },
+    "folder_check_dialog_quit": {
+        "message": "Quit"
     }
 }
