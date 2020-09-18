@@ -1,5 +1,5 @@
 /* eslint-disable-next-line import/no-unresolved */
-const { requireTaskPool } = require('electron-remote');
+const { spawn } = require('child_process');
 const listeners = require('../../notifier');
 const events = require('../../events');
 const settings = require('../settings-manager');
@@ -7,6 +7,7 @@ const antibanner = require('../antibanner');
 const whitelist = require('../whitelist');
 const log = require('../utils/log');
 const concurrent = require('../utils/concurrent');
+const appPack = require('../../../utils/app-pack');
 const { groupRules, rulesGroupsBundles, filterGroupsBundles } = require('./rule-groups');
 
 /**
@@ -74,16 +75,71 @@ module.exports = (function () {
     };
 
     /**
+     * Runs shell script
+     *
+     * @param command
+     * @param args
+     * @param callback
+     */
+    const runScript = (command, args, callback) => {
+        const child = spawn(command, args);
+
+        let stdout = '';
+        let stderr = '';
+
+        child.stdout.setEncoding('utf8');
+        child.stdout.on('data', (data) => {
+            data = data.toString();
+            stdout += data;
+        });
+
+        child.stderr.setEncoding('utf8');
+        child.stderr.on('data', (data) => {
+            data = data.toString();
+            stderr += data;
+        });
+
+        child.on('close', (code) => {
+            callback(code, stdout, stderr);
+        });
+
+        return child;
+    };
+
+    /**
      * Runs converter method for rules
      *
      * @param rules array of rules
      * @param advancedBlocking if we need advanced blocking content
      */
     const jsonFromRules = async (rules, advancedBlocking) => {
-        const converterModule = requireTaskPool(require.resolve('../libs/JSConverter'));
+        log.info(`Conversion of ${rules.length} rules started..`);
 
-        const result = await converterModule.jsonFromFilters(rules, RULES_LIMIT, false, advancedBlocking, 500);
-        return result;
+        const toolPath = appPack.resourcePath('/libs/ConverterTool');
+
+        return new Promise((resolve) => {
+            const child = runScript(toolPath, [
+                `-limit=${RULES_LIMIT}`,
+                '-optimize=false',
+                `-advancedBlocking=${advancedBlocking}`,
+            ], (code, stdout, stderr) => {
+                if (code !== 0) {
+                    log.error(`Unexpected error converting rules: ${stderr}`);
+                    resolve();
+                }
+
+                log.info(`Conversion of ${rules.length} rules completed.`);
+                resolve(JSON.parse(stdout));
+            });
+
+            child.stdin.setEncoding('utf8');
+            for (const r of rules) {
+                child.stdin.write(r);
+                child.stdin.write('\n');
+            }
+
+            child.stdin.end();
+        });
     };
 
     /**
@@ -93,8 +149,12 @@ module.exports = (function () {
      * @return {int} rules count
      */
     const setAdvancedBlocking = async (rules) => {
+        let advancedBlocking = '[]';
+
         const result = await jsonFromRules(rules, true);
-        const advancedBlocking = result ? result.advancedBlocking : '[]';
+        if (result && result.advancedBlocking) {
+            advancedBlocking = result.advancedBlocking;
+        }
 
         setSafariContentBlocker(
             rulesGroupsBundles['advancedBlocking'],
