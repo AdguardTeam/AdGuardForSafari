@@ -146,7 +146,7 @@ module.exports = (function () {
 
             const filterId = addFilterId();
             const groupId = CUSTOM_FILTERS_GROUP_ID;
-            const defaultName = filterData.name || title;
+            const defaultName = title || filterData.name;
             const defaultDescription = filterData.description;
             const { homepage, version, expires } = filterData;
             const timeUpdated = filterData.timeUpdated || new Date().toString();
