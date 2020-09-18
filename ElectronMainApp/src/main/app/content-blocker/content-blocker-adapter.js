@@ -115,7 +115,7 @@ module.exports = (function () {
     const jsonFromRules = async (rules, advancedBlocking) => {
         log.info(`Conversion of ${rules.length} rules started..`);
 
-        const toolPath = appPack.resourcePath('/libs/ConverterTool');
+        const toolPath = appPack.resourcePath('../libs/ConverterTool');
         log.info(`Running converter from: ${toolPath}`);
 
         return new Promise((resolve) => {

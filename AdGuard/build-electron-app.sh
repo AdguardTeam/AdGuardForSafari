@@ -70,7 +70,6 @@ if [[ ${CONFIGURATION} == "Release" ]]; then
     OPT="--asar.unpack=*.node"
 
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/libs/ConverterTool"
 
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=8.3.3 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
     --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
@@ -78,6 +77,7 @@ if [[ ${CONFIGURATION} == "Release" ]]; then
 
     APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
     FRAMEWORKS="${APP}/Contents/Frameworks"
+    RESOURCES="${APP}/Contents/Resources"
 
     # electron-packager produces additional login helper, that we don't need
     # https://github.com/AdguardTeam/AdGuardForSafari/issues/204
@@ -93,10 +93,11 @@ if [[ ${CONFIGURATION} == "Release" ]]; then
     codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Plugin).app" || exit 1
     codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Renderer).app" || exit 1
 
+    codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$RESOURCES/libs/ConverterTool" || exit 1
+
 else
 
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${SRC}/libs/ConverterTool"
 
     PACKAGER_PLATFORM="mas"
     if [[ ${AG_STANDALONE} == "true" ]]; then
@@ -110,6 +111,7 @@ else
 
     APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-${PACKAGER_PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
     FRAMEWORKS="${APP}/Contents/Frameworks"
+    RESOURCES="${APP}/Contents/Resources"
 
     # Sign electron app
     echo "Signing build"
@@ -122,6 +124,8 @@ else
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (GPU).app" || exit 1
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Plugin).app" || exit 1
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Renderer).app" || exit 1
+
+    codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$RESOURCES/libs/ConverterTool" || exit 1
 
     if [[ ${AG_STANDALONE} == "true" ]]; then
       codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Resources/crashpad_handler" || exit 1
