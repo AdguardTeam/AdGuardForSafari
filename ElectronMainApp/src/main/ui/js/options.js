@@ -1762,7 +1762,7 @@ const Settings = function () {
         if (group.groupId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID) {
             const selfAdsFilter = group.filters.filter((f) => (
                 f.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
-            ));
+            ))[0];
             const state = group.enabled && selfAdsFilter.enabled;
             CheckboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], state);
         }
@@ -1819,11 +1819,6 @@ const Settings = function () {
             checkboxes[i].render();
         }
 
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'isGroupEnabled',
-            'groupId': AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID,
-        }));
-
         ipcRenderer.once('isGroupEnabledResponse', (e, isGroupOtherEnabled) => {
             const isSelfAdsEnabled = isGroupOtherEnabled
                 && AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID in enabledFilters;
@@ -1834,6 +1829,11 @@ const Settings = function () {
 
             showProtectionStatusWarning(isProtectionRunning);
         });
+
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'isGroupEnabled',
+            'groupId': AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID,
+        }));
     };
 
     const updateContentBlockersDescription = (info) => {
