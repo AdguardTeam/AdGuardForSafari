@@ -1699,6 +1699,12 @@ const Settings = function () {
             'type': enabled ? 'addAndEnableFilter' : 'disableFilter',
             filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID,
         }));
+        if (enabled) {
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'enableFiltersGroup',
+                groupId: SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID,
+            }));
+        }
     }, 500);
 
     const allowAcceptableAdsCheckbox = document.querySelector('#allowAcceptableAds');
