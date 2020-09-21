@@ -161,9 +161,15 @@ Check certificates names in Scripts/ExportOptions.plist
 
 ### Building
 
-In case we need to notarize the app, we will need to do it.
+#### SafariConverterLib dependency
+
+For converting rules to content-blocker format we use an external library as a binary built from `https://github.com/AdguardTeam/SafariConverterLib/`, that `ConverterTool` binary should be placed in `./libs/`.
+
+You use `./Scripts/download-lib.sh` to download the latest release version of that binary from Github.  
 
 #### Preparation - notarization
+
+In case we need to notarize the app, we will need to do it.
 
 Register in `App Connect` and create a password for `altool`.
 
