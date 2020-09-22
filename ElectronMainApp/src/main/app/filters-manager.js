@@ -156,10 +156,6 @@ module.exports = (() => {
      * @param filterId
      */
     const enableFilter = (filterId) => {
-        if (isFilterEnabled(filterId)) {
-            return;
-        }
-
         const filter = cache.getFilter(filterId);
         filter.enabled = true;
 

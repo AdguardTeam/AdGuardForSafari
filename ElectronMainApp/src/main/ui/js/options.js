@@ -6,8 +6,6 @@ const { dialog } = remote;
 const fs = require('fs');
 const path = require('path');
 
-const SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID = 6;
-
 /**
  * Common utils
  *
@@ -1702,7 +1700,7 @@ const Settings = function () {
         if (enabled) {
             ipcRenderer.send('renderer-to-main', JSON.stringify({
                 'type': 'enableFiltersGroup',
-                groupId: SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID,
+                groupId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID,
             }));
         }
     }, 500);
@@ -1761,11 +1759,11 @@ const Settings = function () {
      * Updates `Allow search ads and the self-promotion` checkbox on `Other` group state change
      */
     const updateAcceptableAdsCheckboxByGroupState = Utils.debounce((group) => {
-        if (group.groupId === SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID) {
+        if (group.groupId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID) {
             const selfAdsFilter = group.filters.find((f) => (
                 f.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
             ));
-            const state = group.enabled && selfAdsFilter && selfAdsFilter.enabled;
+            const state = group.enabled && selfAdsFilter?.enabled;
             CheckboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], state);
         }
     }, 500);
@@ -1834,7 +1832,7 @@ const Settings = function () {
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'isGroupEnabled',
-            'groupId': SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID,
+            'groupId': AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID,
         }));
     };
 
