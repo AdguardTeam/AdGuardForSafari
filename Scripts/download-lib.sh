@@ -8,5 +8,4 @@ LIB_VERSION=$(curl -L "https://api.github.com/repos/Mizzick/SafariConverterLib/r
     sed -E 's/.*"([^"]+)".*/\1/')
 
 echo "{\"version\": \"$LIB_VERSION\"}" > ./libs/ConverterTool.json
-chmod 777 ./libs/ConverterTool.json
 
