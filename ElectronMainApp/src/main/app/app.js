@@ -1,6 +1,7 @@
 const { app } = require('electron');
 const localStorage = require('./storage/storage');
 const packageJson = require('../../../package.json');
+const converterInfo = require('../../../../libs/ConverterTool.json');
 
 /**
  * Application
@@ -66,11 +67,19 @@ module.exports = (() => {
         return 'MAS';
     };
 
+    /**
+     * @returns {*|string} Converter lib version
+     */
+    const getConverterVersion = () => {
+        return converterInfo.version;
+    };
+
     return {
         getVersion,
         getLocale,
         getId,
         getClientId,
         getChannel,
+        getConverterVersion,
     };
 })();

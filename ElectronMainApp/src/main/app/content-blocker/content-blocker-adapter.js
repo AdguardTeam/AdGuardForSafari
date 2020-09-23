@@ -8,6 +8,7 @@ const whitelist = require('../whitelist');
 const log = require('../utils/log');
 const concurrent = require('../utils/concurrent');
 const appPack = require('../../../utils/app-pack');
+const app = require('../app');
 const { groupRules, rulesGroupsBundles, filterGroupsBundles } = require('./rule-groups');
 
 /**
@@ -113,7 +114,10 @@ module.exports = (function () {
      * @param advancedBlocking if we need advanced blocking content
      */
     const jsonFromRules = async (rules, advancedBlocking) => {
+        log.info(`ConverterTool version: ${app.getConverterVersion()}`);
         log.info(`Conversion of ${rules.length} rules started..`);
+
+        // TODO: Log message
 
         const toolPath = appPack.resourcePath('../libs/ConverterTool');
         log.info(`Running converter from: ${toolPath}`);
