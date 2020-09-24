@@ -127,8 +127,9 @@ module.exports = (function () {
                 `-advancedBlocking=${advancedBlocking}`,
             ], (code, stdout, stderr) => {
                 if (code !== 0) {
-                    log.error(`Unexpected error converting rules: ${stderr}`);
+                    log.warn(`Unexpected error converting rules: ${stderr}`);
                     resolve();
+                    return;
                 }
 
                 log.info(`Conversion of ${rules.length} rules completed.`);
