@@ -117,8 +117,6 @@ module.exports = (function () {
         log.info(`ConverterTool version: ${app.getConverterVersion()}`);
         log.info(`Conversion of ${rules.length} rules started..`);
 
-        // TODO: Log message
-
         const toolPath = appPack.resourcePath('../libs/ConverterTool');
         log.info(`Running converter from: ${toolPath}`);
 
@@ -134,7 +132,10 @@ module.exports = (function () {
                 }
 
                 log.info(`Conversion of ${rules.length} rules completed.`);
-                resolve(JSON.parse(stdout));
+                const result = JSON.parse(stdout);
+                log.info(result?.message);
+
+                resolve(result);
             });
 
             child.stdin.setEncoding('utf8');
