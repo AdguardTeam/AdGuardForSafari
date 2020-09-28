@@ -47,6 +47,10 @@ module.exports.init = function () {
             case 'enableFiltersGroup':
                 filters.enableFiltersGroup(message.groupId);
                 break;
+            case 'isGroupEnabled':
+                const isEnabled = filters.isGroupEnabled(message.groupId);
+                sendResponse(event, 'isGroupEnabledResponse', isEnabled);
+                break;
             case 'disableFiltersGroup':
                 filters.disableFiltersGroup(message.groupId);
                 break;
@@ -196,6 +200,7 @@ function processInitializeFrameScriptRequest() {
     const enabledFilters = Object.create(null);
 
     const AntiBannerFiltersId = config.get('AntiBannerFiltersId');
+    const AntiBannerFilterGroupsId = config.get('AntiBannerFilterGroupsId');
 
     for (const key in AntiBannerFiltersId) {
         if (AntiBannerFiltersId.hasOwnProperty(key)) {
@@ -224,6 +229,7 @@ function processInitializeFrameScriptRequest() {
         },
         constants: {
             AntiBannerFiltersId,
+            AntiBannerFilterGroupsId,
         },
     };
 }

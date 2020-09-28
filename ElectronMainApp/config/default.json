@@ -22,7 +22,8 @@
     "SECURITY_ID": 5,
     "OTHER_ID": 6,
     "LANGUAGE_SPECIFIC_ID": 7,
-    "CUSTOM_FILTERS_GROUP_ID": 0
+    "CUSTOM_FILTERS_GROUP_ID": 0,
+    "SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID": 6
   },
   "SafariExtensionBundles": {
     "GENERAL": "com.adguard.safari.AdGuard.BlockerExtension",

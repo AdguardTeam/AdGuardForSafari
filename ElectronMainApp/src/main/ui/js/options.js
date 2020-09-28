@@ -1700,8 +1700,8 @@ const Settings = function () {
     }, 500);
 
     const allowAcceptableAdsCheckbox = document.querySelector('#allowAcceptableAds');
-    allowAcceptableAdsCheckbox.addEventListener('change', function () {
-        toggleAcceptableAdsFilter(this.checked);
+    allowAcceptableAdsCheckbox.addEventListener('change', (e) => {
+        toggleAcceptableAdsFilter(e.target.checked);
     });
 
     checkboxes.push(new Checkbox('#showTrayIcon', userSettings.names.SHOW_TRAY_ICON));
@@ -1746,6 +1746,19 @@ const Settings = function () {
     const updateAcceptableAdsCheckbox = Utils.debounce((filter) => {
         if (filter.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID) {
             CheckboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], filter.enabled);
+        }
+    }, 500);
+
+    /**
+     * Updates `Allow search ads and the self-promotion` checkbox on `Other` group state change
+     */
+    const updateAcceptableAdsCheckboxByGroupState = Utils.debounce((group) => {
+        if (group.groupId === AntiBannerFilterGroupsId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID) {
+            const selfAdsFilter = group.filters.find((f) => (
+                f.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
+            ));
+            const state = group.enabled && selfAdsFilter?.enabled;
+            CheckboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], state);
         }
     }, 500);
 
@@ -1800,10 +1813,19 @@ const Settings = function () {
             checkboxes[i].render();
         }
 
-        updateAcceptableAdsCheckbox({
-            filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID,
-            enabled: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID in enabledFilters,
+        ipcRenderer.once('isGroupEnabledResponse', (e, isGroupOtherEnabled) => {
+            const isSelfAdsEnabled = isGroupOtherEnabled
+                && AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID in enabledFilters;
+            updateAcceptableAdsCheckbox({
+                filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID,
+                enabled: isSelfAdsEnabled,
+            });
         });
+
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'isGroupEnabled',
+            'groupId': AntiBannerFilterGroupsId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID,
+        }));
 
         showProtectionStatusWarning(isProtectionRunning);
     };
@@ -1823,6 +1845,7 @@ const Settings = function () {
     return {
         render,
         updateAcceptableAdsCheckbox,
+        updateAcceptableAdsCheckboxByGroupState,
         updateCheckboxValue,
         updateFilterUpdatePeriodSelect,
         showProtectionStatusWarning,
@@ -2234,6 +2257,7 @@ let userSettings;
 let enabledFilters;
 let environmentOptions;
 let AntiBannerFiltersId;
+let AntiBannerFilterGroupsId;
 let contentBlockerInfo;
 let isProtectionRunning;
 
@@ -2248,6 +2272,7 @@ const initPage = function (response) {
     isProtectionRunning = response.isProtectionRunning;
 
     AntiBannerFiltersId = response.constants.AntiBannerFiltersId;
+    AntiBannerFilterGroupsId = response.constants.AntiBannerFilterGroupsId;
 
     const onDocumentReady = function () {
         const controller = new PageController();
@@ -2273,6 +2298,7 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.FILTER_GROUP_ENABLE_DISABLE:
                     controller.antiBannerFilters.onCategoryStateChanged(options);
+                    controller.settings.updateAcceptableAdsCheckboxByGroupState(options);
                     controller.contentBlockers.setLoading();
                     break;
                 case EventNotifierTypes.START_DOWNLOAD_FILTER:
