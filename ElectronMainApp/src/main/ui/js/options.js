@@ -1697,17 +1697,11 @@ const Settings = function () {
             'type': enabled ? 'addAndEnableFilter' : 'disableFilter',
             filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID,
         }));
-        if (enabled) {
-            ipcRenderer.send('renderer-to-main', JSON.stringify({
-                'type': 'enableFiltersGroup',
-                groupId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID,
-            }));
-        }
     }, 500);
 
     const allowAcceptableAdsCheckbox = document.querySelector('#allowAcceptableAds');
-    allowAcceptableAdsCheckbox.addEventListener('change', function () {
-        toggleAcceptableAdsFilter(this.checked);
+    allowAcceptableAdsCheckbox.addEventListener('change', (e) => {
+        toggleAcceptableAdsFilter(e.target.checked);
     });
 
     checkboxes.push(new Checkbox('#showTrayIcon', userSettings.names.SHOW_TRAY_ICON));
@@ -1759,7 +1753,7 @@ const Settings = function () {
      * Updates `Allow search ads and the self-promotion` checkbox on `Other` group state change
      */
     const updateAcceptableAdsCheckboxByGroupState = Utils.debounce((group) => {
-        if (group.groupId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID) {
+        if (group.groupId === AntiBannerFilterGroupsId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID) {
             const selfAdsFilter = group.filters.find((f) => (
                 f.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
             ));
@@ -1828,12 +1822,12 @@ const Settings = function () {
             });
         });
 
-        showProtectionStatusWarning(isProtectionRunning);
-
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'isGroupEnabled',
-            'groupId': AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID,
+            'groupId': AntiBannerFilterGroupsId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID,
         }));
+
+        showProtectionStatusWarning(isProtectionRunning);
     };
 
     const updateContentBlockersDescription = (info) => {
@@ -2263,6 +2257,7 @@ let userSettings;
 let enabledFilters;
 let environmentOptions;
 let AntiBannerFiltersId;
+let AntiBannerFilterGroupsId;
 let contentBlockerInfo;
 let isProtectionRunning;
 
@@ -2277,6 +2272,7 @@ const initPage = function (response) {
     isProtectionRunning = response.isProtectionRunning;
 
     AntiBannerFiltersId = response.constants.AntiBannerFiltersId;
+    AntiBannerFilterGroupsId = response.constants.AntiBannerFilterGroupsId;
 
     const onDocumentReady = function () {
         const controller = new PageController();

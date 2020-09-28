@@ -200,6 +200,7 @@ function processInitializeFrameScriptRequest() {
     const enabledFilters = Object.create(null);
 
     const AntiBannerFiltersId = config.get('AntiBannerFiltersId');
+    const AntiBannerFilterGroupsId = config.get('AntiBannerFilterGroupsId');
 
     for (const key in AntiBannerFiltersId) {
         if (AntiBannerFiltersId.hasOwnProperty(key)) {
@@ -228,6 +229,7 @@ function processInitializeFrameScriptRequest() {
         },
         constants: {
             AntiBannerFiltersId,
+            AntiBannerFilterGroupsId,
         },
     };
 }
