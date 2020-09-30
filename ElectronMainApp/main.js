@@ -7,7 +7,7 @@ process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
 
 /* global require, process */
 
-const { app, shell, BrowserWindow, dialog, nativeTheme } = require('electron');
+const { app, shell, BrowserWindow, dialog, nativeTheme, nativeImage } = require('electron');
 
 const uiEventListener = require('./src/main/ui-event-handler');
 const startup = require('./src/main/startup');
@@ -46,19 +46,19 @@ const cssMode = nativeTheme.shouldUseDarkColors ? '#323232' : '#ffffff';
  */
 function createWindow() {
     const browserWindow = new BrowserWindow({
-        title: "AdGuard for Safari",
+        title: 'AdGuard for Safari',
         width: 1024,
         height: 768,
         minWidth: 800,
         minHeight: 768,
         center: true,
-        icon: './src/main/ui/images/128x128.png',
+        icon: nativeImage.createFromPath('./src/main/ui/images/128x128.png'),
         resizable: true,
         show: false,
         backgroundColor: cssMode,
         webPreferences: {
-            nodeIntegration: true
-        }
+            nodeIntegration: true,
+        },
     });
 
     browserWindow.once('ready-to-show', () => {
@@ -271,7 +271,7 @@ const checkIsInApplicationsFolder = () => {
                 }
             } else {
                 log.info('Force quit application');
-                app.exit();
+                // app.exit();
             }
         });
     }
