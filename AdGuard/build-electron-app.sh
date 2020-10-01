@@ -16,7 +16,7 @@ nvm use v13.10.0 || exit 1
 # Installing dependencies
 yarn global add electron-osx-sign
 yarn global add node-gyp@7.0.0
-yarn global add electron-userland/electron-osx-sign#timestamp-server
+yarn global add electron-userland/electron-osx-sign
 
 PLATFORM=mas
 ARCH=x64
