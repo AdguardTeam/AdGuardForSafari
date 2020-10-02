@@ -1,13 +1,20 @@
+const {
+    app,
+    shell,
+    BrowserWindow,
+    dialog,
+    nativeTheme,
+    nativeImage,
+} = require('electron');
+
 const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
 const log = require('./src/main/app/utils/log');
 
 /* Reconfigure path to config */
-process.env["NODE_CONFIG_DIR"] = appPack.resourcePath("/config/");
+process.env['NODE_CONFIG_DIR'] = appPack.resourcePath('/config/');
 
 /* global require, process */
-
-const { app, shell, BrowserWindow, dialog, nativeTheme } = require('electron');
 
 const uiEventListener = require('./src/main/ui-event-handler');
 const startup = require('./src/main/startup');
@@ -28,7 +35,7 @@ require('./src/main/updater').initUpdater();
 // No need to delete this line
 require('electron-debug')({
     enabled: true,
-    showDevTools: false
+    showDevTools: false,
 });
 
 if (settings.isHardwareAccelerationDisabled()) {
@@ -46,19 +53,19 @@ const cssMode = nativeTheme.shouldUseDarkColors ? '#323232' : '#ffffff';
  */
 function createWindow() {
     const browserWindow = new BrowserWindow({
-        title: "AdGuard for Safari",
+        title: 'AdGuard for Safari',
         width: 1024,
         height: 768,
         minWidth: 800,
         minHeight: 768,
         center: true,
-        icon: './src/main/ui/images/128x128.png',
+        icon: nativeImage.createFromPath('./src/main/ui/images/128x128.png'),
         resizable: true,
         show: false,
         backgroundColor: cssMode,
         webPreferences: {
-            nodeIntegration: true
-        }
+            nodeIntegration: true,
+        },
     });
 
     browserWindow.once('ready-to-show', () => {
@@ -92,12 +99,16 @@ function confirmWindowClose() {
     }
 
     dialog.showMessageBox({
-        type: "question",
+        type: 'question',
         message: i18n.__('window_close_dialog_message.message'),
         detail: i18n.__('window_close_dialog_detail.message'),
         checkboxLabel: i18n.__('window_close_dialog_checkbox.message'),
-        buttons: [i18n.__('window_close_dialog_no.message'), i18n.__('window_close_dialog_yes.message'), i18n.__('window_close_dialog_cancel.message')],
-        defaultId: 1
+        buttons: [
+            i18n.__('window_close_dialog_no.message'),
+            i18n.__('window_close_dialog_yes.message'),
+            i18n.__('window_close_dialog_cancel.message'),
+        ],
+        defaultId: 1,
     }).then((result) => {
         if (result.response === 2) {
             log.info('Confirmation cancelled');
