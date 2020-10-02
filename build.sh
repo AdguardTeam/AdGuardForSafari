@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# download ConverterLib
+bash ./Scripts/download-lib.sh
+
 BUILD_DIR="build"
 if [ ! -d "$BUILD_DIR" ]; then
     mkdir $BUILD_DIR

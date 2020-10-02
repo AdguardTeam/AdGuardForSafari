@@ -95,6 +95,7 @@ module.exports = (() => {
                 state.push(`Application version: ${agApp.getVersion()}`);
                 state.push(`Application channel: ${agApp.getChannel()}`);
                 state.push(`Application locale: ${agApp.getLocale()}`);
+                state.push(`Converter version: ${agApp.getConverterVersion()}`);
                 state.push(`Enabled filters: [ ${applicationApi.getEnabledFilterIds().join(',')} ]`);
 
                 const statePath = path.join(path.dirname(logsPath), 'state.txt');
