@@ -1,6 +1,7 @@
 const { app } = require('electron');
 const localStorage = require('./storage/storage');
 const packageJson = require('../../../package.json');
+// eslint-disable-next-line import/no-unresolved
 const converterInfo = require('../../../../libs/ConverterTool.json');
 
 /**
