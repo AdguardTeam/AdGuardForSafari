@@ -275,7 +275,7 @@ module.exports = (() => {
      */
     const selectFilterIdsToUpdate = (forceUpdate, filtersToUpdate) => {
         const filterIds = [];
-        const customFilterIds = [];
+        const customFilterIds = customFilters.loadCustomFilters().map((filter) => filter.filterId);
 
         const filters = filtersToUpdate || cache.getFilters();
         const updateFiltersPeriodInMs = settings.getUpdateFiltersPeriod() * 60 * 60 * 1000;
@@ -288,9 +288,7 @@ module.exports = (() => {
                     || (Date.now() - filter.lastCheckTime) >= updateFiltersPeriodInMs);
 
                 if (needUpdate) {
-                    if (filter.customUrl) {
-                        customFilterIds.push(filter.filterId);
-                    } else {
+                    if (!filter.customUrl) {
                         filterIds.push(filter.filterId);
                     }
                 }
