@@ -276,9 +276,13 @@ const checkIsInApplicationsFolder = () => {
             defaultId: 1,
         }).then((result) => {
             if (result.response === 1) {
-                const successfullyMoved = app.moveToApplicationsFolder();
-                if (successfullyMoved) {
-                    log.warn('AdGuard for Safari was successfully moved to Applications folder');
+                try {
+                    const successfullyMoved = app.moveToApplicationsFolder();
+                    if (successfullyMoved) {
+                        log.warn('AdGuard for Safari was successfully moved to Applications folder');
+                    }
+                } catch (error) {
+                    log.error(`Error moving AdGuard for Safari to Application folder: ${error.message}`);
                 }
             } else {
                 log.info('Force quit application');
