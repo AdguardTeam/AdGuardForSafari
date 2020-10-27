@@ -604,8 +604,8 @@
   content: '';
   position: absolute;
   height: 16px;
-  width: 16px;
-  border-radius: 2px;
+  width: 17px;
+  border-radius: 3px;
   margin-top: 2px;
   left: 2px;
 }
@@ -619,7 +619,7 @@
 }
 .toggler.on:before,
 li.active .toggler:before {
-  left: 24px;
+  left: 23px;
 }
 .toggler.off {
 }
