@@ -262,35 +262,25 @@ function isOpenedAtLogin() {
 }
 
 /**
- * Checks if `AdGuard for Safari.app` is running from Applications folder
- * otherwise shows the dialog message and moves `AdGuard for Safari.app` there
+ * Checks if `AdGuard for Safari.app` is running from Applications folder,
+ * otherwise moves it there
  */
-const checkIsInApplicationsFolder = () => {
+const fixAppPath = () => {
     if (!app.isInApplicationsFolder()) {
-        log.error('AdGuard for Safari has been run not from Application folder');
-        dialog.showMessageBox({
-            type: 'question',
-            message: i18n.__('folder_check_dialog_message.message'),
-            detail: i18n.__('folder_check_dialog_detail.message'),
-            buttons: [i18n.__('folder_check_dialog_quit.message'), i18n.__('folder_check_dialog_move.message')],
-            defaultId: 1,
-        }).then((result) => {
-            if (result.response === 1) {
-                try {
-                    const successfullyMoved = app.moveToApplicationsFolder();
-                    if (successfullyMoved) {
-                        log.warn('AdGuard for Safari was successfully moved to Applications folder');
-                    }
-                } catch (error) {
-                    log.error(`Error moving AdGuard for Safari to Application folder: ${error.message}`);
-                }
-            } else {
-                log.info('Force quit application');
-                app.exit();
+        try {
+            const successfullyMoved = app.moveToApplicationsFolder();
+            if (successfullyMoved) {
+                log.warn('AdGuard for Safari was successfully moved to Applications folder');
             }
-        });
+        } catch (error) {
+            log.error(`Error moving AdGuard for Safari to Application folder: ${error.message}`);
+        }
     }
 };
+
+app.on('will-finish-launching', (() => {
+    fixAppPath();
+}));
 
 // Keep a global reference of the tray object, if you don't, the tray icon will
 // be hidden automatically when the JavaScript object is garbage collected.
@@ -335,7 +325,6 @@ app.on('ready', (() => {
             log.debug('Splash screen loaded');
 
             startup.init(showWindow, () => {
-                checkIsInApplicationsFolder();
                 uiEventListener.init();
                 loadMainWindow(() => {
                     toolbarController.requestMASReview();
