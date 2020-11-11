@@ -7,6 +7,8 @@ const {
     nativeImage,
 } = require('electron');
 
+const pJson = require('./package.json');
+
 const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
 const log = require('./src/main/app/utils/log');
@@ -28,22 +30,28 @@ const settings = require('./src/main/app/settings-manager');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+const isMASBuild = () => {
+    return pJson['standalone-build'] !== true && pJson['standalone-beta'] !== true;
+};
+
 /**
  * Checks if `AdGuard for Safari.app` is running from Applications folder,
  * otherwise moves it there
  */
-(() => {
-    if (!app.isInApplicationsFolder()) {
-        try {
-            const successfullyMoved = app.moveToApplicationsFolder();
-            if (successfullyMoved) {
-                log.warn('AdGuard for Safari was successfully moved to Applications folder');
+if (!isMASBuild()) {
+    (() => {
+        if (!app.isInApplicationsFolder()) {
+            try {
+                const successfullyMoved = app.moveToApplicationsFolder();
+                if (successfullyMoved) {
+                    log.warn('AdGuard for Safari was successfully moved to Applications folder');
+                }
+            } catch (error) {
+                log.error(`Error moving AdGuard for Safari to Application folder: ${error.message}`);
             }
-        } catch (error) {
-            log.error(`Error moving AdGuard for Safari to Application folder: ${error.message}`);
         }
-    }
-})();
+    })();
+}
 
 // Check updates
 require('./src/main/updater').initUpdater();
