@@ -28,6 +28,23 @@ const settings = require('./src/main/app/settings-manager');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+/**
+ * Checks if `AdGuard for Safari.app` is running from Applications folder,
+ * otherwise moves it there
+ */
+(() => {
+    if (!app.isInApplicationsFolder()) {
+        try {
+            const successfullyMoved = app.moveToApplicationsFolder();
+            if (successfullyMoved) {
+                log.warn('AdGuard for Safari was successfully moved to Applications folder');
+            }
+        } catch (error) {
+            log.error(`Error moving AdGuard for Safari to Application folder: ${error.message}`);
+        }
+    }
+})();
+
 // Check updates
 require('./src/main/updater').initUpdater();
 
@@ -260,27 +277,6 @@ function shouldOpenSilent() {
 function isOpenedAtLogin() {
     return process.env['LAUNCHED_AT_LOGIN'];
 }
-
-/**
- * Checks if `AdGuard for Safari.app` is running from Applications folder,
- * otherwise moves it there
- */
-const fixAppPath = () => {
-    if (!app.isInApplicationsFolder()) {
-        try {
-            const successfullyMoved = app.moveToApplicationsFolder();
-            if (successfullyMoved) {
-                log.warn('AdGuard for Safari was successfully moved to Applications folder');
-            }
-        } catch (error) {
-            log.error(`Error moving AdGuard for Safari to Application folder: ${error.message}`);
-        }
-    }
-};
-
-app.on('will-finish-launching', (() => {
-    fixAppPath();
-}));
 
 // Keep a global reference of the tray object, if you don't, the tray icon will
 // be hidden automatically when the JavaScript object is garbage collected.
