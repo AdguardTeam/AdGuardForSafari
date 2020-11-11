@@ -7,8 +7,6 @@ const {
     nativeImage,
 } = require('electron');
 
-const pJson = require('./package.json');
-
 const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
 const log = require('./src/main/app/utils/log');
