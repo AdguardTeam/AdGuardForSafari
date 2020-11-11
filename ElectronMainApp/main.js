@@ -30,29 +30,6 @@ const settings = require('./src/main/app/settings-manager');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-const isMASBuild = () => {
-    return pJson['standalone-build'] !== true && pJson['standalone-beta'] !== true;
-};
-
-/**
- * Checks if `AdGuard for Safari.app` is running from Applications folder,
- * otherwise moves it there
- */
-if (!isMASBuild()) {
-    (() => {
-        if (!app.isInApplicationsFolder()) {
-            try {
-                const successfullyMoved = app.moveToApplicationsFolder();
-                if (successfullyMoved) {
-                    log.warn('AdGuard for Safari was successfully moved to Applications folder');
-                }
-            } catch (error) {
-                log.error(`Error moving AdGuard for Safari to Application folder: ${error.message}`);
-            }
-        }
-    })();
-}
-
 // Check updates
 require('./src/main/updater').initUpdater();
 
@@ -286,6 +263,44 @@ function isOpenedAtLogin() {
     return process.env['LAUNCHED_AT_LOGIN'];
 }
 
+/**
+ * Checks if `AdGuard for Safari.app` is running from Applications folder
+ * otherwise shows the dialog message and moves `AdGuard for Safari.app` there
+ */
+const checkIsInApplicationsFolder = () => {
+    if (!app.isInApplicationsFolder()) {
+        log.error('AdGuard for Safari has been run not from Application folder');
+        const response = dialog.showMessageBoxSync({
+            type: 'question',
+            message: i18n.__('folder_check_dialog_message.message'),
+            detail: i18n.__('folder_check_dialog_detail.message'),
+            buttons: [i18n.__('folder_check_dialog_quit.message'), i18n.__('folder_check_dialog_move.message')],
+            defaultId: 1,
+        });
+        if (response === 1) {
+            try {
+                const successfullyMoved = app.moveToApplicationsFolder();
+                if (successfullyMoved) {
+                    log.warn('AdGuard for Safari was successfully moved to Applications folder');
+                }
+            } catch (error) {
+                log.error(`Error moving AdGuard for Safari to Application folder: ${error.message}`);
+            }
+        } else {
+            log.info('Force quit application');
+            app.exit();
+        }
+    }
+};
+
+/**
+ * Checks if it's MAS build
+ * @return {boolean}
+ */
+const isMASBuild = () => {
+    return pJson['standalone-build'] !== true && pJson['standalone-beta'] !== true;
+};
+
 // Keep a global reference of the tray object, if you don't, the tray icon will
 // be hidden automatically when the JavaScript object is garbage collected.
 let tray;
@@ -296,6 +311,9 @@ let tray;
  * Some APIs can only be used after this event occurs.
  */
 app.on('ready', (() => {
+    if (!isMASBuild()) {
+        checkIsInApplicationsFolder();
+    }
     i18n.setAppLocale(app.getLocale());
 
     log.info(`Starting AdGuard v${app.getVersion()}`);
