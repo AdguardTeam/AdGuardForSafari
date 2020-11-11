@@ -23,6 +23,7 @@ const trayController = require('./src/main/tray-controller');
 const toolbarController = require('./src/main/toolbar-controller');
 const mainMenuController = require('./src/main/main-menu.controller');
 const settings = require('./src/main/app/settings-manager');
+const { getChannel } = require('./src/main/app/app');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -268,27 +269,26 @@ function isOpenedAtLogin() {
 const checkIsInApplicationsFolder = () => {
     if (!app.isInApplicationsFolder()) {
         log.error('AdGuard for Safari has been run not from Application folder');
-        dialog.showMessageBox({
+        const response = dialog.showMessageBoxSync({
             type: 'question',
             message: i18n.__('folder_check_dialog_message.message'),
             detail: i18n.__('folder_check_dialog_detail.message'),
             buttons: [i18n.__('folder_check_dialog_quit.message'), i18n.__('folder_check_dialog_move.message')],
             defaultId: 1,
-        }).then((result) => {
-            if (result.response === 1) {
-                try {
-                    const successfullyMoved = app.moveToApplicationsFolder();
-                    if (successfullyMoved) {
-                        log.warn('AdGuard for Safari was successfully moved to Applications folder');
-                    }
-                } catch (error) {
-                    log.error(`Error moving AdGuard for Safari to Application folder: ${error.message}`);
-                }
-            } else {
-                log.info('Force quit application');
-                app.exit();
-            }
         });
+        if (response === 1) {
+            try {
+                const successfullyMoved = app.moveToApplicationsFolder();
+                if (successfullyMoved) {
+                    log.warn('AdGuard for Safari was successfully moved to Applications folder');
+                }
+            } catch (error) {
+                log.error(`Error moving AdGuard for Safari to Application folder: ${error.message}`);
+            }
+        } else {
+            log.info('Force quit application');
+            app.exit();
+        }
     }
 };
 
@@ -302,6 +302,9 @@ let tray;
  * Some APIs can only be used after this event occurs.
  */
 app.on('ready', (() => {
+    if (getChannel() !== 'MAS') {
+        checkIsInApplicationsFolder();
+    }
     i18n.setAppLocale(app.getLocale());
 
     log.info(`Starting AdGuard v${app.getVersion()}`);
@@ -335,7 +338,6 @@ app.on('ready', (() => {
             log.debug('Splash screen loaded');
 
             startup.init(showWindow, () => {
-                checkIsInApplicationsFolder();
                 uiEventListener.init();
                 loadMainWindow(() => {
                     toolbarController.requestMASReview();
