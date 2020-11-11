@@ -31,7 +31,7 @@ const settings = require('./src/main/app/settings-manager');
 let mainWindow;
 
 const isMASBuild = () => {
-    return pJson['standalone-build'] !== true || pJson['standalone-beta'] !== true;
+    return pJson['standalone-build'] !== true && pJson['standalone-beta'] !== true;
 };
 
 /**
