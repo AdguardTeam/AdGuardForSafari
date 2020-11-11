@@ -25,6 +25,7 @@ const trayController = require('./src/main/tray-controller');
 const toolbarController = require('./src/main/toolbar-controller');
 const mainMenuController = require('./src/main/main-menu.controller');
 const settings = require('./src/main/app/settings-manager');
+const { getChannel } = require('./src/main/app/app');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -293,14 +294,6 @@ const checkIsInApplicationsFolder = () => {
     }
 };
 
-/**
- * Checks if it's MAS build
- * @return {boolean}
- */
-const isMASBuild = () => {
-    return pJson['standalone-build'] !== true && pJson['standalone-beta'] !== true;
-};
-
 // Keep a global reference of the tray object, if you don't, the tray icon will
 // be hidden automatically when the JavaScript object is garbage collected.
 let tray;
@@ -311,7 +304,7 @@ let tray;
  * Some APIs can only be used after this event occurs.
  */
 app.on('ready', (() => {
-    if (!isMASBuild()) {
+    if (getChannel() !== 'MAS') {
         checkIsInApplicationsFolder();
     }
     i18n.setAppLocale(app.getLocale());
