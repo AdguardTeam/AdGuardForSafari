@@ -1,6 +1,6 @@
 {
     "main_menu_about": {
-        "message": "Sobre o AdGuard para Safari"
+        "message": "Acerca do AdGuard para Safari"
     },
     "options_popup_trusted_filter_title": {
         "message": "Confiável"
@@ -15,7 +15,7 @@
         "message": "Escolheu confiar neste filtro"
     },
     "options_about_update_check": {
-        "message": "Procurando por Atualizações."
+        "message": "Procurando por actualizações"
     },
     "options_about_title": {
         "message": "AdGuard para Safari"
@@ -264,7 +264,7 @@
         "message": "Seleccionar Todos"
     },
     "tray_menu_about": {
-        "message": "Sobre"
+        "message": "Acerca de"
     },
     "tray_menu_preferences": {
         "message": "Preferências"
@@ -288,7 +288,7 @@
         "message": "Ultima actualização:"
     },
     "options_about": {
-        "message": "Sobre"
+        "message": "Acerca de"
     },
     "options_content_blockers": {
         "message": "Bloqueadores de conteúdo"
@@ -336,7 +336,7 @@
         "message": "Uma nova regra foi adicionada às regras de Utilizador:"
     },
     "options_filters_update_period": {
-        "message": "I​ntervalo entre atualizações "
+        "message": "I​ntervalo entre actualizações"
     },
     "options_filters_update_period_number": {
         "message": {
@@ -345,7 +345,7 @@
         }
     },
     "options_filters_period_not_update": {
-        "message": "Não atualizar"
+        "message": "Não actualizar"
     },
     "options_filters_custom_remove": {
         "message": "remover"
@@ -369,7 +369,7 @@
         "message": "Activa a aceleração de hardware para a janela de definições, é necessário reiniciar a aplicação"
     },
     "settings_notification_protection_title": {
-        "message": "Atenção! A protecção foi desativada"
+        "message": "Protecção foi pausada"
     },
     "settings_notification_protection_button_text": {
         "message": "Resumo"
@@ -429,21 +429,21 @@
         "message": "Regras do utilizador"
     },
     "window_close_dialog_message": {
-        "message": ""
+        "message": "Manter o AdGuard executando em segundo plano?"
     },
     "window_close_dialog_detail": {
-        "message": ""
+        "message": "Isto é crucial para que o AdGuard possa manter o processo principal funcionando em segundo plano, caso contrário não será capaz de verificar automaticamente por actualizações de filtro e gerir a filtragem."
     },
     "window_close_dialog_checkbox": {
-        "message": ""
+        "message": "Lembrar da minha escolha"
     },
     "window_close_dialog_yes": {
-        "message": ""
+        "message": "Sim (recomendado)"
     },
     "window_close_dialog_no": {
-        "message": ""
+        "message": "Não"
     },
     "window_close_dialog_cancel": {
-        "message": ""
+        "message": "Cancelar"
     }
 }

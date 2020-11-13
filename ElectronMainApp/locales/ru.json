@@ -68,6 +68,15 @@
     "options_import_settings": {
         "message": "Импортировать настройки"
     },
+    "settings_import": {
+        "message": "Импорт настроек"
+    },
+    "settings_import_success": {
+        "message": "Настройки успешно импортированы"
+    },
+    "settings_import_error": {
+        "message": "Во время импорта настроек возникла ошибка"
+    },
     "options_antibanner": {
         "message": "Фильтры"
     },
@@ -340,6 +349,9 @@
     },
     "onboarding_safari_btn": {
         "message": "Открыть настройки"
+    },
+    "onboarding_ignore_safari_btn": {
+        "message": "Игнорировать"
     },
     "options_learn_more": {
         "message": "Узнать больше"

@@ -12,7 +12,7 @@
         "message": "受信任的"
     },
     "options_filters_filter_trusted_tag_desc": {
-        "message": "您已選擇信任該過濾器"
+        "message": "您已選擇信任此過濾器"
     },
     "options_about_update_check": {
         "message": "正在檢查更新"
@@ -123,7 +123,7 @@
         "message": "輸入一個過濾器訂閱之有效的網址。"
     },
     "options_filters_custom_step_one_url_desc_more": {
-        "message": "AdGuard 將增加該過濾器訂閱。"
+        "message": "AdGuard 將增加此過濾器訂閱。"
     },
     "options_filters_custom_step_one_cancel": {
         "message": "取消"
@@ -189,7 +189,7 @@
         "message": "使用者規則"
     },
     "options_userfilter_description": {
-        "message": "您可於此增加您自己的規則。對於熟悉 HTML/CSS 之進階的用戶，該選項是被建議的。閱讀<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>過濾器規則導覽</a>以學習如何撰寫您自己的過濾器規則。"
+        "message": "您可於此增加您自己的規則。對於熟悉 HTML/CSS 之進階的用戶，此選項是被建議的。閱讀<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>過濾器規則導覽</a>以學習如何撰寫您自己的過濾器規則。"
     },
     "options_show_app_updated_notification": {
         "message": "通知有關延伸功能更新"
@@ -219,7 +219,7 @@
         "message": "AdGuard for Safari 剛剛已被更新至版本 $1。"
     },
     "options_popup_version_update_description_minor": {
-        "message": "該版本主要地包含程式錯誤修復和小改進。"
+        "message": "此版本主要地包含程式錯誤修復和小改進。"
     },
     "options_popup_version_update_description_major": {
         "message": "這是一項帶來了許多新的功能和改進之重大的延伸功能升級。"
