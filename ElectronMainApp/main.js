@@ -302,10 +302,10 @@ let tray;
  * Some APIs can only be used after this event occurs.
  */
 app.on('ready', (() => {
+    i18n.setAppLocale(app.getLocale());
     if (getChannel() !== 'MAS') {
         checkIsInApplicationsFolder();
     }
-    i18n.setAppLocale(app.getLocale());
 
     log.info(`Starting AdGuard v${app.getVersion()}`);
     log.info('App ready - creating browser windows');
