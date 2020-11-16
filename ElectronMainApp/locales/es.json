@@ -60,7 +60,7 @@
         "message": "AdGuard para Safari es software libre y de código abierto. Agradecemos tus comentarios y contribuciones. Si deseas informar un error o solicitar una función, dirígete a <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nuestro repositorio en GitHub</a>."
     },
     "options_allow_acceptable_ads": {
-        "message": "Permitir anuncios de búsqueda y la autopromoción de sitios web"
+        "message": "Permitir anuncios de búsqueda y autopromoción de sitios web"
     },
     "options_export_settings": {
         "message": "Exportar configuración"
@@ -189,7 +189,7 @@
         "message": "Reglas del usuario"
     },
     "options_userfilter_description": {
-        "message": "Puedes añadir tus propias reglas aquí. Esta opción se&nbsp;recomienda para usuarios avanzados familiarizados con HTML/CSS. Lea el <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial de reglas de filtro</a> para&nbsp;aprender a escribir&nbsp;tus propias reglas de filtro."
+        "message": "Puedes añadir tus propias reglas aquí. Esta opción se&nbsp;recomienda para usuarios avanzados familiarizados con HTML/CSS. Lee el <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial de reglas de filtro</a> para&nbsp;aprender a escribir&nbsp;tus propias reglas de filtro."
     },
     "options_show_app_updated_notification": {
         "message": "Notificar sobre las actualizaciones de la extensión"
@@ -279,10 +279,10 @@
         "message": "Salir"
     },
     "tray_menu_protection_start": {
-        "message": "El bloqueo de anuncios en Safari está activado"
+        "message": "El bloqueo de anuncios en Safari está encendido"
     },
     "tray_menu_protection_stop": {
-        "message": "El bloqueo de anuncios en Safari está desactivado"
+        "message": "El bloqueo de anuncios en Safari está apagado"
     },
     "options_last_update": {
         "message": "Última actualización:"
