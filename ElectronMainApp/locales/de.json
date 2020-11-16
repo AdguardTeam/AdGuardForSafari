@@ -445,5 +445,17 @@
     },
     "window_close_dialog_cancel": {
         "message": "Abbrechen"
+    },
+    "folder_check_dialog_message": {
+        "message": "AdGuard for Safari sollte über den Ordner \"Programme\" gestartet werden."
+    },
+    "folder_check_dialog_detail": {
+        "message": "Möchten Sie es jetzt in den Anwendungsordner verschieben?"
+    },
+    "folder_check_dialog_move": {
+        "message": "Bewegung"
+    },
+    "folder_check_dialog_quit": {
+        "message": "Beenden"
     }
 }

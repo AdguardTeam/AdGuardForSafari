@@ -445,5 +445,17 @@
     },
     "window_close_dialog_cancel": {
         "message": "İptal"
+    },
+    "folder_check_dialog_message": {
+        "message": "Safari için AdGuard, Uygulamalar klasöründen başlatılmalıdır."
+    },
+    "folder_check_dialog_detail": {
+        "message": "Şimdi onu Uygulamalar klasörüne taşımak istiyor musunuz?"
+    },
+    "folder_check_dialog_move": {
+        "message": "Hareket"
+    },
+    "folder_check_dialog_quit": {
+        "message": "Çıkış"
     }
 }

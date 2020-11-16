@@ -17,9 +17,6 @@
     "options_about_update_check": {
         "message": "Kontrollerar uppdateringar"
     },
-    "options_about_title": {
-        "message": ""
-    },
     "options_about_updating": {
         "message": "Uppdaterar AdGuard för Safari"
     },
@@ -40,9 +37,6 @@
     },
     "main_menu_close_window": {
         "message": "Stäng fönster"
-    },
-    "tray_menu_export_logs": {
-        "message": ""
     },
     "name": {
         "message": "AdGuard AdBlocker"
@@ -281,23 +275,11 @@
     "tray_menu_protection_start": {
         "message": "Annonsblockering i Safari är på"
     },
-    "tray_menu_protection_stop": {
-        "message": ""
-    },
     "options_last_update": {
         "message": "Senaste uppdatering"
     },
     "options_about": {
         "message": "Om"
-    },
-    "options_content_blockers": {
-        "message": ""
-    },
-    "options_content_blockers_desc": {
-        "message": ""
-    },
-    "options_content_blockers_disabled_desc": {
-        "message": ""
     },
     "options_compare_btn": {
         "message": "Jämför dem"
@@ -347,9 +329,6 @@
     "options_filters_period_not_update": {
         "message": "Uppdatera inte"
     },
-    "options_filters_custom_remove": {
-        "message": ""
-    },
     "options_show_tray_icon": {
         "message": "Visa AdGuard för Safari på menyraden"
     },
@@ -362,88 +341,7 @@
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
-    "options_enable_hardware_acceleration": {
-        "message": ""
-    },
-    "options_enable_hardware_acceleration_desc": {
-        "message": ""
-    },
     "settings_notification_protection_title": {
         "message": "Observera! Skyddet kopplades bort"
-    },
-    "settings_notification_protection_button_text": {
-        "message": ""
-    },
-    "settings_notification_extensions_button_text": {
-        "message": ""
-    },
-    "settings_notification_extensions_title": {
-        "message": ""
-    },
-    "settings_notification_extensions_text": {
-        "message": ""
-    },
-    "settings_notification_cb_extensions_title": {
-        "message": ""
-    },
-    "settings_notification_cb_extensions_text": {
-        "message": ""
-    },
-    "options_cb_general_title": {
-        "message": ""
-    },
-    "options_cb_privacy_title": {
-        "message": ""
-    },
-    "options_cb_social_title": {
-        "message": ""
-    },
-    "options_cb_security_title": {
-        "message": ""
-    },
-    "options_cb_other_title": {
-        "message": ""
-    },
-    "options_cb_custom_title": {
-        "message": ""
-    },
-    "options_cb_rules_info": {
-        "message": {
-            "one": "",
-            "other": ""
-        }
-    },
-    "options_cb_rules_overlimit_info": {
-        "message": ""
-    },
-    "options_cb_disabled_warning": {
-        "message": ""
-    },
-    "options_cb_compilation_warning": {
-        "message": ""
-    },
-    "filters_group_custom": {
-        "message": ""
-    },
-    "userfilter_name": {
-        "message": ""
-    },
-    "window_close_dialog_message": {
-        "message": ""
-    },
-    "window_close_dialog_detail": {
-        "message": ""
-    },
-    "window_close_dialog_checkbox": {
-        "message": ""
-    },
-    "window_close_dialog_yes": {
-        "message": ""
-    },
-    "window_close_dialog_no": {
-        "message": ""
-    },
-    "window_close_dialog_cancel": {
-        "message": ""
     }
 }
