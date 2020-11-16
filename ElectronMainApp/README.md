@@ -10,9 +10,11 @@
 - [nodejs](https://nodejs.org/en/download/)
 - [yarn](https://yarnpkg.com/en/docs/install/)
 
+```
 npm install electron-packager -g
- npm install node-gyp -g 
+npm install node-gyp -g 
 npm install electron-osx-sign -g
+```
 
 Install local dependencies by runnning:
 ```

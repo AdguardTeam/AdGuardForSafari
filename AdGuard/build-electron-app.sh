@@ -17,6 +17,7 @@ nvm use v13.10.0 || exit 1
 yarn global add electron-osx-sign
 yarn global add node-gyp@7.0.0
 yarn global add electron-userland/electron-osx-sign
+yarn global add electron-packager
 
 PLATFORM=mas
 ARCH=x64
