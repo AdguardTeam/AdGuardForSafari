@@ -15,7 +15,7 @@
         "message": "Sie haben entschieden, diesem Filter zu vertrauen"
     },
     "options_about_update_check": {
-        "message": "Auf Aktualisierungen prüfen"
+        "message": "Auf Aktualisierungen wird geprüft"
     },
     "options_about_title": {
         "message": "AdGuard für Safari"
@@ -174,7 +174,7 @@
         "message": "Abonnieren"
     },
     "options_filters_check_filters_update": {
-        "message": "Auf Filter-Aktualisierungen prüfen"
+        "message": "Alle Filter aktualisieren"
     },
     "options_whitelist": {
         "message": "Positivliste"
@@ -270,7 +270,7 @@
         "message": "Einstellungen"
     },
     "tray_menu_check_updates": {
-        "message": "Auf Filter-Updates prüfen"
+        "message": "Alle Filter aktualisieren"
     },
     "tray_menu_launch_at_startup": {
         "message": "AdGuard beim Anmelden starten"
@@ -445,17 +445,5 @@
     },
     "window_close_dialog_cancel": {
         "message": "Abbrechen"
-    },
-    "folder_check_dialog_message": {
-        "message": "AdGuard for Safari sollte über den Ordner \"Programme\" gestartet werden."
-    },
-    "folder_check_dialog_detail": {
-        "message": "Möchten Sie es jetzt in den Anwendungsordner verschieben?"
-    },
-    "folder_check_dialog_move": {
-        "message": "Bewegung"
-    },
-    "folder_check_dialog_quit": {
-        "message": "Beenden"
     }
 }

@@ -113,12 +113,6 @@
     "options_filters_empty_custom_add_button": {
         "message": "Добавить собственный фильтр"
     },
-    "options_filters_custom_import_file": {
-        "message": "Импортировать файл"
-    },
-    "options_popup_import_file_error_title": {
-        "message": "Ошибка при импортировании файла"
-    },
     "options_filters_custom_step_one_title": {
         "message": "Новая подписка на фильтр"
     },
@@ -139,9 +133,6 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "Загрузка фильтра"
-    },
-    "options_filters_custom_step_two_subscribing": {
-        "message": "Подписка на фильтр"
     },
     "options_filters_custom_step_three_title": {
         "message": "Произошла ошибка"
@@ -196,12 +187,6 @@
     },
     "options_userfilter": {
         "message": "Пользовательские правила"
-    },
-    "options_userfilter_import": {
-        "message": "Импорт"
-    },
-    "options_userfilter_export": {
-        "message": "Экпорт"
     },
     "options_userfilter_description": {
         "message": "Вы можете добавлять свои собственные правила фильтрации в&nbsp;Пользовательские правила. Рекомендуется только для опытных пользователей, знакомых с&nbsp;HTML/CSS. Перейдите по&nbsp;<a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ссылке</a>, чтобы узнать, как составлять правила фильтрации."
@@ -259,9 +244,6 @@
     },
     "options_editor_indicator_saved": {
         "message": "Сохранено"
-    },
-    "options_editor_save_button": {
-        "message": "Сохранить"
     },
     "main_menu_edit": {
         "message": "Редактировать"
@@ -463,17 +445,5 @@
     },
     "window_close_dialog_cancel": {
         "message": "Отмена"
-    },
-    "folder_check_dialog_message": {
-        "message": "AdGuard для Safari должен запускаться из папки Приложения"
-    },
-    "folder_check_dialog_detail": {
-        "message": "Переместить его в папку Приложения?"
-    },
-    "folder_check_dialog_move": {
-        "message": "Переместить"
-    },
-    "folder_check_dialog_quit": {
-        "message": "Выйти"
     }
 }

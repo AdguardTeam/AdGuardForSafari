@@ -171,7 +171,7 @@
         "message": "İptal"
     },
     "options_filters_custom_step_final_commit": {
-        "message": "Üye ol"
+        "message": "Abone ol"
     },
     "options_filters_check_filters_update": {
         "message": "Filtre güncellemelerini denetle"
@@ -372,7 +372,7 @@
         "message": "Koruma duraklatıldı"
     },
     "settings_notification_protection_button_text": {
-        "message": "Düzelt"
+        "message": "Sürdür"
     },
     "settings_notification_extensions_button_text": {
         "message": "Düzelt"
@@ -445,17 +445,5 @@
     },
     "window_close_dialog_cancel": {
         "message": "İptal"
-    },
-    "folder_check_dialog_message": {
-        "message": "Safari için AdGuard, Uygulamalar klasöründen başlatılmalıdır."
-    },
-    "folder_check_dialog_detail": {
-        "message": "Şimdi onu Uygulamalar klasörüne taşımak istiyor musunuz?"
-    },
-    "folder_check_dialog_move": {
-        "message": "Hareket"
-    },
-    "folder_check_dialog_quit": {
-        "message": "Çıkış"
     }
 }
