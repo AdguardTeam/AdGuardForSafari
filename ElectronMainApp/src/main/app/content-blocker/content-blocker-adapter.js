@@ -45,7 +45,7 @@ module.exports = (function () {
                 const rulesTexts = group.rules.map((x) => x.ruleText);
                 /* eslint-disable-next-line no-await-in-loop */
                 const result = await jsonFromRules(rulesTexts, false);
-                if (result && result.converted) {
+                if (result && result.converted && result.converted !== '[]') {
                     json = result.converted;
                     if (result.overLimit) {
                         overlimit = true;
