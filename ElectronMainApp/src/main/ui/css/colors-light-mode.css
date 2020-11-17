@@ -231,6 +231,9 @@ li.active .toggler {
 .option-popup {
 	background-color: rgba(0, 0, 0, .1);
 }
+.option-popup__title {
+	color: #777777;
+}
 .option-popup__in {
 	background-color: #fff;
 }
