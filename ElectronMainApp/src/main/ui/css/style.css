@@ -1560,8 +1560,9 @@ body {
 .settings__import-export {
   display: block !important;
   margin-top: 10px;
+  text-align: right;
 }
 
 .settings__import-export a {
-  margin-right: 15px;
+  margin-left: 15px;
 }
