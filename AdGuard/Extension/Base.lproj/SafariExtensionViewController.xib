@@ -85,12 +85,12 @@
                         <real value="3.4028234663852886e+38"/>
                     </customSpacing>
                 </stackView>
-                <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="qio-p6-Pqn">
-                    <rect key="frame" x="28" y="228" width="162" height="14"/>
+                <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qio-p6-Pqn">
+                    <rect key="frame" x="28" y="228" width="168" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="fBY-Nv-eMT"/>
                     </constraints>
-                    <buttonCell key="cell" type="bevel" title="Enabled on this website" bezelStyle="regularSquare" image="checkbox" imagePosition="left" alternateImage="checkbox-selected" refusesFirstResponder="YES" inset="2" id="t9o-h0-bnn">
+                    <buttonCell key="cell" type="bevel" title="Enabled on this website" bezelStyle="regularSquare" image="checkbox" imagePosition="left" alignment="right" alternateImage="checkbox-selected" refusesFirstResponder="YES" inset="2" id="t9o-h0-bnn">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
