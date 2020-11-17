@@ -86,7 +86,7 @@
                     </customSpacing>
                 </stackView>
                 <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qio-p6-Pqn">
-                    <rect key="frame" x="28" y="228" width="165" height="14"/>
+                    <rect key="frame" x="28" y="228" width="168" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="fBY-Nv-eMT"/>
                     </constraints>
