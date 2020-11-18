@@ -455,7 +455,7 @@ const WhiteListFilter = function (options) {
         }));
         /* eslint-disable-next-line no-unused-vars */
         hasContent = !!response.content;
-        editor.setValue(response.content || '');
+        editor.setValue(response.content || '', 1);
     }
 
     const whiteListEditor = document.querySelector('#whiteListRules > textarea');
