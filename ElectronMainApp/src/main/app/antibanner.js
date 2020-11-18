@@ -165,7 +165,7 @@ module.exports = (() => {
             // Go through all filters in the map
             for (const filterId in rulesFilterMap) {
                 const filterIdNum = parseInt(filterId, 10);
-                if (filterId !== USER_FILTER_ID) {
+                if (filterIdNum !== USER_FILTER_ID) {
                     const rulesTexts = rulesFilterMap[filterIdNum];
                     const isTrustedFilter = filters.isTrustedFilter(filterIdNum);
                     addRules(filterIdNum, rulesTexts, isTrustedFilter);
