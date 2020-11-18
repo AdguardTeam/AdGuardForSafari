@@ -569,7 +569,7 @@ const UserFilter = function () {
         ipcRenderer.on('getUserRulesResponse', (e, arg) => {
             /* eslint-disable-next-line no-unused-vars */
             hasContent = !!arg.content;
-            editor.setValue(arg.content || '');
+            editor.setValue(arg.content || '', 1);
         });
     }
 
