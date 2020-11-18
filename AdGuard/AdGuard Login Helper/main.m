@@ -3,7 +3,7 @@
 //  AdGuard Login Helper
 //
 //  Created by Roman Sokolov on 28/10/2019.
-//  Copyright © 2019 Adguard Software Ltd. All rights reserved.
+//  Copyright © 2020 AdGuard Software Ltd. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
@@ -19,9 +19,9 @@ int main(int argc, const char * argv[]) {
                 break;
             }
         }
-        
+
         if (!alreadyRunning) {
-            
+
             NSString *appPath = [[[[[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent] stringByDeletingLastPathComponent]  stringByDeletingLastPathComponent] stringByDeletingLastPathComponent];
             // get to the waaay top. Goes through LoginItems, Library, Contents, Applications
             NSURL *url = [NSURL fileURLWithPath:appPath];
@@ -30,7 +30,7 @@ int main(int argc, const char * argv[]) {
             }
             else {
                 NSLog(@"AdGuard For Safari Login Helper: Try laungh: %@", url);
-                
+
                 NSError *lError = nil;
                 NSRunningApplication *app = [[NSWorkspace sharedWorkspace] launchApplicationAtURL:url
                                                                                           options:0
@@ -45,8 +45,8 @@ int main(int argc, const char * argv[]) {
                 }
             }
         }
-        
+
     }
-    
+
     return 0;
 }

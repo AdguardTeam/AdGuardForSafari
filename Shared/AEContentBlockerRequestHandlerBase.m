@@ -3,7 +3,7 @@
 //  shared
 //
 //  Created by Dimitry Kolyshev on 01.08.2019.
-//  Copyright © 2019 Adguard Software Ltd. All rights reserved.
+//  Copyright © 2020 AdGuard Software Ltd. All rights reserved.
 //
 
 #import "AEContentBlockerRequestHandlerBase.h"
@@ -25,9 +25,9 @@
 
 - (void)beginRequestWithExtensionContext:(NSExtensionContext *)context {
     DDLogDebug(@"AG: beginRequestWithExtensionContext..");
-    
+
     NSItemProvider *attachment;
-    
+
     if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsEnabled]) {
         attachment = [[NSItemProvider alloc] initWithContentsOfURL:self.blockingContentRulesUrl];
     }
@@ -37,13 +37,13 @@
     if (attachment) {
         NSExtensionItem *item = [[NSExtensionItem alloc] init];
         item.attachments = @[attachment];
-        
+
         DDLogDebug(@"AG: beginRequestWithExtensionContext done.");
-        
+
         [context completeRequestReturningItems:@[item] completionHandler:nil];
         return;
     }
-    
+
     [context completeRequestReturningItems:nil completionHandler:nil];
 }
 

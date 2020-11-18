@@ -3,7 +3,7 @@
 //  shared
 //
 //  Created by Roman Sokolov on 05/09/2019.
-//  Copyright © 2019 Adguard Software Ltd. All rights reserved.
+//  Copyright © 2020 AdGuard Software Ltd. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

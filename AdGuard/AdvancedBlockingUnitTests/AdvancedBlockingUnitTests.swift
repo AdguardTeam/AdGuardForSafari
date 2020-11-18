@@ -3,7 +3,7 @@
 //  AdvancedBlockingTests
 //
 //  Created by Dimitry Kolyshev on 30.01.2019.
-//  Copyright © 2019 Adguard Software Ltd. All rights reserved.
+//  Copyright © 2020 AdGuard Software Ltd. All rights reserved.
 //
 
 import XCTest
@@ -11,17 +11,17 @@ import XCTest
 @testable import AdvancedBlocking
 
 class AdvancedBlockingTests: XCTestCase {
-    
+
     var contentBlockerContainer: ContentBlockerContainer = ContentBlockerContainer();
-    
+
     override func setUp() {
         //contentBlockerContainer = ContentBlockerContainer();
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    
+
     func testSimple() {
         let contentBlockerJsonString = """
             [
@@ -55,15 +55,15 @@ class AdvancedBlockingTests: XCTestCase {
                 }
             ]
         """;
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
         let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
         XCTAssert(data.scriptlets[0] == "{\"name\":\"abort-on-property-read\",\"args\":[\"I10C\"]}");
     }
-    
+
     func testTriggerUrlFilterAll() {
         let contentBlockerJsonString = """
             [
@@ -96,15 +96,15 @@ class AdvancedBlockingTests: XCTestCase {
                 }
             ]
         """;
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
         let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
         XCTAssert(data.scriptlets.count == 0);
     }
-    
+
     func testTriggerUrlFilter() {
         let contentBlockerJsonString = """
             [
@@ -128,15 +128,15 @@ class AdvancedBlockingTests: XCTestCase {
                 }
             ]
         """;
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
         let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
-    
+
     func testUrlFilterIfDomain() {
         let contentBlockerJsonString = """
             [
@@ -166,15 +166,15 @@ class AdvancedBlockingTests: XCTestCase {
                 }
             ]
         """;
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
         let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
-    
+
     func testUrlFilterIfSubDomain() {
         let contentBlockerJsonString = """
             [
@@ -204,15 +204,15 @@ class AdvancedBlockingTests: XCTestCase {
                 }
             ]
         """;
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
         let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://sub.example.com")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
-    
+
     func testUrlFilterUnlessDomain() {
         let contentBlockerJsonString = """
             [
@@ -240,15 +240,15 @@ class AdvancedBlockingTests: XCTestCase {
                 }
             ]
         """;
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
         let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts.count == 0);
         XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
         XCTAssert(data.scriptlets.count == 0);
     }
-    
+
     func testIgnorePreviousRules() {
         let contentBlockerJsonString = """
             [
@@ -283,22 +283,22 @@ class AdvancedBlockingTests: XCTestCase {
                 }
             ]
         """;
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
         var data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.css.count == 0);
         XCTAssert(data.scriptlets.count == 0);
-        
+
         data = try! contentBlockerContainer.getData(url: URL(string:"http://test.com")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.scripts[1] == "example-ignored-script");
         XCTAssert(data.css.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
-    
+
     func testIgnorePreviousRulesExtended() {
         let contentBlockerJsonString = """
             [{
@@ -312,21 +312,21 @@ class AdvancedBlockingTests: XCTestCase {
                 "action": {"type": "ignore-previous-rules"}
             }]
         """;
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
         var data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.org")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts.count == 0);
         XCTAssert(data.css.count == 0);
         XCTAssert(data.scriptlets.count == 0);
-        
+
         data = try! contentBlockerContainer.getData(url: URL(string:"http://example-more.com")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts[0] == "alert(1);");
         XCTAssert(data.css.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
-    
+
     func testUrlFilterShortcuts() {
         let contentBlockerJsonString = """
             [
@@ -359,13 +359,13 @@ class AdvancedBlockingTests: XCTestCase {
                 }
             ]
         """;
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
         let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts[0] == "test-included-script");
     }
-    
+
     func testInvalidItems() {
         // Invalid trigger
         var contentBlockerJsonString = """
@@ -380,14 +380,14 @@ class AdvancedBlockingTests: XCTestCase {
                 }
             ]
         """;
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
         var data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts.count == 0);
         XCTAssert(data.css.count == 0);
         XCTAssert(data.scriptlets.count == 0);
-        
+
         // Unsupported action
         contentBlockerJsonString = """
             [
@@ -402,14 +402,14 @@ class AdvancedBlockingTests: XCTestCase {
                 }
             ]
         """;
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
         data = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts.count == 0);
         XCTAssert(data.css.count == 0);
         XCTAssert(data.scriptlets.count == 0);
-        
+
         // Invalid action
         contentBlockerJsonString = """
             [
@@ -423,14 +423,14 @@ class AdvancedBlockingTests: XCTestCase {
                 }
             ]
         """;
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
         data = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts.count == 0);
         XCTAssert(data.css.count == 0);
         XCTAssert(data.scriptlets.count == 0);
-        
+
         // Invalid regexp
         contentBlockerJsonString = """
             [
@@ -445,15 +445,15 @@ class AdvancedBlockingTests: XCTestCase {
                 }
             ]
         """;
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
         data = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")!) as! BlockerData;
-        
+
         XCTAssert(data.scripts.count == 0);
         XCTAssert(data.css.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
-    
+
     func testPerformanceEmptyList() {
         self.measure {
             let contentBlockerJsonString = """
@@ -484,14 +484,14 @@ class AdvancedBlockingTests: XCTestCase {
                 }
             ]
         """;
-            
+
             try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
             let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
-            
+
             XCTAssert(data.scripts[0] == "included-script");
         }
     }
-    
+
     func testPerformanceLongList() {
         var contentBlockerJsonString = """
                 [
@@ -520,7 +520,7 @@ class AdvancedBlockingTests: XCTestCase {
                         }
                     }
             """;
-        
+
         for index in 1...5000 {
             contentBlockerJsonString += """
             ,{
@@ -537,21 +537,21 @@ class AdvancedBlockingTests: XCTestCase {
             }
             """;
         }
-        
+
         contentBlockerJsonString += "]";
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
-        
+
         self.measure {
             for _ in 1...3 {
                 let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
-                
+
                 XCTAssert(data.scripts[0] == "included-script");
             }
         }
-        
+
     }
-    
+
     func testPerformanceUrlShortcutsLongList() {
         var contentBlockerJsonString = """
                 [
@@ -574,7 +574,7 @@ class AdvancedBlockingTests: XCTestCase {
                         }
                     }
             """;
-        
+
         for index in 1...5000 {
             contentBlockerJsonString += """
             ,{
@@ -588,56 +588,56 @@ class AdvancedBlockingTests: XCTestCase {
             }
             """;
         }
-        
+
         contentBlockerJsonString += "]";
-        
+
         try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
-        
+
         self.measure {
             for _ in 1...3 {
                 let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
-                
+
                 XCTAssert(data.scripts[0] == "included-script");
             }
         }
-        
+
     }
-    
+
     // Base + Russian filters
     func testPerformanceCommonFilter() {
         let bundle = Bundle(for: type(of:self));
         let path = bundle.path(forResource: "adv-blocking-content-rules", ofType: "json");
-        
+
         let content = try! String(contentsOfFile: path!, encoding: String.Encoding.utf8);
-        
+
         try! contentBlockerContainer.setJson(json: content);
-        
+
         // Average time 0.125
         self.measure {
             for _ in 1...10 {
                 let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://mail.ru")!) as! BlockerData;
-                
+
                 XCTAssert(data.scripts.count == 11);
                 XCTAssert(data.css.count == 0);
                 XCTAssert(data.scriptlets.count == 0);
             }
         }
-        
+
     }
-    
+
     // Base + Russian filters on top sites
     func testPerformanceTopSitesFilter() {
         let bundle = Bundle(for: type(of:self));
         let path = bundle.path(forResource: "adv-blocking-content-rules", ofType: "json");
         let topSitesPath = bundle.path(forResource: "top-sites", ofType: "txt");
-        
+
         let content = try! String(contentsOfFile: path!, encoding: String.Encoding.utf8);
-        
+
         try! contentBlockerContainer.setJson(json: content);
-        
+
         let topSites = try! String(contentsOfFile: topSitesPath!, encoding: String.Encoding.utf8);
         let topSitesArr = topSites.split(separator: "\n");
-        
+
         // Average time 0.175
         self.measure {
             for site in topSitesArr {
@@ -646,7 +646,7 @@ class AdvancedBlockingTests: XCTestCase {
                 XCTAssert(data.scripts.count >= 0);
             }
         }
-        
+
     }
-    
+
 }
