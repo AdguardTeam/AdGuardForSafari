@@ -455,7 +455,7 @@ const WhiteListFilter = function (options) {
         }));
         /* eslint-disable-next-line no-unused-vars */
         hasContent = !!response.content;
-        editor.setValue(response.content || '');
+        editor.setValue(response.content || '', 1);
     }
 
     const whiteListEditor = document.querySelector('#whiteListRules > textarea');
@@ -569,7 +569,7 @@ const UserFilter = function () {
         ipcRenderer.on('getUserRulesResponse', (e, arg) => {
             /* eslint-disable-next-line no-unused-vars */
             hasContent = !!arg.content;
-            editor.setValue(arg.content || '');
+            editor.setValue(arg.content || '', 1);
         });
     }
 
