@@ -2,7 +2,7 @@
 //  AEContentBlockerRequestHandlerBase.h
 //  shared
 //
-//  Copyright © 2019 Adguard Software Ltd. All rights reserved.
+//  Copyright © 2020 AdGuard Software Ltd. All rights reserved.
 //
 #import <Foundation/Foundation.h>
 
