@@ -282,6 +282,15 @@ li.active .toggler {
 .alert__link {
 	color: #66b574;
 }
+.support .block-type__desc-title {
+	color: #333333;
+}
+.support .description {
+	color: #888888;
+}
+.support .opts-list li:hover {
+	background: rgba(0, 0, 0, .1);
+}
 .about-opt__version {
 	color: #252525;
 }

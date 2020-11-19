@@ -306,6 +306,15 @@ li.active .toggler {
 .alert__link {
 	color: #66b574;
 }
+.support .block-type__desc-title {
+	color: #cccccc;
+}
+.support .description {
+	color: #888888;
+}
+.support .opts-list li:hover {
+	background: rgba(255, 255, 255, .1);
+}
 .about-opt__version {
 	color: #eeeeee;
 }
