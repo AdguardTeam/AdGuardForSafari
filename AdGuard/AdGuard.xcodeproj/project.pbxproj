@@ -562,6 +562,7 @@
 		F41DA7E32201C81700C63708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F41DA7E42201C81700C63708 /* script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
 		F41DA7E82201C81700C63708 /* AdvancedBlocking.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdvancedBlocking.entitlements; sourceTree = "<group>"; };
+		F420F7A825682FDD0032FDD0 /* libswiftSwiftOnoneSupport.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libswiftSwiftOnoneSupport.dylib; sourceTree = "<group>"; };
 		F44937BB2291D72500BAEFED /* scriptlets.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = scriptlets.js; sourceTree = "<group>"; };
 		F44ABA9821D4CE21004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/SafariExtensionViewController.strings"; sourceTree = "<group>"; };
 		F44ABA9921D4CE21004EE45B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -851,6 +852,7 @@
 		65216A01212436EA00ABF7D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F420F7A825682FDD0032FDD0 /* libswiftSwiftOnoneSupport.dylib */,
 				65024EAE2126C82E00342E3C /* SafariServices.framework */,
 				65216A02212436EA00ABF7D0 /* Cocoa.framework */,
 			);
