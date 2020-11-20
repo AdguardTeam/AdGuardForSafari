@@ -1,12 +1,12 @@
 {
     "main_menu_about": {
-        "message": "Riguardo AdGuard per Safari"
+        "message": "Informazioni su AdGuard per Safari"
     },
     "options_popup_trusted_filter_title": {
         "message": "Verificato"
     },
     "options_popup_trusted_filter_description": {
-        "message": "I filtri verificati possono utilizzare gestori delle regole di filtraggio molto potenti, che potrebbero essere pericolose se in mani sbagliate. Non spuntare questa casella a meno che non hai piena fiducia."
+        "message": "I filtri verificati possono utilizzare gestori delle regole di filtraggio molto potenti, che potrebbero essere pericolose se in mani sbagliate. Non spuntare questa casella a meno che tu non abbia piena fiducia."
     },
     "options_filters_filter_trusted_tag": {
         "message": "verificato"
@@ -48,25 +48,25 @@
         "message": "Blocco annunci AdGuard"
     },
     "description": {
-        "message": "Un'estensione inarrivabile contro annunci e pop-up. Blocca pubblicità su Facebook, YouTube a tutti gli altri siti web."
+        "message": "Un'estensione inarrivabile contro annunci e pop-up. Blocca pubblicità su Facebook, YouTube e tutti gli altri siti web."
     },
     "options_settings": {
         "message": "AdGuard per Safari - Impostazioni"
     },
     "options_general_settings": {
-        "message": "Impostazioni Generali"
+        "message": "Impostazioni generali"
     },
     "options_general_desc": {
-        "message": "AdGuard per Safari è un software gratuito e open source. Incoraggiamo i tuoi commenti e contributi. Se vuoi riportare un errore, invialo a <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo</a>."
+        "message": "AdGuard per Safari è un software gratuito e open source. Incoraggiamo i tuoi commenti e contributi. Se vuoi riportare un errore, invialo <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>alla nostra repository GitHub</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Permetti annunci di ricerca e l'autopromozione dei siti"
     },
     "options_export_settings": {
-        "message": "Export settings"
+        "message": "Esporta impostazioni"
     },
     "options_import_settings": {
-        "message": "Import settings"
+        "message": "Importa impostazioni"
     },
     "options_antibanner": {
         "message": "Filtri"
@@ -114,16 +114,16 @@
         "message": "Aggiungi filtro utente"
     },
     "options_filters_custom_step_one_title": {
-        "message": "Nuova sottoscrizione filtro"
+        "message": "Nuova iscrizione ad un filtro"
     },
     "options_filters_custom_step_one_input_placeholder": {
         "message": "Inserisci URL filtro"
     },
     "options_filters_custom_step_one_url_desc": {
-        "message": "Inserisci un URL valido per la sottoscrizione filtro"
+        "message": "Inserisci un URL valido per l'iscrizione ad un filtro"
     },
     "options_filters_custom_step_one_url_desc_more": {
-        "message": "AdGuard aggiungerà questa sottoscrizione filtro"
+        "message": "AdGuard aggiungerà questa iscrizione ad un filtro"
     },
     "options_filters_custom_step_one_cancel": {
         "message": "Annulla"
@@ -177,10 +177,10 @@
         "message": "Controlla aggiornamento filtri"
     },
     "options_whitelist": {
-        "message": "Lista Bianca"
+        "message": "Lista bianca"
     },
     "options_whitelist_description": {
-        "message": "AdGuard non filtrerà i siti sulla Lista Bianca."
+        "message": "AdGuard non filtrerà i siti sulla lista bianca."
     },
     "options_whitelist_inverse": {
         "message": "Inverti lista bianca<span class='sp-table-row-info'>Sblocca annunci dappertutto <i>eccetto i</i> siti web della lista bianca</span>"
@@ -276,7 +276,7 @@
         "message": "Esegui AdGuard all'avvio"
     },
     "tray_menu_quit": {
-        "message": "Abbandona"
+        "message": "Esci"
     },
     "tray_menu_protection_start": {
         "message": "Il blocco degli annunci in Safari è attivo"
@@ -432,10 +432,10 @@
         "message": "Mantenere AdGuard in secondo piano?"
     },
     "window_close_dialog_detail": {
-        "message": "È cruciale per AdGuard mantenere il processo principale in esecuzione sullo sfondo, altrimenti non sarà in grado di controllare automaticamente gli aggiornamenti dei filtri e di gestire il filtraggio."
+        "message": "È importantissimo per AdGuard mantenere il processo principale in esecuzione in background, altrimenti non sarà in grado di controllare automaticamente gli aggiornamenti dei filtri e di gestire il filtraggio."
     },
     "window_close_dialog_checkbox": {
-        "message": "Ricordare la mia scelta"
+        "message": "Ricorda la mia scelta"
     },
     "window_close_dialog_yes": {
         "message": "Sì (consigliato)"
@@ -453,7 +453,7 @@
         "message": "Vuoi spostarlo ora nella cartella Applicazioni?"
     },
     "folder_check_dialog_move": {
-        "message": "Mossa"
+        "message": "Sposta"
     },
     "folder_check_dialog_quit": {
         "message": "Abbandona"
