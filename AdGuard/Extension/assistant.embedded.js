@@ -384,7 +384,7 @@
         /* 17 */
         /***/ (function(module) {
 
-            module.exports = JSON.parse("{\"a\":\"4.3.35\"}");
+            module.exports = JSON.parse("{\"a\":\"4.3.36\"}");
 
             /***/ }),
         /* 18 */
