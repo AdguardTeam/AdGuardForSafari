@@ -11,7 +11,7 @@ echo "AG_STANDALONE_BETA: ${AG_STANDALONE_BETA}"
 
 # Fix nvm incompatibility
 . ~/.nvm/nvm.sh
-nvm use v15.2.0 || exit 1
+nvm use v13.10.0 || exit 1
 
 # Installing dependencies
 yarn global add electron-osx-sign
