@@ -7,7 +7,7 @@
     "standalone-build": "AG_STANDALONE_BUILD",
     "standalone-beta": "AG_STANDALONE_BETA",
     "scripts": {
-        "start": "electron . --unhandled-rejections=strict",
+        "start": "electron .",
         "test": "NODE_ENV=test jest --runInBand",
         "inspect": "electron --inspect=5858 .",
         "upload-locales": "gulp upload-locales",
