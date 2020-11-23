@@ -9,6 +9,7 @@ const log = require('../utils/log');
 const concurrent = require('../utils/concurrent');
 const appPack = require('../../../utils/app-pack');
 const app = require('../app');
+const contentBlockerQueue = require('./content-blocker-queue');
 const { groupRules, rulesGroupsBundles, filterGroupsBundles } = require('./rule-groups');
 
 /**
@@ -42,6 +43,9 @@ module.exports = (function () {
             for (const group of grouped) {
                 let json = JSON.stringify(emptyBlockerJSON);
 
+                const bundleId = rulesGroupsBundles[group.key];
+                log.info(`Converting rules for ${bundleId}`);
+
                 const rulesTexts = group.rules.map((x) => x.ruleText);
                 /* eslint-disable-next-line no-await-in-loop */
                 const result = await jsonFromRules(rulesTexts, false);
@@ -54,13 +58,13 @@ module.exports = (function () {
 
                 const info = {
                     rulesCount: result ? result.totalConvertedCount : 0,
-                    bundleId: rulesGroupsBundles[group.key],
+                    bundleId,
                     overlimit: result && result.overLimit,
                     filterGroups: group.filterGroups,
                     hasError: false,
                 };
 
-                setSafariContentBlocker(rulesGroupsBundles[group.key], json, info);
+                setSafariContentBlocker(bundleId, json, info);
             }
 
             const advancedBlockingRulesCount = await setAdvancedBlocking(rules.map((x) => x.ruleText));
@@ -146,6 +150,8 @@ module.exports = (function () {
             }
 
             child.stdin.end();
+        }).catch((e) => {
+            log.error(`Unexpected error running converter tool: ${e}`);
         });
     };
 
@@ -163,11 +169,11 @@ module.exports = (function () {
             advancedBlocking = result.advancedBlocking;
         }
 
-        setSafariContentBlocker(
-            rulesGroupsBundles['advancedBlocking'],
-            advancedBlocking,
-            { rulesCount: result ? result.totalConvertedCount : 0 }
-        );
+        listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, {
+            bundleId: rulesGroupsBundles['advancedBlocking'],
+            json: advancedBlocking,
+            info: { rulesCount: result ? result.totalConvertedCount : 0 },
+        });
 
         return result ? result.advancedBlockingConvertedCount : 0;
     };
@@ -216,7 +222,7 @@ module.exports = (function () {
             log.info(`Setting content blocker json for ${bundleId}.`
                 + `Rules count: ${info.rulesCount}. Json length=${json.length};`);
 
-            listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, {
+            contentBlockerQueue.pushContentBlocker({
                 bundleId,
                 json,
                 info,
@@ -285,6 +291,8 @@ module.exports = (function () {
             if (info && info.bundleId) {
                 saveContentBlockerInfo(info.bundleId, info);
             }
+
+            contentBlockerQueue.processNextContentBlocker();
         }
     });
 
