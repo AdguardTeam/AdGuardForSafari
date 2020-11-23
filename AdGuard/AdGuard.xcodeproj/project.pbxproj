@@ -83,6 +83,7 @@
 		65EF97B2236733DA000CC845 /* AALaunchAtLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF97B0236733DA000CC845 /* AALaunchAtLogin.m */; };
 		65EF97B3236733DA000CC845 /* AALaunchAtLogin.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF97B1236733DA000CC845 /* AALaunchAtLogin.h */; };
 		65FA408D215E8B6B000196EC /* LinkButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65FA408C215E8B6B000196EC /* LinkButton.m */; };
+		65FCA8AB256BBFD700D60C36 /* libs in Resources */ = {isa = PBXBuildFile; fileRef = F4C57F9B2514D6C300A9B7BE /* libs */; };
 		F410563022EA2521003871C5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
 		F410563622EA2521003871C5 /* ContentBlockerRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F410563522EA2521003871C5 /* ContentBlockerRequestHandler.m */; };
 		F410563B22EA2521003871C5 /* BlockerSocialExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F410562F22EA2521003871C5 /* BlockerSocialExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -133,7 +134,6 @@
 		F4B2152322EA2A2D00E2EA16 /* ContentBlockerRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B2152222EA2A2D00E2EA16 /* ContentBlockerRequestHandler.m */; };
 		F4B2152822EA2A2D00E2EA16 /* BlockerCustomExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F4B2151C22EA2A2D00E2EA16 /* BlockerCustomExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F4B2152E22EA2A9500E2EA16 /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 652735B2212D77A3005C35BF /* libshared.a */; };
-		F4C57F9C2514D6C300A9B7BE /* libs in Resources */ = {isa = PBXBuildFile; fileRef = F4C57F9B2514D6C300A9B7BE /* libs */; };
 		F4D590132201C8D3002DCC2C /* ContentBlockerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D590122201C8D3002DCC2C /* ContentBlockerController.swift */; };
 		F4D590152201C8F8002DCC2C /* ContentBlockerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D590142201C8F8002DCC2C /* ContentBlockerContainer.swift */; };
 		F4D5901D2201C965002DCC2C /* AdvancedBlockingUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D5901C2201C965002DCC2C /* AdvancedBlockingUnitTests.swift */; };
@@ -1301,8 +1301,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				65EF97B523673C6E000CC845 /* PBXTargetDependency */,
 				652169F921231BFB00ABF7D0 /* PBXTargetDependency */,
+				65EF97B523673C6E000CC845 /* PBXTargetDependency */,
 				65216A15212436EA00ABF7D0 /* PBXTargetDependency */,
 				658471782136B373005C74E8 /* PBXTargetDependency */,
 				F41DA7EA2201C81700C63708 /* PBXTargetDependency */,
@@ -1670,7 +1670,7 @@
 				65975C9421481540007F766E /* Assets.xcassets in Resources */,
 				F46D132D225E946500282566 /* standalone-beta.xcconfig in Resources */,
 				65D151842139771A0014BE79 /* defaults.plist in Resources */,
-				F4C57F9C2514D6C300A9B7BE /* libs in Resources */,
+				65FCA8AB256BBFD700D60C36 /* libs in Resources */,
 				F46D1322225E940B00282566 /* standalone.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2629,13 +2629,14 @@
 		65720AC421219ACB00B2381C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
+				EXECUTABLE_PREFIX = fake_;
 				INFOPLIST_EXPAND_BUILD_SETTINGS = YES;
 				INFOPLIST_FILE = AdGuard/Info.plist;
 				INFOPLIST_PREPROCESS = YES;
@@ -2655,7 +2656,7 @@
 		65720AC521219ACB00B2381C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
@@ -2663,6 +2664,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = TC3Q7MAJXF;
 				ENABLE_HARDENED_RUNTIME = YES;
+				EXECUTABLE_PREFIX = fake_;
 				INFOPLIST_EXPAND_BUILD_SETTINGS = YES;
 				INFOPLIST_FILE = AdGuard/Info.plist;
 				INFOPLIST_PREPROCESS = YES;
@@ -2996,7 +2998,7 @@
 		F41DA7ED2201C81700C63708 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
 				CODE_SIGN_STYLE = Manual;
@@ -3023,7 +3025,7 @@
 		F41DA7EE2201C81700C63708 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
@@ -3203,12 +3205,13 @@
 		F46D1319225E93A400282566 /* Standalone Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				EXECUTABLE_PREFIX = fake_;
 				INFOPLIST_EXPAND_BUILD_SETTINGS = YES;
 				INFOPLIST_FILE = AdGuard/Info.plist;
 				INFOPLIST_PREPROCESS = YES;
@@ -3318,7 +3321,7 @@
 		F46D131F225E93A400282566 /* Standalone Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
 				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
@@ -3424,12 +3427,13 @@
 		F46D1324225E944700282566 /* Standalone Prod */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				EXECUTABLE_PREFIX = fake_;
 				INFOPLIST_EXPAND_BUILD_SETTINGS = YES;
 				INFOPLIST_FILE = AdGuard/Info.plist;
 				INFOPLIST_PREPROCESS = YES;
@@ -3539,7 +3543,7 @@
 		F46D132A225E944700282566 /* Standalone Prod */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AdvancedBlocking/AdvancedBlocking.entitlements;
 				CODE_SIGN_IDENTITY = "$(AG_SIGN)";
