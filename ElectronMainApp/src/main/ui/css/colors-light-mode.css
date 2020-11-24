@@ -80,8 +80,11 @@ body {
 .opts-list li .warn-message{
 	color: #D6D6D6;
 }
-.opts-list li a{
-	color: #D6D6D6;
+.opts-list li a.button--green{
+	color: #ffffff;
+}
+.opts-list li a.button--green.bd{
+	color: #66b574;
 }
 .opts-list li.active .opt-name__tag{
 	color: #66b574;

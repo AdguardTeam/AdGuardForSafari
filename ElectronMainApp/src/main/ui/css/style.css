@@ -704,7 +704,15 @@ li.active .toggler:before {
   }
 }
 .ace_folding-enabled > .ace_gutter-cell {
-  padding-right: 19px;
+  padding: 0;
+  text-align: center;
+}
+.ace_gutter,
+.ace_layer.ace_gutter-layer.ace_folding-enabled {
+  width: 48px !important;
+}
+.ace_scroller {
+  left: 48px !important;
 }
 .preloader {
   background: url(../images/reload-ico-green.svg) no-repeat;
@@ -1120,7 +1128,7 @@ li.active .toggler:before {
 }
 
 #custom-filter-popup-cancel {
-  margin-right: 7px;
+  margin-right: 20px;
 }
 
 .option-popup__load {
@@ -1582,8 +1590,9 @@ body {
   display: block !important;
   margin-top: 10px;
   text-align: right;
+  padding-right: 0 !important;
 }
 
 .settings__import-export a {
-  margin-left: 15px;
+  margin-left: 20px;
 }
