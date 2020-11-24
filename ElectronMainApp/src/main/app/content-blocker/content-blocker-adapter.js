@@ -9,7 +9,6 @@ const log = require('../utils/log');
 const concurrent = require('../utils/concurrent');
 const appPack = require('../../../utils/app-pack');
 const app = require('../app');
-const contentBlockerQueue = require('./content-blocker-queue');
 const { groupRules, rulesGroupsBundles, filterGroupsBundles } = require('./rule-groups');
 
 /**
@@ -43,9 +42,6 @@ module.exports = (function () {
             for (const group of grouped) {
                 let json = JSON.stringify(emptyBlockerJSON);
 
-                const bundleId = rulesGroupsBundles[group.key];
-                log.info(`Converting rules for ${bundleId}`);
-
                 const rulesTexts = group.rules.map((x) => x.ruleText);
                 /* eslint-disable-next-line no-await-in-loop */
                 const result = await jsonFromRules(rulesTexts, false);
@@ -58,13 +54,13 @@ module.exports = (function () {
 
                 const info = {
                     rulesCount: result ? result.totalConvertedCount : 0,
-                    bundleId,
+                    bundleId: rulesGroupsBundles[group.key],
                     overlimit: result && result.overLimit,
                     filterGroups: group.filterGroups,
                     hasError: false,
                 };
 
-                setSafariContentBlocker(bundleId, json, info);
+                setSafariContentBlocker(rulesGroupsBundles[group.key], json, info);
             }
 
             const advancedBlockingRulesCount = await setAdvancedBlocking(rules.map((x) => x.ruleText));
@@ -150,8 +146,6 @@ module.exports = (function () {
             }
 
             child.stdin.end();
-        }).catch((e) => {
-            log.error(`Unexpected error running converter tool: ${e}`);
         });
     };
 
@@ -169,11 +163,11 @@ module.exports = (function () {
             advancedBlocking = result.advancedBlocking;
         }
 
-        listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, {
-            bundleId: rulesGroupsBundles['advancedBlocking'],
-            json: advancedBlocking,
-            info: { rulesCount: result ? result.totalConvertedCount : 0 },
-        });
+        setSafariContentBlocker(
+            rulesGroupsBundles['advancedBlocking'],
+            advancedBlocking,
+            { rulesCount: result ? result.totalConvertedCount : 0 }
+        );
 
         return result ? result.advancedBlockingConvertedCount : 0;
     };
@@ -222,7 +216,7 @@ module.exports = (function () {
             log.info(`Setting content blocker json for ${bundleId}.`
                 + `Rules count: ${info.rulesCount}. Json length=${json.length};`);
 
-            contentBlockerQueue.pushContentBlocker({
+            listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATE_REQUIRED, {
                 bundleId,
                 json,
                 info,
@@ -291,8 +285,6 @@ module.exports = (function () {
             if (info && info.bundleId) {
                 saveContentBlockerInfo(info.bundleId, info);
             }
-
-            contentBlockerQueue.processNextContentBlocker();
         }
     });
 
