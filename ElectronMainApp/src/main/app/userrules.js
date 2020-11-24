@@ -18,7 +18,7 @@ module.exports = (function () {
      * @param content Rules text
      */
     const updateUserRulesText = function (content) {
-        const lines = content.split(/[\r\n]+/) || [];
+        const lines = content.split('\n') || [];
         rulesStorage.write(USER_FILTER_ID, lines, () => {
             listeners.notifyListeners(events.UPDATE_USER_FILTER_RULES);
             listeners.notifyListeners(events.UPDATE_FILTER_RULES, userFilter, lines);
