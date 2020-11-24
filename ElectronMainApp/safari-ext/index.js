@@ -98,6 +98,14 @@ module.exports = (() => {
         processQueue();
     };
 
+    /**
+     * Async sets content blocker json
+     *
+     * @param bundleId
+     * @param jsonString
+     * @param callback
+     * @return {Promise<unknown>}
+     */
     const setContentBlockingJsonAsync = async (bundleId, jsonString, callback) => {
         return new Promise((resolve, reject) => {
             try {
@@ -118,6 +126,11 @@ module.exports = (() => {
         });
     };
 
+    /**
+     * Starts processing queue
+     *
+     * @return {Promise<void>}
+     */
     const processQueue = async () => {
         if (queueInProcess) {
             return;
