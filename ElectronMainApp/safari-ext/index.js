@@ -103,21 +103,18 @@ module.exports = (() => {
      *
      * @param bundleId
      * @param jsonString
-     * @param callback
      * @return {Promise<unknown>}
      */
-    const setContentBlockingJsonAsync = async (bundleId, jsonString, callback) => {
+    const setContentBlockingJsonAsync = async (bundleId, jsonString) => {
         return new Promise((resolve, reject) => {
             try {
                 if (bundleId === ADVANCED_BLOCKING_BUNDLE_ID) {
                     addon.setAdvancedBlockingJson(jsonString, (result) => {
-                        callback(result);
-                        resolve();
+                        resolve(result);
                     });
                 } else {
                     addon.setContentBlockingJson(bundleId, jsonString, (result) => {
-                        callback(result);
-                        resolve();
+                        resolve(result);
                     });
                 }
             } catch (ex) {
@@ -143,7 +140,8 @@ module.exports = (() => {
             const item = queue.shift();
             try {
                 // eslint-disable-next-line no-await-in-loop
-                await setContentBlockingJsonAsync(item.bundleId, item.jsonString, item.callback);
+                const result = await setContentBlockingJsonAsync(item.bundleId, item.jsonString);
+                item.callback(result);
             } catch (ex) {
                 // Ignore
             }
