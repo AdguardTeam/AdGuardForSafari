@@ -135,10 +135,10 @@
         }
     };
 
+    if (window.top === window) {
+        safari.self.addEventListener("message", handleMessage);
 
-    safari.self.addEventListener("message", handleMessage);
-
-    // Request advanced blocking data
-    safari.extension.dispatchMessage("getAdvancedBlockingData");
+        // Request advanced blocking data
+        safari.extension.dispatchMessage("getAdvancedBlockingData");
+    }
 })();
-
