@@ -123,11 +123,11 @@
      *
      * @param event
      */
-    const handleMessage = event => {
-        if (event.name === "advancedBlockingData") {
+    const handleMessage = (event) => {
+        if (event.name === 'advancedBlockingData') {
             try {
-                const data = JSON.parse(event.message["data"]);
-                const verbose = JSON.parse(event.message["verbose"]);
+                const data = JSON.parse(event.message['data']);
+                const verbose = JSON.parse(event.message['verbose']);
                 applyAdvancedBlockingData(data, verbose);
             } catch (e) {
                 console.error(e);
@@ -135,10 +135,12 @@
         }
     };
 
-    if (window.top === window) {
-        safari.self.addEventListener("message", handleMessage);
+    if (document instanceof HTMLDocument) {
+        if (window.location.href && window.location.href.indexOf('http') === 0) {
+            safari.self.addEventListener('message', handleMessage);
 
-        // Request advanced blocking data
-        safari.extension.dispatchMessage("getAdvancedBlockingData");
+            // Request advanced blocking data
+            safari.extension.dispatchMessage('getAdvancedBlockingData');
+        }
     }
 })();
