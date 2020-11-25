@@ -57,13 +57,16 @@
         "message": "Updating AdGuard for Safari"
     },
     "options_about_updates_not_found": {
-        "message": "AdGuard for Safari is up to date"
+        "message": "You are using the latest version of AdGuard"
     },
     "options_about_update_downloaded": {
         "message": "Nearly up to date! Relaunch AdGuard for Safari to finish updating."
     },
     "options_about_update_relaunch": {
         "message": "Relaunch"
+    },
+    "options_about_read_more": {
+        "message": "Read more about this product"
     },
     "options_popup_title_placeholder": {
         "message": "Enter filter name"
@@ -372,13 +375,13 @@
         "message": "Try AdGuard Premium for better protection!"
     },
     "options_license_agreement": {
-        "message": "End-User License Agreement"
+        "message": "EULA"
     },
     "options_privacy_policy": {
         "message": "Privacy policy"
     },
     "options_acknowledgment": {
-        "message": "Acknowledgments"
+        "message": "Credits and Acknowledgments"
     },
     "options_github": {
         "message": "GitHub"
