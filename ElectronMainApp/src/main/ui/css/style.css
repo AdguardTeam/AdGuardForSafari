@@ -132,7 +132,7 @@
 }
 .settings-sidebar__in {
   width: 990px;
-  padding: 46px 31px 56px;
+  padding: 46px 31px 0;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
