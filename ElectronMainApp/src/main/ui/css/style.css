@@ -8,8 +8,7 @@
 .wlimit { /* th & st */
   width: 990px;
   padding: 0 31px;
-  margin: 0 auto;
-  margin-top: 140px;
+  margin: 140px auto 0;
   height: 100%;
 }
 .button {
@@ -142,6 +141,7 @@
 .settings-sidebar .logo {
   width: 160px;
   height: 36px;
+  margin-bottom: 25px;
 }
 .settings-sidebar .nav {
   padding: 0;
@@ -149,14 +149,12 @@
   list-style: none;
   display: flex;
   justify-content: flex-end;
-  align-items: flex-start;
   min-width: 705px;
 }
 .settings-sidebar .nav li {
   list-style: none;
   padding: 0;
-  margin: 0;
-  margin-left: 50px;
+  margin: 0 0 0 50px;
 }
 .settings-sidebar .nav span {
   display: inline-block;
