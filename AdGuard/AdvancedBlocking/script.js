@@ -135,6 +135,11 @@
         }
     };
 
+    /**
+     * With the following limitation we fix some troubles with Gmail and scrolling on various websites
+     * https://github.com/AdguardTeam/AdGuardForSafari/issues/433
+     * https://github.com/AdguardTeam/AdGuardForSafari/issues/441
+     */
     if (document instanceof HTMLDocument) {
         if (window.location.href && window.location.href.indexOf('http') === 0) {
             safari.self.addEventListener('message', handleMessage);
