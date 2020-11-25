@@ -1428,11 +1428,10 @@ li.active .toggler:before {
   margin-right: 55px;
 }
 .about-opt__version {
-  font-size: 14px;
-  margin-top: 10px;
+  font-size: 16px;
 }
 .about-opt__desc {
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 25px;
 }
 .about-opt__desc-item {
@@ -1443,9 +1442,9 @@ li.active .toggler:before {
   left: 15px;
 }
 .about-opt_title {
-  font-size: 15px;
+  font-size: 17px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 .about-opt__menu {
   display: flex;
@@ -1472,13 +1471,13 @@ li.active .toggler:before {
 }
 
 .about-opt__read-more {
-  font-size: 14px;
+  font-size: 16px;
   text-decoration: underline;
 }
 
 .about-updates {
-  margin-bottom: 10px;
-  font-size: 14px;
+  margin: 9px 0;
+  font-size: 15px;
   cursor: pointer;
   position: relative;
   display: none;
