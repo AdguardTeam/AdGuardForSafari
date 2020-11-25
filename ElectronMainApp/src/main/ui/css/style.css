@@ -8,7 +8,7 @@
 .wlimit { /* th & st */
   width: 990px;
   padding: 0 31px;
-  margin: 190px auto 0;
+  margin: 140px auto 0;
   height: 100%;
 }
 .button {
@@ -125,7 +125,7 @@
 }
 .settings-sidebar {
   width: 100%;
-  height: 170px;
+  height: 140px;
   position: fixed;
   top: 0;
   z-index: 10;
@@ -134,6 +134,9 @@
   width: 990px;
   padding: 46px 31px 56px;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 .settings-sidebar .logo {
   width: 160px;
@@ -145,13 +148,13 @@
   margin: 0;
   list-style: none;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   min-width: 705px;
 }
 .settings-sidebar .nav li {
   list-style: none;
   padding: 0;
-  margin: 0 50px 0 0;
+  margin: 0 0 0 50px;
 }
 .settings-sidebar .nav span {
   display: inline-block;
