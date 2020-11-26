@@ -4,6 +4,7 @@ const fs = require('fs');
 const {
     app, dialog, Tray, Menu, BrowserWindow,
 } = require('electron');
+const homeDir = require('os').homedir();
 const appPack = require('../utils/app-pack');
 const i18n = require('../utils/i18n');
 
@@ -15,6 +16,9 @@ const settings = require('./app/settings-manager');
 const log = require('./app/utils/log');
 
 const agApp = require('./app/app');
+const { 'ag-group': AG_GROUP } = require('../../package.json');
+
+const GROUP_CONTAINERS_PATH = 'Library/Group\ Containers';
 
 /**
  * Tray controller.
@@ -104,6 +108,15 @@ module.exports = (() => {
                 const zip = new AdmZip();
                 zip.addLocalFile(logsPath);
                 zip.addLocalFile(statePath);
+
+                const agGroupPath = `${homeDir}/${GROUP_CONTAINERS_PATH}/${AG_GROUP}`;
+                const files = fs.readdirSync(agGroupPath);
+                files.forEach((file) => {
+                    if (file.endsWith('.json')) {
+                        zip.addLocalFile(`${agGroupPath}/${file}`);
+                    }
+                });
+
                 zip.writeZip(filePath);
             });
         });
