@@ -111,8 +111,6 @@ else
       PACKAGER_PLATFORM="darwin"
     fi
 
-    set TEMPVAR=AG_GROUP
-
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=9.3.1 --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
     --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
     ${OPT} || exit 1
