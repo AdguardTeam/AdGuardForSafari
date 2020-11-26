@@ -107,8 +107,8 @@ module.exports = (() => {
                 zip.addLocalFile(logsPath);
                 zip.addLocalFile(statePath);
 
-                const groupContainers = 'Library/Group\ Containers';
-                const AG_GROUP_PATH = `${homeDir}/${groupContainers}/${AG_GROUP}`;
+                const GROUP_CONTAINERS_PATH = 'Library/Group\ Containers';
+                const AG_GROUP_PATH = `${homeDir}/${GROUP_CONTAINERS_PATH}/${AG_GROUP}`;
                 const files = fs.readdirSync(AG_GROUP_PATH);
                 files.forEach((file) => {
                     if (file.endsWith('.json')) {
