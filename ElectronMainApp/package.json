@@ -6,6 +6,7 @@
     "repository": "github:AdguardTeam/AdGuardForSafari",
     "standalone-build": "AG_STANDALONE_BUILD",
     "standalone-beta": "AG_STANDALONE_BETA",
+    "ag-group": "AG_GROUP",
     "scripts": {
         "start": "electron .",
         "test": "NODE_ENV=test jest --runInBand",

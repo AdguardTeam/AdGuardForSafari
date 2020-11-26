@@ -46,6 +46,8 @@ rsync -avm --include='*.h' -f 'hide,! */' "${SHAREDSRC}/" "${SRC}/safari-ext/sha
 sed -i "" "s/AG_STANDALONE_BETA/${AG_STANDALONE_BETA}/g" "${SRC}/package.json"
 sed -i "" "s/AG_STANDALONE_BUILD/${AG_STANDALONE}/g" "${SRC}/package.json"
 
+sed -i "" "s/AG_GROUP/${AG_GROUP}/g" "${SRC}/package.json"
+
 # Rebuild electron app
 OPT=""
 cd "${SRC}"
@@ -108,6 +110,8 @@ else
       echo "Changing standalone build platform"
       PACKAGER_PLATFORM="darwin"
     fi
+
+    set TEMPVAR=AG_GROUP
 
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=9.3.1 --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
     --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \

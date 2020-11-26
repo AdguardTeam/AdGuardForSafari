@@ -4,6 +4,7 @@ const fs = require('fs');
 const {
     app, dialog, Tray, Menu, BrowserWindow,
 } = require('electron');
+const homeDir = require('os').homedir();
 const appPack = require('../utils/app-pack');
 const i18n = require('../utils/i18n');
 
@@ -15,6 +16,17 @@ const settings = require('./app/settings-manager');
 const log = require('./app/utils/log');
 
 const agApp = require('./app/app');
+
+const { 'ag-group': AG_GROUP } = require('../../package.json');
+
+const groupContainers = 'Library/Group\ Containers';
+const basicJson = 'blocking-content-rules.json';
+const socialJson = 'blocking-content-rules-social.json';
+const sesurityJson = 'blocking-content-rules-security.json';
+const advancedJson = 'adv-blocking-content-rules.json';
+const pravicyJson = 'blocking-content-rules-privacy.json';
+const otherJson = 'blocking-content-rules-other.json';
+const customJson = 'blocking-content-rules-custom.json';
 
 /**
  * Tray controller.
@@ -104,6 +116,19 @@ module.exports = (() => {
                 const zip = new AdmZip();
                 zip.addLocalFile(logsPath);
                 zip.addLocalFile(statePath);
+                try {
+                    // add content blockers JSONs into archive
+                    zip.addLocalFile(`${homeDir}/${groupContainers}/${AG_GROUP}/${basicJson}`);
+                    zip.addLocalFile(`${homeDir}/${groupContainers}/${AG_GROUP}/${socialJson}`);
+                    zip.addLocalFile(`${homeDir}/${groupContainers}/${AG_GROUP}/${sesurityJson}`);
+                    zip.addLocalFile(`${homeDir}/${groupContainers}/${AG_GROUP}/${advancedJson}`);
+                    zip.addLocalFile(`${homeDir}/${groupContainers}/${AG_GROUP}/${pravicyJson}`);
+                    zip.addLocalFile(`${homeDir}/${groupContainers}/${AG_GROUP}/${otherJson}`);
+                    zip.addLocalFile(`${homeDir}/${groupContainers}/${AG_GROUP}/${customJson}`);
+                } catch (error) {
+                    log.error(error.message);
+                }
+
                 zip.writeZip(filePath);
             });
         });
