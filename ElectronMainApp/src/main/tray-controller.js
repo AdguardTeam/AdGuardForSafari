@@ -110,7 +110,7 @@ module.exports = (() => {
                 zip.addLocalFile(statePath);
 
                 const agGroupPath = `${homeDir}/${GROUP_CONTAINERS_PATH}/${AG_GROUP}`;
-                if (fs.existsSync(agGroupPath)) {
+                if (fs.existsSync(agGroupPath) && fs.lstatSync(agGroupPath).isDirectory()) {
                     const files = fs.readdirSync(agGroupPath);
                     files.forEach((file) => {
                         if (file.endsWith('.json')) {
