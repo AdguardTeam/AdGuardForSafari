@@ -135,6 +135,7 @@ module.exports = (function () {
                 log.info(`Conversion of ${rules.length} rules completed.`);
                 const result = JSON.parse(stdout);
                 log.info(result?.message);
+                log.info(result);
 
                 resolve(result);
             });
