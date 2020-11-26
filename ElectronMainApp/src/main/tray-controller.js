@@ -110,12 +110,16 @@ module.exports = (() => {
                 zip.addLocalFile(statePath);
 
                 const agGroupPath = `${homeDir}/${GROUP_CONTAINERS_PATH}/${AG_GROUP}`;
-                const files = fs.readdirSync(agGroupPath);
-                files.forEach((file) => {
-                    if (file.endsWith('.json')) {
-                        zip.addLocalFile(`${agGroupPath}/${file}`);
-                    }
-                });
+                if (fs.existsSync(agGroupPath)) {
+                    const files = fs.readdirSync(agGroupPath);
+                    files.forEach((file) => {
+                        if (file.endsWith('.json')) {
+                            zip.addLocalFile(`${agGroupPath}/${file}`);
+                        }
+                    });
+                } else {
+                    log.error(`Unable to export JSON files. There is no such directory: ${agGroupPath}`);
+                }
 
                 zip.writeZip(filePath);
             });
