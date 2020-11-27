@@ -118,6 +118,9 @@ module.exports = (() => {
             }
         });
 
+        // Set setting on native part
+        setVerboseLogging(settings.isVerboseLoggingEnabled());
+        // Set on setting update
         settings.onUpdated.addListener((setting) => {
             if (setting === settings.VERBOSE_LOGGING) {
                 setVerboseLogging(settings.isVerboseLoggingEnabled());
