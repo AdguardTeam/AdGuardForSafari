@@ -136,15 +136,24 @@ module.exports = (() => {
      * Sets content blocker json
      */
     const setContentBlockingJson = (bundleId, jsonString, info) => {
-        log.debug(`Content-blocker updating ${bundleId}`);
+        log.info(`Content-blocker updating ${bundleId}`);
         safariToolbar.setContentBlockingJson(bundleId, jsonString, (result) => {
             log.info(`Content-blocker ${bundleId} set result : ${result}`);
 
-            if (info) {
-                if (parseError(result)) {
-                    info.hasError = true;
-                }
+            if (parseError(result)) {
+                log.info(`Retry content-blocker updating ${bundleId}`);
+                safariToolbar.setContentBlockingJson(bundleId, jsonString, (result) => {
+                    log.info(`Retry content-blocker ${bundleId} set result : ${result}`);
 
+                    if (parseError(result)) {
+                        if (info) {
+                            info.hasError = true;
+                        }
+                    }
+
+                    listeners.notifyListeners(events.CONTENT_BLOCKER_EXTENSION_UPDATED, info);
+                });
+            } else {
                 listeners.notifyListeners(events.CONTENT_BLOCKER_EXTENSION_UPDATED, info);
             }
         });
