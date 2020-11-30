@@ -70,8 +70,6 @@ yarn electron-rebuild -v 9.3.1
 echo "Processing ConverterTool"
 install_name_tool -add_rpath @executable_path/../Frameworks "${SRC}/../libs/ConverterTool" > /dev/null 2>&1 | echo -n
 install_name_tool -add_rpath @executable_path/../../Frameworks "${SRC}/../libs/ConverterTool" > /dev/null 2>&1 | echo -n
-codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
-
 
 if [[ ${CONFIGURATION} == "Release" ]]; then
     echo "Building release MAS version"
@@ -79,6 +77,7 @@ if [[ ${CONFIGURATION} == "Release" ]]; then
     OPT="--asar.unpack=*.node"
 
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
+    codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
 
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=9.3.1 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
     --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
@@ -104,6 +103,7 @@ if [[ ${CONFIGURATION} == "Release" ]]; then
 else
 
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
+    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
 
     PACKAGER_PLATFORM="mas"
     if [[ ${AG_STANDALONE} == "true" ]]; then
