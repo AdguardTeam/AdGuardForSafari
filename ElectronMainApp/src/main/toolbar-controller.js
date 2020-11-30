@@ -143,6 +143,9 @@ module.exports = (() => {
             if (parseError(result)) {
                 log.info(`Retry content-blocker updating ${bundleId}`);
                 safariToolbar.setContentBlockingJson(bundleId, jsonString, (result) => {
+                    // In some cases we need to retry
+                    // https://github.com/AdguardTeam/AdGuardForSafari/issues/461
+                    // https://github.com/AdguardTeam/AdGuardForSafari/issues/456
                     log.info(`Retry content-blocker ${bundleId} set result : ${result}`);
 
                     if (parseError(result)) {
