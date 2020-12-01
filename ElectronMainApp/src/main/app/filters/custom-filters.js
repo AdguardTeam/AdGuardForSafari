@@ -246,6 +246,8 @@ module.exports = (function () {
                     });
                     localStorage.setItem(CUSTOM_FILTERS_JSON_KEY, JSON.stringify(customFilters));
                     callback(customFilter.filterId);
+                } else {
+                    callback();
                 }
             }
         );
