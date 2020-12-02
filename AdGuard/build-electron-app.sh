@@ -46,8 +46,6 @@ rsync -avm --include='*.h' -f 'hide,! */' "${SHAREDSRC}/" "${SRC}/safari-ext/sha
 sed -i "" "s/AG_STANDALONE_BETA/${AG_STANDALONE_BETA}/g" "${SRC}/package.json"
 sed -i "" "s/AG_STANDALONE_BUILD/${AG_STANDALONE}/g" "${SRC}/package.json"
 
-sed -i "" "s/AG_GROUP/${AG_GROUP}/g" "${SRC}/package.json"
-
 # Rebuild electron app
 OPT=""
 cd "${SRC}"
