@@ -4,7 +4,7 @@ const fs = require('fs');
 const {
     app, dialog, Tray, Menu, BrowserWindow,
 } = require('electron');
-const homeDir = require('os').homedir();
+
 const appPack = require('../utils/app-pack');
 const i18n = require('../utils/i18n');
 
@@ -109,6 +109,7 @@ module.exports = (() => {
                 zip.addLocalFile(logsPath);
                 zip.addLocalFile(statePath);
 
+                const homeDir = app.getPath('home');
                 const agGroupPath = `${homeDir}/${GROUP_CONTAINERS_PATH}/${AG_GROUP}`;
                 if (fs.existsSync(agGroupPath) && fs.lstatSync(agGroupPath).isDirectory()) {
                     const files = fs.readdirSync(agGroupPath);
