@@ -80,8 +80,11 @@ body {
 .opts-list li .warn-message{
 	color: #D6D6D6;
 }
-.opts-list li a{
-	color: #D6D6D6;
+.opts-list li a.button--green{
+	color: #ffffff;
+}
+.opts-list li a.button--green.bd{
+	color: #66b574;
 }
 .opts-list li.active .opt-name__tag{
 	color: #66b574;
@@ -281,6 +284,15 @@ li.active .toggler {
 }
 .alert__link {
 	color: #66b574;
+}
+.support .block-type__desc-title {
+	color: #333333;
+}
+.support .description {
+	color: #888888;
+}
+.support .opts-list li:hover {
+	background: rgba(0, 0, 0, .1);
 }
 .about-opt__version {
 	color: #252525;

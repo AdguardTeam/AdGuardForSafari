@@ -1,3 +1,4 @@
+/* eslint-disable object-shorthand */
 const addon = require('bindings')('safari_ext_addon');
 
 /**
@@ -8,9 +9,11 @@ const addon = require('bindings')('safari_ext_addon');
  * Like begin/end transaction.
  */
 module.exports = (() => {
+    const ADVANCED_BLOCKING_BUNDLE_ID = 'com.adguard.safari.AdGuard.AdvancedBlocking';
+    const ICON_EXTENSION_BUNDLE_ID = 'com.adguard.safari.AdGuard.Extension';
 
-    const ADVANCED_BLOCKING_BUNDLE_ID = "com.adguard.safari.AdGuard.AdvancedBlocking";
-    const ICON_EXTENSION_BUNDLE_ID = "com.adguard.safari.AdGuard.Extension";
+    const queue = [];
+    let queueInProcess = false;
 
     /**
      * Initializes toolbar
@@ -28,7 +31,6 @@ module.exports = (() => {
         onShowPreferencesCallback,
         onReportCallback
     ) => {
-
         if (onProtectionChangedCallback) {
             addon.setOnProtectionEnabled(() => {
                 onProtectionChangedCallback(addon.protectionEnabled());
@@ -55,7 +57,7 @@ module.exports = (() => {
         if (onReportCallback) {
             addon.setOnReport(() => {
                 onReportCallback(addon.reportUrl());
-            })
+            });
         }
 
         busyStatus(false);
@@ -85,11 +87,67 @@ module.exports = (() => {
      * {"result":"error", "error":{"domain":"ErrorDomain", "code":100, "descr":"Error Description IF Available"}}
      */
     const setContentBlockingJson = (bundleId, jsonString, callback) => {
-        if (bundleId === "com.adguard.safari.AdGuard.AdvancedBlocking") {
-            addon.setAdvancedBlockingJson(jsonString, callback);
-        } else {
-            addon.setContentBlockingJson(bundleId, jsonString, callback);
+        queue.push({
+            bundleId,
+            jsonString,
+            callback,
+        });
+
+        // Note that we're calling it without await here
+        // So that it was called asynchronously
+        processQueue();
+    };
+
+    /**
+     * Async sets content blocker json
+     *
+     * @param bundleId
+     * @param jsonString
+     * @return {Promise<unknown>}
+     */
+    const setContentBlockingJsonAsync = async (bundleId, jsonString) => {
+        return new Promise((resolve, reject) => {
+            try {
+                if (bundleId === ADVANCED_BLOCKING_BUNDLE_ID) {
+                    addon.setAdvancedBlockingJson(jsonString, (result) => {
+                        resolve(result);
+                    });
+                } else {
+                    addon.setContentBlockingJson(bundleId, jsonString, (result) => {
+                        resolve(result);
+                    });
+                }
+            } catch (ex) {
+                reject(ex);
+            }
+        });
+    };
+
+    /**
+     * Starts processing queue
+     *
+     * @return {Promise<void>}
+     */
+    const processQueue = async () => {
+        if (queueInProcess) {
+            return;
         }
+
+        queueInProcess = true;
+
+        // Schedule async queue processing
+        while (queue.length > 0) {
+            const item = queue.shift();
+            try {
+                // eslint-disable-next-line no-await-in-loop
+                const result = await setContentBlockingJsonAsync(item.bundleId, item.jsonString);
+                item.callback(result);
+            } catch (ex) {
+                // Ignore
+            }
+        }
+
+        queueInProcess = false;
     };
 
     /**
@@ -182,7 +240,7 @@ module.exports = (() => {
      *
      */
     const setStartAtLogin = (isEnabled) => {
-      addon.setStartAtLogin(isEnabled);
+        addon.setStartAtLogin(isEnabled);
     };
 
     /**
@@ -191,7 +249,7 @@ module.exports = (() => {
      * @return Returns boolean value.
      */
     const startAtLogin = () => {
-      return addon.startAtLogin();
+        return addon.startAtLogin();
     };
 
     /**
@@ -229,7 +287,6 @@ module.exports = (() => {
         setStartAtLogin: setStartAtLogin,
         startAtLogin: startAtLogin,
         removeOldLoginItem: removeOldLoginItem,
-        requestMASUserReview: requestMASUserReview
+        requestMASUserReview: requestMASUserReview,
     };
-
 })();

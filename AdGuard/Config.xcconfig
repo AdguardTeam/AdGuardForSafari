@@ -1,7 +1,7 @@
 AG_COPYRIGHT = Copyright © 2020 AdGuard Software Ltd. All rights reserved.
 AG_NAME = AdGuard for Safari
-AG_VERSION = 1.8.6
-AG_BUILD = 43
+AG_VERSION = 1.8.9
+AG_BUILD = 46
 
 AG_STANDALONE = false
 AG_STANDALONE_BETA = false
@@ -28,3 +28,5 @@ GCC_PREPROCESSOR_DEFINITIONS = AG_GROUP=@\"$(AG_GROUP)\" AG_BUNDLEID=@\"$(AG_BUN
 AG_APP_ENT = ${SRCROOT}/AdGuard/AdGuard.entitlements
 AG_ELECTRON_CHILD_ENT = ${SRCROOT}/AdGuard/ElectronChild.entitlements
 AG_ELECTRON_LOGINHELPER_ENT = ${SRCROOT}/AdGuard/ElectronLoginItem.entitlements
+
+AG_HIDE_EXEC_PREFIX = electron_

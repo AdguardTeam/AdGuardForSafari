@@ -46,6 +46,8 @@ rsync -avm --include='*.h' -f 'hide,! */' "${SHAREDSRC}/" "${SRC}/safari-ext/sha
 sed -i "" "s/AG_STANDALONE_BETA/${AG_STANDALONE_BETA}/g" "${SRC}/package.json"
 sed -i "" "s/AG_STANDALONE_BUILD/${AG_STANDALONE}/g" "${SRC}/package.json"
 
+sed -i "" "s/AG_GROUP/${AG_GROUP}/g" "${SRC}/package.json"
+
 # Rebuild electron app
 OPT=""
 cd "${SRC}"
@@ -65,13 +67,17 @@ cd ../..
 # Rebuild safari-ext and other node packages
 yarn electron-rebuild -v 11.0.2
 
+echo "Processing ConverterTool"
+install_name_tool -add_rpath @executable_path/../Frameworks "${SRC}/../libs/ConverterTool" > /dev/null 2>&1 | echo -n
+install_name_tool -add_rpath @executable_path/../../Frameworks "${SRC}/../libs/ConverterTool" > /dev/null 2>&1 | echo -n
+
 if [[ ${CONFIGURATION} == "Release" ]]; then
     echo "Building release MAS version"
 
     OPT="--asar.unpack=*.node"
 
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
-    codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
+    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
 
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=11.0.2 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
     --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
@@ -97,7 +103,7 @@ if [[ ${CONFIGURATION} == "Release" ]]; then
 else
 
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
+    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
 
     PACKAGER_PLATFORM="mas"
     if [[ ${AG_STANDALONE} == "true" ]]; then
@@ -133,6 +139,9 @@ else
     fi
 
 fi
+
+echo "Hide executable file from xcodebuild"
+mv -f "$APP/Contents/MacOS/${PRODUCT_NAME}" "$APP/Contents/MacOS/${AG_HIDE_EXEC_PREFIX}${PRODUCT_NAME}" || exit 1
 
 # Move products
 DST_DIR="${BUILT_PRODUCTS_DIR}"
