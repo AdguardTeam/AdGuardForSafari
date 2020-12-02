@@ -5,6 +5,8 @@ const {
     app, dialog, Tray, Menu, BrowserWindow,
 } = require('electron');
 
+const { sharedResourcesPath } = require('safari-ext');
+
 const appPack = require('../utils/app-pack');
 const i18n = require('../utils/i18n');
 
@@ -16,9 +18,6 @@ const settings = require('./app/settings-manager');
 const log = require('./app/utils/log');
 
 const agApp = require('./app/app');
-const { 'ag-group': AG_GROUP } = require('../../package.json');
-
-const GROUP_CONTAINERS_PATH = 'Library/Group\ Containers';
 
 /**
  * Tray controller.
@@ -109,17 +108,16 @@ module.exports = (() => {
                 zip.addLocalFile(logsPath);
                 zip.addLocalFile(statePath);
 
-                const homeDir = app.getPath('home');
-                const agGroupPath = `${homeDir}/${GROUP_CONTAINERS_PATH}/${AG_GROUP}`;
-                if (fs.existsSync(agGroupPath) && fs.lstatSync(agGroupPath).isDirectory()) {
-                    const files = fs.readdirSync(agGroupPath);
+                const resourcesPath = sharedResourcesPath();
+                if (fs.existsSync(resourcesPath) && fs.lstatSync(resourcesPath).isDirectory()) {
+                    const files = fs.readdirSync(resourcesPath);
                     files.forEach((file) => {
                         if (file.endsWith('.json')) {
-                            zip.addLocalFile(`${agGroupPath}/${file}`);
+                            zip.addLocalFile(`${resourcesPath}/${file}`);
                         }
                     });
                 } else {
-                    log.error(`Unable to export JSON files. There is no such directory: ${agGroupPath}`);
+                    log.error(`Unable to export JSON files. There is no such directory: ${resourcesPath}`);
                 }
 
                 zip.writeZip(filePath);
