@@ -145,7 +145,7 @@
             safari.self.addEventListener('message', handleMessage);
 
             // Request advanced blocking data
-            safari.extension.dispatchMessage('getAdvancedBlockingData');
+            safari.extension.dispatchMessage('getAdvancedBlockingData', { 'url': window.location.href });
         }
     }
 })();
