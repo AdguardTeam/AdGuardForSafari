@@ -98,6 +98,7 @@
      */
     const applyAdvancedBlockingData = (data, verbose) => {
         logMessage(verbose, 'Applying scripts and css..');
+        logMessage(verbose, `Frame url: ${window.location.href}`);
 
         applyScripts(data.scripts, verbose);
         applyExtendedCss(data.css, verbose);
@@ -145,7 +146,7 @@
             safari.self.addEventListener('message', handleMessage);
 
             // Request advanced blocking data
-            safari.extension.dispatchMessage('getAdvancedBlockingData');
+            safari.extension.dispatchMessage('getAdvancedBlockingData', { 'url': window.location.href });
         }
     }
 })();
