@@ -42,6 +42,46 @@
     };
 
     /**
+     * Applies css stylesheet
+     * As a temporary solution to improve performance we will try to apply basic styles,
+     * filtering out ExtendedCss styles by exceptions raised.
+     *
+     * TODO: Filter ExtendedCss style on background side
+     *
+     * @param styleSelectors Array of stylesheets or selectors
+     * @param verbose logging
+     */
+    const applyCss = (styleSelectors, verbose) => {
+        if (!styleSelectors || !styleSelectors.length) {
+            return;
+        }
+
+        logMessage(verbose, `css length: ${styleSelectors.length}`);
+
+        const extCssStyleSelectors = [];
+
+        const styleElement = document.createElement('style');
+        styleElement.type = 'text/css';
+        (document.head || document.documentElement).appendChild(styleElement);
+
+        for (const selector of styleSelectors.map((s) => s.trim())) {
+            if (!selector.endsWith('}')) {
+                extCssStyleSelectors.push(selector);
+                continue;
+            }
+
+            try {
+                styleElement.sheet.insertRule(selector);
+            } catch (e) {
+                // Ignore exception, we will try to use this selector as ExtendedCss
+                extCssStyleSelectors.push(selector);
+            }
+        }
+
+        applyExtendedCss(extCssStyleSelectors, verbose);
+    };
+
+    /**
      * Applies Extended Css stylesheet
      *
      * @param extendedCss Array with ExtendedCss stylesheets
@@ -52,13 +92,13 @@
             return;
         }
 
-        logMessage(verbose, 'extended css length: ' + extendedCss.length);
+        logMessage(verbose, `extended css length: ${extendedCss.length}`);
         const extcss = new ExtendedCss({
             styleSheet: extendedCss
                 .filter(s => s.length > 0)
                 .map(s => s.trim())
                 .map(s => s[s.length - 1] !== '}' ? `${s} {display:none!important;}` : s)
-                .join("\n")
+                .join('\n')
         });
         extcss.apply();
     };
@@ -101,7 +141,7 @@
         logMessage(verbose, `Frame url: ${window.location.href}`);
 
         applyScripts(data.scripts, verbose);
-        applyExtendedCss(data.css, verbose);
+        applyCss(data.css, verbose);
         applyScriptlets(data.scriptlets, verbose);
 
         logMessage(verbose, 'Applying scripts and css - done');
