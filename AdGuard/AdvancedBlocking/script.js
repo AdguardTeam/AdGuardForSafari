@@ -98,6 +98,7 @@
      */
     const applyAdvancedBlockingData = (data, verbose) => {
         logMessage(verbose, 'Applying scripts and css..');
+        logMessage(verbose, `Frame url: ${window.location.href}`);
 
         applyScripts(data.scripts, verbose);
         applyExtendedCss(data.css, verbose);
