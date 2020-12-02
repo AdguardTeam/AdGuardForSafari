@@ -6,6 +6,7 @@ const settingsBackup = require('./app/settings-provider');
 const filters = require('./app/filters-manager');
 const filterCategories = require('./app/filters/filters-categories');
 const listeners = require('./notifier');
+const trayController = require('./tray-controller');
 const whitelist = require('./app/whitelist');
 const userrules = require('./app/userrules');
 const antibanner = require('./app/antibanner');
@@ -116,6 +117,9 @@ module.exports.init = function () {
                 safariToolbar.openExtensionsPreferenses(() => {
                     // Do nothing
                 });
+                break;
+            case 'exportLogs':
+                trayController.onExportLogsClicked();
                 break;
             case 'changeUpdateFiltersPeriod':
                 settings.changeUpdateFiltersPeriod(message.value);

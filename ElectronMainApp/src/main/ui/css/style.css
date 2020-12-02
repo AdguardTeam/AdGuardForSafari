@@ -47,6 +47,10 @@
   min-width: 175px;
   transition: 0.3s ease background-color;
 }
+#exportLogs.button {
+  position: absolute;
+  left: 30px;
+}
 /* st */
 .tab-pane {
   display: none;

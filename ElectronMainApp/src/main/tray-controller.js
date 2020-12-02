@@ -285,5 +285,6 @@ module.exports = (() => {
 
     return {
         initTray,
+        onExportLogsClicked,
     };
 })();
