@@ -1506,7 +1506,9 @@ const AntiBannerFilters = function (options) {
     }
 
     function onFilterUpdatesFinished() {
-        document.querySelector('#updateAntiBannerFilters').classList.remove('loading');
+        setTimeout(() => {
+            document.querySelector('#updateAntiBannerFilters').classList.remove('loading');
+        }, 900);
     }
 
     function updateFilterMetadata(filter) {
