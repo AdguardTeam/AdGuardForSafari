@@ -45,5 +45,6 @@
 
 - (void)setEnabledButton;
 - (void)reloadPage;
+- (BOOL)domainCheckWithDomains:(NSArray <NSString *> *)domains;
 
 @end
