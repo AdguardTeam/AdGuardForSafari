@@ -181,10 +181,6 @@
     self->_pageForReload = nil;
 }
 
-
-//////////////////////////////////////////////////////////////////////////
-#pragma mark - Private methods
-
 - (BOOL)domainCheckWithDomains:(NSArray <NSString *> *)domains {
     NSString *theDomain = self.currentPageUrl.host;
     if (theDomain.length) {
@@ -199,6 +195,9 @@
     }
     return NO;
 }
+
+//////////////////////////////////////////////////////////////////////////
+#pragma mark - Private methods
 
 - (void)setWhitelistButton {
 
