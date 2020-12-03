@@ -18,25 +18,25 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
         if (self.contentBlockerController == nil) {
             self.contentBlockerController = ContentBlockerController.shared;
         }
-
-        page.getPropertiesWithCompletionHandler { properties in
-            guard let url = properties?.url else {
-                return;
-            }
-
-            NSLog("AG: The extension received a message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:]))");
-
-            // Content script requests scripts and css for current page
-            if (messageName == "getAdvancedBlockingData") {
-                do {
-                    let data: [String : Any]? = [
-                        "data": try self.contentBlockerController!.getData(url: url),
-                        "verbose": self.isVerboseLoggingEnabled()
-                    ];
-                    page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data);
-                } catch {
-                    AESharedResources.ddLogError("AG: Error handling message (\(messageName)) from a script injected into (\(String(describing: url))) with userInfo (\(userInfo ?? [:])): \(error)");
+        
+        NSLog("AG: The extension received a message (\(messageName)) with userInfo (\(userInfo ?? [:]))");
+        
+        // Content script requests scripts and css for current page
+        if (messageName == "getAdvancedBlockingData") {
+            do {
+                if (userInfo == nil || userInfo!["url"] == nil) {
+                    return;
                 }
+
+                let url = userInfo!["url"] as! String;
+                
+                let data: [String : Any]? = [
+                    "data": try self.contentBlockerController!.getData(url: URL(string: url)!),
+                    "verbose": self.isVerboseLoggingEnabled()
+                ];
+                page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data);
+            } catch {
+                AESharedResources.ddLogError("AG: Error handling message (\(messageName)) with userInfo (\(userInfo ?? [:])): \(error)");
             }
         }
     }

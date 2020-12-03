@@ -759,6 +759,13 @@ NAN_METHOD(requestMASUserReview) {
 	[AEMainAppServices requestMASReview];
 }
 
+NAN_METHOD(sharedResourcesPath) {
+
+  NSString *result = [[AESharedResources sharedResourcesURL] path];
+  info.GetReturnValue().Set(Nan::New(result.UTF8String).ToLocalChecked());
+}
+
+
 NAN_MODULE_INIT(Init) {
 
   [AESharedResources initLogger];
@@ -841,6 +848,9 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("requestMASUserReview").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(requestMASUserReview)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("sharedResourcesPath").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(sharedResourcesPath)).ToLocalChecked());
 
 }
 
