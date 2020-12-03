@@ -268,6 +268,13 @@ module.exports = (() => {
     const requestMASUserReview = () => {
         addon.requestMASUserReview();
     };
+    
+    /**
+     * Returns path to shared resources folder (App Group Folder)
+     */
+    const sharedResourcesPath = () => {
+        return addon.sharedResourcesPath();
+    };
 
     return {
         init: init,
@@ -288,5 +295,6 @@ module.exports = (() => {
         startAtLogin: startAtLogin,
         removeOldLoginItem: removeOldLoginItem,
         requestMASUserReview: requestMASUserReview,
+        sharedResourcesPath: sharedResourcesPath
     };
 })();

@@ -93,7 +93,7 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
 /////////////////////////////////////////////////////////////////////
 #pragma mark   Events (public methods)
 
-+ (NSURL *)sharedResuorcesURL{
++ (NSURL *)sharedResourcesURL{
     
     return _containerFolderUrl;
 }
