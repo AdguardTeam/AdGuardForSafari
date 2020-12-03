@@ -117,7 +117,7 @@
         (document.head || document.documentElement).appendChild(styleElement);
 
         for (const selector of styleSelectors.map((s) => s.trim())) {
-            if (!selector.endsWith('}')) {
+            if (!selector.endsWith('}') || selector.includes('debug:')) {
                 extCssStyleSelectors.push(selector);
                 continue;
             }
