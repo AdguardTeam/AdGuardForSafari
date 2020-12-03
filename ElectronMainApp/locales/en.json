@@ -383,8 +383,14 @@
     "options_github": {
         "message": "GitHub"
     },
+    "onboarding_safari_title": {
+        "message": "Need your permission"
+    },
     "onboarding_safari_desc": {
-        "message": "Check the boxes next to AdGuard extensions in Safari preferences"
+        "message": "Check the boxes next to AdGuard extensions in Safari preferences."
+    },
+    "onboarding_safari_link": {
+        "message": "What these extensions do?"
     },
     "onboarding_safari_btn": {
         "message": "Open preferences"

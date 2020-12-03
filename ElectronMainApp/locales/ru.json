@@ -377,8 +377,14 @@
     "options_github": {
         "message": "GitHub"
     },
+    "onboarding_safari_title": {
+        "message": "Необходимо ваше разрешение"
+    },
     "onboarding_safari_desc": {
         "message": "Поставьте галочки напротив расширений AdGuard в настройках Safari"
+    },
+    "onboarding_safari_link": {
+        "message": "Что делают эти расширения?"
     },
     "onboarding_safari_btn": {
         "message": "Открыть настройки"
