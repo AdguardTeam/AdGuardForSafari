@@ -93,7 +93,7 @@ npm install -g electron-osx-sign
 cd ElectronMainApp
 ```
 
-Install local dependencies by runnning:
+Install local dependencies by running:
 
 ```
 yarn install

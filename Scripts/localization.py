@@ -364,7 +364,7 @@ def export_all_translations():
     print("Start exporting ALL translations")
     for locale in TWOSKY_CONFIG["languages"]:
         export_translations(locale)
-    print("Finihed exporting ALL translations")
+    print("Finished exporting ALL translations")
     return
 
 
