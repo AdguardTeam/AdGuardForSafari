@@ -19,24 +19,31 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             self.contentBlockerController = ContentBlockerController.shared;
         }
         
-        NSLog("AG: The extension received a message (\(messageName)) with userInfo (\(userInfo ?? [:]))");
+        NSLog("AG: The extension received a message (%@)", messageName);
         
         // Content script requests scripts and css for current page
         if (messageName == "getAdvancedBlockingData") {
             do {
                 if (userInfo == nil || userInfo!["url"] == nil) {
+                    NSLog("AG: Empty url passed with the message");
                     return;
                 }
 
-                let url = userInfo!["url"] as! String;
+                let url = userInfo?["url"] as? String ?? "";
+                NSLog("AG: Page url: %@", url);
+
+                let pageUrl = URL(string: url);
+                if pageUrl == nil {
+                    return;
+                }
                 
                 let data: [String : Any]? = [
-                    "data": try self.contentBlockerController!.getData(url: URL(string: url)!),
+                    "data": try self.contentBlockerController!.getData(url: pageUrl!),
                     "verbose": self.isVerboseLoggingEnabled()
                 ];
                 page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data);
             } catch {
-                AESharedResources.ddLogError("AG: Error handling message (\(messageName)) with userInfo (\(userInfo ?? [:])): \(error)");
+                AESharedResources.ddLogError("AG: Error handling message (\(messageName)): \(error)");
             }
         }
     }
