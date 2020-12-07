@@ -1190,10 +1190,11 @@ li.active .toggler:before {
 }
 
 .empty-filters__logo {
-  width: 82px;
+  width: 105px;
   margin: 0 auto;
   height: 104px;
   margin-bottom: 62px;
+  background-size: contain;
 }
 
 .empty-filters__desc {
