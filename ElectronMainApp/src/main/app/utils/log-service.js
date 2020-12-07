@@ -62,8 +62,11 @@ const exportLogs = () => {
         } else {
             log.error(`Unable to export JSON files. There is no such directory: ${resourcesPath}`);
         }
-
-        zip.writeZip(filePath);
+        try {
+            zip.writeZip(filePath);
+        } catch (error) {
+            log.error(`Unable to create archive file: ${error.message}`);
+        }
     });
 };
 
