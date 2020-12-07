@@ -38,7 +38,7 @@ static void AsyncSendHandler(uv_async_t *handle) {
 
   DDLogCDebug(@"Invoking callback with type: %d", info->type);
 
-#define c_arg(N) argc = N; argv = (v8::Local<v8::Value> *)malloc(sizeof(v8::Local<v8::Value>)*N) 
+#define c_arg(N) argc = N; argv = (v8::Local<v8::Value> *)malloc(sizeof(v8::Local<v8::Value>)*N)
 
   int argc = 0;
   v8::Local<v8::Value> *argv = NULL;
@@ -91,8 +91,8 @@ NAN_METHOD(setWhitelistDomains) {
       if (! val.IsEmpty()) {
         Nan::Utf8String item(val);
         if (item.length() > 0) {
-          NSString *domain = [[NSString alloc] initWithBytes:*item 
-                                              length:item.length() 
+          NSString *domain = [[NSString alloc] initWithBytes:*item
+                                              length:item.length()
                                               encoding:NSUTF8StringEncoding];
           if (domain) {
             [domains addObject:domain];
@@ -142,8 +142,8 @@ NAN_METHOD(setUserFilter) {
       if (! val.IsEmpty()) {
         Nan::Utf8String item(val);
         if (item.length() > 0) {
-          NSString *rule = [[NSString alloc] initWithBytes:*item 
-                                              length:item.length() 
+          NSString *rule = [[NSString alloc] initWithBytes:*item
+                                              length:item.length()
                                               encoding:NSUTF8StringEncoding];
           if (rule) {
             [rules addObject:rule];
@@ -191,12 +191,12 @@ NAN_METHOD(setContentBlockingJson) {
 	Nan::Utf8String message (info[0]);
 	NSString *bundleId = [NSString stringWithCString:*message encoding:NSUTF8StringEncoding];
     DDLogCInfo(@"(setContentBlockingJson) BundleId parameter: %@", bundleId);
-    
+
     Nan::Callback *cb = new Nan::Callback(info[2].As<Function>());
 
     [AESharedResources setBlockingContentRulesJson:data bundleId:bundleId completion:^{
       DDLogCDebug(@"Json updated in file. Notify the content blocker extension.");
-      [SFContentBlockerManager 
+      [SFContentBlockerManager
       reloadContentBlockerWithIdentifier:bundleId
       completionHandler:^(NSError * _Nullable error) {
         DDLogCDebug(@"Notifying completion with error: %@", error ?: @"[no error]");
@@ -239,12 +239,12 @@ NAN_METHOD(setContentBlockingJson) {
 }
 
 NAN_METHOD(setAdvancedBlockingJson) {
-    
+
     if (info.Length() < 2) {
         ThrowTypeError("Wrong number of arguments");
         return;
     }
-    
+
     if (!info[0]->IsString() || !info[1]->IsFunction()) {
         ThrowTypeError("Wrong arguments");
         return;
@@ -254,9 +254,9 @@ NAN_METHOD(setAdvancedBlockingJson) {
     if (msg.length() > 0) {
         data = [NSData dataWithBytes:*msg length:msg.length()];
     }
-    
+
     Nan::Callback *cb = new Nan::Callback(info[1].As<Function>());
-    
+
     [AESharedResources setAdvancedBlockingContentRulesJson:data completion:^{
         DDLogCDebug(@"Json updated in file. Notify the advanced blocking extension.");
 		[AESharedResources notifyAdvancedBlockingExtension];
@@ -292,7 +292,7 @@ NAN_METHOD(setBusy) {
         return;
     }
 
-    BOOL val = info[0].As<v8::Boolean>()->Value(); 
+    BOOL val = info[0].As<v8::Boolean>()->Value();
     [[AESharedResources sharedDefaults] setBool:val forKey:AEDefaultsMainAppBusy];
     [AESharedResources notifyBusyChanged];
 }
@@ -325,7 +325,7 @@ NAN_METHOD(setProtection) {
         return;
     }
 
-    BOOL val = info[0].As<v8::Boolean>()->Value(); 
+    BOOL val = info[0].As<v8::Boolean>()->Value();
     [[AESharedResources sharedDefaults] setBool:val forKey:AEDefaultsEnabled];
 }
 
@@ -367,7 +367,7 @@ NAN_METHOD(userFilter) {
             delete cb;
         });
     }];
-} 
+}
 
 NAN_METHOD(whitelistDomains) {
 
@@ -380,7 +380,7 @@ NAN_METHOD(whitelistDomains) {
         ThrowTypeError("Wrong arguments");
         return;
     }
-    
+
     Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
 
     [AESharedResources whitelistDomainsWithCompletion:^(NSArray <NSString *> *domains){
@@ -439,26 +439,26 @@ NAN_METHOD(getExtensionContentBlockerState){
 }
 
 NAN_METHOD(extensionSafariIconState){
-    
+
     if (info.Length() < 1) {
         ThrowTypeError("Wrong number of arguments");
         return;
     }
-    
+
     if (!info[0]->IsFunction()) {
         ThrowTypeError("Wrong arguments");
         return;
     }
-    
+
     Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
-    
+
     void (^resultBlock)(BOOL result)  = ^void(BOOL result) {
-        
+
         dispatch_sync(dispatch_get_main_queue(), ^{
             Nan::HandleScope scope;
-            
+
             v8::Local<v8::Value> argv[1] = {Nan::New((bool)result)};
-            
+
             Nan::Call(*cb, 1, argv);
             delete cb;
         });
@@ -502,7 +502,7 @@ NAN_METHOD(extensionAdvancedBlockingState){
 	}];
 }
 
-NAN_METHOD(openExtensionsPreferenses){
+NAN_METHOD(openExtensionsPreferences){
 
      if (info.Length() < 1) {
         ThrowTypeError("Wrong number of arguments");
@@ -513,7 +513,7 @@ NAN_METHOD(openExtensionsPreferenses){
         ThrowTypeError("Wrong arguments");
         return;
     }
-    
+
     Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
 
     void (^resultBlock)(BOOL result)  = ^void(BOOL result) {
@@ -531,13 +531,13 @@ NAN_METHOD(openExtensionsPreferenses){
     [SFContentBlockerManager getStateOfContentBlockerWithIdentifier:AESharedResources.blockerBundleId
     completionHandler:^(SFContentBlockerState * _Nullable state, NSError * _Nullable error) {
       if (error || ! state.enabled) {
-        [SFSafariApplication showPreferencesForExtensionWithIdentifier:AESharedResources.blockerBundleId 
+        [SFSafariApplication showPreferencesForExtensionWithIdentifier:AESharedResources.blockerBundleId
         completionHandler:^(NSError *error){
             resultBlock(error == nil);
         }];
         return;
       }
-      [SFSafariApplication showPreferencesForExtensionWithIdentifier:AESharedResources.extensionBundleId 
+      [SFSafariApplication showPreferencesForExtensionWithIdentifier:AESharedResources.extensionBundleId
       completionHandler:^(NSError *error){
           resultBlock(error == nil);
       }];
@@ -557,7 +557,7 @@ NAN_METHOD(setOnProtectionEnabled) {
       ThrowTypeError("Wrong arguments");
       return;
   }
-  
+
   if (cb) {
     delete cb;
   }
@@ -585,7 +585,7 @@ NAN_METHOD(setOnWhitelist) {
       ThrowTypeError("Wrong arguments");
       return;
   }
-  
+
   if (cb) {
     delete cb;
   }
@@ -613,7 +613,7 @@ NAN_METHOD(setOnUserFilter) {
       ThrowTypeError("Wrong arguments");
       return;
   }
-  
+
   if (cb) {
     delete cb;
   }
@@ -641,7 +641,7 @@ NAN_METHOD(setOnShowPreferences) {
       ThrowTypeError("Wrong arguments");
       return;
   }
-  
+
   if (cb) {
     delete cb;
   }
@@ -669,7 +669,7 @@ NAN_METHOD(setOnReport) {
       ThrowTypeError("Wrong arguments");
       return;
   }
-  
+
   if (cb) {
     delete cb;
   }
@@ -731,24 +731,24 @@ NAN_METHOD(startAtLogin) {
 }
 
 NAN_METHOD(removeOldLoginItem){
-    
+
     if (info.Length() < 1) {
         ThrowTypeError("Wrong number of arguments");
         return;
     }
-    
+
     if (!info[0]->IsFunction()) {
         ThrowTypeError("Wrong arguments");
         return;
     }
-    
+
     Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
-    
+
     [AEMainAppServices removeOldLoginItemWithCompletion:^(BOOL result){
             Nan::HandleScope scope;
-            
+
             v8::Local<v8::Value> argv[1] = {Nan::New((bool)result)};
-            
+
             Nan::Call(*cb, 1, argv);
             delete cb;
     }];
@@ -770,7 +770,7 @@ NAN_MODULE_INIT(Init) {
 
   [AESharedResources initLogger];
     [AEMainAppServices startListenerForRequestsToMainApp];
-    
+
   Nan::Set(target, New<String>("setBusy").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setBusy)).ToLocalChecked());
 
@@ -807,8 +807,8 @@ NAN_MODULE_INIT(Init) {
   Nan::Set(target, New<String>("extensionAdvancedBlockingState").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(extensionAdvancedBlockingState)).ToLocalChecked());
 
-  Nan::Set(target, New<String>("openExtensionsPreferenses").ToLocalChecked(),
-  GetFunction(New<FunctionTemplate>(openExtensionsPreferenses)).ToLocalChecked());
+  Nan::Set(target, New<String>("openExtensionsPreferences").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(openExtensionsPreferences)).ToLocalChecked());
 
   Nan::Set(target, New<String>("setOnProtectionEnabled").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setOnProtectionEnabled)).ToLocalChecked());
@@ -836,7 +836,7 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("setVerboseLogging").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setVerboseLogging)).ToLocalChecked());
-    
+
   Nan::Set(target, New<String>("setStartAtLogin").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setStartAtLogin)).ToLocalChecked());
 

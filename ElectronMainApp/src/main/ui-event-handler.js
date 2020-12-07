@@ -113,7 +113,7 @@ module.exports.init = function () {
                 settingsBackup.applySettingsBackup(message.settings);
                 break;
             case 'openSafariExtensionsPrefs':
-                safariToolbar.openExtensionsPreferenses(() => {
+                safariToolbar.openExtensionsPreferences(() => {
                     // Do nothing
                 });
                 break;
