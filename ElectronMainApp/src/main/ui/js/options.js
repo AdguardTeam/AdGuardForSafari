@@ -2041,9 +2041,11 @@ PageController.prototype = {
         const importSettingsBtn = document.querySelector('#settingsImport');
         const exportSettingsBtn = document.querySelector('#settingsExport');
         const importSettingsInput = document.querySelector('#importSettingsInput');
+        const exportLogsBtn = document.querySelector('#exportLogs');
 
         importSettingsBtn.addEventListener('click', this.importSettingsFile.bind(this));
         exportSettingsBtn.addEventListener('click', this.exportSettingsFile.bind(this));
+        exportLogsBtn.addEventListener('click', this.exportLogs.bind(this));
 
         importSettingsInput.addEventListener('change', (event) => {
             try {
@@ -2054,6 +2056,13 @@ PageController.prototype = {
             }
             importSettingsInput.value = '';
         });
+    },
+
+    exportLogs(event) {
+        event.preventDefault();
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'exportLogs',
+        }));
     },
 
     importSettingsFile(event) {
