@@ -6,6 +6,8 @@ const { dialog } = remote;
 const fs = require('fs');
 const path = require('path');
 
+const ANIMATION_DELAY = 900;
+
 /**
  * Common utils
  *
@@ -1506,7 +1508,10 @@ const AntiBannerFilters = function (options) {
     }
 
     function onFilterUpdatesFinished() {
-        document.querySelector('#updateAntiBannerFilters').classList.remove('loading');
+        // set timeout to let the update button animation turn around
+        setTimeout(() => {
+            document.querySelector('#updateAntiBannerFilters').classList.remove('loading');
+        }, ANIMATION_DELAY);
     }
 
     function updateFilterMetadata(filter) {
