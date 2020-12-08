@@ -1,11 +1,7 @@
 #include "./Config.xcconfig"
 
-AG_VERSION = 1.8.10
-AG_BUILD = 48
-
 AG_STANDALONE = true
 AG_STANDALONE_BETA = true
-
 
 AG_APP_ENT = ${SRCROOT}/AdGuard/standalone/AdGuard.entitlements
 AG_ELECTRON_CHILD_ENT = ${SRCROOT}/AdGuard/standalone/ElectronChild.entitlements

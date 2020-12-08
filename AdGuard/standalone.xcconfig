@@ -1,8 +1,5 @@
 #include "./Config.xcconfig"
 
-AG_VERSION = 1.8.10
-AG_BUILD = 48
-
 AG_STANDALONE = true
 AG_STANDALONE_BETA = false
 
