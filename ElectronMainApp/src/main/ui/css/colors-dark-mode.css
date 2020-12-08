@@ -315,7 +315,8 @@ li.active .toggler {
 .support .opts-list li:hover {
 	background: rgba(255, 255, 255, .1);
 }
-.about-opt__version {
+.about-opt__version,
+.about-opt_title {
 	color: #eeeeee;
 }
 .about-opt__desc {
@@ -327,8 +328,11 @@ li.active .toggler {
 .settings-content .about-opt__menu-item {
 	color: #66b574;
 }
+.about-opt__read-more {
+	color: #66b574;
+}
 .about-updates {
-	color: #eeeeee;
+	color: #cccccc;
 }
 .about-btn {
 	color: #66b574;

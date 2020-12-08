@@ -1416,9 +1416,8 @@ li.active .toggler:before {
 .about-opt {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: calc(100% - 55px);
-  padding-top: 70px;
+  position: relative;
+  margin-top: 45px;
 }
 
 .about-opt__viking {
@@ -1428,21 +1427,30 @@ li.active .toggler:before {
   margin-right: 55px;
 }
 .about-opt__version {
-  font-size: 13px;
-  margin-bottom: 10px;
+  font-size: 16px;
 }
 .about-opt__desc {
-  font-size: 12px;
-  margin-bottom: 90px;
+  font-size: 16px;
+  margin-top: 25px;
 }
 .about-opt__desc-item {
   margin-bottom: 5px;
 }
+.about-opt__info {
+  position: absolute;
+  left: 15px;
+}
+.about-opt_title {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 22px;
+}
 .about-opt__menu {
   display: flex;
   flex-direction: column;
-  margin-top: 25px;
-  text-align: center;
+  text-align: right;
+  position: absolute;
+  right: 0;
 }
 .about-opt__logo {
   width: 160px;
@@ -1453,16 +1461,22 @@ li.active .toggler:before {
 }
 .settings-content .about-opt__menu-item {
   margin-bottom: 15px;
-  font-size: 14px;
-  text-decoration: none;
+  font-size: 15px;
+  text-decoration: underline;
 }
 
 .settings-content .about-opt__menu-item:hover {
   text-decoration: underline;
 }
 
+.about-opt__read-more {
+  font-size: 16px;
+  text-decoration: underline;
+}
+
 .about-updates {
-  margin-bottom: 10px;
+  margin: 9px 0;
+  font-size: 15px;
   cursor: pointer;
   position: relative;
   display: none;
