@@ -1,4 +1,4 @@
-/*! extended-css - v1.3.6 - Fri Nov 27 2020
+/*! extended-css - v1.3.7 - Wed Dec 09 2020
 * https://github.com/AdguardTeam/ExtendedCss
 * Copyright (c) 2020 AdGuard. Licensed LGPL-3.0
 */
@@ -112,11 +112,28 @@ var ExtendedCss = (function () {
   /* eslint-disable no-console */
   var utils = {};
   utils.MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+  utils.isSafariBrowser = function () {
+    var isChrome = navigator.userAgent.indexOf('Chrome') > -1;
+    var isSafari = navigator.userAgent.indexOf('Safari') > -1;
+
+    if (isSafari) {
+      if (isChrome) {
+        // Chrome seems to have both Chrome and Safari userAgents
+        return false;
+      }
+
+      return true;
+    }
+
+    return false;
+  }();
   /**
    * Converts regular expressions passed as pseudo class arguments into RegExp instances.
    * Have to unescape doublequote " as well, because we escape them while enclosing such
    * arguments with doublequotes, and sizzle does not automatically unescapes them.
    */
+
 
   utils.pseudoArgToRegex = function (regexSrc, flag) {
     flag = flag || 'i';
@@ -2975,7 +2992,6 @@ var ExtendedCss = (function () {
    */
 
   var StylePropertyMatcher = function (window) {
-    var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 && navigator.userAgent && !navigator.userAgent.match('CriOS');
     var isPhantom = !!window._phantom;
     var useFallback = isPhantom && !!window.getMatchedCSSRules;
     /**
@@ -3025,7 +3041,7 @@ var ExtendedCss = (function () {
         if (style) {
           value = style.getPropertyValue(propertyName); // https://bugs.webkit.org/show_bug.cgi?id=93445
 
-          if (propertyName === 'opacity' && isSafari) {
+          if (propertyName === 'opacity' && utils.isSafariBrowser) {
             value = (Math.round(parseFloat(value) * 100) / 100).toString();
           }
         }
@@ -4718,9 +4734,15 @@ var ExtendedCss = (function () {
     var EventTracker = function () {
       var ignoredEventTypes = ['mouseover', 'mouseleave', 'mouseenter', 'mouseout'];
       var LAST_EVENT_TIMEOUT_MS = 10;
-      var TRACKED_EVENTS = [// keyboard events
+      var EVENTS = [// keyboard events
       'keydown', 'keypress', 'keyup', // mouse events
-      'auxclick', 'click', 'contextmenu', 'dblclick', 'mousedown', 'mouseenter', 'mouseleave', 'mousemove', 'mouseover', 'mouseout', 'mouseup', 'pointerlockchange', 'pointerlockerror', 'select', 'wheel'];
+      'auxclick', 'click', 'contextmenu', 'dblclick', 'mousedown', 'mouseenter', 'mouseleave', 'mousemove', 'mouseover', 'mouseout', 'mouseup', 'pointerlockchange', 'pointerlockerror', 'select', 'wheel']; // 'wheel' event makes scrolling in Safari twitchy
+      // https://github.com/AdguardTeam/ExtendedCss/issues/120
+
+      var safariProblematicEvents = ['wheel'];
+      var trackedEvents = utils.isSafariBrowser ? EVENTS.filter(function (el) {
+        return !(safariProblematicEvents.indexOf(el) > -1);
+      }) : EVENTS;
       var lastEventType;
       var lastEventTime;
 
@@ -4729,7 +4751,7 @@ var ExtendedCss = (function () {
         lastEventTime = Date.now();
       };
 
-      TRACKED_EVENTS.forEach(function (evName) {
+      trackedEvents.forEach(function (evName) {
         document.documentElement.addEventListener(evName, trackEvent, true);
       });
 
@@ -4771,7 +4793,7 @@ var ExtendedCss = (function () {
 
       if (utils.MutationObserver) {
         domMutationObserver = new utils.MutationObserver(function (mutations) {
-          if (!mutations || mutations.length === 0) {
+          if (!mutations && mutations.length === 0) {
             return;
           }
 
