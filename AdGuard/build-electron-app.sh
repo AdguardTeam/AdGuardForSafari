@@ -9,12 +9,6 @@ echo "AG_STANDALONE_BETA: ${AG_STANDALONE_BETA}"
 . ~/.nvm/nvm.sh
 nvm use v13.10.0 || exit 1
 
-# Installing dependencies
-yarn global add electron-osx-sign
-yarn global add node-gyp@7.1.2
-yarn global add electron-userland/electron-osx-sign
-yarn global add electron-packager
-
 PLATFORM=mas
 ARCH=x64
 
@@ -48,9 +42,6 @@ OPT=""
 cd "${SRC}"
 OPT="--asar"
 yarn install --force || exit 1
-
-# install jq
-brew install jq
 
 # Extract Electron version
 ELECTRON_VERSION=$(jq -r ".devDependencies.electron" ../ElectronMainApp/package.json)

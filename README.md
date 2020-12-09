@@ -68,10 +68,11 @@ AdGuard for Safari consists of three parts:
 ### Prerequisites
 
 - MacOS 10.13 or above
-- [Xcode](https://developer.apple.com/xcode/) 9.4 or above
+- [Xcode](https://developer.apple.com/xcode/) 12.2 or above
 - Xcode Command Line Tools
-- [Node.js](https://nodejs.org/) v8.9.4 or higher
+- [Node.js](https://nodejs.org/) v13.10.0 or higher
 - [Yarn](https://yarnpkg.com/lang/en/)
+- [JQ](https://stedolan.github.io/jq/)
 
 Also, you need to install these packages globally:
 
@@ -80,9 +81,9 @@ Also, you need to install these packages globally:
 - [electron-osx-sign](https://www.npmjs.com/package/electron-osx-sign)
 
 ```
-npm install -g electron-packager 
-npm install -g node-gyp 
-npm install -g electron-osx-sign
+yarn global add electron-packager 
+yarn global add node-gyp 
+yarn global add electron-osx-sign
 ```
 
 ## How to build 

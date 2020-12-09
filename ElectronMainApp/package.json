@@ -43,6 +43,7 @@
         "electron": "^11.0.4",
         "electron-osx-sign": "github:electron-userland/electron-osx-sign",
         "electron-rebuild": "^2.3.2",
+        "electron-packager": "15.2.0",
         "eslint": "^7.6.0",
         "eslint-config-airbnb-base": "^14.2.0",
         "eslint-plugin-import": "^2.22.0",
@@ -53,6 +54,7 @@
         "husky": "^4.2.5",
         "jest": "^26.4.2",
         "node-abi": "^2.19.1",
+        "node-gyp": "7.1.2",
         "request": "^2.88.0",
         "require-dir": "^1.0.0"
     }
