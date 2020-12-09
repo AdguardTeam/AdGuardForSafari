@@ -1,9 +1,5 @@
 #!/bin/bash
 
-if [[ ${CONFIGURATION} == "Debug" ]]; then
-  exit 0
-fi
-
 echo "Building electron app with config:"
 echo "CONFIGURATION: ${CONFIGURATION}"
 echo "AG_STANDALONE: ${AG_STANDALONE}"
@@ -45,19 +41,13 @@ rsync -avm --include='*.h' -f 'hide,! */' "${SHAREDSRC}/" "${SRC}/safari-ext/sha
 # Update package.json
 sed -i "" "s/AG_STANDALONE_BETA/${AG_STANDALONE_BETA}/g" "${SRC}/package.json"
 sed -i "" "s/AG_STANDALONE_BUILD/${AG_STANDALONE}/g" "${SRC}/package.json"
-
-sed -i "" "s/AG_GROUP/${AG_GROUP}/g" "${SRC}/package.json"
+sed -i "" "s/AG_BUILD_CONFIGURATION/${CONFIGURATION}/g" "${SRC}/package.json"
 
 # Rebuild electron app
 OPT=""
 cd "${SRC}"
-if [[ ${CONFIGURATION} != "Debug" ]]; then
-  OPT="--asar"
-  yarn install --force || exit 1
-else
-  #echo "skip"
-  yarn upgrade --force -P safari-ext || exit 1
-fi
+OPT="--asar"
+yarn install --force || exit 1
 
 # Compile electron-remote
 cd "node_modules/electron-remote"
@@ -161,3 +151,4 @@ touch -c "${SRCROOT}/defaults.plist"
 # Update package.json
 sed -i "" "s/\"standalone-build\": \"${AG_STANDALONE}\"/\"standalone-build\": \"AG_STANDALONE_BUILD\"/g" "${SRC}/package.json"
 sed -i "" "s/\"standalone-beta\": \"${AG_STANDALONE_BETA}\"/\"standalone-beta\": \"AG_STANDALONE_BETA\"/g" "${SRC}/package.json"
+sed -i "" "s/\"build-configuration\": \"${CONFIGURATION}\"/\"build-configuration\": \"AG_BUILD_CONFIGURATION\"/g" "${SRC}/package.json"

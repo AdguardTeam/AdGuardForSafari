@@ -42,6 +42,100 @@
     };
 
     /**
+     * Protects specified style element from changes to the current document
+     * Add a mutation observer, which is adds our rules again if it was removed
+     *
+     * @param protectStyleEl protected style element
+     */
+    const protectStyleElementContent = function (protectStyleEl) {
+        const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+        if (!MutationObserver) {
+            return;
+        }
+        /* observer, which observe protectStyleEl inner changes, without deleting styleEl */
+        const innerObserver = new MutationObserver(((mutations) => {
+            for (let i = 0; i < mutations.length; i += 1) {
+                const m = mutations[i];
+                if (protectStyleEl.hasAttribute('mod') && protectStyleEl.getAttribute('mod') === 'inner') {
+                    protectStyleEl.removeAttribute('mod');
+                    break;
+                }
+
+                protectStyleEl.setAttribute('mod', 'inner');
+                let isProtectStyleElModified = false;
+
+                /**
+                 * further, there are two mutually exclusive situations: either there were changes
+                 * the text of protectStyleEl, either there was removes a whole child "text"
+                 * element of protectStyleEl we'll process both of them
+                 */
+                if (m.removedNodes.length > 0) {
+                    for (let j = 0; j < m.removedNodes.length; j += 1) {
+                        isProtectStyleElModified = true;
+                        protectStyleEl.appendChild(m.removedNodes[j]);
+                    }
+                } else if (m.oldValue) {
+                    isProtectStyleElModified = true;
+                    protectStyleEl.textContent = m.oldValue;
+                }
+
+                if (!isProtectStyleElModified) {
+                    protectStyleEl.removeAttribute('mod');
+                }
+            }
+        }));
+
+        innerObserver.observe(protectStyleEl, {
+            'childList': true,
+            'characterData': true,
+            'subtree': true,
+            'characterDataOldValue': true,
+        });
+    };
+
+    /**
+     * Applies css stylesheet
+     * As a temporary solution to improve performance we will try to apply basic styles,
+     * filtering out ExtendedCss styles by exceptions raised.
+     *
+     * TODO: Filter ExtendedCss style on background side
+     *
+     * @param styleSelectors Array of stylesheets or selectors
+     * @param verbose logging
+     */
+    const applyCss = (styleSelectors, verbose) => {
+        if (!styleSelectors || !styleSelectors.length) {
+            return;
+        }
+
+        logMessage(verbose, `css length: ${styleSelectors.length}`);
+
+        const extCssStyleSelectors = [];
+
+        const styleElement = document.createElement('style');
+        styleElement.setAttribute('type', 'text/css');
+        (document.head || document.documentElement).appendChild(styleElement);
+
+        for (const selector of styleSelectors.map((s) => s.trim())) {
+            if (!selector.endsWith('}') || selector.includes('debug:')) {
+                extCssStyleSelectors.push(selector);
+                continue;
+            }
+
+            try {
+                styleElement.sheet.insertRule(selector);
+            } catch (e) {
+                // Ignore exception, we will try to use this selector as ExtendedCss
+                extCssStyleSelectors.push(selector);
+            }
+        }
+
+        protectStyleElementContent(styleElement);
+
+        applyExtendedCss(extCssStyleSelectors, verbose);
+    };
+
+    /**
      * Applies Extended Css stylesheet
      *
      * @param extendedCss Array with ExtendedCss stylesheets
@@ -52,13 +146,13 @@
             return;
         }
 
-        logMessage(verbose, 'extended css length: ' + extendedCss.length);
+        logMessage(verbose, `extended css length: ${extendedCss.length}`);
         const extcss = new ExtendedCss({
             styleSheet: extendedCss
                 .filter(s => s.length > 0)
                 .map(s => s.trim())
                 .map(s => s[s.length - 1] !== '}' ? `${s} {display:none!important;}` : s)
-                .join("\n")
+                .join('\n')
         });
         extcss.apply();
     };
@@ -98,9 +192,10 @@
      */
     const applyAdvancedBlockingData = (data, verbose) => {
         logMessage(verbose, 'Applying scripts and css..');
+        logMessage(verbose, `Frame url: ${window.location.href}`);
 
         applyScripts(data.scripts, verbose);
-        applyExtendedCss(data.css, verbose);
+        applyCss(data.css, verbose);
         applyScriptlets(data.scriptlets, verbose);
 
         logMessage(verbose, 'Applying scripts and css - done');
@@ -145,7 +240,7 @@
             safari.self.addEventListener('message', handleMessage);
 
             // Request advanced blocking data
-            safari.extension.dispatchMessage('getAdvancedBlockingData');
+            safari.extension.dispatchMessage('getAdvancedBlockingData', { 'url': window.location.href });
         }
     }
 })();

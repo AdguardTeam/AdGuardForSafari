@@ -6,6 +6,8 @@ const { dialog } = remote;
 const fs = require('fs');
 const path = require('path');
 
+const ANIMATION_DELAY = 900;
+
 /**
  * Common utils
  *
@@ -1506,7 +1508,10 @@ const AntiBannerFilters = function (options) {
     }
 
     function onFilterUpdatesFinished() {
-        document.querySelector('#updateAntiBannerFilters').classList.remove('loading');
+        // set timeout to let the update button animation turn around
+        setTimeout(() => {
+            document.querySelector('#updateAntiBannerFilters').classList.remove('loading');
+        }, ANIMATION_DELAY);
     }
 
     function updateFilterMetadata(filter) {
@@ -2036,9 +2041,11 @@ PageController.prototype = {
         const importSettingsBtn = document.querySelector('#settingsImport');
         const exportSettingsBtn = document.querySelector('#settingsExport');
         const importSettingsInput = document.querySelector('#importSettingsInput');
+        const exportLogsBtn = document.querySelector('#exportLogs');
 
         importSettingsBtn.addEventListener('click', this.importSettingsFile.bind(this));
         exportSettingsBtn.addEventListener('click', this.exportSettingsFile.bind(this));
+        exportLogsBtn.addEventListener('click', this.exportLogs.bind(this));
 
         importSettingsInput.addEventListener('change', (event) => {
             try {
@@ -2049,6 +2056,13 @@ PageController.prototype = {
             }
             importSettingsInput.value = '';
         });
+    },
+
+    exportLogs(event) {
+        event.preventDefault();
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'exportLogs',
+        }));
     },
 
     importSettingsFile(event) {

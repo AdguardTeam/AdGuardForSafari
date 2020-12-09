@@ -32,7 +32,7 @@ extern NSString * const AEDefaultsAllExtensionsEnabled;
 /**
  Returns URL where is shared resources.
  */
-@property (class, readonly) NSURL *sharedResuorcesURL;
+@property (class, readonly) NSURL *sharedResourcesURL;
 /**
  Returns URL where must be current application logs.
  */

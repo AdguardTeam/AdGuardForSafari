@@ -75,6 +75,9 @@ static BOOL _mainAppReady;
         }];
         if ([messageName isEqualToString:@"blockElementPong"]) {
             [page dispatchMessageToScriptWithName:@"blockElement" userInfo:NULL];
+            if (@available(macOS 10.14.4, *)) {
+                [SafariExtensionViewController.sharedController dismissPopover];
+            } 
         }
         else if ([messageName isEqualToString:@"ruleResponse"]) {
             DDLogInfo(@"AG: Adding rule to user filter: %@", userInfo[@"rule"]);
@@ -103,21 +106,34 @@ static BOOL _mainAppReady;
     // This method will be called whenever some state changes in the passed in window. You should use this as a chance to enable or disable your toolbar item and set badge text.
     DDLogDebugTrace();
     [window getToolbarItemWithCompletionHandler:^(SFSafariToolbarItem * _Nullable toolbarItem) {
+        BOOL toolbarItemOn = NO;
         if ([self setMainAppRunning]) {
-            [toolbarItem setImage:([[AESharedResources sharedDefaults] boolForKey:AEDefaultsEnabled] ?
-                                   [NSImage imageNamed:@"toolbar-on"] :
-                                   [NSImage imageNamed:@"toolbar-off"])];
+            toolbarItemOn = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsEnabled];
         }
         else {
-            [toolbarItem setImage:[NSImage imageNamed:@"toolbar-off"]];
             [[AESharedResources sharedDefaults] setBool:NO forKey:AEDefaultsMainAppBusy];
         }
+        [toolbarItem setImage:(toolbarItemOn ?
+                               [NSImage imageNamed:@"toolbar-on"] :
+                               [NSImage imageNamed:@"toolbar-off"])];
         [window getActiveTabWithCompletionHandler:^(SFSafariTab * _Nullable activeTab) {
             [activeTab getActivePageWithCompletionHandler:^(SFSafariPage * _Nullable activePage) {
                 [activePage getPagePropertiesWithCompletionHandler:^(SFSafariPageProperties * _Nullable properties) {
                     SafariExtensionViewController.sharedController.currentPageUrl = nil;
                     if (properties) {
                         SafariExtensionViewController.sharedController.currentPageUrl = [properties.url copy];
+                        if (toolbarItemOn) {
+                            [AESharedResources whitelistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    DDLogDebug(@"Whitelist domains:\n%@", domains);
+                                    [toolbarItem setImage:([SafariExtensionViewController.sharedController domainCheckWithDomains:domains] ?
+                                                           [NSImage imageNamed:@"toolbar-off"] :
+                                                           [NSImage imageNamed:@"toolbar-on"])];
+                                    validationHandler(YES, nil);
+                                });
+                            }];
+                            return;
+                        }
                     }
                     validationHandler(YES, nil);
                 }];

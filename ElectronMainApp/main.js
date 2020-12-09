@@ -23,7 +23,7 @@ const trayController = require('./src/main/tray-controller');
 const toolbarController = require('./src/main/toolbar-controller');
 const mainMenuController = require('./src/main/main-menu.controller');
 const settings = require('./src/main/app/settings-manager');
-const { getChannel } = require('./src/main/app/app');
+const { getChannel, getConfiguration } = require('./src/main/app/app');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -267,6 +267,10 @@ function isOpenedAtLogin() {
  * otherwise shows the dialog message and moves `AdGuard for Safari.app` there
  */
 const checkIsInApplicationsFolder = () => {
+    if (getConfiguration() === 'Debug') {
+        return;
+    }
+
     if (!app.isInApplicationsFolder()) {
         log.error('AdGuard for Safari has been run not from Application folder');
         const response = dialog.showMessageBoxSync({

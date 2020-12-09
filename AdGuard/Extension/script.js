@@ -41,6 +41,7 @@ if (window.top === window) {
                 const newElement = document.createElement("script");
                 newElement.src = safari.extension.baseURI + "assistant.embedded.js";
                 newElement.id = "adguard.assistant.embedded";
+                newElement.charset = 'utf-8';
                 document.head.appendChild(newElement);
             }
 

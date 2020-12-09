@@ -19,21 +19,21 @@
 
 @interface NSException (Utils)
 
-+ (NSException *)argumentException:(NSString *)agrumentName;
++ (NSException *)argumentException:(NSString *)argumentName;
 
 /**
  Create NSException on allocation memory error.
- 
+
  @param objectName Name of object. May be nil.
- 
+
  */
 + (NSException *)mallocException:(NSString *)objectName;
 
 /**
  Create NSException on application resource available error.
- 
+
  @param resourceName name of app resource (file name and so on). May be nil.
- 
+
  */
 + (NSException *)appResourceUnavailableException:(NSString *)resourceName;
 

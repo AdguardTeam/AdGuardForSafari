@@ -210,11 +210,11 @@ module.exports = (() => {
     };
 
     /**
-    * Launches Safari and opens the preferences panel for a desabled extension.
+    * Launches Safari and opens the preferences panel for a disabled extension.
     * @param callback = (result as bool) => {}
     */
-    const openExtensionsPreferenses = (callback) => {
-        addon.openExtensionsPreferenses(callback);
+    const openExtensionsPreferences = (callback) => {
+        addon.openExtensionsPreferences(callback);
     };
 
     const debugLog = (msg) => {
@@ -269,6 +269,13 @@ module.exports = (() => {
         addon.requestMASUserReview();
     };
 
+    /**
+     * Returns path to shared resources folder (App Group Folder)
+     */
+    const sharedResourcesPath = () => {
+        return addon.sharedResourcesPath();
+    };
+
     return {
         init: init,
         sendReady: sendReady,
@@ -281,12 +288,13 @@ module.exports = (() => {
         setUserFilter: setUserFilter,
         userFilter: userFilter,
         getExtensionState: getExtensionState,
-        openExtensionsPreferenses: openExtensionsPreferenses,
+        openExtensionsPreferences: openExtensionsPreferences,
         debugLog: debugLog,
         setVerboseLogging: setVerboseLogging,
         setStartAtLogin: setStartAtLogin,
         startAtLogin: startAtLogin,
         removeOldLoginItem: removeOldLoginItem,
         requestMASUserReview: requestMASUserReview,
+        sharedResourcesPath: sharedResourcesPath,
     };
 })();

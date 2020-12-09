@@ -80,7 +80,7 @@ def changeEncoding(file):
         with open("temp.strings", "wb") as f2:
             content = f.read().decode('utf-16')
             f2.write(content.lstrip().encode('utf-8'))
-    os.rename("temp.strings", file)
+    shutil.move("temp.strings", file)
 
 def upload_file(path, format, language, file_name):
     """Uploads the specified file to the translation API
@@ -364,7 +364,7 @@ def export_all_translations():
     print("Start exporting ALL translations")
     for locale in TWOSKY_CONFIG["languages"]:
         export_translations(locale)
-    print("Finihed exporting ALL translations")
+    print("Finished exporting ALL translations")
     return
 
 
