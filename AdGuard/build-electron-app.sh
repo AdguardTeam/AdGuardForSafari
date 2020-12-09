@@ -49,8 +49,19 @@ cd "${SRC}"
 OPT="--asar"
 yarn install --force || exit 1
 
+# install jq
+brew install jq
+
+# Extract Electron version
+ELECTRON_VERSION=$(jq -r ".devDependencies.electron" ../ElectronMainApp/package.json)
+
+# Remove prefix "^"
+ELECTRON_VERSION=${ELECTRON_VERSION#"^"}
+
+echo "%%% USING ELECTRON VERSION ${ELECTRON_VERSION}"
+
 # Rebuild safari-ext and other node packages
-yarn electron-rebuild -v 11.0.2
+yarn electron-rebuild -v ${ELECTRON_VERSION}
 
 echo "Processing ConverterTool"
 install_name_tool -add_rpath @executable_path/../Frameworks "${SRC}/../libs/ConverterTool" > /dev/null 2>&1 | echo -n
@@ -64,7 +75,7 @@ if [[ ${CONFIGURATION} == "Release" ]]; then
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
 
-    electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=11.0.2 --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
+    electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
     --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
     ${OPT} || exit 1
 
@@ -75,7 +86,7 @@ if [[ ${CONFIGURATION} == "Release" ]]; then
     # https://github.com/AdguardTeam/AdGuardForSafari/issues/204
     rm -r "${APP}/Contents/Library/LoginItems/${PRODUCT_NAME} Login Helper.app" || exit 1
 
-    electron-osx-sign "${APP}" --platform=${PLATFORM} --type=distribution --hardened-runtime --version=11.0.2 --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_APP_ENT}" || exit 1
+    electron-osx-sign "${APP}" --platform=${PLATFORM} --type=distribution --hardened-runtime --version=${ELECTRON_VERSION} --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_APP_ENT}" || exit 1
 
     codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Electron Framework" || exit 1
     codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib" || exit 1
@@ -96,7 +107,7 @@ else
       PACKAGER_PLATFORM="darwin"
     fi
 
-    electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=11.0.2 --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
+    electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
     --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
     ${OPT} || exit 1
 
