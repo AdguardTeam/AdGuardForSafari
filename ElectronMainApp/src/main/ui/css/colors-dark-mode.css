@@ -351,13 +351,9 @@ li.active .toggler {
 .onboarding__desc {
 	color: #eeeeee;
 }
+
+.onboarding__link,
 #settingsExport,
 #exportLogs {
-
-.onboarding__link {
-	color: #66b574;
-}
-
-#settingsExport {
 	color: #66b574;
 }
