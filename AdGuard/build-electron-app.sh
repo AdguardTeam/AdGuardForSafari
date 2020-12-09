@@ -49,11 +49,6 @@ cd "${SRC}"
 OPT="--asar"
 yarn install --force || exit 1
 
-# Compile electron-remote
-cd "node_modules/electron-remote"
-  yarn install
-cd ../..
-
 # Rebuild safari-ext and other node packages
 yarn electron-rebuild -v 11.0.2
 

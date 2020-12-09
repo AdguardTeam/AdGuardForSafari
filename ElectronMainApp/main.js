@@ -66,6 +66,7 @@ function createWindow() {
         backgroundColor: cssMode,
         webPreferences: {
             nodeIntegration: true,
+            enableRemoteModule: true,
         },
     });
 
