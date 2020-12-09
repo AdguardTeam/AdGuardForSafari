@@ -69,6 +69,13 @@ module.exports = (() => {
     };
 
     /**
+     * @returns {*|string} Build configuration (Debug, Release, etc)
+     */
+    const getConfiguration = () => {
+        return packageJson['build-configuration'];
+    };
+
+    /**
      * @returns {*|string} Converter lib version
      */
     const getConverterVersion = () => {
@@ -81,6 +88,7 @@ module.exports = (() => {
         getId,
         getClientId,
         getChannel,
+        getConfiguration,
         getConverterVersion,
     };
 })();

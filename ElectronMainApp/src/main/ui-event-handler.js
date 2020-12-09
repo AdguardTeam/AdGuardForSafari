@@ -6,6 +6,7 @@ const settingsBackup = require('./app/settings-provider');
 const filters = require('./app/filters-manager');
 const filterCategories = require('./app/filters/filters-categories');
 const listeners = require('./notifier');
+const { exportLogs } = require('./app/utils/log-service');
 const whitelist = require('./app/whitelist');
 const userrules = require('./app/userrules');
 const antibanner = require('./app/antibanner');
@@ -113,9 +114,12 @@ module.exports.init = function () {
                 settingsBackup.applySettingsBackup(message.settings);
                 break;
             case 'openSafariExtensionsPrefs':
-                safariToolbar.openExtensionsPreferenses(() => {
+                safariToolbar.openExtensionsPreferences(() => {
                     // Do nothing
                 });
+                break;
+            case 'exportLogs':
+                exportLogs();
                 break;
             case 'changeUpdateFiltersPeriod':
                 settings.changeUpdateFiltersPeriod(message.value);

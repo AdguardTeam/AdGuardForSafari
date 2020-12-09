@@ -16,7 +16,7 @@ npm install node-gyp -g
 npm install electron-osx-sign -g
 ```
 
-Install local dependencies by runnning:
+Install local dependencies by running:
 ```
   yarn install
 ```
