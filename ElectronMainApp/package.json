@@ -27,7 +27,6 @@
         "config": "^1.31.0",
         "electron-debug": "^2.0.0",
         "electron-log": "^3.0.6",
-        "electron-remote": "git+https://github.com/AdguardTeam/electron-remote.git#18c5b1d",
         "electron-simple-updater": "^1.5.0",
         "electron-store": "^5.0.0",
         "electron-updater": "^4.0.6",
@@ -41,9 +40,10 @@
         "@jest-runner/electron": "^3.0.0",
         "axios": "^0.19.0",
         "devtron": "^1.4.0",
-        "electron": "^9.3.1",
+        "electron": "^11.0.4",
         "electron-osx-sign": "github:electron-userland/electron-osx-sign",
-        "electron-rebuild": "^1.8.5",
+        "electron-rebuild": "^2.3.2",
+        "electron-packager": "15.2.0",
         "eslint": "^7.6.0",
         "eslint-config-airbnb-base": "^14.2.0",
         "eslint-plugin-import": "^2.22.0",
@@ -54,6 +54,7 @@
         "husky": "^4.2.5",
         "jest": "^26.4.2",
         "node-abi": "^2.19.1",
+        "node-gyp": "7.1.2",
         "request": "^2.88.0",
         "require-dir": "^1.0.0"
     }
