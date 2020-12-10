@@ -25,6 +25,10 @@
 .button--green {
   padding: 0 30px;
 }
+.button--green.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
 .button--green-bd.disabled {
   opacity: 0.5;
   cursor: not-allowed;
