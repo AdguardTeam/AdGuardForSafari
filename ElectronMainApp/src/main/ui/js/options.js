@@ -449,6 +449,8 @@ const WhiteListFilter = function (options) {
     });
 
     const changeDefaultWhiteListModeCheckbox = document.querySelector('#changeDefaultWhiteListMode');
+    const whiteListEditor = document.querySelector('#whiteListRules > textarea');
+    const applyChangesBtn = document.querySelector('#whiteListFilterApplyChanges');
 
     let hasContent = false;
     function loadWhiteListDomains() {
@@ -458,10 +460,8 @@ const WhiteListFilter = function (options) {
         /* eslint-disable-next-line no-unused-vars */
         hasContent = !!response.content;
         editor.setValue(response.content || '', 1);
+        applyChangesBtn.classList.add('disabled');
     }
-
-    const whiteListEditor = document.querySelector('#whiteListRules > textarea');
-    const applyChangesBtn = document.querySelector('#whiteListFilterApplyChanges');
 
     applyChangesBtn.onclick = (event) => {
         event.preventDefault();
@@ -497,6 +497,7 @@ const WhiteListFilter = function (options) {
     const session = editor.getSession();
 
     session.addEventListener('change', () => {
+        applyChangesBtn.classList.remove('disabled');
         if (session.getValue().length > 0) {
             exportAllowlistBtn.classList.remove('disabled');
         } else {
