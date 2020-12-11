@@ -1,6 +1,6 @@
 {
     "name": "AdGuardSafariApp",
-    "version": "1.8.10",
+    "version": "1.8.11",
     "description": "",
     "main": "./main.js",
     "repository": "github:AdguardTeam/AdGuardForSafari",
@@ -42,8 +42,8 @@
         "devtron": "^1.4.0",
         "electron": "^11.0.4",
         "electron-osx-sign": "github:electron-userland/electron-osx-sign",
-        "electron-rebuild": "^2.3.2",
         "electron-packager": "15.2.0",
+        "electron-rebuild": "^2.3.2",
         "eslint": "^7.6.0",
         "eslint-config-airbnb-base": "^14.2.0",
         "eslint-plugin-import": "^2.22.0",
