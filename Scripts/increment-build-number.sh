@@ -14,7 +14,7 @@ build_number=$((build_number_parts[1] + 1))
 new_build_number="${build_number_parts[0]} = $build_number"
 echo "New build number: $new_build_number"
 
-sed -i "" "s/$current_build_number/$new_build_number/" "$config_file"
+sed "s/$current_build_number/$new_build_number/" "$config_file" > tmp; mv tmp "$config_file"
 
 
 
