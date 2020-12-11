@@ -18,7 +18,7 @@ patch=$((patch + 1))
 new_version="$major.$minor.$patch"
 echo "New version: $new_version"
 
-sed -i "" "s/$current_version/$new_version/" "$config_file"
+sed "s/$current_version/$new_version/" "$config_file" > tmp; mv tmp "$config_file"
 
 yarn version --patch --no-git-tag-version --cwd "./ElectronMainApp/"
 
