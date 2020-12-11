@@ -12,6 +12,8 @@ This project is supposed to automate some standard tasks.
   - [Exporting translations](#export-all)
 - [Notarization](#notarization)
 - [Updates json](#updates)
+- [Increments version](#increment-version)
+- [Increments build number](#increment-build-number)
 
 ## <a id="requirements"></a> Requirements
 
@@ -122,4 +124,20 @@ Options:
   --channel=CHANNEL     channel (beta or prod)
   --version=VERSION     sem version 
                         
+```
+
+## <a id="increment-version"></a> Increments version
+
+Increments version in Config.xcconfig and Electron package.json
+
+```
+Usage: /bin/bash increment-version.sh 
+```
+
+## <a id="increment-build-number"></a> Increments build number
+
+Increments build number in Config.xcconfig
+
+```
+Usage: /bin/bash increment-build-number.sh 
 ```
