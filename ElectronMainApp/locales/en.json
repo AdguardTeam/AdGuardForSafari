@@ -398,6 +398,36 @@
     "onboarding_safari_link": {
         "message": "What these extensions do?"
     },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "AdGuard Safari Icon"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "You can use this icon to manage AdGuard for Safari settings. For instance, pause blocking on a website, or block an ad manually."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Web Page Content access is required in order to make 'manual blocking tool' work."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Browsing History access is required to detect if AdGuard works on the website you're currently visiting."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard Advanced Blocking"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "This extension applies advanced blocking rules which are not supported by Safari Content Blocking API."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Web Page Content access is required to make advanced cosmetic rules work."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Browsing History access is required to detect what website you're trying to open so that it could find what advanced blocking rules should be applied."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 content blocking extensions"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari limits the maximum number of content blocking rules with 50,000 per extension. This is not enough to handle all sorts of ads and trackers AdGuard blocks. That's why we provide 6 extension, thus increasing that limit to 300,000."
+    },
     "onboarding_safari_btn": {
         "message": "Open preferences"
     },

@@ -1565,11 +1565,51 @@ body {
 }
 
 .onboarding__desc {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .onboarding__link {
   text-decoration: none;
+}
+
+.onboarding__link:hover {
+  filter: brightness(.8);
+}
+
+.onboarding__tooltip {
+  position: absolute;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  min-height: 480px;
+  padding: 50px 120px 0;
+  border-radius: 5px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 25px;
+}
+
+.onboarding__explanation:hover .onboarding__tooltip {
+  visibility: visible;
+}
+
+.onboarding__tooltip__content {
+  margin-bottom: 20px;
+}
+
+.onboarding__tooltip__title {
+  font-size: 30px;
+  margin-bottom: 26px;
+}
+
+.onboarding__tooltip__extension-name {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.onboarding__tooltip ul ul li {
+  list-style: circle inside;
+  margin-left: 10px;
 }
 
 .onboarding__actions {

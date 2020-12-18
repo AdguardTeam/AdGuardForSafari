@@ -70,7 +70,34 @@
             <div class="onboarding__info">
                 <div class="onboarding__title" i18n="onboarding_safari_title"></div>
                 <div class="onboarding__desc" i18n="onboarding_safari_desc"></div>
-                <a class="onboarding__link" href="#" i18n="onboarding_safari_link"></a>
+                <div class="onboarding__explanation">
+                    <a id="onboarding-link" class="onboarding__link" href="#" i18n="onboarding_safari_link"></a>
+                    <div id="onboarding-tooltip" class="onboarding__tooltip">
+                        <div class="onboarding__tooltip__title" i18n="onboarding_safari_link"></div>
+                        <ul>
+                            <li class="onboarding__tooltip__content">
+                                <span class="onboarding__tooltip__extension-name" i18n="onboarding_tooltip_adguard_safari_icon"></span> -
+                                <span i18n="onboarding_tooltip_adguard_safari_icon_info"></span>
+                                <ul>
+                                    <li i18n="onboarding_tooltip_adguard_safari_icon_web_page_content"></li>
+                                    <li i18n="onboarding_tooltip_adguard_safari_icon_browsing_history"></li>
+                                </ul>
+                            </li>
+                            <li class="onboarding__tooltip__content">
+                                <span class="onboarding__tooltip__extension-name" i18n="onboarding_tooltip_adguard_advanced_blocking"></span> -
+                                <span i18n="onboarding_tooltip_adguard_advanced_blocking_info"></span>
+                                <ul>
+                                    <li i18n="onboarding_tooltip_adguard_advanced_blocking_web_page_content"></li>
+                                    <li i18n="onboarding_tooltip_adguard_advanced_blocking_browsing_history"></li>
+                                </ul>
+                            </li>
+                            <li class="onboarding__tooltip__content">
+                                <span class="onboarding__tooltip__extension-name" i18n="onboarding_tooltip_adguard_safari_content_blockers"></span> -
+                                <span i18n="onboarding_tooltip_adguard_safari_content_blockers_info"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="onboarding__actions">
                 <button id="open-safari-extensions-settings-btn" class="button button--green onboarding__btn open-safari-extensions-settings-btn" i18n="onboarding_safari_btn"></button>
