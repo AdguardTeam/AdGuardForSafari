@@ -1549,6 +1549,11 @@ body {
   width: 840px;
   height: 400px;
   margin-bottom: 30px;
+  visibility: hidden;
+}
+
+.onboarding__pic__visible {
+  visibility: visible;
 }
 
 .onboarding__info {

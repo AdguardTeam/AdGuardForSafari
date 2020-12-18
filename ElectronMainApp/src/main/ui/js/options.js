@@ -2166,12 +2166,15 @@ PageController.prototype = {
 
         const onboardingLink = document.querySelector('#onboarding-link');
         const onboardingTooltip = document.querySelector('#onboarding-tooltip');
+        const onboardingPic = document.querySelector('#onboarding-pic');
         onboardingLink.addEventListener('click', (e) => {
             e.preventDefault();
             if (onboardingTooltip.classList.contains('onboarding__tooltip__visible')) {
                 onboardingTooltip.classList.remove('onboarding__tooltip__visible');
+                onboardingPic.classList.add('onboarding__pic__visible');
             } else {
                 onboardingTooltip.classList.add('onboarding__tooltip__visible');
+                onboardingPic.classList.remove('onboarding__pic__visible');
             }
         });
 
