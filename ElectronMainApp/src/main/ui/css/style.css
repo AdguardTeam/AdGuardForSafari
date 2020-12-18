@@ -1581,15 +1581,16 @@ body {
   visibility: hidden;
   top: 0;
   left: 0;
-  min-height: 480px;
-  padding: 50px 120px 0;
+  height: 480px;
+  overflow-y: scroll;
+  padding: 30px 120px 0;
   border-radius: 5px;
   text-align: left;
   font-size: 14px;
   line-height: 25px;
 }
 
-.onboarding__explanation:hover .onboarding__tooltip {
+.onboarding__tooltip__visible {
   visibility: visible;
 }
 

@@ -2164,6 +2164,17 @@ PageController.prototype = {
             window.sessionStorage.setItem(hideOnboardingScreenKey, true);
         });
 
+        const onboardingLink = document.querySelector('#onboarding-link');
+        const onboardingTooltip = document.querySelector('#onboarding-tooltip');
+        onboardingLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (onboardingTooltip.classList.contains('onboarding__tooltip__visible')) {
+                onboardingTooltip.classList.remove('onboarding__tooltip__visible');
+            } else {
+                onboardingTooltip.classList.add('onboarding__tooltip__visible');
+            }
+        });
+
         const enableExtensionsNotificationClose = document.getElementById('enableExtensionsNotificationClose');
         enableExtensionsNotificationClose.addEventListener('click', (e) => {
             e.preventDefault();
