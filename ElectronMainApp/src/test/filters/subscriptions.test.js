@@ -1,7 +1,11 @@
+const appPack = require('../../utils/app-pack');
+jest.spyOn(appPack, 'resourcePath').mockImplementation((resPath) => {
+    const path = require('path');
+    return path.join(__dirname, resPath);
+});
+
 const subscriptions = require('../../main/app/filters/subscriptions');
 const cache = require('../../main/app/filters/cache');
-
-jest.mock('../../main/app/app');
 
 const testFilter = {
     filterId: 1100,

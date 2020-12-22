@@ -2,7 +2,7 @@ const cache = require('../../main/app/filters/cache');
 const filtersCategories = require('../../main/app/filters/filters-categories');
 const serviceClient = require('../../main/app/filters/service-client');
 
-jest.mock('../../main/app/app');
+jest.mock('../../utils/app-pack');
 
 describe('Filters categories tests', () => {
     it('Categories metadata test', (done) => {

@@ -1,6 +1,5 @@
 const config = require('config');
 /* eslint-disable-next-line import/no-unresolved */
-const { requireTaskPool } = require('electron-remote');
 const log = require('../utils/log');
 const rulesStorage = require('../storage/rules-storage');
 const collections = require('../utils/collections');
@@ -15,8 +14,6 @@ module.exports = (() => {
 
     const { USER_FILTER_ID } = config.get('AntiBannerFiltersId');
 
-    const rulesStorageModule = requireTaskPool(require.resolve('../storage/rules-storage'));
-
     /**
      * Loads filter rules from storage
      *
@@ -25,15 +22,10 @@ module.exports = (() => {
      * @returns {*} Deferred object
      */
     const loadFilterRulesFromStorage = (filterId, rulesFilterMap) => {
-        return new Promise((resolve) => {
-            rulesStorageModule.readSync(filterId).then((rulesText) => {
-                if (rulesText) {
-                    rulesFilterMap[filterId] = rulesText;
-                }
-
-                resolve();
-            });
-        });
+        const rulesText = rulesStorage.readSync(filterId);
+        if (rulesText) {
+            rulesFilterMap[filterId] = rulesText;
+        }
     };
 
     /**
@@ -44,17 +36,12 @@ module.exports = (() => {
      * @private
      */
     const loadUserRules = (rulesFilterMap) => {
-        return new Promise((resolve) => {
-            rulesStorageModule.readSync(USER_FILTER_ID).then((rulesText) => {
-                if (!rulesText) {
-                    resolve();
-                    return;
-                }
+        const rulesText = rulesStorage.readSync(USER_FILTER_ID);
+        if (!rulesText) {
+            return;
+        }
 
-                rulesFilterMap[USER_FILTER_ID] = rulesText;
-                resolve();
-            });
-        });
+        rulesFilterMap[USER_FILTER_ID] = rulesText;
     };
 
     /**
