@@ -326,6 +326,18 @@ li.active .toggler {
 	background-image: url("../images/help_info.jpg");
 	background-size: cover;
 }
-.onboarding__desc {
-	color: #000000;
+.onboarding__tooltip {
+	background: #fff;
+	color: #444444;
+}
+.onboarding__title,
+.onboarding__desc{
+	color: #444444;
+}
+.onboarding__link {
+	border-bottom: 1px dotted #5ba575;
+	color: #66b574;
+}
+.onboarding__tooltip__title {
+	color: #68bc86;
 }

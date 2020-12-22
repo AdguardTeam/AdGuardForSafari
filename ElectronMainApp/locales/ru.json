@@ -383,8 +383,38 @@
     "options_github": {
         "message": "GitHub"
     },
+    "onboarding_safari_title": {
+        "message": "Необходимо ваше разрешение"
+    },
     "onboarding_safari_desc": {
         "message": "Поставьте галочки напротив расширений AdGuard в настройках Safari"
+    },
+    "onboarding_safari_link": {
+        "message": "Что делают эти расширения?"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "Используется для управления настройками AdGuard для Safari. Например, приостановить блокировку на веб-сайте или заблокировать рекламу вручную."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Доступ к содержимому веб-страницы необходим для работы функции «ручной блокировки» рекламы."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Доступ к истории просмотров необходим, чтобы определить, работает ли AdGuard на веб-сайте, который вы сейчас просматриваете."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Применяет расширенные правила блокировки, которые не поддерживаются Safari Content Blocking API"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Доступ к содержимому веб-страницы требуется для работы расширенных косметических правил."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Доступ к истории просмотров необходим для определения веб-сайта, который вы пытаетесь открыть, чтобы найти и применить нужные правила блокировки."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 расширений-блокировщиков контента"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "В Сафари максимальное количество правил блокировки контента для одного расширения ограничено 50 000. Этого недостаточно, чтобы заблокировать все виды рекламы и трекинга. Поэтому необходимо 6 расширений, чтобы увеличить этот лимит до 300 000."
     },
     "onboarding_safari_btn": {
         "message": "Открыть настройки"

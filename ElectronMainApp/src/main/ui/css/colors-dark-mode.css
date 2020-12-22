@@ -347,10 +347,26 @@ li.active .toggler {
 	background: url("../images/help_info_dark.jpg") center center no-repeat;
 }
 
+.onboarding__tooltip {
+	background: #323232;
+	color: #fff;
+}
+
+.onboarding__title,
 .onboarding__desc {
 	color: #eeeeee;
 }
+
+.onboarding__link,
 #settingsExport,
 #exportLogs {
 	color: #66b574;
+}
+
+.onboarding__link {
+	border-bottom: 1px dotted #5ba575;
+}
+
+.onboarding__tooltip__title {
+	color: #68bc86;
 }

@@ -1550,17 +1550,76 @@ body {
 }
 
 .onboarding__pic {
-  width: 890px;
-  height: 433px;
+  width: 840px;
+  height: 400px;
+  margin-bottom: 30px;
+  visibility: hidden;
+}
+
+.onboarding__pic__visible {
+  visibility: visible;
+}
+
+.onboarding__info {
+  text-align: center;
+  font-size: 16px;
   margin-bottom: 40px;
 }
 
-.onboarding__desc {
-  font-size: 24px;
+.onboarding__title {
+  font-size: 36px;
   line-height: 33px;
-  text-align: center;
   max-width: 540px;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
+}
+
+.onboarding__desc {
+  margin-bottom: 10px;
+}
+
+.onboarding__link {
+  text-decoration: none;
+}
+
+.onboarding__link:hover {
+  filter: brightness(.8);
+}
+
+.onboarding__tooltip {
+  position: absolute;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  height: 480px;
+  overflow-y: scroll;
+  padding: 30px 120px 0;
+  border-radius: 5px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 25px;
+}
+
+.onboarding__tooltip__visible {
+  visibility: visible;
+}
+
+.onboarding__tooltip__content {
+  margin-bottom: 20px;
+}
+
+.onboarding__tooltip__title {
+  font-size: 30px;
+  margin-bottom: 26px;
+}
+
+.onboarding__tooltip__extension-name {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.onboarding__tooltip ul ul li {
+  list-style: circle inside;
+  margin-left: 10px;
 }
 
 .onboarding__actions {
