@@ -326,6 +326,37 @@ class AdvancedBlockingTests: XCTestCase {
         XCTAssert(data.css.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
+    
+    func testIgnorePreviousRulesScripts() {
+        let contentBlockerJsonString = """
+        [
+            {
+                "trigger":
+                {
+                    "url-filter":".*",
+                    "if-domain":["*example.com"]
+                },
+                "action":{"type":"script","script":"alert(1);"}
+            },
+            {
+                "trigger":
+                {
+                    "url-filter":".*",
+                    "if-domain":["*example.com"],
+                    "resource-type":["document"]
+                },
+                "action":{"type":"ignore-previous-rules"}
+            }
+        ]
+        """;
+        
+        try! contentBlockerContainer.setJson(json: contentBlockerJsonString);
+        var data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
+
+        XCTAssert(data.scripts.count == 0);
+        XCTAssert(data.css.count == 0);
+        XCTAssert(data.scriptlets.count == 0);
+    }
 
     func testUrlFilterShortcuts() {
         let contentBlockerJsonString = """
