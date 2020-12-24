@@ -1,5 +1,6 @@
 /* eslint-disable-next-line import/no-unresolved */
-const { spawn } = require('child_process');
+const { jsonFromRules, getConverterVersion } = require('safari-converter-lib');
+const { resourcePath } = require('../../../utils/app-pack');
 const listeners = require('../../notifier');
 const events = require('../../events');
 const settings = require('../settings-manager');
@@ -7,9 +8,9 @@ const antibanner = require('../antibanner');
 const whitelist = require('../whitelist');
 const log = require('../utils/log');
 const concurrent = require('../utils/concurrent');
-const appPack = require('../../../utils/app-pack');
-const app = require('../app');
 const { groupRules, rulesGroupsBundles, filterGroupsBundles } = require('./rule-groups');
+
+const CONVERTER_TOOL_PATH = '../libs/ConverterTool';
 
 /**
  * Safari Content Blocker Adapter
@@ -32,6 +33,26 @@ module.exports = (function () {
     ];
 
     /**
+     * Converts rules to json using converter api
+     * @param {Array} rules
+     * @param {boolean} advancedBlocking if we need advanced blocking content
+     */
+    const convertRulesToJson = async (rules, advancedBlocking) => {
+        try {
+            log.info(`ConverterTool version: ${getConverterVersion()}`);
+            log.info(`Conversion of ${rules.length} rules started..`);
+            const converterPath = resourcePath(CONVERTER_TOOL_PATH);
+            log.info(`CONVERTER PATH: ${converterPath}`);
+
+            const result = await jsonFromRules(rules, advancedBlocking, RULES_LIMIT, converterPath);
+            return result;
+        } catch (e) {
+            log.error(`Unexpected error converting rules: ${e}`);
+            return null;
+        }
+    };
+
+    /**
      * Load content blocker
      */
     const updateContentBlocker = () => {
@@ -44,8 +65,9 @@ module.exports = (function () {
 
                 const rulesTexts = group.rules.map((x) => x.ruleText);
                 /* eslint-disable-next-line no-await-in-loop */
-                const result = await jsonFromRules(rulesTexts, false);
+                const result = await convertRulesToJson(rulesTexts, false);
                 if (result && result.converted && result.converted !== '[]') {
+                    log.info(result?.message);
                     json = result.converted;
                     if (result.overLimit) {
                         overlimit = true;
@@ -57,7 +79,7 @@ module.exports = (function () {
                     bundleId: rulesGroupsBundles[group.key],
                     overlimit: result && result.overLimit,
                     filterGroups: group.filterGroups,
-                    hasError: false,
+                    hasError: !result,
                 };
 
                 setSafariContentBlocker(rulesGroupsBundles[group.key], json, info);
@@ -76,80 +98,6 @@ module.exports = (function () {
     };
 
     /**
-     * Runs shell script
-     *
-     * @param command
-     * @param args
-     * @param callback
-     */
-    const runScript = (command, args, callback) => {
-        const child = spawn(command, args);
-
-        let stdout = '';
-        let stderr = '';
-
-        child.stdout.setEncoding('utf8');
-        child.stdout.on('data', (data) => {
-            data = data.toString();
-            stdout += data;
-        });
-
-        child.stderr.setEncoding('utf8');
-        child.stderr.on('data', (data) => {
-            data = data.toString();
-            stderr += data;
-        });
-
-        child.on('close', (code) => {
-            callback(code, stdout, stderr);
-        });
-
-        return child;
-    };
-
-    /**
-     * Runs converter method for rules
-     *
-     * @param rules array of rules
-     * @param advancedBlocking if we need advanced blocking content
-     */
-    const jsonFromRules = async (rules, advancedBlocking) => {
-        log.info(`ConverterTool version: ${app.getConverterVersion()}`);
-        log.info(`Conversion of ${rules.length} rules started..`);
-
-        const toolPath = appPack.resourcePath('../libs/ConverterTool');
-        log.info(`Running converter from: ${toolPath}`);
-
-        return new Promise((resolve) => {
-            const child = runScript(toolPath, [
-                `-limit=${RULES_LIMIT}`,
-                '-optimize=false',
-                `-advancedBlocking=${advancedBlocking}`,
-            ], (code, stdout, stderr) => {
-                if (code !== 0) {
-                    log.warn(`Unexpected error converting rules: ${stderr}`);
-                    resolve();
-                    return;
-                }
-
-                log.info(`Conversion of ${rules.length} rules completed.`);
-                const result = JSON.parse(stdout);
-                log.info(result?.message);
-
-                resolve(result);
-            });
-
-            child.stdin.setEncoding('utf8');
-            for (const r of rules) {
-                child.stdin.write(r);
-                child.stdin.write('\n');
-            }
-
-            child.stdin.end();
-        });
-    };
-
-    /**
      * Activates advanced blocking json
      *
      * @param rules array of rules
@@ -157,8 +105,7 @@ module.exports = (function () {
      */
     const setAdvancedBlocking = async (rules) => {
         let advancedBlocking = '[]';
-
-        const result = await jsonFromRules(rules, true);
+        const result = await convertRulesToJson(rules, true);
         if (result && result.advancedBlocking) {
             advancedBlocking = result.advancedBlocking;
         }

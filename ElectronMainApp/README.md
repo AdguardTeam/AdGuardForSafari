@@ -37,3 +37,8 @@ Launch application via `yarn start` and open menu `View -> Toggle Developer Tool
 Launch application via `yarn inspect` and open URI `chrome://inspect` in Chrome
 
 Then add network target `localhost:5858` via button 'Configure' and select this target below.
+
+### Safari converter
+
+After dependency installation ConverterTool binary will be copied to the `libs` directory to resolve its address via `app-pack` and pass to `safari-converter-lib`.
+Check `content-blocker-adapter.js` for more details.

@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
 
-# download ConverterLib
-bash ./Scripts/download-lib.sh
-
 BUILD_DIR="build"
 if [ ! -d "$BUILD_DIR" ]; then
     mkdir $BUILD_DIR
@@ -61,6 +58,10 @@ fi
 
 echo "Step 1: Building the app archive"
 rm -Rf "$ARCHIVE_PATH"
+
+# download AdGuard resources
+yarn install --cwd "${BUILD_DIR}/../AdGuardResources"
+
 xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" clean
 xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -archivePath "$ARCHIVE_PATH"
 

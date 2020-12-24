@@ -22,12 +22,6 @@ if [[ ${ACTION} == "clean" ]]; then
   exit 0
 fi
 
-# Rebuild safari-ext
-cd "${SRC}/safari-ext"
-#node-gyp configure --verbose --debug|| exit 1
-#node-gyp rebuild --verbose|| exit 1
-#
-
 mkdir -vp "${SRC}/safari-ext/shared"
 cp -v "${BUILT_PRODUCTS_DIR}/libshared.a" "${SRC}/safari-ext/shared/" || exit 1
 rsync -avm --include='*.h' -f 'hide,! */' "${SHAREDSRC}/" "${SRC}/safari-ext/shared/"
@@ -48,8 +42,6 @@ ELECTRON_VERSION=$(jq -r ".devDependencies.electron" ../ElectronMainApp/package.
 
 # Remove prefix "^"
 ELECTRON_VERSION=${ELECTRON_VERSION#"^"}
-
-echo "%%% USING ELECTRON VERSION ${ELECTRON_VERSION}"
 
 # Rebuild safari-ext and other node packages
 yarn electron-rebuild -v ${ELECTRON_VERSION}

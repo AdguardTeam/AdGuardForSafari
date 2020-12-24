@@ -7,11 +7,18 @@ yarn-error.log
 ElectronMainApp/safari-ext/shared/*
 *.a
 
+
+# the following libs are downloaded and copied to their extensions folders by AdGuardResources postinstall script
+AdGuard/AdvancedBlocking/extended-css.js
+AdGuard/AdvancedBlocking/scriptlets.js
+AdGuard/Extension/assistant.embedded.js
+
 # -------------- Xcode.gitignore -------------------
 
 ## Build generated
 build/
 DerivedData/
+libs/
 
 ## Various settings
 *.pbxuser
@@ -31,7 +38,3 @@ xcuserdata/
 
 ## Private data
 private
-
-# Libs
-libs/ConverterTool
-libs/ConverterTool.json

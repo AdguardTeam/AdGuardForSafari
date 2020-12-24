@@ -1,8 +1,6 @@
 const { app } = require('electron');
 const localStorage = require('./storage/storage');
 const packageJson = require('../../../package.json');
-// eslint-disable-next-line import/no-unresolved
-const converterInfo = require('../../../../libs/ConverterTool.json');
 
 /**
  * Application
@@ -75,13 +73,6 @@ module.exports = (() => {
         return packageJson['build-configuration'];
     };
 
-    /**
-     * @returns {*|string} Converter lib version
-     */
-    const getConverterVersion = () => {
-        return converterInfo.version;
-    };
-
     return {
         getVersion,
         getLocale,
@@ -89,6 +80,5 @@ module.exports = (() => {
         getClientId,
         getChannel,
         getConfiguration,
-        getConverterVersion,
     };
 })();

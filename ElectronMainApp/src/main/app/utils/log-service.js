@@ -2,6 +2,7 @@ const AdmZip = require('adm-zip');
 const path = require('path');
 const fs = require('fs');
 const { sharedResourcesPath } = require('safari-ext');
+const { getConverterVersion } = require('safari-converter-lib');
 
 const {
     app, dialog, BrowserWindow,
@@ -41,7 +42,7 @@ const exportLogs = () => {
         state.push(`Application version: ${agApp.getVersion()}`);
         state.push(`Application channel: ${agApp.getChannel()}`);
         state.push(`Application locale: ${agApp.getLocale()}`);
-        state.push(`Converter version: ${agApp.getConverterVersion()}`);
+        state.push(`Converter version: ${getConverterVersion()}`);
         state.push(`Enabled filters: [ ${applicationApi.getEnabledFilterIds().join(',')} ]`);
 
         const statePath = path.join(path.dirname(logsPath), 'state.txt');

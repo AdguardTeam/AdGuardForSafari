@@ -1224,7 +1224,7 @@
 /* Begin PBXLegacyTarget section */
 		652169F321231A2300ABF7D0 /* BuildElectronApp */ = {
 			isa = PBXLegacyTarget;
-			buildArgumentsString = "$(SRCROOT)/build-electron-app.sh $(ACTION)";
+			buildArgumentsString = "$(SRCROOT)/../Scripts/build-electron-app.sh $(ACTION)";
 			buildConfigurationList = 652169F421231A2300ABF7D0 /* Build configuration list for PBXLegacyTarget "BuildElectronApp" */;
 			buildPhases = (
 			);
@@ -1736,8 +1736,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4F479FC221A05B600A68681 /* extended-css.js in Resources */,
-				F44937BC2291D72500BAEFED /* scriptlets.js in Resources */,
+			    F4F479FC221A05B600A68681 /* extended-css.js in Resources */,
+                F44937BC2291D72500BAEFED /* scriptlets.js in Resources */,
 				F49E3FE6221F4D72001B9E86 /* InfoPlist.strings in Resources */,
 				F41DA7E52201C81700C63708 /* script.js in Resources */,
 			);
