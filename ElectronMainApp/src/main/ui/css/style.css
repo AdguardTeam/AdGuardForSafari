@@ -248,7 +248,7 @@
   display: block;
   width: 20px;
   height: 16px;
-  background-size: cover;
+  background-size: contain;
   cursor: pointer;
   background-repeat: no-repeat;
   background-image: url(../images/reload-ico.svg);
