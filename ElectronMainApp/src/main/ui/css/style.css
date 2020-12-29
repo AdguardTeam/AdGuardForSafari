@@ -53,7 +53,7 @@
 }
 #exportLogs.button {
   position: absolute;
-  left: 30px;
+  left: -20px;
 }
 /* st */
 .tab-pane {
@@ -1667,6 +1667,7 @@ body {
 }
 
 .settings__import-export {
+  position: relative;
   display: block !important;
   margin-top: 10px;
   text-align: right;
