@@ -67,6 +67,9 @@ body {
 .settings-content .manage-account-btn {
 	color: #ffffff;
 }
+.settings-content a {
+	color: #66b574;
+}
 .option-popup__subtitle,
 .settings-checkboxes__label {
 	color: #cccccc;
