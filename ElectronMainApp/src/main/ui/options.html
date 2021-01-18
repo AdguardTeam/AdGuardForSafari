@@ -244,7 +244,32 @@
 <!--                    </div>-->
                 </div>
                 <div class="settings-body">
-                    <ul id="groupsList" class="opts-list ad-blocker"></ul>
+                    <ul id="groupsList" class="opts-list ad-blocker">
+                        <li id="user-rules" class="active">
+                            <a href="#" data-tab="#userfilter" class="block-type">
+                                <div class="block-type__desc">
+                                    <div class="block-type__desc-title">User rules</div>
+                                    <div class="desc desc--filters">15 user rules</div>
+                                </div>
+                            </a>
+                            <div class="opt-state">
+                                <div class="preloader"></div>
+                                <input type="checkbox" name="groupId" value="">
+                            </div>
+                        </li>
+                        <li id="allowlist" class="active">
+                            <a href="#" data-tab="#whitelist" class="block-type">
+                                <div class="block-type__desc">
+                                    <div class="block-type__desc-title">Allowlist</div>
+                                    <div class="desc desc--filters">AdGuard blocks 11 websites</div>
+                                </div>
+                            </a>
+                            <div class="opt-state">
+                                <div class="preloader"></div>
+                                <input type="checkbox" name="groupId" value="">
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="filters-check">
@@ -369,11 +394,21 @@
 
         <div id="whitelist" class="settings-content tab-pane">
             <div class="settings-content">
-                <div class="subtitle settings-body-subtitle" i18n="options_whitelist"></div>
+                <div class="settings-subtitle">
+                    <a class="back-btn" href="#antibanner">
+                        <img src="images/arrow.svg" class="back">
+                    </a>
+                    <div>
+                        <div class="subtitle settings-body-subtitle whitelist-subtitle" i18n="options_whitelist"></div>
+                        <div class="setting-desc" i18n="options_whitelist_description"></div>
+                    </div>
+                </div>
                 <div class="settings-body">
-                    <div class="setting-desc" i18n="options_whitelist_description"></div>
+                    <div class="filter-rules">
+                        <div id="whiteListRules" class="user-rules"></div>
+                    </div>
                     <ul class="opts-list">
-                        <li class="opts-list__item opts-list__item--reset-padding">
+                        <li class="opts-list__item">
                             <div class="opts-desc">
                                 <div class="opt-name" i18n="options_whitelist_inverse"></div>
                                 <div class="opt-state"></div>
@@ -383,19 +418,16 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="filter-rules">
-                        <div id="whiteListRules" class="user-rules"></div>
-                    </div>
                 </div>
                 <div class="settings-actions settings-actions--saved">
-                    <div class="settings-actions__save-button">
-                      <a class="button button--green button--m settings-content__save-btn" id="whiteListFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
-                    </div>
                     <div class="filter-rules__label" id="whiteListRulesSaveIndicator"></div>
+                    <div class="settings-actions__save-button">
+                        <a class="button button--green button--m settings-content__save-btn" id="whiteListFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
+                    </div>
                     <div class="filter-rules__import-export">
                         <input type="file" id="importAllowlistInput" style="display: none;" accept=".txt, text/plain"/>
-                        <a id="allowlistImport" href="#" i18n="options_userfilter_import" class="button button--green button--link"></a>
-                        <a id="allowlistExport" href="#" i18n="options_userfilter_export" class="button button--green-bd button--link disabled"></a>
+                        <a id="allowlistImport" href="#" i18n="options_userfilter_import" class="button button--simple button--link"></a>
+                        <a id="allowlistExport" href="#" i18n="options_userfilter_export" class="button button--simple button--link disabled"></a>
                     </div>
                 </div>
             </div>
@@ -403,22 +435,29 @@
 
         <div id="userfilter" class="settings-content tab-pane">
             <div class="settings-content">
-                <div class="subtitle settings-body-subtitle" i18n="options_userfilter"></div>
+                <div class="settings-subtitle">
+                    <a class="back-btn" href="#antibanner">
+                        <img src="images/arrow.svg" class="back">
+                    </a>
+                    <div>
+                        <div class="subtitle settings-body-subtitle userfilter-subtitle" i18n="options_userfilter"></div>
+                        <div class="setting-desc" i18n="options_userfilter_description"></div>
+                    </div>
+                </div>
                 <div class="settings-body">
-                    <div class="setting-desc" i18n="options_userfilter_description"></div>
                     <div class="filter-rules">
                         <div id="userRules" class="user-rules"></div>
                     </div>
                 </div>
                 <div class="settings-actions settings-actions--saved">
+                    <div class="filter-rules__label" id="userRulesSaveIndicator"></div>
                     <div class="settings-actions__save-button">
                         <a class="button button--green button--m settings-content__save-btn" id="userFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
                     </div>
-                    <div class="filter-rules__label" id="userRulesSaveIndicator"></div>
                     <div class="filter-rules__import-export">
                         <input type="file" id="importUserFilterInput" style="display: none;" accept=".txt, text/plain"/>
-                        <a id="userFiltersImport" href="#" i18n="options_userfilter_import" class="button button--green button--link"></a>
-                        <a id="userFiltersExport" href="#" i18n="options_userfilter_export" class="button button--green-bd button--link disabled"></a>
+                        <a id="userFiltersImport" href="#" i18n="options_userfilter_import" class="button button--simple button--link"></a>
+                        <a id="userFiltersExport" href="#" i18n="options_userfilter_export" class="button button--simple button--link disabled"></a>
                     </div>
                 </div>
             </div>

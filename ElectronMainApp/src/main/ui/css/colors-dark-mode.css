@@ -9,6 +9,12 @@ body {
 .container {
 	background-color: #323232;
 }
+.button--simple {
+	color: #ffffff;
+}
+.button--simple:hover {
+	color: #cccccc !important;
+}
 .button--green {
 	background-color: #68bc86;
 	color: #ffffff;
@@ -70,12 +76,15 @@ body {
 .settings-content a {
 	color: #66b574;
 }
+#userfilter .settings-content a {
+	color: #ffffff;
+}
 .option-popup__subtitle,
 .settings-checkboxes__label {
 	color: #cccccc;
 }
 .setting-desc {
-	color: #767676;
+	color: #ffffff;
 }
 .filters-list .filters-search {
 	border-bottom: 1px solid #888888;
@@ -168,9 +177,6 @@ body {
 .toggler:before {
 	background-color: #ffffff;
 }
-/*.toggler:after {*/
-/*	background-color: #444444;*/
-/*}*/
 .toggler.on,
 li.active .toggler {
 	background-color: #67b279;

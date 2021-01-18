@@ -222,6 +222,7 @@ const TopMenu = (function () {
     const GENERAL_SETTINGS = '#general-settings';
     const ANTIBANNER = '#antibanner';
     const WHITELIST = '#whitelist';
+    const USERFILTER = '#userfilter';
     const CONTENT_BLOCKERS = '#content-blockers';
 
     let prevTabId;
@@ -270,6 +271,14 @@ const TopMenu = (function () {
             if (typeof onHashUpdatedCallback === 'function') {
                 onHashUpdatedCallback(tabId);
             }
+        }
+
+        if (tabId === WHITELIST
+            || tabId === USERFILTER
+            || tabId.includes(ANTIBANNER)) {
+            antibannerTabs[0].classList.add('active');
+        } else {
+            antibannerTabs[0].classList.remove('active');
         }
 
         prevTabId = tabId;
@@ -846,7 +855,6 @@ const AntiBannerFilters = function (options) {
         return Utils.htmlToElement(`
                 <li id="category${category.groupId}" class="active">
                     <a href="#antibanner${category.groupId}" class="block-type">
-                        <div class="block-type__ico block-type__ico--${category.groupId}"></div>
                         <div class="block-type__desc">
                             <div class="block-type__desc-title">${category.groupName}</div>
                             <div class="desc desc--filters"></div>
