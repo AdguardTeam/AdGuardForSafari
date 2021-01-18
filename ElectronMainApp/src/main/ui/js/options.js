@@ -883,7 +883,7 @@ const AntiBannerFilters = function (options) {
         }
         let homeButton = '';
         if (filter.homepage) {
-            homeButton = `<a class="icon-home" target="_blank" href="${filter.homepage}"></a>`;
+            homeButton = `<a target="_blank" href="${filter.homepage}">Homepage</a>`; // TODO add localization
         }
 
         return `
@@ -891,7 +891,10 @@ const AntiBannerFilters = function (options) {
                 <div class="opts-desc-filter">
                     <div class="opt-name">
                         <div class="title">${filter.name}</div>
-                        <div class="desc">${filter.description}</div>
+                        <div class="desc">
+                            ${filter.description}
+                            ${homeButton}
+                        </div>
                         <div class="opt-name__info">
                             <div class="opt-name__info-labels">
                                 <div class="opt-name__info-item filter-version-desc">
@@ -910,7 +913,6 @@ const AntiBannerFilters = function (options) {
                 <div class="opt-state">
                     <div class="preloader"></div>
                     ${deleteButton}
-                    ${homeButton}
                     <input
                         type="checkbox"
                         name="filterId"
@@ -977,8 +979,8 @@ const AntiBannerFilters = function (options) {
 
         return Utils.htmlToElement(`
             <div id="antibanner${category.groupId}" class="settings-content tab-pane filters-list">
-                ${pageTitleEl}
-                <div class="settings-body settings-body--search">
+                <div class="settings-content_page-title">
+                    ${pageTitleEl}
                     <div class="filters-search">
                         <div class="icon-search">
                             <img src="images/magnifying-glass.svg" alt="">
@@ -989,6 +991,8 @@ const AntiBannerFilters = function (options) {
                             name="searchFiltersList"
                         />
                     </div>
+                </div>
+                <div class="settings-body settings-body--search">
                     <ul class="opts-list">
                         ${filtersList}
                     </ul>

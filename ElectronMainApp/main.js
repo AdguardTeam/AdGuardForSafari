@@ -55,7 +55,7 @@ const cssMode = nativeTheme.shouldUseDarkColors ? '#323232' : '#ffffff';
 function createWindow() {
     const browserWindow = new BrowserWindow({
         title: 'AdGuard for Safari',
-        width: 1024,
+        width: 960,
         height: 768,
         minWidth: 800,
         minHeight: 768,

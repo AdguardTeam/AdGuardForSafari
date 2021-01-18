@@ -40,21 +40,10 @@
                     </a>
                 </li>
                 <li>
-                    <a class="nav__item" href="#" data-tab="#whitelist">
-                        <span i18n="options_whitelist"></span>
+                    <a class="nav__item" href="#" data-tab="#support">
+                        <span i18n="options_support"></span>
                     </a>
                 </li>
-                <li>
-                    <a class="nav__item" href="#" data-tab="#userfilter">
-                        <span i18n="options_userfilter"></span>
-                    </a>
-                </li>
-<!--                TODO: add support tab in 1.9 -->
-<!--                <li>-->
-<!--                    <a class="nav__item" href="#" data-tab="#support">-->
-<!--                        <span i18n="options_support"></span>-->
-<!--                    </a>-->
-<!--                </li>-->
                 <li>
                     <a class="nav__item" href="#" data-tab="#about">
                         <span i18n="options_about"></span>
@@ -131,17 +120,20 @@
                     </button>
                 </div>
                 <ul class="opts-list">
-                    <li class="active">
+                    <li>
                         <div class="opts-desc">
-                            <div class="opt-name" i18n="options_allow_acceptable_ads"></div>
-                            <div class="opt-state">
-                                <div class="sp-table-row-info desc">
-                                    <a class="opt-state__link" target="_blank" href="https://adguard.com/forward.html?action=self_promotion&from=options_screen&app=safari_extension" i18n="options_learn_more"></a>
-                                </div>
-                            </div>
+                            <div class="opt-name" i18n="options_launch_at_login"></div>
                         </div>
                         <div class="opt-state input">
-                            <input type="checkbox" class="sp-table-row-input" id="allowAcceptableAds"/>
+                            <input type="checkbox" class="sp-table-row-input" id="launchAtLogin"/>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="opts-desc">
+                            <div class="opt-name" i18n="options_show_tray_icon"></div>
+                        </div>
+                        <div class="opt-state input">
+                            <input type="checkbox" class="sp-table-row-input" id="showTrayIcon"/>
                         </div>
                     </li>
                     <li>
@@ -160,30 +152,17 @@
                             <select name="filterUpdatePeriod" id="filterUpdatePeriod" class="opt-select"></select>
                         </div>
                     </li>
-                    <li class="opts-list__item opts-list__item--arrow active" data-tab="#content-blockers">
+                    <li class="active">
                         <div class="opts-desc">
-                            <div class="opt-name" i18n="options_content_blockers"></div>
+                            <div class="opt-name" i18n="options_allow_acceptable_ads"></div>
                             <div class="opt-state">
-                                <span id="options_content_blockers_desc_container" class='sp-table-row-info desc'></span>
+                                <div class="sp-table-row-info desc">
+                                    <a class="opt-state__link" target="_blank" href="https://adguard.com/forward.html?action=self_promotion&from=options_screen&app=safari_extension" i18n="options_learn_more"></a>
+                                </div>
                             </div>
                         </div>
-                    </li>
-                    <li>
-                        <div class="opts-desc">
-                            <div class="opt-name" i18n="options_show_tray_icon"></div>
-                            <div class="opt-state"></div>
-                        </div>
                         <div class="opt-state input">
-                            <input type="checkbox" class="sp-table-row-input" id="showTrayIcon"/>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="opts-desc">
-                            <div class="opt-name" i18n="options_launch_at_login"></div>
-                            <div class="opt-state"></div>
-                        </div>
-                        <div class="opt-state input">
-                            <input type="checkbox" class="sp-table-row-input" id="launchAtLogin"/>
+                            <input type="checkbox" class="sp-table-row-input" id="allowAcceptableAds"/>
                         </div>
                     </li>
                     <li>
@@ -208,48 +187,61 @@
                             <input type="checkbox" class="sp-table-row-input" id="enableHardwareAcceleration"/>
                         </div>
                     </li>
-                    <li class="settings__import-export">
-                        <a id="exportLogs" href="#" i18n="options_export_logs" class="button button--green-bd button--link"></a>
-                        <input type="file" id="importSettingsInput" style="display: none;" accept=".json"/>
-                        <a id="settingsImport" href="#" i18n="options_import_settings" class="button button--green button--link"></a>
-                        <a id="settingsExport" href="#" i18n="options_export_settings" class="button button--green-bd button--link"></a>
+                    <li class="opts-list__item opts-list__item--arrow active" data-tab="#content-blockers">
+                        <div class="opts-desc">
+                            <div class="opt-name" i18n="options_content_blockers"></div>
+                            <div class="opt-state">
+                                <span id="options_content_blockers_desc_container" class='sp-table-row-info desc'></span>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="exportLogs"  class="opts-list__item opts-list__item--arrow active">
+                        <div class="opts-desc">
+                            <div class="opt-name" i18n="options_export_logs"></div>
+                        </div>
+                    </li>
+                    <li id="settingsExport" class="opts-list__item opts-list__item--arrow active">
+                        <div class="opts-desc">
+                            <div class="opt-name" i18n="options_export_settings"></div>
+                        </div>
+                    </li>
+                    <input type="file" id="importSettingsInput" style="display: none;" accept=".json"/>
+                    <li id="settingsImport"  class="opts-list__item opts-list__item--arrow active">
+                        <div class="opts-desc">
+                            <div class="opt-name" i18n="options_import_settings"></div>
+                        </div>
                     </li>
                 </ul>
             </div>
-            <!--<div class="settings-actions-wr">-->
-                <!--<div class="try-premium">-->
-                    <!--<a href="https://adguard.com/" target="_blank" class="try-premium__in">-->
-                        <!--<span class="try-premium__btn" i18n="options_compare_btn"></span>-->
-                        <!--<span class="try-premium__title" i18n="options_compare_title"></span>-->
-                    <!--</a>-->
-                <!--</div>-->
 
-                <!--<div class="settings-actions settings-actions&#45;&#45;in">-->
-                    <!--<a href="/pages/export.html#exs" target="_blank" id="exportSettingsFile" class="button button&#45;&#45;green button&#45;&#45;link" i18n="options_export_settings"></a>-->
-                    <!--<a href="#" id="importSettingsFile" i18n="options_import_settings" class="button button&#45;&#45;green-bd button&#45;&#45;link"></a>-->
-                <!--</div>-->
-            <!--</div>-->
             <div class="settings-content__desc" i18n="options_general_desc"></div>
         </div>
 
         <div id="antibanner" class="settings-content tab-pane">
             <div class="settings-content">
-                <div class="page-title">
-                    <div class="info info--rules-current">
-                        <span class="settings-body-subtitle settings-body-subtitle--reset-padding" i18n="options_antibanner"></span>
-                        <div class="upd-wr">
-                            <div class="upd">
-                                <div id="filtersRulesInfo"></div>
-                                <div>
-                                    <span i18n="options_last_update"></span>
-                                    <span id="lastUpdateTime"></span>
-                                </div>
-                            </div>
-                            <div class="settings-actions settings-actions--update-filters">
-                                <a id="updateAntiBannerFilters" href="#"></a>
-                            </div>
+                <div class="filters-info">
+                    <div class="settings-body-subtitle settings-body-subtitle--reset-padding" i18n="options_antibanner"></div>
+                    <div class="filters-info_updates">
+                        <div id="filtersRulesInfo"></div>
+                        <div>
+                            <span i18n="options_last_update"></span>
+                            <span id="lastUpdateTime"></span>
+<!--                            TODO add localization -->
+                            <a id="updateAntiBannerFilters" class="settings-actions--update-filters" href="#">Refresh</a>
+                        </div>
+                        <div class="settings-actions settings-actions--update-filters">
+
                         </div>
                     </div>
+<!--                    <div class="filters-search">-->
+<!--                        <div class="icon-search">-->
+<!--                            <img src="images/magnifying-glass.svg" alt="">-->
+<!--                        </div>-->
+<!--                        <input type="text"-->
+<!--                                i18n="options_filters_list_search_placeholder"-->
+<!--                                name="searchFiltersList"-->
+<!--                        />-->
+<!--                    </div>-->
                 </div>
                 <div class="settings-body">
                     <ul id="groupsList" class="opts-list ad-blocker"></ul>

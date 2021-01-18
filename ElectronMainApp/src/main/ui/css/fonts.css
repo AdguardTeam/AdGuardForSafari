@@ -22,3 +22,17 @@
     font-weight: bold;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('../fonts/SFProDisplay-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('../fonts/SFProDisplay-Semibold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}

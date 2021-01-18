@@ -44,13 +44,13 @@ body {
 	color: #cccccc;
 }
 .settings-content__desc {
-	color: #888888;
+	color: #a4a4a4;
 }
-.upd-wr {
-	color: #888888;
+.filters-info {
+	color: #d8d8d8;
 }
 .settings-body-subtitle {
-	color: #cccccc;
+	color: #f3f3f3;
 }
 .settings-sidebar {
 	background-color: #323232;
@@ -59,10 +59,10 @@ body {
 	background: url(../images/logo-white.svg) no-repeat;
 }
 .settings-sidebar .nav span {
-	color: #cccccc;
+	color: #eeeeee;
 }
 .settings-sidebar .nav a.active span:before {
-	background-color: #66b574;
+	background-color: #68bc86;
 }
 .settings-content .manage-account-btn {
 	color: #ffffff;
@@ -78,7 +78,7 @@ body {
 	color: #767676;
 }
 .filters-list .filters-search {
-	border-bottom: 1px solid #444444;
+	border-bottom: 1px solid #888888;
 }
 .filters-list .filters-search input {
 	color: #eee;
@@ -91,7 +91,7 @@ body {
 }
 .opts-list li {
 	color: #eeeeee;
-	border-bottom: 1px solid #444444;
+	border-bottom: 1px solid #4d4d4d;
 }
 .warn-message {
 	color: #e85037;
@@ -103,7 +103,7 @@ body {
 	color: #eeeeee;
 }
 .opts-list li.active .opt-name__tag{
-	color: #66b574;
+	color: #d8d8d8;
 }
 .opts-list li.active .block__link{
 	color: #66b574;
@@ -112,13 +112,13 @@ body {
 	color: #e85037;
 }
 .opts-list li .opts-desc-filter {
-	color: #adadad;
+	color: #d8d8d8;
 }
 .opts-list li.active .opts-desc-filter {
-	color: #eeeeee;
+	color: #d8d8d8;
 }
 .settings-notification {
-	background: #777777;
+	background: rgba(235, 147, 0 , .1);
 }
 .settings-notification__title {
 	color: #cccccc;
@@ -127,10 +127,10 @@ body {
 	color: #cccccc;
 }
 .block-type .block-type__desc .desc {
-	color: #eeeeee;
+	color: #d8d8d8;
 }
 .block-type__desc-title {
-	color: #66b574;
+	color: #ffffff;
 }
 .block-type__info-title {
 	color: #cccccc;
@@ -148,32 +148,35 @@ body {
 	color: rgba(77, 77, 77, 0.5);
 }
 .opts-list .opt-state .desc {
-	color: #888888;
+	color: #d8d8d8;
 }
 .opt-state__link:hover {
 	color: #58a273;
 }
 .opts-list li .opt-state__link {
-	color: #888888;
+	color: #d8d8d8;
+}
+.opts-list li .opt-state__link:hover {
+	color: #bcbcbc;
 }
 .opt-select {
 	background-color: #444444;
 }
 .toggler {
-	background-color: #964b20;
+	background-color: #888888;
 }
 .toggler:before {
-	background-color: #323232;
+	background-color: #ffffff;
 }
-.toggler:after {
-	background-color: #444444;
-}
+/*.toggler:after {*/
+/*	background-color: #444444;*/
+/*}*/
 .toggler.on,
 li.active .toggler {
-	background-color: #408a40;
+	background-color: #67b279;
 }
 .toggler.off {
-	background-color: #f68a23;
+	background-color: #888888;
 }
 .settings-footer .btn-rate {
 	color: #6a6a6a;
@@ -363,7 +366,7 @@ li.active .toggler {
 .onboarding__link,
 #settingsExport,
 #exportLogs {
-	color: #66b574;
+	color: #ffffff;
 }
 
 .onboarding__link {
