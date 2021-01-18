@@ -247,10 +247,7 @@
   padding: 0 15px;
 }
 a.settings-actions--update-filters {
-  color: #d8d8d8;
-}
-a.settings-actions--update-filters:hover {
-  color: #bbbbbb;
+  margin-left: 3px;
 }
 .settings-actions--saved {
   position: relative;

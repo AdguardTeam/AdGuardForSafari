@@ -47,6 +47,12 @@
     "options_support_rate_description": {
         "message": "Tell us what you think about AdGuard"
     },
+    "options_support_discuss_title": {
+        "message": "Discuss"
+    },
+    "options_support_discuss_description": {
+        "message": "Discuss on our forum, in social networks or on GitHub"
+    },
     "options_about_update_check": {
         "message": "Checking for updates"
     },
@@ -133,6 +139,9 @@
             "one": "%s advanced rule",
             "other": "%s advanced rules"
         }
+    },
+    "options_filters_refresh": {
+        "message": "Refresh"
     },
     "options_filters_enabled": {
         "message": "Enabled:"

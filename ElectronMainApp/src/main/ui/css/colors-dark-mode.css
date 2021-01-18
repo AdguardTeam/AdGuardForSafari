@@ -229,8 +229,11 @@ li.active .toggler {
 .settings-form__input {
 	box-shadow: 0 1px 0 0 rgba(216, 216, 216, .7);
 }
-.settings-actions--update-filters a {
-	filter: brightness(3);
+a.settings-actions--update-filters {
+	color: #d8d8d8;
+}
+a.settings-actions--update-filters:hover {
+	color: #bbbbbb;
 }
 .settings-checkboxes__checkbox:checked + .settings-checkboxes__label:before{
 	background-color: #66b574;
@@ -311,15 +314,6 @@ li.active .toggler {
 }
 .alert__link {
 	color: #66b574;
-}
-.support .block-type__desc-title {
-	color: #cccccc;
-}
-.support .description {
-	color: #888888;
-}
-.support .opts-list li:hover {
-	background: rgba(255, 255, 255, .1);
 }
 .about-opt__version,
 .about-opt_title {

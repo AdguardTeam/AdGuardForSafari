@@ -1476,7 +1476,7 @@ const AntiBannerFilters = function (options) {
         );
 
         document.querySelector('#filtersRulesInfo')
-            .textContent = `${messageFilters} ${messageRules} ${messageAdvancedRules}`;
+            .textContent = `${messageFilters}, ${messageRules}, ${messageAdvancedRules}.`;
 
         checkSafariContentBlockerRulesLimit(info.rulesOverLimit);
     }
