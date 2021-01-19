@@ -851,6 +851,49 @@ const AntiBannerFilters = function (options) {
         CheckboxUtils.updateCheckbox([checkbox], isCheckboxChecked);
     }
 
+    const renderUserfilterElement = () => {
+        const { userRulesNum } = contentBlockerInfo;
+        const userfilterElement = Utils.htmlToElement(`
+                 <li id="user-rules" class="active">
+                    <a href="#" data-tab="#userfilter" class="block-type">
+                        <div class="block-type__desc">
+                            <div class="block-type__desc-title">
+                                ${i18n.__('options_userfilter.message')}
+                            </div>
+                            <!-- TODO add localization-->
+                            <div class="desc desc--filters">${userRulesNum} user rules</div>
+                        </div>
+                    </a>
+                    <div class="opt-state">
+                        <div class="preloader"></div>
+                        <input type="checkbox" name="" value="">
+                    </div>
+                </li>`);
+        document.querySelector('#groupsList')?.appendChild(userfilterElement);
+    };
+
+    const renderWhitelistElement = () => {
+        const whitelistMode = userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE];
+        const { whitelistedNum } = contentBlockerInfo;
+        const whitelistElement = Utils.htmlToElement(`
+                 <li id="allowlist" class="active">
+                    <a href="#" data-tab="#whitelist" class="block-type">
+                        <div class="block-type__desc">
+                            <div class="block-type__desc-title">
+                                ${i18n.__('options_whitelist.message')} ${whitelistMode ? '' : '(Inverted)'}
+                            </div>
+                            <!-- TODO add localization-->
+                            <div class="desc desc--filters">AdGuard blocks ${whitelistedNum} websites only</div>
+                        </div>
+                    </a>
+                    <div class="opt-state">
+                        <div class="preloader"></div>
+                        <input type="checkbox" name="" value="">
+                    </div>
+                </li>`);
+        document.querySelector('#groupsList')?.appendChild(whitelistElement);
+    };
+
     function getFilterCategoryElement(category) {
         return Utils.htmlToElement(`
                 <li id="category${category.groupId}" class="active">
@@ -1126,6 +1169,8 @@ const AntiBannerFilters = function (options) {
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
 
             const { categories } = loadedFiltersInfo;
+            renderUserfilterElement();
+            renderWhitelistElement();
             for (let j = 0; j < categories.length; j += 1) {
                 const category = categories[j];
                 renderFilterCategory(category);
