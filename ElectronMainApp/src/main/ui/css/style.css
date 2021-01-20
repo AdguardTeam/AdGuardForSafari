@@ -604,15 +604,8 @@ a.settings-actions--update-filters {
   border-radius: 10px;
   margin-top: 2px;
   left: 2px;
+  transition: .2s;
 }
-/*.toggler:after {*/
-/*  content: '';*/
-/*  position: absolute;*/
-/*  top: -7px;*/
-/*  left: -25px;*/
-/*  width: 1px;*/
-/*  height: 33px;*/
-/*}*/
 .toggler.on:before,
 li.active .toggler:before {
   left: 23px;
