@@ -55,6 +55,20 @@ module.exports.init = function () {
             case 'disableFiltersGroup':
                 filters.disableFiltersGroup(message.groupId);
                 break;
+            case 'isUserrulesEnabled':
+                const isUserrulesEnabled = settings.isUserrulesEnabled();
+                sendResponse(event, 'isUserrulesEnabledResponse', isUserrulesEnabled);
+                break;
+            case 'toggleUserrulesState':
+                settings.changeUserrulesState(message.enabled);
+                break;
+            case 'isAllowlistEnabled':
+                const isAllowlistEnabled = settings.isAllowlistEnabled();
+                sendResponse(event, 'isAllowlistEnabledResponse', isAllowlistEnabled);
+                break;
+            case 'toggleAllowlistState':
+                settings.changeAllowlistState(message.enabled);
+                break;
             case 'getWhiteListDomains':
                 const whiteListDomains = whitelist.getWhiteListDomains();
                 event.returnValue = { content: whiteListDomains.join('\r\n') };

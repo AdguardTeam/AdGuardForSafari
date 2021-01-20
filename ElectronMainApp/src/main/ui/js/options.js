@@ -742,6 +742,10 @@ const AntiBannerFilters = function (options) {
             toggleFilterState.bind(e.target)();
         } else if (e.target.getAttribute('name') === 'groupId') {
             toggleGroupState.bind(e.target)();
+        } else if (e.target.getAttribute('name') === 'userrules') {
+            toggleUserrulesState.bind(e.target)();
+        } else if (e.target.getAttribute('name') === 'whitelist') {
+            toggleAllowlistState.bind(e.target)();
         }
     });
     document.querySelector('#updateAntiBannerFilters')
@@ -850,49 +854,6 @@ const AntiBannerFilters = function (options) {
             : isCategoryEnabled;
         CheckboxUtils.updateCheckbox([checkbox], isCheckboxChecked);
     }
-
-    const renderUserfilterElement = () => {
-        const { userRulesNum } = contentBlockerInfo;
-        const userfilterElement = Utils.htmlToElement(`
-                 <li id="user-rules" class="active">
-                    <a href="#" data-tab="#userfilter" class="block-type">
-                        <div class="block-type__desc">
-                            <div class="block-type__desc-title">
-                                ${i18n.__('options_userfilter.message')}
-                            </div>
-                            <!-- TODO add localization-->
-                            <div class="desc desc--filters">${userRulesNum} user rules</div>
-                        </div>
-                    </a>
-                    <div class="opt-state">
-                        <div class="preloader"></div>
-                        <input type="checkbox" name="" value="">
-                    </div>
-                </li>`);
-        document.querySelector('#groupsList')?.appendChild(userfilterElement);
-    };
-
-    const renderWhitelistElement = () => {
-        const whitelistMode = userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE];
-        const { whitelistedNum } = contentBlockerInfo;
-        const whitelistElement = Utils.htmlToElement(`
-                 <li id="allowlist" class="active">
-                    <a href="#" data-tab="#whitelist" class="block-type">
-                        <div class="block-type__desc">
-                            <div class="block-type__desc-title">
-                                ${i18n.__('options_whitelist.message')} ${whitelistMode ? '' : '(Inverted)'}
-                            </div>
-                            <!-- TODO add localization-->
-                            <div class="desc desc--filters">AdGuard blocks ${whitelistedNum} websites only</div>
-                        </div>
-                    </a>
-                    <div class="opt-state">
-                        <div class="preloader"></div>
-                        <input type="checkbox" name="" value="">
-                    </div>
-                </li>`);
-        document.querySelector('#groupsList')?.appendChild(whitelistElement);
-    };
 
     function getFilterCategoryElement(category) {
         return Utils.htmlToElement(`
@@ -1169,8 +1130,6 @@ const AntiBannerFilters = function (options) {
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
 
             const { categories } = loadedFiltersInfo;
-            renderUserfilterElement();
-            renderWhitelistElement();
             for (let j = 0; j < categories.length; j += 1) {
                 const category = categories[j];
                 renderFilterCategory(category);
@@ -1224,6 +1183,20 @@ const AntiBannerFilters = function (options) {
                 'groupId': groupId,
             }));
         }
+    }
+
+    function toggleUserrulesState() {
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'toggleUserrulesState',
+            'enabled': this.checked,
+        }));
+    }
+
+    function toggleAllowlistState() {
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'toggleAllowlistState',
+            'enabled': this.checked,
+        }));
     }
 
     function updateAntiBannerFilters(e) {
@@ -1834,6 +1807,8 @@ const Settings = function () {
         'show-tray-icon': '#showTrayIcon',
         'verbose-logging': '#verboseLogging',
         'default-whitelist-mode': '#changeDefaultWhiteListMode',
+        'userrules-enabled': '#userrulesInput',
+        'allowlist-enabled': '#allowlistInput',
     };
 
     /**
@@ -1877,6 +1852,22 @@ const Settings = function () {
         for (let i = 0; i < checkboxes.length; i += 1) {
             checkboxes[i].render();
         }
+
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'isUserrulesEnabled',
+        }));
+
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'isAllowlistEnabled',
+        }));
+
+        ipcRenderer.once('isUserrulesEnabledResponse', (e, isUserrulesEnabled) => {
+            updateCheckboxValue('userrules-enabled', isUserrulesEnabled, false);
+        });
+
+        ipcRenderer.once('isAllowlistEnabledResponse', (e, isAllowlistEnabled) => {
+            updateCheckboxValue('allowlist-enabled', isAllowlistEnabled, false);
+        });
 
         ipcRenderer.once('isGroupEnabledResponse', (e, isGroupOtherEnabled) => {
             const isSelfAdsEnabled = isGroupOtherEnabled
