@@ -126,6 +126,15 @@ body {
 .opts-list li.active .opts-desc-filter {
 	color: #d8d8d8;
 }
+.opts-list li:hover:after {
+	background-color: #4d4d4d;
+}
+.opts-list__item--arrow:before {
+	background-image: url(../images/arrow.svg);
+}
+.opts-list.ad-blocker .opt-state {
+	border-left: 1px solid #4d4d4d;
+}
 .settings-notification {
 	background: rgba(235, 147, 0 , .1);
 }
@@ -370,9 +379,13 @@ a.settings-actions--update-filters:hover {
 }
 
 .onboarding__link {
+	color: #5ba575;
 	border-bottom: 1px dotted #5ba575;
 }
 
 .onboarding__tooltip__title {
 	color: #68bc86;
+}
+.settings-notification__close {
+	background-image: url("data:image/svg+xml,%3Csvg width='24px' height='24px' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E3FBDDA07-F278-4437-A840-5EEE66257C6D@1x%3C/title%3E%3Cg id='Atoms' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg id='_Icons/_Main-(24)/cross' stroke='%23ffffff' stroke-width='1.5'%3E%3Cpath d='M6.42857143,6.42857143 L17.604347,17.604347 M6.42857143,17.5714286 L17.604347,6.39565302' id='Combined-Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
