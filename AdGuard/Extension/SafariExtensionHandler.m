@@ -113,9 +113,6 @@ static BOOL _mainAppReady;
         else {
             [[AESharedResources sharedDefaults] setBool:NO forKey:AEDefaultsMainAppBusy];
         }
-        [toolbarItem setImage:(toolbarItemOn ?
-                               [NSImage imageNamed:@"toolbar-on"] :
-                               [NSImage imageNamed:@"toolbar-off"])];
         [window getActiveTabWithCompletionHandler:^(SFSafariTab * _Nullable activeTab) {
             [activeTab getActivePageWithCompletionHandler:^(SFSafariPage * _Nullable activePage) {
                 [activePage getPagePropertiesWithCompletionHandler:^(SFSafariPageProperties * _Nullable properties) {
@@ -135,6 +132,9 @@ static BOOL _mainAppReady;
                             return;
                         }
                     }
+                    [toolbarItem setImage:(toolbarItemOn ?
+                                           [NSImage imageNamed:@"toolbar-on"] :
+                                           [NSImage imageNamed:@"toolbar-off"])];
                     validationHandler(YES, nil);
                 }];
             }];
