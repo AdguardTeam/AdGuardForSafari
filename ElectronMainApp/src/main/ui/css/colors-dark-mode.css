@@ -43,6 +43,9 @@ body {
 .button--green-bd:hover {
 	background-color: #444444;
 }
+.back-btn {
+	background-image: url(../images/arrow.svg);
+}
 .settings-wrap .page-title {
 	color: #eeeeee;
 }

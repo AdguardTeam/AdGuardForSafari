@@ -110,6 +110,9 @@
   font-size: 14px;
   line-height: 18px;
 }
+.antibanner-page-title {
+  display: flex;
+}
 .info__label {
   font-size: 18px;
 }
@@ -580,9 +583,13 @@ a.settings-actions--update-filters {
   padding: 0;
 }
 .back-btn {
-  position: relative;
-  top: 15px;
   margin-right: 10px;
+  width: 20px;
+  height: 40px;
+  display: block;
+  transform: rotate(180deg);
+  background-position: right center;
+  background-repeat: no-repeat;
 }
 .toggler {
   width: 41px;

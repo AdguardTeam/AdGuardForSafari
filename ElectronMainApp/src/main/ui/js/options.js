@@ -937,10 +937,8 @@ const AntiBannerFilters = function (options) {
 
     function getPageTitleTemplate(name) {
         return `
-            <div class="page-title">
-                <a href="#antibanner">
-                    <img src="images/arrow.svg" class="back">
-                </a>
+            <div class="page-title antibanner-page-title">
+                <a href="#antibanner" class="back-btn"></a>
                 ${name}
             </div>`;
     }

@@ -34,6 +34,9 @@ body {
 .button--green-bd:hover {
 	background-color: rgba(239, 239, 239, 0.5);
 }
+.back-btn {
+	background-image: url(../images/arrow-dark.svg);
+}
 .filters-info {
 	color: #4d4d4d;
 }
