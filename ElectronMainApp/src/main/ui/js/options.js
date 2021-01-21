@@ -1128,6 +1128,8 @@ const AntiBannerFilters = function (options) {
             loadedFiltersInfo.initLoadedFilters(response.filters, response.categories);
             updateRulesCountInfo(response.rulesInfo);
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
+            setUserrulesNum(contentBlockerInfo.userRulesNum);
+            setAllowlistNum(contentBlockerInfo.whitelistedNum);
 
             const { categories } = loadedFiltersInfo;
             for (let j = 0; j < categories.length; j += 1) {
@@ -1472,6 +1474,14 @@ const AntiBannerFilters = function (options) {
             document.querySelector('#lastUpdateTime').textContent = updateText;
         }
     }
+
+    const setUserrulesNum = (rulesNum) => {
+        document.querySelector('.userrulesNum').textContent = rulesNum;
+    };
+
+    const setAllowlistNum = (allowlistNum) => {
+        document.querySelector('.allowlistNum').textContent = allowlistNum;
+    };
 
     /**
      * Checks Safari content blocker rules limit, shows alert message for rules overlimit.
@@ -1853,14 +1863,6 @@ const Settings = function () {
             checkboxes[i].render();
         }
 
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'isUserrulesEnabled',
-        }));
-
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'isAllowlistEnabled',
-        }));
-
         ipcRenderer.once('isUserrulesEnabledResponse', (e, isUserrulesEnabled) => {
             updateCheckboxValue('userrules-enabled', isUserrulesEnabled, false);
         });
@@ -1877,6 +1879,14 @@ const Settings = function () {
                 enabled: isSelfAdsEnabled,
             });
         });
+
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'isUserrulesEnabled',
+        }));
+
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'isAllowlistEnabled',
+        }));
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'isGroupEnabled',
