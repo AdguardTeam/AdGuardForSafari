@@ -119,9 +119,14 @@
   position: relative;
   padding-left: 14px;
   margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 .filters-info_updates {
   margin: 20px 0 0;
+}
+.filters-info .filters-search {
+  margin-top: 43px;
 }
 .settings-wrap .page-title .info .upd {
   font-weight: normal;
@@ -281,7 +286,7 @@ a.settings-actions--update-filters {
 .icon-search {
   padding: 0 15px 0 0;
 }
-.filters-list .filters-search {
+.filters-search {
   display: flex;
   width: 320px;
   height: 40px;
@@ -291,13 +296,13 @@ a.settings-actions--update-filters {
   top: -10px;
 }
 
-.filters-list .filters-search img {
+.filters-search img {
   height: 17px;
   position: relative;
   top: 11px;
 }
 
-.filters-list .filters-search input {
+.filters-search input {
   flex-grow: 1;
   border: 0;
   background: none;

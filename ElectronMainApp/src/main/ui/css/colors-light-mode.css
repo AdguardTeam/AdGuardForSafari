@@ -76,7 +76,7 @@ body {
 .empty-filters__logo {
 	background: url(../images/empty-filters.svg) no-repeat;
 }
-.filters-list .filters-search {
+.filters-search {
 	border-bottom: 1px solid #E7E7E7;
 }
 .opts-list li {

@@ -1062,6 +1062,48 @@ const AntiBannerFilters = function (options) {
         });
     }
 
+    const initGroupsSearch = () => {
+        const antibannerList = document.querySelector('#antibanner .opts-list');
+        const searchInput = document.querySelector('input[name="searchGroupsList"]');
+        const groups = document.querySelectorAll('#groupsList.opts-list li');
+        const filters = document.querySelectorAll('div[id^="antibanner"] .opts-list li[id^="filter"]');
+        const SEARCH_DELAY_MS = 250;
+        if (searchInput) {
+            searchInput.addEventListener('input', Utils.debounce((e) => {
+                const oldSearch = antibannerList.querySelectorAll('li[id^="filter"]');
+                oldSearch.forEach((node) => antibannerList.removeChild(node));
+
+                let searchString;
+                try {
+                    searchString = Utils.escapeRegExp(e.target.value.trim());
+                } catch (err) {
+                    /* eslint-disable-next-line no-console */
+                    console.log(err.message);
+                    return;
+                }
+
+                groups.forEach((group) => {
+                    group.style.display = searchString ? 'none' : 'flex';
+                });
+
+                if (!searchString) {
+                    return;
+                }
+
+                filters.forEach((filter) => {
+                    const title = filter.querySelector('.title');
+                    const regexp = new RegExp(searchString, 'gi');
+                    if (!regexp.test(title.textContent)) {
+                        filter.style.display = 'none';
+                    } else {
+                        filter.style.display = 'flex';
+                        antibannerList.appendChild(filter);
+                    }
+                });
+            }, SEARCH_DELAY_MS));
+        }
+    };
+
     function initFiltersSearch(category) {
         const searchInput = document.querySelector(`#antibanner${category.groupId} input[name="searchFiltersList"]`);
         const filters = document.querySelectorAll(`#antibanner${category.groupId} .opts-list li`);
@@ -1130,6 +1172,7 @@ const AntiBannerFilters = function (options) {
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
             setUserrulesNum(contentBlockerInfo.userRulesNum);
             setAllowlistNum(contentBlockerInfo.whitelistedNum);
+            setSearchPlaceholder();
 
             const { categories } = loadedFiltersInfo;
             for (let j = 0; j < categories.length; j += 1) {
@@ -1138,6 +1181,7 @@ const AntiBannerFilters = function (options) {
                 initFiltersSearch(category);
             }
 
+            initGroupsSearch();
             bindControls();
             CheckboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
 
@@ -1481,6 +1525,11 @@ const AntiBannerFilters = function (options) {
 
     const setAllowlistNum = (allowlistNum) => {
         document.querySelector('.allowlistNum').textContent = allowlistNum;
+    };
+
+    const setSearchPlaceholder = () => {
+        document.querySelector('input[name="searchGroupsList"]')
+            .placeholder = i18n.__('options_filters_list_search_placeholder.message');
     };
 
     /**

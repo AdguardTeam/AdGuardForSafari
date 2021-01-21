@@ -86,10 +86,10 @@ body {
 .setting-desc {
 	color: #ffffff;
 }
-.filters-list .filters-search {
+.filters-search {
 	border-bottom: 1px solid #888888;
 }
-.filters-list .filters-search input {
+.filters-search input {
 	color: #eee;
 }
 .empty-filters__desc {
