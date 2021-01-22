@@ -470,6 +470,8 @@ const WhiteListFilter = function (options) {
         hasContent = !!response.content;
         editor.setValue(response.content || '', 1);
         applyChangesBtn.classList.add('disabled');
+        const whitelistedNum = response.content?.split('\n').length;
+        setAllowlistNum(whitelistedNum);
     }
 
     applyChangesBtn.onclick = (event) => {
@@ -586,6 +588,8 @@ const UserFilter = function () {
             hasContent = !!arg.content;
             editor.setValue(arg.content || '', 1);
             applyChangesBtn.classList.add('disabled');
+            const userrulesNum = arg.content?.split('\n').length;
+            setUserrulesNum(userrulesNum);
         });
     }
 
@@ -655,6 +659,23 @@ const UserFilter = function () {
         isUserFilterEmpty,
     };
 };
+
+const setUserrulesNum = (rulesNum) => {
+    document.querySelector('.userrulesNum').textContent = rulesNum;
+};
+
+const setAllowlistNum = (allowlistNum) => {
+    document.querySelector('.allowlistNum').textContent = allowlistNum;
+};
+
+// const setIsAllowlistInverted = (enabled) => {
+//     if (enabled) {
+//         const title = document.querySelector('#whitelist .block-type__desc-title');
+//         if (title) {
+//             title.innerText += '(Inverted)';
+//         }
+//     }
+// };
 
 /**
  * Filters block
@@ -1169,6 +1190,8 @@ const AntiBannerFilters = function (options) {
             updateRulesCountInfo(response.rulesInfo);
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
             setUserrulesNum(contentBlockerInfo.userRulesNum);
+            // ${i18n.__('options_whitelist.message')} ${whitelistMode ? '' : '(Inverted)'}
+            // setIsAllowlistInverted(userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]);
             setAllowlistNum(contentBlockerInfo.whitelistedNum);
             setSearchPlaceholder();
 
@@ -1516,14 +1539,6 @@ const AntiBannerFilters = function (options) {
             document.querySelector('#lastUpdateTime').textContent = updateText;
         }
     }
-
-    const setUserrulesNum = (rulesNum) => {
-        document.querySelector('.userrulesNum').textContent = rulesNum;
-    };
-
-    const setAllowlistNum = (allowlistNum) => {
-        document.querySelector('.allowlistNum').textContent = allowlistNum;
-    };
 
     const setSearchPlaceholder = () => {
         document.querySelector('input[name="searchGroupsList"]')

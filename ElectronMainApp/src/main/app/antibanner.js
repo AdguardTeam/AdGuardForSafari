@@ -25,17 +25,11 @@ module.exports = (() => {
     let requestFilterInitTime = 0;
 
     let userRulesNum = 0;
-    let whitelistedNum;
+    const whitelistedNum = whitelist.getWhiteListDomains().length;
 
     userrules.getUserRulesText((rulesText) => {
         userRulesNum = rulesText.split('\n').length;
     });
-
-    if (whitelist.isDefaultMode) {
-        whitelistedNum = whitelist.getWhiteListedDomains().length;
-    } else {
-        whitelistedNum = whitelist.getBlockListedDomains().length;
-    }
 
     /**
      * Persist state of content blocker
