@@ -489,6 +489,8 @@ const WhiteListFilter = function (options) {
     function changeDefaultWhiteListMode(e) {
         e.preventDefault();
 
+        setIsAllowlistInverted(e.currentTarget.checked);
+
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'changeDefaultWhiteListMode',
             enabled: !e.currentTarget.checked,
@@ -668,14 +670,11 @@ const setAllowlistNum = (allowlistNum) => {
     document.querySelector('.allowlistNum').textContent = allowlistNum;
 };
 
-// const setIsAllowlistInverted = (enabled) => {
-//     if (enabled) {
-//         const title = document.querySelector('#whitelist .block-type__desc-title');
-//         if (title) {
-//             title.innerText += '(Inverted)';
-//         }
-//     }
-// };
+const setIsAllowlistInverted = (inverted) => {
+    const title = document.querySelector('#allowlist .block-type__desc-title');
+    // TODO add localization
+    title.innerText = `${i18n.__('options_whitelist.message')}${inverted ? ' (Inverted)' : ''}`;
+};
 
 /**
  * Filters block
@@ -1190,8 +1189,7 @@ const AntiBannerFilters = function (options) {
             updateRulesCountInfo(response.rulesInfo);
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
             setUserrulesNum(contentBlockerInfo.userRulesNum);
-            // ${i18n.__('options_whitelist.message')} ${whitelistMode ? '' : '(Inverted)'}
-            // setIsAllowlistInverted(userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]);
+            setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]);
             setAllowlistNum(contentBlockerInfo.whitelistedNum);
             setSearchPlaceholder();
 
