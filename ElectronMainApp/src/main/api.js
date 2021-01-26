@@ -1,8 +1,11 @@
+const config = require('config');
 const whitelist = require('./app/whitelist');
 const userrules = require('./app/userrules');
 const antibanner = require('./app/antibanner');
 const log = require('./app/utils/log');
 const filtersManager = require('./app/filters-manager');
+
+const { CUSTOM_FILTERS_GROUP_ID } = config.get('AntiBannerFilterGroupsId');
 
 /**
  * Api
@@ -144,6 +147,24 @@ module.exports = (() => {
         return enabledFilters;
     };
 
+    /**
+     * Return array of enabled custom filters urls
+     */
+    const getEnabledCustomFiltersUrls = () => {
+        const customFilters = filtersManager.getCustomFilters();
+        const enabledCustomFiltersUrls = [];
+        for (let i = 0; i < customFilters.length; i += 1) {
+            const filter = customFilters[i];
+            if (filter.enabled) {
+                if (filtersManager.isGroupEnabled(CUSTOM_FILTERS_GROUP_ID)) {
+                    enabledCustomFiltersUrls.push(filter.customUrl);
+                }
+            }
+        }
+
+        return enabledCustomFiltersUrls;
+    };
+
     return {
         getToolbarMenuData,
         enable,
@@ -156,5 +177,6 @@ module.exports = (() => {
         setUserFilterRules,
         getUserFilterRules,
         getEnabledFilterIds,
+        getEnabledCustomFiltersUrls,
     };
 })();

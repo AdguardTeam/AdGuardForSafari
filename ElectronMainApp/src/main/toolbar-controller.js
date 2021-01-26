@@ -9,6 +9,8 @@ const log = require('./app/utils/log');
 const app = require('./app/app');
 const localStorage = require('./app/storage/storage');
 
+const REPORT_SAFARI_URL = 'https://reports.adguard.com/new_issue.html?product_type=Saf';
+
 /**
  * Addon toolbar controller.
  * Handles safari-ext events and setups its view state.
@@ -81,12 +83,14 @@ module.exports = (() => {
     const onReportCallback = (reportUrl) => {
         const browser = 'Safari';
         const filters = applicationApi.getEnabledFilterIds();
+        const customFilters = applicationApi.getEnabledCustomFiltersUrls();
 
-        const url = `https://reports.adguard.com/new_issue.html?product_type=Saf&product_version=
-        ${encodeURIComponent(app.getVersion())
-    }&browser=${encodeURIComponent(browser)
-    }&url=${encodeURIComponent(reportUrl)
-    }&filters=${encodeURIComponent(filters.join('.'))}`;
+        const url = `${REPORT_SAFARI_URL}`
+            + `&product_version=${encodeURIComponent(app.getVersion())}`
+            + `&browser=${encodeURIComponent(browser)}`
+            + `&url=${encodeURIComponent(reportUrl)}`
+            + `&filters=${encodeURIComponent(filters.join('.'))}`
+            + `&custom_filters=${encodeURIComponent(customFilters.join())}`;
 
         shell.openExternal(url);
     };
