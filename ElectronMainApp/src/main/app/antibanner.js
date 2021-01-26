@@ -229,7 +229,9 @@ module.exports = (() => {
                     dfds.push(filterRules.loadFilterRulesFromStorage(filter.filterId, rulesFilterMap));
                 }
             }
-            dfds.push(filterRules.loadUserRules(rulesFilterMap));
+            if (settings.isUserrulesEnabled()) {
+                dfds.push(filterRules.loadUserRules(rulesFilterMap));
+            }
 
             // Load all filters and then recreate request filter
             Promise.all(dfds).then(loadAllFilterRulesDone);

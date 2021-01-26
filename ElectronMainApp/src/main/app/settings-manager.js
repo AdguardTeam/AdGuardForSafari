@@ -255,7 +255,6 @@ module.exports = (function () {
     const changeUserrulesState = function (value) {
         setProperty(settings.USERRULES_ENABLED, value);
         log.info(`User rules ${value ? 'enabled' : 'disabled'}`);
-        // TODO enable/disable user rules
     };
 
     const isAllowlistEnabled = function () {
@@ -265,7 +264,6 @@ module.exports = (function () {
     const changeAllowlistState = function (value) {
         setProperty(settings.ALLOWLIST_ENABLED, value);
         log.info(`Allowlist ${value ? 'enabled' : 'disabled'}`);
-        // TODO enable/disable allowlist
     };
 
     const api = {};

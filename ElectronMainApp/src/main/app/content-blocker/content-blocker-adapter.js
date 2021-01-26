@@ -135,16 +135,19 @@ module.exports = (function () {
         let rules = antibanner.getRules();
 
         log.info('Rules loaded: {0}', rules.length);
-        if (settings.isDefaultWhiteListMode()) {
-            rules = rules.concat(whitelist.getRules().map((r) => {
-                return { filterId: 0, ruleText: r };
-            }));
-        } else {
-            const invertedWhitelistRule = constructInvertedWhitelistRule();
-            if (invertedWhitelistRule) {
-                rules = rules.concat({
-                    filterId: 0, ruleText: invertedWhitelistRule,
-                });
+
+        if (settings.isAllowlistEnabled()) {
+            if (settings.isDefaultWhiteListMode() && settings.isAllowlistEnabled()) {
+                rules = rules.concat(whitelist.getRules().map((r) => {
+                    return { filterId: 0, ruleText: r };
+                }));
+            } else {
+                const invertedWhitelistRule = constructInvertedWhitelistRule();
+                if (invertedWhitelistRule) {
+                    rules = rules.concat({
+                        filterId: 0, ruleText: invertedWhitelistRule,
+                    });
+                }
             }
         }
 
