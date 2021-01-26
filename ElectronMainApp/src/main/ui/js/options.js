@@ -471,7 +471,7 @@ const WhiteListFilter = function (options) {
         editor.setValue(response.content || '', 1);
         applyChangesBtn.classList.add('disabled');
         const whitelistedNum = response.content?.split('\n').length;
-        setAllowlistNum(whitelistedNum);
+        setAllowlistInfo(whitelistedNum);
     }
 
     applyChangesBtn.onclick = (event) => {
@@ -663,17 +663,17 @@ const UserFilter = function () {
 };
 
 const setUserrulesNum = (rulesNum) => {
-    document.querySelector('.userrulesNum').textContent = rulesNum;
+    document.querySelector('.userrules-info').innerText = i18n.__('options_userfilter_info.message', rulesNum);
 };
 
-const setAllowlistNum = (allowlistNum) => {
-    document.querySelector('.allowlistNum').textContent = allowlistNum;
+const setAllowlistInfo = (allowlistNum) => {
+    document.querySelector('.allowlist-info').innerText = i18n.__('options_whitelist_info.message', allowlistNum);
 };
 
 const setIsAllowlistInverted = (inverted) => {
     const title = document.querySelector('#allowlist .block-type__desc-title');
-    // TODO add localization
-    title.innerText = `${i18n.__('options_whitelist.message')}${inverted ? ' (Inverted)' : ''}`;
+    title.innerText = `${i18n.__('options_whitelist.message')}`
+        + `${inverted ? i18n.__('options_whitelist_inverted.message') : ''}`;
 };
 
 /**
@@ -915,7 +915,8 @@ const AntiBannerFilters = function (options) {
         }
         let homeButton = '';
         if (filter.homepage) {
-            homeButton = `<a target="_blank" href="${filter.homepage}">Homepage</a>`; // TODO add localization
+            homeButton = `<a target="_blank" href="${filter.homepage}">`
+                + `${i18n.__('options_filters_homepage.message')}</a>`;
         }
 
         return `
@@ -1190,7 +1191,7 @@ const AntiBannerFilters = function (options) {
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
             setUserrulesNum(contentBlockerInfo.userRulesNum);
             setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]);
-            setAllowlistNum(contentBlockerInfo.whitelistedNum);
+            setAllowlistInfo(contentBlockerInfo.whitelistedNum);
             setSearchPlaceholder();
 
             const { categories } = loadedFiltersInfo;

@@ -107,6 +107,9 @@
     "options_filters_enabled": {
         "message": "Включены:"
     },
+    "options_filters_homepage": {
+        "message": "Страница фильтра"
+    },
     "options_filters_enabled_and_more_divider": {
         "message": "%s и еще %s"
     },
@@ -206,11 +209,20 @@
     "options_whitelist_description": {
         "message": "AdGuard не фильтрует рекламу на сайтах, добавленных в белый список."
     },
+    "options_whitelist_inverted": {
+        "message": " (Инвертирован)"
+    },
+    "options_whitelist_info": {
+        "message": "Сайтов в списке: %s"
+    },
     "options_whitelist_inverse": {
         "message": "Инвертировать белый список<span class='sp-table-row-info'>Разблокировать рекламу на всех сайтах, <i>кроме</i> добавленных в белый список</span>"
     },
     "options_userfilter": {
         "message": "Пользовательские правила"
+    },
+    "options_userfilter_info": {
+        "message": "Пользовательских правил: %s"
     },
     "options_userfilter_import": {
         "message": "Импорт"
