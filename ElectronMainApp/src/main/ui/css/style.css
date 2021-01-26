@@ -1108,6 +1108,10 @@ li.active .toggler:before {
   justify-content: space-between;
 }
 
+.option-popup__btns--in {
+  display: flex;
+}
+
 .option-popup__btns--center {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
@@ -1124,6 +1128,11 @@ li.active .toggler:before {
 
 #custom-filter-popup-cancel {
   margin-right: 20px;
+}
+
+.custom-filter-import-file {
+  position: relative;
+  top: -3px;
 }
 
 .option-popup__load {
