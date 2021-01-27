@@ -90,7 +90,7 @@ module.exports = (() => {
             + `&browser=${encodeURIComponent(browser)}`
             + `&url=${encodeURIComponent(reportUrl)}`
             + `&filters=${encodeURIComponent(filters.join('.'))}`
-            + `&custom_filters=${encodeURIComponent(customFilters.join())}`;
+            + `${customFilters ? `&custom_filters=${encodeURIComponent(customFilters.join())}` : ''}`;
 
         shell.openExternal(url);
     };

@@ -151,15 +151,20 @@ module.exports = (() => {
      * Return array of enabled custom filters urls
      */
     const getEnabledCustomFiltersUrls = () => {
+        if (!filtersManager.isGroupEnabled(CUSTOM_FILTERS_GROUP_ID)) {
+            return;
+        }
         const customFilters = filtersManager.getCustomFilters();
         const enabledCustomFiltersUrls = [];
         for (let i = 0; i < customFilters.length; i += 1) {
             const filter = customFilters[i];
             if (filter.enabled) {
-                if (filtersManager.isGroupEnabled(CUSTOM_FILTERS_GROUP_ID)) {
-                    enabledCustomFiltersUrls.push(filter.customUrl);
-                }
+                enabledCustomFiltersUrls.push(filter.customUrl);
             }
+        }
+
+        if (!enabledCustomFiltersUrls.length) {
+            return;
         }
 
         return enabledCustomFiltersUrls;
