@@ -176,8 +176,8 @@
         logMessage(verbose, `Frame url: ${window.location.href}`);
 
         applyScripts(data.scripts, verbose);
-        applyCss(data['css-inject'], verbose);
-        applyExtendedCss(data['css-extended'], verbose);
+        applyCss(data.cssInject, verbose);
+        applyExtendedCss(data.cssExtended, verbose);
         applyScriptlets(data.scriptlets, verbose);
 
         logMessage(verbose, 'Applying scripts and css - done');
