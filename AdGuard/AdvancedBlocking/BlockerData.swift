@@ -11,7 +11,6 @@ import Foundation
 // Wrapper result class
 class BlockerData: Encodable {
     var scripts = [String]()
-    var cssBlocking = [String]()
     var cssExtended = [String]()
     var cssInject = [String]()
     var scriptlets = [String]()
@@ -19,12 +18,6 @@ class BlockerData: Encodable {
     func addScript(script: String?) {
         if (script != nil && script != "") {
             scripts.append(script!);
-        }
-    }
-
-    func addCssBlocking(style: String?) {
-        if (style != nil && style != "") {
-            cssBlocking.append(style!);
         }
     }
 
@@ -48,7 +41,6 @@ class BlockerData: Encodable {
 
     func clear() {
         scripts = [];
-        cssBlocking = [];
         cssExtended = [];
         cssInject = [];
         scriptlets = [];
