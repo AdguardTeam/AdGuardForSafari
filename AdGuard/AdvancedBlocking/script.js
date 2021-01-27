@@ -95,11 +95,6 @@
 
     /**
      * Applies css stylesheet
-     * As a temporary solution to improve performance we will try to apply basic styles,
-     * filtering out ExtendedCss styles by exceptions raised.
-     *
-     * TODO: Filter ExtendedCss style on background side
-     *
      * @param styleSelectors Array of stylesheets or selectors
      * @param verbose logging
      */
@@ -117,11 +112,6 @@
         (document.head || document.documentElement).appendChild(styleElement);
 
         for (const selector of styleSelectors.map((s) => s.trim())) {
-            if (!selector.endsWith('}') || selector.includes('debug:')) {
-                extCssStyleSelectors.push(selector);
-                continue;
-            }
-
             try {
                 styleElement.sheet.insertRule(selector);
             } catch (e) {
@@ -195,7 +185,9 @@
         logMessage(verbose, `Frame url: ${window.location.href}`);
 
         applyScripts(data.scripts, verbose);
-        applyCss(data.css, verbose);
+        applyCss(data.cssBlocking, verbose);
+        applyCss(data.cssInject, verbose);
+        applyExtendedCss(data.cssExtended, verbose);
         applyScriptlets(data.scriptlets, verbose);
 
         logMessage(verbose, 'Applying scripts and css - done');
