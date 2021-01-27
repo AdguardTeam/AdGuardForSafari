@@ -12,6 +12,8 @@ import Foundation
 class BlockerData: Encodable {
     var scripts = [String]()
     var css = [String]()
+    var cssExtended = [String]()
+    var cssInject = [String]()
     var scriptlets = [String]()
 
     func addScript(script: String?) {
@@ -26,6 +28,18 @@ class BlockerData: Encodable {
         }
     }
 
+    func addCssExtended(style: String?) {
+        if (style != nil && style != "") {
+            cssExtended.append(style!);
+        }
+    }
+
+    func addCssInject(style: String?) {
+        if (style != nil && style != "") {
+            cssInject.append(style!);
+        }
+    }
+
     func addScriptlet(scriptlet: String?) {
         if (scriptlet != nil && scriptlet != "") {
             scriptlets.append(scriptlet!);
@@ -35,6 +49,8 @@ class BlockerData: Encodable {
     func clear() {
         scripts = [];
         css = [];
+        cssExtended = [];
+        cssInject = [];
         scriptlets = [];
     }
 }
