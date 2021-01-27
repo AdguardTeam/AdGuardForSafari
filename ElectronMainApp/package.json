@@ -35,7 +35,7 @@
         "i18n": "^0.8.3",
         "request-promise": "^4.2.2",
         "safari-ext": "./safari-ext",
-        "safari-converter-lib": "git+https://github.com/AdguardTeam/SafariConverterLib.git#v1.1.6",
+        "safari-converter-lib": "git+https://github.com/AdguardTeam/SafariConverterLib.git#4e206de",
         "xmlhttprequest": "^1.8.0"
     },
     "devDependencies": {
