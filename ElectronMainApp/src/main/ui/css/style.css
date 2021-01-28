@@ -17,7 +17,7 @@
   height: 40px;
   border-radius: 4px;
   font-size: 13px;
-  line-height: 42px;
+  line-height: 38px;
   transition: 0.3s ease background-color;
   font-weight: 600;
   outline: none;
@@ -35,7 +35,6 @@
   text-align: center;
   font-size: 16px;
   font-weight: normal;
-  text-transform: uppercase;
 }
 .button--green.disabled {
   opacity: 0.4;
@@ -1628,11 +1627,6 @@ body {
 .settings-content .settings-content__save-btn {
   text-decoration: none;
   display: inline-block;
-  padding: 0 40px;
-}
-
-.settings-actions .settings-content__save-btn:last-child {
-  padding-right: 40px;
 }
 
 .filter-rules__label {
