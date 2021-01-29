@@ -1112,11 +1112,12 @@ const AntiBannerFilters = function (options) {
                 filters.forEach((filter) => {
                     const title = filter.querySelector('.title');
                     const regexp = new RegExp(searchString, 'gi');
-                    if (!regexp.test(title.textContent)) {
-                        filter.style.display = 'none';
-                    } else {
-                        filter.style.display = 'flex';
-                        antibannerList.appendChild(filter);
+                    if (regexp.test(title.textContent)) {
+                        const searchResultFilter = document.createElement('li');
+                        searchResultFilter.innerHTML = filter.innerHTML;
+                        searchResultFilter.id = filter.id;
+                        searchResultFilter.style.display = 'flex';
+                        antibannerList.appendChild(searchResultFilter);
                     }
                 });
             }, SEARCH_DELAY_MS));
