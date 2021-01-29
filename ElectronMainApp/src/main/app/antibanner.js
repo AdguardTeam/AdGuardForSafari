@@ -10,6 +10,8 @@ const collections = require('./utils/collections');
 const updateService = require('./update-service');
 const filtersUpdate = require('./filters/filters-update');
 const filterRules = require('./filters/filter-rules');
+const whitelist = require('./whitelist');
+const userrules = require('./userrules');
 
 /**
  * Antibanner service
@@ -22,6 +24,13 @@ module.exports = (() => {
     let requestFilter = null;
     let requestFilterInitTime = 0;
 
+    let userRulesNum = 0;
+    const whitelistedNum = whitelist.getWhiteListDomains().length;
+
+    userrules.getUserRulesText((rulesText) => {
+        userRulesNum = rulesText.split('\n').length;
+    });
+
     /**
      * Persist state of content blocker
      */
@@ -29,6 +38,8 @@ module.exports = (() => {
         rulesCount: 0,
         rulesOverLimit: false,
         advancedBlockingRulesCount: 0,
+        userRulesNum,
+        whitelistedNum,
     };
 
     /**
@@ -218,7 +229,9 @@ module.exports = (() => {
                     dfds.push(filterRules.loadFilterRulesFromStorage(filter.filterId, rulesFilterMap));
                 }
             }
-            dfds.push(filterRules.loadUserRules(rulesFilterMap));
+            if (settings.isUserrulesEnabled()) {
+                dfds.push(filterRules.loadUserRules(rulesFilterMap));
+            }
 
             // Load all filters and then recreate request filter
             Promise.all(dfds).then(loadAllFilterRulesDone);

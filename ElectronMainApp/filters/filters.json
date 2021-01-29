@@ -298,7 +298,7 @@
         {
             "filterId": 101,
             "name": "EasyList",
-            "description": "EasyList is the primary subscription that removes adverts from web pages in English language. Already included in AdGuard Base filter.",
+            "description": "EasyList is the primary subscription that removes adverts from web pages in English. Already included in AdGuard Base filter.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://easylist.to/",
             "expires": 345600,
@@ -306,8 +306,8 @@
             "groupId": 1,
             "subscriptionUrl": "https://easylist.to/easylist/easylist.txt",
             "trustLevel": "low",
-            "version": "2.0.60.85",
-            "timeUpdated": "2020-09-16T20:00:16+0300",
+            "version": "2.0.67.50",
+            "timeUpdated": "2021-01-28T16:00:28+0300",
             "languages": [],
             "tags": [
                 1
@@ -316,7 +316,7 @@
         {
             "filterId": 102,
             "name": "ABPindo",
-            "description": "Bahasa Indonesia supplement for EasyList.",
+            "description": "Indonesian supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://github.com/ABPindo/indonesianadblockrules",
             "expires": 345600,
@@ -324,8 +324,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/ABPindo/indonesianadblockrules/master/subscriptions/abpindo.txt",
             "trustLevel": "high",
-            "version": "2.0.3.72",
-            "timeUpdated": "2020-09-16T08:00:17+0300",
+            "version": "2.0.4.8",
+            "timeUpdated": "2021-01-22T04:00:24+0300",
             "languages": [],
             "tags": [
                 1,
@@ -336,7 +336,7 @@
         {
             "filterId": 103,
             "name": "Bulgarian list",
-            "description": "Български supplement for EasyList.",
+            "description": "Bulgarian supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://stanev.org/abp/",
             "expires": 345600,
@@ -359,7 +359,7 @@
         {
             "filterId": 104,
             "name": "EasyList China",
-            "description": "中文 supplement for EasyList.",
+            "description": "Chinese supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "http://abpchina.org/forum/",
             "expires": 345600,
@@ -367,8 +367,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://easylist-downloads.adblockplus.org/easylistchina.txt",
             "trustLevel": "high",
-            "version": "2.0.73.76",
-            "timeUpdated": "2020-09-16T20:00:22+0300",
+            "version": "2.0.81.82",
+            "timeUpdated": "2021-01-29T12:00:32+0300",
             "languages": [],
             "tags": [
                 1,
@@ -379,7 +379,7 @@
         {
             "filterId": 105,
             "name": "EasyList Czech and Slovak",
-            "description": "Čeština, slovenčina supplement for EasyList.",
+            "description": "Czech and Slovak supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://github.com/tomasko126/easylistczechandslovak",
             "expires": 345600,
@@ -387,8 +387,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/tomasko126/easylistczechandslovak/master/filters.txt",
             "trustLevel": "high",
-            "version": "2.0.1.72",
-            "timeUpdated": "2020-09-10T00:00:23+0300",
+            "version": "2.0.1.84",
+            "timeUpdated": "2021-01-20T00:00:39+0300",
             "languages": [
                 "cs",
                 "sk"
@@ -404,7 +404,7 @@
         {
             "filterId": 106,
             "name": "EasyList Dutch",
-            "description": "Nederlands supplement for EasyList. Already included in AdGuard Dutch filter.",
+            "description": "Dutch supplement for EasyList. Already included in AdGuard Dutch filter.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://easylist.to/",
             "expires": 345600,
@@ -412,8 +412,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://easylist-downloads.adblockplus.org/easylistdutch.txt",
             "trustLevel": "low",
-            "version": "2.0.73.75",
-            "timeUpdated": "2020-09-16T20:00:24+0300",
+            "version": "2.0.81.81",
+            "timeUpdated": "2021-01-29T12:00:34+0300",
             "languages": [],
             "tags": [
                 1,
@@ -424,7 +424,7 @@
         {
             "filterId": 107,
             "name": "EasyList Germany",
-            "description": "Deutsch supplement for EasyList. Already included in AdGuard German filter.",
+            "description": "German supplement for EasyList. Already included in AdGuard German filter.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://easylist.to/",
             "expires": 345600,
@@ -432,8 +432,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://easylist.to/easylistgermany/easylistgermany.txt",
             "trustLevel": "low",
-            "version": "2.0.3.32",
-            "timeUpdated": "2020-09-09T00:00:24+0300",
+            "version": "2.0.4.48",
+            "timeUpdated": "2021-01-29T12:00:36+0300",
             "languages": [],
             "tags": [
                 1,
@@ -444,7 +444,7 @@
         {
             "filterId": 108,
             "name": "EasyList Hebrew",
-            "description": "Supplement for EasyList. Language: עברית",
+            "description": "Hebrew supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://github.com/easylist/EasyListHebrew",
             "expires": 345600,
@@ -452,8 +452,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/easylist/EasyListHebrew/master/EasyListHebrew.txt",
             "trustLevel": "high",
-            "version": "2.0.3.1",
-            "timeUpdated": "2020-09-14T20:00:37+0300",
+            "version": "2.0.3.42",
+            "timeUpdated": "2021-01-29T04:00:33+0300",
             "languages": [
                 "he"
             ],
@@ -467,7 +467,7 @@
         {
             "filterId": 109,
             "name": "EasyList Italy",
-            "description": "Italiano supplement for EasyList.",
+            "description": "Italian supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://easylist.to/",
             "expires": 345600,
@@ -475,8 +475,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://easylist-downloads.adblockplus.org/easylistitaly.txt",
             "trustLevel": "high",
-            "version": "2.0.73.75",
-            "timeUpdated": "2020-09-16T20:00:28+0300",
+            "version": "2.0.81.81",
+            "timeUpdated": "2021-01-29T12:00:39+0300",
             "languages": [
                 "it"
             ],
@@ -490,7 +490,7 @@
         {
             "filterId": 110,
             "name": "EasyList Lithuania",
-            "description": "Lietuvių kalba supplement for EasyList.",
+            "description": "Lithuanian supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://github.com/EasyList-Lithuania/easylist_lithuania",
             "expires": 345600,
@@ -498,8 +498,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/EasyList-Lithuania/easylist_lithuania/master/easylistlithuania.txt",
             "trustLevel": "high",
-            "version": "2.0.1.30",
-            "timeUpdated": "2020-09-12T04:00:26+0300",
+            "version": "2.0.1.36",
+            "timeUpdated": "2021-01-28T00:00:37+0300",
             "languages": [
                 "lt"
             ],
@@ -513,7 +513,7 @@
         {
             "filterId": 111,
             "name": "Latvian List",
-            "description": "Latviešu valoda supplement for EasyList.",
+            "description": "Latvian supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://notabug.org/latvian-list/adblock-latvian",
             "expires": 345600,
@@ -521,8 +521,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://notabug.org/latvian-list/adblock-latvian/raw/master/lists/latvian-list.txt",
             "trustLevel": "high",
-            "version": "2.0.0.43",
-            "timeUpdated": "2020-06-05T12:00:35+0300",
+            "version": "2.0.0.44",
+            "timeUpdated": "2020-09-24T20:00:29+0300",
             "languages": [
                 "lv"
             ],
@@ -536,7 +536,7 @@
         {
             "filterId": 112,
             "name": "Liste AR",
-            "description": "Supplement for EasyList. Language: العربية",
+            "description": "Arabic supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://forums.lanik.us/viewforum.php?f=98",
             "expires": 345600,
@@ -544,8 +544,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://easylist-downloads.adblockplus.org/Liste_AR.txt",
             "trustLevel": "high",
-            "version": "2.0.73.74",
-            "timeUpdated": "2020-09-16T20:00:30+0300",
+            "version": "2.0.81.80",
+            "timeUpdated": "2021-01-29T12:00:41+0300",
             "languages": [
                 "ar"
             ],
@@ -559,7 +559,7 @@
         {
             "filterId": 113,
             "name": "Liste FR",
-            "description": "Français supplement for EasyList. Already included in AdGuard French filter.",
+            "description": "French supplement for EasyList. Already included in AdGuard French filter.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://forums.lanik.us/viewforum.php?f=91",
             "expires": 345600,
@@ -567,8 +567,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://easylist-downloads.adblockplus.org/liste_fr.txt",
             "trustLevel": "low",
-            "version": "2.0.73.75",
-            "timeUpdated": "2020-09-16T20:00:33+0300",
+            "version": "2.0.81.81",
+            "timeUpdated": "2021-01-29T12:00:47+0300",
             "languages": [],
             "tags": [
                 1,
@@ -579,7 +579,7 @@
         {
             "filterId": 114,
             "name": "ROList",
-            "description": "Românesc supplement for EasyList.",
+            "description": "Romanian supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://www.zoso.ro/rolist",
             "expires": 345600,
@@ -587,8 +587,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://www.zoso.ro/pages/rolist.txt",
             "trustLevel": "low",
-            "version": "2.0.0.67",
-            "timeUpdated": "2020-08-28T20:00:34+0300",
+            "version": "2.0.0.75",
+            "timeUpdated": "2020-11-14T08:00:39+0300",
             "languages": [],
             "tags": [
                 1,
@@ -599,7 +599,7 @@
         {
             "filterId": 115,
             "name": "RU AdList",
-            "description": "Дополнительная подписка к EasyList для русскоязычных сайтов",
+            "description": "Russian supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://forums.lanik.us/viewforum.php?f=102",
             "expires": 345600,
@@ -607,8 +607,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://easylist-downloads.adblockplus.org/advblock+cssfixes.txt",
             "trustLevel": "high",
-            "version": "2.0.73.53",
-            "timeUpdated": "2020-09-16T20:00:40+0300",
+            "version": "2.0.81.59",
+            "timeUpdated": "2021-01-29T12:00:57+0300",
             "languages": [],
             "tags": [
                 1,
@@ -627,8 +627,8 @@
             "groupId": 2,
             "subscriptionUrl": "https://easylist.to/easylist/easyprivacy.txt",
             "trustLevel": "low",
-            "version": "2.0.63.43",
-            "timeUpdated": "2020-09-16T20:00:42+0300",
+            "version": "2.0.70.5",
+            "timeUpdated": "2021-01-28T16:01:05+0300",
             "languages": [],
             "tags": [
                 2
@@ -637,7 +637,7 @@
         {
             "filterId": 119,
             "name": "Icelandic ABP List",
-            "description": "Íslenska supplement for EasyList.",
+            "description": "Icelandic supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://adblock.gardar.net/",
             "expires": 345600,
@@ -645,8 +645,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://adblock.gardar.net/is.abp.txt",
             "trustLevel": "high",
-            "version": "2.0.0.5",
-            "timeUpdated": "2020-08-26T16:00:45+0300",
+            "version": "2.0.0.7",
+            "timeUpdated": "2020-12-19T00:01:08+0300",
             "languages": [
                 "is"
             ],
@@ -668,8 +668,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/realodix/AdBlockID/master/output/adblockid.txt",
             "trustLevel": "high",
-            "version": "2.0.4.24",
-            "timeUpdated": "2020-09-15T08:00:43+0300",
+            "version": "2.0.5.70",
+            "timeUpdated": "2021-01-27T19:55:55+0300",
             "languages": [
                 "id"
             ],
@@ -682,7 +682,7 @@
         {
             "filterId": 121,
             "name": "Greek AdBlock Filter",
-            "description": "Ελληνικά supplement for EasyList.",
+            "description": "Greek supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://github.com/kargig/greek-adblockplus-filter",
             "expires": 345600,
@@ -690,8 +690,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://www.void.gr/kargig/void-gr-filters.txt",
             "trustLevel": "low",
-            "version": "2.0.0.54",
-            "timeUpdated": "2020-08-26T00:00:48+0300",
+            "version": "2.0.0.67",
+            "timeUpdated": "2021-01-27T00:01:02+0300",
             "languages": [],
             "tags": [
                 1,
@@ -710,8 +710,8 @@
             "groupId": 4,
             "subscriptionUrl": "https://easylist-downloads.adblockplus.org/fanboy-annoyance.txt",
             "trustLevel": "low",
-            "version": "2.0.60.76",
-            "timeUpdated": "2020-09-16T20:00:54+0300",
+            "version": "2.0.67.39",
+            "timeUpdated": "2021-01-28T16:01:25+0300",
             "languages": [],
             "tags": [
                 5,
@@ -721,7 +721,7 @@
         {
             "filterId": 123,
             "name": "Fanboy's Social Blocking List",
-            "description": "Hide and block social content, social widgets, social scripts and social icons. Already included in Fanboy's Annoyances list.",
+            "description": "Hides and blocks social content, social widgets, social scripts and social icons. Already included in Fanboy's Annoyances list.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://easylist.to/",
             "expires": 345600,
@@ -729,8 +729,8 @@
             "groupId": 3,
             "subscriptionUrl": "https://easylist-downloads.adblockplus.org/fanboy-social.txt",
             "trustLevel": "low",
-            "version": "2.0.60.76",
-            "timeUpdated": "2020-09-16T20:00:56+0300",
+            "version": "2.0.67.40",
+            "timeUpdated": "2021-01-28T16:01:29+0300",
             "languages": [],
             "tags": [
                 3,
@@ -748,8 +748,8 @@
             "groupId": 4,
             "subscriptionUrl": "https://raw.githubusercontent.com/yourduskquibbles/webannoyances/master/ultralist.txt",
             "trustLevel": "high",
-            "version": "1.0.5.93",
-            "timeUpdated": "2020-09-16T20:01:05+0300",
+            "version": "1.0.7.0",
+            "timeUpdated": "2021-01-28T20:01:24+0300",
             "languages": [],
             "tags": [
                 5
@@ -766,8 +766,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://adblock-thai.github.io/thai-ads-filter/subscription.txt",
             "trustLevel": "high",
-            "version": "2.0.0.26",
-            "timeUpdated": "2020-09-05T00:01:11+0300",
+            "version": "2.0.0.34",
+            "timeUpdated": "2020-12-04T12:01:25+0300",
             "languages": [
                 "th"
             ],
@@ -780,7 +780,7 @@
         {
             "filterId": 203,
             "name": "Hungarian filter",
-            "description": "Filter list that specifically removes ads on websites in Hungarian language.",
+            "description": "Filter list that specifically removes ads on websites in the Hungarian language.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://github.com/hufilter/hufilter/wiki",
             "expires": 345600,
@@ -788,8 +788,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/hufilter/hufilter/master/hufilter-adguard.txt",
             "trustLevel": "high",
-            "version": "2.0.1.9",
-            "timeUpdated": "2020-09-01T00:01:04+0300",
+            "version": "2.0.1.28",
+            "timeUpdated": "2021-01-23T04:01:22+0300",
             "languages": [
                 "hu"
             ],
@@ -803,7 +803,7 @@
         {
             "filterId": 204,
             "name": "Peter Lowe's Blocklist",
-            "description": "Let us be blinked at no longer! Let the flashing cease! Down with banners! Up with transfer rates! STOP THE MADNESS!",
+            "description": "Filter that blocks ads, trackers, and other nasty things.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://pgl.yoyo.org/adservers/",
             "expires": 345600,
@@ -811,8 +811,8 @@
             "groupId": 1,
             "subscriptionUrl": "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&mimetype=plaintext",
             "trustLevel": "low",
-            "version": "2.0.6.18",
-            "timeUpdated": "2020-09-14T16:01:11+0300",
+            "version": "2.0.6.90",
+            "timeUpdated": "2021-01-27T16:01:30+0300",
             "languages": [],
             "tags": [
                 1,
@@ -822,7 +822,7 @@
         {
             "filterId": 206,
             "name": "Xfiles",
-            "description": "Italiano adblock filter list.",
+            "description": "Italian adblock filter list.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://xfiles.noads.it/",
             "expires": 345600,
@@ -830,8 +830,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/gioxx/xfiles/master/filtri.txt",
             "trustLevel": "low",
-            "version": "2.0.0.83",
-            "timeUpdated": "2020-09-10T12:01:14+0300",
+            "version": "2.0.0.98",
+            "timeUpdated": "2021-01-26T16:02:25+0300",
             "languages": [],
             "tags": [
                 1,
@@ -849,8 +849,8 @@
             "groupId": 4,
             "subscriptionUrl": "https://easylist-downloads.adblockplus.org/antiadblockfilters.txt",
             "trustLevel": "low",
-            "version": "2.0.73.74",
-            "timeUpdated": "2020-09-16T20:01:09+0300",
+            "version": "2.0.81.80",
+            "timeUpdated": "2021-01-29T12:01:41+0300",
             "languages": [],
             "tags": [
                 50
@@ -865,10 +865,10 @@
             "expires": 345600,
             "displayNumber": 1,
             "groupId": 5,
-            "subscriptionUrl": "https://gitlab.com/curben/urlhaus-filter/raw/master/urlhaus-filter-online.txt",
+            "subscriptionUrl": "https://gitlab.com/curben/urlhaus-filter/-/raw/master/urlhaus-filter-ag-online.txt",
             "trustLevel": "low",
-            "version": "2.0.72.74",
-            "timeUpdated": "2020-09-16T16:01:19+0300",
+            "version": "2.0.75.37",
+            "timeUpdated": "2021-01-29T04:01:34+0300",
             "languages": [],
             "tags": [
                 4
@@ -885,8 +885,8 @@
             "groupId": 5,
             "subscriptionUrl": "https://raw.githubusercontent.com/Spam404/lists/master/adblock-list.txt",
             "trustLevel": "low",
-            "version": "2.0.2.8",
-            "timeUpdated": "2020-08-28T16:01:19+0300",
+            "version": "2.0.2.23",
+            "timeUpdated": "2021-01-28T13:36:39+0300",
             "languages": [],
             "tags": [
                 4
@@ -895,7 +895,7 @@
         {
             "filterId": 212,
             "name": "RU AdList: Counters",
-            "description": "Дополнение для блокировки счетчиков",
+            "description": "RU AdList supplement for trackers blocking.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://forums.lanik.us/viewforum.php?f=102",
             "expires": 345600,
@@ -903,8 +903,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://easylist-downloads.adblockplus.org/cntblock.txt",
             "trustLevel": "low",
-            "version": "2.0.73.75",
-            "timeUpdated": "2020-09-16T20:01:11+0300",
+            "version": "2.0.81.81",
+            "timeUpdated": "2021-01-29T12:01:45+0300",
             "languages": [],
             "tags": [
                 2,
@@ -914,7 +914,7 @@
         {
             "filterId": 213,
             "name": "RU AdList: BitBlock",
-            "description": "Дополнение для блокировки элементов сайтов, которые не относятся к основному содержимому сайта",
+            "description": "RU AdList supplement for annoyances and socials.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://forums.lanik.us/viewforum.php?f=102",
             "expires": 345600,
@@ -922,8 +922,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://easylist-downloads.adblockplus.org/bitblock.txt",
             "trustLevel": "low",
-            "version": "2.0.73.51",
-            "timeUpdated": "2020-09-16T20:01:14+0300",
+            "version": "2.0.81.57",
+            "timeUpdated": "2021-01-29T12:01:50+0300",
             "languages": [],
             "tags": [
                 5,
@@ -942,8 +942,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/abpvn/abpvn/master/filter/abpvn.txt",
             "trustLevel": "low",
-            "version": "2.0.7.71",
-            "timeUpdated": "2020-09-16T16:01:24+0300",
+            "version": "2.0.8.76",
+            "timeUpdated": "2021-01-25T16:01:46+0300",
             "languages": [],
             "tags": [
                 1,
@@ -961,8 +961,8 @@
             "groupId": 2,
             "subscriptionUrl": "https://secure.fanboy.co.nz/enhancedstats.txt",
             "trustLevel": "low",
-            "version": "2.0.4.7",
-            "timeUpdated": "2020-09-14T12:01:23+0300",
+            "version": "2.0.4.25",
+            "timeUpdated": "2021-01-28T16:02:05+0300",
             "languages": [],
             "tags": [
                 2
@@ -971,7 +971,7 @@
         {
             "filterId": 216,
             "name": "Official Polish filters for AdBlock, uBlock Origin & AdGuard",
-            "description": "Oficjalne polskie filtry do AdBlocka, uBlocka Origin i AdGuarda",
+            "description": "Polish supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://github.com/MajkiIT/polish-ads-filter#polish-filters-for-adblock-ublock-origin--adguard",
             "expires": 345600,
@@ -979,8 +979,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/polish-adblock-filters/adblock.txt",
             "trustLevel": "high",
-            "version": "2.0.11.77",
-            "timeUpdated": "2020-09-16T20:01:18+0300",
+            "version": "2.0.13.33",
+            "timeUpdated": "2021-01-29T00:01:51+0300",
             "languages": [
                 "pl"
             ],
@@ -992,8 +992,8 @@
         },
         {
             "filterId": 217,
-            "name": "Polskie Filtry Ciasteczkowe",
-            "description": "Polski filtr cookies.",
+            "name": "Polish GDPR-Cookies Filters",
+            "description": "Polish filter list for cookies blocking.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://github.com/MajkiIT/polish-ads-filter#polish-filters-for-adblock-ublock-origin--adguard",
             "expires": 345600,
@@ -1001,8 +1001,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/cookies_filters/adblock_cookies.txt",
             "trustLevel": "high",
-            "version": "2.0.3.86",
-            "timeUpdated": "2020-09-16T00:01:17+0300",
+            "version": "2.0.4.12",
+            "timeUpdated": "2021-01-22T00:01:52+0300",
             "languages": [],
             "tags": [
                 6,
@@ -1012,7 +1012,7 @@
         {
             "filterId": 218,
             "name": "Estonian List",
-            "description": "Filter for ad blocking on Estonian sites",
+            "description": "Filter for ad blocking on Estonian sites.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://adblock.ee/",
             "expires": 345600,
@@ -1020,8 +1020,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://adblock.ee/list.php",
             "trustLevel": "low",
-            "version": "2.0.3.23",
-            "timeUpdated": "2020-08-02T16:01:31+0300",
+            "version": "2.0.3.31",
+            "timeUpdated": "2021-01-27T19:56:35+0300",
             "languages": [],
             "tags": [
                 1,
@@ -1039,8 +1039,8 @@
             "groupId": 7,
             "subscriptionUrl": "http://sub.adtchrome.com/adt-chinalist-easylist.txt",
             "trustLevel": "low",
-            "version": "2.0.15.21",
-            "timeUpdated": "2020-09-16T20:01:25+0300",
+            "version": "2.0.18.16",
+            "timeUpdated": "2021-01-28T13:36:57+0300",
             "languages": [],
             "tags": [
                 1,
@@ -1050,8 +1050,8 @@
         },
         {
             "filterId": 220,
-            "name": "CJX's Annoyance List",
-            "description": "CJX's Annoyance List",
+            "name": "CJX's Annoyances List",
+            "description": "Supplement for EasyList China+EasyList and EasyPrivacy.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "http://abpchina.org/forum/forum.php?mod=viewthread&tid=29667",
             "expires": 345600,
@@ -1059,8 +1059,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/cjx82630/cjxlist/master/cjx-annoyance.txt",
             "trustLevel": "low",
-            "version": "2.0.3.37",
-            "timeUpdated": "2020-09-12T12:01:28+0300",
+            "version": "2.0.3.82",
+            "timeUpdated": "2021-01-28T16:02:24+0300",
             "languages": [],
             "tags": [
                 5,
@@ -1069,8 +1069,8 @@
         },
         {
             "filterId": 221,
-            "name": "Polskie Filtry Społecznościowe",
-            "description": "Polski social filtr.",
+            "name": "Polish Social Filters",
+            "description": "Polish filter list for social widgets, popups, etc.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://github.com/MajkiIT/polish-ads-filter#polish-filters-for-adblock-ublock-origin--adguard",
             "expires": 345600,
@@ -1078,8 +1078,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/MajkiIT/polish-ads-filter/master/adblock_social_filters/adblock_social_list.txt",
             "trustLevel": "high",
-            "version": "2.0.3.62",
-            "timeUpdated": "2020-09-16T00:01:25+0300",
+            "version": "2.0.3.88",
+            "timeUpdated": "2021-01-22T00:02:06+0300",
             "languages": [],
             "tags": [
                 3,
@@ -1089,7 +1089,7 @@
         {
             "filterId": 222,
             "name": "Adblock-Persian list",
-            "description": "Adblock-Persian list",
+            "description": "Persian ad blocking filter list.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://ideone.com/K452p",
             "expires": 345600,
@@ -1097,8 +1097,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://ideone.com/plain/K452p",
             "trustLevel": "low",
-            "version": "2.0.0.29",
-            "timeUpdated": "2020-07-29T13:27:23+0300",
+            "version": "2.0.0.30",
+            "timeUpdated": "2020-10-13T15:45:24+0300",
             "languages": [],
             "tags": [
                 1,
@@ -1108,7 +1108,7 @@
         {
             "filterId": 223,
             "name": "Fanboy's Swedish",
-            "description": "Fanboy's Swedish",
+            "description": "Filter list for websites in Swedish.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://www.fanboy.co.nz/",
             "expires": 345600,
@@ -1116,8 +1116,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://www.fanboy.co.nz/fanboy-swedish.txt",
             "trustLevel": "low",
-            "version": "2.0.0.24",
-            "timeUpdated": "2020-04-03T04:01:54+0300",
+            "version": "2.0.0.25",
+            "timeUpdated": "2020-10-13T15:45:24+0300",
             "languages": [],
             "tags": [
                 1,
@@ -1126,8 +1126,8 @@
         },
         {
             "filterId": 225,
-            "name": "Fanboy Anti-Facebook List",
-            "description": "Warning, will break on Facebook-based comment sites and may also break on some Facebook apps or games.",
+            "name": "Fanboy's Anti-Facebook List",
+            "description": "Warning, it will break Facebook-based comments on some websites and may also break some Facebook apps or games.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://www.fanboy.co.nz",
             "expires": 345600,
@@ -1146,7 +1146,7 @@
         {
             "filterId": 226,
             "name": "Fanboy's Vietnamese",
-            "description": "Fanboy's Vietnamese",
+            "description": "Filter list for websites in Vietnamese.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://www.fanboy.co.nz/",
             "expires": 345600,
@@ -1165,7 +1165,7 @@
         {
             "filterId": 227,
             "name": "List-KR",
-            "description": "Filter that enables removing of ads, trackers, and various scripts from websites with Korean content. Based on Corset, Korean Adblock filter, Youslist. Combined and augmented with AdGuard-specific rules for enhanced filtering. This filter is expected to be used alongside with Base filter.",
+            "description": "Filter that removes ads, trackers, and various scripts from websites with Korean content. Based on Corset, Korean Adblock filter, Youslist. Combined and augmented with AdGuard-specific rules for enhanced filtering. This filter is expected to be used alongside with AdGuard Base filter.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://list-kr.github.io/",
             "expires": 345600,
@@ -1173,8 +1173,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/List-KR/List-KR/master/filter.txt",
             "trustLevel": "high",
-            "version": "2.0.3.5",
-            "timeUpdated": "2020-09-14T20:02:01+0300",
+            "version": "2.0.3.55",
+            "timeUpdated": "2021-01-29T08:01:53+0300",
             "languages": [
                 "ko"
             ],
@@ -1189,16 +1189,16 @@
         {
             "filterId": 228,
             "name": "xinggsf",
-            "description": "One more China filter list.",
+            "description": "Blocks ads on the Chinese video platforms (MangoTV, DouYu and others).",
             "timeAdded": "2014-06-30T11:56:55+0400",
-            "homepage": "https://github.com/xinggsf/Adblock-Plus-Rule",
+            "homepage": "https://gitee.com/xinggsf/Adblock-Rule",
             "expires": 345600,
             "displayNumber": 2,
             "groupId": 7,
-            "subscriptionUrl": "https://raw.githubusercontent.com/xinggsf/Adblock-Plus-Rule/master/ABP-FX.txt",
-            "trustLevel": "low",
-            "version": "2.0.0.84",
-            "timeUpdated": "2020-04-03T04:01:58+0300",
+            "subscriptionUrl": "https://gitee.com/xinggsf/Adblock-Rule/raw/master/rule.txt",
+            "trustLevel": "high",
+            "version": "2.0.0.87",
+            "timeUpdated": "2021-01-25T08:02:10+0300",
             "languages": [],
             "tags": [
                 1,
@@ -1216,8 +1216,8 @@
             "groupId": 4,
             "subscriptionUrl": "https://www.i-dont-care-about-cookies.eu/abp/",
             "trustLevel": "low",
-            "version": "2.0.0.98",
-            "timeUpdated": "2020-09-04T21:15:17+0300",
+            "version": "2.0.1.39",
+            "timeUpdated": "2021-01-27T16:02:30+0300",
             "languages": [],
             "tags": [
                 6
@@ -1226,7 +1226,7 @@
         {
             "filterId": 230,
             "name": "Fanboy's Spanish/Portuguese",
-            "description": "Fanboy's Spanish/Portuguese",
+            "description": "Filter list for websites in Spanish and Portuguese",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://www.fanboy.co.nz/",
             "expires": 345600,
@@ -1234,8 +1234,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://fanboy.co.nz/fanboy-espanol.txt",
             "trustLevel": "low",
-            "version": "2.0.0.26",
-            "timeUpdated": "2020-05-20T23:16:46+0300",
+            "version": "2.0.0.27",
+            "timeUpdated": "2020-10-13T15:45:38+0300",
             "languages": [],
             "tags": [
                 1,
@@ -1245,8 +1245,8 @@
         },
         {
             "filterId": 231,
-            "name": "Easylist Spanish",
-            "description": "EasyList Spanish filter subscription",
+            "name": "EasyList Spanish",
+            "description": "Spanish supplement for EasyList.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://hg.adblockplus.org/easylistspanish",
             "expires": 345600,
@@ -1254,8 +1254,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://easylist-downloads.adblockplus.org/easylistspanish.txt",
             "trustLevel": "low",
-            "version": "2.0.73.75",
-            "timeUpdated": "2020-09-16T20:01:38+0300",
+            "version": "2.0.81.80",
+            "timeUpdated": "2021-01-29T12:02:29+0300",
             "languages": [],
             "tags": [
                 1,
@@ -1265,8 +1265,8 @@
         },
         {
             "filterId": 232,
-            "name": "KAD - Przekręty",
-            "description": "Filtr chroniący przed przekrętami takimi jak subskrypcje SMS",
+            "name": "KAD - Anti-Scam",
+            "description": "Filter that protects against various types of scams, such as mass text messaging, fake online stores, etc.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://kadantiscam.netlify.app/",
             "expires": 345600,
@@ -1274,8 +1274,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/PolishFiltersTeam/KAD/master/KAD.txt",
             "trustLevel": "low",
-            "version": "2.0.8.96",
-            "timeUpdated": "2020-09-16T20:01:39+0300",
+            "version": "2.0.12.72",
+            "timeUpdated": "2021-01-29T00:02:25+0300",
             "languages": [],
             "tags": [
                 4,
@@ -1285,7 +1285,7 @@
         {
             "filterId": 233,
             "name": "Adblock List for Finland",
-            "description": "Finnish adblock list",
+            "description": "Finnish ad blocking filter list.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://github.com/theel0ja/finnish-easylist-addition",
             "expires": 345600,
@@ -1293,8 +1293,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/theel0ja/finnish-easylist-addition/master/Finland_adb.txt",
             "trustLevel": "high",
-            "version": "2.0.3.13",
-            "timeUpdated": "2020-09-16T20:01:40+0300",
+            "version": "2.0.3.86",
+            "timeUpdated": "2021-01-22T00:02:31+0300",
             "languages": [
                 "fi"
             ],
@@ -1307,7 +1307,7 @@
         {
             "filterId": 234,
             "name": "ROLIST2",
-            "description": "This is a complementary list for RoList with annoyances that are not necessarily banners. It is a very agressive list and not recommended for beginners.",
+            "description": "This is a complementary list for ROList with annoyances that are not necessarily banners. It is a very aggressive list and not recommended for beginners.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://zoso.ro/rolist/",
             "expires": 345600,
@@ -1315,8 +1315,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://www.zoso.ro/pages/rolist2.txt",
             "trustLevel": "low",
-            "version": "2.0.0.52",
-            "timeUpdated": "2020-08-28T20:01:41+0300",
+            "version": "2.0.0.54",
+            "timeUpdated": "2020-11-30T00:02:32+0300",
             "languages": [],
             "tags": [
                 45,
@@ -1334,10 +1334,10 @@
             "expires": 345600,
             "displayNumber": 2,
             "groupId": 7,
-            "subscriptionUrl": "https://gitcdn.xyz/repo/farrokhi/adblock-iran/master/filter.txt",
-            "trustLevel": "low",
-            "version": "2.0.1.0",
-            "timeUpdated": "2020-07-13T16:02:00+0300",
+            "subscriptionUrl": "https://raw.githubusercontent.com/farrokhi/adblock-iran/master/filter.txt",
+            "trustLevel": "high",
+            "version": "2.0.1.3",
+            "timeUpdated": "2021-01-13T01:50:56+0300",
             "languages": [],
             "tags": [
                 1,
@@ -1347,7 +1347,7 @@
         {
             "filterId": 236,
             "name": "road-block",
-            "description": "Romanian Ad (ROad) filter subscription",
+            "description": "Romanian ad blocking filter subscription.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://github.com/tcptomato/ROad-Block",
             "expires": 345600,
@@ -1355,8 +1355,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/tcptomato/ROad-Block/master/road-block-filters.txt",
             "trustLevel": "low",
-            "version": "2.0.0.72",
-            "timeUpdated": "2020-09-01T16:02:05+0300",
+            "version": "2.0.0.75",
+            "timeUpdated": "2020-10-13T15:45:43+0300",
             "languages": [],
             "tags": [
                 1,
@@ -1365,8 +1365,8 @@
         },
         {
             "filterId": 237,
-            "name": "Polskie Filtry Elementów Irytujących",
-            "description": "Filtry ukrywające i blokujące wyskakujące okienka, widgety, newslettery, powiadomienia push, strzałki, otagowane linki wewnętrzne, które są nie na temat artykułów i inne drażniące elementy. Polskie Filtry Ciasteczkowe są już w nich zawarte.",
+            "name": "Polish Annoyances Filters",
+            "description": "Filter list that hides and blocks pop-ups, widgets, newsletters, push notifications, arrows, tagged internal links that are off-topic, and other irritating elements. Polish GDPR-Cookies Filters is already in it.",
             "timeAdded": "2018-02-14T22:15:35+0300",
             "homepage": "https://polishannoyancefilters.netlify.app",
             "expires": 345600,
@@ -1374,8 +1374,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/PolishFiltersTeam/PolishAnnoyanceFilters/master/PPB.txt",
             "trustLevel": "high",
-            "version": "1.0.18.26",
-            "timeUpdated": "2020-09-16T16:02:25+0300",
+            "version": "1.0.19.79",
+            "timeUpdated": "2021-01-28T19:18:32+0300",
             "languages": [],
             "tags": [
                 41,
@@ -1385,7 +1385,7 @@
         {
             "filterId": 238,
             "name": "Polish Anti Adblock Filters",
-            "description": "Oficjalne polskie filtry przeciwko alertom o Adblocku",
+            "description": "Official Polish filters against Adblock alerts.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://github.com/olegwukr/polish-privacy-filters",
             "expires": 345600,
@@ -1393,8 +1393,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/olegwukr/polish-privacy-filters/master/anti-adblock.txt",
             "trustLevel": "high",
-            "version": "2.0.2.72",
-            "timeUpdated": "2020-09-16T20:01:46+0300",
+            "version": "2.0.3.20",
+            "timeUpdated": "2021-01-28T16:03:01+0300",
             "languages": [
                 "pl"
             ],
@@ -1407,7 +1407,7 @@
         {
             "filterId": 239,
             "name": "Fanboy's Anti-thirdparty Fonts",
-            "description": "A filter to block third-party fonts. It may break the look and design of some websites.",
+            "description": "A filter that blocks third-party fonts. It may break the look and design of some websites.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://www.fanboy.co.nz/",
             "expires": 345600,
@@ -1415,8 +1415,8 @@
             "groupId": 2,
             "subscriptionUrl": "https://fanboy.co.nz/fanboy-antifonts.txt",
             "trustLevel": "low",
-            "version": "2.0.0.33",
-            "timeUpdated": "2020-05-09T12:02:00+0300",
+            "version": "2.0.0.38",
+            "timeUpdated": "2021-01-23T16:02:26+0300",
             "languages": [],
             "tags": [
                 2,
@@ -1426,7 +1426,7 @@
         {
             "filterId": 240,
             "name": "BarbBlock",
-            "description": "BarbBlock is a content blocking list with standalone browser extensions for Chrome and Firefox. It blacklists sites which have used DMCA takedowns to force removal from other content blocking lists. Such takedowns are categorically invalid, but they can be effective at intimidating small open-source projects into compliance.",
+            "description": "BarbBlock is a content blocking list with standalone browser extensions for Chrome and Firefox. It blacklists sites that have used DMCA takedowns to force removal from other content blocking lists. Such takedowns are categorically invalid, but they can be effective at intimidating small open-source projects into compliance.",
             "timeAdded": "2014-06-30T11:56:55+0400",
             "homepage": "https://paulgb.github.io/BarbBlock/",
             "expires": 345600,
@@ -1450,8 +1450,8 @@
             "groupId": 4,
             "subscriptionUrl": "https://www.fanboy.co.nz/fanboy-cookiemonster.txt",
             "trustLevel": "low",
-            "version": "2.0.63.15",
-            "timeUpdated": "2020-09-16T20:01:48+0300",
+            "version": "2.0.68.33",
+            "timeUpdated": "2021-01-29T08:02:16+0300",
             "languages": [],
             "tags": [
                 6
@@ -1460,7 +1460,7 @@
         {
             "filterId": 242,
             "name": "NoCoin Filter List",
-            "description": "This filter disables browser based miners such as coin-hive.",
+            "description": "This filter disables browser-based miners such as coin-hive.",
             "timeAdded": "2018-02-14T20:15:11+0300",
             "homepage": "https://github.com/hoshsadiq/adblock-nocoin-list/",
             "expires": 345600,
@@ -1468,8 +1468,8 @@
             "groupId": 5,
             "subscriptionUrl": "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
             "trustLevel": "low",
-            "version": "1.0.2.6",
-            "timeUpdated": "2020-09-03T00:01:52+0300",
+            "version": "1.0.2.14",
+            "timeUpdated": "2021-01-20T08:02:46+0300",
             "languages": [],
             "tags": [
                 4
@@ -1486,8 +1486,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/lassekongo83/Frellwits-filter-lists/master/Frellwits-Swedish-Filter.txt",
             "trustLevel": "high",
-            "version": "2.0.8.65",
-            "timeUpdated": "2020-09-16T20:01:51+0300",
+            "version": "2.0.9.97",
+            "timeUpdated": "2021-01-28T16:03:12+0300",
             "languages": [
                 "sv"
             ],
@@ -1511,8 +1511,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/yous/YousList/master/youslist.txt",
             "trustLevel": "high",
-            "version": "2.0.5.96",
-            "timeUpdated": "2020-09-15T20:02:16+0300",
+            "version": "2.0.6.70",
+            "timeUpdated": "2021-01-28T19:18:43+0300",
             "languages": [],
             "tags": [
                 1,
@@ -1522,7 +1522,7 @@
         {
             "filterId": 245,
             "name": "AlleBlock",
-            "description": "Filters that removes annoying elements from Polish e-commerce sites",
+            "description": "Filter that removes annoying elements from Polish e-commerce sites.",
             "timeAdded": "2018-02-15T22:09:58+0300",
             "homepage": "https://github.com/maciejtarmas/AlleBlock",
             "expires": 345600,
@@ -1530,8 +1530,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://alleblock.pl/alleblock/alleblock.txt",
             "trustLevel": "low",
-            "version": "2.0.1.10",
-            "timeUpdated": "2020-04-03T04:02:25+0300",
+            "version": "2.0.1.18",
+            "timeUpdated": "2021-01-25T20:02:57+0300",
             "languages": [],
             "tags": [
                 41,
@@ -1549,8 +1549,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://easylist-downloads.adblockplus.org/easylistpolish.txt",
             "trustLevel": "low",
-            "version": "2.0.69.80",
-            "timeUpdated": "2020-09-16T20:01:53+0300",
+            "version": "2.0.77.86",
+            "timeUpdated": "2021-01-29T12:02:52+0300",
             "languages": [],
             "tags": [
                 1,
@@ -1560,8 +1560,8 @@
         },
         {
             "filterId": 247,
-            "name": "Polski Antyirytujący Dodatek Specjalny",
-            "description": "Filtry blokujące i ukrywające elementy RSS oraz resztki po ukrytych newsletterach złączonych z elementami społecznościowymi na polskojęzycznych stronach.",
+            "name": "Polish Anti-Annoying Special Supplement",
+            "description": "Filters that block and hide RSS elements and remnants of hidden newsletters combined with social elements on Polish websites.",
             "timeAdded": "2018-03-30T15:15:13+0300",
             "homepage": "https://github.com/PolishFiltersTeam/PolishAntiAnnoyingSpecialSupplement",
             "expires": 345600,
@@ -1569,8 +1569,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/PolishFiltersTeam/PolishAntiAnnoyingSpecialSupplement/master/polish_rss_filters.txt",
             "trustLevel": "high",
-            "version": "2.0.2.4",
-            "timeUpdated": "2020-09-14T04:02:19+0300",
+            "version": "2.0.2.27",
+            "timeUpdated": "2021-01-24T04:02:35+0300",
             "languages": [],
             "tags": [
                 41,
@@ -1581,7 +1581,7 @@
         {
             "filterId": 249,
             "name": "Dandelion Sprout's Nordic Filters",
-            "description": "This list covers websites for Norway, Denmark, Iceland, Danish territories, and the Sami indigenous population. For more information, details, helpful tools, and other lists that I've made, visit https://github.com/DandelionSprout/adfilt/blob/master/Wiki/General-info.md#english.",
+            "description": "This list covers websites for Norway, Denmark, Iceland, Danish territories, and the Sami indigenous population.",
             "timeAdded": "2018-03-30T15:15:13+0300",
             "homepage": "https://github.com/DandelionSprout/adfilt",
             "expires": 345600,
@@ -1589,8 +1589,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/NorwegianExperimentalList%20alternate%20versions/NordicFiltersAdGuard.txt",
             "trustLevel": "high",
-            "version": "2.0.3.70",
-            "timeUpdated": "2020-09-16T00:01:50+0300",
+            "version": "2.0.4.67",
+            "timeUpdated": "2021-01-29T00:02:48+0300",
             "languages": [
                 "no",
                 "da",
@@ -1618,8 +1618,8 @@
             "groupId": 6,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/10_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.1.13",
-            "timeUpdated": "2020-09-13T00:01:56+0300",
+            "version": "2.0.1.26",
+            "timeUpdated": "2021-01-07T16:02:17+0300",
             "languages": [],
             "tags": []
         },
@@ -1634,8 +1634,8 @@
             "groupId": 1,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/11_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.15.33",
-            "timeUpdated": "2020-09-16T14:30:12+0300",
+            "version": "2.0.17.50",
+            "timeUpdated": "2021-01-29T11:30:15+0300",
             "languages": [],
             "tags": [
                 1,
@@ -1656,8 +1656,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/13_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.19.77",
-            "timeUpdated": "2020-09-16T17:30:20+0300",
+            "version": "2.0.23.57",
+            "timeUpdated": "2021-01-29T09:30:22+0300",
             "languages": [
                 "tr"
             ],
@@ -1679,8 +1679,8 @@
             "groupId": 4,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/14_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.58.33",
-            "timeUpdated": "2020-09-16T17:30:31+0300",
+            "version": "2.0.70.21",
+            "timeUpdated": "2021-01-29T14:30:43+0300",
             "languages": [],
             "tags": [
                 5,
@@ -1699,8 +1699,8 @@
             "groupId": 6,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/15_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.11.37",
-            "timeUpdated": "2020-09-16T18:31:01+0300",
+            "version": "2.0.14.64",
+            "timeUpdated": "2021-01-29T09:30:34+0300",
             "languages": [],
             "tags": [
                 45,
@@ -1728,8 +1728,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/16_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.24.18",
-            "timeUpdated": "2020-09-16T15:30:41+0300",
+            "version": "2.0.27.7",
+            "timeUpdated": "2021-01-28T21:30:47+0300",
             "languages": [
                 "fr"
             ],
@@ -1752,8 +1752,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/1_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.41.35",
-            "timeUpdated": "2020-09-16T20:02:33+0300",
+            "version": "2.0.48.41",
+            "timeUpdated": "2021-01-29T11:30:54+0300",
             "languages": [
                 "ru"
             ],
@@ -1775,8 +1775,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/224_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.8.44",
-            "timeUpdated": "2020-09-16T17:30:58+0300",
+            "version": "2.0.18.47",
+            "timeUpdated": "2021-01-29T13:31:16+0300",
             "languages": [
                 "zh"
             ],
@@ -1798,8 +1798,8 @@
             "groupId": 1,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/2_optimized.txt",
             "trustLevel": "full",
-            "version": "2.1.40.41",
-            "timeUpdated": "2020-09-16T22:31:22+0300",
+            "version": "2.1.60.38",
+            "timeUpdated": "2021-01-29T14:31:38+0300",
             "languages": [],
             "tags": [
                 10,
@@ -1819,8 +1819,8 @@
             "groupId": 2,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/3_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.16.99",
-            "timeUpdated": "2020-09-16T17:31:35+0300",
+            "version": "2.0.20.43",
+            "timeUpdated": "2021-01-29T14:31:43+0300",
             "languages": [],
             "tags": [
                 2,
@@ -1838,8 +1838,8 @@
             "groupId": 3,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/4_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.30.28",
-            "timeUpdated": "2020-09-16T17:31:39+0300",
+            "version": "2.0.35.41",
+            "timeUpdated": "2021-01-29T09:31:33+0300",
             "languages": [],
             "tags": [
                 3,
@@ -1857,8 +1857,8 @@
             "groupId": 6,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/5_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.0.71",
-            "timeUpdated": "2020-09-11T15:31:48+0300",
+            "version": "2.0.0.77",
+            "timeUpdated": "2020-12-04T21:31:36+0300",
             "languages": [],
             "tags": [
                 45
@@ -1875,8 +1875,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/6_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.12.85",
-            "timeUpdated": "2020-09-16T17:31:53+0300",
+            "version": "2.0.15.71",
+            "timeUpdated": "2021-01-29T12:04:32+0300",
             "languages": [
                 "de"
             ],
@@ -1898,8 +1898,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/7_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.4.13",
-            "timeUpdated": "2020-09-15T12:32:00+0300",
+            "version": "2.0.5.19",
+            "timeUpdated": "2021-01-29T13:32:05+0300",
             "languages": [
                 "ja"
             ],
@@ -1920,8 +1920,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/8_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.0.90",
-            "timeUpdated": "2020-09-15T19:31:59+0300",
+            "version": "2.0.1.3",
+            "timeUpdated": "2021-01-15T16:31:56+0300",
             "languages": [
                 "nl"
             ],
@@ -1944,8 +1944,8 @@
             "groupId": 7,
             "subscriptionUrl": "https://filters.adtidy.org/extension/safari/filters/9_optimized.txt",
             "trustLevel": "full",
-            "version": "2.0.7.15",
-            "timeUpdated": "2020-09-15T13:32:07+0300",
+            "version": "2.0.8.42",
+            "timeUpdated": "2021-01-26T14:32:12+0300",
             "languages": [
                 "es",
                 "pt"

@@ -222,6 +222,7 @@ const TopMenu = (function () {
     const GENERAL_SETTINGS = '#general-settings';
     const ANTIBANNER = '#antibanner';
     const WHITELIST = '#whitelist';
+    const USERFILTER = '#userfilter';
     const CONTENT_BLOCKERS = '#content-blockers';
 
     let prevTabId;
@@ -270,6 +271,14 @@ const TopMenu = (function () {
             if (typeof onHashUpdatedCallback === 'function') {
                 onHashUpdatedCallback(tabId);
             }
+        }
+
+        if (tabId === WHITELIST
+            || tabId === USERFILTER
+            || tabId.includes(ANTIBANNER)) {
+            antibannerTabs[0].classList.add('active');
+        } else {
+            antibannerTabs[0].classList.remove('active');
         }
 
         prevTabId = tabId;
@@ -461,6 +470,8 @@ const WhiteListFilter = function (options) {
         hasContent = !!response.content;
         editor.setValue(response.content || '', 1);
         applyChangesBtn.classList.add('disabled');
+        const whitelistedNum = response.content?.split('\n').length;
+        setAllowlistInfo(whitelistedNum);
     }
 
     applyChangesBtn.onclick = (event) => {
@@ -477,6 +488,8 @@ const WhiteListFilter = function (options) {
 
     function changeDefaultWhiteListMode(e) {
         e.preventDefault();
+
+        setIsAllowlistInverted(e.currentTarget.checked);
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'changeDefaultWhiteListMode',
@@ -577,6 +590,8 @@ const UserFilter = function () {
             hasContent = !!arg.content;
             editor.setValue(arg.content || '', 1);
             applyChangesBtn.classList.add('disabled');
+            const userrulesNum = arg.content?.split('\n').length;
+            setUserrulesNum(userrulesNum);
         });
     }
 
@@ -645,6 +660,20 @@ const UserFilter = function () {
         updateUserFilterRules: loadUserRules,
         isUserFilterEmpty,
     };
+};
+
+const setUserrulesNum = (rulesNum) => {
+    document.querySelector('.userrules-info').innerText = i18n.__('options_userfilter_info.message', rulesNum);
+};
+
+const setAllowlistInfo = (allowlistNum) => {
+    document.querySelector('.allowlist-info').innerText = i18n.__('options_whitelist_info.message', allowlistNum);
+};
+
+const setIsAllowlistInverted = (inverted) => {
+    const title = document.querySelector('#allowlist .block-type__desc-title');
+    title.innerText = `${i18n.__('options_whitelist.message')}`
+        + `${inverted ? i18n.__('options_whitelist_inverted.message') : ''}`;
 };
 
 /**
@@ -733,6 +762,10 @@ const AntiBannerFilters = function (options) {
             toggleFilterState.bind(e.target)();
         } else if (e.target.getAttribute('name') === 'groupId') {
             toggleGroupState.bind(e.target)();
+        } else if (e.target.getAttribute('name') === 'userrules') {
+            toggleUserrulesState.bind(e.target)();
+        } else if (e.target.getAttribute('name') === 'whitelist') {
+            toggleAllowlistState.bind(e.target)();
         }
     });
     document.querySelector('#updateAntiBannerFilters')
@@ -846,7 +879,6 @@ const AntiBannerFilters = function (options) {
         return Utils.htmlToElement(`
                 <li id="category${category.groupId}" class="active">
                     <a href="#antibanner${category.groupId}" class="block-type">
-                        <div class="block-type__ico block-type__ico--${category.groupId}"></div>
                         <div class="block-type__desc">
                             <div class="block-type__desc-title">${category.groupName}</div>
                             <div class="desc desc--filters"></div>
@@ -883,7 +915,8 @@ const AntiBannerFilters = function (options) {
         }
         let homeButton = '';
         if (filter.homepage) {
-            homeButton = `<a class="icon-home" target="_blank" href="${filter.homepage}"></a>`;
+            homeButton = `<a target="_blank" href="${filter.homepage}">`
+                + `${i18n.__('options_filters_homepage.message')}</a>`;
         }
 
         return `
@@ -891,7 +924,10 @@ const AntiBannerFilters = function (options) {
                 <div class="opts-desc-filter">
                     <div class="opt-name">
                         <div class="title">${filter.name}</div>
-                        <div class="desc">${filter.description}</div>
+                        <div class="desc">
+                            ${filter.description}
+                            ${homeButton}
+                        </div>
                         <div class="opt-name__info">
                             <div class="opt-name__info-labels">
                                 <div class="opt-name__info-item filter-version-desc">
@@ -910,7 +946,6 @@ const AntiBannerFilters = function (options) {
                 <div class="opt-state">
                     <div class="preloader"></div>
                     ${deleteButton}
-                    ${homeButton}
                     <input
                         type="checkbox"
                         name="filterId"
@@ -923,10 +958,8 @@ const AntiBannerFilters = function (options) {
 
     function getPageTitleTemplate(name) {
         return `
-            <div class="page-title">
-                <a href="#antibanner">
-                    <img src="images/arrow.svg" class="back">
-                </a>
+            <div class="page-title antibanner-page-title">
+                <a href="#antibanner" class="back-btn"></a>
                 ${name}
             </div>`;
     }
@@ -977,8 +1010,8 @@ const AntiBannerFilters = function (options) {
 
         return Utils.htmlToElement(`
             <div id="antibanner${category.groupId}" class="settings-content tab-pane filters-list">
-                ${pageTitleEl}
-                <div class="settings-body settings-body--search">
+                <div class="settings-content_page-title">
+                    ${pageTitleEl}
                     <div class="filters-search">
                         <div class="icon-search">
                             <img src="images/magnifying-glass.svg" alt="">
@@ -989,6 +1022,8 @@ const AntiBannerFilters = function (options) {
                             name="searchFiltersList"
                         />
                     </div>
+                </div>
+                <div class="settings-body settings-body--search">
                     <ul class="opts-list">
                         ${filtersList}
                     </ul>
@@ -1045,6 +1080,49 @@ const AntiBannerFilters = function (options) {
             });
         });
     }
+
+    const initGroupsSearch = () => {
+        const antibannerList = document.querySelector('#antibanner .opts-list');
+        const searchInput = document.querySelector('input[name="searchGroupsList"]');
+        const groups = document.querySelectorAll('#groupsList.opts-list li');
+        const filters = document.querySelectorAll('div[id^="antibanner"] .opts-list li[id^="filter"]');
+        const SEARCH_DELAY_MS = 250;
+        if (searchInput) {
+            searchInput.addEventListener('input', Utils.debounce((e) => {
+                const oldSearch = antibannerList.querySelectorAll('li[id^="filter"]');
+                oldSearch.forEach((node) => antibannerList.removeChild(node));
+
+                let searchString;
+                try {
+                    searchString = Utils.escapeRegExp(e.target.value.trim());
+                } catch (err) {
+                    /* eslint-disable-next-line no-console */
+                    console.log(err.message);
+                    return;
+                }
+
+                groups.forEach((group) => {
+                    group.style.display = searchString ? 'none' : 'flex';
+                });
+
+                if (!searchString) {
+                    return;
+                }
+
+                filters.forEach((filter) => {
+                    const title = filter.querySelector('.title');
+                    const regexp = new RegExp(searchString, 'gi');
+                    if (regexp.test(title.textContent)) {
+                        const searchResultFilter = document.createElement('li');
+                        searchResultFilter.innerHTML = filter.innerHTML;
+                        searchResultFilter.id = filter.id;
+                        searchResultFilter.style.display = 'flex';
+                        antibannerList.appendChild(searchResultFilter);
+                    }
+                });
+            }, SEARCH_DELAY_MS));
+        }
+    };
 
     function initFiltersSearch(category) {
         const searchInput = document.querySelector(`#antibanner${category.groupId} input[name="searchFiltersList"]`);
@@ -1112,6 +1190,10 @@ const AntiBannerFilters = function (options) {
             loadedFiltersInfo.initLoadedFilters(response.filters, response.categories);
             updateRulesCountInfo(response.rulesInfo);
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
+            setUserrulesNum(contentBlockerInfo.userRulesNum);
+            setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]);
+            setAllowlistInfo(contentBlockerInfo.whitelistedNum);
+            setSearchPlaceholder();
 
             const { categories } = loadedFiltersInfo;
             for (let j = 0; j < categories.length; j += 1) {
@@ -1120,6 +1202,7 @@ const AntiBannerFilters = function (options) {
                 initFiltersSearch(category);
             }
 
+            initGroupsSearch();
             bindControls();
             CheckboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
 
@@ -1167,6 +1250,20 @@ const AntiBannerFilters = function (options) {
                 'groupId': groupId,
             }));
         }
+    }
+
+    function toggleUserrulesState() {
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'toggleUserrulesState',
+            'enabled': this.checked,
+        }));
+    }
+
+    function toggleAllowlistState() {
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'toggleAllowlistState',
+            'enabled': this.checked,
+        }));
     }
 
     function updateAntiBannerFilters(e) {
@@ -1443,6 +1540,11 @@ const AntiBannerFilters = function (options) {
         }
     }
 
+    const setSearchPlaceholder = () => {
+        document.querySelector('input[name="searchGroupsList"]')
+            .placeholder = i18n.__('options_filters_list_search_placeholder.message');
+    };
+
     /**
      * Checks Safari content blocker rules limit, shows alert message for rules overlimit.
      * It's important to check that limit because of Safari limitations.
@@ -1472,7 +1574,7 @@ const AntiBannerFilters = function (options) {
         );
 
         document.querySelector('#filtersRulesInfo')
-            .textContent = `${messageFilters} ${messageRules} ${messageAdvancedRules}`;
+            .textContent = `${messageFilters}, ${messageRules}, ${messageAdvancedRules}.`;
 
         checkSafariContentBlockerRulesLimit(info.rulesOverLimit);
     }
@@ -1777,6 +1879,8 @@ const Settings = function () {
         'show-tray-icon': '#showTrayIcon',
         'verbose-logging': '#verboseLogging',
         'default-whitelist-mode': '#changeDefaultWhiteListMode',
+        'userrules-enabled': '#userrulesInput',
+        'allowlist-enabled': '#allowlistInput',
     };
 
     /**
@@ -1821,6 +1925,14 @@ const Settings = function () {
             checkboxes[i].render();
         }
 
+        ipcRenderer.once('isUserrulesEnabledResponse', (e, isUserrulesEnabled) => {
+            updateCheckboxValue('userrules-enabled', isUserrulesEnabled, false);
+        });
+
+        ipcRenderer.once('isAllowlistEnabledResponse', (e, isAllowlistEnabled) => {
+            updateCheckboxValue('allowlist-enabled', isAllowlistEnabled, false);
+        });
+
         ipcRenderer.once('isGroupEnabledResponse', (e, isGroupOtherEnabled) => {
             const isSelfAdsEnabled = isGroupOtherEnabled
                 && AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID in enabledFilters;
@@ -1829,6 +1941,14 @@ const Settings = function () {
                 enabled: isSelfAdsEnabled,
             });
         });
+
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'isUserrulesEnabled',
+        }));
+
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'isAllowlistEnabled',
+        }));
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'isGroupEnabled',

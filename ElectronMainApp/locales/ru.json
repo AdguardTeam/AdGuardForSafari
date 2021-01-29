@@ -107,6 +107,9 @@
     "options_filters_enabled": {
         "message": "Включены:"
     },
+    "options_filters_homepage": {
+        "message": "Страница фильтра"
+    },
     "options_filters_enabled_and_more_divider": {
         "message": "%s и еще %s"
     },
@@ -206,11 +209,20 @@
     "options_whitelist_description": {
         "message": "AdGuard не фильтрует рекламу на сайтах, добавленных в белый список."
     },
+    "options_whitelist_inverted": {
+        "message": " (Инвертирован)"
+    },
+    "options_whitelist_info": {
+        "message": "Сайтов в списке: %s"
+    },
     "options_whitelist_inverse": {
         "message": "Инвертировать белый список<span class='sp-table-row-info'>Разблокировать рекламу на всех сайтах, <i>кроме</i> добавленных в белый список</span>"
     },
     "options_userfilter": {
         "message": "Пользовательские правила"
+    },
+    "options_userfilter_info": {
+        "message": "Пользовательских правил: %s"
     },
     "options_userfilter_import": {
         "message": "Импорт"
@@ -353,6 +365,12 @@
     "options_support_rate_description": {
         "message": "Расскажите, что вы думаете об AdGuard"
     },
+    "options_support_discuss_title": {
+        "message": "Обсудить"
+    },
+    "options_support_discuss_description": {
+        "message": "Обсудить на нашем форуме, страницах в социальных сетях или GitHub"
+    },
     "options_about": {
         "message": "О программе"
     },
@@ -445,6 +463,9 @@
     },
     "options_filters_period_not_update": {
         "message": "Не обновлять"
+    },
+    "options_filters_check_for_updates": {
+        "message": "Проверить обновления"
     },
     "options_filters_custom_remove": {
         "message": "удалить"

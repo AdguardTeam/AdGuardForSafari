@@ -47,6 +47,12 @@
     "options_support_rate_description": {
         "message": "Tell us what you think about AdGuard"
     },
+    "options_support_discuss_title": {
+        "message": "Discuss"
+    },
+    "options_support_discuss_description": {
+        "message": "Discuss on our forum, in social networks or on GitHub"
+    },
     "options_about_update_check": {
         "message": "Checking for updates"
     },
@@ -134,8 +140,14 @@
             "other": "%s advanced rules"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "Check for updates"
+    },
     "options_filters_enabled": {
         "message": "Enabled:"
+    },
+    "options_filters_homepage": {
+        "message": "Homepage"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s and %s more"
@@ -236,11 +248,20 @@
     "options_whitelist_description": {
         "message": "AdGuard does not filter web sites from the Allowlist."
     },
+    "options_whitelist_inverted": {
+        "message": " (Inverted)"
+    },
+    "options_whitelist_info": {
+        "message": "AdGuard blocks %s websites only"
+    },
     "options_whitelist_inverse": {
         "message": "Invert Allowlist<span class='sp-table-row-info'>Unblock ads everywhere <i>except for</i> the websites from the Allowlist</span>"
     },
     "options_userfilter": {
         "message": "User rules"
+    },
+    "options_userfilter_info": {
+        "message": "%s user rules"
     },
     "options_userfilter_description": {
         "message": "You can add your own rules here. This option is&nbsp;recommended for advanced users familiar with HTML/CSS. Read the <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filter rules tutorial</a> to&nbsp;learn how to&nbsp;write your own filter rules."

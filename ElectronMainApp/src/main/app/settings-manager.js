@@ -19,6 +19,8 @@ module.exports = (function () {
         DISABLE_SAFEBROWSING: 'safebrowsing-disabled',
         DISABLE_SEND_SAFEBROWSING_STATS: 'safebrowsing-stats-disabled',
         DISABLE_FILTERING: 'adguard-disabled',
+        USERRULES_ENABLED: 'userrules-enabled',
+        ALLOWLIST_ENABLED: 'allowlist-enabled',
         DEFAULT_WHITE_LIST_MODE: 'default-whitelist-mode',
         DISABLE_SHOW_APP_UPDATED_NOTIFICATION: 'show-app-updated-disabled',
         DISABLE_HARDWARE_ACCELERATION: 'hardware-acceleration-disabled',
@@ -49,6 +51,8 @@ module.exports = (function () {
                 defaults[settings.DISABLE_SAFEBROWSING] = true;
                 defaults[settings.DISABLE_SEND_SAFEBROWSING_STATS] = true;
                 defaults[settings.DEFAULT_WHITE_LIST_MODE] = true;
+                defaults[settings.USERRULES_ENABLED] = true;
+                defaults[settings.ALLOWLIST_ENABLED] = true;
                 defaults[settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION] = false;
                 defaults[settings.DISABLE_HARDWARE_ACCELERATION] = false;
                 defaults[settings.UPDATE_FILTERS_PERIOD] = 48;
@@ -244,6 +248,24 @@ module.exports = (function () {
         setProperty(settings.QUIT_ON_CLOSE_WINDOW, value);
     };
 
+    const isUserrulesEnabled = function () {
+        return getProperty(settings.USERRULES_ENABLED);
+    };
+
+    const changeUserrulesState = function (value) {
+        setProperty(settings.USERRULES_ENABLED, value);
+        log.info(`User rules ${value ? 'enabled' : 'disabled'}`);
+    };
+
+    const isAllowlistEnabled = function () {
+        return getProperty(settings.ALLOWLIST_ENABLED);
+    };
+
+    const changeAllowlistState = function (value) {
+        setProperty(settings.ALLOWLIST_ENABLED, value);
+        log.info(`Allowlist ${value ? 'enabled' : 'disabled'}`);
+    };
+
     const api = {};
 
     // Expose settings to api
@@ -281,6 +303,10 @@ module.exports = (function () {
     api.changeHardwareAcceleration = changeHardwareAcceleration;
     api.isQuitOnCloseWindow = isQuitOnCloseWindow;
     api.changeQuitOnCloseWindow = changeQuitOnCloseWindow;
+    api.isUserrulesEnabled = isUserrulesEnabled;
+    api.changeUserrulesState = changeUserrulesState;
+    api.isAllowlistEnabled = isAllowlistEnabled;
+    api.changeAllowlistState = changeAllowlistState;
 
     return api;
 })();

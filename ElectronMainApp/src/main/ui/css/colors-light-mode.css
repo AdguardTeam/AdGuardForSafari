@@ -21,12 +21,24 @@ body {
 .button--link {
 	color: #fff;
 }
+.button--simple {
+	color: #4d4d4d !important;
+}
+.button--simple:hover {
+	color: #888888 !important;
+}
 .button--green-bd {
-	color: #66b574;
-	box-shadow: inset 0 0 0 1px #66b574;
+	color: #68bc86;
+	box-shadow: inset 0 0 0 1px #68bc86;
 }
 .button--green-bd:hover {
 	background-color: rgba(239, 239, 239, 0.5);
+}
+.back-btn {
+	background-image: url(../images/arrow-dark.svg);
+}
+.filters-info {
+	color: #4d4d4d;
 }
 .settings-wrap .page-title {
 	color: #454545;
@@ -35,7 +47,7 @@ body {
 	color: #4d4d4d;
 }
 .settings-content__desc {
-	color: #888888;
+	color: #4d4d4d;
 }
 .upd-wr {
 	color: #888888;
@@ -53,10 +65,10 @@ body {
 	color: #4D4D4D;
 }
 .settings-sidebar .nav a.active span:before {
-	background-color: #66b574;
+	background-color: #68bc86;
 }
 .settings-content a {
-	color: #66b574;
+	color: #68bc86;
 }
 .settings-content .manage-account-btn {
 	color: #ffffff;
@@ -67,12 +79,24 @@ body {
 .empty-filters__logo {
 	background: url(../images/empty-filters.svg) no-repeat;
 }
-.filters-list .filters-search {
+.filters-search {
 	border-bottom: 1px solid #E7E7E7;
 }
 .opts-list li {
-	color: #454545;
+	color: #4d4d4d;
 	border-bottom: 1px solid #E7E7E7;
+}
+.opts-list li:hover:after {
+	background-color: #eeeeee;
+}
+.opts-list__item--arrow:before {
+	background-image: url(../images/arrow-dark.svg);
+}
+.opts-list.ad-blocker .opt-state {
+	border-left: 1px solid #E7E7E7;
+}
+.opts-list .opt-name .desc a {
+	color: #4d4d4d;
 }
 .warn-message {
 	color: #e85037;
@@ -87,7 +111,7 @@ body {
 	color: #66b574;
 }
 .opts-list li.active .opt-name__tag{
-	color: #66b574;
+	color: #4d4d4d;
 }
 .opts-list li.active .block__link{
 	color: #66b574;
@@ -96,10 +120,10 @@ body {
 	color: #e85037;
 }
 .opts-list li .opts-desc-filter {
-	color: #adadad;
+	color: #4d4d4d;
 }
 .opts-list li.active .opts-desc-filter {
-	color: #454545;
+	color: #4d4d4d;
 }
 .settings-notification {
 	background: #fff3df;
@@ -114,7 +138,7 @@ body {
 	color: #454545;
 }
 .block-type__desc-title {
-	color: #66b574;
+	color: #4d4d4d;
 }
 .block-type__info-title {
 	color: #4d4d4d;
@@ -132,7 +156,7 @@ body {
 	color: rgba(77, 77, 77, 0.5);
 }
 .opts-list .opt-state .desc {
-	color: #888888;
+	color: #4d4d4d;
 }
 .opt-state__link:hover {
 	color: #58a273;
@@ -144,7 +168,7 @@ body {
 	background-color: #F3F3F3;
 }
 .toggler {
-	background-color: #F56F23;
+	background-color: #888888;
 }
 .toggler:before {
 	background-color: #fff;
@@ -154,10 +178,10 @@ body {
 }
 .toggler.on,
 li.active .toggler {
-	background-color: #62c162;
+	background-color: #66b574;
 }
 .toggler.off {
-	background-color: #f68a23;
+	background-color: #888888;
 }
 .settings-footer .btn-rate {
 	color: #6a6a6a;
@@ -289,14 +313,11 @@ li.active .toggler {
 	color: #333333;
 }
 .support .description {
-	color: #888888;
-}
-.support .opts-list li:hover {
-	background: rgba(0, 0, 0, .1);
+	color: #4d4d4d;
 }
 .about-opt__version,
 .about-opt_title {
-	color: #252525;
+	color: #4d4d4d;
 }
 .about-opt__desc {
 	color: #888888;
@@ -340,4 +361,8 @@ li.active .toggler {
 }
 .onboarding__tooltip__title {
 	color: #68bc86;
+}
+
+.settings-notification__close {
+	background-image: url("data:image/svg+xml,%3Csvg width='24px' height='24px' viewBox='0 0 24 24' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3E3FBDDA07-F278-4437-A840-5EEE66257C6D@1x%3C/title%3E%3Cg id='Atoms' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg id='_Icons/_Main-(24)/cross' stroke='%234d4d4d' stroke-width='1.5'%3E%3Cpath d='M6.42857143,6.42857143 L17.604347,17.604347 M6.42857143,17.5714286 L17.604347,6.39565302' id='Combined-Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
