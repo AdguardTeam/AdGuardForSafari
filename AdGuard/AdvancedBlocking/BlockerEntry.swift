@@ -39,19 +39,9 @@ struct BlockerEntry: Codable {
 
     struct Action : Codable {
         let type: String
-        let cssExtended: String?
-        let cssInject: String?
+        let css: String?
         let script: String?
         let scriptlet: String?
         let scriptletParam: String?
-
-         enum CodingKeys: String, CodingKey {
-            case type = "type"
-            case cssExtended = "css-extended"
-            case cssInject = "css-inject"
-            case script = "script"
-            case scriptlet = "scriptlet"
-            case scriptletParam = "scriptletParam"
-         }
     }
 }
