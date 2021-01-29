@@ -63,24 +63,35 @@ module.exports = (function () {
             for (const group of grouped) {
                 let json = JSON.stringify(emptyBlockerJSON);
 
-                const rulesTexts = group.rules.map((x) => x.ruleText);
-                /* eslint-disable-next-line no-await-in-loop */
-                const result = await convertRulesToJson(rulesTexts, false);
-                if (result && result.converted && result.converted !== '[]') {
-                    log.info(result?.message);
-                    json = result.converted;
-                    if (result.overLimit) {
-                        overlimit = true;
-                    }
-                }
-
                 const info = {
-                    rulesCount: result ? result.totalConvertedCount : 0,
+                    rulesCount: 0,
                     bundleId: rulesGroupsBundles[group.key],
-                    overlimit: result && result.overLimit,
+                    overlimit: false,
                     filterGroups: group.filterGroups,
-                    hasError: !result,
+                    hasError: false,
                 };
+
+                const groupRules = group.rules;
+                if (groupRules && groupRules.length > 0) {
+                    const rulesTexts = groupRules.map((x) => x.ruleText);
+                    /* eslint-disable-next-line no-await-in-loop */
+                    const result = await convertRulesToJson(rulesTexts, false);
+                    if (result && result.converted && result.converted !== '[]') {
+                        log.info(result?.message);
+
+                        json = result.converted;
+                        if (result.overLimit) {
+                            overlimit = true;
+                        }
+
+                        info.rulesCount = result.totalConvertedCount;
+                        info.overlimit = result.overLimit;
+                    } else {
+                        info.hasError = true;
+                    }
+                } else {
+                    log.info(`No rules found for group: ${group.key}`);
+                }
 
                 setSafariContentBlocker(rulesGroupsBundles[group.key], json, info);
             }
