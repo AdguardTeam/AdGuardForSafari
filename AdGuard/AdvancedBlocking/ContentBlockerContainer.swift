@@ -240,8 +240,10 @@ class ContentBlockerContainer {
 
     // Adds scripts or css to blocker data object
     private func addActionContent(blockerData: BlockerData, blockerEntry: BlockerEntry) {
-        if blockerEntry.action.type == "css" {
-            blockerData.addCss(style: blockerEntry.action.css);
+        if blockerEntry.action.type == "css-extended" {
+            blockerData.addCssExtended(style: blockerEntry.action.css);
+        } else if blockerEntry.action.type == "css-inject" {
+            blockerData.addCssInject(style: blockerEntry.action.css);
         } else if blockerEntry.action.type == "script" {
             blockerData.addScript(script: blockerEntry.action.script);
         } else if blockerEntry.action.type == "scriptlet" {

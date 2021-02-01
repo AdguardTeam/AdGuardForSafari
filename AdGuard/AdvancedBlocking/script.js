@@ -95,11 +95,6 @@
 
     /**
      * Applies css stylesheet
-     * As a temporary solution to improve performance we will try to apply basic styles,
-     * filtering out ExtendedCss styles by exceptions raised.
-     *
-     * TODO: Filter ExtendedCss style on background side
-     *
      * @param styleSelectors Array of stylesheets or selectors
      * @param verbose logging
      */
@@ -110,29 +105,15 @@
 
         logMessage(verbose, `css length: ${styleSelectors.length}`);
 
-        const extCssStyleSelectors = [];
-
         const styleElement = document.createElement('style');
         styleElement.setAttribute('type', 'text/css');
         (document.head || document.documentElement).appendChild(styleElement);
 
         for (const selector of styleSelectors.map((s) => s.trim())) {
-            if (!selector.endsWith('}') || selector.includes('debug:')) {
-                extCssStyleSelectors.push(selector);
-                continue;
-            }
-
-            try {
-                styleElement.sheet.insertRule(selector);
-            } catch (e) {
-                // Ignore exception, we will try to use this selector as ExtendedCss
-                extCssStyleSelectors.push(selector);
-            }
+            styleElement.sheet.insertRule(selector);
         }
 
         protectStyleElementContent(styleElement);
-
-        applyExtendedCss(extCssStyleSelectors, verbose);
     };
 
     /**
@@ -195,7 +176,8 @@
         logMessage(verbose, `Frame url: ${window.location.href}`);
 
         applyScripts(data.scripts, verbose);
-        applyCss(data.css, verbose);
+        applyCss(data.cssInject, verbose);
+        applyExtendedCss(data.cssExtended, verbose);
         applyScriptlets(data.scriptlets, verbose);
 
         logMessage(verbose, 'Applying scripts and css - done');
