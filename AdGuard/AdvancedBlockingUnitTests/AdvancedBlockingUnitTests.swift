@@ -39,7 +39,7 @@ class AdvancedBlockingTests: XCTestCase {
                         "url-filter": ".*"
                     },
                     "action": {
-                        "type": "css",
+                        "type": "css-extended",
                         "css": "#included-css:has(div) { height: 5px; }"
                     }
                 },
@@ -60,7 +60,7 @@ class AdvancedBlockingTests: XCTestCase {
         let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
 
         XCTAssert(data.scripts[0] == "included-script");
-        XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
+        XCTAssert(data.cssExtended[0] == "#included-css:has(div) { height: 5px; }");
         XCTAssert(data.scriptlets[0] == "{\"name\":\"abort-on-property-read\",\"args\":[\"I10C\"]}");
     }
 
@@ -81,7 +81,7 @@ class AdvancedBlockingTests: XCTestCase {
                         "url-filter": ".*"
                     },
                     "action": {
-                        "type": "css",
+                        "type": "css-extended",
                         "css": "#included-css:has(div) { height: 5px; }"
                     }
                 },
@@ -101,7 +101,7 @@ class AdvancedBlockingTests: XCTestCase {
         let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
 
         XCTAssert(data.scripts[0] == "included-script");
-        XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
+        XCTAssert(data.cssExtended[0] == "#included-css:has(div) { height: 5px; }");
         XCTAssert(data.scriptlets.count == 0);
     }
 
@@ -122,7 +122,7 @@ class AdvancedBlockingTests: XCTestCase {
                         "url-filter": "not-example.com"
                     },
                     "action": {
-                        "type": "css",
+                        "type": "css-extended",
                         "css": "#excluded-css:has(div) { height: 5px; }"
                     }
                 }
@@ -133,7 +133,7 @@ class AdvancedBlockingTests: XCTestCase {
         let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
 
         XCTAssert(data.scripts[0] == "included-script");
-        XCTAssert(data.css.count == 0);
+        XCTAssert(data.cssExtended.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
 
@@ -160,7 +160,7 @@ class AdvancedBlockingTests: XCTestCase {
                         ]
                     },
                     "action": {
-                        "type": "css",
+                        "type": "css-extended",
                         "css": "#excluded-css:has(div) { height: 5px; }"
                     }
                 }
@@ -171,7 +171,7 @@ class AdvancedBlockingTests: XCTestCase {
         let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
 
         XCTAssert(data.scripts[0] == "included-script");
-        XCTAssert(data.css.count == 0);
+        XCTAssert(data.cssExtended.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
 
@@ -198,7 +198,7 @@ class AdvancedBlockingTests: XCTestCase {
                         ]
                     },
                     "action": {
-                        "type": "css",
+                        "type": "css-extended",
                         "css": "#excluded-css:has(div) { height: 5px; }"
                     }
                 }
@@ -209,7 +209,7 @@ class AdvancedBlockingTests: XCTestCase {
         let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://sub.example.com")!) as! BlockerData;
 
         XCTAssert(data.scripts[0] == "included-script");
-        XCTAssert(data.css.count == 0);
+        XCTAssert(data.cssExtended.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
 
@@ -234,7 +234,7 @@ class AdvancedBlockingTests: XCTestCase {
                         "url-filter": ".*"
                     },
                     "action": {
-                        "type": "css",
+                        "type": "css-extended",
                         "css": "#included-css:has(div) { height: 5px; }"
                     }
                 }
@@ -245,7 +245,7 @@ class AdvancedBlockingTests: XCTestCase {
         let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
 
         XCTAssert(data.scripts.count == 0);
-        XCTAssert(data.css[0] == "#included-css:has(div) { height: 5px; }");
+        XCTAssert(data.cssExtended[0] == "#included-css:has(div) { height: 5px; }");
         XCTAssert(data.scriptlets.count == 0);
     }
 
@@ -288,14 +288,14 @@ class AdvancedBlockingTests: XCTestCase {
         var data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
 
         XCTAssert(data.scripts[0] == "included-script");
-        XCTAssert(data.css.count == 0);
+        XCTAssert(data.cssExtended.count == 0);
         XCTAssert(data.scriptlets.count == 0);
 
         data = try! contentBlockerContainer.getData(url: URL(string:"http://test.com")!) as! BlockerData;
 
         XCTAssert(data.scripts[0] == "included-script");
         XCTAssert(data.scripts[1] == "example-ignored-script");
-        XCTAssert(data.css.count == 0);
+        XCTAssert(data.cssExtended.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
 
@@ -317,7 +317,7 @@ class AdvancedBlockingTests: XCTestCase {
         var data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.org")!) as! BlockerData;
 
         XCTAssert(data.scripts.count == 0);
-        XCTAssert(data.css.count == 0);
+        XCTAssert(data.cssExtended.count == 0);
         XCTAssert(data.scriptlets.count == 0);
 
         data = try! contentBlockerContainer.getData(url: URL(string:"http://example-more.com")!) as! BlockerData;
@@ -354,7 +354,7 @@ class AdvancedBlockingTests: XCTestCase {
         var data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://example.com")!) as! BlockerData;
 
         XCTAssert(data.scripts.count == 0);
-        XCTAssert(data.css.count == 0);
+        XCTAssert(data.cssExtended.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
 
@@ -416,7 +416,7 @@ class AdvancedBlockingTests: XCTestCase {
         var data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")!) as! BlockerData;
 
         XCTAssert(data.scripts.count == 0);
-        XCTAssert(data.css.count == 0);
+        XCTAssert(data.cssExtended.count == 0);
         XCTAssert(data.scriptlets.count == 0);
 
         // Unsupported action
@@ -438,7 +438,7 @@ class AdvancedBlockingTests: XCTestCase {
         data = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")!) as! BlockerData;
 
         XCTAssert(data.scripts.count == 0);
-        XCTAssert(data.css.count == 0);
+        XCTAssert(data.cssExtended.count == 0);
         XCTAssert(data.scriptlets.count == 0);
 
         // Invalid action
@@ -459,7 +459,7 @@ class AdvancedBlockingTests: XCTestCase {
         data = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")!) as! BlockerData;
 
         XCTAssert(data.scripts.count == 0);
-        XCTAssert(data.css.count == 0);
+        XCTAssert(data.cssExtended.count == 0);
         XCTAssert(data.scriptlets.count == 0);
 
         // Invalid regexp
@@ -481,7 +481,7 @@ class AdvancedBlockingTests: XCTestCase {
         data = try! contentBlockerContainer.getData(url: URL(string:"http://test.ru")!) as! BlockerData;
 
         XCTAssert(data.scripts.count == 0);
-        XCTAssert(data.css.count == 0);
+        XCTAssert(data.cssExtended.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
 
@@ -509,7 +509,7 @@ class AdvancedBlockingTests: XCTestCase {
                         ]
                     },
                     "action": {
-                        "type": "css",
+                        "type": "css-extended",
                         "css": "#excluded-css:has(div) { height: 5px; }"
                     }
                 }
@@ -546,7 +546,7 @@ class AdvancedBlockingTests: XCTestCase {
                             ]
                         },
                         "action": {
-                            "type": "css",
+                            "type": "css-extended",
                             "css": "#excluded-css:has(div) { height: 5px; }"
                         }
                     }
@@ -562,7 +562,7 @@ class AdvancedBlockingTests: XCTestCase {
                         ]
                 },
                 "action": {
-                    "type": "css",
+                    "type": "css-extended",
                     "css": "#excluded-css:has(div) { height: 5px; }"
                 }
             }
@@ -649,7 +649,7 @@ class AdvancedBlockingTests: XCTestCase {
                 let data: BlockerData = try! contentBlockerContainer.getData(url: URL(string:"http://mail.ru")!) as! BlockerData;
 
                 XCTAssert(data.scripts.count == 11);
-                XCTAssert(data.css.count == 0);
+                XCTAssert(data.cssExtended.count == 0);
                 XCTAssert(data.scriptlets.count == 0);
             }
         }
