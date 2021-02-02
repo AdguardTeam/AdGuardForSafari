@@ -718,7 +718,9 @@ const AntiBannerFilters = function (options) {
             }
 
             this.filtersById = filtersById;
-            this.lastUpdateTime = lastUpdateTime;
+            if (this.lastUpdateTime <= lastUpdateTime) {
+                this.lastUpdateTime = lastUpdateTime;
+            }
         },
 
         isEnabled(filterId) {
