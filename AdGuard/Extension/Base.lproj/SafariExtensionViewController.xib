@@ -324,7 +324,7 @@
                     <subviews>
                         <button horizontalHuggingPriority="750" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="jKb-oY-gyH" customClass="LinkButton">
                             <rect key="frame" x="67" y="62" width="98" height="16"/>
-                            <buttonCell key="cell" type="bevel" title="Pause AdGuard" bezelStyle="regularSquare" alignment="center" refusesFirstResponder="YES" inset="2" id="p92-iZ-Q5D" customClass="GreenButtonCell">
+                            <buttonCell key="cell" type="bevel" title="Pause AdGuard for Safari" bezelStyle="regularSquare" alignment="center" refusesFirstResponder="YES" inset="2" id="p92-iZ-Q5D" customClass="GreenButtonCell">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
