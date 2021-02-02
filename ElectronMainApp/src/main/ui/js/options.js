@@ -470,7 +470,7 @@ const WhiteListFilter = function (options) {
         hasContent = !!response.content;
         editor.setValue(response.content || '', 1);
         applyChangesBtn.classList.add('disabled');
-        const whitelistedNum = response.content?.split('\n').length;
+        const whitelistedNum = hasContent ? response.content.split('\n').length : 0;
         setAllowlistInfo(whitelistedNum);
     }
 
@@ -590,7 +590,7 @@ const UserFilter = function () {
             hasContent = !!arg.content;
             editor.setValue(arg.content || '', 1);
             applyChangesBtn.classList.add('disabled');
-            const userrulesNum = arg.content?.split('\n').length;
+            const userrulesNum = arg.content ? arg.content.split('\n').length : 0;
             setUserrulesNum(userrulesNum);
         });
     }
