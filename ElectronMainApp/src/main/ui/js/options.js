@@ -671,7 +671,7 @@ const setAllowlistInfo = (allowlistNum) => {
 };
 
 const setIsAllowlistInverted = (inverted) => {
-    const title = document.querySelector('#allowlist .block-type__desc-title');
+    const title = document.querySelector('#category-allowlist .block-type__desc-title');
     title.innerText = `${i18n.__('options_whitelist.message')}`
         + `${inverted ? i18n.__('options_whitelist_inverted.message') : ''}`;
 };
@@ -1081,6 +1081,13 @@ const AntiBannerFilters = function (options) {
         });
     }
 
+    const clearSearch = (nodes) => {
+        // eslint-disable-next-line no-return-assign
+        nodes.forEach((node) => {
+            node.style.display = 'none';
+        });
+    };
+
     const initGroupsSearch = () => {
         const antibannerList = document.querySelector('#antibanner .opts-list');
         const searchInput = document.querySelector('input[name="searchGroupsList"]');
@@ -1089,8 +1096,7 @@ const AntiBannerFilters = function (options) {
         const SEARCH_DELAY_MS = 250;
         if (searchInput) {
             searchInput.addEventListener('input', Utils.debounce((e) => {
-                const oldSearch = antibannerList.querySelectorAll('li[id^="filter"]');
-                oldSearch.forEach((node) => antibannerList.removeChild(node));
+                clearSearch(antibannerList.querySelectorAll('li[id^="filter"]'));
 
                 let searchString;
                 try {
@@ -1113,11 +1119,7 @@ const AntiBannerFilters = function (options) {
                     const title = filter.querySelector('.title');
                     const regexp = new RegExp(searchString, 'gi');
                     if (regexp.test(title.textContent)) {
-                        const searchResultFilter = document.createElement('li');
-                        searchResultFilter.innerHTML = filter.innerHTML;
-                        searchResultFilter.id = filter.id;
-                        searchResultFilter.style.display = 'flex';
-                        antibannerList.appendChild(searchResultFilter);
+                        antibannerList.appendChild(filter.cloneNode(true));
                     }
                 });
             }, SEARCH_DELAY_MS));
@@ -1201,7 +1203,6 @@ const AntiBannerFilters = function (options) {
                 renderFilterCategory(category);
                 initFiltersSearch(category);
             }
-
             initGroupsSearch();
             bindControls();
             CheckboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
