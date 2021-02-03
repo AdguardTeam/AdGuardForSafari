@@ -472,6 +472,7 @@ const WhiteListFilter = function (options) {
         applyChangesBtn.classList.add('disabled');
         const whitelistedNum = hasContent ? response.content.split('\n').length : 0;
         setAllowlistInfo(whitelistedNum);
+        contentBlockerInfo.whitelistedNum = whitelistedNum;
     }
 
     applyChangesBtn.onclick = (event) => {
@@ -592,6 +593,7 @@ const UserFilter = function () {
             applyChangesBtn.classList.add('disabled');
             const userrulesNum = arg.content ? arg.content.split('\n').length : 0;
             setUserrulesNum(userrulesNum);
+            contentBlockerInfo.userRulesNum = userrulesNum;
         });
     }
 
