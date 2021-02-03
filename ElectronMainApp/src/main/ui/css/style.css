@@ -35,7 +35,7 @@ body {
   font-weight: normal;
 }
 .button--green {
-  width: 200px;
+  padding: 0 25px;
   text-align: center;
   font-size: 16px;
   font-weight: normal;
@@ -257,12 +257,12 @@ body {
 .settings-actions--in {
   margin: 0;
 }
-.settings-actions a {
-  padding-right: 42px;
-}
-.settings-actions a:last-child {
-  padding-right: 0;
-}
+/*.settings-actions a {*/
+/*  padding-right: 42px;*/
+/*}*/
+/*.settings-actions a:last-child {*/
+/*  padding-right: 0;*/
+/*}*/
 .info--rules-current {
   position: relative;
   cursor: pointer;
