@@ -25,10 +25,13 @@ module.exports = (() => {
     let requestFilterInitTime = 0;
 
     let userRulesNum = 0;
-    const whitelistedNum = whitelist.getWhiteListDomains().length;
+    const whitelisted = whitelist.getWhiteListDomains();
+    const whitelistedNum = whitelisted[0] ? whitelisted.length : 0;
 
     userrules.getUserRulesText((rulesText) => {
-        userRulesNum = rulesText.split('\n').length;
+        if (rulesText) {
+            userRulesNum = rulesText.split('\n').length;
+        }
     });
 
     /**

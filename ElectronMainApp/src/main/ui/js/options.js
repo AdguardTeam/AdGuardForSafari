@@ -470,8 +470,9 @@ const WhiteListFilter = function (options) {
         hasContent = !!response.content;
         editor.setValue(response.content || '', 1);
         applyChangesBtn.classList.add('disabled');
-        const whitelistedNum = response.content?.split('\n').length;
+        const whitelistedNum = hasContent ? response.content.split('\n').length : 0;
         setAllowlistInfo(whitelistedNum);
+        contentBlockerInfo.whitelistedNum = whitelistedNum;
     }
 
     applyChangesBtn.onclick = (event) => {
@@ -590,8 +591,9 @@ const UserFilter = function () {
             hasContent = !!arg.content;
             editor.setValue(arg.content || '', 1);
             applyChangesBtn.classList.add('disabled');
-            const userrulesNum = arg.content?.split('\n').length;
+            const userrulesNum = arg.content ? arg.content.split('\n').length : 0;
             setUserrulesNum(userrulesNum);
+            contentBlockerInfo.userRulesNum = userrulesNum;
         });
     }
 
@@ -671,7 +673,7 @@ const setAllowlistInfo = (allowlistNum) => {
 };
 
 const setIsAllowlistInverted = (inverted) => {
-    const title = document.querySelector('#allowlist .block-type__desc-title');
+    const title = document.querySelector('#category-allowlist .block-type__desc-title');
     title.innerText = `${i18n.__('options_whitelist.message')}`
         + `${inverted ? i18n.__('options_whitelist_inverted.message') : ''}`;
 };
@@ -718,7 +720,9 @@ const AntiBannerFilters = function (options) {
             }
 
             this.filtersById = filtersById;
-            this.lastUpdateTime = lastUpdateTime;
+            if (this.lastUpdateTime <= lastUpdateTime) {
+                this.lastUpdateTime = lastUpdateTime;
+            }
         },
 
         isEnabled(filterId) {
@@ -1081,46 +1085,71 @@ const AntiBannerFilters = function (options) {
         });
     }
 
+    const clearSearch = (nodes) => {
+        // eslint-disable-next-line no-return-assign
+        nodes.forEach((node) => {
+            node.style.display = 'none';
+        });
+    };
+
+    const searchFilters = (searchInput, filters, groups) => {
+        let searchString;
+        try {
+            searchString = Utils.escapeRegExp(searchInput.trim());
+        } catch (err) {
+            /* eslint-disable-next-line no-console */
+            console.log(err.message);
+            return;
+        }
+
+        groups.forEach((group) => {
+            group.style.display = searchString ? 'none' : 'flex';
+        });
+
+        if (!searchString) {
+            return;
+        }
+
+        filters.forEach((filter) => {
+            const title = filter.querySelector('.title');
+            const regexp = new RegExp(searchString, 'gi');
+            if (regexp.test(title.textContent)) {
+                filter.style.display = 'flex';
+            }
+        });
+    };
+
     const initGroupsSearch = () => {
         const antibannerList = document.querySelector('#antibanner .opts-list');
         const searchInput = document.querySelector('input[name="searchGroupsList"]');
-        const groups = document.querySelectorAll('#groupsList.opts-list li');
-        const filters = document.querySelectorAll('div[id^="antibanner"] .opts-list li[id^="filter"]');
+
         const SEARCH_DELAY_MS = 250;
+
+        let filtersTemplate = '';
+        loadedFiltersInfo.filters.forEach((filter) => {
+            if (!antibannerList.querySelector(`li[id="filter${filter.filterId}"]`)) {
+                filtersTemplate += getFilterTemplate(filter, filter.enabled, filter.customUrl);
+            }
+        });
+
+        const searchFiltersContainer = document.createElement('div');
+        searchFiltersContainer.innerHTML = filtersTemplate;
+        antibannerList.appendChild(searchFiltersContainer);
+
+        const filters = antibannerList.querySelectorAll('li[id^="filter"]');
+        const groups = antibannerList.querySelectorAll('li[id^="category"]');
+
+        clearSearch(filters);
+
         if (searchInput) {
             searchInput.addEventListener('input', Utils.debounce((e) => {
-                const oldSearch = antibannerList.querySelectorAll('li[id^="filter"]');
-                oldSearch.forEach((node) => antibannerList.removeChild(node));
-
-                let searchString;
-                try {
-                    searchString = Utils.escapeRegExp(e.target.value.trim());
-                } catch (err) {
-                    /* eslint-disable-next-line no-console */
-                    console.log(err.message);
-                    return;
-                }
-
-                groups.forEach((group) => {
-                    group.style.display = searchString ? 'none' : 'flex';
-                });
-
-                if (!searchString) {
-                    return;
-                }
-
-                filters.forEach((filter) => {
-                    const title = filter.querySelector('.title');
-                    const regexp = new RegExp(searchString, 'gi');
-                    if (regexp.test(title.textContent)) {
-                        const searchResultFilter = document.createElement('li');
-                        searchResultFilter.innerHTML = filter.innerHTML;
-                        searchResultFilter.id = filter.id;
-                        searchResultFilter.style.display = 'flex';
-                        antibannerList.appendChild(searchResultFilter);
-                    }
-                });
+                clearSearch(filters);
+                searchFilters(e.target.value, filters, groups);
             }, SEARCH_DELAY_MS));
+        }
+
+        if (searchInput.value) {
+            searchFilters(searchInput.value, filters, groups);
         }
     };
 
@@ -1201,7 +1230,6 @@ const AntiBannerFilters = function (options) {
                 renderFilterCategory(category);
                 initFiltersSearch(category);
             }
-
             initGroupsSearch();
             bindControls();
             CheckboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
@@ -2438,6 +2466,7 @@ const initPage = function (response) {
                     controller.antiBannerFilters.onFilterStateChanged(options);
                     controller.settings.updateAcceptableAdsCheckbox(options);
                     controller.contentBlockers.setLoading();
+                    controller.antiBannerFilters.render();
                     break;
                 case EventNotifierTypes.FILTER_ADD_REMOVE:
                     // re-render fully only if custom filter was added,
