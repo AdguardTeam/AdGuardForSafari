@@ -1090,41 +1090,64 @@ const AntiBannerFilters = function (options) {
         });
     };
 
+    const searchFilters = (searchInput, filters, groups) => {
+        let searchString;
+        try {
+            searchString = Utils.escapeRegExp(searchInput.trim());
+        } catch (err) {
+            /* eslint-disable-next-line no-console */
+            console.log(err.message);
+            return;
+        }
+
+        groups.forEach((group) => {
+            group.style.display = searchString ? 'none' : 'flex';
+        });
+
+        if (!searchString) {
+            return;
+        }
+
+        filters.forEach((filter) => {
+            const title = filter.querySelector('.title');
+            const regexp = new RegExp(searchString, 'gi');
+            if (regexp.test(title.textContent)) {
+                filter.style.display = 'flex';
+            }
+        });
+    };
+
     const initGroupsSearch = () => {
         const antibannerList = document.querySelector('#antibanner .opts-list');
         const searchInput = document.querySelector('input[name="searchGroupsList"]');
-        const groups = document.querySelectorAll('#groupsList.opts-list li');
-        const filters = document.querySelectorAll('div[id^="antibanner"] .opts-list li[id^="filter"]');
+
         const SEARCH_DELAY_MS = 250;
+
+        let filtersTemplate = '';
+        loadedFiltersInfo.filters.forEach((filter) => {
+            if (!antibannerList.querySelector(`li[id="filter${filter.filterId}"]`)) {
+                filtersTemplate += getFilterTemplate(filter, filter.enabled, filter.customUrl);
+            }
+        });
+
+        const searchFiltersContainer = document.createElement('div');
+        searchFiltersContainer.innerHTML = filtersTemplate;
+        antibannerList.appendChild(searchFiltersContainer);
+
+        const filters = antibannerList.querySelectorAll('li[id^="filter"]');
+        const groups = antibannerList.querySelectorAll('li[id^="category"]');
+
+        clearSearch(filters);
+
         if (searchInput) {
             searchInput.addEventListener('input', Utils.debounce((e) => {
-                clearSearch(antibannerList.querySelectorAll('li[id^="filter"]'));
-
-                let searchString;
-                try {
-                    searchString = Utils.escapeRegExp(e.target.value.trim());
-                } catch (err) {
-                    /* eslint-disable-next-line no-console */
-                    console.log(err.message);
-                    return;
-                }
-
-                groups.forEach((group) => {
-                    group.style.display = searchString ? 'none' : 'flex';
-                });
-
-                if (!searchString) {
-                    return;
-                }
-
-                filters.forEach((filter) => {
-                    const title = filter.querySelector('.title');
-                    const regexp = new RegExp(searchString, 'gi');
-                    if (regexp.test(title.textContent)) {
-                        antibannerList.appendChild(filter.cloneNode(true));
-                    }
-                });
+                clearSearch(filters);
+                searchFilters(e.target.value, filters, groups);
             }, SEARCH_DELAY_MS));
+        }
+
+        if (searchInput.value) {
+            searchFilters(searchInput.value, filters, groups);
         }
     };
 
@@ -2441,6 +2464,7 @@ const initPage = function (response) {
                     controller.antiBannerFilters.onFilterStateChanged(options);
                     controller.settings.updateAcceptableAdsCheckbox(options);
                     controller.contentBlockers.setLoading();
+                    controller.antiBannerFilters.render();
                     break;
                 case EventNotifierTypes.FILTER_ADD_REMOVE:
                     // re-render fully only if custom filter was added,
