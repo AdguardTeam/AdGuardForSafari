@@ -20,10 +20,9 @@ body {
   border: 0;
   height: 40px;
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 38px;
   transition: 0.3s ease background-color;
-  font-weight: 600;
   outline: none;
 }
 .button--simple {
@@ -107,9 +106,8 @@ body {
   align-items: flex-start;
 }
 .settings-content__desc {
-  padding: 15px;
-  margin-top: 144px;
-  max-width: 500px;
+  margin-bottom: 30px;
+  max-width: 410px;
   font-size: 16px;
   line-height: 21px;
 }
