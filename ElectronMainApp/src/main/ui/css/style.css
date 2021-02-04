@@ -336,7 +336,7 @@ a.settings-actions--update-filters {
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: center;
-  padding: 20px 15px;
+  padding: 26px 15px;
   position: relative;
 }
 .opts-list li:first-child {
@@ -534,6 +534,10 @@ a.settings-actions--update-filters {
 }
 .opt-state.input .sp-table-row-info.desc{
   display: none;
+}
+.opts-desc .opt-state {
+  align-items: flex-end;
+  height: 26px;
 }
 .opts-list .opt-state .desc {
   font-size: 14px;
