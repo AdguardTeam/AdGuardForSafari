@@ -599,7 +599,8 @@ a.settings-actions--update-filters.loading:after {
   margin-left: 20px;
 }
 .whitelist-subtitle,
-.userfilter-subtitle {
+.userfilter-subtitle,
+.content-blockers-subtitle {
   margin-bottom: 5px;
   padding: 0;
 }
