@@ -553,7 +553,7 @@ a.settings-actions--update-filters.loading:after {
 }
 .opts-desc .opt-state {
   align-items: flex-end;
-  height: 26px;
+  height: 25px;
 }
 .opts-list .opt-state .desc {
   font-size: 14px;
@@ -1422,6 +1422,9 @@ li.active .toggler:before {
 .support .opts-list li:hover .block-type__desc-title {
   text-decoration: none;
 }
+.support .description {
+  font-size: 14px;
+}
 .support .block-type__ico--faq {
   background-image: url("data:image/svg+xml,%0A%3Csvg height='24' width='24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cdefs%3E%3Cpath id='a' d='M10 18.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17zm0 1.5C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10zm-.989-8.085c0-.627.076-1.126.227-1.498.15-.372.427-.738.829-1.1.401-.36.669-.653.802-.88.133-.226.2-.464.2-.715 0-.757-.346-1.136-1.039-1.136-.329 0-.592.102-.79.306-.197.204-.3.485-.309.843H7c.009-.856.283-1.525.822-2.01C8.362 5.243 9.098 5 10.03 5c.941 0 1.671.23 2.19.689.52.46.78 1.108.78 1.945 0 .381-.084.74-.253 1.079-.169.338-.464.714-.886 1.126l-.54.517a1.85 1.85 0 0 0-.578 1.15l-.027.41H9.01zm-.193 2.063c0-.3.101-.547.303-.742s.46-.292.776-.292c.315 0 .574.097.776.292a.988.988 0 0 1 .303.742.98.98 0 0 1-.297.733c-.197.193-.458.289-.782.289s-.585-.096-.783-.289a.98.98 0 0 1-.296-.733z'/%3E%3Cmask id='b' fill='%2367b279'%3E%3Cuse fill-rule='evenodd' xlink:href='%23a'/%3E%3C/mask%3E%3C/defs%3E%3Cg fill='%2367b279' fill-rule='evenodd'%3E%3Cpath d='M0 0h24v24H0z' fill-opacity='.01'/%3E%3Cg transform='translate(2 2)'%3E%3Cuse fill-rule='nonzero' xlink:href='%23a'/%3E%3Cg mask='url(%23b)'%3E%3Cpath d='M-2-2h24v24H-2z'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
@@ -1493,6 +1496,7 @@ li.active .toggler:before {
   text-decoration: underline;
 }
 
+#about-updates-relaunch,
 .about-opt__read-more {
   font-size: 16px;
   text-decoration: underline;
