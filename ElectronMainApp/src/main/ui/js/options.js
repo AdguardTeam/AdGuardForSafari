@@ -431,6 +431,16 @@ const exportFile = async (fileName, fileType, data) => {
 };
 
 /**
+ * Counts the number of not empty lines
+ * @param text
+ * @return {number}
+ */
+const countNotEmptyLines = (text) => text
+    .split('\n')
+    .filter((line) => !!line)
+    .length;
+
+/**
  * Whitelist block
  *
  * @param options
@@ -470,7 +480,7 @@ const WhiteListFilter = function (options) {
         hasContent = !!response.content;
         editor.setValue(response.content || '', 1);
         applyChangesBtn.classList.add('disabled');
-        const whitelistedNum = hasContent ? response.content.split('\n').length : 0;
+        const whitelistedNum = countNotEmptyLines(response.content);
         setAllowlistInfo(whitelistedNum);
         contentBlockerInfo.whitelistedNum = whitelistedNum;
     }
@@ -591,7 +601,7 @@ const UserFilter = function () {
             hasContent = !!arg.content;
             editor.setValue(arg.content || '', 1);
             applyChangesBtn.classList.add('disabled');
-            const userrulesNum = arg.content ? arg.content.split('\n').length : 0;
+            const userrulesNum = countNotEmptyLines(arg.content);
             setUserrulesNum(userrulesNum);
             contentBlockerInfo.userRulesNum = userrulesNum;
         });
