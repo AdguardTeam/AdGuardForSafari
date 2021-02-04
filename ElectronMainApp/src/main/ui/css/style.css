@@ -558,7 +558,7 @@ a.settings-actions--update-filters {
   text-decoration: underline;
 }
 .opts-list li .opt-state__link {
-  text-decoration: none;
+  text-decoration: underline;
 }
 .opt-select {
   cursor: pointer;

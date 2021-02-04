@@ -135,10 +135,10 @@ body {
 	color: #888888;
 }
 .block-type .block-type__desc .desc {
-	color: #454545;
+	color: #777777;
 }
 .block-type__desc-title {
-	color: #4d4d4d;
+	color: #333333;
 }
 .block-type__info-title {
 	color: #4d4d4d;
@@ -156,13 +156,13 @@ body {
 	color: rgba(77, 77, 77, 0.5);
 }
 .opts-list .opt-state .desc {
-	color: #4d4d4d;
+	color: #777777;
 }
 .opt-state__link:hover {
 	color: #58a273;
 }
 .opts-list li .opt-state__link {
-	color: #888888;
+	color: #777777;
 }
 .opt-select {
 	background-color: #F3F3F3;
@@ -313,14 +313,14 @@ li.active .toggler {
 	color: #333333;
 }
 .support .description {
-	color: #4d4d4d;
+	color: #777777;
 }
 .about-opt__version,
 .about-opt_title {
 	color: #4d4d4d;
 }
 .about-opt__desc {
-	color: #888888;
+	color: #4d4d4d;
 }
 .about-opt__logo {
 	background: url(../images/logo.svg) no-repeat;
