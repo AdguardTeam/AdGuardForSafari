@@ -354,6 +354,9 @@ a.settings-actions--update-filters {
   top: -1px;
   z-index: -1;
 }
+#groupsList {
+  margin-bottom: 50px;
+}
 #whitelist .opts-list li:hover:after,
 #userfilter .opts-list li:hover:after{
   display: none;
