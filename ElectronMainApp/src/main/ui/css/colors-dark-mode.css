@@ -53,7 +53,7 @@ body {
 	color: #cccccc;
 }
 .settings-content__desc {
-	color: #a4a4a4;
+	color: #eeeeee;
 }
 .filters-info {
 	color: #d8d8d8;
@@ -338,7 +338,7 @@ a.settings-actions--update-filters:hover {
 	color: #eeeeee;
 }
 .about-opt__desc {
-	color: #888888;
+	color: #eeeeee;
 }
 .about-opt__logo {
 	background: url(../images/logo-white.svg) no-repeat;

@@ -108,10 +108,10 @@ body {
 }
 .settings-content__desc {
   padding: 15px;
-  margin-top: 15px;
-  max-width: 690px;
-  font-size: 14px;
-  line-height: 18px;
+  margin-top: 144px;
+  max-width: 500px;
+  font-size: 16px;
+  line-height: 21px;
 }
 .antibanner-page-title {
   display: flex;
