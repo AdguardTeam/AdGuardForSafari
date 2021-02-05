@@ -185,6 +185,7 @@ body {
 }
 .opt-select {
 	background-color: #444444;
+	background-image: url(../images/arrow-down.svg);
 }
 .toggler {
 	background-color: #888888;

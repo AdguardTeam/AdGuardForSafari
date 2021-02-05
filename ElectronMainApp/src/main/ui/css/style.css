@@ -588,7 +588,6 @@ a.settings-actions--update-filters.loading:after {
   cursor: pointer;
   border: 0;
   font-size: 14px;
-  background-image: url(../images/arrow-down.svg);
   background-size: 10px 6px;
   background-position: calc(100% - 15px) 50%;
   background-repeat: no-repeat;
