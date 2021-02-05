@@ -88,7 +88,7 @@
             </div>
             <div class="onboarding__actions">
                 <button id="open-safari-extensions-settings-btn" class="button button--green onboarding__btn open-safari-extensions-settings-btn" i18n="onboarding_safari_btn"></button>
-                <button id="ignore-safari-extensions-settings-btn" class="button button--transparent onboarding__btn" i18n="onboarding_ignore_safari_btn"></button>
+                <button id="ignore-safari-extensions-settings-btn" class="button button--simple onboarding__btn" i18n="onboarding_ignore_safari_btn"></button>
             </div>
         </div>
         <div id="general-settings" class="settings-content settings-content--general tab-pane">
@@ -297,9 +297,9 @@
                     </div>
                     <div class="option-popup__btns option-popup__btns--sb">
                         <input type="file" id="importCustomFilterFile" style="display: none;" accept=".txt, text/plain"/>
-                        <button class="button button--transparent custom-filter-import-file" i18n="options_filters_custom_import_file"></button>
+                        <button class="button button--simple custom-filter-import-file" i18n="options_filters_custom_import_file"></button>
                         <div class="option-popup__btns-in">
-                            <button id="custom-filter-popup-cancel" class="button button--transparent option-popup__btn" i18n="options_filters_custom_step_one_cancel"></button>
+                            <button id="custom-filter-popup-cancel" class="button button--simple option-popup__btn" i18n="options_filters_custom_step_one_cancel"></button>
                             <button class="button button--green custom-filter-popup-next" i18n="options_filters_custom_step_one_next"></button>
                         </div>
                     </div>
@@ -316,7 +316,7 @@
                         <div class="option-popup__desc option-popup__desc--false option-popup__desc--tac" i18n="options_filters_custom_step_three_desc"></div>
                     </div>
                     <div class="option-popup__btns option-popup__btns--center">
-                        <button class="button button--transparent custom-filter-popup-try-again" i18n="options_filters_custom_step_three_try_again"></button>
+                        <button class="button button--simple custom-filter-popup-try-again" i18n="options_filters_custom_step_three_try_again"></button>
                     </div>
                 </div>
                 <div id="add-custom-filter-step-4" class="option-popup__step">
@@ -374,9 +374,9 @@
                     </div>
                     <div class="option-popup__btns option-popup__btns--sb">
                         <div class="option-popup__btns-in">
-                            <button id="custom-filter-popup-added-back" class="button button--transparent option-popup__btn" i18n="options_filters_custom_step_final_back">
+                            <button id="custom-filter-popup-added-back" class="button button--simple option-popup__btn" i18n="options_filters_custom_step_final_back">
                             </button>
-                            <button id="custom-filter-popup-remove" class="button button--transparent option-popup__btn" i18n="options_filters_custom_step_final_cancel">
+                            <button id="custom-filter-popup-remove" class="button button--simple option-popup__btn" i18n="options_filters_custom_step_final_cancel">
                             </button>
                         </div>
                         <button id="custom-filter-popup-added-subscribe" class="button button--green" i18n="options_filters_custom_step_final_commit">
@@ -419,13 +419,15 @@
                 </div>
                 <div class="settings-actions settings-actions--saved">
                     <div class="filter-rules__label" id="whiteListRulesSaveIndicator"></div>
-                    <div class="settings-actions__save-button">
-                        <a class="button button--green button--m settings-content__save-btn" id="whiteListFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
-                    </div>
-                    <div class="filter-rules__import-export">
-                        <input type="file" id="importAllowlistInput" style="display: none;" accept=".txt, text/plain"/>
-                        <a id="allowlistImport" href="#" i18n="options_userfilter_import" class="button button--simple button--link"></a>
-                        <a id="allowlistExport" href="#" i18n="options_userfilter_export" class="button button--simple button--link disabled"></a>
+                    <div class="settings-actions__action-buttons">
+                        <div class="filter-rules__import-export">
+                            <input type="file" id="importAllowlistInput" style="display: none;" accept=".txt, text/plain"/>
+                            <a id="allowlistImport" href="#" i18n="options_userfilter_import" class="button button--simple"></a>
+                            <a id="allowlistExport" href="#" i18n="options_userfilter_export" class="button button--simple disabled"></a>
+                        </div>
+                        <div class="settings-actions__save-button">
+                            <a class="button button--green button--m settings-content__save-btn" id="whiteListFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -447,13 +449,15 @@
                 </div>
                 <div class="settings-actions settings-actions--saved">
                     <div class="filter-rules__label" id="userRulesSaveIndicator"></div>
-                    <div class="settings-actions__save-button">
-                        <a class="button button--green button--m settings-content__save-btn" id="userFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
-                    </div>
-                    <div class="filter-rules__import-export">
-                        <input type="file" id="importUserFilterInput" style="display: none;" accept=".txt, text/plain"/>
-                        <a id="userFiltersImport" href="#" i18n="options_userfilter_import" class="button button--simple button--link"></a>
-                        <a id="userFiltersExport" href="#" i18n="options_userfilter_export" class="button button--simple button--link disabled"></a>
+                    <div class="settings-actions__action-buttons">
+                        <div class="filter-rules__import-export">
+                            <input type="file" id="importUserFilterInput" style="display: none;" accept=".txt, text/plain"/>
+                            <a id="userFiltersImport" href="#" i18n="options_userfilter_import" class="button button--simple"></a>
+                            <a id="userFiltersExport" href="#" i18n="options_userfilter_export" class="button button--simple disabled"></a>
+                        </div>
+                        <div class="settings-actions__save-button">
+                            <a class="button button--green button--m settings-content__save-btn" id="userFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
+                        </div>
                     </div>
                 </div>
             </div>

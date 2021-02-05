@@ -24,6 +24,9 @@ body {
 .button--simple {
 	color: #4d4d4d !important;
 }
+.settings-actions__action-buttons .button--simple {
+	color: #4d4d4d;
+}
 .button--simple:hover {
 	color: #888888 !important;
 }

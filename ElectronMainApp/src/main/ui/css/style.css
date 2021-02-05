@@ -29,9 +29,11 @@ body {
   background: transparent;
   padding: 5px 24px;
   border: none;
-  text-transform: uppercase;
+  text-transform: none;
   font-size: 16px;
+  line-height: 16px;
   font-weight: normal;
+  text-decoration: none;
 }
 .button--green {
   padding: 0 25px;
@@ -50,12 +52,6 @@ body {
 .button--transparent {
   padding: 0 20px;
   background-color: transparent;
-}
-.button--link {
-  padding: 0 40px;
-  display: inline-block;
-  text-decoration: none;
-  text-align: center;
 }
 .button--green-bd {
   padding: 0 40px;
@@ -283,7 +279,16 @@ a.settings-actions--update-filters.loading:after {
   animation: clockwise 2s linear infinite;
 }
 .settings-actions--saved {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+.settings-actions__action-buttons {
+  display: flex;
+  align-items: baseline;
+}
+.settings-actions__save-button,
+#custom-filter-popup-added-subscribe {
+  margin-left: 24px;
 }
 .setting-desc {
   margin-bottom: 20px;
@@ -790,9 +795,6 @@ li.active .toggler:before {
   background-image: url(../images/arrow-down.svg);
 }
 
-.wlimit .settings-actions .button--link {
-  padding: 0 48px 0 0;
-}
 .settings-actions .button--green-bd {
   margin-left: 20px;
 }
@@ -1128,7 +1130,7 @@ li.active .toggler:before {
 .option-popup__btns--sb {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .option-popup__btns--in {
@@ -1141,21 +1143,12 @@ li.active .toggler:before {
   justify-content: center;
 }
 
-.option-popup__btn {
-  margin-left: 7px;
-}
-
 .option-popup__btn:nth-child(1) {
   margin-left: 0;
 }
 
 #custom-filter-popup-cancel {
   margin-right: 20px;
-}
-
-.custom-filter-import-file {
-  position: relative;
-  top: -3px;
 }
 
 .option-popup__load {
@@ -1668,14 +1661,6 @@ li.active .toggler:before {
   padding-right: 22px;
   background: url(../images/tick.svg) right center no-repeat;
   background-size: 15px;
-}
-
-.settings-actions__save-button {
-  float: right;
-}
-
-.filter-rules__import-export {
-  float: right;
 }
 
 .settings__import-export {

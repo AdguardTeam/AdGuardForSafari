@@ -15,6 +15,9 @@ body {
 .button--simple:hover {
 	color: #cccccc !important;
 }
+.settings-actions__action-buttons .button--simple {
+	color: #ffffff;
+}
 .button--green {
 	background-color: #68bc86;
 	color: #ffffff;
