@@ -353,7 +353,8 @@ a.settings-actions--update-filters.loading:after {
 .opts-list li:first-child {
   border-top: 0;
 }
-.opts-list li:last-child {
+.opts-list li:last-child,
+.opts-list li#category0 {
   border-bottom: 0;
 }
 .opts-list li:hover:after {
@@ -1487,7 +1488,7 @@ li.active .toggler:before {
 }
 .settings-content .about-opt__menu-item {
   margin-bottom: 15px;
-  font-size: 15px;
+  font-size: 16px;
   text-decoration: underline;
 }
 
@@ -1503,7 +1504,7 @@ li.active .toggler:before {
 
 .about-updates {
   margin: 9px 0;
-  font-size: 15px;
+  font-size: 16px;
   cursor: pointer;
   position: relative;
   display: none;
