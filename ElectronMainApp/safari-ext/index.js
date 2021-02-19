@@ -109,13 +109,9 @@ module.exports = (() => {
         return new Promise((resolve, reject) => {
             try {
                 if (bundleId === ADVANCED_BLOCKING_BUNDLE_ID) {
-                    addon.setAdvancedBlockingJson(jsonString, (result) => {
-                        resolve(result);
-                    });
+                    addon.setAdvancedBlockingJson(jsonString, resolve);
                 } else {
-                    addon.setContentBlockingJson(bundleId, jsonString, (result) => {
-                        resolve(result);
-                    });
+                    addon.setContentBlockingJson(bundleId, jsonString, resolve);
                 }
             } catch (ex) {
                 reject(ex);
