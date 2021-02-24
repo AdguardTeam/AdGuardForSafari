@@ -169,6 +169,9 @@ body {
 	background-color: #F3F3F3;
 	background-image: url(../images/arrow-down-dark.svg);
 }
+.opts-list li:hover .opt-select {
+	background-color: #dddddd;
+}
 .toggler {
 	background-color: #888888;
 }
