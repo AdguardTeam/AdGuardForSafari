@@ -114,9 +114,6 @@ body {
 .opts-list li a{
 	color: #d8d8d8;
 }
-.opts-list li.active .opt-name__tag{
-	color: #d8d8d8;
-}
 .opts-list li.active .block__link{
 	color: #66b574;
 }
@@ -126,8 +123,8 @@ body {
 .opts-list li .opts-desc-filter {
 	color: #d8d8d8;
 }
-.opts-list li.active .opts-desc-filter {
-	color: #d8d8d8;
+.opts-list li .opts-desc-filter .title {
+	color: #ffffff;
 }
 .opts-list li:hover:after {
 	background-color: #4d4d4d;

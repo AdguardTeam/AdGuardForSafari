@@ -355,6 +355,9 @@ a.settings-actions--update-filters.loading:after {
   padding: 26px 15px;
   position: relative;
 }
+.opts-list li .opt-name {
+  font-weight: 500;
+}
 .opts-list li:first-child {
   border-top: 0;
 }
@@ -392,7 +395,7 @@ a.settings-actions--update-filters.loading:after {
 }
 .opts-list .opt-name .title {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   padding-right: 30px;
   line-height: 22px;
   word-break: break-all;
@@ -524,6 +527,7 @@ a.settings-actions--update-filters.loading:after {
 
 .block-type__desc-title {
   margin-bottom: 10px;
+  font-weight: 500;
 }
 .block-type__info-title {
   font-size: 16px;
@@ -1461,7 +1465,7 @@ li.active .toggler:before {
 }
 .about-opt_title {
   font-size: 17px;
-  font-weight: bold;
+  font-weight: 500;
   margin-bottom: 22px;
 }
 .about-opt__menu {

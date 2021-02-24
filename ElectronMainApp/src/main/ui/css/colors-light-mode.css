@@ -113,9 +113,6 @@ body {
 .opts-list li a.button--green.bd{
 	color: #66b574;
 }
-.opts-list li.active .opt-name__tag{
-	color: #4d4d4d;
-}
 .opts-list li.active .block__link{
 	color: #66b574;
 }
@@ -123,10 +120,10 @@ body {
 	color: #e85037;
 }
 .opts-list li .opts-desc-filter {
-	color: #4d4d4d;
+	color: #777777;
 }
-.opts-list li.active .opts-desc-filter {
-	color: #4d4d4d;
+.opts-list li .opts-desc-filter .title {
+	color: #333333;
 }
 .settings-notification {
 	background: #fff3df;
