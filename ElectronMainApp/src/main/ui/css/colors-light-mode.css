@@ -92,7 +92,8 @@ body {
 .opts-list li:hover:after {
 	background-color: #eeeeee;
 }
-.opts-list__item--arrow:before {
+#general-settings .opts-list__item--arrow:before,
+.opts-list__item--arrow a:before {
 	background-image: url(../images/arrow-dark.svg);
 }
 .opts-list.ad-blocker .opt-state {

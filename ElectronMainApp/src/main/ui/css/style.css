@@ -426,14 +426,16 @@ a.settings-actions--update-filters.loading:after {
   position: relative;
   cursor: pointer;
 }
-.opts-list__item--arrow:before {
+#general-settings .opts-list__item--arrow:before,
+.opts-list__item--arrow a:before {
   content: '';
   position: absolute;
-  right: 15px;
-  top: calc(50% - 7px);
-  width: 8px;
-  height: 14px;
+  right: 7px;
+  top: calc(50% - 15px);
+  width: 30px;
+  height: 30px;
   background-repeat: no-repeat;
+  background-position: center;
 }
 .opts-list .opts-list__item--reset-padding {
   padding-left: 0;
