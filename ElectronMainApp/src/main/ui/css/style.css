@@ -1346,7 +1346,7 @@ li.active .toggler:before {
   z-index: 1;
   width: 200px;
   top: 25px;
-  left: calc(50% - 115px);
+  left: calc(50% - 60px);
   visibility: hidden;
   text-align: left;
   opacity: 0;
