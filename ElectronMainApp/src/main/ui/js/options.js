@@ -1032,9 +1032,6 @@ const AntiBannerFilters = function (options) {
                 <div class="settings-content_page-title">
                     ${pageTitleEl}
                     <div class="filters-search">
-                        <div class="icon-search">
-                            <img src="images/magnifying-glass.svg" alt="">
-                        </div>
                         <input
                             type="text"
                             placeholder="${i18n.__('options_filters_list_search_placeholder.message')}"

@@ -326,10 +326,13 @@ a.settings-actions--update-filters.loading:after {
 
 .filters-search input {
   flex-grow: 1;
-  border: 0;
-  background: none;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  background: url(../images/magnifying-glass.svg) 5px center no-repeat;
+  background-size: 17px;
   outline: none;
-  padding: 0;
+  padding: 0 0 0 33px;
   font-size: 16px;
 }
 /* /st */
@@ -376,6 +379,9 @@ a.settings-actions--update-filters.loading:after {
 }
 #groupsList {
   margin-bottom: 50px;
+}
+#groupsList li[id^="filter"] {
+  padding: 20px 15px;
 }
 #whitelist .opts-list li:hover:after,
 #userfilter .opts-list li:hover:after{

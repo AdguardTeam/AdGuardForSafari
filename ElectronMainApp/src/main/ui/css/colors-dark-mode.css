@@ -89,11 +89,12 @@ body {
 .setting-desc {
 	color: #ffffff;
 }
-.filters-search {
-	border-bottom: 1px solid #888888;
-}
 .filters-search input {
 	color: #eee;
+	border-bottom: 1px solid #888888;
+}
+.filters-search input:focus {
+	border-bottom: 1px solid #f3f3f3;
 }
 .empty-filters__desc {
 	color: #eee;
