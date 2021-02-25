@@ -92,6 +92,9 @@ body {
 	color: #4d4d4d;
 	border-bottom: 1px solid #E7E7E7;
 }
+.opts-list li a:hover {
+	color: #333333;
+}
 .opts-list li:hover:after {
 	background-color: #eeeeee;
 }

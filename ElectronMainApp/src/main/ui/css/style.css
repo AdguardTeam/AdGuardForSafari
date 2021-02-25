@@ -586,6 +586,12 @@ a.settings-actions--update-filters.loading:after {
   align-items: flex-end;
   height: 25px;
 }
+.opts-desc .opt-state a {
+  align-items: flex-end;
+  height: 25px;
+  position: relative;
+  z-index: 1;
+}
 .opts-list .opt-state.single-opt {
   position: absolute;
   left: -40px;

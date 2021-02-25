@@ -112,13 +112,16 @@ body {
 .opts-list li .warn-message{
 	color: #D6D6D6;
 }
-.opts-list li a{
+.opts-list li a {
 	color: #d8d8d8;
 }
-.opts-list li.active .block__link{
+.opts-list li a:hover {
+	color: #bbbbbb;
+}
+.opts-list li.active .block__link {
 	color: #66b574;
 }
-.opts-list li.active .warn-message{
+.opts-list li.active .warn-message {
 	color: #e85037;
 }
 .opts-list li .opts-desc-filter {
