@@ -80,7 +80,10 @@ body {
 	color: #ffffff;
 }
 .settings-content a {
-	color: #66b574;
+	color: #eeeeee;
+}
+.settings-content a:hover {
+	color: #cccccc;
 }
 .option-popup__subtitle,
 .settings-checkboxes__label {
@@ -343,17 +346,8 @@ li.active .toggler {
 .about-opt__logo {
 	background: url(../images/logo-white.svg) no-repeat;
 }
-.settings-content .about-opt__menu-item {
-	color: #66b574;
-}
-.about-opt__read-more {
-	color: #66b574;
-}
 .about-updates {
 	color: #cccccc;
-}
-.about-btn {
-	color: #66b574;
 }
 .onboarding {
 	background-color: #323232;

@@ -71,7 +71,10 @@ body {
 	background-color: #68bc86;
 }
 .settings-content a {
-	color: #68bc86;
+	color: #4d4d4d;
+}
+.settings-content a:hover {
+	color: #222222;
 }
 .settings-content .manage-account-btn {
 	color: #ffffff;
@@ -110,6 +113,9 @@ body {
 }
 .opts-list .opt-name .desc a {
 	color: #4d4d4d;
+}
+.opts-list .opt-name .desc a:hover {
+	color: #222222;
 }
 .warn-message {
 	color: #e85037;
@@ -339,17 +345,8 @@ li.active .toggler {
 .about-opt__logo {
 	background: url(../images/logo.svg) no-repeat;
 }
-.settings-content .about-opt__menu-item {
-	color: #66b574;
-}
-.about-opt__read-more {
-	color: #66b574;
-}
 .about-updates {
 	color: #333333;
-}
-.about-btn {
-	color: #66b574;
 }
 .onboarding {
 	background-color: #fff;
