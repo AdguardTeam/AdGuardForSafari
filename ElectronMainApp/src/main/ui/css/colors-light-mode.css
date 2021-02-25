@@ -96,8 +96,11 @@ body {
 .opts-list__item--arrow a:before {
 	background-image: url(../images/arrow-dark.svg);
 }
-.opts-list.ad-blocker .opt-state {
-	border-left: 1px solid #E7E7E7;
+.opts-list .opt-state.combo-opt:before {
+	background: #E7E7E7;
+}
+.opts-list li:hover .opt-state.combo-opt:before {
+	background: #cccccc;
 }
 .opts-list .opt-name .desc a {
 	color: #4d4d4d;

@@ -352,7 +352,7 @@ a.settings-actions--update-filters.loading:after {
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: center;
-  padding: 26px 15px;
+  padding: 0;
   position: relative;
 }
 .opts-list li .opt-name {
@@ -417,25 +417,37 @@ a.settings-actions--update-filters.loading:after {
   flex-grow: 1;
   cursor: pointer;
   text-decoration: none;
-  padding-right: 70px;
+  padding: 26px 0 26px 55px;
+  position: relative;
+  left: -40px;
+}
+.filters-list .opts-list li {
+  padding: 20px 15px;
 }
 .opts-list--content-blocker .block-type {
   cursor: default;
 }
-.opts-list__item--arrow {
-  position: relative;
+.opts-list .opts-list__item--arrow {
   cursor: pointer;
+}
+
+.opts-list .opts-list__item--arrow .opts-desc {
+  position: relative;
+  left: -40px;
+  padding-left: 55px;
 }
 #general-settings .opts-list__item--arrow:before,
 .opts-list__item--arrow a:before {
   content: '';
   position: absolute;
-  right: 7px;
-  top: calc(50% - 15px);
-  width: 30px;
-  height: 30px;
+  right: -40px;
+  width: 63px;
+  height: 100%;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: left center;
+}
+.opts-list__item--arrow a:before {
+  right: -80px;
 }
 .opts-list .opts-list__item--reset-padding {
   padding-left: 0;
@@ -561,9 +573,33 @@ a.settings-actions--update-filters.loading:after {
 .opt-state.input .sp-table-row-info.desc{
   display: none;
 }
+.opts-list .opts-desc {
+  padding: 26px 0 26px 15px;
+}
 .opts-desc .opt-state {
   align-items: flex-end;
   height: 25px;
+}
+.opts-list .opt-state.single-opt {
+  position: absolute;
+  left: -40px;
+  width: calc(100% + 80px);
+  height: 100%;
+  cursor: pointer;
+  justify-content: flex-end;
+  padding-right: 55px;
+}
+.opts-list .opt-state.combo-opt {
+  height: 100%;
+  cursor: pointer;
+  padding-right: 55px;
+  position: absolute;
+  right: -40px;
+}
+.opts-list .opt-state.combo-opt:before {
+  content: '';
+  height: 35px;
+  width: 1px;
 }
 .opts-list .opt-state .desc {
   font-size: 14px;
@@ -601,6 +637,7 @@ a.settings-actions--update-filters.loading:after {
   outline: none;
   color: inherit;
   padding: 8px 40px;
+  margin: 0 15px 1px 0;
 }
 .opts-list + .subtitle {
   margin-top: 50px;

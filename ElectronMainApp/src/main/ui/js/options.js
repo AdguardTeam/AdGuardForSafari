@@ -158,7 +158,8 @@ const CheckboxUtils = (() => {
             el.setAttribute('role', 'checkbox');
             checkbox.parentNode.insertBefore(el, checkbox.nextSibling);
 
-            el.addEventListener('click', () => {
+            const checkboxContainer = el.closest('.opt-state');
+            checkboxContainer.addEventListener('click', () => {
                 checkbox.checked = !checkbox.checked;
 
                 const event = document.createEvent('HTMLEvents');
@@ -902,7 +903,7 @@ const AntiBannerFilters = function (options) {
                             <div class="desc desc--filters"></div>
                         </div>
                     </a>
-                    <div class="opt-state">
+                    <div class="opt-state combo-opt">
                         <div class="preloader"></div>
                         <input type="checkbox" name="groupId" value="${category.groupId}">
                     </div>

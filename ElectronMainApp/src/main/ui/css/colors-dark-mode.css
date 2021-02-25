@@ -133,8 +133,11 @@ body {
 .opts-list__item--arrow a:before {
 	background-image: url(../images/arrow.svg);
 }
-.opts-list.ad-blocker .opt-state {
-	border-left: 1px solid #4d4d4d;
+.opts-list .opt-state.combo-opt:before {
+	background: #4d4d4d;
+}
+.opts-list li:hover .opt-state.combo-opt:before {
+	background: #333333;
 }
 .settings-notification {
 	background: rgba(235, 147, 0 , .1);
