@@ -135,7 +135,9 @@ module.exports = (() => {
                 callback();
             }
 
-            listeners.notifyListeners(events.REQUEST_FILTER_UPDATED);
+            if (isRunning()) {
+                listeners.notifyListeners(events.REQUEST_FILTER_UPDATED);
+            }
             const rulesCount = newRequestFilter.rules ? newRequestFilter.rules.length : 0;
             log.debug('Rules count {0}', rulesCount);
             log.info(

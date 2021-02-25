@@ -17,9 +17,8 @@ module.exports = (() => {
     const init = () => {
         // Subscribe to events which lead to content blocker update
         listeners.addListener((event) => {
-            if ((event === events.REQUEST_FILTER_UPDATED
-                || event === events.UPDATE_WHITELIST_FILTER_RULES)
-                && antibanner.isRunning()) {
+            if (event === events.REQUEST_FILTER_UPDATED
+                || event === events.UPDATE_WHITELIST_FILTER_RULES) {
                 contentBlockerAdapter.updateContentBlocker();
             }
         });
