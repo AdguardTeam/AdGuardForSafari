@@ -345,6 +345,12 @@ li.active .toggler {
 .about-opt__logo {
 	background: url(../images/logo.svg) no-repeat;
 }
+.about-btn {
+	color: #4d4d4d;
+}
+.about-btn:hover {
+	color: #222222;
+}
 .about-updates {
 	color: #333333;
 }
