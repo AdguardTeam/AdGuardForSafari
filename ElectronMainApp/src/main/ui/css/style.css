@@ -552,12 +552,13 @@ a.settings-actions--update-filters.loading:after {
 .block-type__info-title {
   font-size: 16px;
   line-height: 20px;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
+  font-weight: 500;
 }
 .block-type__info-desc {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 14px;
-  margin-bottom: 10px;
+  margin: 4px 0;
 }
 .block-type__info-desc:last-child {
   margin-bottom: 0;
