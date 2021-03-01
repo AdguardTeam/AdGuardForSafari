@@ -88,7 +88,7 @@
             </div>
             <div class="onboarding__actions">
                 <button id="open-safari-extensions-settings-btn" class="button button--green onboarding__btn open-safari-extensions-settings-btn" i18n="onboarding_safari_btn"></button>
-                <button id="ignore-safari-extensions-settings-btn" class="button button--transparent onboarding__btn" i18n="onboarding_ignore_safari_btn"></button>
+                <button id="ignore-safari-extensions-settings-btn" class="button button--simple onboarding__btn" i18n="onboarding_ignore_safari_btn"></button>
             </div>
         </div>
         <div id="general-settings" class="settings-content settings-content--general tab-pane">
@@ -124,7 +124,7 @@
                         <div class="opts-desc">
                             <div class="opt-name" i18n="options_launch_at_login"></div>
                         </div>
-                        <div class="opt-state input">
+                        <div class="opt-state input single-opt">
                             <input type="checkbox" class="sp-table-row-input" id="launchAtLogin"/>
                         </div>
                     </li>
@@ -132,7 +132,7 @@
                         <div class="opts-desc">
                             <div class="opt-name" i18n="options_show_tray_icon"></div>
                         </div>
-                        <div class="opt-state input">
+                        <div class="opt-state input single-opt">
                             <input type="checkbox" class="sp-table-row-input" id="showTrayIcon"/>
                         </div>
                     </li>
@@ -140,7 +140,7 @@
                         <div class="opts-desc">
                             <div class="opt-name" i18n="options_show_app_updated_notification"></div>
                         </div>
-                        <div class="opt-state">
+                        <div class="opt-state single-opt">
                             <input type="checkbox" class="sp-table-row-input" id="showAppUpdatedNotification"/>
                         </div>
                     </li>
@@ -161,7 +161,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="opt-state input">
+                        <div class="opt-state input single-opt">
                             <input type="checkbox" class="sp-table-row-input" id="allowAcceptableAds"/>
                         </div>
                     </li>
@@ -172,7 +172,7 @@
                                 <span class='sp-table-row-info desc' i18n="options_verbose_logging_desc"></span>
                             </div>
                         </div>
-                        <div class="opt-state input">
+                        <div class="opt-state input single-opt">
                             <input type="checkbox" class="sp-table-row-input" id="verboseLogging"/>
                         </div>
                     </li>
@@ -183,7 +183,7 @@
                                 <span class='sp-table-row-info desc' i18n="options_enable_hardware_acceleration_desc"></span>
                             </div>
                         </div>
-                        <div class="opt-state input">
+                        <div class="opt-state input single-opt">
                             <input type="checkbox" class="sp-table-row-input" id="enableHardwareAcceleration"/>
                         </div>
                     </li>
@@ -213,8 +213,6 @@
                     </li>
                 </ul>
             </div>
-
-            <div class="settings-content__desc" i18n="options_general_desc"></div>
         </div>
 
         <div id="antibanner" class="settings-content tab-pane">
@@ -235,9 +233,6 @@
                         </div>
                     </div>
                     <div class="filters-search">
-                        <div class="icon-search">
-                            <img src="images/magnifying-glass.svg" alt="">
-                        </div>
                         <input
                             type="text"
                             name="searchGroupsList"
@@ -253,7 +248,7 @@
                                     <div class="desc desc--filters userrules-info"></div>
                                 </div>
                             </a>
-                            <div class="opt-state">
+                            <div class="opt-state combo-opt">
                                 <div class="preloader"></div>
                                 <input type="checkbox" name="userrules" id="userrulesInput">
                             </div>
@@ -266,7 +261,7 @@
                                     <div class="desc desc--filters allowlist-info"></div>
                                 </div>
                             </a>
-                            <div class="opt-state">
+                            <div class="opt-state combo-opt">
                                 <div class="preloader"></div>
                                 <input type="checkbox" name="whitelist" id="allowlistInput">
                             </div>
@@ -301,7 +296,7 @@
                         <input type="file" id="importCustomFilterFile" style="display: none;" accept=".txt, text/plain"/>
                         <button class="button button--simple custom-filter-import-file" i18n="options_filters_custom_import_file"></button>
                         <div class="option-popup__btns-in">
-                            <button id="custom-filter-popup-cancel" class="button button--transparent option-popup__btn" i18n="options_filters_custom_step_one_cancel"></button>
+                            <button id="custom-filter-popup-cancel" class="button button--simple option-popup__btn" i18n="options_filters_custom_step_one_cancel"></button>
                             <button class="button button--green custom-filter-popup-next" i18n="options_filters_custom_step_one_next"></button>
                         </div>
                     </div>
@@ -318,7 +313,7 @@
                         <div class="option-popup__desc option-popup__desc--false option-popup__desc--tac" i18n="options_filters_custom_step_three_desc"></div>
                     </div>
                     <div class="option-popup__btns option-popup__btns--center">
-                        <button class="button button--transparent custom-filter-popup-try-again" i18n="options_filters_custom_step_three_try_again"></button>
+                        <button class="button button--simple custom-filter-popup-try-again" i18n="options_filters_custom_step_three_try_again"></button>
                     </div>
                 </div>
                 <div id="add-custom-filter-step-4" class="option-popup__step">
@@ -376,9 +371,9 @@
                     </div>
                     <div class="option-popup__btns option-popup__btns--sb">
                         <div class="option-popup__btns-in">
-                            <button id="custom-filter-popup-added-back" class="button button--transparent option-popup__btn" i18n="options_filters_custom_step_final_back">
+                            <button id="custom-filter-popup-added-back" class="button button--simple option-popup__btn" i18n="options_filters_custom_step_final_back">
                             </button>
-                            <button id="custom-filter-popup-remove" class="button button--transparent option-popup__btn" i18n="options_filters_custom_step_final_cancel">
+                            <button id="custom-filter-popup-remove" class="button button--simple option-popup__btn" i18n="options_filters_custom_step_final_cancel">
                             </button>
                         </div>
                         <button id="custom-filter-popup-added-subscribe" class="button button--green" i18n="options_filters_custom_step_final_commit">
@@ -421,13 +416,15 @@
                 </div>
                 <div class="settings-actions settings-actions--saved">
                     <div class="filter-rules__label" id="whiteListRulesSaveIndicator"></div>
-                    <div class="settings-actions__save-button">
-                        <a class="button button--green button--m settings-content__save-btn" id="whiteListFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
-                    </div>
-                    <div class="filter-rules__import-export">
-                        <input type="file" id="importAllowlistInput" style="display: none;" accept=".txt, text/plain"/>
-                        <a id="allowlistImport" href="#" i18n="options_userfilter_import" class="button button--simple button--link"></a>
-                        <a id="allowlistExport" href="#" i18n="options_userfilter_export" class="button button--simple button--link disabled"></a>
+                    <div class="settings-actions__action-buttons">
+                        <div class="filter-rules__import-export">
+                            <input type="file" id="importAllowlistInput" style="display: none;" accept=".txt, text/plain"/>
+                            <a id="allowlistImport" href="#" i18n="options_userfilter_import" class="button button--simple"></a>
+                            <a id="allowlistExport" href="#" i18n="options_userfilter_export" class="button button--simple disabled"></a>
+                        </div>
+                        <div class="settings-actions__save-button">
+                            <a class="button button--green button--m settings-content__save-btn" id="whiteListFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -449,24 +446,24 @@
                 </div>
                 <div class="settings-actions settings-actions--saved">
                     <div class="filter-rules__label" id="userRulesSaveIndicator"></div>
-                    <div class="settings-actions__save-button">
-                        <a class="button button--green button--m settings-content__save-btn" id="userFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
-                    </div>
-                    <div class="filter-rules__import-export">
-                        <input type="file" id="importUserFilterInput" style="display: none;" accept=".txt, text/plain"/>
-                        <a id="userFiltersImport" href="#" i18n="options_userfilter_import" class="button button--simple button--link"></a>
-                        <a id="userFiltersExport" href="#" i18n="options_userfilter_export" class="button button--simple button--link disabled"></a>
+                    <div class="settings-actions__action-buttons">
+                        <div class="filter-rules__import-export">
+                            <input type="file" id="importUserFilterInput" style="display: none;" accept=".txt, text/plain"/>
+                            <a id="userFiltersImport" href="#" i18n="options_userfilter_import" class="button button--simple"></a>
+                            <a id="userFiltersExport" href="#" i18n="options_userfilter_export" class="button button--simple disabled"></a>
+                        </div>
+                        <div class="settings-actions__save-button">
+                            <a class="button button--green button--m settings-content__save-btn" id="userFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="content-blockers" class="settings-content tab-pane">
-            <div class="subtitle settings-body-subtitle">
-                <a href="#general-settings">
-                    <img src="images/arrow-dark.svg" class="back">
-                </a>
-                <span i18n="options_content_blockers"></span>
+            <div class="settings-subtitle">
+                <a class="back-btn" href="#general-settings"></a>
+                <span class="settings-body-subtitle content-blockers-subtitle" i18n="options_content_blockers"></span>
             </div>
             <div class="settings-notification settings-notification--cols" id="enableCbExtensionsNotification">
                 <div class="settings-notification__desc">
@@ -591,21 +588,21 @@
                         </li>
 
                         <li class="opts-list__item opts-list__item--arrow active">
-                            <a href="https://adguard.com/forward.html?action=bug_report&from=options_screen&app=safari_extension" target="_blank" class="block-type">
-                                <div class="block-type__ico block-type__ico--bug-report"></div>
-                                <div class="block-type__desc">
-                                    <div class="block-type__desc-title" i18n="options_support_bug_report_title"></div>
-                                    <div class="description" i18n="options_support_bug_report_description"></div>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="opts-list__item opts-list__item--arrow active">
                             <a href="https://adguard.com/forward.html?action=incorrect_blocking&from=options_screen&app=safari_extension" target="_blank" class="block-type">
                                 <div class="block-type__ico block-type__ico--incorrect-blocking"></div>
                                 <div class="block-type__desc">
                                     <div class="block-type__desc-title" i18n="options_support_incorrect_blocking_title"></div>
                                     <div class="description" i18n="options_support_incorrect_blocking_description"></div>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="opts-list__item opts-list__item--arrow active">
+                            <a href="https://adguard.com/forward.html?action=bug_report&from=options_screen&app=safari_extension" target="_blank" class="block-type">
+                                <div class="block-type__ico block-type__ico--bug-report"></div>
+                                <div class="block-type__desc">
+                                    <div class="block-type__desc-title" i18n="options_support_bug_report_title"></div>
+                                    <div class="description" i18n="options_support_bug_report_description"></div>
                                 </div>
                             </a>
                         </li>
@@ -659,12 +656,13 @@
                             </button>
                             <a href="https://adguard.com/forward.html?action=adguard_safari&from=options_screen&app=safari_extension" target="_blank" class="about-opt__read-more" i18n="options_about_read_more"></a>
                             <div class="about-opt__desc">
+                                <div class="settings-content__desc" i18n="options_general_desc"></div>
                                 <div class="about-opt__desc-item">
                                     © 2009-<script>document.write(new Date().getUTCFullYear());</script> AdGuard Software Ltd.
                                 </div>
                                 <div class="about-opt__desc-item">
                                     All rights reserved.
-                                    <a target="_blank" href="https://adguard.com/forward.html?action=home&from=options_screen&app=safari_extension">Adguard.com</a>
+                                    <a target="_blank" href="https://adguard.com/forward.html?action=home&from=options_screen&app=safari_extension">AdGuard.com</a>
                                 </div>
                             </div>
                         </div>

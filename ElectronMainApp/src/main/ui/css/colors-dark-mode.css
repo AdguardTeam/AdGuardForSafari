@@ -15,6 +15,9 @@ body {
 .button--simple:hover {
 	color: #cccccc !important;
 }
+.settings-actions__action-buttons .button--simple {
+	color: #ffffff;
+}
 .button--green {
 	background-color: #68bc86;
 	color: #ffffff;
@@ -53,7 +56,7 @@ body {
 	color: #cccccc;
 }
 .settings-content__desc {
-	color: #a4a4a4;
+	color: #eeeeee;
 }
 .filters-info {
 	color: #d8d8d8;
@@ -77,10 +80,10 @@ body {
 	color: #ffffff;
 }
 .settings-content a {
-	color: #66b574;
+	color: #eeeeee;
 }
-#userfilter .settings-content a {
-	color: #ffffff;
+.settings-content a:hover {
+	color: #cccccc;
 }
 .option-popup__subtitle,
 .settings-checkboxes__label {
@@ -89,11 +92,12 @@ body {
 .setting-desc {
 	color: #ffffff;
 }
-.filters-search {
-	border-bottom: 1px solid #888888;
-}
 .filters-search input {
 	color: #eee;
+	border-bottom: 1px solid #888888;
+}
+.filters-search input:focus {
+	border-bottom: 1px solid #f3f3f3;
 }
 .empty-filters__desc {
 	color: #eee;
@@ -111,32 +115,36 @@ body {
 .opts-list li .warn-message{
 	color: #D6D6D6;
 }
-.opts-list li a{
-	color: #eeeeee;
-}
-.opts-list li.active .opt-name__tag{
+.opts-list li a {
 	color: #d8d8d8;
 }
-.opts-list li.active .block__link{
+.opts-list li a:hover {
+	color: #bbbbbb;
+}
+.opts-list li.active .block__link {
 	color: #66b574;
 }
-.opts-list li.active .warn-message{
+.opts-list li.active .warn-message {
 	color: #e85037;
 }
 .opts-list li .opts-desc-filter {
 	color: #d8d8d8;
 }
-.opts-list li.active .opts-desc-filter {
-	color: #d8d8d8;
+.opts-list li .opts-desc-filter .title {
+	color: #ffffff;
 }
 .opts-list li:hover:after {
 	background-color: #4d4d4d;
 }
-.opts-list__item--arrow:before {
+#general-settings .opts-list__item--arrow:before,
+.opts-list__item--arrow a:before {
 	background-image: url(../images/arrow.svg);
 }
-.opts-list.ad-blocker .opt-state {
-	border-left: 1px solid #4d4d4d;
+.opts-list .opt-state.combo-opt:before {
+	background: #4d4d4d;
+}
+.opts-list li:hover .opt-state.combo-opt:before {
+	background: #333333;
 }
 .settings-notification {
 	background: rgba(235, 147, 0 , .1);
@@ -154,10 +162,10 @@ body {
 	color: #ffffff;
 }
 .block-type__info-title {
-	color: #cccccc;
+	color: #ffffff;
 }
 .block-type__info-desc {
-	color: #888;
+	color: #d8d8d8;
 }
 .cb_warning {
 	color: #9C1D00;
@@ -182,6 +190,7 @@ body {
 }
 .opt-select {
 	background-color: #444444;
+	background-image: url(../images/arrow-down.svg);
 }
 .toggler {
 	background-color: #888888;
@@ -246,12 +255,6 @@ li.active .toggler {
 }
 .settings-form__input {
 	box-shadow: 0 1px 0 0 rgba(216, 216, 216, .7);
-}
-a.settings-actions--update-filters {
-	color: #d8d8d8;
-}
-a.settings-actions--update-filters:hover {
-	color: #bbbbbb;
 }
 .settings-checkboxes__checkbox:checked + .settings-checkboxes__label:before{
 	background-color: #66b574;
@@ -338,22 +341,19 @@ a.settings-actions--update-filters:hover {
 	color: #eeeeee;
 }
 .about-opt__desc {
-	color: #888888;
+	color: #eeeeee;
 }
 .about-opt__logo {
 	background: url(../images/logo-white.svg) no-repeat;
 }
-.settings-content .about-opt__menu-item {
-	color: #66b574;
+.about-btn {
+	color: #eeeeee;
 }
-.about-opt__read-more {
-	color: #66b574;
+.about-btn:hover {
+	color: #cccccc;
 }
 .about-updates {
 	color: #cccccc;
-}
-.about-btn {
-	color: #66b574;
 }
 .onboarding {
 	background-color: #323232;

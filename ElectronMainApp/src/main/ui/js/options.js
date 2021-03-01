@@ -158,7 +158,8 @@ const CheckboxUtils = (() => {
             el.setAttribute('role', 'checkbox');
             checkbox.parentNode.insertBefore(el, checkbox.nextSibling);
 
-            el.addEventListener('click', () => {
+            const checkboxContainer = el.closest('.opt-state');
+            checkboxContainer.addEventListener('click', () => {
                 checkbox.checked = !checkbox.checked;
 
                 const event = document.createEvent('HTMLEvents');
@@ -265,7 +266,7 @@ const TopMenu = (function () {
         }
 
         tab.style.display = 'flex';
-        window.scrollTo(0, 0);
+        document.scrollTop = 0;
 
         if (tabId === WHITELIST) {
             if (typeof onHashUpdatedCallback === 'function') {
@@ -431,6 +432,16 @@ const exportFile = async (fileName, fileType, data) => {
 };
 
 /**
+ * Counts the number of not empty lines
+ * @param text
+ * @return {number}
+ */
+const countNotEmptyLines = (text) => text
+    .split('\n')
+    .filter((line) => !!line)
+    .length;
+
+/**
  * Whitelist block
  *
  * @param options
@@ -470,7 +481,7 @@ const WhiteListFilter = function (options) {
         hasContent = !!response.content;
         editor.setValue(response.content || '', 1);
         applyChangesBtn.classList.add('disabled');
-        const whitelistedNum = hasContent ? response.content.split('\n').length : 0;
+        const whitelistedNum = countNotEmptyLines(response.content);
         setAllowlistInfo(whitelistedNum);
         contentBlockerInfo.whitelistedNum = whitelistedNum;
     }
@@ -591,7 +602,7 @@ const UserFilter = function () {
             hasContent = !!arg.content;
             editor.setValue(arg.content || '', 1);
             applyChangesBtn.classList.add('disabled');
-            const userrulesNum = arg.content ? arg.content.split('\n').length : 0;
+            const userrulesNum = countNotEmptyLines(arg.content);
             setUserrulesNum(userrulesNum);
             contentBlockerInfo.userRulesNum = userrulesNum;
         });
@@ -665,11 +676,15 @@ const UserFilter = function () {
 };
 
 const setUserrulesNum = (rulesNum) => {
-    document.querySelector('.userrules-info').innerText = i18n.__('options_userfilter_info.message', rulesNum);
+    document.querySelector('.userrules-info').innerText = rulesNum === 1
+        ? i18n.__('options_userfilter_info_single.message', rulesNum)
+        : i18n.__('options_userfilter_info_multi.message', rulesNum);
 };
 
 const setAllowlistInfo = (allowlistNum) => {
-    document.querySelector('.allowlist-info').innerText = i18n.__('options_whitelist_info.message', allowlistNum);
+    document.querySelector('.allowlist-info').innerText = allowlistNum === 1
+        ? i18n.__('options_whitelist_info_single.message', allowlistNum)
+        : i18n.__('options_whitelist_info_multi.message', allowlistNum);
 };
 
 const setIsAllowlistInverted = (inverted) => {
@@ -888,7 +903,7 @@ const AntiBannerFilters = function (options) {
                             <div class="desc desc--filters"></div>
                         </div>
                     </a>
-                    <div class="opt-state">
+                    <div class="opt-state combo-opt">
                         <div class="preloader"></div>
                         <input type="checkbox" name="groupId" value="${category.groupId}">
                     </div>
@@ -1017,9 +1032,6 @@ const AntiBannerFilters = function (options) {
                 <div class="settings-content_page-title">
                     ${pageTitleEl}
                     <div class="filters-search">
-                        <div class="icon-search">
-                            <img src="images/magnifying-glass.svg" alt="">
-                        </div>
                         <input
                             type="text"
                             placeholder="${i18n.__('options_filters_list_search_placeholder.message')}"

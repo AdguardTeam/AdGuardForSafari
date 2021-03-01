@@ -251,8 +251,11 @@
     "options_whitelist_inverted": {
         "message": " (Inverted)"
     },
-    "options_whitelist_info": {
-        "message": "AdGuard blocks %s websites"
+    "options_whitelist_info_single": {
+        "message": "%s domain"
+    },
+    "options_whitelist_info_multi": {
+        "message": "%s domains"
     },
     "options_whitelist_inverse": {
         "message": "Invert Allowlist<span class='sp-table-row-info'>Unblock ads everywhere <i>except for</i> the websites from the Allowlist</span>"
@@ -260,7 +263,10 @@
     "options_userfilter": {
         "message": "User rules"
     },
-    "options_userfilter_info": {
+    "options_userfilter_info_single": {
+        "message": "%s user rule"
+    },
+    "options_userfilter_info_multi": {
         "message": "%s user rules"
     },
     "options_userfilter_description": {

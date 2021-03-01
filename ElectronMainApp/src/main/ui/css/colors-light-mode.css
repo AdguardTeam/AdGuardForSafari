@@ -24,6 +24,9 @@ body {
 .button--simple {
 	color: #4d4d4d !important;
 }
+.settings-actions__action-buttons .button--simple {
+	color: #4d4d4d;
+}
 .button--simple:hover {
 	color: #888888 !important;
 }
@@ -68,7 +71,10 @@ body {
 	background-color: #68bc86;
 }
 .settings-content a {
-	color: #68bc86;
+	color: #4d4d4d;
+}
+.settings-content a:hover {
+	color: #222222;
 }
 .settings-content .manage-account-btn {
 	color: #ffffff;
@@ -79,24 +85,37 @@ body {
 .empty-filters__logo {
 	background: url(../images/empty-filters.svg) no-repeat;
 }
-.filters-search {
+.filters-search input {
 	border-bottom: 1px solid #E7E7E7;
+}
+.filters-search input:focus {
+	border-bottom: 1px solid #cccccc;
 }
 .opts-list li {
 	color: #4d4d4d;
 	border-bottom: 1px solid #E7E7E7;
 }
+.opts-list li a:hover {
+	color: #333333;
+}
 .opts-list li:hover:after {
 	background-color: #eeeeee;
 }
-.opts-list__item--arrow:before {
+#general-settings .opts-list__item--arrow:before,
+.opts-list__item--arrow a:before {
 	background-image: url(../images/arrow-dark.svg);
 }
-.opts-list.ad-blocker .opt-state {
-	border-left: 1px solid #E7E7E7;
+.opts-list .opt-state.combo-opt:before {
+	background: #E7E7E7;
+}
+.opts-list li:hover .opt-state.combo-opt:before {
+	background: #cccccc;
 }
 .opts-list .opt-name .desc a {
 	color: #4d4d4d;
+}
+.opts-list .opt-name .desc a:hover {
+	color: #222222;
 }
 .warn-message {
 	color: #e85037;
@@ -110,9 +129,6 @@ body {
 .opts-list li a.button--green.bd{
 	color: #66b574;
 }
-.opts-list li.active .opt-name__tag{
-	color: #4d4d4d;
-}
 .opts-list li.active .block__link{
 	color: #66b574;
 }
@@ -120,10 +136,10 @@ body {
 	color: #e85037;
 }
 .opts-list li .opts-desc-filter {
-	color: #4d4d4d;
+	color: #777777;
 }
-.opts-list li.active .opts-desc-filter {
-	color: #4d4d4d;
+.opts-list li .opts-desc-filter .title {
+	color: #333333;
 }
 .settings-notification {
 	background: #fff3df;
@@ -135,10 +151,10 @@ body {
 	color: #888888;
 }
 .block-type .block-type__desc .desc {
-	color: #454545;
+	color: #777777;
 }
 .block-type__desc-title {
-	color: #4d4d4d;
+	color: #333333;
 }
 .block-type__info-title {
 	color: #4d4d4d;
@@ -156,16 +172,20 @@ body {
 	color: rgba(77, 77, 77, 0.5);
 }
 .opts-list .opt-state .desc {
-	color: #4d4d4d;
+	color: #777777;
 }
 .opt-state__link:hover {
 	color: #58a273;
 }
 .opts-list li .opt-state__link {
-	color: #888888;
+	color: #777777;
 }
 .opt-select {
 	background-color: #F3F3F3;
+	background-image: url(../images/arrow-down-dark.svg);
+}
+.opts-list li:hover .opt-select {
+	background-color: #dddddd;
 }
 .toggler {
 	background-color: #888888;
@@ -313,29 +333,26 @@ li.active .toggler {
 	color: #333333;
 }
 .support .description {
-	color: #4d4d4d;
+	color: #777777;
 }
 .about-opt__version,
 .about-opt_title {
 	color: #4d4d4d;
 }
 .about-opt__desc {
-	color: #888888;
+	color: #4d4d4d;
 }
 .about-opt__logo {
 	background: url(../images/logo.svg) no-repeat;
 }
-.settings-content .about-opt__menu-item {
-	color: #66b574;
+.about-btn {
+	color: #4d4d4d;
 }
-.about-opt__read-more {
-	color: #66b574;
+.about-btn:hover {
+	color: #222222;
 }
 .about-updates {
 	color: #333333;
-}
-.about-btn {
-	color: #66b574;
 }
 .onboarding {
 	background-color: #fff;
