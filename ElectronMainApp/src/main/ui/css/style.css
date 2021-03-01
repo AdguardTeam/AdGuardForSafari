@@ -423,7 +423,7 @@ a.settings-actions--update-filters.loading:after {
   flex-grow: 1;
   cursor: pointer;
   text-decoration: none;
-  padding: 26px 0 26px 55px;
+  padding: 26px 60px 26px 55px;
   position: relative;
   left: -40px;
 }
@@ -960,9 +960,6 @@ li.active .toggler:before {
 }
 .sp-table-row-input{
   display: none;
-}
-.desc--filters {
-  word-break: break-all;
 }
 .filters-check__label {
   font-size: 14px;
