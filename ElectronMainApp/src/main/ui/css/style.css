@@ -581,11 +581,11 @@ a.settings-actions--update-filters.loading:after {
   display: none;
 }
 .opts-list .opts-desc {
-  padding: 26px 0 26px 15px;
+  padding: 26px 60px 26px 15px;
 }
 .opts-desc .opt-state {
   align-items: flex-end;
-  height: 25px;
+  min-height: 25px;
 }
 .opts-desc .opt-state a {
   align-items: flex-end;
