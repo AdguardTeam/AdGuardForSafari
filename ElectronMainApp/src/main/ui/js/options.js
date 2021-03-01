@@ -266,7 +266,7 @@ const TopMenu = (function () {
         }
 
         tab.style.display = 'flex';
-        document.scrollTop = 0;
+        window.scrollTo(-150, 0);
 
         if (tabId === WHITELIST) {
             if (typeof onHashUpdatedCallback === 'function') {
