@@ -1313,8 +1313,6 @@ const AntiBannerFilters = function (options) {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'checkAntiBannerFiltersUpdate',
         }));
-
-        setLastUpdatedTimeText(Date.now());
     }
 
     function addCustomFilter(e) {
