@@ -586,6 +586,7 @@ a.settings-actions--update-filters.loading:after {
 .opts-desc .opt-state {
   align-items: flex-end;
   min-height: 25px;
+  height: auto;
 }
 .opts-desc .opt-state a {
   align-items: flex-end;
@@ -616,6 +617,7 @@ a.settings-actions--update-filters.loading:after {
 }
 .opts-list .opt-state .desc {
   font-size: 14px;
+  line-height: 16px;
   font-weight: 400;
   padding-right: 25px;
   margin-left: 0;
