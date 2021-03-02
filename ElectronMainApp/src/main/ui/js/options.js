@@ -962,7 +962,7 @@ const AntiBannerFilters = function (options) {
                         </div>
                     </div>
                 </div>
-                <div class="opt-state">
+                <div class="opt-state single-opt">
                     <div class="preloader"></div>
                     ${deleteButton}
                     <input
