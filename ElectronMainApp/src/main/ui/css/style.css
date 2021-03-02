@@ -519,10 +519,11 @@ a.settings-actions--update-filters.loading:after {
   font-size: 14px;
 }
 .block-type__ico-info {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   margin-right: 25px;
   background-repeat: no-repeat;
+  background-size: contain;
   display: inline-block;
   flex-shrink: 0;
   background-position: 50%;
