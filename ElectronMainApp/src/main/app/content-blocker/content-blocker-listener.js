@@ -18,7 +18,8 @@ module.exports = (() => {
         // Subscribe to events which lead to content blocker update
         listeners.addListener((event) => {
             if (event === events.REQUEST_FILTER_UPDATED
-                || event === events.UPDATE_WHITELIST_FILTER_RULES) {
+                || event === events.UPDATE_WHITELIST_FILTER_RULES
+                || event === events.UPDATE_USER_FILTER_RULES) {
                 contentBlockerAdapter.updateContentBlocker();
             }
         });

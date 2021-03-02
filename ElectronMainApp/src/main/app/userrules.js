@@ -1,4 +1,5 @@
 const config = require('config');
+const settings = require('./settings-manager');
 const listeners = require('../notifier');
 const events = require('../events');
 const rulesStorage = require('./storage/rules-storage');
@@ -31,9 +32,24 @@ module.exports = (function () {
      */
     const getUserRulesText = function (callback) {
         rulesStorage.read(USER_FILTER_ID, (rulesText) => {
-            const content = (rulesText || []).join('\n');
+            let content = '';
+            if (settings.isUserrulesEnabled()) {
+                content = (rulesText || []).join('\n');
+            }
             if (callback) {
                 callback(content);
+            }
+        });
+    };
+
+    /**
+     * Loads user rules from storage
+     * @param callback Callback function
+     */
+    const getUserRules = function (callback) {
+        rulesStorage.read(USER_FILTER_ID, (rulesText) => {
+            if (callback) {
+                callback(rulesText || []);
             }
         });
     };
@@ -41,5 +57,6 @@ module.exports = (function () {
     return {
         updateUserRulesText,
         getUserRulesText,
+        getUserRules,
     };
 })();
