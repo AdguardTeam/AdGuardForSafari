@@ -27,31 +27,32 @@ module.exports = (function () {
     };
 
     /**
-     * Loads user rules text from storage
+     * Loads user rules from storage
      * @param callback Callback function
      */
-    const getUserRulesText = function (callback) {
-        rulesStorage.read(USER_FILTER_ID, (rulesText) => {
-            let content = '';
-            if (settings.isUserrulesEnabled()) {
-                content = (rulesText || []).join('\n');
-            }
+    const getUserRules = function (callback) {
+        rulesStorage.read(USER_FILTER_ID, (rules) => {
             if (callback) {
-                callback(content);
+                callback(rules || []);
             }
         });
     };
 
     /**
-     * Loads user rules from storage
+     * Loads user rules text from storage
      * @param callback Callback function
      */
-    const getUserRules = function (callback) {
-        rulesStorage.read(USER_FILTER_ID, (rulesText) => {
-            if (callback) {
-                callback(rulesText || []);
-            }
-        });
+    const getUserRulesText = function (callback) {
+        if (settings.isUserrulesEnabled()) {
+            getUserRules((rules) => {
+                const rulesText = rules.join('\n');
+                if (callback) {
+                    callback(rulesText);
+                }
+            });
+        } else if (callback) {
+            callback('');
+        }
     };
 
     return {
