@@ -390,6 +390,9 @@ a.settings-actions--update-filters.loading:after {
 #whitelist .opts-list .opt-state {
   height: 20px;
 }
+#whitelist .opts-list .opts-desc {
+  padding-left: 0;
+}
 .warn-message {
   font-style: italic;
 }
@@ -659,7 +662,7 @@ a.settings-actions--update-filters.loading:after {
 }
 .settings-subtitle {
   display: flex;
-  margin-left: 20px;
+  margin-left: 18px;
 }
 .whitelist-subtitle,
 .userfilter-subtitle,
@@ -788,10 +791,10 @@ li.active .toggler:before {
 }
 .ace_gutter,
 .ace_layer.ace_gutter-layer.ace_folding-enabled {
-  width: 37px !important;
+  width: 47px !important;
 }
 .ace_scroller {
-  left: 37px !important;
+  left: 47px !important;
 }
 .preloader {
   background: url(../images/reload-ico-green.svg) no-repeat;
