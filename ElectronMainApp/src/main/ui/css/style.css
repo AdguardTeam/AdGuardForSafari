@@ -118,15 +118,15 @@ body {
   line-height: 18px;
   position: relative;
   padding-left: 14px;
-  margin-top: 10px;
+  margin-top: 7px;
   display: flex;
   justify-content: space-between;
 }
 .filters-info_updates {
-  margin: 20px 0 0;
+  margin: 68px 0 0;
 }
 .filters-info .filters-search {
-  margin-top: 43px;
+  margin-top: 92px;
 }
 .settings-wrap .page-title .info .upd {
   font-weight: normal;
@@ -1466,6 +1466,9 @@ li.active .toggler:before {
   overflow-y: hidden;
   line-height: 30px;
 }
+#support .settings-body-subtitle {
+  margin-bottom: 35px;
+}
 .support .block-type__desc-title {
   font-size: 16px;
 }
@@ -1494,7 +1497,7 @@ li.active .toggler:before {
   display: flex;
   justify-content: center;
   position: relative;
-  margin-top: 45px;
+  margin-top: 63px;
 }
 
 .about-opt__viking {
