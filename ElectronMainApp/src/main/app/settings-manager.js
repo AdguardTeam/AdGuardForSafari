@@ -263,6 +263,7 @@ module.exports = (function () {
 
     const changeAllowlistState = function (value) {
         setProperty(settings.ALLOWLIST_ENABLED, value);
+        listeners.notifyListeners(events.UPDATE_WHITELIST_FILTER_RULES);
         log.info(`Allowlist ${value ? 'enabled' : 'disabled'}`);
     };
 
