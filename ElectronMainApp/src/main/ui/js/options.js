@@ -334,6 +334,7 @@ const Saver = function (options) {
                 this.indicatorElement.classList.add('filter-rules__label--saved');
                 setTimeout(() => {
                     this.indicatorElement.textContent = '';
+                    this.indicatorElement.classList.remove('filter-rules__label--saved');
                 }, HIDE_INDICATOR_TIMEOUT_MS);
                 break;
             default:

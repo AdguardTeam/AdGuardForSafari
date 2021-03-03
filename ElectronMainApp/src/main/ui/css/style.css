@@ -1715,7 +1715,7 @@ li.active .toggler:before {
 
 .filter-rules__label {
   float: left;
-  margin: 10px 0 0 15px;
+  margin: 10px 0 0 0;
   max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
@@ -1725,8 +1725,8 @@ li.active .toggler:before {
   line-height: 22px;
 }
 .filter-rules__label--saved {
-  padding-right: 22px;
-  background: url(../images/tick.svg) right center no-repeat;
+  padding-left: 22px;
+  background: url(../images/tick.svg) left 17% no-repeat;
   background-size: 15px;
 }
 
