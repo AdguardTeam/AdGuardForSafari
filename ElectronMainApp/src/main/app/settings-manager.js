@@ -254,6 +254,7 @@ module.exports = (function () {
 
     const changeUserrulesState = function (value) {
         setProperty(settings.USERRULES_ENABLED, value);
+        listeners.notifyListeners(events.UPDATE_FILTER_RULES);
         log.info(`User rules ${value ? 'enabled' : 'disabled'}`);
     };
 
@@ -263,6 +264,7 @@ module.exports = (function () {
 
     const changeAllowlistState = function (value) {
         setProperty(settings.ALLOWLIST_ENABLED, value);
+        listeners.notifyListeners(events.UPDATE_WHITELIST_FILTER_RULES);
         log.info(`Allowlist ${value ? 'enabled' : 'disabled'}`);
     };
 

@@ -600,9 +600,10 @@ const UserFilter = function () {
         ipcRenderer.on('getUserRulesResponse', (e, arg) => {
             /* eslint-disable-next-line no-unused-vars */
             hasContent = !!arg.content;
-            editor.setValue(arg.content || '', 1);
+            const userRulesText = (arg.content || []).join('\n');
+            editor.setValue(userRulesText, 1);
             applyChangesBtn.classList.add('disabled');
-            const userrulesNum = countNotEmptyLines(arg.content);
+            const userrulesNum = countNotEmptyLines(userRulesText);
             setUserrulesNum(userrulesNum);
             contentBlockerInfo.userRulesNum = userrulesNum;
         });

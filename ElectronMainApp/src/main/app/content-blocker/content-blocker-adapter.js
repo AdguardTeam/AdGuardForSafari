@@ -147,8 +147,8 @@ module.exports = (function () {
 
         log.info('Rules loaded: {0}', rules.length);
 
-        if (settings.isAllowlistEnabled() && antibanner.isRunning()) {
-            if (settings.isDefaultWhiteListMode() && settings.isAllowlistEnabled()) {
+        if (antibanner.isRunning()) {
+            if (settings.isDefaultWhiteListMode()) {
                 rules = rules.concat(whitelist.getRules().map((r) => {
                     return { filterId: 0, ruleText: r };
                 }));

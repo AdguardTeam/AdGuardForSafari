@@ -336,12 +336,15 @@ module.exports = (function () {
     const getRules = function () {
         // TODO: blockListFilter
         const result = [];
-        getWhiteListedDomains().forEach((d) => {
-            const rule = createWhiteListRule(d);
-            if (rule) {
-                result.push(rule);
-            }
-        });
+
+        if (settings.isAllowlistEnabled()) {
+            getWhiteListedDomains().forEach((d) => {
+                const rule = createWhiteListRule(d);
+                if (rule) {
+                    result.push(rule);
+                }
+            });
+        }
 
         return result;
     };

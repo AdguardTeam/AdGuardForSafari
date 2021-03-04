@@ -116,7 +116,7 @@ module.exports = (() => {
                     setUserFilter(rules);
                 });
             } else if (event === events.UPDATE_WHITELIST_FILTER_RULES) {
-                setWhitelistDomains(applicationApi.getWhitelist());
+                setWhitelistDomains(settings.isAllowlistEnabled() ? applicationApi.getWhitelist() : []);
             } else if (event === events.PROTECTION_STATUS_CHANGED) {
                 setProtectionEnabled(!!info);
             }

@@ -81,7 +81,7 @@ module.exports.init = function () {
                 whitelist.changeDefaultWhiteListMode(message.enabled);
                 break;
             case 'getUserRules':
-                userrules.getUserRulesText((content) => {
+                userrules.getUserRules((content) => {
                     sendResponse(event, 'getUserRulesResponse', { content });
                 });
                 break;
