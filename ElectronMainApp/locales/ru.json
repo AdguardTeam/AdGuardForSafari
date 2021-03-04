@@ -515,6 +515,9 @@
     "settings_notification_cb_extensions_text": {
         "message": "Вам необходимо включить все расширения-блокировщики контента от AdGuard для корректной блокировки рекламы в Safari"
     },
+    "settings_notification_update_interval": {
+        "message": "Внимание! Устаревшие фильтры снижают качество защиты, поэтому важно обновлять их регулярно."
+    },
     "options_cb_general_title": {
         "message": "AdGuard Основные"
     },
