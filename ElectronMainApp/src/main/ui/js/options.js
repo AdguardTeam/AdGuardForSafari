@@ -334,6 +334,7 @@ const Saver = function (options) {
                 this.indicatorElement.classList.add('filter-rules__label--saved');
                 setTimeout(() => {
                     this.indicatorElement.textContent = '';
+                    this.indicatorElement.classList.remove('filter-rules__label--saved');
                 }, HIDE_INDICATOR_TIMEOUT_MS);
                 break;
             default:
@@ -898,7 +899,7 @@ const AntiBannerFilters = function (options) {
     function getFilterCategoryElement(category) {
         return Utils.htmlToElement(`
                 <li id="category${category.groupId}" class="active">
-                    <a href="#antibanner${category.groupId}" class="block-type">
+                    <a href="#antibanner${category.groupId}" class="block-type filter-group">
                         <div class="block-type__desc">
                             <div class="block-type__desc-title">${category.groupName}</div>
                             <div class="desc desc--filters"></div>
@@ -963,7 +964,7 @@ const AntiBannerFilters = function (options) {
                         </div>
                     </div>
                 </div>
-                <div class="opt-state">
+                <div class="opt-state single-opt">
                     <div class="preloader"></div>
                     ${deleteButton}
                     <input

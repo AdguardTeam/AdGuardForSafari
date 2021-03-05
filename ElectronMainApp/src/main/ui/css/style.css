@@ -118,15 +118,15 @@ body {
   line-height: 18px;
   position: relative;
   padding-left: 14px;
-  margin-top: 10px;
+  margin-top: 7px;
   display: flex;
   justify-content: space-between;
 }
 .filters-info_updates {
-  margin: 20px 0 0;
+  margin: 68px 0 0;
 }
 .filters-info .filters-search {
-  margin-top: 43px;
+  margin-top: 92px;
 }
 .settings-wrap .page-title .info .upd {
   font-weight: normal;
@@ -358,6 +358,10 @@ a.settings-actions--update-filters.loading:after {
   padding: 0;
   position: relative;
 }
+.opts-list li a {
+  position: relative;
+  z-index: 1;
+}
 .opts-list li .opt-name {
   font-weight: 500;
 }
@@ -389,6 +393,9 @@ a.settings-actions--update-filters.loading:after {
 }
 #whitelist .opts-list .opt-state {
   height: 20px;
+}
+#whitelist .opts-list .opts-desc {
+  padding-left: 0;
 }
 .warn-message {
   font-style: italic;
@@ -426,6 +433,11 @@ a.settings-actions--update-filters.loading:after {
   padding: 26px 60px 26px 55px;
   position: relative;
   left: -40px;
+}
+.opts-list .filter-group {
+  display: block;
+  width: calc(100% - 50px);
+  flex-grow: initial;
 }
 .filters-list .opts-list li {
   padding: 20px 15px;
@@ -516,10 +528,11 @@ a.settings-actions--update-filters.loading:after {
   font-size: 14px;
 }
 .block-type__ico-info {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   margin-right: 25px;
   background-repeat: no-repeat;
+  background-size: contain;
   display: inline-block;
   flex-shrink: 0;
   background-position: 50%;
@@ -659,7 +672,7 @@ a.settings-actions--update-filters.loading:after {
 }
 .settings-subtitle {
   display: flex;
-  margin-left: 20px;
+  margin-left: 18px;
 }
 .whitelist-subtitle,
 .userfilter-subtitle,
@@ -788,10 +801,10 @@ li.active .toggler:before {
 }
 .ace_gutter,
 .ace_layer.ace_gutter-layer.ace_folding-enabled {
-  width: 37px !important;
+  width: 47px !important;
 }
 .ace_scroller {
-  left: 37px !important;
+  left: 47px !important;
 }
 .preloader {
   background: url(../images/reload-ico-green.svg) no-repeat;
@@ -1324,6 +1337,7 @@ li.active .toggler:before {
   cursor: pointer;
   margin-right: 10px;
   margin-top: 4px;
+  z-index: 1;
 }
 
 .opt-name__tag:last-child {
@@ -1463,6 +1477,9 @@ li.active .toggler:before {
   overflow-y: hidden;
   line-height: 30px;
 }
+#support .settings-body-subtitle {
+  margin-bottom: 35px;
+}
 .support .block-type__desc-title {
   font-size: 16px;
 }
@@ -1491,7 +1508,7 @@ li.active .toggler:before {
   display: flex;
   justify-content: center;
   position: relative;
-  margin-top: 45px;
+  margin-top: 63px;
 }
 
 .about-opt__viking {
@@ -1703,7 +1720,7 @@ li.active .toggler:before {
 
 .filter-rules__label {
   float: left;
-  margin: 10px 0 0 15px;
+  margin: 10px 0 0 0;
   max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
@@ -1713,8 +1730,8 @@ li.active .toggler:before {
   line-height: 22px;
 }
 .filter-rules__label--saved {
-  padding-right: 22px;
-  background: url(../images/tick.svg) right center no-repeat;
+  padding-left: 22px;
+  background: url(../images/tick.svg) left 17% no-repeat;
   background-size: 15px;
 }
 
