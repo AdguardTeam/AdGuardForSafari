@@ -139,6 +139,9 @@
 
 - (IBAction)clickReport:(id)sender {
     NSString *urlString = self.currentPageUrl.absoluteString;
+    if (@available(macOS 10.14.4, *)) {
+        [SafariExtensionViewController.sharedController dismissPopover];
+    }
     if (urlString.length) {
         [[AESharedResources sharedDefaults] setObject:urlString forKey:AEDefaultsLastReportUrl];
         [AESharedResources notifyReport];
