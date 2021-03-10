@@ -1299,6 +1299,7 @@ li.active .toggler:before {
 
 .empty-filters__btn--list {
   margin-top: 20px;
+  margin-left: 15px;
 }
 
 .opt-name__info {
