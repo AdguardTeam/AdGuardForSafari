@@ -1340,6 +1340,10 @@ li.active .toggler:before {
   z-index: 2;
 }
 
+.opt-name__tag:hover {
+  z-index: 3;
+}
+
 .opt-name__tag:last-child {
   margin-right: 0;
 }
@@ -1363,7 +1367,7 @@ li.active .toggler:before {
 .opt-name__tag:before {
   display: block;
   position: absolute;
-  z-index: 1;
+  /*z-index: 1;*/
   width: 200px;
   top: 25px;
   left: calc(50% - 60px);
