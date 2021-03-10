@@ -296,6 +296,9 @@ li.active .toggler {
 .option-popup__table-cell {
 	color: rgb(77, 77, 77);
 }
+.option-popup__cross {
+	filter: brightness(.3);
+}
 .opt-name__tag:after {
 	color: #fff;
 	text-shadow: 0 -1px 2px rgba(162, 161, 161, .3);
