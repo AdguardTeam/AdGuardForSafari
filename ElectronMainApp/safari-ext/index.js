@@ -91,7 +91,8 @@ module.exports = (() => {
     const setContentBlockingJson = (bundleId, jsonString, callback) => {
         if (queue.length > QUEUE_LIMIT) {
             // In most cases it is useless to keep many jsons in queue, cause being used they overwrite themselves
-            queue.shift();
+            const cancelled = queue.shift();
+            cancelled.callback(null);
         }
 
         queue.push({
