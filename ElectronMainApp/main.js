@@ -395,12 +395,12 @@ app.on('activate', () => {
     }
 });
 
-if (getChannel() === 'Standalone Beta') {
-    process.on('uncaughtExceptionMonitor', (error) => {
+if (getChannel() === 'MAS') {
+    process.on('uncaughtException', (error) => {
         log.error(`Uncaught exception: ${error}`);
     });
 } else {
-    process.on('uncaughtException', (error) => {
+    process.on('uncaughtExceptionMonitor', (error) => {
         log.error(`Uncaught exception: ${error}`);
     });
 }
