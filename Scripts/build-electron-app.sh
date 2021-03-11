@@ -47,6 +47,7 @@ ELECTRON_VERSION=${ELECTRON_VERSION#"^"}
 yarn electron-rebuild -v ${ELECTRON_VERSION}
 
 echo "Processing ConverterTool"
+install_name_tool -delete_rpath /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx "${SRC}/../libs/ConverterTool"
 install_name_tool -add_rpath @executable_path/../Frameworks "${SRC}/../libs/ConverterTool" > /dev/null 2>&1 | echo -n
 install_name_tool -add_rpath @executable_path/../../Frameworks "${SRC}/../libs/ConverterTool" > /dev/null 2>&1 | echo -n
 
