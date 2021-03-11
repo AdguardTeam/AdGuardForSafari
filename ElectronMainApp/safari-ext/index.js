@@ -12,8 +12,6 @@ module.exports = (() => {
     const ADVANCED_BLOCKING_BUNDLE_ID = 'com.adguard.safari.AdGuard.AdvancedBlocking';
     const ICON_EXTENSION_BUNDLE_ID = 'com.adguard.safari.AdGuard.Extension';
 
-    const QUEUE_LIMIT = 20;
-
     const queue = [];
     let queueInProcess = false;
 
@@ -89,10 +87,11 @@ module.exports = (() => {
      * {"result":"error", "error":{"domain":"ErrorDomain", "code":100, "descr":"Error Description IF Available"}}
      */
     const setContentBlockingJson = (bundleId, jsonString, callback) => {
-        if (queue.length > QUEUE_LIMIT) {
-            // In most cases it is useless to keep many jsons in queue, cause being used they overwrite themselves
-            const cancelled = queue.shift();
-            cancelled.callback(null);
+        // Remove previous task on this bundle id
+        const previous = queue.find((x) => x.bundleId === bundleId);
+        if (previous) {
+            queue.splice(queue.indexOf(previous), 1);
+            previous.callback(null);
         }
 
         queue.push({
