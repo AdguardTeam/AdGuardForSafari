@@ -310,6 +310,9 @@ app.on('ready', (() => {
     i18n.setAppLocale(app.getLocale());
     if (getChannel() !== 'MAS') {
         checkIsInApplicationsFolder();
+        process.on('uncaughtException', (error) => {
+            log.error(`Uncaught exception: ${error}`);
+        });
     }
 
     log.info(`Starting AdGuard v${app.getVersion()}`);
@@ -393,8 +396,4 @@ app.on('activate', () => {
         loadMainWindow();
         uiEventListener.register(mainWindow);
     }
-});
-
-process.on('uncaughtException', (error) => {
-    log.error(`Uncaught exception: ${error}`);
 });
