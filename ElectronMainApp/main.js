@@ -396,5 +396,5 @@ app.on('activate', () => {
 });
 
 process.on('uncaughtException', (error) => {
-    log.error(`Uncaught exception${error}`);
+    log.error(`Uncaught exception: ${error}`);
 });
