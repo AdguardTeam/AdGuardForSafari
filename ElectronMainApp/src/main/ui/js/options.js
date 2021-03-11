@@ -1958,6 +1958,15 @@ const Settings = function () {
         }));
     });
 
+    const updateIntervalNotification = document.querySelector('#updateIntervalNotification');
+    const showUpdateIntervalNotification = function () {
+        if (filterUpdatePeriodSelect.value === '-1') {
+            updateIntervalNotification.style.display = 'flex';
+        } else {
+            updateIntervalNotification.style.display = 'none';
+        }
+    };
+
     const render = function () {
         periodSelect.render();
 
@@ -1996,6 +2005,7 @@ const Settings = function () {
         }));
 
         showProtectionStatusWarning(isProtectionRunning);
+        showUpdateIntervalNotification();
     };
 
     const updateContentBlockersDescription = (info) => {
@@ -2017,6 +2027,7 @@ const Settings = function () {
         updateCheckboxValue,
         updateFilterUpdatePeriodSelect,
         showProtectionStatusWarning,
+        showUpdateIntervalNotification,
         updateContentBlockersDescription,
     };
 };
@@ -2277,11 +2288,13 @@ PageController.prototype = {
     _initBoardingScreen() {
         const hideExtensionsNotificationKey = 'hide-extensions-notification';
         const hideOnboardingScreenKey = 'hide-onboarding-screen';
+        const hideUpdateIntervalNotificationKey = 'hide-update-interval-notification';
 
         const body = document.querySelector('body');
         const onBoardingScreenEl = body.querySelector('#boarding-screen-placeholder');
         const enableExtensionsNotification = document.getElementById('enableExtensionsNotification');
         const enableCbExtensionsNotification = document.getElementById('enableCbExtensionsNotification');
+        const updateIntervalNotification = document.getElementById('updateIntervalNotification');
 
         const self = this;
         ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
@@ -2294,17 +2307,21 @@ PageController.prototype = {
             onBoardingScreenEl.style.display = shouldHideOnboardingScreen ? 'none' : 'flex';
 
             const hideExtensionsNotification = !!window.sessionStorage.getItem(hideExtensionsNotificationKey);
+            const hideUpdateIntervalNotification = !!window.sessionStorage.getItem(hideUpdateIntervalNotificationKey);
             const extensionsFlag = contentBlockersEnabled && minorExtensionsEnabled;
 
             if (extensionsFlag) {
                 // extensions config had been changed - reset hide-extensions "cookie"
                 window.sessionStorage.setItem(hideExtensionsNotificationKey, false);
+                window.sessionStorage.setItem(hideUpdateIntervalNotificationKey, false);
                 window.sessionStorage.setItem(hideOnboardingScreenKey, false);
             }
 
             const shouldHideNotification = hideExtensionsNotification || extensionsFlag;
+            const shouldHideUpdateIntervalNotification = hideUpdateIntervalNotification || extensionsFlag;
 
             enableExtensionsNotification.style.display = shouldHideNotification ? 'none' : 'flex';
+            updateIntervalNotification.style.display = shouldHideUpdateIntervalNotification ? 'none' : 'flex';
             enableCbExtensionsNotification.style.display = contentBlockersEnabled ? 'none' : 'flex';
 
             self.contentBlockers.updateContentBlockers(arg);
@@ -2347,6 +2364,14 @@ PageController.prototype = {
             enableExtensionsNotification.style.display = 'none';
 
             window.sessionStorage.setItem(hideExtensionsNotificationKey, true);
+        });
+
+        const updateIntervalNotificationClose = document.getElementById('updateIntervalNotificationClose');
+        updateIntervalNotificationClose.addEventListener('click', (e) => {
+            e.preventDefault();
+            updateIntervalNotification.style.display = 'none';
+
+            window.sessionStorage.setItem(hideUpdateIntervalNotificationKey, true);
         });
 
         this.checkSafariExtensions();
@@ -2539,6 +2564,7 @@ const initPage = function (response) {
                     break;
                 case EventNotifierTypes.FILTERS_PERIOD_UPDATED:
                     controller.settings.updateFilterUpdatePeriodSelect(options);
+                    controller.settings.showUpdateIntervalNotification();
                     break;
                 case EventNotifierTypes.PROTECTION_STATUS_CHANGED:
                     controller.settings.showProtectionStatusWarning(options);

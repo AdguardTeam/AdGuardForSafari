@@ -536,6 +536,9 @@
     "settings_notification_cb_extensions_text": {
         "message": "You should enable all AdGuard content blocker extensions for correct ad blocking in Safari"
     },
+    "settings_notification_update_interval": {
+        "message": "Please note that outdated filters decrease the quality of protection, so it's important to keep them up to date."
+    },
     "options_cb_general_title": {
         "message": "AdGuard General"
     },
