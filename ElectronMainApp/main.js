@@ -394,3 +394,7 @@ app.on('activate', () => {
         uiEventListener.register(mainWindow);
     }
 });
+
+process.on('uncaughtException', (error) => {
+    log.error(`Uncaught exception${error}`);
+});
