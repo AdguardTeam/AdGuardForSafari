@@ -1961,12 +1961,11 @@ const Settings = function () {
     const showUpdateIntervalNotification = function () {
         const updateIntervalNotification = document.querySelector('#updateIntervalNotification');
         const hideUpdateIntervalNotificationKey = 'hide-update-interval-notification';
-        const hideNotification = window.sessionStorage.getItem(hideUpdateIntervalNotificationKey) === 'true';
-        if (filterUpdatePeriodSelect.value === '-1' && !hideNotification) {
+        const hideUpdateIntervalNotification = !!window.sessionStorage.getItem(hideUpdateIntervalNotificationKey);
+        if (filterUpdatePeriodSelect.value === '-1' && !hideUpdateIntervalNotification) {
             updateIntervalNotification.style.display = 'flex';
         } else {
             updateIntervalNotification.style.display = 'none';
-            window.sessionStorage.setItem(hideUpdateIntervalNotificationKey, false);
         }
     };
 
