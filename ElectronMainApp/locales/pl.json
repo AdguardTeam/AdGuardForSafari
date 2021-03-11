@@ -14,6 +14,39 @@
     "options_filters_filter_trusted_tag_desc": {
         "message": "Zdecydowałeś się zaufać temu filtrowi"
     },
+    "options_support": {
+        "message": "Wsparcie"
+    },
+    "options_support_faq_title": {
+        "message": "FAQ"
+    },
+    "options_support_faq_description": {
+        "message": "Często zadawane pytania"
+    },
+    "options_support_bug_report_title": {
+        "message": "Zgłoś błąd"
+    },
+    "options_support_bug_report_description": {
+        "message": "Jeśli coś nie działa poprawnie w programie"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Zgłoś nieprawidłowe zablokowanie"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Jeśli widzisz pominiętą reklamę lub „zepsutą” witrynę"
+    },
+    "options_support_feedback_title": {
+        "message": "Zostaw opinię"
+    },
+    "options_support_feedback_description": {
+        "message": "Wyślij propozycję funkcji i sugestii"
+    },
+    "options_support_rate_title": {
+        "message": "Oceń aplikację"
+    },
+    "options_support_rate_description": {
+        "message": "Podziel się z nami swoją opinią o AdGuard"
+    },
     "options_about_update_check": {
         "message": "Sprawdzanie aktualizacji"
     },
@@ -53,6 +86,12 @@
     "options_settings": {
         "message": "AdGuard dla Safari - Ustawienia"
     },
+    "options_settings_import_wrong_file_extension": {
+        "message": "Plik musi mieć rozszerzenie .json"
+    },
+    "options_settings_import_error": {
+        "message": "Błąd podczas importowania ustawień"
+    },
     "options_general_settings": {
         "message": "Główne "
     },
@@ -67,6 +106,9 @@
     },
     "options_import_settings": {
         "message": "Importuj ustawienia"
+    },
+    "options_export_logs": {
+        "message": "Eksportuj logi"
     },
     "options_antibanner": {
         "message": "Filtry"
@@ -113,6 +155,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "Dodaj niestandardowy filtr"
     },
+    "options_filters_custom_import_file": {
+        "message": "Importuj plik"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "Błąd importu"
+    },
     "options_filters_custom_step_one_title": {
         "message": "Nowa subskrypcja filtra"
     },
@@ -133,6 +181,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "Pobieranie filtra"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "Subskrybuj filtr"
     },
     "options_filters_custom_step_three_title": {
         "message": "Wystąpił błąd"
@@ -177,19 +228,31 @@
         "message": "Sprawdź aktualizacje filtrów"
     },
     "options_whitelist": {
-        "message": "Biała lista"
+        "message": "Lista dozwolonych"
     },
     "options_whitelist_description": {
-        "message": "AdGuard nie filtruje stron znajdujących się na białej liście."
+        "message": "AdGuard nie filtruje stron internetowych z Listy dozwolonych."
     },
     "options_whitelist_inverse": {
-        "message": "Odwróć białą listę<span class='sp-table-row-info'>Odblokuj reklamy wszędzie <i>z wyjątkiem</i> białej listy</span>"
+        "message": "Odwróć Listę dozwolonych<span class='sp-table-row-info'>Odblokuj reklamy wszędzie <i>z wyjątkiem</i> stron z Listy dozwolonych</span>"
     },
     "options_userfilter": {
         "message": "Reguły użytkownika"
     },
     "options_userfilter_description": {
         "message": "Możesz tutaj dodać własne reguły. Ta opcja jest&nbsp;zalecana dla zaawansowanych użytkowników znających HTML/CSS. Przeczytaj <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filter rules tutorial</a> &nbsp;aby dowiedzieć się, jak&nbsp;napisać własne reguły dotyczące filtrów."
+    },
+    "options_userfilter_import": {
+        "message": "Importuj"
+    },
+    "options_userfilter_export": {
+        "message": "Eksportuj"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "Błąd podczas importowania reguł"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "Plik musi mieć rozszerzenie .txt"
     },
     "options_show_app_updated_notification": {
         "message": "Powiadamiaj o aktualizacjach rozszerzenia"
@@ -199,6 +262,9 @@
     },
     "options_popup_update_error_title": {
         "message": "Błąd aktualizacji filtra"
+    },
+    "options_popup_update_version_error": {
+        "message": "Wersja filtru, który próbujesz zaktualizować, jest taka sama lub starsza"
     },
     "options_popup_update_not_found": {
         "message": "Nie znaleziono aktualizacji"
@@ -244,6 +310,9 @@
     },
     "options_editor_indicator_saved": {
         "message": "Zapisano"
+    },
+    "options_editor_save_button": {
+        "message": "Zapisz"
     },
     "main_menu_edit": {
         "message": "Edytuj"
@@ -323,6 +392,9 @@
     "onboarding_safari_btn": {
         "message": "Otwórz ustawienia"
     },
+    "onboarding_ignore_safari_btn": {
+        "message": "Ignoruj"
+    },
     "options_learn_more": {
         "message": "Dowiedz się więcej o tym"
     },
@@ -367,6 +439,15 @@
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "Umożliwia przyspieszenie sprzętowe dla okna ustawień, wymagane ponowne uruchomienie aplikacji"
+    },
+    "settings_import": {
+        "message": "Import ustawień"
+    },
+    "settings_import_success": {
+        "message": "Import ustawień zakończony pomyślnie"
+    },
+    "settings_import_error": {
+        "message": "Wystąpił błąd podczas importowania ustawień"
     },
     "settings_notification_protection_title": {
         "message": "Uwaga! Ochrona została wyłączona"
@@ -453,9 +534,9 @@
         "message": "Czy chcesz teraz przenieść go do folderu Aplikacje?"
     },
     "folder_check_dialog_move": {
-        "message": "Rusz to"
+        "message": "Przenieś"
     },
     "folder_check_dialog_quit": {
-        "message": "Wyloguj"
+        "message": "Porzuć"
     }
 }

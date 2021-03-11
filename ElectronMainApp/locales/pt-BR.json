@@ -14,6 +14,39 @@
     "options_filters_filter_trusted_tag_desc": {
         "message": "Você escolheu confiar neste filtro"
     },
+    "options_support": {
+        "message": "Suporte"
+    },
+    "options_support_faq_title": {
+        "message": "FAQ"
+    },
+    "options_support_faq_description": {
+        "message": "Perguntas frequentes"
+    },
+    "options_support_bug_report_title": {
+        "message": "Reportar um problema"
+    },
+    "options_support_bug_report_description": {
+        "message": "Se algo não funcionar corretamente no programa"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Denunciar bloqueio incorreto"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Se você vir um anúncio perdido ou um site \"quebrado\""
+    },
+    "options_support_feedback_title": {
+        "message": "Deixar feedback"
+    },
+    "options_support_feedback_description": {
+        "message": "Enviar solicitações e sugestões de recursos"
+    },
+    "options_support_rate_title": {
+        "message": "Avaliar o aplicativo"
+    },
+    "options_support_rate_description": {
+        "message": "Diga-nos o que você pensa sobre AdGuard"
+    },
     "options_about_update_check": {
         "message": "Verificando atualizações"
     },
@@ -45,13 +78,19 @@
         "message": "Exportar registro e informações do sistema..."
     },
     "name": {
-        "message": "AdGuard AdBlocker"
+        "message": "Bloqueador de anúncio do AdGuard"
     },
     "description": {
         "message": "Uma extensão de bloqueio incomparável contra anúncios e pop-ups. Bloqueia os anúncios do Facebook, Youtube e todos outros sites."
     },
     "options_settings": {
         "message": "AdGuard para Safari - Configurações"
+    },
+    "options_settings_import_wrong_file_extension": {
+        "message": "Extensão de arquivo deve ser .json"
+    },
+    "options_settings_import_error": {
+        "message": "Erro ao importar as configurações"
     },
     "options_general_settings": {
         "message": "Geral"
@@ -66,7 +105,10 @@
         "message": "Export settings"
     },
     "options_import_settings": {
-        "message": "Import settings"
+        "message": "Importar configurações"
+    },
+    "options_export_logs": {
+        "message": "Exportar registros"
     },
     "options_antibanner": {
         "message": "Filtros"
@@ -113,6 +155,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "Adicionar filtro personalizado"
     },
+    "options_filters_custom_import_file": {
+        "message": "Importar arquivo"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "Erro de importação"
+    },
     "options_filters_custom_step_one_title": {
         "message": "Nova inscrição de filtro"
     },
@@ -133,6 +181,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "Baixando o filtro"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "Inscrevendo-se no filtro"
     },
     "options_filters_custom_step_three_title": {
         "message": "Ocorreu um erro"
@@ -177,19 +228,31 @@
         "message": "Verificar atualizações de filtros"
     },
     "options_whitelist": {
-        "message": "Lista branca"
+        "message": "Lista de permissões"
     },
     "options_whitelist_description": {
-        "message": "O AdGuard não irá filtrar os sites da lista branca."
+        "message": "O AdGuard não irá filtrar os sites da listas de permissões."
     },
     "options_whitelist_inverse": {
-        "message": "Inverter lista branca<span class='sp-table-row-info'>Desbloquear todos anúncios <i>exceto</i> os da lista branca</span>"
+        "message": "Inverter listas de permissões<span class='sp-table-row-info'>Desbloquear todos anúncios <i>exceto</i> os da listas de permissões</span>"
     },
     "options_userfilter": {
         "message": "Regras de usuário"
     },
     "options_userfilter_description": {
         "message": "Você pode adicionar suas próprias regras para&nbsp;esse filtro. Essa opção é&nbsp;recomendada para usuários avançados familiarizados com HTML/CSS. Leia nosso <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial das regras de filtragem</a> para&nbsp;aprender como&nbsp;escrever suas próprias regras de filtragem."
+    },
+    "options_userfilter_import": {
+        "message": "Importar"
+    },
+    "options_userfilter_export": {
+        "message": "Exportar"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "Erro ao importar as regras"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "Extensão de arquivo deve ser .txt"
     },
     "options_show_app_updated_notification": {
         "message": "Notificar sobre atualizações na extensão"
@@ -199,6 +262,9 @@
     },
     "options_popup_update_error_title": {
         "message": "Erro na atualização de filtros"
+    },
+    "options_popup_update_version_error": {
+        "message": "A versão do filtro que você está tentando atualizar é a mesma ou mais antiga"
     },
     "options_popup_update_not_found": {
         "message": "Não há atualizações disponíveis"
@@ -245,6 +311,9 @@
     "options_editor_indicator_saved": {
         "message": "Salvo"
     },
+    "options_editor_save_button": {
+        "message": "Salvar"
+    },
     "main_menu_edit": {
         "message": "Editar"
     },
@@ -273,7 +342,7 @@
         "message": "Verificar atualizações de filtros"
     },
     "tray_menu_launch_at_startup": {
-        "message": "Executar o AdGuard ao Iniciar"
+        "message": "Iniciar o AdGuard ao entrar"
     },
     "tray_menu_quit": {
         "message": "Sair"
@@ -323,6 +392,9 @@
     "onboarding_safari_btn": {
         "message": "Abrir preferências"
     },
+    "onboarding_ignore_safari_btn": {
+        "message": "Ignorar"
+    },
     "options_learn_more": {
         "message": "Saiba mais"
     },
@@ -368,6 +440,15 @@
     "options_enable_hardware_acceleration_desc": {
         "message": "Habilita a aceleração de hardware para a janela de configurações, é necessário reiniciar o aplicativo"
     },
+    "settings_import": {
+        "message": "Importação de configurações"
+    },
+    "settings_import_success": {
+        "message": "Importação de configurações concluída com sucesso"
+    },
+    "settings_import_error": {
+        "message": "Ocorreu um erro durante a importação das configurações"
+    },
     "settings_notification_protection_title": {
         "message": "Proteção foi pausada"
     },
@@ -402,7 +483,7 @@
         "message": "Segurança"
     },
     "options_cb_other_title": {
-        "message": "Outro"
+        "message": "AdGuard - Outros"
     },
     "options_cb_custom_title": {
         "message": "Personalizado"
@@ -445,5 +526,17 @@
     },
     "window_close_dialog_cancel": {
         "message": "Cancelar"
+    },
+    "folder_check_dialog_message": {
+        "message": "O AdGuard para Safari deve ser iniciado na pasta de Aplicativos."
+    },
+    "folder_check_dialog_detail": {
+        "message": "Você deseja movê-lo para a pasta de Aplicativos agora?"
+    },
+    "folder_check_dialog_move": {
+        "message": "Mover"
+    },
+    "folder_check_dialog_quit": {
+        "message": "Sair"
     }
 }

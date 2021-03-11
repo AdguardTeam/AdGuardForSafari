@@ -14,6 +14,39 @@
     "options_filters_filter_trusted_tag_desc": {
         "message": "Вы решили доверять этому фильтру"
     },
+    "options_support": {
+        "message": "Поддержка"
+    },
+    "options_support_faq_title": {
+        "message": "FAQ"
+    },
+    "options_support_faq_description": {
+        "message": "Часто задаваемые вопросы"
+    },
+    "options_support_bug_report_title": {
+        "message": "Сообщить об ошибке"
+    },
+    "options_support_bug_report_description": {
+        "message": "Если что-то в программе работает некорректно"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Сообщить о некорректной блокировке"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Если вы увидели пропущенную рекламу или \"сломанный\" сайт"
+    },
+    "options_support_feedback_title": {
+        "message": "Оставить отзыв"
+    },
+    "options_support_feedback_description": {
+        "message": "Отправить запрос на новую функцию или другое предложение"
+    },
+    "options_support_rate_title": {
+        "message": "Оцените наше приложение"
+    },
+    "options_support_rate_description": {
+        "message": "Расскажите, что вы думаете об AdGuard"
+    },
     "options_about_update_check": {
         "message": "Проверка обновлений"
     },
@@ -24,7 +57,7 @@
         "message": "Обновление AdGuard для Safari"
     },
     "options_about_updates_not_found": {
-        "message": "Вы используете последнюю версию AdGuard"
+        "message": "AdGuard для Safari обновлен"
     },
     "options_about_update_downloaded": {
         "message": "Почти обновлено! Перезапустите расширение AdGuard для Safari, чтобы завершить обновление."
@@ -55,6 +88,12 @@
     },
     "options_settings": {
         "message": "Настройки AdGuard для Safari"
+    },
+    "options_settings_import_wrong_file_extension": {
+        "message": "Расширение файла должно быть .json "
+    },
+    "options_settings_import_error": {
+        "message": "Ошибка импорта настроек"
     },
     "options_general_settings": {
         "message": "Общие"
@@ -135,7 +174,7 @@
         "message": "Импортировать файл"
     },
     "options_popup_import_file_error_title": {
-        "message": "Ошибка при импортировании файла"
+        "message": "Ошибка импорта"
     },
     "options_filters_custom_step_one_title": {
         "message": "Новая подписка на фильтр"
@@ -159,7 +198,7 @@
         "message": "Загрузка фильтра"
     },
     "options_filters_custom_step_two_subscribing": {
-        "message": "Подписка на фильтр"
+        "message": "Добавление фильтра"
     },
     "options_filters_custom_step_three_title": {
         "message": "Произошла ошибка"
@@ -239,6 +278,12 @@
     "options_userfilter_description": {
         "message": "Вы можете добавлять свои собственные правила фильтрации в&nbsp;Пользовательские правила. Рекомендуется только для опытных пользователей, знакомых с&nbsp;HTML/CSS. Перейдите по&nbsp;<a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ссылке</a>, чтобы узнать, как составлять правила фильтрации."
     },
+    "options_userfilter_import_rules_error": {
+        "message": "Ошибка импорта правил фильтрации"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "Расширение файла должно быть .txt"
+    },
     "options_show_app_updated_notification": {
         "message": "Уведомлять об обновлениях расширения"
     },
@@ -247,6 +292,9 @@
     },
     "options_popup_update_error_title": {
         "message": "Ошибка обновления фильтров"
+    },
+    "options_popup_update_version_error": {
+        "message": "Версия фильтра, который вы хотите обновить, та же или более старая"
     },
     "options_popup_update_not_found": {
         "message": "Обновления не найдены"
@@ -444,7 +492,7 @@
         "message": "Открыть настройки"
     },
     "onboarding_ignore_safari_btn": {
-        "message": "Игнорировать"
+        "message": "Пропустить"
     },
     "options_learn_more": {
         "message": "Узнать больше"
@@ -493,6 +541,15 @@
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "Включить аппаратное ускорение для окна настроек. Требуется перезапуск"
+    },
+    "settings_import": {
+        "message": "Импорт настроек"
+    },
+    "settings_import_success": {
+        "message": "Настройки успешно импортированы"
+    },
+    "settings_import_error": {
+        "message": "Во время импорта настроек произошла ошибка"
     },
     "settings_notification_protection_title": {
         "message": "Защита приостановлена"
@@ -576,15 +633,15 @@
         "message": "Отмена"
     },
     "folder_check_dialog_message": {
-        "message": "AdGuard для Safari должен запускаться из папки Приложения"
+        "message": "AdGuard для Safari должен быть запущен из папки \"Приложения\""
     },
     "folder_check_dialog_detail": {
-        "message": "Переместить его в папку Приложения?"
+        "message": "Вы хотите переместить его в папку \"Приложения\"?"
     },
     "folder_check_dialog_move": {
         "message": "Переместить"
     },
     "folder_check_dialog_quit": {
-        "message": "Выйти"
+        "message": "Выход"
     }
 }

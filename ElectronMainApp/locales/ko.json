@@ -14,6 +14,39 @@
     "options_filters_filter_trusted_tag_desc": {
         "message": "이 필터를 신뢰하셨습니다."
     },
+    "options_support": {
+        "message": "고객지원"
+    },
+    "options_support_faq_title": {
+        "message": "FAQ"
+    },
+    "options_support_faq_description": {
+        "message": "자주 묻는 질문"
+    },
+    "options_support_bug_report_title": {
+        "message": "버그 제보"
+    },
+    "options_support_bug_report_description": {
+        "message": "정상적으로 작동하지 않는다면 프로그램을 재시작 해보세요"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "잘못된 차단 제보"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "차단되지 않은 광고나 \"올바르게 표시되지 않는\" 웹사이트를 발견 시"
+    },
+    "options_support_feedback_title": {
+        "message": "피드백 남기기"
+    },
+    "options_support_feedback_description": {
+        "message": "기능 요청 또는 제안 제출"
+    },
+    "options_support_rate_title": {
+        "message": "앱을 평가해주세요"
+    },
+    "options_support_rate_description": {
+        "message": "AdGuard에 대한 의견을 남겨주세요"
+    },
     "options_about_update_check": {
         "message": "업데이트 확인 중"
     },
@@ -53,6 +86,12 @@
     "options_settings": {
         "message": "Safari용 AdGuard - 설정"
     },
+    "options_settings_import_wrong_file_extension": {
+        "message": ""
+    },
+    "options_settings_import_error": {
+        "message": "설정을 가져오는 중 오류가 발생했습니다"
+    },
     "options_general_settings": {
         "message": "일반"
     },
@@ -60,13 +99,16 @@
         "message": "Safari용 AdGuard는 무료 오픈소스 소프트웨어입니다. 저희는 여러분의 피드백과 기여를 환영합니다. 만약 버그 신고나 새 기능을 요청하고 싶으시다면, <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>저희의 Github 저장소</a>로 향하세요."
     },
     "options_allow_acceptable_ads": {
-        "message": "웹사이트의 광고와 셀프 프로모션 검색 허용"
+        "message": "검색 엔진의 광고와 웹사이트의 자체 광고 허용"
     },
     "options_export_settings": {
         "message": "설정 내보내기"
     },
     "options_import_settings": {
         "message": "설정 불러오기"
+    },
+    "options_export_logs": {
+        "message": "로그 내보내기"
     },
     "options_antibanner": {
         "message": "필터"
@@ -113,6 +155,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "사용자 정의 필터 추가"
     },
+    "options_filters_custom_import_file": {
+        "message": "파일 가져오기"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "불러오기 오류"
+    },
     "options_filters_custom_step_one_title": {
         "message": "새로운 필터 구독"
     },
@@ -133,6 +181,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "필터 다운로드 중"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "필터 구독 중"
     },
     "options_filters_custom_step_three_title": {
         "message": "오류가 발생하였습니다"
@@ -191,6 +242,18 @@
     "options_userfilter_description": {
         "message": "자신만의 규칙을&nbsp;추가할 수 있습니다. 이 설정은&nbsp;HTML/CSS에 익숙한 고급 사용자에게 권장합니다. <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>필터 규칙 튜토리얼</a>을 읽어보고&nbsp; 사용자 지정 필터 규칙&nbsp;을 어떻게 사용하는지 알아보세요."
     },
+    "options_userfilter_import": {
+        "message": "가져오기"
+    },
+    "options_userfilter_export": {
+        "message": "내보내기"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "필터 가져오기 오류"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": ""
+    },
     "options_show_app_updated_notification": {
         "message": "필터 업데이트 알림"
     },
@@ -199,6 +262,9 @@
     },
     "options_popup_update_error_title": {
         "message": "필터 업데이트 에러"
+    },
+    "options_popup_update_version_error": {
+        "message": "업데이트하려는 필터의 버전이 같거나 더 오래되었습니다"
     },
     "options_popup_update_not_found": {
         "message": "업데이트 없음"
@@ -244,6 +310,9 @@
     },
     "options_editor_indicator_saved": {
         "message": "저장됨"
+    },
+    "options_editor_save_button": {
+        "message": "저장"
     },
     "main_menu_edit": {
         "message": "편집"
@@ -323,6 +392,9 @@
     "onboarding_safari_btn": {
         "message": "환경 설정 열기"
     },
+    "onboarding_ignore_safari_btn": {
+        "message": "무시"
+    },
     "options_learn_more": {
         "message": "자세히 알아보기"
     },
@@ -367,6 +439,15 @@
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "설정 창에 하드웨어 가속 활성화, 애플리케이션 재시작 필요"
+    },
+    "settings_import": {
+        "message": "설정 불러오기"
+    },
+    "settings_import_success": {
+        "message": "설정을 성공적으로 불러왔습니다"
+    },
+    "settings_import_error": {
+        "message": "설정을 불러오던 중 오류가 발생했습니다"
     },
     "settings_notification_protection_title": {
         "message": "주의! 보호가 비활성화되어 있습니다"
@@ -445,5 +526,17 @@
     },
     "window_close_dialog_cancel": {
         "message": "취소"
+    },
+    "folder_check_dialog_message": {
+        "message": "Safari용 AdGuard는 애플리케이션 폴더에서 실행되어야 합니다."
+    },
+    "folder_check_dialog_detail": {
+        "message": "지금 바로 애플리케이션 폴더로 옮기실건가요?"
+    },
+    "folder_check_dialog_move": {
+        "message": "이동"
+    },
+    "folder_check_dialog_quit": {
+        "message": "종료"
     }
 }

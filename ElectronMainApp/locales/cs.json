@@ -14,6 +14,39 @@
     "options_filters_filter_trusted_tag_desc": {
         "message": "Zvolili jste si důvěřovat tomuto filtru"
     },
+    "options_support": {
+        "message": "Podpora"
+    },
+    "options_support_faq_title": {
+        "message": "FAQ"
+    },
+    "options_support_faq_description": {
+        "message": "Často kladené otázky"
+    },
+    "options_support_bug_report_title": {
+        "message": "Nahlásit chybu"
+    },
+    "options_support_bug_report_description": {
+        "message": "Pokud v programu něco nefunguje správně"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Nahlásit nekorektní blokování"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Pokud vidíte nevyfiltrovanou reklamu nebo „nefunkční“ web"
+    },
+    "options_support_feedback_title": {
+        "message": "Zanechat zpětnou vazbu"
+    },
+    "options_support_feedback_description": {
+        "message": "Odešlete požadavky a návrhy funkcí"
+    },
+    "options_support_rate_title": {
+        "message": "Ohodnotit aplikaci"
+    },
+    "options_support_rate_description": {
+        "message": "Řekněte nám, co si myslíte o AdGuardu"
+    },
     "options_about_update_check": {
         "message": "Kontroluji aktualizace"
     },
@@ -53,6 +86,12 @@
     "options_settings": {
         "message": "AdGuard pro Safari - Nastavení"
     },
+    "options_settings_import_wrong_file_extension": {
+        "message": "Přípona souboru rozšíření musí být .json"
+    },
+    "options_settings_import_error": {
+        "message": "Chyba při načítání nastavení"
+    },
     "options_general_settings": {
         "message": "Obecné"
     },
@@ -67,6 +106,9 @@
     },
     "options_import_settings": {
         "message": "Import settings"
+    },
+    "options_export_logs": {
+        "message": "Exportovat protokoly"
     },
     "options_antibanner": {
         "message": "Filtry"
@@ -113,6 +155,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "Přidat vlastní filtr"
     },
+    "options_filters_custom_import_file": {
+        "message": "Importovat soubor"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "Chyba importu"
+    },
     "options_filters_custom_step_one_title": {
         "message": "Odběr nového filtru"
     },
@@ -133,6 +181,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "Stahování filtru"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "Přihlášení k odběru filtru"
     },
     "options_filters_custom_step_three_title": {
         "message": "Vyskytla se chyba"
@@ -177,19 +228,31 @@
         "message": "Vyhledat aktualizace filtrů"
     },
     "options_whitelist": {
-        "message": "Whitelist"
+        "message": "Seznam povolených"
     },
     "options_whitelist_description": {
-        "message": "AdGuard neblokuje reklamy na těchto stránkách"
+        "message": "AdGuard nefiltruje stránky v seznamu povolených."
     },
     "options_whitelist_inverse": {
-        "message": "Invertovat Whitelist <span class='sp-table-row-info'>. Blokuje reklamy všude <i> , kromě </i> stránek uvedených ve whitelistu</span>."
+        "message": "Invertovat seznam povolených<span class='sp-table-row-info'>. Odblokuje reklamy všude <i>, kromě</i> stránek uvedených v seznamu povolených</span>"
     },
     "options_userfilter": {
         "message": "Uživatelská pravidla"
     },
     "options_userfilter_description": {
         "message": "Zde můžete přidat vlastní pravidla. Tato možnost je doporučena pro pokročilé uživatele, kteří jsou obeznámeni s HTML/CSS. Chcete-li se neučit psát svá vlastní filtrovací pravidla, přečtěte si <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filter rules tutorial</a>návod filtrovacích pravidel</a>."
+    },
+    "options_userfilter_import": {
+        "message": "Import"
+    },
+    "options_userfilter_export": {
+        "message": "Export"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "Chyba při importu pravidel"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "Přípona souboru rozšíření musí být .txt"
     },
     "options_show_app_updated_notification": {
         "message": "Upozornit na aktualizace rozšíření"
@@ -199,6 +262,9 @@
     },
     "options_popup_update_error_title": {
         "message": "Chyba aktualizace filtrů"
+    },
+    "options_popup_update_version_error": {
+        "message": "Verze filtru, který se pokoušíte aktualizovat, je stejná nebo starší"
     },
     "options_popup_update_not_found": {
         "message": "Nenalezeny žádné aktualizace"
@@ -244,6 +310,9 @@
     },
     "options_editor_indicator_saved": {
         "message": "Uloženo"
+    },
+    "options_editor_save_button": {
+        "message": "Uložit"
     },
     "main_menu_edit": {
         "message": "Upravit"
@@ -323,6 +392,9 @@
     "onboarding_safari_btn": {
         "message": "Otevřít předvolby"
     },
+    "onboarding_ignore_safari_btn": {
+        "message": "Ignorovat"
+    },
     "options_learn_more": {
         "message": "Zjistit více"
     },
@@ -367,6 +439,15 @@
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "Zapne hardwarovou akceleraci pro okno nastavení. Vyžaduje restart aplikace"
+    },
+    "settings_import": {
+        "message": "Import nastavení"
+    },
+    "settings_import_success": {
+        "message": "Import nastavení byl úspěšně dokončen"
+    },
+    "settings_import_error": {
+        "message": "Během importu nastavení došlo k chybě"
     },
     "settings_notification_protection_title": {
         "message": "Pozor! Ochrana byla vypnuta"
@@ -445,5 +526,17 @@
     },
     "window_close_dialog_cancel": {
         "message": "Zrušit"
+    },
+    "folder_check_dialog_message": {
+        "message": "AdGuard pro Safari by měl být spuštěn ze složky Aplikace."
+    },
+    "folder_check_dialog_detail": {
+        "message": "Chcete jej nyní přesunout do složky Aplikace?"
+    },
+    "folder_check_dialog_move": {
+        "message": "Přesunout"
+    },
+    "folder_check_dialog_quit": {
+        "message": "Ukončit"
     }
 }

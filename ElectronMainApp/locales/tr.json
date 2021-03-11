@@ -3,16 +3,49 @@
         "message": "About AdGuard for Safari"
     },
     "options_popup_trusted_filter_title": {
-        "message": "Trusted"
+        "message": "Güvenilir"
     },
     "options_popup_trusted_filter_description": {
-        "message": "Trusted filters can use powerful filtering rules modifiers which can be dangerous in the wrong hands. Do not check this box unless you fully trust it."
+        "message": "Güvenilir filtreler, yanlış ellerde tehlikeli olabilecek güçlü filtreleme kuralı değiştiricileri kullanabilir. Tam anlamıyla güvenmediğiniz sürece bu kutuyu işaretlemeyin."
     },
     "options_filters_filter_trusted_tag": {
-        "message": "trusted"
+        "message": "güvenilir"
     },
     "options_filters_filter_trusted_tag_desc": {
-        "message": "You chose to trust this filter"
+        "message": "Bu filtreye güvenmeyi seçtiniz"
+    },
+    "options_support": {
+        "message": "Destek"
+    },
+    "options_support_faq_title": {
+        "message": "SSS"
+    },
+    "options_support_faq_description": {
+        "message": "Sıkça sorulan sorular"
+    },
+    "options_support_bug_report_title": {
+        "message": "Hata bildir"
+    },
+    "options_support_bug_report_description": {
+        "message": "Eğer programda bir şey düzgün çalışmıyorsa"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Hatalı engellemeyi bildir"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Kaçan bir reklam veya \"bozuk\" bir site görürseniz"
+    },
+    "options_support_feedback_title": {
+        "message": "Geri bildirimde bulunun"
+    },
+    "options_support_feedback_description": {
+        "message": "Yeni özellik isteği veya öneri gönderin"
+    },
+    "options_support_rate_title": {
+        "message": "Uygulamayı değerlendirin"
+    },
+    "options_support_rate_description": {
+        "message": "AdGuard hakkında ne düşündüğünüzü bize bildirin"
     },
     "options_about_update_check": {
         "message": "Checking for updates"
@@ -45,13 +78,19 @@
         "message": "Günlükleri ve sistem bilgilerini dışa aktar..."
     },
     "name": {
-        "message": "AdGuard AdBlocker"
+        "message": "AdGuard Reklam Engelleyicisi"
     },
     "description": {
         "message": "Reklam ve pop-uplara karşı benzersiz reklam engelleme eklentisi. Facebook, Youtube ve diğer tüm sitelerdeki reklamları engeller."
     },
     "options_settings": {
         "message": "Safari için AdGuard - Ayarlar"
+    },
+    "options_settings_import_wrong_file_extension": {
+        "message": "Dosya uzantısı .json olmalı"
+    },
+    "options_settings_import_error": {
+        "message": "Ayarlar içe aktarılırken hata oluştu"
     },
     "options_general_settings": {
         "message": "Genel"
@@ -68,6 +107,9 @@
     "options_import_settings": {
         "message": "Import settings"
     },
+    "options_export_logs": {
+        "message": "Günlükleri dışa aktar"
+    },
     "options_antibanner": {
         "message": "Filtreler"
     },
@@ -79,14 +121,14 @@
     },
     "options_antibanner_info_rules": {
         "message": {
-            "one": "%s rule",
-            "other": "%s rules"
+            "one": "%s kural",
+            "other": "%s kural"
         }
     },
     "options_antibanner_info_adv_rules": {
         "message": {
-            "one": "%s advanced rule",
-            "other": "%s advanced rules"
+            "one": "%s gelişmiş kural",
+            "other": "%s gelişmiş kural"
         }
     },
     "options_filters_enabled": {
@@ -113,6 +155,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "Özel filtre ekle"
     },
+    "options_filters_custom_import_file": {
+        "message": "Dosyayı içe aktar"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "İçe aktarma hatası"
+    },
     "options_filters_custom_step_one_title": {
         "message": "Yeni filtre aboneliği"
     },
@@ -129,10 +177,13 @@
         "message": "İptal"
     },
     "options_filters_custom_step_one_next": {
-        "message": "İleri"
+        "message": "Sonraki"
     },
     "options_filters_custom_step_two_checking": {
         "message": "Filtre indiriliyor"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "Filtreye abone olmak"
     },
     "options_filters_custom_step_three_title": {
         "message": "Hata oluştu"
@@ -177,19 +228,31 @@
         "message": "Filtre güncellemelerini denetle"
     },
     "options_whitelist": {
-        "message": "Beyaz liste"
+        "message": "İzin verilen listesi"
     },
     "options_whitelist_description": {
-        "message": "AdGuard, beyazlistedeki sitelerde reklamları filtrelemez."
+        "message": "AdGuard, İzin verilen listedeki sitelerde reklamları engellemez."
     },
     "options_whitelist_inverse": {
-        "message": "Beyazlisteyi içe aktar<span class='sp-table-row-info'>bu beyazliste harici tüm reklamları engelle <i></i> </span>"
+        "message": "İzin verilen listesini ters çevir<span class='sp-table-row-info'>İzin verilen listesindeki siteler <i>dışında</i> her yerde reklamların engelini kaldırın</span>"
     },
     "options_userfilter": {
         "message": "Kullanıcı kuralları"
     },
     "options_userfilter_description": {
         "message": "Burada kendi kurallarınızı ekleyebilirsiniz. Bu seçenek HTML/CSS kodları hakkında bilgi sahibi olan gelişmiş kullanıcılar için önerilir. Kendi filtre kurallarınızı nasıl yazacağınızı öğrenmek için <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filtre kuralları eğitimini</a> okuyun."
+    },
+    "options_userfilter_import": {
+        "message": "İçe aktar"
+    },
+    "options_userfilter_export": {
+        "message": "Dışa aktar"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "Kuralları içe aktarırken hata"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "Dosya uzantısı .txt olmalı"
     },
     "options_show_app_updated_notification": {
         "message": "Eklenti güncellemelerini bana bildir"
@@ -199,6 +262,9 @@
     },
     "options_popup_update_error_title": {
         "message": "Filtre güncelleme hatası"
+    },
+    "options_popup_update_version_error": {
+        "message": "Güncellemeye çalıştığınız filtrenin sürümü aynı veya daha eski"
     },
     "options_popup_update_not_found": {
         "message": "Güncelleme bulunamadı!"
@@ -245,6 +311,9 @@
     "options_editor_indicator_saved": {
         "message": "Kaydedildi"
     },
+    "options_editor_save_button": {
+        "message": "Kaydet"
+    },
     "main_menu_edit": {
         "message": "Düzenle"
     },
@@ -267,7 +336,7 @@
         "message": "Hakkında"
     },
     "tray_menu_preferences": {
-        "message": "Seçenekler"
+        "message": "Tercihler"
     },
     "tray_menu_check_updates": {
         "message": "Filtre güncellemelerini denetle"
@@ -321,7 +390,10 @@
         "message": "Safari ayarlarda ; \"AdGuard Safari Icon\" ve \"AdGuard\" yanlarındaki kutucukları işaretleyin"
     },
     "onboarding_safari_btn": {
-        "message": "Seçenekleri aç"
+        "message": "Tercihleri aç"
+    },
+    "onboarding_ignore_safari_btn": {
+        "message": "Yoksay"
     },
     "options_learn_more": {
         "message": "Daha fazla bilgi edin"
@@ -357,16 +429,25 @@
         "message": "Giriş yaparken Safari için Adguard'ı başlat"
     },
     "options_verbose_logging": {
-        "message": "Verbose logging"
+        "message": "Ayrıntılı günlük kayıt"
     },
     "options_verbose_logging_desc": {
-        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
+        "message": "Eğer Ayrıntılı günlük kaydı etkinleştirilirse, AdGuard Safari eklentileri tarayıcı konsoluna ek bilgiler yazdırır"
     },
     "options_enable_hardware_acceleration": {
         "message": "Donanımsal hızlandırmayı etkinleştir"
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "Ayarlar penceresi için donanımsal hızlandırmayı etkinleştirir, uygulamanın yeniden başlatılması gerekir"
+    },
+    "settings_import": {
+        "message": "Ayarları içe aktar"
+    },
+    "settings_import_success": {
+        "message": "Ayarları içe aktarma başarıyla tamamlandı"
+    },
+    "settings_import_error": {
+        "message": "Ayarları içe aktarırken bir hata oluştu"
     },
     "settings_notification_protection_title": {
         "message": "Koruma duraklatıldı"
@@ -453,7 +534,7 @@
         "message": "Şimdi onu Uygulamalar klasörüne taşımak istiyor musunuz?"
     },
     "folder_check_dialog_move": {
-        "message": "Hareket"
+        "message": "Taşı"
     },
     "folder_check_dialog_quit": {
         "message": "Çıkış"

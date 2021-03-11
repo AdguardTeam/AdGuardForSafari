@@ -14,6 +14,39 @@
     "options_filters_filter_trusted_tag_desc": {
         "message": "Ви встановили довіру цьому фільтру"
     },
+    "options_support": {
+        "message": "Підтримка"
+    },
+    "options_support_faq_title": {
+        "message": "Часті питання"
+    },
+    "options_support_faq_description": {
+        "message": "Часті запитання"
+    },
+    "options_support_bug_report_title": {
+        "message": "Повідомити про помилку"
+    },
+    "options_support_bug_report_description": {
+        "message": "Якщо щось не працює правильно в програмі"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Повідомити про неправильне блокування"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Якщо ви бачите пропущену рекламу чи «пошкоджений» вебсайт"
+    },
+    "options_support_feedback_title": {
+        "message": "Залишити відгук"
+    },
+    "options_support_feedback_description": {
+        "message": "Подавайте запити нових функцій та пропозиції"
+    },
+    "options_support_rate_title": {
+        "message": "Оцінити програму"
+    },
+    "options_support_rate_description": {
+        "message": "Розкажіть нам про свої враження від AdGuard"
+    },
     "options_about_update_check": {
         "message": "Перевірка оновлень"
     },
@@ -53,6 +86,12 @@
     "options_settings": {
         "message": "AdGuard для Safari - Налаштування"
     },
+    "options_settings_import_wrong_file_extension": {
+        "message": "Розширення файлу має бути .json"
+    },
+    "options_settings_import_error": {
+        "message": "Помилка імпортування налаштувань"
+    },
     "options_general_settings": {
         "message": "Загальні"
     },
@@ -60,13 +99,16 @@
         "message": "AdGuard for Safari - безкоштовне програмне забезпечення з відкритим кодом. Ми вдячні за Ваші відгуки та пропозиції. Якщо ви хочете повідомити про помилку або надіслати запит на функцію, перейдіть на сторінку <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>наш репозіторій Github</a>."
     },
     "options_allow_acceptable_ads": {
-        "message": "Дозволити рекламу в результатах пошуку і саморекламу веб-сайтів"
+        "message": "Дозволити рекламу в результатах пошуку і саморекламу вебсайтів"
     },
     "options_export_settings": {
         "message": "Експорт налаштувань"
     },
     "options_import_settings": {
         "message": "Імпорт налаштувань"
+    },
+    "options_export_logs": {
+        "message": "Експортувати журнали"
     },
     "options_antibanner": {
         "message": "Фільтри"
@@ -113,6 +155,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "Додати власний фільтр"
     },
+    "options_filters_custom_import_file": {
+        "message": "Імпортувати файл"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "Помилка імпортування"
+    },
     "options_filters_custom_step_one_title": {
         "message": "Додавання нового фільтру"
     },
@@ -133,6 +181,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "Завантаження фільтру"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "Додавання фільтру"
     },
     "options_filters_custom_step_three_title": {
         "message": "Виникла помилка"
@@ -177,19 +228,31 @@
         "message": "Перевірити оновлення фільтрів"
     },
     "options_whitelist": {
-        "message": "Білий список"
+        "message": "Список дозволів"
     },
     "options_whitelist_description": {
-        "message": "AdGuard не працює на сайтах, доданих у білий список."
+        "message": "AdGuard не фільтрує вебсайти, додані до списку дозволів."
     },
     "options_whitelist_inverse": {
-        "message": "Інвертувати білий список<span class='sp-table-row-info'>Розблокувати рекламу всюди, <i>за винятком</i> білого списку</span>"
+        "message": "Інвертувати список дозволів<span class='sp-table-row-info'>Розблокувати рекламу всюди, <i>за винятком</i> вебсайтів зі списку дозволів</span>"
     },
     "options_userfilter": {
         "message": "Правила користувача"
     },
     "options_userfilter_description": {
         "message": "Тут ви можете додавати власні правила. Ця функція&nbsp;рекомендується лише для досвідчених користувачів, знайомих з HTML/CSS. Ознайомтеся з <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>настановами щодо правил фільтрування</a>, щоб&nbsp;навчитися створювати&nbsp;власні правила фільтрування."
+    },
+    "options_userfilter_import": {
+        "message": "Імпортувати"
+    },
+    "options_userfilter_export": {
+        "message": "Експортувати"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "Помилка імпортування правил"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "Розширення файлу має бути .txt"
     },
     "options_show_app_updated_notification": {
         "message": "Сповіщати про оновлення розширення"
@@ -199,6 +262,9 @@
     },
     "options_popup_update_error_title": {
         "message": "Помилка оновлення фільтрів"
+    },
+    "options_popup_update_version_error": {
+        "message": "Версія фільтра, який ви намагаєтесь оновити, така ж або старіша"
     },
     "options_popup_update_not_found": {
         "message": "Оновлень не знайдено"
@@ -245,6 +311,9 @@
     "options_editor_indicator_saved": {
         "message": "Збережено"
     },
+    "options_editor_save_button": {
+        "message": "Зберегти"
+    },
     "main_menu_edit": {
         "message": "Редагувати"
     },
@@ -273,7 +342,7 @@
         "message": "Перевірити оновлення фільтрів"
     },
     "tray_menu_launch_at_startup": {
-        "message": "Запускати AdGuard при вході"
+        "message": "Запускати AdGuard під час входу"
     },
     "tray_menu_quit": {
         "message": "Вихід"
@@ -323,8 +392,11 @@
     "onboarding_safari_btn": {
         "message": "Відкрити налаштування"
     },
+    "onboarding_ignore_safari_btn": {
+        "message": "Пропустити"
+    },
     "options_learn_more": {
-        "message": "Дізнайтеся більше про це"
+        "message": "Докладніше"
     },
     "options_about_version": {
         "message": "Версія %s"
@@ -367,6 +439,15 @@
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "Активує апаратне прискорення для вікна параметрів (необхідний перезапуск)"
+    },
+    "settings_import": {
+        "message": "Імпортування налаштувань"
+    },
+    "settings_import_success": {
+        "message": "Налаштування успішно імпортовані"
+    },
+    "settings_import_error": {
+        "message": "Під час імпортування сталася помилка"
     },
     "settings_notification_protection_title": {
         "message": "Захист призупинено"
@@ -414,7 +495,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Перевищено обмеження в 50000 правил. Будь ласка, вимкніть непотрібні правила для коректної роботи.<br/>Зараз увімкнено правил: %s (вимкнено правил: $2)"
+        "message": "Перевищено обмеження в 50000 правил. Вимкніть непотрібні правила для належної роботи програми.<br/>Зараз увімкнено правил: %s (вимкнено правил: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Вимкнено в Safari"
@@ -447,13 +528,13 @@
         "message": "Скасувати"
     },
     "folder_check_dialog_message": {
-        "message": "AdGuard для Safari треба запускати з папки Програми."
+        "message": "AdGuard для Safari слід запускати з теки Програми."
     },
     "folder_check_dialog_detail": {
-        "message": "Хочете перенести його до папки Програми?"
+        "message": "Хочете перемістити його до теки Програми зараз?"
     },
     "folder_check_dialog_move": {
-        "message": "Перенести"
+        "message": "Перемістити"
     },
     "folder_check_dialog_quit": {
         "message": "Вийти"

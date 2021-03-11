@@ -14,6 +14,39 @@
     "options_filters_filter_trusted_tag_desc": {
         "message": "Ați ales să vă încredeți în acest filtru"
     },
+    "options_support": {
+        "message": "Suport"
+    },
+    "options_support_faq_title": {
+        "message": "FAQ"
+    },
+    "options_support_faq_description": {
+        "message": "Întrebări frecvente"
+    },
+    "options_support_bug_report_title": {
+        "message": "Raportați o eroare"
+    },
+    "options_support_bug_report_description": {
+        "message": "Dacă ceva nu funcționează corect în program"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Raportați blocări incorecte"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Dacă vedeți un anunț ratat sau un site \"deteriorat\""
+    },
+    "options_support_feedback_title": {
+        "message": "Lăsați un feedback"
+    },
+    "options_support_feedback_description": {
+        "message": "Trimiteți cereri de funcții și sugestii"
+    },
+    "options_support_rate_title": {
+        "message": "Evaluați aplicația"
+    },
+    "options_support_rate_description": {
+        "message": "Spuneți-ne ce părere aveți despre AdGuard"
+    },
     "options_about_update_check": {
         "message": "Se caută actualizări"
     },
@@ -53,6 +86,12 @@
     "options_settings": {
         "message": "AdGuard pentru Safari - Setări"
     },
+    "options_settings_import_wrong_file_extension": {
+        "message": "Extensia fișierului trebuie să fie .json"
+    },
+    "options_settings_import_error": {
+        "message": "Eroare la importare setări"
+    },
     "options_general_settings": {
         "message": "General"
     },
@@ -67,6 +106,9 @@
     },
     "options_import_settings": {
         "message": "Importați setările"
+    },
+    "options_export_logs": {
+        "message": "Export jurnale"
     },
     "options_antibanner": {
         "message": "Filtre"
@@ -113,6 +155,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "Adăugați filtru personalizat"
     },
+    "options_filters_custom_import_file": {
+        "message": "Importați fișierul"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "Eroare la import"
+    },
     "options_filters_custom_step_one_title": {
         "message": "Abonarea la un filtru nou"
     },
@@ -133,6 +181,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "Se descarcă filtrul"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "Se abonează la filtru"
     },
     "options_filters_custom_step_three_title": {
         "message": "A apărut o eroare"
@@ -177,19 +228,31 @@
         "message": "Verifică actualizări filtre"
     },
     "options_whitelist": {
-        "message": "Lista albă"
+        "message": "Listă autorizări"
     },
     "options_whitelist_description": {
-        "message": "AdGuard nu filtrează site-urile web din lista albă."
+        "message": "AdGuard nu filtrează site-urile web din lista de autorizări."
     },
     "options_whitelist_inverse": {
-        "message": "Lista albă inversată<span class = 'sp-table-row-info'>Deblochează reclame peste tot <i>cu excepția</i> listei albe</span>"
+        "message": "Listă autorizări inversată<span class='sp-table-row-info'>Deblochează reclame peste tot, <i> cu excepția</i> listei de autorizări</span>"
     },
     "options_userfilter": {
         "message": "Reguli Utilizator"
     },
     "options_userfilter_description": {
         "message": "Puteți adăuga propriile reguli aici. Această opțiune este&nbsp;recomandată pentru utilizatorii avansați familiarizați cu HTML/CSS. Citiți <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>ghidul</a> de&nbsp;urmat la&nbsp;scrierea propriilor reguli de filtrare."
+    },
+    "options_userfilter_import": {
+        "message": "Importați"
+    },
+    "options_userfilter_export": {
+        "message": "Exportați"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "Eroare la importul regulilor"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "Extensia fișierului trebuie să fie .txt"
     },
     "options_show_app_updated_notification": {
         "message": "Notifică despre actualizare extensii"
@@ -199,6 +262,9 @@
     },
     "options_popup_update_error_title": {
         "message": "Eroare actualizare filtru"
+    },
+    "options_popup_update_version_error": {
+        "message": "Versiunea filtrului pe care încercați să îl actualizați este aceeași sau mai veche"
     },
     "options_popup_update_not_found": {
         "message": "Nu s-au găsit actualizări"
@@ -244,6 +310,9 @@
     },
     "options_editor_indicator_saved": {
         "message": "Salvat"
+    },
+    "options_editor_save_button": {
+        "message": "Salvați"
     },
     "main_menu_edit": {
         "message": "Editare"
@@ -323,6 +392,9 @@
     "onboarding_safari_btn": {
         "message": "Deschide preferințele"
     },
+    "onboarding_ignore_safari_btn": {
+        "message": "Ignoră"
+    },
     "options_learn_more": {
         "message": "Aflați mai multe despre asta"
     },
@@ -367,6 +439,15 @@
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "Permite accelerarea hardware-ului pentru fereastra de setări. Este necesară repornirea aplicației"
+    },
+    "settings_import": {
+        "message": "Import setări"
+    },
+    "settings_import_success": {
+        "message": "Importul setărilor s-a încheiat cu succes"
+    },
+    "settings_import_error": {
+        "message": "A apărut o eroare la importul setărilor"
     },
     "settings_notification_protection_title": {
         "message": "Protecția este în pauză"
@@ -445,5 +526,17 @@
     },
     "window_close_dialog_cancel": {
         "message": "Anulare"
+    },
+    "folder_check_dialog_message": {
+        "message": "AdGuard pentru Safari ar trebui să fie lansat din dosarul Aplicații."
+    },
+    "folder_check_dialog_detail": {
+        "message": "Doriți să îl mutați acum în dosarul Aplicații?"
+    },
+    "folder_check_dialog_move": {
+        "message": "Mutați-l"
+    },
+    "folder_check_dialog_quit": {
+        "message": "Ieșire"
     }
 }
