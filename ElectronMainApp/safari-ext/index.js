@@ -87,6 +87,13 @@ module.exports = (() => {
      * {"result":"error", "error":{"domain":"ErrorDomain", "code":100, "descr":"Error Description IF Available"}}
      */
     const setContentBlockingJson = (bundleId, jsonString, callback) => {
+        // Remove previous task on this bundle id
+        const previous = queue.find((x) => x.bundleId === bundleId);
+        if (previous) {
+            queue.splice(queue.indexOf(previous), 1);
+            previous.callback(null);
+        }
+
         queue.push({
             bundleId,
             jsonString,
