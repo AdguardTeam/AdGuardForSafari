@@ -394,3 +394,13 @@ app.on('activate', () => {
         uiEventListener.register(mainWindow);
     }
 });
+
+if (getChannel() === 'MAS') {
+    process.on('uncaughtException', (error) => {
+        log.error(`Uncaught exception: ${error}`);
+    });
+} else {
+    process.on('uncaughtExceptionMonitor', (error) => {
+        log.error(`Uncaught exception: ${error}`);
+    });
+}
