@@ -36,7 +36,7 @@
         "message": "If you see a missed ad or \"broken\" website"
     },
     "options_support_feedback_title": {
-        "message": "Leave a feedback"
+        "message": "Leave feedback"
     },
     "options_support_feedback_description": {
         "message": "Submit feature requests and suggestions"
@@ -63,7 +63,7 @@
         "message": "Updating AdGuard for Safari"
     },
     "options_about_updates_not_found": {
-        "message": "You are using the latest version of AdGuard"
+        "message": "AdGuard for Safari is up to date"
     },
     "options_about_update_downloaded": {
         "message": "Nearly up to date! Relaunch AdGuard for Safari to finish updating."
@@ -96,7 +96,7 @@
         "message": "AdGuard for Safari - Settings"
     },
     "options_settings_import_wrong_file_extension": {
-        "message": "The file extension should be .json"
+        "message": "The file extension must be .json"
     },
     "options_settings_import_error": {
         "message": "Error importing settings"
@@ -246,7 +246,7 @@
         "message": "Allowlist"
     },
     "options_whitelist_description": {
-        "message": "AdGuard does not filter web sites from the Allowlist."
+        "message": "AdGuard does not filter websites from the Allowlist."
     },
     "options_whitelist_inverted": {
         "message": " (Inverted)"
@@ -282,7 +282,7 @@
         "message": "Error importing rules"
     },
     "options_popup_import_rules_wrong_file_extension": {
-        "message": "The file extension should be .txt"
+        "message": "The file extension must be .txt"
     },
     "options_show_app_updated_notification": {
         "message": "Notify about extension updates"
@@ -405,13 +405,13 @@
         "message": "Try AdGuard Premium for better protection!"
     },
     "options_license_agreement": {
-        "message": "EULA"
+        "message": "End-User License Agreement"
     },
     "options_privacy_policy": {
         "message": "Privacy policy"
     },
     "options_acknowledgment": {
-        "message": "Credits and Acknowledgments"
+        "message": "Acknowledgments"
     },
     "options_github": {
         "message": "GitHub"
@@ -453,7 +453,7 @@
         "message": "6 content blocking extensions"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari limits the maximum number of content blocking rules with 50,000 per extension. This is not enough to handle all sorts of ads and trackers AdGuard blocks. That's why we provide 6 extension, thus increasing that limit to 300,000."
+        "message": "Safari limits the maximum number of content blocking rules with 50,000 per extension. This is not enough to handle all sorts of ads and trackers AdGuard blocks. That's why we provide 6 extensions, thus increasing that limit to 300,000."
     },
     "onboarding_safari_btn": {
         "message": "Open preferences"

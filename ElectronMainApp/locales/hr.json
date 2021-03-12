@@ -14,6 +14,39 @@
     "options_filters_filter_trusted_tag_desc": {
         "message": "Izabrali ste vjerovati ovom filtru"
     },
+    "options_support": {
+        "message": "Podrška"
+    },
+    "options_support_faq_title": {
+        "message": "ČPP"
+    },
+    "options_support_faq_description": {
+        "message": "Često postavljena pitanja"
+    },
+    "options_support_bug_report_title": {
+        "message": "Prijavite pogrešku"
+    },
+    "options_support_bug_report_description": {
+        "message": "Ako nešto ne radi ispravno u programu"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Prijavi netočno blokiranje"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Ako vidite propušteni oglas ili \"pokvarenu\" web stranicu"
+    },
+    "options_support_feedback_title": {
+        "message": "Ostavite povratnu informaciju"
+    },
+    "options_support_feedback_description": {
+        "message": "Pošaljite zahtjeve i prijedloge značajki"
+    },
+    "options_support_rate_title": {
+        "message": "Ocijenite aplikaciju"
+    },
+    "options_support_rate_description": {
+        "message": "Recite nam što mislite o AdGuard-u"
+    },
     "options_about_update_check": {
         "message": "Provjera ažuriranja"
     },
@@ -53,6 +86,12 @@
     "options_settings": {
         "message": "AdGuard za Safari - Postavke"
     },
+    "options_settings_import_wrong_file_extension": {
+        "message": "Vrsta datoteke treba biti .json"
+    },
+    "options_settings_import_error": {
+        "message": "Pogreška prilikom uvoza postavki"
+    },
     "options_general_settings": {
         "message": "Općenito"
     },
@@ -67,6 +106,9 @@
     },
     "options_import_settings": {
         "message": "Uvoz postavki"
+    },
+    "options_export_logs": {
+        "message": "Izvoz zapisa"
     },
     "options_antibanner": {
         "message": "Filtri"
@@ -113,6 +155,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "Dodaj prilagođeni filtar"
     },
+    "options_filters_custom_import_file": {
+        "message": "Uvoz datoteke"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "Uvoz pogreške"
+    },
     "options_filters_custom_step_one_title": {
         "message": "Pretplata na novi filtar"
     },
@@ -133,6 +181,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "Preuzimanje filtara"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "Pretplata na filtar"
     },
     "options_filters_custom_step_three_title": {
         "message": "Došlo je do pogreške"
@@ -191,6 +242,18 @@
     "options_userfilter_description": {
         "message": "Ovdje možete dodati svoja pravila. Ova opcija je&nbsp;preporučena naprednim korisnicima upoznatim s HTML/CSS. Pročitajte <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>upute pravila filtriranja</a> kako&nbsp;biste naučili&nbsp;pisati vlastita pravila filtriranja."
     },
+    "options_userfilter_import": {
+        "message": "Uvoz"
+    },
+    "options_userfilter_export": {
+        "message": "Izvoz"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "Pogreška uvoza pravila"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "Vrsta datoteke treba biti .txt"
+    },
     "options_show_app_updated_notification": {
         "message": "Obavijesti o ažuriranjima proširenja"
     },
@@ -199,6 +262,9 @@
     },
     "options_popup_update_error_title": {
         "message": "Pogreška pri ažuriranju filtara"
+    },
+    "options_popup_update_version_error": {
+        "message": "Verzija filtra koji pokušavate ažurirati ista je ili starija"
     },
     "options_popup_update_not_found": {
         "message": "Nisu pronađena ažuriranja"
@@ -244,6 +310,9 @@
     },
     "options_editor_indicator_saved": {
         "message": "Spremljeno"
+    },
+    "options_editor_save_button": {
+        "message": "Spremi"
     },
     "main_menu_edit": {
         "message": "Uredi"
@@ -323,6 +392,9 @@
     "onboarding_safari_btn": {
         "message": "Otvori postavke"
     },
+    "onboarding_ignore_safari_btn": {
+        "message": "Zanemari"
+    },
     "options_learn_more": {
         "message": "Saznajte više"
     },
@@ -367,6 +439,15 @@
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "Omogućuje ubrzanje hardvera za prozor postavki. Potrebno je ponovno pokretanje aplikacije"
+    },
+    "settings_import": {
+        "message": "Uvoz postavki"
+    },
+    "settings_import_success": {
+        "message": "Postavke su uspješno uvezene"
+    },
+    "settings_import_error": {
+        "message": "Došlo je do pogreške tijekom uvoza postavki"
     },
     "settings_notification_protection_title": {
         "message": "Zaštita je pauzirana"
@@ -445,5 +526,17 @@
     },
     "window_close_dialog_cancel": {
         "message": "Poništi"
+    },
+    "folder_check_dialog_message": {
+        "message": "AdGuard za Safari treba pokrenuti iz mape Aplikacije."
+    },
+    "folder_check_dialog_detail": {
+        "message": "Želite li sada premjestiti u mapu Aplikacije?"
+    },
+    "folder_check_dialog_move": {
+        "message": "Premjesti"
+    },
+    "folder_check_dialog_quit": {
+        "message": "Zatvori"
     }
 }

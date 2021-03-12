@@ -14,6 +14,39 @@
     "options_filters_filter_trusted_tag_desc": {
         "message": "您选择信任此过滤器"
     },
+    "options_support": {
+        "message": "支持"
+    },
+    "options_support_faq_title": {
+        "message": "常见问题解答"
+    },
+    "options_support_faq_description": {
+        "message": "常见问题解答"
+    },
+    "options_support_bug_report_title": {
+        "message": "报告错误"
+    },
+    "options_support_bug_report_description": {
+        "message": "如果软件运行异常"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "报告错误拦截"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "如您发现“漏网”的广告或损坏的网站"
+    },
+    "options_support_feedback_title": {
+        "message": "留下反馈"
+    },
+    "options_support_feedback_description": {
+        "message": "提交功能请求和建议"
+    },
+    "options_support_rate_title": {
+        "message": "给应用评级"
+    },
+    "options_support_rate_description": {
+        "message": "告诉我们您对 AdGuard 的想法"
+    },
     "options_about_update_check": {
         "message": "检查更新"
     },
@@ -53,6 +86,12 @@
     "options_settings": {
         "message": "AdGuard for Safari - 设置"
     },
+    "options_settings_import_wrong_file_extension": {
+        "message": ""
+    },
+    "options_settings_import_error": {
+        "message": "导入设置错误"
+    },
     "options_general_settings": {
         "message": "常规"
     },
@@ -67,6 +106,9 @@
     },
     "options_import_settings": {
         "message": "Import settings"
+    },
+    "options_export_logs": {
+        "message": "导出日志"
     },
     "options_antibanner": {
         "message": "过滤器"
@@ -113,6 +155,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "添加自定义过滤器"
     },
+    "options_filters_custom_import_file": {
+        "message": "导入文件"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "导入错误"
+    },
     "options_filters_custom_step_one_title": {
         "message": "新过滤器订阅"
     },
@@ -133,6 +181,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "下载过滤器"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "添加过滤器"
     },
     "options_filters_custom_step_three_title": {
         "message": "发生错误"
@@ -183,13 +234,25 @@
         "message": "AdGuard 不过滤白名单上的网站。"
     },
     "options_whitelist_inverse": {
-        "message": "颠倒白名单<span class='sp-table-row-info'>取消拦截所有网站的广告，白名单上的网站<i>除外</i></span>"
+        "message": "颠倒白名单<span class='sp-table-row-info'>取消所有网站上的广告拦截，白名单上的网站<i>除外</i></span>"
     },
     "options_userfilter": {
         "message": "用户规则"
     },
     "options_userfilter_description": {
         "message": "你可在此处添加自己的规则&nbsp。给熟悉HTML/CSSp的高级用户推荐使用该选项。对&nbsp可以阅读<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>过滤规则教程</a> ; 学习&nbsp;如何编写自己的规则"
+    },
+    "options_userfilter_import": {
+        "message": "导入"
+    },
+    "options_userfilter_export": {
+        "message": "导出"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "导入规则错误"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": ""
     },
     "options_show_app_updated_notification": {
         "message": "通知扩展更新"
@@ -199,6 +262,9 @@
     },
     "options_popup_update_error_title": {
         "message": "过滤器更新错误"
+    },
+    "options_popup_update_version_error": {
+        "message": "您试图更新的过滤器版本是一样或更老的"
     },
     "options_popup_update_not_found": {
         "message": "未找到更新"
@@ -244,6 +310,9 @@
     },
     "options_editor_indicator_saved": {
         "message": "已保存"
+    },
+    "options_editor_save_button": {
+        "message": "保存"
     },
     "main_menu_edit": {
         "message": "编辑"
@@ -323,6 +392,9 @@
     "onboarding_safari_btn": {
         "message": "打开首选项"
     },
+    "onboarding_ignore_safari_btn": {
+        "message": "忽略"
+    },
     "options_learn_more": {
         "message": "了解更多信息"
     },
@@ -367,6 +439,15 @@
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "为设置窗口启用硬件加速，需要重新启动应用程序"
+    },
+    "settings_import": {
+        "message": "设置导入"
+    },
+    "settings_import_success": {
+        "message": "设置成功导入"
+    },
+    "settings_import_error": {
+        "message": "导入设置期间发生错误"
     },
     "settings_notification_protection_title": {
         "message": "注意! 保护已被禁用"
@@ -445,5 +526,17 @@
     },
     "window_close_dialog_cancel": {
         "message": "取消"
+    },
+    "folder_check_dialog_message": {
+        "message": "适用于 Safari 的 AdGuard 要从“应用程序”文件夹中开启。"
+    },
+    "folder_check_dialog_detail": {
+        "message": "您是否想现在移动至应用程序文件夹中？"
+    },
+    "folder_check_dialog_move": {
+        "message": "移动"
+    },
+    "folder_check_dialog_quit": {
+        "message": "退出"
     }
 }

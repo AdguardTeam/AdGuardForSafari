@@ -14,6 +14,39 @@
     "options_filters_filter_trusted_tag_desc": {
         "message": "Vous avez choisi de faire confiance à ce filtre"
     },
+    "options_support": {
+        "message": "Assistance"
+    },
+    "options_support_faq_title": {
+        "message": "FAQ"
+    },
+    "options_support_faq_description": {
+        "message": "Foire aux questions"
+    },
+    "options_support_bug_report_title": {
+        "message": "Signaler un bogue"
+    },
+    "options_support_bug_report_description": {
+        "message": "Si quelque chose ne fonctionne pas correctement dans le programme"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Signaler un blocage incorrect"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Si vous voyez une pub manquée ou un site \"cassé\""
+    },
+    "options_support_feedback_title": {
+        "message": "Envoyer des commentaires"
+    },
+    "options_support_feedback_description": {
+        "message": "Soumettre des demandes de fonctionnalités et des suggestions"
+    },
+    "options_support_rate_title": {
+        "message": "Notez cette application"
+    },
+    "options_support_rate_description": {
+        "message": "Dites-nous ce que vous pensez d’AdGuard"
+    },
     "options_about_update_check": {
         "message": "Vérification des mises à jour"
     },
@@ -53,6 +86,12 @@
     "options_settings": {
         "message": "AdGuard pour Safari - Paramétrages"
     },
+    "options_settings_import_wrong_file_extension": {
+        "message": ""
+    },
+    "options_settings_import_error": {
+        "message": "Erreur lors de l'import des paramètres"
+    },
     "options_general_settings": {
         "message": "Général"
     },
@@ -67,6 +106,9 @@
     },
     "options_import_settings": {
         "message": "Importer les paramètres"
+    },
+    "options_export_logs": {
+        "message": "Exporter les journaux"
     },
     "options_antibanner": {
         "message": "Filtres"
@@ -113,6 +155,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "Ajouter un filtre personnalisé "
     },
+    "options_filters_custom_import_file": {
+        "message": "Importer le fichier"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "Erreur lors de l'importation"
+    },
     "options_filters_custom_step_one_title": {
         "message": "Abonnement à un nouveau filtre"
     },
@@ -133,6 +181,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "Téléchargement du filtre en cours"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "S'abonner au filtre"
     },
     "options_filters_custom_step_three_title": {
         "message": "Une erreur est survenue"
@@ -183,13 +234,25 @@
         "message": "AdGuard ne filtre pas les sites Web sur la liste blanche."
     },
     "options_whitelist_inverse": {
-        "message": "Inverser la liste blanche<span class='sp-table-row-info'>Débloquer la publicité partout <i>excepté</i> la liste blanche</span>"
+        "message": "Inverser la Liste blanche<span class='sp-table-row-info'>Débloquer la publicité partout <i>excepté</i> la Liste blanche</span>"
     },
     "options_userfilter": {
         "message": "Règles d'utilisateur"
     },
     "options_userfilter_description": {
         "message": "Vous pouvez ajouter vos propres règles ici. Cette option est&nbsp;recommandée pour les utilisateurs avancés familiers avec le langage HTML / CSS. Lisez le <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutoriel</a> pour&nbsp;apprendre à&nbsp;écrire vos propres règles."
+    },
+    "options_userfilter_import": {
+        "message": "Importer"
+    },
+    "options_userfilter_export": {
+        "message": "Exporter"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "Erreur lors de l'importation des règles"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": ""
     },
     "options_show_app_updated_notification": {
         "message": "Me notifier des mises à jour des extensions"
@@ -199,6 +262,9 @@
     },
     "options_popup_update_error_title": {
         "message": "Erreur de mise à jour des filtres"
+    },
+    "options_popup_update_version_error": {
+        "message": "La version du filtre que vous essayez de mettre à jour est la même ou plus ancienne"
     },
     "options_popup_update_not_found": {
         "message": "Aucune mise à jour trouvée"
@@ -244,6 +310,9 @@
     },
     "options_editor_indicator_saved": {
         "message": "Sauvegardé"
+    },
+    "options_editor_save_button": {
+        "message": "Sauvegarder"
     },
     "main_menu_edit": {
         "message": "Éditer"
@@ -323,6 +392,9 @@
     "onboarding_safari_btn": {
         "message": "Ouvrir les préférences"
     },
+    "onboarding_ignore_safari_btn": {
+        "message": "Ignorer"
+    },
     "options_learn_more": {
         "message": "En savoir plus"
     },
@@ -367,6 +439,15 @@
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "Active l'accélération matérielle pour la fenêtre des paramètres. Vous devrez redémarrer l'application"
+    },
+    "settings_import": {
+        "message": "Importer les paramètres"
+    },
+    "settings_import_success": {
+        "message": "Les paramètres ont été importés"
+    },
+    "settings_import_error": {
+        "message": "Une erreur s’est produite lors de l’importation des paramètres"
     },
     "settings_notification_protection_title": {
         "message": "La protection est en pause"
@@ -447,13 +528,13 @@
         "message": "Annuler"
     },
     "folder_check_dialog_message": {
-        "message": "AdGuard pour Safari doit être lancé à partir du dossier Applications."
+        "message": "AdGuard pour Safari devrait être lancé à partir du dossier Applications."
     },
     "folder_check_dialog_detail": {
-        "message": "Voulez-vous le déplacer maintenant dans le dossier Applications?"
+        "message": "Voulez-vous le déplacer maintenant au dossier Applications?"
     },
     "folder_check_dialog_move": {
-        "message": "Bouge toi"
+        "message": "Déplacer"
     },
     "folder_check_dialog_quit": {
         "message": "Quitter"

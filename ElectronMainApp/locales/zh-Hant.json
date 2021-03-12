@@ -14,6 +14,39 @@
     "options_filters_filter_trusted_tag_desc": {
         "message": "您已選擇信任此過濾器"
     },
+    "options_support": {
+        "message": "支援"
+    },
+    "options_support_faq_title": {
+        "message": "常見問答集"
+    },
+    "options_support_faq_description": {
+        "message": "常見問答集"
+    },
+    "options_support_bug_report_title": {
+        "message": "報告程式錯誤"
+    },
+    "options_support_bug_report_description": {
+        "message": "如果某事物未在程式中正確地運作"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "報告不正確的封鎖"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "如果您看到遺漏的廣告或\"毀損的\"網站"
+    },
+    "options_support_feedback_title": {
+        "message": "留下回饋意見"
+    },
+    "options_support_feedback_description": {
+        "message": "提交功能請求和建議"
+    },
+    "options_support_rate_title": {
+        "message": "對此應用程式評分"
+    },
+    "options_support_rate_description": {
+        "message": "告訴我們您對於 AdGuard 有什麼想法"
+    },
     "options_about_update_check": {
         "message": "正在檢查更新"
     },
@@ -53,6 +86,12 @@
     "options_settings": {
         "message": "AdGuard for Safari - 設定"
     },
+    "options_settings_import_wrong_file_extension": {
+        "message": "該副檔名必須為 .json"
+    },
+    "options_settings_import_error": {
+        "message": "匯入設定出錯"
+    },
     "options_general_settings": {
         "message": "一般的"
     },
@@ -67,6 +106,9 @@
     },
     "options_import_settings": {
         "message": "匯入設定"
+    },
+    "options_export_logs": {
+        "message": "匯出記錄"
     },
     "options_antibanner": {
         "message": "過濾器"
@@ -113,6 +155,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "增加自訂的過濾器"
     },
+    "options_filters_custom_import_file": {
+        "message": "匯入檔案"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "匯入出錯"
+    },
     "options_filters_custom_step_one_title": {
         "message": "新的過濾器訂閱"
     },
@@ -133,6 +181,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "正在下載該過濾器"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "正在訂閱該過濾器"
     },
     "options_filters_custom_step_three_title": {
         "message": "錯誤已發生"
@@ -177,19 +228,31 @@
         "message": "檢查過濾器更新"
     },
     "options_whitelist": {
-        "message": "白名單"
+        "message": "允許清單"
     },
     "options_whitelist_description": {
-        "message": "AdGuard 不過濾來自白名單中的網站。"
+        "message": "AdGuard 不過濾來自允許清單中的網站。"
     },
     "options_whitelist_inverse": {
-        "message": "反向白名單<span class='sp-table-row-info'><i>除</i>白名單之外，解除封鎖各處廣告</span>"
+        "message": "反向允許清單<span class='sp-table-row-info'><i>除</i>來自允許清單中的網站之外，解除封鎖各處廣告</span>"
     },
     "options_userfilter": {
         "message": "使用者規則"
     },
     "options_userfilter_description": {
         "message": "您可於此增加您自己的規則。對於熟悉 HTML/CSS 之進階的用戶，此選項是被建議的。閱讀<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>過濾器規則導覽</a>以學習如何撰寫您自己的過濾器規則。"
+    },
+    "options_userfilter_import": {
+        "message": "匯入"
+    },
+    "options_userfilter_export": {
+        "message": "匯出"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "匯入規則出錯"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "該副檔名必須為 .txt"
     },
     "options_show_app_updated_notification": {
         "message": "通知有關延伸功能更新"
@@ -199,6 +262,9 @@
     },
     "options_popup_update_error_title": {
         "message": "過濾器之更新出錯"
+    },
+    "options_popup_update_version_error": {
+        "message": "您正在試圖更新的過濾器之版本為相同的或較舊的"
     },
     "options_popup_update_not_found": {
         "message": "無已發現的更新"
@@ -244,6 +310,9 @@
     },
     "options_editor_indicator_saved": {
         "message": "已儲存"
+    },
+    "options_editor_save_button": {
+        "message": "儲存"
     },
     "main_menu_edit": {
         "message": "編輯"
@@ -323,6 +392,9 @@
     "onboarding_safari_btn": {
         "message": "開啟偏好設定"
     },
+    "onboarding_ignore_safari_btn": {
+        "message": "忽略"
+    },
     "options_learn_more": {
         "message": "了解更多關於它"
     },
@@ -367,6 +439,15 @@
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "啟用硬體加速供設定視窗，應用程式重新啟動是必須的"
+    },
+    "settings_import": {
+        "message": "設定匯入"
+    },
+    "settings_import_success": {
+        "message": "設定匯入被成功地完成"
+    },
+    "settings_import_error": {
+        "message": "在設定匯入期間，錯誤已發生"
     },
     "settings_notification_protection_title": {
         "message": "防護被暫停"
@@ -445,5 +526,17 @@
     },
     "window_close_dialog_cancel": {
         "message": "取消"
+    },
+    "folder_check_dialog_message": {
+        "message": "AdGuard for Safari 應從應用程式檔案夾被啟動。"
+    },
+    "folder_check_dialog_detail": {
+        "message": "您想要立即搬移它至應用程式檔案夾嗎？"
+    },
+    "folder_check_dialog_move": {
+        "message": "搬移"
+    },
+    "folder_check_dialog_quit": {
+        "message": "退出"
     }
 }
