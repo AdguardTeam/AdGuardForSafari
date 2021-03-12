@@ -1958,9 +1958,11 @@ const Settings = function () {
         }));
     });
 
-    const updateIntervalNotification = document.querySelector('#updateIntervalNotification');
     const showUpdateIntervalNotification = function () {
-        if (filterUpdatePeriodSelect.value === '-1') {
+        const updateIntervalNotification = document.querySelector('#updateIntervalNotification');
+        const hideUpdateIntervalNotificationKey = 'hide-update-interval-notification';
+        const hideUpdateIntervalNotification = !!window.sessionStorage.getItem(hideUpdateIntervalNotificationKey);
+        if (filterUpdatePeriodSelect.value === '-1' && !hideUpdateIntervalNotification) {
             updateIntervalNotification.style.display = 'flex';
         } else {
             updateIntervalNotification.style.display = 'none';
@@ -2307,21 +2309,17 @@ PageController.prototype = {
             onBoardingScreenEl.style.display = shouldHideOnboardingScreen ? 'none' : 'flex';
 
             const hideExtensionsNotification = !!window.sessionStorage.getItem(hideExtensionsNotificationKey);
-            const hideUpdateIntervalNotification = !!window.sessionStorage.getItem(hideUpdateIntervalNotificationKey);
             const extensionsFlag = contentBlockersEnabled && minorExtensionsEnabled;
 
             if (extensionsFlag) {
                 // extensions config had been changed - reset hide-extensions "cookie"
                 window.sessionStorage.setItem(hideExtensionsNotificationKey, false);
-                window.sessionStorage.setItem(hideUpdateIntervalNotificationKey, false);
                 window.sessionStorage.setItem(hideOnboardingScreenKey, false);
             }
 
             const shouldHideNotification = hideExtensionsNotification || extensionsFlag;
-            const shouldHideUpdateIntervalNotification = hideUpdateIntervalNotification || extensionsFlag;
 
             enableExtensionsNotification.style.display = shouldHideNotification ? 'none' : 'flex';
-            updateIntervalNotification.style.display = shouldHideUpdateIntervalNotification ? 'none' : 'flex';
             enableCbExtensionsNotification.style.display = contentBlockersEnabled ? 'none' : 'flex';
 
             self.contentBlockers.updateContentBlockers(arg);
