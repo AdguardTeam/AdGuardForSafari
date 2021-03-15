@@ -1299,6 +1299,7 @@ const AntiBannerFilters = function (options) {
             'type': 'toggleUserrulesState',
             'enabled': this.checked,
         }));
+        userSettings.values[userSettings.names.USERRULES_ENABLED] = this.checked;
     }
 
     function toggleAllowlistState() {
@@ -2163,7 +2164,8 @@ const ContentBlockersScreen = function (antiBannerFilters, userFilter) {
      */
     const init = () => {
         ipcRenderer.on('getContentBlockersMetadataResponse', (e, response) => {
-            const userFilterEnabled = !userFilter.isUserFilterEmpty();
+            const userFilterEnabled = userSettings.values[userSettings.names.USERRULES_ENABLED]
+                && !userFilter.isUserFilterEmpty();
             for (const extension of response) {
                 const filtersInfo = antiBannerFilters.getFiltersInfo(extension.groupIds, userFilterEnabled);
                 updateExtensionState(extension.bundleId, extension.rulesInfo, filtersInfo);
@@ -2537,7 +2539,8 @@ const initPage = function (response) {
                     controller.checkSafariExtensions();
                     break;
                 case EventNotifierTypes.CONTENT_BLOCKER_EXTENSION_UPDATED:
-                    const userFilterEnabled = !controller.userFilter.isUserFilterEmpty();
+                    const userFilterEnabled = userSettings.values[userSettings.names.USERRULES_ENABLED]
+                        && !controller.userFilter.isUserFilterEmpty();
                     const filtersInfo = controller.antiBannerFilters
                         .getFiltersInfo(options.filterGroups, userFilterEnabled);
                     controller.contentBlockers.updateExtensionState(options.bundleId, options, filtersInfo);
