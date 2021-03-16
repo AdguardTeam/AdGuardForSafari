@@ -55,58 +55,60 @@ module.exports = (function () {
     /**
      * Load content blocker
      */
-    const updateContentBlocker = (onCompleted) => {
-        loadRules(async (rules) => {
-            const grouped = groupRules(rules);
-            let overlimit = false;
+    const updateContentBlocker = async () => {
+        return new Promise((resolve) => {
+            loadRules(async (rules) => {
+                const grouped = groupRules(rules);
+                let overlimit = false;
 
-            for (const group of grouped) {
-                let json = JSON.stringify(emptyBlockerJSON);
+                for (const group of grouped) {
+                    let json = JSON.stringify(emptyBlockerJSON);
 
-                const info = {
-                    rulesCount: 0,
-                    bundleId: rulesGroupsBundles[group.key],
-                    overlimit: false,
-                    filterGroups: group.filterGroups,
-                    hasError: false,
-                };
+                    const info = {
+                        rulesCount: 0,
+                        bundleId: rulesGroupsBundles[group.key],
+                        overlimit: false,
+                        filterGroups: group.filterGroups,
+                        hasError: false,
+                    };
 
-                const groupRules = group.rules;
-                if (groupRules && groupRules.length > 0) {
-                    const rulesTexts = groupRules.map((x) => x.ruleText);
-                    /* eslint-disable-next-line no-await-in-loop */
-                    const result = await convertRulesToJson(rulesTexts, false);
-                    if (result && result.converted && result.converted !== '[]') {
-                        log.info(result?.message);
+                    const groupRules = group.rules;
+                    if (groupRules && groupRules.length > 0) {
+                        const rulesTexts = groupRules.map((x) => x.ruleText);
+                        /* eslint-disable-next-line no-await-in-loop */
+                        const result = await convertRulesToJson(rulesTexts, false);
+                        if (result && result.converted && result.converted !== '[]') {
+                            log.info(result?.message);
 
-                        json = result.converted;
-                        if (result.overLimit) {
-                            overlimit = true;
+                            json = result.converted;
+                            if (result.overLimit) {
+                                overlimit = true;
+                            }
+
+                            info.rulesCount = result.totalConvertedCount;
+                            info.overlimit = result.overLimit;
+                        } else {
+                            info.hasError = true;
                         }
-
-                        info.rulesCount = result.totalConvertedCount;
-                        info.overlimit = result.overLimit;
                     } else {
-                        info.hasError = true;
+                        log.info(`No rules found for group: ${group.key}`);
                     }
-                } else {
-                    log.info(`No rules found for group: ${group.key}`);
+
+                    setSafariContentBlocker(rulesGroupsBundles[group.key], json, info);
                 }
 
-                setSafariContentBlocker(rulesGroupsBundles[group.key], json, info);
-            }
+                const advancedBlockingRulesCount = await setAdvancedBlocking(rules.map((x) => x.ruleText));
 
-            const advancedBlockingRulesCount = await setAdvancedBlocking(rules.map((x) => x.ruleText));
+                const rulesWithoutComments = rules.filter((rule) => !rule.ruleText.startsWith('!')).length;
 
-            const rulesWithoutComments = rules.filter((rule) => !rule.ruleText.startsWith('!')).length;
+                listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
+                    rulesCount: rulesWithoutComments,
+                    rulesOverLimit: overlimit,
+                    advancedBlockingRulesCount,
+                });
 
-            listeners.notifyListeners(events.CONTENT_BLOCKER_UPDATED, {
-                rulesCount: rulesWithoutComments,
-                rulesOverLimit: overlimit,
-                advancedBlockingRulesCount,
+                resolve();
             });
-
-            onCompleted();
         });
     };
 

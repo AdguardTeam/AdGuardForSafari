@@ -22,7 +22,7 @@ module.exports = (() => {
      *
      * https://jira.adguard.com/browse/AG-7168
      */
-    const reloadContentBlockers = () => {
+    const reloadContentBlockers = async () => {
         if (processing) {
             dirty = true;
             return;
@@ -31,17 +31,15 @@ module.exports = (() => {
         processing = true;
         dirty = false;
 
-        contentBlockerAdapter.updateContentBlocker(() => {
-            if (dirty) {
-                // Needs reload after timeout
-                setTimeout(() => {
-                    processing = false;
-                    reloadContentBlockers();
-                }, 5000);
-            } else {
-                processing = false;
-            }
-        });
+        await contentBlockerAdapter.updateContentBlocker();
+        if (dirty) {
+            // Needs reload after timeout
+            await new Promise((resolve) => setTimeout(resolve, 5000));
+            processing = false;
+            await reloadContentBlockers();
+        } else {
+            processing = false;
+        }
     };
 
     /**
@@ -49,10 +47,10 @@ module.exports = (() => {
      */
     const init = () => {
         // Subscribe to events which lead to content blocker update
-        listeners.addListener((event) => {
+        listeners.addListener(async (event) => {
             if (event === events.REQUEST_FILTER_UPDATED
                 || event === events.UPDATE_WHITELIST_FILTER_RULES) {
-                reloadContentBlockers();
+                await reloadContentBlockers();
             }
         });
 
