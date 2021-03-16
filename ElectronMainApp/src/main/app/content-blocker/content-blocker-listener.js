@@ -11,6 +11,39 @@ const antibanner = require('../antibanner');
 module.exports = (() => {
     'use strict';
 
+    let processing = false;
+    let dirty = false;
+
+    /**
+     * Reloads content blockers
+     *
+     * This implementation waits for previous call to complete, cause otherwise we have a race condition with content
+     * blockers loading to safari. We skip repeated calls here as well.
+     *
+     * https://jira.adguard.com/browse/AG-7168
+     */
+    const reloadContentBlockers = () => {
+        if (processing) {
+            dirty = true;
+            return;
+        }
+
+        processing = true;
+        dirty = false;
+
+        contentBlockerAdapter.updateContentBlocker(() => {
+            if (dirty) {
+                // Needs reload after timeout
+                setTimeout(() => {
+                    processing = false;
+                    reloadContentBlockers();
+                }, 5000);
+            } else {
+                processing = false;
+            }
+        });
+    };
+
     /**
      * Sets up listener for content blocker events
      */
@@ -19,7 +52,7 @@ module.exports = (() => {
         listeners.addListener((event) => {
             if (event === events.REQUEST_FILTER_UPDATED
                 || event === events.UPDATE_WHITELIST_FILTER_RULES) {
-                contentBlockerAdapter.updateContentBlocker();
+                reloadContentBlockers();
             }
         });
 

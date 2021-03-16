@@ -55,7 +55,7 @@ module.exports = (function () {
     /**
      * Load content blocker
      */
-    const updateContentBlocker = () => {
+    const updateContentBlocker = (onCompleted) => {
         loadRules(async (rules) => {
             const grouped = groupRules(rules);
             let overlimit = false;
@@ -105,6 +105,8 @@ module.exports = (function () {
                 rulesOverLimit: overlimit,
                 advancedBlockingRulesCount,
             });
+
+            onCompleted();
         });
     };
 
