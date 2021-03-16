@@ -796,7 +796,7 @@ li.active .toggler:before {
     transform: rotate(360deg);
   }
 }
-#whitelist .ace_scroller {
+.ace_scroller {
   left: 18px !important;
 }
 .ace_gutter {
