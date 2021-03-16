@@ -558,8 +558,16 @@ const WhiteListFilter = function (options) {
             });
     });
 
+    /**
+     * returns true if allowlist is empty
+     */
+    const isAllowlistEmpty = () => {
+        return !editor.getValue().trim();
+    };
+
     return {
         updateWhiteListDomains: loadWhiteListDomains,
+        isAllowlistEmpty,
     };
 };
 
@@ -1307,6 +1315,7 @@ const AntiBannerFilters = function (options) {
             'type': 'toggleAllowlistState',
             'enabled': this.checked,
         }));
+        userSettings.values[userSettings.names.ALLOWLIST_ENABLED] = this.checked;
     }
 
     function updateAntiBannerFilters(e) {
@@ -1693,10 +1702,11 @@ const AntiBannerFilters = function (options) {
     /**
      * Creates filters info string
      *
-     * @param groupIds [] array of enabled groups
-     * @param userFilterEnabled Boolean is user filter enabled
+     * @param {Array} groupIds array of enabled groups
+     * @param {Boolean} userFilterEnabled - is user filter enabled
+     * @param {Boolean} allowlistEnabled - is allowlist enabled
      */
-    const getFiltersInfo = (groupIds, userFilterEnabled) => {
+    const getFiltersInfo = (groupIds, userFilterEnabled, allowlistEnabled) => {
         if (!groupIds) {
             return null;
         }
@@ -1716,6 +1726,13 @@ const AntiBannerFilters = function (options) {
         if (userFilterEnabled) {
             filters.push({
                 name: i18n.__('userfilter_name.message'),
+                enabled: true,
+            });
+        }
+
+        if (allowlistEnabled) {
+            filters.push({
+                name: i18n.__('allowlist_name.message'),
                 enabled: true,
             });
         }
@@ -2042,7 +2059,7 @@ const Settings = function () {
  * @returns {*}
  * @constructor
  */
-const ContentBlockersScreen = function (antiBannerFilters, userFilter) {
+const ContentBlockersScreen = function (antiBannerFilters, userFilter, whitelist) {
     'use strict';
 
     /**
@@ -2166,8 +2183,14 @@ const ContentBlockersScreen = function (antiBannerFilters, userFilter) {
         ipcRenderer.on('getContentBlockersMetadataResponse', (e, response) => {
             const userFilterEnabled = userSettings.values[userSettings.names.USERRULES_ENABLED]
                 && !userFilter.isUserFilterEmpty();
+            const allowlistEnabled = userSettings.values[userSettings.names.ALLOWLIST_ENABLED]
+                && !whitelist.isAllowlistEmpty();
             for (const extension of response) {
-                const filtersInfo = antiBannerFilters.getFiltersInfo(extension.groupIds, userFilterEnabled);
+                const filtersInfo = antiBannerFilters.getFiltersInfo(
+                    extension.groupIds,
+                    userFilterEnabled,
+                    allowlistEnabled
+                );
                 updateExtensionState(extension.bundleId, extension.rulesInfo, filtersInfo);
             }
         });
@@ -2432,7 +2455,7 @@ PageController.prototype = {
         this.antiBannerFilters.render();
 
         // Initialize Content blockers
-        this.contentBlockers = new ContentBlockersScreen(this.antiBannerFilters, this.userFilter);
+        this.contentBlockers = new ContentBlockersScreen(this.antiBannerFilters, this.userFilter, this.whiteListFilter);
         this.contentBlockers.init();
 
         document.querySelector('#about-version-placeholder')
@@ -2541,8 +2564,10 @@ const initPage = function (response) {
                 case EventNotifierTypes.CONTENT_BLOCKER_EXTENSION_UPDATED:
                     const userFilterEnabled = userSettings.values[userSettings.names.USERRULES_ENABLED]
                         && !controller.userFilter.isUserFilterEmpty();
+                    const allowlistEnabled = userSettings.values[userSettings.names.ALLOWLIST_ENABLED]
+                        && !controller.whiteListFilter.isAllowlistEmpty();
                     const filtersInfo = controller.antiBannerFilters
-                        .getFiltersInfo(options.filterGroups, userFilterEnabled);
+                        .getFiltersInfo(options.filterGroups, userFilterEnabled, allowlistEnabled);
                     controller.contentBlockers.updateExtensionState(options.bundleId, options, filtersInfo);
                     break;
                 case EventNotifierTypes.SHOW_OPTIONS_GENERAL_TAB:
