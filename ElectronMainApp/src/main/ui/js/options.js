@@ -503,6 +503,7 @@ const WhiteListFilter = function (options) {
         e.preventDefault();
 
         setIsAllowlistInverted(e.currentTarget.checked);
+        userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE] = !e.currentTarget.checked;
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'changeDefaultWhiteListMode',
@@ -551,7 +552,12 @@ const WhiteListFilter = function (options) {
         if (exportAllowlistBtn.classList.contains('disabled')) {
             return;
         }
-        exportFile('adguard-allowlist', 'txt', editor.getValue())
+
+        const fileName = userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]
+            ? 'adguard-allowlist'
+            : 'adguard-allowlist-inverted';
+
+        exportFile(fileName, 'txt', editor.getValue())
             .catch((err) => {
                 /* eslint-disable-next-line no-console */
                 console.error(err.message);
