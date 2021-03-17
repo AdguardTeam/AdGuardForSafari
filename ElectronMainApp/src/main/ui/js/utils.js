@@ -1,7 +1,10 @@
 /* global i18n */
 
+const fs = require('fs');
 const path = require('path');
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, remote } = require('electron');
+
+const { dialog } = remote;
 
 const Utils = {
 
@@ -119,6 +122,32 @@ const Utils = {
             reader.onerror = function () {
                 throw new Error(i18n.__('options_settings_import_error'));
             };
+        }
+    },
+
+    setUserrulesNum(rulesNum) {
+        document.querySelector('.userrules-info').innerText = rulesNum === 1
+            ? i18n.__('options_userfilter_info_single.message', rulesNum)
+            : i18n.__('options_userfilter_info_multi.message', rulesNum);
+    },
+
+    /**
+     * Exports file with provided data
+     * @param {string} fileName
+     * @param {string} fileType
+     * @param {string} data
+     * @returns {Promise<void>}
+     */
+    async exportFile(fileName, fileType, data) {
+        const d = new Date();
+        const timeStamp = `${d.getFullYear()}${d.getMonth()}${d.getDate()}_${d.getHours()}`
+            + `${d.getMinutes()}${d.getSeconds()}`;
+        const exportFileName = `${fileName}-${timeStamp}.${fileType}`;
+        const exportDialog = await dialog.showSaveDialog({
+            defaultPath: exportFileName,
+        });
+        if (!exportDialog.canceled) {
+            fs.writeFileSync(exportDialog.filePath.toString(), data);
         }
     },
 };

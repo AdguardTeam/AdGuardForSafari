@@ -1,9 +1,9 @@
 /* global ace, i18n, EventNotifierTypes */
 
-const { ipcRenderer, remote } = require('electron');
+const { ipcRenderer } = require('electron');
 
-const { dialog } = remote;
-const fs = require('fs');
+// eslint-disable-next-line import/no-unresolved
+const UserFilter = require('./js/user-filter');
 // eslint-disable-next-line import/no-unresolved
 const Utils = require('./js/utils');
 // eslint-disable-next-line import/no-unresolved
@@ -184,36 +184,6 @@ const TopMenu = (function () {
 })();
 
 /**
- * Exports file with provided data
- * @param {string} fileName
- * @param {string} fileType
- * @param {string} data
- * @returns {Promise<void>}
- */
-const exportFile = async (fileName, fileType, data) => {
-    const d = new Date();
-    const timeStamp = `${d.getFullYear()}${d.getMonth()}${d.getDate()}_${d.getHours()}`
-        + `${d.getMinutes()}${d.getSeconds()}`;
-    const exportFileName = `${fileName}-${timeStamp}.${fileType}`;
-    const exportDialog = await dialog.showSaveDialog({
-        defaultPath: exportFileName,
-    });
-    if (!exportDialog.canceled) {
-        fs.writeFileSync(exportDialog.filePath.toString(), data);
-    }
-};
-
-/**
- * Counts the number of not empty lines
- * @param text
- * @return {number}
- */
-const countNotEmptyLines = (text) => text
-    .split('\n')
-    .filter((line) => !!line)
-    .length;
-
-/**
  * Whitelist block
  *
  * @param options
@@ -253,7 +223,7 @@ const WhiteListFilter = function (options) {
         hasContent = !!response.content;
         editor.setValue(response.content || '', 1);
         applyChangesBtn.classList.add('disabled');
-        const whitelistedNum = countNotEmptyLines(response.content);
+        const whitelistedNum = editorUtils.countNotEmptyLines(response.content);
         setAllowlistInfo(whitelistedNum);
         contentBlockerInfo.whitelistedNum = whitelistedNum;
     }
@@ -328,7 +298,7 @@ const WhiteListFilter = function (options) {
             ? 'adguard-allowlist'
             : 'adguard-allowlist-inverted';
 
-        exportFile(fileName, 'txt', editor.getValue())
+        Utils.exportFile(fileName, 'txt', editor.getValue())
             .catch((err) => {
                 /* eslint-disable-next-line no-console */
                 console.error(err.message);
@@ -346,126 +316,6 @@ const WhiteListFilter = function (options) {
         updateWhiteListDomains: loadWhiteListDomains,
         isAllowlistEmpty,
     };
-};
-
-/**
- * User filter block
- *
- * @returns {{ updateUserFilterRules: loadUserRules, isUserFilterEmpty }}
- * @constructor
- */
-const UserFilter = function () {
-    'use strict';
-
-    const editorId = 'userRules';
-    const editor = ace.edit(editorId);
-    editorUtils.handleEditorResize(editor);
-
-    editor.setShowPrintMargin(false);
-
-    editor.$blockScrolling = Infinity;
-    editor.session.setMode('ace/mode/adguard');
-    editor.setOption('wrap', true);
-
-    const userRulesEditor = document.querySelector('#userRules > textarea');
-    const applyChangesBtn = document.querySelector('#userFilterApplyChanges');
-    const saveIndicatorElement = document.querySelector('#userRulesSaveIndicator');
-
-    const saver = new editorUtils.Saver({
-        editor,
-        saveEventType: 'saveUserRules',
-        indicatorElement: saveIndicatorElement,
-    });
-
-    let hasContent = false;
-    function loadUserRules() {
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'getUserRules',
-        }));
-
-        ipcRenderer.on('getUserRulesResponse', (e, arg) => {
-            /* eslint-disable-next-line no-unused-vars */
-            hasContent = !!arg.content;
-            const userRulesText = (arg.content || []).join('\n');
-            editor.setValue(userRulesText, 1);
-            applyChangesBtn.classList.add('disabled');
-            const userrulesNum = countNotEmptyLines(userRulesText);
-            setUserrulesNum(userrulesNum);
-            contentBlockerInfo.userRulesNum = userrulesNum;
-        });
-    }
-
-    applyChangesBtn.onclick = (event) => {
-        event.preventDefault();
-        saver.saveData();
-        userRulesEditor.focus();
-    };
-
-    editor.commands.addCommand({
-        name: 'save',
-        bindKey: { win: 'Ctrl-S', 'mac': 'Cmd-S' },
-        exec: () => saver.saveData(),
-    });
-
-    /**
-     * returns true is user filter is empty
-     */
-    const isUserFilterEmpty = () => {
-        return !editor.getValue().trim();
-    };
-
-    const importUserFiltersInput = document.querySelector('#importUserFilterInput');
-    const importUserFiltersBtn = document.querySelector('#userFiltersImport');
-    const exportUserFiltersBtn = document.querySelector('#userFiltersExport');
-
-    const session = editor.getSession();
-
-    session.addEventListener('change', () => {
-        applyChangesBtn.classList.remove('disabled');
-        if (session.getValue().length > 0) {
-            exportUserFiltersBtn.classList.remove('disabled');
-        } else {
-            exportUserFiltersBtn.classList.add('disabled');
-        }
-    });
-
-    importUserFiltersBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-        importUserFiltersInput.click();
-    });
-
-    importUserFiltersInput.addEventListener('change', async (event) => {
-        try {
-            const importedRules = await Utils.importRulesFromFile(event);
-            Utils.addRulesToEditor(editor, importedRules);
-        } catch (err) {
-            /* eslint-disable-next-line no-console */
-            console.error(err.message);
-        }
-    });
-
-    exportUserFiltersBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-        if (exportUserFiltersBtn.classList.contains('disabled')) {
-            return;
-        }
-        exportFile('adguard-user-rules', 'txt', editor.getValue())
-            .catch((err) => {
-                /* eslint-disable-next-line no-console */
-                console.error(err.message);
-            });
-    });
-
-    return {
-        updateUserFilterRules: loadUserRules,
-        isUserFilterEmpty,
-    };
-};
-
-const setUserrulesNum = (rulesNum) => {
-    document.querySelector('.userrules-info').innerText = rulesNum === 1
-        ? i18n.__('options_userfilter_info_single.message', rulesNum)
-        : i18n.__('options_userfilter_info_multi.message', rulesNum);
 };
 
 const setAllowlistInfo = (allowlistNum) => {
@@ -1018,7 +868,7 @@ const AntiBannerFilters = function (options) {
             loadedFiltersInfo.initLoadedFilters(response.filters, response.categories);
             updateRulesCountInfo(response.rulesInfo);
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
-            setUserrulesNum(contentBlockerInfo.userRulesNum);
+            Utils.setUserrulesNum(contentBlockerInfo.userRulesNum);
             setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]);
             setAllowlistInfo(contentBlockerInfo.whitelistedNum);
             setSearchPlaceholder();
@@ -2056,7 +1906,7 @@ PageController.prototype = {
             'type': 'getUserSettings',
         }));
         ipcRenderer.once('getUserSettingsResponse', (e, response) => {
-            exportFile('adguard-settings', 'json', JSON.stringify(response, null, 4))
+            Utils.exportFile('adguard-settings', 'json', JSON.stringify(response, null, 4))
                 .catch((err) => {
                     /* eslint-disable-next-line no-console */
                     console.error(err.message);
@@ -2225,7 +2075,7 @@ PageController.prototype = {
 
         // Initialize User filter
         this.userFilter = new UserFilter();
-        this.userFilter.updateUserFilterRules();
+        this.userFilter.updateUserFilterRules(contentBlockerInfo);
 
         // Initialize AntiBanner filters
         this.antiBannerFilters = new AntiBannerFilters({ rulesInfo: contentBlockerInfo });
@@ -2327,7 +2177,7 @@ const initPage = function (response) {
                     controller.antiBannerFilters.onFilterDownloadFinished(options);
                     break;
                 case EventNotifierTypes.UPDATE_USER_FILTER_RULES:
-                    controller.userFilter.updateUserFilterRules();
+                    controller.userFilter.updateUserFilterRules(contentBlockerInfo);
                     controller.contentBlockers.setLoading();
                     break;
                 case EventNotifierTypes.UPDATE_WHITELIST_FILTER_RULES:

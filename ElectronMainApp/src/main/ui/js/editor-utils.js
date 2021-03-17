@@ -110,7 +110,18 @@ const Saver = function (options) {
     };
 };
 
+/**
+ * Counts the number of not empty lines
+ * @param text
+ * @return {number}
+ */
+const countNotEmptyLines = (text) => text
+    .split('\n')
+    .filter((line) => !!line)
+    .length;
+
 module.exports = {
     handleEditorResize,
     Saver,
+    countNotEmptyLines,
 };
