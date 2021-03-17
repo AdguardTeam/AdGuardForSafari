@@ -1,9 +1,9 @@
 /* global ace */
 
 const { ipcRenderer } = require('electron');
-const Utils = require('./common-utils');
-const editorUtils = require('./editor-utils');
-const checkboxUtils = require('./checkbox-utils');
+const Utils = require('./utils/common-utils');
+const editorUtils = require('./utils/editor-utils');
+const checkboxUtils = require('./utils/checkbox-utils');
 
 /**
  * Whitelist block

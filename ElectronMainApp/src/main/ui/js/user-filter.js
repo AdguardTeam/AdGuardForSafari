@@ -1,8 +1,8 @@
 /* global ace */
 
 const { ipcRenderer } = require('electron');
-const Utils = require('./common-utils');
-const editorUtils = require('./editor-utils');
+const Utils = require('./utils/common-utils');
+const editorUtils = require('./utils/editor-utils');
 
 /**
  * User filter block
