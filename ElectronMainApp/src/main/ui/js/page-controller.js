@@ -7,7 +7,7 @@ const Utils = require('./utils/common-utils');
 const checkboxUtils = require('./utils/checkbox-utils');
 const TopMenu = require('./top-menu');
 const ContentBlockersScreen = require('./content-blockers');
-const AntiBannerFilters = require('./filters/antibanner-filters');
+const AntiBannerFilters = require('./filters/antibanner-filters/antibanner-filters');
 const Settings = require('./general-settings');
 
 /**
