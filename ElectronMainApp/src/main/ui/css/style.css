@@ -783,6 +783,7 @@ li.active .toggler:before {
 .user-rules {
   width: 100%;
   height: 100%;
+  overflow: visible;
 }
 @-webkit-keyframes clockwise {
   0% {
@@ -795,6 +796,13 @@ li.active .toggler:before {
     transform: rotate(360deg);
   }
 }
+.ace_scroller {
+  left: 18px !important;
+}
+.ace_gutter {
+  left: -33px !important;
+}
+
 .ace_folding-enabled > .ace_gutter-cell {
   padding: 0;
   text-align: center;
@@ -802,9 +810,6 @@ li.active .toggler:before {
 .ace_gutter,
 .ace_layer.ace_gutter-layer.ace_folding-enabled {
   width: 47px !important;
-}
-.ace_scroller {
-  left: 47px !important;
 }
 .preloader {
   background: url(../images/reload-ico-green.svg) no-repeat;
@@ -950,17 +955,16 @@ li.active .toggler:before {
 }
 /* /st */
 .filter-rules {
-  width: 100%;
   height: 200px;
   resize: both;
-  min-width: 100%;
   min-height: 150px;
-  max-width: 600px;
   max-height: 100%;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   padding-right: 10px;
   margin-top: 15px;
+  width: calc(100% - 33px) !important;
+  left: 33px;
 }
 .filter-rules textarea {
   border: 0;
