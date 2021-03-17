@@ -4,134 +4,12 @@ const { ipcRenderer, remote } = require('electron');
 
 const { dialog } = remote;
 const fs = require('fs');
-const path = require('path');
+// eslint-disable-next-line import/no-unresolved
+const Utils = require('./js/utils');
+// eslint-disable-next-line import/no-unresolved
+const editorUtils = require('./js/editor-utils');
 
 const ANIMATION_DELAY = 900;
-
-/**
- * Common utils
- *
- * @type {{debounce: Utils.debounce, htmlToElement: Utils.htmlToElement}}
- */
-const Utils = {
-
-    /**
-     * Debounces function with specified timeout
-     *
-     * @param func
-     * @param wait
-     * @returns {Function}
-     */
-    debounce(func, wait) {
-        let timeout;
-        return function () {
-            const context = this;
-            const args = arguments;
-            const later = function () {
-                timeout = null;
-                func.apply(context, args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    },
-
-    /**
-     * Escapes regular expression
-     */
-    escapeRegExp: (function () {
-        const matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
-        return function (str) {
-            if (typeof str !== 'string') {
-                throw new TypeError('Expected a string');
-            }
-            return str.replace(matchOperatorsRe, '\\$&');
-        };
-    })(),
-
-    /**
-     * Creates HTMLElement from string
-     *
-     * @param {String} html HTML representing a single element
-     * @return {Element}
-     */
-    htmlToElement(html) {
-        const template = document.createElement('template');
-        html = html.trim(); // Never return a text node of whitespace as the result
-        template.innerHTML = html;
-        return template.content.firstChild;
-    },
-
-    /**
-     * Imports rules from file
-     * @param event
-     */
-    importRulesFromFile: function importRulesFromFile(event) {
-        return new Promise((resolve) => {
-            const fileInput = event.target;
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                fileInput.value = '';
-                resolve(e.target.result);
-            };
-            reader.onerror = function (err) {
-                throw new Error(`${i18n.__('options_userfilter_import_rules_error')} ${err.message}`);
-            };
-            const file = fileInput.files[0];
-            if (file) {
-                if (file.type !== 'text/plain') {
-                    throw new Error(i18n.__('options_popup_import_rules_wrong_file_extension'));
-                }
-                reader.readAsText(file, 'utf-8');
-            }
-        });
-    },
-
-    /**
-     * Adds rules into editor
-     * @param editor
-     * @param rules
-     */
-    addRulesToEditor: function addRulesToEditor(editor, rules) {
-        const oldRules = editor.getValue();
-        const newRules = `${oldRules}\n${rules}`.split('\n');
-        const trimmedRules = newRules.map((rule) => rule.trim());
-        const ruleSet = new Set(trimmedRules);
-        const uniqueRules = Array.from(ruleSet).join('\n');
-        editor.setValue(uniqueRules.trim());
-    },
-
-    getExtension: function getExtension(filename) {
-        if (!filename) {
-            return undefined;
-        }
-        return path.extname(filename).substring(1);
-    },
-
-    handleImportSettings(event) {
-        const onFileLoaded = (content) => {
-            ipcRenderer.send('renderer-to-main', JSON.stringify({
-                'type': 'applyUserSettings',
-                'settings': content,
-            }));
-        };
-
-        const file = event.currentTarget.files[0];
-        if (file) {
-            if (this.getExtension(file.name) !== 'json') {
-                throw new Error(i18n.__('options_settings_import_wrong_file_extension'));
-            }
-            const reader = new FileReader();
-            reader.readAsText(file, 'UTF-8');
-            reader.onload = function (evt) {
-                onFileLoaded(evt.target.result);
-            };
-            reader.onerror = function () {
-                throw new Error(i18n.__('options_settings_import_error'));
-            };
-        }
-    },
-};
 
 /**
  * UI checkboxes utils
@@ -305,113 +183,6 @@ const TopMenu = (function () {
     };
 })();
 
-const Saver = function (options) {
-    const HIDE_INDICATOR_TIMEOUT_MS = 2000;
-    const DEBOUNCE_TIME = 1000;
-
-    this.indicatorElement = options.indicatorElement;
-    this.editor = options.editor;
-    this.saveEventType = options.saveEventType;
-
-    const states = {
-        SAVING: 'saving',
-        SAVED: 'saved',
-    };
-
-    const indicatorText = {
-        [states.SAVING]: i18n.__('options_editor_indicator_saving.message'),
-        [states.SAVED]: i18n.__('options_editor_indicator_saved.message'),
-    };
-
-    const setState = (state) => {
-        switch (state) {
-            case states.SAVING:
-                this.indicatorElement.textContent = indicatorText[states.SAVING];
-                this.indicatorElement.classList.remove('filter-rules__label--saved');
-                break;
-            case states.SAVED:
-                this.indicatorElement.textContent = indicatorText[states.SAVED];
-                this.indicatorElement.classList.add('filter-rules__label--saved');
-                setTimeout(() => {
-                    this.indicatorElement.textContent = '';
-                    this.indicatorElement.classList.remove('filter-rules__label--saved');
-                }, HIDE_INDICATOR_TIMEOUT_MS);
-                break;
-            default:
-                break;
-        }
-    };
-
-    this.saveData = Utils.debounce(() => {
-        const text = this.editor.getValue();
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            type: this.saveEventType,
-            content: text,
-        }));
-        setState(states.SAVED);
-    }, DEBOUNCE_TIME);
-
-    const saveData = () => {
-        setState(states.SAVING);
-        this.saveData();
-    };
-
-    return {
-        saveData,
-    };
-};
-
-/**
- * Function changes editor size while user resizes editor parent node
- * @param editor
- * @param {String} editorId
- */
-const handleEditorResize = (editor) => {
-    const editorId = editor.container.id;
-    const DRAG_TIMEOUT_MS = 100;
-    const editorParent = editor.container.parentNode;
-
-    const saveSize = (editorParent) => {
-        const { width, height } = editorParent.style;
-        if (width && height) {
-            localStorage.setItem(editorId, JSON.stringify({ size: { width, height } }));
-        }
-    };
-
-    const restoreSize = (editorParent) => {
-        const dataJson = localStorage.getItem(editorId);
-        if (!dataJson) {
-            return;
-        }
-        const { size } = JSON.parse(dataJson);
-        const { width, height } = size || {};
-        if (width && height) {
-            editorParent.style.width = width;
-            editorParent.style.height = height;
-        }
-    };
-
-    // restore size is it was set previously set;
-    restoreSize(editorParent);
-
-    const onMouseMove = Utils.debounce(() => {
-        editor.resize();
-    }, DRAG_TIMEOUT_MS);
-
-    const onMouseUp = () => {
-        saveSize(editorParent);
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', onMouseUp);
-    };
-
-    editorParent.addEventListener('mousedown', (e) => {
-        if (e.target === e.currentTarget) {
-            document.addEventListener('mousemove', onMouseMove);
-            document.addEventListener('mouseup', onMouseUp);
-        }
-    });
-};
-
 /**
  * Exports file with provided data
  * @param {string} fileName
@@ -454,7 +225,7 @@ const WhiteListFilter = function (options) {
 
     const editorId = 'whiteListRules';
     const editor = ace.edit(editorId);
-    handleEditorResize(editor);
+    editorUtils.handleEditorResize(editor);
 
     editor.setShowPrintMargin(false);
 
@@ -463,7 +234,7 @@ const WhiteListFilter = function (options) {
     editor.setOption('wrap', true);
 
     const saveIndicatorElement = document.querySelector('#whiteListRulesSaveIndicator');
-    const saver = new Saver({
+    const saver = new editorUtils.Saver({
         editor,
         saveEventType: 'saveWhiteListDomains',
         indicatorElement: saveIndicatorElement,
@@ -588,7 +359,7 @@ const UserFilter = function () {
 
     const editorId = 'userRules';
     const editor = ace.edit(editorId);
-    handleEditorResize(editor);
+    editorUtils.handleEditorResize(editor);
 
     editor.setShowPrintMargin(false);
 
@@ -600,7 +371,7 @@ const UserFilter = function () {
     const applyChangesBtn = document.querySelector('#userFilterApplyChanges');
     const saveIndicatorElement = document.querySelector('#userRulesSaveIndicator');
 
-    const saver = new Saver({
+    const saver = new editorUtils.Saver({
         editor,
         saveEventType: 'saveUserRules',
         indicatorElement: saveIndicatorElement,
