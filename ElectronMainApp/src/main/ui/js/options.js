@@ -1,94 +1,17 @@
-/* global ace, i18n, EventNotifierTypes */
+/* global i18n, EventNotifierTypes */
 
 const { ipcRenderer } = require('electron');
 
+// eslint-disable-next-line import/no-unresolved
+const WhiteListFilter = require('./js/whitelist-filter');
 // eslint-disable-next-line import/no-unresolved
 const UserFilter = require('./js/user-filter');
 // eslint-disable-next-line import/no-unresolved
 const Utils = require('./js/utils');
 // eslint-disable-next-line import/no-unresolved
-const editorUtils = require('./js/editor-utils');
+const checkboxUtils = require('./js/checkbox-utils');
 
 const ANIMATION_DELAY = 900;
-
-/**
- * UI checkboxes utils
- *
- * @type {{toggleCheckbox, updateCheckbox}}
- */
-const CheckboxUtils = (() => {
-    'use strict';
-
-    /**
-     * Toggles wrapped elements with checkbox UI
-     *
-     * @param {Array.<Object>} elements
-     */
-    const toggleCheckbox = (elements) => {
-        Array.prototype.forEach.call(elements, (checkbox) => {
-            if (checkbox.getAttribute('toggleCheckbox')) {
-                // already applied
-                return;
-            }
-
-            const el = document.createElement('div');
-            el.classList.add('toggler');
-            el.setAttribute('role', 'checkbox');
-            checkbox.parentNode.insertBefore(el, checkbox.nextSibling);
-
-            const checkboxContainer = el.closest('.opt-state');
-            checkboxContainer.addEventListener('click', () => {
-                checkbox.checked = !checkbox.checked;
-
-                const event = document.createEvent('HTMLEvents');
-                event.initEvent('change', true, false);
-                checkbox.dispatchEvent(event);
-            });
-
-            checkbox.addEventListener('change', () => {
-                onClicked(checkbox.checked);
-            });
-
-            function onClicked(checked) {
-                if (checked) {
-                    el.classList.add('active');
-                    el.closest('li').classList.add('active');
-                } else {
-                    el.classList.remove('active');
-                    el.closest('li').classList.remove('active');
-                }
-            }
-
-            checkbox.style.display = 'none';
-            onClicked(checkbox.checked);
-
-            checkbox.setAttribute('toggleCheckbox', 'true');
-        });
-    };
-
-    /**
-     * Updates checkbox elements according to checked parameter
-     *
-     * @param {Array.<Object>} elements
-     * @param {boolean} checked
-     */
-    const updateCheckbox = (elements, checked) => {
-        Array.prototype.forEach.call(elements, (el) => {
-            if (checked) {
-                el.setAttribute('checked', 'checked');
-                el.closest('li').classList.add('active');
-            } else {
-                el.removeAttribute('checked');
-                el.closest('li').classList.remove('active');
-            }
-        });
-    };
-
-    return {
-        toggleCheckbox,
-        updateCheckbox,
-    };
-})();
 
 /**
  * Top menu
@@ -182,153 +105,6 @@ const TopMenu = (function () {
         toggleTab,
     };
 })();
-
-/**
- * Whitelist block
- *
- * @param options
- * @returns {{updateWhiteListDomains: loadWhiteListDomains}}
- * @constructor
- */
-const WhiteListFilter = function (options) {
-    'use strict';
-
-    const editorId = 'whiteListRules';
-    const editor = ace.edit(editorId);
-    editorUtils.handleEditorResize(editor);
-
-    editor.setShowPrintMargin(false);
-
-    editor.$blockScrolling = Infinity;
-    editor.session.setMode('ace/mode/adguard');
-    editor.setOption('wrap', true);
-
-    const saveIndicatorElement = document.querySelector('#whiteListRulesSaveIndicator');
-    const saver = new editorUtils.Saver({
-        editor,
-        saveEventType: 'saveWhiteListDomains',
-        indicatorElement: saveIndicatorElement,
-    });
-
-    const changeDefaultWhiteListModeCheckbox = document.querySelector('#changeDefaultWhiteListMode');
-    const whiteListEditor = document.querySelector('#whiteListRules > textarea');
-    const applyChangesBtn = document.querySelector('#whiteListFilterApplyChanges');
-
-    let hasContent = false;
-    function loadWhiteListDomains() {
-        const response = ipcRenderer.sendSync('renderer-to-main', JSON.stringify({
-            'type': 'getWhiteListDomains',
-        }));
-        /* eslint-disable-next-line no-unused-vars */
-        hasContent = !!response.content;
-        editor.setValue(response.content || '', 1);
-        applyChangesBtn.classList.add('disabled');
-        const whitelistedNum = editorUtils.countNotEmptyLines(response.content);
-        setAllowlistInfo(whitelistedNum);
-        contentBlockerInfo.whitelistedNum = whitelistedNum;
-    }
-
-    applyChangesBtn.onclick = (event) => {
-        event.preventDefault();
-        saver.saveData();
-        whiteListEditor.focus();
-    };
-
-    editor.commands.addCommand({
-        name: 'save',
-        bindKey: { win: 'Ctrl-S', 'mac': 'Cmd-S' },
-        exec: () => saver.saveData(),
-    });
-
-    function changeDefaultWhiteListMode(e) {
-        e.preventDefault();
-
-        setIsAllowlistInverted(e.currentTarget.checked);
-        userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE] = !e.currentTarget.checked;
-
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'changeDefaultWhiteListMode',
-            enabled: !e.currentTarget.checked,
-        }));
-
-        loadWhiteListDomains();
-    }
-
-    changeDefaultWhiteListModeCheckbox.addEventListener('change', changeDefaultWhiteListMode);
-
-    CheckboxUtils.updateCheckbox([changeDefaultWhiteListModeCheckbox], !options.defaultWhiteListMode);
-
-    const importAllowlistInput = document.querySelector('#importAllowlistInput');
-    const importAllowlistBtn = document.querySelector('#allowlistImport');
-    const exportAllowlistBtn = document.querySelector('#allowlistExport');
-
-    const session = editor.getSession();
-
-    session.addEventListener('change', () => {
-        applyChangesBtn.classList.remove('disabled');
-        if (session.getValue().length > 0) {
-            exportAllowlistBtn.classList.remove('disabled');
-        } else {
-            exportAllowlistBtn.classList.add('disabled');
-        }
-    });
-
-    importAllowlistBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-        importAllowlistInput.click();
-    });
-
-    importAllowlistInput.addEventListener('change', async (event) => {
-        try {
-            const importedDomains = await Utils.importRulesFromFile(event);
-            Utils.addRulesToEditor(editor, importedDomains);
-        } catch (err) {
-            /* eslint-disable-next-line no-console */
-            console.error(err.message);
-        }
-    });
-
-    exportAllowlistBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-        if (exportAllowlistBtn.classList.contains('disabled')) {
-            return;
-        }
-
-        const fileName = userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]
-            ? 'adguard-allowlist'
-            : 'adguard-allowlist-inverted';
-
-        Utils.exportFile(fileName, 'txt', editor.getValue())
-            .catch((err) => {
-                /* eslint-disable-next-line no-console */
-                console.error(err.message);
-            });
-    });
-
-    /**
-     * returns true if allowlist is empty
-     */
-    const isAllowlistEmpty = () => {
-        return !editor.getValue().trim();
-    };
-
-    return {
-        updateWhiteListDomains: loadWhiteListDomains,
-        isAllowlistEmpty,
-    };
-};
-
-const setAllowlistInfo = (allowlistNum) => {
-    document.querySelector('.allowlist-info').innerText = allowlistNum === 1
-        ? i18n.__('options_whitelist_info_single.message', allowlistNum)
-        : i18n.__('options_whitelist_info_multi.message', allowlistNum);
-};
-
-const setIsAllowlistInverted = (inverted) => {
-    const title = document.querySelector('#category-allowlist .block-type__desc-title');
-    title.innerText = `${i18n.__('options_whitelist.message')}`
-        + `${inverted ? i18n.__('options_whitelist_inverted.message') : ''}`;
-};
 
 /**
  * Filters block
@@ -528,7 +304,7 @@ const AntiBannerFilters = function (options) {
         const isCheckboxChecked = typeof isCategoryEnabled === 'undefined'
             ? enabledFiltersCount > 0
             : isCategoryEnabled;
-        CheckboxUtils.updateCheckbox([checkbox], isCheckboxChecked);
+        checkboxUtils.updateCheckbox([checkbox], isCheckboxChecked);
     }
 
     function getFilterCategoryElement(category) {
@@ -869,8 +645,8 @@ const AntiBannerFilters = function (options) {
             updateRulesCountInfo(response.rulesInfo);
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
             Utils.setUserrulesNum(contentBlockerInfo.userRulesNum);
-            setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]);
-            setAllowlistInfo(contentBlockerInfo.whitelistedNum);
+            Utils.setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]);
+            Utils.setAllowlistInfo(contentBlockerInfo.whitelistedNum);
             setSearchPlaceholder();
 
             const { categories } = loadedFiltersInfo;
@@ -881,7 +657,7 @@ const AntiBannerFilters = function (options) {
             }
             initGroupsSearch();
             bindControls();
-            CheckboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
+            checkboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
 
             // check document hash
             const { hash } = document.location;
@@ -1266,7 +1042,7 @@ const AntiBannerFilters = function (options) {
 
         const filterCheckbox = getFilterCheckbox(filterId);
         if (filterCheckbox) {
-            CheckboxUtils.updateCheckbox([filterCheckbox], enabled);
+            checkboxUtils.updateCheckbox([filterCheckbox], enabled);
         }
     }
 
@@ -1474,7 +1250,7 @@ const Settings = function () {
                 checked = !checked;
             }
 
-            CheckboxUtils.updateCheckbox([element], checked);
+            checkboxUtils.updateCheckbox([element], checked);
         };
 
         return {
@@ -1541,7 +1317,7 @@ const Settings = function () {
 
     const updateAcceptableAdsCheckbox = Utils.debounce((filter) => {
         if (filter.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID) {
-            CheckboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], filter.enabled);
+            checkboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], filter.enabled);
         }
     }, 500);
 
@@ -1554,7 +1330,7 @@ const Settings = function () {
                 f.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
             ));
             const state = group.enabled && selfAdsFilter?.enabled;
-            CheckboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], state);
+            checkboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], state);
         }
     }, 500);
 
@@ -1577,7 +1353,7 @@ const Settings = function () {
      */
     const updateCheckboxValue = (propertyName, value, inverted) => {
         const checkbox = document.querySelector(checkboxSelectors[propertyName]);
-        CheckboxUtils.updateCheckbox([checkbox], inverted ? !value : value);
+        checkboxUtils.updateCheckbox([checkbox], inverted ? !value : value);
     };
 
     const filterUpdatePeriodSelect = document.querySelector('#filterUpdatePeriod');
@@ -1849,7 +1625,7 @@ PageController.prototype = {
         this._bindEvents();
         this._render();
 
-        CheckboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
+        checkboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
 
         // Initialize top menu
         TopMenu.init({
@@ -2060,8 +1836,6 @@ PageController.prototype = {
     },
 
     _render() {
-        const defaultWhitelistMode = userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE];
-
         if (environmentOptions.Prefs.mobile) {
             document.querySelector('#resetStats').style.display = 'none';
         }
@@ -2070,7 +1844,7 @@ PageController.prototype = {
         this.settings.render();
 
         // Initialize whitelist filter
-        this.whiteListFilter = new WhiteListFilter({ defaultWhiteListMode: defaultWhitelistMode });
+        this.whiteListFilter = new WhiteListFilter(userSettings, contentBlockerInfo);
         this.whiteListFilter.updateWhiteListDomains();
 
         // Initialize User filter

@@ -6,9 +6,6 @@ const editorUtils = require('./editor-utils');
 
 /**
  * User filter block
- *
- * @returns {{ updateUserFilterRules: loadUserRules, isUserFilterEmpty }}
- * @constructor
  */
 const UserFilter = function () {
     'use strict';
