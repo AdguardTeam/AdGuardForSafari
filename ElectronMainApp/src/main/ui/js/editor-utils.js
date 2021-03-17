@@ -1,7 +1,7 @@
 /* global i18n */
 
 const { ipcRenderer } = require('electron');
-const Utils = require('./utils');
+const Utils = require('./common-utils');
 
 /**
  * Function changes editor size while user resizes editor parent node

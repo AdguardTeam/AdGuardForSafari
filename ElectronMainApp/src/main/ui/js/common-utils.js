@@ -6,7 +6,7 @@ const { ipcRenderer, remote } = require('electron');
 
 const { dialog } = remote;
 
-const Utils = {
+const CommonUtils = {
 
     /**
      * Debounces function with specified timeout
@@ -164,4 +164,4 @@ const Utils = {
     },
 };
 
-module.exports = Utils;
+module.exports = CommonUtils;

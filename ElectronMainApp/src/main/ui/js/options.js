@@ -7,7 +7,7 @@ const WhiteListFilter = require('./js/whitelist-filter');
 // eslint-disable-next-line import/no-unresolved
 const UserFilter = require('./js/user-filter');
 // eslint-disable-next-line import/no-unresolved
-const Utils = require('./js/utils');
+const Utils = require('./js/common-utils');
 // eslint-disable-next-line import/no-unresolved
 const checkboxUtils = require('./js/checkbox-utils');
 

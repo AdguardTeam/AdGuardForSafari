@@ -1,7 +1,7 @@
 /* global ace */
 
 const { ipcRenderer } = require('electron');
-const Utils = require('./utils');
+const Utils = require('./common-utils');
 const editorUtils = require('./editor-utils');
 
 /**
