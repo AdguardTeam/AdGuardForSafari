@@ -55,7 +55,7 @@ module.exports = (function () {
     /**
      * Load content blocker
      */
-    const updateContentBlocker = async () => {
+    const updateContentBlocker = () => {
         return new Promise((resolve) => {
             loadRules(async (rules) => {
                 const grouped = groupRules(rules);
