@@ -1,7 +1,7 @@
 /* global ace */
 
 const { ipcRenderer } = require('electron');
-const Utils = require('../utils/common-utils');
+const utils = require('../utils/common-utils');
 const editorUtils = require('../utils/editor-utils');
 
 /**
@@ -43,7 +43,7 @@ const UserFilter = function () {
             editor.setValue(userRulesText, 1);
             applyChangesBtn.classList.add('disabled');
             const userrulesNum = editorUtils.countNotEmptyLines(userRulesText);
-            Utils.setUserrulesNum(userrulesNum);
+            utils.setUserrulesNum(userrulesNum);
             contentBlockerInfo.userRulesNum = userrulesNum;
         });
     }
@@ -89,8 +89,8 @@ const UserFilter = function () {
 
     importUserFiltersInput.addEventListener('change', async (event) => {
         try {
-            const importedRules = await Utils.importRulesFromFile(event);
-            Utils.addRulesToEditor(editor, importedRules);
+            const importedRules = await utils.importRulesFromFile(event);
+            utils.addRulesToEditor(editor, importedRules);
         } catch (err) {
             /* eslint-disable-next-line no-console */
             console.error(err.message);
@@ -102,7 +102,7 @@ const UserFilter = function () {
         if (exportUserFiltersBtn.classList.contains('disabled')) {
             return;
         }
-        Utils.exportFile('adguard-user-rules', 'txt', editor.getValue())
+        utils.exportFile('adguard-user-rules', 'txt', editor.getValue())
             .catch((err) => {
                 /* eslint-disable-next-line no-console */
                 console.error(err.message);

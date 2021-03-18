@@ -1,7 +1,7 @@
 /* global ace */
 
 const { ipcRenderer } = require('electron');
-const Utils = require('../utils/common-utils');
+const utils = require('../utils/common-utils');
 const editorUtils = require('../utils/editor-utils');
 const checkboxUtils = require('../utils/checkbox-utils');
 
@@ -44,7 +44,7 @@ const WhiteListFilter = function (userSettings, contentBlockerInfo) {
         editor.setValue(response.content || '', 1);
         applyChangesBtn.classList.add('disabled');
         const whitelistedNum = editorUtils.countNotEmptyLines(response.content);
-        Utils.setAllowlistInfo(whitelistedNum);
+        utils.setAllowlistInfo(whitelistedNum);
         contentBlockerInfo.whitelistedNum = whitelistedNum;
     }
 
@@ -63,7 +63,7 @@ const WhiteListFilter = function (userSettings, contentBlockerInfo) {
     function changeDefaultWhiteListMode(e) {
         e.preventDefault();
 
-        Utils.setIsAllowlistInverted(e.currentTarget.checked);
+        utils.setIsAllowlistInverted(e.currentTarget.checked);
         userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE] = !e.currentTarget.checked;
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
@@ -103,8 +103,8 @@ const WhiteListFilter = function (userSettings, contentBlockerInfo) {
 
     importAllowlistInput.addEventListener('change', async (event) => {
         try {
-            const importedDomains = await Utils.importRulesFromFile(event);
-            Utils.addRulesToEditor(editor, importedDomains);
+            const importedDomains = await utils.importRulesFromFile(event);
+            utils.addRulesToEditor(editor, importedDomains);
         } catch (err) {
             /* eslint-disable-next-line no-console */
             console.error(err.message);
@@ -121,7 +121,7 @@ const WhiteListFilter = function (userSettings, contentBlockerInfo) {
             ? 'adguard-allowlist'
             : 'adguard-allowlist-inverted';
 
-        Utils.exportFile(fileName, 'txt', editor.getValue())
+        utils.exportFile(fileName, 'txt', editor.getValue())
             .catch((err) => {
                 /* eslint-disable-next-line no-console */
                 console.error(err.message);

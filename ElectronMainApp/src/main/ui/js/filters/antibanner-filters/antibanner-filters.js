@@ -1,9 +1,9 @@
 /* global i18n */
 
 const { ipcRenderer } = require('electron');
-const Utils = require('../../utils/common-utils');
+const utils = require('../../utils/common-utils');
 const checkboxUtils = require('../../utils/checkbox-utils');
-const TopMenu = require('../../top-menu');
+const topMenu = require('../../top-menu');
 const search = require('./filter-search');
 const customFilters = require('./custom-filters');
 
@@ -211,7 +211,7 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
     }
 
     function getFilterCategoryElement(category) {
-        return Utils.htmlToElement(`
+        return utils.htmlToElement(`
                 <li id="category${category.groupId}" class="active">
                     <a href="#antibanner${category.groupId}" class="block-type filter-group">
                         <div class="block-type__desc">
@@ -323,7 +323,7 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
 
         if (isCustomFilters
             && filters.length === 0) {
-            return Utils.htmlToElement(getEmptyCustomFiltersTemplate(category));
+            return utils.htmlToElement(getEmptyCustomFiltersTemplate(category));
         }
 
         const pageTitleEl = getPageTitleTemplate(category.groupName);
@@ -343,7 +343,7 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
                 + `${i18n.__('options_filters_empty_custom_add_button.message')}</button>`;
         }
 
-        return Utils.htmlToElement(`
+        return utils.htmlToElement(`
             <div id="antibanner${category.groupId}" class="settings-content tab-pane filters-list">
                 <div class="settings-content_page-title">
                     ${pageTitleEl}
@@ -418,9 +418,9 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
             loadedFiltersInfo.initLoadedFilters(response.filters, response.categories);
             updateRulesCountInfo(response.rulesInfo);
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
-            Utils.setUserrulesNum(contentBlockerInfo.userRulesNum);
-            Utils.setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]);
-            Utils.setAllowlistInfo(contentBlockerInfo.whitelistedNum);
+            utils.setUserrulesNum(contentBlockerInfo.userRulesNum);
+            utils.setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]);
+            utils.setAllowlistInfo(contentBlockerInfo.whitelistedNum);
             setSearchPlaceholder();
 
             const { categories } = loadedFiltersInfo;
@@ -436,7 +436,7 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
             // check document hash
             const { hash } = document.location;
             if (hash && hash.indexOf('#antibanner') === 0) {
-                TopMenu.toggleTab();
+                topMenu.toggleTab();
             }
 
             ipcRenderer.send('renderer-to-main', JSON.stringify({
@@ -625,7 +625,7 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
                                         data-tooltip="${i18n.__('options_filters_filter_trusted_tag_desc.message')}">
                                         #${i18n.__('options_filters_filter_trusted_tag.message')}
                                    </div>`;
-                filterEl.querySelector('.tags-container').appendChild(Utils.htmlToElement(tagTrusted));
+                filterEl.querySelector('.tags-container').appendChild(utils.htmlToElement(tagTrusted));
             }
         }
     }

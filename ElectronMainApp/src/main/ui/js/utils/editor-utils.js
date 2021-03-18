@@ -1,7 +1,7 @@
 /* global i18n */
 
 const { ipcRenderer } = require('electron');
-const Utils = require('./common-utils');
+const utils = require('./common-utils');
 
 /**
  * Function changes editor size while user resizes editor parent node
@@ -36,7 +36,7 @@ const handleEditorResize = (editor) => {
     // restore size is it was set previously set;
     restoreSize(editorParent);
 
-    const onMouseMove = Utils.debounce(() => {
+    const onMouseMove = utils.debounce(() => {
         editor.resize();
     }, DRAG_TIMEOUT_MS);
 
@@ -91,7 +91,7 @@ const Saver = function (options) {
         }
     };
 
-    this.saveData = Utils.debounce(() => {
+    this.saveData = utils.debounce(() => {
         const text = this.editor.getValue();
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             type: this.saveEventType,

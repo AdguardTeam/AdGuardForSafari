@@ -1,4 +1,4 @@
-const Utils = require('../../utils/common-utils');
+const utils = require('../../utils/common-utils');
 
 const clearSearch = (nodes) => {
     // eslint-disable-next-line no-return-assign
@@ -10,7 +10,7 @@ const clearSearch = (nodes) => {
 const searchFilters = (searchInput, filters, groups) => {
     let searchString;
     try {
-        searchString = Utils.escapeRegExp(searchInput.trim());
+        searchString = utils.escapeRegExp(searchInput.trim());
     } catch (err) {
         /* eslint-disable-next-line no-console */
         console.log(err.message);
@@ -57,7 +57,7 @@ const initGroupsSearch = (loadedFiltersInfo, getFilterTemplate) => {
     clearSearch(filters);
 
     if (searchInput) {
-        searchInput.addEventListener('input', Utils.debounce((e) => {
+        searchInput.addEventListener('input', utils.debounce((e) => {
             clearSearch(filters);
             searchFilters(e.target.value, filters, groups);
         }, SEARCH_DELAY_MS));
@@ -73,10 +73,10 @@ function initFiltersSearch(category) {
     const filters = document.querySelectorAll(`#antibanner${category.groupId} .opts-list li`);
     const SEARCH_DELAY_MS = 250;
     if (searchInput) {
-        searchInput.addEventListener('input', Utils.debounce((e) => {
+        searchInput.addEventListener('input', utils.debounce((e) => {
             let searchString;
             try {
-                searchString = Utils.escapeRegExp(e.target.value.trim());
+                searchString = utils.escapeRegExp(e.target.value.trim());
             } catch (err) {
                 /* eslint-disable-next-line no-console */
                 console.log(err.message);

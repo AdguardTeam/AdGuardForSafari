@@ -3,9 +3,9 @@
 const { ipcRenderer } = require('electron');
 const WhiteListFilter = require('./filters/whitelist-filter');
 const UserFilter = require('./filters/user-filter');
-const Utils = require('./utils/common-utils');
+const utils = require('./utils/common-utils');
 const checkboxUtils = require('./utils/checkbox-utils');
-const TopMenu = require('./top-menu');
+const topMenu = require('./top-menu');
 const ContentBlockersScreen = require('./content-blockers');
 const AntiBannerFilters = require('./filters/antibanner-filters/antibanner-filters');
 const Settings = require('./general-settings');
@@ -46,7 +46,7 @@ PageController.prototype = {
         checkboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
 
         // Initialize top menu
-        TopMenu.init({
+        topMenu.init({
             /* eslint-disable-next-line no-unused-vars */
             onHashUpdated(tabId) {
                 // Doing nothing
@@ -72,7 +72,7 @@ PageController.prototype = {
 
         importSettingsInput.addEventListener('change', (event) => {
             try {
-                Utils.handleImportSettings(event);
+                utils.handleImportSettings(event);
             } catch (err) {
                 /* eslint-disable-next-line no-console */
                 console.error(err.message);
@@ -100,7 +100,7 @@ PageController.prototype = {
             'type': 'getUserSettings',
         }));
         ipcRenderer.once('getUserSettingsResponse', (e, response) => {
-            Utils.exportFile('adguard-settings', 'json', JSON.stringify(response, null, 4))
+            utils.exportFile('adguard-settings', 'json', JSON.stringify(response, null, 4))
                 .catch((err) => {
                     /* eslint-disable-next-line no-console */
                     console.error(err.message);

@@ -1,7 +1,7 @@
 /* global i18n */
 
 const { ipcRenderer } = require('electron');
-const Utils = require('./utils/common-utils');
+const utils = require('./utils/common-utils');
 const checkboxUtils = require('./utils/checkbox-utils');
 
 /**
@@ -64,7 +64,7 @@ const Settings = function (
         { negate: true }
     ));
 
-    const toggleAcceptableAdsFilter = Utils.debounce((enabled) => {
+    const toggleAcceptableAdsFilter = utils.debounce((enabled) => {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': enabled ? 'addAndEnableFilter' : 'disableFilter',
             filterId: AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID,
@@ -115,7 +115,7 @@ const Settings = function (
     };
     const periodSelect = initUpdateFiltersPeriodSelect();
 
-    const updateAcceptableAdsCheckbox = Utils.debounce((filter) => {
+    const updateAcceptableAdsCheckbox = utils.debounce((filter) => {
         if (filter.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID) {
             checkboxUtils.updateCheckbox([allowAcceptableAdsCheckbox], filter.enabled);
         }
@@ -124,7 +124,7 @@ const Settings = function (
     /**
      * Updates `Allow search ads and the self-promotion` checkbox on `Other` group state change
      */
-    const updateAcceptableAdsCheckboxByGroupState = Utils.debounce((group) => {
+    const updateAcceptableAdsCheckboxByGroupState = utils.debounce((group) => {
         if (group.groupId === AntiBannerFilterGroupsId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID) {
             const selfAdsFilter = group.filters.find((f) => (
                 f.filterId === AntiBannerFiltersId.SEARCH_AND_SELF_PROMO_FILTER_ID
