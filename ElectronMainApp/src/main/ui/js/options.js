@@ -2337,7 +2337,7 @@ PageController.prototype = {
             const hideOnboardingScreen = !!window.sessionStorage.getItem(hideOnboardingScreenKey);
             const shouldHideOnboardingScreen = !allContentBlockersDisabled || hideOnboardingScreen;
 
-            settingsWrap.style.overflow = shouldHideOnboardingScreen ? 'hidden' : 'hidden';
+            settingsWrap.style.overflow = shouldHideOnboardingScreen ? 'auto' : 'hidden';
             onBoardingScreenEl.style.display = shouldHideOnboardingScreen ? 'none' : 'flex';
 
             const hideExtensionsNotification = !!window.sessionStorage.getItem(hideExtensionsNotificationKey);
