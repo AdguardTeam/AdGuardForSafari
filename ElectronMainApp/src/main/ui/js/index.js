@@ -5,26 +5,19 @@ const { ipcRenderer } = require('electron');
 // eslint-disable-next-line import/no-unresolved
 const PageController = require('./js/page-controller');
 
-let userSettings;
-let enabledFilters;
-let environmentOptions;
-let AntiBannerFiltersId;
-let AntiBannerFilterGroupsId;
-let contentBlockerInfo;
-let isProtectionRunning;
-
 /**
  * Initializes page
  */
 const initPage = function (response) {
-    userSettings = response.userSettings;
-    enabledFilters = response.enabledFilters;
-    environmentOptions = response.environmentOptions;
-    contentBlockerInfo = response.contentBlockerInfo;
-    isProtectionRunning = response.isProtectionRunning;
+    const {
+        userSettings,
+        enabledFilters,
+        environmentOptions,
+        contentBlockerInfo,
+        isProtectionRunning,
+    } = response;
 
-    AntiBannerFiltersId = response.constants.AntiBannerFiltersId;
-    AntiBannerFilterGroupsId = response.constants.AntiBannerFilterGroupsId;
+    const { AntiBannerFiltersId, AntiBannerFilterGroupsId } = response.constants;
 
     const onDocumentReady = function () {
         const controller = new PageController(
