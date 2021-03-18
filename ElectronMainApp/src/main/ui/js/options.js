@@ -2324,8 +2324,8 @@ PageController.prototype = {
         const hideOnboardingScreenKey = 'hide-onboarding-screen';
         const hideUpdateIntervalNotificationKey = 'hide-update-interval-notification';
 
-        const body = document.querySelector('body');
-        const onBoardingScreenEl = body.querySelector('#boarding-screen-placeholder');
+        const onBoardingScreenEl = document.querySelector('#boarding-screen-placeholder');
+        const settingsWrap = document.querySelector('.settings-wrap');
         const enableExtensionsNotification = document.getElementById('enableExtensionsNotification');
         const enableCbExtensionsNotification = document.getElementById('enableCbExtensionsNotification');
         const updateIntervalNotification = document.getElementById('updateIntervalNotification');
@@ -2337,7 +2337,7 @@ PageController.prototype = {
             const hideOnboardingScreen = !!window.sessionStorage.getItem(hideOnboardingScreenKey);
             const shouldHideOnboardingScreen = !allContentBlockersDisabled || hideOnboardingScreen;
 
-            body.style.overflow = shouldHideOnboardingScreen ? 'auto' : 'hidden';
+            settingsWrap.style.overflow = shouldHideOnboardingScreen ? 'auto' : 'hidden';
             onBoardingScreenEl.style.display = shouldHideOnboardingScreen ? 'none' : 'flex';
 
             const hideExtensionsNotification = !!window.sessionStorage.getItem(hideExtensionsNotificationKey);
@@ -2369,7 +2369,7 @@ PageController.prototype = {
         const ignoreSafariSettingsButtons = document.querySelector('#ignore-safari-extensions-settings-btn');
         ignoreSafariSettingsButtons.addEventListener('click', (e) => {
             e.preventDefault();
-            body.style.overflow = 'auto';
+            settingsWrap.style.overflow = 'auto';
             onBoardingScreenEl.style.display = 'none';
             window.sessionStorage.setItem(hideOnboardingScreenKey, true);
         });
