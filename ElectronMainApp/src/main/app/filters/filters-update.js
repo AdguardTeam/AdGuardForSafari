@@ -277,6 +277,7 @@ module.exports = (() => {
         const filterIds = [];
 
         const customFilterIds = customFilters.loadCustomFilters()
+            .filter((f) => !filtersToUpdate || filtersToUpdate.find((x) => x.filterId === f.filterId))
             .filter((f) => f.enabled)
             .map((filter) => filter.filterId);
 
