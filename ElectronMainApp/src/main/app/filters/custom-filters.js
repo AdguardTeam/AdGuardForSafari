@@ -239,6 +239,7 @@ module.exports = (function () {
                             f.description = filter.description;
                             f.timeUpdated = new Date().toString();
                             f.lastUpdateTime = f.timeUpdated;
+                            f.lastCheckTime = Date.now();
                             f.trusted = customFilter.trusted;
                             cache.updateFilters(f);
                             listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, f);

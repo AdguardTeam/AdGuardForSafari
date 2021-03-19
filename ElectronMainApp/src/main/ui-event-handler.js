@@ -40,7 +40,7 @@ module.exports.init = function () {
                 settings.changeLaunchAtLogin(message.value);
                 break;
             case 'addAndEnableFilter':
-                filters.addAndEnableFilters([message.filterId]);
+                filters.enableAndUpdateFilter(message.filterId);
                 break;
             case 'disableFilter':
                 filters.disableFilters([message.filterId]);

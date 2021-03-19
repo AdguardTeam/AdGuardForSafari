@@ -250,6 +250,22 @@ module.exports = (() => {
     };
 
     /**
+     * Enables and updates filter
+     *
+     * @param filterId
+     */
+    const enableAndUpdateFilter = (filterId) => {
+        addAntiBannerFilter(filterId, (success) => {
+            if (success) {
+                enableFilter(filterId);
+
+                const filter = cache.getFilter(filterId);
+                filtersUpdate.checkFilterUpdate(filter);
+            }
+        });
+    };
+
+    /**
      * Disables filters
      *
      * @param filterIds
@@ -493,6 +509,7 @@ module.exports = (() => {
         getCustomFilters,
 
         addAndEnableFilters,
+        enableAndUpdateFilter,
         disableFilters,
         removeFilter,
 

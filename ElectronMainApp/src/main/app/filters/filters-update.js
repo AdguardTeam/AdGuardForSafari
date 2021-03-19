@@ -400,20 +400,9 @@ module.exports = (() => {
         }, RELOAD_FILTERS_DELAY);
     };
 
-    listeners.addListener((event, filter) => {
-        switch (event) {
-            case events.FILTER_ENABLE_DISABLE:
-                if (filter.enabled) {
-                    checkFilterUpdate(filter);
-                }
-                break;
-            default:
-                break;
-        }
-    });
-
     return {
         checkAntiBannerFiltersUpdate,
+        checkFilterUpdate,
         scheduleFiltersUpdate,
         loadFilterRules,
         rerunAutoUpdateTimer,
