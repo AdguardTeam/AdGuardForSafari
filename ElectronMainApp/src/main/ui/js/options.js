@@ -1994,20 +1994,30 @@ const Settings = function () {
         }
     };
 
+    const updateAllowlistState = () => {
+        ipcRenderer.once('isAllowlistEnabledResponse', (e, isAllowlistEnabled) => {
+            updateCheckboxValue('allowlist-enabled', isAllowlistEnabled, false);
+        });
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'isAllowlistEnabled',
+        }));
+    };
+
+    const updateUserFilterState = () => {
+        ipcRenderer.once('isUserrulesEnabledResponse', (e, isUserrulesEnabled) => {
+            updateCheckboxValue('userrules-enabled', isUserrulesEnabled, false);
+        });
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'isUserrulesEnabled',
+        }));
+    };
+
     const render = function () {
         periodSelect.render();
 
         for (let i = 0; i < checkboxes.length; i += 1) {
             checkboxes[i].render();
         }
-
-        ipcRenderer.once('isUserrulesEnabledResponse', (e, isUserrulesEnabled) => {
-            updateCheckboxValue('userrules-enabled', isUserrulesEnabled, false);
-        });
-
-        ipcRenderer.once('isAllowlistEnabledResponse', (e, isAllowlistEnabled) => {
-            updateCheckboxValue('allowlist-enabled', isAllowlistEnabled, false);
-        });
 
         ipcRenderer.once('isGroupEnabledResponse', (e, isGroupOtherEnabled) => {
             const isSelfAdsEnabled = isGroupOtherEnabled
@@ -2019,20 +2029,14 @@ const Settings = function () {
         });
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'isUserrulesEnabled',
-        }));
-
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'isAllowlistEnabled',
-        }));
-
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'isGroupEnabled',
             'groupId': AntiBannerFilterGroupsId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID,
         }));
 
         showProtectionStatusWarning(isProtectionRunning);
         showUpdateIntervalNotification();
+        updateUserFilterState();
+        updateAllowlistState();
     };
 
     const updateContentBlockersDescription = (info) => {
@@ -2056,6 +2060,8 @@ const Settings = function () {
         showProtectionStatusWarning,
         showUpdateIntervalNotification,
         updateContentBlockersDescription,
+        updateAllowlistState,
+        updateUserFilterState,
     };
 };
 
@@ -2556,10 +2562,12 @@ const initPage = function (response) {
                     controller.antiBannerFilters.onFilterDownloadFinished(options);
                     break;
                 case EventNotifierTypes.UPDATE_USER_FILTER_RULES:
+                    controller.settings.updateUserFilterState();
                     controller.userFilter.updateUserFilterRules();
                     controller.contentBlockers.setLoading();
                     break;
                 case EventNotifierTypes.UPDATE_WHITELIST_FILTER_RULES:
+                    controller.settings.updateAllowlistState();
                     controller.whiteListFilter.updateWhiteListDomains();
                     controller.contentBlockers.setLoading();
                     break;

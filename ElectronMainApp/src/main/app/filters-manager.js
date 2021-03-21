@@ -260,7 +260,9 @@ module.exports = (() => {
                 enableFilter(filterId);
 
                 const filter = cache.getFilter(filterId);
-                filtersUpdate.checkFilterUpdate(filter);
+                if (!filter.customUrl) {
+                    filtersUpdate.checkFilterUpdate(filter);
+                }
             }
         });
     };
