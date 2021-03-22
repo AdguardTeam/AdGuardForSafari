@@ -275,7 +275,11 @@ module.exports = (() => {
      */
     const selectFilterIdsToUpdate = (forceUpdate, filtersToUpdate) => {
         const filterIds = [];
-        const customFilterIds = customFilters.loadCustomFilters().map((filter) => filter.filterId);
+
+        const customFilterIds = customFilters.loadCustomFilters()
+            .filter((f) => !filtersToUpdate || filtersToUpdate.find((x) => x.filterId === f.filterId))
+            .filter((f) => f.enabled)
+            .map((filter) => filter.filterId);
 
         const filters = filtersToUpdate || cache.getFilters();
         const updateFiltersPeriodInMs = settings.getUpdateFiltersPeriod() * 60 * 60 * 1000;
@@ -397,18 +401,9 @@ module.exports = (() => {
         }, RELOAD_FILTERS_DELAY);
     };
 
-    listeners.addListener((event, filter) => {
-        switch (event) {
-            case events.FILTER_ENABLE_DISABLE:
-                checkFilterUpdate(filter);
-                break;
-            default:
-                break;
-        }
-    });
-
     return {
         checkAntiBannerFiltersUpdate,
+        checkFilterUpdate,
         scheduleFiltersUpdate,
         loadFilterRules,
         rerunAutoUpdateTimer,

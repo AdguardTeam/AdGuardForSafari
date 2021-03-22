@@ -34,7 +34,7 @@ module.exports = (() => {
         await contentBlockerAdapter.updateContentBlocker();
         if (dirty) {
             // Needs reload after timeout
-            await new Promise((resolve) => setTimeout(resolve, 5000));
+            await new Promise((resolve) => setTimeout(resolve, 2000));
             processing = false;
             await reloadContentBlockers();
         } else {
