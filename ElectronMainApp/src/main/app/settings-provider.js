@@ -189,7 +189,7 @@ module.exports = (() => {
      */
     const applyFiltersSection = async (section, callback) => {
         const whiteListSection = section.filters['whitelist'] || {};
-        const whitelistEnabled = whiteListSection.enabled;
+        const whitelistEnabled = !!whiteListSection.enabled;
         const whitelistDomains = whiteListSection.domains || [];
         const blacklistDomains = whiteListSection['inverted-domains'] || [];
 
@@ -199,7 +199,7 @@ module.exports = (() => {
         settingsManager.updateDefaultWhiteListMode(!whiteListSection.inverted);
 
         const userFilterSection = section.filters['user-filter'] || {};
-        const userFilterEnabled = userFilterSection.enabled;
+        const userFilterEnabled = !!userFilterSection.enabled;
         const userRulesData = userFilterSection.rules || '';
 
         // Apply user rules
