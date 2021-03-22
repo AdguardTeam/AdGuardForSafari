@@ -32,8 +32,7 @@ const initPage = function (response) {
         controller.init();
 
         ipcRenderer.on('main-to-renderer', (e, arg) => {
-            const event = arg.args[0];
-            const options = arg.args[1];
+            const [event, options] = arg.args;
 
             switch (event) {
                 case EventNotifierTypes.FILTER_ENABLE_DISABLE:

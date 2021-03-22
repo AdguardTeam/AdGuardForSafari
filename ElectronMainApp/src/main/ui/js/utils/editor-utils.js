@@ -6,7 +6,6 @@ const utils = require('./common-utils');
 /**
  * Function changes editor size while user resizes editor parent node
  * @param editor
- * @param {String} editorId
  */
 const handleEditorResize = (editor) => {
     const editorId = editor.container.id;

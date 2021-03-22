@@ -7,12 +7,12 @@ const { ipcRenderer, remote } = require('electron');
 const { dialog } = remote;
 
 /**
-     * Debounces function with specified timeout
-     *
-     * @param func
-     * @param wait
-     * @returns {Function}
-     */
+ * Debounces function with specified timeout
+ *
+ * @param func
+ * @param wait
+ * @returns {Function}
+ */
 function debounce(func, wait) {
     let timeout;
     return function () {
@@ -41,11 +41,11 @@ function debounce(func, wait) {
 })();
 
 /**
-     * Creates HTMLElement from string
-     *
-     * @param {String} html HTML representing a single element
-     * @return {Element}
-     */
+ * Creates HTMLElement from string
+ *
+ * @param {String} html HTML representing a single element
+ * @return {Element}
+ */
 const htmlToElement = (html) => {
     const template = document.createElement('template');
     html = html.trim(); // Never return a text node of whitespace as the result
@@ -54,9 +54,9 @@ const htmlToElement = (html) => {
 };
 
 /**
-     * Imports rules from file
-     * @param event
-     */
+ * Imports rules from file
+ * @param event
+ */
 const importRulesFromFile = (event) => {
     return new Promise((resolve) => {
         const fileInput = event.target;
@@ -79,10 +79,10 @@ const importRulesFromFile = (event) => {
 };
 
 /**
-     * Adds rules into editor
-     * @param editor
-     * @param rules
-     */
+ * Adds rules into editor
+ * @param editor
+ * @param rules
+ */
 const addRulesToEditor = (editor, rules) => {
     const oldRules = editor.getValue();
     const newRules = `${oldRules}\n${rules}`.split('\n');
@@ -138,20 +138,20 @@ const setAllowlistInfo = (allowlistNum) => {
 const setIsAllowlistInverted = (inverted) => {
     const title = document.querySelector('#category-allowlist .block-type__desc-title');
     title.innerText = `${i18n.__('options_whitelist.message')}`
-            + `${inverted ? i18n.__('options_whitelist_inverted.message') : ''}`;
+        + `${inverted ? i18n.__('options_whitelist_inverted.message') : ''}`;
 };
 
 /**
-     * Exports file with provided data
-     * @param {string} fileName
-     * @param {string} fileType
-     * @param {string} data
-     * @returns {Promise<void>}
-     */
+ * Exports file with provided data
+ * @param {string} fileName
+ * @param {string} fileType
+ * @param {string} data
+ * @returns {Promise<void>}
+ */
 const exportFile = async (fileName, fileType, data) => {
     const d = new Date();
     const timeStamp = `${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}_${d.getHours()}`
-            + `${d.getMinutes()}${d.getSeconds()}`;
+        + `${d.getMinutes()}${d.getSeconds()}`;
     const exportFileName = `${fileName}-${timeStamp}.${fileType}`;
     const exportDialog = await dialog.showSaveDialog({
         defaultPath: exportFileName,

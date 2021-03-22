@@ -29,11 +29,8 @@ function renderCustomFilterPopup() {
     }
 
     function clearActiveStep() {
-        document.querySelector('#add-custom-filter-step-1').classList.remove(POPUP_ACTIVE_CLASS);
-        document.querySelector('#add-custom-filter-step-2').classList.remove(POPUP_ACTIVE_CLASS);
-        document.querySelector('#add-custom-filter-step-3').classList.remove(POPUP_ACTIVE_CLASS);
-        document.querySelector('#add-custom-filter-step-4').classList.remove(POPUP_ACTIVE_CLASS);
-        document.querySelector('#add-custom-filter-step-5').classList.remove(POPUP_ACTIVE_CLASS);
+        const steps = document.querySelectorAll('[id^="add-custom-filter-step-"]');
+        steps.forEach((el) => el.classList.remove(POPUP_ACTIVE_CLASS));
 
         document.querySelector('#custom-filter-popup-close').style.display = 'block';
     }
@@ -53,16 +50,6 @@ function renderCustomFilterPopup() {
         document.querySelector('#custom-filter-popup-added-homepage').setAttribute('href', filter.homepage);
         document.querySelector('#custom-filter-popup-added-url').textContent = filter.customUrl;
         document.querySelector('#custom-filter-popup-added-url').setAttribute('href', filter.customUrl);
-    }
-
-    /* eslint-disable-next-line no-unused-vars */
-    function addAndEnableFilter(filterId) {
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'addAndEnableFilter',
-            filterId,
-        }));
-
-        closePopup();
     }
 
     function removeAntiBannerFilter(filterId) {

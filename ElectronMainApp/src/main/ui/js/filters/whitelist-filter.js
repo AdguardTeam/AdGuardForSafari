@@ -8,7 +8,8 @@ const checkboxUtils = require('../utils/checkbox-utils');
 /**
  * Whitelist block
  *
- * @param userSettings
+ * @param {object} userSettings
+ * @param {object} contentBlockerInfo
  */
 const WhiteListFilter = function (userSettings, contentBlockerInfo) {
     'use strict';
