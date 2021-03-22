@@ -1,11 +1,15 @@
+/* global describe, it, expect */
+
 const path = require('path');
 const customFilters = require('../../main/app/filters/custom-filters');
+const filtersState = require('../../main/app/filters/filters-state');
 const cache = require('../../main/app/filters/cache');
 
 const testFilterPath = path.resolve(__dirname, '../resources', 'test-filter.txt');
 
 describe('Custom filters tests', () => {
     it('Add custom filter', (done) => {
+        filtersState.init();
         const filters = customFilters.loadCustomFilters();
         expect(filters).toHaveLength(0);
 
