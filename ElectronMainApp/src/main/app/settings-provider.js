@@ -62,6 +62,8 @@ module.exports = (() => {
         const whiteListDomains = whitelist.getWhiteListedDomains() || [];
         const blockListDomains = whitelist.getBlockListedDomains() || [];
         const defaultWhiteListMode = !!whitelist.isDefaultMode();
+        const whitelistEnabled = !!settingsManager.isAllowlistEnabled();
+        const userFilterEnabled = !!settingsManager.isUserrulesEnabled();
 
         // Collect user rules
         userRules.getUserRulesText((content) => {
@@ -71,10 +73,12 @@ module.exports = (() => {
                     'enabled-filters': enabledFilterIds,
                     'custom-filters': customFiltersData,
                     'user-filter': {
+                        'enabled': userFilterEnabled,
                         'rules': content,
                         'disabled-rules': '',
                     },
                     'whitelist': {
+                        'enabled': whitelistEnabled,
                         'inverted': !defaultWhiteListMode,
                         'domains': whiteListDomains,
                         'inverted-domains': blockListDomains,
@@ -185,17 +189,21 @@ module.exports = (() => {
      */
     const applyFiltersSection = async (section, callback) => {
         const whiteListSection = section.filters['whitelist'] || {};
+        const whitelistEnabled = !!whiteListSection.enabled;
         const whitelistDomains = whiteListSection.domains || [];
         const blacklistDomains = whiteListSection['inverted-domains'] || [];
 
         // Apply whitelist/blacklist domains and whitelist mode
+        settingsManager.changeAllowlistState(whitelistEnabled);
         whitelist.configure(whitelistDomains, blacklistDomains, !whiteListSection.inverted);
         settingsManager.updateDefaultWhiteListMode(!whiteListSection.inverted);
 
         const userFilterSection = section.filters['user-filter'] || {};
+        const userFilterEnabled = !!userFilterSection.enabled;
         const userRulesData = userFilterSection.rules || '';
 
         // Apply user rules
+        settingsManager.changeUserrulesState(userFilterEnabled);
         userRules.updateUserRulesText(userRulesData);
 
         // Apply custom filters

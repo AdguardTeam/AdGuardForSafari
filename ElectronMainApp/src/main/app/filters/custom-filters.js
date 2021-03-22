@@ -6,6 +6,7 @@ const localStorage = require('../storage/storage');
 const listeners = require('../../notifier');
 const events = require('../../events');
 const log = require('../utils/log');
+const { getFiltersState } = require('./filters-state');
 const {
     CUSTOM_FILTERS_START_ID,
     CUSTOM_FILTERS_JSON_KEY,
@@ -238,6 +239,7 @@ module.exports = (function () {
                             f.description = filter.description;
                             f.timeUpdated = new Date().toString();
                             f.lastUpdateTime = f.timeUpdated;
+                            f.lastCheckTime = Date.now();
                             f.trusted = customFilter.trusted;
                             cache.updateFilters(f);
                             listeners.notifyListeners(events.SUCCESS_DOWNLOAD_FILTER, f);
@@ -259,8 +261,17 @@ module.exports = (function () {
      * @returns {Array}
      */
     const loadCustomFilters = () => {
-        const customFilters = localStorage.getItem(CUSTOM_FILTERS_JSON_KEY);
-        return customFilters ? JSON.parse(customFilters) : [];
+        const customFiltersString = localStorage.getItem(CUSTOM_FILTERS_JSON_KEY);
+        if (!customFiltersString) {
+            return [];
+        }
+        const customFilters = JSON.parse(customFiltersString);
+        // update custom filters with actual state
+        const filtersState = getFiltersState();
+        for (const filter of customFilters) {
+            filter.enabled = filtersState[filter.filterId].enabled;
+        }
+        return customFilters;
     };
 
     return {
