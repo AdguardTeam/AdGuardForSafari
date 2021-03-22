@@ -541,6 +541,7 @@ const WhiteListFilter = function (options) {
         try {
             const importedDomains = await Utils.importRulesFromFile(event);
             Utils.addRulesToEditor(editor, importedDomains);
+            saver.saveData();
         } catch (err) {
             /* eslint-disable-next-line no-console */
             console.error(err.message);
@@ -667,6 +668,7 @@ const UserFilter = function () {
         try {
             const importedRules = await Utils.importRulesFromFile(event);
             Utils.addRulesToEditor(editor, importedRules);
+            saver.saveData();
         } catch (err) {
             /* eslint-disable-next-line no-console */
             console.error(err.message);
