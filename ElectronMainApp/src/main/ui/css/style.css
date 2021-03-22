@@ -1303,6 +1303,7 @@ li.active .toggler:before {
 
 .empty-filters__btn--list {
   margin-top: 20px;
+  margin-bottom: 50px;
   margin-left: 15px;
 }
 
