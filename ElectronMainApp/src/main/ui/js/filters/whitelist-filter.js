@@ -105,6 +105,7 @@ const WhiteListFilter = function (userSettings, contentBlockerInfo) {
         try {
             const importedDomains = await utils.importRulesFromFile(event);
             utils.addRulesToEditor(editor, importedDomains);
+            saver.saveData();
         } catch (err) {
             /* eslint-disable-next-line no-console */
             console.error(err.message);

@@ -91,6 +91,7 @@ const UserFilter = function () {
         try {
             const importedRules = await utils.importRulesFromFile(event);
             utils.addRulesToEditor(editor, importedRules);
+            saver.saveData();
         } catch (err) {
             /* eslint-disable-next-line no-console */
             console.error(err.message);

@@ -63,10 +63,12 @@ const initPage = function (response) {
                     controller.antiBannerFilters.onFilterDownloadFinished(options);
                     break;
                 case EventNotifierTypes.UPDATE_USER_FILTER_RULES:
+                    controller.settings.updateUserFilterState();
                     controller.userFilter.updateUserFilterRules(contentBlockerInfo);
                     controller.contentBlockers.setLoading();
                     break;
                 case EventNotifierTypes.UPDATE_WHITELIST_FILTER_RULES:
+                    controller.settings.updateAllowlistState();
                     controller.whiteListFilter.updateWhiteListDomains();
                     controller.contentBlockers.setLoading();
                     break;

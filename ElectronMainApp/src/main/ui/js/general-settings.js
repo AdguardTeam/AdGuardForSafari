@@ -191,20 +191,30 @@ const Settings = function (
         }
     };
 
+    const updateAllowlistState = () => {
+        ipcRenderer.once('isAllowlistEnabledResponse', (e, isAllowlistEnabled) => {
+            updateCheckboxValue('allowlist-enabled', isAllowlistEnabled, false);
+        });
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'isAllowlistEnabled',
+        }));
+    };
+
+    const updateUserFilterState = () => {
+        ipcRenderer.once('isUserrulesEnabledResponse', (e, isUserrulesEnabled) => {
+            updateCheckboxValue('userrules-enabled', isUserrulesEnabled, false);
+        });
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'isUserrulesEnabled',
+        }));
+    };
+
     const render = function () {
         periodSelect.render();
 
         for (let i = 0; i < checkboxes.length; i += 1) {
             checkboxes[i].render();
         }
-
-        ipcRenderer.once('isUserrulesEnabledResponse', (e, isUserrulesEnabled) => {
-            updateCheckboxValue('userrules-enabled', isUserrulesEnabled, false);
-        });
-
-        ipcRenderer.once('isAllowlistEnabledResponse', (e, isAllowlistEnabled) => {
-            updateCheckboxValue('allowlist-enabled', isAllowlistEnabled, false);
-        });
 
         ipcRenderer.once('isGroupEnabledResponse', (e, isGroupOtherEnabled) => {
             const isSelfAdsEnabled = isGroupOtherEnabled
@@ -216,20 +226,14 @@ const Settings = function (
         });
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'isUserrulesEnabled',
-        }));
-
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'isAllowlistEnabled',
-        }));
-
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'isGroupEnabled',
             'groupId': AntiBannerFilterGroupsId.SEARCH_AND_SELF_PROMO_FILTER_GROUP_ID,
         }));
 
         showProtectionStatusWarning(isProtectionRunning);
         showUpdateIntervalNotification();
+        updateUserFilterState();
+        updateAllowlistState();
     };
 
     const updateContentBlockersDescription = (info) => {
@@ -253,6 +257,8 @@ const Settings = function (
         showProtectionStatusWarning,
         showUpdateIntervalNotification,
         updateContentBlockersDescription,
+        updateAllowlistState,
+        updateUserFilterState,
     };
 };
 

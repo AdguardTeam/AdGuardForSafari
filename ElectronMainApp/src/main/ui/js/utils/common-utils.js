@@ -150,7 +150,7 @@ const setIsAllowlistInverted = (inverted) => {
      */
 const exportFile = async (fileName, fileType, data) => {
     const d = new Date();
-    const timeStamp = `${d.getFullYear()}${d.getMonth()}${d.getDate()}_${d.getHours()}`
+    const timeStamp = `${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}_${d.getHours()}`
             + `${d.getMinutes()}${d.getSeconds()}`;
     const exportFileName = `${fileName}-${timeStamp}.${fileType}`;
     const exportDialog = await dialog.showSaveDialog({
