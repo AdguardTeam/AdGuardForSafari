@@ -1,12 +1,14 @@
 /* global ace, i18n, EventNotifierTypes */
 
 const { ipcRenderer, remote } = require('electron');
+const { Range } = require('ace-builds');
 
 const { dialog } = remote;
 const fs = require('fs');
 const path = require('path');
 
 const ANIMATION_DELAY = 900;
+const COMMENT_MASK = '!';
 
 /**
  * Common utils
@@ -499,6 +501,34 @@ const WhiteListFilter = function (options) {
         exec: () => saver.saveData(),
     });
 
+    editor.commands.addCommand({
+        name: 'comment',
+        bindKey: { win: 'Ctrl-/', 'mac': 'Cmd-/' },
+        exec: (editor) => {
+            const selection = editor.getSelection();
+            const ranges = selection.getAllRanges();
+
+            const rowsToToggle = ranges
+                .map((range) => {
+                    const [start, end] = [range.start.row, range.end.row];
+                    return Array.from({ length: end - start + 1 }, (_, idx) => idx + start);
+                })
+                .flat();
+
+            rowsToToggle.forEach((row) => {
+                const rawLine = editor.session.getLine(row);
+                // if line starts with comment mark we remove it
+                if (rawLine.trim().startsWith(COMMENT_MASK)) {
+                    const lineWithRemovedComment = rawLine.replace(COMMENT_MASK, '');
+                    editor.session.replace(new Range(row, 0, row), lineWithRemovedComment);
+                    // otherwise we add it
+                } else {
+                    editor.session.insert({ row, column: 0 }, COMMENT_MASK);
+                }
+            });
+        },
+    });
+
     function changeDefaultWhiteListMode(e) {
         e.preventDefault();
 
@@ -635,6 +665,34 @@ const UserFilter = function () {
         name: 'save',
         bindKey: { win: 'Ctrl-S', 'mac': 'Cmd-S' },
         exec: () => saver.saveData(),
+    });
+
+    editor.commands.addCommand({
+        name: 'comment',
+        bindKey: { win: 'Ctrl-/', 'mac': 'Cmd-/' },
+        exec: (editor) => {
+            const selection = editor.getSelection();
+            const ranges = selection.getAllRanges();
+
+            const rowsToToggle = ranges
+                .map((range) => {
+                    const [start, end] = [range.start.row, range.end.row];
+                    return Array.from({ length: end - start + 1 }, (_, idx) => idx + start);
+                })
+                .flat();
+
+            rowsToToggle.forEach((row) => {
+                const rawLine = editor.session.getLine(row);
+                // if line starts with comment mark we remove it
+                if (rawLine.trim().startsWith(COMMENT_MASK)) {
+                    const lineWithRemovedComment = rawLine.replace(COMMENT_MASK, '');
+                    editor.session.replace(new Range(row, 0, row), lineWithRemovedComment);
+                    // otherwise we add it
+                } else {
+                    editor.session.insert({ row, column: 0 }, COMMENT_MASK);
+                }
+            });
+        },
     });
 
     /**
