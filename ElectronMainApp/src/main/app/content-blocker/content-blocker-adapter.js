@@ -158,7 +158,7 @@ module.exports = (function () {
                 }));
             } else {
                 const invertedWhitelistRule = constructInvertedWhitelistRule();
-                if (invertedWhitelistRule) {
+                if (invertedWhitelistRule && settings.isAllowlistEnabled()) {
                     rules = rules.concat({
                         filterId: 0, ruleText: invertedWhitelistRule,
                     });
