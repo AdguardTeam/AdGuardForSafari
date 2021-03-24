@@ -1579,7 +1579,6 @@ li.active .toggler:before {
 .about-updates {
   margin: 9px 0;
   font-size: 16px;
-  cursor: pointer;
   position: relative;
   display: none;
 }
