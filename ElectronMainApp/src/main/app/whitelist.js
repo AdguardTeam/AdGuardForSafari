@@ -315,7 +315,6 @@ module.exports = (function () {
      * Returns the array of whitelisted domains
      */
     const getWhiteListedDomains = function () {
-        // return whiteListDomainsHolder.domains.filter((domain) => !domain.startsWith('!'));
         return whiteListDomainsHolder.domains;
     };
 
@@ -323,7 +322,6 @@ module.exports = (function () {
      * Returns the array of blocklisted domains, inverted mode
      */
     const getBlockListedDomains = function () {
-        // return blockListDomainsHolder.domains.filter((domain) => !domain.startsWith('!'));
         return blockListDomainsHolder.domains;
     };
 

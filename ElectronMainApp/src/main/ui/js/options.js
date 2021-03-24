@@ -1,7 +1,6 @@
 /* global ace, i18n, EventNotifierTypes */
 
 const { ipcRenderer, remote } = require('electron');
-// const { Range } = require('ace-builds');
 
 const { dialog } = remote;
 const fs = require('fs');
