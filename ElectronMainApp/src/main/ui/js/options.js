@@ -1,11 +1,14 @@
 /* global ace, i18n, EventNotifierTypes */
 
 const { ipcRenderer, remote } = require('electron');
-const { Range } = require('ace-builds');
+// const { Range } = require('ace-builds');
 
 const { dialog } = remote;
 const fs = require('fs');
 const path = require('path');
+
+// eslint-disable-next-line import/no-unresolved
+const { Range } = require('./js/libs/ace/ace');
 
 const ANIMATION_DELAY = 900;
 const COMMENT_MASK = '!';
