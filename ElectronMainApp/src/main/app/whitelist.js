@@ -307,16 +307,6 @@ module.exports = (function () {
     };
 
     /**
-     * Returns the array of whitelist domains
-     */
-    const getWhiteListDomains = function () {
-        if (isDefaultWhiteListMode()) {
-            return whiteListDomainsHolder.domains;
-        }
-        return blockListDomainsHolder.domains;
-    };
-
-    /**
      * Returns the array of whitelisted domains
      */
     const getWhiteListedDomains = function () {
@@ -328,6 +318,16 @@ module.exports = (function () {
      */
     const getBlockListedDomains = function () {
         return blockListDomainsHolder.domains;
+    };
+
+    /**
+     * Returns the array of whitelist domains
+     */
+    const getWhiteListDomains = function () {
+        if (isDefaultWhiteListMode()) {
+            return getWhiteListedDomains();
+        }
+        return getBlockListedDomains();
     };
 
     /**
@@ -359,12 +359,16 @@ module.exports = (function () {
             return null;
         }
 
+        // if (!settings.isAllowlistEnabled()) {
+        //     return false;
+        // }
+
         const host = getHost(url);
 
         if (isDefaultWhiteListMode()) {
             return getWhiteListedDomains().indexOf(host) >= 0;
         }
-        return !getBlockListedDomains().indexOf(host) >= 0;
+        return getBlockListedDomains().indexOf(host) >= 0;
     };
 
     /**
