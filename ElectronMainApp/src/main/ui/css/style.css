@@ -1579,7 +1579,6 @@ li.active .toggler:before {
 .about-updates {
   margin: 9px 0;
   font-size: 16px;
-  cursor: pointer;
   position: relative;
   display: none;
 }
@@ -1592,6 +1591,7 @@ li.active .toggler:before {
   width: 18px;
   height: 15px;
   background-image: url(../images/reload-ico-green.svg);
+  background-repeat: no-repeat;
 }
 
 @-webkit-keyframes clockwise {
