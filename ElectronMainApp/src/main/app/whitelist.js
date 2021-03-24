@@ -106,6 +106,11 @@ module.exports = (function () {
             return null;
         }
 
+        // don't create rule for comments
+        if (domain.startsWith('!')) {
+            return null;
+        }
+
         // https://github.com/AdguardTeam/AdGuardForSafari/issues/346
         if (domain.startsWith('localhost')) {
             return `@@${domain}$document`;
@@ -310,6 +315,7 @@ module.exports = (function () {
      * Returns the array of whitelisted domains
      */
     const getWhiteListedDomains = function () {
+        // return whiteListDomainsHolder.domains.filter((domain) => !domain.startsWith('!'));
         return whiteListDomainsHolder.domains;
     };
 
@@ -317,6 +323,7 @@ module.exports = (function () {
      * Returns the array of blocklisted domains, inverted mode
      */
     const getBlockListedDomains = function () {
+        // return blockListDomainsHolder.domains.filter((domain) => !domain.startsWith('!'));
         return blockListDomainsHolder.domains;
     };
 
@@ -358,10 +365,6 @@ module.exports = (function () {
         if (!url) {
             return null;
         }
-
-        // if (!settings.isAllowlistEnabled()) {
-        //     return false;
-        // }
 
         const host = getHost(url);
 

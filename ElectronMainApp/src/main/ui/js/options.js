@@ -438,13 +438,13 @@ const exportFile = async (fileName, fileType, data) => {
 };
 
 /**
- * Counts the number of not empty lines
+ * Counts the number of rules excluding empty lines and comments
  * @param text
  * @return {number}
  */
-const countNotEmptyLines = (text) => text
+const countRules = (text) => text
     .split('\n')
-    .filter((line) => !!line)
+    .filter((line) => !!line && !line.startsWith('!'))
     .length;
 
 /**
@@ -487,7 +487,7 @@ const WhiteListFilter = function (options) {
         hasContent = !!response.content;
         editor.setValue(response.content || '', 1);
         applyChangesBtn.classList.add('disabled');
-        const whitelistedNum = countNotEmptyLines(response.content);
+        const whitelistedNum = countRules(response.content);
         setAllowlistInfo(whitelistedNum);
         contentBlockerInfo.whitelistedNum = whitelistedNum;
     }
@@ -652,7 +652,7 @@ const UserFilter = function () {
             const userRulesText = (arg.content || []).join('\n');
             editor.setValue(userRulesText, 1);
             applyChangesBtn.classList.add('disabled');
-            const userrulesNum = countNotEmptyLines(userRulesText);
+            const userrulesNum = countRules(userRulesText);
             setUserrulesNum(userrulesNum);
             contentBlockerInfo.userRulesNum = userrulesNum;
         });
