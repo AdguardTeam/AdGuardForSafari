@@ -16,7 +16,6 @@ const UserFilter = function () {
 
     editor.setShowPrintMargin(false);
 
-    editor.$blockScrolling = Infinity;
     editor.session.setMode('ace/mode/adguard');
     editor.setOption('wrap', true);
 

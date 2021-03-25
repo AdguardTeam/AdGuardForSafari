@@ -20,7 +20,6 @@ const WhiteListFilter = function (userSettings, contentBlockerInfo) {
 
     editor.setShowPrintMargin(false);
 
-    editor.$blockScrolling = Infinity;
     editor.session.setMode('ace/mode/adguard');
     editor.setOption('wrap', true);
 
