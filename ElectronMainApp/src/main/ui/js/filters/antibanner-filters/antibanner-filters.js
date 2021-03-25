@@ -93,16 +93,18 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
 
     // Bind events
     document.addEventListener('change', (e) => {
-        if (e.target.getAttribute('name') === 'filterId') {
-            toggleFilterState.bind(e.target)();
-        } else if (e.target.getAttribute('name') === 'groupId') {
-            toggleGroupState.bind(e.target)();
-        } else if (e.target.getAttribute('name') === 'userrules') {
-            toggleUserrulesState.bind(e.target)();
-        } else if (e.target.getAttribute('name') === 'whitelist') {
-            toggleAllowlistState.bind(e.target)();
+        const targetName = e.target.getAttribute('name');
+        if (targetName === 'filterId') {
+            toggleFilterState(e.target);
+        } else if (targetName === 'groupId') {
+            toggleGroupState(e.target);
+        } else if (targetName === 'userrules') {
+            toggleUserrulesState(e.target.checked);
+        } else if (targetName === 'whitelist') {
+            toggleAllowlistState(e.target.checked);
         }
     });
+
     document.querySelector('#updateAntiBannerFilters')
         .addEventListener('click', updateAntiBannerFilters);
 
@@ -449,9 +451,9 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
         }));
     }
 
-    function toggleFilterState() {
-        const filterId = this.value - 0;
-        if (this.checked) {
+    function toggleFilterState(target) {
+        const filterId = target.value - 0;
+        if (target.checked) {
             ipcRenderer.send('renderer-to-main', JSON.stringify({
                 'type': 'addAndEnableFilter',
                 'filterId': filterId,
@@ -464,9 +466,9 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
         }
     }
 
-    function toggleGroupState() {
-        const groupId = this.value - 0;
-        if (this.checked) {
+    function toggleGroupState(target) {
+        const groupId = target.value - 0;
+        if (target.checked) {
             ipcRenderer.send('renderer-to-main', JSON.stringify({
                 'type': 'enableFiltersGroup',
                 'groupId': groupId,
@@ -479,20 +481,20 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
         }
     }
 
-    function toggleUserrulesState() {
+    function toggleUserrulesState(checked) {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'toggleUserrulesState',
-            'enabled': this.checked,
+            'enabled': checked,
         }));
-        userSettings.values[userSettings.names.USERRULES_ENABLED] = this.checked;
+        userSettings.values[userSettings.names.USERRULES_ENABLED] = checked;
     }
 
-    function toggleAllowlistState() {
+    function toggleAllowlistState(checked) {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'toggleAllowlistState',
-            'enabled': this.checked,
+            'enabled': checked,
         }));
-        userSettings.values[userSettings.names.ALLOWLIST_ENABLED] = this.checked;
+        userSettings.values[userSettings.names.ALLOWLIST_ENABLED] = checked;
     }
 
     function updateAntiBannerFilters(e) {
