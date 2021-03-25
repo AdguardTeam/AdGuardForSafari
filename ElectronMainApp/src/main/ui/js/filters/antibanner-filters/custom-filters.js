@@ -64,7 +64,7 @@ function renderCustomFilterPopup() {
     let onPopupCloseClicked;
     let onSubscribeBackClicked;
 
-    function renderStepOne() {
+    function renderInputFilter() {
         clearActiveStep();
         document.querySelector('#add-custom-filter-step-1').classList.add(POPUP_ACTIVE_CLASS);
 
@@ -80,18 +80,18 @@ function renderCustomFilterPopup() {
         document.querySelector('#custom-filter-popup-cancel').addEventListener('click', onPopupCloseClicked);
     }
 
-    function renderStepTwo() {
+    function renderDownloadingFilter() {
         clearActiveStep();
         document.querySelector('#add-custom-filter-step-2').classList.add(POPUP_ACTIVE_CLASS);
         document.querySelector('#custom-filter-popup-close').style.display = 'none';
     }
 
-    function renderStepThree() {
+    function renderError() {
         clearActiveStep();
         document.querySelector('#add-custom-filter-step-3').classList.add(POPUP_ACTIVE_CLASS);
     }
 
-    function renderStepFour(filter) {
+    function renderConfirmFilterData(filter) {
         clearActiveStep();
         document.querySelector('#add-custom-filter-step-4').classList.add(POPUP_ACTIVE_CLASS);
         document.querySelector('#custom-filter-popup-trusted').checked = false;
@@ -112,12 +112,12 @@ function renderCustomFilterPopup() {
                 title: title.trim(),
                 trusted: trustedCheckbox.checked,
             }));
-            renderStepFive();
+            renderSubscribingFilter();
             ipcRenderer.once('subscribeToCustomFilterSuccessResponse', () => {
                 closePopup();
             });
             ipcRenderer.once('subscribeToCustomFilterErrorResponse', () => {
-                renderStepThree();
+                renderError();
             });
         };
         document.querySelector('#custom-filter-popup-added-subscribe')
@@ -140,7 +140,7 @@ function renderCustomFilterPopup() {
         }
         onSubscribeBackClicked = () => {
             removeAntiBannerFilter(filter.filterId);
-            renderStepOne();
+            renderInputFilter();
         };
         document.querySelector('#custom-filter-popup-added-back')
             .addEventListener('click', onSubscribeBackClicked);
@@ -157,7 +157,7 @@ function renderCustomFilterPopup() {
             .addEventListener('click', onPopupCloseClicked);
     }
 
-    function renderStepFive() {
+    function renderSubscribingFilter() {
         clearActiveStep();
         document.querySelector('#add-custom-filter-step-5').classList.add(POPUP_ACTIVE_CLASS);
         document.querySelector('#custom-filter-popup-close').style.display = 'none';
@@ -174,13 +174,13 @@ function renderCustomFilterPopup() {
 
         ipcRenderer.on('loadCustomFilterInfoResponse', (e, arg) => {
             if (arg) {
-                renderStepFour(arg);
+                renderConfirmFilterData(arg);
             } else {
-                renderStepThree();
+                renderError();
             }
         });
 
-        renderStepTwo();
+        renderDownloadingFilter();
     }
 
     function bindEvents() {
@@ -214,13 +214,13 @@ function renderCustomFilterPopup() {
             ipcRenderer.once('loadCustomFilterInfoResponse', (e, arg) => {
                 importCustomFilterFile.value = '';
                 /* eslint-disable-next-line no-unused-expressions */
-                arg ? renderStepFour(arg) : renderStepThree();
+                arg ? renderConfirmFilterData(arg) : renderError();
             });
         });
 
         // Step three events
         document.querySelector('.custom-filter-popup-try-again')
-            .addEventListener('click', renderStepOne);
+            .addEventListener('click', renderInputFilter);
     }
 
     if (!customPopupInitialized) {
@@ -230,7 +230,7 @@ function renderCustomFilterPopup() {
 
     document.querySelector('#add-custom-filter-popup').classList.add('option-popup--active');
     document.querySelector('#custom-filter-popup-url').value = '';
-    renderStepOne();
+    renderInputFilter();
 }
 
 module.exports = {
