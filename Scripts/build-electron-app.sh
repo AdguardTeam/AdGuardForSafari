@@ -10,7 +10,7 @@ echo "AG_STANDALONE_BETA: ${AG_STANDALONE_BETA}"
 nvm use v13.10.0 || exit 1
 
 PLATFORM=mas
-ARCH=x64
+ARCH=arm64
 
 SRC="${SRCROOT}/../ElectronMainApp"
 SHAREDSRC="${SRCROOT}/../Shared"
