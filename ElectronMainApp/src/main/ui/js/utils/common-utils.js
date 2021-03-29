@@ -30,15 +30,13 @@ function debounce(func, wait) {
 /**
  * Escapes regular expression
  */
-(function escapeRegExp() {
+const escapeRegExp = (str) => {
     const matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
-    return function (str) {
-        if (typeof str !== 'string') {
-            throw new TypeError('Expected a string');
-        }
-        return str.replace(matchOperatorsRe, '\\$&');
-    };
-})();
+    if (typeof str !== 'string') {
+        throw new TypeError('Expected a string');
+    }
+    return str.replace(matchOperatorsRe, '\\$&');
+};
 
 /**
  * Creates HTMLElement from string
@@ -172,4 +170,5 @@ module.exports = {
     setAllowlistInfo,
     setIsAllowlistInverted,
     exportFile,
+    escapeRegExp,
 };
