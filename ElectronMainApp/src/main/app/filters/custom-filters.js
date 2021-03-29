@@ -135,6 +135,7 @@ module.exports = (function () {
 
         if (filter) {
             filter.trusted = trusted;
+            filter.title = title;
             updateCustomFilter(filter, (filterId) => {
                 log.info(`Custom filter with ID ${filterId} successfully updated`);
                 callback(filterId);
@@ -225,16 +226,17 @@ module.exports = (function () {
      * @param callback
      */
     const updateCustomFilter = (customFilter, callback) => {
+        const filterTitle = customFilter.title || customFilter.name;
         getCustomFilterInfo(
             customFilter.customUrl,
-            { title: customFilter.name, trusted: customFilter.trusted },
+            { title: customFilter.title, trusted: customFilter.trusted },
             (result = {}) => {
                 const { filter, rules } = result;
                 if (filter) {
                     const customFilters = loadCustomFilters();
                     customFilters.forEach((f) => {
                         if (f.customUrl === customFilter.customUrl) {
-                            f.name = filter.name;
+                            f.name = filterTitle;
                             f.version = filter.version;
                             f.description = filter.description;
                             f.timeUpdated = new Date().toString();
