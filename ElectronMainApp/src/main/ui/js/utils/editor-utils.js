@@ -110,17 +110,17 @@ const Saver = function (options) {
 };
 
 /**
- * Counts the number of not empty lines
+ * Counts the number of rules excluding empty lines and comments
  * @param text
  * @return {number}
  */
-const countNotEmptyLines = (text) => text
+const countRules = (text) => text
     .split('\n')
-    .filter((line) => !!line)
+    .filter((line) => !!line && !line.startsWith('!'))
     .length;
 
 module.exports = {
     handleEditorResize,
     Saver,
-    countNotEmptyLines,
+    countRules,
 };
