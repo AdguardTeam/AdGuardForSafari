@@ -1,7 +1,7 @@
 /* global i18n */
 
 const { ipcRenderer } = require('electron');
-const WhiteListFilter = require('./filters/whitelist-filter');
+const AllowlistFilter = require('./filters/allowlist-filter');
 const UserFilter = require('./filters/user-filter');
 const utils = require('./utils/common-utils');
 const checkboxUtils = require('./utils/checkbox-utils');
@@ -267,9 +267,9 @@ PageController.prototype = {
         );
         this.settings.render();
 
-        // Initialize whitelist filter
-        this.whiteListFilter = new WhiteListFilter(this.userSettings, this.contentBlockerInfo);
-        this.whiteListFilter.updateWhiteListDomains();
+        // Initialize allowlist filter
+        this.allowlistFilter = new AllowlistFilter(this.userSettings, this.contentBlockerInfo);
+        this.allowlistFilter.updateWhiteListDomains();
 
         // Initialize User filter
         this.userFilter = new UserFilter();
@@ -288,7 +288,7 @@ PageController.prototype = {
         this.contentBlockers = new ContentBlockersScreen(
             this.antiBannerFilters,
             this.userFilter,
-            this.whiteListFilter,
+            this.allowlistFilter,
             this.userSettings
         );
         this.contentBlockers.init();

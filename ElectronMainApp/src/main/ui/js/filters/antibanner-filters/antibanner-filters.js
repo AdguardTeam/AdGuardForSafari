@@ -100,7 +100,7 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
             toggleGroupState(e.target);
         } else if (targetName === 'userrules') {
             toggleUserrulesState(e.target.checked);
-        } else if (targetName === 'whitelist') {
+        } else if (targetName === 'allowlist') {
             toggleAllowlistState(e.target.checked);
         }
     });

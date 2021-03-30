@@ -6,12 +6,12 @@ const editorUtils = require('../utils/editor-utils');
 const checkboxUtils = require('../utils/checkbox-utils');
 
 /**
- * Whitelist block
+ * Allowlist block
  *
  * @param {object} userSettings
  * @param {object} contentBlockerInfo
  */
-const WhiteListFilter = function (userSettings, contentBlockerInfo) {
+const AllowlistFilter = function (userSettings, contentBlockerInfo) {
     'use strict';
 
     const editorId = 'whiteListRules';
@@ -142,4 +142,4 @@ const WhiteListFilter = function (userSettings, contentBlockerInfo) {
     };
 };
 
-module.exports = WhiteListFilter;
+module.exports = AllowlistFilter;
