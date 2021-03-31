@@ -106,6 +106,11 @@ module.exports = (function () {
             return null;
         }
 
+        // don't create rule for comments
+        if (domain.startsWith('!')) {
+            return null;
+        }
+
         // https://github.com/AdguardTeam/AdGuardForSafari/issues/346
         if (domain.startsWith('localhost')) {
             return `@@${domain}$document`;
@@ -358,10 +363,6 @@ module.exports = (function () {
         if (!url) {
             return null;
         }
-
-        // if (!settings.isAllowlistEnabled()) {
-        //     return false;
-        // }
 
         const host = getHost(url);
 

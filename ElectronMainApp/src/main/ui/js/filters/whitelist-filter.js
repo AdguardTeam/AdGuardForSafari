@@ -4,6 +4,9 @@ const { ipcRenderer } = require('electron');
 const utils = require('../utils/common-utils');
 const editorUtils = require('../utils/editor-utils');
 const checkboxUtils = require('../utils/checkbox-utils');
+const { Range } = require('../libs/ace/ace');
+
+const COMMENT_MASK = '!';
 
 /**
  * Whitelist block
@@ -43,7 +46,7 @@ const WhiteListFilter = function (userSettings, contentBlockerInfo) {
         hasContent = !!response.content;
         editor.setValue(response.content || '', 1);
         applyChangesBtn.classList.add('disabled');
-        const whitelistedNum = editorUtils.countNotEmptyLines(response.content);
+        const whitelistedNum = editorUtils.countRules(response.content);
         utils.setAllowlistInfo(whitelistedNum);
         contentBlockerInfo.whitelistedNum = whitelistedNum;
     }
@@ -58,6 +61,34 @@ const WhiteListFilter = function (userSettings, contentBlockerInfo) {
         name: 'save',
         bindKey: { win: 'Ctrl-S', 'mac': 'Cmd-S' },
         exec: () => saver.saveData(),
+    });
+
+    editor.commands.addCommand({
+        name: 'comment',
+        bindKey: { win: 'Ctrl-/', 'mac': 'Cmd-/' },
+        exec: (editor) => {
+            const selection = editor.getSelection();
+            const ranges = selection.getAllRanges();
+
+            const rowsToToggle = ranges
+                .map((range) => {
+                    const [start, end] = [range.start.row, range.end.row];
+                    return Array.from({ length: end - start + 1 }, (_, idx) => idx + start);
+                })
+                .flat();
+
+            rowsToToggle.forEach((row) => {
+                const rawLine = editor.session.getLine(row);
+                // if line starts with comment mark we remove it
+                if (rawLine.trim().startsWith(COMMENT_MASK)) {
+                    const lineWithRemovedComment = rawLine.replace(COMMENT_MASK, '');
+                    editor.session.replace(new Range(row, 0, row), lineWithRemovedComment);
+                    // otherwise we add it
+                } else {
+                    editor.session.insert({ row, column: 0 }, COMMENT_MASK);
+                }
+            });
+        },
     });
 
     function changeDefaultWhiteListMode(e) {

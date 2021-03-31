@@ -3,6 +3,10 @@
 const { ipcRenderer } = require('electron');
 const utils = require('../utils/common-utils');
 const editorUtils = require('../utils/editor-utils');
+// eslint-disable-next-line import/no-unresolved
+const { Range } = require('../libs/ace/ace');
+
+const COMMENT_MASK = '!';
 
 /**
  * User filter block
@@ -41,7 +45,7 @@ const UserFilter = function () {
             const userRulesText = (arg.content || []).join('\n');
             editor.setValue(userRulesText, 1);
             applyChangesBtn.classList.add('disabled');
-            const userrulesNum = editorUtils.countNotEmptyLines(userRulesText);
+            const userrulesNum = editorUtils.countRules(userRulesText);
             utils.setUserrulesNum(userrulesNum);
             contentBlockerInfo.userRulesNum = userrulesNum;
         });
@@ -57,6 +61,34 @@ const UserFilter = function () {
         name: 'save',
         bindKey: { win: 'Ctrl-S', 'mac': 'Cmd-S' },
         exec: () => saver.saveData(),
+    });
+
+    editor.commands.addCommand({
+        name: 'comment',
+        bindKey: { win: 'Ctrl-/', 'mac': 'Cmd-/' },
+        exec: (editor) => {
+            const selection = editor.getSelection();
+            const ranges = selection.getAllRanges();
+
+            const rowsToToggle = ranges
+                .map((range) => {
+                    const [start, end] = [range.start.row, range.end.row];
+                    return Array.from({ length: end - start + 1 }, (_, idx) => idx + start);
+                })
+                .flat();
+
+            rowsToToggle.forEach((row) => {
+                const rawLine = editor.session.getLine(row);
+                // if line starts with comment mark we remove it
+                if (rawLine.trim().startsWith(COMMENT_MASK)) {
+                    const lineWithRemovedComment = rawLine.replace(COMMENT_MASK, '');
+                    editor.session.replace(new Range(row, 0, row), lineWithRemovedComment);
+                    // otherwise we add it
+                } else {
+                    editor.session.insert({ row, column: 0 }, COMMENT_MASK);
+                }
+            });
+        },
     });
 
     /**
