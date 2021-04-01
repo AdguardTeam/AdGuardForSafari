@@ -5,6 +5,7 @@ node_modules
 yarn-error.log
 .DS_Store
 ElectronMainApp/safari-ext/shared/*
+/ElectronMainApp/dist/
 *.a
 
 
