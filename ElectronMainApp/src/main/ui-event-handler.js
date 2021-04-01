@@ -69,15 +69,15 @@ module.exports.init = function () {
             case 'toggleAllowlistState':
                 settings.changeAllowlistState(message.enabled);
                 break;
-            case 'getWhiteListDomains':
-                const whiteListDomains = whitelist.getWhiteListDomains();
-                event.returnValue = { content: whiteListDomains.join('\r\n') };
+            case 'getAllowlistDomains':
+                const allowlistDomains = whitelist.getWhiteListDomains();
+                event.returnValue = { content: allowlistDomains.join('\r\n') };
                 break;
             case 'saveWhiteListDomains':
                 const domains = message.content.split(/[\r\n]+/);
                 whitelist.updateWhiteListDomains(domains);
                 break;
-            case 'changeDefaultWhiteListMode':
+            case 'changeDefaultAllowlistMode':
                 whitelist.changeDefaultWhiteListMode(message.enabled);
                 break;
             case 'getUserRules':

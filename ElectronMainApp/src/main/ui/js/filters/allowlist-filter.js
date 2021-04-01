@@ -40,15 +40,15 @@ const AllowlistFilter = function (userSettings, contentBlockerInfo) {
     let hasContent = false;
     function loadAllowlistDomains() {
         const response = ipcRenderer.sendSync('renderer-to-main', JSON.stringify({
-            'type': 'getWhiteListDomains',
+            'type': 'getAllowlistDomains',
         }));
         /* eslint-disable-next-line no-unused-vars */
         hasContent = !!response.content;
         editor.setValue(response.content || '', 1);
         applyChangesBtn.classList.add('disabled');
-        const whitelistedNum = editorUtils.countRules(response.content);
-        utils.setAllowlistInfo(whitelistedNum);
-        contentBlockerInfo.whitelistedNum = whitelistedNum;
+        const allowlistedNum = editorUtils.countRules(response.content);
+        utils.setAllowlistInfo(allowlistedNum);
+        contentBlockerInfo.whitelistedNum = allowlistedNum;
     }
 
     applyChangesBtn.onclick = (event) => {
@@ -91,14 +91,14 @@ const AllowlistFilter = function (userSettings, contentBlockerInfo) {
         },
     });
 
-    function changeDefaultWhiteListMode(e) {
+    function changeDefaultAllowlistMode(e) {
         e.preventDefault();
 
         utils.setIsAllowlistInverted(e.currentTarget.checked);
         userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE] = !e.currentTarget.checked;
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'changeDefaultWhiteListMode',
+            'type': 'changeDefaultAllowlistMode',
             enabled: !e.currentTarget.checked,
         }));
 
