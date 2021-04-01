@@ -10,7 +10,7 @@ const log = require('./utils/log');
  * Whitelist
  *
  * @type {{init, getRules, getWhiteListDomains, getWhiteListedDomains, getBlockListedDomains, findWhiteListRule,
- * whiteListUrl, unWhiteListUrl, updateWhiteListDomains, configure, isDefaultMode, changeDefaultWhiteListMode}}
+ * whiteListUrl, unWhiteListUrl, loadAllowlistDomains, configure, isDefaultMode, changeDefaultWhiteListMode}}
  */
 module.exports = (function () {
     const WHITE_LIST_DOMAINS_LS_PROP = 'white-list-domains';

@@ -269,7 +269,7 @@ PageController.prototype = {
 
         // Initialize allowlist filter
         this.allowlistFilter = new AllowlistFilter(this.userSettings, this.contentBlockerInfo);
-        this.allowlistFilter.updateWhiteListDomains();
+        this.allowlistFilter.loadAllowlistDomains();
 
         // Initialize User filter
         this.userFilter = new UserFilter();

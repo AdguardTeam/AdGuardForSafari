@@ -674,7 +674,7 @@ a.settings-actions--update-filters.loading:after {
   display: flex;
   margin-left: 18px;
 }
-.whitelist-subtitle,
+.allowlist-subtitle,
 .userfilter-subtitle,
 .content-blockers-subtitle {
   margin-bottom: 5px;

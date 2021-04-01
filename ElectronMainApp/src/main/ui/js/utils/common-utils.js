@@ -129,14 +129,14 @@ const setUserrulesNum = (rulesNum) => {
 
 const setAllowlistInfo = (allowlistNum) => {
     document.querySelector('.allowlist-info').innerText = allowlistNum === 1
-        ? i18n.__('options_whitelist_info_single.message', allowlistNum)
-        : i18n.__('options_whitelist_info_multi.message', allowlistNum);
+        ? i18n.__('options_allowlist_info_single.message', allowlistNum)
+        : i18n.__('options_allowlist_info_multi.message', allowlistNum);
 };
 
 const setIsAllowlistInverted = (inverted) => {
     const title = document.querySelector('#category-allowlist .block-type__desc-title');
-    title.innerText = `${i18n.__('options_whitelist.message')}`
-        + `${inverted ? i18n.__('options_whitelist_inverted.message') : ''}`;
+    title.innerText = `${i18n.__('options_allowlist.message')}`
+        + `${inverted ? i18n.__('options_allowlist_inverted.message') : ''}`;
 };
 
 /**
