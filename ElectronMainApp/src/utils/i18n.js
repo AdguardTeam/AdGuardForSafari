@@ -55,7 +55,7 @@ module.exports = (() => {
         const list = i18n.__h.apply(this, arguments);
         const resDefaultLocale = list.find((i) => i['en']);
 
-        const args = Object.values(arguments);
+        const args = [...arguments];
         // handle sprintf parameters for default locale
         if (resDefaultLocale && args.length > 1) {
             args.shift();
