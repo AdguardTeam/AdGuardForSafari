@@ -199,7 +199,7 @@ module.exports = (function () {
     const constructInvertedWhitelistRule = () => {
         const domains = whitelist.getBlockListedDomains();
         let invertedWhitelistRule = '@@||*$document';
-        if (domains && domains[0]) {
+        if (domains && domains.length > 0) {
             invertedWhitelistRule += ',domain=';
             let i = 0;
             const len = domains.length;

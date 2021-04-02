@@ -322,7 +322,7 @@ module.exports = (function () {
      * Returns the array of blocklisted domains, inverted mode
      */
     const getBlockListedDomains = function () {
-        return blockListDomainsHolder.domains;
+        return blockListDomainsHolder.domains.filter((f) => f);
     };
 
     /**
