@@ -369,7 +369,7 @@ module.exports = (function () {
         if (isDefaultWhiteListMode()) {
             return getWhiteListedDomains().indexOf(host) >= 0;
         }
-        return getBlockListedDomains().indexOf(host) >= 0;
+        return !getBlockListedDomains().indexOf(host) >= 0;
     };
 
     /**

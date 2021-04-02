@@ -197,9 +197,9 @@ module.exports = (function () {
      * @private
      */
     const constructInvertedWhitelistRule = () => {
-        const domains = whitelist.getWhiteListDomains();
+        const domains = whitelist.getBlockListedDomains();
         let invertedWhitelistRule = '@@||*$document';
-        if (domains && domains.length > 0) {
+        if (domains && domains[0]) {
             invertedWhitelistRule += ',domain=';
             let i = 0;
             const len = domains.length;
