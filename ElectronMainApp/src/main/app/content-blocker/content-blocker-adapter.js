@@ -5,7 +5,7 @@ const listeners = require('../../notifier');
 const events = require('../../events');
 const settings = require('../settings-manager');
 const antibanner = require('../antibanner');
-const whitelist = require('../whitelist');
+const allowlist = require('../allowlist');
 const log = require('../utils/log');
 const concurrent = require('../utils/concurrent');
 const { groupRules, rulesGroupsBundles, filterGroupsBundles } = require('./rule-groups');
@@ -135,7 +135,7 @@ module.exports = (function () {
     };
 
     /**
-     * Load rules from requestFilter and WhiteListService
+     * Load rules from requestFilter and AllowListService
      * @private
      */
     const loadRules = concurrent.debounce((callback) => {
@@ -152,15 +152,15 @@ module.exports = (function () {
         log.info('Rules loaded: {0}', rules.length);
 
         if (antibanner.isRunning()) {
-            if (settings.isDefaultWhiteListMode()) {
-                rules = rules.concat(whitelist.getRules().map((r) => {
+            if (settings.isDefaultAllowlistMode()) {
+                rules = rules.concat(allowlist.getRules().map((r) => {
                     return { filterId: 0, ruleText: r };
                 }));
             } else {
-                const invertedWhitelistRule = constructInvertedWhitelistRule();
-                if (invertedWhitelistRule && settings.isAllowlistEnabled()) {
+                const invertedAllowlistRule = constructInvertedAllowlistRule();
+                if (invertedAllowlistRule && settings.isAllowlistEnabled()) {
                     rules = rules.concat({
-                        filterId: 0, ruleText: invertedWhitelistRule,
+                        filterId: 0, ruleText: invertedAllowlistRule,
                     });
                 }
             }
@@ -192,27 +192,27 @@ module.exports = (function () {
     };
 
     /**
-     * Constructs rule for inverted whitelist
+     * Constructs rule for inverted allowlist
      *
      * @private
      */
-    const constructInvertedWhitelistRule = () => {
-        const domains = whitelist.getWhiteListDomains();
-        let invertedWhitelistRule = '@@||*$document';
+    const constructInvertedAllowlistRule = () => {
+        const domains = allowlist.getAllowlistDomains();
+        let invertedAllowlistRule = '@@||*$document';
         if (domains && domains.length > 0) {
-            invertedWhitelistRule += ',domain=';
+            invertedAllowlistRule += ',domain=';
             let i = 0;
             const len = domains.length;
             for (; i < len; i += 1) {
                 if (i > 0) {
-                    invertedWhitelistRule += '|';
+                    invertedAllowlistRule += '|';
                 }
 
-                invertedWhitelistRule += `~${domains[i]}`;
+                invertedAllowlistRule += `~${domains[i]}`;
             }
         }
 
-        return invertedWhitelistRule;
+        return invertedAllowlistRule;
     };
 
     /**

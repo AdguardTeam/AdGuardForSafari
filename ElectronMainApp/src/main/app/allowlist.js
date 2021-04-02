@@ -7,22 +7,22 @@ const cache = require('./utils/cache');
 const log = require('./utils/log');
 
 /**
- * Whitelist
+ * Allowlist
  *
- * @type {{init, getRules, getWhiteListDomains, getWhiteListedDomains, getBlockListedDomains, findWhiteListRule,
- * whiteListUrl, unWhiteListUrl, loadAllowlistDomains, configure, isDefaultMode, changeDefaultWhiteListMode}}
+ * @type {{init, getRules, getAllowlistDomains, getAllowlistedDomains, getBlockListedDomains, findAllowlistRule,
+ * allowlistUrl, unAllowlistUrl, loadAllowlistDomains, configure, isDefaultMode, changeDefaultAllowlistMode}}
  */
 module.exports = (function () {
     const WHITE_LIST_DOMAINS_LS_PROP = 'white-list-domains';
     const BLOCK_LIST_DOMAINS_LS_PROP = 'block-list-domains';
 
     /**
-     * Returns whitelist mode
+     * Returns allowlist mode
      * In default mode filtration is enabled for all sites
      * In inverted model filtration is disabled for all sites
      */
-    const isDefaultWhiteListMode = () => {
-        return settings.isDefaultWhiteListMode();
+    const isDefaultAllowlistMode = () => {
+        return settings.isDefaultAllowlistMode();
     };
 
     /**
@@ -64,9 +64,9 @@ module.exports = (function () {
     /**
      * Read domains and initialize filters lazy
      */
-    const whiteListDomainsHolder = {
+    const allowlistDomainsHolder = {
         get domains() {
-            return cache.lazyGet(whiteListDomainsHolder, 'domains', () => {
+            return cache.lazyGet(allowlistDomainsHolder, 'domains', () => {
                 return getDomainsFromLocalStorage(WHITE_LIST_DOMAINS_LS_PROP);
             });
         },
@@ -91,17 +91,17 @@ module.exports = (function () {
     };
 
     /* eslint-disable-next-line no-unused-vars */
-    function notifyWhiteListUpdated(options) {
-        listeners.notifyListeners(events.UPDATE_WHITELIST_FILTER_RULES);
+    function notifyAllowlistUpdated(options) {
+        listeners.notifyListeners(events.UPDATE_ALLOWLIST_FILTER_RULES);
     }
 
     /**
-     * Create whitelist rule from input text
+     * Create allowlist rule from input text
      * @param domain Domain
      * @returns {*}
      * @private
      */
-    function createWhiteListRule(domain) {
+    function createAllowlistRule(domain) {
         if (!domain) {
             return null;
         }
@@ -120,50 +120,50 @@ module.exports = (function () {
     }
 
     /**
-     * Adds domain to array of whitelist domains
+     * Adds domain to array of allowlist domains
      * @param domain
      */
-    function addDomainToWhiteList(domain) {
+    function addDomainToAllowlist(domain) {
         if (!domain) {
             return;
         }
-        if (isDefaultWhiteListMode()) {
-            whiteListDomainsHolder.add(domain);
+        if (isDefaultAllowlistMode()) {
+            allowlistDomainsHolder.add(domain);
         } else {
             blockListDomainsHolder.add(domain);
         }
     }
 
     /**
-     * Remove domain form whitelist domains
+     * Remove domain form allowlist domains
      * @param domain
      */
-    function removeDomainFromWhiteList(domain) {
+    function removeDomainFromAllowlist(domain) {
         if (!domain) {
             return;
         }
-        if (isDefaultWhiteListMode()) {
-            collections.removeAll(whiteListDomainsHolder.domains, domain);
+        if (isDefaultAllowlistMode()) {
+            collections.removeAll(allowlistDomainsHolder.domains, domain);
         } else {
             collections.removeAll(blockListDomainsHolder.domains, domain);
         }
     }
 
     /**
-     * Remove domain from whitelist
+     * Remove domain from allowlist
      * @param domain
      */
-    function removeFromWhiteList(domain) {
-        removeDomainFromWhiteList(domain);
+    function removeFromAllowlist(domain) {
+        removeDomainFromAllowlist(domain);
         saveDomainsToLocalStorage();
-        notifyWhiteListUpdated();
+        notifyAllowlistUpdated();
     }
 
     /**
      * Save domains to local storage
      */
     function saveDomainsToLocalStorage() {
-        localStorage.setItem(WHITE_LIST_DOMAINS_LS_PROP, JSON.stringify(whiteListDomainsHolder.domains));
+        localStorage.setItem(WHITE_LIST_DOMAINS_LS_PROP, JSON.stringify(allowlistDomainsHolder.domains));
         localStorage.setItem(BLOCK_LIST_DOMAINS_LS_PROP, JSON.stringify(blockListDomainsHolder.domains));
     }
 
@@ -180,43 +180,43 @@ module.exports = (function () {
                 domains = JSON.parse(json);
             }
         } catch (ex) {
-            log.error('Error retrieve whitelist domains {0}, cause {1}', prop, ex);
+            log.error('Error retrieve allowlist domains {0}, cause {1}', prop, ex);
         }
         return domains;
     }
 
     /**
-     * Adds domain to whitelist
+     * Adds domain to allowlist
      * @param domain
      */
-    function addToWhiteList(domain) {
-        const rule = createWhiteListRule(domain);
+    function addToAllowlist(domain) {
+        const rule = createAllowlistRule(domain);
         if (rule) {
-            addDomainToWhiteList(domain);
+            addDomainToAllowlist(domain);
             saveDomainsToLocalStorage();
-            notifyWhiteListUpdated();
+            notifyAllowlistUpdated();
         }
     }
 
     /**
-     * Changes whitelist mode
+     * Changes allowlist mode
      * @param defaultMode
      */
-    const changeDefaultWhiteListMode = function (defaultMode) {
-        settings.changeDefaultWhiteListMode(defaultMode);
-        notifyWhiteListUpdated();
+    const changeDefaultAllowlistMode = function (defaultMode) {
+        settings.changeDefaultAllowlistMode(defaultMode);
+        notifyAllowlistUpdated();
     };
 
     /**
      * Stop (or start in case of inverted mode) filtration for url
      * @param url
      */
-    const whiteListUrl = function (url) {
+    const allowlistUrl = function (url) {
         const domain = getHost(url);
-        if (isDefaultWhiteListMode()) {
-            addToWhiteList(domain);
+        if (isDefaultAllowlistMode()) {
+            addToAllowlist(domain);
         } else {
-            removeFromWhiteList(domain);
+            removeFromAllowlist(domain);
         }
     };
 
@@ -224,42 +224,42 @@ module.exports = (function () {
      * Start (or stop in case of inverted mode) filtration for url
      * @param url
      */
-    const unWhiteListUrl = function (url) {
+    const unAllowlistUrl = function (url) {
         const domain = getHost(url);
-        if (isDefaultWhiteListMode()) {
-            removeFromWhiteList(domain);
+        if (isDefaultAllowlistMode()) {
+            removeFromAllowlist(domain);
         } else {
-            addToWhiteList(domain);
+            addToAllowlist(domain);
         }
     };
 
     /**
-     * Updates domains in whitelist
+     * Updates domains in allowlist
      * @param domains
      */
-    const updateWhiteListDomains = function (domains) {
+    const updateAllowlistDomains = function (domains) {
         domains = domains || [];
-        if (isDefaultWhiteListMode()) {
-            clearWhiteListed();
-            addWhiteListed(domains);
+        if (isDefaultAllowlistMode()) {
+            clearAllowlisted();
+            addAllowlisted(domains);
         } else {
             clearBlockListed();
             addBlockListed(domains);
         }
-        notifyWhiteListUpdated();
+        notifyAllowlistUpdated();
     };
 
     /**
-     * Add domains to whitelist
+     * Add domains to allowlist
      * @param domains
      */
-    const addWhiteListed = function (domains) {
+    const addAllowlisted = function (domains) {
         if (!domains) {
             return;
         }
         for (let i = 0; i < domains.length; i += 1) {
             const domain = domains[i];
-            whiteListDomainsHolder.add(domain);
+            allowlistDomainsHolder.add(domain);
         }
         saveDomainsToLocalStorage();
     };
@@ -280,11 +280,11 @@ module.exports = (function () {
     };
 
     /**
-     * Clear whitelisted only
+     * Clear allowlisted only
      */
-    const clearWhiteListed = function () {
+    const clearAllowlisted = function () {
         localStorage.removeItem(WHITE_LIST_DOMAINS_LS_PROP);
-        cache.lazyGetClear(whiteListDomainsHolder, 'domains');
+        cache.lazyGetClear(allowlistDomainsHolder, 'domains');
     };
 
     /**
@@ -296,26 +296,26 @@ module.exports = (function () {
     };
 
     /**
-     * Configures whitelist service
-     * @param whitelist Whitelist domains
+     * Configures allowlist service
+     * @param allowlist Allowlist domains
      * @param blocklist Blocklist domains
-     * @param whiteListMode Whitelist mode
+     * @param allowlistMode Allowlist mode
      * @param options
      */
-    const configure = function (whitelist, blocklist, whiteListMode, options) {
-        clearWhiteListed();
+    const configure = function (allowlist, blocklist, allowlistMode, options) {
+        clearAllowlisted();
         clearBlockListed();
-        addWhiteListed(whitelist || []);
+        addAllowlisted(allowlist || []);
         addBlockListed(blocklist || []);
-        settings.changeDefaultWhiteListMode(whiteListMode);
-        notifyWhiteListUpdated(options);
+        settings.changeDefaultAllowlistMode(allowlistMode);
+        notifyAllowlistUpdated(options);
     };
 
     /**
-     * Returns the array of whitelisted domains
+     * Returns the array of allowlisted domains
      */
-    const getWhiteListedDomains = function () {
-        return whiteListDomainsHolder.domains;
+    const getAllowlistedDomains = function () {
+        return allowlistDomainsHolder.domains;
     };
 
     /**
@@ -326,11 +326,11 @@ module.exports = (function () {
     };
 
     /**
-     * Returns the array of whitelist domains
+     * Returns the array of allowlist domains
      */
-    const getWhiteListDomains = function () {
-        if (isDefaultWhiteListMode()) {
-            return getWhiteListedDomains();
+    const getAllowlistDomains = function () {
+        if (isDefaultAllowlistMode()) {
+            return getAllowlistedDomains();
         }
         return getBlockListedDomains();
     };
@@ -343,8 +343,8 @@ module.exports = (function () {
         const result = [];
 
         if (settings.isAllowlistEnabled()) {
-            getWhiteListedDomains().forEach((d) => {
-                const rule = createWhiteListRule(d);
+            getAllowlistedDomains().forEach((d) => {
+                const rule = createAllowlistRule(d);
                 if (rule) {
                     result.push(rule);
                 }
@@ -355,34 +355,34 @@ module.exports = (function () {
     };
 
     /**
-     * Finds if url is whitelisted
+     * Finds if url is allowlisted
      *
      * @param url
      */
-    const isWhitelisted = (url) => {
+    const isAllowlisted = (url) => {
         if (!url) {
             return null;
         }
 
         const host = getHost(url);
 
-        if (isDefaultWhiteListMode()) {
-            return getWhiteListedDomains().indexOf(host) >= 0;
+        if (isDefaultAllowlistMode()) {
+            return getAllowlistedDomains().indexOf(host) >= 0;
         }
         return getBlockListedDomains().indexOf(host) >= 0;
     };
 
     /**
-     * Initializes whitelist filter
+     * Initializes allowlist filter
      */
     const init = function () {
         /**
-         * Access to whitelist/blacklist domains before the proper initialization of localStorage
+         * Access to allowlist/blocklist domains before the proper initialization of localStorage
          * leads to wrong caching of its values
          * To prevent it we should clear cached values
          * https://github.com/AdguardTeam/AdguardBrowserExtension/issues/933
          */
-        cache.lazyGetClear(whiteListDomainsHolder, 'domains');
+        cache.lazyGetClear(allowlistDomainsHolder, 'domains');
         cache.lazyGetClear(blockListDomainsHolder, 'domains');
     };
 
@@ -390,21 +390,21 @@ module.exports = (function () {
 
         init,
         getRules,
-        getWhiteListDomains,
+        getAllowlistDomains,
 
-        getWhiteListedDomains,
+        getAllowlistedDomains,
         getBlockListedDomains,
 
-        whiteListUrl,
-        unWhiteListUrl,
+        allowlistUrl,
+        unAllowlistUrl,
 
-        isWhitelisted,
+        isAllowlisted,
 
-        updateWhiteListDomains,
+        updateAllowlistDomains,
 
         configure,
 
-        isDefaultMode: isDefaultWhiteListMode,
-        changeDefaultWhiteListMode,
+        isDefaultMode: isDefaultAllowlistMode,
+        changeDefaultAllowlistMode,
     };
 })();

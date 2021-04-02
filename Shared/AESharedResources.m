@@ -361,7 +361,7 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
     return  [_containerFolderUrl URLByAppendingPathComponent:AES_ADV_BLOCKING_CONTENT_RULES_RESOURCE].path;
 }
 
-+ (void)setWhitelistDomains:(NSArray <NSString *> *)domains completion:(void (^)(void))completion {
++ (void)setAllowlistDomains:(NSArray <NSString *> *)domains completion:(void (^)(void))completion {
     [self saveObject:domains key:AES_WHITELIST_DOMAINS completion:completion];
 }
 

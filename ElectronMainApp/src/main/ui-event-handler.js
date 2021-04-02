@@ -7,7 +7,7 @@ const filters = require('./app/filters-manager');
 const filterCategories = require('./app/filters/filters-categories');
 const listeners = require('./notifier');
 const { exportLogs } = require('./app/utils/log-service');
-const whitelist = require('./app/whitelist');
+const allowlist = require('./app/allowlist');
 const userrules = require('./app/userrules');
 const antibanner = require('./app/antibanner');
 const app = require('./app/app');
@@ -70,15 +70,15 @@ module.exports.init = function () {
                 settings.changeAllowlistState(message.enabled);
                 break;
             case 'getAllowlistDomains':
-                const allowlistDomains = whitelist.getWhiteListDomains();
+                const allowlistDomains = allowlist.getAllowlistDomains();
                 event.returnValue = { content: allowlistDomains.join('\r\n') };
                 break;
-            case 'saveWhiteListDomains':
+            case 'saveAllowlistDomains':
                 const domains = message.content.split(/[\r\n]+/);
-                whitelist.updateWhiteListDomains(domains);
+                allowlist.updateAllowlistDomains(domains);
                 break;
             case 'changeDefaultAllowlistMode':
-                whitelist.changeDefaultWhiteListMode(message.enabled);
+                allowlist.changeDefaultAllowlistMode(message.enabled);
                 break;
             case 'getUserRules':
                 userrules.getUserRules((content) => {

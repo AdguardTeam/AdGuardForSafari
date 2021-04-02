@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
 
     DDLogDebugTrace();
-    
+
     _disabledLogo = [NSImage imageNamed:@"logo-gray"];
     _enabledLogo = [NSImage imageNamed:@"logo-green"];
 }
@@ -71,7 +71,7 @@
             [mDomains addObject:domain];
         }
         DDLogDebug(@"Whitelist domains for save:\n%@", mDomains);
-        [AESharedResources setWhitelistDomains:mDomains completion:^{
+        [AESharedResources setAllowlistDomains:mDomains completion:^{
             DDLogDebug(@"Whitelist domains saved");
             [self setCurrentPageNeedReload];
             [AESharedResources notifyWhitelistChanged];
@@ -113,7 +113,7 @@
                 DDLogError(@"Error occurs when running: %@", lError);
             }
         }
-        
+
         [SafariExtensionHandler onReady:^{
             if (! [AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]) {
                 [self startProtection];

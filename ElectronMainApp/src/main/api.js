@@ -1,5 +1,5 @@
 const config = require('config');
-const whitelist = require('./app/whitelist');
+const allowlist = require('./app/allowlist');
 const userrules = require('./app/userrules');
 const antibanner = require('./app/antibanner');
 const log = require('./app/utils/log');
@@ -15,22 +15,22 @@ module.exports = (() => {
      * Returns toolbar data for url
      *
      * @param {String} url
-     * @returns {{applicationFilteringDisabled: boolean, urlFilteringDisabled: boolean, isWhitelisted: boolean}}
+     * @returns {{applicationFilteringDisabled: boolean, urlFilteringDisabled: boolean, isAllowlisted: boolean}}
      */
     const getToolbarMenuData = (url) => {
         const urlFilteringDisabled = !url || url.indexOf('http') !== 0;
         const applicationFilteringDisabled = antibanner.isRunning();
-        let isWhitelisted = false;
+        let isAllowlisted = false;
 
         if (!urlFilteringDisabled) {
-            isWhitelisted = whitelist.isWhitelisted(url);
+            isAllowlisted = allowlist.isAllowlisted(url);
         }
 
         return {
             applicationFilteringDisabled,
             urlFilteringDisabled,
 
-            isWhitelisted,
+            isAllowlisted,
         };
     };
 
@@ -40,9 +40,9 @@ module.exports = (() => {
      * @param {String} url
      */
     const enable = (url) => {
-        whitelist.unWhiteListUrl(url);
+        allowlist.unAllowlistUrl(url);
 
-        log.info(`Url removed from whitelist: ${url}`);
+        log.info(`Url removed from allowlist: ${url}`);
     };
 
     /**
@@ -51,9 +51,9 @@ module.exports = (() => {
      * @param {String} url
      */
     const disable = (url) => {
-        whitelist.whiteListUrl(url);
+        allowlist.allowlistUrl(url);
 
-        log.info(`Url added to whitelist: ${url}`);
+        log.info(`Url added to allowlist: ${url}`);
     };
 
     /**
@@ -103,21 +103,21 @@ module.exports = (() => {
     };
 
     /**
-     * Sets whitelist domains
+     * Sets allowlist domains
      *
      * @param {Array} domains
      */
-    const setWhitelist = (domains) => {
-        whitelist.updateWhiteListDomains(domains);
+    const setAllowlist = (domains) => {
+        allowlist.updateAllowlistDomains(domains);
 
-        log.info('Whitelist updated');
+        log.info('allowlist updated');
     };
 
     /**
-     * Returns whitelisted domains
+     * Returns allowlisted domains
      */
-    const getWhitelist = () => {
-        return whitelist.getWhiteListDomains();
+    const getAllowlist = () => {
+        return allowlist.getAllowlistDomains();
     };
 
     /**
@@ -177,8 +177,8 @@ module.exports = (() => {
         isProtectionRunning,
         pause,
         start,
-        setWhitelist,
-        getWhitelist,
+        setAllowlist,
+        getAllowlist,
         setUserFilterRules,
         getUserFilterRules,
         getEnabledFilterIds,

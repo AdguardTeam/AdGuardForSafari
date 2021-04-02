@@ -48,7 +48,7 @@ const AllowlistFilter = function (userSettings, contentBlockerInfo) {
         applyChangesBtn.classList.add('disabled');
         const allowlistedNum = editorUtils.countRules(response.content);
         utils.setAllowlistInfo(allowlistedNum);
-        contentBlockerInfo.whitelistedNum = allowlistedNum;
+        contentBlockerInfo.allowlistedNum = allowlistedNum;
     }
 
     applyChangesBtn.onclick = (event) => {
@@ -95,7 +95,7 @@ const AllowlistFilter = function (userSettings, contentBlockerInfo) {
         e.preventDefault();
 
         utils.setIsAllowlistInverted(e.currentTarget.checked);
-        userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE] = !e.currentTarget.checked;
+        userSettings.values[userSettings.names.DEFAULT_ALLOWLIST_MODE] = !e.currentTarget.checked;
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'changeDefaultAllowlistMode',
@@ -109,7 +109,7 @@ const AllowlistFilter = function (userSettings, contentBlockerInfo) {
 
     checkboxUtils.updateCheckbox(
         [changeDefaultAllowlistModeCheckbox],
-        !userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]
+        !userSettings.values[userSettings.names.DEFAULT_ALLOWLIST_MODE]
     );
 
     const importAllowlistInput = document.querySelector('#importAllowlistInput');
@@ -149,7 +149,7 @@ const AllowlistFilter = function (userSettings, contentBlockerInfo) {
             return;
         }
 
-        const fileName = userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]
+        const fileName = userSettings.values[userSettings.names.DEFAULT_ALLOWLIST_MODE]
             ? 'adguard-allowlist'
             : 'adguard-allowlist-inverted';
 

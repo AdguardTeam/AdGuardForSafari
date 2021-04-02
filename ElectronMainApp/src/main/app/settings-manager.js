@@ -21,7 +21,7 @@ module.exports = (function () {
         DISABLE_FILTERING: 'adguard-disabled',
         USERRULES_ENABLED: 'userrules-enabled',
         ALLOWLIST_ENABLED: 'allowlist-enabled',
-        DEFAULT_WHITE_LIST_MODE: 'default-whitelist-mode',
+        DEFAULT_ALLOWLIST_MODE: 'default-allowlist-mode',
         DISABLE_SHOW_APP_UPDATED_NOTIFICATION: 'show-app-updated-disabled',
         DISABLE_HARDWARE_ACCELERATION: 'hardware-acceleration-disabled',
         UPDATE_FILTERS_PERIOD: 'update-filters-period',
@@ -50,7 +50,7 @@ module.exports = (function () {
 
                 defaults[settings.DISABLE_SAFEBROWSING] = true;
                 defaults[settings.DISABLE_SEND_SAFEBROWSING_STATS] = true;
-                defaults[settings.DEFAULT_WHITE_LIST_MODE] = true;
+                defaults[settings.DEFAULT_ALLOWLIST_MODE] = true;
                 defaults[settings.USERRULES_ENABLED] = true;
                 defaults[settings.ALLOWLIST_ENABLED] = true;
                 defaults[settings.DISABLE_SHOW_APP_UPDATED_NOTIFICATION] = false;
@@ -153,17 +153,17 @@ module.exports = (function () {
         };
     };
 
-    const isDefaultWhiteListMode = function () {
-        return getProperty(settings.DEFAULT_WHITE_LIST_MODE);
+    const isDefaultAllowlistMode = function () {
+        return getProperty(settings.DEFAULT_ALLOWLIST_MODE);
     };
 
-    const changeDefaultWhiteListMode = function (enabled) {
-        setProperty(settings.DEFAULT_WHITE_LIST_MODE, enabled);
+    const changeDefaultAllowlistMode = function (enabled) {
+        setProperty(settings.DEFAULT_ALLOWLIST_MODE, enabled);
     };
 
-    const updateDefaultWhiteListMode = (value) => {
+    const updateDefaultAllowlistMode = (value) => {
         listeners.notifyListeners(events.SETTING_UPDATED, {
-            propertyName: settings.DEFAULT_WHITE_LIST_MODE,
+            propertyName: settings.DEFAULT_ALLOWLIST_MODE,
             propertyValue: value,
             inverted: true,
         });
@@ -264,7 +264,7 @@ module.exports = (function () {
 
     const changeAllowlistState = function (value) {
         setProperty(settings.ALLOWLIST_ENABLED, value);
-        listeners.notifyListeners(events.UPDATE_WHITELIST_FILTER_RULES);
+        listeners.notifyListeners(events.UPDATE_ALLOWLIST_FILTER_RULES);
         log.info(`Allowlist ${value ? 'enabled' : 'disabled'}`);
     };
 
@@ -290,9 +290,9 @@ module.exports = (function () {
     api.changeEnableSafebrowsing = changeEnableSafebrowsing;
     api.changeSendSafebrowsingStats = changeSendSafebrowsingStats;
     api.getSafebrowsingInfo = getSafebrowsingInfo;
-    api.isDefaultWhiteListMode = isDefaultWhiteListMode;
-    api.changeDefaultWhiteListMode = changeDefaultWhiteListMode;
-    api.updateDefaultWhiteListMode = updateDefaultWhiteListMode;
+    api.isDefaultAllowlistMode = isDefaultAllowlistMode;
+    api.changeDefaultAllowlistMode = changeDefaultAllowlistMode;
+    api.updateDefaultAllowlistMode = updateDefaultAllowlistMode;
     api.changeUpdateFiltersPeriod = changeUpdateFiltersPeriod;
     api.getUpdateFiltersPeriod = getUpdateFiltersPeriod;
     api.changeLaunchAtLogin = changeLaunchAtLogin;

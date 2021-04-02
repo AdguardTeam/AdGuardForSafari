@@ -421,8 +421,8 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
             updateRulesCountInfo(response.rulesInfo);
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
             utils.setUserrulesNum(contentBlockerInfo.userRulesNum);
-            utils.setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]);
-            utils.setAllowlistInfo(contentBlockerInfo.whitelistedNum);
+            utils.setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_ALLOWLIST_MODE]);
+            utils.setAllowlistInfo(contentBlockerInfo.allowlistedNum);
             setSearchPlaceholder();
 
             const { categories } = loadedFiltersInfo;

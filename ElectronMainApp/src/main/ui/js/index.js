@@ -66,7 +66,7 @@ const initPage = function (response) {
                     controller.userFilter.updateUserFilterRules(contentBlockerInfo);
                     controller.contentBlockers.setLoading();
                     break;
-                case EventNotifierTypes.UPDATE_WHITELIST_FILTER_RULES:
+                case EventNotifierTypes.UPDATE_ALLOWLIST_FILTER_RULES:
                     controller.settings.updateAllowlistState();
                     controller.allowlistFilter.loadAllowlistDomains();
                     controller.contentBlockers.setLoading();
