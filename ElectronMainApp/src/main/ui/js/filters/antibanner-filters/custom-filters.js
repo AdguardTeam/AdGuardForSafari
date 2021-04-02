@@ -205,6 +205,10 @@ function renderCustomFilterPopup() {
 
         importCustomFilterFile.addEventListener('change', (event) => {
             const file = event.target.files[0];
+            if (file.type !== 'text/plain') {
+                renderError();
+                return;
+            }
             const filePath = `file://${file.path}`;
             ipcRenderer.send('renderer-to-main', JSON.stringify({
                 'type': 'loadCustomFilterInfo',
