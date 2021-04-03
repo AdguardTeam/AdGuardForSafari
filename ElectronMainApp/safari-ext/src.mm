@@ -383,7 +383,7 @@ NAN_METHOD(allowlistDomains) {
 
     Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
 
-    [AESharedResources whitelistDomainsWithCompletion:^(NSArray <NSString *> *domains){
+    [AESharedResources allowlistDomainsWithCompletion:^(NSArray <NSString *> *domains){
 
         dispatch_sync(dispatch_get_main_queue(), ^{
             Nan::HandleScope scope;
@@ -572,7 +572,7 @@ NAN_METHOD(setOnProtectionEnabled) {
   }];
 }
 
-NAN_METHOD(setOnWhitelist) {
+NAN_METHOD(setOnAllowlist) {
 
   static Nan::Callback *cb = nullptr;
 
@@ -591,7 +591,7 @@ NAN_METHOD(setOnWhitelist) {
   }
   cb = new Nan::Callback(info[0].As<Function>());
 
-  [AESharedResources setListenerOnWhitelistChanged:^{
+  [AESharedResources setListenerOnAllowlistChanged:^{
       dispatch_async(dispatch_get_main_queue(), ^{
           Nan::HandleScope scope;
 
@@ -813,8 +813,8 @@ NAN_MODULE_INIT(Init) {
   Nan::Set(target, New<String>("setOnProtectionEnabled").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setOnProtectionEnabled)).ToLocalChecked());
 
-  Nan::Set(target, New<String>("setOnWhitelist").ToLocalChecked(),
-  GetFunction(New<FunctionTemplate>(setOnWhitelist)).ToLocalChecked());
+  Nan::Set(target, New<String>("setOnAllowlist").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setOnAllowlist)).ToLocalChecked());
 
   Nan::Set(target, New<String>("setOnUserFilter").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setOnUserFilter)).ToLocalChecked());

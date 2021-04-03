@@ -55,13 +55,13 @@
     [AESharedResources notifyDefaultsChanged];
 }
 
-- (IBAction)clickWhitelist:(id)sender {
+- (IBAction)clickAllowlist:(id)sender {
     NSString *domain = self.currentPageUrl.host;
     if (domain.length == 0) {
         return;
     }
     self.busy = YES;
-    [AESharedResources whitelistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
+    [AESharedResources allowlistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
         DDLogDebugTrace();
         NSMutableArray *mDomains = [domains mutableCopy] ?: [NSMutableArray new];
         if ([self domainCheckWithDomains:mDomains]) {
@@ -70,11 +70,11 @@
         else {
             [mDomains addObject:domain];
         }
-        DDLogDebug(@"Whitelist domains for save:\n%@", mDomains);
+        DDLogDebug(@"Allowlist domains for save:\n%@", mDomains);
         [AESharedResources setAllowlistDomains:mDomains completion:^{
-            DDLogDebug(@"Whitelist domains saved");
+            DDLogDebug(@"Allowlist domains saved");
             [self setCurrentPageNeedReload];
-            [AESharedResources notifyWhitelistChanged];
+            [AESharedResources notifyAllowlistChanged];
         }];
     }];
 }
@@ -154,7 +154,7 @@
 - (void)setEnabledButton {
     DDLogDebugTrace();
     BOOL showDisabledUI = ! (self.mainAppRunning && [AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]);
-    [self setWhitelistButton];
+    [self setAllowlistButton];
     if (showDisabledUI) {
         self.adguardIcon.image = _disabledLogo;
         if (self.mainAppRunning) {
@@ -202,14 +202,14 @@
 //////////////////////////////////////////////////////////////////////////
 #pragma mark - Private methods
 
-- (void)setWhitelistButton {
+- (void)setAllowlistButton {
 
-    [AESharedResources whitelistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
+    [AESharedResources allowlistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
         ASSIGN_WEAK(self);
         dispatch_async(dispatch_get_main_queue(), ^{
             ASSIGN_STRONG(self);
-            DDLogDebug(@"Whitelist domains:\n%@", domains);
-            USE_STRONG(self).whitelistButton.state = ! [USE_STRONG(self) domainCheckWithDomains:domains] ? NSOnState : NSOffState;
+            DDLogDebug(@"Allowlist domains:\n%@", domains);
+            USE_STRONG(self).allowlistButton.state = ! [USE_STRONG(self) domainCheckWithDomains:domains] ? NSOnState : NSOffState;
         });
     }];
 }

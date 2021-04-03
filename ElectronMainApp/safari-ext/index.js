@@ -38,8 +38,8 @@ module.exports = (() => {
         }
 
         if (onAllowlistChangedCallback) {
-            addon.setOnWhitelist(() => {
-                addon.whitelistDomains(onAllowlistChangedCallback);
+            addon.setOnAllowlist(() => {
+                addon.allowlistDomains(onAllowlistChangedCallback);
             });
         }
         if (onUserFilterChangedCallback) {
@@ -173,14 +173,14 @@ module.exports = (() => {
      * @param callback = () => {}
      */
     const setAllowlistDomains = (domains, callback) => {
-        addon.setWhitelistDomains(domains, callback);
+        addon.setAllowlistDomains(domains, callback);
     };
 
     /**
      * @param callback = (domains as stringArray) => {}
      */
     const allowlistDomains = (callback) => {
-        addon.whitelistDomains(callback);
+        addon.allowlistDomains(callback);
     };
 
     /**

@@ -35,14 +35,14 @@
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface DDContextWhitelistFilterLogFormatter () {
+@interface DDContextAllowlistFilterLogFormatter () {
     DDLoggingContextSet *_contextSet;
 }
 
 @end
 
 
-@implementation DDContextWhitelistFilterLogFormatter
+@implementation DDContextAllowlistFilterLogFormatter
 
 - (instancetype)init {
     if ((self = [super init])) {
@@ -52,24 +52,24 @@
     return self;
 }
 
-- (void)addToWhitelist:(NSInteger)loggingContext {
+- (void)addToAllowlist:(NSInteger)loggingContext {
     [_contextSet addToSet:loggingContext];
 }
 
-- (void)removeFromWhitelist:(NSInteger)loggingContext {
+- (void)removeFromAllowlist:(NSInteger)loggingContext {
     [_contextSet removeFromSet:loggingContext];
 }
 
-- (NSArray *)whitelist {
+- (NSArray *)allowlist {
     return [_contextSet currentSet];
 }
 
-- (BOOL)isOnWhitelist:(NSInteger)loggingContext {
+- (BOOL)isOnAllowlist:(NSInteger)loggingContext {
     return [_contextSet isInSet:loggingContext];
 }
 
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage {
-    if ([self isOnWhitelist:logMessage->_context]) {
+    if ([self isOnAllowlist:logMessage->_context]) {
         return logMessage->_message;
     } else {
         return nil;

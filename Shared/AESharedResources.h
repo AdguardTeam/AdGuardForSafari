@@ -122,15 +122,15 @@ extern NSString * const AEDefaultsAllExtensionsEnabled;
 + (void)setListenerOnDefaultsChanged:(AESListenerBlock)block;
 
 /**
- Notifies all, that the whitelist was changed.
+ Notifies all, that the allowlist was changed.
  */
-+ (void)notifyWhitelistChanged;
++ (void)notifyAllowlistChanged;
 /**
- Register listener for changing the whitelist.
+ Register listener for changing the allowlist.
 
  @param block Performed on internal thread when catched notification.
  */
-+ (void)setListenerOnWhitelistChanged:(AESListenerBlock)block;
++ (void)setListenerOnAllowlistChanged:(AESListenerBlock)block;
 
 /**
  Notifies all, that the user filter rules was changed.
@@ -217,7 +217,7 @@ extern NSString * const AEDefaultsAllExtensionsEnabled;
 + (void)notifyAdvancedBlockingExtension;
 /**
  Register listener for advanced blocking extension.
- 
+
  @param block Performed on internal thread when catched notification.
  */
 + (void)setListenerOnAdvancedBlocking:(AESListenerBlock)block;
@@ -258,18 +258,18 @@ extern NSString * const AEDefaultsAllExtensionsEnabled;
  */
 + (NSString *)advancedBlockingContentRulesUrlString;
 /**
- Saves the whitelist domains in shared storage.
+ Saves the allowlist domains in shared storage.
  Completion is executed on global concurent queue.
 
  @param domains List of the domains, may be nil.
  @param completion May be nil.
  */
-+ (void)setWhitelistDomains:(NSArray <NSString *> *)domains completion:(void (^)(void))completion;
++ (void)setAllowlistDomains:(NSArray <NSString *> *)domains completion:(void (^)(void))completion;
 /**
- Gets the whitelist domains from shared storage.
+ Gets the allowlist domains from shared storage.
  Completion is executed on global concurent queue.
  */
-+ (void)whitelistDomainsWithCompletion:(void (^)(NSArray <NSString *> *domains))completion;
++ (void)allowlistDomainsWithCompletion:(void (^)(NSArray <NSString *> *domains))completion;
 /**
  Saves the user filter rules in shared storage.
  Completion is executed on global concurent queue.

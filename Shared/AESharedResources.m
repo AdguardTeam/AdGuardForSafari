@@ -27,11 +27,11 @@
 #define AES_BLOCKING_CONTENT_RULES_OTHER_RESOURCE     @"blocking-content-rules-other.json"
 #define AES_BLOCKING_CONTENT_RULES_CUSTOM_RESOURCE     @"blocking-content-rules-custom.json"
 #define AES_ADV_BLOCKING_CONTENT_RULES_RESOURCE @"adv-blocking-content-rules.json"
-#define AES_WHITELIST_DOMAINS                   @"whitelist-domains.data"
+#define AES_ALLOWLIST_DOMAINS                   @"allowlist-domains.data"
 #define AES_USERFILTER_RULES                    @"userfilter-rules.data"
 
 #define NOTIFICATION_DEFAULTS                   AG_BUNDLEID @".notify.defaults"
-#define NOTIFICATION_WHITELIST                  AG_BUNDLEID @".notify.whitelist"
+#define NOTIFICATION_ALLOWLIST                  AG_BUNDLEID @".notify.allowlist"
 #define NOTIFICATION_USERFILTER                 AG_BUNDLEID @".notify.userfilter"
 #define NOTIFICATION_BUSY                       AG_BUNDLEID @".notify.busy"
 #define NOTIFICATION_VERBOSE_LOGGING            AG_BUNDLEID @".notify.verbose"
@@ -193,13 +193,13 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
                                block:block];
 }
 
-+ (void)notifyWhitelistChanged {
++ (void)notifyAllowlistChanged {
     dispatch_async(dispatch_get_main_queue(), ^{
-        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_WHITELIST, NULL, NULL, YES);
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_ALLOWLIST, NULL, NULL, YES);
     });
 }
-+ (void)setListenerOnWhitelistChanged:(AESListenerBlock)block {
-    [self setListenerForNotification:NOTIFICATION_WHITELIST
++ (void)setListenerOnAllowlistChanged:(AESListenerBlock)block {
+    [self setListenerForNotification:NOTIFICATION_ALLOWLIST
                                block:block];
 }
 
@@ -362,12 +362,12 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
 }
 
 + (void)setAllowlistDomains:(NSArray <NSString *> *)domains completion:(void (^)(void))completion {
-    [self saveObject:domains key:AES_WHITELIST_DOMAINS completion:completion];
+    [self saveObject:domains key:AES_ALLOWLIST_DOMAINS completion:completion];
 }
 
-+ (void)whitelistDomainsWithCompletion:(void (^)(NSArray <NSString *> *domains))completion {
++ (void)allowlistDomainsWithCompletion:(void (^)(NSArray <NSString *> *domains))completion {
 
-    [self loadObjectWithKey:AES_WHITELIST_DOMAINS class:[NSArray class] completion:completion];
+    [self loadObjectWithKey:AES_ALLOWLIST_DOMAINS class:[NSArray class] completion:completion];
 }
 
 + (void)setUserFilterRules:(NSArray <NSString *> *)rules completion:(void (^)(void))completion {
