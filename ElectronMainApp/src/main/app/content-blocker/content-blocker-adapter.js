@@ -197,7 +197,7 @@ module.exports = (function () {
      * @private
      */
     const constructInvertedAllowlistRule = () => {
-        const domains = allowlist.getAllowlistDomains();
+        const domains = allowlist.getBlocklistedDomains();
         let invertedAllowlistRule = '@@||*$document';
         if (domains && domains.length > 0) {
             invertedAllowlistRule += ',domain=';
