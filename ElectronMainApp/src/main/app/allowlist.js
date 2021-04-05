@@ -9,7 +9,7 @@ const log = require('./utils/log');
 /**
  * Allowlist
  *
- * @type {{init, getRules, getAllowlistDomains, getAllowlistedDomains, getBlockListedDomains, findAllowlistRule,
+ * @type {{init, getRules, getAllowlistDomains, getAllowlistedDomains, getBlocklistedDomains, findAllowlistRule,
  * allowlistUrl, unAllowlistUrl, loadAllowlistDomains, configure, isDefaultMode, changeDefaultAllowlistMode}}
  */
 module.exports = (function () {
@@ -321,7 +321,7 @@ module.exports = (function () {
     /**
      * Returns the array of blocklisted domains, inverted mode
      */
-    const getBlockListedDomains = function () {
+    const getBlocklistedDomains = function () {
         return blockListDomainsHolder.domains;
     };
 
@@ -332,7 +332,7 @@ module.exports = (function () {
         if (isDefaultAllowlistMode()) {
             return getAllowlistedDomains();
         }
-        return getBlockListedDomains();
+        return getBlocklistedDomains();
     };
 
     /**
@@ -369,7 +369,7 @@ module.exports = (function () {
         if (isDefaultAllowlistMode()) {
             return getAllowlistedDomains().indexOf(host) >= 0;
         }
-        return getBlockListedDomains().indexOf(host) >= 0;
+        return getBlocklistedDomains().indexOf(host) >= 0;
     };
 
     /**
@@ -393,7 +393,7 @@ module.exports = (function () {
         getAllowlistDomains,
 
         getAllowlistedDomains,
-        getBlockListedDomains,
+        getBlocklistedDomains,
 
         allowlistUrl,
         unAllowlistUrl,

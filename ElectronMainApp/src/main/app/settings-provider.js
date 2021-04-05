@@ -60,7 +60,7 @@ module.exports = (() => {
 
         // Collect allowlist/blocklist domains and allowlist mode
         const allowlistDomains = allowlist.getAllowlistedDomains() || [];
-        const blockListDomains = allowlist.getBlockListedDomains() || [];
+        const blockListDomains = allowlist.getBlocklistedDomains() || [];
         const defaultAllowlistMode = !!allowlist.isDefaultMode();
         const allowlistEnabled = !!settingsManager.isAllowlistEnabled();
         const userFilterEnabled = !!settingsManager.isUserrulesEnabled();
@@ -188,6 +188,7 @@ module.exports = (() => {
      * @param callback Finish callback
      */
     const applyFiltersSection = async (section, callback) => {
+        // TODO remove whitelist later
         const allowlistSection = section.filters['allowlist'] || section.filters['whitelist'] || {};
         const allowlistEnabled = !!allowlistSection.enabled;
         const allowlistDomains = allowlistSection.domains || [];

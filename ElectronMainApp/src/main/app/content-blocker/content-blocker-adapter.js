@@ -135,7 +135,7 @@ module.exports = (function () {
     };
 
     /**
-     * Load rules from requestFilter and AllowListService
+     * Load rules from requestFilter and AllowlistService
      * @private
      */
     const loadRules = concurrent.debounce((callback) => {
