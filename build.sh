@@ -63,7 +63,7 @@ rm -Rf "$ARCHIVE_PATH"
 yarn install --cwd "${BUILD_DIR}/../AdGuardResources"
 
 xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" clean
-xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -archivePath "$ARCHIVE_PATH" -destination 'platform=OS X,arch=arm64'
+xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -arch="arm64" -archivePath "$ARCHIVE_PATH" -destination 'platform=OS X'
 
 # zip the archive so that we could use it as a build artifact
 /usr/bin/ditto -c -k --keepParent "$ARCHIVE_PATH" "$ARCHIVE_PATH.zip"
