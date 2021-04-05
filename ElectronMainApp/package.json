@@ -15,7 +15,6 @@
         "download-locales": "gulp download-locales",
         "rebuild-locales": "gulp rebuild-locales",
         "electron-rebuild": "electron-rebuild",
-        "electron-builder": "electron-builder",
         "lint": "eslint ./src/main",
         "postinstall": "./tasks/copy-converter.sh"
     },
@@ -44,7 +43,7 @@
         "axios": "^0.19.0",
         "devtron": "^1.4.0",
         "electron": "^11.0.4",
-        "electron-builder": "^22.10.5",
+        "electron-rebuild": "^2.3.2",
         "electron-osx-sign": "github:electron-userland/electron-osx-sign",
         "electron-packager": "15.2.0",
         "eslint": "^7.6.0",

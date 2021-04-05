@@ -44,7 +44,7 @@ ELECTRON_VERSION=$(jq -r ".devDependencies.electron" ../ElectronMainApp/package.
 ELECTRON_VERSION=${ELECTRON_VERSION#"^"}
 
 # Rebuild safari-ext and other node packages
-yarn electron-builder --arm64
+yarn electron-rebuild --arch=${ARCH} -v ${ELECTRON_VERSION}
 
 echo "Processing ConverterTool"
 install_name_tool -delete_rpath /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx "${SRC}/../libs/ConverterTool"
