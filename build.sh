@@ -31,7 +31,7 @@ echo "Building AdGuard, update channel $CHANNEL"
 # Configuration
 #
 
-WORKSPACE="Adguard.xcworkspace"
+WORKSPACE="AdGuard.xcworkspace"
 CODE_SIGN_IDENTITY="Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)"
 ARCHIVE_NAME="AdGuard_Safari.xcarchive"
 ARCHIVE_PATH="$BUILD_DIR/$ARCHIVE_NAME"
