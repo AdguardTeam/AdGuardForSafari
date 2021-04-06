@@ -243,8 +243,8 @@ module.exports = (function () {
             clearAllowlisted();
             addAllowlisted(domains);
         } else {
-            clearBlockListed();
-            addBlockListed(domains);
+            clearBlocklisted();
+            addBlocklisted(domains);
         }
         notifyAllowlistUpdated();
     };
@@ -268,7 +268,7 @@ module.exports = (function () {
      * Add domains to blocklist
      * @param domains
      */
-    const addBlockListed = function (domains) {
+    const addBlocklisted = function (domains) {
         if (!domains) {
             return;
         }
@@ -290,7 +290,7 @@ module.exports = (function () {
     /**
      * Clear blocklisted only
      */
-    const clearBlockListed = function () {
+    const clearBlocklisted = function () {
         localStorage.removeItem(BLOCK_LIST_DOMAINS_LS_PROP);
         cache.lazyGetClear(blockListDomainsHolder, 'domains');
     };
@@ -304,9 +304,9 @@ module.exports = (function () {
      */
     const configure = function (allowlist, blocklist, allowlistMode, options) {
         clearAllowlisted();
-        clearBlockListed();
+        clearBlocklisted();
         addAllowlisted(allowlist || []);
-        addBlockListed(blocklist || []);
+        addBlocklisted(blocklist || []);
         settings.changeDefaultAllowlistMode(allowlistMode);
         notifyAllowlistUpdated(options);
     };
