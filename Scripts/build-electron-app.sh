@@ -10,7 +10,11 @@ echo "AG_STANDALONE_BETA: ${AG_STANDALONE_BETA}"
 nvm use v13.10.0 || exit 1
 
 PLATFORM=mas
-ARCH=arm64
+ARCH=${AG_BUILD_ARCH}
+
+if [ ${ARCH} == "x86_64" ]; then
+    ARCH=x64
+fi
 
 SRC="${SRCROOT}/../ElectronMainApp"
 SHAREDSRC="${SRCROOT}/../Shared"

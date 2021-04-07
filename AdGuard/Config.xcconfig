@@ -6,6 +6,8 @@ AG_BUILD = 134
 AG_STANDALONE = false
 AG_STANDALONE_BETA = false
 
+AG_BUILD_ARCH=$(ARCHS)
+
 AG_BUNDLEID = com.adguard.safari.AdGuard
 AG_LOGIN_HELPER_BUNDLEID = $(AG_BUNDLEID).login-helper
 

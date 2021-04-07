@@ -33,11 +33,20 @@ echo "Building AdGuard, update channel $CHANNEL"
 
 WORKSPACE="AdGuard.xcworkspace"
 CODE_SIGN_IDENTITY="Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)"
-ARCHIVE_NAME="AdGuard_Safari.xcarchive"
-ARCHIVE_PATH="$BUILD_DIR/$ARCHIVE_NAME"
 APP_NAME="AdGuard for Safari.app"
-ARCHIVE_APP_PATH="$ARCHIVE_PATH/Products/Applications/$APP_NAME"
-APP_PATH="$BUILD_DIR/$APP_NAME"
+
+X64_ARCHIVE_NAME="AdGuard_Safari_x64.xcarchive"
+X64_ARCHIVE_PATH="$BUILD_DIR/$X64_ARCHIVE_NAME"
+X64_APP_NAME="AdGuard for Safari x64.app"
+X64_ARCHIVE_APP_PATH="$X64_ARCHIVE_PATH/Products/Applications/$APP_NAME"
+X64_APP_PATH="$BUILD_DIR/$X64_APP_NAME"
+
+ARM64_ARCHIVE_NAME="AdGuard_Safari_arm64.xcarchive"
+ARM64_ARCHIVE_PATH="$BUILD_DIR/$ARM64_ARCHIVE_NAME"
+ARM64_APP_NAME="AdGuard for Safari arm64.app"
+ARM64_ARCHIVE_APP_PATH="$ARM64_ARCHIVE_PATH/Products/Applications/$APP_NAME"
+ARM64_APP_PATH="$BUILD_DIR/$ARM64_APP_NAME"
+
 SCHEME="AdGuard"
 APP_BUNDLE_ID="com.adguard.safari.AdGuard"
 VERSION_FILE="version.txt"
@@ -45,7 +54,8 @@ VERSION_FILE="version.txt"
 CONFIGURATION_NAME="Release"
 if [ "$CHANNEL" == "beta" ]; then
     CONFIGURATION_NAME="Standalone Beta"
-    APP_NAME="Adguard for Safari Beta.app"
+#    X64_APP_NAME="AdGuard for Safari Beta.app"
+#    X64_APP_PATH="$BUILD_DIR/$X64_APP_NAME"
 fi
 
 if [ "$CHANNEL" == "release" ]; then
@@ -56,24 +66,34 @@ fi
 # Build process
 #
 
-echo "Step 1: Building the app archive"
-rm -Rf "$ARCHIVE_PATH"
-
+echo "Step 1: Building the app archives"
 # download AdGuard resources
 yarn install --cwd "${BUILD_DIR}/../AdGuardResources"
 
+# build for x64
+rm -Rf "$X64_ARCHIVE_PATH"
 xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" clean
-xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -archivePath "$ARCHIVE_PATH" VALID_ARCHS=arm64 -destination 'platform=OS X'
+xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -archivePath "$X64_ARCHIVE_PATH" VALID_ARCHS=x86_64
 
-# zip the archive so that we could use it as a build artifact
-/usr/bin/ditto -c -k --keepParent "$ARCHIVE_PATH" "$ARCHIVE_PATH.zip"
+# build for arm64
+rm -Rf "$ARM64_ARCHIVE_PATH"
+xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" clean
+xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -archivePath "$ARM64_ARCHIVE_PATH" VALID_ARCHS=arm64 -destination 'platform=OS X'
 
-echo "Step 2: Copying the app to the build directory"
-rm -Rf "$APP_PATH"
-cp -HRfp "$ARCHIVE_APP_PATH" "$APP_PATH"
+# zip the archives so that we could use them as a build artifacts
+/usr/bin/ditto -c -k --keepParent "$X64_ARCHIVE_PATH" "$X64_ARCHIVE_PATH.zip"
+/usr/bin/ditto -c -k --keepParent "$ARM64_ARCHIVE_PATH" "$ARM64_ARCHIVE_PATH.zip"
+
+echo "Step 2: Copying the apps to the build directory"
+rm -Rf "$X64_APP_PATH"
+cp -HRfp "$X64_ARCHIVE_APP_PATH" "$X64_APP_PATH"
+
+rm -Rf "$ARM64_APP_PATH"
+cp -HRfp "$ARM64_ARCHIVE_APP_PATH" "$ARM64_APP_PATH"
 
 echo "Step 3: Modify the app update channel to $CHANNEL"
-INFO_PLIST=${APP_PATH}/Contents/Info.plist
+X64_INFO_PLIST=${X64_APP_PATH}/Contents/Info.plist
+ARM64_INFO_PLIST=${64_APP_PATH}/Contents/Info.plist
 
 # retrieve version and build number from the app itself
 build_number=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "$INFO_PLIST")
@@ -84,22 +104,24 @@ if [ "$NOTARIZE_DISABLED" == "--notarize=0" ]; then
     echo "Notarizing is disabled"
 else
     # python script parameters should be relative to the script location
-    python3 -u Scripts/notarize.py --path="../$APP_PATH" --bundle-id="$APP_BUNDLE_ID"
+    python3 -u Scripts/notarize.py --path="../$X64_APP_PATH" --bundle-id="$APP_BUNDLE_ID"
+    python3 -u Scripts/notarize.py --path="../$ARM64_APP_PATH" --bundle-id="$APP_BUNDLE_ID"
 fi
 
 echo "Step 5: Archive the app"
-# zip the archive so that we could use it as a build artifact
-/usr/bin/ditto -c -k --keepParent "$APP_PATH" "$BUILD_DIR/AdGuard_Safari.app.zip"
+ zip the archive so that we could use it as a build artifact
+/usr/bin/ditto -c -k --keepParent "$X64_APP_PATH" "$BUILD_DIR/AdGuard_Safari_x64.app.zip"
+/usr/bin/ditto -c -k --keepParent "$ARM64_APP_PATH" "$BUILD_DIR/AdGuard_Safari_arm64.app.zip"
 
 echo "Step 6: Build version.txt"
 printf "version=$version\nbuild_number=$build_number\nchannel=$CHANNEL\n" >$BUILD_DIR/$VERSION_FILE
 
 echo "Step 7: Build updates json files"
 # creates release.json and edits updates.json
-buildFileName="AdGuard_Safari.app.zip"
-if [ "$CHANNEL" == "beta" ]; then
-    buildFileName="AdGuard_Safari_Beta.app.zip"
-fi
+buildFileName="AdGuard_Safari_x64.app.zip"
+#if [ "$CHANNEL" == "beta" ]; then
+#    buildFileName="AdGuard_Safari_Beta.app.zip"
+#fi
 
 printf "{
   \"url\": \"https://static.adguard.com/safari/$CHANNEL/$buildFileName\",
