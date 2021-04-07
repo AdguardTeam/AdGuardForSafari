@@ -93,11 +93,11 @@ cp -HRfp "$ARM64_ARCHIVE_APP_PATH" "$ARM64_APP_PATH"
 
 echo "Step 3: Modify the app update channel to $CHANNEL"
 X64_INFO_PLIST=${X64_APP_PATH}/Contents/Info.plist
-ARM64_INFO_PLIST=${64_APP_PATH}/Contents/Info.plist
+# ARM64_INFO_PLIST=${ARM64_APP_PATH}/Contents/Info.plist
 
 # retrieve version and build number from the app itself
-build_number=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "$INFO_PLIST")
-version=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$INFO_PLIST")
+build_number=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "$X64_INFO_PLIST")
+version=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$X64_INFO_PLIST")
 
 echo "Step 4: Notarizing the app"
 if [ "$NOTARIZE_DISABLED" == "--notarize=0" ]; then
@@ -109,7 +109,7 @@ else
 fi
 
 echo "Step 5: Archive the app"
- zip the archive so that we could use it as a build artifact
+#zip the archive so that we could use it as a build artifact
 /usr/bin/ditto -c -k --keepParent "$X64_APP_PATH" "$BUILD_DIR/AdGuard_Safari_x64.app.zip"
 /usr/bin/ditto -c -k --keepParent "$ARM64_APP_PATH" "$BUILD_DIR/AdGuard_Safari_arm64.app.zip"
 
@@ -118,19 +118,23 @@ printf "version=$version\nbuild_number=$build_number\nchannel=$CHANNEL\n" >$BUIL
 
 echo "Step 7: Build updates json files"
 # creates release.json and edits updates.json
-buildFileName="AdGuard_Safari_x64.app.zip"
+#buildFileName="AdGuard_Safari_x64.app.zip"
 #if [ "$CHANNEL" == "beta" ]; then
 #    buildFileName="AdGuard_Safari_Beta.app.zip"
 #fi
 
-printf "{
-  \"url\": \"https://static.adguard.com/safari/$CHANNEL/$buildFileName\",
-  \"name\": \"$version-$build_number\",
-  \"notes\": \"Updates\",
-  \"pub_date\": \"$(date -u +%FT%TZ)\"
-}" >$BUILD_DIR/release.json
-
-curl "https://static.adguard.com/safari/updates.json" > $BUILD_DIR/updates.json
+#printf "{
+#  \"url\": \"https://static.adguard.com/safari/$CHANNEL/$buildFileName\",
+#  \"name\": \"$version-$build_number\",
+#  \"notes\": \"Updates\",
+#  \"pub_date\": \"$(date -u +%FT%TZ)\"
+#}" >$BUILD_DIR/release.json
+#
+#curl "https://static.adguard.com/safari/updates.json" > $BUILD_DIR/updates.json
 
 # python script parameters should be relative to the script location
-python3 -u Scripts/update_version.py --path="../$BUILD_DIR/updates.json" --channel="$CHANNEL" --version="$version"
+#python3 -u Scripts/update_version.py --path="../$BUILD_DIR/updates.json" --channel="$CHANNEL" --version="$version"
+
+echo "Step 8: Create the universal build"
+cd ElectronMainApp
+yarn make-universal-app
