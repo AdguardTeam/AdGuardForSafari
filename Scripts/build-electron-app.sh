@@ -50,11 +50,6 @@ ELECTRON_VERSION=${ELECTRON_VERSION#"^"}
 # Rebuild safari-ext and other node packages
 yarn electron-rebuild --arch=${ARCH} -v ${ELECTRON_VERSION}
 
-echo "Processing ConverterTool"
-install_name_tool -delete_rpath /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx "${SRC}/../libs/ConverterTool"
-install_name_tool -add_rpath @executable_path/../Frameworks "${SRC}/../libs/ConverterTool" > /dev/null 2>&1 | echo -n
-install_name_tool -add_rpath @executable_path/../../Frameworks "${SRC}/../libs/ConverterTool" > /dev/null 2>&1 | echo -n
-
 if [[ ${CONFIGURATION} == "Release" ]]; then
     echo "Building release MAS version"
 
@@ -64,7 +59,7 @@ if [[ ${CONFIGURATION} == "Release" ]]; then
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
 
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
-    --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
+    --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${TARGET_TEMP_DIR}" \
     ${OPT} || exit 1
 
     APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
@@ -96,7 +91,7 @@ else
     fi
 
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
-    --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
+    --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${TARGET_TEMP_DIR}" \
     ${OPT} || exit 1
 
     APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-${PACKAGER_PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
@@ -123,9 +118,6 @@ else
     fi
 
 fi
-
-echo "Hide executable file from xcodebuild"
-mv -f "$APP/Contents/MacOS/${PRODUCT_NAME}" "$APP/Contents/MacOS/${AG_HIDE_EXEC_PREFIX}${PRODUCT_NAME}" || exit 1
 
 # Move products
 DST_DIR="${BUILT_PRODUCTS_DIR}"

@@ -38,7 +38,6 @@
 		655C8662212AEA3200CB6DAE /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C863D212AEA3200CB6DAE /* NSDate+Utils.m */; };
 		655C8665212AEA3200CB6DAE /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8640212AEA3200CB6DAE /* NSString+Utils.m */; };
 		655C8667212AEA3200CB6DAE /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C8642212AEA3200CB6DAE /* NSException+Utils.m */; };
-		65642C64256BDD7700726D45 /* fake_AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65642C55256BDC8B00726D45 /* fake_AppDelegate.swift */; };
 		6582EECA2183435C007DC151 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6582EECC2183435C007DC151 /* InfoPlist.strings */; };
 		6582EED121834467007DC151 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6582EED321834467007DC151 /* InfoPlist.strings */; };
 		6584716E2136B373005C74E8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
@@ -433,7 +432,6 @@
 		655C865D212AEA3200CB6DAE /* ACObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACObject.m; sourceTree = "<group>"; };
 		655C865E212AEA3200CB6DAE /* ACLFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLFileLogger.m; sourceTree = "<group>"; };
 		655C8675212AEB5F00CB6DAE /* ACLang.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACLang.h; sourceTree = "<group>"; };
-		65642C55256BDC8B00726D45 /* fake_AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fake_AppDelegate.swift; sourceTree = "<group>"; };
 		65720AB221219AC900B2381C /* AdGuard for Safari.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AdGuard for Safari.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65720ABD21219ACB00B2381C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65720AC021219ACB00B2381C /* AdGuard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuard.entitlements; sourceTree = "<group>"; };
@@ -1011,7 +1009,6 @@
 				65C41D3422D8B0DF0001AFBA /* ElectronChild.entitlements */,
 				65C41D3622D8B0DF0001AFBA /* ElectronLoginItem.entitlements */,
 				F46D132E225E950A00282566 /* standalone */,
-				65642C55256BDC8B00726D45 /* fake_AppDelegate.swift */,
 				65720ABD21219ACB00B2381C /* Info.plist */,
 			);
 			path = AdGuard;
@@ -1301,7 +1298,6 @@
 				652169FA21231D0400ABF7D0 /* Resources */,
 				65216A1A212436EA00ABF7D0 /* Embed App Extensions */,
 				651D5DA423673CFC0025C72C /* Copy Launch At Login Helper */,
-				65642C99256BEAF400726D45 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1781,26 +1777,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		65642C99256BEAF400726D45 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "DST_DIR=\"${BUILT_PRODUCTS_DIR}\"\nif [[ ${ACTION} == \"install\" ]]; then\n  DST_DIR=\"${INSTALL_ROOT}/Applications\"\n  mkdir -p \"${DST_DIR}\"\nfi\nmv -f \"${DST_DIR}/${PRODUCT_NAME}.app/Contents/MacOS/${AG_HIDE_EXEC_PREFIX}${PRODUCT_NAME}\" \"${DST_DIR}/${PRODUCT_NAME}.app/Contents/MacOS/${PRODUCT_NAME}\" || exit 1\n\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		65024EA22126C80C00342E3C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1862,7 +1838,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65642C64256BDD7700726D45 /* fake_AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2671,7 +2646,7 @@
 		65720AC421219ACB00B2381C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
@@ -2698,7 +2673,7 @@
 		65720AC521219ACB00B2381C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
@@ -3249,7 +3224,7 @@
 		F46D1319225E93A400282566 /* Standalone Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
@@ -3398,7 +3373,6 @@
 		F46D1320225E93A400282566 /* Standalone Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -3478,7 +3452,7 @@
 		F46D1324225E944700282566 /* Standalone Prod */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "$(AG_APP_ENT)";
@@ -3627,7 +3601,6 @@
 		F46D132B225E944700282566 /* Standalone Prod */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -3844,7 +3817,6 @@
 		F4D590222201C965002DCC2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -3868,7 +3840,6 @@
 		F4D590232201C965002DCC2C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;

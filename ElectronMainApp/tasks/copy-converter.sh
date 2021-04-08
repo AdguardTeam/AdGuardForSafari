@@ -6,3 +6,4 @@
 mkdir -p ../libs
 cp node_modules/safari-converter-lib/bin/ConverterTool ../libs/ConverterTool
 chmod +x ../libs/ConverterTool
+rm -rf node_modules/safari-converter-lib/.build
