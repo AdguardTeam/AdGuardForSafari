@@ -180,7 +180,7 @@ You use `./Scripts/download-lib.sh` to download the latest release version of th
 In case we need to notarize the app, we will need to do it.
 
 Register in `App Connect` and create a password for `altool`.
-ca
+
 > "Because App Store Connect now requires two-factor authentication (2FA) on all accounts, you must create an app-specific password for altool, as described in [Using app-specific passwords](https://support.apple.com/en-us/HT204397).
 > To avoid including your password as cleartext in a script, you can provide a reference to a keychain item, as shown in the previous example. This assumes the keychain holds a keychain item named `altool_access` with an account value matching the username `dev_acc@icloud.com`. Note that altool can’t access your iCloud keychain for security reasons, so the item must be in your login keychain. You can add a new keychain item using the Keychain Access app, or from the command line using the security utility:
 >
@@ -202,6 +202,9 @@ https://developer.apple.com/documentation/security/notarizing_your_app_before_di
 - refresh `updates/updates.json` and `release.json` in gh-pages branch
 
 #### Build application
+
+If running build on remote machine (i.e. SSH,) run `security unlock-keychain` before running `./build.sh`
+to avoid the `errSecInternalComponent` error
 
 ```
 ./build.sh <channel> [--notarize=0]
