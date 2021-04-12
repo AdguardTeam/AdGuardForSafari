@@ -81,14 +81,14 @@ Also, you need to install these packages globally:
 - [electron-osx-sign](https://www.npmjs.com/package/electron-osx-sign)
 
 ```
-yarn global add electron-packager 
-yarn global add node-gyp 
+yarn global add electron-packager
+yarn global add node-gyp
 yarn global add electron-osx-sign
 ```
 
-## How to build 
+## How to build
 
-### To run application in development mode 
+### To run application in development mode
 
 ```
 cd ElectronMainApp
@@ -112,7 +112,7 @@ Open menu `View -> Toggle Developer Tools`
 
 #### Debug main process
 
-Launch the application via 
+Launch the application via
 ```
 yarn inspect
 ```
@@ -131,12 +131,12 @@ where `<YOUR APPLE DEVELOPER COMMON NAME>` is your codesign identity
 Make sure your system Nodejs version higher v8.9.4.
 
 Steps to check it:
-if you use `nvm` run 
+if you use `nvm` run
 ```
 nvm use system
 node -v
 ```
-otherwise 
+otherwise
 ```
 node -v
 ```
@@ -151,14 +151,21 @@ yarn test
 
 ## Preparing and building Adguard.
 
-### Environment requirements
+### Official environment requirements
 
-- MacOS 10.14.4+
-- Xcode 10.2+
+- MacOS 10.15.4+
+- Xcode 12.0+
 - Dev account on developer.apple.com and `Adguard Software Limited` membership, enabled `App Store Connect`
 - Certificates `Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)` and `Developer ID Installer: Adguard Software Limited (TC3Q7MAJXF)` in `keychain`
 
-Check certificates names in Scripts/ExportOptions.plist
+Check certificates names in Scripts/ExportOptions.plist. If not using Adguard certificates,
+
+- MacOS 10.15.4+
+- Xcode 12.0+
+- Paid dev account on developer.apple.com
+- `Developer ID Application` and `Developer ID Installer` in keychain
+- Replace your Adguard certificate identifiers with your own in `Scripts/ExportOptions.plist`, `AdGuard/AdGuard/Info.plist`, `AdGuard/Config.xcconfig`, and `AdGuard/AdGuard.xcodeproj/project.pbxproj`
+
 
 ### Building
 
@@ -173,7 +180,7 @@ You use `./Scripts/download-lib.sh` to download the latest release version of th
 In case we need to notarize the app, we will need to do it.
 
 Register in `App Connect` and create a password for `altool`.
-
+ca
 > "Because App Store Connect now requires two-factor authentication (2FA) on all accounts, you must create an app-specific password for altool, as described in [Using app-specific passwords](https://support.apple.com/en-us/HT204397).
 > To avoid including your password as cleartext in a script, you can provide a reference to a keychain item, as shown in the previous example. This assumes the keychain holds a keychain item named `altool_access` with an account value matching the username `dev_acc@icloud.com`. Note that altool can’t access your iCloud keychain for security reasons, so the item must be in your login keychain. You can add a new keychain item using the Keychain Access app, or from the command line using the security utility:
 >
@@ -186,10 +193,6 @@ Create `Scripts/.devconfig.json` with created username and keychain item.
 #### Common issues
 https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/resolving_common_notarization_issues
 
-Use fixed `electron-osx-sign`
-```
-npm install -g electron-userland/electron-osx-sign#timestamp-server
-```
 
 #### How to release standalone builds
 - update version `package.json` and `AdGuard/standalone.xcconfig` or `AdGuard/standalone-beta.xcconfig`
@@ -214,10 +217,15 @@ Arguments:
 
 Output directory `build` contains:
 
-- `Adguard for Safari.app` -- signed and notarized app.
-- `Adguard for Safari.app.zip` -- zip of signed and notarized app.
-- `Adguard for Safari.xcarchive` -- app archive.
-- `Adguard for Safari.xcarchive.zip` -- zip of app archive
+- `Adguard for Safari.app` -- signed and notarized universal (fat) app bundle.
+- `AdGuard for Safari arm64.app` -- signed and notarized arm64 (thin) app bundle.
+- `AdGuard for Safari x64.app` -- signed and notarized x86_64 (thin) app bundle.
+- `AdGuard_Safari_arm64.app.zip` -- zip of signed and notarized app bundle.
+- `AdGuard_Safari_x64.app.zip` -- zip of signed and notarized app bundle.
+- `AdGuard_Safari_arm64.xcarchive` -- arm64 app archive.
+- `AdGuard_Safari_x64.xcarchive` -- x86_64 app archive.
+- `AdGuard_Safari_arm64.app.zip` -- zip of arm64 app archive
+- `AdGuard_Safari_x64.app.zip` -- zip of x86_64 app archive
 - `version.txt` -- version info (CI requirement).
 - `updates.json` -- json file with updates info.
 - `release.json` -- json file with updates info.
