@@ -81,8 +81,7 @@ xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" clean
 xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -archivePath "$ARM64_ARCHIVE_PATH" VALID_ARCHS=arm64 -destination 'platform=OS X'
 
 # zip the archives so that we could use them as a build artifacts
-/usr/bin/ditto -c -k --keepParent "$X64_ARCHIVE_PATH" "$X64_ARCHIVE_PATH.zip"
-/usr/bin/ditto -c -k --keepParent "$ARM64_ARCHIVE_PATH" "$ARM64_ARCHIVE_PATH.zip"
+zip -9 -r "$BUILD_DIR/AdGuard_Safari.xcarchive.zip" $X64_ARCHIVE_PATH $ARM64_ARCHIVE_PATH
 
 echo "Step 2: Copying the apps to the build directory"
 rm -Rf "$X64_APP_PATH"
@@ -118,23 +117,26 @@ printf "version=$version\nbuild_number=$build_number\nchannel=$CHANNEL\n" >$BUIL
 
 echo "Step 7: Build updates json files"
 # creates release.json and edits updates.json
-#buildFileName="AdGuard_Safari_x64.app.zip"
-#if [ "$CHANNEL" == "beta" ]; then
-#    buildFileName="AdGuard_Safari_Beta.app.zip"
-#fi
+buildFileName="AdGuard_Safari_x64.app.zip"
+if [ "$CHANNEL" == "beta" ]; then
+    buildFileName="AdGuard_Safari_Beta.app.zip"
+fi
 
-#printf "{
-#  \"url\": \"https://static.adguard.com/safari/$CHANNEL/$buildFileName\",
-#  \"name\": \"$version-$build_number\",
-#  \"notes\": \"Updates\",
-#  \"pub_date\": \"$(date -u +%FT%TZ)\"
-#}" >$BUILD_DIR/release.json
-#
-#curl "https://static.adguard.com/safari/updates.json" > $BUILD_DIR/updates.json
+printf "{
+  \"url\": \"https://static.adguard.com/safari/$CHANNEL/$buildFileName\",
+  \"name\": \"$version-$build_number\",
+  \"notes\": \"Updates\",
+  \"pub_date\": \"$(date -u +%FT%TZ)\"
+}" >$BUILD_DIR/release.json
+
+curl "https://static.adguard.com/safari/updates.json" > $BUILD_DIR/updates.json
 
 # python script parameters should be relative to the script location
-#python3 -u Scripts/update_version.py --path="../$BUILD_DIR/updates.json" --channel="$CHANNEL" --version="$version"
+python3 -u Scripts/update_version.py --path="../$BUILD_DIR/updates.json" --channel="$CHANNEL" --version="$version"
 
 echo "Step 8: Create the universal build"
 cd ElectronMainApp
 yarn make-universal-app
+
+echo "Step 9: Archive the universal build"
+/usr/bin/ditto -c -k --keepParent "$BUILD_DIR/$APP_NAME" "$BUILD_DIR/AdGuard_Safari.app.zip"

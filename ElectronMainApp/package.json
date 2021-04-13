@@ -16,7 +16,6 @@
         "rebuild-locales": "gulp rebuild-locales",
         "electron-rebuild": "electron-rebuild",
         "lint": "eslint ./src/main",
-        "postinstall": "./tasks/copy-converter.sh",
         "make-universal-app": "node ./tasks/universal-app.js"
     },
     "husky": {
