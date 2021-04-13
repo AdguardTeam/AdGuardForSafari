@@ -139,4 +139,4 @@ cd ElectronMainApp
 yarn make-universal-app
 
 echo "Step 9: Archive the universal build"
-zip -9 -r "$BUILD_DIR/AdGuard_Safari.app.zip" $BUILD_DIR/$APP_NAME
+/usr/bin/ditto -c -k --keepParent "$BUILD_DIR/$APP_NAME" "$BUILD_DIR/AdGuard_Safari.app.zip"
