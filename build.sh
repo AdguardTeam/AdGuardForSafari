@@ -35,22 +35,22 @@ WORKSPACE="AdGuard.xcworkspace"
 CODE_SIGN_IDENTITY="Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)"
 APP_NAME="AdGuard for Safari.app"
 
-X64_ARCHIVE_NAME="AdGuard_Safari_x64.xcarchive"
-X64_ARCHIVE_PATH="$BUILD_DIR/$X64_ARCHIVE_NAME"
-X64_APP_NAME="AdGuard for Safari x64.app"
-X64_ARCHIVE_APP_PATH="$X64_ARCHIVE_PATH/Products/Applications/$APP_NAME"
-X64_APP_PATH="$BUILD_DIR/$X64_APP_NAME"
+#X64_ARCHIVE_NAME="AdGuard_Safari_x64.xcarchive"
+#X64_ARCHIVE_PATH="$BUILD_DIR/$X64_ARCHIVE_NAME"
+#X64_APP_NAME="AdGuard for Safari x64.app"
+#X64_ARCHIVE_APP_PATH="$X64_ARCHIVE_PATH/Products/Applications/$APP_NAME"
+#X64_APP_PATH="$BUILD_DIR/$X64_APP_NAME"
 
-#ARCHIVE_NAME="AdGuard_Safari.xcarchive"
-#ARCHIVE_PATH="$BUILD_DIR/$ARCHIVE_NAME"
-#ARCHIVE_APP_PATH="$X64_ARCHIVE_PATH/Products/Applications/$APP_NAME"
+ARCHIVE_NAME="AdGuard_Safari.xcarchive"
+ARCHIVE_PATH="$BUILD_DIR/$ARCHIVE_NAME"
+ARCHIVE_APP_PATH="$ARCHIVE_PATH/Products/Applications/$APP_NAME"
 APP_PATH="$BUILD_DIR/$APP_NAME"
 
-ARM64_ARCHIVE_NAME="AdGuard_Safari_arm64.xcarchive"
-ARM64_ARCHIVE_PATH="$BUILD_DIR/$ARM64_ARCHIVE_NAME"
-ARM64_APP_NAME="AdGuard for Safari arm64.app"
-ARM64_ARCHIVE_APP_PATH="$ARM64_ARCHIVE_PATH/Products/Applications/$APP_NAME"
-ARM64_APP_PATH="$BUILD_DIR/$ARM64_APP_NAME"
+#ARM64_ARCHIVE_NAME="AdGuard_Safari_arm64.xcarchive"
+#ARM64_ARCHIVE_PATH="$BUILD_DIR/$ARM64_ARCHIVE_NAME"
+#ARM64_APP_NAME="AdGuard for Safari arm64.app"
+#ARM64_ARCHIVE_APP_PATH="$ARM64_ARCHIVE_PATH/Products/Applications/$APP_NAME"
+#ARM64_APP_PATH="$BUILD_DIR/$ARM64_APP_NAME"
 
 AG_ELECTRON_CHILD_ENT="AdGuard/AdGuard/ElectronChild.entitlements"
 FRAMEWORKS="$APP_PATH/Contents/Frameworks/"
@@ -82,40 +82,40 @@ echo "Step 1: Building the app archives"
 yarn install --cwd "${BUILD_DIR}/../AdGuardResources"
 
 # build for x64
-rm -Rf "$X64_ARCHIVE_PATH"
+rm -Rf "$ARCHIVE_PATH"
 xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" clean
-xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -archivePath "$X64_ARCHIVE_PATH" VALID_ARCHS=x86_64
+xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -arch x86_64 -arch arm64 -archivePath "$ARCHIVE_PATH"
 
 # build for arm64
-rm -Rf "$ARM64_ARCHIVE_PATH"
-xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" clean
-xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -archivePath "$ARM64_ARCHIVE_PATH" VALID_ARCHS=arm64 -destination 'platform=OS X'
+#rm -Rf "$ARM64_ARCHIVE_PATH"
+#xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" clean
+#xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -archivePath "$ARM64_ARCHIVE_PATH" VALID_ARCHS=arm64 -destination 'platform=OS X'
 
 # zip the archives so that we could use them as a build artifacts
-zip -9 -r "$BUILD_DIR/AdGuard_Safari.xcarchive.zip" $X64_ARCHIVE_PATH $ARM64_ARCHIVE_PATH
+zip -9 -r "$BUILD_DIR/AdGuard_Safari.xcarchive.zip" $ARCHIVE_PATH
 
 echo "Step 2: Copying the apps to the build directory"
-rm -Rf "$X64_APP_PATH"
-cp -HRfp "$X64_ARCHIVE_APP_PATH" "$X64_APP_PATH"
+rm -Rf "$APP_PATH"
+cp -HRfp "$ARCHIVE_APP_PATH" "$APP_PATH"
 
-rm -Rf "$ARM64_APP_PATH"
-cp -HRfp "$ARM64_ARCHIVE_APP_PATH" "$ARM64_APP_PATH"
+#rm -Rf "$ARM64_APP_PATH"
+#cp -HRfp "$ARM64_ARCHIVE_APP_PATH" "$ARM64_APP_PATH"
 
 echo "Step 3: Modify the app update channel to $CHANNEL"
-X64_INFO_PLIST=${X64_APP_PATH}/Contents/Info.plist
+INFO_PLIST=${APP_PATH}/Contents/Info.plist
 # ARM64_INFO_PLIST=${ARM64_APP_PATH}/Contents/Info.plist
 
 # retrieve version and build number from the app itself
-build_number=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "$X64_INFO_PLIST")
-version=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$X64_INFO_PLIST")
+build_number=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "$INFO_PLIST")
+version=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$INFO_PLIST")
 
 echo "Step 4: Notarizing the app"
 if [ "$NOTARIZE_DISABLED" == "--notarize=0" ]; then
     echo "Notarizing is disabled"
 else
     # python script parameters should be relative to the script location
-    python3 -u Scripts/notarize.py --path="../$X64_APP_PATH" --bundle-id="$APP_BUNDLE_ID"
-    python3 -u Scripts/notarize.py --path="../$ARM64_APP_PATH" --bundle-id="$APP_BUNDLE_ID"
+    python3 -u Scripts/notarize.py --path="../$APP_PATH" --bundle-id="$APP_BUNDLE_ID"
+#    python3 -u Scripts/notarize.py --path="../$APP_PATH" --bundle-id="$APP_BUNDLE_ID"
 fi
 
 #echo "Step 5: Archive the app"
@@ -145,27 +145,10 @@ curl "https://static.adguard.com/safari/updates.json" > $BUILD_DIR/updates.json
 # python script parameters should be relative to the script location
 python3 -u Scripts/update_version.py --path="../$BUILD_DIR/updates.json" --channel="$CHANNEL" --version="$version"
 
-echo "Step 8: Create the universal build"
-cd ElectronMainApp
-yarn make-universal-app
-cd ..
-
-electron-osx-sign "${APP}" --platform=mas --timestamp="" --type=distribution --hardened-runtime --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_APP_ENT}" || exit 1
-
-codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Electron Framework" || exit 1
-codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib" || exit 1
-codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
-codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper.app" || exit 1
-codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (GPU).app" || exit 1
-codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Plugin).app" || exit 1
-codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Renderer).app" || exit 1
-
-#if [[ ${AG_STANDALONE} == "true" ]]; then
-  codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
-  codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework/Versions/A/Resources/ShipIt" || exit 1
-  codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework" || exit 1
-  codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "$APP_PATH/Contents/MacOS/AdGuard for Safari" || exit 1
-#fi
-
-echo "Step 9: Archive the universal build"
-/usr/bin/ditto -c -k --keepParent "$APP_PATH" "$BUILD_DIR/AdGuard_Safari.app.zip"
+#echo "Step 8: Create the universal build"
+#cd ElectronMainApp
+#yarn make-universal-app
+#cd ..
+#
+#echo "Step 9: Archive the universal build"
+#/usr/bin/ditto -c -k --keepParent "$APP_PATH" "$BUILD_DIR/AdGuard_Safari.app.zip"
