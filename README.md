@@ -27,7 +27,7 @@
 <br />
 
 <p align="center">
-    <img src="https://cdn.adguard.com/public/Adguard/Blog/Safari_Ext_AppStore/Preferences_Filters.jpg" width="800" />
+    <img src="https://cdn.adguard.com/public/Adguard/Common/safari_filters.png?" width="800" />
 </p>
 
 <hr />
