@@ -120,7 +120,7 @@ fi
 
 #echo "Step 5: Archive the app"
 #zip the archive so that we could use it as a build artifact
-#/usr/bin/ditto -c -k --keepParent "$X64_APP_PATH" "$BUILD_DIR/AdGuard_Safari_x64.app.zip"
+/usr/bin/ditto -c -k --keepParent "$APP_PATH" "$BUILD_DIR/AdGuard_Safari.app.zip"
 #/usr/bin/ditto -c -k --keepParent "$ARM64_APP_PATH" "$BUILD_DIR/AdGuard_Safari_arm64.app.zip"
 
 echo "Step 6: Build version.txt"
