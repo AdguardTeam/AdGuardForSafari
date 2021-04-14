@@ -41,11 +41,22 @@ X64_APP_NAME="AdGuard for Safari x64.app"
 X64_ARCHIVE_APP_PATH="$X64_ARCHIVE_PATH/Products/Applications/$APP_NAME"
 X64_APP_PATH="$BUILD_DIR/$X64_APP_NAME"
 
+#ARCHIVE_NAME="AdGuard_Safari.xcarchive"
+#ARCHIVE_PATH="$BUILD_DIR/$ARCHIVE_NAME"
+#ARCHIVE_APP_PATH="$X64_ARCHIVE_PATH/Products/Applications/$APP_NAME"
+APP_PATH="$BUILD_DIR/$APP_NAME"
+
 ARM64_ARCHIVE_NAME="AdGuard_Safari_arm64.xcarchive"
 ARM64_ARCHIVE_PATH="$BUILD_DIR/$ARM64_ARCHIVE_NAME"
 ARM64_APP_NAME="AdGuard for Safari arm64.app"
 ARM64_ARCHIVE_APP_PATH="$ARM64_ARCHIVE_PATH/Products/Applications/$APP_NAME"
 ARM64_APP_PATH="$BUILD_DIR/$ARM64_APP_NAME"
+
+AG_ELECTRON_CHILD_ENT="AdGuard/AdGuard/ElectronChild.entitlements"
+FRAMEWORKS="$APP_PATH/Contents/Frameworks/"
+PRODUCT_NAME="AdGuard for Safari"
+AG_APP_ENT="AdGuard/AdGuard/AdGuard.entitlements"
+SRC="AdGuard/../ElectronMainApp"
 
 SCHEME="AdGuard"
 APP_BUNDLE_ID="com.adguard.safari.AdGuard"
@@ -107,10 +118,10 @@ else
     python3 -u Scripts/notarize.py --path="../$ARM64_APP_PATH" --bundle-id="$APP_BUNDLE_ID"
 fi
 
-echo "Step 5: Archive the app"
+#echo "Step 5: Archive the app"
 #zip the archive so that we could use it as a build artifact
-/usr/bin/ditto -c -k --keepParent "$X64_APP_PATH" "$BUILD_DIR/AdGuard_Safari_x64.app.zip"
-/usr/bin/ditto -c -k --keepParent "$ARM64_APP_PATH" "$BUILD_DIR/AdGuard_Safari_arm64.app.zip"
+#/usr/bin/ditto -c -k --keepParent "$X64_APP_PATH" "$BUILD_DIR/AdGuard_Safari_x64.app.zip"
+#/usr/bin/ditto -c -k --keepParent "$ARM64_APP_PATH" "$BUILD_DIR/AdGuard_Safari_arm64.app.zip"
 
 echo "Step 6: Build version.txt"
 printf "version=$version\nbuild_number=$build_number\nchannel=$CHANNEL\n" >$BUILD_DIR/$VERSION_FILE
@@ -137,6 +148,24 @@ python3 -u Scripts/update_version.py --path="../$BUILD_DIR/updates.json" --chann
 echo "Step 8: Create the universal build"
 cd ElectronMainApp
 yarn make-universal-app
+cd ..
+
+electron-osx-sign "${APP}" --platform=mas --timestamp="" --type=distribution --hardened-runtime --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_APP_ENT}" || exit 1
+
+codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Electron Framework" || exit 1
+codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib" || exit 1
+codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
+codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper.app" || exit 1
+codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (GPU).app" || exit 1
+codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Plugin).app" || exit 1
+codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Renderer).app" || exit 1
+
+#if [[ ${AG_STANDALONE} == "true" ]]; then
+  codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
+  codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework/Versions/A/Resources/ShipIt" || exit 1
+  codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework" || exit 1
+  codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "$APP_PATH/Contents/MacOS/AdGuard for Safari" || exit 1
+#fi
 
 echo "Step 9: Archive the universal build"
-/usr/bin/ditto -c -k --keepParent "$BUILD_DIR/$APP_NAME" "$BUILD_DIR/AdGuard_Safari.app.zip"
+/usr/bin/ditto -c -k --keepParent "$APP_PATH" "$BUILD_DIR/AdGuard_Safari.app.zip"
