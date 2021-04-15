@@ -14,7 +14,7 @@ cd ../ElectronMainApp
 yarn make-universal-app "$TARGET_TEMP_DIR"
 
 APP_NAME="AdGuard for Safari.app"
-rm -Rf "$BUILT_PRODUCTS_DIR/$APP_NAME"
-cp -HRfp "$TARGET_TEMP_DIR/$APP_NAME" "$BUILT_PRODUCTS_DIR/$APP_NAME"
+cp -HRfp "$TARGET_TEMP_DIR/$APP_NAME" "$BUILT_PRODUCTS_DIR"
+
 
 cd ../AdGuard

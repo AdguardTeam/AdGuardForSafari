@@ -4,11 +4,15 @@ const fs = require('fs');
 
 const { log } = console;
 
-const BUILD_FOLDER = path.resolve(__dirname, '../../build');
+const targetDir = process.argv.slice(2)[0];
+if (!targetDir) {
+    throw new Error('No target directory');
+}
+const APP_NAME = 'AdGuard for Safari.app';
 
-const X64_APP_PATH = `${BUILD_FOLDER}/AdGuard for Safari x64.app`;
-const ARM64_APP_PATH = `${BUILD_FOLDER}/AdGuard for Safari arm64.app`;
-const OUTPUT_APP_PATH = `${BUILD_FOLDER}/AdGuard for Safari.app`;
+const X64_APP_PATH = path.resolve(targetDir, 'x86_64', 'AdGuard for Safari-darwin-x64', APP_NAME);
+const ARM64_APP_PATH = path.resolve(targetDir, 'arm64', 'AdGuard for Safari-darwin-arm64', APP_NAME);
+const OUTPUT_APP_PATH = path.resolve(targetDir, APP_NAME);
 
 (async () => {
     if (!fs.existsSync(X64_APP_PATH) || !fs.existsSync(ARM64_APP_PATH)) {
