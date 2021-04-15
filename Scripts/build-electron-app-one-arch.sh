@@ -133,8 +133,8 @@ if [[ ${ACTION} == "install" ]]; then
   mkdir -p "${DST_DIR}"
 fi
 
-#rm -Rfv "${DST_DIR}/${PRODUCT_NAME}.app"
-#cp -HRfp "${APP}" "${DST_DIR}" || exit 1
+rm -Rfv "${DST_DIR}/${PRODUCT_NAME}.app"
+cp -HRfp "${APP}" "${DST_DIR}" || exit 1
 
 #  Touch native part of the project
 touch -c "${SRCROOT}/Assets.xcassets"
