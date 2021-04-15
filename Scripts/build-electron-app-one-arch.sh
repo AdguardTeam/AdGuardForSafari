@@ -45,7 +45,7 @@ yarn install --force || exit 1
 
 # Copy converter binary
 mkdir -p ../libs
-cp node_modules/safari-converter-lib/bin/${ARCH}/ConverterTool ../libs
+cp node_modules/safari-converter-lib/bin/ConverterTool ../libs
 chmod +x ../libs/ConverterTool
 
 # Extract Electron version
@@ -66,10 +66,10 @@ if [[ ${CONFIGURATION} == "Release" ]]; then
     codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
 
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
-    --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${TARGET_TEMP_DIR}" \
+    --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${2}" \
     ${OPT} || exit 1
 
-    APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
+    APP="${2}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
     FRAMEWORKS="${APP}/Contents/Frameworks"
 
     # electron-packager produces additional login helper, that we don't need
@@ -98,10 +98,10 @@ else
     fi
 
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
-    --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${TARGET_TEMP_DIR}" --osx-sign=false \
+    --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${2}" \
     ${OPT} || exit 1
 
-    APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-${PACKAGER_PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
+    APP="${2}/${PRODUCT_NAME}-${PACKAGER_PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
     FRAMEWORKS="${APP}/Contents/Frameworks"
     RESOURCES="${APP}/Contents/Resources"
 
@@ -133,8 +133,8 @@ if [[ ${ACTION} == "install" ]]; then
   mkdir -p "${DST_DIR}"
 fi
 
-rm -Rfv "${DST_DIR}/${PRODUCT_NAME}.app"
-cp -HRfp "${APP}" "${DST_DIR}" || exit 1
+#rm -Rfv "${DST_DIR}/${PRODUCT_NAME}.app"
+#cp -HRfp "${APP}" "${DST_DIR}" || exit 1
 
 #  Touch native part of the project
 touch -c "${SRCROOT}/Assets.xcassets"
