@@ -66,7 +66,7 @@ yarn install --cwd "${BUILD_DIR}/../AdGuardResources"
 # build for x64 and arm64
 rm -Rf "$ARCHIVE_PATH"
 xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" clean
-xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -arch x86_64 -arch arm64 -archivePath "$ARCHIVE_PATH"
+xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -arch x86_64 -arch arm64 -archivePath "$ARCHIVE_PATH" CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" CODE_SIGN_ENTITLEMENTS=""
 
 # zip the archives so that we could use them as a build artifacts
 zip -9 -r "$BUILD_DIR/AdGuard_Safari.xcarchive.zip" $ARCHIVE_PATH
