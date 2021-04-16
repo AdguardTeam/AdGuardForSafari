@@ -68,7 +68,7 @@ static void AsyncSendHandler(uv_async_t *handle) {
   uv_close((uv_handle_t *)handle, DeleteAsyncHandle);
 }
 
-NAN_METHOD(setWhitelistDomains) {
+NAN_METHOD(setAllowlistDomains) {
 
     if (info.Length() < 2) {
         ThrowTypeError("Wrong number of arguments");
@@ -104,7 +104,7 @@ NAN_METHOD(setWhitelistDomains) {
     DDLogCDebug(@"List of domains count: %lu", domains.count);
     DDLogCDebug(@"List of domains:\n%@", domains);
 
-    [AESharedResources setWhitelistDomains:domains completion:^{
+    [AESharedResources setAllowlistDomains:domains completion:^{
       DDLogCDebug(@"Domains saved");
 
       auto *info = new CallbackInfo();
@@ -369,7 +369,7 @@ NAN_METHOD(userFilter) {
     }];
 }
 
-NAN_METHOD(whitelistDomains) {
+NAN_METHOD(allowlistDomains) {
 
     if (info.Length() < 1) {
         ThrowTypeError("Wrong number of arguments");
@@ -383,7 +383,7 @@ NAN_METHOD(whitelistDomains) {
 
     Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
 
-    [AESharedResources whitelistDomainsWithCompletion:^(NSArray <NSString *> *domains){
+    [AESharedResources allowlistDomainsWithCompletion:^(NSArray <NSString *> *domains){
 
         dispatch_sync(dispatch_get_main_queue(), ^{
             Nan::HandleScope scope;
@@ -572,7 +572,7 @@ NAN_METHOD(setOnProtectionEnabled) {
   }];
 }
 
-NAN_METHOD(setOnWhitelist) {
+NAN_METHOD(setOnAllowlist) {
 
   static Nan::Callback *cb = nullptr;
 
@@ -591,7 +591,7 @@ NAN_METHOD(setOnWhitelist) {
   }
   cb = new Nan::Callback(info[0].As<Function>());
 
-  [AESharedResources setListenerOnWhitelistChanged:^{
+  [AESharedResources setListenerOnAllowlistChanged:^{
       dispatch_async(dispatch_get_main_queue(), ^{
           Nan::HandleScope scope;
 
@@ -786,8 +786,8 @@ NAN_MODULE_INIT(Init) {
   Nan::Set(target, New<String>("setAdvancedBlockingJson").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setAdvancedBlockingJson)).ToLocalChecked());
 
-  Nan::Set(target, New<String>("setWhitelistDomains").ToLocalChecked(),
-  GetFunction(New<FunctionTemplate>(setWhitelistDomains)).ToLocalChecked());
+  Nan::Set(target, New<String>("setAllowlistDomains").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setAllowlistDomains)).ToLocalChecked());
 
   Nan::Set(target, New<String>("setUserFilter").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setUserFilter)).ToLocalChecked());
@@ -795,8 +795,8 @@ NAN_MODULE_INIT(Init) {
   Nan::Set(target, New<String>("userFilter").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(userFilter)).ToLocalChecked());
 
-  Nan::Set(target, New<String>("whitelistDomains").ToLocalChecked(),
-  GetFunction(New<FunctionTemplate>(whitelistDomains)).ToLocalChecked());
+  Nan::Set(target, New<String>("allowlistDomains").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(allowlistDomains)).ToLocalChecked());
 
   Nan::Set(target, New<String>("getExtensionContentBlockerState").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(getExtensionContentBlockerState)).ToLocalChecked());
@@ -813,8 +813,8 @@ NAN_MODULE_INIT(Init) {
   Nan::Set(target, New<String>("setOnProtectionEnabled").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setOnProtectionEnabled)).ToLocalChecked());
 
-  Nan::Set(target, New<String>("setOnWhitelist").ToLocalChecked(),
-  GetFunction(New<FunctionTemplate>(setOnWhitelist)).ToLocalChecked());
+  Nan::Set(target, New<String>("setOnAllowlist").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setOnAllowlist)).ToLocalChecked());
 
   Nan::Set(target, New<String>("setOnUserFilter").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setOnUserFilter)).ToLocalChecked());

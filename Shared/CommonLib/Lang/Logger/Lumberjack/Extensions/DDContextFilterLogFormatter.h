@@ -23,7 +23,7 @@
 #import "DDLog.h"
 
 /**
- * This class provides a log formatter that filters log statements from a logging context not on the whitelist.
+ * This class provides a log formatter that filters log statements from a logging context not on the allowlist.
  *
  * A log formatter can be added to any logger to format and/or filter its output.
  * You can learn more about log formatters here:
@@ -41,7 +41,7 @@
  * For example, logically separate parts of your app each have a different logging context.
  * Also 3rd party frameworks that make use of Lumberjack generally use their own dedicated logging context.
  **/
-@interface DDContextWhitelistFilterLogFormatter : NSObject <DDLogFormatter>
+@interface DDContextAllowlistFilterLogFormatter : NSObject <DDLogFormatter>
 
 /**
  *  Designated default initializer
@@ -49,30 +49,30 @@
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
- *  Add a context to the whitelist
+ *  Add a context to the allowlist
  *
  *  @param loggingContext the context
  */
-- (void)addToWhitelist:(NSInteger)loggingContext;
+- (void)addToAllowlist:(NSInteger)loggingContext;
 
 /**
- *  Remove context from whitelist
+ *  Remove context from allowlist
  *
  *  @param loggingContext the context
  */
-- (void)removeFromWhitelist:(NSInteger)loggingContext;
+- (void)removeFromAllowlist:(NSInteger)loggingContext;
 
 /**
- *  Return the whitelist
+ *  Return the allowlist
  */
-@property (readonly, copy) NSArray<NSNumber *> *whitelist;
+@property (readonly, copy) NSArray<NSNumber *> *allowlist;
 
 /**
- *  Check if a context is on the whitelist
+ *  Check if a context is on the allowlist
  *
  *  @param loggingContext the context
  */
-- (BOOL)isOnWhitelist:(NSInteger)loggingContext;
+- (BOOL)isOnAllowlist:(NSInteger)loggingContext;
 
 @end
 

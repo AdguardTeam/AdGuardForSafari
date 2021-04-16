@@ -25,9 +25,9 @@ static BOOL _mainAppReady;
         _onReadyBlocks = [NSMutableArray new];
         _mainAppReady = NO;
         [AESharedResources initLogger];
-        
+
         DDLogInfo(@"AG: Initialize SafariExtensionHandler");
-        
+
         [AESharedResources setListenerOnBusyChanged:^{
             DDLogDebugTrace();
             [SafariExtensionViewController.sharedController setEnabledButton]; //this call peforms tuning all views
@@ -77,7 +77,7 @@ static BOOL _mainAppReady;
             [page dispatchMessageToScriptWithName:@"blockElement" userInfo:NULL];
             if (@available(macOS 10.14.4, *)) {
                 [SafariExtensionViewController.sharedController dismissPopover];
-            } 
+            }
         }
         else if ([messageName isEqualToString:@"ruleResponse"]) {
             DDLogInfo(@"AG: Adding rule to user filter: %@", userInfo[@"rule"]);
@@ -120,9 +120,9 @@ static BOOL _mainAppReady;
                     if (properties) {
                         SafariExtensionViewController.sharedController.currentPageUrl = [properties.url copy];
                         if (toolbarItemOn) {
-                            [AESharedResources whitelistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
+                            [AESharedResources allowlistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                    DDLogDebug(@"Whitelist domains:\n%@", domains);
+                                    DDLogDebug(@"Allowlist domains:\n%@", domains);
                                     [toolbarItem setImage:([SafariExtensionViewController.sharedController domainCheckWithDomains:domains] ?
                                                            [NSImage imageNamed:@"toolbar-off"] :
                                                            [NSImage imageNamed:@"toolbar-on"])];

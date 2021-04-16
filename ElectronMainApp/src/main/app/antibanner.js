@@ -10,7 +10,7 @@ const collections = require('./utils/collections');
 const updateService = require('./update-service');
 const filtersUpdate = require('./filters/filters-update');
 const filterRules = require('./filters/filter-rules');
-const whitelist = require('./whitelist');
+const allowlist = require('./allowlist');
 const userrules = require('./userrules');
 
 /**
@@ -25,8 +25,8 @@ module.exports = (() => {
     let requestFilterInitTime = 0;
 
     let userRulesNum = 0;
-    const whitelisted = whitelist.getWhiteListDomains();
-    const whitelistedNum = whitelisted[0] ? whitelisted.length : 0;
+    const allowlisted = allowlist.getAllowlistDomains();
+    const allowlistedNum = allowlisted[0] ? allowlisted.length : 0;
 
     userrules.getUserRulesText((rulesText) => {
         if (rulesText) {
@@ -42,7 +42,7 @@ module.exports = (() => {
         rulesOverLimit: false,
         advancedBlockingRulesCount: 0,
         userRulesNum,
-        whitelistedNum,
+        allowlistedNum,
     };
 
     /**

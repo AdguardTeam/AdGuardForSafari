@@ -49,7 +49,7 @@ module.exports = (() => {
         // Subscribe to events which lead to content blocker update
         listeners.addListener(async (event) => {
             if (event === events.REQUEST_FILTER_UPDATED
-                || event === events.UPDATE_WHITELIST_FILTER_RULES) {
+                || event === events.UPDATE_ALLOWLIST_FILTER_RULES) {
                 await reloadContentBlockers();
             }
         });

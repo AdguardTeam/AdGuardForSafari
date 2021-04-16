@@ -227,22 +227,22 @@
     "options_filters_check_filters_update": {
         "message": "Alle Filter aktualisieren"
     },
-    "options_whitelist": {
+    "options_allowlist": {
         "message": "Positivliste"
     },
-    "options_whitelist_description": {
+    "options_allowlist_description": {
         "message": "AdGuard filtert keine Webseiten, die in der Positivliste enthalten sind."
     },
-    "options_whitelist_inverted": {
+    "options_allowlist_inverted": {
         "message": " (Invertiert)"
     },
-    "options_whitelist_info_single": {
+    "options_allowlist_info_single": {
         "message": "%s Domain"
     },
-    "options_whitelist_info_multi": {
+    "options_allowlist_info_multi": {
         "message": "%s Domänen"
     },
-    "options_whitelist_inverse": {
+    "options_allowlist_inverse": {
         "message": "Positivliste invertieren<span class='sp-table-row-info'>Werbung überall anzeigen, <i>außer auf Webseiten</i> die in der Positivliste enthalten sind</span>"
     },
     "options_userfilter": {

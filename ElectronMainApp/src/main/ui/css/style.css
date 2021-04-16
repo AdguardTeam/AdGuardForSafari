@@ -387,14 +387,14 @@ a.settings-actions--update-filters.loading:after {
 #groupsList li[id^="filter"] {
   padding: 20px 15px;
 }
-#whitelist .opts-list li:hover:after,
+#allowlist .opts-list li:hover:after,
 #userfilter .opts-list li:hover:after{
   display: none;
 }
-#whitelist .opts-list .opt-state {
+#allowlist .opts-list .opt-state {
   height: 20px;
 }
-#whitelist .opts-list .opts-desc {
+#allowlist .opts-list .opts-desc {
   padding-left: 0;
 }
 .warn-message {
@@ -674,7 +674,7 @@ a.settings-actions--update-filters.loading:after {
   display: flex;
   margin-left: 18px;
 }
-.whitelist-subtitle,
+.allowlist-subtitle,
 .userfilter-subtitle,
 .content-blockers-subtitle {
   margin-bottom: 5px;

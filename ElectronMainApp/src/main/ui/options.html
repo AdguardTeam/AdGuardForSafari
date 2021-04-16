@@ -258,15 +258,15 @@
                             </div>
                         </li>
                         <li id="category-allowlist" class="active">
-                            <a href="#" data-tab="#whitelist" class="block-type filter-group">
+                            <a href="#" data-tab="#allowlist" class="block-type filter-group">
                                 <div class="block-type__desc">
-                                    <div class="block-type__desc-title" i18n="options_whitelist"></div>
+                                    <div class="block-type__desc-title" i18n="options_allowlist"></div>
                                     <div class="desc desc--filters allowlist-info"></div>
                                 </div>
                             </a>
                             <div class="opt-state combo-opt">
                                 <div class="preloader"></div>
-                                <input type="checkbox" name="whitelist" id="allowlistInput">
+                                <input type="checkbox" name="allowlist" id="allowlistInput">
                             </div>
                         </li>
                     </ul>
@@ -392,33 +392,33 @@
             </div>
         </div>
 
-        <div id="whitelist" class="settings-content tab-pane">
+        <div id="allowlist" class="settings-content tab-pane">
             <div class="settings-content">
                 <div class="settings-subtitle">
                     <a class="back-btn" href="#antibanner"></a>
                     <div>
-                        <div class="subtitle settings-body-subtitle whitelist-subtitle" i18n="options_whitelist"></div>
-                        <div class="setting-desc" i18n="options_whitelist_description"></div>
+                        <div class="subtitle settings-body-subtitle allowlist-subtitle" i18n="options_allowlist"></div>
+                        <div class="setting-desc" i18n="options_allowlist_description"></div>
                     </div>
                 </div>
                 <div class="settings-body">
                     <div class="filter-rules">
-                        <div id="whiteListRules" class="user-rules"></div>
+                        <div id="allowlistRules" class="user-rules"></div>
                     </div>
                     <ul class="opts-list">
                         <li class="opts-list__item">
                             <div class="opts-desc">
-                                <div class="opt-name" i18n="options_whitelist_inverse"></div>
+                                <div class="opt-name" i18n="options_allowlist_inverse"></div>
                                 <div class="opt-state"></div>
                             </div>
                             <div class="opt-state input">
-                                <input type="checkbox" class="sp-table-row-input" id="changeDefaultWhiteListMode"/>
+                                <input type="checkbox" class="sp-table-row-input" id="changeDefaultAllowlistMode"/>
                             </div>
                         </li>
                     </ul>
                 </div>
                 <div class="settings-actions settings-actions--saved">
-                    <div class="filter-rules__label" id="whiteListRulesSaveIndicator"></div>
+                    <div class="filter-rules__label" id="allowlistRulesSaveIndicator"></div>
                     <div class="settings-actions__action-buttons">
                         <div class="filter-rules__import-export">
                             <input type="file" id="importAllowlistInput" style="display: none;" accept=".txt, text/plain"/>
@@ -426,7 +426,7 @@
                             <a id="allowlistExport" href="#" i18n="options_userfilter_export" class="button button--simple disabled"></a>
                         </div>
                         <div class="settings-actions__save-button">
-                            <a class="button button--green button--m settings-content__save-btn" id="whiteListFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
+                            <a class="button button--green button--m settings-content__save-btn" id="allowlistFilterApplyChanges" href="#" i18n="options_editor_save_button"></a>
                         </div>
                     </div>
                 </div>
