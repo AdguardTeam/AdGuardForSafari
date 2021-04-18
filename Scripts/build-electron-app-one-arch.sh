@@ -105,6 +105,13 @@ else
     FRAMEWORKS="${APP}/Contents/Frameworks"
     RESOURCES="${APP}/Contents/Resources"
 
+    # Remove redundant signatures
+    rm -Rfv "$FRAMEWORKS/Electron Framework.framework/Versions/A/_CodeSignature/CodeResources"
+    rm -Rfv "$FRAMEWORKS/Mantle.framework/Versions/A/_CodeSignature/CodeResources"
+    rm -Rfv "$FRAMEWORKS/ReactiveObjC.framework/Versions/A/_CodeSignature/CodeResources"
+    rm -Rfv "$FRAMEWORKS/Squirrel.framework/Versions/A/_CodeSignature/CodeResources"
+    rm -Rfv "$FRAMEWORKS/../_CodeSignature/CodeResources"
+
 #    echo "Signing build"
 #    # Sign electron app
 #    electron-osx-sign "${APP}" --platform=${PLATFORM} --timestamp="" --type=distribution --hardened-runtime --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_APP_ENT}" || exit 1
@@ -133,8 +140,8 @@ if [[ ${ACTION} == "install" ]]; then
   mkdir -p "${DST_DIR}"
 fi
 
-rm -Rfv "${DST_DIR}/${PRODUCT_NAME}.app"
-cp -HRfp "${APP}" "${DST_DIR}" || exit 1
+#rm -Rfv "${DST_DIR}/${PRODUCT_NAME}.app"
+#cp -HRfp "${APP}" "${DST_DIR}" || exit 1
 
 #  Touch native part of the project
 touch -c "${SRCROOT}/Assets.xcassets"
