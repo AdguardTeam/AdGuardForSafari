@@ -2,7 +2,7 @@
 version: 2
 plan:
   project-key: AGSAFARI
-  key: IV
+  key: IVSPECS
   name: Increment version
 variables:
   dockerNode: node:15.14.0-buster-slim
@@ -24,7 +24,7 @@ Increment:
       ${system.YARN_DIR}: "${bamboo.cacheYarn}"
   tasks:
     - checkout:
-        force-clean-build: 'false'
+        force-clean-build: 'true'
     - script:
         interpreter: SHELL
         scripts:

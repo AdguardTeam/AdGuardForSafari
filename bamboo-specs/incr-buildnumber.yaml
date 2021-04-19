@@ -17,7 +17,7 @@ Increment:
     clean-working-dir: true
   tasks:
     - checkout:
-        force-clean-build: 'false'
+        force-clean-build: 'true'
     - script:
         interpreter: SHELL
         scripts:
