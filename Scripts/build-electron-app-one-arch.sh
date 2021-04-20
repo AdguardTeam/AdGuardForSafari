@@ -97,7 +97,7 @@ else
       PACKAGER_PLATFORM="darwin"
     fi
 
-    OPT="--asar.unpack=**/config/default.json"
+    #OPT="--asar.unpack=**/config/default.json"
 
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
     --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${2}" --nosign --osx-sign=false --osx-sign.identity=null \

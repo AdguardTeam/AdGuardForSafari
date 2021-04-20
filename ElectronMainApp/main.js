@@ -13,6 +13,7 @@ const log = require('./src/main/app/utils/log');
 
 /* Reconfigure path to config */
 process.env['NODE_CONFIG_DIR'] = appPack.resourcePath('/config/');
+// process.env['NODE_CONFIG_DIR'] = "/Applications/AdGuard for Safari.app/Contents/Resources/app-x64.asar/config/";
 
 /* global require, process */
 
@@ -142,7 +143,7 @@ function loadMainWindow(onWindowLoaded) {
     if (!mainWindow) {
         mainWindow = createWindow();
     }
-    mainWindow.loadFile('./src/main/ui/options.html');
+    mainWindow.loadFile('../app-x64.asar/src/main/ui/options.html');
 
     // reloads page to update color theme if OS color theme has been changed
     nativeTheme.on('updated', function theThemeHasChanged () {
@@ -204,7 +205,7 @@ function loadMainWindow(onWindowLoaded) {
  */
 function loadSplashScreenWindow(onWindowLoaded) {
     mainWindow = createWindow();
-    mainWindow.loadFile('./src/main/ui/loading.html');
+    mainWindow.loadFile('../app-x64.asar/src/main/ui/loading.html');
 
     if (onWindowLoaded) {
         const onDidFinishLoad = () => {
