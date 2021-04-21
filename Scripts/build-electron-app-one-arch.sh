@@ -98,21 +98,15 @@ else
     fi
 
     #OPT="--asar.unpack=**/config/default.json"
+    OPT="--asar.unpack=*.node"
 
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
-    --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${2}" --nosign --osx-sign=false --osx-sign.identity=null \
+    --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${2}" --osx-sign=false \
     ${OPT} || exit 1
 
     APP="${2}/${PRODUCT_NAME}-${PACKAGER_PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
     FRAMEWORKS="${APP}/Contents/Frameworks"
     RESOURCES="${APP}/Contents/Resources"
-
-    # Remove redundant signatures
-    rm -Rfv "$FRAMEWORKS/Electron Framework.framework/Versions/A/_CodeSignature/CodeResources"
-    rm -Rfv "$FRAMEWORKS/Mantle.framework/Versions/A/_CodeSignature/CodeResources"
-    rm -Rfv "$FRAMEWORKS/ReactiveObjC.framework/Versions/A/_CodeSignature/CodeResources"
-    rm -Rfv "$FRAMEWORKS/Squirrel.framework/Versions/A/_CodeSignature/CodeResources"
-    rm -Rfv "$FRAMEWORKS/../_CodeSignature/CodeResources"
 
 #    echo "Signing build"
 #    # Sign electron app
@@ -134,6 +128,13 @@ else
 #    fi
 
 fi
+
+# Remove redundant signatures
+    rm -Rfv "$FRAMEWORKS/Electron Framework.framework/Versions/A/_CodeSignature/CodeResources"
+    rm -Rfv "$FRAMEWORKS/Mantle.framework/Versions/A/_CodeSignature/CodeResources"
+    rm -Rfv "$FRAMEWORKS/ReactiveObjC.framework/Versions/A/_CodeSignature/CodeResources"
+    rm -Rfv "$FRAMEWORKS/Squirrel.framework/Versions/A/_CodeSignature/CodeResources"
+    rm -Rfv "$FRAMEWORKS/../_CodeSignature/CodeResources"
 
 # Move products
 DST_DIR="${BUILT_PRODUCTS_DIR}"
