@@ -1,0 +1,8 @@
+#include "./Config.xcconfig"
+
+AG_STANDALONE = true
+AG_STANDALONE_BETA = true
+
+AG_APP_ENT = ${SRCROOT}/AdGuard/standalone/AdGuard.entitlements
+AG_ELECTRON_CHILD_ENT = ${SRCROOT}/AdGuard/standalone/ElectronChild.entitlements
+AG_ELECTRON_LOGINHELPER_ENT = ${SRCROOT}/AdGuard/standalone/ElectronLoginItem.entitlements

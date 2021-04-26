@@ -1,5 +1,4 @@
 /* eslint-disable object-shorthand */
-// const addon = require('bindings')('safari_ext_addon');
 const bindings = require('bindings');
 
 /**
@@ -11,6 +10,8 @@ const bindings = require('bindings');
  */
 module.exports = (() => {
     let moduleRoot = bindings.getRoot(bindings.getFileName());
+    // universal build contains two `safari-ext` modules: for x64 and arm64
+    // fix path according to the current architecture
     if (process.arch === 'arm64') {
         moduleRoot = moduleRoot.replace('app.asar', 'app-arm64.asar.unpacked');
     } else {
