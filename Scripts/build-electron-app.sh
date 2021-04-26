@@ -23,4 +23,9 @@ APP_NAME="AdGuard for Safari.app"
 rm -Rfv "${DST_DIR}/${APP_NAME}"
 cp -HRfp "${TARGET_TEMP_DIR}/${APP_NAME}" "${DST_DIR}"
 
+rm "${DST_DIR}/${APP_NAME}/Contents/Resources/app.asar"
+rm "${DST_DIR}/${APP_NAME}/Contents/Resources/app-arm64.asar"
+
+mv "${DST_DIR}/${APP_NAME}/Contents/Resources/app-x64.asar" "${DST_DIR}/${APP_NAME}/Contents/Resources/app.asar"
+
 cd ../AdGuard

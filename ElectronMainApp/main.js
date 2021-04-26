@@ -143,7 +143,7 @@ function loadMainWindow(onWindowLoaded) {
     if (!mainWindow) {
         mainWindow = createWindow();
     }
-    mainWindow.loadFile('../app-x64.asar/src/main/ui/options.html');
+    mainWindow.loadFile('./src/main/ui/options.html');
 
     // reloads page to update color theme if OS color theme has been changed
     nativeTheme.on('updated', function theThemeHasChanged () {

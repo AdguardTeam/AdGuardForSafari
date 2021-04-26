@@ -1,5 +1,6 @@
 /* eslint-disable object-shorthand */
-const addon = require('bindings')('safari_ext_addon');
+// const addon = require('bindings')('safari_ext_addon');
+const bindings = require('bindings');
 
 /**
  * Addon toolbar api
@@ -9,6 +10,17 @@ const addon = require('bindings')('safari_ext_addon');
  * Like begin/end transaction.
  */
 module.exports = (() => {
+    let moduleRoot = bindings.getRoot(bindings.getFileName());
+    if (process.arch === 'arm64') {
+        moduleRoot = moduleRoot.replace('app.asar', 'app-arm64.asar.unpacked');
+    } else {
+        moduleRoot = moduleRoot.replace('app.asar', 'app-x64.asar.unpacked');
+    }
+    const addon = bindings({
+        bindings: 'safari_ext_addon',
+        module_root: moduleRoot,
+    });
+
     const ADVANCED_BLOCKING_BUNDLE_ID = 'com.adguard.safari.AdGuard.AdvancedBlocking';
     const ICON_EXTENSION_BUNDLE_ID = 'com.adguard.safari.AdGuard.Extension';
 
