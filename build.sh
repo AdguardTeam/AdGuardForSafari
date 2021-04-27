@@ -32,7 +32,6 @@ echo "Building AdGuard, update channel $CHANNEL"
 #
 
 WORKSPACE="AdGuard.xcworkspace"
-#CODE_SIGN_IDENTITY="Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)"
 APP_NAME="AdGuard for Safari.app"
 APP_ARCHIVE_NAME="AdGuard_Safari.app.zip"
 APP_BETA_ARCHIVE_NAME="AdGuard_Safari_Beta.app.zip"

@@ -34,9 +34,7 @@ sed -i "" "s/AG_STANDALONE_BUILD/${AG_STANDALONE}/g" "${SRC}/package.json"
 sed -i "" "s/AG_BUILD_CONFIGURATION/${CONFIGURATION}/g" "${SRC}/package.json"
 
 # Rebuild electron app
-OPT=""
 cd "${SRC}"
-OPT="--asar"
 yarn install --force || exit 1
 
 # Copy converter binary
@@ -50,47 +48,31 @@ ELECTRON_VERSION=$(jq -r ".devDependencies.electron" ../ElectronMainApp/package.
 # Remove prefix "^"
 ELECTRON_VERSION=${ELECTRON_VERSION#"^"}
 
-ARCHS="--arch=x64 --arch=arm64"
-
 # Rebuild safari-ext and other node packages
 yarn electron-rebuild --arch=${ARCH} -v ${ELECTRON_VERSION}
 
+OPT="--asar.unpack=*.node"
+
+if [[ ${AG_STANDALONE} == "true" ]]; then
+  echo "Changing standalone build platform"
+  PLATFORM="darwin"
+fi
+
+# run electron-packager for both architectures to get similar asar files in universal build
+# to be able to get rid of redundant asar files later
+ARCHS="--arch=x64 --arch=arm64"
+electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
+${ARCHS} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${2}" --osx-sign=false \
+${OPT} || exit 1
+
+APP="${2}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
+FRAMEWORKS="${APP}/Contents/Frameworks"
+
 if [[ ${CONFIGURATION} == "Release" ]]; then
-    echo "Building release MAS version"
-
-    OPT="--asar.unpack=*.node"
-
-    # run electron-packager for both architectures to get similar asar files in universal build
-    # to be able to get rid of redundant asar files later
-    electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
-    ${ARCHS} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${2}" --osx-sign=false \
-    ${OPT} || exit 1
-
-    APP="${2}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
-    FRAMEWORKS="${APP}/Contents/Frameworks"
-
-    # electron-packager produces additional login helper, that we don't need
+    # electron-packager produces additional login helper for release version only,
+    # that we don't need, because we use our own.
     # https://github.com/AdguardTeam/AdGuardForSafari/issues/204
     rm -r "${APP}/Contents/Library/LoginItems/${PRODUCT_NAME} Login Helper.app" || exit 1
-
-else
-    OPT="--asar.unpack=*.node"
-
-    PACKAGER_PLATFORM="mas"
-    if [[ ${AG_STANDALONE} == "true" ]]; then
-      echo "Changing standalone build platform"
-      PACKAGER_PLATFORM="darwin"
-    fi
-
-    # run electron-packager for both architectures to get similar asar files in universal build
-    # to be able to get rid of redundant asar files later
-    electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
-    ${ARCHS} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${2}" --osx-sign=false \
-    ${OPT} || exit 1
-
-    APP="${2}/${PRODUCT_NAME}-${PACKAGER_PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
-    FRAMEWORKS="${APP}/Contents/Frameworks"
-    RESOURCES="${APP}/Contents/Resources"
 fi
 
 # Remove redundant signatures which fail a universal build bundling,
