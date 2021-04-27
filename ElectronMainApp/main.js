@@ -13,7 +13,6 @@ const log = require('./src/main/app/utils/log');
 
 /* Reconfigure path to config */
 process.env['NODE_CONFIG_DIR'] = appPack.resourcePath('/config/');
-// process.env['NODE_CONFIG_DIR'] = "/Applications/AdGuard for Safari.app/Contents/Resources/app-x64.asar/config/";
 
 /* global require, process */
 
@@ -205,7 +204,7 @@ function loadMainWindow(onWindowLoaded) {
  */
 function loadSplashScreenWindow(onWindowLoaded) {
     mainWindow = createWindow();
-    mainWindow.loadFile('../app-x64.asar/src/main/ui/loading.html');
+    mainWindow.loadFile('./src/main/ui/loading.html');
 
     if (onWindowLoaded) {
         const onDidFinishLoad = () => {
