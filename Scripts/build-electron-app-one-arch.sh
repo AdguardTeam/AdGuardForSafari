@@ -111,11 +111,6 @@ if [[ ${ACTION} == "install" ]]; then
   mkdir -p "${DST_DIR}"
 fi
 
-#  Touch native part of the project
-touch -c "${SRCROOT}/Assets.xcassets"
-touch -c "${SRCROOT}/AdGuard/Info.plist"
-touch -c "${SRCROOT}/defaults.plist"
-
 # Update package.json
 sed -i "" "s/\"standalone-build\": \"${AG_STANDALONE}\"/\"standalone-build\": \"AG_STANDALONE_BUILD\"/g" "${SRC}/package.json"
 sed -i "" "s/\"standalone-beta\": \"${AG_STANDALONE_BETA}\"/\"standalone-beta\": \"AG_STANDALONE_BETA\"/g" "${SRC}/package.json"
