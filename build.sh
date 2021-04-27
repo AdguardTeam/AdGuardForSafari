@@ -32,8 +32,10 @@ echo "Building AdGuard, update channel $CHANNEL"
 #
 
 WORKSPACE="AdGuard.xcworkspace"
-CODE_SIGN_IDENTITY="Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)"
+#CODE_SIGN_IDENTITY="Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)"
 APP_NAME="AdGuard for Safari.app"
+APP_ARCHIVE_NAME="AdGuard_Safari.app.zip"
+APP_BETA_ARCHIVE_NAME="AdGuard_Safari_Beta.app.zip"
 
 ARCHIVE_NAME="AdGuard_Safari.xcarchive"
 ARCHIVE_PATH="$BUILD_DIR/$ARCHIVE_NAME"
@@ -80,15 +82,6 @@ INFO_PLIST=${APP_PATH}/Contents/Info.plist
 build_number=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "$INFO_PLIST")
 version=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$INFO_PLIST")
 
-FRAMEWORKS="${APP_PATH}/Contents/Frameworks"
-RESOURCES="${APP_PATH}/Contents/Resources"
-
-SRCROOT="./AdGuard"
-AG_APP_ENT=${SRCROOT}/AdGuard/AdGuard.entitlements
-AG_ELECTRON_CHILD_ENT=${SRCROOT}/AdGuard/ElectronChild.entitlements
-PRODUCT_NAME="AdGuard for Safari"
-PLATFORM="mas"
-
 echo "Step 4: Notarizing the app"
 if [ "$NOTARIZE_DISABLED" == "--notarize=0" ]; then
     echo "Notarizing is disabled"
@@ -98,17 +91,17 @@ else
 fi
 
 echo "Step 5: Archive the app"
-#zip the archive so that we could use it as a build artifact
-/usr/bin/ditto -c -k --keepParent "$APP_PATH" "$BUILD_DIR/AdGuard_Safari.app.zip"
+# zip the archive so that we could use it as a build artifact
+/usr/bin/ditto -c -k --keepParent "$APP_PATH" "$BUILD_DIR/$APP_ARCHIVE_NAME"
 
 echo "Step 6: Build version.txt"
 printf "version=$version\nbuild_number=$build_number\nchannel=$CHANNEL\n" >$BUILD_DIR/$VERSION_FILE
 
 echo "Step 7: Build updates json files"
 # creates release.json and edits updates.json
-buildFileName="AdGuard_Safari_x64.app.zip"
+buildFileName=APP_ARCHIVE_NAME
 if [ "$CHANNEL" == "beta" ]; then
-    buildFileName="AdGuard_Safari_Beta.app.zip"
+    buildFileName=APP_BETA_ARCHIVE_NAME
 fi
 
 printf "{

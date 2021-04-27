@@ -93,7 +93,8 @@ else
     RESOURCES="${APP}/Contents/Resources"
 fi
 
-# Remove redundant signatures
+# Remove redundant signatures which fail a universal build bundling,
+# because all non-binary files must have identical SHAs when creating a universal build.
 rm -Rfv "$FRAMEWORKS/Electron Framework.framework/Versions/A/_CodeSignature/CodeResources"
 rm -Rfv "$FRAMEWORKS/Mantle.framework/Versions/A/_CodeSignature/CodeResources"
 rm -Rfv "$FRAMEWORKS/ReactiveObjC.framework/Versions/A/_CodeSignature/CodeResources"
