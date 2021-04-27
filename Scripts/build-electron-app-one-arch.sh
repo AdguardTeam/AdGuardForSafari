@@ -62,8 +62,6 @@ if [[ ${CONFIGURATION} == "Release" ]]; then
 
     OPT="--asar.unpack=*.node"
 
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
-
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
     --arch=x64 --arch=arm64  --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${2}" --osx-sign=false \
     ${OPT} || exit 1
@@ -77,7 +75,9 @@ if [[ ${CONFIGURATION} == "Release" ]]; then
 
 else
     OPT="--asar.unpack=*.node"
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
+    # run electron-packager for both architectures to get similar asar files in universal build
+    # to be able to get rid of redundant asar files later
+    ARCHS="--arch=x64 --arch=arm64"
 
     PACKAGER_PLATFORM="mas"
     if [[ ${AG_STANDALONE} == "true" ]]; then
@@ -86,7 +86,7 @@ else
     fi
 
     electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
-    --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${2}" --osx-sign=false \
+    ${ARCHS} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${2}" --osx-sign=false \
     ${OPT} || exit 1
 
     APP="${2}/${PRODUCT_NAME}-${PACKAGER_PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"

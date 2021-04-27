@@ -23,9 +23,12 @@ APP_NAME="AdGuard for Safari.app"
 rm -Rfv "${DST_DIR}/${APP_NAME}"
 cp -HRfp "${TARGET_TEMP_DIR}/${APP_NAME}" "${DST_DIR}"
 
+# Get rid of redundant asar files (need only one app.asar):
+# for the moment app.asar is path resolver for app-x64.asar and app-arm64.asar, that we don't need
 rm "${DST_DIR}/${APP_NAME}/Contents/Resources/app.asar"
+# we had run electron-packager for both architectures so asar files for x64 and arm64 are similar
+# and we can remove one of them and rename other one to app.asar
 rm "${DST_DIR}/${APP_NAME}/Contents/Resources/app-x64.asar"
-
 mv "${DST_DIR}/${APP_NAME}/Contents/Resources/app-arm64.asar" "${DST_DIR}/${APP_NAME}/Contents/Resources/app.asar"
 
 cd ../AdGuard
