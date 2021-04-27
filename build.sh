@@ -91,14 +91,6 @@ AG_ELECTRON_CHILD_ENT=${SRCROOT}/AdGuard/ElectronChild.entitlements
 PRODUCT_NAME="AdGuard for Safari"
 PLATFORM="mas"
 
-echo "%%%"
-echo "AG_APP_ENT: ${AG_APP_ENT}"
-echo "AG_ELECTRON_CHILD_ENT: ${AG_ELECTRON_CHILD_ENT}"
-echo "FRAMEWORKS: ${FRAMEWORKS}"
-echo "RESOURCES: ${RESOURCES}"
-echo "CODE_SIGN_IDENTITY: ${CODE_SIGN_IDENTITY}"
-echo "APP_PATH: ${APP_PATH}"
-
 echo "Step 4: Notarizing the app"
 if [ "$NOTARIZE_DISABLED" == "--notarize=0" ]; then
     echo "Notarizing is disabled"
