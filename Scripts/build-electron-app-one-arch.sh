@@ -68,7 +68,7 @@ ${OPT} || exit 1
 APP="${2}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
 FRAMEWORKS="${APP}/Contents/Frameworks"
 
-if [[ ${CONFIGURATION} == "Release" ]]; then
+if [[ ${PLATFORM} == "mas" ]]; then
     # electron-packager produces additional login helper for release version only,
     # that we don't need, because we use our own.
     # https://github.com/AdguardTeam/AdGuardForSafari/issues/204
