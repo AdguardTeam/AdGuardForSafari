@@ -47,8 +47,6 @@ VERSION_FILE="version.txt"
 CONFIGURATION_NAME="Release"
 if [ "$CHANNEL" == "beta" ]; then
     CONFIGURATION_NAME="Standalone Beta"
-#    X64_APP_NAME="AdGuard for Safari Beta.app"
-#    X64_APP_PATH="$BUILD_DIR/$X64_APP_NAME"
 fi
 
 if [ "$CHANNEL" == "release" ]; then
