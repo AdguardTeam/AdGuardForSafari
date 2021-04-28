@@ -49,7 +49,6 @@
 		65975C9621481540007F766E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65975C9321481540007F766E /* Assets.xcassets */; };
 		65975C9D2148266C007F766E /* toolbar-on.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 65975C9C2148266C007F766E /* toolbar-on.pdf */; };
 		65975CA021484E13007F766E /* GreenButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65975C9F21484E13007F766E /* GreenButtonCell.m */; };
-		65C8B03C2146635C00B2E7FD /* assistant.embedded.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C8B03B2146635B00B2E7FD /* assistant.embedded.js */; };
 		65C8B03E21467AF500B2E7FD /* assistant.runner.js in Resources */ = {isa = PBXBuildFile; fileRef = 65C8B03D21467AF500B2E7FD /* assistant.runner.js */; };
 		65D151842139771A0014BE79 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D151832139771A0014BE79 /* defaults.plist */; };
 		65D151852139771A0014BE79 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65D151832139771A0014BE79 /* defaults.plist */; };
@@ -388,7 +387,6 @@
 		6504C10F2136EA2D007E9674 /* PopupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopupView.m; sourceTree = "<group>"; };
 		651A4FAC232149E4002DAD0A /* AEMainAppServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEMainAppServices.h; sourceTree = "<group>"; };
 		651A4FAD232149E4002DAD0A /* AEMainAppServices.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AEMainAppServices.m; sourceTree = "<group>"; };
-		652169F721231AA100ABF7D0 /* build-electron-app.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "build-electron-app.sh"; sourceTree = "<group>"; };
 		65216A00212436E900ABF7D0 /* AdGuardForSafariExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdGuardForSafariExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		65216A02212436EA00ABF7D0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		65216A05212436EA00ABF7D0 /* SafariExtensionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SafariExtensionHandler.h; sourceTree = "<group>"; };
@@ -456,7 +454,6 @@
 		65C41D3422D8B0DF0001AFBA /* ElectronChild.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ElectronChild.entitlements; sourceTree = "<group>"; };
 		65C41D3522D8B0DF0001AFBA /* AdGuard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuard.entitlements; sourceTree = "<group>"; };
 		65C41D3622D8B0DF0001AFBA /* ElectronLoginItem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ElectronLoginItem.entitlements; sourceTree = "<group>"; };
-		65C8B03B2146635B00B2E7FD /* assistant.embedded.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = assistant.embedded.js; sourceTree = "<group>"; };
 		65C8B03D21467AF500B2E7FD /* assistant.runner.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = assistant.runner.js; sourceTree = "<group>"; };
 		65D151832139771A0014BE79 /* defaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
 		65D151892139A5080014BE79 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
@@ -874,7 +871,6 @@
 				6504C10A2136BF10007E9674 /* Info.plist */,
 				6582EED321834467007DC151 /* InfoPlist.strings */,
 				65975C9C2148266C007F766E /* toolbar-on.pdf */,
-				65C8B03B2146635B00B2E7FD /* assistant.embedded.js */,
 				65C8B03D21467AF500B2E7FD /* assistant.runner.js */,
 				65216A0F212436EA00ABF7D0 /* script.js */,
 				65216A13212436EA00ABF7D0 /* Extension.entitlements */,
@@ -962,7 +958,6 @@
 				F46D1321225E940B00282566 /* standalone.xcconfig */,
 				F46D132C225E946500282566 /* standalone-beta.xcconfig */,
 				65D151832139771A0014BE79 /* defaults.plist */,
-				652169F721231AA100ABF7D0 /* build-electron-app.sh */,
 				65975C9321481540007F766E /* Assets.xcassets */,
 				655C8628212AE6C200CB6DAE /* Shared */,
 				65720AB421219AC900B2381C /* AdGuard */,
@@ -1682,7 +1677,6 @@
 			files = (
 				65C8B03E21467AF500B2E7FD /* assistant.runner.js in Resources */,
 				6535D712213D4374004D8A08 /* Localizable.strings in Resources */,
-				65C8B03C2146635C00B2E7FD /* assistant.embedded.js in Resources */,
 				65975C9D2148266C007F766E /* toolbar-on.pdf in Resources */,
 				65216A0D212436EA00ABF7D0 /* SafariExtensionViewController.xib in Resources */,
 				65D151852139771A0014BE79 /* defaults.plist in Resources */,
