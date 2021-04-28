@@ -28,10 +28,6 @@ if [[ ${ACTION} == "clean" ]]; then
   exit 0
 fi
 
-mkdir -vp "${SRC}/safari-ext/shared"
-cp -v "${BUILT_PRODUCTS_DIR}/libshared.a" "${SRC}/safari-ext/shared/" || exit 1
-rsync -avm --include='*.h' -f 'hide,! */' "${SHAREDSRC}/" "${SRC}/safari-ext/shared/"
-
 # Update package.json
 sed -i "" "s/AG_STANDALONE_BETA/${AG_STANDALONE_BETA}/g" "${SRC}/package.json"
 sed -i "" "s/AG_STANDALONE_BUILD/${AG_STANDALONE}/g" "${SRC}/package.json"

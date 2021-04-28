@@ -1296,7 +1296,8 @@
 				652169FA21231D0400ABF7D0 /* Resources */,
 				65216A1A212436EA00ABF7D0 /* Embed App Extensions */,
 				651D5DA423673CFC0025C72C /* Copy Launch At Login Helper */,
-				6565F4842639AEB0008711C6 /* ShellScript */,
+				6565F4842639AEB0008711C6 /* Run Script For Repairing electron exec file */,
+				6565F49F2639E14E008711C6 /* Run Script for Signing  */,
 			);
 			buildRules = (
 			);
@@ -1776,7 +1777,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6565F4842639AEB0008711C6 /* ShellScript */ = {
+		6565F4842639AEB0008711C6 /* Run Script For Repairing electron exec file */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1785,13 +1786,32 @@
 			);
 			inputPaths = (
 			);
+			name = "Run Script For Repairing electron exec file";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nDST_DIR=\"${BUILT_PRODUCTS_DIR}\"\nif [[ ${ACTION} == \"install\" ]]; then \nDST_DIR=\"${INSTALL_ROOT}/Applications\"\nmkdir -p \"${DST_DIR}\"\nfi\nmv -f \"${DST_DIR}/${PRODUCT_NAME}.app/Contents/MacOS/${AG_HIDE_EXEC_PREFIX}${PRODUCT_NAME}\" \"${DST_DIR}/${PRODUCT_NAME}.app/Contents/MacOS/${PRODUCT_NAME}\" || exit 1\n\n\n\n\n";
+			shellScript = "DST_DIR=\"${BUILT_PRODUCTS_DIR}\"\nif [[ ${ACTION} == \"install\" ]]; then \nDST_DIR=\"${INSTALL_ROOT}/Applications\"\nmkdir -p \"${DST_DIR}\"\nfi\nmv -f \"${DST_DIR}/${PRODUCT_NAME}.app/Contents/MacOS/${AG_HIDE_EXEC_PREFIX}${PRODUCT_NAME}\" \"${DST_DIR}/${PRODUCT_NAME}.app/Contents/MacOS/${PRODUCT_NAME}\" || exit 1\n\n\n\n\n";
+		};
+		6565F49F2639E14E008711C6 /* Run Script for Signing  */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script for Signing ";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "/bin/bash \"${SRCROOT}/../Scripts/sign-build.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2518,9 +2538,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
-				EXCLUDED_ARCHS = "";
 				EXECUTABLE_PREFIX = lib;
-				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2533,9 +2551,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
-				EXCLUDED_ARCHS = "";
 				EXECUTABLE_PREFIX = lib;
-				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3349,9 +3365,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
-				EXCLUDED_ARCHS = "";
 				EXECUTABLE_PREFIX = lib;
-				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3577,9 +3591,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N33TQXN8C7;
-				EXCLUDED_ARCHS = "";
 				EXECUTABLE_PREFIX = lib;
-				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
