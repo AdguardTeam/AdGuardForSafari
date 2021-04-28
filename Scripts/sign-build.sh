@@ -68,4 +68,4 @@ else
 fi
 
 #escho odna huinya
-# rm -v "$AG_APP_ENT"
+rm -v "$AG_APP_ENT"
