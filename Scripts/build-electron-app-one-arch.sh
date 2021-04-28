@@ -41,11 +41,6 @@ sed -i "" "s/AG_BUILD_CONFIGURATION/${CONFIGURATION}/g" "${SRC}/package.json"
 cd "${SRC}"
 yarn install --force || exit 1
 
-# Copy converter binary
-mkdir -p ../libs
-cp node_modules/safari-converter-lib/bin/ConverterTool ../libs
-chmod +x ../libs/ConverterTool
-
 # Extract Electron version
 ELECTRON_VERSION=$(jq -r ".devDependencies.electron" ../ElectronMainApp/package.json)
 

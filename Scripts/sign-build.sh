@@ -41,7 +41,7 @@ if [[ ${CONFIGURATION} == "Release" ]]; then
   codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Renderer).app" || exit 1
 
 else
-  codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${RESOURCES}/libs/ConverterTool" || exit 1
+  codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${RESOURCES}/libs/ConverterTool" || exit 1
 
   # codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${RESOURCES}/app-x64.asar.unpacked/node_modules/safari-ext/bin/darwin-x64-85/safari-ext.node" || exit 1
   # codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${RESOURCES}/app-arm64.asar.unpacked/node_modules/safari-ext/bin/darwin-arm64-85/safari-ext.node" || exit 1
