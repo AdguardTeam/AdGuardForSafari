@@ -45,7 +45,7 @@ else
     codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libvk_swiftshader.dylib" || exit 1
     codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Helpers/chrome_crashpad_handler" || exit 1
     codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
-    
+
     codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/ReactiveObjC.framework/Versions/A/ReactiveObjC" || exit 1
     codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/ReactiveObjC.framework" || exit 1
 
@@ -62,7 +62,7 @@ else
     codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_LOGINHELPER_ENT}" "${LOGINS}/AdGuard Login Helper.app/Contents/MacOS/AdGuard Login Helper" || exit 1
     codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_LOGINHELPER_ENT}" "${LOGINS}/AdGuard Login Helper.app" || exit 1
 
-# Signing main app bin and bundle DO NOT DO, because signing performs xCode on final stage
+# DO NOT sign main app binary and bundle, because it will be signed by xCode on the final stage
 #    codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$APP_PATH/Contents/MacOS/${PRODUCT_NAME}" || exit 1
 #    codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "$APP_PATH" || exit 1
   fi
