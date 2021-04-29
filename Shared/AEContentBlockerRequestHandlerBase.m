@@ -24,26 +24,29 @@
 }
 
 - (void)beginRequestWithExtensionContext:(NSExtensionContext *)context {
-    DDLogDebug(@"AG: beginRequestWithExtensionContext..");
+    DDLogInfo(@"AG: beginRequestWithExtensionContext..");
 
     NSItemProvider *attachment;
 
     if ([[AESharedResources sharedDefaults] boolForKey:AEDefaultsEnabled]) {
         attachment = [[NSItemProvider alloc] initWithContentsOfURL:self.blockingContentRulesUrl];
+        DDLogInfo(@"AG: beginRequestWithExtensionContext obtained content.");
     }
     else {
         attachment = [[NSItemProvider alloc] initWithContentsOfURL:self.blockingContentEmptyResourceUrl];
+        DDLogInfo(@"AG: beginRequestWithExtensionContext empty content.");
     }
     if (attachment) {
         NSExtensionItem *item = [[NSExtensionItem alloc] init];
         item.attachments = @[attachment];
 
-        DDLogDebug(@"AG: beginRequestWithExtensionContext done.");
+        DDLogInfo(@"AG: beginRequestWithExtensionContext done.");
 
         [context completeRequestReturningItems:@[item] completionHandler:nil];
         return;
     }
 
+    DDLogInfo(@"AG: beginRequestWithExtensionContext done with error.");
     [context completeRequestReturningItems:nil completionHandler:nil];
 }
 

@@ -105,6 +105,8 @@ def get_notarization_info(request_uuid):
         if line.startswith("Status:"):
             parts = line.split(":", 2)
             status = parts[1].strip()
+            if status == "invalid": 
+                print("out: {0}".format(result.stdout))
             return status
 
     print("out: {0}".format(result.stdout.decode("utf-8")))
