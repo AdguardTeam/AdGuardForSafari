@@ -48,6 +48,7 @@ VERSION_FILE="version.txt"
 CONFIGURATION_NAME="Release"
 if [ "$CHANNEL" == "beta" ]; then
     CONFIGURATION_NAME="Standalone Beta"
+    APP_NAME="Adguard for Safari Beta.app"
 fi
 
 if [ "$CHANNEL" == "release" ]; then
