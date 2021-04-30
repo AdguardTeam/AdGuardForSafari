@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 ELECTRON="ElectronMainApp"
 SRC="${SRCROOT}/../${ELECTRON}"
 SHAREDSRC="${SRCROOT}/../Shared"

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 echo "Building electron app with config:"
 echo "CONFIGURATION: ${CONFIGURATION}"
 echo "AG_STANDALONE: ${AG_STANDALONE}"

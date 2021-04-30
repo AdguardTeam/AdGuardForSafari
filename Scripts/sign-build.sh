@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 APP_NAME="${PRODUCT_NAME}.app"
 DST_DIR="${BUILT_PRODUCTS_DIR}"
 if [[ ${ACTION} == "install" ]]; then

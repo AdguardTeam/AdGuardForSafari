@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # copy scriptlets.js
 cp node_modules/scriptlets/dist/scriptlets.js ../AdGuard/AdvancedBlocking
 
