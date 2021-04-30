@@ -99,9 +99,9 @@ printf "version=$version\nbuild_number=$build_number\nchannel=$CHANNEL\n" >$BUIL
 
 echo "Step 7: Build updates json files"
 # creates release.json and edits updates.json
-buildFileName=APP_ARCHIVE_NAME
+buildFileName="${APP_ARCHIVE_NAME}"
 if [ "$CHANNEL" == "beta" ]; then
-    buildFileName="${APP_ARCHIVE_NAME}"
+    buildFileName="${APP_BETA_ARCHIVE_NAME}"
 fi
 
 printf "{
