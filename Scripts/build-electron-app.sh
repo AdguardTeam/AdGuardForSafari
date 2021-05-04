@@ -33,7 +33,7 @@ if [[ $? == 0 ]] || ! [ -f "$TIME_MARKER" ]; then
 
     echo "Create universal build"
     cd ../ElectronMainApp
-    yarn make-universal-app "$TARGET_TEMP_DIR"
+    yarn make-universal-app "$TARGET_TEMP_DIR" "$AG_STANDALONE"
 
     touch "${TIME_MARKER}"
 
