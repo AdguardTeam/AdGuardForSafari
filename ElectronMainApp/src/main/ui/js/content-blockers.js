@@ -8,7 +8,7 @@ const { ipcRenderer } = require('electron');
  * @returns {*}
  * @constructor
  */
-const ContentBlockersScreen = function (antiBannerFilters, userFilter, whitelist, userSettings) {
+const ContentBlockersScreen = function (antiBannerFilters, userFilter, allowlist, userSettings) {
     'use strict';
 
     /**
@@ -133,7 +133,7 @@ const ContentBlockersScreen = function (antiBannerFilters, userFilter, whitelist
             const userFilterEnabled = userSettings.values[userSettings.names.USERRULES_ENABLED]
                 && !userFilter.isUserFilterEmpty();
             const allowlistEnabled = userSettings.values[userSettings.names.ALLOWLIST_ENABLED]
-                && !whitelist.isAllowlistEmpty();
+                && !allowlist.isAllowlistEmpty();
             for (const extension of response) {
                 const filtersInfo = antiBannerFilters.getFiltersInfo(
                     extension.groupIds,

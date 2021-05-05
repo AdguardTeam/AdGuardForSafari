@@ -9,15 +9,15 @@ const { Range } = require('../libs/ace/ace');
 const COMMENT_MASK = '!';
 
 /**
- * Whitelist block
+ * Allowlist block
  *
  * @param {object} userSettings
  * @param {object} contentBlockerInfo
  */
-const WhiteListFilter = function (userSettings, contentBlockerInfo) {
+const AllowlistFilter = function (userSettings, contentBlockerInfo) {
     'use strict';
 
-    const editorId = 'whiteListRules';
+    const editorId = 'allowlistRules';
     const editor = ace.edit(editorId);
     editorUtils.handleEditorResize(editor);
 
@@ -26,35 +26,35 @@ const WhiteListFilter = function (userSettings, contentBlockerInfo) {
     editor.session.setMode('ace/mode/adguard');
     editor.setOption('wrap', true);
 
-    const saveIndicatorElement = document.querySelector('#whiteListRulesSaveIndicator');
+    const saveIndicatorElement = document.querySelector('#allowlistRulesSaveIndicator');
     const saver = new editorUtils.Saver({
         editor,
-        saveEventType: 'saveWhiteListDomains',
+        saveEventType: 'saveAllowlistDomains',
         indicatorElement: saveIndicatorElement,
     });
 
-    const changeDefaultWhiteListModeCheckbox = document.querySelector('#changeDefaultWhiteListMode');
-    const whiteListEditor = document.querySelector('#whiteListRules > textarea');
-    const applyChangesBtn = document.querySelector('#whiteListFilterApplyChanges');
+    const changeDefaultAllowlistModeCheckbox = document.querySelector('#changeDefaultAllowlistMode');
+    const allowlistEditor = document.querySelector('#allowlistRules > textarea');
+    const applyChangesBtn = document.querySelector('#allowlistFilterApplyChanges');
 
     let hasContent = false;
-    function loadWhiteListDomains() {
+    function loadAllowlistDomains() {
         const response = ipcRenderer.sendSync('renderer-to-main', JSON.stringify({
-            'type': 'getWhiteListDomains',
+            'type': 'getAllowlistDomains',
         }));
         /* eslint-disable-next-line no-unused-vars */
         hasContent = !!response.content;
         editor.setValue(response.content || '', 1);
         applyChangesBtn.classList.add('disabled');
-        const whitelistedNum = editorUtils.countRules(response.content);
-        utils.setAllowlistInfo(whitelistedNum);
-        contentBlockerInfo.whitelistedNum = whitelistedNum;
+        const allowlistedNum = editorUtils.countRules(response.content);
+        utils.setAllowlistInfo(allowlistedNum);
+        contentBlockerInfo.allowlistedNum = allowlistedNum;
     }
 
     applyChangesBtn.onclick = (event) => {
         event.preventDefault();
         saver.saveData();
-        whiteListEditor.focus();
+        allowlistEditor.focus();
     };
 
     editor.commands.addCommand({
@@ -91,25 +91,25 @@ const WhiteListFilter = function (userSettings, contentBlockerInfo) {
         },
     });
 
-    function changeDefaultWhiteListMode(e) {
+    function changeDefaultAllowlistMode(e) {
         e.preventDefault();
 
         utils.setIsAllowlistInverted(e.currentTarget.checked);
-        userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE] = !e.currentTarget.checked;
+        userSettings.values[userSettings.names.DEFAULT_ALLOWLIST_MODE] = !e.currentTarget.checked;
 
         ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'changeDefaultWhiteListMode',
+            'type': 'changeDefaultAllowlistMode',
             enabled: !e.currentTarget.checked,
         }));
 
-        loadWhiteListDomains();
+        loadAllowlistDomains();
     }
 
-    changeDefaultWhiteListModeCheckbox.addEventListener('change', changeDefaultWhiteListMode);
+    changeDefaultAllowlistModeCheckbox.addEventListener('change', changeDefaultAllowlistMode);
 
     checkboxUtils.updateCheckbox(
-        [changeDefaultWhiteListModeCheckbox],
-        !userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]
+        [changeDefaultAllowlistModeCheckbox],
+        !userSettings.values[userSettings.names.DEFAULT_ALLOWLIST_MODE]
     );
 
     const importAllowlistInput = document.querySelector('#importAllowlistInput');
@@ -149,7 +149,7 @@ const WhiteListFilter = function (userSettings, contentBlockerInfo) {
             return;
         }
 
-        const fileName = userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]
+        const fileName = userSettings.values[userSettings.names.DEFAULT_ALLOWLIST_MODE]
             ? 'adguard-allowlist'
             : 'adguard-allowlist-inverted';
 
@@ -168,9 +168,9 @@ const WhiteListFilter = function (userSettings, contentBlockerInfo) {
     };
 
     return {
-        updateWhiteListDomains: loadWhiteListDomains,
+        loadAllowlistDomains,
         isAllowlistEmpty,
     };
 };
 
-module.exports = WhiteListFilter;
+module.exports = AllowlistFilter;

@@ -15,7 +15,7 @@
                 <outlet property="view" destination="c22-O7-iKe" id="vwT-Xx-Aiz"/>
                 <outlet property="warningMessageDescription" destination="65Y-cw-5zK" id="abS-GV-HiE"/>
                 <outlet property="warningMessageLabel" destination="WI5-OB-i6V" id="yGF-aF-Vxt"/>
-                <outlet property="whitelistButton" destination="qio-p6-Pqn" id="cjd-fO-G9A"/>
+                <outlet property="allowlistButton" destination="qio-p6-Pqn" id="cjd-fO-G9A"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -98,7 +98,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="clickWhitelist:" target="-2" id="gSg-T4-DN8"/>
+                        <action selector="clickAllowlist:" target="-2" id="gSg-T4-DN8"/>
                         <binding destination="-2" name="enabled" keyPath="self.busy" id="IHi-hl-SYy">
                             <dictionary key="options">
                                 <integer key="NSNoSelectionPlaceholder" value="0"/>

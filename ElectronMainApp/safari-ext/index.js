@@ -31,14 +31,14 @@ module.exports = (() => {
      * Initializes toolbar
      *
      * @param onProtectionChangedCallback  = (bool) => {}
-     * @param onWhitelistChangedCallback = (stringArray) => {}
+     * @param onAllowlistChangedCallback = (stringArray) => {}
      * @param onUserFilterChangedCallback = (stringArray) => {}
      * @param onShowPreferencesCallback = () => ()
      * @param onReportCallback = (string) => ()
      */
     const init = (
         onProtectionChangedCallback,
-        onWhitelistChangedCallback,
+        onAllowlistChangedCallback,
         onUserFilterChangedCallback,
         onShowPreferencesCallback,
         onReportCallback
@@ -49,9 +49,9 @@ module.exports = (() => {
             });
         }
 
-        if (onWhitelistChangedCallback) {
-            addon.setOnWhitelist(() => {
-                addon.whitelistDomains(onWhitelistChangedCallback);
+        if (onAllowlistChangedCallback) {
+            addon.setOnAllowlist(() => {
+                addon.allowlistDomains(onAllowlistChangedCallback);
             });
         }
         if (onUserFilterChangedCallback) {
@@ -184,15 +184,15 @@ module.exports = (() => {
      * @param domains - string array
      * @param callback = () => {}
      */
-    const setWhitelistDomains = (domains, callback) => {
-        addon.setWhitelistDomains(domains, callback);
+    const setAllowlistDomains = (domains, callback) => {
+        addon.setAllowlistDomains(domains, callback);
     };
 
     /**
      * @param callback = (domains as stringArray) => {}
      */
-    const whitelistDomains = (callback) => {
-        addon.whitelistDomains(callback);
+    const allowlistDomains = (callback) => {
+        addon.allowlistDomains(callback);
     };
 
     /**
@@ -298,8 +298,8 @@ module.exports = (() => {
         setContentBlockingJson: setContentBlockingJson,
         setProtectionEnabled: setProtectionEnabled,
         protectionEnabled: protectionEnabled,
-        setWhitelistDomains: setWhitelistDomains,
-        whitelistDomains: whitelistDomains,
+        setAllowlistDomains,
+        allowlistDomains,
         setUserFilter: setUserFilter,
         userFilter: userFilter,
         getExtensionState: getExtensionState,

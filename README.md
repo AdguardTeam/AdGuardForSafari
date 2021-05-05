@@ -27,7 +27,7 @@
 <br />
 
 <p align="center">
-    <img src="https://cdn.adguard.com/public/Adguard/Blog/Safari_Ext_AppStore/Preferences_Filters.jpg" width="800" />
+    <img src="https://cdn.adguard.com/public/Adguard/Common/safari_filters.png?" width="800" />
 </p>
 
 <hr />
@@ -43,7 +43,7 @@ Unlike other major ad blockers, AdGuard provides some extra features you are use
 * Custom filters
 * Creating your own filtering rules
 * Manual blocking tool
-* Whitelisting websites
+* Allowlisting websites
 
 AdGuard for Safari is based on the Safari native content blocking API, which makes it lightning fast, but somewhat limited in capabilities. For instance, Safari limits the number of rules a content blocker can have.
 

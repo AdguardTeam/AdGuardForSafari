@@ -66,9 +66,9 @@ const initPage = function (response) {
                     controller.userFilter.updateUserFilterRules(contentBlockerInfo);
                     controller.contentBlockers.setLoading();
                     break;
-                case EventNotifierTypes.UPDATE_WHITELIST_FILTER_RULES:
+                case EventNotifierTypes.UPDATE_ALLOWLIST_FILTER_RULES:
                     controller.settings.updateAllowlistState();
-                    controller.whiteListFilter.updateWhiteListDomains();
+                    controller.allowlistFilter.loadAllowlistDomains();
                     controller.contentBlockers.setLoading();
                     break;
                 case EventNotifierTypes.CONTENT_BLOCKER_UPDATED:
@@ -79,7 +79,7 @@ const initPage = function (response) {
                     const userFilterEnabled = userSettings.values[userSettings.names.USERRULES_ENABLED]
                         && !controller.userFilter.isUserFilterEmpty();
                     const allowlistEnabled = userSettings.values[userSettings.names.ALLOWLIST_ENABLED]
-                        && !controller.whiteListFilter.isAllowlistEmpty();
+                        && !controller.allowlistFilter.isAllowlistEmpty();
                     const filtersInfo = controller.antiBannerFilters
                         .getFiltersInfo(options.filterGroups, userFilterEnabled, allowlistEnabled);
                     controller.contentBlockers.updateExtensionState(options.bundleId, options, filtersInfo);

@@ -100,7 +100,7 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
             toggleGroupState(e.target);
         } else if (targetName === 'userrules') {
             toggleUserrulesState(e.target.checked);
-        } else if (targetName === 'whitelist') {
+        } else if (targetName === 'allowlist') {
             toggleAllowlistState(e.target.checked);
         }
     });
@@ -421,8 +421,8 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
             updateRulesCountInfo(response.rulesInfo);
             setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
             utils.setUserrulesNum(contentBlockerInfo.userRulesNum);
-            utils.setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_WHITE_LIST_MODE]);
-            utils.setAllowlistInfo(contentBlockerInfo.whitelistedNum);
+            utils.setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_ALLOWLIST_MODE]);
+            utils.setAllowlistInfo(contentBlockerInfo.allowlistedNum);
             setSearchPlaceholder();
 
             const { categories } = loadedFiltersInfo;

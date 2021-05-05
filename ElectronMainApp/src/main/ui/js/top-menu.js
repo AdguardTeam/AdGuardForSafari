@@ -6,7 +6,7 @@
 
 const GENERAL_SETTINGS = '#general-settings';
 const ANTIBANNER = '#antibanner';
-const WHITELIST = '#whitelist';
+const ALLOWLIST = '#allowlist';
 const USERFILTER = '#userfilter';
 const CONTENT_BLOCKERS = '#content-blockers';
 
@@ -52,13 +52,13 @@ const toggleTab = function () {
     tab.style.display = 'flex';
     window.scrollTo(-150, 0);
 
-    if (tabId === WHITELIST) {
+    if (tabId === ALLOWLIST) {
         if (typeof onHashUpdatedCallback === 'function') {
             onHashUpdatedCallback(tabId);
         }
     }
 
-    if (tabId === WHITELIST
+    if (tabId === ALLOWLIST
         || tabId === USERFILTER
         || tabId.includes(ANTIBANNER)) {
         antibannerTabs[0].classList.add('active');

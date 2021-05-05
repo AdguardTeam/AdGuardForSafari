@@ -18,7 +18,7 @@
 #pragma mark - OUTLETS
 
 @property (weak) IBOutlet NSImageView *adguardIcon;
-@property (weak) IBOutlet NSButton *whitelistButton;
+@property (weak) IBOutlet NSButton *allowlistButton;
 @property (weak) IBOutlet NSButton *assistantButton;
 @property (weak) IBOutlet NSTextField *warningMessageLabel;
 @property (weak) IBOutlet NSTextField *warningMessageDescription;
@@ -28,7 +28,7 @@
 #pragma mark - ACTIONS
 
 - (IBAction)clickPause:(id)sender;
-- (IBAction)clickWhitelist:(id)sender;
+- (IBAction)clickAllowlist:(id)sender;
 - (IBAction)clickAssistant:(id)sender;
 - (IBAction)clickRunAdguard:(id)sender;
 - (IBAction)clickPreferences:(id)sender;

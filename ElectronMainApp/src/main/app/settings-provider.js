@@ -5,7 +5,7 @@ const customFilters = require('./filters/custom-filters');
 const app = require('./app');
 const settingsManager = require('./settings-manager');
 const userRules = require('./userrules');
-const whitelist = require('./whitelist');
+const allowlist = require('./allowlist');
 const log = require('./utils/log');
 const listeners = require('../notifier');
 const events = require('../events');
@@ -58,11 +58,11 @@ module.exports = (() => {
         const enabledGroupIds = collectEnabledGroupIds();
         const customFiltersData = collectCustomFiltersData();
 
-        // Collect whitelist/blacklist domains and whitelist mode
-        const whiteListDomains = whitelist.getWhiteListedDomains() || [];
-        const blockListDomains = whitelist.getBlockListedDomains() || [];
-        const defaultWhiteListMode = !!whitelist.isDefaultMode();
-        const whitelistEnabled = !!settingsManager.isAllowlistEnabled();
+        // Collect allowlist/blocklist domains and allowlist mode
+        const allowlistDomains = allowlist.getAllowlistedDomains() || [];
+        const blockListDomains = allowlist.getBlocklistedDomains() || [];
+        const defaultAllowlistMode = !!allowlist.isDefaultMode();
+        const allowlistEnabled = !!settingsManager.isAllowlistEnabled();
         const userFilterEnabled = !!settingsManager.isUserrulesEnabled();
 
         // Collect user rules
@@ -77,10 +77,10 @@ module.exports = (() => {
                         'rules': content,
                         'disabled-rules': '',
                     },
-                    'whitelist': {
-                        'enabled': whitelistEnabled,
-                        'inverted': !defaultWhiteListMode,
-                        'domains': whiteListDomains,
+                    'allowlist': {
+                        'enabled': allowlistEnabled,
+                        'inverted': !defaultAllowlistMode,
+                        'domains': allowlistDomains,
                         'inverted-domains': blockListDomains,
                     },
                 },
@@ -188,15 +188,16 @@ module.exports = (() => {
      * @param callback Finish callback
      */
     const applyFiltersSection = async (section, callback) => {
-        const whiteListSection = section.filters['whitelist'] || {};
-        const whitelistEnabled = !!whiteListSection.enabled;
-        const whitelistDomains = whiteListSection.domains || [];
-        const blacklistDomains = whiteListSection['inverted-domains'] || [];
+        // TODO remove whitelist later
+        const allowlistSection = section.filters['allowlist'] || section.filters['whitelist'] || {};
+        const allowlistEnabled = !!allowlistSection.enabled;
+        const allowlistDomains = allowlistSection.domains || [];
+        const blocklistDomains = allowlistSection['inverted-domains'] || [];
 
-        // Apply whitelist/blacklist domains and whitelist mode
-        settingsManager.changeAllowlistState(whitelistEnabled);
-        whitelist.configure(whitelistDomains, blacklistDomains, !whiteListSection.inverted);
-        settingsManager.updateDefaultWhiteListMode(!whiteListSection.inverted);
+        // Apply allowlist/blocklist domains and allowlist mode
+        settingsManager.changeAllowlistState(allowlistEnabled);
+        allowlist.configure(allowlistDomains, blocklistDomains, !allowlistSection.inverted);
+        settingsManager.updateDefaultAllowlistMode(!allowlistSection.inverted);
 
         const userFilterSection = section.filters['user-filter'] || {};
         const userFilterEnabled = !!userFilterSection.enabled;

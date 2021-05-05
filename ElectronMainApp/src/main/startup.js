@@ -1,5 +1,5 @@
 const safariToolbar = require('safari-ext');
-const whitelist = require('./app/whitelist');
+const allowlist = require('./app/allowlist');
 const filters = require('./app/filters-manager');
 const antibanner = require('./app/antibanner');
 const filterState = require('./app/filters/filters-state');
@@ -20,8 +20,8 @@ module.exports = (() => {
 
         safariToolbar.busyStatus(true);
 
-        whitelist.init();
-        log.debug('Whitelist initialization completed');
+        allowlist.init();
+        log.debug('Allowlist initialization completed');
 
         contentBlockerListener.init();
         log.debug('Content blocker listener initialization completed');

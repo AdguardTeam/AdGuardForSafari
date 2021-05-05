@@ -42,13 +42,13 @@ module.exports = (() => {
     };
 
     /**
-     * Whitelist has been changed from toolbar
+     * Allowlist has been changed from toolbar
      *
      */
-    const onWhitelistChangedCallback = (domains) => {
-        log.debug('Whitelist changed: {0}', domains);
+    const onAllowlistChangedCallback = (domains) => {
+        log.debug('Allowlist changed: {0}', domains);
 
-        applicationApi.setWhitelist(domains);
+        applicationApi.setAllowlist(domains);
     };
 
     /**
@@ -103,7 +103,7 @@ module.exports = (() => {
         log.debug('Initializing toolbar controller..');
 
         // Subscribe to toolbar events
-        safariToolbar.init(onProtectionChangedCallback, onWhitelistChangedCallback,
+        safariToolbar.init(onProtectionChangedCallback, onAllowlistChangedCallback,
             onUserFilterChangedCallback, onShowPreferencesCallback(showWindow),
             onReportCallback);
 
@@ -115,8 +115,8 @@ module.exports = (() => {
                 applicationApi.getUserFilterRules((rules) => {
                     setUserFilter(rules);
                 });
-            } else if (event === events.UPDATE_WHITELIST_FILTER_RULES) {
-                setWhitelistDomains(settings.isAllowlistEnabled() ? applicationApi.getWhitelist() : []);
+            } else if (event === events.UPDATE_ALLOWLIST_FILTER_RULES) {
+                setAllowlistDomains(settings.isAllowlistEnabled() ? applicationApi.getAllowlist() : []);
             } else if (event === events.PROTECTION_STATUS_CHANGED) {
                 setProtectionEnabled(!!info);
             }
@@ -198,11 +198,11 @@ module.exports = (() => {
     };
 
     /**
-     * Sets whitelisted domains
+     * Sets allowlisted domains
      */
-    const setWhitelistDomains = (domains) => {
+    const setAllowlistDomains = (domains) => {
         safariToolbar.busyStatus(true);
-        safariToolbar.setWhitelistDomains(domains, () => {
+        safariToolbar.setAllowlistDomains(domains, () => {
             safariToolbar.busyStatus(false);
         });
     };
