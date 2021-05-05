@@ -51,6 +51,13 @@ if [[ ${AG_STANDALONE} == "true" ]]; then
 
   codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework/Versions/A/Resources/ShipIt" || exit 1
   codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework" || exit 1
+else
+  # Extract Electron version
+  ELECTRON_VERSION=$(jq -r ".devDependencies.electron" ../ElectronMainApp/package.json)
+  # Remove prefix "^"
+  ELECTRON_VERSION=${ELECTRON_VERSION#"^"}
+
+  electron-osx-sign "${APP_PATH}" --platform=${PLATFORM} --type=distribution --hardened-runtime --version=${ELECTRON_VERSION} --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_APP_ENT}" || exit 1
 fi
 
 # DO NOT sign main app binary and bundle, because it will be signed by xCode on the final stage
