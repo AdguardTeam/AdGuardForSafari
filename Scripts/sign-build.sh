@@ -51,6 +51,8 @@ if [[ ${AG_STANDALONE} == "true" ]]; then
 
   codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework/Versions/A/Resources/ShipIt" || exit 1
   codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework" || exit 1
+else
+  codesign --verbose --force -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Renderer).app/Contents/MacOS/AdGuard for Safari Helper (Renderer)" || exit 1
 fi
 
 # DO NOT sign main app binary and bundle, because it will be signed by xCode on the final stage
