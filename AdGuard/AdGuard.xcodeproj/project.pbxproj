@@ -957,7 +957,6 @@
 		65720AA921219AC900B2381C = {
 			isa = PBXGroup;
 			children = (
-				6565F4752639A806008711C6 /* fake_AppDelegate.swift */,
 				F4C57F9B2514D6C300A9B7BE /* libs */,
 				F4581BF322F8A2430069FA94 /* blocker-content-rules-empty.json */,
 				657215562121F30600B2381C /* Config.xcconfig */,
@@ -1006,6 +1005,7 @@
 		65720AB421219AC900B2381C /* AdGuard */ = {
 			isa = PBXGroup;
 			children = (
+				6565F4752639A806008711C6 /* fake_AppDelegate.swift */,
 				65C41D3522D8B0DF0001AFBA /* AdGuard.entitlements */,
 				65C41D3422D8B0DF0001AFBA /* ElectronChild.entitlements */,
 				65C41D3622D8B0DF0001AFBA /* ElectronLoginItem.entitlements */,
