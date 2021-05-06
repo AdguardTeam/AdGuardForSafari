@@ -7733,7 +7733,7 @@ rsvp@^4.8.4:
   resolved "git+https://github.com/AdguardTeam/SafariConverterLib.git#92480fad14014c5bd8f84010cf74e27bf23436c8"
 
 safari-ext@./safari-ext:
-  version "1.0.36"
+  version "1.0.37"
   dependencies:
     bindings "^1.2.1"
     nan "^2.3.3"

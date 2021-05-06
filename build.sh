@@ -69,7 +69,7 @@ xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" clean
 xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -arch x86_64 -arch arm64 -archivePath "$ARCHIVE_PATH"
 
 # zip the archives so that we could use them as a build artifacts
-zip -9 -r "$BUILD_DIR/AdGuard_Safari.xcarchive.zip" $ARCHIVE_PATH
+/usr/bin/ditto -c -k --keepParent "$ARCHIVE_PATH" "$ARCHIVE_PATH.zip"
 
 echo "Step 2: Copying the apps to the build directory"
 rm -Rf "$APP_PATH"
