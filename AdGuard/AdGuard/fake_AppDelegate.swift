@@ -1,8 +1,9 @@
 //
 //  fake_AppDelegate.swift
+//  AdGuard
 //
-//  Created by Roman Sokolov on 23.11.2020.
-//  Copyright © 2020 Adguard Software Ltd. All rights reserved.
+//  Created by Roman Sokolov on 28.04.2021.
+//  Copyright © 2021 Adguard Software Ltd. All rights reserved.
 //
 
 import Cocoa
@@ -23,4 +24,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 }
-

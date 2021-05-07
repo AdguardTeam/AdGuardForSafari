@@ -1,144 +1,73 @@
 #!/bin/bash
 
-echo "Building electron app with config:"
-echo "CONFIGURATION: ${CONFIGURATION}"
-echo "AG_STANDALONE: ${AG_STANDALONE}"
-echo "AG_STANDALONE_BETA: ${AG_STANDALONE_BETA}"
+set -e
 
-# Fix nvm incompatibility
-. ~/.nvm/nvm.sh
-nvm use v13.10.0 || exit 1
-
-PLATFORM=mas
-ARCH=x64
-
-SRC="${SRCROOT}/../ElectronMainApp"
+ELECTRON="ElectronMainApp"
+SRC="${SRCROOT}/../${ELECTRON}"
 SHAREDSRC="${SRCROOT}/../Shared"
+APP_NAME="${PRODUCT_NAME}.app"
+APP="${TARGET_TEMP_DIR}/${APP_NAME}"
 
-# Cleaning safari-ext
-if [[ ${ACTION} == "clean" ]]; then
-  cd "${SHAREDSRC}"
-  node-gyp clean || exit 1
-  exit 0
-fi
 
-mkdir -vp "${SRC}/safari-ext/shared"
-cp -v "${BUILT_PRODUCTS_DIR}/libshared.a" "${SRC}/safari-ext/shared/" || exit 1
-rsync -avm --include='*.h' -f 'hide,! */' "${SHAREDSRC}/" "${SRC}/safari-ext/shared/"
+TIME_MARKER="${TARGET_TEMP_DIR}/ElectronTimeMarker.touch"
 
-# Update package.json
-sed -i "" "s/AG_STANDALONE_BETA/${AG_STANDALONE_BETA}/g" "${SRC}/package.json"
-sed -i "" "s/AG_STANDALONE_BUILD/${AG_STANDALONE}/g" "${SRC}/package.json"
-sed -i "" "s/AG_BUILD_CONFIGURATION/${CONFIGURATION}/g" "${SRC}/package.json"
+[ -f "$TIME_MARKER" ] && /usr/bin/find "${SRC}/" -newer "${TIME_MARKER}" | grep ${ELECTRON} > /dev/null
 
-# Rebuild electron app
-OPT=""
-cd "${SRC}"
-OPT="--asar"
-yarn install --force || exit 1
+if [[ $? == 0 ]] || ! [ -f "$TIME_MARKER" ]; then
 
-# Extract Electron version
-ELECTRON_VERSION=$(jq -r ".devDependencies.electron" ../ElectronMainApp/package.json)
+    echo "Rebuild electron started"
 
-# Remove prefix "^"
-ELECTRON_VERSION=${ELECTRON_VERSION#"^"}
+    mkdir -p $TARGET_TEMP_DIR/arm64
+    mkdir -p $TARGET_TEMP_DIR/x86_64
 
-# Rebuild safari-ext and other node packages
-yarn electron-rebuild -v ${ELECTRON_VERSION}
 
-echo "Processing ConverterTool"
-install_name_tool -delete_rpath /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx "${SRC}/../libs/ConverterTool"
-install_name_tool -add_rpath @executable_path/../Frameworks "${SRC}/../libs/ConverterTool" > /dev/null 2>&1 | echo -n
-install_name_tool -add_rpath @executable_path/../../Frameworks "${SRC}/../libs/ConverterTool" > /dev/null 2>&1 | echo -n
+    mkdir -vp "${SRC}/safari-ext/shared"
+    cp -v "${BUILT_PRODUCTS_DIR}/libshared.a" "${SRC}/safari-ext/shared/" || exit 1
+    rsync -avm --include='*.h' -f 'hide,! */' "${SHAREDSRC}/" "${SRC}/safari-ext/shared/"
 
-if [[ ${CONFIGURATION} == "Release" ]]; then
-    echo "Building release MAS version"
+    echo "Build electron app for arm64"
+    bash ../Scripts/build-electron-app-one-arch.sh arm64 "$TARGET_TEMP_DIR/arm64" || exit 1
 
-    OPT="--asar.unpack=*.node"
+    echo "Build electron app for x86_64"
+    bash ../Scripts/build-electron-app-one-arch.sh x86_64 "$TARGET_TEMP_DIR/x86_64" || exit 1
 
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
+    echo "Create universal build"
+    cd ../ElectronMainApp
+    yarn make-universal-app "$TARGET_TEMP_DIR" "$AG_STANDALONE"
 
-    electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
-    --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
-    ${OPT} || exit 1
+    touch "${TIME_MARKER}"
 
-    APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-${PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
-    FRAMEWORKS="${APP}/Contents/Frameworks"
+    echo "Copy converter binary"
+    mkdir -p "${SRC}/../libs"
+    cp "${SRC}/node_modules/safari-converter-lib/bin/ConverterTool" "${SRC}/../libs" || exit 1
+    chmod +x "${SRC}/../libs/ConverterTool"
 
-    # electron-packager produces additional login helper, that we don't need
-    # https://github.com/AdguardTeam/AdGuardForSafari/issues/204
-    rm -r "${APP}/Contents/Library/LoginItems/${PRODUCT_NAME} Login Helper.app" || exit 1
+    echo "Processing ConverterTool"
+    install_name_tool -add_rpath @executable_path/../Frameworks "${SRC}/../libs/ConverterTool" > /dev/null 2>&1 | echo -n
+    install_name_tool -add_rpath @executable_path/../../Frameworks "${SRC}/../libs/ConverterTool" > /dev/null 2>&1 | echo -n
 
-    electron-osx-sign "${APP}" --platform=${PLATFORM} --type=distribution --hardened-runtime --version=${ELECTRON_VERSION} --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_APP_ENT}" || exit 1
-
-    codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Electron Framework" || exit 1
-    codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib" || exit 1
-    codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
-    codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper.app" || exit 1
-    codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (GPU).app" || exit 1
-    codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Plugin).app" || exit 1
-    codesign --verbose --force --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Renderer).app" || exit 1
-
-else
-
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${SRC}/node_modules/safari-ext/build/Release/safari_ext_addon.node"
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "${SRC}/../libs/ConverterTool" || exit 1
-
-    PACKAGER_PLATFORM="mas"
-    if [[ ${AG_STANDALONE} == "true" ]]; then
-      echo "Changing standalone build platform"
-      PACKAGER_PLATFORM="darwin"
-    fi
-
-    electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PACKAGER_PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
-    --arch=${ARCH} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --overwrite --out="${TARGET_TEMP_DIR}" \
-    ${OPT} || exit 1
-
-    APP="${TARGET_TEMP_DIR}/${PRODUCT_NAME}-${PACKAGER_PLATFORM}-${ARCH}/${PRODUCT_NAME}.app"
-    FRAMEWORKS="${APP}/Contents/Frameworks"
-    RESOURCES="${APP}/Contents/Resources"
-
-    # Sign electron app
-    echo "Signing build"
-    electron-osx-sign "${APP}" --platform=${PLATFORM} --timestamp="" --type=distribution --hardened-runtime --identity="${CODE_SIGN_IDENTITY}" --entitlements="${AG_APP_ENT}" || exit 1
-
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Electron Framework" || exit 1
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib" || exit 1
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper.app" || exit 1
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (GPU).app" || exit 1
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Plugin).app" || exit 1
-    codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/${PRODUCT_NAME} Helper (Renderer).app" || exit 1
-
-    if [[ ${AG_STANDALONE} == "true" ]]; then
-      codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Electron Framework.framework" || exit 1
-      codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework/Versions/A/Resources/ShipIt" || exit 1
-      codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_ELECTRON_CHILD_ENT}" "$FRAMEWORKS/Squirrel.framework" || exit 1
-      codesign --verbose --force --deep -o runtime --timestamp --sign "${CODE_SIGN_IDENTITY}" --entitlements "${AG_APP_ENT}" "$APP/Contents/MacOS/AdGuard for Safari" || exit 1
-    fi
+    echo "Hide executable file from xcodebuild"
+    mv -f "$APP/Contents/MacOS/${PRODUCT_NAME}" "$APP/Contents/MacOS/${AG_HIDE_EXEC_PREFIX}${PRODUCT_NAME}" || exit 1
 
 fi
 
-echo "Hide executable file from xcodebuild"
-mv -f "$APP/Contents/MacOS/${PRODUCT_NAME}" "$APP/Contents/MacOS/${AG_HIDE_EXEC_PREFIX}${PRODUCT_NAME}" || exit 1
+echo "Copying electron app to: ${DST_DIR}"
 
-# Move products
 DST_DIR="${BUILT_PRODUCTS_DIR}"
 if [[ ${ACTION} == "install" ]]; then
   DST_DIR="${INSTALL_ROOT}/Applications/"
   mkdir -p "${DST_DIR}"
 fi
 
-rm -Rfv "${DST_DIR}/${PRODUCT_NAME}.app"
-cp -HRfp "${APP}" "${DST_DIR}" || exit 1
+rm -Rfv "${DST_DIR}/${APP_NAME}"
+cp -HRfpv "${APP}" "${DST_DIR}"
 
-#  Touch native part of the project
-touch -c "${SRCROOT}/Assets.xcassets"
-touch -c "${SRCROOT}/AdGuard/Info.plist"
-touch -c "${SRCROOT}/defaults.plist"
+# Get rid of redundant asar files (need only one app.asar):
+# for the moment app.asar is path resolver for app-x64.asar and app-arm64.asar, that we don't need
+rm "${DST_DIR}/${APP_NAME}/Contents/Resources/app.asar"
+# we had run electron-packager for both architectures so asar files for x64 and arm64 are similar
+# and we can remove one of them and rename other one to app.asar
+rm "${DST_DIR}/${APP_NAME}/Contents/Resources/app-x64.asar"
+mv "${DST_DIR}/${APP_NAME}/Contents/Resources/app-arm64.asar" "${DST_DIR}/${APP_NAME}/Contents/Resources/app.asar"
 
-# Update package.json
-sed -i "" "s/\"standalone-build\": \"${AG_STANDALONE}\"/\"standalone-build\": \"AG_STANDALONE_BUILD\"/g" "${SRC}/package.json"
-sed -i "" "s/\"standalone-beta\": \"${AG_STANDALONE_BETA}\"/\"standalone-beta\": \"AG_STANDALONE_BETA\"/g" "${SRC}/package.json"
-sed -i "" "s/\"build-configuration\": \"${CONFIGURATION}\"/\"build-configuration\": \"AG_BUILD_CONFIGURATION\"/g" "${SRC}/package.json"
+cd ../AdGuard

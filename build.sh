@@ -31,13 +31,16 @@ echo "Building AdGuard, update channel $CHANNEL"
 # Configuration
 #
 
-WORKSPACE="Adguard.xcworkspace"
-CODE_SIGN_IDENTITY="Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)"
+WORKSPACE="AdGuard.xcworkspace"
+APP_NAME="AdGuard for Safari.app"
+APP_ARCHIVE_NAME="AdGuard_Safari.app.zip"
+APP_BETA_ARCHIVE_NAME="AdGuard_Safari_Beta.app.zip"
+
 ARCHIVE_NAME="AdGuard_Safari.xcarchive"
 ARCHIVE_PATH="$BUILD_DIR/$ARCHIVE_NAME"
-APP_NAME="Adguard for Safari.app"
 ARCHIVE_APP_PATH="$ARCHIVE_PATH/Products/Applications/$APP_NAME"
 APP_PATH="$BUILD_DIR/$APP_NAME"
+
 SCHEME="AdGuard"
 APP_BUNDLE_ID="com.adguard.safari.AdGuard"
 VERSION_FILE="version.txt"
@@ -56,19 +59,19 @@ fi
 # Build process
 #
 
-echo "Step 1: Building the app archive"
-rm -Rf "$ARCHIVE_PATH"
-
+echo "Step 1: Building the app archives"
 # download AdGuard resources
 yarn install --cwd "${BUILD_DIR}/../AdGuardResources"
 
+# build for x64 and arm64
+rm -Rf "$ARCHIVE_PATH"
 xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" clean
-xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -archivePath "$ARCHIVE_PATH"
+xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CONFIGURATION_NAME" -arch x86_64 -arch arm64 -archivePath "$ARCHIVE_PATH"
 
-# zip the archive so that we could use it as a build artifact
+# zip the archives so that we could use them as a build artifacts
 /usr/bin/ditto -c -k --keepParent "$ARCHIVE_PATH" "$ARCHIVE_PATH.zip"
 
-echo "Step 2: Copying the app to the build directory"
+echo "Step 2: Copying the apps to the build directory"
 rm -Rf "$APP_PATH"
 cp -HRfp "$ARCHIVE_APP_PATH" "$APP_PATH"
 
@@ -89,16 +92,16 @@ fi
 
 echo "Step 5: Archive the app"
 # zip the archive so that we could use it as a build artifact
-/usr/bin/ditto -c -k --keepParent "$APP_PATH" "$BUILD_DIR/AdGuard_Safari.app.zip"
+/usr/bin/ditto -c -k --keepParent "$APP_PATH" "$BUILD_DIR/$APP_ARCHIVE_NAME"
 
 echo "Step 6: Build version.txt"
 printf "version=$version\nbuild_number=$build_number\nchannel=$CHANNEL\n" >$BUILD_DIR/$VERSION_FILE
 
 echo "Step 7: Build updates json files"
 # creates release.json and edits updates.json
-buildFileName="AdGuard_Safari.app.zip"
+buildFileName="${APP_ARCHIVE_NAME}"
 if [ "$CHANNEL" == "beta" ]; then
-    buildFileName="AdGuard_Safari_Beta.app.zip"
+    buildFileName="${APP_BETA_ARCHIVE_NAME}"
 fi
 
 printf "{

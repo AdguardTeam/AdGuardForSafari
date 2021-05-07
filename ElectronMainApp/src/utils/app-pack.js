@@ -3,6 +3,7 @@ module.exports = (() => {
         const path = require('path');
         const pr = require('electron').remote ? require('electron').remote.process : process;
         const base = path.dirname(pr.mainModule.filename);
+
         return path.join(base, resPath);
     };
 
