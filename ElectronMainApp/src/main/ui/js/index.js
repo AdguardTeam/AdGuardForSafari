@@ -116,6 +116,9 @@ const initPage = function (response) {
                 case EventNotifierTypes.APPLICATION_UPDATE_NOT_FOUND:
                     controller.onAppUpdateNotFound(options);
                     break;
+                case EventNotifierTypes.APPLICATION_UPDATE_ERROR:
+                    controller.onAppUpdateError();
+                    break;
                 case EventNotifierTypes.APPLICATION_UPDATE_DOWNLOADED:
                     controller.onAppUpdateDownloaded(options);
                     break;

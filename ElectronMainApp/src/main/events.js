@@ -23,6 +23,7 @@ const EventNotifierTypes = module.exports = {
     APPLICATION_UPDATE_FOUND: 'event.application.update.found',
     APPLICATION_UPDATE_NOT_FOUND: 'event.application.update.not.found',
     APPLICATION_UPDATE_DOWNLOADED: 'event.application.update.downloaded',
+    APPLICATION_UPDATE_ERROR: 'event.application.update.error',
     CHANGE_PREFS: 'event.change.prefs',
     UPDATE_FILTERS_SHOW_POPUP: 'event.update.filters.show.popup',
     UPDATE_USER_FILTER_RULES: 'event.update.user.filter.rules',

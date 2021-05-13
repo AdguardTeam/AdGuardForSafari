@@ -326,6 +326,12 @@ PageController.prototype = {
 
         this.aboutUpdatesRelaunch.classList.remove('about-btn--hidden');
     },
+
+    onAppUpdateError() {
+        this.aboutUpdatesBlock.classList.remove('about-updates--rotate');
+        this.aboutUpdatesBlock.classList.add('about-updates--hidden');
+        this.aboutUpdatesBlock.innerText = i18n.__('options_about_updates_error.message');
+    },
 };
 
 module.exports = PageController;
