@@ -310,7 +310,7 @@ a.settings-actions--update-filters.loading:after {
 }
 .filters-search {
   display: flex;
-  width: 320px;
+  width: 250px;
   height: 40px;
   border-width: 0 0 1px 0;
   padding: 0 0 0 10px;
