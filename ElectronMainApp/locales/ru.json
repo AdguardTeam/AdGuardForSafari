@@ -245,7 +245,7 @@
     "options_filters_check_filters_update": {
         "message": "Проверить обновления фильтров"
     },
-    "options_whitelist": {
+    "options_allowlist": {
         "message": "Белый список"
     },
     "options_whitelist_description": {
@@ -254,11 +254,11 @@
     "options_allowlist_inverted": {
         "message": " (Инвертирован)"
     },
-    "options_allowlist_info_single": {
-        "message": "%s домен"
-    },
     "options_allowlist_info_multi": {
         "message": "Доменов в списке: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "Список пуст"
     },
     "options_whitelist_inverse": {
         "message": "Инвертировать белый список<span class='sp-table-row-info'>Разблокировать рекламу на всех сайтах, <i>кроме</i> добавленных в белый список</span>"
@@ -266,11 +266,11 @@
     "options_userfilter": {
         "message": "Пользовательские правила"
     },
-    "options_userfilter_info_single": {
-        "message": "%s правило"
-    },
     "options_userfilter_info_multi": {
         "message": "Пользовательских правил: %s"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Нет пользовательских правил"
     },
     "options_userfilter_import": {
         "message": "Импорт"

@@ -122,14 +122,14 @@ function handleImportSettings(event) {
 }
 
 const setUserrulesNum = (rulesNum) => {
-    document.querySelector('.userrules-info').innerText = rulesNum === 1
-        ? i18n.__('options_userfilter_info_single.message', rulesNum)
+    document.querySelector('.userrules-info').innerText = rulesNum === 0
+        ? i18n.__('options_userfilter_no_user_rules.message', rulesNum)
         : i18n.__('options_userfilter_info_multi.message', rulesNum);
 };
 
 const setAllowlistInfo = (allowlistNum) => {
-    document.querySelector('.allowlist-info').innerText = allowlistNum === 1
-        ? i18n.__('options_allowlist_info_single.message', allowlistNum)
+    document.querySelector('.allowlist-info').innerText = allowlistNum === 0
+        ? i18n.__('options_allowlist_no_domains.message', allowlistNum)
         : i18n.__('options_allowlist_info_multi.message', allowlistNum);
 };
 

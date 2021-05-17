@@ -236,11 +236,11 @@
     "options_allowlist_inverted": {
         "message": " (Invertiert)"
     },
-    "options_allowlist_info_single": {
-        "message": "%s Domain"
-    },
     "options_allowlist_info_multi": {
-        "message": "%s Domänen"
+        "message": "Domänen: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "Die Liste ist leer"
     },
     "options_allowlist_inverse": {
         "message": "Positivliste invertieren<span class='sp-table-row-info'>Werbung überall anzeigen, <i>außer auf Webseiten</i> die in der Positivliste enthalten sind</span>"
@@ -248,11 +248,11 @@
     "options_userfilter": {
         "message": "Benutzerregeln"
     },
-    "options_userfilter_info_single": {
-        "message": "%s Benutzerregel"
-    },
     "options_userfilter_info_multi": {
-        "message": "%s Benutzerregeln"
+        "message": "Benutzerregeln: %s"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Keine Benutzerregeln"
     },
     "options_userfilter_description": {
         "message": "Sie können Ihre eigenen Regeln zu Benutzerregeln hinzufügen. Diese Option ist für die mit HTML/CSS vertrauten fortgeschrittenen Benutzer empfohlen. Lesen Sie <a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>die Filterregeln-Anleitung</a>, um zu erfahren, wie Sie Ihre eigenen Filterregeln schreiben können."
