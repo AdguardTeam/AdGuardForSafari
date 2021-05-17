@@ -26,7 +26,7 @@ const toggleTab = function () {
         tabId = GENERAL_SETTINGS;
         tab = document.querySelector(tabId);
     }
-
+    const generalSettingsTab = document.querySelector(`[data-tab="${GENERAL_SETTINGS}"]`);
     const antibannerTabs = document.querySelectorAll(`[data-tab="${ANTIBANNER}"]`);
 
     if (prevTabId) {
@@ -34,7 +34,9 @@ const toggleTab = function () {
             antibannerTabs.forEach((el) => {
                 el.classList.remove('active');
             });
-        } else if (prevTabId !== CONTENT_BLOCKERS) {
+        } else if (prevTabId === CONTENT_BLOCKERS) {
+            generalSettingsTab.classList.remove('active');
+        } else {
             document.querySelector(`[data-tab="${prevTabId}"]`).classList.remove('active');
         }
 
@@ -64,6 +66,10 @@ const toggleTab = function () {
         antibannerTabs[0].classList.add('active');
     } else {
         antibannerTabs[0].classList.remove('active');
+    }
+
+    if (tabId === CONTENT_BLOCKERS) {
+        generalSettingsTab.classList.add('active');
     }
 
     prevTabId = tabId;
