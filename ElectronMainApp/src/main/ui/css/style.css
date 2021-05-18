@@ -103,9 +103,12 @@ body {
 }
 .settings-content__desc {
   margin-bottom: 30px;
-  max-width: 410px;
+  max-width: 450px;
   font-size: 16px;
   line-height: 21px;
+}
+.settings-content__desc .link {
+  white-space: nowrap;
 }
 .antibanner-page-title {
   display: flex;
