@@ -123,3 +123,7 @@
 .ace-tm .ace_indent-guide {
 	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWPQ0FD0ZXBzd/wPAAjVAoxeSgNeAAAAAElFTkSuQmCC) right repeat-y;
 }
+
+.ace-tm .ace_marker-layer .ace_selected-word {
+	background: #1e5a1e;
+}
