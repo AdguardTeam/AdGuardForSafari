@@ -394,6 +394,10 @@ a.settings-actions--update-filters.loading:after {
 #userfilter .opts-list li:hover:after{
   display: none;
 }
+#allowlist .back-btn,
+#userfilter .back-btn {
+  margin-top: -2px;
+}
 #allowlist .opts-list .opt-state {
   height: 20px;
 }
