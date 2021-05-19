@@ -1668,7 +1668,7 @@ li.active .toggler:before {
   font-size: 36px;
   line-height: 33px;
   max-width: 540px;
-  margin-bottom: 35px;
+  margin: 0 auto 35px;
 }
 
 .onboarding__desc {
