@@ -1,6 +1,6 @@
 /* global i18n */
 
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, shell } = require('electron');
 const AllowlistFilter = require('./filters/allowlist-filter');
 const UserFilter = require('./filters/user-filter');
 const utils = require('./utils/common-utils');
@@ -295,6 +295,8 @@ PageController.prototype = {
 
         document.querySelector('#about-version-placeholder')
             .textContent = i18n.__('options_about_version.message', this.environmentOptions.appVersion);
+
+        this.resolveIncorrectBlockingLink();
     },
 
     _preventDragAndDrop() {
@@ -331,6 +333,38 @@ PageController.prototype = {
         this.aboutUpdatesBlock.classList.remove('about-updates--rotate');
         this.aboutUpdatesBlock.classList.add('about-updates--hidden');
         this.aboutUpdatesBlock.innerText = i18n.__('options_about_updates_error.message');
+    },
+
+    resolveIncorrectBlockingLink() {
+        const incorrectBlockingLink = document.querySelector('#incorrect-blocking-link');
+        const REPORT_URL = 'https://reports.adguard.com/en/new_issue.html?product_type=Saf';
+        const versionArg = `&product_version=${this.environmentOptions.appVersion}`;
+        const BROWSER_ARG = '&browser=Safari';
+
+        incorrectBlockingLink.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'getUserSettings',
+            }));
+            ipcRenderer.once('getUserSettingsResponse', (e, response) => {
+                const enabledFiltersIds = response.filters['enabled-filters'];
+                const enabledCustomFiltersUrls = response.filters['custom-filters']
+                    .filter((f) => f.enabled)
+                    .map((f) => encodeURIComponent(f.customUrl));
+
+                const filtersArg = enabledFiltersIds.length
+                    ? `&filters=${enabledFiltersIds.join('.')}`
+                    : '';
+
+                const customFiltersArg = enabledCustomFiltersUrls.length
+                    ? `&custom_filters=${enabledCustomFiltersUrls.join(',')}`
+                    : '';
+
+                const incorrectBlockingLinkUrl = REPORT_URL + BROWSER_ARG + versionArg + filtersArg + customFiltersArg;
+                shell.openExternal(incorrectBlockingLinkUrl);
+            });
+        });
     },
 };
 
