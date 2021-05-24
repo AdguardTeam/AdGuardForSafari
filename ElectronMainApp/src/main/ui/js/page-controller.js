@@ -152,7 +152,7 @@ PageController.prototype = {
             const hideOnboardingScreen = !!window.sessionStorage.getItem(hideOnboardingScreenKey);
             const shouldHideOnboardingScreen = !allContentBlockersDisabled || hideOnboardingScreen;
 
-            settingsWrap.style.overflow = shouldHideOnboardingScreen ? 'auto' : 'hidden';
+            settingsWrap.style.overflow = shouldHideOnboardingScreen ? 'initial' : 'hidden';
             onBoardingScreenEl.style.display = shouldHideOnboardingScreen ? 'none' : 'flex';
 
             const hideExtensionsNotification = !!window.sessionStorage.getItem(hideExtensionsNotificationKey);
@@ -184,7 +184,7 @@ PageController.prototype = {
         const ignoreSafariSettingsButtons = document.querySelector('#ignore-safari-extensions-settings-btn');
         ignoreSafariSettingsButtons.addEventListener('click', (e) => {
             e.preventDefault();
-            settingsWrap.style.overflow = 'auto';
+            settingsWrap.style.overflow = 'initial';
             onBoardingScreenEl.style.display = 'none';
             window.sessionStorage.setItem(hideOnboardingScreenKey, true);
         });
