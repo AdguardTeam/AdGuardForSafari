@@ -70,22 +70,28 @@ const UserFilter = function () {
             const selection = editor.getSelection();
             const ranges = selection.getAllRanges();
 
-            const rowsToToggle = ranges
+            const selectedRows = ranges
                 .map((range) => {
                     const [start, end] = [range.start.row, range.end.row];
                     return Array.from({ length: end - start + 1 }, (_, idx) => idx + start);
                 })
                 .flat();
 
-            rowsToToggle.forEach((row) => {
-                const rawLine = editor.session.getLine(row);
-                // if line starts with comment mark we remove it
-                if (rawLine.trim().startsWith(COMMENT_MASK)) {
-                    const lineWithRemovedComment = rawLine.replace(COMMENT_MASK, '');
-                    editor.session.replace(new Range(row, 0, row), lineWithRemovedComment);
-                    // otherwise we add it
+            // check if all selected lines are commented
+            const hasUncommentedRows = selectedRows.some((row) => !editor.session
+                .getLine(row)
+                .trim()
+                .startsWith(COMMENT_MASK));
+
+            selectedRows.forEach((row) => {
+                if (hasUncommentedRows) {
+                    // add comment mark
+                    editor.session.insert({ row, column: 0 }, `${COMMENT_MASK} `);
                 } else {
-                    editor.session.insert({ row, column: 0 }, COMMENT_MASK);
+                    // remove comment mark
+                    const rawLine = editor.session.getLine(row);
+                    const newLine = rawLine.replace(`${COMMENT_MASK} `, '').trim();
+                    editor.session.replace(new Range(row, 0, row), newLine);
                 }
             });
         },
