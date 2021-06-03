@@ -52,7 +52,7 @@ const toggleTab = function () {
     }
 
     tab.style.display = 'flex';
-    window.scrollTo(0, 0);
+    window.scrollTo(0, -500);
 
     if (tabId === ALLOWLIST) {
         if (typeof onHashUpdatedCallback === 'function') {
