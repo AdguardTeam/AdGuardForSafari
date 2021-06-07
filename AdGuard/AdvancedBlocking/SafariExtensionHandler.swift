@@ -38,6 +38,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
                 }
                 
                 let data: [String : Any]? = [
+                    "url": url,
                     "data": try self.contentBlockerController!.getData(url: pageUrl!),
                     "verbose": self.isVerboseLoggingEnabled()
                 ];
