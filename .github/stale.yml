@@ -6,7 +6,10 @@ daysUntilClose: 7
 exemptLabels:
   - 'bug'
   - 'enhancement'
+  - 'Feature Request'
+  - 'Feature_Request'
   - 'feature request'
+  - 'feature_request'
   - 'localization'
 # Label to use when marking an issue as stale
 staleLabel: 'wontfix'
