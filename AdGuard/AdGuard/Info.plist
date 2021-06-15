@@ -23,7 +23,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(AG_BUILD)</string>
 	<key>ElectronTeamID</key>
-	<string>TC3Q7MAJXF</string>
+	<string>$(AG_TEAM)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
