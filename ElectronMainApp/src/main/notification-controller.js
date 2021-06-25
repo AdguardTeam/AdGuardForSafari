@@ -66,7 +66,7 @@ module.exports = (() => {
     };
 
     const getFiltersUpdateResultMessage = (success, updatedFilters) => {
-        const title = success
+        let title = success
             ? i18n.__('options_popup_update_title.message')
             : i18n.__('options_popup_update_error_title.message');
 
@@ -74,6 +74,7 @@ module.exports = (() => {
 
         if (success) {
             if (updatedFilters.length === 0) {
+                title = i18n.__('options_popup_update_not_found_title.message');
                 text.push(i18n.__('options_popup_update_not_found.message'));
             } else {
                 updatedFilters.sort((a, b) => {
