@@ -66,7 +66,7 @@ module.exports = (() => {
         const userFilterEnabled = !!settingsManager.isUserrulesEnabled();
 
         // Collect user rules
-        userRules.getUserRulesText((content) => {
+        userRules.getUserRules((content) => {
             const section = {
                 'filters': {
                     'enabled-groups': enabledGroupIds,
@@ -74,7 +74,7 @@ module.exports = (() => {
                     'custom-filters': customFiltersData,
                     'user-filter': {
                         'enabled': userFilterEnabled,
-                        'rules': content,
+                        'rules': content.join('\n'),
                         'disabled-rules': '',
                     },
                     'allowlist': {
