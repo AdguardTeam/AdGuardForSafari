@@ -19,6 +19,10 @@ module.exports = (function () {
      * @param content Rules text
      */
     const updateUserRulesText = function (content) {
+        if (!settings.isUserrulesEnabled()) {
+            settings.changeUserrulesState(true);
+        }
+
         const lines = content.split('\n') || [];
         rulesStorage.write(USER_FILTER_ID, lines, () => {
             listeners.notifyListeners(events.UPDATE_USER_FILTER_RULES);

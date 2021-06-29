@@ -238,6 +238,10 @@ module.exports = (function () {
      * @param domains
      */
     const updateAllowlistDomains = function (domains) {
+        if (!settings.isAllowlistEnabled()) {
+            settings.changeAllowlistState(true);
+        }
+
         domains = domains || [];
         if (isDefaultAllowlistMode()) {
             clearAllowlisted();

@@ -204,8 +204,8 @@ module.exports = (() => {
         const userRulesData = userFilterSection.rules || '';
 
         // Apply user rules
-        settingsManager.changeUserrulesState(userFilterEnabled);
         userRules.updateUserRulesText(userRulesData);
+        settingsManager.changeUserrulesState(userFilterEnabled);
 
         // Apply custom filters
         const customFiltersData = section.filters['custom-filters'] || [];
