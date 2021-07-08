@@ -47,6 +47,12 @@
     "options_support_rate_description": {
         "message": "Расскажите, что вы думаете об AdGuard"
     },
+    "options_support_discuss_title": {
+        "message": "Обсудить"
+    },
+    "options_support_discuss_description": {
+        "message": "Обсудить на форуме, в социальных сетях или на GitHub"
+    },
     "options_about_update_check": {
         "message": "Проверка обновлений"
     },
@@ -60,7 +66,7 @@
         "message": "AdGuard для Safari обновлен"
     },
     "options_about_updates_error": {
-        "message": "При обновлении возникла ошибка"
+        "message": "Ошибка обновления"
     },
     "options_about_update_downloaded": {
         "message": "Почти обновлено! Перезапустите расширение AdGuard для Safari, чтобы завершить обновление."
@@ -69,7 +75,7 @@
         "message": "Перезапустить"
     },
     "options_about_read_more": {
-        "message": "Узнать больше о продукте"
+        "message": "Узнать больше об этом продукте"
     },
     "options_popup_title_placeholder": {
         "message": "Введите название фильтра"
@@ -114,7 +120,7 @@
         "message": "Импортировать настройки"
     },
     "options_export_logs": {
-        "message": "Экспорт логов"
+        "message": "Экспортировать логи"
     },
     "settings_import": {
         "message": "Импорт настроек"
@@ -146,11 +152,14 @@
             "other": "%s продвинутых правил"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "Проверить обновления"
+    },
     "options_filters_enabled": {
         "message": "Включены:"
     },
     "options_filters_homepage": {
-        "message": "Страница фильтра"
+        "message": "Главная"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s и еще %s"
@@ -248,19 +257,19 @@
     "options_allowlist": {
         "message": "Белый список"
     },
-    "options_whitelist_description": {
+    "options_allowlist_description": {
         "message": "AdGuard не фильтрует рекламу на сайтах, добавленных в белый список."
     },
     "options_allowlist_inverted": {
         "message": " (Инвертирован)"
     },
     "options_allowlist_info_multi": {
-        "message": "Доменов в списке: %s"
+        "message": "Домены: %s"
     },
     "options_allowlist_no_domains": {
-        "message": "Список пуст"
+        "message": "Белый список пуст"
     },
-    "options_whitelist_inverse": {
+    "options_allowlist_inverse": {
         "message": "Инвертировать белый список<span class='sp-table-row-info'>Разблокировать рекламу на всех сайтах, <i>кроме</i> добавленных в белый список</span>"
     },
     "options_userfilter": {
@@ -270,7 +279,10 @@
         "message": "Пользовательских правил: %s"
     },
     "options_userfilter_no_user_rules": {
-        "message": "Нет пользовательских правил"
+        "message": "Список пуст"
+    },
+    "options_userfilter_description": {
+        "message": "Вы можете добавлять свои собственные правила фильтрации в&nbsp;Пользовательские правила. Рекомендуется только для опытных пользователей, знакомых с&nbsp;HTML/CSS. Перейдите по&nbsp;<a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ссылке</a>, чтобы узнать, как составлять правила фильтрации."
     },
     "options_userfilter_import": {
         "message": "Импорт"
@@ -300,7 +312,7 @@
         "message": "Версия фильтра, который вы хотите обновить, та же или более старая"
     },
     "options_popup_update_not_found_title": {
-        "message": "Все фильтры в актуальном состоянии"
+        "message": "Все фильтры обновлены"
     },
     "options_popup_update_not_found": {
         "message": "Обновления не найдены"
@@ -387,7 +399,7 @@
         "message": "Блокировка в Safari включена"
     },
     "tray_menu_protection_stop": {
-        "message": "Блокировка в Safari приостановлена"
+        "message": "Блокировка в Safari отключена"
     },
     "options_last_update": {
         "message": "Последнее обновление:"
@@ -462,37 +474,43 @@
         "message": "GitHub"
     },
     "onboarding_safari_title": {
-        "message": "Необходимо ваше разрешение"
+        "message": "Требуется разрешение"
     },
     "onboarding_safari_desc": {
-        "message": "Поставьте галочки напротив расширений AdGuard в настройках Safari"
+        "message": "Поставьте галочки напротив расширений AdGuard в настройках Safari."
     },
     "onboarding_safari_link": {
         "message": "Что делают эти расширения?"
     },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "Иконка AdGuard Safari"
+    },
     "onboarding_tooltip_adguard_safari_icon_info": {
-        "message": "Используется для управления настройками AdGuard для Safari. Например, приостановить блокировку на веб-сайте или заблокировать рекламу вручную."
+        "message": "Вы можете использовать этот значок для управления настройками AdGuard для Safari. Например, приостановить блокировку на сайте или заблокировать рекламу вручную."
     },
     "onboarding_tooltip_adguard_safari_icon_web_page_content": {
-        "message": "Доступ к содержимому веб-страницы необходим для работы функции «ручной блокировки» рекламы."
+        "message": "Доступ к содержимому веб-страницы необходим, чтобы работал инструмент ручной блокировки контента."
     },
     "onboarding_tooltip_adguard_safari_icon_browsing_history": {
-        "message": "Доступ к истории просмотров необходим, чтобы определить, работает ли AdGuard на веб-сайте, который вы сейчас просматриваете."
+        "message": "Доступ к истории поиска необходим, чтобы понять, работает ли AdGuard на сайте, на котором вы находитесь."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "Расширенная блокировка AdGuard"
     },
     "onboarding_tooltip_adguard_advanced_blocking_info": {
-        "message": "Применяет расширенные правила блокировки, которые не поддерживаются Safari Content Blocking API"
+        "message": "Это расширение применяет дополнительные правила блокировки, которые не поддерживаются Safari Content Blocking API."
     },
     "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
-        "message": "Доступ к содержимому веб-страницы требуется для работы расширенных косметических правил."
+        "message": "Доступ к содержимому веб-страницы необходим, чтобы работали расширенные косметические правила."
     },
     "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
-        "message": "Доступ к истории просмотров необходим для определения веб-сайта, который вы пытаетесь открыть, чтобы найти и применить нужные правила блокировки."
+        "message": "Доступ к истории браузера необходим, чтобы понять, какие расширенные правила блокировки нужно применить для сайта, который вы хотите открыть."
     },
     "onboarding_tooltip_adguard_safari_content_blockers": {
-        "message": "6 расширений-блокировщиков контента"
+        "message": "6 расширений для блокировки контента"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "В Сафари максимальное количество правил блокировки контента для одного расширения ограничено 50 000. Этого недостаточно, чтобы заблокировать все виды рекламы и трекинга. Поэтому необходимо 6 расширений, чтобы увеличить этот лимит до 300 000."
+        "message": "Safari ограничивает максимальное количество правил блокировки контента до 50 000 на расширение. Этого недостаточно, чтобы охватить всю рекламу и трекеры, которые блокирует AdGuard. Мы используем 6 расширений, чтобы увеличить лимит до 300 000."
     },
     "onboarding_safari_btn": {
         "message": "Открыть настройки"
@@ -579,7 +597,7 @@
         "message": "Вам необходимо включить все расширения-блокировщики контента от AdGuard для корректной блокировки рекламы в Safari"
     },
     "settings_notification_update_interval": {
-        "message": "Внимание! Устаревшие фильтры снижают качество защиты, поэтому важно обновлять их регулярно."
+        "message": "Обратите внимание, что устаревшие фильтры ухудшают качество защиты, поэтому важно обновлять их."
     },
     "options_cb_general_title": {
         "message": "AdGuard Основные"

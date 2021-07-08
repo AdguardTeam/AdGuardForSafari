@@ -47,6 +47,12 @@
     "options_support_rate_description": {
         "message": "Schreiben Sie uns, was Sie über AdGuard denken"
     },
+    "options_support_discuss_title": {
+        "message": "Diskutieren"
+    },
+    "options_support_discuss_description": {
+        "message": "Diskutieren Sie in unserem Forum, in den sozialen Netzwerken oder auf GitHub"
+    },
     "options_about_update_check": {
         "message": "Auf Aktualisierungen wird geprüft"
     },
@@ -59,11 +65,17 @@
     "options_about_updates_not_found": {
         "message": "AdGuard für Safari ist aktuell"
     },
+    "options_about_updates_error": {
+        "message": "Fehler bei der Aktualisierung"
+    },
     "options_about_update_downloaded": {
         "message": "Fast geschafft! Starten Sie AdGuard für Safari neu, um die Aktualisierung abzuschließen."
     },
     "options_about_update_relaunch": {
         "message": "Neu starten"
+    },
+    "options_about_read_more": {
+        "message": "Mehr über dieses Produkt erfahren"
     },
     "options_popup_title_placeholder": {
         "message": "Filternamen eingeben"
@@ -87,7 +99,7 @@
         "message": "AdGuard für Safari - Einstellungen"
     },
     "options_settings_import_wrong_file_extension": {
-        "message": ""
+        "message": "Die Dateierweiterung sollte .json lauten"
     },
     "options_settings_import_error": {
         "message": "Fehler beim Importieren der Einstellungen"
@@ -131,8 +143,14 @@
             "other": "%s erweiterte Regeln"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "Nach Aktualisierungen suchen"
+    },
     "options_filters_enabled": {
         "message": "Aktiviert:"
+    },
+    "options_filters_homepage": {
+        "message": "Startseite"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s und %s weitere"
@@ -150,7 +168,7 @@
         "message": "Aktualisiert: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "Leider verfügen Sie noch über keine Eigenen Filter"
+        "message": "Es wurden noch keine Eigenen Filter angelegt"
     },
     "options_filters_empty_custom_add_button": {
         "message": "Eigenen Filter hinzufügen"
@@ -228,22 +246,22 @@
         "message": "Alle Filter aktualisieren"
     },
     "options_allowlist": {
-        "message": "Positivliste"
+        "message": "Freigabeliste"
     },
     "options_allowlist_description": {
-        "message": "AdGuard filtert keine Webseiten, die in der Positivliste enthalten sind."
+        "message": "AdGuard filtert keine Webseiten aus der Freigabeliste."
     },
     "options_allowlist_inverted": {
         "message": " (Invertiert)"
     },
     "options_allowlist_info_multi": {
-        "message": "Domänen: %s"
+        "message": "Domains: %s"
     },
     "options_allowlist_no_domains": {
-        "message": "Die Liste ist leer"
+        "message": "Freigabeliste ist leer"
     },
     "options_allowlist_inverse": {
-        "message": "Positivliste invertieren<span class='sp-table-row-info'>Werbung überall anzeigen, <i>außer auf Webseiten</i> die in der Positivliste enthalten sind</span>"
+        "message": "Freigabeliste invertieren<span class='sp-table-row-info'>Werbung überall zulassen, <i>außer auf Webseiten</i> aus der Freigabeliste</span>"
     },
     "options_userfilter": {
         "message": "Benutzerregeln"
@@ -252,7 +270,7 @@
         "message": "Benutzerregeln: %s"
     },
     "options_userfilter_no_user_rules": {
-        "message": "Keine Benutzerregeln"
+        "message": "Liste ist leer"
     },
     "options_userfilter_description": {
         "message": "Sie können Ihre eigenen Regeln zu Benutzerregeln hinzufügen. Diese Option ist für die mit HTML/CSS vertrauten fortgeschrittenen Benutzer empfohlen. Lesen Sie <a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>die Filterregeln-Anleitung</a>, um zu erfahren, wie Sie Ihre eigenen Filterregeln schreiben können."
@@ -267,7 +285,7 @@
         "message": "Fehler beim Importieren der Regeln"
     },
     "options_popup_import_rules_wrong_file_extension": {
-        "message": ""
+        "message": "Die Dateierweiterung sollte .txt lauten"
     },
     "options_show_app_updated_notification": {
         "message": "Über Updates der Erweiterung benachrichtigen"
@@ -280,6 +298,9 @@
     },
     "options_popup_update_version_error": {
         "message": "Die Version des Filters, den Sie zu aktualisieren versuchen, ist identisch oder älter"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Alle Filter sind aktuell"
     },
     "options_popup_update_not_found": {
         "message": "Keine Updates gefunden"
@@ -401,8 +422,44 @@
     "options_github": {
         "message": "GitHub"
     },
+    "onboarding_safari_title": {
+        "message": "Benötigt Ihre Zustimmung"
+    },
     "onboarding_safari_desc": {
         "message": "Aktivieren Sie die Kontrollkästchen neben den AdGuard-Erweiterungen in den Safari-Einstellungen"
+    },
+    "onboarding_safari_link": {
+        "message": "Was machen diese Erweiterungen?"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "AdGuard Safari-Symbol"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "Mit diesem Symbol können Sie die Einstellungen von AdGuard für Safari verwalten. Zum Beispiel können Sie das Sperren auf einer Webseite pausieren oder eine Werbung manuell sperren."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Der Zugriff auf den Inhalt der Webseite ist erforderlich, damit das \"manuelle Sperrwerkzeug\" verwendet werden kann."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Der Zugriff auf den Browserverlauf ist erforderlich, um zu erkennen, ob AdGuard auf der aktuell besuchten Website verwendet werden kann."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard — Erweitertes sperren"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Diese Erweiterung wendet erweiterte Sperrregeln, die von der API zum Sperren von Inhalten von Safari nicht unterstützt werden."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Der Zugriff auf Webseiteninhalte ist erforderlich, damit die erweiterten kosmetischen Regeln ausgeführt werden können."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Der Zugriff auf den Browserverlauf ist erforderlich, um zu erkennen, welche zu öffnende Website Sie aufrufen, so dass feststellen werden kann, welche erweiterten Sperrregeln angewendet werden sollten."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 Erweiterungen zum Sperren von Inhalten"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari begrenzt die maximale Anzahl von Regeln zum Sperren von Inhalten mit 50.000 pro Erweiterung. Dies ist nicht genug, um alle Arten von Werbung und Trackern zu verarbeiten, die AdGuard sperren kann. Deshalb stellen wir 6 Erweiterungen zur Verfügung und erhöhen damit das Maximum auf 300.000 Einträge."
     },
     "onboarding_safari_btn": {
         "message": "Einstellungen öffnen"
@@ -485,6 +542,9 @@
     "settings_notification_cb_extensions_text": {
         "message": "Sie sollten alle Inhaltsblocker-Erweiterungen von AdGuard aktivieren, um ein erfolgreiches Sperren von Werbeanzeigen in Safari zu gewährleisten."
     },
+    "settings_notification_update_interval": {
+        "message": "Bitte beachten Sie, dass veraltete Filter die Qualität des Schutzes verringern, daher ist es wichtig, sie auf dem neuesten Stand zu halten."
+    },
     "options_cb_general_title": {
         "message": "AdGuard Allgemein"
     },
@@ -525,7 +585,7 @@
         "message": "Benutzerregeln"
     },
     "allowlist_name": {
-        "message": "Positivliste"
+        "message": "Freigabeliste"
     },
     "window_close_dialog_message": {
         "message": "AdGuard im Hintergrund laufen lassen?"

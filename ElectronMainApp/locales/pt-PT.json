@@ -15,7 +15,7 @@
         "message": "Escolheu confiar neste filtro"
     },
     "options_support": {
-        "message": "Assistência"
+        "message": "Assistência técnica"
     },
     "options_support_faq_title": {
         "message": "FAQ"
@@ -30,7 +30,7 @@
         "message": "Se algo não funcionar corretamente no programa"
     },
     "options_support_incorrect_blocking_title": {
-        "message": "Denunciar bloqueio incorrecto"
+        "message": "Denunciar bloqueio incorreto"
     },
     "options_support_incorrect_blocking_description": {
         "message": "Se você vir um anúncio perdido ou um sítio \"quebrado\""
@@ -47,23 +47,35 @@
     "options_support_rate_description": {
         "message": "Diga-nos o que tu pensas sobre AdGuard"
     },
+    "options_support_discuss_title": {
+        "message": "Discutir"
+    },
+    "options_support_discuss_description": {
+        "message": "Discuta em nosso fórum, em redes sociais ou no GitHub"
+    },
     "options_about_update_check": {
-        "message": "Procurando por actualizações"
+        "message": "A procurar atualizações"
     },
     "options_about_title": {
         "message": "AdGuard para Safari"
     },
     "options_about_updating": {
-        "message": "A actualizar o AdGuard para Safari"
+        "message": "A atualizar o AdGuard para Safari"
     },
     "options_about_updates_not_found": {
-        "message": "O AdGuard para Safari está actualizado"
+        "message": "O AdGuard para Safari está atualizado"
+    },
+    "options_about_updates_error": {
+        "message": "Erro ao atualizar"
     },
     "options_about_update_downloaded": {
-        "message": "A actualização está quase completa! Abra novamente o AdGuard para safari para finalizar a actualização."
+        "message": "A atualização está quase completa! Abra novamente o AdGuard para safari para finalizar a atualização."
     },
     "options_about_update_relaunch": {
         "message": "Abra novamente"
+    },
+    "options_about_read_more": {
+        "message": "Leia mais sobre este produto"
     },
     "options_popup_title_placeholder": {
         "message": "Insira o nome do filtro"
@@ -131,8 +143,14 @@
             "other": "%s regras avançadas"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "Verificar atualizações"
+    },
     "options_filters_enabled": {
-        "message": "Activado:"
+        "message": "Ativado:"
+    },
+    "options_filters_homepage": {
+        "message": "Página inicial"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s e %s mais"
@@ -141,16 +159,16 @@
         "message": "%s e %s"
     },
     "options_filters_no_enabled": {
-        "message": "Nenhum filtro activado"
+        "message": "Nenhum filtro ativado"
     },
     "options_filters_version": {
         "message": "versão %s"
     },
     "options_filters_updated": {
-        "message": "actualizado: %s"
+        "message": "atualizado: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "Desculpe, mas ainda não tem nenhum filtro personalizado"
+        "message": "Tu ainda não tens filtros personalizados"
     },
     "options_filters_empty_custom_add_button": {
         "message": "Adicionar filtro personalizado"
@@ -225,19 +243,34 @@
         "message": "Subscreva"
     },
     "options_filters_check_filters_update": {
-        "message": "Verificar actualizações de filtros"
+        "message": "Verificar atualizações de filtros"
     },
-    "options_whitelist": {
+    "options_allowlist": {
         "message": "Lista de permissões"
     },
-    "options_whitelist_description": {
-        "message": "O AdGuard não irá filtrar nenhum site da listas de permissões."
+    "options_allowlist_description": {
+        "message": "O AdGuard não irá filtrar nenhum sítio da listas de permissões."
     },
-    "options_whitelist_inverse": {
+    "options_allowlist_inverted": {
+        "message": " (Invertida)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "Domínios: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "Lsta de permissões está vazia"
+    },
+    "options_allowlist_inverse": {
         "message": "Inverter listas de permissões<span class='sp-table-row-info'>Desbloquear toda a publicidade<i>excepto</i> a listas de permissões</span>"
     },
     "options_userfilter": {
         "message": "Regras do utilizador"
+    },
+    "options_userfilter_info_multi": {
+        "message": "Regras do utilizador: %s"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Lsta está vazia"
     },
     "options_userfilter_description": {
         "message": "Pode adicionar as suas próprias regras ao &nbsp;este filtro. Esta opção é &nbsp;recomendada para utilizadores avançados familiarizados com HTML/CSS. Leia o <a class='spl-user-descr-link'href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'> tutorial de regras de filtro </a > para &nbsp;aprender como &nbsp; escrever as suas próprias regras de filtro."
@@ -255,49 +288,52 @@
         "message": "A extensão do ficheiro deve ser .txt"
     },
     "options_show_app_updated_notification": {
-        "message": "Notificar actualização das extensões"
+        "message": "Notificar atualização das extensões"
     },
     "options_popup_update_title": {
-        "message": "Filtros actualizados com sucesso"
+        "message": "Filtros atualizados com sucesso"
     },
     "options_popup_update_error_title": {
-        "message": "Erro de actualização dos filtros"
+        "message": "Erro de atualização dos filtros"
     },
     "options_popup_update_version_error": {
-        "message": "A versão do filtro que tu estás tentando actualizar é a mesma ou mais antiga"
+        "message": "A versão do filtro que tu estás tentando atualizar é a mesma ou mais antiga"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Todos os filtros estão atualizados"
     },
     "options_popup_update_not_found": {
-        "message": "Não há actualizações disponíveis"
+        "message": "Não há atualizações disponíveis"
     },
     "options_popup_update_error": {
-        "message": "Erro ao actualizar. Por favor, tente mais tarde."
+        "message": "Erro ao atualizar. Por favor, tente mais tarde."
     },
     "options_popup_update_updated": {
-        "message": "\"$1\" actualizado para a versão $2"
+        "message": "\"$1\" atualizado para a versão $2"
     },
     "options_popup_update_updated_more": {
         "message": {
-            "one": "%s filtro actualizado: $2",
-            "other": "%s filtros actualizados: $2"
+            "one": "%s filtro atualizado: $2",
+            "other": "%s filtros atualizados: $2"
         }
     },
     "options_popup_version_update_title": {
-        "message": "O AdGuard para o Safari acabou de ser actualizado para a versão $1."
+        "message": "O AdGuard para o Safari acabou de ser atualizado para a versão $1."
     },
     "options_popup_version_update_description_minor": {
         "message": "Esta versão contém principalmente correcções de bugs e pequenas melhorias."
     },
     "options_popup_version_update_description_major": {
-        "message": "Esta é uma grande actualização de extensão que traz muitos recursos novos e melhorias."
+        "message": "Esta é uma grande atualização de extensão que traz muitos recursos novos e melhorias."
     },
     "notification_content_blocker_overlimit_title": {
         "message": "Aviso"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Muitos filtros activados. O Safari não pode usar mais de 50.000 regras num grupo."
+        "message": "Muitos filtros ativados. O Safari não pode usar mais de 50.000 regras num grupo."
     },
     "options_content_blocker_overlimit": {
-        "message": "Muitos filtros activados. O Safari não pode usar mais de 50.000 regras num grupo."
+        "message": "Muitos filtros ativados. O Safari não pode usar mais de 50.000 regras num grupo."
     },
     "options_filters_list_search_placeholder": {
         "message": "Pesquisar"
@@ -330,7 +366,7 @@
         "message": "Colar"
     },
     "main_menu_select-all": {
-        "message": "Seleccionar Todos"
+        "message": "Selecionar todos"
     },
     "tray_menu_about": {
         "message": "Acerca de"
@@ -339,7 +375,7 @@
         "message": "Preferências"
     },
     "tray_menu_check_updates": {
-        "message": "Verificar actualizações de filtros"
+        "message": "Verificar atualizações de filtros"
     },
     "tray_menu_launch_at_startup": {
         "message": "Iniciar o AdGuard ao iniciar a sessão"
@@ -354,7 +390,7 @@
         "message": "O bloqueio de anúncios no Safari está desligado"
     },
     "options_last_update": {
-        "message": "Ultima actualização:"
+        "message": "Ultima atualização:"
     },
     "options_about": {
         "message": "Acerca de"
@@ -363,10 +399,10 @@
         "message": "Bloqueadores de conteúdo"
     },
     "options_content_blockers_desc": {
-        "message": "Bloqueadores de anúncios activados:%s de 6 (cada um pode conter até 50 000 regras)"
+        "message": "Bloqueadores de anúncios ativados:%s de 6 (cada um pode conter até 50 000 regras)"
     },
     "options_content_blockers_disabled_desc": {
-        "message": "Os bloqueadores de anúncios estão desactivados"
+        "message": "Os bloqueadores de anúncios estão desativados"
     },
     "options_compare_btn": {
         "message": "Como eles comparam"
@@ -386,8 +422,44 @@
     "options_github": {
         "message": "GitHub"
     },
+    "onboarding_safari_title": {
+        "message": "Precisamos da tua permissão"
+    },
     "onboarding_safari_desc": {
-        "message": "Marque as caixas ao lado das extensões do AdGuard nas preferências do Safari"
+        "message": "Marque as caixas ao lado das extensões do AdGuard nas preferências do Safari."
+    },
+    "onboarding_safari_link": {
+        "message": "O que essas extensões fazem?"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "Ícone do Safari do AdGuard"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "Pode usar este ícone para gerir as definições do AdGuard para o Safari. Por exemplo, pause o bloqueio num site ou bloqueie um anúncio manualmente."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "O acesso ao conteúdo da página da Web é necessário para que a 'ferramenta de bloqueio manual' funcione."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "O acesso ao histórico de navegação é necessário para detectar se o AdGuard funciona no sítio que você está visitando no momento."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "Bloqueio avançado do AdGuard"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Esta extensão aplica regras de bloqueio avançadas que não são suportadas pela API do bloqueador de conteúdo do Safari."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "O acesso ao conteúdo da página da Web é necessário para que as regras cosméticas avançadas funcionem."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "O acesso ao histórico de navegação é necessário para detectar o sítio que tu estás tentando abrir, de modo que ele possa encontrar quais regras de bloqueio avançadas devem ser aplicadas."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 extensões de bloqueio de conteúdo"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "O Safari limita o número máximo de regras de bloqueio de conteúdo com 50.000 por extensão. Isso não é suficiente para lidar com todos os tipos de anúncios e rastreadores que o AdGuard bloqueia. É por isso que fornecemos 6 extensões, aumentando assim esse limite para 300.000."
     },
     "onboarding_safari_btn": {
         "message": "Abrir preferências"
@@ -402,13 +474,13 @@
         "message": "Versão %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "As regras de utilizador foram actualizadas"
+        "message": "As regras de utilizador foram atualizadas"
     },
     "notification_user_filter_updated_desc": {
         "message": "Uma nova regra foi adicionada às regras de Utilizador:"
     },
     "options_filters_update_period": {
-        "message": "I​ntervalo entre actualizações"
+        "message": "I​ntervalo entre atualizações "
     },
     "options_filters_update_period_number": {
         "message": {
@@ -417,7 +489,7 @@
         }
     },
     "options_filters_period_not_update": {
-        "message": "Não actualizar"
+        "message": "Não atualizar"
     },
     "options_filters_custom_remove": {
         "message": "remover"
@@ -435,7 +507,7 @@
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
     "options_enable_hardware_acceleration": {
-        "message": "Activar aceleração de hardware"
+        "message": "Ativar aceleração de hardware"
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "Activa a aceleração de hardware para a janela de definições, é necessário reiniciar a aplicação"
@@ -459,16 +531,19 @@
         "message": "Corrigir"
     },
     "settings_notification_extensions_title": {
-        "message": "Algumas extensões do AdGuard estão desactivadas"
+        "message": "Algumas extensões do AdGuard estão desativadas"
     },
     "settings_notification_extensions_text": {
-        "message": "Deve activar todas as extensões do AdGuard para o correcto bloqueio de anúncios no Safari"
+        "message": "Deve ativar todas as extensões do AdGuard para o correto bloqueio de anúncios no Safari"
     },
     "settings_notification_cb_extensions_title": {
-        "message": "Algumas extensões do bloqueador de conteúdo do AdGuard estão desactivadas"
+        "message": "Algumas extensões do bloqueador de conteúdo do AdGuard estão desativadas"
     },
     "settings_notification_cb_extensions_text": {
-        "message": "Deve activar todas as extensões do bloqueio de conteúdo do AdGuard para o correcto bloqueio de anúncios no Safari"
+        "message": "Deve ativar todas as extensões do bloqueio de conteúdo do AdGuard para o correto bloqueio de anúncios no Safari"
+    },
+    "settings_notification_update_interval": {
+        "message": "Observe que os filtros desatualizados diminuem a qualidade da protecção, por isso é importante mantê-los atualizados."
     },
     "options_cb_general_title": {
         "message": "AdGuard Geral"
@@ -495,10 +570,10 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "O limite de 50.000 regras foi excedido. Desactive as regras desnecessárias para que a aplicação funcione correctamente.<br/>Regras activadas no momento:%s (regras desactivadas: $2)"
+        "message": "O limite de 50.000 regras foi excedido. Desative as regras desnecessárias para que a aplicação funcione corretamente.<br/>Regras ativadas no momento:%s (regras desativadas: $2)"
     },
     "options_cb_disabled_warning": {
-        "message": "Desactivado no Safari"
+        "message": "Desativado no Safari"
     },
     "options_cb_compilation_warning": {
         "message": "A compilação falhou"
@@ -509,11 +584,14 @@
     "userfilter_name": {
         "message": "Regras do utilizador"
     },
+    "allowlist_name": {
+        "message": "Lista de permissões"
+    },
     "window_close_dialog_message": {
         "message": "Manter o AdGuard executando em segundo plano?"
     },
     "window_close_dialog_detail": {
-        "message": "Isto é crucial para que o AdGuard possa manter o processo principal funcionando em segundo plano, caso contrário não será capaz de verificar automaticamente por actualizações de filtro e gerir a filtragem."
+        "message": "Isto é crucial para que o AdGuard possa manter o processo principal funcionando em segundo plano, caso contrário não será capaz de verificar automaticamente por atualizações de filtro e gerir a filtragem."
     },
     "window_close_dialog_checkbox": {
         "message": "Lembrar da minha escolha"
@@ -528,10 +606,10 @@
         "message": "Cancelar"
     },
     "folder_check_dialog_message": {
-        "message": "O AdGuard para Safari deve ser executado na pasta de Aplicativos."
+        "message": "O AdGuard para Safari deve ser executado na pasta de Aplicações."
     },
     "folder_check_dialog_detail": {
-        "message": "Tu desejas movê-lo para a pasta de Aplicativos agora?"
+        "message": "Tu desejas movê-lo para a pasta de Aplicações agora?"
     },
     "folder_check_dialog_move": {
         "message": "Mover"

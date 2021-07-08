@@ -47,6 +47,12 @@
     "options_support_rate_description": {
         "message": "告訴我們您對於 AdGuard 有什麼想法"
     },
+    "options_support_discuss_title": {
+        "message": "討論"
+    },
+    "options_support_discuss_description": {
+        "message": "於我們的論壇、社群網路或 GitHub 上討論"
+    },
     "options_about_update_check": {
         "message": "正在檢查更新"
     },
@@ -59,11 +65,17 @@
     "options_about_updates_not_found": {
         "message": "AdGuard for Safari 為最新的"
     },
+    "options_about_updates_error": {
+        "message": "更新出錯"
+    },
     "options_about_update_downloaded": {
         "message": "幾乎為最新的！重新啟動 AdGuard for Safari 以完成更新。"
     },
     "options_about_update_relaunch": {
         "message": "重新啟動"
+    },
+    "options_about_read_more": {
+        "message": "閱讀更多關於此產品"
     },
     "options_popup_title_placeholder": {
         "message": "輸入過濾器名稱"
@@ -131,8 +143,14 @@
             "other": "%s 進階的規則"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "檢查更新"
+    },
     "options_filters_enabled": {
         "message": "已啟用："
+    },
+    "options_filters_homepage": {
+        "message": "首頁"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s 和 %s 更多"
@@ -150,10 +168,10 @@
         "message": "已更新於：%s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "抱歉，但您尚無任何自訂的過濾器"
+        "message": "您尚無任何自訂的過濾器"
     },
     "options_filters_empty_custom_add_button": {
-        "message": "增加自訂的過濾器"
+        "message": "新增自訂的過濾器"
     },
     "options_filters_custom_import_file": {
         "message": "匯入檔案"
@@ -171,7 +189,7 @@
         "message": "輸入一個過濾器訂閱之有效的網址。"
     },
     "options_filters_custom_step_one_url_desc_more": {
-        "message": "AdGuard 將增加此過濾器訂閱。"
+        "message": "AdGuard 將新增此過濾器訂閱。"
     },
     "options_filters_custom_step_one_cancel": {
         "message": "取消"
@@ -227,20 +245,32 @@
     "options_filters_check_filters_update": {
         "message": "檢查過濾器更新"
     },
-    "options_whitelist": {
+    "options_allowlist": {
         "message": "允許清單"
     },
-    "options_whitelist_description": {
+    "options_allowlist_description": {
         "message": "AdGuard 不過濾來自允許清單中的網站。"
     },
-    "options_whitelist_inverse": {
+    "options_allowlist_inverted": {
+        "message": "（反向的）"
+    },
+    "options_allowlist_info_multi": {
+        "message": "網域：%s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "允許清單為空"
+    },
+    "options_allowlist_inverse": {
         "message": "反向允許清單<span class='sp-table-row-info'><i>除</i>來自允許清單中的網站之外，解除封鎖各處廣告</span>"
     },
     "options_userfilter": {
         "message": "使用者規則"
     },
+    "options_userfilter_info_multi": {
+        "message": "使用者規則: %s"
+    },
     "options_userfilter_description": {
-        "message": "您可於此增加您自己的規則。對於熟悉 HTML/CSS 之進階的用戶，此選項是被建議的。閱讀<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>過濾器規則導覽</a>以學習如何撰寫您自己的過濾器規則。"
+        "message": "您可於此新增您自己的規則。對於熟悉 HTML/CSS 之進階的用戶，此選項是被建議的。閱讀<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>過濾器規則導覽</a>以學習如何撰寫您自己的過濾器規則。"
     },
     "options_userfilter_import": {
         "message": "匯入"
@@ -265,6 +295,9 @@
     },
     "options_popup_update_version_error": {
         "message": "您正在試圖更新的過濾器之版本為相同的或較舊的"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "所有的過濾器是最新的"
     },
     "options_popup_update_not_found": {
         "message": "無已發現的更新"
@@ -386,8 +419,44 @@
     "options_github": {
         "message": "GitHub"
     },
+    "onboarding_safari_title": {
+        "message": "需要您的權限"
+    },
     "onboarding_safari_desc": {
-        "message": "在 Safari 偏好設定中勾選緊鄰著 AdGuard 延伸功能之核取框"
+        "message": "在 Safari 偏好設定中勾選緊鄰著 AdGuard 延伸功能之核取框。"
+    },
+    "onboarding_safari_link": {
+        "message": "這些延伸功能做什麼呢？"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "AdGuard Safari 圖像"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "您可使用此圖像以管理 AdGuard for Safari 設定。例如，暫停於網站上的封鎖，或手動地封鎖廣告。"
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "為了使'手動的封鎖工具'運作，網頁內容權限是必須的。"
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "瀏覽記錄權限是必須的以偵測 AdGuard 是否於您目前正在訪問的網站上運作。"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard 進階的封鎖"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "此延伸功能套用不被 Safari 內容阻擋應用程式介面（API）支援之進階的封鎖規則。"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "網頁內容權限是必須的以使進階之修飾的（cosmetic）規則運作。"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "為了偵測您正在試圖開啟什麼網站，瀏覽記錄權限是必須的以便它可知道什麼進階的封鎖規則應被套用。"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 個內容阻擋延伸功能"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari 以每個延伸功能 50,000 項規則限制內容阻擋規則之最大數量。這不足以處理 AdGuard 封鎖之各種各樣的廣告和追蹤器。那是為什麼我們提供 6 個延伸功能，從而增加該限制到 300,000 項規則。"
     },
     "onboarding_safari_btn": {
         "message": "開啟偏好設定"
@@ -470,6 +539,9 @@
     "settings_notification_cb_extensions_text": {
         "message": "為了在 Safari 中之正確的廣告封鎖，您應啟用所有的 AdGuard 內容阻擋器延伸功能"
     },
+    "settings_notification_update_interval": {
+        "message": "請注意過時的過濾器降低防護的品質，因此保持它們最新是重要的。"
+    },
     "options_cb_general_title": {
         "message": "AdGuard 一般的"
     },
@@ -508,6 +580,9 @@
     },
     "userfilter_name": {
         "message": "使用者規則"
+    },
+    "allowlist_name": {
+        "message": "允許清單"
     },
     "window_close_dialog_message": {
         "message": "保持 AdGuard 在背景執行嗎？"

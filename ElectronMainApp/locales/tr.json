@@ -6,7 +6,7 @@
         "message": "Güvenilir"
     },
     "options_popup_trusted_filter_description": {
-        "message": "Güvenilir filtreler, yanlış ellerde tehlikeli olabilecek güçlü filtreleme kuralı değiştiricileri kullanabilir. Tam anlamıyla güvenmediğiniz sürece bu kutuyu işaretlemeyin."
+        "message": "Güvenilir filtreler, yanlış ellerde tehlikeli olabilecek güçlü filtreleme kuralı değiştiricileri kullanabilir. Tam anlamıyla güvenmediğiniz sürece bu kutucuğu işaretlemeyin."
     },
     "options_filters_filter_trusted_tag": {
         "message": "güvenilir"
@@ -27,7 +27,7 @@
         "message": "Hata bildir"
     },
     "options_support_bug_report_description": {
-        "message": "Eğer programda bir şey düzgün çalışmıyorsa"
+        "message": "Programda bir şey düzgün çalışmıyorsa"
     },
     "options_support_incorrect_blocking_title": {
         "message": "Hatalı engellemeyi bildir"
@@ -36,7 +36,7 @@
         "message": "Kaçan bir reklam veya \"bozuk\" bir site görürseniz"
     },
     "options_support_feedback_title": {
-        "message": "Geri bildirimde bulunun"
+        "message": "Geri bildirimde bulun"
     },
     "options_support_feedback_description": {
         "message": "Yeni özellik isteği veya öneri gönderin"
@@ -47,8 +47,14 @@
     "options_support_rate_description": {
         "message": "AdGuard hakkında ne düşündüğünüzü bize bildirin"
     },
+    "options_support_discuss_title": {
+        "message": "Tartışın"
+    },
+    "options_support_discuss_description": {
+        "message": "Forumumuzda, sosyal ağlarda veya GitHub'da tartışın"
+    },
     "options_about_update_check": {
-        "message": "Checking for updates"
+        "message": "Güncellemeler denetleniyor"
     },
     "options_about_title": {
         "message": "Safari için AdGuard"
@@ -59,11 +65,17 @@
     "options_about_updates_not_found": {
         "message": "AdGuard for Safari is up to date"
     },
+    "options_about_updates_error": {
+        "message": "Güncelleme hatası"
+    },
     "options_about_update_downloaded": {
         "message": "Neredeyse güncel! Güncellemeyi bitirmek için Safari için Adguard'ı yeniden başlat."
     },
     "options_about_update_relaunch": {
         "message": "Relaunch"
+    },
+    "options_about_read_more": {
+        "message": "Bu ürün hakkında daha fazla bilgi edinin"
     },
     "options_popup_title_placeholder": {
         "message": "Filtre adı girin"
@@ -75,7 +87,7 @@
         "message": "Pencereyi kapat"
     },
     "tray_menu_export_logs": {
-        "message": "Günlükleri ve sistem bilgilerini dışa aktar..."
+        "message": "Günlükleri ve sistem bilgisini dışa aktar..."
     },
     "name": {
         "message": "AdGuard Reklam Engelleyicisi"
@@ -99,7 +111,7 @@
         "message": "Safari için AdGuard ücretsiz ve açık kaynaklı bir yazılımdır. Geri bildirimlerinizi ve katkılarınızı memnuniyetle bekleriz. Bir hata bildirmek veya bir özellik tavsiye etmek istiyorsanız, lütfen <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>bizim Github sayfamıza</a> gidin."
     },
     "options_allow_acceptable_ads": {
-        "message": "Arama sonucu reklamlarına ve sitelerin kendi tanıtım reklamlarına izin ver"
+        "message": "Arama ağı ve sitelerin öz-tanıtım reklamlarına izin ver"
     },
     "options_export_settings": {
         "message": "Export settings"
@@ -131,8 +143,14 @@
             "other": "%s gelişmiş kural"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "Güncellemeleri denetle"
+    },
     "options_filters_enabled": {
         "message": "Etkin:"
+    },
+    "options_filters_homepage": {
+        "message": "Ana sayfa"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s ve %s daha"
@@ -150,7 +168,7 @@
         "message": "güncellendi: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "Üzgünüz, henüz hiç özel filtreniz yok"
+        "message": "Henüz herhangi bir özel filtreniz yok"
     },
     "options_filters_empty_custom_add_button": {
         "message": "Özel filtre ekle"
@@ -210,7 +228,7 @@
         "message": "Kural sayısı:"
     },
     "options_filters_custom_step_final_filter_homepage": {
-        "message": "Anasayfa:"
+        "message": "Ana sayfa:"
     },
     "options_filters_custom_step_final_filter_url": {
         "message": "URL:"
@@ -227,17 +245,32 @@
     "options_filters_check_filters_update": {
         "message": "Filtre güncellemelerini denetle"
     },
-    "options_whitelist": {
+    "options_allowlist": {
         "message": "İzin verilen listesi"
     },
-    "options_whitelist_description": {
+    "options_allowlist_description": {
         "message": "AdGuard, İzin verilen listedeki sitelerde reklamları engellemez."
     },
-    "options_whitelist_inverse": {
+    "options_allowlist_inverted": {
+        "message": " (ters çevrilmiş)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "Alan adları: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "İzin verilen listesi boş"
+    },
+    "options_allowlist_inverse": {
         "message": "İzin verilen listesini ters çevir<span class='sp-table-row-info'>İzin verilen listesindeki siteler <i>dışında</i> her yerde reklamların engelini kaldırın</span>"
     },
     "options_userfilter": {
         "message": "Kullanıcı kuralları"
+    },
+    "options_userfilter_info_multi": {
+        "message": "Kullanıcı kuralları: %s"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Listesi boş"
     },
     "options_userfilter_description": {
         "message": "Burada kendi kurallarınızı ekleyebilirsiniz. Bu seçenek HTML/CSS kodları hakkında bilgi sahibi olan gelişmiş kullanıcılar için önerilir. Kendi filtre kurallarınızı nasıl yazacağınızı öğrenmek için <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filtre kuralları eğitimini</a> okuyun."
@@ -249,7 +282,7 @@
         "message": "Dışa aktar"
     },
     "options_userfilter_import_rules_error": {
-        "message": "Kuralları içe aktarırken hata"
+        "message": "Kurallar içe aktarılırken hata oluştu"
     },
     "options_popup_import_rules_wrong_file_extension": {
         "message": "Dosya uzantısı .txt olmalı"
@@ -265,6 +298,9 @@
     },
     "options_popup_update_version_error": {
         "message": "Güncellemeye çalıştığınız filtrenin sürümü aynı veya daha eski"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Tüm filtreler güncel"
     },
     "options_popup_update_not_found": {
         "message": "Güncelleme bulunamadı!"
@@ -363,7 +399,7 @@
         "message": "İçerik engelleyicileri"
     },
     "options_content_blockers_desc": {
-        "message": "Etkinleştirilen reklam engelleyicisi adeti: 6 tanenin %s tanesi (her biri 50.000 adete kadar kural içerebilir)"
+        "message": "Etkin reklam engelleyiciler: 6 üzerinden %s (her biri en fazla 50.000 kural içerebilir)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Reklam engelleyicileri devre dışıdır"
@@ -386,8 +422,44 @@
     "options_github": {
         "message": "Github"
     },
+    "onboarding_safari_title": {
+        "message": "İzniniz gerekli"
+    },
     "onboarding_safari_desc": {
-        "message": "Safari ayarlarda ; \"AdGuard Safari Icon\" ve \"AdGuard\" yanlarındaki kutucukları işaretleyin"
+        "message": "Safari tercihlerinde AdGuard eklentilerinin yanındaki kutucukları işaretleyin."
+    },
+    "onboarding_safari_link": {
+        "message": "Bu eklentiler ne yapar?"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "AdGuard Safari Simgesi"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "Safari için AdGuard ayarlarını yönetmek için bu simgeyi kullanabilirsiniz. Örneğin, bir sitede engellemeyi duraklatın veya bir reklamı elle engelleyin."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "'El ile engelleme aracının' çalışması için Web Sayfası İçeriğine erişim gerekli."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "AdGuard'ın şu anda ziyaret ettiğiniz sitede çalışıp çalışmadığını tespit etmek için Tarama Geçmişi erişimi gerekli."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard Gelişmiş Engelleme"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Bu eklenti, Safari İçerik Engelleme API'si tarafından desteklenmeyen gelişmiş engelleme kurallarını uygular."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Gelişmiş kozmetik kuralların çalışması için Web Sayfası İçeriğine erişim gerekli."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Tarama Geçmişi erişimi, hangi gelişmiş engelleme kurallarının uygulanması gerektiğini bulabilmesi ve hangi siteyi açmaya çalıştığınızı tespit etmek için gerekli."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 içerik engelleme eklentisi"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari, eklenti başına 50.000 ile maksimum içerik engelleme kuralı sayısını sınırlar. Bu, her tür reklamı ve izleyiciyi AdGuard engellemelerini işlemek için yeterli değildir. Bu yüzden 6 eklenti sağlıyoruz, böylece bu sınırı 300.000'e çıkarıyoruz."
     },
     "onboarding_safari_btn": {
         "message": "Tercihleri aç"
@@ -462,13 +534,16 @@
         "message": "Bazı AdGuard eklentileri devre dışıdır"
     },
     "settings_notification_extensions_text": {
-        "message": "Safari'de düzgün bir reklam engellemesi için bütün AdGuard eklentilerini devreye sokmalısınız"
+        "message": "Safari'de doğru reklam engellemesi için tüm AdGuard eklentilerini etkinleştirmelisiniz"
     },
     "settings_notification_cb_extensions_title": {
-        "message": "Bazı AdGuard içerik engelleyicisi eklentileri devre dışıdır"
+        "message": "Bazı AdGuard içerik engelleyici eklentileri devre dışıdır"
     },
     "settings_notification_cb_extensions_text": {
-        "message": "Safari'de düzgün bir reklam engellemesi için bütün AdGuard içerik engelleyicisi eklentilerini devreye sokmalısınız"
+        "message": "Safari'de doğru reklam engellemesi için tüm AdGuard içerik engelleyici eklentilerini etkinleştirmelisiniz"
+    },
+    "settings_notification_update_interval": {
+        "message": "Lütfen güncel olmayan filtrelerin koruma kalitesini düşürdüğünü ve bu nedenle onları güncel tutmanın önemli olduğunu unutmayın."
     },
     "options_cb_general_title": {
         "message": "AdGuard Genel"
@@ -508,6 +583,9 @@
     },
     "userfilter_name": {
         "message": "Kullanıcı kuralları"
+    },
+    "allowlist_name": {
+        "message": "İzin verilen listesi"
     },
     "window_close_dialog_message": {
         "message": "AdGuard arka planda çalışır durumda bırakılsın mı?"

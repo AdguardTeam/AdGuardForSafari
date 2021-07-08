@@ -47,6 +47,12 @@
     "options_support_rate_description": {
         "message": "Fortæl os, hvad du synes om AdGuard"
     },
+    "options_support_discuss_title": {
+        "message": "Debattér"
+    },
+    "options_support_discuss_description": {
+        "message": "Debattér på vores forum, sociale netværk eller GitHub"
+    },
     "options_about_update_check": {
         "message": "Søger efter opdateringer"
     },
@@ -59,11 +65,17 @@
     "options_about_updates_not_found": {
         "message": "AdGuard til Safari er opdateret"
     },
+    "options_about_updates_error": {
+        "message": "Opdateringsfejl"
+    },
     "options_about_update_downloaded": {
         "message": "Næsten opdateret! Genstart AdGuard til Safari for at færdiggøre opdateringen."
     },
     "options_about_update_relaunch": {
         "message": "Genstart"
+    },
+    "options_about_read_more": {
+        "message": "Læs mere om produktet"
     },
     "options_popup_title_placeholder": {
         "message": "Angiv filternavn"
@@ -131,8 +143,14 @@
             "other": "%s avancerede regler"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "Søg efter opdateringer"
+    },
     "options_filters_enabled": {
         "message": "Aktiveret:"
+    },
+    "options_filters_homepage": {
+        "message": "Hjemmeside"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s og %s flere"
@@ -150,7 +168,7 @@
         "message": "opdateret: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "Beklager, du har ingen tilpassede filtre endnu"
+        "message": "Du har ingen tilpassede filtre endnu"
     },
     "options_filters_empty_custom_add_button": {
         "message": "Tilføj tilpasset filter"
@@ -227,17 +245,32 @@
     "options_filters_check_filters_update": {
         "message": "Søg efter filteropdateringer"
     },
-    "options_whitelist": {
+    "options_allowlist": {
         "message": "Hvidliste"
     },
-    "options_whitelist_description": {
+    "options_allowlist_description": {
         "message": "AdGuard filtrerer ikke websteder fra hvidlisten."
     },
-    "options_whitelist_inverse": {
+    "options_allowlist_inverted": {
+        "message": " (Inverteret)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "Domæner: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "Hvidliste er tom"
+    },
+    "options_allowlist_inverse": {
         "message": "Invertér Hvidliste<span class='sp-table-row-info'>Afblokér annoncer overalt <i>undtagen</i> for websteder på hvidlisten</span>"
     },
     "options_userfilter": {
         "message": "Brugerregler"
+    },
+    "options_userfilter_info_multi": {
+        "message": "Brugerregler: %s"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Liste er tom"
     },
     "options_userfilter_description": {
         "message": "Egne regler kan tilføjes her. Denne mulighed &nbsp;anbefales til avancerede brugere med HTML/CSS kendskab. Læs i <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filterregelvejledningen</a> om, at&nbsp;hvordan&nbsp;du skriver dine egne filterregler."
@@ -265,6 +298,9 @@
     },
     "options_popup_update_version_error": {
         "message": "Versionen på opdateringen til det filter, du forsøger at opdatere, er identisk eller ældre"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Alle filtre er opdaterede"
     },
     "options_popup_update_not_found": {
         "message": "Ingen opdateringer fundet"
@@ -386,8 +422,44 @@
     "options_github": {
         "message": "GitHub"
     },
+    "onboarding_safari_title": {
+        "message": "Kræver din tilladelse"
+    },
     "onboarding_safari_desc": {
         "message": "Afkryds felterne ved siden af AdGuard-udvidelser i Safari-indstillingerne"
+    },
+    "onboarding_safari_link": {
+        "message": "Hvad gør disse udvidelser?"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "AdGuard Safari-ikon"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "Via dette ikon kan du håndtere indstillinger for AdGuard til Safari, f.eks. sætte blokering på pause på et websted eller manuelt blokere en annonce."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Adgang til Websideindhold kræves for at 'manuelt blokeringsværktøj' kan fungere."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Adgang til Browserhistorik kræves for at detektere, om AdGuard fungerer på webstedet, du netop besøger."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard Avanceret Blokering"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Denne udvidelse anvender avancerede blokeringsregler, som ikke understøttes af Safaris Indholdsblokerings-API."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Adgang til Websideindhold kræves for at avancerede kosmetiske regler kan fungere."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Adgang til Browserhistorik kræves for at detektere, hvilket websted du prøver at tilgå og dermed afgøre, hvilke avancerede blokeringsregler, som skal anvendes."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 indholdsblokerende udvidelser"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari begrænser antallet af indholdsblokeringsregler til 50.000 pr. udvidelse, hvilket ikke er nær nok til at håndtere alle typer AdGuard-blokerede annoncer og trackere. Vi tilbyder derfor 6 udvidelser og øger dermed grænsen til 300.000."
     },
     "onboarding_safari_btn": {
         "message": "Åbn præferencer"
@@ -470,6 +542,9 @@
     "settings_notification_cb_extensions_text": {
         "message": "Du skal aktivere alle AdGuard Indholdsblocker-udvidelser for korrekt adblocking i Safari"
     },
+    "settings_notification_update_interval": {
+        "message": "Bemærk, at forældede filtre nedsætter beskyttelseskvaliteten, hvorfor det er vigtigt at holde dem opdateret."
+    },
     "options_cb_general_title": {
         "message": "AdGuard Generelt"
     },
@@ -508,6 +583,9 @@
     },
     "userfilter_name": {
         "message": "Brugerregler"
+    },
+    "allowlist_name": {
+        "message": "Hvidliste"
     },
     "window_close_dialog_message": {
         "message": "Behold AdGuard kørende i baggrunden?"

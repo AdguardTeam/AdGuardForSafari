@@ -47,6 +47,12 @@
     "options_support_rate_description": {
         "message": "Podziel się z nami swoją opinią o AdGuard"
     },
+    "options_support_discuss_title": {
+        "message": "Podyskutuj"
+    },
+    "options_support_discuss_description": {
+        "message": "Porozmawiaj na naszym forum, w sieciach społecznościowych lub na GitHub"
+    },
     "options_about_update_check": {
         "message": "Sprawdzanie aktualizacji"
     },
@@ -59,11 +65,17 @@
     "options_about_updates_not_found": {
         "message": "AdGuard dla Safari został zaktualizowany"
     },
+    "options_about_updates_error": {
+        "message": "Błąd aktualizacji"
+    },
     "options_about_update_downloaded": {
         "message": "Prawie zaktualizowany! Uruchom ponownie AdGuard dla Safari, aby zakończyć aktualizację."
     },
     "options_about_update_relaunch": {
         "message": "Uruchom ponownie"
+    },
+    "options_about_read_more": {
+        "message": "Przeczytaj więcej o tym produkcie"
     },
     "options_popup_title_placeholder": {
         "message": "Wpisz nazwę filtra"
@@ -131,8 +143,14 @@
             "other": "%s advanced rules"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "Sprawdź aktualizacje"
+    },
     "options_filters_enabled": {
         "message": "Włączony"
+    },
+    "options_filters_homepage": {
+        "message": "Strona główna"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s i %s więcej"
@@ -150,7 +168,7 @@
         "message": "zaktualizowano: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "Przepraszam, ale nie masz jeszcze żadnych niestandardowych filtrów"
+        "message": "Nie masz jeszcze żadnych niestandardowych filtrów"
     },
     "options_filters_empty_custom_add_button": {
         "message": "Dodaj niestandardowy filtr"
@@ -227,17 +245,32 @@
     "options_filters_check_filters_update": {
         "message": "Sprawdź aktualizacje filtrów"
     },
-    "options_whitelist": {
+    "options_allowlist": {
         "message": "Lista dozwolonych"
     },
-    "options_whitelist_description": {
-        "message": "AdGuard nie filtruje stron internetowych z Listy dozwolonych."
+    "options_allowlist_description": {
+        "message": "AdGuard nie filtruje witryn z listy dozwolonych."
     },
-    "options_whitelist_inverse": {
+    "options_allowlist_inverted": {
+        "message": " (Odwrócona)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "Domeny: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "Lista dozwolonych jest pusta"
+    },
+    "options_allowlist_inverse": {
         "message": "Odwróć Listę dozwolonych<span class='sp-table-row-info'>Odblokuj reklamy wszędzie <i>z wyjątkiem</i> stron z Listy dozwolonych</span>"
     },
     "options_userfilter": {
         "message": "Reguły użytkownika"
+    },
+    "options_userfilter_info_multi": {
+        "message": "Reguł użytkownika: %s"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Lista jest pusta"
     },
     "options_userfilter_description": {
         "message": "Możesz tutaj dodać własne reguły. Ta opcja jest&nbsp;zalecana dla zaawansowanych użytkowników znających HTML/CSS. Przeczytaj <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filter rules tutorial</a> &nbsp;aby dowiedzieć się, jak&nbsp;napisać własne reguły dotyczące filtrów."
@@ -265,6 +298,9 @@
     },
     "options_popup_update_version_error": {
         "message": "Wersja filtru, który próbujesz zaktualizować, jest taka sama lub starsza"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Wszystkie filtry są aktualne"
     },
     "options_popup_update_not_found": {
         "message": "Nie znaleziono aktualizacji"
@@ -386,8 +422,44 @@
     "options_github": {
         "message": "GitHub"
     },
+    "onboarding_safari_title": {
+        "message": "Potrzebuję Twojej zgody"
+    },
     "onboarding_safari_desc": {
-        "message": "Zaznacz pole \"ikona AdGuard Safari\" i \"AdGuard\" w ustawieniach Safari"
+        "message": "Zaznacz pola obok rozszerzeń AdGuard w preferencjach Safari."
+    },
+    "onboarding_safari_link": {
+        "message": "Co robią te rozszerzenia?"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "Ikona Safari AdGuard"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "Możesz użyć tej ikony do zarządzania ustawieniami AdGuard dla Safari. Na przykład wstrzymaj blokowanie w witrynie lub zablokuj reklamę ręcznie."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Dostęp do zawartości strony internetowej jest wymagany, aby „narzędzie do ręcznego blokowania” działało."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Dostęp do historii przeglądania jest wymagany, aby wykryć, czy AdGuard działa w witrynie, którą właśnie odwiedzasz."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "Zaawansowane blokowanie AdGuard"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "To rozszerzenie stosuje zaawansowane reguły blokowania, które nie są obsługiwane przez interfejs API Blokowania Treści Safari."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Dostęp do zawartości strony internetowej jest wymagany, aby zaawansowane reguły kosmetyczne działały."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Dostęp do historii przeglądania jest wymagany, aby wykryć witrynę, którą próbujesz otworzyć, aby mogła znaleźć zaawansowane reguły blokowania, które należy zastosować."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 rozszerzeń blokujących treść"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari ogranicza maksymalną liczbę reguł blokowania treści do 50,000 na rozszerzenie. To nie wystarczy, aby obsłużyć wszelkiego rodzaju reklamy i elementy śledzące blokowane przez AdGuard. Dlatego też zapewniamy 6 rozszerzeń, zwiększając tym samym ten limit do 300,000."
     },
     "onboarding_safari_btn": {
         "message": "Otwórz ustawienia"
@@ -470,6 +542,9 @@
     "settings_notification_cb_extensions_text": {
         "message": "Włącz wszystkie blokery treści AdGuard do poprawnego blokowania reklam w przeglądarce Safari"
     },
+    "settings_notification_update_interval": {
+        "message": "Pamiętaj, że przestarzałe filtry obniżają jakość ochrony, dlatego ważne jest, aby je aktualizować."
+    },
     "options_cb_general_title": {
         "message": "AdGuard Ustawienia"
     },
@@ -508,6 +583,9 @@
     },
     "userfilter_name": {
         "message": "Reguły użytkownika"
+    },
+    "allowlist_name": {
+        "message": "Lista dozwolonych"
     },
     "window_close_dialog_message": {
         "message": "Chcesz aby AdGuard działał w tle?"

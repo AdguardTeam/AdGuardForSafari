@@ -47,6 +47,9 @@
     "options_support_rate_description": {
         "message": "Recite nam šta mislite o AdGuard-u"
     },
+    "options_support_discuss_title": {
+        "message": "Diskutujte"
+    },
     "options_about_update_check": {
         "message": "Proveravam ažuriranja"
     },
@@ -64,6 +67,9 @@
     },
     "options_about_update_relaunch": {
         "message": "Ponovo pokreni"
+    },
+    "options_about_read_more": {
+        "message": "Pročitajte više o proizvodu"
     },
     "options_popup_title_placeholder": {
         "message": "Unesite ime filtera"
@@ -87,7 +93,7 @@
         "message": "AdGuard za Safari - postavke"
     },
     "options_settings_import_wrong_file_extension": {
-        "message": ""
+        "message": "Oznaka datoteke treba biti .json"
     },
     "options_settings_import_error": {
         "message": "Greška prilikom uvoza postavke"
@@ -131,8 +137,14 @@
             "other": "%s naprednih pravila"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "Proveri ažuriranja"
+    },
     "options_filters_enabled": {
         "message": "Uključeno:"
+    },
+    "options_filters_homepage": {
+        "message": "Početna stranica"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s i %s još"
@@ -227,17 +239,23 @@
     "options_filters_check_filters_update": {
         "message": "Proveri ažuriranja filtera"
     },
-    "options_whitelist": {
-        "message": "Bela lista"
+    "options_allowlist": {
+        "message": "Lista dozvoljenih"
     },
-    "options_whitelist_description": {
+    "options_allowlist_description": {
         "message": "AdGuard ne ffiltrira sajtove sa bele liste."
     },
-    "options_whitelist_inverse": {
+    "options_allowlist_no_domains": {
+        "message": "Bela lista je prazna"
+    },
+    "options_allowlist_inverse": {
         "message": "Okreni belu listu<span class='sp-table-row-info'>Odblokiraj reklame svuda <i>osim</i> na beloj listi</span>"
     },
     "options_userfilter": {
         "message": "Korisnička pravila"
+    },
+    "options_userfilter_info_multi": {
+        "message": "Korisnička pravila: %s"
     },
     "options_userfilter_description": {
         "message": "Ovde možete dodati vaša pravila. Ova opcija je&nbsp;preporučljiva za napredne korisnike koji su upoznati sa HTML/CSS. pročitajte <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>Uputstva za pravila</a> to&nbsp;saznajte kako da&nbsp;napišete vaša pravila za filtriranje."
@@ -252,7 +270,7 @@
         "message": "Greška prilikom uvoza pravila"
     },
     "options_popup_import_rules_wrong_file_extension": {
-        "message": ""
+        "message": "Oznaka datoteke treba da bude .txt"
     },
     "options_show_app_updated_notification": {
         "message": "Obavesti o ažuriranjima proširenja"
@@ -265,6 +283,9 @@
     },
     "options_popup_update_version_error": {
         "message": "Verzija filtera koji pokušavate da ažurirate je ista ili starija"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Svi filteri su već ažurirani"
     },
     "options_popup_update_not_found": {
         "message": "Nema pronađenih ažuriranja"
@@ -386,8 +407,26 @@
     "options_github": {
         "message": "GitHub"
     },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard napredno blokiranje"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Ovo proširenje primenjuje napredna pravila blokiranja koja nisu podržana od Safarijevog API za blokiranje sadržaja."
+    },
+    "onboarding_safari_title": {
+        "message": "Potrebna je vaša dozvola"
+    },
     "onboarding_safari_desc": {
         "message": "Označite kućice pored AdGuard proširenja u Safarijevim postavkama"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "AdGuard Safari ikonica"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "Ovu ikonicu možete koristiti za upravljanje AdGuard-om za Safari. Na primer, pauziranje blokiranja na sajtu, ili da ručno blokirate reklamu."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard napredno blokiranje"
     },
     "onboarding_safari_btn": {
         "message": "Otvori postavke"
@@ -508,6 +547,9 @@
     },
     "userfilter_name": {
         "message": "Korisnička pravila"
+    },
+    "allowlist_name": {
+        "message": "Lista dozvoljenih"
     },
     "window_close_dialog_message": {
         "message": "Želite li da ostavite AdGuard da radi u pozadini?"

@@ -47,6 +47,12 @@
     "options_support_rate_description": {
         "message": "Podeľte sa s nami o svoj názor na AdGuard"
     },
+    "options_support_discuss_title": {
+        "message": "Prediskutovať"
+    },
+    "options_support_discuss_description": {
+        "message": "Diskutujte na našom fóre, v sociálnych sieťach alebo na GitHub"
+    },
     "options_about_update_check": {
         "message": "Kontrolujem aktualizácie"
     },
@@ -59,11 +65,17 @@
     "options_about_updates_not_found": {
         "message": "AdGuard pre Safari je aktuálny"
     },
+    "options_about_updates_error": {
+        "message": "Chyba pri aktualizácii"
+    },
     "options_about_update_downloaded": {
         "message": "Takmer aktuálne! Ak chcete dokončiť aktualizáciu, znova spustite program AdGuard pre Safari."
     },
     "options_about_update_relaunch": {
         "message": "Reštart"
+    },
+    "options_about_read_more": {
+        "message": "Prečítať si viac o tomto produkte"
     },
     "options_popup_title_placeholder": {
         "message": "Zadajte meno filtra"
@@ -87,7 +99,7 @@
         "message": "AdGuard pre Safari - Nastavenia"
     },
     "options_settings_import_wrong_file_extension": {
-        "message": ""
+        "message": "Rozšírenie súboru musí byť .json"
     },
     "options_settings_import_error": {
         "message": "Chyba pri importe nastavení"
@@ -131,8 +143,14 @@
             "other": "%s rozšírených pravidiel"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "Skontrolovať aktualizácie"
+    },
     "options_filters_enabled": {
         "message": "Zapnuté:"
+    },
+    "options_filters_homepage": {
+        "message": "Domovská stránka"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s a ešte %s"
@@ -150,7 +168,7 @@
         "message": "aktualizované: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "Ľutujeme, ale zatiaľ nemáte žiadne vlastné filtre"
+        "message": "Zatiaľ nemáte žiadne vlastné filtre"
     },
     "options_filters_empty_custom_add_button": {
         "message": "Pridať vlastný filter"
@@ -227,17 +245,32 @@
     "options_filters_check_filters_update": {
         "message": "Skontrolovať aktualizácie filtrov"
     },
-    "options_whitelist": {
+    "options_allowlist": {
         "message": "Zoznam povolení"
     },
-    "options_whitelist_description": {
+    "options_allowlist_description": {
         "message": "AdGuard nefiltruje webové stránky zo zoznamu povolení."
     },
-    "options_whitelist_inverse": {
+    "options_allowlist_inverted": {
+        "message": " (Invertované)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "Domény: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "Zoznam povolení je prázdny"
+    },
+    "options_allowlist_inverse": {
         "message": "Invertovať zoznam povolení<span class='sp-table-row-info'>Odblokovať reklamy všade <i>okrem</i> zoznamu povolení</span>"
     },
     "options_userfilter": {
         "message": "Používateľský filter"
+    },
+    "options_userfilter_info_multi": {
+        "message": "Používateľských pravidiel: %s"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Zoznam je prázdny"
     },
     "options_userfilter_description": {
         "message": "K tomuto filtru môžete pridať Vaše vlastné pravidlá. Táto voľba je odporúčaná len pre skúsených používateľov so znalosťou HTML/CSS. Pozrite si <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>príručku filtračných pravidiel</a> pre získanie informácií o tom, ako písať vlastné filtračné pravidlá."
@@ -252,7 +285,7 @@
         "message": "Chyba pri importe pravidiel"
     },
     "options_popup_import_rules_wrong_file_extension": {
-        "message": ""
+        "message": "Rozšírenie súboru musí byť .txt"
     },
     "options_show_app_updated_notification": {
         "message": "Upozorniť na na aktualizácie rozšírenia"
@@ -265,6 +298,9 @@
     },
     "options_popup_update_version_error": {
         "message": "Verzia filtra, ktorý sa pokúšate aktualizovať, je rovnaká alebo staršia"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Všetky filtre sú aktuálne"
     },
     "options_popup_update_not_found": {
         "message": "Aktualizácie nenájdené"
@@ -386,8 +422,44 @@
     "options_github": {
         "message": "GitHub"
     },
+    "onboarding_safari_title": {
+        "message": "Vyžaduje Vaše povolenie"
+    },
     "onboarding_safari_desc": {
         "message": "V predvoľbách Safari začiarknite políčka vedľa rozšírení AdGuard"
+    },
+    "onboarding_safari_link": {
+        "message": "Čo tieto rozšírenia robia?"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "Ikona AdGuard Safari"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "Túto ikonu môžete použiť na správu nastavení AdGuard pre Safari. Napríklad pozastavte blokovanie na webe alebo manuálne zablokujte reklamu."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Pre funkčnosť \"Manual Blocking Tool\" je potrebný prístup k obsahu webovej stránky."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Pre zistenie, či AdGuard pracuje na webovej stránky, ktorú práve prezeráte, je potrebný prístup k histórii prehliadania."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard pokročilé blokovanie"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Toto rozšírenie uplatňuje pokročilé pravidlá blokovania, ktoré rozhranie API Safari Content Blocking API nepodporuje."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Na tvorbu pokročilých kozmetických pravidiel je potrebný prístup k obsahu webovej stránky."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Na zistenie, aké pokročilé pravidlá blokovania by sa mali uplatňovať na stránke, ktorú sa snažíte otvoriť, je potrebný prístup k histórii prehliadania."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 rozšírení blokovania obsahu"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari obmedzuje maximálny počet pravidiel blokovania obsahu na 50 000 na rozšírenie. To nestačí na spracovanie všetkých druhov reklám a sledovačov, ktoré blokuje AdGuard. Preto poskytujeme 6 rozšírení, čím sa táto hranica zvyšuje na 300 000."
     },
     "onboarding_safari_btn": {
         "message": "Otvoriť preferencie"
@@ -470,6 +542,9 @@
     "settings_notification_cb_extensions_text": {
         "message": "Pre správne blokovanie reklám v prehliadači Safari by ste mali povoliť všetky rozšírenia blokovania obsahu AdGuard"
     },
+    "settings_notification_update_interval": {
+        "message": "Upozorňujeme, že zastarané filtre znižujú kvalitu ochrany, preto je dôležité ich dodržiavať aktuálne."
+    },
     "options_cb_general_title": {
         "message": "AdGuard všeobecné"
     },
@@ -508,6 +583,9 @@
     },
     "userfilter_name": {
         "message": "Vlastný filter"
+    },
+    "allowlist_name": {
+        "message": "Zoznam povolení"
     },
     "window_close_dialog_message": {
         "message": "Nechať AdGuard bežať na pozadí?"

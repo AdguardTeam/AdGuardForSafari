@@ -15,37 +15,43 @@
         "message": "あなたはこのフィルタを信頼するようにしました"
     },
     "options_support": {
-        "message": ""
+        "message": "サポート"
     },
     "options_support_faq_title": {
-        "message": ""
+        "message": "FAQ（よくあるご質問）"
     },
     "options_support_faq_description": {
-        "message": ""
+        "message": "よくあるご質問の多くが既にこちらで回答されています。"
     },
     "options_support_bug_report_title": {
-        "message": ""
+        "message": "バグ・不具合を報告する"
     },
     "options_support_bug_report_description": {
-        "message": ""
+        "message": "本アプリが正常に作動しない場合"
     },
     "options_support_incorrect_blocking_title": {
-        "message": ""
+        "message": "不適切なブロックを報告する"
     },
     "options_support_incorrect_blocking_description": {
-        "message": ""
+        "message": "すり抜け広告やサイトが“壊れている”場合など"
     },
     "options_support_feedback_title": {
-        "message": ""
+        "message": "フィードバックを送信する"
     },
     "options_support_feedback_description": {
-        "message": ""
+        "message": "ぜひ機能リクエストや改善のご提案等をお送りください"
     },
     "options_support_rate_title": {
-        "message": ""
+        "message": "このアプリを評価する"
     },
     "options_support_rate_description": {
-        "message": ""
+        "message": "AdGuardに関するご意見をお伝えください。"
+    },
+    "options_support_discuss_title": {
+        "message": "AdGuardを話し合う"
+    },
+    "options_support_discuss_description": {
+        "message": "AdGuardのフォーラム、SNS、GitHub"
     },
     "options_about_update_check": {
         "message": "アップデートを確認中"
@@ -59,11 +65,17 @@
     "options_about_updates_not_found": {
         "message": "AdGuard for Safariは最新状態です。"
     },
+    "options_about_updates_error": {
+        "message": "アップデートエラー"
+    },
     "options_about_update_downloaded": {
         "message": "最新状態まであと一歩。アップデートを完了させるには、AdGuard for Safariを再起動してください。"
     },
     "options_about_update_relaunch": {
         "message": "再起動"
+    },
+    "options_about_read_more": {
+        "message": "本製品についての詳細"
     },
     "options_popup_title_placeholder": {
         "message": "フィルタ名を入力してください"
@@ -87,10 +99,10 @@
         "message": "AdGuard for Safari - 設定"
     },
     "options_settings_import_wrong_file_extension": {
-        "message": ""
+        "message": "ファイル拡張は .json になっている必要があります。"
     },
     "options_settings_import_error": {
-        "message": ""
+        "message": "設定のインポート中にエラーが発生しました。"
     },
     "options_general_settings": {
         "message": "一般設定"
@@ -102,13 +114,13 @@
         "message": "有用な広告を表示する"
     },
     "options_export_settings": {
-        "message": "Export settings"
+        "message": "設定をエクスポートする"
     },
     "options_import_settings": {
-        "message": "Import settings"
+        "message": "設定をインポートする"
     },
     "options_export_logs": {
-        "message": ""
+        "message": "ログをエクスポートする"
     },
     "options_antibanner": {
         "message": "フィルタ"
@@ -131,8 +143,14 @@
             "other": "高度ルール %s件"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "更新を確認する"
+    },
     "options_filters_enabled": {
         "message": "有効："
+    },
+    "options_filters_homepage": {
+        "message": "ホームページ"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s とその他 %s 個"
@@ -150,16 +168,16 @@
         "message": "最終更新日時: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "カスタムフィルタはまだ登録されていません"
+        "message": "追加されているカスタムフィルタがありません"
     },
     "options_filters_empty_custom_add_button": {
         "message": "カスタムフィルタを追加"
     },
     "options_filters_custom_import_file": {
-        "message": ""
+        "message": "フィルタをインポート"
     },
     "options_popup_import_file_error_title": {
-        "message": ""
+        "message": "インポートエラー"
     },
     "options_filters_custom_step_one_title": {
         "message": "新しいフィルタ・サブスクリプション"
@@ -183,7 +201,7 @@
         "message": "フィルタをダウンロード中"
     },
     "options_filters_custom_step_two_subscribing": {
-        "message": ""
+        "message": "フィルタを購読中"
     },
     "options_filters_custom_step_three_title": {
         "message": "エラーが発生しました"
@@ -227,32 +245,47 @@
     "options_filters_check_filters_update": {
         "message": "フィルタのアップデートを確認する"
     },
-    "options_whitelist": {
+    "options_allowlist": {
+        "message": "ホワイトリスト"
+    },
+    "options_allowlist_description": {
+        "message": "ホワイトリストにあるウェブサイトをAdGuardはフィルタリング（広告ブロック等）しません。"
+    },
+    "options_allowlist_inverted": {
+        "message": " (逆転中)"
+    },
+    "options_allowlist_info_multi": {
         "message": ""
     },
-    "options_whitelist_description": {
-        "message": ""
+    "options_allowlist_no_domains": {
+        "message": "ホワイトリストは空です"
     },
-    "options_whitelist_inverse": {
-        "message": ""
+    "options_allowlist_inverse": {
+        "message": "ホワイトリストを逆転させる<span class='sp-table-row-info'>ホワイトリスト<i>以外</i>の全てのサイトで広告ブロックしないようにする</span>"
     },
     "options_userfilter": {
         "message": "ユーザールール"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s ユーザールール"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s ユーザールール"
     },
     "options_userfilter_description": {
         "message": "このフィルタに独自のルールを追加できます。このオプションはHTML/CSSに精通した上級者ユーザーにおすすめです。 <a class='spl-user-descr-link'href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>フィルタ・ルールのチュートリアル</a>を読むことで独自のフィルタ・ルールを作成する方法を学べます。"
     },
     "options_userfilter_import": {
-        "message": ""
+        "message": "インポート"
     },
     "options_userfilter_export": {
-        "message": ""
+        "message": "エクスポート"
     },
     "options_userfilter_import_rules_error": {
-        "message": ""
+        "message": "ルールのインポート中にエラーが発生しました"
     },
     "options_popup_import_rules_wrong_file_extension": {
-        "message": ""
+        "message": "ファイル拡張は .txt になっている必要があります"
     },
     "options_show_app_updated_notification": {
         "message": "拡張機能のアップデートについて通知を受け取る"
@@ -264,7 +297,10 @@
         "message": "フィルタ更新エラー"
     },
     "options_popup_update_version_error": {
-        "message": ""
+        "message": "更新しようとしているフィルタバージョンは現在のバージョンと同じ、もしくはより旧いです"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "すべてのフィルタは最新状態です"
     },
     "options_popup_update_not_found": {
         "message": "アップデート見つかりませんでした"
@@ -312,7 +348,7 @@
         "message": "保存完了"
     },
     "options_editor_save_button": {
-        "message": ""
+        "message": "保存"
     },
     "main_menu_edit": {
         "message": "編集"
@@ -386,14 +422,50 @@
     "options_github": {
         "message": "Github"
     },
+    "onboarding_safari_title": {
+        "message": "ユーザー様の許可が必要です。"
+    },
     "onboarding_safari_desc": {
-        "message": "Safari環境設定でAdGuard拡張機能の横にあるチェックボックスにチェックを入れてください。"
+        "message": "Safari環境設定ですべてのAdGuard拡張機能チェックボックスにチェックを入れてください。"
+    },
+    "onboarding_safari_link": {
+        "message": "これらの拡張機能は何のためにあるの？"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "AdGuard Safari アイコン"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "このアイコンを使って、閲覧中のサイトで広告ブロックを一時停止したり、要素を手動で選んでブロックしたりなど、AdGuard for Safariの設定を管理できます。"
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Webページのコンテンツへのアクセスは、「手動で要素をブロック」機能を動作させるために必要です。"
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "閲覧履歴へのアクセスは、閲覧中のWebサイトでAdGuardが機能しているかどうかを検出するために必要です。"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard高度なブロック"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "この拡張機能は、Safari Content Blocking APIでサポートされていない高度なブロックルールを適用します。"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Webページのコンテンツへのアクセスは、高度なコスメティック・ルールを適用させるために必要です。"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "閲覧履歴へのアクセスは、どのウェブサイトを開こうとしているかを検出し、適用すべき高度なブロックルールを見つけ出すために必要です。"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "６つのコンテンツブロック拡張機能"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safariは、コンテンツブロックルールの最大数を拡張機能ごとに50,000本に制限しています。この数だと、AdGuardがブロックすべきあらゆる種類の広告やトラッカーに対応できません。そのため、AdGuardは6つの拡張機能を提供することでルール制限数を300,000本に増やしています。"
     },
     "onboarding_safari_btn": {
         "message": "環境設定を開く"
     },
     "onboarding_ignore_safari_btn": {
-        "message": ""
+        "message": "無視する"
     },
     "options_learn_more": {
         "message": "詳細はこちら"
@@ -429,10 +501,10 @@
         "message": "ログイン時にAdGuard for Safariを起動する"
     },
     "options_verbose_logging": {
-        "message": "Verbose logging"
+        "message": "詳細なログ記録"
     },
     "options_verbose_logging_desc": {
-        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
+        "message": "詳細なログ記録を有効にすると、AdGuard Safariの拡張機能はブラウザコンソールに追加情報を表示します。"
     },
     "options_enable_hardware_acceleration": {
         "message": "ハードウェアアクセラレーションを有効にする"
@@ -441,13 +513,13 @@
         "message": "設定ウィンドウのハードウェアアクセラレーションを有効にします。※アプリケーションの再起動が必要です。"
     },
     "settings_import": {
-        "message": ""
+        "message": "設定のインポート"
     },
     "settings_import_success": {
-        "message": ""
+        "message": "設定が正常にインポートされました。"
     },
     "settings_import_error": {
-        "message": ""
+        "message": "設定インポート中にエラーが発生しました"
     },
     "settings_notification_protection_title": {
         "message": "【注意】保護は無効になりました"
@@ -469,6 +541,9 @@
     },
     "settings_notification_cb_extensions_text": {
         "message": "Safari広告ブロックが正しく動作するには、AdGuardコンテンツブロッカー拡張機能をすべて有効にする必要があります。"
+    },
+    "settings_notification_update_interval": {
+        "message": "古くなっているフィルターは保護の質を低下させるため、常に最新の状態に更新しておくことが重要です。"
     },
     "options_cb_general_title": {
         "message": "AdGuard一般"
@@ -509,6 +584,9 @@
     "userfilter_name": {
         "message": "ユーザールール"
     },
+    "allowlist_name": {
+        "message": "ホワイトリスト"
+    },
     "window_close_dialog_message": {
         "message": "AdGuardをバックグラウンドで起動し続けますか？"
     },
@@ -528,15 +606,15 @@
         "message": "キャンセル"
     },
     "folder_check_dialog_message": {
-        "message": ""
+        "message": "AdGuard for Safariは、「アプリケーション」フォルダから起動する必要があります。"
     },
     "folder_check_dialog_detail": {
-        "message": ""
+        "message": "今すぐ「アプリケーションフォルダ」に移動しますか？"
     },
     "folder_check_dialog_move": {
-        "message": ""
+        "message": "移動"
     },
     "folder_check_dialog_quit": {
-        "message": ""
+        "message": "終了"
     }
 }

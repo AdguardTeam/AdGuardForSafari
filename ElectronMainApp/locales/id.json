@@ -47,6 +47,12 @@
     "options_support_rate_description": {
         "message": "Beri tahu kamu pendapat Anda tentang AdGuard"
     },
+    "options_support_discuss_title": {
+        "message": "Diskusi"
+    },
+    "options_support_discuss_description": {
+        "message": "Diskusikan di forum kami, di jejaring sosial atau di GitHub"
+    },
     "options_about_update_check": {
         "message": "Memeriksa pembaruan"
     },
@@ -59,11 +65,17 @@
     "options_about_updates_not_found": {
         "message": "AdGuard untuk Safari sudah terbaru"
     },
+    "options_about_updates_error": {
+        "message": "Kesalahan pembaruan"
+    },
     "options_about_update_downloaded": {
         "message": "Hampir terbaru! Luncurkan ulang AdGuard untuk Safari untuk menyelesaikan pembaruan."
     },
     "options_about_update_relaunch": {
         "message": "Jalankan ulang"
+    },
+    "options_about_read_more": {
+        "message": "Baca lebih lanjut tentang produk ini"
     },
     "options_popup_title_placeholder": {
         "message": "Masukkan nama filter"
@@ -87,7 +99,7 @@
         "message": "AdGuard untuk Safari - Pengaturan"
     },
     "options_settings_import_wrong_file_extension": {
-        "message": ""
+        "message": "Ekstensi file harus .json"
     },
     "options_settings_import_error": {
         "message": "Terjadi kesalahan saat mengimpor pengaturan"
@@ -131,8 +143,14 @@
             "other": "%s aturan lanjutan"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "Periksa pembaruan"
+    },
     "options_filters_enabled": {
         "message": "Diaktifkan:"
+    },
+    "options_filters_homepage": {
+        "message": "Beranda"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s dan %s lagi"
@@ -227,17 +245,32 @@
     "options_filters_check_filters_update": {
         "message": "Periksa pembaruan penyaring"
     },
-    "options_whitelist": {
+    "options_allowlist": {
         "message": "Daftar yang diizinkan"
     },
-    "options_whitelist_description": {
+    "options_allowlist_description": {
         "message": "AdGuard tidak memfilter situs web dari Daftar yang diizinkan."
     },
-    "options_whitelist_inverse": {
-        "message": "Balik Daftar yang diizinkan<span class='sp-table-row-info'>Buka blokir iklan di mana saja<i>kecuali</i> dalam Daftar yang diizinkan</span>"
+    "options_allowlist_inverted": {
+        "message": " (dibalikan)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "Domains: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "Daftar yang diizinkan kosong"
+    },
+    "options_allowlist_inverse": {
+        "message": "Balik Daftar yang diizinkan<span class='sp-table-row-info'>Buka blokir iklan di mana saja<i>kecuali untuk</i> situs dari Daftar yang diizinkan</span>"
     },
     "options_userfilter": {
         "message": "Penyaring pengguna"
+    },
+    "options_userfilter_info_multi": {
+        "message": "Penyaring pengguna: %s"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Daftar kosong"
     },
     "options_userfilter_description": {
         "message": "Anda dapat menambahkan aturan Anda sendiri ke&nbsp;filter ini. Opsi ini&nbsp;disarankan untuk pengguna tingkat lanjut yang terbiasa dengan HTML / CSS. Baca <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial aturan filter</a> untuk&nbsp;mempelajari cara&nbsp;menulis aturan filter Anda sendiri."
@@ -252,7 +285,7 @@
         "message": "Terjadi kesalahan saat mengimpor aturan"
     },
     "options_popup_import_rules_wrong_file_extension": {
-        "message": ""
+        "message": "Ekstensi file harus .txt"
     },
     "options_show_app_updated_notification": {
         "message": "Beritahu tentang pembaruan ekstensi"
@@ -265,6 +298,9 @@
     },
     "options_popup_update_version_error": {
         "message": "Versi filter yang Anda coba perbarui sama atau lebih lama"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Semua filter telah terkini"
     },
     "options_popup_update_not_found": {
         "message": "Tidak ditemukan pembaruan"
@@ -386,8 +422,44 @@
     "options_github": {
         "message": "Github"
     },
+    "onboarding_safari_title": {
+        "message": "Memerlukan izin Anda"
+    },
     "onboarding_safari_desc": {
         "message": "Centang kotak di sebelah \"Ikon AdGuard Safari\", \"AdGuard Pemblokiran Lanjutan\" dan \"AdGuard\" di preferensi Safari"
+    },
+    "onboarding_safari_link": {
+        "message": "Apa fungsi ekstensi-ekstensi ini?"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "Ikon Safari AdGuard"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "Anda dapat menggunakan ikon ini untuk mengelola AdGuard untuk pengaturan Safari. Misalnya, menjeda pemblokiran di situs web, atau memblokir iklan secara manual."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Akses Konten Halaman Web diperlukan untuk membuat 'alat pemblokiran manual' berfungsi."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Akses Riwayat Penjelajahan diperlukan untuk mendeteksi apakah AdGuard berfungsi di situs web yang sedang Anda kunjungi."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard Pemblokiran Lanjutan"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Ekstensi ini menerapkan aturan pemblokiran lanjutan yang tidak didukung oleh API Safari Content Blocking."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Akses Konten Halaman Web diperlukan untuk membuat aturan kosmetik tingkat lanjut berfungsi."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Akses Riwayat Penjelajahan diperlukan untuk mendeteksi situs web apa yang Anda coba buka sehingga dapat menemukan aturan pemblokiran lanjutan apa yang harus diterapkan."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 ekstensi pemblokiran konten"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari membatasi jumlah maksimum aturan pemblokiran konten dengan 50.000 per ekstensi. Ini tidak cukup untuk menangani semua jenis iklan dan pelacak yang diblokir AdGuard. Itu sebabnya kami menyediakan 6 ekstensi, sehingga meningkatkan batas itu menjadi 300.000."
     },
     "onboarding_safari_btn": {
         "message": "Buka preferensi"
@@ -470,6 +542,9 @@
     "settings_notification_cb_extensions_text": {
         "message": "Anda harus mengaktifkan semua ekstensi AdGuard pemblokir konten untuk pemblokiran iklan yang benar di Safari"
     },
+    "settings_notification_update_interval": {
+        "message": "Harap perhatikan bahwa filter usang menurunkan kualitas perlindungan, jadi penting untuk selalu memperbaruinya."
+    },
     "options_cb_general_title": {
         "message": "AdGuard Umum"
     },
@@ -508,6 +583,9 @@
     },
     "userfilter_name": {
         "message": "Penyaring pengguna"
+    },
+    "allowlist_name": {
+        "message": "Daftar yang diizinkan"
     },
     "window_close_dialog_message": {
         "message": "Biarkan AdGuard tetap berjalan dibelakang?"

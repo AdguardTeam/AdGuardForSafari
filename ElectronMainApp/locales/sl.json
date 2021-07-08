@@ -47,6 +47,12 @@
     "options_support_rate_description": {
         "message": "Povejte nam, kaj mislite o AdGuardu"
     },
+    "options_support_discuss_title": {
+        "message": "Pogovor"
+    },
+    "options_support_discuss_description": {
+        "message": "Pogovorite se na našem forumu, na družbenih omrežjih ali na GitHubu"
+    },
     "options_about_update_check": {
         "message": "Preverjanje obstoja posodobitev"
     },
@@ -64,6 +70,9 @@
     },
     "options_about_update_relaunch": {
         "message": "Znova zaženi"
+    },
+    "options_about_read_more": {
+        "message": "Preberite več o tem izdelku"
     },
     "options_popup_title_placeholder": {
         "message": "Vnesite ime filtra"
@@ -131,8 +140,14 @@
             "other": "%s naprednih pravil"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "Preveri obstoj posodobitev"
+    },
     "options_filters_enabled": {
         "message": "Omogočeno:"
+    },
+    "options_filters_homepage": {
+        "message": "Domača stran"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s in %s več"
@@ -150,7 +165,7 @@
         "message": "posodobljena %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "Žal še nimate nobenih filtrov po meri"
+        "message": "Še nimate nobenih filtrov po meri"
     },
     "options_filters_empty_custom_add_button": {
         "message": "Dodaj filter po meri"
@@ -227,17 +242,29 @@
     "options_filters_check_filters_update": {
         "message": "Preveri obstoj posodobitev filtrov"
     },
-    "options_whitelist": {
+    "options_allowlist": {
         "message": "Seznam dovoljenih"
     },
-    "options_whitelist_description": {
+    "options_allowlist_description": {
         "message": "AdGuard ne filtrira spletnih strani s seznama dovoljenih."
     },
-    "options_whitelist_inverse": {
+    "options_allowlist_inverted": {
+        "message": " (Obrnjeno)"
+    },
+    "options_allowlist_no_domains": {
+        "message": "Seznam dovoljenih je prazen"
+    },
+    "options_allowlist_inverse": {
         "message": "Obrni seznam dovoljenih<span class='sp-table-row-info'>Povsod dovoli oglase <i>razen</i> na spletnih straneh na Seznamu dovoljenih</span>"
     },
     "options_userfilter": {
         "message": "Uporabniška pravila"
+    },
+    "options_userfilter_info_multi": {
+        "message": "Uporabniških pravil: %s"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Seznam je prazen"
     },
     "options_userfilter_description": {
         "message": "Tukaj lahko dodate svoja lastna pravila. Ta možnost je&nbsp;priporočena za napredne uporabnike, ki dobro poznajo HTML/CSS. Preberite <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>Vodič pravil filtriranja</a> da izveste&nbsp;kako&nbsp;pisati svoja lastna pravila filtriranja."
@@ -265,6 +292,9 @@
     },
     "options_popup_update_version_error": {
         "message": "Različica filtra, ki jo poskušate posodobiti, je enaka ali starejša"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Vsi filtri so že posodobljeni"
     },
     "options_popup_update_not_found": {
         "message": "Ni najdenih posodobitev"
@@ -386,8 +416,44 @@
     "options_github": {
         "message": "Github"
     },
+    "onboarding_safari_title": {
+        "message": "Potrebuje vaše dovoljenje"
+    },
     "onboarding_safari_desc": {
-        "message": "Potrdite polja poleg razširitev AdGuarda v nastavitvah Safarija"
+        "message": "Potrdite polja poleg razširitev AdGuarda v nastavitvah Safarija."
+    },
+    "onboarding_safari_link": {
+        "message": "Kaj naredijo te razširitve?"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "Ikona AdGuard Safari"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "S to ikono lahko upravljate nastavitve AdGuarda za Safari. Na primer, začasno ustavite zaviranje na spletni strani ali ročno onemogočite oglas."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Za delovanje orodja za ročno onemogočanje je potreben dostop do vsebine spletne strani."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Dostop do zgodovine brskanja je potreben, da se ugotovi, ali AdGuard deluje na spletni strani, ki jo trenutno obiskujete."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard Napredno zaviranje"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Ta razširitev uporablja napredna pravila za zaviranje, ki jih ne podpira API za zaviranje vsebine Safari."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Za delovanje naprednih kozmetičnih pravil je potreben dostop do vsebine spletne strani."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Da bi lahko našli napredna pravila zaviranja je potreben dostop do zgodovine brskanja za zaznavanje spletne strani, ki jo želite odpreti."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 filtrov za zaviranje vsebine"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari omeji največje število pravil zaviranja vsebine s 50.000 na eno razširitev. To ni dovolj za obdelavo vseh vrst oglasov in sledilcev, da jih AdGuard zavira. Zato nudimo šest razširitev, s čimer to omejitev povečamo na 300.000."
     },
     "onboarding_safari_btn": {
         "message": "Odpri nastavitve"
@@ -470,6 +536,9 @@
     "settings_notification_cb_extensions_text": {
         "message": "Za pravilno onemogočanje oglasov v Safariju morate omogočiti vse AdGuardove Razširitve zaviralca vsebine"
     },
+    "settings_notification_update_interval": {
+        "message": "Upoštevajte, da zastareli filtri zmanjšujejo kakovost zaščite, zato je pomembno, da jih posodabljate."
+    },
     "options_cb_general_title": {
         "message": "AdGuard Splošno"
     },
@@ -508,6 +577,9 @@
     },
     "userfilter_name": {
         "message": "Uporabniška pravila"
+    },
+    "allowlist_name": {
+        "message": "Seznam dovoljenih"
     },
     "window_close_dialog_message": {
         "message": "Ali naj AdGuard deluje v ozadju?"

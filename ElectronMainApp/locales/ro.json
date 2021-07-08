@@ -47,6 +47,12 @@
     "options_support_rate_description": {
         "message": "Spuneți-ne ce părere aveți despre AdGuard"
     },
+    "options_support_discuss_title": {
+        "message": "Discuții"
+    },
+    "options_support_discuss_description": {
+        "message": "Discutați pe forumul nostru, în rețelele sociale sau pe GitHub"
+    },
     "options_about_update_check": {
         "message": "Se caută actualizări"
     },
@@ -59,11 +65,17 @@
     "options_about_updates_not_found": {
         "message": "AdGuard pentru Safari este la zi"
     },
+    "options_about_updates_error": {
+        "message": "Eroare de actualizare"
+    },
     "options_about_update_downloaded": {
         "message": "Aproape la zi! Relansați AdGuard pentru ca Safari să termine actualizarea."
     },
     "options_about_update_relaunch": {
         "message": "Reporniți"
+    },
+    "options_about_read_more": {
+        "message": "Citiți mai multe despre acest produs"
     },
     "options_popup_title_placeholder": {
         "message": "Introduceți numele filtrului"
@@ -131,8 +143,14 @@
             "other": "%s reguli avansate"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "Căutare actualizări"
+    },
     "options_filters_enabled": {
         "message": "Activat:"
+    },
+    "options_filters_homepage": {
+        "message": "Pagina de start"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s și %s mai mult"
@@ -150,7 +168,7 @@
         "message": "actualizat: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "Ne pare rău, dar nu aveți niciun filtru personalizat"
+        "message": "Încă nu aveți filtre personalizate"
     },
     "options_filters_empty_custom_add_button": {
         "message": "Adăugați filtru personalizat"
@@ -227,17 +245,32 @@
     "options_filters_check_filters_update": {
         "message": "Verifică actualizări filtre"
     },
-    "options_whitelist": {
+    "options_allowlist": {
         "message": "Listă autorizări"
     },
-    "options_whitelist_description": {
-        "message": "AdGuard nu filtrează site-urile web din lista de autorizări."
+    "options_allowlist_description": {
+        "message": "AdGuard nu filtrează site-urile web din Lista de Autorizări."
     },
-    "options_whitelist_inverse": {
-        "message": "Listă autorizări inversată<span class='sp-table-row-info'>Deblochează reclame peste tot, <i> cu excepția</i> listei de autorizări</span>"
+    "options_allowlist_inverted": {
+        "message": " (Inversate)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "Domenii: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "Lista de Autorizări este goală"
+    },
+    "options_allowlist_inverse": {
+        "message": "Lista de Autorizări Inversată<span class='sp-table-row-info'>Deblochează reclame peste tot <i>cu excepția</i> site-urile web din Lista de Autorizări</span>"
     },
     "options_userfilter": {
         "message": "Reguli Utilizator"
+    },
+    "options_userfilter_info_multi": {
+        "message": "Reguli utilizator: %s"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "lista este goală"
     },
     "options_userfilter_description": {
         "message": "Puteți adăuga propriile reguli aici. Această opțiune este&nbsp;recomandată pentru utilizatorii avansați familiarizați cu HTML/CSS. Citiți <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>ghidul</a> de&nbsp;urmat la&nbsp;scrierea propriilor reguli de filtrare."
@@ -265,6 +298,9 @@
     },
     "options_popup_update_version_error": {
         "message": "Versiunea filtrului pe care încercați să îl actualizați este aceeași sau mai veche"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Toate filtrele sunt la zi"
     },
     "options_popup_update_not_found": {
         "message": "Nu s-au găsit actualizări"
@@ -386,8 +422,44 @@
     "options_github": {
         "message": "GitHub"
     },
+    "onboarding_safari_title": {
+        "message": "Necesită permisiunea dvs."
+    },
     "onboarding_safari_desc": {
-        "message": "Bifați casetele de lângă extensiile AdGuard în preferințele Safari"
+        "message": "Bifați casetele de lângă extensiile AdGuard în preferințele Safari."
+    },
+    "onboarding_safari_link": {
+        "message": "Ce fac aceste extensii?"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "Pictograma AdGuard Safari"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "Puteți utiliza această pictogramă pentru a gestiona setările AdGuard pentru Safari. De exemplu, întrerupeți blocarea pe un site Web sau blocați manual un anunț."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Accesul la conținutul paginii Web este necesar pentru a face ca 'Instrumentul de blocare manuală' să funcționeze."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Este necesar accesul la istoricul de navigare pentru a detecta dacă AdGuard funcționează pe site-ul pe care îl vizitați în prezent."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "Blocare avansată AdGuard"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Această extensie aplică reguli avansate de blocare care nu sunt acceptate de API-ul de blocare de conținut Safari."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Pentru ca regulile cosmetice avansate să funcționeze, este necesar accesul la conținutul paginii web."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Dacă doriți ca AdGuard să găsească ce reguli avansate de blocare are nevoie să aplice pe pagina web pe care încercați să o deschideți, este necesar accesul la istoricul de navigare."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 extensii de blocare a conținutului"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari limitează numărul de reguli de blocare a conținutului la 50.000 pe extensie, ceea ce nu este suficient pentru a gestiona toate tipurile de anunțuri și trackere blocate de AdGuard. De aceea, oferim 6 extensii, mărind astfel limita la 300.000."
     },
     "onboarding_safari_btn": {
         "message": "Deschide preferințele"
@@ -470,6 +542,9 @@
     "settings_notification_cb_extensions_text": {
         "message": "Trebuie activate TOATE extensiile de blocare conținut AdGuard pentru a filtra corect în Safari"
     },
+    "settings_notification_update_interval": {
+        "message": "Vă rugăm să rețineți că filtrele învechite reduc calitatea protecției, deci este important să le păstrați la zi."
+    },
     "options_cb_general_title": {
         "message": "AdGuard General"
     },
@@ -508,6 +583,9 @@
     },
     "userfilter_name": {
         "message": "Filtre utilizator"
+    },
+    "allowlist_name": {
+        "message": "Listă autorizări"
     },
     "window_close_dialog_message": {
         "message": "Lăsați AdGuard să funcționeze în fundal?"

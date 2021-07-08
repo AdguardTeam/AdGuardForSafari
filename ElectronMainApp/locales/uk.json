@@ -47,6 +47,12 @@
     "options_support_rate_description": {
         "message": "Розкажіть нам про свої враження від AdGuard"
     },
+    "options_support_discuss_title": {
+        "message": "Обговорити"
+    },
+    "options_support_discuss_description": {
+        "message": "Обговорити в соціальних мережах, на нашому форумі або GitHub"
+    },
     "options_about_update_check": {
         "message": "Перевірка оновлень"
     },
@@ -59,11 +65,17 @@
     "options_about_updates_not_found": {
         "message": "AdGuard для Safari оновлено"
     },
+    "options_about_updates_error": {
+        "message": "Помилка оновлення"
+    },
     "options_about_update_downloaded": {
         "message": "Майже оновлено! Перезапустіть AdGuard для Safari, щоб застосувати оновлення."
     },
     "options_about_update_relaunch": {
         "message": "Перезапустити"
+    },
+    "options_about_read_more": {
+        "message": "Дізнатися більше про програму"
     },
     "options_popup_title_placeholder": {
         "message": "Введіть назву фільтру"
@@ -81,7 +93,7 @@
         "message": "AdGuard Антибанер"
     },
     "description": {
-        "message": "Неперевершений захист від реклами і спливаючих вікон. Блокує рекламу в Facebook, на Youtube і інших сайтах."
+        "message": "Неперевершений захист від реклами і спливних вікон. Блокує рекламу в Facebook, Youtube та інших сайтах."
     },
     "options_settings": {
         "message": "AdGuard для Safari - Налаштування"
@@ -131,8 +143,14 @@
             "other": "%s розширених правил"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "Перевірити оновлення"
+    },
     "options_filters_enabled": {
         "message": "Увімкнено:"
+    },
+    "options_filters_homepage": {
+        "message": "Домашня сторінка"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s і ще %s"
@@ -150,7 +168,7 @@
         "message": "оновлено: %s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "Вибачте, але у вас поки що немає власних фільтрів"
+        "message": "Поки що немає власних фільтрів"
     },
     "options_filters_empty_custom_add_button": {
         "message": "Додати власний фільтр"
@@ -227,17 +245,32 @@
     "options_filters_check_filters_update": {
         "message": "Перевірити оновлення фільтрів"
     },
-    "options_whitelist": {
+    "options_allowlist": {
         "message": "Список дозволів"
     },
-    "options_whitelist_description": {
-        "message": "AdGuard не фільтрує вебсайти, додані до списку дозволів."
+    "options_allowlist_description": {
+        "message": "AdGuard не фільтрує вебсайти зі Списку дозволів."
     },
-    "options_whitelist_inverse": {
-        "message": "Інвертувати список дозволів<span class='sp-table-row-info'>Розблокувати рекламу всюди, <i>за винятком</i> вебсайтів зі списку дозволів</span>"
+    "options_allowlist_inverted": {
+        "message": " (Інвертовано)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "Домени: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "Список дозволів порожній"
+    },
+    "options_allowlist_inverse": {
+        "message": "Інвертувати Список дозволів<span class='sp-table-row-info'>Розблокувати рекламу всюди, <i>окрім</i> вебсайтів зі Списку дозволів</span>"
     },
     "options_userfilter": {
         "message": "Правила користувача"
+    },
+    "options_userfilter_info_multi": {
+        "message": "Правил користувача: %s"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Список порожній"
     },
     "options_userfilter_description": {
         "message": "Тут ви можете додавати власні правила. Ця функція&nbsp;рекомендується лише для досвідчених користувачів, знайомих з HTML/CSS. Ознайомтеся з <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>настановами щодо правил фільтрування</a>, щоб&nbsp;навчитися створювати&nbsp;власні правила фільтрування."
@@ -266,6 +299,9 @@
     "options_popup_update_version_error": {
         "message": "Версія фільтра, який ви намагаєтесь оновити, така ж або старіша"
     },
+    "options_popup_update_not_found_title": {
+        "message": "Усі фільтри уже оновлено"
+    },
     "options_popup_update_not_found": {
         "message": "Оновлень не знайдено"
     },
@@ -273,7 +309,7 @@
         "message": "Не вдалося отримати оновлення. Будь ласка, спробуйте ще раз пізніше."
     },
     "options_popup_update_updated": {
-        "message": "\"$1\" оновлено до версії $2"
+        "message": "«$1» оновлено до версії $2"
     },
     "options_popup_update_updated_more": {
         "message": {
@@ -386,8 +422,44 @@
     "options_github": {
         "message": "GitHub"
     },
+    "onboarding_safari_title": {
+        "message": "Необхідний ваш дозвіл"
+    },
     "onboarding_safari_desc": {
-        "message": "Поставте позначки поряд з \"Піктограма AdGuard в Safari\", \"Розширене блокування AdGuard\" та \"AdGuard\" в налаштуваннях Safari"
+        "message": "Помітьте прапорцями розширення AdGuard в налаштуваннях Safari."
+    },
+    "onboarding_safari_link": {
+        "message": "Яке призначення цих розширень?"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "Піктограма AdGuard в Safari"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "За допомогою цієї піктограми ви можете керувати налаштуваннями AdGuard для Safari. Наприклад, призупинити блокування на вебсайті або заблокувати рекламу вручну."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Доступ до вмісту вебсторінки необхідний для роботи інструмента ручного блокування."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Доступ до історії перегляду необхідний, щоб виявляти чи AdGuard працює на вебсайті, який ви зараз відвідуєте."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "Розширене блокування AdGuard"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Це розширення застосовує розширені правила блокування, що не підтримуються Safari Content Blocking API."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Доступ до вмісту вебсторінки необхідний для забезпечення роботи розширених косметичних правил."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Доступ до історії перегляду необхідний для виявлення вебсайту, який ви намагаєтесь відкрити, щоб можна було визначити, які розширені правила блокування слід застосувати."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 розширень блокування вмісту"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari обмежує максимальну кількість правил блокування вмісту до 50.000 для одного розширення. Цього недостатньо для AdGuard, щоб обробляти й блокувати усі можливі типи реклами та стеження. Саме тому ми створили 6 розширень, збільшивши таким чином ліміт до 300.000."
     },
     "onboarding_safari_btn": {
         "message": "Відкрити налаштування"
@@ -470,6 +542,9 @@
     "settings_notification_cb_extensions_text": {
         "message": "Вам слід увімкнути всі розширення AdGuard для правильного блокування вмісту в Safari"
     },
+    "settings_notification_update_interval": {
+        "message": "Зауважте, що застарілі фільтри знижують якість захисту, тому важливо періодично оновлювати їх."
+    },
     "options_cb_general_title": {
         "message": "AdGuard - Загальні"
     },
@@ -508,6 +583,9 @@
     },
     "userfilter_name": {
         "message": "Правила користувача"
+    },
+    "allowlist_name": {
+        "message": "Список дозволів"
     },
     "window_close_dialog_message": {
         "message": "Продовжувати роботу AdGuard у фоновому режимі?"

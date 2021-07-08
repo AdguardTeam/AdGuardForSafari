@@ -47,6 +47,12 @@
     "options_support_rate_description": {
         "message": "告诉我们您对 AdGuard 的想法"
     },
+    "options_support_discuss_title": {
+        "message": "讨论"
+    },
+    "options_support_discuss_description": {
+        "message": "请在我们的论坛、社交网络或 GitHub 上讨论"
+    },
     "options_about_update_check": {
         "message": "检查更新"
     },
@@ -59,11 +65,17 @@
     "options_about_updates_not_found": {
         "message": "AdGuard for Safari 已为最新版本"
     },
+    "options_about_updates_error": {
+        "message": "更新错误"
+    },
     "options_about_update_downloaded": {
         "message": "更新近乎完成！请重启 AdGuard for Safari 以完成更新。"
     },
     "options_about_update_relaunch": {
         "message": "重新启用"
+    },
+    "options_about_read_more": {
+        "message": "阅读更多关于该产品的信息"
     },
     "options_popup_title_placeholder": {
         "message": "输入过滤器名称"
@@ -87,7 +99,7 @@
         "message": "AdGuard for Safari - 设置"
     },
     "options_settings_import_wrong_file_extension": {
-        "message": ""
+        "message": "文件扩展名应为 .json"
     },
     "options_settings_import_error": {
         "message": "导入设置错误"
@@ -131,8 +143,14 @@
             "other": "%s advanced rules"
         }
     },
+    "options_filters_check_for_updates": {
+        "message": "检查更新"
+    },
     "options_filters_enabled": {
         "message": "已开启："
+    },
+    "options_filters_homepage": {
+        "message": "主页"
     },
     "options_filters_enabled_and_more_divider": {
         "message": "%s 和 %s 更多"
@@ -150,7 +168,7 @@
         "message": "更新于：%s"
     },
     "options_filters_empty_custom_filters": {
-        "message": "抱歉，您没有任何自定义过滤器"
+        "message": "您还没有任何自定义过滤器"
     },
     "options_filters_empty_custom_add_button": {
         "message": "添加自定义过滤器"
@@ -227,17 +245,29 @@
     "options_filters_check_filters_update": {
         "message": "检查过滤器更新"
     },
-    "options_whitelist": {
+    "options_allowlist": {
         "message": "白名单"
     },
-    "options_whitelist_description": {
-        "message": "AdGuard 不过滤白名单上的网站。"
+    "options_allowlist_description": {
+        "message": "AdGuard 不过滤来自白名单的网站。"
     },
-    "options_whitelist_inverse": {
-        "message": "颠倒白名单<span class='sp-table-row-info'>取消所有网站上的广告拦截，白名单上的网站<i>除外</i></span>"
+    "options_allowlist_inverted": {
+        "message": " (颠倒的)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "域名：%s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "白名单为空"
+    },
+    "options_allowlist_inverse": {
+        "message": "反转白名单<span class='sp-table-row-info'>取消所有网站上的广告拦截，白名单上的网站<i>除外</i></span>"
     },
     "options_userfilter": {
         "message": "用户规则"
+    },
+    "options_userfilter_info_multi": {
+        "message": "条用户规则: %s"
     },
     "options_userfilter_description": {
         "message": "你可在此处添加自己的规则&nbsp。给熟悉HTML/CSSp的高级用户推荐使用该选项。对&nbsp可以阅读<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>过滤规则教程</a> ; 学习&nbsp;如何编写自己的规则"
@@ -252,7 +282,7 @@
         "message": "导入规则错误"
     },
     "options_popup_import_rules_wrong_file_extension": {
-        "message": ""
+        "message": "文件扩展名应为 .txt"
     },
     "options_show_app_updated_notification": {
         "message": "通知扩展更新"
@@ -265,6 +295,9 @@
     },
     "options_popup_update_version_error": {
         "message": "您试图更新的过滤器版本是一样或更老的"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "所有过滤器已更新至最新"
     },
     "options_popup_update_not_found": {
         "message": "未找到更新"
@@ -386,8 +419,44 @@
     "options_github": {
         "message": "Github"
     },
+    "onboarding_safari_title": {
+        "message": "需要您的允许"
+    },
     "onboarding_safari_desc": {
-        "message": "在 Safari 首选项页内，复选框紧邻  \"AdGuard Safari 图标\" 和 \"AdGuard\""
+        "message": "在 Safari 偏好设置勾选紧邻 AdGuard 扩展的复选框。"
+    },
+    "onboarding_safari_link": {
+        "message": "这些扩展有什么功能？"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "AdGuard Safari 图标"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "您可以使用这个图标来管理 AdGuard for Safari 的设置。例如，暂停拦截一个网站，或手动拦截一个广告。"
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "要让“手动阻止工具”运作，必须授予网页内容访问权限。"
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "需要浏览历史访问权限来检测 AdGuard 是否在您当前访问的网站上运行。"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "Adguard 高级拦截"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "这个扩展应用 Safari 内容拦截 API 不支持的高级拦截规则。"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "要让高级修饰规则运行，网页内容访问权是必需的。"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "需要获取浏览历史访问权限以检测您试图打开的网站，这样它就可以找到应该应用的高级拦截规则。"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 个内容拦截扩展"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari 将每个扩展的内容阻止规则的最大数量限制为50,000条。这并不足以处理 AdGuard 拦截的各种各样的广告和跟踪器。这就是为什么我们提供了6个扩展，从而将限制增加到 30万。"
     },
     "onboarding_safari_btn": {
         "message": "打开首选项"
@@ -470,6 +539,9 @@
     "settings_notification_cb_extensions_text": {
         "message": "您需要开启AdGuard 内容拦截器的所有扩展项以确保广告拦截在Safari中的正常运行"
     },
+    "settings_notification_update_interval": {
+        "message": "请注意，过时的过滤器会降低保护的质量，所以时常更新它们非常重要。"
+    },
     "options_cb_general_title": {
         "message": "AdGuard 常用"
     },
@@ -508,6 +580,9 @@
     },
     "userfilter_name": {
         "message": "用户过滤器"
+    },
+    "allowlist_name": {
+        "message": "白名单"
     },
     "window_close_dialog_message": {
         "message": "保持 AdGuard 在后台运行？"

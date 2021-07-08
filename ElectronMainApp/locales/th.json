@@ -14,39 +14,6 @@
     "options_filters_filter_trusted_tag_desc": {
         "message": "คุณเลือกที่จะเชื่อถือตัวกรองนี้"
     },
-    "options_support": {
-        "message": ""
-    },
-    "options_support_faq_title": {
-        "message": ""
-    },
-    "options_support_faq_description": {
-        "message": ""
-    },
-    "options_support_bug_report_title": {
-        "message": ""
-    },
-    "options_support_bug_report_description": {
-        "message": ""
-    },
-    "options_support_incorrect_blocking_title": {
-        "message": ""
-    },
-    "options_support_incorrect_blocking_description": {
-        "message": ""
-    },
-    "options_support_feedback_title": {
-        "message": ""
-    },
-    "options_support_feedback_description": {
-        "message": ""
-    },
-    "options_support_rate_title": {
-        "message": ""
-    },
-    "options_support_rate_description": {
-        "message": ""
-    },
     "options_about_update_check": {
         "message": "ตรวจสอบการปรับปรุง"
     },
@@ -86,12 +53,6 @@
     "options_settings": {
         "message": "AdGuard สำหรับ Safari - การตั้งค่า"
     },
-    "options_settings_import_wrong_file_extension": {
-        "message": ""
-    },
-    "options_settings_import_error": {
-        "message": ""
-    },
     "options_general_settings": {
         "message": "ทั่วไป"
     },
@@ -106,9 +67,6 @@
     },
     "options_import_settings": {
         "message": "นำเข้าการตั้งค่า"
-    },
-    "options_export_logs": {
-        "message": ""
     },
     "options_antibanner": {
         "message": "ตัวกรอง"
@@ -149,17 +107,8 @@
     "options_filters_updated": {
         "message": "อัปเดต: %s"
     },
-    "options_filters_empty_custom_filters": {
-        "message": "ขออภัย แต่คุณยังไม่ได้เลือกตัวกรองที่กำหนดเองเลย"
-    },
     "options_filters_empty_custom_add_button": {
         "message": "เพิ่มตัวกรองเอง"
-    },
-    "options_filters_custom_import_file": {
-        "message": ""
-    },
-    "options_popup_import_file_error_title": {
-        "message": ""
     },
     "options_filters_custom_step_one_title": {
         "message": "การสมัครสมาชิกตัวกรองใหม่"
@@ -181,9 +130,6 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "กำลังดาวน์โหลดตัวกรอง"
-    },
-    "options_filters_custom_step_two_subscribing": {
-        "message": ""
     },
     "options_filters_custom_step_three_title": {
         "message": "เกิดข้อผิดพลาด"
@@ -227,32 +173,14 @@
     "options_filters_check_filters_update": {
         "message": "ตรวจสอบการอัปเดตตัวกรอง"
     },
-    "options_whitelist": {
-        "message": ""
-    },
-    "options_whitelist_description": {
-        "message": ""
-    },
-    "options_whitelist_inverse": {
-        "message": ""
-    },
     "options_userfilter": {
         "message": "ตัวกรองผู้ใช้"
     },
+    "options_userfilter_no_user_rules": {
+        "message": "รายการว่างเปล่า"
+    },
     "options_userfilter_description": {
         "message": "คุณสามารถเพิ่มกฎของคุณเองใน&nbsp;ตัวกรองนี้&nbsp;แนะนำให้ใช้ตัวเลือกนี้สำหรับผู้ใช้ขั้นสูงที่คุ้นเคยกับ HTML/CSS อ่าน <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>กฎการสอนตัวกรอง</a>เพื่อ&nbsp;เรียนรู้วิธีเขียน&nbsp;กฎตัวกรองของคุณเอง"
-    },
-    "options_userfilter_import": {
-        "message": ""
-    },
-    "options_userfilter_export": {
-        "message": ""
-    },
-    "options_userfilter_import_rules_error": {
-        "message": ""
-    },
-    "options_popup_import_rules_wrong_file_extension": {
-        "message": ""
     },
     "options_show_app_updated_notification": {
         "message": "แจ้งเตือนเกี่ยวกับการอัปเดตส่วนขยาย"
@@ -262,9 +190,6 @@
     },
     "options_popup_update_error_title": {
         "message": "ผิดพลาดในการอัปเดตของตัวกรอง"
-    },
-    "options_popup_update_version_error": {
-        "message": ""
     },
     "options_popup_update_not_found": {
         "message": "ไม่พบการอัปเดต"
@@ -310,9 +235,6 @@
     },
     "options_editor_indicator_saved": {
         "message": "บันทึกแล้ว"
-    },
-    "options_editor_save_button": {
-        "message": ""
     },
     "main_menu_edit": {
         "message": "แก้ไข"
@@ -386,14 +308,8 @@
     "options_github": {
         "message": "Github"
     },
-    "onboarding_safari_desc": {
-        "message": "ทำเครื่องหมายในช่องถัดจากส่วนขยาย AdGuard ในการตั้งค่า Safari"
-    },
     "onboarding_safari_btn": {
         "message": "เปิดการตั้งค่า"
-    },
-    "onboarding_ignore_safari_btn": {
-        "message": ""
     },
     "options_learn_more": {
         "message": "เรียนรู้เพิ่มเติมเกี่ยวกับมัน"
@@ -439,15 +355,6 @@
     },
     "options_enable_hardware_acceleration_desc": {
         "message": "เปิดใช้งานการเร่งด้วยฮาร์ดแวร์สำหรับหน้าต่างการตั้งค่า ต้องการเริ่มต้นแอปพลิเคชันใหม่"
-    },
-    "settings_import": {
-        "message": ""
-    },
-    "settings_import_success": {
-        "message": ""
-    },
-    "settings_import_error": {
-        "message": ""
     },
     "settings_notification_protection_title": {
         "message": "หยุดการป้องกันชั่วคราว"
@@ -508,35 +415,5 @@
     },
     "userfilter_name": {
         "message": "ตัวกรองผู้ใช้"
-    },
-    "window_close_dialog_message": {
-        "message": ""
-    },
-    "window_close_dialog_detail": {
-        "message": ""
-    },
-    "window_close_dialog_checkbox": {
-        "message": ""
-    },
-    "window_close_dialog_yes": {
-        "message": ""
-    },
-    "window_close_dialog_no": {
-        "message": ""
-    },
-    "window_close_dialog_cancel": {
-        "message": ""
-    },
-    "folder_check_dialog_message": {
-        "message": ""
-    },
-    "folder_check_dialog_detail": {
-        "message": ""
-    },
-    "folder_check_dialog_move": {
-        "message": ""
-    },
-    "folder_check_dialog_quit": {
-        "message": ""
     }
 }
