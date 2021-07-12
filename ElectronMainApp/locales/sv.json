@@ -331,5 +331,11 @@
     },
     "settings_notification_protection_title": {
         "message": "Observera! Skyddet kopplades bort"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s regel används",
+            "other": "%s regler används"
+        }
     }
 }

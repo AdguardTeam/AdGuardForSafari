@@ -241,7 +241,7 @@ const Settings = function (
         if (info.enabledContentBlockersCount === 0) {
             cbDescription.textContent = i18n.__('options_content_blockers_disabled_desc.message');
         } else {
-            cbDescription.textContent = i18n.__n(
+            cbDescription.textContent = i18n.__(
                 'options_content_blockers_desc.message',
                 info.enabledContentBlockersCount
             );
