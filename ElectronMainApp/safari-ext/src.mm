@@ -765,6 +765,12 @@ NAN_METHOD(sharedResourcesPath) {
   info.GetReturnValue().Set(Nan::New(result.UTF8String).ToLocalChecked());
 }
 
+NAN_METHOD(getSafariVersion) {
+
+    NSString *result = [AESharedResources safariVersion] ?: @"";
+    info.GetReturnValue().Set(Nan::New(result.UTF8String).ToLocalChecked());
+}
+
 
 NAN_MODULE_INIT(Init) {
 
@@ -851,6 +857,9 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("sharedResourcesPath").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(sharedResourcesPath)).ToLocalChecked());
+    
+  Nan::Set(target, New<String>("getSafariVersion").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(getSafariVersion)).ToLocalChecked());
 
 }
 

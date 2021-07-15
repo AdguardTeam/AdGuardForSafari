@@ -79,6 +79,10 @@ extern NSString * const AEDefaultsAllExtensionsEnabled;
  BundleId of the Custom content blocker extension.
  */
 @property (class, readonly) NSString *blockerCustomBundleId;
+/**
+ Safari browser version.
+ */
+@property (class, readonly) NSString *safariVersion;
 
 
 /**

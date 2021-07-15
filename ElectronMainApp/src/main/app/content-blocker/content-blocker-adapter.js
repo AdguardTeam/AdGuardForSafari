@@ -1,5 +1,6 @@
 /* eslint-disable-next-line import/no-unresolved */
 const { jsonFromRules, getConverterVersion } = require('safari-converter-lib');
+const safariExt = require('safari-ext');
 const { resourcePath } = require('../../../utils/app-pack');
 const listeners = require('../../notifier');
 const events = require('../../events');
@@ -18,7 +19,6 @@ const CONVERTER_TOOL_PATH = '../libs/ConverterTool';
  * @type {{updateContentBlocker}}
  */
 module.exports = (function () {
-    const RULES_LIMIT = 50000;
     const DEBOUNCE_PERIOD = 500;
 
     const emptyBlockerJSON = [
@@ -39,12 +39,19 @@ module.exports = (function () {
      */
     const convertRulesToJson = async (rules, advancedBlocking) => {
         try {
+            let safariVersion = safariExt.getSafariVersion();
+            log.info(`Safari browser version: ${safariVersion}`);
+            if (safariVersion) {
+                // major version
+                safariVersion = safariVersion.substring(0, 2);
+            }
+
             log.info(`ConverterTool version: ${getConverterVersion()}`);
             log.info(`Conversion of ${rules.length} rules started..`);
             const converterPath = resourcePath(CONVERTER_TOOL_PATH);
             log.info(`CONVERTER PATH: ${converterPath}`);
 
-            const result = await jsonFromRules(rules, advancedBlocking, RULES_LIMIT, converterPath);
+            const result = await jsonFromRules(rules, advancedBlocking, safariVersion, converterPath);
             return result;
         } catch (e) {
             log.error(`Unexpected error converting rules: ${e}`);

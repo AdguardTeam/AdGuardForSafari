@@ -43,6 +43,8 @@
 #define NOTIFICATION_EXTENSIONS_ENABLED         AG_BUNDLEID @".notify.allExtentionsEnabled"
 #define REQUEST_EXTENSIONS_ENABLED              AG_BUNDLEID @".request.allExtentionsEnabled"
 
+#define ADC_PROCESS_DEFAULT_BUNDLE_ID           @"com.apple.Safari"
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources Constants
 
@@ -140,6 +142,11 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
 }
 + (NSString *)blockerCustomBundleId{
     return AG_BLOCKER_CUSTOM_BUNDLEID;
+}
++ (NSString *)safariVersion{
+    NSURL *path = [[NSWorkspace sharedWorkspace] URLForApplicationWithBundleIdentifier:ADC_PROCESS_DEFAULT_BUNDLE_ID];
+    NSBundle *bundle = [NSBundle bundleWithPath:path.path];
+    return [bundle.infoDictionary objectForKey:@"CFBundleShortVersionString"];
 }
 
 + (void)initLogger {

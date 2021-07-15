@@ -291,6 +291,13 @@ module.exports = (() => {
         return addon.sharedResourcesPath();
     };
 
+    /**
+     * Returns path to shared resources folder (App Group Folder)
+     */
+    const getSafariVersion = () => {
+        return addon.getSafariVersion();
+    };
+
     return {
         init: init,
         sendReady: sendReady,
@@ -311,5 +318,6 @@ module.exports = (() => {
         removeOldLoginItem: removeOldLoginItem,
         requestMASUserReview: requestMASUserReview,
         sharedResourcesPath: sharedResourcesPath,
+        getSafariVersion: getSafariVersion,
     };
 })();
