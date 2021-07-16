@@ -201,9 +201,10 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
         const element = getCategoryElement(groupId);
         const checkbox = getCategoryCheckbox(groupId);
 
-        if (groupFiltersCount > 0) {
-            element.querySelector('.desc').textContent = filtersNamesDescription;
-        }
+        const descElement = element.querySelector('.desc');
+        descElement.textContent = groupFiltersCount > 0
+            ? filtersNamesDescription
+            : i18n.__('options_filters_no_filters.message');
 
         const isCategoryEnabled = loadedFiltersInfo.isCategoryEnabled(groupId);
         const isCheckboxChecked = typeof isCategoryEnabled === 'undefined'

@@ -161,6 +161,9 @@
     "options_filters_no_enabled": {
         "message": "No filters enabled"
     },
+    "options_filters_no_filters": {
+        "message": "No filters"
+    },
     "options_filters_version": {
         "message": "version %s"
     },
@@ -387,7 +390,7 @@
         "message": "Ad blocking in Safari is on"
     },
     "tray_menu_protection_stop": {
-        "message": "Ad blocking in Safari is off"
+        "message": "Ad blocking in Safari is paused"
     },
     "options_last_update": {
         "message": "Last update:"
