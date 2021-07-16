@@ -29,6 +29,7 @@ module.exports = (function () {
         LAUNCH_AT_LOGIN: 'launch-at-login',
         VERBOSE_LOGGING: 'verbose-logging',
         QUIT_ON_CLOSE_WINDOW: 'quit-on-close-main-window',
+        ALLOW_ACCEPTABLE_ADS: 'allow-acceptable-ads',
     };
 
     const properties = Object.create(null);
@@ -268,6 +269,14 @@ module.exports = (function () {
         log.info(`Allowlist ${value ? 'enabled' : 'disabled'}`);
     };
 
+    const changeAllowAcceptableAds = (value) => {
+        listeners.notifyListeners(events.SETTING_UPDATED, {
+            propertyName: settings.ALLOW_ACCEPTABLE_ADS,
+            propertyValue: value,
+            inverted: false,
+        });
+    };
+
     const api = {};
 
     // Expose settings to api
@@ -309,6 +318,7 @@ module.exports = (function () {
     api.changeUserrulesState = changeUserrulesState;
     api.isAllowlistEnabled = isAllowlistEnabled;
     api.changeAllowlistState = changeAllowlistState;
+    api.changeAllowAcceptableAds = changeAllowAcceptableAds;
 
     return api;
 })();

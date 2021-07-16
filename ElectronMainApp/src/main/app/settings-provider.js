@@ -134,6 +134,7 @@ module.exports = (() => {
         } else {
             filters.disableFilters([config.get('AntiBannerFiltersId').SEARCH_AND_SELF_PROMO_FILTER_ID]);
         }
+        settingsManager.changeAllowAcceptableAds(set['allow-acceptable-ads']);
 
         callback(true);
     };

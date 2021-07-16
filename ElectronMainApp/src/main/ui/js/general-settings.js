@@ -143,6 +143,7 @@ const Settings = function (
         'default-allowlist-mode': '#changeDefaultAllowlistMode',
         'userrules-enabled': '#userrulesInput',
         'allowlist-enabled': '#allowlistInput',
+        'allow-acceptable-ads': '#allowAcceptableAds',
     };
 
     /**
