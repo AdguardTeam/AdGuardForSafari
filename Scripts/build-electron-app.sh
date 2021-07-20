@@ -1,20 +1,22 @@
 #!/bin/bash
 
-set -e
-
 ELECTRON="ElectronMainApp"
 SRC="${SRCROOT}/../${ELECTRON}"
 SHAREDSRC="${SRCROOT}/../Shared"
 APP_NAME="${PRODUCT_NAME}.app"
 APP="${TARGET_TEMP_DIR}/${APP_NAME}"
 
-
 TIME_MARKER="${TARGET_TEMP_DIR}/ElectronTimeMarker.touch"
 
 [ -f "$TIME_MARKER" ] && /usr/bin/find "${SRC}/" -newer "${TIME_MARKER}" | grep ${ELECTRON} > /dev/null
 
-if [[ $? == 0 ]] || ! [ -f "$TIME_MARKER" ]; then
+# save last result in temp variable to be able to call set -e later,
+# otherwise set -e forces program to exit when grep doesn't find anythink
+SEARCH_RESULT=$?
 
+set -e
+
+if [[ $SEARCH_RESULT == 0 ]] || ! [ -f "$TIME_MARKER" ]; then
     echo "Rebuild electron started"
 
     mkdir -p $TARGET_TEMP_DIR/arm64
