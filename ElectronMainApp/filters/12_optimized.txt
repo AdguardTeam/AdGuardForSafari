@@ -1,9 +1,9 @@
-! Checksum: BZEOKKsoJIDxKB8wBa+L2Q
-! Title: AdGuard Safari filter
-! Description: Special filter for Safari 9+ on iOS and Mac OS. We need a separate filter for Safari browser because it does not fully support our rules syntax.
-! Version: 2.0.1.45
-! TimeUpdated: 2019-11-19T19:39:17+07:00
-! Expires: 2 days (update frequency)
+! Checksum: fPzDaz9AqT4rhIhAC73YgQ
+! Title: AdGuard Safari filter (Optimized)
+! Description: Special filter for Safari 9+ on iOS and Mac OS. We need a separate filter for Safari browser because it does not fully support our rules syntax. Already included in AdGuard Base filter.
+! Version: 2.0.1.81
+! TimeUpdated: 2021-07-20T00:30:29+03:00
+! Expires: 4 days (update frequency)
 @@||imasdk.googleapis.com/js/sdkloader/ima3_debug.js$domain=maxpreps.com
 @@||hdliveextra-a.akamaihd.net/*/config/ads.js$domain=nbcsports.com
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=247sports.com
@@ -13,7 +13,6 @@
 techbii.com##.herald-ad
 @@||techbii.com^$generichide
 @@||securepubads.g.doubleclick.net/gpt/pubads_impl_$domain=itprotoday.com
-@@||baqiworld.com^$generichide
 @@||gomovies.cd^$generichide
 @@||streamapi.xyz/*/*.json
 @@||123moviestube.io^$generichide
@@ -24,7 +23,6 @@ techbii.com##.herald-ad
 lep.co.uk##.leaderboard-ad
 @@||lep.co.uk^$generichide
 @@||cracxsoftwares.com^$generichide
-@@||layer13.net/ad/banner/_adsense_/_adserver/_adview_.ad.json
 @@||layer13.net^$generichide
 @@||leechall.com^$generichide
 @@||caravaning.de^$generichide
@@ -58,10 +56,7 @@ manta.com##.adsbygoogle
 sevenangel.id##.adsbygoogle
 @@||sevenangel.id^$generichide
 @@||bludv.com^$generichide
-@@||mylink.nu^$generichide
 @@||alts4free.com^$generichide
-@@||darkcomet.net^$generichide
-darkcomet.net##.adsbygoogle
 @@||firmgoogle.com^$generichide
 @@||asianovel.com^$generichide
 @@||food-tiger.de^$generichide
@@ -78,7 +73,6 @@ pallok.com##.adsbygoogle
 businessvoip.me##.adsbygoogle
 italiashare.life##.bforum > #___gcse_0 + div[align="center"]:not([id]):not([class])
 @@||italiashare.life^$generichide
-@@||9ketsuki.info^$generichide
 @@||play.anghami.com^$generichide
 play.anghami.com##.header-banner
 play.anghami.com##.content > .mpu
@@ -97,7 +91,6 @@ play.anghami.com##.content > .mpu
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=cokomik.net
 @@||pagead2.googlesyndication.com/pagead/js/*/show_ads_impl.js$domain=cokomik.net
 cokomik.net#@#.adsbygoogle
-@@||gamedev.net^$generichide
 @@||arkforum.de^$generichide
 @@||appdrop.net^$generichide
 @@||chelsea24news.pl^$generichide
@@ -291,16 +284,15 @@ televisaofutebol.com#@#iframe[width="300"][height="250"]
 @@||zenfoneasus.com^$generichide
 @@||camiris.com^$generichide
 @@/fuckadblock.js$domain=camiris.com
-@@||cat3movie.us^$generichide
 @@||inside-digital.de^$generichide
 @@||arabloads.net^$generichide
-@@||googletagservices.com/tag/js/gpt.js$domain=baltimoresun.com|boston.com|calgaryherald.com|calgarysun.com|capitalgazette.com|carrollcountytimes.com|celebslam.com|celebuzz.com|chicagotribune.com|courant.com|dailypress.com|deathandtaxesmag.com|edmontonjournal.com|edmontonsun.com|edmunds.com|financialpost.com|gamerevolution.com|geek.com|gofugyourself.com|hearthhead.com|ign.com|infinitiev.com|leaderpost.com|lolking.net|mcall.com|mmo-champion.com|montrealgazette.com|nasdaq.com|nationalpost.com|orlandosentinel.com|ottawacitizen.com|pcmag.com|ranker.com|sandiegouniontribune.com|saveur.com|sherdog.com|spin.com|sporcle.com|stereogum.com|sun-sentinel.com|thefrisky.com|theprovince.com|thestarphoenix.com|thesuperficial.com|timeanddate.com|tmn.today|torontosun.com|twincities.com|vancouversun.com|vibe.com|windsorstar.com
-@@||securepubads.g.doubleclick.net/gpt/pubads_impl_*.js$domain=baltimoresun.com|boston.com|calgaryherald.com|calgarysun.com|capitalgazette.com|carrollcountytimes.com|celebslam.com|celebuzz.com|chicagotribune.com|courant.com|dailypress.com|deathandtaxesmag.com|edmontonjournal.com|edmontonsun.com|edmunds.com|financialpost.com|gamerevolution.com|geek.com|gofugyourself.com|hearthhead.com|ign.com|infinitiev.com|leaderpost.com|lolking.net|mcall.com|mmo-champion.com|montrealgazette.com|nasdaq.com|nationalpost.com|orlandosentinel.com|ottawacitizen.com|pcmag.com|ranker.com|sandiegouniontribune.com|saveur.com|sherdog.com|spin.com|sporcle.com|stereogum.com|sun-sentinel.com|thefrisky.com|theprovince.com|thestarphoenix.com|thesuperficial.com|timeanddate.com|tmn.today|torontosun.com|twincities.com|vancouversun.com|vibe.com|windsorstar.com
-@@||static.ads-twitter.com/oct.js$domain=baltimoresun.com|boston.com|calgaryherald.com|calgarysun.com|capitalgazette.com|carrollcountytimes.com|celebslam.com|celebuzz.com|chicagotribune.com|courant.com|dailypress.com|deathandtaxesmag.com|edmontonjournal.com|edmontonsun.com|edmunds.com|financialpost.com|gamerevolution.com|geek.com|gofugyourself.com|hearthhead.com|ign.com|infinitiev.com|leaderpost.com|lolking.net|mcall.com|mmo-champion.com|montrealgazette.com|nasdaq.com|nationalpost.com|orlandosentinel.com|ottawacitizen.com|pcmag.com|ranker.com|sandiegouniontribune.com|saveur.com|sherdog.com|spin.com|sporcle.com|stereogum.com|sun-sentinel.com|thefrisky.com|theprovince.com|thestarphoenix.com|thesuperficial.com|timeanddate.com|tmn.today|torontosun.com|twincities.com|vancouversun.com|vibe.com|windsorstar.com
-@@||js.revsci.net/gateway/gw.js$domain=baltimoresun.com|boston.com|calgaryherald.com|calgarysun.com|capitalgazette.com|carrollcountytimes.com|celebslam.com|celebuzz.com|chicagotribune.com|courant.com|dailypress.com|deathandtaxesmag.com|edmontonjournal.com|edmontonsun.com|edmunds.com|financialpost.com|gamerevolution.com|geek.com|gofugyourself.com|hearthhead.com|ign.com|infinitiev.com|leaderpost.com|lolking.net|mcall.com|mmo-champion.com|montrealgazette.com|nasdaq.com|nationalpost.com|orlandosentinel.com|ottawacitizen.com|pcmag.com|ranker.com|sandiegouniontribune.com|saveur.com|sherdog.com|spin.com|sporcle.com|stereogum.com|sun-sentinel.com|thefrisky.com|theprovince.com|thestarphoenix.com|thesuperficial.com|timeanddate.com|tmn.today|torontosun.com|twincities.com|vancouversun.com|vibe.com|windsorstar.com
-@@||c.betrad.com/geo/ba.js$domain=baltimoresun.com|boston.com|calgaryherald.com|calgarysun.com|capitalgazette.com|carrollcountytimes.com|celebslam.com|celebuzz.com|chicagotribune.com|courant.com|dailypress.com|deathandtaxesmag.com|edmontonjournal.com|edmontonsun.com|edmunds.com|financialpost.com|gamerevolution.com|geek.com|gofugyourself.com|hearthhead.com|ign.com|infinitiev.com|leaderpost.com|lolking.net|mcall.com|mmo-champion.com|montrealgazette.com|nasdaq.com|nationalpost.com|orlandosentinel.com|ottawacitizen.com|pcmag.com|ranker.com|sandiegouniontribune.com|saveur.com|sherdog.com|spin.com|sporcle.com|stereogum.com|sun-sentinel.com|thefrisky.com|theprovince.com|thestarphoenix.com|thesuperficial.com|timeanddate.com|tmn.today|torontosun.com|twincities.com|vancouversun.com|vibe.com|windsorstar.com
-@@||yahoo.com/lib/metro/g/myy/advertisement_*.js$domain=baltimoresun.com|boston.com|calgaryherald.com|calgarysun.com|capitalgazette.com|carrollcountytimes.com|celebslam.com|celebuzz.com|chicagotribune.com|courant.com|dailypress.com|deathandtaxesmag.com|edmontonjournal.com|edmontonsun.com|edmunds.com|financialpost.com|gamerevolution.com|geek.com|gofugyourself.com|hearthhead.com|ign.com|infinitiev.com|leaderpost.com|lolking.net|mcall.com|mmo-champion.com|montrealgazette.com|nasdaq.com|nationalpost.com|orlandosentinel.com|ottawacitizen.com|pcmag.com|ranker.com|sandiegouniontribune.com|saveur.com|sherdog.com|spin.com|sporcle.com|stereogum.com|sun-sentinel.com|thefrisky.com|theprovince.com|thestarphoenix.com|thesuperficial.com|timeanddate.com|tmn.today|torontosun.com|twincities.com|vancouversun.com|vibe.com|windsorstar.com
-@@||google-analytics.com/analytics.js$domain=baltimoresun.com|boston.com|calgaryherald.com|calgarysun.com|capitalgazette.com|carrollcountytimes.com|celebslam.com|celebuzz.com|chicagotribune.com|courant.com|dailypress.com|deathandtaxesmag.com|edmontonjournal.com|edmontonsun.com|edmunds.com|financialpost.com|gamerevolution.com|geek.com|gofugyourself.com|hearthhead.com|ign.com|infinitiev.com|leaderpost.com|lolking.net|mcall.com|mmo-champion.com|montrealgazette.com|nasdaq.com|nationalpost.com|orlandosentinel.com|ottawacitizen.com|pcmag.com|ranker.com|sandiegouniontribune.com|saveur.com|sherdog.com|spin.com|sporcle.com|stereogum.com|sun-sentinel.com|thefrisky.com|theprovince.com|thestarphoenix.com|thesuperficial.com|timeanddate.com|tmn.today|torontosun.com|twincities.com|vancouversun.com|vibe.com|windsorstar.com
+@@||googletagservices.com/tag/js/gpt.js$domain=boston.com|calgaryherald.com|calgarysun.com|celebuzz.com|infinitiev.com|montrealgazette.com
+@@||securepubads.g.doubleclick.net/gpt/pubads_impl_*.js$domain=boston.com|calgaryherald.com|calgarysun.com|celebuzz.com|infinitiev.com|montrealgazette.com
+@@||static.ads-twitter.com/oct.js$domain=boston.com|calgaryherald.com|calgarysun.com|celebuzz.com|infinitiev.com|montrealgazette.com
+@@||js.revsci.net/gateway/gw.js$domain=boston.com|calgaryherald.com|calgarysun.com|celebuzz.com|infinitiev.com|montrealgazette.com
+@@||c.betrad.com/geo/ba.js$domain=boston.com|calgaryherald.com|calgarysun.com|celebuzz.com|infinitiev.com|montrealgazette.com
+@@||yahoo.com/lib/metro/g/myy/advertisement_*.js$domain=boston.com|calgaryherald.com|calgarysun.com|celebuzz.com|infinitiev.com|montrealgazette.com
+@@||google-analytics.com/analytics.js$domain=boston.com|calgaryherald.com|calgarysun.com|celebuzz.com|infinitiev.com|montrealgazette.com
 @@||avaxhome.co^$generichide
 @@/favicon.ico$domain=avaxhome.co
 @@||securepubads.g.doubleclick.net/gpt/pubads_impl_$domain=allmusic.com
@@ -358,7 +350,6 @@ ad4msan.com#@##adver5
 ad4msan.com#@##googleAdwordsModule
 ad4msan.com#@##iframeTopAd
 ad4msan.com#@##multi_ad
-ad4msan.com#@##adsense
 ||adition.com^$third-party
 ||v.fwmrm.net^$third-party
 ||tapcreatives.net^$third-party
@@ -391,7 +382,7 @@ wikimovies.ru##body > noindex
 @@||jsc.marketgid.com/*/seasonvar.ru.*.js
 tree.tv,comedy-film.net,free-torrent.org,free-torrents.org,onlyf.ws,torrentino.me##body > :not(div)
 rutorgames.org##body > noindex
-nnm-club.tv,nnm-club.me,nnmclub.to##.leftnav > center > noindex
+nnmclub.ro,nnm-club.t0r.xyz,nnm-club-me.appspot.com,nnm-club.lib,nnm-club.me,nnmclub.to##.leftnav > center > noindex
 meddaily.ru##div[style="width: 240px; background-color: White;"]
 google.ad,google.ae,google.al,google.am,google.as,google.at,google.az,google.ba,google.be,google.bf,google.bg,google.bi,google.bj,google.bs,google.bt,google.by,google.ca,google.cat,google.cd,google.cf,google.cg,google.ch,google.ci,google.cl,google.cm,google.cn,google.co.ao,google.co.bw,google.co.ck,google.co.cr,google.co.id,google.co.il,google.co.in,google.co.jp,google.co.ke,google.co.kr,google.co.ls,google.co.ma,google.co.mz,google.co.nz,google.co.th,google.co.tz,google.co.ug,google.co.uk,google.co.uz,google.co.ve,google.co.vi,google.co.za,google.co.zm,google.co.zw,google.com,google.com.af,google.com.ag,google.com.ai,google.com.ar,google.com.au,google.com.bd,google.com.bh,google.com.bn,google.com.bo,google.com.br,google.com.bz,google.com.co,google.com.cu,google.com.cy,google.com.do,google.com.ec,google.com.eg,google.com.et,google.com.fj,google.com.gh,google.com.gi,google.com.gt,google.com.hk,google.com.jm,google.com.kh,google.com.kw,google.com.lb,google.com.ly,google.com.mm,google.com.mt,google.com.mx,google.com.my,google.com.na,google.com.nf,google.com.ng,google.com.ni,google.com.np,google.com.om,google.com.pa,google.com.pe,google.com.pg,google.com.ph,google.com.pk,google.com.pr,google.com.py,google.com.qa,google.com.sa,google.com.sb,google.com.sg,google.com.sl,google.com.sv,google.com.tj,google.com.tr,google.com.tw,google.com.ua,google.com.uy,google.com.vc,google.com.vn,google.cv,google.cz,google.de,google.dj,google.dk,google.dm,google.dz,google.ee,google.es,google.fi,google.fm,google.fr,google.ga,google.ge,google.gg,google.gl,google.gm,google.gp,google.gr,google.gy,google.hn,google.hr,google.ht,google.hu,google.ie,google.im,google.iq,google.is,google.it,google.je,google.jo,google.kg,google.ki,google.kz,google.la,google.li,google.lk,google.lt,google.lu,google.lv,google.md,google.me,google.mg,google.mk,google.ml,google.mn,google.ms,google.mu,google.mv,google.mw,google.ne,google.nl,google.no,google.nr,google.nu,google.pl,google.pn,google.ps,google.pt,google.ro,google.rs,google.ru,google.rw,google.sc,google.se,google.sh,google.si,google.sk,google.sm,google.sn,google.so,google.sr,google.st,google.td,google.tg,google.tk,google.tl,google.tm,google.tn,google.to,google.tt,google.vg,google.vu,google.ws##.ampads
 google.ad,google.ae,google.al,google.am,google.as,google.at,google.az,google.ba,google.be,google.bf,google.bg,google.bi,google.bj,google.bs,google.bt,google.by,google.ca,google.cat,google.cd,google.cf,google.cg,google.ch,google.ci,google.cl,google.cm,google.cn,google.co.ao,google.co.bw,google.co.ck,google.co.cr,google.co.id,google.co.il,google.co.in,google.co.jp,google.co.ke,google.co.kr,google.co.ls,google.co.ma,google.co.mz,google.co.nz,google.co.th,google.co.tz,google.co.ug,google.co.uk,google.co.uz,google.co.ve,google.co.vi,google.co.za,google.co.zm,google.co.zw,google.com,google.com.af,google.com.ag,google.com.ai,google.com.ar,google.com.au,google.com.bd,google.com.bh,google.com.bn,google.com.bo,google.com.br,google.com.bz,google.com.co,google.com.cu,google.com.cy,google.com.do,google.com.ec,google.com.eg,google.com.et,google.com.fj,google.com.gh,google.com.gi,google.com.gt,google.com.hk,google.com.jm,google.com.kh,google.com.kw,google.com.lb,google.com.ly,google.com.mm,google.com.mt,google.com.mx,google.com.my,google.com.na,google.com.nf,google.com.ng,google.com.ni,google.com.np,google.com.om,google.com.pa,google.com.pe,google.com.pg,google.com.ph,google.com.pk,google.com.pr,google.com.py,google.com.qa,google.com.sa,google.com.sb,google.com.sg,google.com.sl,google.com.sv,google.com.tj,google.com.tr,google.com.tw,google.com.ua,google.com.uy,google.com.vc,google.com.vn,google.cv,google.cz,google.de,google.dj,google.dk,google.dm,google.dz,google.ee,google.es,google.fi,google.fm,google.fr,google.ga,google.ge,google.gg,google.gl,google.gm,google.gp,google.gr,google.gy,google.hn,google.hr,google.ht,google.hu,google.ie,google.im,google.iq,google.is,google.it,google.je,google.jo,google.kg,google.ki,google.kz,google.la,google.li,google.lk,google.lt,google.lu,google.lv,google.md,google.me,google.mg,google.mk,google.ml,google.mn,google.ms,google.mu,google.mv,google.mw,google.ne,google.nl,google.no,google.nr,google.nu,google.pl,google.pn,google.ps,google.pt,google.ro,google.rs,google.ru,google.rw,google.sc,google.se,google.sh,google.si,google.sk,google.sm,google.sn,google.so,google.sr,google.st,google.td,google.tg,google.tk,google.tl,google.tm,google.tn,google.to,google.tt,google.vg,google.vu,google.ws###i-amphtml-wrapper div.content_ins
@@ -418,17 +409,14 @@ theoutline.com##.post__body > p + div[class][data-id]
 m.blogtin.video##iframe[src^="http://m.blogtin.video/wp-content/themes/news/ads/"]
 iculture.nl##.ad-container
 blogtamsu.video,m.blogtamsu.vn##iframe[src^="http://m.blogtamsu.vn/wp-content/themes/news/ads/"]
-kissanime.ru###overlay
 ||ltn.hitomi.la/thlYeSta6.js$important
 ||ltn.hitomi.la/RaCtICanTi24.js$important
-cmovieshd.bz,9anime.is,vidstreaming.io,gogoanime.se##body > div[style^="z-index: 9999"]
+cmovieshd.bz,vidstreaming.io##body > div[style^="z-index: 9999"]
 forbes.com##.top-ad-container
 forbes.com##div[id^="google_ads_iframe_"]
 m.timesofindia.com##div[data-secname="Top_Stories"] > ul > div[class*=" "][style="background: none;"] > div[class]:not([id]):not([style]) > iframe:not([src])
 gamedev.net##.ad_text
 gamedev.net##.ad_leaderboard
-electrek.co,9to5mac.com,9to5google.com##div[class^="th"][class*=" th"]
-electrek.co,9to5mac.com,9to5google.com##div[class^="st"][class*=" st"]
 motorradonline.de##.mps-banner > span
 themefire.net##.adsbygoogle
 convertfiles.com###advertisement_section
@@ -446,7 +434,6 @@ sports.ru##.bonuses-aside
 /\/\/s5o.ru\/source\/_desktop\/assets\/[0-9].(png)/$domain=sports.ru,image
 o2.pl##div[data-st-area="ST-Article-Body"] > div._1-MSN > div[style*="width: 970px;"]
 o2.pl##div[data-st-area="ST-Article-Body"] > div._1-MSN+div > div[style="padding-top: 20px;"] > div[class] > div[style*="height: 600px;"]
-dizipub.co###video-oncesi img
 avaxhome.co##a[href^="http://ul.to/ref"]
 forbes.com###stackForbesAdvoice
 forbes.com##.article-speed-bump
@@ -466,7 +453,6 @@ uptobox.com##.ad-square
 kinopoisk.ru###brandingFlash
 kinopoisk.ru##.direct-kp-customize
 ||st.kp.yandex.net/images/bnnr/$domain=kinopoisk.ru
-baskino.club###b-mtbbar__container
 go4up.com##a[style="display:inline!important"] > img
 go4up.com##a[target$="_blank"] > img
 on-movie.net##body > div[class^="skin-block_"][style^="background-image: url(data:image/jpeg;base64"]
@@ -514,67 +500,40 @@ m.sports.ru##iframe[src^="http://www.sports.ru/desktop/special/"]
 @@||pics.porn300.com^
 @@||cdn*.porn300.com^
 @@||games.tiscali.cz^$subdocument,domain=games.tiscali.cz
-@@||mp4upload.com^$domain=kissanime.ru
-@@||lh3.googleusercontent.com^$domain=kissanime.ru
 @@||finn.no/*ad.html?
 @@||hitomi.la^$script
 @@||bleachernation.com/headerprebid/bn_prebid_logic_*.js
 @@||ilovecreatives.com/ads?
-@@||ulink.adjust.com/*adjust_iredirect
 @@||github.com/*adblock
 @@||v.fwmrm.net/ad^$domain=vplayer.nbcsports.com
-@@blob:https://www.youtube.com/
-@@||googlevideo.com/videoplayback?
-@@||youtube.com/yts/jsbin/player-*/base.js
-@@||youtube.com/yts/jsbin/www-embed-player-*/www-embed-player.js
-@@||openload.co^$domain=sledujserialy.sk
-@@||bp.blogspot.com^$image,domain=kissmanga.com
-@@||217.23.10.62^$image,domain=kissmanga.com
 @@||parcelapp.net/webtrack.php?
-@@||rapidvideo.com^$domain=9anime.is
-@@||openload.co^$domain=9anime.is
-@@||cdnjs.cloudflare.com/ajax/libs/$domain=9anime.is
 @@||gannettdigital.com/universal-web-client/$domain=greenvilleonline.com
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=greenvilleonline.com
 @@||disquscdn.com^$script,domain=hentaihaven.org
 @@||oasjs.kataweb.it/cookielex/set-cookie.short.redir?backurl=
 @@||oasjs.repubblica.it/cookielex/set-cookie.short.redir?backurl=
-@@||static.dwatchseries.to^$stylesheet,script,domain=dwatchseries.to
 @@||ebay-kleinanzeigen.de/*.html?keywords=*&categoryId=*&adType=
-@@||openload.co^$domain=anyanime.com
 @@||playercdn.net/*.mp4$domain=anyanime.com
 @@||p.jwpcdn.com/player/$domain=anyanime.com
 @@||vidbom.com^$domain=anyanime.com
 @@||mp4upload.com^$domain=anyanime.com
 @@||dmcdn.net^$domain=anyanime.com
-@@||openload.co^$domain=kissanime.ru
-@@||playercdn.net/*.mp4$domain=kissanime.ru
-@@||p.jwpcdn.com/player/$domain=kissanime.ru
-@@||video-*.*.fbcdn.net/*.mp4$domain=kissanime.ru
 @@||b.cdn13.com/*.mp4?$domain=xhamster.com
-@@||openload.co^$domain=xmoviesforyou.com
-@@||oload.site^$domain=xmoviesforyou.com
-@@||oload.stream^$domain=xmoviesforyou.com
 @@||datoporn.co^$domain=xmoviesforyou.com
 @@||x.sare25.com/x.php?url=
 @@||aktualne.cz^$subdocument,domain=aktualne.cz
 @@||lpj4.adj.st/dawanda.com/
 fxporn.net#@#.video_ads
 @@||tracking.asosconnect.com/aff_c?offer_id=*&aff_id=*&aff_sub=clickref&*&url=http%3a%2f%2fwww.asos.de%2fasos%2f
-@@||mcloud.to^$script,stylesheet,media,xmlhttprequest,domain=9anime.is
 @@||googleusercontent.com/download/$domain=9anime.to
-@@||p.jwpcdn.com/player/$domain=9anime.to|9anime.is
-@@||playercdn.net/*.mp4$domain=9anime.to|9anime.is
+@@||p.jwpcdn.com/player/$domain=9anime.to
+@@||playercdn.net/*.mp4$domain=9anime.to
 @@||ahcdn.com/*.mp4$domain=xhamster.com
 @@||xhcdn.com/*.mp4$domain=xhamster.com
 @@||google.com/recaptcha/$domain=pornhub.com
 @@||cdnjs.cloudflare.com/ajax/libs/$domain=xmoviesforyou.com
 @@||fruithosted.net/dl/*.mp4
 @@||oloadcdn.net/dl/*.mp4
-@@||streamcherry.com/assets/js/license
-@@||streamcherry.com/assets/js/script.*.js$domain=xmoviesforyou.com
-@@||streamcherry.com/assets/js/video-js/
-@@||streamcherry.com/v/*~*/$domain=xmoviesforyou.com
 @@||dato.porn/assets/js/mobile-detection.js
 @@||dato.porn/cdn-cgi/apps/head/*.js$domain=xmoviesforyou.com
 @@||dato.porn/hls/*.m3u8
@@ -598,7 +557,6 @@ fxporn.net#@#.video_ads
 @@||static.adf.ly/static/css/$domain=adf.ly
 @@||static.adf.ly/static/js/$domain=adf.ly
 @@||an.yandex.ru/mapuid/*?location=*&jsredir=
-@@$websocket,domain=123movies.is
 @@||olx.ua/static/olxua/naspersclassifieds-regional/olxeu-atlas-web/static/js/xgemius.js
 @@||app.adjust.io/*&utm_source=desktop_kleiderkreisel.de
 @@||boards.4chan.org/adv/
@@ -611,7 +569,6 @@ fxporn.net#@#.video_ads
 @@||google.com/js/bg/$domain=xhamster.com
 @@||go.onelink.me/*?pid=
 @@||bp.blogspot.com^$domain=fmovies.se|fmovies.to
-@@||openload.co/stream/$domain=fmovies.se|fmovies.to
 @@||fmovies.se^$domain=fmovies.se|fmovies.to
 @@||googlevideo.com^$domain=fmovies.se|fmovies.to
 @@||oloadcdn.net^$domain=fmovies.se|fmovies.to
@@ -652,7 +609,6 @@ rt.com#@##offers
 @@||cdnssl.mediafire.com/js/
 @@||xg4ken.com/trk/*&adgroupid=
 @@||analytics.edgesuite.net^$domain=foxnews.com
-@@||global.fncstatic.com/static/v/all/js/ads.js$domain=foxnews.com
 @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=foxnews.com
 @@/google-adwords$domain=t3n.de,~third-party
 ||mc.yandex.ru/watch/*$domain=internethaber.com
@@ -664,7 +620,6 @@ rt.com#@##offers
 @@||netflix.com/*/Login
 @@||click.uol.com.br^$domain=uol.com.br
 @@||reklama5.mk^$domain=reklama5.mk
-@@||tube.buzzoola.com$domain=anidub.com
 @@||list-manage.com/track/click$document
 @@/crossdomain.xml$domain=phonearena.com
 @@||static1-azcdn.newser.com/javascript/
@@ -682,11 +637,6 @@ cari.com.my###cvidloader
 @@||go.com/b/ss/$domain=espn.go.com
 @@||once.unicornmedia.com/now/*/content.once?$domain=espn.go.com
 @@||googletagservices.com/tag/js/gpt.js$domain=nfl.com
-@@||go.admost.com/adx/js/admost.js^$domain=mackolik.com
-@@||app.medyanetads.com/ad.js$domain=mackolik.com
-@@||app.medyanetads.com/Session$domain=mackolik.com
-@@||app.medyanetads.com/Session?publisher=$domain=sahadan.com
-@@||go.admost.com/adx/get.ashx&accptck$domain=sahadan.com
 @@||yandex.ru/clck/jsredir?$domain=yandex.ru
 @@||yandex.ua/clck/jsredir?$domain=yandex.ua
 @@||yandex.by/clck/jsredir?$domain=yandex.by
