@@ -241,7 +241,8 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
         if (filter.trusted) {
             tagDetails += `<div class="opt-name__tag tag-trusted"
                                 data-tooltip="${i18n.__('options_filters_filter_trusted_tag_desc.message')}">
-                                #${i18n.__('options_filters_filter_trusted_tag.message')}
+                                <!-- https://jira.adguard.com/browse/AG-9225 don't translate the tag name -->
+                                #${i18n.__({ phrase: 'options_filters_filter_trusted_tag.message', locale: 'en' })}
                            </div>`;
         }
 
