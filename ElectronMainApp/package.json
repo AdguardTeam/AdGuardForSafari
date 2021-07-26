@@ -9,6 +9,7 @@
     "build-configuration": "AG_BUILD_CONFIGURATION",
     "scripts": {
         "start": "electron .",
+        "clean": "../Scripts/clean.sh",
         "test": "NODE_ENV=test jest --runInBand",
         "inspect": "electron --inspect=5858 .",
         "upload-locales": "gulp upload-locales",
