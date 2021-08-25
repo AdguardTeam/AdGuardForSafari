@@ -157,6 +157,18 @@ const Settings = function (
         checkboxUtils.updateCheckbox([checkbox], inverted ? !value : value);
     };
 
+    /**
+     * Updates allowlist default mode
+     * @param {string} propertyName
+     * @param {boolean} value
+     */
+    const updateAllowlistDefaultMode = (propertyName, value) => {
+        if (propertyName === userSettings.names.DEFAULT_ALLOWLIST_MODE) {
+            userSettings.values[userSettings.names.DEFAULT_ALLOWLIST_MODE] = value;
+            utils.setIsAllowlistInverted(value);
+        }
+    };
+
     const filterUpdatePeriodSelect = document.querySelector('#filterUpdatePeriod');
     const updateFilterUpdatePeriodSelect = (period) => {
         filterUpdatePeriodSelect.value = period;
@@ -254,6 +266,7 @@ const Settings = function (
         updateAcceptableAdsCheckbox,
         updateAcceptableAdsCheckboxByGroupState,
         updateCheckboxValue,
+        updateAllowlistDefaultMode,
         updateFilterUpdatePeriodSelect,
         showProtectionStatusWarning,
         showUpdateIntervalNotification,

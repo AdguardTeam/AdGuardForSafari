@@ -102,6 +102,10 @@ const initPage = function (response) {
                         options.propertyValue,
                         options.inverted
                     );
+                    controller.settings.updateAllowlistDefaultMode(
+                        options.propertyName,
+                        options.propertyValue
+                    );
                     break;
                 case EventNotifierTypes.FILTERS_PERIOD_UPDATED:
                     controller.settings.updateFilterUpdatePeriodSelect(options);
