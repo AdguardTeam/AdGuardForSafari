@@ -30,6 +30,7 @@ module.exports = (function () {
         VERBOSE_LOGGING: 'verbose-logging',
         QUIT_ON_CLOSE_WINDOW: 'quit-on-close-main-window',
         ALLOW_ACCEPTABLE_ADS: 'allow-acceptable-ads',
+        IS_UPDATE_RELAUNCH: 'is-update-relaunch',
     };
 
     const properties = Object.create(null);
@@ -61,6 +62,7 @@ module.exports = (function () {
                 defaults[settings.LAUNCH_AT_LOGIN] = false;
                 defaults[settings.VERBOSE_LOGGING] = false;
                 defaults[settings.QUIT_ON_CLOSE_WINDOW] = -1;
+                defaults[settings.IS_UPDATE_RELAUNCH] = false;
 
                 return defaults;
             });
@@ -277,6 +279,14 @@ module.exports = (function () {
         });
     };
 
+    const isUpdateRelaunch = () => {
+        return getProperty(settings.IS_UPDATE_RELAUNCH);
+    };
+
+    const setUpdateRelaunch = (value) => {
+        setProperty(settings.IS_UPDATE_RELAUNCH, value);
+    };
+
     const api = {};
 
     // Expose settings to api
@@ -319,6 +329,8 @@ module.exports = (function () {
     api.isAllowlistEnabled = isAllowlistEnabled;
     api.changeAllowlistState = changeAllowlistState;
     api.changeAllowAcceptableAds = changeAllowAcceptableAds;
+    api.isUpdateRelaunch = isUpdateRelaunch;
+    api.setUpdateRelaunch = setUpdateRelaunch;
 
     return api;
 })();

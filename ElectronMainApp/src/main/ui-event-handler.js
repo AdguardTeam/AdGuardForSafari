@@ -145,6 +145,7 @@ module.exports.init = function () {
                 updater.checkForUpdates();
                 break;
             case 'updateRelaunch':
+                settings.setUpdateRelaunch(true);
                 updater.quitAndInstall();
                 break;
         }

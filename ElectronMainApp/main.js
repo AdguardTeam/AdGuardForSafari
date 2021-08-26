@@ -81,6 +81,12 @@ function createWindow() {
  * Add a confirmation dialog on window close
  */
 function confirmWindowClose() {
+    // Don't show confirmation message on app relaunch for update
+    if (settings.isUpdateRelaunch()) {
+        settings.setUpdateRelaunch(false);
+        app.quit();
+        return;
+    }
     // Check if we have previously saved setting
     const quitOnCloseWindow = settings.isQuitOnCloseWindow();
     if (quitOnCloseWindow === 1) {
