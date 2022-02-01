@@ -10,6 +10,8 @@ const ContentBlockersScreen = require('./content-blockers');
 const AntiBannerFilters = require('./filters/antibanner-filters/antibanner-filters');
 const Settings = require('./general-settings');
 
+const CONTENT_BLOCKERS_COUNT = 6;
+
 /**
  * Page controller
  *
@@ -22,7 +24,8 @@ const PageController = function (
     isProtectionRunning,
     AntiBannerFiltersId,
     AntiBannerFilterGroupsId,
-    contentBlockerInfo
+    contentBlockerInfo,
+    rulesLimit
 ) {
     this.userSettings = userSettings;
     this.enabledFilters = enabledFilters;
@@ -31,6 +34,7 @@ const PageController = function (
     this.AntiBannerFiltersId = AntiBannerFiltersId;
     this.AntiBannerFilterGroupsId = AntiBannerFilterGroupsId;
     this.contentBlockerInfo = contentBlockerInfo;
+    this.rulesLimit = rulesLimit;
 };
 
 PageController.prototype = {
@@ -144,6 +148,13 @@ PageController.prototype = {
         const enableExtensionsNotification = document.getElementById('enableExtensionsNotification');
         const enableCbExtensionsNotification = document.getElementById('enableCbExtensionsNotification');
         const updateIntervalNotification = document.getElementById('updateIntervalNotification');
+
+        const onboardingContentBlockersInfo = document.querySelector('.onboarding__tooltip__content_blockers_info');
+        onboardingContentBlockersInfo.innerHTML = i18n.__(
+            'onboarding_tooltip_adguard_safari_content_blockers_info.message',
+            this.rulesLimit,
+            this.rulesLimit * CONTENT_BLOCKERS_COUNT
+        );
 
         const self = this;
         ipcRenderer.on('getSafariExtensionsStateResponse', (e, arg) => {
@@ -263,7 +274,8 @@ PageController.prototype = {
             this.enabledFilters,
             this.AntiBannerFiltersId,
             this.AntiBannerFilterGroupsId,
-            this.isProtectionRunning
+            this.isProtectionRunning,
+            this.rulesLimit
         );
         this.settings.render();
 
@@ -280,7 +292,8 @@ PageController.prototype = {
             { rulesInfo: this.contentBlockerInfo },
             this.contentBlockerInfo,
             this.environmentOptions,
-            this.userSettings
+            this.userSettings,
+            this.rulesLimit
         );
         this.antiBannerFilters.render();
 
@@ -289,7 +302,8 @@ PageController.prototype = {
             this.antiBannerFilters,
             this.userFilter,
             this.allowlistFilter,
-            this.userSettings
+            this.userSettings,
+            this.rulesLimit
         );
         this.contentBlockers.init();
 

@@ -333,10 +333,10 @@
         "message": "Warning"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Too many filters enabled. Safari cannot use more than 50,000 rules in one group."
+        "message": "Too many filters enabled. Safari cannot use more than %s rules in one group."
     },
     "options_content_blocker_overlimit": {
-        "message": "Too many filters enabled. Safari cannot use more than 50,000 rules in one group."
+        "message": "Too many filters enabled. Safari cannot use more than %s rules in one group."
     },
     "options_filters_list_search_placeholder": {
         "message": "Search"
@@ -402,7 +402,7 @@
         "message": "Content blockers"
     },
     "options_content_blockers_desc": {
-        "message": "Enabled ad blockers: %s out of 6 (each can contain up to 50,000 rules)"
+        "message": "Enabled ad blockers: %s out of 6 (each can contain up to %s rules)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Ad blockers are disabled"
@@ -462,7 +462,7 @@
         "message": "6 content blocking extensions"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari limits the maximum number of content blocking rules with 50,000 per extension. This is not enough to handle all sorts of ads and trackers AdGuard blocks. That's why we provide 6 extensions, thus increasing that limit to 300,000."
+        "message": "Safari limits the maximum number of content blocking rules with %s per extension. This is not enough to handle all sorts of ads and trackers AdGuard blocks. That's why we provide 6 extensions, thus increasing that limit to %s."
     },
     "onboarding_safari_btn": {
         "message": "Open preferences"
@@ -573,7 +573,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "The limit of 50,000 rules has been exceeded. Please disable unnecessary rules for the app to work correctly.<br/>Enabled rules at the moment: %s (disabled rules: $2)"
+        "message": "The limit of %s rules has been exceeded. Please disable unnecessary rules for the app to work correctly.<br/>Enabled rules at the moment: %s (disabled rules: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Disabled in Safari"

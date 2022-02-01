@@ -4,6 +4,7 @@ const config = require('config');
 const listeners = require('./notifier');
 const events = require('./events');
 const i18n = require('../utils/i18n');
+const applicationApi = require('./api');
 
 /**
  * Notifications controller
@@ -160,7 +161,8 @@ module.exports = (() => {
      */
     const showRulesOverLimitNotification = (showMainWindow) => {
         const title = i18n.__('notification_content_blocker_overlimit_title.message');
-        const subtitle = i18n.__('notification_content_blocker_overlimit_desc.message');
+        const rulesLimit = applicationApi.getRulesLimit();
+        const subtitle = i18n.__('notification_content_blocker_overlimit_desc.message', rulesLimit);
 
         showNotification({
             title,

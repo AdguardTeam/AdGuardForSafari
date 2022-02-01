@@ -1,4 +1,6 @@
+const safariExt = require('safari-ext');
 const config = require('config');
+
 const allowlist = require('./app/allowlist');
 const userrules = require('./app/userrules');
 const antibanner = require('./app/antibanner');
@@ -7,6 +9,9 @@ const filtersManager = require('./app/filters-manager');
 
 const { CUSTOM_FILTERS_GROUP_ID } = config.get('AntiBannerFilterGroupsId');
 
+const SAFARI_15_VERSION = 15;
+const OLD_RULES_LIMIT = 50000;
+const NEW_RULES_LIMIT = 150000;
 /**
  * Api
  */
@@ -170,6 +175,17 @@ module.exports = (() => {
         return enabledCustomFiltersUrls;
     };
 
+    /**
+     * Returns the rules limit for current Safari version
+     */
+    const getRulesLimit = () => {
+        const safariVersion = safariExt.getSafariVersion();
+        const safariMajorVersion = parseInt(safariVersion.substring(0, 2), 10);
+
+        // Since Safari 15 the new rules limit for each content blocker is 150000, instead of 50000
+        return safariMajorVersion >= SAFARI_15_VERSION ? NEW_RULES_LIMIT : OLD_RULES_LIMIT;
+    };
+
     return {
         getToolbarMenuData,
         enable,
@@ -183,5 +199,6 @@ module.exports = (() => {
         getUserFilterRules,
         getEnabledFilterIds,
         getEnabledCustomFiltersUrls,
+        getRulesLimit,
     };
 })();

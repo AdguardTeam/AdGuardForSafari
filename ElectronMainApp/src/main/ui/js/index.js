@@ -15,6 +15,7 @@ const initPage = function (response) {
         environmentOptions,
         contentBlockerInfo,
         isProtectionRunning,
+        rulesLimit,
     } = response;
 
     const { AntiBannerFiltersId, AntiBannerFilterGroupsId } = response.constants;
@@ -27,7 +28,8 @@ const initPage = function (response) {
             isProtectionRunning,
             AntiBannerFiltersId,
             AntiBannerFilterGroupsId,
-            contentBlockerInfo
+            contentBlockerInfo,
+            rulesLimit
         );
         controller.init();
 

@@ -8,7 +8,7 @@ const { ipcRenderer } = require('electron');
  * @returns {*}
  * @constructor
  */
-const ContentBlockersScreen = function (antiBannerFilters, userFilter, allowlist, userSettings) {
+const ContentBlockersScreen = function (antiBannerFilters, userFilter, allowlist, userSettings, rulesLimit) {
     'use strict';
 
     /**
@@ -83,8 +83,8 @@ const ContentBlockersScreen = function (antiBannerFilters, userFilter, allowlist
                 if (info.overlimit) {
                     icon.classList.add('block-type__ico-info--overlimit-warning');
 
-                    let textContent = i18n.__('options_cb_rules_overlimit_info.message', info.rulesCount);
-                    textContent = textContent.replace('$2', info.rulesCount - 50000);
+                    let textContent = i18n.__('options_cb_rules_overlimit_info.message', rulesLimit, info.rulesCount);
+                    textContent = textContent.replace('$2', info.rulesCount - rulesLimit);
 
                     // rulesInfoElement.style.display = 'flex';
                     rulesInfoElement.classList.add('cb_overlimit_warning');

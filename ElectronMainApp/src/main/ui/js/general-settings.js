@@ -15,7 +15,8 @@ const Settings = function (
     enabledFilters,
     AntiBannerFiltersId,
     AntiBannerFilterGroupsId,
-    isProtectionRunning
+    isProtectionRunning,
+    rulesLimit
 ) {
     'use strict';
 
@@ -256,7 +257,8 @@ const Settings = function (
         } else {
             cbDescription.textContent = i18n.__(
                 'options_content_blockers_desc.message',
-                info.enabledContentBlockersCount
+                info.enabledContentBlockersCount,
+                rulesLimit
             );
         }
     };

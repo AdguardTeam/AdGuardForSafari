@@ -221,6 +221,8 @@ function processInitializeFrameScriptRequest() {
     const AntiBannerFiltersId = config.get('AntiBannerFiltersId');
     const AntiBannerFilterGroupsId = config.get('AntiBannerFilterGroupsId');
 
+    const rulesLimit = applicationApi.getRulesLimit();
+
     for (const key in AntiBannerFiltersId) {
         if (AntiBannerFiltersId.hasOwnProperty(key)) {
             const filterId = AntiBannerFiltersId[key];
@@ -250,5 +252,6 @@ function processInitializeFrameScriptRequest() {
             AntiBannerFiltersId,
             AntiBannerFilterGroupsId,
         },
+        rulesLimit,
     };
 }

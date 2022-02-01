@@ -43,7 +43,7 @@ module.exports = (function () {
             log.info(`Safari browser version: ${safariVersion}`);
             if (safariVersion) {
                 // major version
-                safariVersion = safariVersion.substring(0, 2);
+                safariVersion = parseInt(safariVersion.substring(0, 2), 10);
             }
 
             log.info(`ConverterTool version: ${getConverterVersion()}`);
