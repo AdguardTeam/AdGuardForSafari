@@ -383,6 +383,9 @@ a.settings-actions--update-filters.loading:after {
   top: -1px;
   z-index: -1;
 }
+.opts-list li .opts-desc-filter {
+  width: 81%;
+}
 #groupsList {
   margin-bottom: 50px;
 }
