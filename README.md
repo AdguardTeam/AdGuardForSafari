@@ -81,14 +81,14 @@ Also, you need to install these packages globally:
 - [electron-osx-sign](https://www.npmjs.com/package/electron-osx-sign)
 
 ```
-yarn global add electron-packager 
-yarn global add node-gyp 
+yarn global add electron-packager
+yarn global add node-gyp
 yarn global add electron-osx-sign
 ```
 
-## How to build 
+## How to build
 
-### To run application in development mode 
+### To run application in development mode
 
 ```
 cd ElectronMainApp
@@ -112,7 +112,7 @@ Open menu `View -> Toggle Developer Tools`
 
 #### Debug main process
 
-Launch the application via 
+Launch the application via
 ```
 yarn inspect
 ```
@@ -131,12 +131,12 @@ where `<YOUR APPLE DEVELOPER COMMON NAME>` is your codesign identity
 Make sure your system Nodejs version higher v8.9.4.
 
 Steps to check it:
-if you use `nvm` run 
+if you use `nvm` run
 ```
 nvm use system
 node -v
 ```
-otherwise 
+otherwise
 ```
 node -v
 ```
@@ -166,7 +166,7 @@ Check certificates names in Scripts/ExportOptions.plist
 
 For converting rules to content-blocker format we use an external library as a binary built from `https://github.com/AdguardTeam/SafariConverterLib/`, that `ConverterTool` binary should be placed in `./libs/`.
 
-You use `./Scripts/download-lib.sh` to download the latest release version of that binary from Github.  
+You use `./Scripts/download-lib.sh` to download the latest release version of that binary from Github.
 
 #### Preparation - notarization
 
@@ -210,7 +210,7 @@ Arguments:
   - `mas` -- Mac App Store
   - `beta` -- standalone beta
   - `release` -- standalone release
-- `[--notarize=0]` -- optional parameter to skip notarization  
+- `[--notarize=0]` -- optional parameter to skip notarization
 
 Output directory `build` contains:
 
