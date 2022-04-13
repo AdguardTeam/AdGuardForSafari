@@ -5,6 +5,9 @@ const { ipcRenderer } = require('electron');
 // eslint-disable-next-line import/no-unresolved
 const PageController = require('./js/page-controller');
 
+// Filter unblocking search ads and self-promotion
+const SELF_ADS_FILTER_ID = 10;
+
 /**
  * Initializes page
  */
@@ -41,7 +44,10 @@ const initPage = function (response) {
                     controller.antiBannerFilters.onFilterStateChanged(options);
                     controller.settings.updateAcceptableAdsCheckbox(options);
                     controller.contentBlockers.setLoading();
-                    controller.antiBannerFilters.render();
+                    if (options.filterId === SELF_ADS_FILTER_ID) {
+                        // rerender only if self-ads filter enabled/disabled to synchronize it with general setting
+                        controller.antiBannerFilters.render();
+                    }
                     break;
                 case EventNotifierTypes.FILTER_ADD_REMOVE:
                     // re-render fully only if custom filter was added,
