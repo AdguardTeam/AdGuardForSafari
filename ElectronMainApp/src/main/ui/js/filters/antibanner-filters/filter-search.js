@@ -1,3 +1,5 @@
+const { ipcRenderer } = require('electron');
+
 const utils = require('../../utils/common-utils');
 
 const clearSearch = (nodes) => {
@@ -68,39 +70,61 @@ const initGroupsSearch = (loadedFiltersInfo, getFilterTemplate) => {
     }
 };
 
-function initFiltersSearch(category) {
+function initFiltersSearch(category, renderCategoryFilters) {
     const searchInput = document.querySelector(`#antibanner${category.groupId} input[name="searchFiltersList"]`);
-    const filters = document.querySelectorAll(`#antibanner${category.groupId} .opts-list li`);
-    const SEARCH_DELAY_MS = 250;
-    if (searchInput) {
-        searchInput.addEventListener('input', utils.debounce((e) => {
-            let searchString;
-            try {
-                searchString = utils.escapeRegExp(e.target.value.trim());
-            } catch (err) {
-                /* eslint-disable-next-line no-console */
-                console.log(err.message);
-                return;
-            }
-
-            if (!searchString) {
-                filters.forEach((filter) => {
-                    filter.style.display = 'flex';
-                });
-                return;
-            }
-
-            filters.forEach((filter) => {
-                const title = filter.querySelector('.title');
-                const regexp = new RegExp(searchString, 'gi');
-                if (!regexp.test(title.textContent)) {
-                    filter.style.display = 'none';
-                } else {
-                    filter.style.display = 'flex';
-                }
-            });
-        }, SEARCH_DELAY_MS));
+    if (!searchInput) {
+        return;
     }
+
+    const filtersContainer = document.querySelector(`#antibanner${category.groupId} .opts-list`);
+    const filters = filtersContainer.querySelectorAll('li');
+
+    const SEARCH_DELAY_MS = 250;
+
+    searchInput.addEventListener('input', utils.debounce((e) => {
+        let searchString;
+        try {
+            searchString = utils.escapeRegExp(e.target.value.trim());
+        } catch (err) {
+            /* eslint-disable-next-line no-console */
+            console.log(err.message);
+            return;
+        }
+
+        if (!searchString) {
+            ipcRenderer.once('getFiltersMetadataResponse', (e, response) => {
+                const updatedCategory = response.categories.find((cat) => cat.groupId === category.groupId);
+                renderCategoryFilters(updatedCategory);
+                const tabId = document.location.hash;
+                const tab = document.querySelector(tabId);
+                if (!tab) {
+                    return;
+                }
+                tab.style.display = 'flex';
+                initFiltersSearch(updatedCategory, renderCategoryFilters);
+            });
+            ipcRenderer.send('renderer-to-main', JSON.stringify({
+                'type': 'getFiltersMetadata',
+            }));
+            return;
+        }
+
+        filters.forEach((filter) => {
+            const title = filter.querySelector('.title');
+            const regexp = new RegExp(searchString, 'gi');
+            if (!regexp.test(title.textContent)) {
+                filter.style.display = 'none';
+            } else {
+                filter.style.display = 'flex';
+            }
+        });
+
+        [...filters]
+            .sort((filter) => (filter.className === 'active' ? -1 : 1))
+            .forEach((node) => {
+                filtersContainer.appendChild(node);
+            });
+    }, SEARCH_DELAY_MS));
 }
 
 /**

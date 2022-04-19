@@ -295,7 +295,8 @@ PageController.prototype = {
             this.userSettings,
             this.rulesLimit
         );
-        this.antiBannerFilters.render();
+        this.antiBannerFilters.init();
+        this.antiBannerFilters.updateData();
 
         // Initialize Content blockers
         this.contentBlockers = new ContentBlockersScreen(

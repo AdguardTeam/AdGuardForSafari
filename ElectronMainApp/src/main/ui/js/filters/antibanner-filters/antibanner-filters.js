@@ -1,21 +1,24 @@
 /* global i18n */
-
+const config = require('config');
 const { ipcRenderer } = require('electron');
+
 const utils = require('../../utils/common-utils');
 const checkboxUtils = require('../../utils/checkbox-utils');
-const topMenu = require('../../top-menu');
 const search = require('./filter-search');
 const customFilters = require('./custom-filters');
 
 const ANIMATION_DELAY = 900;
 
+const { CUSTOM_FILTERS_GROUP_ID } = config.get('AntiBannerFilterGroupsId');
+
 /**
  * Filters block
  *
  * @param options
- * @returns {{render: renderCategoriesAndFilters, updateRulesCountInfo: updateRulesCountInfo,
- * onFilterStateChanged: onFilterStateChanged, onFilterDownloadStarted: onFilterDownloadStarted,
- * onFilterDownloadFinished: onFilterDownloadFinished}}
+ * @returns {{init: init, updateData: updateFiltersMetadata, renderCustomFilters: renderCustomFilters,
+ * updateRulesCountInfo: updateRulesCountInfo, onFilterStateChanged: onFilterStateChanged,
+ * onFilterDownloadStarted: onFilterDownloadStarted, onFilterDownloadFinished: onFilterDownloadFinished,
+ * onFilterUpdatesFinished: onFilterUpdatesFinished, getFiltersInfo: getFiltersInfo}}
  * @constructor
  */
 /* eslint-disable-next-line no-unused-vars */
@@ -325,6 +328,8 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
         const { filters } = category;
         const isCustomFilters = category.groupId === 0;
 
+        const sortedFilters = filters.sort((filter) => (filter.enabled ? -1 : 1));
+
         if (isCustomFilters
             && filters.length === 0) {
             return utils.htmlToElement(getEmptyCustomFiltersTemplate(category));
@@ -333,10 +338,10 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
         const pageTitleEl = getPageTitleTemplate(category.groupName);
 
         let filtersList = '';
-        for (let i = 0; i < filters.length; i += 1) {
+        for (let i = 0; i < sortedFilters.length; i += 1) {
             filtersList += getFilterTemplate(
-                filters[i],
-                loadedFiltersInfo.isEnabled(filters[i].filterId),
+                sortedFilters[i],
+                loadedFiltersInfo.isEnabled(sortedFilters[i].filterId),
                 isCustomFilters
             );
         }
@@ -369,11 +374,61 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
         `);
     }
 
-    function renderFilterCategory(category) {
-        let categoryContentElement = document.querySelector(`#antibanner${category.groupId}`);
-        if (categoryContentElement) {
-            categoryContentElement.parentNode.removeChild(categoryContentElement);
+    /**
+     * Updates filters info and render custom filters
+     */
+    function renderCustomFilters() {
+        ipcRenderer.once('getFiltersMetadataResponse', () => {
+            const category = loadedFiltersInfo.categories.find((cat) => cat.groupId === CUSTOM_FILTERS_GROUP_ID);
+            renderCategoryFilters(category);
+            const tabId = document.location.hash;
+            const tab = document.querySelector(tabId);
+            if (!tab) {
+                return;
+            }
+            tab.style.display = 'flex';
+        });
+
+        updateFiltersMetadata();
+    }
+
+    /**
+     * Binds custom filters controls
+     */
+    function bindCustomFiltersControls() {
+        const emptyFiltersAddCustomButton = document.querySelector('.empty-filters__btn');
+        if (emptyFiltersAddCustomButton) {
+            emptyFiltersAddCustomButton.addEventListener('click', customFilters.addCustomFilter);
         }
+
+        document.querySelectorAll('.remove-custom-filter-button').forEach((el) => {
+            el.addEventListener('click', customFilters.removeCustomFilter);
+        });
+    }
+
+    /**
+     * Renders filters for provided category
+     * @param category
+     */
+    function renderCategoryFilters(category) {
+        const categoryContentElement = getFiltersContentElement(category);
+        const existingCategoryFiltersNode = document.querySelector(`#antibanner${category.groupId}`);
+        if (existingCategoryFiltersNode) {
+            document.querySelector('#antibanner').parentNode
+                .replaceChild(categoryContentElement, existingCategoryFiltersNode);
+        }
+        document.querySelector('#antibanner').parentNode.appendChild(categoryContentElement);
+        checkboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
+        if (category.groupId === CUSTOM_FILTERS_GROUP_ID) {
+            bindCustomFiltersControls();
+        }
+    }
+
+    /**
+     * Renders category
+     * @param category
+     */
+    function renderCategory(category) {
         let categoryElement = document.querySelector(`#category${category.groupId}`);
         if (categoryElement) {
             categoryElement.parentNode.removeChild(categoryElement);
@@ -383,71 +438,52 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
         document.querySelector('#groupsList').appendChild(categoryElement);
         updateCategoryFiltersInfo(category.groupId);
 
-        categoryContentElement = getFiltersContentElement(category);
-        document.querySelector('#antibanner').parentNode.appendChild(categoryContentElement);
+        const categoryLink = categoryElement.querySelector('a.filter-group');
+        categoryLink.addEventListener('click', () => {
+            renderCategoryFilters(category);
+            search.initFiltersSearch(category, renderCategoryFilters);
+        });
     }
 
-    function bindControls() {
-        const emptyFiltersAddCustomButton = document.querySelector('.empty-filters__btn');
-        if (emptyFiltersAddCustomButton) {
-            emptyFiltersAddCustomButton.addEventListener('click', customFilters.addCustomFilter);
+    /**
+     * Renders all categories
+     */
+    function renderCategories() {
+        const { categories } = loadedFiltersInfo;
+        for (let j = 0; j < categories.length; j += 1) {
+            const category = categories[j];
+            renderCategory(category);
         }
-
-        document.querySelectorAll('.remove-custom-filter-button').forEach((el) => {
-            el.addEventListener('click', customFilters.removeCustomFilter);
-        });
-
-        document.querySelectorAll('.tabs-bar .tab').forEach((tab) => {
-            tab.addEventListener('click', (e) => {
-                e.preventDefault();
-
-                const current = e.currentTarget;
-                current.parentNode.querySelectorAll('.tabs-bar .tab').forEach((el) => {
-                    el.classList.remove('active');
-                });
-                current.classList.add('active');
-
-                const { parentNode } = current.parentNode;
-                parentNode.querySelector('.opts-list[data-tab="recommended"]').style.display = 'none';
-                parentNode.querySelector('.opts-list[data-tab="other"]').style.display = 'none';
-
-                const attr = current.getAttribute('data-tab');
-                parentNode.querySelector(`.opts-list[data-tab="${attr}"]`).style.display = 'block';
-            });
-        });
+        search.initGroupsSearch(loadedFiltersInfo, getFilterTemplate);
+        setSearchPlaceholder();
+        checkboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
     }
 
-    function renderCategoriesAndFilters() {
+    /**
+     * Updates filters info
+     * @param data
+     */
+    function updateLoadedFiltersInfo(data) {
+        loadedFiltersInfo.initLoadedFilters(data.filters, data.categories);
+        updateRulesCountInfo(data.rulesInfo);
+        setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
+        utils.setUserrulesNum(contentBlockerInfo.userRulesNum);
+        utils.setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_ALLOWLIST_MODE]);
+        utils.setAllowlistInfo(contentBlockerInfo.allowlistedNum);
+    }
+
+    function init() {
         ipcRenderer.on('getFiltersMetadataResponse', (e, response) => {
-            loadedFiltersInfo.initLoadedFilters(response.filters, response.categories);
-            updateRulesCountInfo(response.rulesInfo);
-            setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
-            utils.setUserrulesNum(contentBlockerInfo.userRulesNum);
-            utils.setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_ALLOWLIST_MODE]);
-            utils.setAllowlistInfo(contentBlockerInfo.allowlistedNum);
-            setSearchPlaceholder();
-
-            const { categories } = loadedFiltersInfo;
-            for (let j = 0; j < categories.length; j += 1) {
-                const category = categories[j];
-                renderFilterCategory(category);
-                search.initFiltersSearch(category);
-            }
-            search.initGroupsSearch(loadedFiltersInfo, getFilterTemplate);
-            bindControls();
-            checkboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
-
-            // check document hash
-            const { hash } = document.location;
-            if (hash && hash.indexOf('#antibanner') === 0) {
-                topMenu.toggleTab();
-            }
+            updateLoadedFiltersInfo(response);
+            renderCategories();
 
             ipcRenderer.send('renderer-to-main', JSON.stringify({
                 'type': 'getContentBlockersMetadata',
             }));
         });
+    }
 
+    function updateFiltersMetadata() {
         ipcRenderer.send('renderer-to-main', JSON.stringify({
             'type': 'getFiltersMetadata',
         }));
@@ -679,7 +715,9 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
     };
 
     return {
-        render: renderCategoriesAndFilters,
+        init,
+        updateData: updateFiltersMetadata,
+        renderCustomFilters,
         updateRulesCountInfo,
         onFilterStateChanged,
         onCategoryStateChanged,
