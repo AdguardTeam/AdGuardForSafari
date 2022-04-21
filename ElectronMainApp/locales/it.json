@@ -42,7 +42,7 @@
         "message": "Invia richieste per nuove funzionalità e suggerimenti"
     },
     "options_support_rate_title": {
-        "message": "Vota questa\\'app"
+        "message": "Vota questa'app"
     },
     "options_support_rate_description": {
         "message": "Dicci cosa ne pensi di AdGuard"
@@ -90,25 +90,25 @@
         "message": "Esporta registri e informazioni di sistema..."
     },
     "name": {
-        "message": "Blocca-annunci AdGuard"
+        "message": "AdGuard Blocca-Annunci"
     },
     "description": {
-        "message": "Un\\'estensione inarrivabile contro annunci e pop-up. Blocca pubblicità su Facebook, YouTube a tutti gli altri siti web."
+        "message": "Un'estensione inarrivabile contro annunci e pop-up. Blocca pubblicità su Facebook, YouTube a tutti gli altri siti web."
     },
     "options_settings": {
         "message": "AdGuard per Safari - Impostazioni"
     },
     "options_settings_import_wrong_file_extension": {
-        "message": "L\\'estensione del file deve essere .json"
+        "message": "L'estensione del file deve essere .json"
     },
     "options_settings_import_error": {
-        "message": "Errore nell\\'importazione delle impostazioni"
+        "message": "Errore nell'importazione delle impostazioni"
     },
     "options_general_settings": {
         "message": "Impostazioni Generali"
     },
     "options_general_desc": {
-        "message": "AdGuard per Safari è un software gratuito e open source. Incoraggiamo i tuoi commenti e contributi. Se vuoi riportare un errore, invialo a <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo</a>."
+        "message": "AdGuard per Safari è un software gratuito e open source. Incoraggiamo i tuoi commenti e contributi. Se volessi segnalare un errore, potrai farlo sulla <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nostra repository Github</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Permetti annunci di ricerca e l'autopromozione dei siti"
@@ -225,7 +225,7 @@
         "message": "Versione:\n"
     },
     "options_filters_custom_step_final_filter_rules_count": {
-        "message": "Conteggio Regole:"
+        "message": "Conteggio regole:"
     },
     "options_filters_custom_step_final_filter_homepage": {
         "message": "Pagina principale:"
@@ -258,7 +258,7 @@
         "message": "Domini: %s"
     },
     "options_allowlist_no_domains": {
-        "message": "La lista bianca è vuota"
+        "message": "La Lista bianca è vuota"
     },
     "options_allowlist_inverse": {
         "message": "Inverti la Lista bianca<span class='sp-table-row-info'>Sblocca gli annunci ovunque<i>eccetto sui</i> siti web dalla Lista bianca</span>"
@@ -266,11 +266,14 @@
     "options_userfilter": {
         "message": "Regole utente"
     },
-    "options_userfilter_info_multi": {
-        "message": "Regole utente: %s"
-    },
     "options_userfilter_no_user_rules": {
         "message": "La lista è vuota"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s regola utente"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s regole utente"
     },
     "options_userfilter_description": {
         "message": "Puoi aggiungere le tue regole qui. Questa opzione è&nbsp;consigliata per utenti avanzati esperti di HTML/CSS. Leggi il <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial sulle regole per i filtri</a> per&nbsp;imparare a&nbsp;scrivere le tue regole per i filtri."
@@ -285,7 +288,7 @@
         "message": "Errore di importazione regole"
     },
     "options_popup_import_rules_wrong_file_extension": {
-        "message": "L\\'estensione del file deve essere .txt"
+        "message": "L'estensione del file deve essere .txt"
     },
     "options_show_app_updated_notification": {
         "message": "Notica aggiornamenti estensione"
@@ -306,7 +309,7 @@
         "message": "Nessun aggiornamento trovato"
     },
     "options_popup_update_error": {
-        "message": "Impossibile recuperare gli aggiornamenti. Si prega di riprovare più tardi."
+        "message": "Impossibile recuperare gli aggiornamenti. Ti invitiamo a riprovare più tardi."
     },
     "options_popup_update_updated": {
         "message": "\"$1\" aggiornato alla versione $2"
@@ -330,10 +333,10 @@
         "message": "Attenzione"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Troppi filtri attivi. Safari non può utilizzare più di 50.000 regole in un gruppo."
+        "message": "Troppi filtri attivi. Safari non può utilizzare più di %s regole in un gruppo."
     },
     "options_content_blocker_overlimit": {
-        "message": "Troppi filtri attivi. Safari non può utilizzare più di 50.000 regole in un gruppo."
+        "message": "Troppi filtri attivi. Safari non può utilizzare più di %s regole in un gruppo."
     },
     "options_filters_list_search_placeholder": {
         "message": "Ricerca"
@@ -399,7 +402,7 @@
         "message": "Blocchi di contenuti"
     },
     "options_content_blockers_desc": {
-        "message": "Blocchi annunci attivi: %s su 6 (ciascuna può contenere fino a 50.000 regole)"
+        "message": "Blocchi annunci attivi: %s su 6 (ciascuna può contenere fino a %s regole)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "I blocchi degli annunci sono disattivati"
@@ -447,19 +450,19 @@
         "message": "Blocco Avanzato AdGuard"
     },
     "onboarding_tooltip_adguard_advanced_blocking_info": {
-        "message": "Questa estensione applica regole di blocco avanzate che non sono supportate dall\\'API di Blocco Contenuti Safari."
+        "message": "Questa estensione applica regole di blocco avanzate che non sono supportate dall'API di Blocco Contenuti Safari."
     },
     "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
         "message": "Il permesso Contenuto Pagina Web è richiesto per il corretto funzionamento delle regole cosmetiche."
     },
     "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
-        "message": "Il permesso Cronologia di Navigazione è necessario per rilevare il sito web a cui stai tentando di accedere, in modo che quest\\'ultimo possa trovare le regole di blocco avanzate da applicare."
+        "message": "Il permesso Cronologia di Navigazione è necessario per rilevare il sito web a cui stai tentando di accedere, in modo che quest'ultimo possa trovare le regole di blocco avanzate da applicare."
     },
     "onboarding_tooltip_adguard_safari_content_blockers": {
         "message": "6 estensioni di blocco contenuti"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari limita il numero massimo di regole di blocco dei contenuti a 50.000 per estensione. Questo non è sufficiente per gestire tutti i tipi di blocchi AdGuard di annunci e traccianti. Ecco perché forniamo 6 estensioni, portando così il limite a 300.000."
+        "message": "Safari limita il numero massimo di regole di blocco dei contenuti a %s per estensione. Questo non è sufficiente per gestire tutti i tipi di blocchi AdGuard di annunci e tracciatori. Ecco perché forniamo 6 estensioni, portando così il limite a %s."
     },
     "onboarding_safari_btn": {
         "message": "Apri preferenze"
@@ -519,7 +522,7 @@
         "message": "Impostazioni correttamente importate"
     },
     "settings_import_error": {
-        "message": "Si è verificato un errore durante l\\'importazione delle impostazioni"
+        "message": "Si è verificato un errore durante l'importazione delle impostazioni"
     },
     "settings_notification_protection_title": {
         "message": "La protezione è in pausa"
@@ -570,7 +573,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Il limite di 50.000 regole attive è stato superato. Si prega di disattivare le regole non necessarie per il funzionamento corretto dell'applicazione.<br/>Regole attive al momento: %s (regole disattivate: $2)"
+        "message": "Il limite di %s regole attive è stato superato. Ti suggeriamo di disattivare le regole non necessarie per un corretto funzionamento dell'applicazione.<br/>Regole attive al momento: %s (regole disattivate: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Disattivato nel Safari"

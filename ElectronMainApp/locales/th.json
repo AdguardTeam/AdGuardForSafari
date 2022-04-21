@@ -53,6 +53,9 @@
     "options_settings": {
         "message": "AdGuard สำหรับ Safari - การตั้งค่า"
     },
+    "options_settings_import_error": {
+        "message": "การนำเข้าการตั้งค่าผิดพลาด"
+    },
     "options_general_settings": {
         "message": "ทั่วไป"
     },
@@ -88,6 +91,9 @@
             "one": "%s กฎขั้นสูง",
             "other": "%s กฎขั้นสูง"
         }
+    },
+    "options_filters_check_for_updates": {
+        "message": "ตรวจสอบการปรับปรุง"
     },
     "options_filters_enabled": {
         "message": "เปิดใช้งาน:"
@@ -181,6 +187,12 @@
     },
     "options_userfilter_description": {
         "message": "คุณสามารถเพิ่มกฎของคุณเองใน&nbsp;ตัวกรองนี้&nbsp;แนะนำให้ใช้ตัวเลือกนี้สำหรับผู้ใช้ขั้นสูงที่คุ้นเคยกับ HTML/CSS อ่าน <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>กฎการสอนตัวกรอง</a>เพื่อ&nbsp;เรียนรู้วิธีเขียน&nbsp;กฎตัวกรองของคุณเอง"
+    },
+    "options_userfilter_import": {
+        "message": "นำเข้า"
+    },
+    "options_userfilter_export": {
+        "message": "ส่งออก"
     },
     "options_show_app_updated_notification": {
         "message": "แจ้งเตือนเกี่ยวกับการอัปเดตส่วนขยาย"
@@ -308,8 +320,26 @@
     "options_github": {
         "message": "Github"
     },
+    "onboarding_safari_title": {
+        "message": "ต้องการการอนุญาตจากคุณ"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "AdGuard ไอคอน Safari"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "คุณสามารถใช้ไอคอนนี้เพื่อจัดการการตั้งค่า AdGuard สำหรับ Safari ตัวอย่างเช่นหยุดการปิดกั้นบนเว็บไซต์หรือปิดกั้นโฆษณาด้วยตนเอง"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard การปิดกั้นขั้นสูง"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "ส่วนขยายนี้ใช้กฎการปิดกั้นขั้นสูงซึ่งไม่รองรับโดย Safari Content Blocking API"
+    },
     "onboarding_safari_btn": {
         "message": "เปิดการตั้งค่า"
+    },
+    "onboarding_ignore_safari_btn": {
+        "message": "ไม่สนใจ"
     },
     "options_learn_more": {
         "message": "เรียนรู้เพิ่มเติมเกี่ยวกับมัน"
@@ -415,5 +445,8 @@
     },
     "userfilter_name": {
         "message": "ตัวกรองผู้ใช้"
+    },
+    "folder_check_dialog_quit": {
+        "message": "ออก"
     }
 }

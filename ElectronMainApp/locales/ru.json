@@ -33,7 +33,7 @@
         "message": "Сообщить о некорректной блокировке"
     },
     "options_support_incorrect_blocking_description": {
-        "message": "Если вы увидели пропущенную рекламу или \"сломанный\" сайт"
+        "message": "Если вы увидели пропущенную рекламу или «сломанный» сайт"
     },
     "options_support_feedback_title": {
         "message": "Оставить отзыв"
@@ -278,11 +278,14 @@
     "options_userfilter": {
         "message": "Пользовательские правила"
     },
-    "options_userfilter_info_multi": {
-        "message": "Пользовательских правил: %s"
-    },
     "options_userfilter_no_user_rules": {
         "message": "Список пуст"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s пользовательское правило"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s пользовательских правил"
     },
     "options_userfilter_description": {
         "message": "Вы можете добавлять свои собственные правила фильтрации в&nbsp;Пользовательские правила. Рекомендуется только для опытных пользователей, знакомых с&nbsp;HTML/CSS. Перейдите по&nbsp;<a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ссылке</a>, чтобы узнать, как составлять правила фильтрации."
@@ -292,9 +295,6 @@
     },
     "options_userfilter_export": {
         "message": "Экспорт"
-    },
-    "options_userfilter_description": {
-        "message": "Вы можете добавлять свои собственные правила фильтрации в&nbsp;Пользовательские правила. Рекомендуется только для опытных пользователей, знакомых с&nbsp;HTML/CSS. Перейдите по&nbsp;<a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ссылке</a>, чтобы узнать, как составлять правила фильтрации."
     },
     "options_userfilter_import_rules_error": {
         "message": "Ошибка импорта правил фильтрации"
@@ -324,7 +324,7 @@
         "message": "Не удалось получить обновления. Пожалуйста, повторите попытку позже."
     },
     "options_popup_update_updated": {
-        "message": "\"$1\" обновлен до версии $2"
+        "message": "«$1» обновлен до версии $2"
     },
     "options_popup_update_updated_more": {
         "message": {
@@ -345,10 +345,10 @@
         "message": "Предупреждение"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Активировано слишком много фильтров. Safari не может использовать более 50,000 правил в одной группе."
+        "message": "Активировано слишком много фильтров. Safari не может использовать более %s правил в одной группе."
     },
     "options_content_blocker_overlimit": {
-        "message": "Активировано слишком много фильтров. Safari не может использовать более 50 000 правил в одной группе."
+        "message": "Активировано слишком много фильтров. Safari не может использовать более %s правил в одной группе."
     },
     "options_filters_list_search_placeholder": {
         "message": "Поиск"
@@ -402,7 +402,7 @@
         "message": "Блокировка в Safari включена"
     },
     "tray_menu_protection_stop": {
-        "message": "Блокировка в Safari приостановлена"
+        "message": "Блокировка в Safari отключена"
     },
     "options_last_update": {
         "message": "Последнее обновление:"
@@ -453,7 +453,7 @@
         "message": "Блокировщики контента"
     },
     "options_content_blockers_desc": {
-        "message": "Включено блокировщиков: %s из 6 (каждый может содержать до 50 000 правил)"
+        "message": "Включено блокировщиков: %s из 6 (каждый может содержать до %s правил)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Нет включенных блокировщиков"
@@ -513,7 +513,7 @@
         "message": "6 расширений для блокировки контента"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari ограничивает максимальное количество правил блокировки контента до 50 000 на расширение. Этого недостаточно, чтобы охватить всю рекламу и трекеры, которые блокирует AdGuard. Мы используем 6 расширений, чтобы увеличить лимит до 300 000."
+        "message": "Safari ограничивает максимальное количество правил блокировки контента до %s на расширение. Этого недостаточно, чтобы охватить всю рекламу и трекеры, которые блокирует AdGuard. Мы используем 6 расширений, чтобы увеличить лимит до %s."
     },
     "onboarding_safari_btn": {
         "message": "Открыть настройки"
@@ -627,7 +627,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Превышен лимит в 50 000 правил. Пожалуйста, отключите лишние правила для корректной работы приложения.<br/>В настоящий момент используется правил: %s (правил отключено: $2)"
+        "message": "Превышен лимит в %s правил. Пожалуйста, отключите лишние правила для корректной работы приложения.<br/>В настоящий момент используется правил: %s (правил отключено: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Отключено в Safari"
@@ -663,10 +663,10 @@
         "message": "Отмена"
     },
     "folder_check_dialog_message": {
-        "message": "AdGuard для Safari должен быть запущен из папки \"Приложения\""
+        "message": "AdGuard для Safari должен быть запущен из папки «Приложения»."
     },
     "folder_check_dialog_detail": {
-        "message": "Вы хотите переместить его в папку \"Приложения\"?"
+        "message": "Вы хотите переместить его в папку «Приложения»?"
     },
     "folder_check_dialog_move": {
         "message": "Переместить"

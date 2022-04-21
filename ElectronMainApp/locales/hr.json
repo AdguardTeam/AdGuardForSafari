@@ -65,6 +65,9 @@
     "options_about_updates_not_found": {
         "message": "AdGuard za Safari je ažuriran"
     },
+    "options_about_updates_error": {
+        "message": "Greška prilikom nadobradnje"
+    },
     "options_about_update_downloaded": {
         "message": "Skoro ažurirano! Ponovno pokrenite AdGuard za Safari za dovršetak ažuriranja."
     },
@@ -252,7 +255,7 @@
         "message": " (izokrenuto)"
     },
     "options_allowlist_info_multi": {
-        "message": "%s domena"
+        "message": "Domene: %s"
     },
     "options_allowlist_no_domains": {
         "message": "Popis dopuštenih je prazan"
@@ -263,11 +266,14 @@
     "options_userfilter": {
         "message": "Korisnička pravila"
     },
-    "options_userfilter_info_multi": {
-        "message": "Korisnička pravila: %s"
-    },
     "options_userfilter_no_user_rules": {
         "message": "Popis je prazan"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s korisničko pravilo"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s korisničkih pravila"
     },
     "options_userfilter_description": {
         "message": "Ovdje možete dodati svoja pravila. Ova opcija je&nbsp;preporučena naprednim korisnicima upoznatim s HTML/CSS. Pročitajte <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>upute pravila filtriranja</a> kako&nbsp;biste naučili&nbsp;pisati vlastita pravila filtriranja."
@@ -327,10 +333,10 @@
         "message": "Upozorenje"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Prevelik broj filtara je odabran. Safari ne može koristiti više od 50 000 pravila unutar jedne grupe."
+        "message": "Prevelik broj filtara je odabran. Safari ne može koristiti više od %s pravila unutar jedne grupe."
     },
     "options_content_blocker_overlimit": {
-        "message": "Prevelik broj filtara je odabran. Safari ne može koristiti više od 50 000 pravila unutar jedne grupe."
+        "message": "Prevelik broj filtara je odabran. Safari ne može koristiti više od %s pravila unutar jedne grupe."
     },
     "options_filters_list_search_placeholder": {
         "message": "Pretraga"
@@ -396,7 +402,7 @@
         "message": "Blokeri sadržaja"
     },
     "options_content_blockers_desc": {
-        "message": "Omogućeni blokeri oglasa: %s od 6 (svaki može sadržavati do 50 000 pravila)"
+        "message": "Omogućeni blokeri oglasa: %s od 6 (svaki može sadržavati do %s pravila)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Blokeri oglasa su onemogućeni"
@@ -456,7 +462,7 @@
         "message": "6 proširenja za blokiranje sadržaja"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari ograničava maksimalni broj pravila za blokiranje sadržaja na 50.000 po proširenju. Ovo nije dovoljno za rukovanje svim vrstama oglasa i pratitelja koje Adguard blokira. Zato pružamo 6 proširenja, čime se to ograničenje povećava na 300.000."
+        "message": "Safari ograničava maksimalni broj pravila za blokiranje sadržaja na 50.000 po proširenju. Ovo nije dovoljno za rukovanje svim vrstama oglasa i pratitelja koje Adguard blokira. Zato pružamo 6 proširenja, čime se to ograničenje povećava na %s."
     },
     "onboarding_safari_btn": {
         "message": "Otvori postavke"
@@ -567,7 +573,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Limit od 50 000 pravila je prekoračen. Onemogućite nepotrebna pravila kako bi aplikacija ispravno radila.<br/>Trenutno omogućena pravila: %s (onemogućena pravila: $2)"
+        "message": "Limit od %s pravila je prekoračen. Onemogućite nepotrebna pravila kako bi aplikacija ispravno radila.<br/>Trenutno omogućena pravila: %s (onemogućena pravila: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Onemogućeno u Safariju"

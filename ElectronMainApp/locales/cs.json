@@ -266,6 +266,9 @@
     "options_userfilter": {
         "message": "Uživatelská pravidla"
     },
+    "options_userfilter_info_single": {
+        "message": "Uživatelské pravidlo: %s"
+    },
     "options_userfilter_info_multi": {
         "message": "Uživatelská pravidla: %s"
     },
@@ -330,10 +333,10 @@
         "message": "Varování"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Příliš mnoho povolených filtrů. Safari není schopno používat více než 50 000 pravidel v jedné skupině."
+        "message": "Příliš mnoho povolených filtrů. Safari není schopno používat více než %s pravidel v jedné skupině."
     },
     "options_content_blocker_overlimit": {
-        "message": "Příliš mnoho povolených filtrů. Safari není schopno používat více než 50 000 pravidel v jedné skupině."
+        "message": "Příliš mnoho povolených filtrů. Safari není schopno používat více než %s pravidel v jedné skupině."
     },
     "options_filters_list_search_placeholder": {
         "message": "Hledat"
@@ -399,7 +402,7 @@
         "message": "Blokátory obsahu"
     },
     "options_content_blockers_desc": {
-        "message": "Zapnuté blokátory reklam: %s z 6 (každý může obsahovat až 50 000 pravidel)"
+        "message": "Zapnuté blokátory reklam: %s z 6 (každý může obsahovat až %s pravidel)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Blokátory reklam jsou vypnuty"
@@ -459,7 +462,7 @@
         "message": "6 rozšíření blokování obsahu"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari omezuje maximální počet pravidel blokování obsahu na 50 000 na jedno rozšíření. To nestačí ke zpracování všech druhů reklam a slídičů, které AdGuard blokuje. Proto poskytujeme 6 rozšíření, čímž zvyšujeme tento limit na 300 000."
+        "message": "Safari omezuje maximální počet pravidel blokování obsahu na %s na jedno rozšíření. To nestačí ke zpracování všech druhů reklam a slídičů, které AdGuard blokuje. Proto poskytujeme 6 rozšíření, čímž zvyšujeme tento limit na %s."
     },
     "onboarding_safari_btn": {
         "message": "Otevřít předvolby"
@@ -570,7 +573,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Byl překročen limit 50 000 pravidel. Pro správné fungování aplikace vypněte nepotřebná pravidla. <br/>Počet momentálně zapnutých pravidel: %s (vypnutá pravidla: $2)"
+        "message": "Byl překročen limit %s pravidel. Pro správné fungování aplikace vypněte nepotřebná pravidla. <br/>Počet momentálně zapnutých pravidel: %s (vypnutá pravidla: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Vypnuto v Safari"

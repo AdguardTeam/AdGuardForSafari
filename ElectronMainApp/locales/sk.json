@@ -266,11 +266,14 @@
     "options_userfilter": {
         "message": "Používateľský filter"
     },
-    "options_userfilter_info_multi": {
-        "message": "Používateľských pravidiel: %s"
-    },
     "options_userfilter_no_user_rules": {
         "message": "Zoznam je prázdny"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s používateľské pravidlo"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s používateľské pravidlá, %s používateľských pravidiel"
     },
     "options_userfilter_description": {
         "message": "K tomuto filtru môžete pridať Vaše vlastné pravidlá. Táto voľba je odporúčaná len pre skúsených používateľov so znalosťou HTML/CSS. Pozrite si <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>príručku filtračných pravidiel</a> pre získanie informácií o tom, ako písať vlastné filtračné pravidlá."
@@ -330,10 +333,10 @@
         "message": "Varovanie"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Je zapnutých príliš veľa filtrov. Safari nemôže používať viac ako 50 000 pravidiel v jednej skupine."
+        "message": "Je zapnutých príliš veľa filtrov. Safari nemôže používať viac ako %s pravidiel v jednej skupine."
     },
     "options_content_blocker_overlimit": {
-        "message": "Je zapnutých príliš veľa filtrov. Safari nemôže používať viac ako 50 000 pravidiel v jednej skupine."
+        "message": "Je zapnutých príliš veľa filtrov. Safari nemôže používať viac ako %s pravidiel v jednej skupine."
     },
     "options_filters_list_search_placeholder": {
         "message": "Hľadať"
@@ -399,7 +402,7 @@
         "message": "Blokovače obsahu"
     },
     "options_content_blockers_desc": {
-        "message": "Zapnuté blokovače reklamy: %s zo 6 (každý môže obsahovať až 50 000 pravidiel)"
+        "message": "Zapnuté blokovače reklamy: %s zo 6 (každý môže obsahovať až %s pravidiel)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Blokovače reklamy sú vypnuté"
@@ -459,7 +462,7 @@
         "message": "6 rozšírení blokovania obsahu"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari obmedzuje maximálny počet pravidiel blokovania obsahu na 50 000 na rozšírenie. To nestačí na spracovanie všetkých druhov reklám a sledovačov, ktoré blokuje AdGuard. Preto poskytujeme 6 rozšírení, čím sa táto hranica zvyšuje na 300 000."
+        "message": "Safari obmedzuje maximálny počet pravidiel blokovania obsahu na %s na rozšírenie. To nestačí na spracovanie všetkých druhov reklám a sledovačov, ktoré blokuje AdGuard. Preto poskytujeme 6 rozšírení, čím sa táto hranica zvyšuje na %s."
     },
     "onboarding_safari_btn": {
         "message": "Otvoriť preferencie"
@@ -570,7 +573,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Bol prekročený Limit 50 000 pravidiel. Vypnite nepotrebné pravidlá, aby aplikácia fungovala správne.<br/>Počet aktuálne zapnutých pravidiel: %s (počet vypnutých pravidiel: $2)"
+        "message": "Bol prekročený Limit %s pravidiel. Vypnite nepotrebné pravidlá, aby aplikácia fungovala správne.<br/>Počet aktuálne zapnutých pravidiel: %s (počet vypnutých pravidiel: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Vypnuté v Safari"

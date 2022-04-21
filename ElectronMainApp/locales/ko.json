@@ -266,11 +266,14 @@
     "options_userfilter": {
         "message": "사용자 규칙"
     },
-    "options_userfilter_info_multi": {
-        "message": "사용자 규칙: % s"
-    },
     "options_userfilter_no_user_rules": {
         "message": "목록이 비어 있습니다"
+    },
+    "options_userfilter_info_single": {
+        "message": "사용자 규칙 %s개"
+    },
+    "options_userfilter_info_multi": {
+        "message": "사용자 규칙 %s개"
     },
     "options_userfilter_description": {
         "message": "자신만의 규칙을&nbsp;추가할 수 있습니다. 이 설정은&nbsp;HTML/CSS에 익숙한 고급 사용자에게 권장합니다. <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>필터 규칙 튜토리얼</a>을 읽어보고&nbsp; 사용자 지정 필터 규칙&nbsp;을 어떻게 사용하는지 알아보세요."
@@ -330,10 +333,10 @@
         "message": "경고"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "너무 많은 필터들이 활성화 되어 있습니다. Safari는 한 그룹에서 50,000개 이상의 규칙을 사용할 수 없습니다."
+        "message": "너무 많은 필터들이 활성화 되어 있습니다. Safari는 한 그룹에서 %s개 이상의 규칙을 사용할 수 없습니다."
     },
     "options_content_blocker_overlimit": {
-        "message": "너무 많은 필터들이 활성화 되어 있습니다. Safari는 한 그룹에서 50,000개 이상의 규칙을 사용할 수 없습니다."
+        "message": "너무 많은 필터들이 활성화 되어 있습니다. Safari는 한 그룹에서 %s개 이상의 규칙을 사용할 수 없습니다."
     },
     "options_filters_list_search_placeholder": {
         "message": "검색"
@@ -399,7 +402,7 @@
         "message": "콘텐츠 차단기"
     },
     "options_content_blockers_desc": {
-        "message": "사용 가능한 광고 차단기: 6개 중 %s (각 최대 50,000개의 규칙을 포함 할 수 있습니다)"
+        "message": "사용 가능한 광고 차단기: 6개 중 %s (각 최대 %s개의 규칙을 포함 할 수 있습니다)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "광고 차단기가 비활성화되었습니다"
@@ -570,7 +573,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "50,000개의 규칙 제한이 초과되었습니다. 앱이 올바르게 작동하기 위해 불필요한 규칙을 사용하지 않도록 설정하세요. <br/>현재 활성화된 규칙:%s (비활성화돤 규칙: $2)"
+        "message": "%s개의 규칙 제한이 초과되었습니다. 앱이 올바르게 작동하기 위해 불필요한 규칙을 사용하지 않도록 설정하세요. <br/>현재 활성화된 규칙:%s (비활성화돤 규칙: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "사파리 비활성화"

@@ -255,7 +255,7 @@
         "message": "Korisnička pravila"
     },
     "options_userfilter_info_multi": {
-        "message": "Korisnička pravila: %s"
+        "message": "%s korisnička pravila"
     },
     "options_userfilter_description": {
         "message": "Ovde možete dodati vaša pravila. Ova opcija je&nbsp;preporučljiva za napredne korisnike koji su upoznati sa HTML/CSS. pročitajte <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>Uputstva za pravila</a> to&nbsp;saznajte kako da&nbsp;napišete vaša pravila za filtriranje."
@@ -315,10 +315,10 @@
         "message": "Upozorenje"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Uključeno je previše filtera. Safari ne može da koristi više od 50,000 pravila u jednoj grupi."
+        "message": "Uključeno je previše filtera. Safari ne može da koristi više od %s pravila u jednoj grupi."
     },
     "options_content_blocker_overlimit": {
-        "message": "Uključeno je previše filtera. Safari ne može da koristi više od 50,000 pravila u jednoj grupi."
+        "message": "Uključeno je previše filtera. Safari ne može da koristi više od %s pravila u jednoj grupi."
     },
     "options_filters_list_search_placeholder": {
         "message": "Pretraga"
@@ -384,7 +384,7 @@
         "message": "Blokatori sadržaja"
     },
     "options_content_blockers_desc": {
-        "message": "Uključeni blokatori reklama: %s od 6 (svaki može sadržati do 50,000 pravila)"
+        "message": "Uključeni blokatori reklama: %s od 6 (svaki može sadržati do %s pravila)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Blokatori reklama su isključeni"
@@ -427,6 +427,9 @@
     },
     "onboarding_tooltip_adguard_advanced_blocking": {
         "message": "AdGuard napredno blokiranje"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Ovo proširenje primenjuje napredna pravila blokiranja koja nisu podržana od Safarijevog API za blokiranje sadržaja."
     },
     "onboarding_safari_btn": {
         "message": "Otvori postavke"
@@ -534,7 +537,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Ograničenje od 50,000 pravila je dostignuto. Isključite nepotrebna pravila kako bi aplikacija ispravno radila.<br/>Trenutno uključenih pravila: %s (isključena pravila: $2)"
+        "message": "Ograničenje od %s pravila je dostignuto. Isključite nepotrebna pravila kako bi aplikacija ispravno radila.<br/>Trenutno uključenih pravila: %s (isključena pravila: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Isključeno u Safariju"

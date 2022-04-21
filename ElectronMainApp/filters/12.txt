@@ -1,8 +1,8 @@
-! Checksum: P71tQ610zd830clO4cK3jA
+! Checksum: 55MHc2TDNbq3IxWNonSsmg
 ! Title: AdGuard Safari filter
 ! Description: Special filter for Safari 9+ on iOS and Mac OS. We need a separate filter for Safari browser because it does not fully support our rules syntax. Already included in AdGuard Base filter.
-! Version: 2.0.1.83
-! TimeUpdated: 2021-09-08T19:30:33+03:00
+! Version: 2.0.1.89
+! TimeUpdated: 2022-04-18T21:30:20+07:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -163,10 +163,6 @@ play.anghami.com##.content > .mpu
 @@||clkmein.com^$generichide
 ! https://github.com/AdguardTeam/AdguardFilters/issues/5162
 @@||business-tv.me^$generichide
-! https://forum.adguard.com/index.php?threads/22117/
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=cokomik.net
-@@||pagead2.googlesyndication.com/pagead/js/*/show_ads_impl.js$domain=cokomik.net
-cokomik.net#@#.adsbygoogle
 ! https://github.com/AdguardTeam/AdguardFilters/issues/5090
 @@||arkforum.de^$generichide
 ! https://forum.adguard.com/index.php?threads/22031/
@@ -418,8 +414,6 @@ televisaofutebol.com#@#iframe[width="300"][height="250"]
 @@||mackie100projects.altervista.org^$generichide
 ! https://forum.adguard.com/index.php?threads/13867/
 @@||pagead2.googlesyndication.com/pagead/js/lidar.js$domain=freewarefiles.com
-! https://forum.adguard.com/index.php?threads/13921/
-@@||cdn.popcash.net/pop.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/3018
 @@||usapoliticstoday.com^$generichide
 ! https://github.com/AdguardTeam/AdguardFilters/issues/2995
@@ -827,8 +821,6 @@ m.sports.ru##iframe[src^="http://www.sports.ru/desktop/special/"]
 @@||x.sare25.com/x.php?url=
 ! https://github.com/AdguardTeam/AdguardFilters/issues/11748#issuecomment-366602974
 @@||aktualne.cz^$subdocument,domain=aktualne.cz
-! https://github.com/AdguardTeam/AdguardFilters/issues/8900
-@@||lpj4.adj.st/dawanda.com/
 ! https://github.com/AdguardTeam/AdguardFilters/issues/10904
 fxporn.net#@#.video_ads
 ! https://github.com/AdguardTeam/AdguardFilters/issues/8073
@@ -903,11 +895,10 @@ fxporn.net#@#.video_ads
 ! https://github.com/AdguardTeam/AdguardFilters/issues/4180
 @@||go.onelink.me/*?pid=
 ! https://github.com/AdguardTeam/AdguardFilters/issues/3656
-@@||bp.blogspot.com^$domain=fmovies.se|fmovies.to
-@@||fmovies.se^$domain=fmovies.se|fmovies.to
-@@||googlevideo.com^$domain=fmovies.se|fmovies.to
-@@||oloadcdn.net^$domain=fmovies.se|fmovies.to
-@@||jwpltx.com^$domain=fmovies.se|fmovies.to
+@@||bp.blogspot.com^$domain=fmovies.to
+@@||googlevideo.com^$domain=fmovies.to
+@@||oloadcdn.net^$domain=fmovies.to
+@@||jwpltx.com^$domain=fmovies.to
 ! vmall.com - Fixing authorization
 @@.vmall.com/oauth
 ! https://github.com/AdguardTeam/AdguardFilters/issues/4215
@@ -923,7 +914,7 @@ fxporn.net#@#.video_ads
 ! https://github.com/AdguardTeam/AdguardBrowserExtension/issues/466
 @@||11street.my/totalsearch/
 ! https://github.com/AdguardTeam/AdguardFilters/issues/3559
-@@|http://*$domain=fmovies.to|fmovies.se,~third-party
+@@|http://*$domain=fmovies.to,~third-party
 !https://forum.adguard.com/index.php?threads/accountkiller-com.16162/
 @@||google-analytics.com/analytics.js^$domain=accountkiller.com
 ! https://forum.adguard.com/index.php?threads/pornve-com-nsfw.16118/

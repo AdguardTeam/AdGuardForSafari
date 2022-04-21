@@ -1,8 +1,8 @@
-! Checksum: iP63qiu338UvAz247vPl1g
+! Checksum: CH96BetuX1cPpYig13gAyQ
 ! Title: AdGuard Experimental filter
 ! Description: Filter designed to test certain hazardous filtering rules before they are added to the basic filters.
-! Version: 2.0.0.89
-! TimeUpdated: 2021-09-10T00:31:30+03:00
+! Version: 2.0.0.96
+! TimeUpdated: 2022-03-17T14:31:25+07:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -146,8 +146,12 @@
 ! Rules that are restricted to one or more domains.
 ! This section contain any type of rule grouped by domain.
 !
-! https://github.com/AdguardTeam/AdguardFilters/issues/92860
-adssettings.google.com##sc-survey-survey-manager
+! main youtube page - changing view for the first row of elements
+www.youtube.com#$?##contents ytd-rich-grid-row:has(> div[id="contents"] > ytd-rich-item-renderer[style="display: none !important;"]) > #contents:first-child { max-width: unset !important; }
+www.youtube.com#$?##contents ytd-rich-grid-row:has(> div[id="contents"] > ytd-rich-item-renderer[style="display: none !important;"]) ytd-rich-grid-media { max-width: unset !important; }
+www.youtube.com#$?##contents ytd-rich-grid-row:has(> div[id="contents"] > ytd-rich-item-renderer[style="display: none !important;"]) { --ytd-rich-grid-items-per-row: 1 !important; }
+! https://github.com/AdguardTeam/AdguardFilters/issues/96262
+developer.android.com,adssettings.google.com##sc-survey-survey-manager
 !
 ! Whitelist
 ! http://adguard.com/filterrules.html#exclusionRules
@@ -166,6 +170,9 @@ adssettings.google.com##sc-survey-survey-manager
 /fbevents.js^
 /ads/beacon-
 /AppMeasurement-$script,domain=~mlb.com
+!
+||welcoming-carpets.tk^$third-party
+||creative-banana.tk^$third-party
 !-------------------------------------------------------------------!
 !------- Experimental rules for Social filter ----------------------!
 !-------------------------------------------------------------------!
@@ -236,6 +243,8 @@ adssettings.google.com##sc-survey-survey-manager
 ! Rules which are restricted to one or more domains.
 ! This section contain any type of rule grouped by domain.
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/105359#issuecomment-1069375715
+ozerki.ru#?#header > div.popup:has(> div.popup__container div.rkf_popup_button > a[href="https://express.superapteka.ru/"])
 !
 ! Whitelist
 !

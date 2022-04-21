@@ -266,11 +266,14 @@
     "options_userfilter": {
         "message": "Règles d'utilisateur"
     },
-    "options_userfilter_info_multi": {
-        "message": "Règles d’utilisateur: %s"
-    },
     "options_userfilter_no_user_rules": {
         "message": "La liste est vide"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s règle d’utilisateur"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s règles d’utilisateur"
     },
     "options_userfilter_description": {
         "message": "Vous pouvez ajouter vos propres règles ici. Cette option est&nbsp;recommandée pour les utilisateurs avancés familiers avec le langage HTML / CSS. Lisez le <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutoriel</a> pour&nbsp;apprendre à&nbsp;écrire vos propres règles."
@@ -330,10 +333,10 @@
         "message": "Alerte"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Trop de filtres activés. Safari ne peut pas utiliser plus de 50000 règles la fois."
+        "message": "Trop de filtres activés. Safari ne peut pas utiliser plus de %s règles la fois."
     },
     "options_content_blocker_overlimit": {
-        "message": "Trop de filtres activés. Safari ne peut pas utiliser plus de 50000 règles la fois."
+        "message": "Trop de filtres activés. Safari ne peut pas utiliser plus de %s règles la fois."
     },
     "options_filters_list_search_placeholder": {
         "message": "Rechercher"
@@ -399,7 +402,7 @@
         "message": "Bloqueurs de contenu"
     },
     "options_content_blockers_desc": {
-        "message": "Bloqueurs de pubs activés : %s sur 6 (chacun peut contenir jusqu'à 50 000 règles)"
+        "message": "Bloqueurs de pubs activés : %s sur 6 (chacun peut contenir jusqu'à %s règles)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Les bloqueurs de pubs sont désactivés"
@@ -459,7 +462,7 @@
         "message": "6 extensions de blocage de contenu"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari limite le nombre maximal de règles de blocage de contenu à 50 000 par extension. Cela ne suffit pas pour gérer toutes sortes de publicités et de pisteurs bloqués par AdGuard. C’est pourquoi nous proposons 6 extensions, augmentant ainsi cette limite à 300 000."
+        "message": "Safari limite le nombre maximal de règles de blocage de contenu à %s par extension. Cela ne suffit pas pour gérer toutes sortes de publicités et de pisteurs bloqués par AdGuard. C’est pourquoi nous proposons 6 extensions, augmentant ainsi cette limite à %s."
     },
     "onboarding_safari_btn": {
         "message": "Ouvrir les préférences"
@@ -570,7 +573,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "La limite de 50 000 règles est dépassée. Veuillez désactiver les règles qui ne sont pas nécessaires pour le fonctionnement correct de l'application.<br/>Règles activées en ce moment : %s (règles désactivées: $2)"
+        "message": "La limite de %s règles est dépassée. Veuillez désactiver les règles qui ne sont pas nécessaires pour le fonctionnement correct de l'application.<br/>Règles activées en ce moment : %s (règles désactivées: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Désactivé dans Safari"

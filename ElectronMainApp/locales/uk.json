@@ -108,16 +108,16 @@
         "message": "Загальні"
     },
     "options_general_desc": {
-        "message": "AdGuard for Safari - безкоштовне програмне забезпечення з відкритим кодом. Ми вдячні за Ваші відгуки та пропозиції. Якщо ви хочете повідомити про помилку або надіслати запит на функцію, перейдіть на сторінку <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>наш репозіторій Github</a>."
+        "message": "AdGuard for Safari — безкоштовне програмне забезпечення з відкритим кодом. Ми вдячні за ваші відгуки та пропозиції. Ви можете повідомити про помилку або надіслати запит на функцію <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>у нашому репозиторії на Github</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Дозволити рекламу в результатах пошуку і саморекламу вебсайтів"
     },
     "options_export_settings": {
-        "message": "Експорт налаштувань"
+        "message": "Експортувати налаштування"
     },
     "options_import_settings": {
-        "message": "Імпорт налаштувань"
+        "message": "Імпортувати налаштування"
     },
     "options_export_logs": {
         "message": "Експортувати журнали"
@@ -186,10 +186,10 @@
         "message": "Введіть URL-адресу фільтру"
     },
     "options_filters_custom_step_one_url_desc": {
-        "message": "Введіть дійсну URL-адресу підписки на фільтр."
+        "message": "Введіть дійсну URL-адресу фільтра."
     },
     "options_filters_custom_step_one_url_desc_more": {
-        "message": "AdGuard додасть цю підписку на фільтр."
+        "message": "Цей фільтр буде додано до AdGuard."
     },
     "options_filters_custom_step_one_cancel": {
         "message": "Скасувати"
@@ -201,7 +201,7 @@
         "message": "Завантаження фільтру"
     },
     "options_filters_custom_step_two_subscribing": {
-        "message": "Додавання фільтру"
+        "message": "Додавання фільтра"
     },
     "options_filters_custom_step_three_title": {
         "message": "Виникла помилка"
@@ -240,7 +240,7 @@
         "message": "Скасувати"
     },
     "options_filters_custom_step_final_commit": {
-        "message": "Підписатися"
+        "message": "Додати"
     },
     "options_filters_check_filters_update": {
         "message": "Перевірити оновлення фільтрів"
@@ -265,6 +265,9 @@
     },
     "options_userfilter": {
         "message": "Правила користувача"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s правило користувача"
     },
     "options_userfilter_info_multi": {
         "message": "Правил користувача: %s"
@@ -330,10 +333,10 @@
         "message": "Попередження"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Активовано забагато фільтрів. Safari може використовувати не більше 50 000 правил в одній групі."
+        "message": "Активовано забагато фільтрів. Safari може використовувати не більше %s правил в одній групі."
     },
     "options_content_blocker_overlimit": {
-        "message": "Активовано забагато фільтрів. Safari може використовувати не більше 50 000 правил в одній групі."
+        "message": "Активовано забагато фільтрів. Safari може використовувати не більше %s правил в одній групі."
     },
     "options_filters_list_search_placeholder": {
         "message": "Пошук"
@@ -399,7 +402,7 @@
         "message": "Блокувальники вмісту"
     },
     "options_content_blockers_desc": {
-        "message": "Увімкнено блокувальників: %s з 6 (кожен може містити до 50 000 правил)"
+        "message": "Увімкнено блокувальників: %s з 6 (кожен може містити до %s правил)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Блокувальники реклами вимкнені"
@@ -429,7 +432,7 @@
         "message": "Помітьте прапорцями розширення AdGuard в налаштуваннях Safari."
     },
     "onboarding_safari_link": {
-        "message": "Яке призначення цих розширень?"
+        "message": "Навіщо ці розширення?"
     },
     "onboarding_tooltip_adguard_safari_icon": {
         "message": "Піктограма AdGuard в Safari"
@@ -459,7 +462,7 @@
         "message": "6 розширень блокування вмісту"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari обмежує максимальну кількість правил блокування вмісту до 50.000 для одного розширення. Цього недостатньо для AdGuard, щоб обробляти й блокувати усі можливі типи реклами та стеження. Саме тому ми створили 6 розширень, збільшивши таким чином ліміт до 300.000."
+        "message": "Safari обмежує максимальну кількість правил блокування вмісту до %s для одного розширення. Цього недостатньо для AdGuard, щоб обробляти й блокувати усі можливі типи реклами та стеження. Саме тому ми створили 6 розширень, збільшивши таким чином ліміт до %s."
     },
     "onboarding_safari_btn": {
         "message": "Відкрити налаштування"
@@ -570,7 +573,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Перевищено обмеження в 50000 правил. Вимкніть непотрібні правила для належної роботи програми.<br/>Зараз увімкнено правил: %s (вимкнено правил: $2)"
+        "message": "Перевищено обмеження в %s правил. Вимкніть непотрібні правила для належної роботи програми.<br/>Зараз увімкнено правил: %s (вимкнено правил: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Вимкнено в Safari"
@@ -606,10 +609,10 @@
         "message": "Скасувати"
     },
     "folder_check_dialog_message": {
-        "message": "AdGuard для Safari слід запускати з теки Програми."
+        "message": "AdGuard для Safari слід запускати з папки «Програми»."
     },
     "folder_check_dialog_detail": {
-        "message": "Хочете перемістити його до теки Програми зараз?"
+        "message": "Хочете перемістити його до папки «Програми» зараз?"
     },
     "folder_check_dialog_move": {
         "message": "Перемістити"

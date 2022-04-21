@@ -225,7 +225,7 @@
         "message": "Versiune:"
     },
     "options_filters_custom_step_final_filter_rules_count": {
-        "message": "Număr reguli:"
+        "message": "Număr de reguli:"
     },
     "options_filters_custom_step_final_filter_homepage": {
         "message": "Homepage:"
@@ -249,7 +249,7 @@
         "message": "Listă autorizări"
     },
     "options_allowlist_description": {
-        "message": "AdGuard nu filtrează site-urile web din Lista de Autorizări."
+        "message": "AdGuard nu filtrează site-urile web din Lista de autorizări."
     },
     "options_allowlist_inverted": {
         "message": " (Inversate)"
@@ -258,19 +258,22 @@
         "message": "Domenii: %s"
     },
     "options_allowlist_no_domains": {
-        "message": "Lista de Autorizări este goală"
+        "message": "Lista de autorizări este goală"
     },
     "options_allowlist_inverse": {
-        "message": "Lista de Autorizări Inversată<span class='sp-table-row-info'>Deblochează reclame peste tot <i>cu excepția</i> site-urile web din Lista de Autorizări</span>"
+        "message": "Lista de autorizări inversată<span class='sp-table-row-info'>Deblochează reclamele peste tot <i>cu excepția</i> site-urile web din Lista de autorizări</span>"
     },
     "options_userfilter": {
         "message": "Reguli Utilizator"
     },
-    "options_userfilter_info_multi": {
-        "message": "Reguli utilizator: %s"
-    },
     "options_userfilter_no_user_rules": {
         "message": "lista este goală"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s regulă utilizator"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s reguli utilizatori"
     },
     "options_userfilter_description": {
         "message": "Puteți adăuga propriile reguli aici. Această opțiune este&nbsp;recomandată pentru utilizatorii avansați familiarizați cu HTML/CSS. Citiți <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>ghidul</a> de&nbsp;urmat la&nbsp;scrierea propriilor reguli de filtrare."
@@ -330,10 +333,10 @@
         "message": "Atenție"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Prea multe filtre activate. Safari nu poate utiliza mai mult de 50.000 de reguli pe grup."
+        "message": "Prea multe filtre activate. Safari nu poate utiliza mai mult de %s de reguli pe grup."
     },
     "options_content_blocker_overlimit": {
-        "message": "Prea multe filtre activate. Safari nu poate utiliza mai mult de 50.000 de reguli pe grup."
+        "message": "Prea multe filtre activate. Safari nu poate utiliza mai mult de %s de reguli pe grup."
     },
     "options_filters_list_search_placeholder": {
         "message": "Căutați"
@@ -354,7 +357,7 @@
         "message": "Editare"
     },
     "main_menu_undo": {
-        "message": "Anulați"
+        "message": "Anulare"
     },
     "main_menu_cut": {
         "message": "Tăiați"
@@ -399,7 +402,7 @@
         "message": "Blocante de conținut"
     },
     "options_content_blockers_desc": {
-        "message": "Blocante de reclame activate: %s din 6 (pot conține fiecare până la 50.000 de reguli)"
+        "message": "Blocante de reclame activate: %s din 6 (pot conține fiecare până la %s de reguli)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Blocanții de reclame sunt dezactivați"
@@ -459,7 +462,7 @@
         "message": "6 extensii de blocare a conținutului"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari limitează numărul de reguli de blocare a conținutului la 50.000 pe extensie, ceea ce nu este suficient pentru a gestiona toate tipurile de anunțuri și trackere blocate de AdGuard. De aceea, oferim 6 extensii, mărind astfel limita la 300.000."
+        "message": "Safari limitează numărul de reguli de blocare a conținutului la %s pe extensie, ceea ce nu este suficient pentru a gestiona toate tipurile de anunțuri și trackere blocate de AdGuard. De aceea, oferim 6 extensii, mărind astfel limita la %s."
     },
     "onboarding_safari_btn": {
         "message": "Deschide preferințele"
@@ -484,7 +487,7 @@
     },
     "options_filters_update_period_number": {
         "message": {
-            "one": "Fiecare oră",
+            "one": "La fiecare oră",
             "other": "Fiecare %s ore"
         }
     },
@@ -570,7 +573,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Limita de 50.000 de reguli a fost depășită. Dezactivați regulile inutile pentru ca aplicația să funcționeze corect.<br/>În prezent, regulile activate: %s (reguli dezactivate: $2)"
+        "message": "Limita de %s de reguli a fost depășită. Dezactivați regulile inutile pentru ca aplicația să funcționeze corect.<br/>În prezent, regulile activate: %s (reguli dezactivate: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Dezactivat în Safari"

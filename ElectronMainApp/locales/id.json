@@ -266,11 +266,14 @@
     "options_userfilter": {
         "message": "Penyaring pengguna"
     },
-    "options_userfilter_info_multi": {
-        "message": "Penyaring pengguna: %s"
-    },
     "options_userfilter_no_user_rules": {
         "message": "Daftar kosong"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s aturan pengguna"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s aturan pengguna"
     },
     "options_userfilter_description": {
         "message": "Anda dapat menambahkan aturan Anda sendiri ke&nbsp;filter ini. Opsi ini&nbsp;disarankan untuk pengguna tingkat lanjut yang terbiasa dengan HTML / CSS. Baca <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial aturan filter</a> untuk&nbsp;mempelajari cara&nbsp;menulis aturan filter Anda sendiri."
@@ -330,10 +333,10 @@
         "message": "Peringatan"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Terlalu banyak filter diaktifkan. Safari tidak dapat menggunakan lebih dari 50.000 aturan dalam satu grup."
+        "message": "Terlalu banyak filter diaktifkan. Safari tidak dapat menggunakan lebih dari %s aturan dalam satu grup."
     },
     "options_content_blocker_overlimit": {
-        "message": "Terlalu banyak filter diaktifkan. Safari tidak dapat menggunakan lebih dari 50.000 aturan dalam satu grup."
+        "message": "Terlalu banyak filter diaktifkan. Safari tidak dapat menggunakan lebih dari %s aturan dalam satu grup."
     },
     "options_filters_list_search_placeholder": {
         "message": "Cari"
@@ -399,7 +402,7 @@
         "message": "Pemblokir konten"
     },
     "options_content_blockers_desc": {
-        "message": "Pemblokir iklan diaktifkan: %s dari 6 (masing-masing dapat berisi hingga 50.000 aturan)"
+        "message": "Pemblokir iklan diaktifkan: %s dari 6 (masing-masing dapat berisi hingga %s aturan)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Pemblokir iklan dinonaktifkan"
@@ -459,7 +462,7 @@
         "message": "6 ekstensi pemblokiran konten"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari membatasi jumlah maksimum aturan pemblokiran konten dengan 50.000 per ekstensi. Ini tidak cukup untuk menangani semua jenis iklan dan pelacak yang diblokir AdGuard. Itu sebabnya kami menyediakan 6 ekstensi, sehingga meningkatkan batas itu menjadi 300.000."
+        "message": "Safari membatasi jumlah maksimum aturan pemblokiran konten dengan %s per ekstensi. Ini tidak cukup untuk menangani semua jenis iklan dan pelacak yang diblokir AdGuard. Itu sebabnya kami menyediakan 6 ekstensi, sehingga meningkatkan batas itu menjadi %s."
     },
     "onboarding_safari_btn": {
         "message": "Buka preferensi"
@@ -570,7 +573,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Batas 50.000 aturan telah terlampaui. Harap nonaktifkan aturan yang tidak perlu agar aplikasi berfungsi dengan benar.<br/>Aturan yang diaktifkan saat ini: %s (aturan yang dinonaktifkan: $2)"
+        "message": "Batas %s aturan telah terlampaui. Harap nonaktifkan aturan yang tidak perlu agar aplikasi berfungsi dengan benar.<br/>Aturan yang diaktifkan saat ini: %s (aturan yang dinonaktifkan: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Dinonaktifkan di Safari"

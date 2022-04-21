@@ -6,7 +6,7 @@
         "message": "受信任的"
     },
     "options_popup_trusted_filter_description": {
-        "message": "受信任的過濾器可使用在錯誤的手中可能是危險的之強大的過濾規則修飾語。除非您完全地信任它，否則勿勾選該核取框。"
+        "message": "受信任的過濾器可使用在錯誤的手中可能是危險的之強大的過濾規則修飾語。除非您完全地信任它，否則勿勾選此核取框。"
     },
     "options_filters_filter_trusted_tag": {
         "message": "受信任的"
@@ -66,7 +66,7 @@
         "message": "AdGuard for Safari 為最新的"
     },
     "options_about_updates_error": {
-        "message": "更新出錯"
+        "message": "更新錯誤"
     },
     "options_about_update_downloaded": {
         "message": "幾乎為最新的！重新啟動 AdGuard for Safari 以完成更新。"
@@ -177,7 +177,7 @@
         "message": "匯入檔案"
     },
     "options_popup_import_file_error_title": {
-        "message": "匯入出錯"
+        "message": "匯入錯誤"
     },
     "options_filters_custom_step_one_title": {
         "message": "新的過濾器訂閱"
@@ -204,7 +204,7 @@
         "message": "正在訂閱該過濾器"
     },
     "options_filters_custom_step_three_title": {
-        "message": "錯誤已發生"
+        "message": "錯誤發生了"
     },
     "options_filters_custom_step_three_desc": {
         "message": "不幸地，由於非預期性的錯誤，您自訂的過濾器無法被加入。"
@@ -266,8 +266,11 @@
     "options_userfilter": {
         "message": "使用者規則"
     },
+    "options_userfilter_info_single": {
+        "message": "%s 使用者規則"
+    },
     "options_userfilter_info_multi": {
-        "message": "使用者規則: %s"
+        "message": "%s 使用者規則"
     },
     "options_userfilter_description": {
         "message": "您可於此新增您自己的規則。對於熟悉 HTML/CSS 之進階的用戶，此選項是被建議的。閱讀<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>過濾器規則導覽</a>以學習如何撰寫您自己的過濾器規則。"
@@ -291,7 +294,7 @@
         "message": "過濾器被成功地更新"
     },
     "options_popup_update_error_title": {
-        "message": "過濾器之更新出錯"
+        "message": "過濾器之更新錯誤"
     },
     "options_popup_update_version_error": {
         "message": "您正在試圖更新的過濾器之版本為相同的或較舊的"
@@ -318,7 +321,7 @@
         "message": "AdGuard for Safari 剛剛已被更新至版本 $1。"
     },
     "options_popup_version_update_description_minor": {
-        "message": "此版本主要地包含程式錯誤修復和小改進。"
+        "message": "此版本主要地包含程式錯誤修正和小改進。"
     },
     "options_popup_version_update_description_major": {
         "message": "這是一項帶來了許多新的功能和改進之重大的延伸功能升級。"
@@ -327,10 +330,10 @@
         "message": "警告"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "太多已啟用的過濾器。Safari 無法在一個群組中使用超過 50,000 項規則。"
+        "message": "太多已啟用的過濾器。Safari 無法在一個群組中使用超過 %s 項規則。"
     },
     "options_content_blocker_overlimit": {
-        "message": "太多已啟用的過濾器。Safari 無法在一個群組中使用超過 50,000 項規則。"
+        "message": "太多已啟用的過濾器。Safari 無法在一個群組中使用超過 %s 項規則。"
     },
     "options_filters_list_search_placeholder": {
         "message": "搜尋"
@@ -396,7 +399,7 @@
         "message": "內容阻擋器"
     },
     "options_content_blockers_desc": {
-        "message": "已啟用廣告封鎖器：6 當中的 %s（每個可包含高達 50,000 項規則）"
+        "message": "已啟用廣告封鎖器：6 當中的 %s（每個可包含高達 %s 項規則）"
     },
     "options_content_blockers_disabled_desc": {
         "message": "廣告封鎖器被禁用"
@@ -444,7 +447,7 @@
         "message": "AdGuard 進階的封鎖"
     },
     "onboarding_tooltip_adguard_advanced_blocking_info": {
-        "message": "此延伸功能套用不被 Safari 內容阻擋應用程式介面（API）支援之進階的封鎖規則。"
+        "message": "此延伸功能套用不被 Safari 內容阻擋應用程式介面支援之進階的封鎖規則。"
     },
     "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
         "message": "網頁內容權限是必須的以使進階之修飾的（cosmetic）規則運作。"
@@ -456,7 +459,7 @@
         "message": "6 個內容阻擋延伸功能"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari 以每個延伸功能 50,000 項規則限制內容阻擋規則之最大數量。這不足以處理 AdGuard 封鎖之各種各樣的廣告和追蹤器。那是為什麼我們提供 6 個延伸功能，從而增加該限制到 300,000 項規則。"
+        "message": "Safari 以每個延伸功能 %s 項規則限制內容阻擋規則之最大數量。這不足以處理 AdGuard 封鎖之各種各樣的廣告和追蹤器。那是為什麼我們提供 6 個延伸功能，從而增加該限制到 %s 項規則。"
     },
     "onboarding_safari_btn": {
         "message": "開啟偏好設定"
@@ -567,7 +570,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "50,000 項規則的限制已被超出。請禁用不必要的規則以使應用程式正確地運作。<br/>此刻已啟用的規則：%s（已禁用的規則：$2）"
+        "message": "%s 項規則的限制已被超出。請禁用不必要的規則以使應用程式正確地運作。<br/>此刻已啟用的規則：%s（已禁用的規則：$2）"
     },
     "options_cb_disabled_warning": {
         "message": "已在 Safari 中禁用"

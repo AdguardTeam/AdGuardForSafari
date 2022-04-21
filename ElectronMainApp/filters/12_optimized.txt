@@ -1,8 +1,8 @@
-! Checksum: drjQcgKuinQNkMJ84gTL2w
+! Checksum: JA2TJgQMN0yl/QOQA01bhg
 ! Title: AdGuard Safari filter (Optimized)
 ! Description: Special filter for Safari 9+ on iOS and Mac OS. We need a separate filter for Safari browser because it does not fully support our rules syntax. Already included in AdGuard Base filter.
-! Version: 2.0.1.83
-! TimeUpdated: 2021-09-08T19:30:33+03:00
+! Version: 2.0.1.89
+! TimeUpdated: 2022-04-18T21:30:20+07:00
 ! Expires: 4 days (update frequency)
 @@||imasdk.googleapis.com/js/sdkloader/ima3_debug.js$domain=maxpreps.com
 @@||hdliveextra-a.akamaihd.net/*/config/ads.js$domain=nbcsports.com
@@ -88,9 +88,6 @@ play.anghami.com##.content > .mpu
 @@||jilhub.xyz^$generichide
 @@||clkmein.com^$generichide
 @@||business-tv.me^$generichide
-@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=cokomik.net
-@@||pagead2.googlesyndication.com/pagead/js/*/show_ads_impl.js$domain=cokomik.net
-cokomik.net#@#.adsbygoogle
 @@||arkforum.de^$generichide
 @@||appdrop.net^$generichide
 @@||chelsea24news.pl^$generichide
@@ -299,7 +296,6 @@ televisaofutebol.com#@#iframe[width="300"][height="250"]
 @@google$domain=focus.de,script
 @@||mackie100projects.altervista.org^$generichide
 @@||pagead2.googlesyndication.com/pagead/js/lidar.js$domain=freewarefiles.com
-@@||cdn.popcash.net/pop.js
 @@||usapoliticstoday.com^$generichide
 @@||ran.de^$generichide
 @@||mackungfu.org^$generichide
@@ -520,7 +516,6 @@ m.sports.ru##iframe[src^="http://www.sports.ru/desktop/special/"]
 @@||datoporn.co^$domain=xmoviesforyou.com
 @@||x.sare25.com/x.php?url=
 @@||aktualne.cz^$subdocument,domain=aktualne.cz
-@@||lpj4.adj.st/dawanda.com/
 fxporn.net#@#.video_ads
 @@||tracking.asosconnect.com/aff_c?offer_id=*&aff_id=*&aff_sub=clickref&*&url=http%3a%2f%2fwww.asos.de%2fasos%2f
 @@||googleusercontent.com/download/$domain=9anime.to
@@ -566,11 +561,10 @@ fxporn.net#@#.video_ads
 @@||google.com/recaptcha/$domain=xhamster.com
 @@||google.com/js/bg/$domain=xhamster.com
 @@||go.onelink.me/*?pid=
-@@||bp.blogspot.com^$domain=fmovies.se|fmovies.to
-@@||fmovies.se^$domain=fmovies.se|fmovies.to
-@@||googlevideo.com^$domain=fmovies.se|fmovies.to
-@@||oloadcdn.net^$domain=fmovies.se|fmovies.to
-@@||jwpltx.com^$domain=fmovies.se|fmovies.to
+@@||bp.blogspot.com^$domain=fmovies.to
+@@||googlevideo.com^$domain=fmovies.to
+@@||oloadcdn.net^$domain=fmovies.to
+@@||jwpltx.com^$domain=fmovies.to
 @@.vmall.com/oauth
 @@||movie-blog.org$domain=movie-blog.org,~script,~image
 @@||image*.putlockers.
@@ -579,7 +573,7 @@ fxporn.net#@#.video_ads
 @@||banner.dna.fi^
 @@||vectorstock.com^$domain=vectorstock.com
 @@||11street.my/totalsearch/
-@@|http://*$domain=fmovies.to|fmovies.se,~third-party
+@@|http://*$domain=fmovies.to,~third-party
 @@||google-analytics.com/analytics.js^$domain=accountkiller.com
 @@||prscripts.com/pub.js$domain=pornve.com
 afkortingen.nu#@##cookie_popup_container
