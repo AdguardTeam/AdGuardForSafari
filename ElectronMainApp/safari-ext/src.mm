@@ -771,6 +771,13 @@ NAN_METHOD(getSafariVersion) {
     info.GetReturnValue().Set(Nan::New(result.UTF8String).ToLocalChecked());
 }
 
+NAN_METHOD(getOSVersion) {
+
+    NSProcessInfo *pInfo = [NSProcessInfo processInfo];
+    NSString *version = [pInfo operatingSystemVersionString];
+    info.GetReturnValue().Set(Nan::New(version.UTF8String).ToLocalChecked());
+}
+
 
 NAN_MODULE_INIT(Init) {
 
@@ -860,6 +867,9 @@ NAN_MODULE_INIT(Init) {
     
   Nan::Set(target, New<String>("getSafariVersion").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(getSafariVersion)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("getOSVersion").ToLocalChecked(),
+    GetFunction(New<FunctionTemplate>(getOSVersion)).ToLocalChecked());
 
 }
 

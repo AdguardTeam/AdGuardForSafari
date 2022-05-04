@@ -44,6 +44,25 @@ module.exports = (function () {
             if (safariVersion) {
                 // major version
                 safariVersion = parseInt(safariVersion.substring(0, 2), 10);
+            } else {
+                log.warn('Unable to detect Safari browser version');
+            }
+
+            let osVersion = safariExt.getOSVersion();
+            log.info(`OS version: ${osVersion}`);
+
+            if (osVersion && osVersion.startsWith('Version')) {
+                // major version
+                osVersion = parseInt(osVersion.substring(8, 10), 10);
+            } else {
+                log.warn('Unable to detect OS major version');
+            }
+
+            // https://github.com/AdguardTeam/AdGuardForSafari/issues/699
+            // in case of Big Sur and Safari 15 we convert rules for Safari 14
+            // to avoid errors of 'fetch', 'other' and 'websocket' resources types
+            if (osVersion === 11 && safariVersion >= 15) {
+                safariVersion = 14;
             }
 
             log.info(`ConverterTool version: ${getConverterVersion()}`);

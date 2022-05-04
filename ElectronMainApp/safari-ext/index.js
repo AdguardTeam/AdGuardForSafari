@@ -292,10 +292,17 @@ module.exports = (() => {
     };
 
     /**
-     * Returns path to shared resources folder (App Group Folder)
+     * Returns Safari browser version
      */
     const getSafariVersion = () => {
         return addon.getSafariVersion();
+    };
+
+    /**
+     * Returns OS version
+     */
+    const getOSVersion = () => {
+        return addon.getOSVersion();
     };
 
     return {
@@ -319,5 +326,6 @@ module.exports = (() => {
         requestMASUserReview: requestMASUserReview,
         sharedResourcesPath: sharedResourcesPath,
         getSafariVersion: getSafariVersion,
+        getOSVersion,
     };
 })();
