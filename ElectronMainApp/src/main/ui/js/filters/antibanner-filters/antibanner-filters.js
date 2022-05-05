@@ -361,6 +361,7 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
                             type="text"
                             placeholder="${i18n.__('options_filters_list_search_placeholder.message')}"
                             name="searchFiltersList"
+                            tabindex="0"
                         />
                     </div>
                 </div>

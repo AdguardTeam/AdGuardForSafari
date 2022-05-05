@@ -76,6 +76,10 @@ function initFiltersSearch(category, renderCategoryFilters) {
         return;
     }
 
+    // https://github.com/AdguardTeam/AdGuardForSafari/issues/711
+    // keep focus on search input if all search symbols has been deleted
+    searchInput.focus();
+
     const filtersContainer = document.querySelector(`#antibanner${category.groupId} .opts-list`);
     const filters = filtersContainer.querySelectorAll('li');
 
