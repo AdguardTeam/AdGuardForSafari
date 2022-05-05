@@ -1,3 +1,5 @@
+const editorUtils = require('./utils/editor-utils');
+
 /**
  * Top menu
  *
@@ -58,6 +60,11 @@ const toggleTab = function () {
         if (typeof onHashUpdatedCallback === 'function') {
             onHashUpdatedCallback(tabId);
         }
+        editorUtils.focusEditor('allowlistRules');
+    }
+
+    if (tabId === USERFILTER) {
+        editorUtils.focusEditor('userRules');
     }
 
     if (tabId === ALLOWLIST

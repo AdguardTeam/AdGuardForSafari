@@ -49,6 +49,8 @@ const AllowlistFilter = function (userSettings, contentBlockerInfo) {
         const allowlistedNum = editorUtils.countRules(response.content);
         utils.setAllowlistInfo(allowlistedNum);
         contentBlockerInfo.allowlistedNum = allowlistedNum;
+        // focus editor after changing allowlist mode
+        allowlistEditor.focus();
     }
 
     applyChangesBtn.onclick = (event) => {

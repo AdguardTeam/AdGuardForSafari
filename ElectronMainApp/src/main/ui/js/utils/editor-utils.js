@@ -119,8 +119,18 @@ const countRules = (text) => text
     .filter((line) => !!line && !line.startsWith('!'))
     .length;
 
+/**
+ * Sets focus to the editor by provided editor id
+ * @param editorId
+ */
+const focusEditor = (editorId) => {
+    const editor = document.querySelector(`#${editorId} > textarea`);
+    editor.focus();
+};
+
 module.exports = {
     handleEditorResize,
     Saver,
     countRules,
+    focusEditor,
 };
