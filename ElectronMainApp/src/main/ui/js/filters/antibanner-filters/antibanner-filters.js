@@ -421,6 +421,7 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
         checkboxUtils.toggleCheckbox(document.querySelectorAll('.opt-state input[type=checkbox]'));
         if (category.groupId === CUSTOM_FILTERS_GROUP_ID) {
             bindCustomFiltersControls();
+            search.initFiltersSearch(category, renderCategoryFilters);
         }
     }
 
