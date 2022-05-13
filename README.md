@@ -221,3 +221,15 @@ Output directory `build` contains:
 - `version.txt` -- version info (CI requirement).
 - `updates.json` -- json file with updates info.
 - `release.json` -- json file with updates info.
+
+### Clean install
+
+* Disable all AdGuard for Safari extensions in Safari browser settings and close browser
+* Close AdGuard for Safari
+* Delete the following directories:
+  * ~/Library/Application Support/AdGuardSafariApp
+  * ~/Library/Containers/ - all directories started with com.adguard.safari.AdGuard (if there’s any)
+  * ~/Library/GroupContainers/TC3Q7MAJXF.com.adguard.safari.AdGuard
+  * ~/Library/Preferences/com.adguard.safari.AdGuard.plist
+* Quit all “AdGuard” and “cfprefsd” processes in Activity monitor
+* Reinstall AdGuard for Safari
