@@ -1,31 +1,27 @@
 const cache = require('../../main/app/filters/cache');
-const serviceClient = require('../../main/app/filters/service-client');
+const filtersMetadata = require('../resources/filtersMetadata.json');
 
 jest.mock('../../main/app/app');
 
 describe('Filters, groups and tags cache tests', () => {
-    it('Metadata cache test', (done) => {
-        serviceClient.loadRemoteFiltersMetadata((metadata) => {
-            cache.setData(metadata);
+    it('Metadata cache test', () => {
+        cache.setData(filtersMetadata);
 
-            const filters = cache.getFilters();
-            expect(filters).toHaveLength(metadata.filters.length);
-            expect(filters).toStrictEqual(metadata.filters);
+        const filters = cache.getFilters();
+        expect(filters).toHaveLength(filtersMetadata.filters.length);
+        expect(filters).toStrictEqual(filtersMetadata.filters);
 
-            const groups = cache.getGroups();
-            expect(groups).toHaveLength(metadata.groups.length);
-            expect(groups).toStrictEqual(metadata.groups);
+        const groups = cache.getGroups();
+        expect(groups).toHaveLength(filtersMetadata.groups.length);
+        expect(groups).toStrictEqual(filtersMetadata.groups);
 
-            const tags = cache.getTags();
-            expect(tags).toHaveLength(metadata.tags.length);
-            expect(tags).toStrictEqual(metadata.tags);
+        const tags = cache.getTags();
+        expect(tags).toHaveLength(filtersMetadata.tags.length);
+        expect(tags).toStrictEqual(filtersMetadata.tags);
 
-            const cacheData = cache.getData();
-            expect(cacheData.filters).toStrictEqual(metadata.filters);
-            expect(cacheData.groups).toStrictEqual(metadata.groups);
-            expect(cacheData.tags).toStrictEqual(metadata.tags);
-
-            done();
-        });
+        const cacheData = cache.getData();
+        expect(cacheData.filters).toStrictEqual(filtersMetadata.filters);
+        expect(cacheData.groups).toStrictEqual(filtersMetadata.groups);
+        expect(cacheData.tags).toStrictEqual(filtersMetadata.tags);
     });
 });
