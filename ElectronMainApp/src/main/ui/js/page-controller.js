@@ -308,8 +308,11 @@ PageController.prototype = {
         );
         this.contentBlockers.init();
 
+        const { appVersion, buildNumber } = this.environmentOptions;
+        const version = `${appVersion} (${buildNumber})`;
+
         document.querySelector('#about-version-placeholder')
-            .textContent = i18n.__('options_about_version.message', this.environmentOptions.appVersion);
+            .textContent = i18n.__('options_about_version.message', version);
 
         this.resolveIncorrectBlockingLink();
     },

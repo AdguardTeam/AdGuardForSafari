@@ -305,6 +305,13 @@ module.exports = (() => {
         return addon.getOSVersion();
     };
 
+    /**
+     * Returns app build number
+     */
+    const getBuildNumber = () => {
+        return addon.getBuildNumber();
+    };
+
     return {
         init: init,
         sendReady: sendReady,
@@ -327,5 +334,6 @@ module.exports = (() => {
         sharedResourcesPath: sharedResourcesPath,
         getSafariVersion: getSafariVersion,
         getOSVersion,
+        getBuildNumber,
     };
 })();

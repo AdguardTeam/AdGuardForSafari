@@ -778,6 +778,13 @@ NAN_METHOD(getOSVersion) {
     info.GetReturnValue().Set(Nan::New(version.UTF8String).ToLocalChecked());
 }
 
+NAN_METHOD(getBuildNumber) {
+
+    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+    NSString *buildNumber = infoDict[@"CFBundleVersion"] ?: @"";
+    info.GetReturnValue().Set(Nan::New(buildNumber.UTF8String).ToLocalChecked());
+}
+
 
 NAN_MODULE_INIT(Init) {
 
@@ -864,13 +871,15 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("sharedResourcesPath").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(sharedResourcesPath)).ToLocalChecked());
-    
+
   Nan::Set(target, New<String>("getSafariVersion").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(getSafariVersion)).ToLocalChecked());
 
   Nan::Set(target, New<String>("getOSVersion").ToLocalChecked(),
     GetFunction(New<FunctionTemplate>(getOSVersion)).ToLocalChecked());
 
+  Nan::Set(target, New<String>("getBuildNumber").ToLocalChecked(),
+    GetFunction(New<FunctionTemplate>(getBuildNumber)).ToLocalChecked());
 }
 
 // macro to load the module when require'd

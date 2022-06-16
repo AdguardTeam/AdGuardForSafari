@@ -6,6 +6,7 @@ const {
     nativeTheme,
     nativeImage,
 } = require('electron');
+const safariExt = require('safari-ext');
 
 const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
@@ -318,7 +319,7 @@ app.on('ready', (() => {
         checkIsInApplicationsFolder();
     }
 
-    log.info(`Starting AdGuard v${app.getVersion()}`);
+    log.info(`Starting AdGuard v${app.getVersion()} (${safariExt.getBuildNumber()})`);
     log.info('App ready - creating browser windows');
 
     if (shouldOpenSilent()) {

@@ -1,4 +1,5 @@
 const { app } = require('electron');
+const safariExt = require('safari-ext');
 const localStorage = require('./storage/storage');
 const packageJson = require('../../../package.json');
 
@@ -32,6 +33,13 @@ module.exports = (() => {
      */
     const getVersion = () => {
         return app.getVersion();
+    };
+
+    /**
+     * @returns {*} Application build number
+     */
+    const getBuildNumber = () => {
+        return safariExt.getBuildNumber();
     };
 
     /**
@@ -75,6 +83,7 @@ module.exports = (() => {
 
     return {
         getVersion,
+        getBuildNumber,
         getLocale,
         getId,
         getClientId,

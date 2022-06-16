@@ -246,6 +246,7 @@ function processInitializeFrameScriptRequest() {
                 mobile: false,
             },
             appVersion: app.getVersion(),
+            buildNumber: app.getBuildNumber(),
             updatesPermitted: updater.isUpdatePermitted(),
         },
         constants: {
