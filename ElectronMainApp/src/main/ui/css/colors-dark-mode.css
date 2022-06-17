@@ -1,5 +1,8 @@
 @import "editor-dark-mode.css";
 
+:root {
+	color-scheme: dark;
+}
 body {
 	background-color: #323232;
 }
