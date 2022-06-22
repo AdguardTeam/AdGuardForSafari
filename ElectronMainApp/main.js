@@ -5,6 +5,7 @@ const {
     dialog,
     nativeTheme,
     nativeImage,
+    globalShortcut,
 } = require('electron');
 const safariExt = require('safari-ext');
 
@@ -411,3 +412,11 @@ if (getChannel() === 'MAS') {
         log.error(`Uncaught exception: ${error}`);
     });
 }
+
+// disable refreshing window by hotkey
+app.on('browser-window-focus', () => {
+    globalShortcut.register('CommandOrControl+R', () => {});
+});
+app.on('browser-window-blur', () => {
+    globalShortcut.unregister('CommandOrControl+R');
+});
