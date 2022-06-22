@@ -12,6 +12,7 @@ const concurrent = require('../utils/concurrent');
 const { groupRules, rulesGroupsBundles, filterGroupsBundles } = require('./rule-groups');
 
 const CONVERTER_TOOL_PATH = '../libs/ConverterTool';
+const DEFAULT_OS_VERSION = 11;
 
 /**
  * Safari Content Blocker Adapter
@@ -48,15 +49,8 @@ module.exports = (function () {
                 log.warn('Unable to detect Safari browser version');
             }
 
-            let osVersion = safariExt.getOSVersion();
+            const osVersion = safariExt.getOSVersion() || DEFAULT_OS_VERSION;
             log.info(`OS version: ${osVersion}`);
-
-            if (osVersion && osVersion.startsWith('Version')) {
-                // major version
-                osVersion = parseInt(osVersion.substring(8, 10), 10);
-            } else {
-                log.warn('Unable to detect OS major version');
-            }
 
             // https://github.com/AdguardTeam/AdGuardForSafari/issues/699
             // in case of Big Sur and Safari 15 we convert rules for Safari 14

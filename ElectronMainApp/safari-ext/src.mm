@@ -774,8 +774,9 @@ NAN_METHOD(getSafariVersion) {
 NAN_METHOD(getOSVersion) {
 
     NSProcessInfo *pInfo = [NSProcessInfo processInfo];
-    NSString *version = [pInfo operatingSystemVersionString];
-    info.GetReturnValue().Set(Nan::New(version.UTF8String).ToLocalChecked());
+    NSOperatingSystemVersion version = [pInfo operatingSystemVersion];
+    NSInteger majorVersion = version.majorVersion;
+    info.GetReturnValue().Set(Nan::New((int)majorVersion));
 }
 
 NAN_METHOD(getBuildNumber) {
