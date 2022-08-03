@@ -108,7 +108,7 @@
         "message": "Generelt"
     },
     "options_general_desc": {
-        "message": "AdGuard til Safari er et gratis og open-source software. Alle feedback og bidrag er meget velkomne. Vil du anmelde en fejl eller anmode om en funktion, så gå til <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>vores GitHub-repo</a>."
+        "message": "AdGuard til Safari er et gratis og open-source software. Alle feedback og bidrag er meget velkomne. Vil du anmelde en fejl eller anmode om en funktion, så gå til <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>vores GitHub-repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Tillad søgningsreklamer og selvpromovering af websteder"
@@ -276,7 +276,7 @@
         "message": "%s brugerregler"
     },
     "options_userfilter_description": {
-        "message": "Egne regler kan tilføjes her. Denne mulighed &nbsp;anbefales til avancerede brugere med HTML/CSS kendskab. Læs i <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filterregelvejledningen</a> om, at&nbsp;hvordan&nbsp;du skriver dine egne filterregler."
+        "message": "Egne regler kan tilføjes her. Denne mulighed &nbsp;anbefales til avancerede brugere med HTML/CSS kendskab. Læs i <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filterregelvejledningen</a> om, at&nbsp;hvordan&nbsp;du skriver dine egne filterregler."
     },
     "options_userfilter_import": {
         "message": "Importér"

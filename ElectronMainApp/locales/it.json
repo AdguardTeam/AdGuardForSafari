@@ -108,7 +108,7 @@
         "message": "Impostazioni Generali"
     },
     "options_general_desc": {
-        "message": "AdGuard per Safari è un software gratuito e open source. Incoraggiamo i tuoi commenti e contributi. Se volessi segnalare un errore, potrai farlo sulla <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nostra repository Github</a>."
+        "message": "AdGuard per Safari è un software gratuito e open source. Incoraggiamo i tuoi commenti e contributi. Se volessi segnalare un errore, potrai farlo sulla <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nostra repository Github</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Permetti annunci di ricerca e l'autopromozione dei siti"
@@ -276,7 +276,7 @@
         "message": "%s regole utente"
     },
     "options_userfilter_description": {
-        "message": "Puoi aggiungere le tue regole qui. Questa opzione è&nbsp;consigliata per utenti avanzati esperti di HTML/CSS. Leggi il <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial sulle regole per i filtri</a> per&nbsp;imparare a&nbsp;scrivere le tue regole per i filtri."
+        "message": "Puoi aggiungere le tue regole qui. Questa opzione è&nbsp;consigliata per utenti avanzati esperti di HTML/CSS. Leggi il <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial sulle regole per i filtri</a> per&nbsp;imparare a&nbsp;scrivere le tue regole per i filtri."
     },
     "options_userfilter_import": {
         "message": "Importa"

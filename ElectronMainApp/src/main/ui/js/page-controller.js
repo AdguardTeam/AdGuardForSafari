@@ -355,7 +355,8 @@ PageController.prototype = {
 
     resolveIncorrectBlockingLink() {
         const incorrectBlockingLink = document.querySelector('#incorrect-blocking-link');
-        const REPORT_URL = 'https://reports.adguard.com/en/new_issue.html?product_type=Saf';
+        // eslint-disable-next-line max-len
+        const REPORT_URL = 'https://link.adtidy.org/forward.html?action=report&from=toolbar&app=safari_extension&product_type=Saf';
         const versionArg = `&product_version=${this.environmentOptions.appVersion}`;
         const BROWSER_ARG = '&browser=Safari';
 

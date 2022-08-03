@@ -108,7 +108,7 @@
         "message": "一般的"
     },
     "options_general_desc": {
-        "message": "AdGuard for Safari 是一款免費的且開源的軟體。我們歡迎您的回饋意見和貢獻。如果您想要報告程式錯誤或請求功能，請前往<a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>我們的 GitHub 儲存庫</a>。"
+        "message": "AdGuard for Safari 是一款免費的且開源的軟體。我們歡迎您的回饋意見和貢獻。如果您想要報告程式錯誤或請求功能，請前往<a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>我們的 GitHub 儲存庫</a>。"
     },
     "options_allow_acceptable_ads": {
         "message": "允許搜尋廣告和網站之自我推銷"
@@ -273,7 +273,7 @@
         "message": "%s 使用者規則"
     },
     "options_userfilter_description": {
-        "message": "您可於此新增您自己的規則。對於熟悉 HTML/CSS 之進階的用戶，此選項是被建議的。閱讀<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>過濾器規則導覽</a>以學習如何撰寫您自己的過濾器規則。"
+        "message": "您可於此新增您自己的規則。對於熟悉 HTML/CSS 之進階的用戶，此選項是被建議的。閱讀<a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>過濾器規則導覽</a>以學習如何撰寫您自己的過濾器規則。"
     },
     "options_userfilter_import": {
         "message": "匯入"

@@ -105,13 +105,13 @@ if [ "$CHANNEL" == "beta" ]; then
 fi
 
 printf "{
-  \"url\": \"https://static.adguard.com/safari/$CHANNEL/$buildFileName\",
+  \"url\": \"https://static.adtidy.org/safari/$CHANNEL/$buildFileName\",
   \"name\": \"$version-$build_number\",
   \"notes\": \"Updates\",
   \"pub_date\": \"$(date -u +%FT%TZ)\"
 }" >$BUILD_DIR/release.json
 
-curl "https://static.adguard.com/safari/updates.json" > $BUILD_DIR/updates.json
+curl "https://static.adtidy.org/safari/updates.json" > $BUILD_DIR/updates.json
 
 # python script parameters should be relative to the script location
 python3 -u Scripts/update_version.py --path="../$BUILD_DIR/updates.json" --channel="$CHANNEL" --version="$version"

@@ -108,7 +108,7 @@
         "message": "일반"
     },
     "options_general_desc": {
-        "message": "Safari용 AdGuard는 무료 오픈소스 소프트웨어입니다. 저희는 여러분의 피드백과 기여를 환영합니다. 만약 버그 신고나 새 기능을 요청하고 싶으시다면, <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>저희의 Github 저장소</a>로 향하세요."
+        "message": "Safari용 AdGuard는 무료 오픈소스 소프트웨어입니다. 저희는 여러분의 피드백과 기여를 환영합니다. 만약 버그 신고나 새 기능을 요청하고 싶으시다면, <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>저희의 Github 저장소</a>로 향하세요."
     },
     "options_allow_acceptable_ads": {
         "message": "검색 엔진의 광고와 웹사이트의 자체 광고 허용"
@@ -276,7 +276,7 @@
         "message": "사용자 규칙 %s개"
     },
     "options_userfilter_description": {
-        "message": "자신만의 규칙을&nbsp;추가할 수 있습니다. 이 설정은&nbsp;HTML/CSS에 익숙한 고급 사용자에게 권장합니다. <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>필터 규칙 튜토리얼</a>을 읽어보고&nbsp; 사용자 지정 필터 규칙&nbsp;을 어떻게 사용하는지 알아보세요."
+        "message": "자신만의 규칙을&nbsp;추가할 수 있습니다. 이 설정은&nbsp;HTML/CSS에 익숙한 고급 사용자에게 권장합니다. <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>필터 규칙 튜토리얼</a>을 읽어보고&nbsp; 사용자 지정 필터 규칙&nbsp;을 어떻게 사용하는지 알아보세요."
     },
     "options_userfilter_import": {
         "message": "가져오기"

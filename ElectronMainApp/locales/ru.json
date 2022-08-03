@@ -108,7 +108,7 @@
         "message": "Общие"
     },
     "options_general_desc": {
-        "message": "AdGuard для Safari — это бесплатное программное обеспечение с открытым исходным кодом. Мы приветствуем ваши отзывы и предложения. Если вы хотите сообщить об ошибке или запросить функцию, пожалуйста, отправляйтесь в <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>наш репозиторий на GitHub</a>."
+        "message": "AdGuard для Safari — это бесплатное программное обеспечение с открытым исходным кодом. Мы приветствуем ваши отзывы и предложения. Если вы хотите сообщить об ошибке или запросить функцию, пожалуйста, отправляйтесь в <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>наш репозиторий на GitHub</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Разрешить поисковую рекламу и саморекламу сайтов"
@@ -288,7 +288,7 @@
         "message": "%s пользовательских правил"
     },
     "options_userfilter_description": {
-        "message": "Вы можете добавлять свои собственные правила фильтрации в&nbsp;Пользовательские правила. Рекомендуется только для опытных пользователей, знакомых с&nbsp;HTML/CSS. Перейдите по&nbsp;<a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ссылке</a>, чтобы узнать, как составлять правила фильтрации."
+        "message": "Вы можете добавлять свои собственные правила фильтрации в&nbsp;Пользовательские правила. Рекомендуется только для опытных пользователей, знакомых с&nbsp;HTML/CSS. Перейдите по&nbsp;<a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>ссылке</a>, чтобы узнать, как составлять правила фильтрации."
     },
     "options_userfilter_import": {
         "message": "Импорт"

@@ -108,7 +108,7 @@
         "message": "Všeobecné"
     },
     "options_general_desc": {
-        "message": "AdGuard pre Safari je bezplatný a otvorený softvér. Vítame vašu spätnú väzbu a príspevky. Ak chcete nahlásiť chybu alebo požiadať o novú funkciu, prejdite na <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our GitHub repo</a>."
+        "message": "AdGuard pre Safari je bezplatný a otvorený softvér. Vítame vašu spätnú väzbu a príspevky. Ak chcete nahlásiť chybu alebo požiadať o novú funkciu, prejdite na <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our GitHub repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Povoliť reklamy vo vyhľadávacej sieti a vlastnú propagáciu webových stránok"
@@ -276,7 +276,7 @@
         "message": "%s používateľské pravidlá, %s používateľských pravidiel"
     },
     "options_userfilter_description": {
-        "message": "K tomuto filtru môžete pridať Vaše vlastné pravidlá. Táto voľba je odporúčaná len pre skúsených používateľov so znalosťou HTML/CSS. Pozrite si <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>príručku filtračných pravidiel</a> pre získanie informácií o tom, ako písať vlastné filtračné pravidlá."
+        "message": "K tomuto filtru môžete pridať Vaše vlastné pravidlá. Táto voľba je odporúčaná len pre skúsených používateľov so znalosťou HTML/CSS. Pozrite si <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>príručku filtračných pravidiel</a> pre získanie informácií o tom, ako písať vlastné filtračné pravidlá."
     },
     "options_userfilter_import": {
         "message": "Import"

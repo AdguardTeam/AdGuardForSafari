@@ -108,7 +108,7 @@
         "message": "Splošno"
     },
     "options_general_desc": {
-        "message": "AdGuard za Safari je brezplačen in odprtokodni program. Pozdravljamo vaše povratne informacije in prispevke. Če želite prijaviti napako ali zahtevati funkcijo, se obrnite na <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>našem Github odlagališču</a>."
+        "message": "AdGuard za Safari je brezplačen in odprtokodni program. Pozdravljamo vaše povratne informacije in prispevke. Če želite prijaviti napako ali zahtevati funkcijo, se obrnite na <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>našem Github odlagališču</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Dovoli iskalne oglase in samopromocijo spletnih strani"
@@ -276,7 +276,7 @@
         "message": "%s uporabniških pravil"
     },
     "options_userfilter_description": {
-        "message": "Tukaj lahko dodate svoja lastna pravila. Ta možnost je&nbsp;priporočena za napredne uporabnike, ki dobro poznajo HTML/CSS. Preberite <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>Vodič pravil filtriranja</a> da izveste&nbsp;kako&nbsp;pisati svoja lastna pravila filtriranja."
+        "message": "Tukaj lahko dodate svoja lastna pravila. Ta možnost je&nbsp;priporočena za napredne uporabnike, ki dobro poznajo HTML/CSS. Preberite <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>Vodič pravil filtriranja</a> da izveste&nbsp;kako&nbsp;pisati svoja lastna pravila filtriranja."
     },
     "options_userfilter_import": {
         "message": "Uvozi"
