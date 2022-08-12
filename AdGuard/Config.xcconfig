@@ -24,7 +24,7 @@ AG_ADVANCED_BLOCKING_BUNDLEID = $(AG_BUNDLEID).AdvancedBlocking
 AG_SIGN = Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)
 AG_MAS_SIGN = Apple Distribution: Adguard Software Limited (TC3Q7MAJXF)
 
-AG_MAS_PROVISION = AdGuard for Safari Provision
+AG_MAS_PROVISION = AdGuard for Safari
 
 AG_GROUP = $(AG_TEAM).$(AG_BUNDLEID)
 
