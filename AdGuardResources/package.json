@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "assistant": "git+https://github.com/AdguardTeam/AdguardAssistant#v4.3.43",
-    "@adguard/scriptlets": "^1.6.51",
+    "@adguard/scriptlets": "^1.6.55",
     "extended-css": "git+https://github.com/AdguardTeam/ExtendedCss#v1.3.14"
   }
 }
