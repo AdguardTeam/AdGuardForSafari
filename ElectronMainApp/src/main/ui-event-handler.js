@@ -1,4 +1,4 @@
-const { ipcMain } = require('electron');
+const { ipcMain, app: electronApp } = require('electron');
 const config = require('config');
 const safariToolbar = require('safari-ext');
 const settings = require('./app/settings-manager');
@@ -148,6 +148,10 @@ module.exports.init = function () {
                 settings.setUpdateRelaunch(true);
                 updater.quitAndInstall();
                 break;
+            case 'getAppPath': {
+                event.returnValue = electronApp.getAppPath();
+                break;
+            }
         }
     });
 };

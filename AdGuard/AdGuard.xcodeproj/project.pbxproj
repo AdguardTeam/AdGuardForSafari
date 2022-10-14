@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		65024EA92126C80D00342E3C /* AdGuardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65024EA82126C80D00342E3C /* AdGuardTests.m */; };
-		65024EAF2126C82E00342E3C /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65024EAE2126C82E00342E3C /* SafariServices.framework */; };
 		6504C1102136EA2D007E9674 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6504C10F2136EA2D007E9674 /* PopupView.m */; };
 		651A4FAE232149E4002DAD0A /* AEMainAppServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 651A4FAC232149E4002DAD0A /* AEMainAppServices.h */; };
 		651A4FAF232149E4002DAD0A /* AEMainAppServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 651A4FAD232149E4002DAD0A /* AEMainAppServices.m */; };
@@ -289,13 +287,6 @@
 			remoteGlobalIDString = F4B2151B22EA2A2D00E2EA16;
 			remoteInfo = BlockerCustomExtension;
 		};
-		F4D5901F2201C965002DCC2C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65720AAA21219AC900B2381C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 65720AB121219AC900B2381C;
-			remoteInfo = AdGuard;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -379,9 +370,6 @@
 		5D438EF921AFEDCF00BA0A3C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5D438EFA21AFEDCF00BA0A3C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5D438EFB21AFEDCF00BA0A3C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		65024EA62126C80D00342E3C /* AdGuardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdGuardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		65024EA82126C80D00342E3C /* AdGuardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdGuardTests.m; sourceTree = "<group>"; };
-		65024EAA2126C80D00342E3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65024EAE2126C82E00342E3C /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		6504C10A2136BF10007E9674 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6504C10C2136CD37007E9674 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SafariExtensionViewController.strings; sourceTree = "<group>"; };
@@ -739,14 +727,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		65024EA32126C80C00342E3C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				65024EAF2126C82E00342E3C /* SafariServices.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		652169FD212436E900ABF7D0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -842,15 +822,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		65024EA72126C80D00342E3C /* AdGuardTests */ = {
-			isa = PBXGroup;
-			children = (
-				65024EA82126C80D00342E3C /* AdGuardTests.m */,
-				65024EAA2126C80D00342E3C /* Info.plist */,
-			);
-			path = AdGuardTests;
-			sourceTree = "<group>";
-		};
 		65216A01212436EA00ABF7D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -969,7 +940,6 @@
 				65EF979E23672E15000CC845 /* AdGuard Login Helper */,
 				65216A04212436EA00ABF7D0 /* Extension */,
 				6584716F2136B373005C74E8 /* BlockerExtension */,
-				65024EA72126C80D00342E3C /* AdGuardTests */,
 				F41DA7DB2201C81700C63708 /* AdvancedBlocking */,
 				F4D5901B2201C965002DCC2C /* AdvancedBlockingUnitTests */,
 				F41308E822EA125D006B4D93 /* BlockerPrivacyExtension */,
@@ -987,7 +957,6 @@
 			children = (
 				65720AB221219AC900B2381C /* AdGuard for Safari.app */,
 				65216A00212436E900ABF7D0 /* AdGuardForSafariExtension.appex */,
-				65024EA62126C80D00342E3C /* AdGuardTests.xctest */,
 				652735B2212D77A3005C35BF /* libshared.a */,
 				6584716D2136B372005C74E8 /* AdGuardForSafariBlockerExtension.appex */,
 				F41DA7D92201C81700C63708 /* AdvancedBlocking.appex */,
@@ -1238,23 +1207,6 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
-		65024EA52126C80C00342E3C /* AdGuardTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 65024EAD2126C80D00342E3C /* Build configuration list for PBXNativeTarget "AdGuardTests" */;
-			buildPhases = (
-				65024EA22126C80C00342E3C /* Sources */,
-				65024EA32126C80C00342E3C /* Frameworks */,
-				65024EA42126C80C00342E3C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AdGuardTests;
-			productName = AdGuardTests;
-			productReference = 65024EA62126C80D00342E3C /* AdGuardTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		652169FF212436E900ABF7D0 /* AdGuardForSafariExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65216A17212436EA00ABF7D0 /* Build configuration list for PBXNativeTarget "AdGuardForSafariExtension" */;
@@ -1469,7 +1421,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				F4D590202201C965002DCC2C /* PBXTargetDependency */,
 			);
 			name = AdvancedBlockingUnitTests;
 			productName = AdvancedBlockingUnitTests;
@@ -1486,10 +1437,6 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Adguard Software Ltd";
 				TargetAttributes = {
-					65024EA52126C80C00342E3C = {
-						CreatedOnToolsVersion = 9.4;
-						LastSwiftMigration = 1000;
-					};
 					652169F321231A2300ABF7D0 = {
 						CreatedOnToolsVersion = 9.4;
 					};
@@ -1644,7 +1591,6 @@
 				652169F321231A2300ABF7D0 /* BuildElectronApp */,
 				652169FF212436E900ABF7D0 /* AdGuardForSafariExtension */,
 				6584716C2136B372005C74E8 /* AdGuardForSafariBlockerExtension */,
-				65024EA52126C80C00342E3C /* AdGuardTests */,
 				652735B1212D77A3005C35BF /* shared */,
 				F41DA7D82201C81700C63708 /* AdvancedBlocking */,
 				F4D590192201C965002DCC2C /* AdvancedBlockingUnitTests */,
@@ -1659,13 +1605,6 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		65024EA42126C80C00342E3C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		652169FA21231D0400ABF7D0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1820,14 +1759,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		65024EA22126C80C00342E3C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				65024EA92126C80D00342E3C /* AdGuardTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		652169FC212436E900ABF7D0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2085,11 +2016,6 @@
 			isa = PBXTargetDependency;
 			target = F4B2151B22EA2A2D00E2EA16 /* BlockerCustomExtension */;
 			targetProxy = F4B2152622EA2A2D00E2EA16 /* PBXContainerItemProxy */;
-		};
-		F4D590202201C965002DCC2C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 65720AB121219AC900B2381C /* AdGuard */;
-			targetProxy = F4D5901F2201C965002DCC2C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2419,53 +2345,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		65024EAB2126C80D00342E3C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = TC3Q7MAJXF;
-				INFOPLIST_FILE = AdGuardTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuardTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Advanced Blocking/AdGuardTests-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		65024EAC2126C80D00342E3C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = TC3Q7MAJXF;
-				INFOPLIST_FILE = AdGuardTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuardTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Advanced Blocking/AdGuardTests-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Release;
-		};
 		652169F521231A2300ABF7D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3238,29 +3117,6 @@
 			};
 			name = "Standalone Beta";
 		};
-		F46D131D225E93A400282566 /* Standalone Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = TC3Q7MAJXF;
-				INFOPLIST_FILE = AdGuardTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuardTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Advanced Blocking/AdGuardTests-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
-			};
-			name = "Standalone Beta";
-		};
 		F46D131E225E93A400282566 /* Standalone Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3298,9 +3154,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = TC3Q7MAJXF;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = TC3Q7MAJXF;
 				INFOPLIST_FILE = AdvancedBlockingUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3308,8 +3166,9 @@
 					"@loader_path/../Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = mizzick.AdvancedBlockingUnitTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdvancedBlockingUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
@@ -3447,29 +3306,6 @@
 			};
 			name = "Standalone Prod";
 		};
-		F46D1328225E944700282566 /* Standalone Prod */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = TC3Q7MAJXF;
-				INFOPLIST_FILE = AdGuardTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdGuardTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Advanced Blocking/AdGuardTests-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
-			};
-			name = "Standalone Prod";
-		};
 		F46D1329225E944700282566 /* Standalone Prod */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3507,9 +3343,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = TC3Q7MAJXF;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = TC3Q7MAJXF;
 				INFOPLIST_FILE = AdvancedBlockingUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3517,8 +3355,9 @@
 					"@loader_path/../Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = mizzick.AdvancedBlockingUnitTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdvancedBlockingUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
@@ -3684,9 +3523,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = TC3Q7MAJXF;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = TC3Q7MAJXF;
 				INFOPLIST_FILE = AdvancedBlockingUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3695,8 +3536,9 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = mizzick.AdvancedBlockingUnitTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdvancedBlockingUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -3708,9 +3550,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = TC3Q7MAJXF;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = TC3Q7MAJXF;
 				INFOPLIST_FILE = AdvancedBlockingUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3718,8 +3562,9 @@
 					"@loader_path/../Frameworks",
 				);
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = mizzick.AdvancedBlockingUnitTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.safari.AdvancedBlockingUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
@@ -3729,17 +3574,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		65024EAD2126C80D00342E3C /* Build configuration list for PBXNativeTarget "AdGuardTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				65024EAB2126C80D00342E3C /* Debug */,
-				65024EAC2126C80D00342E3C /* Release */,
-				F46D131D225E93A400282566 /* Standalone Beta */,
-				F46D1328225E944700282566 /* Standalone Prod */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		652169F421231A2300ABF7D0 /* Build configuration list for PBXLegacyTarget "BuildElectronApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

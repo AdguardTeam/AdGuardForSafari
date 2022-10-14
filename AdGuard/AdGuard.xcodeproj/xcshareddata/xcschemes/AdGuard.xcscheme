@@ -47,6 +47,16 @@
                ReferencedContainer = "container:AdGuard.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "65024EA52126C80C00342E3C"
+               BuildableName = "AdGuardTests.xctest"
+               BlueprintName = "AdGuardTests"
+               ReferencedContainer = "container:AdGuard.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

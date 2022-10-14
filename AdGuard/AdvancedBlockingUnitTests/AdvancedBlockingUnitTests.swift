@@ -323,7 +323,7 @@ class AdvancedBlockingTests: XCTestCase {
         data = try! contentBlockerContainer.getData(url: URL(string:"http://example-more.com")!) as! BlockerData;
 
         XCTAssert(data.scripts[0] == "alert(1);");
-        XCTAssert(data.css.count == 0);
+        XCTAssert(data.cssInject.count == 0);
         XCTAssert(data.scriptlets.count == 0);
     }
     

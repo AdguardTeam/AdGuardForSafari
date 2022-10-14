@@ -29,5 +29,6 @@ const OUTPUT_APP_PATH = path.resolve(targetDir, APP_NAME);
         x64AppPath: X64_APP_PATH,
         arm64AppPath: ARM64_APP_PATH,
         outAppPath: OUTPUT_APP_PATH,
+        force: true,
     });
 })();

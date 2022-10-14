@@ -1,10 +1,7 @@
 /* global i18n */
-
-const fs = require('fs');
 const path = require('path');
-const { ipcRenderer, remote } = require('electron');
-
-const { dialog } = remote;
+const { ipcRenderer } = require('electron');
+const { InvokeType } = require('../../../../common/invoke-type');
 
 /**
  * Debounces function with specified timeout
@@ -151,12 +148,8 @@ const exportFile = async (fileName, fileType, data) => {
     const timeStamp = `${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}_${d.getHours()}`
         + `${d.getMinutes()}${d.getSeconds()}`;
     const exportFileName = `${fileName}-${timeStamp}.${fileType}`;
-    const exportDialog = await dialog.showSaveDialog({
-        defaultPath: exportFileName,
-    });
-    if (!exportDialog.canceled) {
-        fs.writeFileSync(exportDialog.filePath.toString(), data);
-    }
+
+    await ipcRenderer.invoke(InvokeType.ExportFile, { path: exportFileName, data });
 };
 
 module.exports = {

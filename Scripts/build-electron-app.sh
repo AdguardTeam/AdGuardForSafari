@@ -27,11 +27,12 @@ if [[ $SEARCH_RESULT == 0 ]] || ! [ -f "$TIME_MARKER" ]; then
     cp -v "${BUILT_PRODUCTS_DIR}/libshared.a" "${SRC}/safari-ext/shared/" || exit 1
     rsync -avm --include='*.h' -f 'hide,! */' "${SHAREDSRC}/" "${SRC}/safari-ext/shared/"
 
-    echo "Build electron app for arm64"
-    bash ../Scripts/build-electron-app-one-arch.sh arm64 "$TARGET_TEMP_DIR/arm64" || exit 1
-
+    # TODO figure out how not to depend on the order of builds
     echo "Build electron app for x86_64"
     bash ../Scripts/build-electron-app-one-arch.sh x86_64 "$TARGET_TEMP_DIR/x86_64" || exit 1
+
+    echo "Build electron app for arm64"
+    bash ../Scripts/build-electron-app-one-arch.sh arm64 "$TARGET_TEMP_DIR/arm64" || exit 1
 
     echo "Create universal build"
     cd ../ElectronMainApp

@@ -15,8 +15,6 @@ const log = require('./src/main/app/utils/log');
 /* Reconfigure path to config */
 process.env['NODE_CONFIG_DIR'] = appPack.resourcePath('/config/');
 
-/* global require, process */
-
 const uiEventListener = require('./src/main/ui-event-handler');
 const startup = require('./src/main/startup');
 
@@ -25,6 +23,7 @@ const toolbarController = require('./src/main/toolbar-controller');
 const mainMenuController = require('./src/main/main-menu.controller');
 const settings = require('./src/main/app/settings-manager');
 const { getChannel, getConfiguration } = require('./src/main/app/app');
+const { Invokes } = require('./src/main/invokes');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -67,7 +66,7 @@ function createWindow() {
         backgroundColor: cssMode,
         webPreferences: {
             nodeIntegration: true,
-            enableRemoteModule: true,
+            contextIsolation: false, // default value from 12 version is true, but we need to use require in the files
         },
     });
 
@@ -362,6 +361,9 @@ app.on('ready', (() => {
     mainMenuController.initMenu(showWindow);
     tray = trayController.initTray(showWindow);
     toolbarController.initToolbarController(showWindow);
+
+    // init invokes handlers
+    Invokes.init();
 
     log.info('App on ready completed');
 }));
