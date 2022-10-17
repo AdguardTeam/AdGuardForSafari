@@ -25,5 +25,5 @@ module.exports.LOCALES = [
     'ko',
     'uk',
     'sl',
-    'id'
+    'id',
 ];

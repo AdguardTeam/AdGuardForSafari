@@ -32,6 +32,11 @@ Localization process consists of multiple phases. Please read what's done on eac
 
 Also, you will need to keep the list of languages up-to-date in the `.twosky.json` file in the repository root.
 
+### To launch localization script you might be required to install additional python packages. To do so, run the following command:
+```bash
+python3 -m pip install requests
+```
+
 ### <a id="git-diff"></a> How to make git diff work with .strings files
 
 Add this to your `~/.gitconfig` file:
