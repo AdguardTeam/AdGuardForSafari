@@ -132,28 +132,41 @@ function initFiltersSearch(category, renderCategoryFilters) {
 }
 
 /**
- * Function clears search results when user moves from category antibanner page to another page
+ * Function clears search results when user switches tabs, or moves from category to category
  *
- * @param {*} on hashchange event
+ * @param event hashchange event
  */
 function clearSearchEvent(event) {
+    const clearGroupSearch = (groupId) => {
+        const searchInput = document.querySelector(`#antibanner${groupId} input[name="searchFiltersList"]`);
+        const filters = document.querySelectorAll(`#antibanner${groupId} .opts-list li`);
+        if (searchInput) {
+            searchInput.value = '';
+        }
+
+        if (filters && filters.length > 0) {
+            filters.forEach((filter) => {
+                filter.style.display = 'flex';
+            });
+        }
+    };
+
+    const clearGlobalSearch = () => {
+        const searchInput = document.querySelector('input[name="searchGroupsList"]');
+        const antibannerList = document.querySelector('#antibanner .opts-list');
+        const filters = antibannerList.querySelectorAll('li[id^="filter"]');
+        const groups = antibannerList.querySelectorAll('li[id^="category"]');
+
+        searchInput.value = '';
+        searchFilters('', filters, groups);
+    };
+
     const regex = /#antibanner(\d+)/g;
     const match = regex.exec(event.oldURL);
-    if (!match) {
-        return;
-    }
-
-    const groupId = match[1];
-    const searchInput = document.querySelector(`#antibanner${groupId} input[name="searchFiltersList"]`);
-    const filters = document.querySelectorAll(`#antibanner${groupId} .opts-list li`);
-    if (searchInput) {
-        searchInput.value = '';
-    }
-
-    if (filters && filters.length > 0) {
-        filters.forEach((filter) => {
-            filter.style.display = 'flex';
-        });
+    if (match) {
+        clearGroupSearch(match[1]);
+    } else {
+        clearGlobalSearch();
     }
 }
 
