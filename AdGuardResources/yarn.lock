@@ -2,10 +2,15 @@
 # yarn lockfile v1
 
 
-"@adguard/extended-css@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@adguard/extended-css/-/extended-css-2.0.4.tgz#18017f69b2c1e4fd28849cbc041b81b892a06d72"
-  integrity sha512-WIyhFjb078dEzjKPXCXGHzO0A99fGHdml7MvI/fhSuOPopQ8KNWNdOUetdYZY7CHyWvcIk3BEwJwg9CdlQYvnw==
+"@adguard/assistant@^4.3.65":
+  version "4.3.65"
+  resolved "https://registry.yarnpkg.com/@adguard/assistant/-/assistant-4.3.65.tgz#be128b8ad4b7013e0a018013444ff60e433c6fe2"
+  integrity sha512-/e0AO0G94kyle2gkN33u09TbzIrMyTbTgWgj0mFNIr6XhLXsuDEbjfQPBKlkUmj+lu04+QFiEAh9J3xZzyYyMA==
+
+"@adguard/extended-css@^2.0.5":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@adguard/extended-css/-/extended-css-2.0.7.tgz#ee89374207c2ba72b5bf05eac0389f35204ca696"
+  integrity sha512-9LPmpqif52sc2F/vreWwYXToQtF4WY8tgBHQ2ymu+TkOcTmxpM3tQT0cb4HzyrlBGV8ue+rU0uFQY/DUXp8Wfw==
 
 "@adguard/scriptlets@^1.6.55":
   version "1.6.55"
@@ -28,10 +33,6 @@ argparse@^1.0.7:
   integrity sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==
   dependencies:
     sprintf-js "~1.0.2"
-
-"assistant@git+https://github.com/AdguardTeam/AdguardAssistant#v4.3.43":
-  version "4.3.43"
-  resolved "git+https://github.com/AdguardTeam/AdguardAssistant#2e706484354e7e483b116fdbaed3a3ab8486b0c5"
 
 esprima@^4.0.0:
   version "4.0.1"

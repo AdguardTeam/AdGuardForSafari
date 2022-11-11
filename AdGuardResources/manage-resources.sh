@@ -9,4 +9,4 @@ cp node_modules/@adguard/scriptlets/dist/scriptlets.js ../AdGuard/AdvancedBlocki
 cp node_modules/@adguard/extended-css/dist/extended-css.js ../AdGuard/AdvancedBlocking
 
 # copy assistant.embedded.js
-cp node_modules/assistant/dist/assistant.embedded.js ../AdGuard/Extension
+cp node_modules/@adguard/assistant/dist/assistant.js ../AdGuard/Extension/assistant.embedded.js
