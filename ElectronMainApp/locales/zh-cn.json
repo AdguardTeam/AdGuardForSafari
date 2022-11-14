@@ -161,6 +161,9 @@
     "options_filters_no_enabled": {
         "message": "未开启任何过滤器"
     },
+    "options_filters_no_filters": {
+        "message": "无过滤器"
+    },
     "options_filters_version": {
         "message": "版本 %s"
     },
@@ -265,6 +268,9 @@
     },
     "options_userfilter": {
         "message": "用户规则"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "无用户规则"
     },
     "options_userfilter_info_single": {
         "message": "%s 条用户规则"

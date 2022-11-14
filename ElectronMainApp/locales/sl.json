@@ -108,7 +108,7 @@
         "message": "Splošno"
     },
     "options_general_desc": {
-        "message": "AdGuard za Safari je brezplačen in odprtokodni program. Pozdravljamo vaše povratne informacije in prispevke. Če želite prijaviti napako ali zahtevati funkcijo, se obrnite na <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>našem Github odlagališču</a>."
+        "message": "AdGuard za Safari je brezplačen in odprtokodni program. Veseli bomo vaših povratnih informacij in prispevkov. Če želite prijaviti napako ali zahtevati funkcijo, pojdite na <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>naš GitHub repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Dovoli iskalne oglase in samopromocijo spletnih strani"
@@ -160,6 +160,9 @@
     },
     "options_filters_no_enabled": {
         "message": "Ni omogočenih filtrov"
+    },
+    "options_filters_no_filters": {
+        "message": "Brez filtrov"
     },
     "options_filters_version": {
         "message": "različica %s"
@@ -267,7 +270,7 @@
         "message": "Uporabniška pravila"
     },
     "options_userfilter_no_user_rules": {
-        "message": "Seznam je prazen"
+        "message": "Ni uporabniških pravil"
     },
     "options_userfilter_info_single": {
         "message": "%s uporabniškopravilo"
@@ -276,7 +279,7 @@
         "message": "%s uporabniških pravil"
     },
     "options_userfilter_description": {
-        "message": "Tukaj lahko dodate svoja lastna pravila. Ta možnost je&nbsp;priporočena za napredne uporabnike, ki dobro poznajo HTML/CSS. Preberite <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>Vodič pravil filtriranja</a> da izveste&nbsp;kako&nbsp;pisati svoja lastna pravila filtriranja."
+        "message": "Tukaj lahko dodate svoja pravila. Ta možnost je&nbsp;priporočljiva za napredne uporabnike, ki poznajo HTML/CSS. Preberite <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>vadnico o pravilih filtra</a> do&nbsp;, naučite se, kako&nbsp;napisati lastna pravila filtra."
     },
     "options_userfilter_import": {
         "message": "Uvozi"

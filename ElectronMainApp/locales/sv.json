@@ -128,6 +128,9 @@
     "options_filters_no_enabled": {
         "message": "Inga filter tillagda"
     },
+    "options_filters_no_filters": {
+        "message": "Inga filter"
+    },
     "options_filters_version": {
         "message": "version %s"
     },
@@ -207,7 +210,7 @@
         "message": "Användarregler"
     },
     "options_userfilter_no_user_rules": {
-        "message": "listan är tom"
+        "message": "Inga användarregler"
     },
     "options_userfilter_description": {
         "message": "Du kan lägga till egna filterregler till&nbsp;det här filtret. Alternativet &nbsp;rekommenderas för användare som är bekanta med HTML/CSS. Läs <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filterregelsgudien</a> för att &nbsp;lära dig hur du&nbsp;skapar egna filterregler."

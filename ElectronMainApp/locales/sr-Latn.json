@@ -50,6 +50,9 @@
     "options_support_discuss_title": {
         "message": "Diskutujte"
     },
+    "options_support_discuss_description": {
+        "message": "Raspravljajte na našem forumu, na društvenim mrežama ili na GitHub"
+    },
     "options_about_update_check": {
         "message": "Proveravam ažuriranja"
     },
@@ -61,6 +64,9 @@
     },
     "options_about_updates_not_found": {
         "message": "AdGuard za Safari je ažuriran"
+    },
+    "options_about_updates_error": {
+        "message": "Greška ažuriranja"
     },
     "options_about_update_downloaded": {
         "message": "Skoro smo gotovi! Ponovo pokrenite AdGuard za Safari da dovršite ažuriranje."
@@ -155,6 +161,9 @@
     "options_filters_no_enabled": {
         "message": "Nema uključenih filtera"
     },
+    "options_filters_no_filters": {
+        "message": "Nema filtera"
+    },
     "options_filters_version": {
         "message": "verzija %s"
     },
@@ -245,6 +254,12 @@
     "options_allowlist_description": {
         "message": "AdGuard ne ffiltrira sajtove sa bele liste."
     },
+    "options_allowlist_inverted": {
+        "message": " Obrnuto"
+    },
+    "options_allowlist_info_multi": {
+        "message": "Domeni: %s"
+    },
     "options_allowlist_no_domains": {
         "message": "Bela lista je prazna"
     },
@@ -253,6 +268,12 @@
     },
     "options_userfilter": {
         "message": "Korisnička pravila"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Nema korisničkih pravila"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s korisničko pravilo"
     },
     "options_userfilter_info_multi": {
         "message": "%s korisnička pravila"
@@ -419,17 +440,35 @@
     "onboarding_safari_desc": {
         "message": "Označite kućice pored AdGuard proširenja u Safarijevim postavkama"
     },
+    "onboarding_safari_link": {
+        "message": "Šta ova proširenja rade?"
+    },
     "onboarding_tooltip_adguard_safari_icon": {
         "message": "AdGuard Safari ikonica"
     },
     "onboarding_tooltip_adguard_safari_icon_info": {
         "message": "Ovu ikonicu možete koristiti za upravljanje AdGuard-om za Safari. Na primer, pauziranje blokiranja na sajtu, ili da ručno blokirate reklamu."
     },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Potreban je pristup sadržaju Web stranice da bi alatka za ručno blokiranje radila."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Pristup istoriji pregledanja je neophodan da bi se otkrilo da li AdGuard radi na Veb lokaciji koju trenutno posećujete."
+    },
     "onboarding_tooltip_adguard_advanced_blocking": {
         "message": "AdGuard napredno blokiranje"
     },
     "onboarding_tooltip_adguard_advanced_blocking_info": {
         "message": "Ovo proširenje primenjuje napredna pravila blokiranja koja nisu podržana od Safarijevog API za blokiranje sadržaja."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Pristup sadržaju Web stranice je neophodan da bi napredna kozmetička pravila radila."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Pristup istoriji pregledanja je neophodan da bi se otkrila Veb lokacija koju pokušavate da otvorite da bi mogao da pronađe koja napredna pravila blokiranja bi trebalo primeniti."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 proširenja blokiranja sadržaja"
     },
     "onboarding_safari_btn": {
         "message": "Otvori postavke"
@@ -511,6 +550,9 @@
     },
     "settings_notification_cb_extensions_text": {
         "message": "Za pravilno blokiranje reklama u Safariju, trebalo bi da uključite sva AdGuard proširenja za blokiranje sadržaja"
+    },
+    "settings_notification_update_interval": {
+        "message": "Imajte na umu da zastareli filteri smanjuju kvalitet zaštite, tako da je važno da budu ažurirani."
     },
     "options_cb_general_title": {
         "message": "AdGuard opšte"

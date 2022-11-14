@@ -1,0 +1,626 @@
+{
+    "main_menu_about": {
+        "message": "درباره AdGuard for Safari"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "قابل اعتماد"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "فیلترهای مورد اعتماد میتوانند از ویرایشگرهای دستور قدرتمند استفاده کنند که استفاده نادرست از آن میتواند خطرناک باشد. این کادر را انتخاب نکنید مگر اینکه کاملا به آن اعتماد دارید."
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "قابل اعتماد"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "شما اعتماد به این فیلتر را انتخاب کردید"
+    },
+    "options_support": {
+        "message": "پشتيباني"
+    },
+    "options_support_faq_title": {
+        "message": "پرسش و پاسخ"
+    },
+    "options_support_faq_description": {
+        "message": "سوالات متداول"
+    },
+    "options_support_bug_report_title": {
+        "message": "گزارش مشکل"
+    },
+    "options_support_bug_report_description": {
+        "message": "اگر موردی در برنامه به درستی کار نمیکند"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "گزارش مسدودسازی اشتباه"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "اگر شما یک آگهی از دست رفته و یا \"شکسته\" وب سایت را ببینید"
+    },
+    "options_support_feedback_title": {
+        "message": "بازخورد بگذارید"
+    },
+    "options_support_feedback_description": {
+        "message": "ارائه پیشنهادات و درخواست برای امکانات برنامه"
+    },
+    "options_support_rate_title": {
+        "message": "امتیاز به برنامه"
+    },
+    "options_support_rate_description": {
+        "message": "نظرتان را راجع به AdGuard به ما بگویید"
+    },
+    "options_support_discuss_title": {
+        "message": "انجمن برنامه"
+    },
+    "options_support_discuss_description": {
+        "message": "در انجمن ما، در شبکه های اجتماعی یا در گیت هاب بحث کنید"
+    },
+    "options_about_update_check": {
+        "message": "بررسی برای بروز رسانی"
+    },
+    "options_about_title": {
+        "message": "AdGuard for Safari"
+    },
+    "options_about_updating": {
+        "message": "بروز رسانی AdGuard for Safari"
+    },
+    "options_about_updates_not_found": {
+        "message": "AdGuard for Safari بروز است"
+    },
+    "options_about_updates_error": {
+        "message": "خطای به روز رسانی"
+    },
+    "options_about_update_downloaded": {
+        "message": "تقریبا بروز است. AdGuard for Safari را مجددا برای پایان بروز رسانی اجرا کنید."
+    },
+    "options_about_update_relaunch": {
+        "message": "اِجرای مجدد"
+    },
+    "options_about_read_more": {
+        "message": "درباره این محصول بیشتر بخوانید"
+    },
+    "options_popup_title_placeholder": {
+        "message": "نام فیلتر را وارد کنید"
+    },
+    "main_menu_hide": {
+        "message": "پنهان کن"
+    },
+    "main_menu_close_window": {
+        "message": "بستن پنجره"
+    },
+    "tray_menu_export_logs": {
+        "message": "خروجی وقایع و اطلاعات سیستم..."
+    },
+    "name": {
+        "message": "مسدودساز تبلیغ AdGuard"
+    },
+    "description": {
+        "message": "افزونه مسدودساز تبلیغ بی نظیر در برابر تبلیغات و پاپ آپ ها. مسدودسازی تبلیغات در فیسبوک،یوتوب و سایر وبسایت ها."
+    },
+    "options_settings": {
+        "message": "AdGuard for Safari - تنظیمات"
+    },
+    "options_settings_import_wrong_file_extension": {
+        "message": "پسوند فایل باید json. باشد"
+    },
+    "options_settings_import_error": {
+        "message": "خطا در وارد کردن تنظیمات"
+    },
+    "options_general_settings": {
+        "message": "عمومي"
+    },
+    "options_general_desc": {
+        "message": "AdGuard for Safari یک نرم افزار متن باز است. ما از مشارکت و دیدگاه شما استقبال می کنیم. اگر میخواهید یک مشکل یا درخواست را مطرح کنید، لطفا سری به صفحه <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>گیت هاب ما بزنید</a>."
+    },
+    "options_allow_acceptable_ads": {
+        "message": "اجازه تبلیغات درون سایتی و تبلیغات جستجو"
+    },
+    "options_export_settings": {
+        "message": "خروجیگیری تنظیمات"
+    },
+    "options_import_settings": {
+        "message": "واردکردن تنظیمات"
+    },
+    "options_export_logs": {
+        "message": "خروجیگیری وقایع"
+    },
+    "options_antibanner": {
+        "message": "فیلترها"
+    },
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s فیلتر",
+            "other": "%s فیلتر"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s دستور",
+            "other": "%s دستور"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s دستور پیشرفته",
+            "other": "%s دستور پیشرفته"
+        }
+    },
+    "options_filters_check_for_updates": {
+        "message": "بررسي براي بروز رساني"
+    },
+    "options_filters_enabled": {
+        "message": "فعال شده:"
+    },
+    "options_filters_homepage": {
+        "message": "صفحه خانگی"
+    },
+    "options_filters_enabled_and_more_divider": {
+        "message": "%s و %s بیشتر"
+    },
+    "options_filters_enabled_and_divider": {
+        "message": "%s و %s"
+    },
+    "options_filters_no_enabled": {
+        "message": "فیلتری فعال نشده است"
+    },
+    "options_filters_no_filters": {
+        "message": "بدون فیلتر"
+    },
+    "options_filters_version": {
+        "message": "نسخه %s"
+    },
+    "options_filters_updated": {
+        "message": "بروز رسانی شده: %s"
+    },
+    "options_filters_empty_custom_filters": {
+        "message": "متاسفیم، اما شما هنوز فیلتر دستی ندارید"
+    },
+    "options_filters_empty_custom_add_button": {
+        "message": "افزودن فیلتر دستی"
+    },
+    "options_filters_custom_import_file": {
+        "message": "فایل وارد کنید"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "خطای واردات"
+    },
+    "options_filters_custom_step_one_title": {
+        "message": "اشتراک فیلتر جدید"
+    },
+    "options_filters_custom_step_one_input_placeholder": {
+        "message": "آدرس فیلتر را وارد کنید"
+    },
+    "options_filters_custom_step_one_url_desc": {
+        "message": "آدرس معتبر برای اشتراک فیلتر وارد کنید."
+    },
+    "options_filters_custom_step_one_url_desc_more": {
+        "message": "AdGuard این اشتراک فیلتر را اضافه می کند."
+    },
+    "options_filters_custom_step_one_cancel": {
+        "message": "لغو"
+    },
+    "options_filters_custom_step_one_next": {
+        "message": "بعدی"
+    },
+    "options_filters_custom_step_two_checking": {
+        "message": "در حال دانلود فیلتر"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "اشتراک در فیلتر"
+    },
+    "options_filters_custom_step_three_title": {
+        "message": "خطا رخ داده"
+    },
+    "options_filters_custom_step_three_desc": {
+        "message": "متاسفانه،فیلتر دستی شما به علت خطای غیر منتظره نمیتواند اضافه شود."
+    },
+    "options_filters_custom_step_three_try_again": {
+        "message": "امتحان دوباره"
+    },
+    "options_filters_custom_step_final_title": {
+        "message": "اشتراک فیلتر جدید"
+    },
+    "options_filters_custom_step_final_filter_title": {
+        "message": "عنوان:"
+    },
+    "options_filters_custom_step_final_filter_description": {
+        "message": "توضيحات:"
+    },
+    "options_filters_custom_step_final_filter_version": {
+        "message": "نسخه:"
+    },
+    "options_filters_custom_step_final_filter_rules_count": {
+        "message": "تعداد دستور:"
+    },
+    "options_filters_custom_step_final_filter_homepage": {
+        "message": "صفحه خانگی:"
+    },
+    "options_filters_custom_step_final_filter_url": {
+        "message": "آدرس:"
+    },
+    "options_filters_custom_step_final_back": {
+        "message": "قبلی"
+    },
+    "options_filters_custom_step_final_cancel": {
+        "message": "لغو"
+    },
+    "options_filters_custom_step_final_commit": {
+        "message": "عضویت"
+    },
+    "options_filters_check_filters_update": {
+        "message": "بررسی برای بروز رسانی فیلترها"
+    },
+    "options_allowlist": {
+        "message": "لیست سفید"
+    },
+    "options_allowlist_description": {
+        "message": "AdGuard وبسایت های لیست سفید را فیلتر نمی کند."
+    },
+    "options_allowlist_inverted": {
+        "message": " (معکوس)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "دامنه: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "لیست سفید خالی است"
+    },
+    "options_allowlist_inverse": {
+        "message": "معکوس لیست سفیدt<span class='sp-table-row-info'>باز کردن ابلیغات در همه جا <i>بجز</i> لیست سفید</span>"
+    },
+    "options_userfilter": {
+        "message": "دستورات کاربر"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "بدون قوانین کاربری"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s قانون کاربر"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s فیلتر کاربر"
+    },
+    "options_userfilter_description": {
+        "message": "میتوانید دستورات خود را به&nbsp; فیلتر اضافه کنید. این گزینه&nbsp; برای کاربران حرفه ای که با اِچ تی اِم اِل/سی اِس اِس آشنایی دارند توصیه میشود. آموزش <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>دستورات فیلتر </a> را برای یادگیری&nbsp; بیشتر&nbsp; دریاره چگونگی نوشتن دستور خودتان ببینید."
+    },
+    "options_userfilter_import": {
+        "message": "وارد کردن"
+    },
+    "options_userfilter_export": {
+        "message": "خروجيگيري"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "خطا در وارد کردن قوانین"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "پسوند فایل باید txt. باشد"
+    },
+    "options_show_app_updated_notification": {
+        "message": "درباره بروز رسانی افزونه اطلاع رسانی کن"
+    },
+    "options_popup_update_title": {
+        "message": "فیلتر با موفقیت بروز رسانی شد"
+    },
+    "options_popup_update_error_title": {
+        "message": "خطای بروز رسانی فیلترها"
+    },
+    "options_popup_update_version_error": {
+        "message": "نسخه فیلتری که می‌خواهید به‌روزرسانی کنید مشابه یا قدیمی‌تر است"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "تمام فیلترها به روز هستند"
+    },
+    "options_popup_update_not_found": {
+        "message": "بروز رسانی یافت نشد"
+    },
+    "options_popup_update_error": {
+        "message": "موفق به دریافت بروز رسانی نشد. لطفا بعدا امتحان کنید."
+    },
+    "options_popup_update_updated": {
+        "message": "\"$1\" بروز رسانی شد به نسخه $2"
+    },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s فیلتر بروز رسانی شده: $2",
+            "other": "%s فیلتر بروز رسانی شده: $2"
+        }
+    },
+    "options_popup_version_update_title": {
+        "message": "AdGuard برای سافاری بروز رسانی شده به نسخه $1."
+    },
+    "options_popup_version_update_description_minor": {
+        "message": "این نسخه بیشتر حاوی حل مشکلات و بهبودی های کوچک می باشد."
+    },
+    "options_popup_version_update_description_major": {
+        "message": "این ارتقاء کامل افزونه ویژگی های جدید و بهبودی را اضافه می کند."
+    },
+    "notification_content_blocker_overlimit_title": {
+        "message": "هشدار"
+    },
+    "notification_content_blocker_overlimit_desc": {
+        "message": "فیلترهای زیادی فعال شده است. سافاری بیش از 50000 دستور نمیتواند استفاده کند."
+    },
+    "options_content_blocker_overlimit": {
+        "message": "فیلترهای زیادی فعال شده است. سافاری بیش از 50000 دستور نمیتواند استفاده کند."
+    },
+    "options_filters_list_search_placeholder": {
+        "message": "جستجو"
+    },
+    "options_editor_indicator_editing": {
+        "message": "ویرایش..."
+    },
+    "options_editor_indicator_saving": {
+        "message": "ذخیره سازی..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "ذخیره شده"
+    },
+    "options_editor_save_button": {
+        "message": "ذخیره"
+    },
+    "main_menu_edit": {
+        "message": "ويرايش"
+    },
+    "main_menu_undo": {
+        "message": "آندو"
+    },
+    "main_menu_cut": {
+        "message": "کات"
+    },
+    "main_menu_copy": {
+        "message": "کپی"
+    },
+    "main_menu_paste": {
+        "message": "چسباندن"
+    },
+    "main_menu_select-all": {
+        "message": "انتخاب همه"
+    },
+    "tray_menu_about": {
+        "message": "درباره"
+    },
+    "tray_menu_preferences": {
+        "message": "اولویت ها"
+    },
+    "tray_menu_check_updates": {
+        "message": "بررسی برای بروز رسانی فیلترها"
+    },
+    "tray_menu_launch_at_startup": {
+        "message": "اِجرای خودکار AdGuard هنگام ورود"
+    },
+    "tray_menu_quit": {
+        "message": "خروج"
+    },
+    "tray_menu_protection_start": {
+        "message": "مسدودسازی تبلیغ در سافاری فعال است"
+    },
+    "tray_menu_protection_stop": {
+        "message": "مسدودسازی تبلیغ در سافاری غیر فعال است"
+    },
+    "options_last_update": {
+        "message": "آخرین بروز رسانی:"
+    },
+    "options_about": {
+        "message": "درباره"
+    },
+    "options_content_blockers": {
+        "message": "مسدودسازهای محتوا"
+    },
+    "options_content_blockers_desc": {
+        "message": "مسدودسازهای تبلیغ فعال: %s از 6 تا (هر کدام میتواند تا 50000 دستور داشته باشد)"
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": "مسدودسازهای تبلیغ غیرفعال شده اند"
+    },
+    "options_compare_btn": {
+        "message": "چطور مقایسه می شوند"
+    },
+    "options_compare_title": {
+        "message": "AdGuard پریمیوم را برای حفاظت بهتر امتحان کنید!"
+    },
+    "options_license_agreement": {
+        "message": "توافقنامه مجوز کاربر-نهایی"
+    },
+    "options_privacy_policy": {
+        "message": "سیاست حریم خصوصی"
+    },
+    "options_acknowledgment": {
+        "message": "قدرداني ها"
+    },
+    "options_github": {
+        "message": "Github"
+    },
+    "onboarding_safari_title": {
+        "message": "به اجازه شما نیاز دارد"
+    },
+    "onboarding_safari_desc": {
+        "message": "کادرهای بعد از \"آیکون AdGuard سافاری\" و \"مسدودساز محتوای AdGuard\" و \"AdGuard\" را در اولویت های سافاری را بررسی کنید"
+    },
+    "onboarding_safari_link": {
+        "message": "این افزونه ها چه کاری انجام می دهند؟"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "آیکون سافاری AdGuard"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "شما میتوانید از این آیکون برای مدیریت تنظیمات AdGuard برای سافاری استفاده کنید. برای نمونه،وقفه مسدودسازی در این وبسایت،یا مسدودسازی تبلیغ بطور دستی."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "دسترسی به محتوای صفحه وب به منظور کار \"ابزار مسدود کردن دستی\" مورد نیاز است."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "برای تشخیص اینکه آیا AdGuard در وب‌سایتی که در حال حاضر بازدید می‌کنید کار می‌کند یا خیر، دسترسی به سابقه مرور لازم است."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "مسدودساز پیشرفته AdGuard"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "این افزونه دستورات مسدودسازی پیشرفته که با API مسدودساز محتوا سافاری پشتیبانی نشده را اعمال می کند."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "دسترسی به محتوای صفحه وب برای اجرای قوانین آرایشی پیشرفته ضروری است."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "دسترسی به تاریخچه مرور برای تشخیص اینکه چه وب‌سایتی را می‌خواهید باز کنید مورد نیاز است تا بتواند قوانین مسدودسازی پیشرفته را پیدا کند."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 افزونه مسدود کننده محتوا"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "صفری حداکثر تعداد قوانین مسدود کننده محتوا را با %s گسترش محدود می کند. این کافی نیست برای رسیدگی به انواع تبلیغات و ردیاب بلوک AdGuard. به همین دلیل است که ما ارائه 6 پسوند ، در نتیجه افزایش است که حد %s."
+    },
+    "onboarding_safari_btn": {
+        "message": "بازکردن اولویت ها"
+    },
+    "onboarding_ignore_safari_btn": {
+        "message": "رَد کن"
+    },
+    "options_learn_more": {
+        "message": "بیشتر در مورد آن بدانید"
+    },
+    "options_about_version": {
+        "message": "نسخه %s"
+    },
+    "notification_user_filter_updated_title": {
+        "message": "دستورات کاربر بروز رسانی شده است"
+    },
+    "notification_user_filter_updated_desc": {
+        "message": "یک دستور جدید به فیلتر کاربر اضافه شد:"
+    },
+    "options_filters_update_period": {
+        "message": "فاصله بروز رسانی"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "one": "هر ساعت",
+            "other": "هر %s ساعت"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "بروز رسانی نکن"
+    },
+    "options_filters_custom_remove": {
+        "message": "حذف"
+    },
+    "options_show_tray_icon": {
+        "message": "نمایش AdGuard for Safari در نوار منو"
+    },
+    "options_launch_at_login": {
+        "message": "اِجرای AdGuard for Safari در ورود"
+    },
+    "options_verbose_logging": {
+        "message": "ضبط وقایع بیشتر"
+    },
+    "options_verbose_logging_desc": {
+        "message": "اگر ضبط وقایع بیشترفعال باشد،افزونه AdGuard سافاری اطلاعات اضافی را در کنسول مرورگر چاپ می کند"
+    },
+    "options_enable_hardware_acceleration": {
+        "message": "فعالسازی شتاب دهنده سخت افزاری"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "فعالسازی شتاب دهنده سخت افزاری برای تنظیمات پنجره،ریستارت برنامه نیاز است"
+    },
+    "settings_import": {
+        "message": "وارد کردن تنظیمات"
+    },
+    "settings_import_success": {
+        "message": "وارد کردن تنظیمات با موفقیت به پایان رسید"
+    },
+    "settings_import_error": {
+        "message": "هنگام وارد کردن تنظیمات خطایی روی داد"
+    },
+    "settings_notification_protection_title": {
+        "message": "توجه! حفاظت غيرفعال شده است"
+    },
+    "settings_notification_protection_button_text": {
+        "message": "تعمیر کن"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "تعمیر کن"
+    },
+    "settings_notification_extensions_title": {
+        "message": "برخی از افزونه های AdGuard غیرفعال شده است"
+    },
+    "settings_notification_extensions_text": {
+        "message": "برای مسدودکردن صحیح تبلیغات در سافاری شما باید همه افزونه های AdGuard را فعال کنید"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "برخی از افزونه های AdGuard Content Blocker غیرفعال شده است"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "برای مسدودکردن صحیح تبلیغات در سافاری شما باید همه افزونه های AdGuard Content Blocker را فعال کنید"
+    },
+    "settings_notification_update_interval": {
+        "message": "لطفاً توجه داشته باشید که فیلترهای قدیمی کیفیت محافظت را کاهش می دهند، بنابراین مهم است که آنها را به روز نگه دارید."
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard عمومی"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard حریم خصوصی"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard اجتماعی"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard امنیتی"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard سایر"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard سفارشی"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s دستور استفاده شده است",
+            "other": "%s دستور استفاده شده است"
+        }
+    },
+    "options_cb_rules_overlimit_info": {
+        "message": "از محدودیت 500,00 دستور گذشته است. لطفا دستورات غیر ضروری برای کارکرد صحیح برنامه غیرفعال کنید.<br/> دستورات فعال شده اکنون: %s (دستورات غیرفعال شده:$2)"
+    },
+    "options_cb_disabled_warning": {
+        "message": "در سافاری غیرفعال شده است"
+    },
+    "options_cb_compilation_warning": {
+        "message": "گرد آوری موفق نشد"
+    },
+    "filters_group_custom": {
+        "message": "دستي"
+    },
+    "userfilter_name": {
+        "message": "دستورات کاربر"
+    },
+    "allowlist_name": {
+        "message": "لیست مجاز"
+    },
+    "window_close_dialog_message": {
+        "message": "AdGuard در پس زمینه فعال بماند؟"
+    },
+    "window_close_dialog_detail": {
+        "message": "این برای AdGuard حیاتی است که فرآیند اصلی در پس زمینه فعال بماند، در غیر حالت آن قادر به بررسی و بروز رسانی و مدیریت فیلترها نخواهد بود."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "انتخابم را بخاطر بسپر"
+    },
+    "window_close_dialog_yes": {
+        "message": "بله\" (توصیه شده)"
+    },
+    "window_close_dialog_no": {
+        "message": "خیر"
+    },
+    "window_close_dialog_cancel": {
+        "message": "لغو"
+    },
+    "folder_check_dialog_message": {
+        "message": "AdGuard برای Safari باید از پوشه برنامه های کاربردی راه اندازی شود."
+    },
+    "folder_check_dialog_detail": {
+        "message": "آیا می خواهید اکنون آن را به پوشه برنامه ها منتقل کنید؟"
+    },
+    "folder_check_dialog_move": {
+        "message": "حرکت"
+    },
+    "folder_check_dialog_quit": {
+        "message": "خروج"
+    }
+}

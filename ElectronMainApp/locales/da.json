@@ -108,7 +108,7 @@
         "message": "Generelt"
     },
     "options_general_desc": {
-        "message": "AdGuard til Safari er et gratis og open-source software. Alle feedback og bidrag er meget velkomne. Vil du anmelde en fejl eller anmode om en funktion, så gå til <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>vores GitHub-repo</a>."
+        "message": "AdGuard til Safari er en gratis og open-source software. Alle feedback og bidrag er meget velkomne. Vil man anmelde en fejl eller anmode om en funktion, så gå til <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our GitHub repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Tillad søgningsreklamer og selvpromovering af websteder"
@@ -160,6 +160,9 @@
     },
     "options_filters_no_enabled": {
         "message": "Ingen filtre er aktiveret"
+    },
+    "options_filters_no_filters": {
+        "message": "Ingen filtre"
     },
     "options_filters_version": {
         "message": "version %s"
@@ -267,7 +270,7 @@
         "message": "Brugerregler"
     },
     "options_userfilter_no_user_rules": {
-        "message": "Liste er tom"
+        "message": "Ingen brugerregler"
     },
     "options_userfilter_info_single": {
         "message": "%s brugerregel"
@@ -276,7 +279,7 @@
         "message": "%s brugerregler"
     },
     "options_userfilter_description": {
-        "message": "Egne regler kan tilføjes her. Denne mulighed &nbsp;anbefales til avancerede brugere med HTML/CSS kendskab. Læs i <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filterregelvejledningen</a> om, at&nbsp;hvordan&nbsp;du skriver dine egne filterregler."
+        "message": "Egne regler kan tilføjes hér. Denne mulighed &nbsp;anbefales til avancerede brugere med HTML-/CSS kendskab. Læs i <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filterregelvejledningen</a> om, &nbsp;hvordan&nbsp;man skriver sine egne filterregler."
     },
     "options_userfilter_import": {
         "message": "Importér"
@@ -333,10 +336,10 @@
         "message": "Advarsel"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "For mange aktive filtre. Safari kan anvende maks. %s regler i én gruppe."
+        "message": "For mange aktive filtre. Safari kan anvende maks. %s regler pr. gruppe."
     },
     "options_content_blocker_overlimit": {
-        "message": "For mange aktive filtre. Safari kan anvende maks. %s regler i én gruppe."
+        "message": "For mange aktive filtre. Safari kan anvende maks. %s regler pr. gruppe."
     },
     "options_filters_list_search_placeholder": {
         "message": "Søg"
@@ -462,7 +465,7 @@
         "message": "6 indholdsblokerende udvidelser"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari begrænser antallet af indholdsblokeringsregler til %s pr. udvidelse, hvilket ikke er nær nok til at håndtere alle typer AdGuard-blokerede annoncer og trackere. Vi tilbyder derfor 6 udvidelser og øger dermed grænsen til %s."
+        "message": "Safari begrænser antallet af indholdsblokeringsregler til %s pr. udvidelse, hvilket ikke er nok til at håndtere alle typer AdGuard-blokerede annoncer og trackere. Vi tilbyder derfor 6 udvidelser og øger dermed grænsen til %s."
     },
     "onboarding_safari_btn": {
         "message": "Åbn præferencer"
@@ -573,7 +576,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Grænsen på %s regler er overskredet. Deaktivér unødvendige regler for, at appen kan fungere korrekt.<br/>Aktiverede regler pt.: %s (deaktiverede regler: $2)"
+        "message": "Grænsen på %s regler er overskredet. Deaktivér unødvendige regler, så appen kan fungere korrekt.<br/>Aktiverede regler pt.: %s (deaktiverede regler: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Deaktiveret i Safari"

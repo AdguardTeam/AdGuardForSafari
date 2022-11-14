@@ -161,6 +161,9 @@
     "options_filters_no_enabled": {
         "message": "Nenhum filtro ativado"
     },
+    "options_filters_no_filters": {
+        "message": "Sem filtros"
+    },
     "options_filters_version": {
         "message": "versão %s"
     },
@@ -267,7 +270,7 @@
         "message": "Regras do utilizador"
     },
     "options_userfilter_no_user_rules": {
-        "message": "Lsta está vazia"
+        "message": "Sem regras do utilizador"
     },
     "options_userfilter_info_single": {
         "message": "%s regra do utilizador"

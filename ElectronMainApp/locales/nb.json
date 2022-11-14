@@ -1,0 +1,626 @@
+{
+    "main_menu_about": {
+        "message": "Om AdGuard for Safari"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "Betrodd"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "Betrodde filtre kan bruke mektige filtreringsoppføringsmodifikatorer som kan være farlige i feil hender. Ikke huk denne boksen hvis du ikke stoler på den."
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "betrodd"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "Du valgte å stole på dette filteret"
+    },
+    "options_support": {
+        "message": "Kundestøtte"
+    },
+    "options_support_faq_title": {
+        "message": "OSS"
+    },
+    "options_support_faq_description": {
+        "message": "Ofte stilte spørsmål"
+    },
+    "options_support_bug_report_title": {
+        "message": "Meld inn en feil"
+    },
+    "options_support_bug_report_description": {
+        "message": "Hvis noe ikke fungerer som det skal i programmet"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Rapporter inn blokkering av noe uskyldig"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Hvis du ser en ubesvart annonse eller \"ødelagt\" nettsted"
+    },
+    "options_support_feedback_title": {
+        "message": "Gi tilbakemelding"
+    },
+    "options_support_feedback_description": {
+        "message": "Send inn funksjonsforespørsler og forslag"
+    },
+    "options_support_rate_title": {
+        "message": "Vurder appen"
+    },
+    "options_support_rate_description": {
+        "message": "Fortell oss hva du synes om AdGuard"
+    },
+    "options_support_discuss_title": {
+        "message": "Funksjonsforespørsel"
+    },
+    "options_support_discuss_description": {
+        "message": "Diskuter på forumet vårt, i sosiale nettverk eller på GitHub"
+    },
+    "options_about_update_check": {
+        "message": "Se etter oppdateringer"
+    },
+    "options_about_title": {
+        "message": "AdGuard for Safari"
+    },
+    "options_about_updating": {
+        "message": "Oppdaterer AdGuard for Safari"
+    },
+    "options_about_updates_not_found": {
+        "message": "AdGuard for Safari er oppdatert"
+    },
+    "options_about_updates_error": {
+        "message": "Oppdateringsfeil"
+    },
+    "options_about_update_downloaded": {
+        "message": "Nesten oppdatert! Start AdGuard for Safari på nytt for å fullføre oppdateringen."
+    },
+    "options_about_update_relaunch": {
+        "message": "Start opp på nytt"
+    },
+    "options_about_read_more": {
+        "message": "Les mer om produktet"
+    },
+    "options_popup_title_placeholder": {
+        "message": "Skriv inn filterets navn"
+    },
+    "main_menu_hide": {
+        "message": "Skjul"
+    },
+    "main_menu_close_window": {
+        "message": "Lukk vinduet"
+    },
+    "tray_menu_export_logs": {
+        "message": "Eksporter loggfiler og systeminfo …"
+    },
+    "name": {
+        "message": "AdGuard reklameblokkerer"
+    },
+    "description": {
+        "message": "Uovertruffen adblock-utvidelse mot reklame og oppsprettsvinduer. Blokkerer annonser på Facebook, YouTube og alle andre nettsteder."
+    },
+    "options_settings": {
+        "message": "AdGuard for Safari - Innstillinger"
+    },
+    "options_settings_import_wrong_file_extension": {
+        "message": "Filutvidelsen burde være .json"
+    },
+    "options_settings_import_error": {
+        "message": "Feil under importering av innstillinger"
+    },
+    "options_general_settings": {
+        "message": "Generelt"
+    },
+    "options_general_desc": {
+        "message": "AdGuard for Safari er en gratis og åpenkildekodet programvare. Vi ønsker dine tilbakemeldinger og bidrag velkommen. Hvis du vil rapportere inn en feil eller ønske en funksjon, vennligst gå til <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>vårt GitHub-kodelager</a>."
+    },
+    "options_allow_acceptable_ads": {
+        "message": "Tillat reklamer på søkemotorer og nettsteders selvpromoteringer"
+    },
+    "options_export_settings": {
+        "message": "Eksporter innstillinger"
+    },
+    "options_import_settings": {
+        "message": "Importer innstillinger"
+    },
+    "options_export_logs": {
+        "message": "Eksporter loggbøker"
+    },
+    "options_antibanner": {
+        "message": "Filtre"
+    },
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s filter",
+            "other": "%s filtre"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s regel",
+            "other": "%s regler"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s avansert regel",
+            "other": "%s avanserte regler"
+        }
+    },
+    "options_filters_check_for_updates": {
+        "message": "Se etter oppdateringer"
+    },
+    "options_filters_enabled": {
+        "message": "Aktivert:"
+    },
+    "options_filters_homepage": {
+        "message": "Hjemmeside"
+    },
+    "options_filters_enabled_and_more_divider": {
+        "message": "%s og %s til"
+    },
+    "options_filters_enabled_and_divider": {
+        "message": "%s og %s"
+    },
+    "options_filters_no_enabled": {
+        "message": "Ingen filtre er skrudd på"
+    },
+    "options_filters_no_filters": {
+        "message": "Ingen filtre"
+    },
+    "options_filters_version": {
+        "message": "versjon %s"
+    },
+    "options_filters_updated": {
+        "message": "oppdatert: %s"
+    },
+    "options_filters_empty_custom_filters": {
+        "message": "Beklager, du har ikke noen selvvalgte filtre ennå"
+    },
+    "options_filters_empty_custom_add_button": {
+        "message": "Legg til et egendefinert filter"
+    },
+    "options_filters_custom_import_file": {
+        "message": "Importer fil"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "Importeringsfeil"
+    },
+    "options_filters_custom_step_one_title": {
+        "message": "Nytt filterabonnement"
+    },
+    "options_filters_custom_step_one_input_placeholder": {
+        "message": "Skriv inn filterlistens URL"
+    },
+    "options_filters_custom_step_one_url_desc": {
+        "message": "Skriv inn en gyldig URL til et filterlisteabonnement."
+    },
+    "options_filters_custom_step_one_url_desc_more": {
+        "message": "AdGuard vil legge til dette filterabonnementet."
+    },
+    "options_filters_custom_step_one_cancel": {
+        "message": "Avbryt"
+    },
+    "options_filters_custom_step_one_next": {
+        "message": "Neste"
+    },
+    "options_filters_custom_step_two_checking": {
+        "message": "Laster ned filtret"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "Abonner på filteret"
+    },
+    "options_filters_custom_step_three_title": {
+        "message": "En feil oppstod"
+    },
+    "options_filters_custom_step_three_desc": {
+        "message": "Dessverre kan ikke det tilpassede filteret ditt legges til på grunn av en uventet feil."
+    },
+    "options_filters_custom_step_three_try_again": {
+        "message": "Prøv på nytt"
+    },
+    "options_filters_custom_step_final_title": {
+        "message": "Nytt filterabonnement"
+    },
+    "options_filters_custom_step_final_filter_title": {
+        "message": "Tittel:"
+    },
+    "options_filters_custom_step_final_filter_description": {
+        "message": "Beskrivelse:"
+    },
+    "options_filters_custom_step_final_filter_version": {
+        "message": "Versjon:"
+    },
+    "options_filters_custom_step_final_filter_rules_count": {
+        "message": "Antall oppføringer:"
+    },
+    "options_filters_custom_step_final_filter_homepage": {
+        "message": "Hjemmeside:"
+    },
+    "options_filters_custom_step_final_filter_url": {
+        "message": "URL:"
+    },
+    "options_filters_custom_step_final_back": {
+        "message": "Tilbake"
+    },
+    "options_filters_custom_step_final_cancel": {
+        "message": "Avbryt"
+    },
+    "options_filters_custom_step_final_commit": {
+        "message": "Abonner"
+    },
+    "options_filters_check_filters_update": {
+        "message": "Let etter filteroppdateringer"
+    },
+    "options_allowlist": {
+        "message": "Hviteliste"
+    },
+    "options_allowlist_description": {
+        "message": "AdGuard filtrerer ikke nettsteder som er på hvitelisten."
+    },
+    "options_allowlist_inverted": {
+        "message": " (Invertert)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "Domener: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "Hvitelisten er tom"
+    },
+    "options_allowlist_inverse": {
+        "message": "Inverter hvitelisten<span class='sp-table-row-info'>Opphev reklameblokkering overalt <i>unntatt</i> på nettstedene i hvitelisten</span>"
+    },
+    "options_userfilter": {
+        "message": "Brukerfiltre"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Ingen brukerregler"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s brukerregel"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s brukerregler"
+    },
+    "options_userfilter_description": {
+        "message": "Du kan legge til dine egne regler her. Dette alternativet er&nbsp;anbefalt for avanserte brukere med erfaring med HTML/CSS. Les <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filterregler-guiden</a> for å&nbsp;lære hvordan du&nbsp;kan skrive dine egne filterregler."
+    },
+    "options_userfilter_import": {
+        "message": "Importer"
+    },
+    "options_userfilter_export": {
+        "message": "Eksport"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "Feil under importering av regler"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "Filutvidelsen bør være .txt"
+    },
+    "options_show_app_updated_notification": {
+        "message": "Bli varslet om utvidelsesoppdateringer"
+    },
+    "options_popup_update_title": {
+        "message": "Filtrene ble vellykket oppdatert"
+    },
+    "options_popup_update_error_title": {
+        "message": "Feil under filteroppdatering(er)"
+    },
+    "options_popup_update_version_error": {
+        "message": "Versjonen av filteret du prøver å oppdatere er den samme eller eldre"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Alle filtre er oppdatert"
+    },
+    "options_popup_update_not_found": {
+        "message": "Ingen oppdateringer funnet"
+    },
+    "options_popup_update_error": {
+        "message": "Mislyktes i å hente oppdateringer. Prøv igjen senere."
+    },
+    "options_popup_update_updated": {
+        "message": "«$1» mislyktes i å oppdateres til versjon $2"
+    },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s filter ble oppdatert: $2",
+            "other": "%s filtre ble oppdatert: $2"
+        }
+    },
+    "options_popup_version_update_title": {
+        "message": "AdGuard for Safari ble nettopp oppdatert til versjon $1."
+    },
+    "options_popup_version_update_description_minor": {
+        "message": "Denne versjonen inneholder stort sett fiksinger av feil og små forbedringer."
+    },
+    "options_popup_version_update_description_major": {
+        "message": "Dette er en stor utvidelsesoppgradering som har med seg mange nye funksjoner og forbedringer."
+    },
+    "notification_content_blocker_overlimit_title": {
+        "message": "Advarsel"
+    },
+    "notification_content_blocker_overlimit_desc": {
+        "message": "For mange filtre er skrudd på. Safari kan ikke bruke mer enn 50 000 oppføringer i en gruppe."
+    },
+    "options_content_blocker_overlimit": {
+        "message": "For mange filtre er skrudd på. Safari kan ikke bruke mer enn 50 000 oppføringer i en gruppe."
+    },
+    "options_filters_list_search_placeholder": {
+        "message": "Søk"
+    },
+    "options_editor_indicator_editing": {
+        "message": "Redigerer …"
+    },
+    "options_editor_indicator_saving": {
+        "message": "Lagrer..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "Lagret"
+    },
+    "options_editor_save_button": {
+        "message": "Lagre"
+    },
+    "main_menu_edit": {
+        "message": "Redigering"
+    },
+    "main_menu_undo": {
+        "message": "Angre"
+    },
+    "main_menu_cut": {
+        "message": "Klipp ut"
+    },
+    "main_menu_copy": {
+        "message": "Kopier"
+    },
+    "main_menu_paste": {
+        "message": "Lim inn"
+    },
+    "main_menu_select-all": {
+        "message": "Velg alle"
+    },
+    "tray_menu_about": {
+        "message": "Om"
+    },
+    "tray_menu_preferences": {
+        "message": "Foretrukne valg"
+    },
+    "tray_menu_check_updates": {
+        "message": "Let etter filteroppdateringer"
+    },
+    "tray_menu_launch_at_startup": {
+        "message": "Start opp AdGuard ved innlogging"
+    },
+    "tray_menu_quit": {
+        "message": "Avslutt"
+    },
+    "tray_menu_protection_start": {
+        "message": "Reklameblokkering i Safari er skrudd på"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Reklameblokkering i Safari er skrudd av"
+    },
+    "options_last_update": {
+        "message": "Seneste oppdatering:"
+    },
+    "options_about": {
+        "message": "Om"
+    },
+    "options_content_blockers": {
+        "message": "Innholdsblokkerere"
+    },
+    "options_content_blockers_desc": {
+        "message": "Aktiverte annonseblokkerere: %s av 6 (hver av dem kan inneholde opptil 50 000 oppføringer)"
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": "Reklameblokkerere er skrudd av"
+    },
+    "options_compare_btn": {
+        "message": "Sammenligning av dem"
+    },
+    "options_compare_title": {
+        "message": "Prøv AdGuard Premium for bedre beskyttelse!"
+    },
+    "options_license_agreement": {
+        "message": "Lisensavtale for brukere"
+    },
+    "options_privacy_policy": {
+        "message": "Personvernretningslinjer"
+    },
+    "options_acknowledgment": {
+        "message": "Anerkjennelser"
+    },
+    "options_github": {
+        "message": "GitHub"
+    },
+    "onboarding_safari_title": {
+        "message": "Trenger din godkjenning"
+    },
+    "onboarding_safari_desc": {
+        "message": "Merk av i boksene ved siden av AdGuard-utvidelser i Safari-innstillingene"
+    },
+    "onboarding_safari_link": {
+        "message": "Hva gjør disse utvidelsene?"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "AdGuard Safari-ikon"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "Du kan bruke dette ikonet til å administrere 'AdGuard for Safari'-innstillingene. For eksempel kan du sette blokkeringen på pause på et nettsted, eller blokkere en reklame manuelt."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Nettsideinnholdstilgang er nødvendig for å få 'manuell blokkeringsverktøy' til å fungere."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Nettleserloggtilgang er nødvendig for å oppdage om AdGuard fungerer på nettstedet du besøker for øyeblikket."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard avansert blokkering"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Denne utvidelsen bruker avanserte blokkeringsregler som ikke støttes av Safari sin innholdsblokkerings-API."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Nettsideinnholdstilgang er nødvendig for å få avanserte kosmetiske regler til å fungere."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Nettleserloggtilgang er nødvendig for å oppdage hvilket nettsted du prøver å åpne, slik at det kan finne hvilke avanserte blokkeringsregler som bør brukes."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 innholdsblokkerende utvidelser"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari begrenser det maksimale antallet innholdsblokkeringsregler med %s per utvidelse. Dette er ikke nok til å håndtere alle slags AdGuard-blokker for annonser og sporing. Det er derfor vi tilbyr 6 utvidelser, og dermed øker denne grensen til %s."
+    },
+    "onboarding_safari_btn": {
+        "message": "Åpne preferanser"
+    },
+    "onboarding_ignore_safari_btn": {
+        "message": "Ignorer"
+    },
+    "options_learn_more": {
+        "message": "Lær mer om det"
+    },
+    "options_about_version": {
+        "message": "Versjon %s"
+    },
+    "notification_user_filter_updated_title": {
+        "message": "Brukeroppføringer oppdatert"
+    },
+    "notification_user_filter_updated_desc": {
+        "message": "En ny regel ble lagt til i brukerreglene:"
+    },
+    "options_filters_update_period": {
+        "message": "Oppdateringsvanlighet"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "one": "Hver time",
+            "other": "Hver %s. time"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "Ikke oppdater"
+    },
+    "options_filters_custom_remove": {
+        "message": "fjern"
+    },
+    "options_show_tray_icon": {
+        "message": "Vis AdGuard for Safari i menylinjen"
+    },
+    "options_launch_at_login": {
+        "message": "Start opp AdGuard for Safari ved innlogging"
+    },
+    "options_verbose_logging": {
+        "message": "Detaljert loggføring"
+    },
+    "options_verbose_logging_desc": {
+        "message": "Hvis detaljert loggføring er aktivert, vil AdGuards Safari-utvidelser skrive ytterligere informasjon til nettleserkonsollen"
+    },
+    "options_enable_hardware_acceleration": {
+        "message": "Skru på maskinvareakselerasjon"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Skrur på maskinvareakselerasjon for innstillingsvinduet. Programomstart er påkrevd"
+    },
+    "settings_import": {
+        "message": "Innstillingsimportering"
+    },
+    "settings_import_success": {
+        "message": "Import av innstillinger fullført"
+    },
+    "settings_import_error": {
+        "message": "Det oppstod en feil under import av innstillinger"
+    },
+    "settings_notification_protection_title": {
+        "message": "Beskyttelsen er satt på pause"
+    },
+    "settings_notification_protection_button_text": {
+        "message": "Gjenoppta"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Fiks det"
+    },
+    "settings_notification_extensions_title": {
+        "message": "Noen AdGuard-utvidelser er skrudd av"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Du bør skru på alle AdGuard-utvidelsene for riktig reklameblokkering i Safari"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "Noen AdGuard-innholdsblokkeringsutvidelser er skrudd av"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Du bør skru på alle AdGuard-innholdsblokkeringsutvidelsene for riktig reklameblokkering i Safari"
+    },
+    "settings_notification_update_interval": {
+        "message": "Vær oppmerksom på at utdaterte filtre reduserer beskyttelseskvaliteten, så det er viktig å holde dem oppdatert."
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard Generelt"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard Privatliv"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard Sosial"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard Sikkerhet"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard Annet"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard Selvvalgt"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s oppføring benyttet",
+            "other": "%s oppføringer benyttet"
+        }
+    },
+    "options_cb_rules_overlimit_info": {
+        "message": "Grensen på 50 000 regler er overskredet. Vennligst skru av unødvendige regler for at appen skal fungere riktig.<br/>Aktiverte regler for øyeblikket: %s (deaktiverte regler: $2)"
+    },
+    "options_cb_disabled_warning": {
+        "message": "Skrudd av i Safari"
+    },
+    "options_cb_compilation_warning": {
+        "message": "Kompilering mislyktes"
+    },
+    "filters_group_custom": {
+        "message": "Tilpasset"
+    },
+    "userfilter_name": {
+        "message": "Brukerfiltre"
+    },
+    "allowlist_name": {
+        "message": "Hvitelistet"
+    },
+    "window_close_dialog_message": {
+        "message": "Vil du la AdGuard kjøre i bakgrunnen?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Dette er avgjørende for at AdGuard skal holde hovedprosessen gående i bakgrunnen, ellers kan den ikke automatisk lete etter filteroppdateringer og administrere filtrering."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Husk valget mitt"
+    },
+    "window_close_dialog_yes": {
+        "message": "Ja (anbefalt)"
+    },
+    "window_close_dialog_no": {
+        "message": "Nei"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Avbryt"
+    },
+    "folder_check_dialog_message": {
+        "message": "AdGuard for Safari bør startes fra Programmer-mappen."
+    },
+    "folder_check_dialog_detail": {
+        "message": "Vil du flytte den til Programmer-mappen nå?"
+    },
+    "folder_check_dialog_move": {
+        "message": "Flytt"
+    },
+    "folder_check_dialog_quit": {
+        "message": "Avslutt"
+    }
+}

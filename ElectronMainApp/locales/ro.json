@@ -108,7 +108,7 @@
         "message": "General"
     },
     "options_general_desc": {
-        "message": "AdGuard pentru Safari este un software gratuit și open source. Vă mulțumim pentru feedback-ul și contribuțiile dvs.. Raportare de erori sau cereri de funcții pot fi făcute la <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>contul nostru GitHub</a>."
+        "message": "AdGuard for Safari este un software gratuit și open source. Vă apreciem feedback-ul și contribuțiile. Dacă doriți să raportați un bug sau să solicitați o funcție, mergeți la <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'> repo-ul nostru GitHub</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Lăsați reclame la căutare și auto-promovare site-uri"
@@ -160,6 +160,9 @@
     },
     "options_filters_no_enabled": {
         "message": "Niciun filtru activat"
+    },
+    "options_filters_no_filters": {
+        "message": "Fără filtre"
     },
     "options_filters_version": {
         "message": "versiune %s"
@@ -267,7 +270,7 @@
         "message": "Reguli Utilizator"
     },
     "options_userfilter_no_user_rules": {
-        "message": "lista este goală"
+        "message": "Fără reguli utilizator"
     },
     "options_userfilter_info_single": {
         "message": "%s regulă utilizator"
@@ -276,7 +279,7 @@
         "message": "%s reguli utilizatori"
     },
     "options_userfilter_description": {
-        "message": "Puteți adăuga propriile reguli aici. Această opțiune este&nbsp;recomandată pentru utilizatorii avansați familiarizați cu HTML/CSS. Citiți <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>ghidul</a> de&nbsp;urmat la&nbsp;scrierea propriilor reguli de filtrare."
+        "message": "Puteți să adăugați propriile reguli aici. Această opțiune este&nbsp;recomandată pentru utilizatorii avansați familiarizați cu HTML/CSS. Citiți <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorialul privind regulile de filtrare</a> pentru&nbsp;a învăța cum să&nbsp;scrieți propriile reguli de filtrare."
     },
     "options_userfilter_import": {
         "message": "Importați"
@@ -573,7 +576,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Limita de %s de reguli a fost depășită. Dezactivați regulile inutile pentru ca aplicația să funcționeze corect.<br/>În prezent, regulile activate: %s (reguli dezactivate: $2)"
+        "message": "Limita de %s de reguli a fost depășită. Dezactivați regulile inutile pentru ca aplicația să funcționeze corect.<br/>Reguli activate în prezent: %s (reguli dezactivate: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Dezactivat în Safari"

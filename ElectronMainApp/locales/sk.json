@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "Často kladené otázky"
     },
+    "options_support_feature_request_title": {
+        "message": "Odoslať požiadavku na funkciu"
+    },
+    "options_support_feature_request_description": {
+        "message": "Navrhnite spôsoby, ako aplikáciu vylepšiť"
+    },
     "options_support_bug_report_title": {
         "message": "Nahlásiť chybu"
     },
@@ -161,6 +167,9 @@
     "options_filters_no_enabled": {
         "message": "Nie sú zapnuté žiadne filtre"
     },
+    "options_filters_no_filters": {
+        "message": "Žiadne filtre"
+    },
     "options_filters_version": {
         "message": "verzia %s"
     },
@@ -267,7 +276,7 @@
         "message": "Používateľský filter"
     },
     "options_userfilter_no_user_rules": {
-        "message": "Zoznam je prázdny"
+        "message": "Žiadne používateľské pravidlá"
     },
     "options_userfilter_info_single": {
         "message": "%s používateľské pravidlo"

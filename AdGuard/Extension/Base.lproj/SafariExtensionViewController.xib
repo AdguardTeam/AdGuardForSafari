@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,12 +9,12 @@
         <customObject id="-2" userLabel="File's Owner" customClass="SafariExtensionViewController">
             <connections>
                 <outlet property="adguardIcon" destination="DHo-Vn-6on" id="bF3-sf-CPS"/>
+                <outlet property="allowlistButton" destination="qio-p6-Pqn" id="cjd-fO-G9A"/>
                 <outlet property="assistantButton" destination="0bc-P0-SgG" id="St5-gl-LLM"/>
                 <outlet property="runAdguardButton" destination="K9v-08-IS3" id="Vk2-wY-YxW"/>
                 <outlet property="view" destination="c22-O7-iKe" id="vwT-Xx-Aiz"/>
                 <outlet property="warningMessageDescription" destination="65Y-cw-5zK" id="abS-GV-HiE"/>
                 <outlet property="warningMessageLabel" destination="WI5-OB-i6V" id="yGF-aF-Vxt"/>
-                <outlet property="allowlistButton" destination="qio-p6-Pqn" id="cjd-fO-G9A"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -30,7 +29,7 @@
             </userGuides>
             <subviews>
                 <stackView orientation="horizontal" alignment="centerY" spacing="13" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rtO-ks-TWg" userLabel="Stack Top Icons">
-                    <rect key="frame" x="0.0" y="272" width="247" height="31"/>
+                    <rect key="frame" x="0.0" y="260" width="246" height="31"/>
                     <edgeInsets key="edgeInsets" left="20" right="20" top="0.0" bottom="0.0"/>
                     <beginningViews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DHo-Vn-6on">
@@ -126,7 +125,7 @@
                     </connections>
                 </button>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="CVr-v4-bDt">
-                    <rect key="frame" x="0.0" y="207" width="247" height="5"/>
+                    <rect key="frame" x="0.0" y="195" width="246" height="5"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="pQJ-d8-2Tr"/>
                     </constraints>
@@ -141,7 +140,7 @@
                     </connections>
                 </box>
                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="25" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJ8-Wf-pr8" userLabel="Stack Titles">
-                    <rect key="frame" x="20" y="126" width="118" height="57"/>
+                    <rect key="frame" x="20" y="115" width="124" height="57"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="du9-Ja-6bt">
                             <rect key="frame" x="-2" y="41" width="108" height="16"/>
@@ -152,7 +151,7 @@
                             </textFieldCell>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="gvG-9D-ca7">
-                            <rect key="frame" x="-2" y="0.0" width="122" height="16"/>
+                            <rect key="frame" x="-2" y="0.0" width="98" height="16"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Report an issue" usesSingleLineMode="YES" id="Uuh-Ao-BUJ">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -179,10 +178,10 @@
                     </connections>
                 </stackView>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rhc-3f-Mmp" userLabel="Stack Buttons">
-                    <rect key="frame" x="158" y="122" width="69" height="62"/>
+                    <rect key="frame" x="164" y="112" width="62" height="60"/>
                     <subviews>
                         <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="0bc-P0-SgG">
-                            <rect key="frame" x="-6" y="34" width="81" height="32"/>
+                            <rect key="frame" x="-7" y="33" width="76" height="32"/>
                             <buttonCell key="cell" type="push" title="Select" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" state="on" borderStyle="border" inset="2" id="McY-Cj-7jd" customClass="GreenButtonCell">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -209,7 +208,7 @@
                             </connections>
                         </button>
                         <button verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="VtF-CS-bVP">
-                            <rect key="frame" x="-6" y="-7" width="81" height="32"/>
+                            <rect key="frame" x="-7" y="-7" width="76" height="32"/>
                             <buttonCell key="cell" type="push" title="Report" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" state="on" borderStyle="border" inset="2" id="d52-xp-fe4" customClass="GreenButtonCell">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -261,7 +260,7 @@
                     </connections>
                 </stackView>
                 <textField horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WI5-OB-i6V">
-                    <rect key="frame" x="18" y="218" width="211" height="19"/>
+                    <rect key="frame" x="18" y="206" width="210" height="19"/>
                     <textFieldCell key="cell" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" id="F0e-9f-alD">
                         <font key="font" metaFont="system" size="15"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -279,7 +278,7 @@
                     </connections>
                 </textField>
                 <button verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="K9v-08-IS3">
-                    <rect key="frame" x="104" y="28" width="40" height="32"/>
+                    <rect key="frame" x="108" y="28" width="30" height="32"/>
                     <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MCZ-9T-yrA" customClass="GreenButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -305,7 +304,7 @@
                     </connections>
                 </button>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="LXA-5T-3Tr">
-                    <rect key="frame" x="0.0" y="95" width="247" height="5"/>
+                    <rect key="frame" x="0.0" y="85" width="246" height="5"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="SpI-nU-o1j"/>
                     </constraints>
@@ -320,10 +319,10 @@
                     </connections>
                 </box>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eUB-7s-Qmw">
-                    <rect key="frame" x="8" y="8" width="231" height="78"/>
+                    <rect key="frame" x="8" y="8" width="230" height="68"/>
                     <subviews>
                         <button horizontalHuggingPriority="750" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="jKb-oY-gyH" customClass="LinkButton">
-                            <rect key="frame" x="67" y="62" width="98" height="16"/>
+                            <rect key="frame" x="36" y="52" width="158" height="16"/>
                             <buttonCell key="cell" type="bevel" title="Pause AdGuard for Safari" bezelStyle="regularSquare" alignment="center" refusesFirstResponder="YES" inset="2" id="p92-iZ-Q5D" customClass="GreenButtonCell">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -374,20 +373,20 @@
                             </connections>
                         </button>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="rwO-WV-q0R">
-                            <rect key="frame" x="115" y="50" width="1" height="12"/>
+                            <rect key="frame" x="115" y="40" width="1" height="12"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="12" id="7a5-rG-bzX"/>
                                 <constraint firstAttribute="width" constant="1" id="Net-0c-yTf"/>
                             </constraints>
                         </customView>
                         <box verticalHuggingPriority="1000" boxType="custom" borderType="none" cornerRadius="4" translatesAutoresizingMaskIntoConstraints="NO" id="Wke-Zo-itT">
-                            <rect key="frame" x="0.0" y="0.0" width="231" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="230" height="40"/>
                             <view key="contentView" id="nCn-Ms-r56">
-                                <rect key="frame" x="0.0" y="0.0" width="231" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="230" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Gxi-0D-SJR">
-                                        <rect key="frame" x="38" y="10" width="189" height="30"/>
+                                        <rect key="frame" x="38" y="5" width="188" height="30"/>
                                         <textFieldCell key="cell" title="Some AdGuard extensions are disabled!" id="H2E-6z-orr">
                                             <font key="font" metaFont="cellTitle"/>
                                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -395,7 +394,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b1y-id-03Q">
-                                        <rect key="frame" x="11" y="21" width="18" height="18"/>
+                                        <rect key="frame" x="11" y="11" width="18" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="18" id="V0e-L0-qyZ"/>
                                             <constraint firstAttribute="height" constant="18" id="fEq-ze-cS2"/>
@@ -455,9 +454,9 @@
                     </connections>
                 </stackView>
                 <textField horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="65Y-cw-5zK" userLabel="Warning Message Description">
-                    <rect key="frame" x="18" y="198" width="211" height="12"/>
+                    <rect key="frame" x="18" y="186" width="210" height="12"/>
                     <textFieldCell key="cell" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" id="fN9-iQ-wTe">
-                        <font key="font" metaFont="system" size="9"/>
+                        <font key="font" metaFont="miniSystem"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

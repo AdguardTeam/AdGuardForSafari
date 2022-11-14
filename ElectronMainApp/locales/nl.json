@@ -1,0 +1,632 @@
+{
+    "main_menu_about": {
+        "message": "Over AdGuard voor Safari"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "Vertrouwd"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "Vertrouwde filters kunnen filterregels sterk aanpassen wat gevaarlijk kan zijn in verkeerde handen. Vink dit niet aan tenzij je dit volledig vertrouwt."
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "vertrouwd"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "Je kiest om deze filter te vertrouwen"
+    },
+    "options_support": {
+        "message": "Ondersteuning"
+    },
+    "options_support_faq_title": {
+        "message": "Veel gestelde vragen"
+    },
+    "options_support_faq_description": {
+        "message": "Veel gestelde vragen"
+    },
+    "options_support_feature_request_title": {
+        "message": "Functieverzoek verzenden"
+    },
+    "options_support_feature_request_description": {
+        "message": "Manieren voorstellen om de app te verbeteren"
+    },
+    "options_support_bug_report_title": {
+        "message": "Een fout rapporteren"
+    },
+    "options_support_bug_report_description": {
+        "message": "Als er iets niet correct werkt in het programma"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Foutieve blokkering melden"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Als je een gemiste advertentie of een \"kapotte\" website ziet"
+    },
+    "options_support_feedback_title": {
+        "message": "Feedback geven"
+    },
+    "options_support_feedback_description": {
+        "message": "Functieverzoeken en suggesties indienen"
+    },
+    "options_support_rate_title": {
+        "message": "De app beoordelen"
+    },
+    "options_support_rate_description": {
+        "message": "Vertel ons wat je van AdGuard vindt"
+    },
+    "options_support_discuss_title": {
+        "message": "Discussie"
+    },
+    "options_support_discuss_description": {
+        "message": "Discussie op ons forum, op sociale netwerken of op GitHub"
+    },
+    "options_about_update_check": {
+        "message": "Op updates controleren"
+    },
+    "options_about_title": {
+        "message": "AdGuard voor Safari"
+    },
+    "options_about_updating": {
+        "message": "AdGuard voor Safari bijwerken"
+    },
+    "options_about_updates_not_found": {
+        "message": "AdGuard voor Safari is actueel"
+    },
+    "options_about_updates_error": {
+        "message": "Update fout"
+    },
+    "options_about_update_downloaded": {
+        "message": "Bijna bijgewerkt! Start AdGuard voor Safari opnieuw het bijwerken te voltooien."
+    },
+    "options_about_update_relaunch": {
+        "message": "Herstarten"
+    },
+    "options_about_read_more": {
+        "message": "Meer lezen over dit product"
+    },
+    "options_popup_title_placeholder": {
+        "message": "Filternaam invoeren"
+    },
+    "main_menu_hide": {
+        "message": "Verbergen"
+    },
+    "main_menu_close_window": {
+        "message": "Sluit venster"
+    },
+    "tray_menu_export_logs": {
+        "message": "Logbestanden en systeeminfo exporteren..."
+    },
+    "name": {
+        "message": "AdGuard-advertentieblokkeerder"
+    },
+    "description": {
+        "message": "Ongeëvenaarde adblock invoegtoepassing tegen advertenties en pop-ups. Blokkeert ads op Facebook, YouTube en alle andere websites."
+    },
+    "options_settings": {
+        "message": "AdGuard for Safari - Instellingen"
+    },
+    "options_settings_import_wrong_file_extension": {
+        "message": "De bestandsextensie moet .json zijn"
+    },
+    "options_settings_import_error": {
+        "message": "Fout bij importeren van instellingen"
+    },
+    "options_general_settings": {
+        "message": "Algemeen"
+    },
+    "options_general_desc": {
+        "message": "AdGuard voor Safari is gratis en open source software. We zijn blij met jouw feedback en bijdragen. Als je een bug wilt melden of een functie wilt aanvragen, ga dan naar <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>onze GitHub-opslagplaats</a>."
+    },
+    "options_allow_acceptable_ads": {
+        "message": "Zoek-advertenties en reclames voor eigen websites toestaan"
+    },
+    "options_export_settings": {
+        "message": "Instellingen exporteren"
+    },
+    "options_import_settings": {
+        "message": "Instellingen importeren"
+    },
+    "options_export_logs": {
+        "message": "Logboek exporteren"
+    },
+    "options_antibanner": {
+        "message": "Filters"
+    },
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s filter",
+            "other": "%s filters"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s regel",
+            "other": "%s regels"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s geavanceerde regel",
+            "other": "%s geavanceerde regels"
+        }
+    },
+    "options_filters_check_for_updates": {
+        "message": "Op updates controleren"
+    },
+    "options_filters_enabled": {
+        "message": "Ingeschakeld:"
+    },
+    "options_filters_homepage": {
+        "message": "Startpagina"
+    },
+    "options_filters_enabled_and_more_divider": {
+        "message": "%s en %s meer"
+    },
+    "options_filters_enabled_and_divider": {
+        "message": "%s en %s"
+    },
+    "options_filters_no_enabled": {
+        "message": "Geen filters ingeschakeld"
+    },
+    "options_filters_no_filters": {
+        "message": "Geen filters"
+    },
+    "options_filters_version": {
+        "message": "versie %s"
+    },
+    "options_filters_updated": {
+        "message": "bijgewerkt: %s"
+    },
+    "options_filters_empty_custom_filters": {
+        "message": "Je hebt nog geen aangepaste filters"
+    },
+    "options_filters_empty_custom_add_button": {
+        "message": "Aangepast filter toevoegen"
+    },
+    "options_filters_custom_import_file": {
+        "message": "Bestand importeren"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "Fout bij importeren"
+    },
+    "options_filters_custom_step_one_title": {
+        "message": "Nieuw filter abonnement"
+    },
+    "options_filters_custom_step_one_input_placeholder": {
+        "message": "Filter URL invoeren"
+    },
+    "options_filters_custom_step_one_url_desc": {
+        "message": "Voer een geldige URL voor het filter abonnement in."
+    },
+    "options_filters_custom_step_one_url_desc_more": {
+        "message": "AdGuard voegt dit filterabonnement toe."
+    },
+    "options_filters_custom_step_one_cancel": {
+        "message": "Annuleren"
+    },
+    "options_filters_custom_step_one_next": {
+        "message": "Volgende"
+    },
+    "options_filters_custom_step_two_checking": {
+        "message": "Filter downloaden"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "Op het filter abonneren"
+    },
+    "options_filters_custom_step_three_title": {
+        "message": "Er is een fout opgetreden"
+    },
+    "options_filters_custom_step_three_desc": {
+        "message": "Vanwege een onverwachte fout kan je aangepaste filter niet worden toegevoegd."
+    },
+    "options_filters_custom_step_three_try_again": {
+        "message": "Probeer opnieuw"
+    },
+    "options_filters_custom_step_final_title": {
+        "message": "Nieuw filter abonnement"
+    },
+    "options_filters_custom_step_final_filter_title": {
+        "message": "Titel:"
+    },
+    "options_filters_custom_step_final_filter_description": {
+        "message": "Beschrijving:"
+    },
+    "options_filters_custom_step_final_filter_version": {
+        "message": "Versie:"
+    },
+    "options_filters_custom_step_final_filter_rules_count": {
+        "message": "Aantal regels:"
+    },
+    "options_filters_custom_step_final_filter_homepage": {
+        "message": "Startpagina:"
+    },
+    "options_filters_custom_step_final_filter_url": {
+        "message": "URL:"
+    },
+    "options_filters_custom_step_final_back": {
+        "message": "Terug"
+    },
+    "options_filters_custom_step_final_cancel": {
+        "message": "Annuleren"
+    },
+    "options_filters_custom_step_final_commit": {
+        "message": "Abonneren"
+    },
+    "options_filters_check_filters_update": {
+        "message": "Controleren op filtersupdates"
+    },
+    "options_allowlist": {
+        "message": "Toelatingslijst"
+    },
+    "options_allowlist_description": {
+        "message": "AdGuard filtert geen websites van de toelatingslijst."
+    },
+    "options_allowlist_inverted": {
+        "message": " (Omgekeerd)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "Domeinen: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "Toelatingslijst is leeg"
+    },
+    "options_allowlist_inverse": {
+        "message": "Toelatingslijst omkeren<span class='sp-table-row-info'>Advertenties overal deblokkeren, <i>behalve</i> de websites van de toelatingslijst</span>"
+    },
+    "options_userfilter": {
+        "message": "Gebruikersregels"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Geen gebruikersregels"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s gebruikersregel"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s gebruikersregels"
+    },
+    "options_userfilter_description": {
+        "message": "Je kunt hier jouw eigen regels toevoegen. Deze optie wordt&nbsp;aanbevolen voor gevorderde gebruikers die bekend zijn met HTML/CSS. Lees de <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filterregels tutorial</a> t/m&nbsp;leer hoe je&nbsp;jouw eigen filterregels schrijft."
+    },
+    "options_userfilter_import": {
+        "message": "Importeren"
+    },
+    "options_userfilter_export": {
+        "message": "Exporteren"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "Fout bij importeren regels"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "De bestandsextensie moet .txt zijn"
+    },
+    "options_show_app_updated_notification": {
+        "message": "Informeer mij over extensie-updates"
+    },
+    "options_popup_update_title": {
+        "message": "Filters sucesvol bijgewerkt"
+    },
+    "options_popup_update_error_title": {
+        "message": "Filters update fout"
+    },
+    "options_popup_update_version_error": {
+        "message": "De versie van het filter dat je probeert bij te werken, is dezelfde of ouder"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Alle filters zijn bijgewerkt"
+    },
+    "options_popup_update_not_found": {
+        "message": "Geen updates gevonden"
+    },
+    "options_popup_update_error": {
+        "message": "Het verkrijgen van nieuwe versies is mislukt. Probeer het later opnieuw."
+    },
+    "options_popup_update_updated": {
+        "message": "\"$1\" is bijgewerkt naar versie $2"
+    },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s filter bijgewerkt: $2",
+            "other": "%s filters bijgewerkt: $2"
+        }
+    },
+    "options_popup_version_update_title": {
+        "message": "AdGuard voor Safari is net bijgewerkt naar versie $1."
+    },
+    "options_popup_version_update_description_minor": {
+        "message": "Deze versie bevat hoofdzakelijk bugfixes en kleine verbeteringen."
+    },
+    "options_popup_version_update_description_major": {
+        "message": "Dit is een belangrijke update met heel wat nieuwe functies en optimalisaties."
+    },
+    "notification_content_blocker_overlimit_title": {
+        "message": "Waarschuwing"
+    },
+    "notification_content_blocker_overlimit_desc": {
+        "message": "Er zijn te veel filters ingeschakeld. Safari kan niet meer dan %s regels in één groep gebruiken."
+    },
+    "options_content_blocker_overlimit": {
+        "message": "Er zijn te veel filters ingeschakeld. Safari kan niet meer dan %s regels in één groep gebruiken."
+    },
+    "options_filters_list_search_placeholder": {
+        "message": "Zoeken"
+    },
+    "options_editor_indicator_editing": {
+        "message": "Aanpassen..."
+    },
+    "options_editor_indicator_saving": {
+        "message": "Bewaren..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "Opgeslagen"
+    },
+    "options_editor_save_button": {
+        "message": "Opslaan"
+    },
+    "main_menu_edit": {
+        "message": "Bewerken"
+    },
+    "main_menu_undo": {
+        "message": "Ongedaan maken"
+    },
+    "main_menu_cut": {
+        "message": "Knippen"
+    },
+    "main_menu_copy": {
+        "message": "Kopiëren"
+    },
+    "main_menu_paste": {
+        "message": "Plakken"
+    },
+    "main_menu_select-all": {
+        "message": "Alles selecteren"
+    },
+    "tray_menu_about": {
+        "message": "Over"
+    },
+    "tray_menu_preferences": {
+        "message": "Voorkeuren"
+    },
+    "tray_menu_check_updates": {
+        "message": "Controleren op filtersupdates"
+    },
+    "tray_menu_launch_at_startup": {
+        "message": "Start AdGuard wanneer je inlogt"
+    },
+    "tray_menu_quit": {
+        "message": "Beëindigen"
+    },
+    "tray_menu_protection_start": {
+        "message": "Ad blocking in Safari is ingeschakeld"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Ad blocking in Safari is uitgeschakeld"
+    },
+    "options_last_update": {
+        "message": "Laatste update:"
+    },
+    "options_about": {
+        "message": "Over"
+    },
+    "options_content_blockers": {
+        "message": "Inhoudsblokkeringen"
+    },
+    "options_content_blockers_desc": {
+        "message": "Ingeschakelde advertentiesblokkers: %s van 6 (elk kan tot %s regels bevatten)"
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": "Ad filters zijn uitgeschakeld"
+    },
+    "options_compare_btn": {
+        "message": "Hoe ze zich verhouden"
+    },
+    "options_compare_title": {
+        "message": "Probeer AdGuard Premium voor een betere bescherming!"
+    },
+    "options_license_agreement": {
+        "message": "Licentieovereenkomst voor eindgebruiker"
+    },
+    "options_privacy_policy": {
+        "message": "Privacybeleid"
+    },
+    "options_acknowledgment": {
+        "message": "Dankbetuigingen"
+    },
+    "options_github": {
+        "message": "GitHub"
+    },
+    "onboarding_safari_title": {
+        "message": "Je toestemming is nodig"
+    },
+    "onboarding_safari_desc": {
+        "message": "Vink de vakjes naast AdGuard-uitbreidingen aan in Safari-voorkeuren."
+    },
+    "onboarding_safari_link": {
+        "message": "Wat doen deze uitbreidingen?"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "AdGuard Safari pictogram"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "Je kunt dit pictogram gebruiken om de AdGuard voor Safari-instellingen te beheren. Bijvoorbeeld het blokkeren op een website pauzeren of een advertentie handmatig blokkeren."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Toegang tot de webpagina-inhoud is vereist om de \"handmatige blokkeerfunctie\" te laten werken."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Toegang tot de bladergeschiedenis is vereist om te kunnen detecteren of AdGuard werkt op de website die je momenteel bezoekt."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "AdGuard geavanceerde blokkering"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Deze uitbreiding past geavanceerde blokkeringsregels toe die niet worden ondersteund door de Safari Content Blocking API."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Toegang tot webpagina-inhoud is vereist om geavanceerde cosmetische regels te laten werken."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Toegang tot de bladergeschiedenis is vereist om te detecteren welke website je probeert te openen, zodat achterhaald kan worden welke geavanceerde blokkeringsregels moeten worden toegepast."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 inhoudblokkerende uitbreidingen"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari beperkt het maximale aantal regels voor het blokkeren van inhoud tot %s per uitbreiding. Dat is niet genoeg om alle soorten advertenties en volgers die AdGuard blokkeert af te handelen. Daarom bieden we 6 uitbreidingen, waarmee we die limiet verhogen naar %s."
+    },
+    "onboarding_safari_btn": {
+        "message": "Open voorkeuren"
+    },
+    "onboarding_ignore_safari_btn": {
+        "message": "Negeren"
+    },
+    "options_learn_more": {
+        "message": "Meer info"
+    },
+    "options_about_version": {
+        "message": "Versie %s"
+    },
+    "notification_user_filter_updated_title": {
+        "message": "Gebruikersregels bijgewerkt"
+    },
+    "notification_user_filter_updated_desc": {
+        "message": "Een nieuwe regel is toegevoegd aan de gebruikersregels:"
+    },
+    "options_filters_update_period": {
+        "message": "Update interval"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "one": "Elk uur",
+            "other": "Elke %s uur"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "Niet bijwerken"
+    },
+    "options_filters_custom_remove": {
+        "message": "verwijderen"
+    },
+    "options_show_tray_icon": {
+        "message": "Toon AdGuard voor Safari in de menubalk"
+    },
+    "options_launch_at_login": {
+        "message": "Start AdGuard voor Safari na aanmelden"
+    },
+    "options_verbose_logging": {
+        "message": "Uitgebreide logboekregistratie"
+    },
+    "options_verbose_logging_desc": {
+        "message": "Als de Uitgebreide logboekregistratie is ingeschakeld, zullen AdGuard Safari-extensies aanvullende informatie naar de browserconsole wegschrijven"
+    },
+    "options_enable_hardware_acceleration": {
+        "message": "Hardware versnelling inschakelen"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Schakelt hardware versnelling in ifv instellingen scherm, app herstarten vereist"
+    },
+    "settings_import": {
+        "message": "Instellingen importeren"
+    },
+    "settings_import_success": {
+        "message": "Instellingen succesvol geïmporteerd"
+    },
+    "settings_import_error": {
+        "message": "Fout tijdens importeren instellingen"
+    },
+    "settings_notification_protection_title": {
+        "message": "Bescherming is gepauzeerd"
+    },
+    "settings_notification_protection_button_text": {
+        "message": "Repareren"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Repareren"
+    },
+    "settings_notification_extensions_title": {
+        "message": "Enkele AdGuard uitbreidingen zijn uitgeschakeld"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Je moet alle AdGuard uitbreidingen inschakelen voor een goede ad-blokkering in Safari"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "Enkele AdGuard inhoudsblokkering-uitbreidingen zijn uitgeschakeld"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Je moet alle AdGuard inhoudsblokkering-uitbreidingen inschakelen voor een goede ad-blokkering in Safari"
+    },
+    "settings_notification_update_interval": {
+        "message": "Houd er rekening mee dat verouderde filters de kwaliteit van de bescherming verminderen, dus is het belangrijk om ze actueel te houden."
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard Algemeen"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard Privacy"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard Sociaal"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard Beveiliging"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard Andere"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard Aangepast"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s regel gebruikt",
+            "other": "%s regels gebruikt"
+        }
+    },
+    "options_cb_rules_overlimit_info": {
+        "message": "Het maximum van %s regels is overschreden. Schakel onnodige regels uit om de app correct te laten werken.<br/>Momenteel ingeschakelde regels: %s (uitgeschakelde regels: $2)"
+    },
+    "options_cb_disabled_warning": {
+        "message": "Uitgeschakeld in Safari"
+    },
+    "options_cb_compilation_warning": {
+        "message": "Compileren mislukt"
+    },
+    "filters_group_custom": {
+        "message": "Aangepast"
+    },
+    "userfilter_name": {
+        "message": "Gebruikersfilter"
+    },
+    "allowlist_name": {
+        "message": "Toelatingslijst"
+    },
+    "window_close_dialog_message": {
+        "message": "AdGuard ingeschakeld laten op de achtergrond?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Het is cruciaal voor AdGuard om het hoofdproces ingeschakeld te laten op de achtergrond voor het bijwerken en beheren van filters."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Keuze bewaren"
+    },
+    "window_close_dialog_yes": {
+        "message": "Ja (aanbevolen)"
+    },
+    "window_close_dialog_no": {
+        "message": "Nee"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Annuleren"
+    },
+    "folder_check_dialog_message": {
+        "message": "AdGuard voor Safari moet worden gestart vanuit de map Programma's."
+    },
+    "folder_check_dialog_detail": {
+        "message": "Wilt je het nu naar de map Programma's verplaatsen?"
+    },
+    "folder_check_dialog_move": {
+        "message": "Verplaatsen"
+    },
+    "folder_check_dialog_quit": {
+        "message": "Stoppen"
+    }
+}

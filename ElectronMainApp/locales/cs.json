@@ -108,7 +108,7 @@
         "message": "Obecné"
     },
     "options_general_desc": {
-        "message": "AdGuard pro Safari je open source a bezpatný software. Vaše připomínky a příspěvky jsou vítány. Chcete-li nahlásit chybu nebo požádat o funkci, přejděte na stránku <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>our Github repo</a>."
+        "message": "AdGuard pro Safari je open source a bezpatný software. Vaše připomínky a příspěvky jsou vítány. Chcete-li nahlásit chybu nebo požádat o funkci, přejděte na stránku <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>našeho repozitáře GitHub</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Zobrazovat užitečné reklamy"
@@ -160,6 +160,9 @@
     },
     "options_filters_no_enabled": {
         "message": "Nebyly povoleny žádné filtry"
+    },
+    "options_filters_no_filters": {
+        "message": "Žádné filtry"
     },
     "options_filters_version": {
         "message": "Verze %s"
@@ -266,6 +269,9 @@
     "options_userfilter": {
         "message": "Uživatelská pravidla"
     },
+    "options_userfilter_no_user_rules": {
+        "message": "Žádná uživatelská pravidla"
+    },
     "options_userfilter_info_single": {
         "message": "Uživatelské pravidlo: %s"
     },
@@ -276,7 +282,7 @@
         "message": "Seznam je prázdný"
     },
     "options_userfilter_description": {
-        "message": "Zde můžete přidat vlastní pravidla. Tato možnost je doporučena pro pokročilé uživatele, kteří jsou obeznámeni s HTML/CSS. Chcete-li se neučit psát svá vlastní filtrovací pravidla, přečtěte si <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filter rules tutorial</a>návod filtrovacích pravidel</a>."
+        "message": "Zde můžete přidat vlastní pravidla. Tuto možnost&nbsp;doporučujeme pokročilým uživatelům znalým HTML/CSS. Přečtěte si <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>návod k pravidlům filtrů,</a> kde&nbsp;se dozvíte,&nbsp;jak napsat vlastní pravidla filtrů."
     },
     "options_userfilter_import": {
         "message": "Import"

@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "Häufig gestellte Fragen"
     },
+    "options_support_feature_request_title": {
+        "message": "Funktionsanfrage senden"
+    },
+    "options_support_feature_request_description": {
+        "message": "Vorschläge zur Verbesserung der App"
+    },
     "options_support_bug_report_title": {
         "message": "Fehler melden"
     },
@@ -42,7 +48,7 @@
         "message": "Vorschläge und Wünsche einreichen"
     },
     "options_support_rate_title": {
-        "message": "App berwerten"
+        "message": "App bewerten"
     },
     "options_support_rate_description": {
         "message": "Schreiben Sie uns, was Sie über AdGuard denken"
@@ -108,7 +114,7 @@
         "message": "Allgemein"
     },
     "options_general_desc": {
-        "message": "AdGuard für Safari ist eine freie Open-Source-Software. Wir freuen uns über Ihr Feedback und Ihre Beiträge. Falls Sie einen Fehler melden oder eine Funktion anfragen möchten, gehen Sie bitte zu <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>unserem GitHub-Repository</a>."
+        "message": "AdGuard für Safari ist eine freie Open-Source-Software. Wir freuen uns über dein Feedback und deine Beiträge. Falls du einen Fehler melden oder eine Funktion anfragen möchtest, gehe bitte zu <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>unserem GitHub-Repository</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Werbung in Suchvorgängen und Eigenwerbung der Websites erlauben"
@@ -161,11 +167,14 @@
     "options_filters_no_enabled": {
         "message": "Keine Filter aktiviert"
     },
+    "options_filters_no_filters": {
+        "message": "Keine Filter"
+    },
     "options_filters_version": {
         "message": "Version %s"
     },
     "options_filters_updated": {
-        "message": "Aktualisiert: %s"
+        "message": "aktualisiert: %s"
     },
     "options_filters_empty_custom_filters": {
         "message": "Es wurden noch keine Eigenen Filter angelegt"
@@ -246,10 +255,10 @@
         "message": "Alle Filter aktualisieren"
     },
     "options_allowlist": {
-        "message": "Freigabeliste"
+        "message": "Positivliste"
     },
     "options_allowlist_description": {
-        "message": "AdGuard filtert keine Websites aus der Freigabeliste."
+        "message": "AdGuard filtert keine Websites aus der Positivliste."
     },
     "options_allowlist_inverted": {
         "message": " (Invertiert)"
@@ -258,16 +267,16 @@
         "message": "Domains: %s"
     },
     "options_allowlist_no_domains": {
-        "message": "Freigabeliste ist leer"
+        "message": "Positivliste ist leer"
     },
     "options_allowlist_inverse": {
-        "message": "Freigabeliste invertieren<span class='sp-table-row-info'>Werbung überall zulassen, <i>außer auf Websites</i> aus der Freigabeliste</span>"
+        "message": "Positivliste invertieren<span class='sp-table-row-info'>Werbung überall zulassen, <i>außer auf Websites</i> aus der Positivliste</span>"
     },
     "options_userfilter": {
         "message": "Benutzerregeln"
     },
     "options_userfilter_no_user_rules": {
-        "message": "Liste ist leer"
+        "message": "Keine Benutzerregeln"
     },
     "options_userfilter_info_single": {
         "message": "%s Benutzerregel"
@@ -276,7 +285,7 @@
         "message": "%s Benutzerregeln"
     },
     "options_userfilter_description": {
-        "message": "Sie können Ihre eigenen Regeln zu Benutzerregeln hinzufügen. Diese Option ist für die mit HTML/CSS vertrauten fortgeschrittenen Benutzer empfohlen. Lesen Sie <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>die Filterregeln-Anleitung</a>, um zu erfahren, wie Sie Ihre eigenen Filterregeln schreiben können."
+        "message": "Sie können Ihre eigenen Regeln zu Benutzerregeln hinzufügen. Diese Option ist für die mit HTML/CSS vertrauten fortgeschrittenen Benutzer empfohlen. Lesen Sie <a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>die Filterregeln-Anleitung</a>, um zu erfahren, wie Sie Ihre eigenen Filterregeln schreiben können."
     },
     "options_userfilter_import": {
         "message": "Importieren"
@@ -333,10 +342,10 @@
         "message": "Warnung"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Zu viele Filter aktiviert. Safari kann nicht mehr als %s Regeln in einer Gruppe verarbeiten."
+        "message": "Zu viele Filter aktiviert. Safari kann nicht mehr als %s Regeln in einer Gruppe verwenden."
     },
     "options_content_blocker_overlimit": {
-        "message": "Zu viele Filter aktiviert. Safari kann nicht mehr als %s Regeln in einer Gruppe verarbeiten."
+        "message": "Zu viele Filter aktiviert. Safari kann nicht mehr als %s Regeln in einer Gruppe verwenden."
     },
     "options_filters_list_search_placeholder": {
         "message": "Suchen"
@@ -402,7 +411,7 @@
         "message": "Inhaltsblocker"
     },
     "options_content_blockers_desc": {
-        "message": "Aktivierte Werbeblocker: %s von 6 (jeder kann bis zu %s Regeln enthalten)"
+        "message": "Aktivierte Werbeblocker: %s von 6 (jeder kann bis zu %s Regel enthalten)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Werbeblocker sind deaktiviert"
@@ -462,7 +471,7 @@
         "message": "6 Erweiterungen zum Sperren von Inhalten"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari begrenzt die maximale Anzahl von Regeln zum Sperren von Inhalten mit %s pro Erweiterung. Dies ist nicht genug, um alle Arten von Werbung und Trackern zu verarbeiten, die AdGuard sperren kann. Deshalb stellen wir 6 Erweiterungen zur Verfügung und erhöhen damit das Maximum auf %s Einträge."
+        "message": "Safari begrenzt die maximale Anzahl von Inhaltsblockierungsregeln auf %s pro Erweiterung. Dies reicht nicht aus, um alle Arten von AdGuard-Blockierungen von Anzeigen und Trackern zu verarbeiten. Aus diesem Grund bieten wir 6 Erweiterungen an und erhöhen damit dieses Limit auf %s."
     },
     "onboarding_safari_btn": {
         "message": "Einstellungen öffnen"
@@ -573,7 +582,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Die Grenze von %s Regeln wurde überschritten. Bitte deaktivieren Sie unnötige Regeln, damit die App korrekt funktioniert.<br/>Aktuell aktivierte Regeln: %s ($2 Regeln deaktiviert)"
+        "message": "Das Limit von %s Regeln wurde überschritten. Bitte deaktivieren Sie unnötige Regeln, damit die App korrekt funktioniert.<br/>Aktivierte Regeln im Moment: %s (deaktivierte Regeln: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "In Safari deaktiviert"
@@ -588,7 +597,7 @@
         "message": "Benutzerregeln"
     },
     "allowlist_name": {
-        "message": "Freigabeliste"
+        "message": "Positivliste"
     },
     "window_close_dialog_message": {
         "message": "AdGuard im Hintergrund laufen lassen?"
@@ -609,7 +618,7 @@
         "message": "Abbrechen"
     },
     "folder_check_dialog_message": {
-        "message": "AdGuard for Safari sollte aus dem Ordner „Programme” gestartet werden."
+        "message": "AdGuard for Safari sollte aus dem Ordner „Programme“ gestartet werden."
     },
     "folder_check_dialog_detail": {
         "message": "Möchten Sie die Erweiterung jetzt in den Ordner \"Programme\" verschieben?"

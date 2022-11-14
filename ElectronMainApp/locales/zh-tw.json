@@ -108,7 +108,7 @@
         "message": "一般的"
     },
     "options_general_desc": {
-        "message": "AdGuard for Safari 是一款免費的且開源的軟體。我們歡迎您的回饋意見和貢獻。如果您想要報告程式錯誤或請求功能，請前往<a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>我們的 GitHub 儲存庫</a>。"
+        "message": "AdGuard for Safari 是一款免費的且開源的軟體。我們歡迎您的回饋意見和貢獻。如果您想要報告程式錯誤或請求功能，請前往<a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>我們的 GitHub 儲存庫</a>。"
     },
     "options_allow_acceptable_ads": {
         "message": "允許搜尋廣告和網站之自我推銷"
@@ -160,6 +160,9 @@
     },
     "options_filters_no_enabled": {
         "message": "無已啟用的過濾器"
+    },
+    "options_filters_no_filters": {
+        "message": "無過濾器"
     },
     "options_filters_version": {
         "message": "版本 %s"
@@ -265,6 +268,9 @@
     },
     "options_userfilter": {
         "message": "使用者規則"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "無使用者規則"
     },
     "options_userfilter_info_single": {
         "message": "%s 使用者規則"

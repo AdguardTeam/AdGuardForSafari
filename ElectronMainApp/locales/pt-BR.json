@@ -161,6 +161,9 @@
     "options_filters_no_enabled": {
         "message": "Nenhum filtro ativado"
     },
+    "options_filters_no_filters": {
+        "message": "Sem filtros"
+    },
     "options_filters_version": {
         "message": "versão %s"
     },
@@ -267,7 +270,7 @@
         "message": "Regras de usuário"
     },
     "options_userfilter_no_user_rules": {
-        "message": "Lsta está vazia"
+        "message": "Sem regras de usuário"
     },
     "options_userfilter_info_single": {
         "message": "%s regra de usuário"
@@ -333,10 +336,10 @@
         "message": "Aviso"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Existem muitos filtros ativos. O Safari não pode usar mais do que 50 mil regras em um grupo."
+        "message": "Muitos filtros ativos. O Safari não pode usar mais do que %s regras."
     },
     "options_content_blocker_overlimit": {
-        "message": "Existem muitos filtros ativos. O Safari não pode usar mais do que 50 mil regras em um grupo."
+        "message": "Muitos filtros ativos. O Safari não pode usar mais do que %s regras."
     },
     "options_filters_list_search_placeholder": {
         "message": "Procurar"
@@ -402,7 +405,7 @@
         "message": "Bloqueadores de conteúdo"
     },
     "options_content_blockers_desc": {
-        "message": "Bloqueadores de anúncios ativados: %s de 6 (cada um pode conter até 50 mil regras)"
+        "message": "Bloqueadores de anúncios ativados: %s de 6 (cada um pode conter até %s regras)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Os bloqueadores de anúncios estão desativados"
@@ -573,7 +576,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "O limite de 50 mil regras foi excedido. Desative regras sem utilização para que o aplicativo funcione corretamente.<br/>Regras ativadas no momento: %s (regras desativadas: $2)"
+        "message": "O limite de %s regras foi excedido. Desative regras sem utilização para que o aplicativo funcione corretamente.<br/>Regras ativadas no momento: %s (regras desativadas: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Desativado no Safari"
