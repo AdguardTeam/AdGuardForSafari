@@ -11,6 +11,12 @@ jest.spyOn(serviceClient, 'loadRemoteFiltersMetadata').mockImplementation((callb
     callback(filtersMetadata);
 });
 
+jest.spyOn(serviceClient, 'executeRequestAsync').mockImplementation((url, contentType, successCallback) => {
+    successCallback({
+        responseText: JSON.stringify(filtersMetadata),
+    });
+});
+
 describe('Service client tests', () => {
     it('Download rules by path', (done) => {
         serviceClient.loadFilterRulesBySubscriptionUrl(testFilterPath, (lines) => {

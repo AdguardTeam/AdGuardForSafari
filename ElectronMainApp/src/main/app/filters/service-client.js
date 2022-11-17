@@ -14,7 +14,7 @@ const appPack = require('../../../utils/app-pack');
  * All requests sent by this class are covered in the privacy policy:
  * http://adguard.com/en/privacy.html#browsers
  */
-module.exports = (function () {
+const serviceClient = (function () {
     'use strict';
 
     /**
@@ -193,7 +193,7 @@ module.exports = (function () {
             }
         };
 
-        executeRequestAsync(settings.filtersMetadataUrl, 'application/json', success, errorCallback);
+        serviceClient.executeRequestAsync(settings.filtersMetadataUrl, 'application/json', success, errorCallback);
     };
 
     /**
@@ -331,5 +331,10 @@ module.exports = (function () {
         loadLocalFiltersI18Metadata,
 
         loadRemoteFiltersMetadata,
+
+        // for tests exposed only
+        executeRequestAsync,
     };
 })();
+
+module.exports = serviceClient;
