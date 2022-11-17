@@ -334,8 +334,21 @@ a.settings-actions--update-filters.loading:after {
   background: url(../images/magnifying-glass.svg) 5px center no-repeat;
   background-size: 17px;
   outline: none;
-  padding: 0 0 0 33px;
+  padding: 0 33px;
   font-size: 16px;
+}
+.filters-search .clear-search {
+  width: 24px;
+  height: 26px;
+  background: url(../images/cross.svg) center no-repeat;
+  position: absolute;
+  top: 7px;
+  right: 3px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.filters-search .clear-search.clear-search--visible {
+  visibility: visible;
 }
 /* /st */
 /* th & st */

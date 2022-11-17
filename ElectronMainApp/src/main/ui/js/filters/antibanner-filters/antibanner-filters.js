@@ -363,6 +363,7 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
                             name="searchFiltersList"
                             tabindex="0"
                         />
+                        <div class="clear-search clear-filters-search"></div>
                     </div>
                 </div>
                 <div class="settings-body settings-body--search">

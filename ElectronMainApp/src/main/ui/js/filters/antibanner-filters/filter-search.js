@@ -2,6 +2,8 @@ const { ipcRenderer } = require('electron');
 
 const utils = require('../../utils/common-utils');
 
+const CLEAR_SEARCH_VISIBLE_CLASS = 'clear-search--visible';
+
 const clearSearch = (nodes) => {
     // eslint-disable-next-line no-return-assign
     nodes.forEach((node) => {
@@ -58,9 +60,16 @@ const initGroupsSearch = (loadedFiltersInfo, getFilterTemplate) => {
 
     clearSearch(filters);
 
+    const clearSearchButton = document.querySelector('#clearGroupFiltersSearch');
+
     if (searchInput) {
         searchInput.addEventListener('input', utils.debounce((e) => {
             clearSearch(filters);
+            if (searchInput.value) {
+                clearSearchButton.classList.add(CLEAR_SEARCH_VISIBLE_CLASS);
+            } else {
+                clearSearchButton.classList.remove(CLEAR_SEARCH_VISIBLE_CLASS);
+            }
             searchFilters(e.target.value, filters, groups);
         }, SEARCH_DELAY_MS));
     }
@@ -68,6 +77,16 @@ const initGroupsSearch = (loadedFiltersInfo, getFilterTemplate) => {
     if (searchInput.value) {
         searchFilters(searchInput.value, filters, groups);
     }
+
+    clearSearchButton
+        .addEventListener('click', (e) => {
+            if (searchInput?.value) {
+                clearSearchButton.classList.remove(CLEAR_SEARCH_VISIBLE_CLASS);
+                clearSearch(filters);
+                clearSearchEvent(e);
+                searchInput.focus();
+            }
+        });
 };
 
 function initFiltersSearch(category, renderCategoryFilters) {
@@ -85,10 +104,30 @@ function initFiltersSearch(category, renderCategoryFilters) {
 
     const SEARCH_DELAY_MS = 250;
 
+    const resetFiltersSearch = () => {
+        ipcRenderer.once('getFiltersMetadataResponse', (e, response) => {
+            const updatedCategory = response.categories.find((cat) => cat.groupId === category.groupId);
+            renderCategoryFilters(updatedCategory);
+            const tabId = document.location.hash;
+            const tab = document.querySelector(tabId);
+            if (!tab) {
+                return;
+            }
+            tab.style.display = 'flex';
+            initFiltersSearch(updatedCategory, renderCategoryFilters);
+        });
+        ipcRenderer.send('renderer-to-main', JSON.stringify({
+            'type': 'getFiltersMetadata',
+        }));
+    };
+
+    const clearSearchButton = document.querySelector(`#antibanner${category.groupId} .clear-filters-search`);
+
     searchInput.addEventListener('input', utils.debounce((e) => {
         let searchString;
         try {
             searchString = utils.escapeRegExp(e.target.value.trim());
+            clearSearchButton.classList.add(CLEAR_SEARCH_VISIBLE_CLASS);
         } catch (err) {
             /* eslint-disable-next-line no-console */
             console.log(err.message);
@@ -96,20 +135,8 @@ function initFiltersSearch(category, renderCategoryFilters) {
         }
 
         if (!searchString) {
-            ipcRenderer.once('getFiltersMetadataResponse', (e, response) => {
-                const updatedCategory = response.categories.find((cat) => cat.groupId === category.groupId);
-                renderCategoryFilters(updatedCategory);
-                const tabId = document.location.hash;
-                const tab = document.querySelector(tabId);
-                if (!tab) {
-                    return;
-                }
-                tab.style.display = 'flex';
-                initFiltersSearch(updatedCategory, renderCategoryFilters);
-            });
-            ipcRenderer.send('renderer-to-main', JSON.stringify({
-                'type': 'getFiltersMetadata',
-            }));
+            resetFiltersSearch();
+            clearSearchButton.classList.remove(CLEAR_SEARCH_VISIBLE_CLASS);
             return;
         }
 
@@ -129,6 +156,16 @@ function initFiltersSearch(category, renderCategoryFilters) {
                 filtersContainer.appendChild(node);
             });
     }, SEARCH_DELAY_MS));
+
+    clearSearchButton
+        .addEventListener('click', () => {
+            if (searchInput?.value) {
+                searchInput.value = '';
+                resetFiltersSearch();
+                clearSearchButton.classList.remove(CLEAR_SEARCH_VISIBLE_CLASS);
+                searchInput.focus();
+            }
+        });
 }
 
 /**
