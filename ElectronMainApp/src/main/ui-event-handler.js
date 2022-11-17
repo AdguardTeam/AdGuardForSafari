@@ -1,6 +1,8 @@
 const { ipcMain, app: electronApp } = require('electron');
 const config = require('config');
 const safariToolbar = require('safari-ext');
+const { getConverterVersion } = require('safari-converter-lib');
+
 const settings = require('./app/settings-manager');
 const settingsBackup = require('./app/settings-provider');
 const filters = require('./app/filters-manager');
@@ -252,6 +254,7 @@ function processInitializeFrameScriptRequest() {
             appVersion: app.getVersion(),
             buildNumber: app.getBuildNumber(),
             updatesPermitted: updater.isUpdatePermitted(),
+            converterVersion: getConverterVersion(),
         },
         constants: {
             AntiBannerFiltersId,

@@ -69,10 +69,12 @@ PageController.prototype = {
         const exportSettingsBtn = document.querySelector('#settingsExport');
         const importSettingsInput = document.querySelector('#importSettingsInput');
         const exportLogsBtn = document.querySelector('#exportLogs');
+        const versionElement = document.querySelector('#about-version-placeholder');
 
         importSettingsBtn.addEventListener('click', this.importSettingsFile.bind(this));
         exportSettingsBtn.addEventListener('click', this.exportSettingsFile.bind(this));
         exportLogsBtn.addEventListener('click', this.exportLogs.bind(this));
+        versionElement.addEventListener('click', this.displayMoreInfo.bind(this));
 
         importSettingsInput.addEventListener('change', (event) => {
             try {
@@ -83,6 +85,36 @@ PageController.prototype = {
             }
             importSettingsInput.value = '';
         });
+    },
+
+    /**
+     * Updates version node with text
+     * @param versionNode
+     * @param text
+     */
+    renderVersion(versionNode, text) {
+        versionNode.textContent = i18n.__('options_about_version.message', text);
+    },
+
+    /**
+     * Builds string with version information
+     * @param extendedInfo - flag, if true adds more information about version to output string
+     * @returns {string}
+     */
+    getVersionMessage(extendedInfo) {
+        const { appVersion, buildNumber, converterVersion } = this.environmentOptions;
+        if (extendedInfo) {
+            return `${appVersion} (build ${buildNumber}, CT ${converterVersion})`;
+        }
+        return `${appVersion}`;
+    },
+
+    /**
+     * Handles click to version element
+     * @param e - click event
+     */
+    displayMoreInfo(e) {
+        this.renderVersion(e.currentTarget, this.getVersionMessage(true));
     },
 
     exportLogs(event) {
@@ -308,11 +340,10 @@ PageController.prototype = {
         );
         this.contentBlockers.init();
 
-        const { appVersion, buildNumber } = this.environmentOptions;
-        const version = `${appVersion} (${buildNumber})`;
-
-        document.querySelector('#about-version-placeholder')
-            .textContent = i18n.__('options_about_version.message', version);
+        this.renderVersion(
+            document.querySelector('#about-version-placeholder'),
+            this.getVersionMessage()
+        );
 
         this.resolveIncorrectBlockingLink();
     },
