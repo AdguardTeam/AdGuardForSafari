@@ -20,7 +20,7 @@
         <img src="https://img.shields.io/github/release/AdguardTeam/AdguardForSafari.svg?label=release" alt="Latest release" />
     </a>
     <a href="https://agrd.io/safari_beta">
-        <img src="https://img.shields.io/github/tag-pre/AdguardTeam/AdguardForSafari.svg?label=beta" alt="Latest beta" />
+        <img src="https://img.shields.io/github/v/release/AdguardTeam/AdGuardForSafari?include_prereleases&label=beta&sort=semver" alt="Latest beta" />
     </a>
 </p>
 
