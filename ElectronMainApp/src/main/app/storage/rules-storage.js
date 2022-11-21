@@ -12,6 +12,7 @@ module.exports = (() => {
         return `filter_${path}`;
     };
 
+    // TODO refactor and remove callback to simplify code
     const read = (path, callback) => {
         const cached = cache[path];
         if (cached) {

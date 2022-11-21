@@ -189,6 +189,14 @@ module.exports = (() => {
     };
 
     /**
+     * Sets allowlist inverted status
+     * @param inverted - boolean
+     */
+    const setAllowlistInverted = (inverted) => {
+        addon.setAllowlistInverted(inverted);
+    };
+
+    /**
      * @param callback = (domains as stringArray) => {}
      */
     const allowlistDomains = (callback) => {
@@ -313,27 +321,28 @@ module.exports = (() => {
     };
 
     return {
-        init: init,
-        sendReady: sendReady,
-        busyStatus: busyStatus,
-        setContentBlockingJson: setContentBlockingJson,
-        setProtectionEnabled: setProtectionEnabled,
-        protectionEnabled: protectionEnabled,
+        init,
+        sendReady,
+        busyStatus,
+        setContentBlockingJson,
+        setProtectionEnabled,
+        protectionEnabled,
         setAllowlistDomains,
         allowlistDomains,
-        setUserFilter: setUserFilter,
-        userFilter: userFilter,
-        getExtensionState: getExtensionState,
-        openExtensionsPreferences: openExtensionsPreferences,
-        debugLog: debugLog,
-        setVerboseLogging: setVerboseLogging,
-        setStartAtLogin: setStartAtLogin,
-        startAtLogin: startAtLogin,
-        removeOldLoginItem: removeOldLoginItem,
-        requestMASUserReview: requestMASUserReview,
-        sharedResourcesPath: sharedResourcesPath,
-        getSafariVersion: getSafariVersion,
+        setUserFilter,
+        userFilter,
+        getExtensionState,
+        openExtensionsPreferences,
+        debugLog,
+        setVerboseLogging,
+        setStartAtLogin,
+        startAtLogin,
+        removeOldLoginItem,
+        requestMASUserReview,
+        sharedResourcesPath,
+        getSafariVersion,
         getOSVersion,
         getBuildNumber,
+        setAllowlistInverted,
     };
 })();

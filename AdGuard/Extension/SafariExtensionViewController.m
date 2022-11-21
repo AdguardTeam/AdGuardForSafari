@@ -209,7 +209,10 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             ASSIGN_STRONG(self);
             DDLogDebug(@"Allowlist domains:\n%@", domains);
-            USE_STRONG(self).allowlistButton.state = ! [USE_STRONG(self) domainCheckWithDomains:domains] ? NSOnState : NSOffState;
+            BOOL inAllowlist = [USE_STRONG(self) domainCheckWithDomains:domains];
+            BOOL allowlistInverted = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsAllowlistInverted];
+            BOOL enabledForDomain = allowlistInverted ? inAllowlist : !inAllowlist;
+            USE_STRONG(self).allowlistButton.state = enabledForDomain ? NSOnState : NSOffState;
         });
     }];
 }

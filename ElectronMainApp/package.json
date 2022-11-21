@@ -40,7 +40,7 @@
     "devDependencies": {
         "@electron/universal": "^1.3.0",
         "@jest-runner/electron": "^3.0.0",
-        "@jest/schemas": "^28.1.3",
+        "@jest/schemas": "^29.0.0",
         "@swc/cli": "^0.1.57",
         "@swc/core": "^1.3.8",
         "@swc/register": "^0.1.10",

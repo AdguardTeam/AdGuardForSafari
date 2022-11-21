@@ -119,6 +119,22 @@ NAN_METHOD(setAllowlistDomains) {
     }];
 }
 
+NAN_METHOD(setAllowlistInverted) {
+
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsBoolean()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+
+    BOOL val = info[0].As<v8::Boolean>()->Value();
+    [[AESharedResources sharedDefaults] setBool:val forKey:AEDefaultsAllowlistInverted];
+}
+
 NAN_METHOD(setUserFilter) {
 
     if (info.Length() < 2) {
@@ -809,6 +825,9 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("setAllowlistDomains").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setAllowlistDomains)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("setAllowlistInverted").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setAllowlistInverted)).ToLocalChecked());
 
   Nan::Set(target, New<String>("setUserFilter").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setUserFilter)).ToLocalChecked());

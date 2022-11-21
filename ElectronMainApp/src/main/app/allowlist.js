@@ -90,8 +90,10 @@ module.exports = (function () {
         },
     };
 
-    /* eslint-disable-next-line no-unused-vars */
-    function notifyAllowlistUpdated(options) {
+    /**
+     * Notifies listeners about allowlist changes (new domain added or removed, allowlist mode changed)
+     */
+    function notifyAllowlistUpdated() {
         listeners.notifyListeners(events.UPDATE_ALLOWLIST_FILTER_RULES);
     }
 
@@ -304,15 +306,14 @@ module.exports = (function () {
      * @param allowlist Allowlist domains
      * @param blocklist Blocklist domains
      * @param allowlistMode Allowlist mode
-     * @param options
      */
-    const configure = function (allowlist, blocklist, allowlistMode, options) {
+    const configure = function (allowlist, blocklist, allowlistMode) {
         clearAllowlisted();
         clearBlocklisted();
         addAllowlisted(allowlist || []);
         addBlocklisted(blocklist || []);
         settings.changeDefaultAllowlistMode(allowlistMode);
-        notifyAllowlistUpdated(options);
+        notifyAllowlistUpdated();
     };
 
     /**

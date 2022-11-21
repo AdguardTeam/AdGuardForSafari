@@ -103,12 +103,12 @@ static BOOL _mainAppReady;
 }
 
 - (void)validateToolbarItemInWindow:(SFSafariWindow *)window validationHandler:(void (^)(BOOL enabled, NSString *badgeText))validationHandler {
-    // This method will be called whenever some state changes in the passed in window. You should use this as a chance to enable or disable your toolbar item and set badge text.
+    // This method will be called whenever some state changes passed in the window. You should use this as a chance to enable or disable your toolbar item and set badge text.
     DDLogDebugTrace();
     [window getToolbarItemWithCompletionHandler:^(SFSafariToolbarItem * _Nullable toolbarItem) {
-        BOOL toolbarItemOn = NO;
+        BOOL protectionEnabled = NO;
         if ([self setMainAppRunning]) {
-            toolbarItemOn = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsEnabled];
+            protectionEnabled = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsEnabled];
         }
         else {
             [[AESharedResources sharedDefaults] setBool:NO forKey:AEDefaultsMainAppBusy];
@@ -119,20 +119,23 @@ static BOOL _mainAppReady;
                     SafariExtensionViewController.sharedController.currentPageUrl = nil;
                     if (properties) {
                         SafariExtensionViewController.sharedController.currentPageUrl = [properties.url copy];
-                        if (toolbarItemOn) {
+                        if (protectionEnabled) {
                             [AESharedResources allowlistDomainsWithCompletion:^(NSArray<NSString *> *domains) {
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     DDLogDebug(@"Allowlist domains:\n%@", domains);
-                                    [toolbarItem setImage:([SafariExtensionViewController.sharedController domainCheckWithDomains:domains] ?
-                                                           [NSImage imageNamed:@"toolbar-off"] :
-                                                           [NSImage imageNamed:@"toolbar-on"])];
+                                    BOOL inAllowlist = [SafariExtensionViewController.sharedController domainCheckWithDomains:domains];
+                                    BOOL allowlistInverted = [[AESharedResources sharedDefaults] boolForKey:AEDefaultsAllowlistInverted];
+                                    BOOL toolbarEnabled = allowlistInverted ? inAllowlist : !inAllowlist;
+                                    [toolbarItem setImage:(toolbarEnabled ?
+                                                           [NSImage imageNamed:@"toolbar-on"] :
+                                                           [NSImage imageNamed:@"toolbar-off"])];
                                     validationHandler(YES, nil);
                                 });
                             }];
                             return;
                         }
                     }
-                    [toolbarItem setImage:(toolbarItemOn ?
+                    [toolbarItem setImage:(protectionEnabled ?
                                            [NSImage imageNamed:@"toolbar-on"] :
                                            [NSImage imageNamed:@"toolbar-off"])];
                     validationHandler(YES, nil);

@@ -104,22 +104,38 @@ module.exports = (() => {
         log.debug('Initializing toolbar controller..');
 
         // Subscribe to toolbar events
-        safariToolbar.init(onProtectionChangedCallback, onAllowlistChangedCallback,
-            onUserFilterChangedCallback, onShowPreferencesCallback(showWindow),
-            onReportCallback);
+        safariToolbar.init(
+            onProtectionChangedCallback,
+            onAllowlistChangedCallback,
+            onUserFilterChangedCallback,
+            onShowPreferencesCallback(showWindow),
+            onReportCallback
+        );
 
         // Subscribe to application events
         listeners.addListener((event, info) => {
-            if (event === events.CONTENT_BLOCKER_UPDATE_REQUIRED) {
-                setContentBlockingJson(info.bundleId, info.json, info.info);
-            } else if (event === events.UPDATE_USER_FILTER_RULES) {
-                applicationApi.getUserFilterRules((rules) => {
-                    setUserFilter(rules);
-                });
-            } else if (event === events.UPDATE_ALLOWLIST_FILTER_RULES) {
-                setAllowlistDomains(settings.isAllowlistEnabled() ? applicationApi.getAllowlist() : []);
-            } else if (event === events.PROTECTION_STATUS_CHANGED) {
-                setProtectionEnabled(!!info);
+            switch (event) {
+                case events.CONTENT_BLOCKER_UPDATE_REQUIRED: {
+                    setContentBlockingJson(info.bundleId, info.json, info.info);
+                    break;
+                }
+                case events.UPDATE_USER_FILTER_RULES: {
+                    applicationApi.getUserFilterRules((rules) => {
+                        setUserFilter(rules);
+                    });
+                    break;
+                }
+                case events.UPDATE_ALLOWLIST_FILTER_RULES: {
+                    setAllowlistDomains(settings.isAllowlistEnabled() ? applicationApi.getAllowlist() : []);
+                    setAllowlistInverted(!settings.isDefaultAllowlistMode());
+                    break;
+                }
+                case events.PROTECTION_STATUS_CHANGED: {
+                    setProtectionEnabled(!!info);
+                    break;
+                }
+                default:
+                    break;
             }
         });
 
@@ -206,6 +222,15 @@ module.exports = (() => {
         safariToolbar.setAllowlistDomains(domains, () => {
             safariToolbar.busyStatus(false);
         });
+    };
+
+    /**
+     * Sets allowlist inversion mode
+     */
+    const setAllowlistInverted = (inverted) => {
+        safariToolbar.busyStatus(true);
+        safariToolbar.setAllowlistInverted(inverted);
+        safariToolbar.busyStatus(false);
     };
 
     /**

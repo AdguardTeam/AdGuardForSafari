@@ -53,6 +53,7 @@ NSString * const AEDefaultsMainAppBusy = @"AEDefaultsMainAppBusy";
 NSString * const AEDefaultsVerboseLogging = @"AEDefaultsVerboseLogging";
 NSString * const AEDefaultsLastReportUrl = @"AEDefaultsLastReportUrl";
 NSString * const AEDefaultsAllExtensionsEnabled = @"AEDefaultsAllExtensionsEnabled";
+NSString * const AEDefaultsAllowlistInverted = @"AEDefaultsAllowlistInverted";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

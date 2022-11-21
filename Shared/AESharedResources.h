@@ -17,6 +17,7 @@ extern NSString * const AEDefaultsMainAppBusy;
 extern NSString * const AEDefaultsVerboseLogging;
 extern NSString * const AEDefaultsLastReportUrl;
 extern NSString * const AEDefaultsAllExtensionsEnabled;
+extern NSString * const AEDefaultsAllowlistInverted;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
