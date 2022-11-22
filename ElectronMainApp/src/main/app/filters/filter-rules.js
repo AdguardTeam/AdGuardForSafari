@@ -98,7 +98,7 @@ module.exports = (() => {
     /**
      * If rules is trusted or not
      * Untrusted rules are $replace or JS
-     *
+     * TODO: in the future we may allow CSS rules and Scriptlets (except for "trusted" scriptlets)
      * @param ruleText
      */
     const isTrustedRule = (ruleText) => {
