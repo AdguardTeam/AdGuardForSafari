@@ -81,7 +81,6 @@ const initGroupsSearch = (loadedFiltersInfo, getFilterTemplate) => {
     clearSearchButton
         .addEventListener('click', (e) => {
             if (searchInput?.value) {
-                clearSearchButton.classList.remove(CLEAR_SEARCH_VISIBLE_CLASS);
                 clearSearch(filters);
                 clearSearchEvent(e);
                 searchInput.focus();
@@ -194,7 +193,10 @@ function clearSearchEvent(event) {
         const filters = antibannerList.querySelectorAll('li[id^="filter"]');
         const groups = antibannerList.querySelectorAll('li[id^="category"]');
 
+        const clearSearchButton = document.querySelector('#clearGroupFiltersSearch');
+        clearSearchButton.classList.remove(CLEAR_SEARCH_VISIBLE_CLASS);
         searchInput.value = '';
+        clearSearch(filters);
         searchFilters('', filters, groups);
     };
 
