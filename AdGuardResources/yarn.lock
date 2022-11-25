@@ -12,10 +12,10 @@
   resolved "https://registry.yarnpkg.com/@adguard/extended-css/-/extended-css-2.0.10.tgz#5858691317454fd5851a2ca0d5d04058381db030"
   integrity sha512-RD+Uo7wjNPzuazmUPt+GFYnmJgKH+k93ZlSUeHJmijx9R2ro1DB9c4hJJ/17wmhU0CkvNwLehRK7mu5Fcfynpg==
 
-"@adguard/scriptlets@^1.6.55":
-  version "1.6.55"
-  resolved "https://registry.yarnpkg.com/@adguard/scriptlets/-/scriptlets-1.6.55.tgz#e32941d1ae02405ce0e0996f550e5dcf39de7929"
-  integrity sha512-p6lt0midjcLDdMcZilnyIDtEQm43OljLGSvVnjUn1Dh3crONpCp+MI+PVys82fd+9VNiea30hkz5d/WQ7DIiYg==
+"@adguard/scriptlets@^1.7.3":
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/@adguard/scriptlets/-/scriptlets-1.7.3.tgz#63df428f136635ea8395bd911c1697561d32ca1f"
+  integrity sha512-6qRjUQGr2Ga5mF9cbrhbcibum7pMSyCWP5wK5xEviyemwvcLAQQvCvzChzgVeBmfpCFjuEV9ufCj9oGfkMCpSw==
   dependencies:
     "@babel/runtime" "^7.7.2"
     js-yaml "^3.13.1"
