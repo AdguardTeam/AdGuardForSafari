@@ -7,6 +7,7 @@ const log = require('./app/utils/log');
 const contentBlockerListener = require('./app/content-blocker/content-blocker-listener');
 const notificationController = require('./notification-controller');
 const toolbarController = require('./toolbar-controller');
+const settings = require('./app/settings-manager.js');
 
 /**
  * Application startup
@@ -19,6 +20,13 @@ module.exports = (() => {
         log.info('Application initialization..');
 
         safariToolbar.busyStatus(true);
+
+        // set launch at login
+        const isLaunchAtLoginEnabled = settings.isLaunchAtLoginEnabled();
+        if (isLaunchAtLoginEnabled !== safariToolbar.startAtLogin()) {
+            safariToolbar.setStartAtLogin(isLaunchAtLoginEnabled);
+            log.info('Launch at login set to {0}', isLaunchAtLoginEnabled);
+        }
 
         allowlist.init();
         log.debug('Allowlist initialization completed');

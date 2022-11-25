@@ -6,6 +6,7 @@ yarn-error.log
 .DS_Store
 ElectronMainApp/safari-ext/shared/*
 *.a
+Makefile
 
 
 # the following libs are downloaded and copied to their extensions folders by AdGuardResources postinstall script
