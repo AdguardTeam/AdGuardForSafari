@@ -640,16 +640,21 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
         setLastUpdatedTimeText(filter.lastUpdateTime);
     }
 
-    function onFilterUpdatesFinished() {
+    function onFilterUpdatesFinished(updatedFilters) {
         // set timeout to let the update button animation turn around
         setTimeout(() => {
             document.querySelector('#updateAntiBannerFilters').classList.remove('loading');
         }, ANIMATION_DELAY);
+        if (Array.isArray(updatedFilters)) {
+            updatedFilters.forEach((filter) => {
+                updateFilterMetadata(filter);
+            });
+        }
     }
 
     function updateFilterMetadata(filter) {
-        const filterEl = getFilterElement(filter.filterId);
-        if (filterEl) {
+        const filterElements = document.querySelectorAll(`#filter${filter.filterId}`);
+        filterElements.forEach((filterEl) => {
             filterEl.querySelector('.preloader').classList.remove('active');
 
             const timeUpdated = new Date(filter.lastUpdateTime || filter.timeUpdated);
@@ -673,7 +678,7 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
                                    </div>`;
                 filterEl.querySelector('.tags-container').appendChild(utils.htmlToElement(tagTrusted));
             }
-        }
+        });
     }
 
     /**
