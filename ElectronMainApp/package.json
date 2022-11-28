@@ -23,6 +23,7 @@
         }
     },
     "dependencies": {
+        "@adguard/filters-downloader": "1.1.15",
         "adm-zip": "^0.4.13",
         "config": "^1.31.0",
         "electron-debug": "^2.0.0",
@@ -30,7 +31,6 @@
         "electron-simple-updater": "^1.5.0",
         "electron-store": "^5.0.0",
         "electron-updater": "^4.3.8",
-        "filters-downloader": "git+https://github.com/AdguardTeam/FiltersDownloader.git#v1.0.14",
         "i18n": "^0.8.3",
         "safari-converter-lib": "git+https://github.com/AdguardTeam/SafariConverterLib.git#v2.0.31",
         "safari-ext": "./safari-ext",

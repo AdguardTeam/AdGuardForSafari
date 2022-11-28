@@ -1,6 +1,6 @@
 const { XMLHttpRequest } = require('xmlhttprequest');
 const fs = require('fs');
-const filterDownloader = require('filters-downloader');
+const filterDownloader = require('@adguard/filters-downloader');
 const config = require('config');
 const path = require('path');
 const log = require('../utils/log');
