@@ -13,8 +13,8 @@ TEMP_DIR = tempfile.mkdtemp()
 # Directory of this python file
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 
-def updateVersion(path, channel, version):
 
+def update_version(path, channel, version):
     print("Updating json file {0}".format(path))
 
     file = open(path, 'r')
@@ -36,14 +36,19 @@ def updateVersion(path, channel, version):
                 "version": "1.4.1"}
         }
 
-    prodConfig = config_json["darwin-x64-prod"]
-    betaConfig = config_json["darwin-x64-beta"]
+    prod_config = config_json["darwin-x64-prod"]
+    beta_config = config_json["darwin-x64-beta"]
 
     if channel == "release":
-        prodConfig["version"] = version
+        prod_config["version"] = version
 
     if channel == "beta":
-        betaConfig["version"] = version
+        beta_config["version"] = version
+
+    # props for arm64, otherwise updates are not working
+    # props values are the same, since we have universal builds
+    config_json["darwin-arm64-prod"] = prod_config
+    config_json["darwin-arm64-beta"] = beta_config
 
     file = open(path, "w")
     file.write(json.dumps(config_json, indent=4))
@@ -80,7 +85,7 @@ def main():
     if not os.path.exists(path):
         raise ValueError("Cannot find json file: {0}".format(path))
 
-    updateVersion(path, options.channel, options.version)
+    update_version(path, options.channel, options.version)
     return
 
 
