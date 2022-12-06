@@ -1,6 +1,7 @@
 const config = require('config');
 const fs = require('fs');
 const path = require('path');
+
 const listeners = require('../notifier');
 const events = require('../events');
 const subscriptions = require('./filters/subscriptions');
@@ -13,7 +14,6 @@ const log = require('./utils/log');
 const filtersUpdate = require('./filters/filters-update');
 const serviceClient = require('./filters/service-client');
 const appPack = require('../../utils/app-pack');
-
 const { CUSTOM_FILTERS_START_ID } = require('./filters/constants');
 
 /**
@@ -502,6 +502,13 @@ module.exports = (() => {
         });
     };
 
+    /**
+     * Returns date of last filters updated check
+     */
+    const getFiltersUpdateLastCheck = () => {
+        return filtersUpdate.getFiltersUpdateLastCheck();
+    };
+
     return {
         getFilters,
         getGroups,
@@ -529,5 +536,7 @@ module.exports = (() => {
         checkAntiBannerFiltersUpdate,
         removeObsoleteFilters,
         cleanRemovedCustomFilters,
+
+        getFiltersUpdateLastCheck,
     };
 })();

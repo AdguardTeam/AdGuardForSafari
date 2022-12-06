@@ -7,6 +7,9 @@ const events = require('../../events');
 const settings = require('../settings-manager');
 const versionUtils = require('../utils/version');
 const log = require('../utils/log');
+const storage = require('../storage/storage');
+
+const FILTERS_UPDATE_LAST_CHECK_KEY = 'filters-update-last-check';
 
 /**
  * Filters update service
@@ -65,6 +68,20 @@ module.exports = (() => {
     };
 
     /**
+     * Sets date of last filters updated check
+     */
+    const setFiltersUpdateLastCheck = (value) => {
+        storage.setItem(FILTERS_UPDATE_LAST_CHECK_KEY, value);
+    };
+
+    /**
+     * Gets date of last filters updated check
+     */
+    const getFiltersUpdateLastCheck = () => {
+        return storage.getItem(FILTERS_UPDATE_LAST_CHECK_KEY);
+    };
+
+    /**
      * Checks filters updates.
      *
      * @param forceUpdate Normally we respect filter update period. But if this parameter is
@@ -72,17 +89,21 @@ module.exports = (() => {
      * @param filters     Optional Array of filters to update
      */
     const checkAntiBannerFiltersUpdate = (forceUpdate, filters) => {
+        const currentDate = new Date();
+        setFiltersUpdateLastCheck(currentDate);
         const onSuccess = (updatedFilters) => {
             listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
                 success: true,
                 updatedFilters,
                 forceUpdate,
+                filtersUpdateLastCheck: currentDate,
             });
         };
         const onError = () => {
             listeners.notifyListeners(events.UPDATE_FILTERS_SHOW_POPUP, {
                 success: false,
                 forceUpdate,
+                filtersUpdateLastCheck: currentDate,
             });
         };
 
@@ -408,5 +429,6 @@ module.exports = (() => {
         loadFilterRules,
         rerunAutoUpdateTimer,
         reloadAntiBannerFilters,
+        getFiltersUpdateLastCheck,
     };
 })();

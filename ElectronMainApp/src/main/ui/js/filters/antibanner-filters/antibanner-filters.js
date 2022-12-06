@@ -469,7 +469,7 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
     function updateLoadedFiltersInfo(data) {
         loadedFiltersInfo.initLoadedFilters(data.filters, data.categories);
         updateRulesCountInfo(data.rulesInfo);
-        setLastUpdatedTimeText(loadedFiltersInfo.lastUpdateTime);
+        setLastUpdatedTimeText(data.filtersUpdateLastCheck || loadedFiltersInfo.lastUpdateTime);
         utils.setUserrulesNum(contentBlockerInfo.userRulesNum);
         utils.setIsAllowlistInverted(!userSettings.values[userSettings.names.DEFAULT_ALLOWLIST_MODE]);
         utils.setAllowlistInfo(contentBlockerInfo.allowlistedNum);
@@ -547,22 +547,13 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
         }));
     }
 
-    function setLastUpdatedTimeText(lastUpdateTime) {
-        if (lastUpdateTime && lastUpdateTime >= loadedFiltersInfo.lastUpdateTime) {
-            loadedFiltersInfo.lastUpdateTime = lastUpdateTime;
-
-            let updateText = '';
-            lastUpdateTime = loadedFiltersInfo.lastUpdateTime;
-            if (lastUpdateTime) {
-                lastUpdateTime = new Date(lastUpdateTime);
-                const options = {
-                    year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric',
-                };
-                updateText = lastUpdateTime.toLocaleString(environmentOptions.Prefs.locale, options);
-            }
-
-            document.querySelector('#lastUpdateTime').textContent = updateText;
-        }
+    function setLastUpdatedTimeText(date) {
+        const lastUpdateTime = new Date(date);
+        const options = {
+            year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric',
+        };
+        const updateText = lastUpdateTime.toLocaleString(environmentOptions.Prefs.locale, options);
+        document.querySelector('#lastUpdateTime').textContent = updateText;
     }
 
     const setSearchPlaceholder = () => {
@@ -637,10 +628,9 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
     function onFilterDownloadFinished(filter) {
         getCategoryElement(filter.groupId).querySelector('.preloader').classList.remove('active');
         updateFilterMetadata(filter);
-        setLastUpdatedTimeText(filter.lastUpdateTime);
     }
 
-    function onFilterUpdatesFinished(updatedFilters) {
+    function onFilterUpdatesFinished(updatedFilters, filtersUpdateLastCheck) {
         // set timeout to let the update button animation turn around
         setTimeout(() => {
             document.querySelector('#updateAntiBannerFilters').classList.remove('loading');
@@ -649,6 +639,9 @@ const AntiBannerFilters = function (options, contentBlockerInfo, environmentOpti
             updatedFilters.forEach((filter) => {
                 updateFilterMetadata(filter);
             });
+        }
+        if (filtersUpdateLastCheck) {
+            setLastUpdatedTimeText(filtersUpdateLastCheck);
         }
     }
 

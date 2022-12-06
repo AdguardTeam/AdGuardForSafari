@@ -33,6 +33,7 @@ module.exports.init = function () {
             case 'getFiltersMetadata':
                 const filtersMetadata = filterCategories.getFiltersMetadata();
                 filtersMetadata.rulesInfo = antibanner.getContentBlockerInfo();
+                filtersMetadata.filtersUpdateLastCheck = filters.getFiltersUpdateLastCheck();
                 sendResponse(event, 'getFiltersMetadataResponse', filtersMetadata);
                 break;
             case 'changeUserSetting':
