@@ -128,7 +128,7 @@
         }
 
         logMessage(verbose, `extended css length: ${extendedCss.length}`);
-        const extCss = new ExtendedCss.ExtendedCss({
+        const extCss = new ExtendedCss({
             styleSheet: extendedCss
                 .filter(s => s.length > 0)
                 .map(s => s.trim())
@@ -158,8 +158,13 @@
                     param.verbose = true;
                 }
 
-                const code = scriptlets && scriptlets.invoke(param);
-                return code ? code : '';
+                let code = '';
+                try {
+                    code = scriptlets && scriptlets.invoke(param);
+                } catch (e) {
+                    logMessage(verbose, `Error: can't invoke scriptlet with name: ${param.name}`);
+                }
+                return code;
             });
 
         executeScripts(scriptletExecutableScripts);
