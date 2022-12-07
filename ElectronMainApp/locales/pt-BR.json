@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "Perguntas frequentes"
     },
+    "options_support_feature_request_title": {
+        "message": "Enviar solicitação de recurso"
+    },
+    "options_support_feature_request_description": {
+        "message": "Sugerir maneiras de melhorar o aplicativo"
+    },
     "options_support_bug_report_title": {
         "message": "Reportar um problema"
     },
@@ -279,7 +285,7 @@
         "message": "%s regras de usuário"
     },
     "options_userfilter_description": {
-        "message": "Você pode adicionar suas próprias regras para&nbsp;esse filtro. Essa opção é&nbsp;recomendada para usuários avançados familiarizados com HTML/CSS. Leia nosso <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial das regras de filtragem</a> para&nbsp;aprender como&nbsp;escrever suas próprias regras de filtragem."
+        "message": "Você pode adicionar suas próprias regras aqui. Essa opção é&nbsp;recomendada para usuários avançados familiarizados com HTML/CSS. Leia nosso <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial das regras de filtragem</a> para&nbsp;aprender como&nbsp;escrever suas próprias regras de filtragem."
     },
     "options_userfilter_import": {
         "message": "Importar"

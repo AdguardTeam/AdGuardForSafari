@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "Gyakran Ismételt Kérdések"
     },
+    "options_support_feature_request_title": {
+        "message": "Funkciókérelem benyújtása"
+    },
+    "options_support_feature_request_description": {
+        "message": "Javasoljon módszereket az alkalmazás fejlesztésére"
+    },
     "options_support_bug_report_title": {
         "message": "Hiba jelentése"
     },
@@ -108,7 +114,7 @@
         "message": "Általános"
     },
     "options_general_desc": {
-        "message": ""
+        "message": "Az AdGuard for Safari egy ingyenes és nyílt forráskódú szoftver. Szívesen várjuk a visszajelzését és a közreműködését. Ha hibát szeretne bejelenteni, vagy új funkciót kérni, látogasson el a <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>GitHub oldalunkra.</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Nem tolakodó hirdetések engedélyezése"
@@ -270,7 +276,7 @@
         "message": "Felhasználói szabályok"
     },
     "options_userfilter_no_user_rules": {
-        "message": ""
+        "message": "Nincsenek felhasználói szabályok"
     },
     "options_userfilter_info_single": {
         "message": "%s felhasználói szabály"
@@ -279,7 +285,7 @@
         "message": "%s felhasználói szabály"
     },
     "options_userfilter_description": {
-        "message": ""
+        "message": "Saját szabályokat adhat hozzá ehhez a szűrőhöz. Ez a lehetőség haladó felhasználók részére ajánlott, akik jártasak HTML/CSS-ben. Olvassa el a <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>fszűrő szabályok segédletet</a>, hogy megtanuljon saját szűrő szabályokat írni."
     },
     "options_userfilter_import": {
         "message": "Importálás"
@@ -336,10 +342,10 @@
         "message": "Figyelmeztetés"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": ""
+        "message": "Túl sok szűrő van bekapcsolva. A Safari nem tud %s szabálynál többet használni egy csoporton belül."
     },
     "options_content_blocker_overlimit": {
-        "message": ""
+        "message": "Túl sok szűrő van bekapcsolva. A Safari nem tud %s szabálynál többet használni egy csoporton belül."
     },
     "options_filters_list_search_placeholder": {
         "message": "Keresés"
@@ -405,7 +411,7 @@
         "message": "Tartalomblokkolók"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "Engedélyezett hirdetésblokkolók: %s a 6-ból (összesen legfeljebb %s szabály lehet)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "A hirdetésblokkolók ki vannak kapcsolva"
@@ -465,7 +471,7 @@
         "message": "6 tartalomblokkoló kiegészítő"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": ""
+        "message": "A Safari kiegészítőnként %s-re korlátozza a tartalomblokkolási szabályok maximális számát. Ez nem elegendő minden hirdetés és nyomkövető kezeléséhez, amelyeket az AdGuard blokkolni tud. Ezért kínálunk 6 kiegészítőt, mivel így ezt a határt %s-re növeljük."
     },
     "onboarding_safari_btn": {
         "message": "Beállítások megnyitása"
@@ -576,7 +582,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "A maximális %s szabály elérve. Kérjük, kapcsolja ki a szükségtelen szabályokat, hogy az app megfelelően működjön.<br/>Engedélyezett szűrők ebben a pillanatban: %s (kikapcsolt szabályok: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Kikapcsolva a Safariban"

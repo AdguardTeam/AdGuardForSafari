@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "Розв'язання відомих проблем"
     },
+    "options_support_feature_request_title": {
+        "message": "Запропонувати нову функцію"
+    },
+    "options_support_feature_request_description": {
+        "message": "Запропонуйте шляхи покращення програми"
+    },
     "options_support_bug_report_title": {
         "message": "Повідомити про помилку"
     },
@@ -108,7 +114,7 @@
         "message": "Загальні"
     },
     "options_general_desc": {
-        "message": "AdGuard for Safari — безкоштовне програмне забезпечення з відкритим кодом. Ми вдячні за ваші відгуки та пропозиції. Ви можете повідомити про помилку або надіслати запит на функцію <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>у нашому репозиторії на Github</a>."
+        "message": "AdGuard for Safari — безплатне програмне забезпечення з відкритим кодом. Ми вдячні за ваші відгуки та пропозиції. Ви можете повідомити про помилку або надіслати запит на функцію <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>у нашому репозиторії на Github</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Дозволити рекламу в результатах пошуку і саморекламу вебсайтів"
@@ -269,6 +275,9 @@
     "options_userfilter": {
         "message": "Правила користувача"
     },
+    "options_userfilter_no_user_rules": {
+        "message": "Немає правил користувача"
+    },
     "options_userfilter_info_single": {
         "message": "%s правило користувача"
     },
@@ -279,7 +288,7 @@
         "message": "Список порожній"
     },
     "options_userfilter_description": {
-        "message": "Тут ви можете додавати власні правила. Ця функція&nbsp;рекомендується лише для досвідчених користувачів, знайомих з HTML/CSS. Ознайомтеся з <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>настановами щодо правил фільтрування</a>, щоб&nbsp;навчитися створювати&nbsp;власні правила фільтрування."
+        "message": "Тут ви можете додавати власні правила. Ця функція рекомендується лише для досвідчених користувачів, знайомих з HTML/CSS. Ознайомтеся з <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>настановами щодо правил фільтрування</a>, щоб&nbsp;навчитися створювати&nbsp;власні правила фільтрування."
     },
     "options_userfilter_import": {
         "message": "Імпортувати"
@@ -576,7 +585,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Перевищено обмеження в %s правил. Вимкніть непотрібні правила для належної роботи програми.<br/>Зараз увімкнено правил: %s (вимкнено правил: $2)"
+        "message": "Перевищено обмеження в 50000 правил. Будь ласка, вимкніть непотрібні правила для правильної роботи.<br/>Зараз увімкнено правил: %s (вимкнено правил: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Вимкнено в Safari"

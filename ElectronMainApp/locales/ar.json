@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "أسئلة مكررة"
     },
+    "options_support_feature_request_title": {
+        "message": "إرسال طلب الميزة"
+    },
+    "options_support_feature_request_description": {
+        "message": "اقترح طرقًا لتحسين التطبيق"
+    },
     "options_support_bug_report_title": {
         "message": "أبلِغ عن مشكلة"
     },
@@ -108,7 +114,7 @@
         "message": "General"
     },
     "options_general_desc": {
-        "message": ""
+        "message": "AdGuard for Safari هو برنامج مجاني ومفتوح المصدر. نحن نرحب بملاحظاتك ومساهماتك. إذا كنت تريد الإبلاغ عن خطأ أو طلب ميزة ، فيرجى التوجه إلى <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>GitHub repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "السماح بإعلانات البحث والترويج الذاتي لمواقع الويب"
@@ -162,7 +168,7 @@
         "message": "لا توجد فلاتر مفعلة"
     },
     "options_filters_no_filters": {
-        "message": ""
+        "message": "لا المرشحات"
     },
     "options_filters_version": {
         "message": "الإصدار %s"
@@ -270,7 +276,7 @@
         "message": "فلتر المستخدم"
     },
     "options_userfilter_no_user_rules": {
-        "message": ""
+        "message": "لا توجد قواعد المستخدم"
     },
     "options_userfilter_info_single": {
         "message": "%s قاعدة المستخدم"
@@ -279,7 +285,7 @@
         "message": "%s قواعد المستخدم"
     },
     "options_userfilter_description": {
-        "message": ""
+        "message": "يمكنك إضافة القواعد الخاصة بك هنا. هذا الخيار هو&nbsp; موصى به للمستخدمين المتقدمين المطلعين على HTML / CSS. إقرأ الـ <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>دروس قواعد القلاتر</a>إلى&nbsp; تعلم كيف&nbsp;تكتب قاعدة فلاتر خاصة بك."
     },
     "options_userfilter_import": {
         "message": "استيراد"
@@ -336,10 +342,10 @@
         "message": "تحذير"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": ""
+        "message": "تم تمكين عدد كبير جدًا من الفلاتر. لا يمكن لـ Safari استخدام أكثر من %s قاعدة في مجموعة واحدة."
     },
     "options_content_blocker_overlimit": {
-        "message": ""
+        "message": "تم تمكين عدد كبير جدًا من الفلاتر. لا يمكن لـ Safari استخدام أكثر من %s قاعدة في مجموعة واحدة."
     },
     "options_filters_list_search_placeholder": {
         "message": "بحث"
@@ -405,7 +411,7 @@
         "message": "مانعي المحتوى"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "أدوات حظر الإعلانات الممكنة: %s من أصل 6 (يمكن أن يحتوي كل منها على ما يصل إلى %s قاعدة)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "تم تعطيل أدوات حظر الإعلانات"
@@ -426,7 +432,7 @@
         "message": "شكر وتقدير"
     },
     "options_github": {
-        "message": "جيت هاب"
+        "message": "GitHub"
     },
     "onboarding_safari_title": {
         "message": "بحاجة إلى الإذن منك"
@@ -465,7 +471,7 @@
         "message": "6 ملحقات حظر المحتوى"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": ""
+        "message": "يُقلص Safari من الحد الأقصى لعدد قواعد حظر المحتوى بـ %s لكل امتداد. هذا لا يكفي للتعامل مع جميع أنواع الإعلانات وتتبع كتل AdGuard. هذا هو السبب في أننا نقدم 6 ملحقات، وبالتالي زيادة هذا الحد إلى %s."
     },
     "onboarding_safari_btn": {
         "message": "فتح التفضيلات"
@@ -552,22 +558,22 @@
         "message": "يرجى ملاحظة أن الفلاتر القديمة تخفض من جودة الحماية، لذلك من المهم تحديثهم باستمرار."
     },
     "options_cb_general_title": {
-        "message": "عام"
+        "message": "AdGuard General"
     },
     "options_cb_privacy_title": {
-        "message": "خصوصية AdGuard"
+        "message": "AdGuard Privacy"
     },
     "options_cb_social_title": {
-        "message": "Ad Guardالاجتماعية"
+        "message": "AdGuard Social"
     },
     "options_cb_security_title": {
-        "message": "أمان AdGuard"
+        "message": "AdGuard Security"
     },
     "options_cb_other_title": {
-        "message": "AdGuard أخرى"
+        "message": "AdGuard Other"
     },
     "options_cb_custom_title": {
-        "message": "تخصيص AdGuard"
+        "message": "AdGuard Custom"
     },
     "options_cb_rules_info": {
         "message": {
@@ -576,7 +582,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "تم تجاوز الحد الأقصى البالغ %s قاعدة. يرجى تعطيل القواعد غير الضرورية لكي يعمل التطبيق بشكل صحيح.<br/>القواعد الممكنة في الوقت الحالي: %s (قاعدة معطلة: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "تعطيل في سفاري"
@@ -585,7 +591,7 @@
         "message": "فشل التجميع"
     },
     "filters_group_custom": {
-        "message": "مخصص"
+        "message": "Custom"
     },
     "userfilter_name": {
         "message": "فلتر المستخدم"

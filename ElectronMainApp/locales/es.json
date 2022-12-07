@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "Preguntas frecuentes"
     },
+    "options_support_feature_request_title": {
+        "message": "Enviar solicitud de función"
+    },
+    "options_support_feature_request_description": {
+        "message": "Sugerir formas de mejorar la aplicación"
+    },
     "options_support_bug_report_title": {
         "message": "Informar de un error"
     },
@@ -270,7 +276,7 @@
         "message": "Reglas del usuario"
     },
     "options_userfilter_no_user_rules": {
-        "message": "La lista está vacía"
+        "message": "No hay reglas del usuario"
     },
     "options_userfilter_info_single": {
         "message": "%s regla de usuario"

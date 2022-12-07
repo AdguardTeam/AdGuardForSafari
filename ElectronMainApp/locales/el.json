@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "Συχνές ερωτήσεις"
     },
+    "options_support_feature_request_title": {
+        "message": "Υποβολή αιτήματος για δυνατότητα"
+    },
+    "options_support_feature_request_description": {
+        "message": "Προτείνετε τρόπους βελτίωσης της εφαρμογής"
+    },
     "options_support_bug_report_title": {
         "message": "Αναφορά σφάλματος"
     },
@@ -108,7 +114,7 @@
         "message": "Γενικά"
     },
     "options_general_desc": {
-        "message": ""
+        "message": "Το AdGuard για Safari είναι ένα δωρεάν λογισμικό ανοιχτού κώδικα. Καλωσορίζουμε τα σχόλιά σας και τις συνεισφορές σας. Αν θέλετε να αναφέρετε ένα σφάλμα ή να ζητήσετε μια λειτουργία, μεταβείτε στο <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>GitHub repo</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Να επιτρέπονται οι διαφημίσεις αναζήτησης και η αυτοπροώθηση των ιστότοπων"
@@ -162,7 +168,7 @@
         "message": "Δεν έχουν ενεργοποιηθεί φίλτρα"
     },
     "options_filters_no_filters": {
-        "message": ""
+        "message": "Χωρίς φίλτρα"
     },
     "options_filters_version": {
         "message": "έκδοση %s"
@@ -228,7 +234,7 @@
         "message": "Έκδοση:"
     },
     "options_filters_custom_step_final_filter_rules_count": {
-        "message": ""
+        "message": "Καταμέτρηση κανόνων:"
     },
     "options_filters_custom_step_final_filter_homepage": {
         "message": "Αρχική σελίδα:"
@@ -270,7 +276,7 @@
         "message": "Κανόνες χρήστη"
     },
     "options_userfilter_no_user_rules": {
-        "message": ""
+        "message": "Δεν υπάρχουν κανόνες χρήστη"
     },
     "options_userfilter_info_single": {
         "message": "%s κανόνας χρήστη"
@@ -279,7 +285,7 @@
         "message": "%s κανόνες χρήστη"
     },
     "options_userfilter_description": {
-        "message": ""
+        "message": "Μπορείτε να προσθέσετε τους δικούς σας κανόνες εδώ. Αυτή η επιλογή&nbsp;συνιστάται για προχωρημένους χρήστες εξοικειωμένους με HTML/CSS. Διαβάστε τον <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>οδηγό κανόνων φίλτρου</a> για να&nbsp;μάθετε πώς να γράφετε&nbsp;τους δικούς σας κανόνες φίλτρου."
     },
     "options_userfilter_import": {
         "message": "Εισαγωγή"
@@ -336,10 +342,10 @@
         "message": "Προειδοποίηση"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": ""
+        "message": "Ενεργοποιήθηκαν πάρα πολλά φίλτρα. Το Safari δεν μπορεί να χρησιμοποιήσει περισσότερους από %s κανόνες σε μία ομάδα."
     },
     "options_content_blocker_overlimit": {
-        "message": ""
+        "message": "Ενεργοποιήθηκαν πάρα πολλά φίλτρα. Το Safari δεν μπορεί να χρησιμοποιήσει περισσότερους από %s κανόνες σε μία ομάδα."
     },
     "options_filters_list_search_placeholder": {
         "message": "Αναζήτηση"
@@ -405,7 +411,7 @@
         "message": "Αποκλειστές περιεχομένου"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "Ενεργοποιημένοι αποκλειστές διαφημίσεων: %s από 6 (ο καθένας μπορεί να περιέχει έως και %s κανόνες)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Οι αποκλειστές διαφημίσεων είναι απενεργοποιημένοι"
@@ -465,7 +471,7 @@
         "message": "6 επεκτάσεις αποκλεισμού περιεχομένου"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": ""
+        "message": "Το Safari περιορίζει τον μέγιστο αριθμό κανόνων αποκλεισμού περιεχομένου με %s ανά επέκταση. Αυτό δεν αρκεί για τον χειρισμό όλων των ειδών των διαφημίσεων και των ιχνηλατών παρακολούθησης AdGuard. Γι 'αυτό παρέχουμε 6 επεκτάσεις, αυξάνοντας έτσι αυτό το όριο σε %s."
     },
     "onboarding_safari_btn": {
         "message": "Άνοιγμα προτιμήσεων"
@@ -576,7 +582,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "Έχει ξεπεραστεί το όριο των %s κανόνων. Απενεργοποιήστε τους περιττούς κανόνες για να λειτουργεί σωστά η εφαρμογή. <br/>Ενεργοποιημένοι κανόνες αυτήν τη στιγμή: %s (απενεργοποιημένοι κανόνες: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Απενεργοποιήθηκε στο Safari"

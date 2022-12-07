@@ -22,6 +22,11 @@ if [[ $SEARCH_RESULT == 0 ]] || ! [ -f "$TIME_MARKER" ]; then
     mkdir -p $TARGET_TEMP_DIR/arm64
     mkdir -p $TARGET_TEMP_DIR/x86_64
 
+    echo "Copy .twosky.json to locales"
+    TWOSKY_CONTENT="$(cat "${SRCROOT}/../.twosky.json")"
+    echo "// This file added here automatically, see Scripts/build-electron-app.sh
+module.exports = ${TWOSKY_CONTENT};" > "${SRC}/locales/.twosky.js"
+
 
     mkdir -vp "${SRC}/safari-ext/shared"
     cp -v "${BUILT_PRODUCTS_DIR}/libshared.a" "${SRC}/safari-ext/shared/" || exit 1

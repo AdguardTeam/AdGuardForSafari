@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "Các câu hỏi thường gặp"
     },
+    "options_support_feature_request_title": {
+        "message": "Gửi yêu cầu tính năng"
+    },
+    "options_support_feature_request_description": {
+        "message": "Đề xuất các cách để cải thiện ứng dụng"
+    },
     "options_support_bug_report_title": {
         "message": "Báo cáo lỗi"
     },
@@ -108,7 +114,7 @@
         "message": "Cài đặt Chung"
     },
     "options_general_desc": {
-        "message": ""
+        "message": "AdGuard Safari là một phần mềm mã nguồn mở và miễn phí. Chúng tôi đón nhận tất cả phản hồi và ý kiến đóng góp. Nếu bạn muốn báo cáo một lỗi hoặc yêu cầu tính năng mới, xin hướng thẳng đến <<a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>Github repo của chúng tôi</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Chấp nhận các quảng cáo tìm kiếm và các trang web tự quảng cáo"
@@ -270,7 +276,7 @@
         "message": "Bộ lọc của người dùng"
     },
     "options_userfilter_no_user_rules": {
-        "message": ""
+        "message": "Không có quy tắc người dùng"
     },
     "options_userfilter_info_single": {
         "message": "%s quy tắc người dùng"
@@ -279,7 +285,7 @@
         "message": "%s quy tắc người dùng"
     },
     "options_userfilter_description": {
-        "message": ""
+        "message": "Bạn có thể thêm các quy tắc của mình tại đây. Tuỳ chọn này&nbsp;được đề xuất cho những ai đã quen với HTML/CSS. Xem thêm <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>hướng dẫn quy tắc bộ lọc</a> để&nbsp;học cách&nbsp;tự viết bộ lọc."
     },
     "options_userfilter_import": {
         "message": "Nhập"
@@ -336,10 +342,10 @@
         "message": "Cảnh báo"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": ""
+        "message": "Quá nhiều bộ lọc được đật. Safari không thể dùng hơn %s quy tắc trong cùng một nhóm."
     },
     "options_content_blocker_overlimit": {
-        "message": ""
+        "message": "Quá nhiều bộ lọc được bật. Safari không thể dùng hơn %s quy tắc trong cùng một nhóm."
     },
     "options_filters_list_search_placeholder": {
         "message": "Tìm kiếm"
@@ -405,7 +411,7 @@
         "message": "Trình chặn nội dung"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "Bật chặn quảng cáo: %s của 6 (mỗi nhóm có thể chứa lên đến %s quy tắc)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Trình chặn quảng cáo đã tắt"
@@ -465,7 +471,7 @@
         "message": "6 tiện ích chặn quảng cáo"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": ""
+        "message": "Safari giới hạn số lượng quy tắc chặn nội dung tối đa là %s cho mỗi tiện ích mở rộng. Điều này là không đủ để xử lý tất cả các loại quảng cáo và trình theo dõi các khối AdGuard. Đó là lý do tại sao chúng tôi cung cấp 6 tiện ích mở rộng, do đó tăng giới hạn đó lên %s."
     },
     "onboarding_safari_btn": {
         "message": "Mở Tuỳ chọn Mở rộng"
@@ -576,7 +582,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "Đã vượt giới hạn %s quy tắc. Xin tắt bớt những quy tắc không cần thiết để ứng dụng hoạt động chính xác.<br/> Quy tắc đã được bật lúc này: %s (quy tắc đã bị tắt: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Đã tắt trong Safari"

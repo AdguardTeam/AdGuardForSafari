@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "자주 묻는 질문"
     },
+    "options_support_feature_request_title": {
+        "message": "기능 요청사항 제출"
+    },
+    "options_support_feature_request_description": {
+        "message": "앱을 개선하는 방법을 제안하세요"
+    },
     "options_support_bug_report_title": {
         "message": "버그 제보"
     },
@@ -108,7 +114,7 @@
         "message": "일반"
     },
     "options_general_desc": {
-        "message": "Safari용 AdGuard는 무료 오픈소스 소프트웨어입니다. 저희는 여러분의 피드백과 기여를 환영합니다. 만약 버그 신고나 새 기능을 요청하고 싶으시다면, <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>저희의 Github 저장소</a>로 향하세요."
+        "message": "Safari용 AdGuard는 무료 오픈소스 소프트웨어입니다. 저희는 여러분의 피드백과 기여를 환영합니다. 만약 버그 신고나 새 기능을 요청하고 싶다면, <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>저희의 Github 저장소</a>로 향하세요."
     },
     "options_allow_acceptable_ads": {
         "message": "검색 엔진의 광고와 웹사이트의 자체 광고 허용"
@@ -270,7 +276,7 @@
         "message": "사용자 규칙"
     },
     "options_userfilter_no_user_rules": {
-        "message": "목록이 비어 있습니다"
+        "message": "사용자 규칙 없음"
     },
     "options_userfilter_info_single": {
         "message": "사용자 규칙 %s개"
@@ -279,7 +285,7 @@
         "message": "사용자 규칙 %s개"
     },
     "options_userfilter_description": {
-        "message": "자신만의 규칙을&nbsp;추가할 수 있습니다. 이 설정은&nbsp;HTML/CSS에 익숙한 고급 사용자에게 권장합니다. <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>필터 규칙 튜토리얼</a>을 읽어보고&nbsp; 사용자 지정 필터 규칙&nbsp;을 어떻게 사용하는지 알아보세요."
+        "message": "자신만의 규칙을&nbsp;추가할 수 있습니다. 이 설정은&nbsp;HTML/CSS에 익숙한 고급 사용자에게 권장합니다. <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>필터 규칙 튜토리얼</a>을 읽어보고&nbsp; 사용자 지정 필터 규칙&nbsp;을 어떻게 사용하는지 알아보세요."
     },
     "options_userfilter_import": {
         "message": "가져오기"
@@ -336,7 +342,7 @@
         "message": "경고"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "너무 많은 필터들이 활성화 되어 있습니다. Safari는 한 그룹에서 %s개 이상의 규칙을 사용할 수 없습니다."
+        "message": "너무 많은 필터들이 활성화 되어 있습니다. Safari는 한 그룹에서 50,000개 이상의 규칙을 사용할 수 없습니다."
     },
     "options_content_blocker_overlimit": {
         "message": "너무 많은 필터들이 활성화 되어 있습니다. Safari는 한 그룹에서 %s개 이상의 규칙을 사용할 수 없습니다."
@@ -465,7 +471,7 @@
         "message": "콘텐츠 차단 확장 프로그램 6개"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari에서는 한 확장 프로그램이 최대 5만 개의 콘텐츠 차단 규칙만을 가질 수 있도록 제한하고 있습니다. 이는 AdGuard가 차단하는 모든 종류의 광고와 트래커의 종류를 담아내기에 부족합니다. 이게 바로 제한을 최대 30만 개로 올리기 위해 6개의 확장 프로그램을 내놓은 이유입니다."
+        "message": "Safari에서는 한 확장 프로그램이 최대 %s 개의 콘텐츠 차단 규칙만을 가질 수 있도록 제한하고 있습니다. 이는 AdGuard가 차단하는 모든 종류의 광고와 트래커의 종류를 담아내기에 부족합니다. 이게 바로 제한을 최대 %s 개로 올리기 위해 6개의 확장 프로그램을 제공하는 이유입니다."
     },
     "onboarding_safari_btn": {
         "message": "환경 설정 열기"
@@ -576,7 +582,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "%s개의 규칙 제한이 초과되었습니다. 앱이 올바르게 작동하기 위해 불필요한 규칙을 사용하지 않도록 설정하세요. <br/>현재 활성화된 규칙:%s (비활성화돤 규칙: $2)"
+        "message": "%s개의 규칙 제한이 초과되었습니다. 앱이 올바르게 작동하기 위해 불필요한 규칙을 사용하지 않도록 설정하세요. <br/>현재 활성화된 규칙:%s (비활성화된 규칙: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "사파리 비활성화"

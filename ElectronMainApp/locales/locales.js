@@ -1,29 +1,7 @@
-module.exports.LOCALES = [
-    'en',
-    'ru',
-    'de',
-    'fr',
-    'hr',
-    'es',
-    'ja',
-    'da',
-    'zh-Hant',
-    'zh-tw',
-    'zh-Hans',
-    'zh-cn',
-    'it',
-    'pl',
-    'pt-br',
-    'pt-pt',
-    'cs',
-    'sk',
-    'sv',
-    'sr-Latn',
-    'th',
-    'tr',
-    'ro',
-    'ko',
-    'uk',
-    'sl',
-    'id',
-];
+const twoskyConfigs = require('./.twosky.js');
+
+const config = twoskyConfigs[0];
+
+const locales = Object.keys(config.languages);
+
+module.exports.LOCALES = locales;
