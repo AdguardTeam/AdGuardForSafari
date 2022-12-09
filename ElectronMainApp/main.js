@@ -25,6 +25,14 @@ const settings = require('./src/main/app/settings-manager');
 const { getChannel, getConfiguration } = require('./src/main/app/app');
 const { Invokes } = require('./src/main/invokes');
 
+const getTrace = (name) => {
+    try {
+        throw new Error(name);
+    } catch (e) {
+        return e.stack.replace('Error:', 'Trace:');
+    }
+};
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -144,6 +152,7 @@ function confirmWindowClose() {
  * Creates main window
  */
 function loadMainWindow(onWindowLoaded) {
+    log.info(getTrace('loadMainWindow'));
 
     if (!mainWindow) {
         mainWindow = createWindow();
@@ -151,7 +160,7 @@ function loadMainWindow(onWindowLoaded) {
     mainWindow.loadFile('./src/main/ui/options.html');
 
     // reloads page to update color theme if OS color theme has been changed
-    nativeTheme.on('updated', function theThemeHasChanged () {
+    nativeTheme.on('updated', () => {
         if (mainWindow) {
             mainWindow.webContents.reload();
         }
@@ -187,7 +196,7 @@ function loadMainWindow(onWindowLoaded) {
     });
 
     // Open _target=blank hrefs in external window
-    mainWindow.webContents.on('new-window', function (event, url) {
+    mainWindow.webContents.on('new-window', (event, url) => {
         event.preventDefault();
         shell.openExternal(url);
     });
@@ -232,6 +241,8 @@ function loadSplashScreenWindow(onWindowLoaded) {
  * @param onWindowLoaded callback on window created and loaded
  */
 function showWindow(onWindowLoaded) {
+    log.info(getTrace('showWindow'));
+
     if (mainWindow) {
         mainWindow.show();
 
