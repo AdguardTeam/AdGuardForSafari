@@ -56,6 +56,10 @@ module.exports = [
     ],
     "xib_files": [
       "Extension/Base.lproj/SafariExtensionViewController.xib"
-    ]
+    ],
+    "json_pairs": {
+      "zh-Hans" : "zh-cn",
+      "zh-Hant" : "zh-tw"
+    }
   }
 ];

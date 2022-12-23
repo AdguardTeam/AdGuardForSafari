@@ -1,5 +1,6 @@
 const i18n = require('i18n');
 const { vsprintf } = require('sprintf-js');
+
 const appPack = require('./app-pack');
 const { LOCALES } = require('../../locales/locales');
 
