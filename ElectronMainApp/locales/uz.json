@@ -1,0 +1,683 @@
+{
+    "main_menu_about": {
+        "message": "AdGuard для Safari haqida"
+    },
+    "options_popup_trusted_filter_title": {
+        "message": "Ishonchli"
+    },
+    "options_popup_trusted_filter_description": {
+        "message": "Ishonchli filtrlar ishonchli qo'llarda xavfli bo'lishi mumkin bo'lgan kuchli filtr qoidalarini o'zgartirish vositalaridan foydalanishi mumkin. Agar siz filtrga to'liq ishonmasangiz, bu katakchani belgilamang."
+    },
+    "options_filters_filter_trusted_tag": {
+        "message": "Ishonchli"
+    },
+    "options_filters_filter_trusted_tag_desc": {
+        "message": "Siz ushbu filtrga ishonishni tanladingiz"
+    },
+    "options_support": {
+        "message": "Qo'llab-quvvatlash (Biz bilan bog'lansih)"
+    },
+    "options_support_faq_title": {
+        "message": "FAQ"
+    },
+    "options_support_faq_description": {
+        "message": "Ko'p so'raladigan savollar"
+    },
+    "options_support_feature_request_title": {
+        "message": "Xususiyat soʻrovini yuboring"
+    },
+    "options_support_feature_request_description": {
+        "message": "Ilovani yaxshilash yo'llarini taklif qiling"
+    },
+    "options_support_bug_report_title": {
+        "message": "Xato haqida xabar bering"
+    },
+    "options_support_bug_report_description": {
+        "message": "Agar dasturda biror narsa to'g'ri ishlamasa"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Noto'g'ri blokirovka haqida xabar bering"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Agar o'tkazib yuborilgan reklama yoki (buzilgan saytni) ko'rsangiz"
+    },
+    "options_support_feedback_title": {
+        "message": "Fikr bildiring"
+    },
+    "options_support_feedback_description": {
+        "message": "Xususiyat soʻrovi yoki boshqa taklifni yuboring"
+    },
+    "options_support_rate_title": {
+        "message": "Ilovamizga baho bering"
+    },
+    "options_support_rate_description": {
+        "message": "AdGuard, haqida fikringizni bildiring"
+    },
+    "options_support_discuss_title": {
+        "message": "Muhokama qiling"
+    },
+    "options_support_discuss_description": {
+        "message": "Forumda, ijtimoiy tarmoqlarda yoki GitHub-da muhokama qiling"
+    },
+    "options_about_update_check": {
+        "message": "Yangilanishlarni tekshirish"
+    },
+    "options_about_title": {
+        "message": "AdGuard Safari uchun"
+    },
+    "options_about_updating": {
+        "message": "Safari uchun AdGuard dasturini yangilang"
+    },
+    "options_about_updates_not_found": {
+        "message": "Safari uchun AdGuard yangilandi!"
+    },
+    "options_about_updates_error": {
+        "message": "Yangilash xatosi"
+    },
+    "options_about_update_downloaded": {
+        "message": "Deyarli yangilandi! Yangilashni yakunlash uchun Safari uchun AdGuard kengaytmasini qayta ishga tushiring!"
+    },
+    "options_about_update_relaunch": {
+        "message": "Qayta ishga tushirish"
+    },
+    "options_about_read_more": {
+        "message": "Ushbu mahsulot haqida ko'proq bilib oling"
+    },
+    "options_popup_title_placeholder": {
+        "message": "Filtr nomini kiriting"
+    },
+    "main_menu_hide": {
+        "message": "Yashirish"
+    },
+    "main_menu_close_window": {
+        "message": "Derazani yopish"
+    },
+    "tray_menu_export_logs": {
+        "message": "Jurnallar va tizim ma'lumotlarini eksport qilish..."
+    },
+    "name": {
+        "message": "AdGuard anti-banner"
+    },
+    "description": {
+        "message": "Reklamalar va qalqib chiquvchi oynalardan ustun bo'lmagan himoya. Facebook, YouTube va boshqa saytlardagi reklamalarni bloklaydi."
+    },
+    "options_settings": {
+        "message": "Safari uchun AdGuard sozlamalari"
+    },
+    "options_settings_import_wrong_file_extension": {
+        "message": "Fayl kengaytmasi (.json) bo'lishi kerak "
+    },
+    "options_settings_import_error": {
+        "message": "Sozlamalarni import qilish xatosi"
+    },
+    "options_general_settings": {
+        "message": "General"
+    },
+    "options_general_desc": {
+        "message": "Safari uchun AdGuard bepul va ochiq kodli dasturdir. Fikr va takliflaringizni mamnuniyat bilan qabul qilamiz. Agar siz xato haqida xabar bermoqchi bo'lsangiz yoki funksiya so'ramoqchi bo'lsangiz, iltimos, <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>наш репозиторий на GitHub</a> yuboring."
+    },
+    "options_allow_acceptable_ads": {
+        "message": "Qidiruv reklamalari va oʻz-oʻzini reklama qiluvchi saytlarga ruxsat bering"
+    },
+    "options_export_settings": {
+        "message": "Eksport sozlamalari"
+    },
+    "options_import_settings": {
+        "message": "Import sozlamalari"
+    },
+    "options_export_logs": {
+        "message": "Jurnallarni eksport qilish"
+    },
+    "settings_import": {
+        "message": "Import sozlamalari"
+    },
+    "settings_import_success": {
+        "message": "Sozlamalar muvaffaqiyatli import qilindi"
+    },
+    "settings_import_error": {
+        "message": "Sozlamalarni import qilishda xatolik yuz berdi"
+    },
+    "options_antibanner": {
+        "message": "Filtrlar"
+    },
+    "options_antibanner_info_filters": {
+        "message": {
+            "one": "%s Filtr",
+            "other": "%s Filtrlar"
+        }
+    },
+    "options_antibanner_info_rules": {
+        "message": {
+            "one": "%s qoida",
+            "other": "%s qoidalar"
+        }
+    },
+    "options_antibanner_info_adv_rules": {
+        "message": {
+            "one": "%s rivojlangan qoida",
+            "other": "%s rivojlangan qoidalar"
+        }
+    },
+    "options_filters_check_for_updates": {
+        "message": "Yangilanishlarni tekshiring"
+    },
+    "options_filters_enabled": {
+        "message": "Yoqilgan:"
+    },
+    "options_filters_homepage": {
+        "message": "Bosh sahifa"
+    },
+    "options_filters_enabled_and_more_divider": {
+        "message": "%s va yana %s"
+    },
+    "options_filters_enabled_and_divider": {
+        "message": "%s va %s"
+    },
+    "options_filters_no_enabled": {
+        "message": "Filtrlar yoqilmagan"
+    },
+    "options_filters_no_filters": {
+        "message": "Filtirlar mavjud emas"
+    },
+    "options_filters_version": {
+        "message": "versiyasi %s"
+    },
+    "options_filters_updated": {
+        "message": "yangilandi: %s"
+    },
+    "options_filters_empty_custom_filters": {
+        "message": "Sizda hali maxsus filtrlar mavjud emas"
+    },
+    "options_filters_empty_custom_add_button": {
+        "message": "O'z filtringizni qo'shing"
+    },
+    "options_filters_custom_import_file": {
+        "message": "Faylni import qilish"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "Import xatosi"
+    },
+    "options_filters_custom_step_one_title": {
+        "message": "Yangi filtr obunasi"
+    },
+    "options_filters_custom_step_one_input_placeholder": {
+        "message": "Filtr URL manzilini kiriting"
+    },
+    "options_filters_custom_step_one_url_desc": {
+        "message": "Yaroqli obuna URL manzilini kiriting."
+    },
+    "options_filters_custom_step_one_url_desc_more": {
+        "message": "AdGuard ushbu obunani filtrga qo'shadi."
+    },
+    "options_filters_custom_step_one_cancel": {
+        "message": "Bekor qilish"
+    },
+    "options_filters_custom_step_one_next": {
+        "message": "Keyingi sahifa"
+    },
+    "options_filters_custom_step_two_checking": {
+        "message": "Filtrni yuklash"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "Filtr qo'shish"
+    },
+    "options_filters_custom_step_three_title": {
+        "message": "Xato ro'y berildi"
+    },
+    "options_filters_custom_step_three_desc": {
+        "message": "Afsuski, kutilmagan xatolik tufayli maxsus filtringizni qo‘shib bo‘lmadi."
+    },
+    "options_filters_custom_step_three_try_again": {
+        "message": "Qayta urinib ko'rish"
+    },
+    "options_filters_custom_step_final_title": {
+        "message": "Yangi filtr obunasi"
+    },
+    "options_filters_custom_step_final_filter_title": {
+        "message": "Nomi:"
+    },
+    "options_filters_custom_step_final_filter_description": {
+        "message": "Filtr haqida:"
+    },
+    "options_filters_custom_step_final_filter_version": {
+        "message": "Versiyasi:"
+    },
+    "options_filters_custom_step_final_filter_rules_count": {
+        "message": "Qoidalar soni:"
+    },
+    "options_filters_custom_step_final_filter_homepage": {
+        "message": "Sayt:"
+    },
+    "options_filters_custom_step_final_filter_url": {
+        "message": "URL:"
+    },
+    "options_filters_custom_step_final_back": {
+        "message": "Orqga qaytish"
+    },
+    "options_filters_custom_step_final_cancel": {
+        "message": "Bekor qilish"
+    },
+    "options_filters_custom_step_final_commit": {
+        "message": "Obuna bo'lish"
+    },
+    "options_filters_check_filters_update": {
+        "message": "Filtr yangilanishlarini tekshiring"
+    },
+    "options_allowlist": {
+        "message": "Oq ro'yxat"
+    },
+    "options_allowlist_description": {
+        "message": "AdGuard oq ro'yxatga kiritilgan veb-saytlardagi reklamalarni filtrlamaydi."
+    },
+    "options_allowlist_inverted": {
+        "message": " (Inverted)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "Domenlar: %s"
+    },
+    "options_allowlist_no_domains": {
+        "message": "Oq ro'yxat bo'sh"
+    },
+    "options_allowlist_inverse": {
+        "message": "Oq ro'yxatni o'zgartiring<span class='sp-table-row-info'>Barcha saytlardagi reklamalarni blokdan chiqarish, <i>кроме</i> oq ro'yxatga kiritilgan</span>"
+    },
+    "options_userfilter": {
+        "message": "Maxsus qoidalar"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "Maxsus qoidalar yo'q"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s odatiy qoida"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s odatiy qoidalar"
+    },
+    "options_userfilter_description": {
+        "message": "Siz oʻz filtr qoidalarini &nbsp;Maxsus qoidalarga qoʻshishingiz mumkin. Faqat HTML/CSS-ni yaxshi biladigan ilg'or foydalanuvchilar uchun tavsiya etiladi. buning uchun <a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>ссылке</a>, ga boring, filtrlash qoidalarini yozishni o'rganish."
+    },
+    "options_userfilter_import": {
+        "message": "Import"
+    },
+    "options_userfilter_export": {
+        "message": "Eksport"
+    },
+    "options_userfilter_import_rules_error": {
+        "message": "Filtrlash qoidalarini import qilishda xatolik yuz berdi"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "Fayl kengaytmasi .txt bo'lishi kerak"
+    },
+    "options_show_app_updated_notification": {
+        "message": "Kengaytma yangilanishlari haqida xabar bering"
+    },
+    "options_popup_update_title": {
+        "message": "Filtrlar muvaffaqiyatli yangilandi"
+    },
+    "options_popup_update_error_title": {
+        "message": "Filtrni yangilash xatosi"
+    },
+    "options_popup_update_version_error": {
+        "message": "Siz yangilamoqchi bo'lgan filtr versiyasi bir xil yoki eskiroq"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Barcha filtrlar yangilandi"
+    },
+    "options_popup_update_not_found": {
+        "message": "Hech qanday yangilanish topilmadi"
+    },
+    "options_popup_update_error": {
+        "message": "Yangilanishlarni hozir yuklashni iloji yo'q. Iltimos keyinroq qayta urinib ko'ring."
+    },
+    "options_popup_update_updated": {
+        "message": "«$1» versiyasiyadan $2 yangilandi"
+    },
+    "options_popup_update_updated_more": {
+        "message": {
+            "one": "%s filtr yangilandi: $2",
+            "other": "%s $2 filtrlar yangilandi"
+        }
+    },
+    "options_popup_version_update_title": {
+        "message": "Safari uchun AdGuard kengaytmasi $1 versiyasiga yangilandi."
+    },
+    "options_popup_version_update_description_minor": {
+        "message": "Ushbu versiyada asosan xatoliklar tuzatilgan va kichik yaxshilanishlar mavjud."
+    },
+    "options_popup_version_update_description_major": {
+        "message": "Bu ko'plab yangi xususiyatlar va yaxshilanishlarni o'z ichiga olgan kengaytmali yangilanishi."
+    },
+    "notification_content_blocker_overlimit_title": {
+        "message": "Ogohlantiramiz"
+    },
+    "notification_content_blocker_overlimit_desc": {
+        "message": "Juda koʻp filtr faollashtirilgan. Safari bitta guruhda %s dan ortiq qoidalardan foydalana olmaydi."
+    },
+    "options_content_blocker_overlimit": {
+        "message": "Juda koʻp filtr faollashtirilgan. Safari bitta guruhda %s dan ortiq qoidalardan foydalana olmaydi."
+    },
+    "options_filters_list_search_placeholder": {
+        "message": "Qidirish"
+    },
+    "options_editor_indicator_editing": {
+        "message": "Tahrirlanmoqda..."
+    },
+    "options_editor_indicator_saving": {
+        "message": "Saqlash..."
+    },
+    "options_editor_indicator_saved": {
+        "message": "Saqlantirildi"
+    },
+    "options_editor_save_button": {
+        "message": "Saqlash"
+    },
+    "main_menu_edit": {
+        "message": "Tahrirlash"
+    },
+    "main_menu_undo": {
+        "message": "Bekor qilish"
+    },
+    "main_menu_cut": {
+        "message": "Kesmoq"
+    },
+    "main_menu_copy": {
+        "message": "Nusxalash"
+    },
+    "main_menu_paste": {
+        "message": "Kiritmoq"
+    },
+    "main_menu_select-all": {
+        "message": "Hammasini tanlash"
+    },
+    "tray_menu_about": {
+        "message": "Dastur haqida"
+    },
+    "tray_menu_preferences": {
+        "message": "Sozlamalar"
+    },
+    "tray_menu_check_updates": {
+        "message": "Filtr yangilanishlarini tekshiring"
+    },
+    "tray_menu_launch_at_startup": {
+        "message": "Tizim ishga tushganda AdGuard-ni ishga tushiring"
+    },
+    "tray_menu_quit": {
+        "message": "Chiqish"
+    },
+    "tray_menu_protection_start": {
+        "message": "Safari-da blokirovka yoqilgan"
+    },
+    "tray_menu_protection_stop": {
+        "message": "Safari-da blokirovka o'chirilgan"
+    },
+    "options_last_update": {
+        "message": "Oxirgi yangilanish:"
+    },
+    "options_support": {
+        "message": "Qo'llab-quvvatlash"
+    },
+    "options_support_faq_title": {
+        "message": "FAQ"
+    },
+    "options_support_faq_description": {
+        "message": "Ko'p so'raladigan savollar"
+    },
+    "options_support_bug_report_title": {
+        "message": "Muammo haqida xabar bering"
+    },
+    "options_support_bug_report_description": {
+        "message": "Agar dasturda biror narsa to'g'ri ishlamasa"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Noto'g'ri blokirovka haqida xabar bering"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Agar o'tkazib yuborilgan reklama yoki \"buzilgan\" saytni ko'rsangiz"
+    },
+    "options_support_feedback_title": {
+        "message": "Fikr bildiring"
+    },
+    "options_support_feedback_description": {
+        "message": "Mahsulotni yaxshilash bo'yicha takliflaringiz"
+    },
+    "options_support_rate_title": {
+        "message": "Ilovaga baho bering"
+    },
+    "options_support_rate_description": {
+        "message": "AdGuard haqida fikringizni bildiring"
+    },
+    "options_support_discuss_title": {
+        "message": "Muhokama qiling"
+    },
+    "options_support_discuss_description": {
+        "message": "Forumimizda, ijtimoiy media sahifalarimizda yoki GitHubda muhokama qiling"
+    },
+    "options_about": {
+        "message": "Dastur haqida"
+    },
+    "options_content_blockers": {
+        "message": "Content bloklari"
+    },
+    "options_content_blockers_desc": {
+        "message": "Bloklovchilar yoqilgan: 6-tadan %s yoqilgan (har birida %s tagacha qoidalar boʻlishi mumkin)"
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": "Hech qanday blokirovkalar yoqilmagan"
+    },
+    "options_compare_btn": {
+        "message": "Taqqoslash"
+    },
+    "options_compare_title": {
+        "message": "Eng yaxshi himoya uchun AdGuard Premium-ni o'rnating!"
+    },
+    "options_license_agreement": {
+        "message": "Litsenziya shartnomasi"
+    },
+    "options_privacy_policy": {
+        "message": "Maxfiylik siyosati"
+    },
+    "options_acknowledgment": {
+        "message": "Minnatdochilik bildirish"
+    },
+    "options_github": {
+        "message": "GitHub"
+    },
+    "onboarding_safari_title": {
+        "message": "Ruxsat talab qilinadi"
+    },
+    "onboarding_safari_desc": {
+        "message": "Safari sozlamalarida AdGuard kengaytmalari yonidagi katakchalarni belgilang."
+    },
+    "onboarding_safari_link": {
+        "message": "Ushbu kengaytmalar nima qiladi?"
+    },
+    "onboarding_tooltip_adguard_safari_icon": {
+        "message": "AdGuard Safari belgisi"
+    },
+    "onboarding_tooltip_adguard_safari_icon_info": {
+        "message": "Safari uchun AdGuard sozlamalarini boshqarish uchun ushbu belgidan foydalanishingiz mumkin. Masalan, saytda bloklashni to'xtatib qo'ying yoki reklamalarni qo'lda bloklang."
+    },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Qo'lda kontentni blokirovka qilish vositasi ishlashi uchun veb-sahifa tarkibiga kirish talab qilinadi."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "AdGuard siz kirgan saytda ishlayotganligini tushunish uchun qidiruv tarixiga kirish zarur."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking": {
+        "message": "Kengaytirilgan AdGuard blokirovkasi"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_info": {
+        "message": "Ushbu kengaytma Safari Content Blocking API tomonidan qo'llab-quvvatlanmaydigan qo'shimcha blokirovka qoidalarini qo'llaydi."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Ilg'or kosmetik qoidalar ishlashi uchun veb-sahifa tarkibiga kirish kerak."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Brauzer tarixiga kirish, siz ochmoqchi bo'lgan sayt uchun qaysi ilg'or blokirovka qoidalarini qo'llash kerakligini tushunish uchun zarur."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 ta kontentni blokirovka qiluvchi kengaytmalar"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari kontentni bloklash qoidalarining maksimal sonini har bir kengaytma uchun %s bilan cheklaydi. Bu AdGuard bloklagan barcha reklama va trekerlarni qamrab olish uchun etarli emas. Cheklovni %s ga oshirish uchun 6 ta kengaytmadan foydalanmoqdamiz."
+    },
+    "onboarding_safari_btn": {
+        "message": "Sozlamalarni oching"
+    },
+    "onboarding_ignore_safari_btn": {
+        "message": "Oʻtkazib yuborish"
+    },
+    "options_learn_more": {
+        "message": "Qo'shimcha ma'lumot olish uchun"
+    },
+    "options_about_version": {
+        "message": "Versiyasi: %s"
+    },
+    "notification_user_filter_updated_title": {
+        "message": "Shaxsiy qoidalar yangilandi"
+    },
+    "notification_user_filter_updated_desc": {
+        "message": "Maxsus qoidalarga yangi qoida qo'shildi:"
+    },
+    "options_filters_update_period": {
+        "message": "Yangilash oralig'i"
+    },
+    "options_filters_update_period_number": {
+        "message": {
+            "one": "Har soatda",
+            "other": "Har %s soatda"
+        }
+    },
+    "options_filters_period_not_update": {
+        "message": "Yangilanmasin"
+    },
+    "options_filters_check_for_updates": {
+        "message": "Yangilanishlarni tekshiring"
+    },
+    "options_filters_custom_remove": {
+        "message": "o'chirish"
+    },
+    "options_show_tray_icon": {
+        "message": "Menyu satrida Safari uchun AdGuard-ni ko'rsating"
+    },
+    "options_launch_at_login": {
+        "message": "Kirish paytida Safari uchun AdGuard dasturini ishga tushiring"
+    },
+    "options_verbose_logging": {
+        "message": "Batafsil ro'yxatga olish"
+    },
+    "options_verbose_logging_desc": {
+        "message": "Agar batafsil logging yoqilgan bo'lsa, Safari uchun AdGuard kengaytmalari brauzer konsoliga qo'shimcha ma'lumotlarni kiritadi."
+    },
+    "options_enable_hardware_acceleration": {
+        "message": "Uskuna tezlashtirishni yoqing"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Sozlamalar oynasi uchun apparat tezlashtirishni yoqing. Qayta ishga tushirish talab qilinadi!"
+    },
+    "settings_import": {
+        "message": "Sozlamalarni yuklab olish (Import settings)"
+    },
+    "settings_import_success": {
+        "message": "Sozlamalar muvaffaqiyatli yuklab olindi"
+    },
+    "settings_import_error": {
+        "message": "Sozlamalarni import qilishda xatolik yuz berdi"
+    },
+    "settings_notification_protection_title": {
+        "message": "Himoya to'xtatildi"
+    },
+    "settings_notification_protection_button_text": {
+        "message": "Qayta boshlash"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Tuzatish"
+    },
+    "settings_notification_extensions_title": {
+        "message": "Ba'zi AdGuard kengaytmalari o'chirilgan"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Safari-da reklamalarni to'g'ri bloklash uchun barcha AdGuard kengaytmalarini yoqishingiz kerak"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "AdGuard-dan ba'zi kontentni bloklaydigan kengaytmalar o'chirib qo'yilgan"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Safari-da reklamalarni to'g'ri bloklash uchun barcha AdGuard kontentini bloklovchi kengaytmalarni yoqishingiz kerak"
+    },
+    "settings_notification_update_interval": {
+        "message": "E'tibor bering, eskirgan filtrlar himoya sifatini pasaytiradi, shuning uchun ularni yangilash muhimdir."
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard Maxsus qoidalar"
+    },
+    "options_cb_privacy_title": {
+        "message": "AdGuard Maxfiylik"
+    },
+    "options_cb_social_title": {
+        "message": "AdGuard Ijtimoiy vidjetlar"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard Xavfsizlik"
+    },
+    "options_cb_other_title": {
+        "message": "AdGuard boshqa qoidalar"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard Maxsus"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s qoida ishlatiladi",
+            "other": "Ishlatilayotgan qoidalar: %s"
+        }
+    },
+    "options_cb_rules_overlimit_info": {
+        "message": "%s qoidada chegaradan oshib ketdi. Iltimos, ilovaning to'g'ri ishlashi uchun keraksiz qoidalarni o'chirib qo'ying. <br/> Hozirda qo'llatilgan qoidalar: %s (o'chirilgan qoidalar: $2)"
+    },
+    "options_cb_disabled_warning": {
+        "message": "Safari-da o'chirilgan"
+    },
+    "options_cb_compilation_warning": {
+        "message": "Kompilyatsiya amalga oshmadi"
+    },
+    "filters_group_custom": {
+        "message": "Shaxsiy"
+    },
+    "userfilter_name": {
+        "message": "Maxsus qoidalar"
+    },
+    "allowlist_name": {
+        "message": "Oq ro'yxat"
+    },
+    "window_close_dialog_message": {
+        "message": "AdGuard fonda ishlashini xohlaysizmi?"
+    },
+    "window_close_dialog_detail": {
+        "message": "AdGuard fonda ishlashi juda muhim, aks holda u avtomatik ravishda filtr yangilanishlarini tekshira olmaydi va filtrlashni boshqara olmaydi."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Mening tanlovimni eslang"
+    },
+    "window_close_dialog_yes": {
+        "message": "Ha (tavsiya etiladi)"
+    },
+    "window_close_dialog_no": {
+        "message": "Yo'q"
+    },
+    "window_close_dialog_cancel": {
+        "message": "Bekor qilish"
+    },
+    "folder_check_dialog_message": {
+        "message": "AdGuard Safari uchun «Ilovalar» jildidan ishga tushirishi kerak."
+    },
+    "folder_check_dialog_detail": {
+        "message": "Siz uni «Ilovalar» jildiga ko'chirmoqchisiz?"
+    },
+    "folder_check_dialog_move": {
+        "message": "Ko'chirish"
+    },
+    "folder_check_dialog_quit": {
+        "message": "Chiqish"
+    }
+}

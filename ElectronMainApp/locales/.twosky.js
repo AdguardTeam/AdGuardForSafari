@@ -36,6 +36,7 @@ module.exports = [
       "th": "Thai",
       "tr": "Turkish",
       "uk": "Ukrainian",
+      "uz": "Uzbek",
       "vi": "Vietnamese",
       "zh-Hans": "Chinese Simplified (mainland China)",
       "zh-Hant": "Chinese Traditional (Taiwan)"
