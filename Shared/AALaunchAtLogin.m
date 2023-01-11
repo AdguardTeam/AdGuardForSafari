@@ -24,7 +24,7 @@
 -(id)initWithIdentifier:(NSString*)identifier {
     self = [self init];
     if(self) {
-        _enabled = YES;
+        _enabled = NO;
         self.identifier = identifier;
     }
     return self;
