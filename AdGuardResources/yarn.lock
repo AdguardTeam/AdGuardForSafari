@@ -7,15 +7,15 @@
   resolved "https://registry.yarnpkg.com/@adguard/assistant/-/assistant-4.3.68.tgz#4a85019274fcc8eaf1a59acfbd52e40636663d5d"
   integrity sha512-dwFdCU/359YPiD4MZZYLSz8rK1o78aABg0rKICCAjwRUOFmAwwS9/dje1S2s3Xjl+ap5cAtJPu1GgWwIK81lCw==
 
-"@adguard/extended-css@^2.0.26":
-  version "2.0.26"
-  resolved "https://registry.yarnpkg.com/@adguard/extended-css/-/extended-css-2.0.26.tgz#f41a32b542fca3bc43240f8fba5b839c9e4c61ae"
-  integrity sha512-bc7MWURvdBQchOSc4ZFZis1yhwVTWHH+RAORQ6ljNMJXhf1BFpe98vdPiUn3fuKMmlKtwApZIdUCNww0HsaH+w==
+"@adguard/extended-css@^2.0.33":
+  version "2.0.33"
+  resolved "https://registry.yarnpkg.com/@adguard/extended-css/-/extended-css-2.0.33.tgz#b3586588e24272f46d32f08edd65f8a7a78bcf0e"
+  integrity sha512-T6hUugh+30RFEAlzAj2/T8rL76Y179Pf4YxParNxOzb8+16/Spv1tCviPxAsz/fWukjvzUK4OAVHSR7FHgvTHw==
 
-"@adguard/scriptlets@^1.7.14":
-  version "1.7.14"
-  resolved "https://registry.yarnpkg.com/@adguard/scriptlets/-/scriptlets-1.7.14.tgz#3623c7d4b779b0038400b99ae9abe342ac8ec725"
-  integrity sha512-cI3f2Yjg1KSVl7uWdu2IPe8uS4ljDsVxypaZ0nWHlL2wvTndSPuvR+KMb0CnmcknP+83fu/Si3I257i+VMz1sw==
+"@adguard/scriptlets@^1.7.20":
+  version "1.7.20"
+  resolved "https://registry.yarnpkg.com/@adguard/scriptlets/-/scriptlets-1.7.20.tgz#9210b68a7736b0b69f1264c8dd0be08efea5c019"
+  integrity sha512-yUCFGegqP4o0b0J1sG6914gA28or25QpAlvppEYJOTON1Ywt61WXaxQdjCpEZFdeXYykZ5HsAUo/zmGmvdKVMQ==
   dependencies:
     "@babel/runtime" "^7.7.2"
     js-yaml "^3.13.1"
