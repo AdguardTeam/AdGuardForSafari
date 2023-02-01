@@ -162,7 +162,7 @@
                 try {
                     code = scriptlets && scriptlets.invoke(param);
                 } catch (e) {
-                    logMessage(verbose, `Error: can't invoke scriptlet with name: ${param.name}`);
+                    logMessage(verbose, e.message);
                 }
                 return code;
             });
