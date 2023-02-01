@@ -65,6 +65,19 @@ module.exports = (() => {
     };
 
     /**
+     * Creates handler for events firing when custom filter was set.
+     * @param showWindow Callback to open electron window
+     * @returns handler, which receives custom filter info
+     */
+    const onCustomFilterInfoSetCallback = (showWindow) => (customFilterInfo) => {
+        log.debug('Custom filter info set');
+        // open main window, or focus it if it's already open
+        showWindow(() => {
+            listeners.notifyListeners(events.CUSTOM_FILTER_INFO_SET, customFilterInfo);
+        });
+    };
+
+    /**
      * Return callback function for show preferences event
      *
      * @param showWindow
@@ -109,7 +122,8 @@ module.exports = (() => {
             onAllowlistChangedCallback,
             onUserFilterChangedCallback,
             onShowPreferencesCallback(showWindow),
-            onReportCallback
+            onReportCallback,
+            onCustomFilterInfoSetCallback(showWindow)
         );
 
         // Subscribe to application events

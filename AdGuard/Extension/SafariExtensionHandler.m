@@ -93,7 +93,12 @@ static BOOL _mainAppReady;
                 }];
             }
         }
-
+        else if ([messageName isEqualToString:@"addFilterSubscription"]) {
+            DDLogInfo(@"AG: Adding custom filter with url: %@, and title: %@", userInfo[@"url"], userInfo[@"title"]);
+            [AESharedResources setCustomFilterInfo:userInfo completion:^{
+                [AESharedResources notifyCustomFilterInfoSet];
+            }];
+        }
     }
 }
 

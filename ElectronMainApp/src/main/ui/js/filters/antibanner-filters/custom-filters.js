@@ -6,6 +6,10 @@ function addCustomFilter(e) {
     renderCustomFilterPopup();
 }
 
+function onCustomFilterSubscribe(customFilterInfo = {}) {
+    renderCustomFilterPopup(customFilterInfo);
+}
+
 function removeCustomFilter(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -21,7 +25,7 @@ function removeCustomFilter(e) {
 }
 
 let customPopupInitialized = false;
-function renderCustomFilterPopup() {
+function renderCustomFilterPopup(customFilterInfo = {}) {
     const POPUP_ACTIVE_CLASS = 'option-popup__step--active';
 
     function closePopup() {
@@ -64,7 +68,7 @@ function renderCustomFilterPopup() {
     let onPopupCloseClicked;
     let onSubscribeBackClicked;
 
-    function renderInputFilter() {
+    function renderInputFilter(url) {
         clearActiveStep();
         document.querySelector('#add-custom-filter-step-1').classList.add(POPUP_ACTIVE_CLASS);
 
@@ -78,6 +82,10 @@ function renderCustomFilterPopup() {
         document.querySelector('#custom-filter-popup-close').addEventListener('click', onPopupCloseClicked);
 
         document.querySelector('#custom-filter-popup-cancel').addEventListener('click', onPopupCloseClicked);
+
+        if (url) {
+            document.querySelector('#custom-filter-popup-url').value = url;
+        }
     }
 
     function renderDownloadingFilter() {
@@ -167,10 +175,18 @@ function renderCustomFilterPopup() {
         e.preventDefault();
 
         const url = document.querySelector('#custom-filter-popup-url').value;
-        ipcRenderer.send('renderer-to-main', JSON.stringify({
-            'type': 'loadCustomFilterInfo',
+        const message = {
+            type: 'loadCustomFilterInfo',
             url,
-        }));
+        };
+
+        // pass title to the main if custom filter info exists
+        // and custom filter info url equals to the url from the input (needed when user decides to update url)
+        if (customFilterInfo.title && url === customFilterInfo.url) {
+            message.title = customFilterInfo.title;
+        }
+
+        ipcRenderer.send('renderer-to-main', JSON.stringify(message));
 
         ipcRenderer.on('loadCustomFilterInfoResponse', (e, arg) => {
             if (arg) {
@@ -223,8 +239,9 @@ function renderCustomFilterPopup() {
         });
 
         // Step three events
-        document.querySelector('.custom-filter-popup-try-again')
-            .addEventListener('click', renderInputFilter);
+        document.querySelector('.custom-filter-popup-try-again').addEventListener('click', () => {
+            renderInputFilter();
+        });
     }
 
     if (!customPopupInitialized) {
@@ -234,10 +251,11 @@ function renderCustomFilterPopup() {
 
     document.querySelector('#add-custom-filter-popup').classList.add('option-popup--active');
     document.querySelector('#custom-filter-popup-url').value = '';
-    renderInputFilter();
+    renderInputFilter(customFilterInfo.url);
 }
 
 module.exports = {
     addCustomFilter,
     removeCustomFilter,
+    onCustomFilterSubscribe,
 };

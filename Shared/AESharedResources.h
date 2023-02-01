@@ -172,6 +172,7 @@ extern NSString * const AEDefaultsAllowlistInverted;
  Notifies, that user wants to see the prerefences window.
  */
 + (void)notifyShowPreferences;
+
 /**
  Register listener for show preferences.
 
@@ -288,6 +289,22 @@ extern NSString * const AEDefaultsAllowlistInverted;
  Completion is executed on global concurent queue.
  */
 + (void)userFilterRulesWithCompletion:(void (^)(NSArray <NSString *> *rules))completion;
+
+/**
+ Sets the custom filter data in shared storage.
+ @param customFilterInfo Information about filter with url and title
+ */
++ (void)setCustomFilterInfo:(NSDictionary *)customFilterInfo completion:(void (^)(void))completion;
+
+/**
+ Notifies that custom filter info was set
+ */
++ (void)notifyCustomFilterInfoSet;
+
+/**
+ Gets the custom filter info from shared storage.
+ */
++ (void)customFilterInfoWithCompletion:(void (^)(NSDictionary *customFilterInfo))completion;
 
 /**
   Log info wrapper

@@ -131,6 +131,10 @@ const initPage = function (response) {
                         options.filtersUpdateLastCheck
                     );
                     break;
+                case EventNotifierTypes.CUSTOM_FILTER_INFO_SET: {
+                    controller.onCustomFilterSubscribe(options);
+                    break;
+                }
             }
         });
     };

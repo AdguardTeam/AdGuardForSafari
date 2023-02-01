@@ -29,6 +29,7 @@
 #define AES_ADV_BLOCKING_CONTENT_RULES_RESOURCE @"adv-blocking-content-rules.json"
 #define AES_ALLOWLIST_DOMAINS                   @"allowlist-domains.data"
 #define AES_USERFILTER_RULES                    @"userfilter-rules.data"
+#define AES_CUSTOM_FILTER_INFO                  @"custom-filter-info.data"
 
 #define NOTIFICATION_DEFAULTS                   AG_BUNDLEID @".notify.defaults"
 #define NOTIFICATION_ALLOWLIST                  AG_BUNDLEID @".notify.allowlist"
@@ -39,6 +40,7 @@
 #define NOTIFICATION_READY                      AG_BUNDLEID @".notify.ready"
 #define NOTIFICATION_REPORT                     AG_BUNDLEID @".notify.report"
 #define NOTIFICATION_ADVANCED_BLOCKING          AG_BUNDLEID @".notify.advancedblocking"
+#define NOTIFICATION_CUSTOM_FILTER_INFO_SET     AG_BUNDLEID @".notify.customfilterinfoset"
 
 #define NOTIFICATION_EXTENSIONS_ENABLED         AG_BUNDLEID @".notify.allExtentionsEnabled"
 #define REQUEST_EXTENSIONS_ENABLED              AG_BUNDLEID @".request.allExtentionsEnabled"
@@ -220,12 +222,22 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
     [self setListenerForNotification:NOTIFICATION_USERFILTER
                                block:block];
 }
++ (void)notifyCustomFilterInfoSet {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef) NOTIFICATION_CUSTOM_FILTER_INFO_SET, NULL, NULL, YES);
+    });
+}
++ (void)setListenerOnCustomFilterInfoSet:(AESListenerBlock)block {
+    [self setListenerForNotification:NOTIFICATION_CUSTOM_FILTER_INFO_SET
+                               block:block];
+}
 
 + (void)notifyShowPreferences {
     dispatch_async(dispatch_get_main_queue(), ^{
         CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), (CFStringRef)NOTIFICATION_SHOW_PREFS, NULL, NULL, YES);
     });
 }
+
 + (void)setListenerOnShowPreferences:(AESListenerBlock)block {
     [self setListenerForNotification:NOTIFICATION_SHOW_PREFS
                                block:block];
@@ -386,6 +398,16 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
 + (void)userFilterRulesWithCompletion:(void (^)(NSArray <NSString *> *rules))completion {
 
     [self loadObjectWithKey:AES_USERFILTER_RULES class:[NSArray class] completion:completion];
+}
+
++ (void)setCustomFilterInfo:(NSDictionary *)customFilterInfo completion:(void (^)(void))completion {
+
+    [self saveObject:customFilterInfo key:AES_CUSTOM_FILTER_INFO completion:completion];
+}
+
++ (void)customFilterInfoWithCompletion:(void (^)(NSDictionary *customFilterInfo))completion {
+
+    [self loadObjectWithKey:AES_CUSTOM_FILTER_INFO class:[NSDictionary class] completion:completion];
 }
 
 + (void)DDLogInfo:(NSString *)message {

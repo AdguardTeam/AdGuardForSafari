@@ -644,6 +644,66 @@ NAN_METHOD(setOnUserFilter) {
   }];
 }
 
+NAN_METHOD(setOnCustomFilterInfoSet) {
+    static Nan::Callback *cb = nullptr;
+
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsFunction()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+
+    if (cb) {
+        delete cb;
+    }
+
+    cb = new Nan::Callback(info[0].As<Function>());
+
+    [AESharedResources setListenerOnCustomFilterInfoSet:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            Nan::HandleScope scope;
+
+            Nan::Call(*cb, 0, 0);
+        });
+    }];
+}
+
+NAN_METHOD(customFilterInfo) {
+
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsFunction()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+
+    Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
+
+    [AESharedResources customFilterInfoWithCompletion:^(NSDictionary *customFilterInfo){
+
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            Nan::HandleScope scope;
+
+            v8::Local<Object> result = Nan::New<Object>();
+            v8::Local<v8::Context> ctx = Nan::GetCurrentContext();
+            for (NSString *key in customFilterInfo) {
+                result->Set(ctx, Nan::New(key.UTF8String).ToLocalChecked(), Nan::New([customFilterInfo[key] UTF8String]).ToLocalChecked());
+            }
+            v8::Local<v8::Value> argv[1] = {result};
+
+            Nan::Call(*cb, 1, argv);
+            delete cb;
+        });
+    }];
+}
+
 NAN_METHOD(setOnShowPreferences) {
 
   static Nan::Callback *cb = nullptr;
@@ -858,6 +918,12 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("setOnUserFilter").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setOnUserFilter)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("setOnCustomFilterInfoSet").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(setOnCustomFilterInfoSet)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("customFilterInfo").ToLocalChecked(),
+  GetFunction(New<FunctionTemplate>(customFilterInfo)).ToLocalChecked());
 
   Nan::Set(target, New<String>("setOnShowPreferences").ToLocalChecked(),
   GetFunction(New<FunctionTemplate>(setOnShowPreferences)).ToLocalChecked());

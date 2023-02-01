@@ -9,6 +9,7 @@ const topMenu = require('./top-menu');
 const ContentBlockersScreen = require('./content-blockers');
 const AntiBannerFilters = require('./filters/antibanner-filters/antibanner-filters');
 const Settings = require('./general-settings');
+const customFilters = require('./filters/antibanner-filters/custom-filters');
 
 const CONTENT_BLOCKERS_COUNT = 6;
 
@@ -415,6 +416,14 @@ PageController.prototype = {
                 shell.openExternal(incorrectBlockingLinkUrl);
             });
         });
+    },
+
+    onCustomFilterSubscribe(options) {
+        if (window.location.hash !== '#antibanner0') {
+            // TODO after ui rework make page to switch to the custom group
+            window.location.hash = 'antibanner';
+        }
+        customFilters.onCustomFilterSubscribe(options);
     },
 };
 
