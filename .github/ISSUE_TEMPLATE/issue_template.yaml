@@ -14,7 +14,7 @@ body:
       description:
       options:
         - label: I am running the latest version
-        - label: I made sure all content blockers are enebled in Safari settings
+        - label: I made sure all content blockers are enabled in Safari settings
         - label: I checked the documentation and found no answer
         - label: I checked to make sure that this issue has not already been filed
     validations:
