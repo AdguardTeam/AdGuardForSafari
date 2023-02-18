@@ -33,7 +33,7 @@ int main(int argc, const char * argv[]) {
 
                 NSError *lError = nil;
                 NSRunningApplication *app = [[NSWorkspace sharedWorkspace] launchApplicationAtURL:url
-                                                                                          options:0
+                                                                                          options:NSWorkspaceLaunchWithoutAddingToRecents
                                                                                     configuration:@{NSWorkspaceLaunchConfigurationEnvironment:
                                                                                                         @{@"LAUNCHED_AT_LOGIN": @"1"}}
                                                                                             error:&lError];
