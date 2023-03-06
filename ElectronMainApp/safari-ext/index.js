@@ -328,6 +328,29 @@ module.exports = (() => {
         return addon.getBuildNumber();
     };
 
+    /**
+     * Returns boolean flag if extension should be launched in background
+     * @returns {Promise<boolean>}
+     */
+    const getLaunchedBackground = async () => {
+        const WAIT_TIMEOUT_MS = 100;
+        const getLaunchedBackgroundFromFile = () => {
+            return new Promise((resolve, reject) => {
+                addon.getLaunchedBackground((launchedBackground) => {
+                    resolve(launchedBackground);
+                });
+                setTimeout(() => {
+                    reject(new Error('getLaunchedBackground couldn\'t return response in time'));
+                }, WAIT_TIMEOUT_MS);
+            });
+        };
+
+        const result = await getLaunchedBackgroundFromFile();
+        addon.resetLaunchedBackground();
+
+        return result;
+    };
+
     return {
         init,
         sendReady,
@@ -352,5 +375,6 @@ module.exports = (() => {
         getOSVersion,
         getBuildNumber,
         setAllowlistInverted,
+        getLaunchedBackground,
     };
 })();

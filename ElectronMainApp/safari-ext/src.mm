@@ -806,6 +806,44 @@ NAN_METHOD(startAtLogin) {
   info.GetReturnValue().Set(Nan::New((bool)result));
 }
 
+/*
+Sets the flag that indicates that the app was launched in background
+*/
+NAN_METHOD(getLaunchedBackground) {
+
+    if (info.Length() < 1) {
+        ThrowTypeError("Wrong number of arguments");
+        return;
+    }
+
+    if (!info[0]->IsFunction()) {
+        ThrowTypeError("Wrong arguments");
+        return;
+    }
+
+    Nan::Callback *cb = new Nan::Callback(info[0].As<Function>());
+
+    [AESharedResources launchInBackgroundWithCompletion:^(BOOL result){
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            Nan::HandleScope scope;
+
+            v8::Local<v8::Value> argv[1] = {Nan::New((BOOL)result)};
+
+            Nan::Call(*cb, 1, argv);
+            delete cb;
+        });
+    }];
+}
+
+/*
+Resets the flag that indicates that the app was launched in background
+*/
+NAN_METHOD(resetLaunchedBackground) {
+    [AESharedResources setLaunchInBackground:NO completion:^{
+        DDLogCDebug(@"launch in background was reset");
+    }];
+}
+
 NAN_METHOD(removeOldLoginItem){
 
     if (info.Length() < 1) {
@@ -966,6 +1004,12 @@ NAN_MODULE_INIT(Init) {
 
   Nan::Set(target, New<String>("getBuildNumber").ToLocalChecked(),
     GetFunction(New<FunctionTemplate>(getBuildNumber)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("getLaunchedBackground").ToLocalChecked(),
+    GetFunction(New<FunctionTemplate>(getLaunchedBackground)).ToLocalChecked());
+
+  Nan::Set(target, New<String>("resetLaunchedBackground").ToLocalChecked(),
+    GetFunction(New<FunctionTemplate>(resetLaunchedBackground)).ToLocalChecked());
 }
 
 // macro to load the module when require'd

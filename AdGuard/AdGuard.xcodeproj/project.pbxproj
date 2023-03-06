@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49020FBA29AE1D8F0024A96F /* libshared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 652735B2212D77A3005C35BF /* libshared.a */; };
+		49CED90529AE642B0087B457 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65216A02212436EA00ABF7D0 /* Cocoa.framework */; };
 		6504C1102136EA2D007E9674 /* PopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6504C10F2136EA2D007E9674 /* PopupView.m */; };
 		651A4FAE232149E4002DAD0A /* AEMainAppServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 651A4FAC232149E4002DAD0A /* AEMainAppServices.h */; };
 		651A4FAF232149E4002DAD0A /* AEMainAppServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 651A4FAD232149E4002DAD0A /* AEMainAppServices.m */; };
@@ -189,6 +191,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		49020FBB29AE1D8F0024A96F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65720AAA21219AC900B2381C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 652735B1212D77A3005C35BF;
+			remoteInfo = shared;
+		};
 		652169F821231BFB00ABF7D0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65720AAA21219AC900B2381C /* Project object */;
@@ -856,6 +865,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49CED90529AE642B0087B457 /* Cocoa.framework in Frameworks */,
+				49020FBA29AE1D8F0024A96F /* libshared.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1402,6 +1413,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				49020FBC29AE1D8F0024A96F /* PBXTargetDependency */,
 			);
 			name = "AdGuard Login Helper";
 			productName = "AdGuard Login Helper";
@@ -2057,6 +2069,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		49020FBC29AE1D8F0024A96F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 652735B1212D77A3005C35BF /* shared */;
+			targetProxy = 49020FBB29AE1D8F0024A96F /* PBXContainerItemProxy */;
+		};
 		652169F921231BFB00ABF7D0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 652169F321231A2300ABF7D0 /* BuildElectronApp */;

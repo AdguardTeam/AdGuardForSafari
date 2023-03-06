@@ -103,17 +103,27 @@
             DDLogError(@"Can't obtain URL for Main App.");
         }
         else {
+            // Set flag that extension was launched in background, for main app to launch in background
+            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+            
+            [AESharedResources setLaunchInBackground:YES completion:^{
+                dispatch_semaphore_signal(semaphore);
+            }];
+            
+            // timeout after 1 second
+            dispatch_time_t timeout = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
+            dispatch_semaphore_wait(semaphore, timeout);
+            
             NSError *lError = nil;
             NSRunningApplication *app = [[NSWorkspace sharedWorkspace] launchApplicationAtURL:appURL
                                                                                       options:0
-                                                                                configuration:@{NSWorkspaceLaunchConfigurationEnvironment:
-                                                                                                    @{@"LAUNCHED_BACKGROUND": @"1"}}
+                                                                                configuration:@{}
                                                                                         error:&lError];
             if (app == nil && lError != nil) {
                 DDLogError(@"Error occurs when running: %@", lError);
             }
         }
-
+        
         [SafariExtensionHandler onReady:^{
             if (! [AESharedResources.sharedDefaults boolForKey:AEDefaultsEnabled]) {
                 [self startProtection];

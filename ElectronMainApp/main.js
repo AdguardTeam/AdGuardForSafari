@@ -11,6 +11,7 @@ const safariExt = require('safari-ext');
 const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
 const log = require('./src/main/app/utils/log');
+const { launchState } = require('./src/main/launch-state');
 
 /* Reconfigure path to config */
 process.env['NODE_CONFIG_DIR'] = appPack.resourcePath('/config/');
@@ -262,22 +263,8 @@ function showWindow(onWindowLoaded) {
  *
  * @return {*}
  */
-function shouldOpenSilent() {
-    if (isOpenedAtLogin()) {
-        log.info('App is opened at login');
-        return true;
-    }
-
-    return process.env['LAUNCHED_BACKGROUND'];
-}
-
-/**
- * Checks if app is launched at login
- *
- * @return {string|undefined}
- */
-function isOpenedAtLogin() {
-    return process.env['LAUNCHED_AT_LOGIN'];
+async function shouldOpenSilent() {
+    return launchState.launchedBackground();
 }
 
 /**
@@ -323,7 +310,7 @@ let tray;
  * initialization and is ready to create browser windows.
  * Some APIs can only be used after this event occurs.
  */
-app.on('ready', (() => {
+app.on('ready', (async () => {
     i18n.setAppLocale(app.getLocale());
     if (getChannel() !== 'MAS') {
         checkIsInApplicationsFolder();
@@ -332,7 +319,7 @@ app.on('ready', (() => {
     log.info(`Starting AdGuard v${app.getVersion()} (${safariExt.getBuildNumber()})`);
     log.info('App ready - creating browser windows');
 
-    if (shouldOpenSilent()) {
+    if (await shouldOpenSilent()) {
         log.info('App is launching in background');
 
         // Open in background
@@ -412,6 +399,9 @@ app.on('activate', () => {
     if (mainWindow === null) {
         loadMainWindow();
         uiEventListener.register(mainWindow);
+    } else {
+        // Show window when app icon is clicked in Dock or called from Spotlight search
+        showWindow();
     }
 });
 
