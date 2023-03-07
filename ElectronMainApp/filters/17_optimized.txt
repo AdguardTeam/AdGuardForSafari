@@ -1,15 +1,24 @@
-! Checksum: XDsOy09NvNrMslGrOilZwQ
+! Checksum: rufDQhuN5vzKY18kzReYQg
 ! Title: AdGuard URL Tracking filter (Optimized)
 ! Description: Filter that enhances privacy by removing tracking parameters from URLs.
-! Version: 2.0.3.89
-! TimeUpdated: 2022-12-09T10:30:50+00:00
+! Version: 2.0.4.37
+! TimeUpdated: 2023-02-27T17:04:59+00:00
 ! Expires: 4 days (update frequency)
+$removeparam=tduid
+$removeparam=gci
+$removeparam=pk_vid
+$removeparam=mindbox-click-id
+click_id=*_branch_referrer=$removeparam
+$removeparam=famad_xuid
 $removeparam=twclid
 $removeparam=erid
 $removeparam=cx_click
+$removeparam=cx_recsOrder
+$removeparam=cx_recsWidget
 $removeparam=mkt_tok
 $removeparam=mindbox-message-key
 $removeparam=_kx
+?uclick=*&uclickhash=$removeparam
 /?uclick=*;uclickhash=$removeparam
 &uclick=*&uclickhash=$removeparam
 /?r=dir&zoneid=$removeparam
@@ -63,6 +72,7 @@ $removeparam=utm_campaignid
 $removeparam=utm_channel
 $removeparam=utm_cid
 $removeparam=utm_content
+$removeparam=utm_creative
 $removeparam=utm_emcid
 $removeparam=utm_emmid
 $removeparam=utm_id
@@ -148,9 +158,58 @@ $removeparam=fb_action_types
 $removeparam=fb_comment_id
 $removeparam=fb_ref
 $removeparam=fb_source
+||realestate.yahoo.co.jp^$removeparam=sc_out
+||glami.cz^$removeparam=/ga[ct]id/
+||open.spotify.com^$removeparam=referral
+||skt.sh/common/share/bridge?$removeparam=referer
+||login.afreecatv.com^$removeparam=szFrom
+||moffme.com^$removeparam=source
+||moffme.com^$removeparam=medium
+||moffme.com^$removeparam=campaign
+||click.speee-ad.jp^$removeparam=os
+||click.speee-ad.jp^$removeparam=ref
+||click.speee-ad.jp^$removeparam=sess_id
+||click.speee-ad.jp^$removeparam=slot_index
+||click.speee-ad.jp^$removeparam=v
+||tiktok.com^$removeparam=embed_source
+||tiktok.com^$removeparam=referer_url
+||tiktok.com^$removeparam=refer
+||voicy.jp^$removeparam=share.ref
+||chaturbate.com^$removeparam=/tour|campaign/,~third-party
+||awaliwa.com^$removeparam=lg
+||awaliwa.com^$removeparam=s
+||awaliwa.com^$removeparam=c
+||awaliwa.com^$removeparam=z
+||awaliwa.com^$removeparam=old
+||awaliwa.com^$removeparam=bd_vid
+||awaliwa.com^$removeparam=acr
+||megaknihy.cz^$removeparam=/param[0-9]{1}|utm_si|matchtype|device|creative|keyword|placement|adposition|campaignid|adgroupid|feeditemid|targetid|loc_|searchtype|network|search_pos|cat_pos|block|position/
+||brazzers.com^$removeparam=ats
+||whale.naver.com^$removeparam=wpid
+||wemakeprice.com^$removeparam=refer
+||joshi-spa.jp^$removeparam=cx_clicks_art_mdl
+||joshi-spa.jp^$removeparam=cx_clicks_sldbox
+||n11.com^$removeparam=/pfx|adj/
+||home.kingsoft.jp^$removeparam=from
+||bbc.$removeparam=at_link_id
+||bbc.$removeparam=facebook_page
+||bbc.$removeparam=at_ptr_name
+||bbc.$removeparam=at_link_type
+||bbc.$removeparam=at_link_origin
+||bbc.$removeparam=at_campaign_type
+||bbc.$removeparam=at_bbc_team
+||jlcpcb.com^$removeparam=from
+||morhipo.com^$removeparam=srsltid
+||event.hoken-mammoth.jp^$removeparam=s_mf
+||cinematoday.jp^$removeparam=g_clk
+$removeparam=afid,domain=123chat.jp|kanochat.jp
+||basketballking.jp^$removeparam=cx_art
+||japan.cnet.com^$removeparam=tag
+||asahi.com^$removeparam=iref
+||asahi.com^$removeparam=ref
+||asahi.com^$removeparam=cid
 ||cnn.co.jp^$removeparam=ref
-||jiji.com$removeparam=g
-||jiji.com$removeparam=m
+||jiji.com^$removeparam=m
 ||fashion-press.net^$removeparam=media
 ||douban.com^$removeparam=_i
 ||oshiete.goo.ne.jp^$removeparam=from
@@ -247,6 +306,7 @@ $removeparam=fb_source
 ||fmworld.net^$removeparam=from
 ||kaspersky.$removeparam=_ga
 ||kaspersky.$removeparam=icid
+||facebook.com/marketplace/$removeparam=tracking
 ||facebook.com^$removeparam=extid
 ||zenaps.com^$removeparam=cookie
 ||zenaps.com^$removeparam=bId
@@ -266,7 +326,6 @@ $removeparam=fb_source
 ||shop.hololivepro.com^$removeparam=pr_seq
 ||shop.hololivepro.com^$removeparam=pr_prod_strat
 ||wq.jd.com^$removeparam=pvid
-||redirects.tradedoubler.com^$removeparam=tduid
 ||coolblue.nl^$removeparam=clickref
 ||coolblue.nl^$removeparam=ref
 ||coolblue.nl^$removeparam=PHGref
@@ -314,7 +373,7 @@ $removeparam=oref,domain=defenseone.com|govexec.com|nextgov.com|route-fifty.com
 ||trib.al$removeparam=c[0]
 $removeparam=/utm_partner_id|frommail/,domain=mail.ru|sportmail.ru
 ||pulse.mail.ru^$removeparam=/^(udid|DeviceID|ver|appbuild|vendor|model|device_name|device_type|instanceid|device_year|connection_class|appsflyerid)/
-||use.typekit.net^$font,removeparam=~/^(primer|subset_id)=/
+||use.typekit.net^$font,removeparam=~/^(primer|subset_id)=/,domain=~fonts.adobe.com
 ||p.typekit.net^$stylesheet,removeparam
 ||open.spotify.com^$removeparam=_branch_referrer
 ||qcplay.co.jp/?shortlink=*&c=$removeparam=c
@@ -323,7 +382,7 @@ $removeparam=/utm_partner_id|frommail/,domain=mail.ru|sportmail.ru
 ||giphy.com^$removeparam=cid
 ||giphy.com^$removeparam=ct
 ||giphy.com^$removeparam=rid
-$removeparam=ref,domain=jin115.com|bipblog.com|animember.net
+$removeparam=ref,domain=jin115.com|bipblog.com|animember.net|sbbit.jp|blog.livedoor.jp|blog.jp|2chblog.jp
 ||cinematoday.jp^$removeparam=g_clk
 ||xxvidsx.com^$removeparam=ad
 ||xxvidsx.com^$removeparam=site
@@ -371,22 +430,23 @@ $removeparam=ref,domain=jin115.com|bipblog.com|animember.net
 ||click.linksynergy.com/fs-bin/click?id=$removeparam=u1
 ||click.linksynergy.com/fs-bin/click?id=$removeparam=u2
 ||go.mysku.ru^$removeparam=~r
+||apple.com^$removeparam=afid
+||apple.com^$removeparam=cid
 ||apple.com^$removeparam=ct
 ||apple.com^$removeparam=pt
 $removeparam=ActionID,domain=otto.de|ottoversand.at
 $removeparam=AffiliateID,domain=otto.de|ottoversand.at
 $removeparam=campid,domain=otto.de|ottoversand.at
 ||search.naver.com/p/crd/rd$removeparam=i
-||search.naver.com/p/crd/rd$removeparam=px
-||search.naver.com/p/crd/rd$removeparam=py
-||search.naver.com/p/crd/rd$removeparam=sx
-||search.naver.com/p/crd/rd$removeparam=sy
-||search.naver.com/p/crd/rd$removeparam=p
-||search.naver.com/p/crd/rd$removeparam=s
-||search.naver.com/p/crd/rd$removeparam=time
+||search.naver.com/p/crd/rd$removeparam=px,document,image
+||search.naver.com/p/crd/rd$removeparam=py,document,image
+||search.naver.com/p/crd/rd$removeparam=sx,document,image
+||search.naver.com/p/crd/rd$removeparam=sy,document,image
+||search.naver.com/p/crd/rd$removeparam=p,document,image
+||search.naver.com/p/crd/rd$removeparam=s,document,image
+||search.naver.com/p/crd/rd$removeparam=time,document,image
 ||buzzfeednews.com^$removeparam=ref
 ||goodreads.com^$removeparam=ref
-||journal.tinkoff.ru$removeparam=mindbox-click-id
 ||coconala.com^$removeparam=ref
 ||coconala.com^$removeparam=ref_kind
 ||coconala.com^$removeparam=ref_no
@@ -569,6 +629,7 @@ $removeparam=a_aid,domain=expressvpn.com|vpnarea.com
 ||dailymotion.com/embed/video/*?ads_params=*&origin=$removeparam=ads_params
 ||dailymotion.com/embed/video/*?ads_params=*&origin=$removeparam=origin
 ||wired.co.uk^$removeparam=mbid
+||wired.com^$removeparam=mbid
 ||wikihow.com^$removeparam=?utm_source
 ||kohls.com^$removeparam=CID
 ||instagram.com^$removeparam=ig_rid
@@ -619,7 +680,6 @@ $removeparam=a_aid,domain=expressvpn.com|vpnarea.com
 ||play.google.*^$removeparam=referrer
 ||google.*/search$removeparam=oq
 ||google.*/search$removeparam=gs_l
-||google.*/search$removeparam=ie
 ||google.*/search$removeparam=oe
 ||google.*/websearch$removeparam=visit_id
 ||google.*/search$removeparam=biw
@@ -635,6 +695,7 @@ $removeparam=a_aid,domain=expressvpn.com|vpnarea.com
 ||www.ebay.$removeparam=amdata
 ||www.ebay.$removeparam=mkrid
 ||www.ebay.$removeparam=campid
+||amazon.*$removeparam=linkId
 ||amazon.*$removeparam=adgrpid
 ||amazon.*$removeparam=hvadid
 ||amazon.*$removeparam=hvbmt
@@ -832,6 +893,8 @@ $removeparam=dclid
 ||v.youku.com^$removeparam=spm
 ||theregister.com^$removeparam=td
 ||deezer.com^$removeparam=origin
+@@||tradedoubler.com^$removeparam=tduid
+@@||carrefourpl.snrpage.com^$removeparam=utm_source
 @@||s.click.aliexpress.com/deep_link.htm?aff_short_key=$removeparam=aff_short_key
 @@||transfernow.net/*/dltransfer$removeparam=utm_source
 @@||assetstore.unity.com/packages/*?aid=*&utm_$removeparam

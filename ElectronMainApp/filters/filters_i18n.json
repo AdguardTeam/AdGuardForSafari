@@ -5,7 +5,7 @@
 				"name": "حظر الإعلانات"
 			},
 			"be": {
-				"name": "Блакаванне рэкламы"
+				"name": "Блакіроўка рэкламы"
 			},
 			"bg": {
 				"name": "Блокиране на рекламите"
@@ -821,7 +821,7 @@
 			},
 			"be": {
 				"description": "Створаны для блакавання інтэрнэт-рэкламы",
-				"name": "Блакаванне рэкламы"
+				"name": "Блакіроўка рэкламы"
 			},
 			"bg": {
 				"description": "Проектиран за блокиране на реклами онлайн",
@@ -1018,7 +1018,7 @@
 				"name": "حفاظت حریم خصوصی"
 			},
 			"fi": {
-				"description": "Suunniteltu suojaamaan yksityisyyttäsi estämällä seuranta- ja analysointijärjestelmät",
+				"description": "Suunniteltu suojaamaan yksityisyyttäsi estämällä seuranta- ja analytiikkajärjestelmät",
 				"name": "Yksityisyyden suojaus"
 			},
 			"fr": {
@@ -1436,7 +1436,7 @@
 				"name": "مضاد الحماية من المضايقات"
 			},
 			"be": {
-				"description": "Створаны для блакавання нерэкламных элементаў, што адцягваюць ад змесціва старонкі (прапановы пра падпіску, апавяшчэнні пра акцыі і г. д.).",
+				"description": "Створаны для блакавання нерэкламных элементаў, што адцягваюць ад змесціва старонкі (прапановы пра падпіску, апавяшчэнні пра акцыі і г. д.).",
 				"name": "Абарона ад раздражняльнікаў"
 			},
 			"cs": {
@@ -4392,8 +4392,8 @@
 				"name": "مرجع Spyware filter"
 			},
 			"fi": {
-				"description": "Sisältää viitteitä seurannan eston suodattimeen",
-				"name": "Seurannan eston suodattimen viite"
+				"description": "Sisältää viittauksia seurantaestosuodattimeen",
+				"name": "Seurantaestosuodattimen viittaus"
 			},
 			"fr": {
 				"description": "Contient des références au filtre Anti-espionnage",
@@ -7569,7 +7569,7 @@
 			},
 			"be": {
 				"description": "Створаны адмыслова для блакавання рэкламы на сайтах на чэшскай мове",
-				"name": "Блакаванне рэкламы на чэшскай мове"
+				"name": "Блакіроўка рэкламы для чэшскай мовы"
 			},
 			"cs": {
 				"description": "Navrženo speciálně na blokování reklam na webových stránkách v českém jazyce",
@@ -10309,7 +10309,7 @@
 			},
 			"be": {
 				"name": "Фільтр лічыльнікаў і сістэм аналітыкі",
-				"description": "Найболей поўны спіс розных інтэрнэт-лічыльнікаў і сістэм інтэрнэт-аналітыкі. Калі вы не жадаеце, каб за вашымі дзеяннямі ў інтэрнэце сачылі, скарыстайце гэты фільтр."
+				"description": "Найболей поўны спіс розных інтэрнэт-лічыльнікаў і сістэм інтэрнэт-аналітыкі. Калі вы не жадаеце, каб за вашымі дзеяннямі ў інтэрнэце сачылі, скарыстайце гэты фільтр."
 			},
 			"bg": {
 				"name": "Шпионски филтър",
@@ -10352,8 +10352,8 @@
 				"description": "جامعترین لیست شمارنده های آنلاین گوناگون و ابزارهای تجزیه و تحلیل وب.اگر نمیخواهید اقدامات شما در وب رَدیابی شود،از این فیلتر استفاده کنید."
 			},
 			"fi": {
-				"name": "AdGuardin seurannanestosuodatin",
-				"description": "Kattavin lista erilaisista verkkolaskureista ja analyysityökaluista. Jos et halua, että toimiasi Internetissä seurataan, käytä tätä suodatinta."
+				"name": "AdGuardin seurantaestosuodatin",
+				"description": "Kattavin lista erilaisista verkkolaskureista ja analytiikkatyökaluista. Jos et halua, että toimiasi Internetissä seurataan, käytä tätä suodatinta."
 			},
 			"fr": {
 				"name": "Filtre AdGuard Anti espionnage",
@@ -10380,7 +10380,7 @@
 				"description": "L'elenco più esaustivo dei vari contatori ed analizzatori del traffico di rete. Utilizza questo filtro, se non vuoi che le tue azioni su Internet vengano monitorate."
 			},
 			"ja": {
-				"name": "AdGuard追跡防止フィルタ",
+				"name": "AdGuard 追跡防止フィルタ",
 				"description": "最も幅広い様々なオンラインカウンターおよびウェブ分析ツールのリスト。インターネット上での操作を追跡されたくない場合は、このフィルタをご利用ください。"
 			},
 			"ko": {
@@ -10417,7 +10417,7 @@
 			},
 			"ru": {
 				"name": "Фильтр счётчиков и систем аналитики",
-				"description": "Наиболее полный список различных интернет-счетчиков и систем интернет-аналитики. Если вы не желаете, чтобы за вашими действиями в интернете следили, используйте этот фильтр."
+				"description": "Наиболее полный список различных интернет-счетчиков и систем интернет-аналитики. Если вы не желаете, чтобы за вашими действиями в интернете следили, используйте этот фильтр."
 			},
 			"sk": {
 				"name": "AdGuard filter proti sledovaniu",
@@ -10441,7 +10441,7 @@
 			},
 			"uk": {
 				"name": "Фільтр захисту від стеження AdGuard",
-				"description": "Найповніший фільтр різних елементів стеження та систем вебаналітики. Використовуйте цей фільтр, якщо не хочете, щоб за вашими діями в інтернеті стежили."
+				"description": "Найповніший фільтр різних елементів стеження та систем вебаналітики. Використовуйте цей фільтр, якщо не хочете, щоб за вашими діями в інтернеті стежили."
 			},
 			"vi": {
 				"name": "Bộ lọc gián điệp",
@@ -10507,7 +10507,7 @@
 			},
 			"fi": {
 				"name": "AdGuardin sosiaalisen median suodatin",
-				"description": "Suodatin sosiaalisen median widgeteille (tykkäyspainikkeille yms.)"
+				"description": "Suodatin sosiaalisen median widgeteille (tykkäyspainikkeille yms.)."
 			},
 			"fr": {
 				"name": "Filtre AdGuard pour médias sociaux",
@@ -10617,7 +10617,7 @@
 			},
 			"be": {
 				"name": "Эксперыментальны фільтр",
-				"description": "Фільтр, прызначаны для праверкі некаторых небяспечных правілаў фільтрацыі перад тым як яны будуць дададзены ў асноўныя фільтры."
+				"description": "Фільтр, прызначаны для праверкі некаторых небяспечных правілаў фільтрацыі перад тым як яны будуць дададзены ў асноўныя фільтры."
 			},
 			"bg": {
 				"name": "Експериментален филтър",
@@ -10725,7 +10725,7 @@
 			},
 			"ru": {
 				"name": "Экспериментальный фильтр",
-				"description": "Фильтр, предназначенный для проверки некоторых опасных правил фильтрации перед тем как они будут добавлены в основные фильтры."
+				"description": "Фильтр, предназначенный для проверки некоторых опасных правил фильтрации перед тем как они будут добавлены в основные фильтры."
 			},
 			"sk": {
 				"name": "AdGuard experimentálny filter",
@@ -10749,7 +10749,7 @@
 			},
 			"uk": {
 				"name": "Експериментальний фільтр AdGuard",
-				"description": "Фільтр, призначений для перевірки деяких правил фільтрування, перш ніж їх буде додано до основних фільтрів."
+				"description": "Фільтр, призначений для перевірки деяких правил фільтрування, перш ніж їх буде додано до основних фільтрів."
 			},
 			"vi": {
 				"name": "Bộ lọc thử nghiệm",
@@ -10842,7 +10842,7 @@
 				"description": "EasyList Germany + Filtro tedesco. Elenco di filtri che rimuove specificatamente gli annunci sui siti web in lingua tedesca."
 			},
 			"ja": {
-				"name": "AdGuardドイツ語フィルタ",
+				"name": "AdGuard ドイツ語フィルタ",
 				"description": "EasyList GermanyとAdGuardドイツ語フィルタの合同。ドイツ語のウェブ広告を除去するフィルタリストです。"
 			},
 			"ko": {
@@ -11150,7 +11150,7 @@
 				"description": "EasyList Dutch + Filtro olandese. Elenco di filtri che rimuove specificatamente gli annunci sui siti web in lingua olandese."
 			},
 			"ja": {
-				"name": "AdGuardオランダ語フィルタ",
+				"name": "AdGuard オランダ語フィルタ",
 				"description": "EasyList DutchとAdGuardオランダ語フィルタの合同。オランダ語のウェブ広告を除去するフィルタリストです。"
 			},
 			"ko": {
@@ -11387,7 +11387,7 @@
 			},
 			"be": {
 				"name": "Фільтр карыснай рэкламы",
-				"description": "Фільтр, які разблакуе пошукавую рэкламу і ўласную рэкламу ўэб-сайтаў (зніжкі, прома-акцыі і таму падобнае)."
+				"description": "Фільтр, які разблакуе пошук (DuckDuckGo, Google, Bing, Yahoo) і самарэкламу. Вызначэнне самарэкламы: калі рэклама на вэб-сайце рэкламуе гэты самы вэб-сайт або іншыя вэб-сайты/сацыяльныя сеткі/і г.д. цесна звязана з ім, такая рэклама лічыцца самарэкламай."
 			},
 			"bg": {
 				"name": "Филтър за полезни реклами",
@@ -11403,7 +11403,7 @@
 			},
 			"da": {
 				"name": "Filter, der afblokerer selvpromoverende annoncer",
-				"description": "Filter, der afblokerer søgninger (Duckduckgo, Google, Bing, Yahoo) og selvpromoverende annoncer. Definition af selvpromovering: Når en annonce på et websted promoverer selvsamme websted eller andre websteder/sociale medier/mv. nært beslægtet hermed, anses en sådan annonce som selvpromoverende."
+				"description": "Filter, der afblokerer søgninger (DuckDuckGo, Google, Bing, Yahoo) og selvpromoverende annoncer. Definition af selvpromovering: Når en annonce på et websted promoverer selvsamme websted eller andre websteder/sociale medier/mv. nært beslægtet hermed, anses en sådan annonce som selvpromoverende."
 			},
 			"de": {
 				"name": "Filter zum Anzeigen von nützlicher Werbung",
@@ -11415,19 +11415,19 @@
 			},
 			"en": {
 				"name": "Filter unblocking search ads and self-promotion",
-				"description": "Filter that unblocks searches (Duckduckgo, Google, Bing, Yahoo) and self-promo ads. Self-promotion definition: When an ad on a website is promoting this very website or other websites/social media/etc. closely related to it, such an ad is considered a self-promoting one."
+				"description": "Filter that unblocks searches (DuckDuckGo, Google, Bing, Yahoo) and self-promo ads. Self-promotion definition: When an ad on a website is promoting this very website or other websites/social media/etc. closely related to it, such an ad is considered a self-promoting one."
 			},
 			"es": {
 				"name": "Filtro para desbloquear anuncios de búsqueda y autopromoción",
-				"description": "Filtro que desbloquea anuncios de búsqueda (Duckduckgo, Google, Bing, Yahoo) y autopromoción. Definición de autopromoción: cuando un anuncio en un sitio web está promocionando este mismo sitio web u otros sitios web/redes sociales/etc. estrechamente relacionado con él, dicho anuncio se considera un anuncio de autopromoción."
+				"description": "Filtro que desbloquea anuncios de búsqueda (DuckDuckGo, Google, Bing, Yahoo) y autopromoción. Definición de autopromoción: cuando un anuncio en un sitio web está promocionando este mismo sitio web u otros sitios web/redes sociales/etc. estrechamente relacionado con él, dicho anuncio se considera un anuncio de autopromoción."
 			},
 			"es_ES": {
 				"name": "Filtro para desbloquear anuncios de búsqueda y autopromoción",
-				"description": "Filtro que desbloquea anuncios de búsqueda (Duckduckgo, Google, Bing, Yahoo) y autopromoción. Definición de autopromoción: cuando un anuncio en un sitio web está promocionando este mismo sitio web u otros sitios web/redes sociales/etc. estrechamente relacionado con él, dicho anuncio se considera un anuncio de autopromoción."
+				"description": "Filtro que desbloquea anuncios de búsqueda (DuckDuckGo, Google, Bing, Yahoo) y autopromoción. Definición de autopromoción: cuando un anuncio en un sitio web está promocionando este mismo sitio web u otros sitios web/redes sociales/etc. estrechamente relacionado con él, dicho anuncio se considera un anuncio de autopromoción."
 			},
 			"fa": {
 				"name": "فیلتر بازکردن تبلیغات مفید",
-				"description": "فیلتری که جستجو را بازکرده و تبلیغ خود ترویجی می کند."
+				"description": "فیلتری که جستجوها (DuckDuckGo، Google، Bing، Yahoo) و تبلیغات خود تبلیغاتی را باز می کند. تعریف خود تبلیغی: زمانی که یک تبلیغ در یک وب سایت همین وب سایت یا سایر وب سایت ها / رسانه های اجتماعی / غیره را تبلیغ می کند. از نزدیک با آن مرتبط است، چنین تبلیغی یک تبلیغ خود تلقی می شود."
 			},
 			"fi": {
 				"name": "Hakumainonnan ja sivustojen oman markkinoinnin salliva suodatin",
@@ -11435,11 +11435,11 @@
 			},
 			"fr": {
 				"name": "Filtre pour les annonces utiles",
-				"description": "Filtre qui débloque les annonces liées aux recherches (Duckduckgo, Google, Bing, Yahoo) et anonces autopublicitaires. Définition de autopublicité: quand l'annonce d'un site web fait la promotion dûdit site, soit des sites web, média sociaux et autres plateformes reliées."
+				"description": "Filtre qui débloque les annonces liées aux recherches (DuckDuckGo, Google, Bing, Yahoo) et anonces autopublicitaires. Définition de autopublicité: quand l'annonce d'un site web fait la promotion dûdit site, soit des sites web, média sociaux et autres plateformes reliées."
 			},
 			"he": {
 				"name": "מסנן עבור אי־חסימה של פרסומות חיפוש וקידום עצמי",
-				"description": "מסנן שמבטל חסימה של תוצאות חיפוש (Duckduckgo, Google, Bing, Yahoo) ומודעות קידום עצמי. ההגדרה של קידום עצמי: כשמופיעה באתר אינטרנט מודעת פרסום המקדמת את אותו האתר או רשתות חברתיות, אתרים אחרים וכד' שקשורים לאותו האתר, המודעה הזו נחשבת למודעת קידום עצמי."
+				"description": "מסנן שמבטל חסימה של תוצאות חיפוש (DuckDuckGo, Google, Bing, Yahoo) ומודעות קידום עצמי. ההגדרה של קידום עצמי: כשמופיעה באתר אינטרנט מודעת פרסום המקדמת את אותו האתר או רשתות חברתיות, אתרים אחרים וכד' שקשורים לאותו האתר, המודעה הזו נחשבת למודעת קידום עצמי."
 			},
 			"hr": {
 				"name": "Filtar za odblokiranje oglasa pretraživača i samopromocije",
@@ -11451,15 +11451,15 @@
 			},
 			"id": {
 				"name": "Penyaring iklan berguna",
-				"description": "Penyaring yang membuka blokir pencarian (Duckduckgo, Google, Bing, Yahoo) dan iklan promosi diri. Definisi promosi diri: ketika iklan di situs web mempromosikan situs web ini atau media sosial lain yang terkait erat dengannya, iklan tersebut dianggap sebagai iklan yang mempromosikan diri."
+				"description": "Penyaring yang membuka blokir pencarian (DuckDuckGo, Google, Bing, Yahoo) dan iklan promosi diri. Definisi promosi diri: ketika iklan di situs web mempromosikan situs web ini atau media sosial lain yang terkait erat dengannya, iklan tersebut dianggap sebagai iklan yang mempromosikan diri."
 			},
 			"it": {
 				"name": "Filtro che sblocca gli annunci di ricerca ed autopromozione",
-				"description": "Filtro che sblocca ricerche (Duckduckgo, Google, Bing, Yahoo) e annunci autopromozionali. Definizione di autopromozione: quando un annuncio su un sito web promuove quello stesso sito o altri siti/social media/ecc. strettamente correlati ad esso, tale annuncio è considerato autopromozionale."
+				"description": "Filtro che sblocca ricerche (DuckDuckGo, Google, Bing, Yahoo) e annunci autopromozionali. Definizione di autopromozione: quando un annuncio su un sito web promuove quello stesso sito o altri siti/social media/ecc. strettamente correlati ad esso, tale annuncio è considerato autopromozionale."
 			},
 			"ja": {
 				"name": "検索広告・自己宣伝のブロック解除フィルタ",
-				"description": "検索エンジン(Duckduckgo、Google、Bing、Yahoo)と自己宣伝広告のブロックを解除するフィルタ。※自己宣伝の定義：ウェブサイトの広告がそのウェブサイト自体やそれと密接に関連している他ウェブサイト・SNSなどを宣伝している場合、そのような広告は自己宣伝広告と見なされます。"
+				"description": "検索エンジン(DuckDuckGo、Google、Bing、Yahoo)と自己宣伝広告のブロックを解除するフィルタ。※自己宣伝の定義：ウェブサイトの広告がそのウェブサイト自体やそれと密接に関連している他ウェブサイト・SNSなどを宣伝している場合、そのような広告は自己宣伝広告と見なされます。"
 			},
 			"ko": {
 				"name": "유용한 광고 필터",
@@ -11467,71 +11467,71 @@
 			},
 			"nl": {
 				"name": "Filter voor zinvolle advertenties",
-				"description": "Filter dat advertenties deblokkeert die wellicht zinvol zijn voor gebruikers."
+				"description": "Filter dat zoekopdrachten (DuckDuckGo, Google, Bing, Yahoo) en advertenties voor zelfpromotie deblokkeert. Definitie van zelfpromotie: wanneer een advertentie op een website reclame maakt voor deze website of andere websites/sociale media/etc. nauw verwant is, wordt een dergelijke advertentie beschouwd als een advertentie die zichzelf promoot."
 			},
 			"no": {
 				"name": "Filter for ikke å blokkere nyttige annonser",
-				"description": "Filtrer som fjerner blokkering av søk (Duckduckgo, Google, Bing, Yahoo) og selvfremmende annonser. Definisjon av selvfremmende annonser: når en annonse på en nettside fremmer denne nettsiden eller andre nettsider/sosiale medier og så videre, som er nært knyttet til den. Slike annonser betraktes som selvfremmende."
+				"description": "Filtrer som fjerner blokkering av søk (DuckDuckGo, Google, Bing, Yahoo) og selvfremmende annonser. Definisjon av selvfremmende annonser: når en annonse på en nettside fremmer denne nettsiden eller andre nettsider/sosiale medier og så videre, som er nært knyttet til den. Slike annonser betraktes som selvfremmende."
 			},
 			"pl": {
 				"name": "Filtr użytecznych reklam",
-				"description": "Filtr, który odblokowuje reklamy w wyszukiwarkach internetowych (Duckduckgo, Google, Bing, Yahoo) i autopromocję. Definicja autopromocji: gdy reklama na stronie promuje tę stronę lub inne strony internetowe/media społecznościowe/itp. ściśle z nią związane, reklama taka jest uważana za autopromocję."
+				"description": "Filtr, który odblokowuje reklamy w wyszukiwarkach internetowych (DuckDuckGo, Google, Bing, Yahoo) i autopromocję. Definicja autopromocji: gdy reklama na stronie promuje tę stronę lub inne strony internetowe/media społecznościowe/itp. ściśle z nią związane, reklama taka jest uważana za autopromocję."
 			},
 			"pt": {
 				"name": "Filtro para desbloquear anúncios úteis",
-				"description": "Filtro que desbloqueia as pesquisas (Duckduckgo, Google, Bing, Yahoo) e anúncios autopromocionais. Definição de autopromocional: quando um anúncio num sítio promove esse mesmo sítio ou outros sítios/redes sociais/etc. intimamente relacionados a ele, esse anúncio é considerado autopromocional."
+				"description": "Filtro que desbloqueia as pesquisas (DuckDuckGo, Google, Bing, Yahoo) e anúncios autopromocionais. Definição de autopromocional: quando um anúncio num sítio promove esse mesmo sítio ou outros sítios/redes sociais/etc. intimamente relacionados a ele, esse anúncio é considerado autopromocional."
 			},
 			"pt_BR": {
 				"name": "Filtro para desbloquear anúncios úteis e de autopromoção",
-				"description": "Filtro que desbloqueia os anúncios de autopromoção dentro dos sites de buscas (Google, Duckduckgo, Bing, Yahoo) que podem ser útil para o usuário. Definição de autopromoção: É quando um anúncio em um site está promovendo o site dele mesmo ou outros sites relacionados a ele. Esse tipo de anúncio é considerado autopromocional."
+				"description": "Filtro que desbloqueia os anúncios de autopromoção dentro dos sites de buscas (Google, DuckDuckGo, Bing, Yahoo) que podem ser útil para o usuário. Definição de autopromoção: É quando um anúncio em um site está promovendo o site dele mesmo ou outros sites relacionados a ele. Esse tipo de anúncio é considerado autopromocional."
 			},
 			"pt_PT": {
 				"name": "Filtro para desbloquear anúncios úteis",
-				"description": "Filtro que desbloqueia as pesquisas (Duckduckgo, Google, Bing, Yahoo) e anúncios autopromocionais. Definição de autopromocional: quando um anúncio num sítio promove esse mesmo sítio ou outros sítios/redes sociais/etc. intimamente relacionados a ele, esse anúncio é considerado autopromocional."
+				"description": "Filtro que desbloqueia as pesquisas (DuckDuckGo, Google, Bing, Yahoo) e anúncios autopromocionais. Definição de autopromocional: quando um anúncio num sítio promove esse mesmo sítio ou outros sítios/redes sociais/etc. intimamente relacionados a ele, esse anúncio é considerado autopromocional."
 			},
 			"ro": {
 				"name": "Filtre pentru deblocare de reclame utile",
-				"description": "Filtre care deblochează reclame legate de căutări (Duckduckgo, Google, Bing, Yahoo) și reclame auto-promoționale. Definiție de auto-promovare: când un anunț de pe un site web promovează acest site sau alte site-uri web/social media/etc. în strânsă legătură cu acesta."
+				"description": "Filtre care deblochează reclame legate de căutări (DuckDuckGo, Google, Bing, Yahoo) și reclame auto-promoționale. Definiție de auto-promovare: când un anunț de pe un site web promovează acest site sau alte site-uri web/social media/etc. în strânsă legătură cu acesta."
 			},
 			"ru": {
 				"name": "Фильтр полезной рекламы",
-				"description": "Фильтр, разблокирующий поисковую рекламу (Duckduckgo, Google, Bing, Yahoo) и собственную рекламу веб-сайтов (скидки, промоакции и тому подобное)."
+				"description": "Фильтр, разблокирующий поисковую рекламу (DuckDuckGo, Google, Bing, Yahoo) и саморекламу. Саморекламой считаются объявления на сайте, которые продвигает этот самый сайт или другие сайты/социальные сети/и т. д., тесно связанные с ним."
 			},
 			"sk": {
 				"name": "Filter pre odblokovanie užitočných reklám",
-				"description": "Filter, ktorý odblokuje vyhľadávanie (Duckduckgo, Google, Bing, Yahoo) a vlastnú propagáciu. Vlastnú propagáciu pritom definujeme ako reklamu na stránke, ktorá propaguje tú istú stránku alebo iné stránky, sociálne médiá atď., ktoré s ňou majú úzky vzťah."
+				"description": "Filter, ktorý odblokuje vyhľadávanie (DuckDuckGo, Google, Bing, Yahoo) a vlastnú propagáciu. Vlastnú propagáciu pritom definujeme ako reklamu na stránke, ktorá propaguje tú istú stránku alebo iné stránky, sociálne médiá atď., ktoré s ňou majú úzky vzťah."
 			},
 			"sl": {
 				"name": "Filtriraj omogočanje iskalnih oglasov in samopromocijo",
-				"description": "Filtriranje, ki omogoča iskalne (Duckduckgo, Google, Bing, Yahoo) in samopromotivne oglase. Opredelitev samopromocije: ko oglas na spletni strani oglašuje to spletno stran ali druge spletne strani/družbene medije/itd. tesno povezan z njim, tak oglas šteje za samopromotivni."
+				"description": "Filtriranje, ki omogoča iskalne (DuckDuckGo, Google, Bing, Yahoo) in samopromotivne oglase. Opredelitev samopromocije: ko oglas na spletni strani oglašuje to spletno stran ali druge spletne strani/družbene medije/itd. tesno povezan z njim, tak oglas šteje za samopromotivni."
 			},
 			"sr": {
 				"name": "Filter za odblokiranje reklama u pretrazi i samopromociji",
-				"description": "Filter koji ne blokira reklame u pretragama (Duckduckgo, Google, Bing, Yahoo) i ne blokira samopromotivne reklame. Definicija samopromocije: Kada reklama na sajtu promoviše svoj sajt ili druge sajtove/društvene mreže/itd. koji su usko povezani sa njim, takva reklama se smatra za samopromociju."
+				"description": "Filter koji ne blokira reklame u pretragama (DuckDuckGo, Google, Bing, Yahoo) i ne blokira samopromotivne reklame. Definicija samopromocije: Kada reklama na sajtu promoviše svoj sajt ili druge sajtove/društvene mreže/itd. koji su usko povezani sa njim, takva reklama se smatra za samopromociju."
 			},
 			"sv": {
 				"name": "Filter för att avblockera användbara annonser",
-				"description": "Filter som avblockerar sökreklam (Duckduckgo, Google, Bing, Yahoo) och egenreklam. Definition av Egenreklam: när en annons marknadsför den specifika webbplatsen eller andra sajter/sociala medier/etc nära kopplade till sajten betraktas dessa som egenreklam."
+				"description": "Filter som avblockerar sökreklam (DuckDuckGo, Google, Bing, Yahoo) och egenreklam. Definition av Egenreklam: när en annons marknadsför den specifika webbplatsen eller andra sajter/sociala medier/etc nära kopplade till sajten betraktas dessa som egenreklam."
 			},
 			"tr": {
 				"name": "Arama motoru reklamlarına ve öz tanıtımına izin veren filtre",
-				"description": "Arama sonucu (Duckduckgo, Google, Bing, Yahoo) ve sitelerin kendi tanıtım reklamlarının engelini kaldıran filtre. Sitelerin kendi tanıtım reklamının tanımı: Bir sitedeki reklam, bu sitenin veya onunla yakından alakalı diğer siteyi/sosyal medya bağlantısını vb. tanıtıyorsa, bu reklam kendi tanıtım reklamı olarak kabul edilir."
+				"description": "Arama sonucu (DuckDuckGo, Google, Bing, Yahoo) ve sitelerin kendi tanıtım reklamlarının engelini kaldıran filtre. Sitelerin kendi tanıtım reklamının tanımı: Bir sitedeki reklam, bu sitenin veya onunla yakından alakalı diğer siteyi/sosyal medya bağlantısını vb. tanıtıyorsa, bu reklam kendi tanıtım reklamı olarak kabul edilir."
 			},
 			"uk": {
 				"name": "Фільтр розблокування корисної реклами",
-				"description": "Фільтр, який розблоковує рекламу в пошукових системах (Duckduckgo, Google, Bing, Yahoo) та саморекламу. Що таке самореклама? Якщо оголошення на вебсайті рекламує цей же вебсайт або інші вебсайти, соціальні мережі чи сервіси, що тісно пов'язані з ним, таке оголошення вважається саморекламою."
+				"description": "Фільтр, який розблоковує рекламу в пошукових системах (DuckDuckGo, Google, Bing, Yahoo) та саморекламу. Що таке самореклама? Якщо оголошення на вебсайті рекламує цей же вебсайт або інші вебсайти, соціальні мережі чи сервіси, що тісно пов'язані з ним, таке оголошення вважається саморекламою."
 			},
 			"vi": {
 				"name": "Bộ lọc quảng cáo hữu ích",
-				"description": "Bộ lọc bỏ chặn những quảng cáo có thể hữu ích với người dùng."
+				"description": "Bộ lọc bỏ chặn các tìm kiếm (DuckDuckGo, Google, Bing, Yahoo) và quảng cáo tự quảng cáo. Định nghĩa tự quảng cáo: Khi một quảng cáo trên một trang web đang quảng cáo cho chính trang web này hoặc các trang web/phương tiện truyền thông xã hội khác/v.v. liên quan chặt chẽ đến nó, một quảng cáo như vậy được coi là một quảng cáo tự quảng cáo."
 			},
 			"zh": {
 				"name": "解除搜索广告和自我推销过滤器",
-				"description": "该过滤器会解除对搜索引擎（Duckduckgo、Google、 Bing、 Yahoo）广告以及自我推销广告的过滤。自我推销广告的定义：为宣传网站自身或是与之紧密相关的其它网站或社交媒体的广告。"
+				"description": "该过滤器会解除对搜索引擎（DuckDuckGo、Google、 Bing、 Yahoo）广告以及自我推销广告的过滤。自我推销广告的定义：为宣传网站自身或是与之紧密相关的其它网站或社交媒体的广告。"
 			},
 			"zh_TW": {
 				"name": "解除封鎖搜尋廣告和自我推銷之過濾器",
-				"description": "解除封鎖搜尋（Duckduckgo、Google、Bing、Yahoo）和自我推銷廣告之過濾器。自我推銷的定義：當一個於網站上的廣告恰好正在推銷這個網站或與其密切相關之其它的網站/社群媒體/等等時，這樣的廣告被認為是一種自我推銷之廣告。"
+				"description": "解除封鎖搜尋（DuckDuckGo、Google、Bing、Yahoo）和自我推銷廣告之過濾器。自我推銷的定義：當一個於網站上的廣告恰好正在推銷這個網站或與其密切相關之其它的網站/社群媒體/等等時，這樣的廣告被認為是一種自我推銷之廣告。"
 			}
 		},
 		"11": {
@@ -12047,7 +12047,7 @@
 			},
 			"fi": {
 				"name": "AdGuardin DNS-suodatin",
-				"description": "Suodatin koostuu useista erillisistä suodattimista (AdGuardin vakiosuodatin, sosiaalisen median suodatin, seurannanestosuodatin, mobiilimainossuodatin, EasyList ja EasyPrivacy) ja se on erityisesti tiivistetty DNS-tason mainosestoon sopivammaksi."
+				"description": "Suodatin koostuu useista erillisistä suodattimista (AdGuardin vakiosuodatin, sosiaalisen median suodatin, seurantaestosuodatin, mobiilimainossuodatin, EasyList ja EasyPrivacy) ja se on erityisesti tiivistetty DNS-tason mainosestoon sopivammaksi."
 			},
 			"fr": {
 				"name": "Filtre AdGuard Noms de Domaine Simplifiés  (DNS).",
@@ -13129,7 +13129,7 @@
 			},
 			"fr": {
 				"name": "Filtre AdGuard Widgets",
-				"description": "Bloque les widgets tiers gênants : assistants en ligne, chats d'assistance en direct, etc."
+				"description": "Bloque les widgets tiers gênants : assistants en ligne, chats d'assistance en direct, etc."
 			},
 			"he": {
 				"name": "מסנן ווידג'טים של AdGuard",
@@ -13737,7 +13737,7 @@
 			},
 			"tr": {
 				"name": "EasyList China",
-				"description": "Bulgarca siteleri için ek filtre listesi. AdGuard Çince filtresine zaten dahildir."
+				"description": "Çince siteleri için ek filtre listesi. AdGuard Çince filtresine zaten dahildir."
 			},
 			"uk": {
 				"name": "EasyList China",
@@ -20388,140 +20388,6 @@
 				"description": "封鎖於韓文網站上的廣告之過濾器。"
 			}
 		},
-		"245": {
-			"ar": {
-				"name": "AlleBlock",
-				"description": "عامل التصفية الذي يزيل العناصر المزعجة من مواقع التجارة الإلكترونية البولندية."
-			},
-			"be": {
-				"name": "AlleBlock",
-				"description": "Фільтр, які падаляе раздражняльныя элементы з польскіх сайтаў электроннай камерцыі."
-			},
-			"cs": {
-				"name": "AlleBlock",
-				"description": "Filtr, který odstraňuje nepříjemné prvky z polských stránek elektronického obchodování."
-			},
-			"da": {
-				"name": "AlleBlock",
-				"description": "Filter, der fjerner irriterende elementer fra polske e-handelswebsteder."
-			},
-			"de": {
-				"name": "AlleBlock ( e-Commerce, Polen)",
-				"description": "Filter, der lästige Elemente auf Webseiten polnischer E-Handelsplattformen entfernt."
-			},
-			"el": {
-				"name": "AlleBlock",
-				"description": "Φίλτρο που αφαιρεί ενοχλητικά στοιχεία από πολωνικούς ιστότοπους ηλεκτρονικού εμπορίου."
-			},
-			"en": {
-				"name": "AlleBlock",
-				"description": "Filter that removes annoying elements from Polish e-commerce sites."
-			},
-			"es": {
-				"name": "AlleBlock",
-				"description": "Filtro que elimina elementos molestos de los sitios de comercio electrónico polacos."
-			},
-			"es_ES": {
-				"name": "AlleBlock",
-				"description": "Filtro que elimina elementos molestos de los sitios de comercio electrónico polacos."
-			},
-			"fi": {
-				"name": "AlleBlock",
-				"description": "Suodatin, joka poistaa ärsyttäviä elementtejä puolalaisilta verkkokauppasivustoilta."
-			},
-			"fr": {
-				"name": "AlleBlock",
-				"description": "Filtre qui supprime les éléments gênants des sites de commerce électronique Polonais."
-			},
-			"he": {
-				"name": "AlleBlock",
-				"description": "מסנן שמסיר אלמנטים מטרידים מאתרים מסחר פולניים."
-			},
-			"hr": {
-				"name": "AlleBlock",
-				"description": "Filtar koji uklanja dosadne elemente s web stranica poljskih e-trgovina."
-			},
-			"hu": {
-				"name": "AlleBlock",
-				"description": "Szűrő, amely eltávolítja a bosszantó elemeket a lengyel e-kereskedelmi webhelyekről."
-			},
-			"id": {
-				"name": "AlleBlock",
-				"description": "Filter yang menghilangkan elemen mengganggu dari situs e-commerce Polandia."
-			},
-			"it": {
-				"name": "AlleBlock",
-				"description": "Filtro che rimuove elementi irritanti dai siti di e-commerce polacchi."
-			},
-			"ja": {
-				"name": "AlleBlock",
-				"description": "ポーランドのECサイトで迷惑要素を除去するフィルター。"
-			},
-			"ko": {
-				"name": "AlleBlock",
-				"description": "폴란드 전자 상거래 사이트에서 방해 요소를 제거하는 필터입니다."
-			},
-			"nl": {
-				"name": "AlleBlock",
-				"description": "Filter dat ergerlijke elementen van Poolse e-commerce websites verwijdert."
-			},
-			"pl": {
-				"name": "AlleBlock",
-				"description": "Filtr usuwający irytujące elementy z polskich witryn e-commerce."
-			},
-			"pt": {
-				"name": "AlleBlock",
-				"description": "Filtro que remove elementos irritantes de sítios de comércio eletrónico poloneses."
-			},
-			"pt_BR": {
-				"name": "AlleBlock",
-				"description": "Filtro que remove elementos irritantes de sites de comércio eletrônico poloneses."
-			},
-			"pt_PT": {
-				"name": "AlleBlock",
-				"description": "Filtro que remove elementos irritantes de sítios de comércio eletrónico poloneses."
-			},
-			"ro": {
-				"name": "AlleBlock",
-				"description": "Filtru care elimină elementele enervante de pe site-urile poloneze de comerț electronic."
-			},
-			"ru": {
-				"name": "AlleBlock",
-				"description": "Фильтр, который удаляет раздражающие элементы с польских сайтов электронной коммерции."
-			},
-			"sk": {
-				"name": "AlleBlock",
-				"description": "Filter, ktorý odstraňuje obťažujúce prvky z poľských stránok elektronického obchodu."
-			},
-			"sl": {
-				"name": "AlleBlock",
-				"description": "Filter, ki odstranjuje nadležne elemente s poljskih spletnih strani e-trgovine."
-			},
-			"sr": {
-				"name": "AlleBlock",
-				"description": "Filter koji uklanja dosadne elemente sa poljskih e-komerc sajtova."
-			},
-			"tr": {
-				"name": "AlleBlock",
-				"description": "Lehçe e-ticaret sitelerden rahatsız edici öğeleri kaldıran filtre."
-			},
-			"uk": {
-				"name": "AlleBlock",
-				"description": "Фільтр, який вилучає надокучливі елементи з польських комерційних сайтів."
-			},
-			"vi": {
-				"name": "AlleBlock",
-				"description": "Bộ lọc loại bỏ phiền nhiễu trên các trang thương mại điện tử tiếng Ba Lan."
-			},
-			"zh": {
-				"name": "AlleBlock",
-				"description": "从波兰电商站点移除恼人元素的过滤器"
-			},
-			"zh_TW": {
-				"name": "AlleBlock",
-				"description": "從波蘭電商網站上移除惱人的元件之過濾器。"
-			}
-		},
 		"246": {
 			"ar": {
 				"name": "EasyList Polish",
@@ -21097,7 +20963,7 @@
 			},
 			"fr": {
 				"name": "Legitimate URL Shortener",
-				"description": "Supprime automatiquement les valeurs « $ » et « & » inutiles des URL, ce qui les rend plus faciles à copier à partir de la barre d’adresse et à coller ailleurs en tant que liens."
+				"description": "Supprime automatiquement les valeurs « $ » et « & » inutiles des URL, ce qui les rend plus faciles à copier à partir de la barre d’adresse et à coller ailleurs en tant que liens."
 			},
 			"he": {
 				"name": "Legitimate URL Shortener",
