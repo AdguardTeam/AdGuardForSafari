@@ -24,7 +24,7 @@
         "message": "Foire aux questions"
     },
     "options_support_bug_report_title": {
-        "message": "Signaler un bogue"
+        "message": "Signaler un bug"
     },
     "options_support_bug_report_description": {
         "message": "Si quelque chose ne fonctionne pas correctement dans le programme"
@@ -69,7 +69,7 @@
         "message": "Erreur de mise à jour"
     },
     "options_about_update_downloaded": {
-        "message": "Presque à jour! Relancez AdGuard pour Safari pour terminer la mise à jour."
+        "message": "Presque à jour ! Relancez AdGuard pour Safari pour terminer la mise à jour."
     },
     "options_about_update_relaunch": {
         "message": "Relancer"
@@ -96,7 +96,7 @@
         "message": "Unmatched adblock extension against advertising and pop-ups. Blocks ads on Facebook, Youtube and all other websites."
     },
     "options_settings": {
-        "message": "AdGuard pour Safari - Paramétrages"
+        "message": "AdGuard pour Safari - Paramètres"
     },
     "options_settings_import_wrong_file_extension": {
         "message": "L'extension du ficher devrait être .json"
@@ -108,10 +108,10 @@
         "message": "Général"
     },
     "options_general_desc": {
-        "message": "AdGuard pour Safari est un logiciel gratuit à source ouverte. Nous accueillons volontiers vos avis et contributions. Si vous souhaitez reporter une bogue ou suggerer une nouvelle fonctionnalité, veuiller accéder à <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'> notre compte Github</a>."
+        "message": "AdGuard pour Safari est un logiciel gratuit et open source. Nous accueillons volontiers vos avis et contributions. Si vous souhaitez reporter un bug ou suggérer une nouvelle fonctionnalité, veuillez accéder à <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>notre compte Github</a>."
     },
     "options_allow_acceptable_ads": {
-        "message": "Autoriser les annonces de recherche et l'auto-promotion des sites Web"
+        "message": "Autoriser les annonces de recherche et l'auto-promotion des sites web"
     },
     "options_export_settings": {
         "message": "Exporter les paramètres"
@@ -189,7 +189,7 @@
         "message": "Saisir l'URL du filtre"
     },
     "options_filters_custom_step_one_url_desc": {
-        "message": "Saisir un URL valide pour s'abonner au filtre."
+        "message": "Saisir une URL valide pour s'abonner au filtre."
     },
     "options_filters_custom_step_one_url_desc_more": {
         "message": "AdGuard va vous abonner à ce filtre."
@@ -252,7 +252,7 @@
         "message": "Liste blanche"
     },
     "options_allowlist_description": {
-        "message": "AdGuard ne filtre pas les sites Web sur la liste blanche."
+        "message": "AdGuard ne filtre pas les sites web sur la liste blanche."
     },
     "options_allowlist_inverted": {
         "message": " (Inversée)"
@@ -264,7 +264,7 @@
         "message": "La liste blanche est vide"
     },
     "options_allowlist_inverse": {
-        "message": "Inverser la Liste blanche<span class='sp-table-row-info'>Débloquer la publicité partout <i>excepté</i> la Liste blanche</span>"
+        "message": "Inverser la liste blanche<span class='sp-table-row-info'>Débloquer la publicité partout <i>excepté</i> la liste blanche</span>"
     },
     "options_userfilter": {
         "message": "Règles d'utilisateur"
@@ -327,7 +327,7 @@
         "message": "AdGuard pour Safari a été mis à jour à la version $1."
     },
     "options_popup_version_update_description_minor": {
-        "message": "Cette version contient des corrections de bogues et des améliorations mineures."
+        "message": "Cette version contient des corrections de bugs et des améliorations mineures."
     },
     "options_popup_version_update_description_major": {
         "message": "C'est une mise à jour majeure comportant beaucoup d'améliorations et des fonctionnalités nouvelles."
@@ -345,10 +345,10 @@
         "message": "Rechercher"
     },
     "options_editor_indicator_editing": {
-        "message": "Édition en cours ..."
+        "message": "Édition en cours..."
     },
     "options_editor_indicator_saving": {
-        "message": "Sauvegarde en cours ..."
+        "message": "Sauvegarde en cours..."
     },
     "options_editor_indicator_saved": {
         "message": "Sauvegardé"
@@ -441,13 +441,13 @@
         "message": "Icône AdGuard Safari"
     },
     "onboarding_tooltip_adguard_safari_icon_info": {
-        "message": "Vous pouvez utiliser cette icône pour gérer les paramètres d’AdGuard pour Safari. Par exemple, suspendre le blocage sur un site Web ou bloquer une publicité manuellement."
+        "message": "Vous pouvez utiliser cette icône pour gérer les paramètres d’AdGuard pour Safari. Par exemple, suspendre le blocage sur un site web ou bloquer une publicité manuellement."
     },
     "onboarding_tooltip_adguard_safari_icon_web_page_content": {
-        "message": "L' accès au contenu de la page Web est nécessaire pour faire fonctionner « l’outil de blocage manuel »."
+        "message": "L'accès au contenu de la page web est nécessaire pour faire fonctionner « l’outil de blocage manuel »."
     },
     "onboarding_tooltip_adguard_safari_icon_browsing_history": {
-        "message": "L' accès à l’historique de navigation est nécessaire pour détecter si AdGuard fonctionne sur le site Web que vous visitez actuellement."
+        "message": "L'accès à l’historique de navigation est nécessaire pour détecter si AdGuard fonctionne sur le site web que vous visitez actuellement."
     },
     "onboarding_tooltip_adguard_advanced_blocking": {
         "message": "Blocage avancé d’AdGuard"
@@ -456,10 +456,10 @@
         "message": "Cette extension applique des règles de blocage avancées qui ne sont pas prises en charge par l’API de blocage de contenu Safari."
     },
     "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
-        "message": "L' accès au contenu de la page Web est nécessaire pour que les règles cosmétiques avancées fonctionnent."
+        "message": "L'accès au contenu de la page web est nécessaire pour que les règles cosmétiques avancées fonctionnent."
     },
     "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
-        "message": "L' accès à l’historique de navigation est nécessaire pour détecter quel site Web vous essayez d’ouvrir afin de déterminer les règles de blocage avancées à appliquer."
+        "message": "L'accès à l’historique de navigation est nécessaire pour détecter quel site web vous essayez d’ouvrir afin de déterminer les règles de blocage avancées à appliquer."
     },
     "onboarding_tooltip_adguard_safari_content_blockers": {
         "message": "6 extensions de blocage de contenu"
@@ -486,7 +486,7 @@
         "message": "Une nouvelle règle a été ajoutée aux règles d'utilisateur :"
     },
     "options_filters_update_period": {
-        "message": "Interval des mises à jour"
+        "message": "Intervalle des mises à jour"
     },
     "options_filters_update_period_number": {
         "message": {
@@ -501,7 +501,7 @@
         "message": "supprimer"
     },
     "options_show_tray_icon": {
-        "message": "Afficher AdGuard pour Safari dans la barre du menu"
+        "message": "Afficher AdGuard pour Safari dans la barre des menus"
     },
     "options_launch_at_login": {
         "message": "Lancer AdGuard pour Safari dès la connexion"
@@ -510,7 +510,7 @@
         "message": "Journalisation avancée"
     },
     "options_verbose_logging_desc": {
-        "message": "Si cette option est activée, les extensions AdGuard pour Safari vont ajouter l'information supplémentaire à la console du navigateur"
+        "message": "Si cette option est activée, les extensions AdGuard pour Safari vont ajouter des informations supplémentaires à la console du navigateur"
     },
     "options_enable_hardware_acceleration": {
         "message": "Activer l'accélération matérielle"
@@ -615,7 +615,7 @@
         "message": "AdGuard pour Safari devrait être lancé à partir du dossier Applications."
     },
     "folder_check_dialog_detail": {
-        "message": "Voulez-vous le déplacer maintenant au dossier Applications?"
+        "message": "Voulez-vous le déplacer maintenant au dossier Applications ?"
     },
     "folder_check_dialog_move": {
         "message": "Déplacer"
