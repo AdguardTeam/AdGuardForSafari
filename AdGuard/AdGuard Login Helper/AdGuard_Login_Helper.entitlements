@@ -6,9 +6,5 @@
 	<true/>
 	<key>com.apple.security.files.user-selected.read-only</key>
 	<true/>
-	<key>com.apple.security.application-groups</key>
-	<array>
-		<string>$(AG_GROUP)</string>
-	</array>
 </dict>
 </plist>

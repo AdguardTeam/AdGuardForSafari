@@ -1,7 +1,7 @@
 AG_COPYRIGHT = Copyright © 2021 AdGuard Software Ltd. All rights reserved.
 AG_NAME = AdGuard for Safari
 AG_VERSION = 1.11.12
-AG_BUILD = 280
+AG_BUILD = 287
 
 AG_STANDALONE = false
 AG_STANDALONE_BETA = false
@@ -10,6 +10,7 @@ AG_BUILD_ARCH=$(ARCHS)
 
 AG_TEAM = TC3Q7MAJXF
 AG_BUNDLEID = com.adguard.safari.AdGuard
+AG_URL_SCHEME = agsafari
 AG_LOGIN_HELPER_BUNDLEID = $(AG_BUNDLEID).login-helper
 
 AG_EXTENSION_BUNDLEID = $(AG_BUNDLEID).Extension

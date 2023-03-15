@@ -11,7 +11,6 @@ const safariExt = require('safari-ext');
 const appPack = require('./src/utils/app-pack');
 const i18n = require('./src/utils/i18n');
 const log = require('./src/main/app/utils/log');
-const { launchState } = require('./src/main/launch-state');
 
 /* Reconfigure path to config */
 process.env['NODE_CONFIG_DIR'] = appPack.resourcePath('/config/');
@@ -259,15 +258,6 @@ function showWindow(onWindowLoaded) {
 }
 
 /**
- * Should app launch silent in background
- *
- * @return {*}
- */
-async function shouldOpenSilent() {
-    return launchState.launchedBackground();
-}
-
-/**
  * Checks if `AdGuard for Safari.app` is running from Applications folder
  * otherwise shows the dialog message and moves `AdGuard for Safari.app` there
  */
@@ -306,6 +296,21 @@ const checkIsInApplicationsFolder = () => {
 let tray;
 
 /**
+ * Variable used to track whether the app was launched in the background.
+ * To track this, we launch the app with a custom url.
+ * Other ways didn't work because the app can also be launched in a sandbox.
+ * @type {boolean}
+ */
+let launchInBackground = false;
+app.on('open-url', (e, url) => {
+    e.preventDefault();
+    log.info(`"open-url" event fired with url: "${url}"`);
+    if (url === 'agsafari://launchInBackground') {
+        launchInBackground = true;
+    }
+});
+
+/**
  * This method will be called when Electron has finished
  * initialization and is ready to create browser windows.
  * Some APIs can only be used after this event occurs.
@@ -319,7 +324,8 @@ app.on('ready', (async () => {
     log.info(`Starting AdGuard v${app.getVersion()} (${safariExt.getBuildNumber()})`);
     log.info('App ready - creating browser windows');
 
-    if (await shouldOpenSilent()) {
+    if (launchInBackground) {
+        launchInBackground = false;
         log.info('App is launching in background');
 
         // Open in background

@@ -103,24 +103,19 @@
             DDLogError(@"Can't obtain URL for Main App.");
         }
         else {
-            // Set flag that extension was launched in background, for main app to launch in background
-            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+            NSURL *urlToOpen = [NSURL URLWithString:@"agsafari://launchInBackground"];
             
-            [AESharedResources setLaunchInBackground:YES completion:^{
-                dispatch_semaphore_signal(semaphore);
-            }];
+            NSError *error = nil;
+            [NSWorkspace.sharedWorkspace openURLs:@[urlToOpen]
+                             withApplicationAtURL:appURL
+                                          options:0
+                                    configuration:@{}
+                                            error:&error];
             
-            // timeout after 1 second
-            dispatch_time_t timeout = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC));
-            dispatch_semaphore_wait(semaphore, timeout);
-            
-            NSError *lError = nil;
-            NSRunningApplication *app = [[NSWorkspace sharedWorkspace] launchApplicationAtURL:appURL
-                                                                                      options:0
-                                                                                configuration:@{}
-                                                                                        error:&lError];
-            if (app == nil && lError != nil) {
-                DDLogError(@"Error occurs when running: %@", lError);
+            if (error) {
+                DDLogError(@"An error occurred: %@", error.localizedDescription);
+            } else {
+                DDLogDebug(@"Main app successfully launched");
             }
         }
         

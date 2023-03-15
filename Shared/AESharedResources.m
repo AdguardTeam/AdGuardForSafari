@@ -30,7 +30,6 @@
 #define AES_ALLOWLIST_DOMAINS                   @"allowlist-domains.data"
 #define AES_USERFILTER_RULES                    @"userfilter-rules.data"
 #define AES_CUSTOM_FILTER_INFO                  @"custom-filter-info.data"
-#define AES_LAUNCH_IN_BACKGROUND                @"launch-background.data"
 
 #define NOTIFICATION_DEFAULTS                   AG_BUNDLEID @".notify.defaults"
 #define NOTIFICATION_ALLOWLIST                  AG_BUNDLEID @".notify.allowlist"
@@ -57,7 +56,6 @@ NSString * const AEDefaultsVerboseLogging = @"AEDefaultsVerboseLogging";
 NSString * const AEDefaultsLastReportUrl = @"AEDefaultsLastReportUrl";
 NSString * const AEDefaultsAllExtensionsEnabled = @"AEDefaultsAllExtensionsEnabled";
 NSString * const AEDefaultsAllowlistInverted = @"AEDefaultsAllowlistInverted";
-NSString * const AEDefaultsLaunchedBackground = @"AEDefaultsLaunchedBackground";
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -410,22 +408,6 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
 + (void)customFilterInfoWithCompletion:(void (^)(NSDictionary *customFilterInfo))completion {
 
     [self loadObjectWithKey:AES_CUSTOM_FILTER_INFO class:[NSDictionary class] completion:completion];
-}
-
-+ (void)setLaunchInBackground:(BOOL)launchInBackground completion:(void (^)(void))completion {
-    NSString *value = (launchInBackground ? @"1" : @"0");
-    [self saveObject:value key:AES_LAUNCH_IN_BACKGROUND completion:completion];
-}
-
-+ (void)launchInBackgroundWithCompletion:(void (^)(BOOL success))completion {
-
-    [self loadObjectWithKey:AES_LAUNCH_IN_BACKGROUND class:[NSString class] completion:^(NSString *launchInBackground) {
-        BOOL success = NO;
-        if ([launchInBackground isEqualToString:@"1"]) {
-            success = YES;
-        }
-        completion(success);
-    }];
 }
 
 + (void)DDLogInfo:(NSString *)message {

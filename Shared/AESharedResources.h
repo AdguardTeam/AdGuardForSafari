@@ -18,7 +18,6 @@ extern NSString * const AEDefaultsVerboseLogging;
 extern NSString * const AEDefaultsLastReportUrl;
 extern NSString * const AEDefaultsAllExtensionsEnabled;
 extern NSString * const AEDefaultsAllowlistInverted;
-extern NSString * const AEDefaultsLaunchedBackground;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
@@ -306,19 +305,6 @@ extern NSString * const AEDefaultsLaunchedBackground;
  Gets the custom filter info from shared storage.
  */
 + (void)customFilterInfoWithCompletion:(void (^)(NSDictionary *customFilterInfo))completion;
-
-
-/**
- Sets the flag if the application should be launched in the background.
- There is no other way to pass this flag to the application at launch.
- @param launchInBackground boolean flag
- */
-+ (void)setLaunchInBackground:(BOOL)launchInBackground completion:(void (^)(void))completion;
-
-/**
- Gets a boolean flag if the application should be started in the background
- */
-+ (void)launchInBackgroundWithCompletion:(void (^)(BOOL success))completion;
 
 /**
   Log info wrapper
