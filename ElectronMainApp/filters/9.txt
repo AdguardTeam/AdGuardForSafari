@@ -1,8 +1,8 @@
-! Checksum: guXaA24h/gUX5u/4GTbvoA
+! Checksum: oD74I0Pv08dz1en0Q0Z5XA
 ! Title: AdGuard Spanish/Portuguese filter
-! Description: Filter list that specifically removes ads on websites in Spanish and Portuguese languages.
-! Version: 2.0.17.59
-! TimeUpdated: 2023-03-06T09:32:11+00:00
+! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
+! Version: 2.0.17.68
+! TimeUpdated: 2023-03-16T11:32:07+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -89,6 +89,9 @@
 ! https://forum.adguard.com/index.php?threads/ivoox-com-podcasts-issues.29530/
 ! ||addevweb.com^$third-party
 !
+||spacelala.com^
+||pitors.com^
+||texamp.com^
 ||smart-placements-sdk.ex.co^
 ||mucmoapa.com^
 ||cibgphkiqbjk.com^
@@ -299,6 +302,13 @@
 ! Bad: ||ad.doubleclick.net^ (should be in adservers.txt)
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/145474
+xerifetech.com#%#//scriptlet('prevent-setTimeout', '_0x')
+xerifetech.com#%#//scriptlet('prevent-addEventListener', '', '_0x')
+xerifetech.com#%#//scriptlet('set-constant', 'adblock.check', 'noopFunc')
+xerifetech.com#$#body div.adsbox.doubleclick.ad-placement[id]:not(#style_important) { display: block !important; }
+@@||xerifetech.com^$generichide
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=xerifetech.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/144342
 tipsdesalud.tips,saludmasya.com#@#.ad_content
 tipsdesalud.tips,saludmasya.com#@#.ad_body
@@ -344,8 +354,6 @@ netcine.to#%#//scriptlet('prevent-fetch', '/pagead2\.googlesyndication\.com|\/da
 @@||googleads.g.doubleclick.net/pagead/id$xmlhttprequest,domain=netcine.to
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=netcine.to
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142265
-antoniomote.com##.jetblocker_overlay
-antoniomote.com##.jetblocker-wrapper
 antoniomote.com#$#[id].adsbox.doubleclick.ad-placement { display: block !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142266
 oliberal.com#%#//scriptlet("abort-current-inline-script", "$", "blockWall")
@@ -1455,6 +1463,8 @@ peru21.pe#@#.adstop
 ! https://github.com/AdguardTeam/AdguardFilters/issues/24801
 yahoo.com#?#ul[class^="Mb(0)"] > li.js-stream-content:-abp-has(> div > a[rel="nofollow noopener noreferrer"]+div:contains(Patrocinado))
 !
+hentaikai.com#?#.main > .card-serie:-abp-has(> a[href^="https://www.tufos.com.br/"])
+superhq.net#?#.post-list-grade > .item-post-grade:-abp-has(> .entry-featured-media > a > .selos > .ad)
 diariofutrono.cl#?#.row > div#body_right > div.row:-abp-has(> script[src^="/base/printadv/"])
 tudn.com,univision.com#?#article > div[class] > div[class]:-abp-has(> div.OUTBRAIN)
 univision.com#?#div:not([class]) > div[class]:-abp-has(> div[id^="div-gpt-ad-"])
@@ -1723,6 +1733,9 @@ seriesgato.com#?#.TPlayerNv > li.Button:-abp-has(> span:contains(Publicidad))
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/145476
+superhq.net#%#//scriptlet('abort-on-property-write', 'exopop')
+hentaikai.com,superhq.net#%#//scriptlet('abort-on-property-write', 'protData')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142854
 cuevana.run#%#//scriptlet('prevent-window-open')
 cuevana.run#%#//scriptlet('abort-on-property-read', 'cJsEdge')
@@ -2319,12 +2332,19 @@ http://adw.
 $third-party,script,domain=mangatigre.com
 !
 ! ##.ad
-vidaextra.com,mediotiempo.com,elpais.com,olhardigital.com.br,atribuna.com.br,jovemnerd.com.br,laopiniondemurcia.es,larazon.es,dicio.com.br,band.uol.com.br,xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
+mundoxiaomi.com,vidaextra.com,mediotiempo.com,elpais.com,olhardigital.com.br,atribuna.com.br,jovemnerd.com.br,laopiniondemurcia.es,larazon.es,dicio.com.br,band.uol.com.br,xataka.com,onyxplay.com,genbeta.com,vagalume.com.br,xatakandroid.com,abril.com.br##.ad
 ! ##.ads
 bebe.abril.com.br,tribunapr.uol.com.br,diariodonordeste.verdesmares.com.br,sbt.com.br,link.estadao.com.br,atomixhq.*,jc.ne10.uol.com.br,internetpasoapaso.com,acidadeon.com,leouve.com.br,larazon.es,infoescola.com,quatrorodas.abril.com.br,cbn.globoradio.globo.com,maxitorrent.com,veja.abril.com.br,odia.ig.com.br,especiais.g1.globo.com,tribunapr.com.br,novelasd.com,anime-tube.tv##.ads
 ! ##.banner
 economipedia.com,informador.mx,elinformador.com.co,cronista.com,rionegro.com.ar,diariodecuyo.com.ar,voydeviaje.com.ar,guarda14.com,viapais.com.ar,agazeta.com.br,eleconomista.com.mx,metropolitanafm.com.br,tycsports.com,elespectador.com,bnews.com.br,migalhas.com.br,losandes.com.ar,lavoz.com.ar,mundo.sputniknews.com,omelete.com.br,lapoliticaonline.com.ar,mundotecnologias.com,valenciaplaza.com,veneapp.com,dalealbo.cl,globo.com,defesanet.com.br,mibrujula.com,lyon.kim,26noticias.com.ar,auniao.com,clickpb.com.br,emagister.com,lanacion.com.ar,parana-online.com.br,r7.com,toxico-pc.com,uol.com.br##.banner
 !
+prismascans.net,prismahentai.com,cerisescan.com,reaperscans.net,sinensisscans.com,yugenmangas.com.br,randomscans.com,arthurscan.xyz##.adclose
+||superhq.net/pop/
+superhq.net##body .banner-750x250-single
+hentaikai.com##a[href^="https://www.tufos.com.br/"]
+diariocorreo.pe###spc_post_stories:empty
+spdiario.com.br###interna_banner_side
+spdiario.com.br##div[id$="_banner_quadrado"]
 jbox.com.br##.jbox-publi-fullwidth
 gabarite.com.br###publicidade
 independentespanol.com###top-banner-wrapper
@@ -2797,7 +2817,7 @@ olimpicos.marcaclaro.com##.banner-leader
 lostiempos.com###takeover-desktop-counter
 legiaodosherois.com.br##.bg-ad-wrapper
 legiaodosherois.com.br##.widget--adsense
-gestion.pe,elcomercio.pe##div[class^="content_gpt_"]
+diariocorreo.pe,gestion.pe,elcomercio.pe##div[class^="content_gpt_"]
 dual1080p.blogspot.com##.sidebar #HTML5
 dual1080p.blogspot.com##.sidebar #Image1
 it-swarm-es.com##.adnet
@@ -5109,6 +5129,9 @@ insurances.tips##.adsbygoogle
 ! Good: example.org#@#.ad
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/145203
+!+ PLATFORM(ios, ext_safari, ext_android_cb)
+@@||webmotors.com.br/javascripts/prebid.*.js$domain=webmotors.com.br
 ! https://github.com/uBlockOrigin/uAssets/issues/9807#issuecomment-1450692386
 @@||static.adsafeprotected.com/iasPET.1.js$domain=independentespanol.com
 @@||permutive.app/*web.js$domain=independentespanol.com

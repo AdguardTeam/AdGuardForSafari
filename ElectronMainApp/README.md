@@ -12,7 +12,7 @@
 
 ```
 npm install electron-packager -g
-npm install node-gyp -g 
+npm install node-gyp -g
 npm install electron-osx-sign -g
 ```
 
@@ -42,3 +42,12 @@ Then add network target `localhost:5858` via button 'Configure' and select this 
 
 After dependency installation ConverterTool binary will be copied to the `libs` directory to resolve its address via `app-pack` and pass to `safari-converter-lib`.
 Check `content-blocker-adapter.js` for more details.
+
+### How to update filters
+
+To update pre-installed AdGuard filters just run
+```
+yarn filters
+```
+
+> `yarn install` is not needed.
