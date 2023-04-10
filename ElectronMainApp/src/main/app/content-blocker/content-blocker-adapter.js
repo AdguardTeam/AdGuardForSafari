@@ -43,8 +43,9 @@ module.exports = (function () {
             let safariVersion = safariExt.getSafariVersion();
             log.info(`Detected Safari browser version: ${safariVersion}`);
             if (safariVersion) {
-                // major version
-                safariVersion = parseInt(safariVersion.substring(0, 2), 10);
+                // Starting from 16.4 version Safari content blockers supports :has() pseudo-class.
+                // https://www.webkit.org/blog/13966/webkit-features-in-safari-16-4/
+                safariVersion = parseFloat(safariVersion);
             } else {
                 log.warn('Unable to detect Safari browser version');
             }
