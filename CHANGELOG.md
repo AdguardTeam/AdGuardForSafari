@@ -11,3 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated SafariConverterLib to v2.0.39 — support :has() pseudo-class by Safari content blockers [since Safari v16.4](https://www.webkit.org/blog/13966/webkit-features-in-safari-16-4/)
+- Updated Scriptlets to v1.9.7
+- Updated ExtendedCss to v2.0.52
+
+
+[Unreleased]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.12.289-release...HEAD

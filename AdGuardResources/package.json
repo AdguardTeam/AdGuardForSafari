@@ -7,8 +7,8 @@
     "postinstall": "./manage-resources.sh"
   },
   "dependencies": {
-    "@adguard/extended-css": "^2.0.51",
-    "@adguard/scriptlets": "^1.9.1",
+    "@adguard/extended-css": "^2.0.52",
+    "@adguard/scriptlets": "^1.9.7",
     "@adguard/assistant": "^4.3.68"
   }
 }
