@@ -128,15 +128,6 @@
     "options_export_logs": {
         "message": "Экспортировать логи"
     },
-    "settings_import": {
-        "message": "Импорт настроек"
-    },
-    "settings_import_success": {
-        "message": "Настройки успешно импортированы"
-    },
-    "settings_import_error": {
-        "message": "Во время импорта настроек возникла ошибка"
-    },
     "options_antibanner": {
         "message": "Фильтры"
     },
@@ -413,45 +404,6 @@
     "options_last_update": {
         "message": "Последнее обновление:"
     },
-    "options_support": {
-        "message": "Поддержка"
-    },
-    "options_support_faq_title": {
-        "message": "FAQ"
-    },
-    "options_support_faq_description": {
-        "message": "Часто задаваемые вопросы"
-    },
-    "options_support_bug_report_title": {
-        "message": "Сообщить о проблеме"
-    },
-    "options_support_bug_report_description": {
-        "message": "Если что-то работает неправильно в программе"
-    },
-    "options_support_incorrect_blocking_title": {
-        "message": "Сообщить о некорректной блокировке"
-    },
-    "options_support_incorrect_blocking_description": {
-        "message": "Если вы видите пропущенную рекламу или \"поломанный\" сайт"
-    },
-    "options_support_feedback_title": {
-        "message": "Оставить отзыв"
-    },
-    "options_support_feedback_description": {
-        "message": "Ваши предложения по улучшению продукта"
-    },
-    "options_support_rate_title": {
-        "message": "Оценить приложение"
-    },
-    "options_support_rate_description": {
-        "message": "Расскажите, что вы думаете об AdGuard"
-    },
-    "options_support_discuss_title": {
-        "message": "Обсудить"
-    },
-    "options_support_discuss_description": {
-        "message": "Обсудить на нашем форуме, страницах в социальных сетях или GitHub"
-    },
     "options_about": {
         "message": "О программе"
     },
@@ -550,9 +502,6 @@
     },
     "options_filters_period_not_update": {
         "message": "Не обновлять"
-    },
-    "options_filters_check_for_updates": {
-        "message": "Проверить обновления"
     },
     "options_filters_custom_remove": {
         "message": "удалить"

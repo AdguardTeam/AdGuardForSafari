@@ -20,6 +20,12 @@
     "options_support_faq_title": {
         "message": "FAQ"
     },
+    "options_support_feature_request_title": {
+        "message": "Skicka begäran om en funktion"
+    },
+    "options_support_feature_request_description": {
+        "message": "Föreslå sätt att förbättra appen"
+    },
     "options_support_bug_report_title": {
         "message": "Rapportera ett fel"
     },
@@ -137,6 +143,9 @@
     "options_filters_updated": {
         "message": "uppdaterade: %s"
     },
+    "options_filters_empty_custom_filters": {
+        "message": "Beklagar men du har ännu inga egna filter"
+    },
     "options_filters_empty_custom_add_button": {
         "message": "Lägg till ett eget filter"
     },
@@ -203,6 +212,9 @@
     "options_filters_check_filters_update": {
         "message": "Kontrollera om det finns filteruppdateringar"
     },
+    "options_allowlist": {
+        "message": "Vitlista"
+    },
     "options_allowlist_no_domains": {
         "message": "Vita listan är tom"
     },
@@ -211,6 +223,12 @@
     },
     "options_userfilter_no_user_rules": {
         "message": "Inga användarregler"
+    },
+    "options_userfilter_info_single": {
+        "message": "%s användarregel"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s användarregler"
     },
     "options_userfilter_description": {
         "message": "Du kan lägga till egna filterregler till&nbsp;det här filtret. Alternativet &nbsp;rekommenderas för användare som är bekanta med HTML/CSS. Läs <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>filterregelsgudien</a> för att &nbsp;lära dig hur du&nbsp;skapar egna filterregler."
@@ -341,6 +359,9 @@
     "onboarding_safari_title": {
         "message": "Behöver din tillåtelse"
     },
+    "onboarding_safari_desc": {
+        "message": "Sätt bock i rutan intill \"AdGuard Safariikon\" och i \"AdGuard\" i Safaris Inställningar"
+    },
     "onboarding_tooltip_adguard_safari_icon": {
         "message": "AdGuards SafariIkon"
     },
@@ -404,23 +425,20 @@
     "options_cb_other_title": {
         "message": "AdGuard Annat"
     },
-    "options_cb_rules_info": {
-        "message": {
-            "one": "%s regel används",
-            "other": "%s regler används"
-        }
-    },
     "filters_group_custom": {
         "message": "Eget"
     },
     "userfilter_name": {
-        "message": "Användarfilter"
+        "message": "Användarregler"
     },
     "window_close_dialog_no": {
         "message": "Nej"
     },
     "window_close_dialog_cancel": {
         "message": "Avbryt"
+    },
+    "folder_check_dialog_move": {
+        "message": "Flytta"
     },
     "folder_check_dialog_quit": {
         "message": "Avsluta"

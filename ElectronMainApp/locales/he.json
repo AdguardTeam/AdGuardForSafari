@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "שאלות נפוצות"
     },
+    "options_support_feature_request_title": {
+        "message": "שלח בקשה לתכונה"
+    },
+    "options_support_feature_request_description": {
+        "message": "הצע דרכים לשיפור האפליקציה"
+    },
     "options_support_bug_report_title": {
         "message": "דווח על תקל"
     },
@@ -270,7 +276,7 @@
         "message": "כללי משתמש"
     },
     "options_userfilter_no_user_rules": {
-        "message": ""
+        "message": "אין חוקי משתמש"
     },
     "options_userfilter_info_single": {
         "message": "כלל משתמש %s"
@@ -279,7 +285,7 @@
         "message": "%s כללי משתמש"
     },
     "options_userfilter_description": {
-        "message": ""
+        "message": "אתה יכול להוסיף חוקים משלך כאן. אפשרות זו&nbsp;מומלצת למשתמשים מתקדמים שמכירים HTML/CSS. קרא את מדריך <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>כללי סינון</a> עד&nbsp;למד כיצד&nbsp;לכתוב כללי סינון משלך."
     },
     "options_userfilter_import": {
         "message": "ייבא"
@@ -336,10 +342,10 @@
         "message": "אזהרה"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": ""
+        "message": "יותר מדי מסננים מאופשרים. Safari אינו יכול להשתמש ביותר מן %s כללים בקבוצה אחת."
     },
     "options_content_blocker_overlimit": {
-        "message": ""
+        "message": "יותר מדי מסננים מאופשרים. Safari אינו יכול להשתמש ביותר מן %s כללים בקבוצה אחת."
     },
     "options_filters_list_search_placeholder": {
         "message": "חפש"
@@ -405,7 +411,7 @@
         "message": "חוסמי תכנים"
     },
     "options_content_blockers_desc": {
-        "message": ""
+        "message": "חוסמי פרסומות מאופשרים: %s מתוך 6 (כל אחד יכול להכיל עד %s כללים)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "חוסמי פרסומות מושבתים"
@@ -465,7 +471,7 @@
         "message": "6 הרחבות של חסימת תוכן"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": ""
+        "message": "Safari מגביל את המספר המרבי של כללי חסימת תוכן אל %s לכל הרחבה. זה לא מספיק כדי לטפל בכל הסוגים של הפרסומות והעוקבנים אשר AdGuard חוסם. זאת הסיבה שאנחנו מספקים 6 הרחבות, מה שמגדיל את המגבלה הזאת אל %s."
     },
     "onboarding_safari_btn": {
         "message": "פתח העדפות"
@@ -576,7 +582,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": ""
+        "message": "המגבלה של %s כללים חרגה. אנא השבת כללים בלתי נחוצים כדי שהיישום יעבוד כראוי.<br/>כללים מאופשרים כרגע: %s (כללים מושבתים: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "מושבת בדפדפן Safari"

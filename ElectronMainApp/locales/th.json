@@ -14,6 +14,45 @@
     "options_filters_filter_trusted_tag_desc": {
         "message": "คุณเลือกที่จะเชื่อถือตัวกรองนี้"
     },
+    "options_support": {
+        "message": "สนับสนุน"
+    },
+    "options_support_faq_title": {
+        "message": "คำถามที่พบบ่อย"
+    },
+    "options_support_faq_description": {
+        "message": "คำถามที่พบบ่อย"
+    },
+    "options_support_bug_report_title": {
+        "message": "รายงานข้อผิดพลาด"
+    },
+    "options_support_bug_report_description": {
+        "message": "หากมีบางอย่างทำงานไม่ถูกต้องในโปรแกรม"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "รายงานการปิดกั้นที่ไม่ถูกต้อง"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "หากคุณเห็นโฆษณาที่ไม่ได้รับหรือเว็บไซต์ \"เสีย\""
+    },
+    "options_support_feedback_title": {
+        "message": "แสดงความคิดเห็น"
+    },
+    "options_support_feedback_description": {
+        "message": "ส่งคำขอคุณสมบัติและข้อเสนอแนะ"
+    },
+    "options_support_rate_title": {
+        "message": "ให้คะแนนแอป"
+    },
+    "options_support_rate_description": {
+        "message": "บอกเราว่าคุณคิดอย่างไรเกี่ยวกับ AdGuard"
+    },
+    "options_support_discuss_title": {
+        "message": "สนทนา"
+    },
+    "options_support_discuss_description": {
+        "message": "พูดคุยในฟอรัมของเราในโซเชียลเน็ตเวิร์กหรือบน GitHub"
+    },
     "options_about_update_check": {
         "message": "ตรวจสอบการปรับปรุง"
     },
@@ -31,6 +70,9 @@
     },
     "options_about_update_relaunch": {
         "message": "เปิดใหม่"
+    },
+    "options_about_read_more": {
+        "message": "อ่านเพิ่มเติมเกี่ยวกับผลิตภัณฑ์นี้"
     },
     "options_popup_title_placeholder": {
         "message": "ใส่ชื่อตัวกรอง"
@@ -53,6 +95,9 @@
     "options_settings": {
         "message": "AdGuard สำหรับ Safari - การตั้งค่า"
     },
+    "options_settings_import_wrong_file_extension": {
+        "message": "นามสกุลไฟล์ต้องเป็น .json"
+    },
     "options_settings_import_error": {
         "message": "การนำเข้าการตั้งค่าผิดพลาด"
     },
@@ -60,7 +105,7 @@
         "message": "ทั่วไป"
     },
     "options_general_desc": {
-        "message": "AdGuard สำหรับ Safari เป็นซอฟต์แวร์โอเพ่นซอร์สฟรี เรายินดีรับข้อเสนอแนะและผลงานของคุณ หากคุณต้องการรายงานข้อบกพร่องหรือขอคุณสมบัติโปรดไปที่ <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'> GitHub repo ของเรา</a>."
+        "message": "AdGuard สำหรับ Safari เป็นซอฟต์แวร์โอเพ่นซอร์สฟรี เรายินดีรับข้อเสนอแนะและผลงานของคุณ หากคุณต้องการรายงานข้อบกพร่องหรือขอคุณสมบัติโปรดไปที่ <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>GitHub repo ของเรา</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "อนุญาตโฆษณาการค้นหาและการโปรโมตเว็บไซต์ด้วยตนเอง"
@@ -71,8 +116,8 @@
     "options_import_settings": {
         "message": "นำเข้าการตั้งค่า"
     },
-    "options_support_faq_title": {
-        "message": "คำถามที่พบบ่อย"
+    "options_export_logs": {
+        "message": "ส่งออกบันทึก"
     },
     "options_antibanner": {
         "message": "ตัวกรอง"
@@ -101,6 +146,9 @@
     "options_filters_enabled": {
         "message": "เปิดใช้งาน:"
     },
+    "options_filters_homepage": {
+        "message": "หน้าหลัก"
+    },
     "options_filters_enabled_and_more_divider": {
         "message": "%s และ %s อื่น ๆ"
     },
@@ -116,8 +164,17 @@
     "options_filters_updated": {
         "message": "อัปเดต: %s"
     },
+    "options_filters_empty_custom_filters": {
+        "message": "ขออภัย แต่คุณยังไม่ได้เลือกตัวกรองที่กำหนดเองเลย"
+    },
     "options_filters_empty_custom_add_button": {
         "message": "เพิ่มตัวกรองเอง"
+    },
+    "options_filters_custom_import_file": {
+        "message": "นำเข้าไฟล์"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "ข้อผิดพลาดในการนำเข้า"
     },
     "options_filters_custom_step_one_title": {
         "message": "การสมัครสมาชิกตัวกรองใหม่"
@@ -139,6 +196,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "กำลังดาวน์โหลดตัวกรอง"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "การสมัครรับตัวกรอง"
     },
     "options_filters_custom_step_three_title": {
         "message": "เกิดข้อผิดพลาด"
@@ -182,11 +242,20 @@
     "options_filters_check_filters_update": {
         "message": "ตรวจสอบการอัปเดตตัวกรอง"
     },
+    "options_allowlist": {
+        "message": "รายการที่อนุญาต"
+    },
+    "options_allowlist_no_domains": {
+        "message": "รายการอนุญาตว่างเปล่า"
+    },
     "options_userfilter": {
         "message": "ตัวกรองผู้ใช้"
     },
-    "options_userfilter_no_user_rules": {
-        "message": "รายการว่างเปล่า"
+    "options_userfilter_info_single": {
+        "message": "%s กฎผู้ใช้"
+    },
+    "options_userfilter_info_multi": {
+        "message": "%s กฎผู้ใช้"
     },
     "options_userfilter_description": {
         "message": "คุณสามารถเพิ่มกฎของคุณเองใน&nbsp;ตัวกรองนี้&nbsp;แนะนำให้ใช้ตัวเลือกนี้สำหรับผู้ใช้ขั้นสูงที่คุ้นเคยกับ HTML/CSS อ่าน <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>กฎการสอนตัวกรอง</a>เพื่อ&nbsp;เรียนรู้วิธีเขียน&nbsp;กฎตัวกรองของคุณเอง"
@@ -197,6 +266,12 @@
     "options_userfilter_export": {
         "message": "ส่งออก"
     },
+    "options_userfilter_import_rules_error": {
+        "message": "เกิดข้อผิดพลาดในการนำเข้ากฎผู้ใช้"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "นามสกุลไฟล์ต้องเป็น .txt"
+    },
     "options_show_app_updated_notification": {
         "message": "แจ้งเตือนเกี่ยวกับการอัปเดตส่วนขยาย"
     },
@@ -205,6 +280,9 @@
     },
     "options_popup_update_error_title": {
         "message": "ผิดพลาดในการอัปเดตของตัวกรอง"
+    },
+    "options_popup_update_version_error": {
+        "message": "เวอร์ชันของตัวกรองที่คุณพยายามอัปเดตนั้นเหมือนกันหรือเก่ากว่า"
     },
     "options_popup_update_not_found": {
         "message": "ไม่พบการอัปเดต"
@@ -234,10 +312,10 @@
         "message": "คำเตือน"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "เปิดใช้งานตัวกรองมากเกินไป Safari ไม่สามารถใช้กฎมากกว่า 50,000 กฎในกลุ่มเดียว"
+        "message": "เปิดใช้งานตัวกรองมากเกินไป Safari ไม่สามารถใช้กฎมากกว่า %s กฎในกลุ่มเดียว"
     },
     "options_content_blocker_overlimit": {
-        "message": "เปิดใช้งานตัวกรองมากเกินไป Safari ไม่สามารถใช้กฎมากกว่า 50,000 กฎในกลุ่มเดียว"
+        "message": "เปิดใช้งานตัวกรองมากเกินไป Safari ไม่สามารถใช้กฎมากกว่า %s กฎในกลุ่มเดียว"
     },
     "options_filters_list_search_placeholder": {
         "message": "ค้นหา"
@@ -250,6 +328,9 @@
     },
     "options_editor_indicator_saved": {
         "message": "บันทึกแล้ว"
+    },
+    "options_editor_save_button": {
+        "message": "บันทึก"
     },
     "main_menu_edit": {
         "message": "แก้ไข"
@@ -300,7 +381,7 @@
         "message": "ตัวบล็อกเนื้อหา"
     },
     "options_content_blockers_desc": {
-        "message": "ตัวบล็อกโฆษณาที่เปิดใช้งาน: %s จาก 6 (แต่ละรายการสามารถมีกฎได้ถึง 50,000 กฎ)"
+        "message": "ตัวบล็อกโฆษณาที่เปิดใช้งาน: %s จาก 6 (แต่ละรายการสามารถมีกฎได้ถึง %s กฎ)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "ตัวบล็อกโฆษณาถูกปิดใช้งาน"
@@ -326,17 +407,41 @@
     "onboarding_safari_title": {
         "message": "ต้องการการอนุญาตจากคุณ"
     },
+    "onboarding_safari_desc": {
+        "message": "ทำเครื่องหมายในช่องถัดจากส่วนขยาย AdGuard ในการตั้งค่า Safari"
+    },
+    "onboarding_safari_link": {
+        "message": "ส่วนขยายเหล่านี้ทำอะไร?"
+    },
     "onboarding_tooltip_adguard_safari_icon": {
         "message": "AdGuard ไอคอน Safari"
     },
     "onboarding_tooltip_adguard_safari_icon_info": {
         "message": "คุณสามารถใช้ไอคอนนี้เพื่อจัดการการตั้งค่า AdGuard สำหรับ Safari ตัวอย่างเช่นหยุดการปิดกั้นบนเว็บไซต์หรือปิดกั้นโฆษณาด้วยตนเอง"
     },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "จำเป็นต้องมีการเข้าถึงเนื้อหาของเว็บเพจเพื่อให้ 'เครื่องมือปิดกั้นด้วยตนเอง' ทำงานได้"
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "จำเป็นต้องมีการเข้าถึงประวัติการเข้าชมเพื่อตรวจสอบว่า AdGuard ทำงานบนเว็บไซต์ที่คุณกำลังเยี่ยมชมอยู่หรือไม่"
+    },
     "onboarding_tooltip_adguard_advanced_blocking": {
         "message": "AdGuard การปิดกั้นขั้นสูง"
     },
     "onboarding_tooltip_adguard_advanced_blocking_info": {
         "message": "ส่วนขยายนี้ใช้กฎการปิดกั้นขั้นสูงซึ่งไม่รองรับโดย Safari Content Blocking API"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "จำเป็นต้องมีการเข้าถึงเนื้อหาของเว็บเพจเพื่อให้กฎองค์ประกอบขั้นสูงทำงานได้"
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "จำเป็นต้องมีการเข้าถึงประวัติการเข้าชมเพื่อตรวจสอบว่าคุณพยายามเปิดเว็บไซต์ใดเพื่อให้สามารถค้นหากฎการปิดกั้นขั้นสูงที่ควรใช้"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 ส่วนขยายการปิดกั้นเนื้อหา"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari จำกัดจำนวนสูงสุดของกฎการปิดกั้นเนื้อหาที่ %s ต่อส่วนขยาย สิ่งนี้ไม่เพียงพอที่จะจัดการกับโฆษณาและตัวติดตามปิดกั้น AdGuard ทุกประเภท นั่นเป็นเหตุผลว่าทำไมเราจึงมี 6 ส่วนขยายจึงเพิ่มขีดจำกัดเป็น %s"
     },
     "onboarding_safari_btn": {
         "message": "เปิดการตั้งค่า"
@@ -389,6 +494,15 @@
     "options_enable_hardware_acceleration_desc": {
         "message": "เปิดใช้งานการเร่งด้วยฮาร์ดแวร์สำหรับหน้าต่างการตั้งค่า ต้องการเริ่มต้นแอปพลิเคชันใหม่"
     },
+    "settings_import": {
+        "message": "นำเข้าการตั้งค่า"
+    },
+    "settings_import_success": {
+        "message": "นำเข้าการตั้งค่าเสร็จสมบูรณ์"
+    },
+    "settings_import_error": {
+        "message": "เกิดข้อผิดพลาดระหว่างการนำเข้าการตั้งค่า"
+    },
     "settings_notification_protection_title": {
         "message": "หยุดการป้องกันชั่วคราว"
     },
@@ -409,6 +523,9 @@
     },
     "settings_notification_cb_extensions_text": {
         "message": "คุณควรเปิดใช้งานส่วนขยาย AdGuard content blocker ทั้งหมดเพื่อการบล็อกโฆษณาที่ถูกต้องใน Safari"
+    },
+    "settings_notification_update_interval": {
+        "message": "โปรดทราบว่าตัวกรองที่ล้าสมัยจะลดคุณภาพของการป้องกันดังนั้นจึงเป็นเรื่องสำคัญที่จะต้องอัปเดตให้ทันสมัยอยู่เสมอ"
     },
     "options_cb_general_title": {
         "message": "AdGuard ทั่วไป"
@@ -435,7 +552,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "เกินขีดจำกัด 50,000 กฎแล้ว โปรดปิดใช้งานกฎที่ไม่จำเป็นเพื่อให้แอปทำงานอย่างถูกต้อง<br/>กฎที่เปิดใช้งานในขณะนี้: %s (กฎที่ปิดใช้งาน: $2)"
+        "message": "เกินขีดจำกัด %s กฎแล้ว โปรดปิดใช้งานกฎที่ไม่จำเป็นเพื่อให้แอปทำงานอย่างถูกต้อง<br/>กฎที่เปิดใช้งานในขณะนี้: %s (กฎที่ปิดใช้งาน: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "ปิดใช้งานใน Safari"
@@ -448,6 +565,36 @@
     },
     "userfilter_name": {
         "message": "ตัวกรองผู้ใช้"
+    },
+    "allowlist_name": {
+        "message": "รายการที่อนุญาต"
+    },
+    "window_close_dialog_message": {
+        "message": "ให้ AdGuard ทำงานอยู่เบื้องหลังหรือไม่?"
+    },
+    "window_close_dialog_detail": {
+        "message": "นี่เป็นสิ่งสำคัญสำหรับ AdGuard ในการทำให้กระบวนการหลักทำงานอยู่เบื้องหลังมิฉะนั้นจะไม่สามารถตรวจสอบการอัปเดตตัวกรองและจัดการการกรองโดยอัตโนมัติได้"
+    },
+    "window_close_dialog_checkbox": {
+        "message": "จำทางเลือกของฉันไว้"
+    },
+    "window_close_dialog_yes": {
+        "message": "ใช่ (แนะนำ)"
+    },
+    "window_close_dialog_no": {
+        "message": "ไม่"
+    },
+    "window_close_dialog_cancel": {
+        "message": "ยกเลิก"
+    },
+    "folder_check_dialog_message": {
+        "message": "AdGuard สำหรับ Safari ควรเปิดใช้งานจากโฟลเดอร์แอปพลิเคชัน"
+    },
+    "folder_check_dialog_detail": {
+        "message": "คุณต้องการย้ายไปที่โฟลเดอร์แอปพลิเคชันเดี๋ยวนี้หรือไม่?"
+    },
+    "folder_check_dialog_move": {
+        "message": "ย้าย"
     },
     "folder_check_dialog_quit": {
         "message": "ออก"

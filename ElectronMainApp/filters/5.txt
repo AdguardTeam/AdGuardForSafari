@@ -1,8 +1,8 @@
-! Checksum: pct2wU0v6kOF8CeORXrUuw
+! Checksum: EyC2Bumv2AI7kErNe2KK8g
 ! Title: AdGuard Experimental filter
 ! Description: Filter designed to test certain hazardous filtering rules before they are added to the basic filters.
-! Version: 2.0.1.5
-! TimeUpdated: 2023-02-21T14:33:04+00:00
+! Version: 2.0.1.15
+! TimeUpdated: 2023-04-19T08:31:58+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -237,6 +237,7 @@ developer.android.com,adssettings.google.com##sc-survey-survey-manager
 ! Rules which are restricted to one or more domains.
 ! This section contain any type of rule grouped by domain.
 !
+mail.yandex.ru#?#.modal:-abp-has(> div[data-lego] div[class^="mail-SubscriptionsPopup"])
 !
 ! Allowlist
 !
@@ -256,6 +257,14 @@ developer.android.com,adssettings.google.com##sc-survey-survey-manager
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142875
 imdb.com#?#div[data-testid="promptable"]:-abp-has(.ipc-rating-display-with-poster__image)
 imdb.com#$?#body:-abp-has(div[data-testid="promptable"] .ipc-rating-display-with-poster__image) { overflow: auto !important; }
+!
+! Special rules for AdGuard websites' test pages. The only purpose of these
+! rules is to make test pages work so that users could verify that AdGuard
+! is properly working.
+!
+!+ NOT_OPTIMIZED
+adguard.com,adguard.app##.hello_from_adguard_experimental
+!
 !-------------------------------------------------------------------!
 !------- Experimental rules for Mobile ads filter-------------------!
 !-------------------------------------------------------------------!

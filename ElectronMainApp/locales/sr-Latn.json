@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "Često postavljana pitanja"
     },
+    "options_support_feature_request_title": {
+        "message": "Poslati zahtev za funkciju"
+    },
+    "options_support_feature_request_description": {
+        "message": "Predložiti ideje za poboljšanje aplikacije"
+    },
     "options_support_bug_report_title": {
         "message": "Prijavi grešku"
     },
@@ -428,12 +434,6 @@
     "options_github": {
         "message": "GitHub"
     },
-    "onboarding_tooltip_adguard_advanced_blocking": {
-        "message": "AdGuard napredno blokiranje"
-    },
-    "onboarding_tooltip_adguard_advanced_blocking_info": {
-        "message": "Ovo proširenje primenjuje napredna pravila blokiranja koja nisu podržana od Safarijevog API za blokiranje sadržaja."
-    },
     "onboarding_safari_title": {
         "message": "Potrebna je vaša dozvola"
     },
@@ -469,6 +469,9 @@
     },
     "onboarding_tooltip_adguard_safari_content_blockers": {
         "message": "6 proširenja blokiranja sadržaja"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari ograničava maksimalan broj pravila blokiranja sadržaja sa %s po proširenju. Ovo nije dovoljno za rukovanje svim vrstama oglasa i tragačima AdGuard blokova. Zato obezbeđujemo 6 proširenja, čime se taj limit povećava na %s."
     },
     "onboarding_safari_btn": {
         "message": "Otvori postavke"

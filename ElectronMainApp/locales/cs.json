@@ -284,9 +284,6 @@
     "options_userfilter_info_multi": {
         "message": "Uživatelská pravidla: %s"
     },
-    "options_userfilter_no_user_rules": {
-        "message": "Seznam je prázdný"
-    },
     "options_userfilter_description": {
         "message": "Zde můžete přidat vlastní pravidla. Tuto možnost&nbsp;doporučujeme pokročilým uživatelům znalým HTML/CSS. Přečtěte si <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>návod k pravidlům filtrů,</a> kde&nbsp;se dozvíte,&nbsp;jak napsat vlastní pravidla filtrů."
     },

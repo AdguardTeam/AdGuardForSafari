@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "Domande frequenti"
     },
+    "options_support_feature_request_title": {
+        "message": "Invia richiesta di funzionalità"
+    },
+    "options_support_feature_request_description": {
+        "message": "Suggerisci modi per migliorare l'app"
+    },
     "options_support_bug_report_title": {
         "message": "Segnala un bug"
     },
@@ -108,16 +114,16 @@
         "message": "Impostazioni Generali"
     },
     "options_general_desc": {
-        "message": "AdGuard per Safari è un software gratuito e open source. Incoraggiamo i tuoi commenti e contributi. Se volessi segnalare un errore, potrai farlo sulla <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nostra repository Github</a>."
+        "message": "AdGuard per Safari è un software gratuito e open source. Incoraggiamo i tuoi commenti e contributi. Se volessi segnalare un errore, potrai farlo sulla <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>nostra repository Github</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Permetti annunci di ricerca e l'autopromozione dei siti"
     },
     "options_export_settings": {
-        "message": "Export settings"
+        "message": "Esporta impostazioni"
     },
     "options_import_settings": {
-        "message": "Import settings"
+        "message": "Importa le impostazioni"
     },
     "options_export_logs": {
         "message": "Esporta i registri"
@@ -270,7 +276,7 @@
         "message": "Regole utente"
     },
     "options_userfilter_no_user_rules": {
-        "message": "La lista è vuota"
+        "message": "Nessuna regola utente"
     },
     "options_userfilter_info_single": {
         "message": "%s regola utente"
@@ -279,7 +285,7 @@
         "message": "%s regole utente"
     },
     "options_userfilter_description": {
-        "message": "Puoi aggiungere le tue regole qui. Questa opzione è&nbsp;consigliata per utenti avanzati esperti di HTML/CSS. Leggi il <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial sulle regole per i filtri</a> per&nbsp;imparare a&nbsp;scrivere le tue regole per i filtri."
+        "message": "Puoi aggiungere le tue regole qui. Questa opzione è&nbsp;consigliata per utenti avanzati esperti di HTML/CSS. Leggi il <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutorial sulle regole per i filtri</a> per&nbsp;imparare a&nbsp;scrivere le tue regole per i filtri."
     },
     "options_userfilter_import": {
         "message": "Importa"
@@ -465,7 +471,7 @@
         "message": "6 estensioni di blocco contenuti"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari limita il numero massimo di regole di blocco dei contenuti a %s per estensione. Questo non è sufficiente per gestire tutti i tipi di blocchi AdGuard di annunci e tracciatori. Ecco perché forniamo 6 estensioni, portando così il limite a %s."
+        "message": "Safari limita il numero massimo di regole di blocco dei contenuti a %s per estensione. Questo non è sufficiente per gestire tutti i tipi di annunci e tracciatori bloccati da AdGuard. Ecco perché forniamo 6 estensioni, portando così il limite a %s."
     },
     "onboarding_safari_btn": {
         "message": "Apri preferenze"
@@ -576,7 +582,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Il limite di %s regole attive è stato superato. Ti suggeriamo di disattivare le regole non necessarie per un corretto funzionamento dell'applicazione.<br/>Regole attive al momento: %s (regole disattivate: $2)"
+        "message": "Il limite di %s regole attive è stato superato. Si prega di disattivare le regole non necessarie per il funzionamento corretto dell'applicazione.<br/>Regole attive al momento: %s (regole disattivate: $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Disattivato nel Safari"

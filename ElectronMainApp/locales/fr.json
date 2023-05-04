@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "Foire aux questions"
     },
+    "options_support_feature_request_title": {
+        "message": "Soumettre une demande de fonctionnalité"
+    },
+    "options_support_feature_request_description": {
+        "message": "Suggérer des façons d'améliorer l'application"
+    },
     "options_support_bug_report_title": {
         "message": "Signaler un bogue"
     },
@@ -108,7 +114,7 @@
         "message": "Général"
     },
     "options_general_desc": {
-        "message": "AdGuard pour Safari est un logiciel gratuit à source ouverte. Nous accueillons volontiers vos avis et contributions. Si vous souhaitez reporter une bogue ou suggerer une nouvelle fonctionnalité, veuiller accéder à <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'> notre compte Github</a>."
+        "message": "AdGuard pour Safari est un logiciel gratuit et open source. Nous accueillons volontiers vos avis et contributions. Si vous souhaitez signaler un bug ou suggérer une nouvelle fonctionnalité, veuillez accéder à <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'> notre dépôt GitHub</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Autoriser les annonces de recherche et l'auto-promotion des sites Web"
@@ -270,7 +276,7 @@
         "message": "Règles d'utilisateur"
     },
     "options_userfilter_no_user_rules": {
-        "message": "La liste est vide"
+        "message": "Aucune règle utilisateur"
     },
     "options_userfilter_info_single": {
         "message": "%s règle d’utilisateur"
@@ -279,7 +285,7 @@
         "message": "%s règles d’utilisateur"
     },
     "options_userfilter_description": {
-        "message": "Vous pouvez ajouter vos propres règles ici. Cette option est&nbsp;recommandée pour les utilisateurs avancés familiers avec le langage HTML / CSS. Lisez le <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>tutoriel</a> pour&nbsp;apprendre à&nbsp;écrire vos propres règles."
+        "message": "Vous pouvez ajouter vos propres règles ici. Cette option est&nbsp;recommandée pour les utilisateurs avancés familiers avec le langage HTML/CSS. Lisez le <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>manuel</a> pour&nbsp;apprendre à&nbsp;écrire vos propres règles de filtrage."
     },
     "options_userfilter_import": {
         "message": "Importer"
@@ -336,10 +342,10 @@
         "message": "Alerte"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "Trop de filtres activés. Safari ne peut pas utiliser plus de %s règles la fois."
+        "message": "Trop de filtres activés. Safari ne peut pas utiliser plus de %s règles dans un groupe."
     },
     "options_content_blocker_overlimit": {
-        "message": "Trop de filtres activés. Safari ne peut pas utiliser plus de %s règles la fois."
+        "message": "Trop de filtres activés. Safari ne peut pas utiliser plus de %s règles dans un groupe."
     },
     "options_filters_list_search_placeholder": {
         "message": "Rechercher"
@@ -405,7 +411,7 @@
         "message": "Bloqueurs de contenu"
     },
     "options_content_blockers_desc": {
-        "message": "Bloqueurs de pubs activés : %s sur 6 (chacun peut contenir jusqu'à %s règles)"
+        "message": "Bloqueurs de publicité activés : %s sur 6 (chacun peut contenir jusqu'à %s règles)"
     },
     "options_content_blockers_disabled_desc": {
         "message": "Les bloqueurs de pubs sont désactivés"
@@ -465,7 +471,7 @@
         "message": "6 extensions de blocage de contenu"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari limite le nombre maximal de règles de blocage de contenu à %s par extension. Cela ne suffit pas pour gérer toutes sortes de publicités et de pisteurs bloqués par AdGuard. C’est pourquoi nous proposons 6 extensions, augmentant ainsi cette limite à %s."
+        "message": "Safari limite le nombre maximal de règles de blocage de contenu à %s par extension. Cela ne suffit pas pour gérer toutes sortes de publicités et de traqueurs bloqués par AdGuard. C’est pourquoi nous proposons 6 extensions, augmentant ainsi cette limite à %s."
     },
     "onboarding_safari_btn": {
         "message": "Ouvrir les préférences"
@@ -552,22 +558,22 @@
         "message": "Veuillez noter que les filtres obsolètes diminuent la qualité de la protection, c'est donc important de les maintenir à jour."
     },
     "options_cb_general_title": {
-        "message": "AdGuard General"
+        "message": "AdGuard Général"
     },
     "options_cb_privacy_title": {
-        "message": "AdGuard Privacy"
+        "message": "AdGuard Confidentialité"
     },
     "options_cb_social_title": {
         "message": "AdGuard Social"
     },
     "options_cb_security_title": {
-        "message": "AdGuard Security"
+        "message": "AdGuard Securité"
     },
     "options_cb_other_title": {
         "message": "AdGuard Autres"
     },
     "options_cb_custom_title": {
-        "message": "AdGuard Custom"
+        "message": "AdGuard Personnalisé"
     },
     "options_cb_rules_info": {
         "message": {
@@ -576,7 +582,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "La limite de %s règles est dépassée. Veuillez désactiver les règles qui ne sont pas nécessaires pour le fonctionnement correct de l'application.<br/>Règles activées en ce moment : %s (règles désactivées: $2)"
+        "message": "La limite de %s règles est dépassée. Veuillez désactiver les règles qui ne sont pas nécessaires pour le fonctionnement correct de l'application.<br/>Règles activées en ce moment : %s (règles désactivées : $2)"
     },
     "options_cb_disabled_warning": {
         "message": "Désactivé dans Safari"

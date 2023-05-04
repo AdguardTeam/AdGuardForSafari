@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "常见问题解答"
     },
+    "options_support_feature_request_title": {
+        "message": "发送功能请求"
+    },
+    "options_support_feature_request_description": {
+        "message": "提出改进应用程序的方法"
+    },
     "options_support_bug_report_title": {
         "message": "报告错误"
     },
@@ -108,16 +114,16 @@
         "message": "常规"
     },
     "options_general_desc": {
-        "message": "AdGuard for Safari 是一款免费开源的软件。我们欢迎您反馈和贡献。如您要报告错误或请求新特性，请转到 <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>Github 以报告给我们</a>。"
+        "message": "适用于 Safari 的 AdGuard 是一款免费开源的软件。我们欢迎用户的反馈和贡献。如要报告错误或请求新功能，请转到 <a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>Github</a>。"
     },
     "options_allow_acceptable_ads": {
         "message": "允许搜索广告和网站自宣传"
     },
     "options_export_settings": {
-        "message": "Export settings"
+        "message": "导出设置"
     },
     "options_import_settings": {
-        "message": "Import settings"
+        "message": "导入设置"
     },
     "options_export_logs": {
         "message": "导出日志"
@@ -279,7 +285,7 @@
         "message": "%s 条用户规则"
     },
     "options_userfilter_description": {
-        "message": "你可在此处添加自己的规则&nbsp。给熟悉HTML/CSSp的高级用户推荐使用该选项。对&nbsp可以阅读<a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>过滤规则教程</a> ; 学习&nbsp;如何编写自己的规则"
+        "message": "用户可在此处添加自己的规则。给熟悉 HTML/CSS&nbsp; 的高级用户推荐使用该选项。可以阅读<a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>过滤规则教程</a>了解&nbsp;如何&nbsp;编写自己的规则。"
     },
     "options_userfilter_import": {
         "message": "导入"
@@ -336,10 +342,10 @@
         "message": "警告"
     },
     "notification_content_blocker_overlimit_desc": {
-        "message": "开启的过滤器过多。Safari 最多仅可使用 %s条规则。"
+        "message": "开启的过滤器过多。Safari 最多仅可使用 %s 条规则。"
     },
     "options_content_blocker_overlimit": {
-        "message": "开启的过滤器过多。Safari 最多仅可使用 %s条规则。"
+        "message": "开启的过滤器过多。Safari 最多仅可使用 %s 条规则。"
     },
     "options_filters_list_search_placeholder": {
         "message": "搜索"
@@ -405,7 +411,7 @@
         "message": "内容拦截"
     },
     "options_content_blockers_desc": {
-        "message": "已启用广告过滤器：6个当中的 %s（每个最高可包含 %s 条规则）"
+        "message": "已启用广告过滤器：%s/6（每个最高可包含%s条规则）"
     },
     "options_content_blockers_disabled_desc": {
         "message": "广告过滤器已禁用"
@@ -465,7 +471,7 @@
         "message": "6 个内容拦截扩展"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari 将每个扩展的内容阻止规则的最大数量限制为%s条。这并不足以处理 AdGuard 拦截的各种各样的广告和跟踪器。这就是为什么我们提供了6个扩展，从而将限制增加到 %s"
+        "message": "Safari 将每个扩展的内容阻止规则的最大数量限制为%s条。这并不足以处理 AdGuard 拦截的各种各样的广告和跟踪器。这就是为什么我们提供了6个扩展，从而将限制增加到%s万。"
     },
     "onboarding_safari_btn": {
         "message": "打开首选项"
@@ -507,7 +513,7 @@
         "message": "在启动时运行AdGuard for Safari"
     },
     "options_verbose_logging": {
-        "message": "Verbose logging"
+        "message": "详细日志记录"
     },
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
@@ -576,7 +582,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "超过%s条规则的限制。 请禁用不必要的规则来使应用正常工作。<br/>此时已启用的规则： %s （已禁用规则： $2）"
+        "message": "已超过 %s 条规则的限制。 请禁用不必要的规则来使应用正常工作。<br/>此时已启用的规则：%s （已禁用规则： $2）"
     },
     "options_cb_disabled_warning": {
         "message": "Safari中不可用"

@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "Često postavljena pitanja"
     },
+    "options_support_feature_request_title": {
+        "message": "Pošalji zahtjev za značajku"
+    },
+    "options_support_feature_request_description": {
+        "message": "Predložite načine za poboljšanje aplikacije"
+    },
     "options_support_bug_report_title": {
         "message": "Prijavite pogrešku"
     },
@@ -108,7 +114,7 @@
         "message": "Općenito"
     },
     "options_general_desc": {
-        "message": "AdGuard za Safari je besplatni program, otvorenog kôda. Pozdravljamo vaše povratne informacije i doprinose. Ako želite prijaviti pogrešku ili zatražiti značajku, idite na adresu<a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>našeg GitHub repozitorija</a>."
+        "message": "AdGuard za Safari je besplatni program, otvorenog kôda. Pozdravljamo vaše povratne informacije i doprinose. Ako želite prijaviti pogrešku ili zatražiti značajku, idite na adresu<a target='_blank' href='https://adguard.com/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>našeg GitHub repozitorija</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Omogućite oglase kod pretraživača i kod samopromocijskih oglasa web stranica"
@@ -270,7 +276,7 @@
         "message": "Korisnička pravila"
     },
     "options_userfilter_no_user_rules": {
-        "message": "Popis je prazan"
+        "message": "Bez korisničkih pravila"
     },
     "options_userfilter_info_single": {
         "message": "%s korisničko pravilo"
@@ -279,7 +285,7 @@
         "message": "%s korisničkih pravila"
     },
     "options_userfilter_description": {
-        "message": "Ovdje možete dodati svoja pravila. Ova opcija je&nbsp;preporučena naprednim korisnicima upoznatim s HTML/CSS. Pročitajte <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>upute pravila filtriranja</a> kako&nbsp;biste naučili&nbsp;pisati vlastita pravila filtriranja."
+        "message": "Ovdje možete dodati svoja pravila. Ova opcija je&nbsp;preporučena naprednim korisnicima upoznatim s HTML/CSS. Pročitajte <a class='spl-user-descr-link' href='https://adguard.com/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>upute pravila filtriranja</a> kako&nbsp;biste naučili&nbsp;pisati vlastita pravila filtriranja."
     },
     "options_userfilter_import": {
         "message": "Uvoz"
@@ -465,7 +471,7 @@
         "message": "6 proširenja za blokiranje sadržaja"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari ograničava maksimalni broj pravila za blokiranje sadržaja na 50.000 po proširenju. Ovo nije dovoljno za rukovanje svim vrstama oglasa i pratitelja koje Adguard blokira. Zato pružamo 6 proširenja, čime se to ograničenje povećava na %s."
+        "message": "Safari ograničava maksimalni broj pravila za blokiranje sadržaja na %s po proširenju. Ovo nije dovoljno za rukovanje svim vrstama oglasa i pratitelja koje Adguard blokira. Zato pružamo 6 proširenja, čime se to ograničenje povećava na %s."
     },
     "onboarding_safari_btn": {
         "message": "Otvori postavke"
