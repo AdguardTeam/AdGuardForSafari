@@ -7232,9 +7232,9 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-"safari-converter-lib@git+https://github.com/AdguardTeam/SafariConverterLib.git#v2.0.34":
-  version "2.0.34"
-  resolved "git+https://github.com/AdguardTeam/SafariConverterLib.git#5729b8af32b27dedb036c23b5b9b7e2edb8695de"
+"safari-converter-lib@git+https://github.com/AdguardTeam/SafariConverterLib.git#v2.0.39":
+  version "2.0.39"
+  resolved "git+https://github.com/AdguardTeam/SafariConverterLib.git#c1673c955ff787c4acf3b0082f74fdac0c9bbffd"
 
 safari-ext@./safari-ext:
   version "1.0.38"
