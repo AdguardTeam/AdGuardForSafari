@@ -273,7 +273,7 @@
         "message": "Інвертаваць белы спіс<span class='sp-table-row-info'>Адблакаваць рэкламу на ўсіх сайтах, <i>апроч</i> дададзеных у белы спіс</span>"
     },
     "options_userfilter": {
-        "message": "Карыстацкія правілы"
+        "message": "Карыстальніцкія правілы"
     },
     "options_userfilter_no_user_rules": {
         "message": "Няма правіл карыстальніка"
@@ -285,7 +285,7 @@
         "message": "%s карыстальніцкія правілы"
     },
     "options_userfilter_description": {
-        "message": "Вы можаце дадаваць свае ўласныя правілы фільтрацыі ў&nbsp;Карыстацкія правілы. Рэкамендуецца толькі для дасведчаных карыстачоў, знаёмых з&nbsp;HTML/CSS. Перайдзіце па&nbsp;<a class='spl-user-descr-link' href='https://adguard.com/filterrules.html?utm_source=extension&aid=16593' target='_blank'>спасылцы</a>, каб даведацца, як складаць правілы фільтрацыі."
+        "message": "Вы можаце дадаваць свае ўласныя правілы фільтрацыі. Рэкамендуецца толькі для дасведчаных карыстальнікаў, знаёмых з HTML/CSS. Прачытайце <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>дапаможнік па правілах фільтрацыі</a>, каб навучыцца пісаць уласныя правілы фільтрацыі."
     },
     "options_userfilter_import": {
         "message": "Імпарт"
@@ -486,10 +486,10 @@
         "message": "Версія %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "Карыстацкія правілы абноўлены"
+        "message": "Карыстальніцкія правілы абноўлены"
     },
     "notification_user_filter_updated_desc": {
-        "message": "Новае правіла было дададзена ў Карыстацкія правілы:"
+        "message": "Новае правіла было дададзена ў карыстальніцкія правілы:"
     },
     "options_filters_update_period": {
         "message": "Інтэрвал абнаўлення"

@@ -1,8 +1,8 @@
-! Checksum: +tXoa32KtesG5JcJd6LC9A
+! Checksum: cCOfEjZyKmwjS/CF5iht1g
 ! Title: AdGuard URL Tracking filter
 ! Description: Filter that enhances privacy by removing tracking parameters from URLs.
-! Version: 2.0.5.82
-! TimeUpdated: 2023-05-03T10:30:57+00:00
+! Version: 2.0.6.45
+! TimeUpdated: 2023-07-12T21:30:55+07:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -16,6 +16,16 @@
 ! Ideally, supply a link to the document that explains how this parameter is used.
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/155405
+! Used by shareasale.com
+! Click tracking. Probably used by malware
+! https://github.com/AdguardTeam/AdguardFilters/issues/154659
+! https://github.com/AdguardTeam/AdguardFilters/issues/152387
+! Sovrn (VigLink) tracking
+! impact.com
+! IO Technologies
+! Identify a period of time for which unique visitors use our website
+! Counts sessions of unique visitors
 ! https://seksohub.com/video/family-strokes-adria-rae-familystrokes-mothers-day-threesome-step-mom-07c320d88b275hp?asgtbndr=1
 ! https://help.zeydoo.com/en/articles/4362736-how-to-setup-zeydoo-s2s-conversion-tracking
 ! Tradedoubler
@@ -92,6 +102,60 @@
 !
 !
 !
+! doda.jp trackparams
+! https://www.hatarako.net/fukuoka/?prelink=allmaplink
+! https://github.com/AdguardTeam/AdguardFilters/issues/156147
+! https://github.com/AdguardTeam/AdguardFilters/issues/155994
+! https://github.com/AdguardTeam/AdguardFilters/issues/155766
+! https://github.com/AdguardTeam/AdguardFilters/issues/155138
+! https://github.com/AdguardTeam/AdguardFilters/issues/155405
+! https://github.com/AdguardTeam/AdguardFilters/issues/155149
+! https://github.com/AdguardTeam/AdguardFilters/issues/155063
+! https://github.com/AdguardTeam/AdguardFilters/issues/155096
+! https://github.com/AdguardTeam/AdguardFilters/issues/155071
+! https://github.com/AdguardTeam/AdguardFilters/issues/155045
+! https://github.com/AdguardTeam/AdguardFilters/issues/154947
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6306117
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6306026
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6252773
+! https://github.com/AdguardTeam/AdguardFilters/issues/154325
+! https://github.com/AdguardTeam/AdguardFilters/issues/153955
+! https://github.com/AdguardTeam/AdguardFilters/issues/154223
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6213496
+! https://github.com/AdguardTeam/AdguardFilters/issues/154057
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6185764
+! https://github.com/AdguardTeam/AdguardFilters/issues/153546
+! https://github.com/AdguardTeam/AdguardFilters/issues/153536
+! https://github.com/AdguardTeam/AdguardFilters/issues/153222
+! https://github.com/AdguardTeam/AdguardFilters/issues/153288
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6133356
+! Naver newsstand - https://newsstand.naver.com/
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6129946
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6097514
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6077178
+! https://github.com/uBlockOrigin/uBlock-issues/discussions/2683
+! https://github.com/AdguardTeam/AdguardFilters/issues/152614
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6040753
+! https://github.com/AdguardTeam/AdguardFilters/issues/152218
+! https://github.com/AdguardTeam/AdguardFilters/issues/152313
+! https://github.com/AdguardTeam/AdguardFilters/issues/151756
+! https://github.com/AdguardTeam/AdguardFilters/pull/152161
+! https://github.com/AdguardTeam/AdguardFilters/issues/151413
+! https://dietpartner.jp/?from=common from popup on the page
+! https://github.com/AdguardTeam/AdguardFilters/issues/151234
+! https://github.com/AdguardTeam/AdguardFilters/issues/150811
+! https://github.com/AdguardTeam/AdguardFilters/issues/151197
+! https://github.com/AdguardTeam/AdguardFilters/issues/151002
+! https://github.com/AdguardTeam/AdguardFilters/issues/151193
+! https://github.com/AdguardTeam/AdguardFilters/issues/150965
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-5898232
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-5886900
+! https://github.com/AdguardTeam/AdguardFilters/issues/150733
+! https://github.com/AdguardTeam/AdguardFilters/issues/150639
+! https://github.com/AdguardTeam/AdguardFilters/issues/149911
+! https://github.com/AdguardTeam/AdguardFilters/issues/150086
+! https://github.com/AdguardTeam/AdguardFilters/issues/150409
+! https://github.com/AdguardTeam/AdguardFilters/issues/149710
 ! Skimlinks
 ! https://developers.skimlinks.com/link.html
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148859
@@ -231,6 +295,7 @@
 ! https://github.com/AdguardTeam/AdguardFilters/issues/115977
 ! https://developer.atlassian.com/developer-guide/client-identification/
 ! https://www.so-net.ne.jp/access/hikari/minico/ad/?SmRcid=snt_snt_top_gate
+! https://github.com/AdguardTeam/AdguardFilters/issues/150742
 ! https://github.com/AdguardTeam/AdguardFilters/issues/113231#issuecomment-1091899519
 ! popin.cc widgets
 ! cancanlah.com
@@ -379,6 +444,8 @@
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/110571 - disable rule if issue happens again: broke adding article to basket when viewing all offers
 !
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-5867802
+!
 ! https://github.com/AdguardTeam/AdguardFilters/issues/83138
 ! https://github.com/AdguardTeam/AdguardFilters/issues/83136
 ! Prevent tracking when request is unblocked
@@ -413,6 +480,7 @@
 !
 ! Deezer
 ! https://github.com/AdguardTeam/AdguardFilters/pull/119475
+! GamesPlanet
 !
 ! Special rules for AdGuard websites' test pages. The only purpose of these
 ! rules is to make test pages work so that users could verify that AdGuard
@@ -430,6 +498,7 @@ adguard.com,adguard.app##.hello_from_adguard_tracking_params
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/152716
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148757
 ! https://github.com/AdguardTeam/AdguardFilters/issues/144144
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-4621746
