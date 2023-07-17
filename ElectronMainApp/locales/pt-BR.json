@@ -120,7 +120,7 @@
         "message": "Permitir anúncios em pesquisa e autopromoção de sites"
     },
     "options_export_settings": {
-        "message": "Export settings"
+        "message": "Exportar configurações"
     },
     "options_import_settings": {
         "message": "Importar configurações"
@@ -513,10 +513,10 @@
         "message": "Executar o AdGuard no Logon"
     },
     "options_verbose_logging": {
-        "message": "Verbose logging"
+        "message": "Registo detalhado"
     },
     "options_verbose_logging_desc": {
-        "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
+        "message": "Se o registro detalhado estiver ativado, a extensão AdGuard para Safari obterá informações adicionais no console do navegador"
     },
     "options_enable_hardware_acceleration": {
         "message": "Habilitar aceleração de hardware"
