@@ -7232,9 +7232,10 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-"safari-converter-lib@git+https://github.com/AdguardTeam/SafariConverterLib.git#v2.0.39":
-  version "2.0.39"
-  resolved "git+https://github.com/AdguardTeam/SafariConverterLib.git#c1673c955ff787c4acf3b0082f74fdac0c9bbffd"
+"safari-converter-lib@git+https://github.com/AdguardTeam/SafariConverterLib.git#v2.0.40":
+  version "2.0.41"
+  uid f4297fd6b82a8de2268f3281552401e1bde5c59b
+  resolved "git+https://github.com/AdguardTeam/SafariConverterLib.git#f4297fd6b82a8de2268f3281552401e1bde5c59b"
 
 safari-ext@./safari-ext:
   version "1.0.38"
@@ -8339,9 +8340,9 @@ wide-align@^1.1.5:
     string-width "^1.0.2 || 2 || 3 || 4"
 
 word-wrap@^1.2.3, word-wrap@~1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
-  integrity sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.4.tgz#cb4b50ec9aca570abd1f52f33cd45b6c61739a9f"
+  integrity sha512-2V81OA4ugVo5pRo46hAoD2ivUJx8jXmWXfUkY4KFNw0hEptvN0QfH3K4nHiwzGeKl5rFKedV48QVoqYavy4YpA==
 
 wrap-ansi@^6.2.0:
   version "6.2.0"
