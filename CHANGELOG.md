@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Updated Scriptlets to v1.9.57
+- Updated Scriptlets to v1.9.62
 
 
 ## [1.11.14]
