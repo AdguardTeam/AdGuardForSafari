@@ -21,7 +21,7 @@ module.exports = (() => {
         module_root: moduleRoot,
     });
 
-    const ADVANCED_BLOCKING_BUNDLE_ID = 'com.adguard.safari.AdGuard.AdvancedBlocking';
+    const ADVANCED_BLOCKING_ID = 'advancedBlocking';
     const ICON_EXTENSION_BUNDLE_ID = 'com.adguard.safari.AdGuard.Extension';
 
     const queue = [];
@@ -135,7 +135,7 @@ module.exports = (() => {
     const setContentBlockingJsonAsync = async (bundleId, jsonString) => {
         return new Promise((resolve, reject) => {
             try {
-                if (bundleId === ADVANCED_BLOCKING_BUNDLE_ID) {
+                if (bundleId === ADVANCED_BLOCKING_ID) {
                     addon.setAdvancedBlockingJson(jsonString, resolve);
                 } else {
                     addon.setContentBlockingJson(bundleId, jsonString, resolve);
@@ -231,9 +231,7 @@ module.exports = (() => {
      * @param callback {*}
      */
     const getExtensionState = (bundleId, callback) => {
-        if (bundleId === ADVANCED_BLOCKING_BUNDLE_ID) {
-            addon.extensionAdvancedBlockingState(callback);
-        } else if (bundleId === ICON_EXTENSION_BUNDLE_ID) {
+        if (bundleId === ICON_EXTENSION_BUNDLE_ID) {
             addon.extensionSafariIconState(callback);
         } else {
             addon.getExtensionContentBlockerState(bundleId, callback);

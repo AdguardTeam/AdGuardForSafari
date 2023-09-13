@@ -1,26 +1,20 @@
 //
-//  SafariExtensionHandler.swift
-//  AdvancedBlocking
+//  AdvancedBlockerHandler.swift
 //
-//  Created by Dimitry Kolyshev on 30.01.2019.
 //  Copyright © 2020 AdGuard Software Ltd. All rights reserved.
 //
 
 import SafariServices
 
-class SafariExtensionHandler: SFSafariExtensionHandler {
+@objc
+final class AdvancedBlockerHandler: NSObject {
 
-    private var contentBlockerController: ContentBlockerController? = nil;
-
-    override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {
+    @objc
+    static func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {
         // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").
 
-        if (self.contentBlockerController == nil) {
-            self.contentBlockerController = ContentBlockerController.shared;
-        }
-        
         NSLog("AG: The extension received a message (%@)", messageName);
-        
+
         // Content script requests scripts and css for current page
         if (messageName == "getAdvancedBlockingData") {
             do {
@@ -37,9 +31,10 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
                     return;
                 }
                 
+
                 let data: [String : Any]? = [
                     "url": url,
-                    "data": try self.contentBlockerController!.getData(url: pageUrl!),
+                    "data": try ContentBlockerController.shared.getData(url: pageUrl!),
                     "verbose": self.isVerboseLoggingEnabled()
                 ];
                 page.dispatchMessageToScript(withName: "advancedBlockingData", userInfo: data);
@@ -50,7 +45,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
     }
 
     // Returns true if verbose logging setting is enabled
-    private func isVerboseLoggingEnabled() -> Bool {
+    static private func isVerboseLoggingEnabled() -> Bool {
         return AESharedResources.sharedDefaults.bool(forKey: AEDefaultsVerboseLogging);
     }
 }

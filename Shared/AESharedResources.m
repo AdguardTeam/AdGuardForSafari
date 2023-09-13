@@ -125,9 +125,6 @@ static AESListenerBlock _onAllExtensionEnabledRequestBlock;
     return AG_EXTENSION_BUNDLEID;
 }
 
-+ (NSString *)advancedBlockingBundleId {
-    return AG_ADVANCED_BLOCKING_BUNDLEID;
-}
 + (NSString *)blockerBundleId {
     return AG_BLOCKER_BUNDLEID;
 }

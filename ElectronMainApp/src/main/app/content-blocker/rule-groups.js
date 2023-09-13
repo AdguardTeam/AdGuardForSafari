@@ -80,7 +80,6 @@ module.exports = (function () {
         security: SafariExtensionBundles.SECURITY,
         other: SafariExtensionBundles.OTHER,
         custom: SafariExtensionBundles.CUSTOM,
-        advancedBlocking: SafariExtensionBundles.ADVANCED_BLOCKING,
     };
 
     /**

@@ -1,6 +1,6 @@
-/* eslint-disable-next-line import/no-unresolved */
 const { jsonFromRules, getConverterVersion } = require('safari-converter-lib');
 const safariExt = require('safari-ext');
+
 const { resourcePath } = require('../../../utils/app-pack');
 const listeners = require('../../notifier');
 const events = require('../../events');
@@ -13,6 +13,7 @@ const { groupRules, rulesGroupsBundles, filterGroupsBundles } = require('./rule-
 
 const CONVERTER_TOOL_PATH = '../libs/ConverterTool';
 const DEFAULT_OS_VERSION = 11;
+const ADVANCED_BLOCKING_ID = 'advancedBlocking';
 
 /**
  * Safari Content Blocker Adapter
@@ -151,7 +152,7 @@ module.exports = (function () {
         }
 
         setSafariContentBlocker(
-            rulesGroupsBundles['advancedBlocking'],
+            ADVANCED_BLOCKING_ID,
             advancedBlocking,
             { rulesCount: result ? result.totalConvertedCount : 0 }
         );

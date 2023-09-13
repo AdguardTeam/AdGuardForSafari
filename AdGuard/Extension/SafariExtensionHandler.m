@@ -10,6 +10,7 @@
 #import "SafariExtensionViewController.h"
 #import "ACLang.h"
 #import "AESharedResources.h"
+#import "AdGuardForSafariExtension-Swift.h"
 
 @interface SafariExtensionHandler ()
 
@@ -98,6 +99,10 @@ static BOOL _mainAppReady;
             [AESharedResources setCustomFilterInfo:userInfo completion:^{
                 [AESharedResources notifyCustomFilterInfoSet];
             }];
+        }
+        else {
+            DDLogInfo(@"AG: Handling by advanced blocker handler");
+            [AdvancedBlockerHandler messageReceivedWithName:messageName from:page userInfo:userInfo];
         }
     }
 }

@@ -61,38 +61,36 @@
 
 + (void)performAllExtensionEnabledRequest {
     DDLogInfo(@"AG: Checking enabled extensions...");
-    [self checkExtension:AESharedResources.advancedBlockingBundleId // Advanced
-    ifSuccess:^{
-        [self checkBlocker:AESharedResources.blockerBundleId // Base blocker
-        ifSuccess:^{
-            [self checkBlocker:AESharedResources.blockerPrivacyBundleId // Privacy blocker
-            ifSuccess:^{
-                [self checkBlocker:AESharedResources.blockerSecurityBundleId // Security blocker
-                ifSuccess:^{
-                    [self checkBlocker:AESharedResources.blockerOtherBundleId // Other blocker
-                    ifSuccess:^{
-                        [self checkBlocker:AESharedResources.blockerCustomBundleId // Custom blocker
-                        ifSuccess:^{
-                            [self checkBlocker:AESharedResources.blockerSocialBundleId // Social blocker
-                            ifSuccess:^{
-                                //Save good result of the checking
-                                [AESharedResources.sharedDefaults
-                                 setBool:YES
-                                 forKey:AEDefaultsAllExtensionsEnabled];
-                                [AESharedResources synchronizeSharedDefaults];
-                                [AESharedResources responseAllExtensionEnabled];
-                                DDLogInfo(@"AG: Checking enabled extensions finished with success.");
-                            }];
-
+    
+    [self checkBlocker:AESharedResources.blockerBundleId // Base blocker
+             ifSuccess:^{
+        [self checkBlocker:AESharedResources.blockerPrivacyBundleId // Privacy blocker
+                 ifSuccess:^{
+            [self checkBlocker:AESharedResources.blockerSecurityBundleId // Security blocker
+                     ifSuccess:^{
+                [self checkBlocker:AESharedResources.blockerOtherBundleId // Other blocker
+                         ifSuccess:^{
+                    [self checkBlocker:AESharedResources.blockerCustomBundleId // Custom blocker
+                             ifSuccess:^{
+                        [self checkBlocker:AESharedResources.blockerSocialBundleId // Social blocker
+                                 ifSuccess:^{
+                            //Save good result of the checking
+                            [AESharedResources.sharedDefaults
+                             setBool:YES
+                             forKey:AEDefaultsAllExtensionsEnabled];
+                            [AESharedResources synchronizeSharedDefaults];
+                            [AESharedResources responseAllExtensionEnabled];
+                            DDLogInfo(@"AG: Checking enabled extensions finished with success.");
                         }];
-
+                        
                     }];
-
+                    
                 }];
-
+                
             }];
-
+            
         }];
+        
     }];
 }
 

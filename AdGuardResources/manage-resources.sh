@@ -3,10 +3,10 @@
 set -e
 
 # copy scriptlets.js
-cp node_modules/@adguard/scriptlets/dist/scriptlets.js ../AdGuard/AdvancedBlocking
+cp node_modules/@adguard/scriptlets/dist/scriptlets.js ../AdGuard/Extension
 
 # copy extended-css.js
-cp node_modules/@adguard/extended-css/dist/extended-css.js ../AdGuard/AdvancedBlocking
+cp node_modules/@adguard/extended-css/dist/extended-css.js ../AdGuard/Extension
 
 # copy assistant.embedded.js
 cp node_modules/@adguard/assistant/dist/self.assistant.js ../AdGuard/Extension/assistant.embedded.js

@@ -55,11 +55,6 @@ extern NSString * const AEDefaultsAllowlistInverted;
  Bundle id of the Safari app extension.
  */
 @property (class, readonly) NSString *extensionBundleId;
-
-/**
- Bundle id of Advanced Blocking Safari app extension.
- */
-@property (class, readonly) NSString *advancedBlockingBundleId;
 /**
  BundleId of the Privacy content blocker extension.
  */
