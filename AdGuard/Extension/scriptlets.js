@@ -1,6 +1,7 @@
+
 /**
  * AdGuard Scriptlets
- * Version 1.9.62
+ * Version 1.9.72
  */
 
 (function () {
@@ -1574,6 +1575,17 @@
           getWildcardPropertyInChain(item, nextProp, lookThrough, output);
         });
       }
+
+      // If base is an Array check elements in array
+      // https://github.com/AdguardTeam/Scriptlets/issues/345
+      if (Array.isArray(base)) {
+        base.forEach(function (key) {
+          var nextBase = key;
+          if (nextBase !== undefined) {
+            getWildcardPropertyInChain(nextBase, chain, lookThrough, output);
+          }
+        });
+      }
       var nextBase = base[prop];
       chain = chain.slice(pos + 1);
       if (nextBase !== undefined) {
@@ -1615,6 +1627,45 @@
     };
 
     /**
+     * Returns the native `RegExp.prototype.test` method if it exists.
+     *
+     * @returns The native `RegExp.prototype.test` method.
+     * @throws If `RegExp.prototype.test` is not a function.
+     */
+    var getNativeRegexpTest = function getNativeRegexpTest() {
+      var descriptor = Object.getOwnPropertyDescriptor(RegExp.prototype, 'test');
+      var nativeRegexTest = descriptor === null || descriptor === void 0 ? void 0 : descriptor.value;
+      if (descriptor && typeof descriptor.value === 'function') {
+        return nativeRegexTest;
+      }
+      throw new Error('RegExp.prototype.test is not a function');
+    };
+
+    /**
+     * Checks if the stackTrace contains stackRegexp
+     * https://github.com/AdguardTeam/Scriptlets/issues/82
+     *
+     * @param stackMatch - input stack value to match
+     * @param stackTrace - script error stack trace
+     * @returns if the stackTrace contains stackRegexp
+     */
+    var matchStackTrace = function matchStackTrace(stackMatch, stackTrace) {
+      if (!stackMatch || stackMatch === '') {
+        return true;
+      }
+      if (shouldAbortInlineOrInjectedScript(stackMatch, stackTrace)) {
+        return true;
+      }
+      var stackRegexp = toRegExp(stackMatch);
+      var refinedStackTrace = stackTrace.split('\n').slice(2) // get rid of our own functions in the stack trace
+      .map(function (line) {
+        return line.trim();
+      }) // trim the lines
+      .join('\n');
+      return getNativeRegexpTest().call(stackRegexp, refinedStackTrace);
+    };
+
+    /**
      * Checks if prunning is required
      *
      * @param source required, scriptlet properties
@@ -1624,7 +1675,7 @@
      * which must be all present for the pruning to occur
      * @returns true if prunning is required
      */
-    function isPruningNeeded(source, root, prunePaths, requiredPaths) {
+    function isPruningNeeded(source, root, prunePaths, requiredPaths, stack) {
       if (!root) {
         return false;
       }
@@ -1636,13 +1687,17 @@
         var matchRegex = toRegExp(requiredPaths.join(''));
         var shouldLog = matchRegex.test(rootString);
         if (shouldLog) {
-          logMessage(source, "".concat(window.location.hostname, "\n").concat(JSON.stringify(root, null, 2)), true);
+          logMessage(source, "".concat(window.location.hostname, "\n").concat(JSON.stringify(root, null, 2), "\nStack trace:\n").concat(new Error().stack), true);
           if (root && typeof root === 'object') {
             logMessage(source, root, true, false);
           }
           shouldProcess = false;
           return shouldProcess;
         }
+      }
+      if (stack && !matchStackTrace(stack, new Error().stack || '')) {
+        shouldProcess = false;
+        return shouldProcess;
       }
       var wildcardSymbols = ['.*.', '*.', '.*', '.[].', '[].', '.[]'];
       var _loop = function _loop() {
@@ -1654,6 +1709,15 @@
 
         // if the path has wildcard, getPropertyInChain should 'look through' chain props
         var details = getWildcardPropertyInChain(root, requiredPath, hasWildcard);
+
+        // Do not prune if details is an empty Array
+        // https://github.com/AdguardTeam/Scriptlets/issues/345
+        if (!details.length) {
+          shouldProcess = false;
+          return {
+            v: shouldProcess
+          };
+        }
 
         // start value of 'shouldProcess' due to checking below
         shouldProcess = !hasWildcard;
@@ -1670,7 +1734,8 @@
         }
       };
       for (var i = 0; i < requiredPaths.length; i += 1) {
-        _loop();
+        var _ret = _loop();
+        if (typeof _ret === "object") return _ret.v;
       }
       return shouldProcess;
     }
@@ -1685,16 +1750,16 @@
      * which must be all present for the pruning to occur
      * @returns pruned root
      */
-    var jsonPruner = function jsonPruner(source, root, prunePaths, requiredPaths) {
+    var jsonPruner = function jsonPruner(source, root, prunePaths, requiredPaths, stack) {
       if (prunePaths.length === 0 && requiredPaths.length === 0) {
-        logMessage(source, "".concat(window.location.hostname, "\n").concat(JSON.stringify(root, null, 2)), true);
+        logMessage(source, "".concat(window.location.hostname, "\n").concat(JSON.stringify(root, null, 2), "\nStack trace:\n").concat(new Error().stack), true);
         if (root && typeof root === 'object') {
           logMessage(source, root, true, false);
         }
         return root;
       }
       try {
-        if (isPruningNeeded(source, root, prunePaths, requiredPaths) === false) {
+        if (isPruningNeeded(source, root, prunePaths, requiredPaths, stack) === false) {
           return root;
         }
 
@@ -1713,21 +1778,6 @@
         logMessage(source, e);
       }
       return root;
-    };
-
-    /**
-     * Returns the native `RegExp.prototype.test` method if it exists.
-     *
-     * @returns The native `RegExp.prototype.test` method.
-     * @throws If `RegExp.prototype.test` is not a function.
-     */
-    var getNativeRegexpTest = function getNativeRegexpTest() {
-      var descriptor = Object.getOwnPropertyDescriptor(RegExp.prototype, 'test');
-      var nativeRegexTest = descriptor === null || descriptor === void 0 ? void 0 : descriptor.value;
-      if (descriptor && typeof descriptor.value === 'function') {
-        return nativeRegexTest;
-      }
-      throw new Error('RegExp.prototype.test is not a function');
     };
 
     /**
@@ -2166,30 +2216,6 @@
         });
       }
       return isMatched;
-    };
-
-    /**
-     * Checks if the stackTrace contains stackRegexp
-     * https://github.com/AdguardTeam/Scriptlets/issues/82
-     *
-     * @param stackMatch - input stack value to match
-     * @param stackTrace - script error stack trace
-     * @returns if the stackTrace contains stackRegexp
-     */
-    var matchStackTrace = function matchStackTrace(stackMatch, stackTrace) {
-      if (!stackMatch || stackMatch === '') {
-        return true;
-      }
-      if (shouldAbortInlineOrInjectedScript(stackMatch, stackTrace)) {
-        return true;
-      }
-      var stackRegexp = toRegExp(stackMatch);
-      var refinedStackTrace = stackTrace.split('\n').slice(2) // get rid of our own functions in the stack trace
-      .map(function (line) {
-        return line.trim();
-      }) // trim the lines
-      .join('\n');
-      return getNativeRegexpTest().call(stackRegexp, refinedStackTrace);
     };
 
     /**
@@ -3305,7 +3331,7 @@
      * Using it without parameters prevents all `window.open` calls.
      *
      * Related UBO scriptlet:
-     * https://github.com/gorhill/uBlock/wiki/Resources-Library#windowopen-defuserjs-
+     * https://github.com/gorhill/uBlock/wiki/Resources-Library#no-window-open-ifjs-
      *
      * ### Syntax
      *
@@ -3466,7 +3492,7 @@
     }
     preventWindowOpen$1.names = ['prevent-window-open',
     // aliases are needed for matching the related scriptlet converted into our syntax
-    'window.open-defuser.js', 'ubo-window.open-defuser.js', 'ubo-window.open-defuser', 'nowoif.js', 'ubo-nowoif.js', 'ubo-nowoif'];
+    'window.open-defuser.js', 'ubo-window.open-defuser.js', 'ubo-window.open-defuser', 'nowoif.js', 'ubo-nowoif.js', 'ubo-nowoif', 'no-window-open-if.js', 'ubo-no-window-open-if.js', 'ubo-no-window-open-if'];
     preventWindowOpen$1.injections = [hit, isValidStrPattern, escapeRegExp, isValidMatchStr, toRegExp, nativeIsNaN, parseMatchArg, handleOldReplacement, createDecoy, getPreventGetter, noopNull, logMessage, noopFunc, trueFunc, substringBefore, substringAfter$1];
 
     /* eslint-disable max-len */
@@ -4099,7 +4125,7 @@
     }
     removeCookie$1.names = ['remove-cookie',
     // aliases are needed for matching the related scriptlet converted into our syntax
-    'cookie-remover.js', 'ubo-cookie-remover.js', 'ubo-cookie-remover'];
+    'cookie-remover.js', 'ubo-cookie-remover.js', 'ubo-cookie-remover', 'remove-cookie.js', 'ubo-remove-cookie.js', 'ubo-remove-cookie', 'abp-cookie-remover'];
     removeCookie$1.injections = [toRegExp, hit];
 
     /* eslint-disable max-len */
@@ -4111,6 +4137,9 @@
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#addeventlistener-defuserjs-
+     *
+     * Related ABP snippet:
+     * https://gitlab.com/eyeo/snippets/-/blob/main/source/behavioral/prevent-listener.js
      *
      * ### Syntax
      *
@@ -4189,7 +4218,7 @@
     }
     preventAddEventListener$1.names = ['prevent-addEventListener',
     // aliases are needed for matching the related scriptlet converted into our syntax
-    'addEventListener-defuser.js', 'ubo-addEventListener-defuser.js', 'aeld.js', 'ubo-aeld.js', 'ubo-addEventListener-defuser', 'ubo-aeld'];
+    'addEventListener-defuser.js', 'ubo-addEventListener-defuser.js', 'aeld.js', 'ubo-aeld.js', 'ubo-addEventListener-defuser', 'ubo-aeld', 'abp-prevent-listener'];
     preventAddEventListener$1.injections = [hit, toRegExp, validateType, validateListener, listenerToString];
 
     /* eslint-disable consistent-return, no-eval */
@@ -5180,6 +5209,9 @@
      * Sets the specified attribute on the specified elements. This scriptlet runs once when the page loads
      * and after that and after that on DOM tree changes.
      *
+     * Related UBO scriptlet:
+     * https://github.com/gorhill/uBlock/wiki/Resources-Library#set-attrjs-
+     *
      * ### Syntax
      *
      * ```text
@@ -5279,7 +5311,9 @@
       setAttr();
       observeDOMChanges(setAttr, true);
     }
-    setAttr$1.names = ['set-attr'];
+    setAttr$1.names = ['set-attr',
+    // aliases are needed for matching the related scriptlet converted into our syntax
+    'set-attr.js', 'ubo-set-attr.js', 'ubo-set-attr'];
     setAttr$1.injections = [hit, observeDOMChanges, nativeIsNaN,
     // following helpers should be imported and injected
     // because they are used by helpers above
@@ -5807,10 +5841,8 @@
      * @added v1.1.0.
      */
     /* eslint-enable max-len */
-    function jsonPrune$1(source, propsToRemove, requiredInitialProps, stack) {
-      if (!!stack && !matchStackTrace(stack, new Error().stack)) {
-        return;
-      }
+    function jsonPrune$1(source, propsToRemove, requiredInitialProps) {
+      var stack = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
       var prunePaths = propsToRemove !== undefined && propsToRemove !== '' ? propsToRemove.split(/ +/) : [];
       var requiredPaths = requiredInitialProps !== undefined && requiredInitialProps !== '' ? requiredInitialProps.split(/ +/) : [];
       var nativeJSONParse = JSON.parse;
@@ -5821,7 +5853,7 @@
         // dealing with stringified json in args, which should be parsed.
         // so we call nativeJSONParse as JSON.parse which is bound to JSON object
         var root = nativeJSONParse.apply(JSON, args);
-        return jsonPruner(source, root, prunePaths, requiredPaths);
+        return jsonPruner(source, root, prunePaths, requiredPaths, stack);
       };
 
       // JSON.parse mocking
@@ -5832,7 +5864,7 @@
       var responseJsonWrapper = function responseJsonWrapper() {
         var promise = nativeResponseJson.apply(this);
         return promise.then(function (obj) {
-          return jsonPruner(source, obj, prunePaths, requiredPaths);
+          return jsonPruner(source, obj, prunePaths, requiredPaths, stack);
         });
       };
 
@@ -5970,6 +6002,9 @@
      * @description
      * Sets a cookie with the specified name, value, and path.
      *
+     * Related UBO scriptlet:
+     * https://github.com/gorhill/uBlock/wiki/Resources-Library#set-cookiejs-
+     *
      * ### Syntax
      *
      * ```text
@@ -6026,7 +6061,9 @@
       hit(source);
       document.cookie = cookieToSet;
     }
-    setCookie$1.names = ['set-cookie'];
+    setCookie$1.names = ['set-cookie',
+    // aliases are needed for matching the related scriptlet converted into our syntax
+    'set-cookie.js', 'ubo-set-cookie.js', 'ubo-set-cookie'];
     setCookie$1.injections = [hit, logMessage, nativeIsNaN, isCookieSetWithValue, getLimitedCookieValue, concatCookieNameValuePath, isValidCookiePath, getCookiePath];
 
     /**
@@ -6432,6 +6469,9 @@
      *
      * To remove item from localStorage use `$remove$` as a value.
      *
+     * Related UBO scriptlet:
+     * https://github.com/gorhill/uBlock/wiki/Resources-Library#set-local-storage-itemjs-
+     *
      * ### Syntax
      *
      * ```text
@@ -6489,7 +6529,9 @@
       }
       hit(source);
     }
-    setLocalStorageItem$1.names = ['set-local-storage-item'];
+    setLocalStorageItem$1.names = ['set-local-storage-item',
+    // aliases are needed for matching the related scriptlet converted into our syntax
+    'set-local-storage-item.js', 'ubo-set-local-storage-item.js', 'ubo-set-local-storage-item'];
     setLocalStorageItem$1.injections = [hit, logMessage, nativeIsNaN, setStorageItem, removeStorageItem, getLimitedStorageItemValue];
 
     /* eslint-disable max-len */
@@ -6501,6 +6543,9 @@
      * Scriptlet won't set item if storage is full.
      *
      * To remove item from sessionStorage use `$remove$` as a value.
+     *
+     * Related UBO scriptlet:
+     * https://github.com/gorhill/uBlock/wiki/Resources-Library#set-session-storage-itemjs-
      *
      * ### Syntax
      *
@@ -6559,7 +6604,9 @@
       }
       hit(source);
     }
-    setSessionStorageItem$1.names = ['set-session-storage-item'];
+    setSessionStorageItem$1.names = ['set-session-storage-item',
+    // aliases are needed for matching the related scriptlet converted into our syntax
+    'set-session-storage-item.js', 'ubo-set-session-storage-item.js', 'ubo-set-session-storage-item'];
     setSessionStorageItem$1.injections = [hit, logMessage, nativeIsNaN, setStorageItem, removeStorageItem, getLimitedStorageItemValue];
 
     /* eslint-disable max-len */
@@ -7773,7 +7820,7 @@
      * example.org#%#//scriptlet('xml-prune'[, propsToMatch[, optionalProp[, urlToMatch]]])
      * ```
      *
-     * - `propsToMatch` — optional, selector of elements which will be removed from XML
+     * - `propsToMatch` — optional, XPath or selector of elements which will be removed from XML
      * - `optionalProp` — optional, selector of elements that must occur in XML document
      * - `urlToMatch` — optional, string or regular expression for matching the request's URL
      *
@@ -7799,6 +7846,17 @@
      *     ```adblock
      *     example.org#%#//scriptlet('xml-prune', 'Period[id*="-ad-"]', '', '.mpd')
      *     ```
+     *
+     * 1. Remove `Period` tag whose `id` contains `pre-roll` and remove `duration` attribute from the `Period` tag
+     *    by using XPath expression
+     *
+     *     <!-- markdownlint-disable line-length -->
+     *
+     *     ```adblock
+     *     example.org#%#//scriptlet('xml-prune', 'xpath(//*[name()="Period"][contains(@id, "pre-roll") and contains(@id, "-ad-")] | //*[name()="Period"]/@duration)')
+     *     ```
+     *
+     *     <!-- markdownlint-enable line-length -->
      *
      * 1. Call with no arguments will log response payload and URL at the console
      *
@@ -7828,6 +7886,41 @@
       }
       var shouldPruneResponse = false;
       var urlMatchRegexp = toRegExp(urlToMatch);
+      var XPATH_MARKER = 'xpath(';
+      var isXpath = propsToRemove && propsToRemove.startsWith(XPATH_MARKER);
+
+      /**
+       * Checks if the document node from the XML document contains propsToRemove
+       * if so, returns an array with matched elements, otherwise returns an empty array
+       *
+       * @param {Node} contextNode - document node from XML document
+       * @returns {Array}
+       */
+      var getXPathElements = function getXPathElements(contextNode) {
+        var matchedElements = [];
+        try {
+          var elementsToRemove = propsToRemove.slice(XPATH_MARKER.length, -1);
+          var xpathResult = contextNode.evaluate(elementsToRemove, contextNode, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+          for (var i = 0; i < xpathResult.snapshotLength; i += 1) {
+            matchedElements.push(xpathResult.snapshotItem(i));
+          }
+        } catch (ex) {
+          var message = "Invalid XPath parameter: ".concat(propsToRemove, "\n").concat(ex);
+          logMessage(source, message);
+        }
+        return matchedElements;
+      };
+      var xPathPruning = function xPathPruning(xPathElements) {
+        xPathElements.forEach(function (element) {
+          // ELEMENT_NODE
+          if (element.nodeType === 1) {
+            element.remove();
+            // ATTRIBUTE_NODE
+          } else if (element.nodeType === 2) {
+            element.ownerElement.removeAttribute(element.nodeName);
+          }
+        });
+      };
       var isXML = function isXML(text) {
         // It's necessary to check the type of 'text'
         // because 'text' is obtained from the xhr/fetch response,
@@ -7852,7 +7945,7 @@
           return false;
         }
         var docXML = createXMLDocument(response);
-        return !!docXML.querySelector(propsToRemove);
+        return isXpath ? getXPathElements(docXML) : !!docXML.querySelector(propsToRemove);
       };
       var pruneXML = function pruneXML(text) {
         if (!isXML(text)) {
@@ -7868,14 +7961,18 @@
           shouldPruneResponse = false;
           return text;
         }
-        var elems = xmlDoc.querySelectorAll(propsToRemove);
-        if (!elems.length) {
+        var elements = isXpath ? getXPathElements(xmlDoc) : xmlDoc.querySelectorAll(propsToRemove);
+        if (!elements.length) {
           shouldPruneResponse = false;
           return text;
         }
-        elems.forEach(function (elem) {
-          elem.remove();
-        });
+        if (isXpath) {
+          xPathPruning(elements);
+        } else {
+          elements.forEach(function (elem) {
+            elem.remove();
+          });
+        }
         var serializer = new XMLSerializer();
         text = serializer.serializeToString(xmlDoc);
         return text;
@@ -9903,6 +10000,7 @@
 
     var JS_RULE_MARKER = '#%#';
     var COMMENT_MARKER = '!';
+    var UBO_REDIRECT_PRIORITY_MARKER = ':';
 
     /**
      * Checks if rule text is comment e.g. !!example.org##+js(set-constant.js, test, false)
@@ -10133,23 +10231,30 @@
     var validAdgCompatibility = Object.fromEntries(validAdgRedirects.map(function (el) {
       return [el.adg, 'valid adg redirect'];
     }));
+    var RedirectRuleType = /*#__PURE__*/function (RedirectRuleType) {
+      RedirectRuleType["ValidAdg"] = "VALID_ADG";
+      RedirectRuleType["Adg"] = "ADG";
+      RedirectRuleType["Ubo"] = "UBO";
+      RedirectRuleType["Abp"] = "ABP";
+      return RedirectRuleType;
+    }(RedirectRuleType || {});
     var REDIRECT_RULE_TYPES = {
-      ["VALID_ADG"]: {
+      [RedirectRuleType.ValidAdg]: {
         redirectMarker: ADG_UBO_REDIRECT_MARKER,
         compatibility: validAdgCompatibility,
         redirectRuleMarker: ADG_UBO_REDIRECT_RULE_MARKER
       },
-      ["ADG"]: {
+      [RedirectRuleType.Adg]: {
         redirectMarker: ADG_UBO_REDIRECT_MARKER,
         compatibility: adgToUboCompatibility,
         redirectRuleMarker: ADG_UBO_REDIRECT_RULE_MARKER
       },
-      ["UBO"]: {
+      [RedirectRuleType.Ubo]: {
         redirectMarker: ADG_UBO_REDIRECT_MARKER,
         compatibility: uboToAdgCompatibility,
         redirectRuleMarker: ADG_UBO_REDIRECT_RULE_MARKER
       },
-      ["ABP"]: {
+      [RedirectRuleType.Abp]: {
         redirectMarker: ABP_REDIRECT_MARKER,
         compatibility: abpToAdgCompatibility
       }
@@ -10168,16 +10273,29 @@
     /**
      * Gets redirect resource name
      *
-     * @param rule rule text
+     * @param ruleModifiers - list of rule modifiers
      * @param marker - specific Adg/Ubo or Abp redirect resources marker
      * @returns - redirect resource name
      */
-    var getRedirectName = function getRedirectName(rule, marker) {
-      var ruleModifiers = parseModifiers(rule);
+    var getRedirectName = function getRedirectName(ruleModifiers, marker) {
       var redirectNamePart = ruleModifiers.find(function (el) {
         return el.includes(marker);
       });
-      return redirectNamePart ? substringAfter$1(redirectNamePart, marker) : null;
+      if (!redirectNamePart) {
+        return null;
+      }
+      var redirectName = substringAfter$1(redirectNamePart, marker);
+
+      /**
+       * Ignore UBO's redirect rule priority
+       * e.g remove ':100' from ||example.com$redirect=noopjs:100
+       * https://github.com/AdguardTeam/tsurlfilter/issues/59
+       */
+      var redirectPriorityIndex = redirectName.indexOf(UBO_REDIRECT_PRIORITY_MARKER);
+      if (redirectPriorityIndex > -1) {
+        redirectName = redirectName.substring(0, redirectPriorityIndex);
+      }
+      return redirectName;
     };
 
     /**
@@ -10189,7 +10307,7 @@
      */
     var isAdgRedirectRule = function isAdgRedirectRule(rule) {
       var MARKER_IN_BASE_PART_MASK = '/((?!\\$|\\,).{1})redirect((-rule)?)=(.{0,}?)\\$(popup)?/';
-      var _REDIRECT_RULE_TYPES$ = REDIRECT_RULE_TYPES["ADG"],
+      var _REDIRECT_RULE_TYPES$ = REDIRECT_RULE_TYPES[RedirectRuleType.Adg],
         redirectMarker = _REDIRECT_RULE_TYPES$.redirectMarker,
         redirectRuleMarker = _REDIRECT_RULE_TYPES$.redirectRuleMarker;
       return !isComment(rule) && (rule.includes(redirectMarker) || typeof redirectRuleMarker === 'string' && rule.includes(redirectRuleMarker))
@@ -10229,7 +10347,7 @@
         if (!marker) {
           return false;
         }
-        var redirectName = getRedirectName(rule, marker);
+        var redirectName = getRedirectName(parseModifiers(rule), marker);
         if (!redirectName) {
           return false;
         }
@@ -10247,7 +10365,7 @@
      * @returns true if given rule is valid adg redirect
      */
     var isValidAdgRedirectRule = function isValidAdgRedirectRule(rule) {
-      return isRedirectRuleByType(rule, "VALID_ADG");
+      return isRedirectRuleByType(rule, RedirectRuleType.ValidAdg);
     };
 
     /**
@@ -10257,7 +10375,7 @@
      * @returns - true if the rule can be converted to Ubo
      */
     var isAdgRedirectCompatibleWithUbo = function isAdgRedirectCompatibleWithUbo(rule) {
-      return isAdgRedirectRule(rule) && isRedirectRuleByType(rule, "ADG");
+      return isAdgRedirectRule(rule) && isRedirectRuleByType(rule, RedirectRuleType.Adg);
     };
 
     /**
@@ -10267,7 +10385,7 @@
      * @returns - true if the rule can be converted to AdGuard
      */
     var isUboRedirectCompatibleWithAdg = function isUboRedirectCompatibleWithAdg(rule) {
-      return isRedirectRuleByType(rule, "UBO");
+      return isRedirectRuleByType(rule, RedirectRuleType.Ubo);
     };
 
     /**
@@ -10277,7 +10395,7 @@
      * @returns - true if the rule can be converted to AdGuard
      */
     var isAbpRedirectCompatibleWithAdg = function isAbpRedirectCompatibleWithAdg(rule) {
-      return isRedirectRuleByType(rule, "ABP");
+      return isRedirectRuleByType(rule, RedirectRuleType.Abp);
     };
 
     /**
@@ -10330,7 +10448,9 @@
       isAbpRedirectCompatibleWithAdg,
       parseModifiers,
       getRedirectName,
-      hasValidContentType
+      hasValidContentType,
+      isRedirectRuleByType,
+      RedirectRuleType
     };
 
     function _arrayWithHoles(arr) {
@@ -10871,10 +10991,12 @@
       var uboMarkerData = getMarkerData(uboModifiers, validator.REDIRECT_RULE_TYPES.UBO, rule);
       var adgModifiers = uboModifiers.map(function (modifier, index) {
         if (index === uboMarkerData.index) {
-          var uboName = substringAfter$1(modifier, uboMarkerData.marker);
-          var adgName = validator.REDIRECT_RULE_TYPES.UBO.compatibility[uboName];
-          var adgMarker = uboMarkerData.marker === validator.ADG_UBO_REDIRECT_RULE_MARKER ? validator.REDIRECT_RULE_TYPES.ADG.redirectRuleMarker : validator.REDIRECT_RULE_TYPES.ADG.redirectMarker;
-          return "".concat(adgMarker).concat(adgName);
+          var uboName = validator.getRedirectName([modifier], uboMarkerData.marker);
+          if (uboName) {
+            var adgName = validator.REDIRECT_RULE_TYPES.UBO.compatibility[uboName];
+            var adgMarker = uboMarkerData.marker === validator.ADG_UBO_REDIRECT_RULE_MARKER ? validator.REDIRECT_RULE_TYPES.ADG.redirectRuleMarker : validator.REDIRECT_RULE_TYPES.ADG.redirectMarker;
+            return "".concat(adgMarker).concat(adgName);
+          }
         }
         if (modifier === UBO_XHR_TYPE) {
           return ADG_XHR_TYPE;
@@ -10931,6 +11053,9 @@
      *    e.g. ||ad.com^$redirect=<name>,important  ->>  ||ad.com^$redirect=<name>,important,script
      * 3. Replaces Adg redirect name by Ubo analog
      *
+     * Note: if adg redirect uses UBO's priority syntax, it will be lost on conversion, e.g:
+     * ||example.com$redirect=noopjs:99 => ||example.com$redirect=noop.js
+     *
      * @param rule adg rule
      * @returns converted ubo rule
      * @throws on incompatible rule
@@ -10942,7 +11067,10 @@
       var basePart = substringBefore(rule, '$');
       var adgModifiers = validator.parseModifiers(rule);
       var adgMarkerData = getMarkerData(adgModifiers, validator.REDIRECT_RULE_TYPES.ADG, rule);
-      var adgRedirectName = adgModifiers[adgMarkerData.index].slice(adgMarkerData.marker.length);
+      var adgRedirectName = validator.getRedirectName(adgModifiers, adgMarkerData.marker);
+      if (!adgRedirectName) {
+        throw new Error("Unable to convert for uBO - no valid redirect name in rule: ".concat(rule));
+      }
       if (!validator.hasValidContentType(rule)) {
         // add missed source types as content type modifiers
         var sourceTypesData = validator.ABSENT_SOURCE_TYPE_REPLACEMENT.find(function (el) {
@@ -18621,6 +18749,14 @@
             getWildcardPropertyInChain(item, nextProp, lookThrough, output);
           });
         }
+        if (Array.isArray(base)) {
+          base.forEach(function (key) {
+            var nextBase = key;
+            if (nextBase !== undefined) {
+              getWildcardPropertyInChain(nextBase, chain, lookThrough, output);
+            }
+          });
+        }
         var nextBase = base[prop];
         chain = chain.slice(pos + 1);
         if (nextBase !== undefined) {
@@ -18678,7 +18814,7 @@
         var escaped = input.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
         return new RegExp(escaped);
       }
-      function isPruningNeeded(source, root, prunePaths, requiredPaths) {
+      function isPruningNeeded(source, root, prunePaths, requiredPaths, stack) {
         if (!root) {
           return false;
         }
@@ -18688,13 +18824,17 @@
           var matchRegex = toRegExp(requiredPaths.join(""));
           var shouldLog = matchRegex.test(rootString);
           if (shouldLog) {
-            logMessage(source, "".concat(window.location.hostname, "\n").concat(JSON.stringify(root, null, 2)), true);
+            logMessage(source, "".concat(window.location.hostname, "\n").concat(JSON.stringify(root, null, 2), "\nStack trace:\n").concat(new Error().stack), true);
             if (root && typeof root === "object") {
               logMessage(source, root, true, false);
             }
             shouldProcess = false;
             return shouldProcess;
           }
+        }
+        if (stack && !matchStackTrace(stack, new Error().stack || "")) {
+          shouldProcess = false;
+          return shouldProcess;
         }
         var wildcardSymbols = [".*.", "*.", ".*", ".[].", "[].", ".[]"];
         var _loop = function _loop() {
@@ -18704,6 +18844,12 @@
             return requiredPath.includes(symbol);
           });
           var details = getWildcardPropertyInChain(root, requiredPath, hasWildcard);
+          if (!details.length) {
+            shouldProcess = false;
+            return {
+              v: shouldProcess
+            };
+          }
           shouldProcess = !hasWildcard;
           for (var j = 0; j < details.length; j += 1) {
             var hasRequiredProp = typeof lastNestedPropName === "string" && details[j].base[lastNestedPropName] !== undefined;
@@ -18715,20 +18861,21 @@
           }
         };
         for (var i = 0; i < requiredPaths.length; i += 1) {
-          _loop();
+          var _ret = _loop();
+          if (typeof _ret === "object") return _ret.v;
         }
         return shouldProcess;
       }
-      function jsonPruner(source, root, prunePaths, requiredPaths) {
+      function jsonPruner(source, root, prunePaths, requiredPaths, stack) {
         if (prunePaths.length === 0 && requiredPaths.length === 0) {
-          logMessage(source, "".concat(window.location.hostname, "\n").concat(JSON.stringify(root, null, 2)), true);
+          logMessage(source, "".concat(window.location.hostname, "\n").concat(JSON.stringify(root, null, 2), "\nStack trace:\n").concat(new Error().stack), true);
           if (root && typeof root === "object") {
             logMessage(source, root, true, false);
           }
           return root;
         }
         try {
-          if (isPruningNeeded(source, root, prunePaths, requiredPaths) === false) {
+          if (isPruningNeeded(source, root, prunePaths, requiredPaths, stack) === false) {
             return root;
           }
           prunePaths.forEach(function (path) {
@@ -19214,10 +19361,8 @@
       }
     }
     function jsonPrune(source, args) {
-      function jsonPrune(source, propsToRemove, requiredInitialProps, stack) {
-        if (!!stack && !matchStackTrace(stack, new Error().stack)) {
-          return;
-        }
+      function jsonPrune(source, propsToRemove, requiredInitialProps) {
+        var stack = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
         var prunePaths = propsToRemove !== undefined && propsToRemove !== "" ? propsToRemove.split(/ +/) : [];
         var requiredPaths = requiredInitialProps !== undefined && requiredInitialProps !== "" ? requiredInitialProps.split(/ +/) : [];
         var nativeJSONParse = JSON.parse;
@@ -19226,7 +19371,7 @@
             args[_key] = arguments[_key];
           }
           var root = nativeJSONParse.apply(JSON, args);
-          return jsonPruner(source, root, prunePaths, requiredPaths);
+          return jsonPruner(source, root, prunePaths, requiredPaths, stack);
         };
         jsonParseWrapper.toString = nativeJSONParse.toString.bind(nativeJSONParse);
         JSON.parse = jsonParseWrapper;
@@ -19234,7 +19379,7 @@
         var responseJsonWrapper = function responseJsonWrapper() {
           var promise = nativeResponseJson.apply(this);
           return promise.then(function (obj) {
-            return jsonPruner(source, obj, prunePaths, requiredPaths);
+            return jsonPruner(source, obj, prunePaths, requiredPaths, stack);
           });
         };
         if (typeof Response === "undefined") {
@@ -19317,6 +19462,14 @@
             getWildcardPropertyInChain(item, nextProp, lookThrough, output);
           });
         }
+        if (Array.isArray(base)) {
+          base.forEach(function (key) {
+            var nextBase = key;
+            if (nextBase !== undefined) {
+              getWildcardPropertyInChain(nextBase, chain, lookThrough, output);
+            }
+          });
+        }
         var nextBase = base[prop];
         chain = chain.slice(pos + 1);
         if (nextBase !== undefined) {
@@ -19339,7 +19492,7 @@
         }
         nativeConsole("".concat(name, ": ").concat(message));
       }
-      function isPruningNeeded(source, root, prunePaths, requiredPaths) {
+      function isPruningNeeded(source, root, prunePaths, requiredPaths, stack) {
         if (!root) {
           return false;
         }
@@ -19349,13 +19502,17 @@
           var matchRegex = toRegExp(requiredPaths.join(""));
           var shouldLog = matchRegex.test(rootString);
           if (shouldLog) {
-            logMessage(source, "".concat(window.location.hostname, "\n").concat(JSON.stringify(root, null, 2)), true);
+            logMessage(source, "".concat(window.location.hostname, "\n").concat(JSON.stringify(root, null, 2), "\nStack trace:\n").concat(new Error().stack), true);
             if (root && typeof root === "object") {
               logMessage(source, root, true, false);
             }
             shouldProcess = false;
             return shouldProcess;
           }
+        }
+        if (stack && !matchStackTrace(stack, new Error().stack || "")) {
+          shouldProcess = false;
+          return shouldProcess;
         }
         var wildcardSymbols = [".*.", "*.", ".*", ".[].", "[].", ".[]"];
         var _loop = function _loop() {
@@ -19365,6 +19522,12 @@
             return requiredPath.includes(symbol);
           });
           var details = getWildcardPropertyInChain(root, requiredPath, hasWildcard);
+          if (!details.length) {
+            shouldProcess = false;
+            return {
+              v: shouldProcess
+            };
+          }
           shouldProcess = !hasWildcard;
           for (var j = 0; j < details.length; j += 1) {
             var hasRequiredProp = typeof lastNestedPropName === "string" && details[j].base[lastNestedPropName] !== undefined;
@@ -19376,20 +19539,21 @@
           }
         };
         for (var i = 0; i < requiredPaths.length; i += 1) {
-          _loop();
+          var _ret = _loop();
+          if (typeof _ret === "object") return _ret.v;
         }
         return shouldProcess;
       }
-      function jsonPruner(source, root, prunePaths, requiredPaths) {
+      function jsonPruner(source, root, prunePaths, requiredPaths, stack) {
         if (prunePaths.length === 0 && requiredPaths.length === 0) {
-          logMessage(source, "".concat(window.location.hostname, "\n").concat(JSON.stringify(root, null, 2)), true);
+          logMessage(source, "".concat(window.location.hostname, "\n").concat(JSON.stringify(root, null, 2), "\nStack trace:\n").concat(new Error().stack), true);
           if (root && typeof root === "object") {
             logMessage(source, root, true, false);
           }
           return root;
         }
         try {
-          if (isPruningNeeded(source, root, prunePaths, requiredPaths) === false) {
+          if (isPruningNeeded(source, root, prunePaths, requiredPaths, stack) === false) {
             return root;
           }
           prunePaths.forEach(function (path) {
@@ -26976,6 +27140,31 @@
         }
         var shouldPruneResponse = false;
         var urlMatchRegexp = toRegExp(urlToMatch);
+        var XPATH_MARKER = "xpath(";
+        var isXpath = propsToRemove && propsToRemove.startsWith(XPATH_MARKER);
+        var getXPathElements = function getXPathElements(contextNode) {
+          var matchedElements = [];
+          try {
+            var elementsToRemove = propsToRemove.slice(XPATH_MARKER.length, -1);
+            var xpathResult = contextNode.evaluate(elementsToRemove, contextNode, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+            for (var i = 0; i < xpathResult.snapshotLength; i += 1) {
+              matchedElements.push(xpathResult.snapshotItem(i));
+            }
+          } catch (ex) {
+            var message = "Invalid XPath parameter: ".concat(propsToRemove, "\n").concat(ex);
+            logMessage(source, message);
+          }
+          return matchedElements;
+        };
+        var xPathPruning = function xPathPruning(xPathElements) {
+          xPathElements.forEach(function (element) {
+            if (element.nodeType === 1) {
+              element.remove();
+            } else if (element.nodeType === 2) {
+              element.ownerElement.removeAttribute(element.nodeName);
+            }
+          });
+        };
         var isXML = function isXML(text) {
           if (typeof text === "string") {
             var trimmedText = text.trim();
@@ -26995,7 +27184,7 @@
             return false;
           }
           var docXML = createXMLDocument(response);
-          return !!docXML.querySelector(propsToRemove);
+          return isXpath ? getXPathElements(docXML) : !!docXML.querySelector(propsToRemove);
         };
         var pruneXML = function pruneXML(text) {
           if (!isXML(text)) {
@@ -27011,14 +27200,18 @@
             shouldPruneResponse = false;
             return text;
           }
-          var elems = xmlDoc.querySelectorAll(propsToRemove);
-          if (!elems.length) {
+          var elements = isXpath ? getXPathElements(xmlDoc) : xmlDoc.querySelectorAll(propsToRemove);
+          if (!elements.length) {
             shouldPruneResponse = false;
             return text;
           }
-          elems.forEach(function (elem) {
-            elem.remove();
-          });
+          if (isXpath) {
+            xPathPruning(elements);
+          } else {
+            elements.forEach(function (elem) {
+              elem.remove();
+            });
+          }
           var serializer = new XMLSerializer();
           text = serializer.serializeToString(xmlDoc);
           return text;
@@ -27451,6 +27644,7 @@
       "ubo-aeld.js": preventAddEventListener,
       "ubo-addEventListener-defuser": preventAddEventListener,
       "ubo-aeld": preventAddEventListener,
+      "abp-prevent-listener": preventAddEventListener,
       "prevent-adfly": preventAdfly,
       "adfly-defuser.js": preventAdfly,
       "ubo-adfly-defuser.js": preventAdfly,
@@ -27520,6 +27714,9 @@
       "nowoif.js": preventWindowOpen,
       "ubo-nowoif.js": preventWindowOpen,
       "ubo-nowoif": preventWindowOpen,
+      "no-window-open-if.js": preventWindowOpen,
+      "ubo-no-window-open-if.js": preventWindowOpen,
+      "ubo-no-window-open-if": preventWindowOpen,
       "prevent-xhr": preventXHR,
       "no-xhr-if.js": preventXHR,
       "ubo-no-xhr-if.js": preventXHR,
@@ -27542,6 +27739,10 @@
       "cookie-remover.js": removeCookie,
       "ubo-cookie-remover.js": removeCookie,
       "ubo-cookie-remover": removeCookie,
+      "remove-cookie.js": removeCookie,
+      "ubo-remove-cookie.js": removeCookie,
+      "ubo-remove-cookie": removeCookie,
+      "abp-cookie-remover": removeCookie,
       "remove-in-shadow-dom": removeInShadowDom,
       "remove-node-text": removeNodeText,
       "remove-node-text.js": removeNodeText,
@@ -27551,6 +27752,9 @@
       "ubo-remove-node-text": removeNodeText,
       "ubo-rmnt": removeNodeText,
       "set-attr": setAttr,
+      "set-attr.js": setAttr,
+      "ubo-set-attr.js": setAttr,
+      "ubo-set-attr": setAttr,
       "set-constant": setConstant,
       "set-constant.js": setConstant,
       "ubo-set-constant.js": setConstant,
@@ -27560,13 +27764,22 @@
       "ubo-set": setConstant,
       "abp-override-property-read": setConstant,
       "set-cookie": setCookie,
+      "set-cookie.js": setCookie,
+      "ubo-set-cookie.js": setCookie,
+      "ubo-set-cookie": setCookie,
       "set-cookie-reload": setCookieReload,
       "set-local-storage-item": setLocalStorageItem,
+      "set-local-storage-item.js": setLocalStorageItem,
+      "ubo-set-local-storage-item.js": setLocalStorageItem,
+      "ubo-set-local-storage-item": setLocalStorageItem,
       "set-popads-dummy": setPopadsDummy,
       "popads-dummy.js": setPopadsDummy,
       "ubo-popads-dummy.js": setPopadsDummy,
       "ubo-popads-dummy": setPopadsDummy,
       "set-session-storage-item": setSessionStorageItem,
+      "set-session-storage-item.js": setSessionStorageItem,
+      "ubo-set-session-storage-item.js": setSessionStorageItem,
+      "ubo-set-session-storage-item": setSessionStorageItem,
       "trusted-click-element": trustedClickElement,
       "trusted-replace-fetch-response": trustedReplaceFetchResponse,
       "trusted-replace-node-text": trustedReplaceNodeText,
