@@ -215,27 +215,6 @@ function loadMainWindow(onWindowLoaded) {
 }
 
 /**
- * Loads splash screen while loading
- */
-function loadSplashScreenWindow(onWindowLoaded) {
-    mainWindow = createWindow();
-    mainWindow.loadFile('./src/main/ui/loading.html');
-
-    if (onWindowLoaded) {
-        const onDidFinishLoad = () => {
-            mainWindow.webContents.removeListener('did-finish-load', onDidFinishLoad);
-
-            if (typeof onWindowLoaded === 'function') {
-                mainWindow.webContents.removeListener('did-finish-load', onDidFinishLoad);
-                onWindowLoaded();
-            }
-        };
-
-        mainWindow.webContents.addListener('did-finish-load', onDidFinishLoad);
-    }
-}
-
-/**
  * Shows main window
  *
  * @param onWindowLoaded callback on window created and loaded
@@ -296,21 +275,6 @@ const checkIsInApplicationsFolder = () => {
 let tray;
 
 /**
- * Variable used to track whether the app was launched in the background.
- * To track this, we launch the app with a custom url.
- * Other ways didn't work because the app can also be launched in a sandbox.
- * @type {boolean}
- */
-let launchInBackground = false;
-app.on('open-url', (e, url) => {
-    e.preventDefault();
-    log.info(`"open-url" event fired with url: "${url}"`);
-    if (url === 'agsafari://launchInBackground') {
-        launchInBackground = true;
-    }
-});
-
-/**
  * This method will be called when Electron has finished
  * initialization and is ready to create browser windows.
  * Some APIs can only be used after this event occurs.
@@ -324,43 +288,24 @@ app.on('ready', (async () => {
     log.info(`Starting AdGuard v${app.getVersion()} (${safariExt.getBuildNumber()})`);
     log.info('App ready - creating browser windows');
 
-    if (launchInBackground) {
-        launchInBackground = false;
-        log.info('App is launching in background');
+    log.info('App is launching in background');
 
-        // Open in background
-        app.dock.hide();
+    // Open in background
+    app.dock.hide();
 
-        startup.init(showWindow, (shouldShowMainWindow) => {
-            log.info('Startup finished.');
+    startup.init(showWindow, (shouldShowMainWindow) => {
+        log.info('Startup finished.');
 
-            uiEventListener.init();
+        uiEventListener.init();
 
-            if (shouldShowMainWindow) {
-                log.info('Loading main window..');
+        if (shouldShowMainWindow) {
+            log.info('Loading main window..');
 
-                app.dock.show();
+            app.dock.show();
 
-                loadMainWindow();
-            }
-        });
-    } else {
-        log.info('App is launching in foreground');
-
-        app.dock.show();
-
-        loadSplashScreenWindow(() => {
-            log.debug('Splash screen loaded');
-
-            startup.init(showWindow, () => {
-                uiEventListener.init();
-                loadMainWindow(() => {
-                    toolbarController.requestMASReview();
-                });
-                uiEventListener.register(mainWindow);
-            });
-        });
-    }
+            loadMainWindow();
+        }
+    });
 
     mainMenuController.initMenu(showWindow);
     tray = trayController.initTray(showWindow);

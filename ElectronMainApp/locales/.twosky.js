@@ -43,7 +43,6 @@ module.exports = [
     "localizable_files": [
       "Extension/Localizable.strings",
       "Extension/InfoPlist.strings",
-      "AdvancedBlocking/InfoPlist.strings",
       "BlockerCustomExtension/InfoPlist.strings",
       "BlockerExtension/InfoPlist.strings",
       "BlockerOtherExtension/InfoPlist.strings",
