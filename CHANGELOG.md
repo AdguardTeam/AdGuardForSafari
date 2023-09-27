@@ -7,10 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- version of the app is in ElectronMainApp/package.json -->
 
 
-## [Unreleased]
+## [1.11.15]
+
+### Changed
 
 - Updated Scriptlets to v1.9.72
+- Updated SafariConverterLib to v2.0.43
 
+### Fixed
+- Settings panel opens at login [853](https://github.com/AdguardTeam/AdGuardForSafari/issues/853)
+- '$match-case' modifier does not work [#55](https://github.com/AdguardTeam/SafariConverterLib/issues/55)
+- Improve handling of AdGuard Advanced Blocking extension in Safari 17 toolbar [#877](https://github.com/AdguardTeam/AdGuardForSafari/issues/877)
 
 ## [1.11.14]
 
@@ -37,6 +44,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated ExtendedCss to v2.0.52
 
 
-[Unreleased]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.14.301-release...HEAD
+[1.11.15]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.14.301-release...HEAD
 [1.11.14]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.13.297-release...v1.11.14.301-release
 [1.11.13]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.12.289-release...v1.11.13.297-release

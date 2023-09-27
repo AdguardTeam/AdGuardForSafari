@@ -1,8 +1,8 @@
-! Checksum: 5r3mDNypZSRzbWmiJWG+cg
+! Checksum: j50aCwTt4ee8TAKZMvc9fQ
 ! Title: AdGuard Dutch filter (Optimized)
 ! Description: EasyList Dutch + AdGuard Dutch filter. Filter list that specifically removes ads on websites in Dutch language.
-! Version: 2.0.5.85
-! TimeUpdated: 2023-07-12T00:32:15+07:00
+! Version: 2.0.5.98
+! TimeUpdated: 2023-09-18T18:32:26+00:00
 ! Expires: 4 days (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
@@ -447,6 +447,7 @@ _advertentieleaderboardhome.
 ##.gesponsord_blokje_wrap
 ##.hoofdAd2
 ##.massarius-dfp-unit
+##a[href^="https://partner.bol.com/click/"]
 ##a[href^="https://xltube.nl/click/"]
 ###advertentieblokjeid
 ###gesponsordelink
@@ -686,7 +687,7 @@ telegraaf.nl##.VideoArticlePage__banner
 telegraaf.nl##.VideoPage__banner
 dartfreakz.nl,thehike.nl,zozwanger.nl##.a-single
 rtveen.nl##.aas_zone
-autozine.nl,beleggersbelangen.nl,besteproduct.nl,hetnieuwsvandaag.be,indebuurt.nl,koopplein.nl,letsgodigital.org,limburger.nl,persinfo.org,sport.be,tellows.nl,tradeidee.nl,tripadvisor.nl,voetbalnieuws.nl,voetbalprimeur.nl,wijlimburg.nl,xgn.nl##.ad
+autozine.nl,beleggersbelangen.nl,besteproduct.nl,eurosport.nl,hetnieuwsvandaag.be,indebuurt.nl,koopplein.nl,letsgodigital.org,limburger.nl,persinfo.org,sport.be,tellows.nl,tradeidee.nl,tripadvisor.nl,voetbalnieuws.nl,voetbalprimeur.nl,wijlimburg.nl,xgn.nl##.ad
 filmtotaal.nl##.ad-centering
 bruzz.be,omroepflevoland.nl,pu.nl,sportuitslagen.org,trendalert.nl##.ad-container
 voetbal.com##.adbox
@@ -1057,6 +1058,7 @@ indebuurt.nl##.widget-tabs--partner
 indebuurt.nl##.widget-tabs--partners
 autoblog.nl##.widget_ab_sidebar
 nieuws.nl##.widget_add_widget
+ecobioliving.eu##.widget_custom_html
 mannenstyle.nl##.widget_execphp
 riskcompliance.nl##.widget_itarget_banners
 ajaxreport.nl,feyenoordreport.nl,livestreamvandaag.be,psvreport.nl,voetbalsnafu.nl##.widget_links
@@ -1175,6 +1177,8 @@ bol.com##section.js_slot-sponsored-products
 landenweb.nl##table[style="margin-left: auto; margin-right: auto; border: 1px solid; width: 100%; margin-bottom: 10px;"]
 radiocaramba.nl##table[width="120"][height="600"]
 feijenoordnieuws.nl##.cv-table-left > a:not([target="_blank"]):not([rel="nofollow"]):not(a[href^="https://feijenoordnieuws.nl/"])
+2dehands.be#?#.hz-Listing--list-item:-abp-has(.hz-Listing-priority:-abp-contains(Topadvertentie))
+ah.nl#?#.product-card-portrait_root__ZiRpZ:-abp-has(.promotion_root__pAAlu)
 autobahn.eu#?#.d-none.d-md-block.mb-3:-abp-has(a[target="_blank"][rel="noopener"])
 buienradar.nl#?#.linklist:-abp-has(h1:-abp-contains(Lekker Dichtbij Deals))
 businessinsider.nl#?#.widget_custom_html:-abp-has(h2:-abp-contains(Beter Beleggen))
@@ -1216,6 +1220,7 @@ bokt.nl#@#.node-ad
 ajaxreport.nl,ajaxrss.nl,blockchainvandaag.com,casinoreport.nl,casinovergelijkingen.com,cryptobelegging.com,cryptotoekomst.com,feyenoordreport.nl,formula1report.com,fultimateteam.com,gamblingreport.nl,livestreamvandaag.be,psvreport.nl,vergelijkbookmakers.nl,voetbalnotering.nl,voetbalsnafu.nl,voetbalvisie.com#@#.top-ads-block
 directwonen.nl#@#.top-advert
 vakantieplaats.nl#@#.topAds
+||cryptobeneluxbanner.care^
 ||cdn.optoutadvertising.com^
 ||pexi.nl^$third-party
 ||adconfigproxy.azurewebsites.net^$third-party
@@ -1228,6 +1233,12 @@ vakantieplaats.nl#@#.topAds
 @@||tweakers.net/i^
 @@||content.hwigroup.net/images^$domain=hardware.info
 hardware.info,tweakers.net#@#.AdBar
+webcam-binnenvaart.nl#%#//scriptlet('prevent-element-src-loading', 'script', 'adsbygoogle')
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+@@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=webcam-binnenvaart.nl
+vtmgo.be#%#//scriptlet('prevent-fetch', 'v.fwmrm.net')
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+@@||5e124.v.fwmrm.net/ad/g/1?prof=385316%3Adpg_csai_html5&nw=$domain=vtmgo.be
 webcams-texel.nl#%#//scriptlet('abort-current-inline-script', 'document.createElement', 'adsbygoogle')
 !+ PLATFORM(ios, ext_android_cb, ext_safari)
 @@||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js$domain=webcams-texel.nl
@@ -1246,6 +1257,9 @@ tweakers.net#%#//scriptlet('set-constant', 'BannerManager.sendAdRequest', 'noopF
 kijk.nl#$#body .pub_300x250.pub_300x250m.pub_728x90.text-ad.textAd.text_ad.text_ads.text-ads.text-ad-links { display: initial !important; }
 !+ PLATFORM(ios, ext_android_cb, ext_safari)
 @@||kijk.nl^$generichide
+@@||pubads.g.doubleclick.net/ondemand/*/content/*/vid/*/streams$domain=goplay.be
+||pubads.g.doubleclick.net/ondemand/*/content/*/vid/*/streams/*/time-events.json$important,domain=goplay.be
+goplay.be#%#//scriptlet('xml-prune', 'Period[id*="-ad-"]', '', '.mpd')
 goplay.be#%#//scriptlet('prevent-fetch', 'pubads.g.doubleclick.net/gampad/ads')
 @@||imasdk.googleapis.com/js/sdkloader/ima3_dai.js$script,domain=goplay.be
 !+ PLATFORM(ios, ext_android_cb, ext_safari)
@@ -1255,8 +1269,8 @@ vier.be#@#.googleAd
 hardware.info#%#//scriptlet("abort-on-property-read", "Object.prototype.autoRecov")
 hardware.info#%#//scriptlet("prevent-addEventListener", "", "Flags.autoRecov")
 tweakers.net#%#//scriptlet("abort-on-property-read", "Object.prototype.autoRecov")
-!+ PLATFORM(ios, ext_android_cb, ext_safari)
 @@||tweakers.net^$generichide
+@@||ab.tweakers.nl/pool/lib/
 forum.fok.nl#%#//scriptlet("set-constant", "DAB", "noopFunc")
 @@||videoplayer.dpgmedia.net/*/ad_smartads_.js$domain=vtm.be
 ||knack.be/js/responsive/rmgAdCheck.js
@@ -1290,9 +1304,12 @@ knack.be#?##below_para_1:has(> a[href^="https://e093.knack.be/"])
 bnnvara.nl#?#div[id^="ster-ad-bnnvara-"]:upward(1)
 gfcnieuws.com#?#.entry-content div[class]:has(> ins.adsbygoogle)
 hardware.info#%#//scriptlet("set-constant", "BannerManager", "undefined")
+gpblog.com#$#aside[class^="Ad_"] { position: absolute !important; left: -3000px !important; }
 omroepbrabant.nl#$#.ad-banner-container { position: absolute!important; left: -3000px!important; }
 handbalstartpunt.nl#$##advertentie-top { height: 0!important; }
 omroepwest.nl#$#.adcontainer-Rectangle { position: absolute!important; left: -4000px!important; }
+cryptobenelux.com##.clickout-banner-regular_native_box
+bnr.nl##div[class*="BNRAd_ad_"]
 looopings.nl###contentBillboard
 looopings.nl##div[style="min-height:250px;"]
 gpblog.com##.betting-insert
@@ -1436,7 +1453,7 @@ klusidee.nl##td.td-ad
 ||serving-sys.com/*.mp4^$domain=kijk.nl
 ||totaaltv.nl/upload/Banner-sep-astrasat.gif
 !+ NOT_OPTIMIZED
-adguard.com,adguard.app##.hello_from_adguard_dutch
+adguard.info,adguard.com,adguard.app##.hello_from_adguard_dutch
 !#safari_cb_affinity(general,privacy)
 @@||googletagmanager.com/gtm.js$domain=rtlxl.nl
 @@||securepubads.g.doubleclick.net/tag/js/gpt.js$domain=rtlxl.nl

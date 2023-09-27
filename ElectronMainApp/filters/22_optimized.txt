@@ -1,8 +1,8 @@
-! Checksum: LiwbCNcuXRv9xcEP+nNhgQ
+! Checksum: dZk/j7SLqs5udj3KZH4gpw
 ! Title: AdGuard Widgets filter (Optimized)
 ! Description: Blocks annoying third-party widgets: online assistants, live support chats, etc.
-! Version: 2.0.5.61
-! TimeUpdated: 2023-07-14T01:31:11+07:00
+! Version: 2.0.6.40
+! TimeUpdated: 2023-09-25T09:03:05+00:00
 ! Expires: 4 days (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
@@ -66,8 +66,9 @@
 ##.blogroll_wrapper_3
 ##.blogroll_wrapper_4
 ##.blogroll_wrapper_honbun
-[$path=/\/(?:a_load|doujinero|douxnavi|ele01|fightersmatome|geinoujin_dougazou|goodadult|gotisoku|gourmetmatome|hktmatomemon|h_taiken_dan|idol_gravure_sexy|izumich-wjzrnqvn|junglep2|kaigainoomaera|kanribu01|kore_iine|lexus_ls460|nandemojouhou|news4wide123|niji_tan|ninshin_syussann|nityannnerumatome-torendo|nizimoenews|ochinpomilksokuho|seisobitch|sky_wing2010-geinou|soccerrevolution|spec_530|toshi114514|toshiboking|uwasainfo|yakiusoku)/]blog.livedoor.jp##.rss-blogroll
-ysokuhou.blog.jp,matomesan.jp,amage-sokuhou.xyz,metaversesokuhou.blog.jp,maruhorror.com,kininaru-geinou-m.blog.jp,gensen5ch.blog.jp,bakutan.blog.jp,2jieropicture.blog.jp,lolis09.blog.jp,niji-ero-camp.blog.jp,nizisencharacter.blog.jp,nizisensituation.blog.jp,netabarasi.ldblog.jp,lgbtch.blog.jp,hatarakuhijoshiki.livedoor.blog,h-pon.doorblog.jp,akbmatome18300.ldblog.jp,av01.youblog.jp,ff14net.2chblog.jp,magicianwiz.net,ge-sewa-news.blog.jp,2chasadora.com,a711.work,akege.blog.jp,antena-matome.net,buybuykorea.doorblog.jp,chihosoku.com,densetsunokijo.net,dondonwork.com,egm.doorblog.jp,doujinsokuhou45.com,erogurosokuhou.com,ffsoku.blog.jp,girls2chmatome.net,idolgekijyo.doorblog.jp,kagerou.biz,kichimama-life.com,kichimama.net,kichimamasenki.com,kijyonohimitsu.com,kijyotown.net,kusainews.com,love-history.jp,matomehime.com,modevip.work,momoclomatomex.com,mon-st.blog.jp,nandemomatomedan.com,nyankosokuho.com,pachinkoslot.site,pomepuu.net,porolympic.tokyo,shinebeautyhealth.site,shingekikyojin.doorblog.jp,shuraba-dendo.com,snackworld-sokuhou.com,sports-spirits.com,sukashuraba.net,takegon.jp,wiiups.com,46matome.net,kijyokatu.com,god2ch.com,kyarabetsunijiero.net,theaterdays.xyz,tyoieronews.blog.jp,akbmatomeatoz.ldblog.jp,npb-news.com,masaki241105.livedoor.blog,iyaaaao.doorblog.jp,youtube5ch.com,cysoku.com,hannn.livedoor.blog,marasoku.info,pokesoku.jp,pokemongo2ch.net,ff14hikasensokuhou.com,geeksokuhou.net,vtuber-matomeruyon.blog.jp,sakasaka10.blog.jp,jisaka.com,roboanime.com,matomesoku.jp,2ch-ero-report.blog.jp,chunisoku.com,eroitaiken.blog.jp,gurasen.com,moetataiken.com,nokuo.blog.jp,nius.doorblog.jp,pokemonunite.blog.jp,okanenews24.com,valorantchannel.livedoor.blog,vipperlog.com,vipstyle.tokyo,blue-archive.doorblog.jp,beikokukabu-etf-matome.com,pokemongo-kouryakumatome.net,doujin-rpgfan.com,nandemo-nadeshiko.blog.jp,samuraisoccer.doorblog.jp,gamehig.com,chomagireko.blog.jp,bybybicycle.blog.jp,animesoku.com,moemoeanime.blog.jp,buzzral.com,2ch-uwaki.com,2chmatome.bloggeek.jp,2monkeys.jp,5ch-echiechi.doorblog.jp,5chmatome.blogo.jp,aburatanisannogamematome.blog.jp,addchannel.net,aiteesokuhou.blog.jp,akb48rompen.com,audioon.blog.jp,azurlane.doorblog.jp,babymetaltimes.com,bb.doorblog.jp,blog-mougenda.com,blog.game084.com,bm.2chblog.jp,chikakb.ldblog.jp,chomangasokuho.blog.jp,curationewsharp.blog.jp,curioso.blog.jp,dareda.net,db-gohan.blog.jp,dechisoku.com,ebitsu.net,ekurere3.com,ekuzodeerhand.blog.jp,everydayissunday.livedoor.blog,fate-go-grandorder.blog.jp,fate-go.blog.jp,fate-gok.blog.jp,fate-grandorder-go.blog.jp,fate-kouryakumaster.blog.jp,fireembs.blog.jp,gacha.blog.jp,gamejksokuhou.com,gazoua2meru.livedoor.blog,geinoutopics-plus.blog.jp,gensen2ch.com,gunji.blog.jp,hanshintigers1.blog.jp,heart-net.xyz,heartlife-matome.com,hero-news.com,hiraganakeyaki.blog.jp,honsoku.com,hoshujapan.jp,hrocks6969.xyz,ideal2ch.livedoor.biz,internet-game-lounge.blog.jp,jiwachan.net,kasegeru.blog.jp,katasumisokuhou.blog.jp,kazokuchannel.doorblog.jp,kijoden.com,kijonikki.net,kijyotsubu.net,kininaruero7.blog.jp,kinpira-san.com,kokoyakyumatomesokuho.blog.jp,koumuin-matome.blog.jp,labradorsokuho.net,maki7.dreamlog.jp,mashlife.doorblog.jp,matmebae.net,matomelotte.com,matomemo-ch.net,mhsoken.blog.jp,mindhack2ch.com,mirishita.2chblog.jp,moe-vip.com,money-life.doorblog.jp,nanj-push.blog.jp,nanj-short.net,nanj-world.blog.jp,nanjchallenge.net,narisoku.blog.jp,newsweb.blog.jp,nizigami.com,onosakaemiri.blog.jp,oomonoyoutubersokuhou.blogo.jp,orufemorufenz.com,oumaga-times.com,pachinko-next.blog.jp,pachinkolist.com,paranormal-ch.com,pawawa.sokuho.org,pinap.blog.jp,pokemon-goh.doorblog.jp,rakukan.net,romeodensetsu.com,ronsoku.com,sematome.com,setouchi48g.ldblog.jp,shironeko-guild.blog.jp,shumi-nikki.xyz,skematomemon.com,sontaku.info,sutekinakijo.com,syurabarabanba.blog.jp,tachiyomitoday.com,taorun.xyz,timely.blog.jp,tsubamesoku.blog.jp,uwakich.com,virtualyoutuber-matome.blog.jp,visual-matome.com,vrtuber-news.com,vtuber-densoku.blog.jp,yabesoku.blog.jp,yofukasi-susume.xxxblog.jp,yurukuyaru.com,zetusoku.net##.rss-blogroll
+[$path=/\/(?:a_load|bookedaura|doujinero|douxnavi|ele01|fightersmatome|geinoujin_dougazou|goodadult|gotisoku|gourmetmatome|hktmatomemon|h_taiken_dan|idol_gravure_sexy|izumich-wjzrnqvn|junglep2|kaigainoomaera|kanribu01|kore_iine|lexus_ls460|nandemojouhou|news4wide123|niji_tan|ninshin_syussann|nityannnerumatome-torendo|nizimoenews|ochinpomilksokuho|seisobitch|sky_wing2010-geinou|soccerrevolution|spec_530|toshi114514|toshiboking|uwasainfo|yakiusoku)/]blog.livedoor.jp##.rss-blogroll
+genshin-matome.blog.jp,romasaga-reuniverse.blog.jp,umamusume-pakamusu.blog.jp,job-soku.blog.jp,seikeidouga.blog.jp,gensin.blog.jp,guardsoku.blog.jp,ippondemoninjin.livedoor.blog,movient.net,ysokuhou.blog.jp,matomesan.jp,amage-sokuhou.xyz,metaversesokuhou.blog.jp,maruhorror.com,kininaru-geinou-m.blog.jp,gensen5ch.blog.jp,bakutan.blog.jp,2jieropicture.blog.jp,lolis09.blog.jp,niji-ero-camp.blog.jp,nizisencharacter.blog.jp,nizisensituation.blog.jp,netabarasi.ldblog.jp,lgbtch.blog.jp,hatarakuhijoshiki.livedoor.blog,h-pon.doorblog.jp,akbmatome18300.ldblog.jp,av01.youblog.jp,ff14net.2chblog.jp,magicianwiz.net,ge-sewa-news.blog.jp,2chasadora.com,a711.work,akege.blog.jp,antena-matome.net,buybuykorea.doorblog.jp,chihosoku.com,densetsunokijo.net,dondonwork.com,egm.doorblog.jp,doujinsokuhou45.com,erogurosokuhou.com,ffsoku.blog.jp,girls2chmatome.net,idolgekijyo.doorblog.jp,kagerou.biz,kichimama-life.com,kichimama.net,kichimamasenki.com,kijyonohimitsu.com,kijyotown.net,kusainews.com,love-history.jp,matomehime.com,modevip.work,momoclomatomex.com,mon-st.blog.jp,nandemomatomedan.com,nyankosokuho.com,pachinkoslot.site,pomepuu.net,porolympic.tokyo,shinebeautyhealth.site,shingekikyojin.doorblog.jp,shuraba-dendo.com,snackworld-sokuhou.com,sports-spirits.com,sukashuraba.net,takegon.jp,wiiups.com,46matome.net,kijyokatu.com,god2ch.com,kyarabetsunijiero.net,theaterdays.xyz,tyoieronews.blog.jp,akbmatomeatoz.ldblog.jp,npb-news.com,masaki241105.livedoor.blog,iyaaaao.doorblog.jp,youtube5ch.com,cysoku.com,hannn.livedoor.blog,marasoku.info,pokesoku.jp,pokemongo2ch.net,ff14hikasensokuhou.com,geeksokuhou.net,vtuber-matomeruyon.blog.jp,sakasaka10.blog.jp,jisaka.com,roboanime.com,matomesoku.jp,2ch-ero-report.blog.jp,chunisoku.com,eroitaiken.blog.jp,gurasen.com,moetataiken.com,nokuo.blog.jp,nius.doorblog.jp,pokemonunite.blog.jp,okanenews24.com,valorantchannel.livedoor.blog,vipperlog.com,vipstyle.tokyo,blue-archive.doorblog.jp,beikokukabu-etf-matome.com,pokemongo-kouryakumatome.net,doujin-rpgfan.com,nandemo-nadeshiko.blog.jp,samuraisoccer.doorblog.jp,gamehig.com,chomagireko.blog.jp,bybybicycle.blog.jp,animesoku.com,moemoeanime.blog.jp,buzzral.com,2ch-uwaki.com,2chmatome.bloggeek.jp,2monkeys.jp,5ch-echiechi.doorblog.jp,5chmatome.blogo.jp,aburatanisannogamematome.blog.jp,addchannel.net,aiteesokuhou.blog.jp,akb48rompen.com,audioon.blog.jp,azurlane.doorblog.jp,babymetaltimes.com,bb.doorblog.jp,blog-mougenda.com,blog.game084.com,bm.2chblog.jp,chikakb.ldblog.jp,chomangasokuho.blog.jp,curationewsharp.blog.jp,curioso.blog.jp,dareda.net,db-gohan.blog.jp,dechisoku.com,ebitsu.net,ekurere3.com,ekuzodeerhand.blog.jp,everydayissunday.livedoor.blog,fate-go-grandorder.blog.jp,fate-go.blog.jp,fate-gok.blog.jp,fate-grandorder-go.blog.jp,fate-kouryakumaster.blog.jp,fireembs.blog.jp,gacha.blog.jp,gamejksokuhou.com,gazoua2meru.livedoor.blog,geinoutopics-plus.blog.jp,gensen2ch.com,gunji.blog.jp,hanshintigers1.blog.jp,heart-net.xyz,heartlife-matome.com,hero-news.com,hiraganakeyaki.blog.jp,honsoku.com,hoshujapan.jp,hrocks6969.xyz,ideal2ch.livedoor.biz,internet-game-lounge.blog.jp,jiwachan.net,kasegeru.blog.jp,katasumisokuhou.blog.jp,kazokuchannel.doorblog.jp,kijoden.com,kijonikki.net,kijyotsubu.net,kininaruero7.blog.jp,kinpira-san.com,kokoyakyumatomesokuho.blog.jp,koumuin-matome.blog.jp,labradorsokuho.net,maki7.dreamlog.jp,mashlife.doorblog.jp,matmebae.net,matomelotte.com,matomemo-ch.net,mhsoken.blog.jp,mindhack2ch.com,mirishita.2chblog.jp,moe-vip.com,money-life.doorblog.jp,nanj-push.blog.jp,nanj-short.net,nanj-world.blog.jp,nanjchallenge.net,narisoku.blog.jp,newsweb.blog.jp,nizigami.com,onosakaemiri.blog.jp,oomonoyoutubersokuhou.blogo.jp,orufemorufenz.com,oumaga-times.com,pachinko-next.blog.jp,pachinkolist.com,paranormal-ch.com,pawawa.sokuho.org,pinap.blog.jp,pokemon-goh.doorblog.jp,rakukan.net,romeodensetsu.com,ronsoku.com,sematome.com,setouchi48g.ldblog.jp,shironeko-guild.blog.jp,shumi-nikki.xyz,skematomemon.com,sontaku.info,sutekinakijo.com,syurabarabanba.blog.jp,tachiyomitoday.com,taorun.xyz,timely.blog.jp,tsubamesoku.blog.jp,uwakich.com,virtualyoutuber-matome.blog.jp,visual-matome.com,vrtuber-news.com,vtuber-densoku.blog.jp,yabesoku.blog.jp,yofukasi-susume.xxxblog.jp,yurukuyaru.com,zetusoku.net##.rss-blogroll
+moeimg.net###pc-pickup-link-frame
 ||blog.livedoor.jp/nanjstu/bt_rss3.htm
 blog.livedoor.jp##.headlinerss
 [$path=/sekaiminzoku]blog.livedoor.jp##.main-column-inner > div[style^="width:720px;height:"][style*="border-bottom-style:groove"]
@@ -163,6 +164,59 @@ blog.livedoor.jp##.naka_rss
 blog.livedoor.jp##div[class^="footrss"]
 blog.livedoor.jp##div[class^="shitarss_"]
 blog.livedoor.jp##div[id^="shitarss_title_"]
+||vippers.jp/2ch-c_iframe_
+gameinn.jp##.wp-rss-template-container
+gameinn.jp#?#.article-under-box > p.sidetop_p:has(+ .wp-rss-template-container)
+benri.com##.CTPXTBL
+sugi69693.xyz###sidebar
+flashff-blog.com##.rsswaku
+momoniji.com##div[class*="pick-Box"]
+tousatu-club.com##.widget_custom_html
+eroanime-movie.com##.rss-grid
+game16.net##.keni-main_outer > div[class^="headline"]
+geinou-nude.com##div[id^="widget_main_top"]
+||widgets.taxel.jp^$third-party
+||cdn.taxel.jp^$third-party
+news.tokimeki-s.com##.kijinaka_gazoumoji
+gamestlike.com##.singletop-widget
+negisoku.com##.t_h div[class^="res_"] .t_a div[style*="padding: 10px; margin: 5px 20px 10px;"]
+gensin.blog.jp#?#.plugin-memo.sidewrapper:contains(楽天人気ランキング)
+nandemoiiyoch.com###custom_html-11
+nandemoiiyoch.com###custom_html-13
+eromanga-fantasy.com#?#.l-footerTop > div.boxi800:has(> iframe[src$="/sp_rss_iframe.html"])
+erodoujinshi-world.com#?#.l-footerTop > div.boxi800:has(> iframe[data-src="https://erodoujinshi-world.com/sp_rss_iframe.html"])
+eromanga-fantasy.com,erodoujinshi-world.com#?#.l-footerTop > h2.ranking_ttl:contains(他サイトの最新漫画記事)
+hentai-tanker.com#?#main > div.card-white__blue:has(> div.rss-scroll)
+matome.f-book.net##.rss_head
+seiyufan.livedoor.biz##div[class^="rss-box"]
+||fc2.com/s/e/t/setv/blogroll_custom.js
+||tokimeki-s.com/kansha.html
+||sexytvcap.nyanko.org/js/np_list.js
+efire-matome.com###text-16
+efire-matome.com###text-13
+efire-matome.com###text-8
+efire-matome.com###text-17
+chomanga.org#?#.widget:has(div[class^="rss-box"])
+genshin-matomech.umadacchi.net###block-8
+genshin-matomech.umadacchi.net##.rss-flex
+blue-protocol-ch.com##.rss_aritcle
+blue-protocol-ch.com#?#.related_post:has(+ div.rss_aritcle)
+geektushin.com##.widget-above-related-entries
+geektushin.com##.widget-below-related-entries
+geektushin.com##.widget_rss
+uma-log.net###custom_html-8
+uma-log.net###custom_html-9
+negisoku.com##.t_a > span
+negisoku.com##.article-body-more > p[style="color:gray;text-align:right;"]
+net-inov.com##.rss-site
+shouginews.blog.jp###main > div[style^="border:"][style*="padding:"]
+sexytvcap.com###bottomrss
+revuestarlightre.com##main aside.widget_custom_html
+||cpz.to/act/$subdocument
+cpz.to###side_ac_koushin
+erogazopple.com##.rss1.widget_text
+cavolump.com##div[class^="pickup"]
+parlourfullslotl.com##.RSSBlogroll
 nofootynolife.net##.blogroll_content1
 nofootynolife.net##.entry_body > div[style$="#AAA;width: 400px;"]
 2chmatome.net##.rssarticletop
@@ -322,7 +376,7 @@ kijomatomelog.com##div[style="margin-bottom:30px;"] > b > span[style="font-size:
 ||baiku-sokuho.info/top-rss.html
 carp-matome.blog.jp##.bw_outbox
 anihatsu.com##.rss-blogroll-kobetu
-erodoujinjohoukan.com###toprss
+sexytvcap.com,erodoujinjohoukan.com###toprss
 news30over.com##div[class^="topbox"]
 erodaizensyu.com##p > a[href] > iframe[src^="//blog-rss.com"]
 ||mudainodocument.com/headline9.html
@@ -346,7 +400,6 @@ kijolifehack.com##.article-body-more > span > span[style="font-weight: bold; fon
 exawarosu.net##.img-links
 tozanchannel.blog.jp##.ななめmove + p.menuLineLightW-99
 tozanchannel.blog.jp#?#.menuLineLightW-3:contains(人気記事)
-rastaneko-blog.com##.plugin3_outline
 rastaneko-blog.com##div[style="background-color: #f5f5f5; padding: 10px; font-size: 18px; border: 1px dotted #000000;"]
 rastaneko-blog.com##div[style="background-color: #f5f5f5; padding: 10px; font-size: 18px; border: 1px dotted #000000;"] ~ dl:not([class])
 rastaneko-blog.com##.ently_text > div.osusume
@@ -590,7 +643,7 @@ nanj-world.blog.jp#?#body > #second-header:has(> #header_rss_c)
 /under.js$domain=kichimama-life.com|kichimama.net|kijonikki.net|kijyonohimitsu.com|kijyotown.net|romeodensetsu.com|shuraba-dendo.com|shurabanote.com|sukashuraba.net|labradorsokuho.net|densetsunokijo.net
 densetsunokijo.net,kichimama.net,romeodensetsu.com,shuraba-dendo.com,sukashuraba.net,labradorsokuho.net###rss2
 gundam-futab.info##.rss_label
-pokebrary.blog.jp,gundam-futab.info##.blogroll-channel
+sexytvcap.com,pokebrary.blog.jp,gundam-futab.info##.blogroll-channel
 ganmodoki.net###livedoor_sbox_kiji
 ganmodoki.net###pc-rss
 ganmodoki.net###mobile-livedoor-kiji
@@ -663,7 +716,7 @@ gundamlog.com###top_rss
 ||norisoku.com/rss-
 mona-news.com##div[id^="rss_"]
 ||ertk.net/rss.php
-vtubersokuhou.com##.maintop-widget
+gamestlike.com,vtubersokuhou.com##.maintop-widget
 vtubersokuhou.com###block-11
 vtubersokuhou.com###block-15
 revuestarlightre.com###rss-roll-01
@@ -715,7 +768,7 @@ kurumachannel.com##iframe[src*="-Rss.html"]
 kurumachannel.com##.article-body-inner > .bottom-link
 kurumachannel.com##.article-body-inner > div[style="padding-bottom:24px;"]
 ||otasoku.livedoor.biz/otarss.html
-otasoku.livedoor.biz#?##main > .article-footer:has(> .article-post > li > font > b:contains(アンテナ新着記事一覧))
+otasoku.livedoor.biz#?#.article-footer:has(> .article-post > li > font > b:contains(アンテナ新着記事一覧))
 /rss.html$domain=blog.livedoor.jp|blog.jp|moeasia.net|blog.2nt.com|blog.fc2.com
 /rss1.htm$domain=blog.jp|blog.livedoor.jp|kimsoku.com
 /rss2.html$domain=blog.livedoor.jp|ani-chat.net
@@ -814,7 +867,7 @@ bottisoku.blog.2nt.com##div[style^="width:1200px;height:280px"]
 .sprss002.html$domain=moeero-library.com|eromanga-moeerolibrar.com
 ||eromanga-cafe.com^$subdocument,~third-party
 eromanga-cafe.com###custom_html-4
-eromanga-cafe.com###custom_html-7
+nandemoiiyoch.com,eromanga-cafe.com###custom_html-7
 eromanga-cafe.com##.loop-single-widget
 ero-doujinshiworld.com,bl-doujinsouko.com,bl-boyslove.com,eromanga-musou.com,erocomic-hunter.net,eromanga-moeerolibrar.com,eromanga-life.com,ero-mangacafe.com,dojin-pandemic.com,dojinwatch.com,eromanga-castle.com,doujincafe.com,ero-manga-platinum.net,ero-mangasokuhou.com,ero-comic-hunter.net,eromanga-cafe.com,eromanga-sevendays.net,moeero-library.com##.boxi800
 kidan-m.com,otakumix.doorblog.jp###rss1
@@ -946,7 +999,7 @@ psneolog.com##.rss_box-sp
 2chav.com###kotei
 2chav.com##.cari001 + h3.midasih3
 2chav.com##.p3_uekotei
-2chav.com##.plugin3_outline
+panchiragazoumania.com,rastaneko-blog.com,2chav.com##.plugin3_outline
 2chav.com##.kijinakakoteeei
 2chav.com##.kijinakakoteeei02
 2chav.com##div[style^="width:682px;height:385px"]
@@ -957,7 +1010,7 @@ yoshidakenkou.net###header-rss
 1000mg.jp##div[class$="rss"]
 ||itaishinja.com/rss/
 worldrankingup.blog.2nt.com,youskbe.com,kyousoku.net,jiwasoku.com,irodorich.com,kemochan.com,anitubu.com,itaishinja.com##[id^="rss"]
-gurum.biz,newtoku.jp##.blogroll
+youskbe.com,gurum.biz,newtoku.jp##.blogroll
 keyakizaka46matomerabo.com###singleFooter__rss
 keyakizaka46matomerabo.com##.articleSingle__rss
 keyakizaka46matomerabo.com##.rssFeed
@@ -993,6 +1046,9 @@ beasoku.com##.l-rss-header
 ||gubagootracking.com^$third-party
 ||cdn.gubagoo.io^$third-party
 ##gg-toolbar--specials
+||gso.amocrm.ru^$third-party
+||chatwoot.hicity.vn^
+||leadball.ru^$third-party
 ||widget.flowxo.com^$third-party
 ||tidio.com^$third-party
 ||webchat.cmcplanet.com^$third-party
@@ -1131,6 +1187,8 @@ beasoku.com##.l-rss-header
 ||cloud.lexprofit.$third-party
 ||partner-widget.vse-sdal.com^
 ||perimeterx.widget.insent.ai^
+navitime.co.jp##.ntj-web-nps
+translate.com##.translate_helper--closed
 jotform.com##.jfFeedbackButton
 ||dutasex.info/wp-content/plugins/chaty
 ||blog.livedoor.com/plugins/news/topics.js
@@ -1322,6 +1380,8 @@ yuristznaet.ru##iframe[src^="http://form.cloudleadia.com/"]
 ||yangteacher.ru/reformal.js
 ||yastatic.net/*/chat/widget.js$domain=next24.ru|goodprice4you.ru
 ||yengec.zendesk.com/embeddable/
+@@||widgets.trustedshops.com/reviews/tsSticker/tsSticker.js$domain=interpack.eu
+@@||widgets.trustedshops.com/reviews/tsSticker/css/light.theme.css$domain=interpack.eu
 @@||code.jivo.ru/widget/$domain=coffee-tea-bravos.ru
 @@||components.justanswer.com^$domain=justanswer.co.uk|justanswer.es|justanswer.de|justanswer.jp
 @@||quiz.marquiz.ru^$domain=skillfactory.ru
@@ -1335,9 +1395,11 @@ yuristznaet.ru##iframe[src^="http://form.cloudleadia.com/"]
 @@||renderer.apester.com^$domain=sport24.ru
 @@||code.jivosite.com^$domain=help.letyshops.ru
 indoxxi.show##.tawkto-btn
+businesstoday.com.tw##iframe[src^="https://api.popin.cc/"]
+digitalspy.com##div[data-embed="embed-gallery"]
 danas.hr#?#div[class^="css-"] > div[class^="css-"]:has(> div.cls_frame > div[class^="css-"] > div.listalicaProizvoda_swiper)
 book24.ru##.fake-jivosite
-tech.hindustantimes.com#?##entryArticle > div[class*="inlineStoryWidget_"]:has(> .ProductAffilateWrapper)
+tech.hindustantimes.com#?#.article div[class]:has(> section.ProductAffilateWrapper)
 ||geoapteka.ua/geowidget/loader/geowidget.min.js$domain=pharmencyclopedia.com.ua
 pharmencyclopedia.com.ua###geo_wgt
 ixbt.com##div[id^="marketWidget"]
@@ -1363,6 +1425,10 @@ live.kufu.co.jp###similar_articles
 newsee-media.com##.uz-ar
 newsee-media.com,saitama-np.co.jp,htb.co.jp,oricon.co.jp,maidonanews.jp##.uz-ny
 ||gacraft.jp^$third-party
+mbs.jp##.common-wrap--recommend
+front-row.jp##._popIn_recommend
+beauty.oricon.co.jp###contents > div[style="margin-top:20px"] > h3[style="margin-top:17px;background:#ececec; color:#222; margin-bottom: 8px;"]
+lmaga.jp##.feed
 crank-in.net#?#.mb-0:has(> div[id^="_popIn_"])
 dramanavi.net###block-97
 medical.jiji.com###_popIn_recommend_2
@@ -1371,7 +1437,6 @@ sitakke.jp##.editor__section
 sitakke.jp##.ranking
 kahoku.news##div[style="min-height:492px;"]
 news.ntv.co.jp##.recommend-list-wrapper
-otekomachi.yomiuri.co.jp###_popIn_right
 ctinews.com#?#.border-b > div#_popIn_recommend:upward(1)
 ameblo.jp,kakakumag.com###_popIn_recommend
 itmedia.co.jp##._popIn_recommend:empty
@@ -1389,6 +1454,7 @@ full-count.jp#?#section > div.c-heading:has(> p.c-heading__en:contains(RECOMMEND
 ###tripla-app
 /js/chat/edu_chat.js
 /wp-content/plugins/creame-whatsapp-me/public/js/joinchat.
+||cdn.legistco.ru^$third-party
 ||webchat.birdeye.com^$third-party
 ||limetalk.com^$third-party
 ||tracker.tolvnow.com^$third-party
@@ -1415,14 +1481,17 @@ full-count.jp#?#section > div.c-heading:has(> p.c-heading__en:contains(RECOMMEND
 ||uhchat.net^$third-party
 ||wat.atms.at^$third-party
 ||widget.feedot-lawyer.ru^
-footlive.me.pokemon-tube.com,shirainime.com,daemon-hentai.com,seirsanduk.us,sedsports.com,139.99.120.222,indoxxi.show,aniwatcher.com,mylivecricket.info,debrid-file.com,streamonsport.info,gdplayer.tv##iframe[src*="chatango.com"]
-||st.chatango.com^$domain=mysocceraustralia.com|xtapes.to|streamonsports.cc|footlive.me|neonime.site|psntvs.me|hesgoal.com|sanzisport.com|goanimelist.me|pokemon-tube.com|animeindo.moe|shirainime.com|daemon-hentai.com|seirsanduk.us|sedsports.com|139.99.120.222|indoxxi.show|cricfree.live|bosscast.net|aniwatcher.com|mylivecricket.info|debrid-file.com|neonime.vip|streamonsport.info|snahp.it|worldcupfootball.me|gdplayer.tv
+shirainime.com,daemon-hentai.com,seirsanduk.us,sedsports.com,139.99.120.222,indoxxi.show,aniwatcher.com,mylivecricket.info,debrid-file.com,streamonsport.info,gdplayer.tv##iframe[src*="chatango.com"]
+||st.chatango.com^$domain=descargaseriestv.com|mysocceraustralia.com|xtapes.to|streamonsports.cc|footlive.me|neonime.site|psntvs.me|hesgoal.com|sanzisport.com|goanimelist.me|animeindo.moe|shirainime.com|daemon-hentai.com|seirsanduk.us|sedsports.com|139.99.120.222|indoxxi.show|cricfree.live|bosscast.net|aniwatcher.com|mylivecricket.info|debrid-file.com|neonime.vip|streamonsport.info|snahp.it|worldcupfootball.me|gdplayer.tv
 streamonsports.cc,streamonsport.info##.chatango
 139.99.120.222,indoxxi.show##.chatango-btn
+descargaseriestv.com###block-4
 ||widget.intercom.io^$domain=appmaster.io
+food4fitness.pt###pinnedBottomRight
+||accdn.lpsnmedia.net/api/account/*/configuration/le-campaigns/$domain=homedepot.com
 sevenbank.co.jp##.fn-followingMenu
 ing.com.tr###chat
-||webpage.qidian.qq.com/qidian/chatv3/
+||webpage.qidian.qq.com/qidian/chatv3/$third-party
 diskgenius.cn##.class_qidian_wpa
 support.nordpass.com##.Chat-button
 ||guest-agent.mobilus.me/web/mobi-agent-client-frame-loader.min.js$domain=city.arakawa.tokyo.jp
@@ -1521,6 +1590,12 @@ zebratechnologies.force.com##.zbrbot-container
 ||xatech.com/web_gear/chat/chat.swf
 ||zebratechnologies.force.com/resource/*/ChatbotJs/js/botchat-es5.js
 @@||service.force.com/embeddedservice/*/esw.min.js$domain=microchip.com|visible.com|playstation.com|cyberpowersystems.com|lego.com
+smartpress.by##.vidjet-template
+||date.forumodua.com^
+||motor-cdn.prensaiberica.es/widget?$domain=informacion.es
+||widget-am.misteraladin.com^$domain=inews.id
+eiga.com##.area-unext
+||cdn.vuukle.com/platform.js$domain=joblo.com
 ||getnews.jp/webgame/
 getnews.jp###getnews\.jp_comment + center
 web.ultra-soccer.jp###kindle-side-banner
@@ -1531,7 +1606,7 @@ fd.ru##iframe[src^="https://about.glavbukh.ru/callback/form-api.php"]
 ||about.glavbukh.ru/callback/form-api.php
 ||radyosfer.com/player/$domain=unyenethaber.com
 ||s3.tradingview.com/external-embedding/embed-widget-ticker-tape^$domain=yenimesaj.com.tr
-yenimesaj.com.tr#?#div[class="div"] > div[class="div"][style]:has(> div.tradingview-widget-container)
+yenimesaj.com.tr#?#div[class="div"]:has(> div[class="div"][style] > div.tradingview-widget-container)
 sakasaka10.blog.jp##.article-body-more > .t_b ~ br + br
 zeit.de##iframe[id="mycountrytalks-embed"]
 laptopmag.com##.hawk-nest
@@ -1588,6 +1663,8 @@ pesni-tut.com##.r_m_genre_songs + div[id] + div:not([id])
 ||l.getsitecontrol.com^$domain=nv.ua|tedium.co
 ||scripts.mailfire.io^$third-party
 ||youtube.com/embed/?enablejsapi=1&origin=*3dnews.ru&widgetid=1
+ha.com##body > div.QSIPopOver
+tagesspiegel.de###story-elements > div[class]:has(> div#opinary-automation-placeholder)
 nordbayern.de#?#.article__richtext .article__infobox:has(> div[id^="infobox"] > .apester-media)
 rtl.de#?#div[class]:has( > .placeholder + div[class] > .opinary-widget-embed)
 btc-echo.de#?#.bt-bg-white:has(> div[class^="btcee-opinary"])
@@ -1687,7 +1764,19 @@ forumua.org##.l-narrow-column > div.custom-html-widget
 gazeta.ua#?#.container div.w:has(> div#SinoptikInformer)
 dks.com.ua#?#.module-style:has(#SinoptikInformer)
 subbota.ua##aside.sidebar > div[id^="custom_html-"]
-baominh.tech##div[id^="kofi-widget"]
+verstka.media##.verstka-post-content > p[class="has-background"][style="background-color:#47d4ff"]
+cavalierdaily.com#$#.modal-backdrop { display: none !important; }
+cavalierdaily.com#$##cav-generic-modal { display: none !important; }
+cavalierdaily.com#$#body { overflow-y: auto !important; padding-right: 0 !important; }
+smilepolitely.com##.foobar-cta
+theins.ru#?##articleContainer > div:has(a[href^="https://donate.theins.ru/"])
+kcrw.com###cta-get-involved-large-news-cta
+semnasem.org##.adcampaign
+semnasem.org##.adcampaign-inject-banner
+semnasem.org##.article__footer-donate-row
+torrentinvites.org#?##sidebar > li:has(> div.block > div.blocksubhead > span.blocktitle:contains(DONATE))
+||torrentinvites.org/64.gif
+klto9.com,klz9.com,baominh.tech##div[id^="kofi-widget"]
 apkmody.io###fixed-donate
 ||static.fundraiseup.com$domain=gijn.org
 gijn.org##.donate-btn
@@ -1794,4 +1883,4 @@ hromadske.ua#$#.DonateModal-overlay { display: none !important; }
 hromadske.ua#$#body { overflow: visible !important; }
 @@||buymeacoffee.com/*/widget.$script,domain=langoguessr.com
 !+ NOT_OPTIMIZED
-adguard.com,adguard.app##.hello_from_adguard_annoyances_widgets
+adguard.info,adguard.com,adguard.app##.hello_from_adguard_annoyances_widgets

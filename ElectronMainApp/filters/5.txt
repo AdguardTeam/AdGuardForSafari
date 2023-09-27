@@ -1,8 +1,8 @@
-! Checksum: z4F1fN6fVMH2UNtGxDZHwQ
+! Checksum: ZZHlrqexRqk8jbRWqiqdaQ
 ! Title: AdGuard Experimental filter
 ! Description: Filter designed to test certain hazardous filtering rules before they are added to the basic filters.
-! Version: 2.0.1.18
-! TimeUpdated: 2023-05-17T13:31:54+07:00
+! Version: 2.0.1.20
+! TimeUpdated: 2023-08-01T19:32:04+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -141,6 +141,8 @@
 ! Rules that are restricted to one or more domains.
 ! This section contain any type of rule grouped by domain.
 !
+! vipbox.lc - streaming provider - blocking popunders specific to that page
+/[a-z]{8,}\.(com|info|xyz)/$domain=nolive.me,third-party
 ! main youtube page - changing view for the first row of elements
 www.youtube.com#$?##contents ytd-rich-grid-row:has(> div[id="contents"] > ytd-rich-item-renderer[style="display: none !important;"]) > #contents:first-child { max-width: unset !important; }
 www.youtube.com#$?##contents ytd-rich-grid-row:has(> div[id="contents"] > ytd-rich-item-renderer[style="display: none !important;"]) ytd-rich-grid-media { max-width: unset !important; }
@@ -258,7 +260,7 @@ imdb.com#$?#body:has(div[data-testid="promptable"] .ipc-rating-display-with-post
 ! is properly working.
 !
 !+ NOT_OPTIMIZED
-adguard.com,adguard.app##.hello_from_adguard_experimental
+adguard.info,adguard.com,adguard.app##.hello_from_adguard_experimental
 !
 !-------------------------------------------------------------------!
 !------- Experimental rules for Mobile ads filter-------------------!

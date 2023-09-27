@@ -1,8 +1,8 @@
-! Checksum: cCOfEjZyKmwjS/CF5iht1g
+! Checksum: b/kg4t3mHRiEKW7zHScdbQ
 ! Title: AdGuard URL Tracking filter
 ! Description: Filter that enhances privacy by removing tracking parameters from URLs.
-! Version: 2.0.6.45
-! TimeUpdated: 2023-07-12T21:30:55+07:00
+! Version: 2.0.6.99
+! TimeUpdated: 2023-09-24T12:30:52+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -16,6 +16,12 @@
 ! Ideally, supply a link to the document that explains how this parameter is used.
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/162080
+! https://github.com/AdguardTeam/AdguardFilters/issues/158662
+! https://support.google.com/analytics/answer/10071811
+! Coremetrics
+! https://help.hcltechsw.com/commerce/8.0.0/coremetrics/refs/rmtusecmpcore.html
+! https://help.goacoustic.com/hc/en-us/articles/360042483794-Marketing-Channels-report
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155405
 ! Used by shareasale.com
 ! Click tracking. Probably used by malware
@@ -85,8 +91,7 @@
 ! Branch.io ( https://stackoverflow.com/questions/37882810/what-is-meaning-of-branch-match-id )
 ! Valuecommerce ( https://help.valuecommerce.ne.jp/mer/dl/ITP2.0_for_iTAG.pdf )
 ! https://github.com/brave/brave-browser/issues/17507
-! https://github.com/brave/brave-browser/issues/17451
-! https://github.com/brave/brave-browser/issues/13644
+! Olytics
 ! AD EBiS
 ! Wicked Reports click tracking
 ! https://github.com/AdguardTeam/AdguardFilters/issues/108478
@@ -102,6 +107,48 @@
 !
 !
 !
+! DuckDuckGo
+! https://duckduckgo.github.io/duckduckgo-help-pages/privacy/atb/
+! breaks redirect when their Extension is installed - https://github.com/AdguardTeam/AdguardFilters/issues/161751
+! https://github.com/AdguardTeam/AdguardFilters/issues/162037
+! donga.com - click an article at its main homepage. https://www.donga.com/
+! https://github.com/AdguardTeam/AdguardFilters/issues/162001
+! https://github.com/AdguardTeam/AdguardFilters/issues/162003
+! https://github.com/AdguardTeam/AdguardFilters/issues/161972
+! tinkoff.ru
+! https://github.com/AdguardTeam/AdguardFilters/issues/161229
+! https://github.com/AdguardTeam/AdguardFilters/issues/161441
+! Youtube
+! https://github.com/AdguardTeam/AdguardFilters/issues/161013
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6932203
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6908261
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6908266
+! streamfab.jp
+! etsy.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/160495
+! https://github.com/AdguardTeam/AdguardFilters/issues/159953
+! https://github.com/AdguardTeam/AdguardFilters/issues/159733
+! https://www.pixiv.net/novel/?novel13th_character_count_checker&from=pixiv_official_post
+! https://querie.me/answer/t008mMA55hMnREySBJXZ?timestamp=1692022485
+! https://github.com/AdguardTeam/AdguardFilters/issues/159072
+! https://github.com/AdguardTeam/AdguardFilters/issues/158205
+! https://github.com/AdguardTeam/AdguardFilters/issues/158251
+! https://github.com/uBlockOrigin/uAssets/issues/19320
+! https://github.com/AdguardTeam/AdguardFilters/issues/158209
+! https://github.com/AdguardTeam/AdguardFilters/issues/158548
+! wikipedia.org
+! https://wikitech.wikimedia.org/wiki/Provenance
+! sportschosun.com - Click an internal article in their website.
+! https://github.com/AdguardTeam/AdguardFilters/issues/157492
+! https://github.com/AdguardTeam/AdguardFilters/issues/157052
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6532073
+! yna.co.kr - Click an internal article in their website.
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6514228
+! https://github.com/AdguardTeam/AdguardFilters/issues/156979
+! https://github.com/AdguardTeam/AdguardFilters/issues/156855
+! https://github.com/AdguardTeam/AdguardFilters/issues/156781
+! https://github.com/AdguardTeam/AdguardFilters/issues/156784
+! https://ieagent.jp/?ref=hm&cv=floatingbanner&ref=hm&p=ikkenyachintai-yametahougaii-115525&ct=img&cv=Rooch_pc-floatingbanner.jpg
 ! doda.jp trackparams
 ! https://www.hatarako.net/fukuoka/?prelink=allmaplink
 ! https://github.com/AdguardTeam/AdguardFilters/issues/156147
@@ -204,7 +251,6 @@
 ! https://home.kingsoft.jp/news/transport/dressup/175273.html?from=content
 ! AT Internet
 ! https://github.com/AdguardTeam/AdguardFilters/issues/138614
-! https://github.com/AdguardTeam/AdguardFilters/issues/138466
 ! https://event.hoken-mammoth.jp/sp/lps/event_promotion12/?s_mf=0901mamana
 ! internal links ex. https://www.cinematoday.jp/page/A0008622?g_clk=top_specials
 ! affiliate links on h7-game.com (nsfw)
@@ -429,20 +475,17 @@
 ! bitrec.com recommendations widget
 ! https://github.com/AdguardTeam/AdguardFilters/issues/89345
 ! Google Search
-! https://github.com/AdguardTeam/CoreLibs/issues/1464
-! Probably a bug
 ! Breaks codepage in Google Search https://yugioh-wiki.net/index.php
 !
 ! eBay tracking parameters
 ! Amazon tracking IDs found on several subpages
 ! Disabled rules:
+! https://github.com/AdguardTeam/AdguardFilters/issues/157889#issuecomment-1660195416
 ! https://github.com/AdguardTeam/AdguardFilters/issues/110571
 ! https://github.com/AdguardTeam/AdguardFilters/issues/88627
 ! https://github.com/AdguardTeam/AdguardFilters/issues/89163
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148958
-! Breaks navigation and removes choosed seller id on the item's page
-!
-! https://github.com/AdguardTeam/AdguardFilters/issues/110571 - disable rule if issue happens again: broke adding article to basket when viewing all offers
+! Breaks navigation and removes chosen seller id on the item's page
 !
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-5867802
 !
@@ -487,7 +530,7 @@
 ! is properly working.
 !
 !+ NOT_OPTIMIZED
-adguard.com,adguard.app##.hello_from_adguard_tracking_params
+adguard.info,adguard.com,adguard.app##.hello_from_adguard_tracking_params
 !
 !---------------------------------------------------------------------------!
 !-------------- Fixing filtration errors (false-positive) ------------------!
@@ -498,6 +541,9 @@ adguard.com,adguard.app##.hello_from_adguard_tracking_params
 !
 !
 !
+! greenbuildingadvisor.com - broken login
+! https://github.com/AdguardTeam/AdguardFilters/issues/157807
+! Fixes ERR_TOO_MANY_REDIRECTS error
 ! https://github.com/AdguardTeam/AdguardFilters/issues/152716
 ! https://github.com/AdguardTeam/AdguardFilters/issues/148757
 ! https://github.com/AdguardTeam/AdguardFilters/issues/144144
