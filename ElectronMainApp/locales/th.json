@@ -23,6 +23,12 @@
     "options_support_faq_description": {
         "message": "คำถามที่พบบ่อย"
     },
+    "options_support_feature_request_title": {
+        "message": "ส่งขอคุณสมบัติ"
+    },
+    "options_support_feature_request_description": {
+        "message": "แนะนำวิธีการปรับปรุงแอปแอพพลิเคชัน"
+    },
     "options_support_bug_report_title": {
         "message": "รายงานข้อผิดพลาด"
     },
@@ -64,6 +70,9 @@
     },
     "options_about_updates_not_found": {
         "message": "AdGuard สำหรับ Safari เป็นรุ่นล่าสุดแล้ว"
+    },
+    "options_about_updates_error": {
+        "message": "ข้อผิดพลาดในการอัปเดต"
     },
     "options_about_update_downloaded": {
         "message": "เกือบจะล่าสุดแล้ว! เปิด AdGuard ใหม่สำหรับ Safari เพื่อให้การอัปเดตเสร็จสิ้น"
@@ -158,6 +167,9 @@
     "options_filters_no_enabled": {
         "message": "ไม่มีตัวกรองที่เปิดใช้งาน"
     },
+    "options_filters_no_filters": {
+        "message": "ไม่มีตัวกรอง"
+    },
     "options_filters_version": {
         "message": "รุ่น %s"
     },
@@ -245,11 +257,26 @@
     "options_allowlist": {
         "message": "รายการที่อนุญาต"
     },
+    "options_allowlist_description": {
+        "message": "AdGuard ไม่กรองเว็บไซต์จากรายการที่อนุญาต"
+    },
+    "options_allowlist_inverted": {
+        "message": " (กลับหัว)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "โดเมน: %s"
+    },
     "options_allowlist_no_domains": {
         "message": "รายการอนุญาตว่างเปล่า"
     },
+    "options_allowlist_inverse": {
+        "message": "กลับรายการที่อนุญาต<span class='sp-table-row-info'>เลิกบล็อกโฆษณาทุกที่ <i>ยกเว้น</i> เว็บไซต์จากรายการที่อนุญาต</span>"
+    },
     "options_userfilter": {
         "message": "ตัวกรองผู้ใช้"
+    },
+    "options_userfilter_no_user_rules": {
+        "message": "ไม่มีกฎผู้ใช้"
     },
     "options_userfilter_info_single": {
         "message": "%s กฎผู้ใช้"
@@ -283,6 +310,9 @@
     },
     "options_popup_update_version_error": {
         "message": "เวอร์ชันของตัวกรองที่คุณพยายามอัปเดตนั้นเหมือนกันหรือเก่ากว่า"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "ตัวกรองทั้งหมดเป็นข้อมูลล่าสุด"
     },
     "options_popup_update_not_found": {
         "message": "ไม่พบการอัปเดต"

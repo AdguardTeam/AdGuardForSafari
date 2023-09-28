@@ -20,6 +20,9 @@
     "options_support_faq_title": {
         "message": "FAQ"
     },
+    "options_support_faq_description": {
+        "message": "Frågor och svar"
+    },
     "options_support_feature_request_title": {
         "message": "Skicka begäran om en funktion"
     },
@@ -29,11 +32,32 @@
     "options_support_bug_report_title": {
         "message": "Rapportera ett fel"
     },
+    "options_support_bug_report_description": {
+        "message": "Om något inte fungerar korrekt i programmet"
+    },
+    "options_support_incorrect_blocking_title": {
+        "message": "Rapportera felaktig blockering"
+    },
+    "options_support_incorrect_blocking_description": {
+        "message": "Om du ser en missad annons eller en felaktig webbplats"
+    },
     "options_support_feedback_title": {
         "message": "Lämna feedback"
     },
+    "options_support_feedback_description": {
+        "message": "Skicka funktionsförfrågningar och förslag"
+    },
+    "options_support_rate_title": {
+        "message": "Betygsätt appen"
+    },
+    "options_support_rate_description": {
+        "message": "Berätta vad du tycker om AdGuard"
+    },
     "options_support_discuss_title": {
         "message": "Diskutera"
+    },
+    "options_support_discuss_description": {
+        "message": "Diskutera på vårt forum, i sociala medier eller på GitHub"
     },
     "options_about_update_check": {
         "message": "Kontrollerar uppdateringar"
@@ -47,11 +71,17 @@
     "options_about_updates_not_found": {
         "message": "AdGuard för Safari är uppdaterat"
     },
+    "options_about_updates_error": {
+        "message": "Uppdateringsfel"
+    },
     "options_about_update_downloaded": {
         "message": "Nästan uppdaterad! Starta om AdGuard för Safari för att slutföra uppdateringen"
     },
     "options_about_update_relaunch": {
         "message": "Starta om"
+    },
+    "options_about_read_more": {
+        "message": "Läs mer om produkten"
     },
     "options_popup_title_placeholder": {
         "message": "Skriv in filternamn"
@@ -73,6 +103,9 @@
     },
     "options_settings": {
         "message": "AdGuard för Safari - Inställningar"
+    },
+    "options_settings_import_wrong_file_extension": {
+        "message": "Filformatet måste vara .json"
     },
     "options_settings_import_error": {
         "message": "Fel vid import av Inställningar"
@@ -149,6 +182,12 @@
     "options_filters_empty_custom_add_button": {
         "message": "Lägg till ett eget filter"
     },
+    "options_filters_custom_import_file": {
+        "message": "Importera fil"
+    },
+    "options_popup_import_file_error_title": {
+        "message": "Importfel"
+    },
     "options_filters_custom_step_one_title": {
         "message": "Ny filterprenumeration"
     },
@@ -169,6 +208,9 @@
     },
     "options_filters_custom_step_two_checking": {
         "message": "Laddar ner filtret"
+    },
+    "options_filters_custom_step_two_subscribing": {
+        "message": "Prenumerera på filtret"
     },
     "options_filters_custom_step_three_title": {
         "message": "Fel uppstod"
@@ -213,10 +255,22 @@
         "message": "Kontrollera om det finns filteruppdateringar"
     },
     "options_allowlist": {
-        "message": "Vitlista"
+        "message": "Tillåtlista"
+    },
+    "options_allowlist_description": {
+        "message": "AdGuard filtrerar inte webbplatser från Tillåtlistan."
+    },
+    "options_allowlist_inverted": {
+        "message": " (Omvänd)"
+    },
+    "options_allowlist_info_multi": {
+        "message": "Domäner: %s"
     },
     "options_allowlist_no_domains": {
         "message": "Vita listan är tom"
+    },
+    "options_allowlist_inverse": {
+        "message": "Invertera Tillåtlista<span class='sp-table-row-info'>Avblockera annonser överallt <i>utom för</i> webbplatserna från Tillåtlistan</span>"
     },
     "options_userfilter": {
         "message": "Användarregler"
@@ -239,6 +293,12 @@
     "options_userfilter_export": {
         "message": "Exportera"
     },
+    "options_userfilter_import_rules_error": {
+        "message": "Fel vid import av regler"
+    },
+    "options_popup_import_rules_wrong_file_extension": {
+        "message": "Filformatet måste vara .txt"
+    },
     "options_show_app_updated_notification": {
         "message": "Avisera om tilläggsuppdateringar"
     },
@@ -247,6 +307,12 @@
     },
     "options_popup_update_error_title": {
         "message": "Filteruppdateringsfel"
+    },
+    "options_popup_update_version_error": {
+        "message": "Versionen av filtret du försöker uppdatera är densamma eller äldre"
+    },
+    "options_popup_update_not_found_title": {
+        "message": "Alla filter är aktuella"
     },
     "options_popup_update_not_found": {
         "message": "Inga uppdateringar funna"
@@ -332,11 +398,23 @@
     "tray_menu_protection_start": {
         "message": "Annonsblockering i Safari är på"
     },
+    "tray_menu_protection_stop": {
+        "message": "Annonsblockering i Safari är avstängd"
+    },
     "options_last_update": {
         "message": "Senaste uppdatering"
     },
     "options_about": {
         "message": "Om"
+    },
+    "options_content_blockers": {
+        "message": "Innehållsblockerare"
+    },
+    "options_content_blockers_desc": {
+        "message": "Aktiverade annonsblockerare: %s av 6 (var och en kan innehålla upp till %s regler)"
+    },
+    "options_content_blockers_disabled_desc": {
+        "message": "Annonsblockerare är inaktiverade"
     },
     "options_compare_btn": {
         "message": "Jämför dem"
@@ -362,17 +440,38 @@
     "onboarding_safari_desc": {
         "message": "Sätt bock i rutan intill \"AdGuard Safariikon\" och i \"AdGuard\" i Safaris Inställningar"
     },
+    "onboarding_safari_link": {
+        "message": "Vad gör dessa tillägg?"
+    },
     "onboarding_tooltip_adguard_safari_icon": {
         "message": "AdGuards SafariIkon"
     },
     "onboarding_tooltip_adguard_safari_icon_info": {
         "message": "Du kommer åt AdGuards inställningarna för Safari via ikonen. Exempelvis för att pausa, eller manuellt blockera en annons."
     },
+    "onboarding_tooltip_adguard_safari_icon_web_page_content": {
+        "message": "Åtkomst till webbsidokumentet krävs för att göra manuell blockeringverktyg att fungera."
+    },
+    "onboarding_tooltip_adguard_safari_icon_browsing_history": {
+        "message": "Åtkomst till webbhistorik krävs för att upptäcka om AdGuard fungerar på den webbplats du för närvarande besöker."
+    },
     "onboarding_tooltip_adguard_advanced_blocking": {
         "message": "AdGuard Advanced Blocking"
     },
     "onboarding_tooltip_adguard_advanced_blocking_info": {
         "message": "This extension manages injected script and extended css rules."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
+        "message": "Åtkomst till innehåll på webbsidor krävs för att avancerade kosmetiska regler ska fungera."
+    },
+    "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
+        "message": "Åtkomst till webbhistorik krävs för att upptäcka vilken webbplats du försöker öppna så att den kan hitta vilka avancerade blockeringsregler som ska tillämpas."
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers": {
+        "message": "6 innehållsblockerande tillägg"
+    },
+    "onboarding_tooltip_adguard_safari_content_blockers_info": {
+        "message": "Safari begränsar det maximala antalet regler för innehållsblockering till %s per tillägg. Det räcker inte för att hantera alla typer av annonser och spårare som AdGuard blockerar. Därför erbjuder vi 6 tillägg, vilket ökar den gränsen till %s."
     },
     "onboarding_safari_btn": {
         "message": "Öppna Inställningar"
@@ -404,6 +503,9 @@
     "options_filters_period_not_update": {
         "message": "Uppdatera inte"
     },
+    "options_filters_custom_remove": {
+        "message": "radera"
+    },
     "options_show_tray_icon": {
         "message": "Visa AdGuard för Safari på menyraden"
     },
@@ -416,14 +518,77 @@
     "options_verbose_logging_desc": {
         "message": "If Verbose logging is enabled, AdGuard Safari extensions will print additional information to the browser console"
     },
+    "options_enable_hardware_acceleration": {
+        "message": "Aktivera hårdvaruacceleration"
+    },
+    "options_enable_hardware_acceleration_desc": {
+        "message": "Aktiverar hårdvaruacceleration för inställningsfönstret. Programmet måste startas om"
+    },
+    "settings_import": {
+        "message": "Import av inställningar"
+    },
+    "settings_import_success": {
+        "message": "Import av inställningar slutfört"
+    },
+    "settings_import_error": {
+        "message": "Ett fel uppstod under import av inställningar"
+    },
     "settings_notification_protection_title": {
         "message": "Observera! Skyddet kopplades bort"
+    },
+    "settings_notification_protection_button_text": {
+        "message": "Återuppta"
+    },
+    "settings_notification_extensions_button_text": {
+        "message": "Fixa det"
+    },
+    "settings_notification_extensions_title": {
+        "message": "Vissa AdGuard-tillägg är inaktiverade"
+    },
+    "settings_notification_extensions_text": {
+        "message": "Du bör aktivera alla AdGuard-tillägg för korrekt annonsblockering i Safari"
+    },
+    "settings_notification_cb_extensions_title": {
+        "message": "Vissa AdGuard innehållsblockerare är inaktiverade"
+    },
+    "settings_notification_cb_extensions_text": {
+        "message": "Du bör aktivera alla AdGuard-innehållsblockerare för korrekt annonsblockering i Safari"
+    },
+    "settings_notification_update_interval": {
+        "message": "Observera att föråldrade filter minskar kvaliteten på skyddet, så det är viktigt att hålla dem uppdaterade."
+    },
+    "options_cb_general_title": {
+        "message": "AdGuard Allmänt"
     },
     "options_cb_privacy_title": {
         "message": "AdGuard Integritet"
     },
+    "options_cb_social_title": {
+        "message": "AdGuard Social"
+    },
+    "options_cb_security_title": {
+        "message": "AdGuard Säkerhet"
+    },
     "options_cb_other_title": {
         "message": "AdGuard Annat"
+    },
+    "options_cb_custom_title": {
+        "message": "AdGuard Anpassad"
+    },
+    "options_cb_rules_info": {
+        "message": {
+            "one": "%s regel används",
+            "other": "%s regler används"
+        }
+    },
+    "options_cb_rules_overlimit_info": {
+        "message": "Gränsen på %s regler har överskridits. Inaktivera onödiga regler för att appen ska fungera korrekt.<br/>Aktiverade regler för tillfället: %s (inaktiverade regler: $2)"
+    },
+    "options_cb_disabled_warning": {
+        "message": "Inaktiverad i Safari"
+    },
+    "options_cb_compilation_warning": {
+        "message": "Kompileringen misslyckades"
     },
     "filters_group_custom": {
         "message": "Eget"
@@ -431,11 +596,32 @@
     "userfilter_name": {
         "message": "Användarregler"
     },
+    "allowlist_name": {
+        "message": "Tillåtlista"
+    },
+    "window_close_dialog_message": {
+        "message": "Behåll AdGuard igång i bakgrunden?"
+    },
+    "window_close_dialog_detail": {
+        "message": "Detta är avgörande för att AdGuard ska hålla huvudprocessen igång i bakgrunden, annars kan den inte automatiskt söka efter filteruppdateringar och hantera filtreringen."
+    },
+    "window_close_dialog_checkbox": {
+        "message": "Kom ihåg mitt val"
+    },
+    "window_close_dialog_yes": {
+        "message": "Ja (rekommenderas)"
+    },
     "window_close_dialog_no": {
         "message": "Nej"
     },
     "window_close_dialog_cancel": {
         "message": "Avbryt"
+    },
+    "folder_check_dialog_message": {
+        "message": "AdGuard för Safari bör startas från mappen Program."
+    },
+    "folder_check_dialog_detail": {
+        "message": "Vill du flytta den till mappen Program nu?"
     },
     "folder_check_dialog_move": {
         "message": "Flytta"

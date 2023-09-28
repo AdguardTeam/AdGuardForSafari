@@ -303,7 +303,11 @@ app.on('ready', (async () => {
 
             app.dock.show();
 
-            loadMainWindow();
+            loadMainWindow(() => {
+                toolbarController.requestMASReview();
+            });
+
+            uiEventListener.register(mainWindow);
         }
     });
 
