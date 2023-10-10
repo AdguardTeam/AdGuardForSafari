@@ -1,7 +1,12 @@
 &nbsp;
+
 <p align="center">
-  <img src="https://cdn.adguard.com/public/Adguard/Common/adguard_safari.svg" width="300px" alt="AdGuard for Safari" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adtidy.org/public/Adguard/Common/Logos/safari_dark.svg" width="300px" alt="AdGuard for Safari" />
+    <img src="https://cdn.adtidy.org/public/Adguard/Common/Logos/safari.svg" width="300px" alt="AdGuard for Safari" />
+  </picture>
 </p>
+
 <h3 align="center">The most advanced ad blocking extension for Safari</h3>
 <p align="center">
   Free and open source, highly customizable and lightning fast ad blocking extension.
@@ -27,7 +32,10 @@
 <br />
 
 <p align="center">
-    <img src="https://cdn.adguard.com/public/Adguard/Common/safari_filters.png?" width="800" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adtidy.org/content/github/ad_blocker/safari/dark_filters.png" width="800">
+    <img src="https://cdn.adtidy.org/content/github/ad_blocker/safari/filters.png" width="800">
+  </picture>
 </p>
 
 <hr />
