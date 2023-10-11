@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- version of the app is in ElectronMainApp/package.json -->
 
 
+[Unreleased]
+
+### Changed
+
+- Updated `@adguard/filters-downloader` to [v1.1.20](https://github.com/AdguardTeam/FiltersDownloader/blob/master/CHANGELOG.md).
+
+
 ## [1.11.15]
 
 ### Changed
@@ -44,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated ExtendedCss to v2.0.52
 
 
+[Unreleased]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.15.309-release...HEAD
 [1.11.15]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.14.301-release...v1.11.15.309-release
 [1.11.14]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.13.297-release...v1.11.14.301-release
 [1.11.13]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.12.289-release...v1.11.13.297-release
