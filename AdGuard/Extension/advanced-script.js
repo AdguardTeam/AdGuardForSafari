@@ -8,22 +8,61 @@
 
 (() => {
     /**
-     * Execute scripts in a page context and cleanup itself when execution completes
-     * @param scripts Scripts array to execute
+     * Executes code in the context of the page via new script tag and text content.
+     * @param code String of scripts to be executed
+     * @returns {boolean} Returns true if code was executed, otherwise returns false
      */
-    const executeScripts = scripts => {
-        // Wrap with try catch
-        scripts.unshift('( function () { try {');
-        scripts.push("} catch (ex) { console.error('Error executing AG js: ' + ex); } })();");
-
+    const executeScriptsViaTextContent = (code) => {
         const scriptTag = document.createElement('script');
         scriptTag.setAttribute('type', 'text/javascript');
-        scriptTag.textContent = scripts.join('\r\n');
-
+        scriptTag.textContent = code;
         const parent = document.head || document.documentElement;
         parent.appendChild(scriptTag);
         if (scriptTag.parentNode) {
             scriptTag.parentNode.removeChild(scriptTag);
+            return false;
+        }
+        return true;
+    };
+
+    /**
+     * Executes code in the context of page via new script tag and blob. We use this way as fallback,
+     * if we fail to inject via textContent
+     * @param code String of scripts to be executed
+     * @returns {boolean} Returns true if code was executed, otherwise returns false.
+     */
+    const executeScriptsViaBlob = (code) => {
+        const blob = new Blob([code], {type: 'text/javascript'});
+        const url = URL.createObjectURL(blob);
+        const scriptTag = document.createElement('script');
+        scriptTag.src = url;
+        const parent = document.head || document.documentElement;
+        parent.appendChild(scriptTag);
+        URL.revokeObjectURL(url);
+        if (scriptTag.parentNode) {
+            scriptTag.parentNode.removeChild(scriptTag);
+            return false;
+        }
+        return true;
+    };
+
+    /**
+     * Execute scripts in a page context and cleanup itself when execution completes
+     * @param scripts Array of scripts to execute
+     * @param verbose logging
+     */
+    const executeScripts = (scripts = [], verbose) => {
+        scripts.unshift('( function () { try {');
+        // we use this script detect if the script was applied,
+        // if the script tag was removed, then it means that code was applied, otherwise no
+        scripts.push(`;document.currentScript.remove();`);
+        scripts.push("} catch (ex) { console.error('Error executing AG js: ' + ex); } })();");
+        const code = scripts.join('\r\n');
+        if (!executeScriptsViaTextContent(code)) {
+            logMessage(verbose, 'Unable to inject via text content');
+            if(!executeScriptsViaBlob(code)) {
+                logMessage(verbose, 'Unable to inject via blob');
+            }
         }
     };
 
@@ -38,7 +77,7 @@
         }
 
         logMessage(verbose, 'scripts length: ' + scripts.length);
-        executeScripts(scripts.reverse());
+        executeScripts(scripts.reverse(), verbose);
     };
 
     /**
@@ -169,7 +208,7 @@
                 return code;
             });
 
-        executeScripts(scriptletExecutableScripts);
+        executeScripts(scriptletExecutableScripts, verbose);
     };
 
     /**
