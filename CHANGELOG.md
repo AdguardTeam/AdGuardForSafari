@@ -1,6 +1,7 @@
 # AdGuard for Safari Changelog
 
 All notable changes to this project will be documented in this file.
+
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
@@ -11,7 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated `@adguard/filters-downloader` to [v1.1.20](https://github.com/AdguardTeam/FiltersDownloader/blob/master/CHANGELOG.md).
+- Updated [`@adguard/filters-downloader`] to v1.1.20.
+- Updated [`@adguard/scriptlets`] to v1.9.83.
+- Advanced rules applying script injected as a blob
+  [#917](https://github.com/AdguardTeam/AdGuardForSafari/issues/917).
 
 
 ## [1.11.15]
@@ -55,3 +59,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.11.15]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.14.301-release...v1.11.15.309-release
 [1.11.14]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.13.297-release...v1.11.14.301-release
 [1.11.13]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.12.289-release...v1.11.13.297-release
+
+[`@adguard/filters-downloader`]: https://github.com/AdguardTeam/FiltersDownloader/blob/master/CHANGELOG.md
+[`@adguard/scriptlets`]: https://github.com/AdguardTeam/Scriptlets/blob/master/CHANGELOG.md
