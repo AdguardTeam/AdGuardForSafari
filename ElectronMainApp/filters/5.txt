@@ -1,8 +1,8 @@
-! Checksum: ZZHlrqexRqk8jbRWqiqdaQ
+! Checksum: IRaZ4ZcPjgdhWsZDQV2tnQ
 ! Title: AdGuard Experimental filter
 ! Description: Filter designed to test certain hazardous filtering rules before they are added to the basic filters.
-! Version: 2.0.1.20
-! TimeUpdated: 2023-08-01T19:32:04+00:00
+! Version: 2.0.1.24
+! TimeUpdated: 2023-10-25T15:31:55+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -149,6 +149,7 @@ www.youtube.com#$?##contents ytd-rich-grid-row:has(> div[id="contents"] > ytd-ri
 www.youtube.com#$?##contents ytd-rich-grid-row:has(> div[id="contents"] > ytd-rich-item-renderer[style="display: none !important;"]) { --ytd-rich-grid-items-per-row: 1 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/96262
 developer.android.com,adssettings.google.com##sc-survey-survey-manager
+!
 !
 ! Allowlist
 ! http://adguard.com/filterrules.html#exclusionRules

@@ -1,8 +1,8 @@
-! Checksum: KtryurChjjwzoFBS72skNw
+! Checksum: PNb4pl8mdaPtZO9WwKL4uQ
 ! Title: AdGuard Experimental filter (Optimized)
 ! Description: Filter designed to test certain hazardous filtering rules before they are added to the basic filters.
-! Version: 2.0.1.20
-! TimeUpdated: 2023-08-01T19:32:04+00:00
+! Version: 2.0.1.24
+! TimeUpdated: 2023-10-25T15:31:55+00:00
 ! Expires: 4 days (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};

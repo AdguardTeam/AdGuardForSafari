@@ -1,8 +1,8 @@
-! Checksum: aob0GH2BZwBgepH5rBhKdg
+! Checksum: SfNNYImTsFhkL01kaT+RLA
 ! Title: Filter unblocking search ads and self-promotion (Optimized)
 ! Description: Filter that unblocks search ads in Google, DuckDuckGo, Bing, or Yahoo and self-promotion on websites.
-! Version: 2.0.3.14
-! TimeUpdated: 2023-09-05T13:30:15+00:00
+! Version: 2.0.3.15
+! TimeUpdated: 2023-10-09T12:30:24+00:00
 ! Expires: 4 days (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
@@ -140,6 +140,7 @@ amazon.ae,amazon.ca,amazon.cn,amazon.co.jp,amazon.co.uk,amazon.com,amazon.com.au
 amazon.*#@#div[cel_widget_id="mobile-dp-sims_SPThematicBrand_Same"]
 amazon.*#@#section[class*="csm-placement-id"]
 amazon.*#@?#div[data-order-sm]:has(> div[data-csa-c-painter="ad-topper-desktop-card"]:first-child + div[data-csa-c-painter="enumclaw-slot-display-ad"]:last-child)
+amazon.*#@##dp-container > #px-profile_feature_div[data-csa-c-type="widget"]
 search.brave.com#@#div[data-advertiser-id]
 buscape.com.br#@#div[class^="Hits_SponsoredWrapper__"]
 mediafire.com#@##upsellBox

@@ -1,8 +1,8 @@
-! Checksum: b/kg4t3mHRiEKW7zHScdbQ
+! Checksum: gSVLfJKSm0vOCPv1z+kiEA
 ! Title: AdGuard URL Tracking filter
 ! Description: Filter that enhances privacy by removing tracking parameters from URLs.
-! Version: 2.0.6.99
-! TimeUpdated: 2023-09-24T12:30:52+00:00
+! Version: 2.0.7.22
+! TimeUpdated: 2023-10-26T11:30:50+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -16,6 +16,7 @@
 ! Ideally, supply a link to the document that explains how this parameter is used.
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164394
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162080
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158662
 ! https://support.google.com/analytics/answer/10071811
@@ -48,7 +49,7 @@
 ! Cxense clickthrough tracking
 ! Marketo email tracking
 ! Mindbox email tracking
-! klaviyo.com email tracking
+! Klaviyo onsite tracking
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123544
 ! ad click tracking
 ! PopMagic clickthrough tracking
@@ -107,6 +108,21 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164620
+! https://github.com/AdguardTeam/AdguardFilters/issues/164060#issuecomment-1779661046
+! https://github.com/AdguardTeam/AdguardFilters/issues/111997
+! https://github.com/AdguardTeam/AdguardFilters/issues/164394
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-7337134
+! youtube.com - Copy video URL at its search result via mouse right click.
+! damu.net homepage - Visit https://www.daum.net/ and click one of news feed.
+! https://github.com/AdguardTeam/AdguardFilters/issues/163568
+! https://github.com/AdguardTeam/AdguardFilters/issues/163365
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-7207755
+! https://github.com/DandelionSprout/adfilt/discussions/163?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDE2NDIwMDY1NDA6NTg5MDA1OTg%3D#discussioncomment-7198771
+! https://github.com/AdguardTeam/AdguardFilters/issues/163239
+! _csrc_, _cus_ and _cut_ are reproducible when you download their Windows app at Japanese langauge webpage.
+! https://slack.com/downloads/linux?t=[Slack channel ID]
+! Naver Shopping - click an item at its search result webpage.
 ! DuckDuckGo
 ! https://duckduckgo.github.io/duckduckgo-help-pages/privacy/atb/
 ! breaks redirect when their Extension is installed - https://github.com/AdguardTeam/AdguardFilters/issues/161751
@@ -155,12 +171,12 @@
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155994
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155766
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155138
+! https://github.com/AdguardTeam/AdguardFilters/issues/163040
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155405
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155149
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155063
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155096
 ! https://github.com/AdguardTeam/AdguardFilters/issues/155071
-! https://github.com/AdguardTeam/AdguardFilters/issues/155045
 ! https://github.com/AdguardTeam/AdguardFilters/issues/154947
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6306117
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-6306026
@@ -279,6 +295,7 @@
 ! https://github.com/AdguardTeam/AdguardFilters/issues/132478
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131490
 ! politica.com.ua - links click counter
+! https://github.com/AdguardTeam/AdguardFilters/issues/164592
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131139
 ! https://github.com/AdguardTeam/AdguardFilters/issues/144898
 ! https://github.com/AdguardTeam/AdguardFilters/issues/131093
@@ -302,7 +319,6 @@
 ! https://github.com/AdguardTeam/AdGuardSDNSFilter/issues/1024
 ! https://github.com/AdguardTeam/AdguardFilters/issues/126807
 ! https://github.com/AdguardTeam/AdguardFilters/issues/126395
-! Emails from moodfabrics.com
 ! georiot.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/126227
 ! https://github.com/AdguardTeam/AdguardFilters/issues/125102
@@ -330,7 +346,6 @@
 ! https://github.com/AdguardTeam/AdguardFilters/issues/120891
 ! Removing "primer", "subset_id" parameters causes that some fonts are displaying incorrectly - https://github.com/AdguardTeam/AdguardFilters/issues/126288
 ! another one https://github.com/AdguardTeam/AdguardFilters/issues/126333, https://github.com/AdguardTeam/AdguardFilters/issues/134475
-! https://github.com/AdguardTeam/AdguardFilters/issues/118376#issuecomment-1134132202
 ! https://github.com/AdguardTeam/AdguardFilters/issues/120276 ex. https://snail.qcplay.co.jp/?shortlink=tadqwmj0&c=GamerchPCJack0523-0606&pid=Gamerch
 ! https://github.com/AdguardTeam/AdguardFilters/issues/119110
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123265
@@ -358,7 +373,6 @@
 ! Firefox download installer tracking
 ! https://www.comss.ru/page.php?id=10300
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-2381922
-! https://github.com/AdguardTeam/AdguardFilters/issues/111997
 ! https://github.com/AdguardTeam/AdguardFilters/issues/112692
 ! https://forum.adguard.com/index.php?threads/47148/
 ! apple.com
@@ -414,6 +428,7 @@
 ! vstat extension tracking
 ! https://github.com/AdguardTeam/AdguardFilters/issues/101590
 ! https://github.com/AdguardTeam/AdguardFilters/issues/100613
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-7211861
 ! https://github.com/AdguardTeam/AdguardFilters/issues/94662
 ! https://github.com/AdguardTeam/AdguardFilters/issues/99645
 ! https://github.com/AdguardTeam/AdguardFilters/pull/100181
@@ -435,7 +450,6 @@
 ! lcs.naver.com - It is used on Naver Corp's platform
 ! https://github.com/AdguardTeam/AdguardFilters/issues/95525
 ! https://github.com/AdguardTeam/AdguardFilters/issues/95523
-! https://github.com/AdguardTeam/AdguardFilters/issues/94797
 ! https://github.com/AdguardTeam/AdguardFilters/issues/94722
 ! https://github.com/AdguardTeam/AdguardFilters/issues/130919
 ! https://github.com/AdguardTeam/AdguardFilters/issues/94664
@@ -541,6 +555,8 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_tracking_params
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/163365
+! https://github.com/AdguardTeam/AdguardFilters/issues/163015
 ! greenbuildingadvisor.com - broken login
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157807
 ! Fixes ERR_TOO_MANY_REDIRECTS error
@@ -554,7 +570,16 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_tracking_params
 ! Fixing a redirect loop
 ! https://github.com/AdguardTeam/AdguardFilters/issues/117491
 ! https://github.com/AdguardTeam/AdguardFilters/issues/78392
-! https://github.com/AdguardTeam/AdguardFilters/issues/69031 [Stealth Mode - Strip URLs from tracking parameters]
+! https://github.com/AdguardTeam/AdguardFilters/issues/69031
+! https://github.com/AdguardTeam/AdguardFilters/issues/51919
+! https://github.com/AdguardTeam/AdguardFilters/issues/45817
+! https://github.com/AdguardTeam/AdguardFilters/issues/42946
+! https://github.com/AdguardTeam/AdguardFilters/issues/63522
+! https://github.com/AdguardTeam/AdguardFilters/issues/34644
+! https://forum.adguard.com/index.php?threads/https-www-empflix-com-nsfw.25985/
+! https://github.com/AdguardTeam/AdguardFilters/issues/22641
+! https://github.com/AdguardTeam/AdguardFilters/issues/6348
+! https://github.com/AdguardTeam/AdguardForWindows/issues/356#issuecomment-314934554
 ! https://github.com/AdguardTeam/AdguardFilters/issues/52925
 ! https://github.com/AdguardTeam/AdguardFilters/issues/34644
 ! https://github.com/AdguardTeam/AdguardFilters/issues/63522
