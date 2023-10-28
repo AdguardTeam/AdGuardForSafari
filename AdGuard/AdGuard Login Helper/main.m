@@ -33,7 +33,7 @@ int main(int argc, const char * argv[]) {
                 NSError *error = nil;
                 [NSWorkspace.sharedWorkspace openURLs:@[urlToOpen]
                                  withApplicationAtURL:url
-                                              options:0
+                                              options:NSWorkspaceLaunchWithoutAddingToRecents
                                         configuration:@{}
                                                 error:&error];
                 
