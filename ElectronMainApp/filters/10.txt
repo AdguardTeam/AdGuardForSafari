@@ -1,8 +1,8 @@
-! Checksum: 9jVOcPYlduQn5UPT02Etew
+! Checksum: YUdL2AwaPqGOQNwSaCCWIw
 ! Title: Filter unblocking search ads and self-promotion
 ! Description: Filter that unblocks search ads in Google, DuckDuckGo, Bing, or Yahoo and self-promotion on websites.
-! Version: 2.0.3.15
-! TimeUpdated: 2023-10-09T12:30:24+00:00
+! Version: 2.0.3.16
+! TimeUpdated: 2023-10-29T19:30:13+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -255,6 +255,8 @@ amazon.*#@#div[cel_widget_id="mobile-dp-sims_SPThematicBrand_Same"]
 amazon.*#@#section[class*="csm-placement-id"]
 amazon.*#@?#div[data-order-sm]:has(> div[data-csa-c-painter="ad-topper-desktop-card"]:first-child + div[data-csa-c-painter="enumclaw-slot-display-ad"]:last-child)
 amazon.*#@##dp-container > #px-profile_feature_div[data-csa-c-type="widget"]
+amazon.*#@#div[data-csa-c-painter="ad-topper-desktop-card"]
+amazon.*#@?#div[data-display-at]:has(> div[data-csa-c-painter="ad-topper-desktop-card"]:first-child + div[style="display: none !important;"]:last-child)
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/136364
 search.brave.com#@#div[data-advertiser-id]

@@ -1,8 +1,8 @@
-! Checksum: pV1cBO5h9TUomORgl1Tn6w
+! Checksum: exKQ8GKL6YrIOL18eRSzyw
 ! Title: AdGuard Mobile Ads filter
 ! Description: Filter for all known mobile ad networks. Useful for mobile devices.
-! Version: 2.0.46.6
-! TimeUpdated: 2023-10-27T12:30:22+00:00
+! Version: 2.0.46.13
+! TimeUpdated: 2023-10-30T10:30:18+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -216,6 +216,7 @@
 ||startup.mobile.webvisor.com^
 ||startup-mobile.ap.yandex-net.ru^
 !
+||ad.mediamixer.co.kr^
 ||adx.promo^
 ||adfork.co.kr^
 ||92by17snes4.cc^
@@ -2282,12 +2283,20 @@ handelsblatt.com,moyens.net,ign.com,gazeteduvar.com.tr,innpoland.pl,wired.com,sp
 ! ##.ads
 ranky-ranking.net,memo.onl.jp,daily-sun.com,home.kingsoft.jp,berkem.ru,pixiv.net,cartoonpornvideos.com,m.economictimes.com,beethovenmaster.com,m.mistrzowie.org,m.ura.news,up.ymgt.xyz,google.de,www-bento-de.cdn.ampproject.org,m-economictimes-com.cdn.ampproject.org,m.winfuture.de##.ads
 ! ##.ad
-m.geboren.am,dictionary.com,transfermarkt.de,iyf.tv,macwelt.de,pcwelt.de,xataka.com.mx,shikiho.toyokeizai.net,newsee-media.com,rank1-media.com,m.proporn.com,rakuraku-info.jp,sugoren.com,dailynewsonline.jp,yakuji.co.jp,asahi.com,m.winporn.com,slate.com,sankei.com,gameranbu.jp,seiga.nicovideo.jp,m.arukikata.co.jp,setn.com,hateblo.jp,hatenablog.com,hatenablog.jp,hatenadiary.com,hatenadiary.jp,hatenadiary.org,syosetu.org##.ad
+www-cbc-ca.cdn.ampproject.org,m.geboren.am,dictionary.com,transfermarkt.de,iyf.tv,macwelt.de,pcwelt.de,xataka.com.mx,shikiho.toyokeizai.net,newsee-media.com,rank1-media.com,m.proporn.com,rakuraku-info.jp,sugoren.com,dailynewsonline.jp,yakuji.co.jp,asahi.com,m.winporn.com,slate.com,sankei.com,gameranbu.jp,seiga.nicovideo.jp,m.arukikata.co.jp,setn.com,hateblo.jp,hatenablog.com,hatenablog.jp,hatenadiary.com,hatenadiary.jp,hatenadiary.org,syosetu.org##.ad
 ! ##.Ad
 gamesworld.de,fnn.jp##.Ad
 !
 ! SECTION: Regular rules
 !
+cyzowoman.com#?#article > .adminh:has(> amp-ad)
+cyzowoman.com#$?#article > .adminh:has(> amp-ad) { remove: true; }
+txxx.com,txxx.tube##.index-page > .wrapper > .row + div[class]
+in-porn.com,inporn.com##.video__wrapper > section[class]:first-child
+aqa.ru##span[style="height: 300px; padding: 0; width: 100%; display: block;"]
+news-sky-com.cdn.ampproject.org##.sdc-site-au
+metro-co-uk.cdn.ampproject.org##.metro-amp-ad
+www-manchestereveningnews-co-uk.cdn.ampproject.org,www-mirror-co-uk.cdn.ampproject.org##.mod-video
 hi-tech.mail.ru#?#div[data-logger-parent="top"] > div[style*="height"][style*="40px"]:has(> div[data-rb-slot])
 nikkansports.com##li[id^="adUnit"]
 amp-cnn-com.cdn.ampproject.org##.livestory-ad-wrapper
@@ -3020,7 +3029,6 @@ telling.asahi.com##.p-banner-wrapper
 der-postillon.com##.iqadtile-wrapper
 hdmotori.it##div[style^="margin:"][style*="height: 90px;background:"]
 hdmotori.it,hdblog.it##div[style^="margin:"][style*="height: 610px;background:"]
-bookmeter.com##.application__ads
 primamedia.ru##.photorep_mobdirect
 primamedia.ru###default-page-no-padding > div.col-md-4.noprint
 vyatka-grad.ru##.f-w-f1

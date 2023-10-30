@@ -755,7 +755,7 @@
 				"name": "Specifico della lingua"
 			},
 			"ja": {
-				"name": "言語特有フィルタ"
+				"name": "言語特化フィルタ"
 			},
 			"ko": {
 				"name": "특정 언어"
@@ -1646,7 +1646,7 @@
 				"name": "Blocco degli avvisi sui cookie"
 			},
 			"ja": {
-				"description": "ウェブサイト上のCookie通知をブロックするように設計されています",
+				"description": "ウェブサイト上のクッキー（Cookie）使用同意通知をブロックするように設計されています",
 				"name": "ブロックされたCookieの通知"
 			},
 			"ko": {
@@ -2325,7 +2325,7 @@
 			},
 			"de": {
 				"description": "Basiert auf dem AdGuard Basisfilter",
-				"name": "AdGuard — Referenz des Basisfilters"
+				"name": "Referenz zum AdGuard Basisfilter"
 			},
 			"el": {
 				"description": "Έχει αναφορές στο Βασικό φίλτρο AdGuard",
@@ -4456,8 +4456,8 @@
 				"name": "Referința la filtrul spyware"
 			},
 			"ru": {
-				"description": "Имеет отсылки к фильтру счетчиков и систем аналитики (например, часть правил взята оттуда)",
-				"name": "Отсылка к фильтру счетчиков и систем аналитики"
+				"description": "Имеет отсылки к фильтру счётчиков и систем аналитики (например, часть правил взята оттуда)",
+				"name": "Отсылка к фильтру счётчиков и систем аналитики"
 			},
 			"sk": {
 				"description": "Má referencie na Filter proti sledovaniu",
@@ -9929,7 +9929,7 @@
 			},
 			"ja": {
 				"description": "ヒンディー語ページの広告をブロックするように設計されています。",
-				"name": "Hindi language-specific ad blocking"
+				"name": "ヒンディー語専用広告ブロック"
 			},
 			"ko": {
 				"description": "힌디어 웹 페이지에서의 광고 차단을 위해 특별히 설계되었습니다",
@@ -10471,6 +10471,10 @@
 				"description": "Zasnovan posebej za blokiranje oglasov na spletnih straneh v makedonskem jeziku",
 				"name": "Zaviranje oglasov, specifičnih za makedonščino"
 			},
+			"sr": {
+				"description": "Posebno izrađen da blokira reklame na sajtovima na makedonskom jeziku",
+				"name": "Makedonski jezik posebno blokiranje reklama"
+			},
 			"tr": {
 				"description": "Makedonca dilindeki web sayfalarında reklamları engellemek için özel olarak tasarlandı",
 				"name": "Makedonca diline özgü reklam engelleme"
@@ -10516,7 +10520,7 @@
 				"description": "Filter, der aktiverer adblocking på russisksprogede websteder."
 			},
 			"de": {
-				"name": "AdGuard — Russischer Filter",
+				"name": "AdGuard Russischer Filter",
 				"description": "Filter, der Anzeigen auf russischen Webseiten sperrt."
 			},
 			"el": {
@@ -10670,7 +10674,7 @@
 				"description": "EasyList + AdGuard Basisfilter. Dette filter kræves for kvalitets-adblocking."
 			},
 			"de": {
-				"name": "AdGuard — Basisfilter",
+				"name": "AdGuard Basisfilter",
 				"description": "EasyList + AdGuard Basisfilter. Dieser Filter ist für die Verbesserung zum Sperren von Werbung erforderlich."
 			},
 			"el": {
@@ -10824,7 +10828,7 @@
 				"description": "Den mest omfattende liste over div. online hit-tællere og webanalyseværktøjer. Ønsker du ikke dine handlinger på Internet sporet, så benyt dette filter."
 			},
 			"de": {
-				"name": "AdGuard — Tracking-Schutzfilter",
+				"name": "AdGuard Tracking-Schutz-Filter",
 				"description": "Die umfangreichste Liste von verschiedenen Online-Zähler und Web-Analytics-Tools. Wenn Sie nicht möchten, dass Ihre Aktionen im Internet verfolgt werden, aktivieren Sie diesen Filter."
 			},
 			"el": {
@@ -10872,7 +10876,7 @@
 				"description": "Daftar paling komprehensif dari berbagai penghitung online dan alat analisis web. Gunakan penyaring ini, jika Anda tidak ingin tindakan Anda di internet dilacak."
 			},
 			"it": {
-				"name": "Filtro AdGuard Protezione Anti-Monitoraggio",
+				"name": "Filtro Protezione dal Tracciamento AdGuard",
 				"description": "L'elenco più esaustivo dei vari contatori ed analizzatori del traffico di rete. Utilizza questo filtro, se non vuoi che le tue azioni su Internet vengano monitorate."
 			},
 			"ja": {
@@ -10913,7 +10917,7 @@
 			},
 			"ru": {
 				"name": "Фильтр счётчиков и систем аналитики",
-				"description": "Наиболее полный список различных интернет-счетчиков и систем интернет-аналитики. Если вы не желаете, чтобы за вашими действиями в интернете следили, используйте этот фильтр."
+				"description": "Наиболее полный список различных интернет-счётчиков и систем интернет-аналитики. Если вы не хотите, чтобы за вашими действиями в интернете следили, используйте этот фильтр."
 			},
 			"sk": {
 				"name": "AdGuard filter proti sledovaniu",
@@ -10978,7 +10982,7 @@
 				"description": "Filter til sociale medie-widgets (\"Like\"-knapper o.lign.)."
 			},
 			"de": {
-				"name": "AdGuard — Social-Media-Filter",
+				"name": "AdGuard Social-Media-Filter",
 				"description": "Filter für Social-Media-Widgets (\"Gefällt mir\"-Schaltflächen und Ähnliches)."
 			},
 			"el": {
@@ -11132,7 +11136,7 @@
 				"description": "Filter designet til at teste visse risikable filtreringsregler, før de tilføjes basisfiltreret."
 			},
 			"de": {
-				"name": "AdGuard — Experimentelle Filter",
+				"name": "AdGuard Experimenteller Filter",
 				"description": "Filter zum Testen von bestimmten riskanten Filterungsregeln, bevor diese dem Basisfilter hinzugefügt werden."
 			},
 			"el": {
@@ -11286,7 +11290,7 @@
 				"description": "EasyList Germany + AdGuard Tysk filter. Filterliste, der specifikt fjerner reklamer på tysksprogede websteder."
 			},
 			"de": {
-				"name": "AdGuard — Deutscher Filter",
+				"name": "AdGuard Deutscher Filter",
 				"description": "„EasyList Germany“ und „AdGuard Deutscher Filter“Filterlisten, die Werbung auf deutschsprachigen Webseiten sperrt."
 			},
 			"el": {
@@ -11440,7 +11444,7 @@
 				"description": "Filter, der muliggør adblocking på japansksprogede websteder."
 			},
 			"de": {
-				"name": "AdGuard — Japanischer Filter",
+				"name": "AdGuard Japanischer Filter",
 				"description": "Filter, der Anzeigen auf japanischen Webseiten sperrt."
 			},
 			"el": {
@@ -11594,7 +11598,7 @@
 				"description": "EasyList Dutch + AdGuard Hollandsk filter. Filterliste, der specifikt fjerner reklamer på hollandsksprogede websteder."
 			},
 			"de": {
-				"name": "AdGuard — Niederländischer Filter",
+				"name": "AdGuard Niederländischer Filter",
 				"description": "EasyList Dutch + AdGuard niederländischer Filter. Filter, der Werbung auf niederländischen Webseiten sperrt."
 			},
 			"el": {
@@ -11748,7 +11752,7 @@
 				"description": "Filterliste, der specifikt fjerner annoncer på websteder på spansk, portugisisk og brasiliansk portugisisk."
 			},
 			"de": {
-				"name": "AdGuard — Spanischer/Portugiesischer Filter",
+				"name": "AdGuard Spanischer/Portugiesischer Filter",
 				"description": "Filterliste, die gezielt Werbung auf Websites in spanischer, portugiesischer und brasilianisch-portugiesischer Sprache entfernt."
 			},
 			"el": {
@@ -12010,7 +12014,7 @@
 				"description": "Filter som avblockerar sökannonser i Google, DuckDuckGo, Bing eller Yahoo och egenreklam på webbplatser."
 			},
 			"tr": {
-				"name": "Arama motoru reklamlarına ve öz tanıtımına izin veren filtre",
+				"name": "Arama motoru reklamları ve öz tanıtımına izin veren filtre",
 				"description": "Google, DuckDuckGo, Bing veya Yahoo'daki arama ağı reklamlarının ve web sitelerinde kendi kendini tanıtmanın engellemesini kaldıran filtre."
 			},
 			"uk": {
@@ -12056,7 +12060,7 @@
 				"description": "Filter for alle kendte mobilannoncenetværk. Nyttigt for mobilenheder."
 			},
 			"de": {
-				"name": "AdGuard — Filter für mobile Werbung",
+				"name": "AdGuard-Filter gegen mobile Werbung",
 				"description": "Filter für alle bekannten mobilen Werbenetzwerke. Nützlich für mobile Geräte."
 			},
 			"el": {
@@ -12210,7 +12214,7 @@
 				"description": "Filter, der specifikt fjerner annonceer på tyrkisksprogede websteder."
 			},
 			"de": {
-				"name": "AdGuard — Türkischer Filter",
+				"name": "AdGuard Türkischer Filter",
 				"description": "Filterliste, die gezielt Werbeanzeigen auf türkischsprachigen Webseiten sperrt."
 			},
 			"el": {
@@ -12417,7 +12421,7 @@
 			},
 			"ja": {
 				"name": "AdGuard 迷惑要素フィルタ",
-				"description": "Cookie（クッキー）通知、サードパーティーウィジェット、ページ内ポップアップなどを含む、ウェブページ上の鬱陶しい要素をブロックします。このフィルターにはこれらのAdGuardフィルターが含まれています：「AdGuard クッキー通知フィルタ」「AdGuard ポップアップフィルタ」「AdGuard モバイルアプリバナーフィルタ」「AdGuard その他の迷惑要素フィルタ」「AdGuard ウィジェットフィルタ」。"
+				"description": "Cookie（クッキー）使用同意通知、サードパーティーウィジェット、ページ内ポップアップなどを含む、ウェブページ上の鬱陶しい要素をブロックします。このフィルターにはこれらのAdGuardフィルターが含まれています：「AdGuard クッキー通知フィルタ」「AdGuard ポップアップフィルタ」「AdGuard モバイルアプリバナーフィルタ」「AdGuard その他の迷惑要素フィルタ」「AdGuard ウィジェットフィルタ」。"
 			},
 			"ko": {
 				"name": "AdGuard 방해 요소 필터",
@@ -12518,7 +12522,7 @@
 				"description": "Filter sammensat af flere forskellige filtre (AdGuard Basis-, Social Medie-, Sporingsbeskyttelses- og Mobilannoncefiltre, EasyList og EasyPrivacy) forenklet specifikt for bedre kompatibilitet med DNS-niveau adblovking."
 			},
 			"de": {
-				"name": "AdGuard — DNS-Filter",
+				"name": "AdGuard DNS-Filter",
 				"description": "Filter, der sich aus mehreren anderen Filtern zusammensetzt (AdGuard Base-Filter, Social Media-Filter, Tracking-Schutzfilter, Filter für mobile Werbung, EasyList und EasyPrivacy) und speziell vereinfacht wurde, um besser für das Sperren von Werbung auf DNS-Ebene kompatibel zu sein."
 			},
 			"el": {
@@ -12606,7 +12610,7 @@
 				"description": "Filtru compus din mai multe alte filtre (filtru de bază AdGuard, filtru Social Media, filtru de Protecție de Urmărire, filtru de Reclame Mobile, EasyList și EasyPrivacy) și simplificat special pentru o mai bună compatibilitate cu blocarea de reclame la nivel DNS."
 			},
 			"ru": {
-				"name": "DNS фильтр",
+				"name": "DNS-фильтр",
 				"description": "Фильтр, составленный из нескольких фильтров (Базовый фильтр AdGuard, Фильтр социальных сетей, Фильтр счетчиков и систем аналитики, Фильтр мобильной рекламы, EasyList и EasyPrivacy), и специально упрощенный, чтобы быть лучше совместимым с блокировкой рекламы на уровне DNS."
 			},
 			"sk": {
@@ -12672,7 +12676,7 @@
 				"description": "Liste FR + AdGuard Fransk filter. Filterliste, der specifikt fjerner reklamer på fransksprogede websteder."
 			},
 			"de": {
-				"name": "AdGuard — Französischer Filter",
+				"name": "AdGuard Französischer Filter",
 				"description": "Liste FR + französischer AdGuard-Filter. Filter, der gezielt Werbung auf französischen Websites sperrt."
 			},
 			"el": {
@@ -12822,11 +12826,11 @@
 				"description": "Filtr, který zvyšuje soukromí odstraněním parametrů sledování z adres URL."
 			},
 			"da": {
-				"name": "AdGuard URL-sporingsfilter",
+				"name": "AdGuard URL Tracking-filter",
 				"description": "Filter, der booster fortrolighed ved at fjerne sporingsparametre fra URL'er."
 			},
 			"de": {
-				"name": "AdGuard — URL-Tracking-Filter",
+				"name": "AdGuard URL-Tracking-Filter",
 				"description": "Filter, der die Privatsphäre erhöht, indem er Tracking-Parameter aus URLs entfernt."
 			},
 			"el": {
@@ -12980,7 +12984,7 @@
 				"description": "Blokerer cookie-meddelelser på websider."
 			},
 			"de": {
-				"name": "AdGuard — Cookie-Hinweise-Filter",
+				"name": "AdGuard Cookie-Hinweise-Filter",
 				"description": "Blockiert Cookie-Hinweise auf Websites."
 			},
 			"el": {
@@ -13033,10 +13037,10 @@
 			},
 			"ja": {
 				"name": "AdGuard クッキー通知フィルタ",
-				"description": "ウェブページで表示されるCookie（クッキー）通知をブロックします。"
+				"description": "ウェブページで表示されるCookie（クッキー）使用同意通知をブロックします。"
 			},
 			"ko": {
-				"name": "AdGuard 쿠키 필터",
+				"name": "AdGuard 쿠키 알림 필터",
 				"description": "웹 페이지의 쿠키 알림을 차단합니다. AdGuard 방해 요소 필터에 이미 포함되어 있습니다."
 			},
 			"nl": {
@@ -13134,7 +13138,7 @@
 				"description": "Blokerer alle for webstedsfunktionaliteten unødvendige pop op-typer."
 			},
 			"de": {
-				"name": "AdGuard — Popup-Filter",
+				"name": "AdGuard Pop-up-Filter",
 				"description": "Sperrt alle Arten von Pop-ups, die für die Funktionalität von Websites nicht erforderlich sind."
 			},
 			"el": {
@@ -13288,7 +13292,7 @@
 				"description": "Blokerer irriterende bannere, som promoverer mobil-apps på websteder."
 			},
 			"de": {
-				"name": "AdGuard — Mobile App-Banner-Filter",
+				"name": "AdGuard-Filter gegen Mobile-App-Banner",
 				"description": "Blockiert störende Banner, die für mobile Apps von Websites werben."
 			},
 			"el": {
@@ -13442,7 +13446,7 @@
 				"description": "Blokerer irriterende websideelementer, som ikke falder ind under de populære irritationskategorier."
 			},
 			"de": {
-				"name": "AdGuard — Filter gegen andere Belästigungen",
+				"name": "AdGuard-Filter gegen andere Belästigungen",
 				"description": "Blockiert störende Elemente auf Websites, die nicht unter die gängigen Kategorien von Belästigungen fallen."
 			},
 			"el": {
@@ -13596,7 +13600,7 @@
 				"description": "Blokerer irriterende tredjeparts-widgets: Onlineassistenter, live support chats mv."
 			},
 			"de": {
-				"name": "AdGuard — Widgets-Filter",
+				"name": "AdGuard Widgets-Filter",
 				"description": "Sperrt lästige Widgets von Drittanbietern: Online-Assistenten, Live-Support-Chats, usw."
 			},
 			"el": {
@@ -13750,7 +13754,7 @@
 				"description": "Filter, der muliggør adblocking på ukrainsksprogede websteder."
 			},
 			"de": {
-				"name": "AdGuard — Ukrainischer Filter",
+				"name": "AdGuard Ukrainischer Filter",
 				"description": "Filter, der Anzeigen auf ukrainischen Webseiten sperrt."
 			},
 			"en": {
@@ -13758,11 +13762,11 @@
 				"description": "Filter that enables ad blocking on websites in the Ukrainian language."
 			},
 			"es": {
-				"name": "Filtro ucraniano de AdGuard",
+				"name": "Filtro para ucraniano",
 				"description": "Filtro que permite bloquear anuncios en sitios web en ucraniano."
 			},
 			"es_ES": {
-				"name": "Filtro ucraniano de AdGuard",
+				"name": "Filtro para ucraniano",
 				"description": "Filtro que permite bloquear anuncios en sitios web en ucraniano."
 			},
 			"fa": {
@@ -15181,6 +15185,10 @@
 				"name": "EasyList Lithuania",
 				"description": "Дополнительный фильтр для сайтов на литовском языке."
 			},
+			"sk": {
+				"name": "EasyList Lithuania",
+				"description": "Dodatočný zoznam filtrov pre webové stránky v litovčine."
+			},
 			"sl": {
 				"name": "Litovski EasyList",
 				"description": "Dodaten seznam filtrov za spletne strani v litovskem jeziku."
@@ -15310,6 +15318,10 @@
 			"ru": {
 				"name": "Latvian List",
 				"description": "Дополнительный фильтр для сайтов на латвийском языке."
+			},
+			"sk": {
+				"name": "Lotyšský zoznam",
+				"description": "Dodatočný zoznam filtrov pre webové stránky v lotyštine."
 			},
 			"sl": {
 				"name": "Latvijski EasyList",
@@ -15445,6 +15457,10 @@
 				"name": "Liste AR",
 				"description": "Дополнительный фильтр для сайтов на арабском языке."
 			},
+			"sk": {
+				"name": "Liste AR",
+				"description": "Dodatočný zoznam filtrov pre webové stránky v arabčine."
+			},
 			"sl": {
 				"name": "Arabski EasyList",
 				"description": "Dodaten seznam filtrov za spletne strani v arabskem jeziku."
@@ -15574,6 +15590,10 @@
 			"ru": {
 				"name": "Liste FR",
 				"description": "Дополнительный фильтр для сайтов на французском языке. Уже включён во Французский фильтр AdGuard."
+			},
+			"sk": {
+				"name": "Liste FR",
+				"description": "Dodatočný zoznam filtrov pre webové stránky vo francúzštine. Už je zahrnutý vo francúzskom filtri AdGuard."
 			},
 			"sl": {
 				"name": "Francoski EasyList",
@@ -15708,6 +15728,10 @@
 			"ru": {
 				"name": "ROList",
 				"description": "Дополнительный фильтр для сайтов на румынском языке."
+			},
+			"sk": {
+				"name": "ROList",
+				"description": "Dodatočný zoznam filtrov pre webové stránky v rumunčine."
 			},
 			"sl": {
 				"name": "ROList",
@@ -15972,6 +15996,10 @@
 			"ru": {
 				"name": "Icelandic ABP List",
 				"description": "Дополнительный фильтр для сайтов на исландском языке."
+			},
+			"sk": {
+				"name": "Islandský zoznam ABP",
+				"description": "Dodatočný zoznam filtrov pre webové stránky v islandčine."
 			},
 			"sl": {
 				"name": "Islandski seznam ABP",
@@ -16240,6 +16268,10 @@
 			"ru": {
 				"name": "Greek AdBlock Filter",
 				"description": "Дополнительный фильтр для сайтов на греческом языке."
+			},
+			"sk": {
+				"name": "Grécky filter AdBlock",
+				"description": "Dodatočný zoznam filtrov pre webové stránky v gréčtine."
 			},
 			"sl": {
 				"name": "Grški filter zaviranja oglasov",
@@ -16571,6 +16603,10 @@
 				"name": "EasyList portugais",
 				"description": "Liste de filtres additionnelle pour les sites web en espagnol et en portugais."
 			},
+			"hr": {
+				"name": "EasyList Portuguese",
+				"description": "Dodatan popis filtera za web-mjesta na španjolskom i portugalskom."
+			},
 			"it": {
 				"name": "EasyList Portuguese",
 				"description": "Elenco di filtri per siti web in lingua spagnola e portoghese."
@@ -16586,6 +16622,10 @@
 			"nl": {
 				"name": "EasyList Portugees",
 				"description": "Extra filterlijst voor websites in het Spaans en Portugees."
+			},
+			"pl": {
+				"name": "EasyList Portuguese",
+				"description": "Dodatkowa lista filtrów dla stron w języku hiszpańskim i portugalskim."
 			},
 			"pt": {
 				"name": "EasyList Portuguese",
@@ -16610,6 +16650,10 @@
 			"sl": {
 				"name": "EasyList Portuguese",
 				"description": "Dodaten znam filtrov za spletne strani v španščini in portugalščini."
+			},
+			"sr": {
+				"name": "EasyList portugalski",
+				"description": "Filter stvoren za špansko i portugalsko govorno područje."
 			},
 			"tr": {
 				"name": "EasyList Portuguese",
@@ -18069,6 +18113,10 @@
 				"name": "Official Polish filters for AdBlock, uBlock Origin & AdGuard",
 				"description": "Дополнительный фильтр для сайтов на польском языке."
 			},
+			"sk": {
+				"name": "Oficiálne poľské filtre pre AdBlock, uBlock Origin a AdGuard",
+				"description": "Dodatočný zoznam filtrov pre webové stránky v poľštine."
+			},
 			"sl": {
 				"name": "Uradni poljski filtri za AdBlock, uBlock Origin in AdGuard",
 				"description": "Dodaten seznam filtrov za spletne strani v poljskem jeziku."
@@ -18660,7 +18708,7 @@
 				"description": "EasyList China + AdGuard Kinesisk filter. Filterliste, der specifikt fjerner annoncer på kinesisksprogede websteder."
 			},
 			"de": {
-				"name": "AdGuard — Chinesischer Filter",
+				"name": "AdGuard Chinesischer Filter",
 				"description": "EasyList China + AdGuard Chinesischer Filter. Filterliste, die spezifisch Werbeanzeigen auf chinesischsprachigen Websites sperrt."
 			},
 			"el": {
@@ -19025,7 +19073,7 @@
 			},
 			"sk": {
 				"name": "List-KR",
-				"description": "Filter, ktorý odstraňuje reklamy a rôzne skripty z webových stránok s kórejským obsahom. Kombinované a rozšírené o pravidlá špecifické pre AdGuard pre vylepšené filtrovanie. Očakáva sa, že tento filter sa bude používať spolu s filtrom AdGuard Base."
+				"description": "Filter, ktorý odstraňuje reklamy a rôzne skripty z webových stránok s kórejským obsahom. Kombinované a rozšírené o pravidlá špecifické pre AdGuard pre vylepšenú filtráciu. Očakáva sa, že tento filter sa bude používať spolu s filtrom AdGuard Base."
 			},
 			"sl": {
 				"name": "Seznam-KR",
@@ -19424,6 +19472,10 @@
 			"ru": {
 				"name": "EasyList Spanish",
 				"description": "Дополнительный фильтр для сайтов на испанском языке."
+			},
+			"sk": {
+				"name": "Španielsky EasyList",
+				"description": "Dodatočný zoznam filtrov pre webové stránky v španielčine."
 			},
 			"sl": {
 				"name": "Španski EasyList",
@@ -19960,6 +20012,10 @@
 			"ru": {
 				"name": "Persian Blocker",
 				"description": "Фильтр для блокировки рекламы и трекеров на персидских сайтах."
+			},
+			"sk": {
+				"name": "Perzský blokovač",
+				"description": "Zoznam filtrov na blokovanie reklám a sledovačov na webových stránkach v perzštine."
 			},
 			"sl": {
 				"name": "Perzijski zaviralec",
@@ -21155,6 +21211,10 @@
 				"name": "EasyList Polish",
 				"description": "Дополнительный фильтр для сайтов на польском языке."
 			},
+			"sk": {
+				"name": "Poľský EasyList",
+				"description": "Dodatočný zoznam filtrov pre webové stránky v poľštine."
+			},
 			"sl": {
 				"name": "Poljski EasyList",
 				"description": "Dodaten seznam filtrov za spletne strani v poljskem jeziku."
@@ -21955,6 +22015,10 @@
 				"name": "IndianList",
 				"description": "Дополнительный список фильтров для сайтов на хинди, тамильском и других дравидийских и индийских языках."
 			},
+			"sk": {
+				"name": "IndianList",
+				"description": "Ďalší zoznam filtrov pre webové stránky v hindčine, tamilčine a iných drávidských a indických jazykoch."
+			},
 			"sl": {
 				"name": "IndijskiList",
 				"description": "Dodaten seznam filtrov za spletne strani v hindujščini, tamilščini ter drugih dravidskih in indijskih jezikih."
@@ -22061,9 +22125,17 @@
 				"name": "Macedonian adBlock Filters",
 				"description": "Блокируют рекламу и трекеры на различных македонских сайтах."
 			},
+			"sk": {
+				"name": "Macedónske filtre adBlock",
+				"description": "Blokuje reklamy a sledovače na rôznych macedónskych webových stránkach."
+			},
 			"sl": {
 				"name": "Makedonski filtri za zaviranje oglasov",
 				"description": "Onemogoča oglase in sledilnike na različnih makedonskih spletnih mestih."
+			},
+			"sr": {
+				"name": "Makedonski adBlock filteri",
+				"description": "Blokira reklame i praćenja na raznim makedonskim internet stranama."
 			},
 			"tr": {
 				"name": "Macedonian adBlock Filters",

@@ -1,8 +1,8 @@
-! Checksum: CHbvdWFo/iMI8y2ObmMH3w
+! Checksum: ymg3jxvhQfg1F8ewmsRiBw
 ! Title: AdGuard German filter
 ! Description: EasyList Germany + AdGuard German filter. Filter list that specifically removes ads on websites in German language.
-! Version: 2.0.38.44
-! TimeUpdated: 2023-10-27T08:32:06+00:00
+! Version: 2.0.38.46
+! TimeUpdated: 2023-10-28T11:32:16+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -7835,6 +7835,7 @@ $stylesheet,subdocument,third-party,xmlhttprequest,domain=canna-power.to|canna.t
 ||pornozebra.com/cpanel/
 ||pornozebra.com/img/linklist2/
 ||port01.com/uploads/banner/
+||portugalforum.org/data/ads/
 ||pragerzeitung.cz/wp-content/uploads/*_300x450px_
 ||prispi.de/images/bluvista-cam1.gif
 ||production-livingdocs-bluewin-ch.imgix.net^*/6f3cdbc0-2a58-4a7e-933f-9077769c899b.png$domain=bluewin.ch
@@ -8610,7 +8611,7 @@ einkochen.info,ipadblog.de,leserbriefe.info,nh24.de,stimmt.at,wiener-online.at##
 popkultur.de###custom_html-21
 andalusien-aktuell.es###custom_html-22
 daily-pia.de,healthhelp.ch,likehifi.de,perbene.ch,prnet.at,signal-online.d,windowspower.de###custom_html-3
-ipadblog.de,presse-nachrichten.de,signal-online.d###custom_html-4
+ipadblog.de,presse-nachrichten.de,signal-online.d,urheberrecht.de###custom_html-4
 radsportjournaltourman.com###custom_html-42
 nachrichten.es,primavera24.de,radsportjournaltourman.com,signal-online.d###custom_html-5
 haus-garten-magazin.de,nachrichten.es###custom_html-6
@@ -9331,7 +9332,7 @@ msxfaq.de##.boxjob
 x-oo.com##.boxx
 radmarkt.de##.branchenberichte
 blick.ch##.brandstudio
-koerperverletzung.com##.brave_popup
+koerperverletzung.com,urheberrecht.de##.brave_popup
 idowa.de##.brick[data-b-title*="Traffective"]
 tri-mag.de##.bscb-23811
 btc-echo.de##.btc-sponsored

@@ -1,8 +1,8 @@
-! Checksum: gnZcYS1jHMYbAhCyzsvqow
+! Checksum: wcCcPkP7YibR70fgErq+yw
 ! Title: AdGuard Other Annoyances filter
 ! Description: Blocks irritating elements on web pages that do not fall under the popular categories of annoyances.
-! Version: 2.0.16.32
-! TimeUpdated: 2023-10-27T07:31:00+00:00
+! Version: 2.0.16.33
+! TimeUpdated: 2023-10-27T20:31:00+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -3223,6 +3223,8 @@ www.kinopoisk.ru##div[class^="trailer-promo"]
 ! END: Yandex
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164323
+taxscan.in##.taxsc-mobile-popup-ad
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164103
 thesimsresource.com##.vip-square
 thesimsresource.com##.vip-leader.hideme

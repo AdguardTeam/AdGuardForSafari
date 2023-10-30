@@ -1,8 +1,8 @@
-! Checksum: AN3wwD5Q0WH+sAOSJPO6Rg
+! Checksum: SlYeHPj+ZzTXFi90E9hXDg
 ! Title: AdGuard Widgets filter
 ! Description: Blocks annoying third-party widgets: online assistants, live support chats, etc.
-! Version: 2.0.6.54
-! TimeUpdated: 2023-10-24T11:31:31+00:00
+! Version: 2.0.6.55
+! TimeUpdated: 2023-10-30T10:31:17+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -1764,6 +1764,8 @@ zebratechnologies.force.com##.zbrbot-container
 !
 !
 !   NOTE: Allowlist for chat widgets
+! https://github.com/AdguardTeam/AdguardFilters/issues/164918
+@@||widget.replain.cc^$domain=gregoryurban.ru
 ! Unblocking Salesforce support chats only
 @@||service.force.com/embeddedservice/*/esw.min.js$domain=microchip.com|visible.com|playstation.com|cyberpowersystems.com|lego.com
 ! crisp.chat

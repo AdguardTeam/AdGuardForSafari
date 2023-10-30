@@ -1,8 +1,8 @@
-! Checksum: s6Fg5x0PYt84OviHWonpxQ
+! Checksum: 5kFol8B9wrPqDn+8WyTqtA
 ! Title: AdGuard Spanish/Portuguese filter (Optimized)
 ! Description: Filter list that specifically removes ads on websites in Spanish, Portuguese, and Brazilian Portuguese languages.
-! Version: 2.0.21.82
-! TimeUpdated: 2023-10-25T11:32:22+00:00
+! Version: 2.0.21.83
+! TimeUpdated: 2023-10-30T07:32:37+00:00
 ! Expires: 4 days (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};
@@ -2226,7 +2226,7 @@ bahia.ba##div[class^="publicidade-"]
 bahia.ba##.chamada .g-single > a > img[src*="cloudfront.net/wp-content/uploads/"][src*="/BAN" i]
 ||cloudfront.net/wp-content/uploads/*/BAN-300X250PX-RETOMADA.gif$domain=bahia.ba
 ||cloudfront.net/wp-content/uploads/*/BANNER-NOVEMBRO-NEGRO-728X90PX.jpg$domain=bahia.ba
-cifraclub.com.br##div[id^="pub-cc-"]
+palcomp3.com.br,cifraclub.com.br##div[id^="pub-cc-"]
 jc.ne10.uol.com.br##.desktop-banner
 fiuxy2.com##center > p > a[target="_blank"] > img
 pelisplus2.io##div[style] > a[target="_blank"] > img

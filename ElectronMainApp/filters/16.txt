@@ -1,8 +1,8 @@
-! Checksum: s0YOZlRo8l8tWu12UhOiZw
+! Checksum: cp0h08l0AojOn7jUYNHcxw
 ! Title: AdGuard French filter
 ! Description: Liste FR + AdGuard French filter. Filter list that specifically removes ads on websites in French language.
-! Version: 2.0.42.1
-! TimeUpdated: 2023-10-26T16:30:47+00:00
+! Version: 2.0.42.3
+! TimeUpdated: 2023-10-30T09:30:47+00:00
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -708,6 +708,9 @@ tf1.fr,tf1info.fr#%#//scriptlet('prevent-fetch', '/^https:\/\/ads\.stickyadstv\.
 !------- JS rules ---------------------!
 !--------------------------------------!
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164927
+occasions.decathlon.fr#%#//scriptlet('set-constant', 'FastClick', 'noopFunc')
+occasions.decathlon.fr#%#//scriptlet('set-constant', 'FastClick.attach', 'noopFunc')
 ! https://github.com/AdguardTeam/AdguardFilters/issues/157906
 ! 20min.ch - fixes video player
 20min.ch#%#(()=>{window.TATM=window.TATM||{},TATM.init=()=>{},TATM.initAdUnits=()=>{},TATM.pageReady=()=>{},TATM.getVast=function(n){return new Promise((n=>{n()}))},TATM.push=function(n){if("function"==typeof n)try{n()}catch(n){console.debug(n)}};})();
@@ -1544,6 +1547,9 @@ app.molotov.tv#%#//scriptlet('prevent-xhr', '/ping?token=')
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/164927
+!+ PLATFORM(ios, ext_android_cb, ext_safari)
+@@||cdnjs.cloudflare.com/ajax/libs/fastclick/*/fastclick.min.js$domain=occasions.decathlon.fr
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164610
 mrdeepfakes.com#@#div[data-ad]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164510
@@ -6906,6 +6912,7 @@ _siteunder/$popup
 ||11838aaad0.com^
 ||11askdnalsd11.monster^
 ||11ausdasd12.monster^
+||1239feffd9.com^
 ||126bbdd6df.com^
 ||12e42de17f.com^
 ||12link.bonuscontract.com^
@@ -7703,6 +7710,7 @@ _siteunder/$popup
 ||arcticclairvoyant.com^
 ||areamindless.com^
 ||arenitezill.com^
+||arfobkorfa.com^
 ||arfycvxb.com^
 ||argalsunclay.space^
 ||argondenial.com^
@@ -11063,6 +11071,7 @@ _siteunder/$popup
 ||kibejoyant.com^
 ||kibycomaker.com^
 ||kidskinnucleus.com^
+||kigcpofilaw.com^
 ||kigvboadl.xyz^
 ||kikckfirtss.com^
 ||kilnedlucban.com^
