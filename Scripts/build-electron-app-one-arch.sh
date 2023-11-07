@@ -54,7 +54,7 @@ fi
 # run electron-packager for both architectures to get similar asar files in universal build
 # to be able to get rid of redundant asar files later
 ARCHS="--arch=x64 --arch=arm64"
-electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
+yarn electron-packager "${SRC}" "${PRODUCT_NAME}" --electron-version=${ELECTRON_VERSION} --platform=${PLATFORM} --app-bundle-id="${AG_BUNDLEID}" \
 ${ARCHS} --app-version="${AG_VERSION}"  --build-version="${AG_BUILD}" --prune=true --overwrite --out="${2}" --osx-sign=false \
 ${OPT} || exit 1
 

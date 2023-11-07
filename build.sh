@@ -48,18 +48,26 @@ VERSION_FILE="version.txt"
 CONFIGURATION_NAME="Release"
 if [ "$CHANNEL" == "beta" ]; then
     CONFIGURATION_NAME="Standalone Beta"
-    APP_NAME="Adguard for Safari Beta.app"
 fi
 
 if [ "$CHANNEL" == "release" ]; then
     CONFIGURATION_NAME="Standalone Prod"
 fi
 
+STEP=1
+echo "Step $STEP: Remove local keychain if it exists"
+bundle exec fastlane remove_certs config:"$CONFIGURATION_NAME"
+
+let "STEP++"
+echo "Step $STEP: Sync certificates and provisioning profiles"
+bundle exec fastlane certs config:"$CONFIGURATION_NAME" 
+
 #
 # Build process
 #
 
-echo "Step 1: Building the app archives"
+let "STEP++"
+echo "Step $STEP: Building the app archives"
 # download AdGuard resources
 yarn install --cwd "${BUILD_DIR}/../AdGuardResources"
 
@@ -71,33 +79,39 @@ xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" archive -configuration "$CO
 # zip the archives so that we could use them as a build artifacts
 /usr/bin/ditto -c -k --keepParent "$ARCHIVE_PATH" "$ARCHIVE_PATH.zip"
 
-echo "Step 2: Copying the apps to the build directory"
+let "STEP++"
+echo "Step $STEP: Copying the apps to the build directory"
 rm -Rf "$APP_PATH"
 cp -HRfp "$ARCHIVE_APP_PATH" "$APP_PATH"
 
-echo "Step 3: Modify the app update channel to $CHANNEL"
+let "STEP++"
+echo "Step $STEP: Modify the app update channel to $CHANNEL"
 INFO_PLIST=${APP_PATH}/Contents/Info.plist
 
 # retrieve version and build number from the app itself
 build_number=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "$INFO_PLIST")
 version=$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$INFO_PLIST")
 
-echo "Step 4: Notarizing the app"
+let "STEP++"
+echo "Step $STEP: Notarizing the app"
 if [ "$NOTARIZE_DISABLED" == "--notarize=0" ]; then
     echo "Notarizing is disabled"
 else
-    # python script parameters should be relative to the script location
-    python3 -u Scripts/notarize.py --path="../$APP_PATH" --bundle-id="$APP_BUNDLE_ID"
+    # parameters should be relative to the $BUILD_DIR location
+    bundle exec fastlane notari config:"$CONFIGURATION_NAME" bundle:"$APP_NAME" id:"$APP_BUNDLE_ID.$CHANNEL"
 fi
 
-echo "Step 5: Archive the app"
+let "STEP++"
+echo "Step $STEP: Archive the app"
 # zip the archive so that we could use it as a build artifact
 /usr/bin/ditto -c -k --keepParent "$APP_PATH" "$BUILD_DIR/$APP_ARCHIVE_NAME"
 
-echo "Step 6: Build version.txt"
+let "STEP++"
+echo "Step $STEP: Build version.txt"
 printf "version=$version\nbuild_number=$build_number\nchannel=$CHANNEL\n" >$BUILD_DIR/$VERSION_FILE
 
-echo "Step 7: Build updates json files"
+let "STEP++"
+echo "Step $STEP: Build updates json files"
 # creates release.json and edits updates.json
 buildFileName="${APP_ARCHIVE_NAME}"
 if [ "$CHANNEL" == "beta" ]; then
@@ -115,3 +129,8 @@ curl "https://static.adtidy.org/safari/updates.json" > $BUILD_DIR/updates.json
 
 # python script parameters should be relative to the script location
 python3 -u Scripts/update_version.py --path="../$BUILD_DIR/updates.json" --channel="$CHANNEL" --version="$version"
+
+let "STEP++"
+echo "Step $STEP: Remove local keychain"
+bundle exec fastlane remove_certs config:"$CONFIGURATION_NAME"
+

@@ -75,10 +75,10 @@ AdGuard for Safari consists of three parts:
 
 ### Prerequisites
 
-- MacOS 10.13 or above
-- [Xcode](https://developer.apple.com/xcode/) 12.2 or above
+- MacOS 13.1 or above
+- [Xcode](https://developer.apple.com/xcode/) 14.3 or above
 - Xcode Command Line Tools
-- [Node.js](https://nodejs.org/) v13.10.0 or higher
+- [Node.js](https://nodejs.org/) v18.17.1 or higher
 - [Yarn](https://yarnpkg.com/lang/en/)
 - [JQ](https://stedolan.github.io/jq/)
 
@@ -161,10 +161,22 @@ yarn test
 
 ### Environment requirements
 
-- MacOS 10.14.4+
-- Xcode 10.2+
-- Dev account on developer.apple.com and `Adguard Software Limited` membership, enabled `App Store Connect`
-- Certificates `Developer ID Application: Adguard Software Limited (TC3Q7MAJXF)` and `Developer ID Installer: Adguard Software Limited (TC3Q7MAJXF)` in `keychain`
+  - MacOS 13.1+
+  - Xcode 14.3+
+  - Install `Xcode command line tools`
+   ```bash
+   xcode-select --install
+   ```
+  - Install the `ruby` module `bundler` if it is not in the system
+   ```bash
+   sudo gem install bundler
+   ```
+  - Fastlane manages development and distribution certificates according to the documentation described in `fastlane match`. The file `./fastlane/env.default` contains variables (`SENSITIVE_VARS_PATH`, `APP_STORE_CONNECT_API_KEY_PATH`) that define the paths to files with private information necessary for `fastlane match` to work. Create these files in a hidden location with the appropriate contents and specify their paths in the these variables.
+  - You need to run the `configure.sh dev` script, which will install the necessary components and certificates locally.
+   ```bash
+   cd <repository>
+   ./configure.sh dev
+   ```
 
 Check certificates names in Scripts/ExportOptions.plist
 
@@ -175,21 +187,6 @@ Check certificates names in Scripts/ExportOptions.plist
 For converting rules to content-blocker format we use an external library as a binary built from `https://github.com/AdguardTeam/SafariConverterLib/`, that `ConverterTool` binary should be placed in `./libs/`.
 
 You use `./Scripts/download-lib.sh` to download the latest release version of that binary from Github.
-
-#### Preparation - notarization
-
-In case we need to notarize the app, we will need to do it.
-
-Register in `App Connect` and create a password for `altool`.
-
-> "Because App Store Connect now requires two-factor authentication (2FA) on all accounts, you must create an app-specific password for altool, as described in [Using app-specific passwords](https://support.apple.com/en-us/HT204397).
-> To avoid including your password as cleartext in a script, you can provide a reference to a keychain item, as shown in the previous example. This assumes the keychain holds a keychain item named `altool_access` with an account value matching the username `dev_acc@icloud.com`. Note that altool can’t access your iCloud keychain for security reasons, so the item must be in your login keychain. You can add a new keychain item using the Keychain Access app, or from the command line using the security utility:
->
-> ```
-> security add-generic-password -a "dev_acc@icloud.com" -w <secret_password> -s "altool_access"
-> ```
-
-Create `Scripts/.devconfig.json` with created username and keychain item.
 
 #### Common issues
 https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/resolving_common_notarization_issues

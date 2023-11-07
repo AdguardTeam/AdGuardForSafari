@@ -1,0 +1,207 @@
+PROJECT_VARS_PREFIX = "XPV_"
+
+def load_project_vars (configuration = ENV["CONFIGURATION"])
+    Actions.execute_action("Loading project env vars") do
+        jsonString = %x{ xcodebuild -workspace "#{ENV['WORKSPACE']}" -scheme \"#{ENV['SCHEME']}" -configuration "#{configuration}" -showBuildSettings -json 2>/dev/null }
+        dict = JSON.parse(jsonString)[0]['buildSettings']
+        dict.each do |key, val|
+            ENV["#{PROJECT_VARS_PREFIX}#{key}"] = val
+        end
+        UI.success "Project env vars loaded for configuration: #{configuration}"
+    end
+end
+
+def load_sensitive_vars(path)
+    Actions.execute_action("Loading sensitive(private) env vars") do
+        jsonString = File.read(path)
+        dict = JSON.parse(jsonString)
+        dict.each do |key, val|
+            ENV[key] = val
+        end
+        UI.success "Sensitive(private) env vars loaded"
+    end
+end
+
+def create_local_keychain (keychain_path)
+
+    create_keychain(
+      unlock: true,
+      timeout: 0,
+      add_to_search_list: true,
+      lock_after_timeout: false,
+      path: keychain_path,
+      password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+      step_name: "Create local keychain for build"
+    )
+
+    return keychain_path
+end
+
+def compress_bundle (bundle_path, archive_path)
+    success = true
+    sh(
+        "ditto",
+        "-c",
+        "-k",
+        "--rsrc",
+        "--keepParent",
+        bundle_path,
+        archive_path,
+        error_callback: ->(result) { success = false },
+        step_name: "Archiving bundle"
+        )
+    UI.user_error! "Failed archiving bundle: #{bundle_path} " unless success
+end
+
+def staple_bundle (bundle_path)
+    success = true
+    sh(
+        "xcrun",
+        "stapler",
+        "staple",
+        bundle_path,
+        error_callback: ->(result) { success = false },
+        step_name: "Stapling bundle"
+        )
+    UI.user_error! "Failed to staple: #{bundle_path} " unless success
+end
+
+def standalone_certs(app_id, keychain_path = nil, options = {})
+
+    match(
+      step_name: "Sync Developer id identity and provisioning profiles",
+      app_identifier: [
+          app_id
+      ],
+      skip_provisioning_profiles: true,
+  
+      type: "developer_id",
+  
+      keychain_name: keychain_path,
+  
+      readonly: "true",
+      force: "false",
+      force_for_new_devices: "false",
+      verbose: if options[:verbose].nil?; "false"; else options[:verbose]; end,
+  
+      git_branch: "standalone",
+      clone_branch_directly: "true",
+      shallow_clone: "true",
+      platform: "macos",
+      fail_on_name_taken: "true"
+    )
+  
+    match(
+      step_name: "Sync Developer id installer identity",
+      app_identifier: [
+          app_id
+      ],
+  
+      type: "developer_id_installer",
+  
+      keychain_name: keychain_path,
+  
+      readonly: "true",
+      force: "false",
+      force_for_new_devices: "false",
+      verbose: if options[:verbose].nil?; "false"; else options[:verbose]; end,
+  
+      git_branch: "standalone",
+      clone_branch_directly: "true",
+      shallow_clone: "true",
+      platform: "macos",
+      fail_on_name_taken: "true",
+      skip_provisioning_profiles: "true"
+    )
+  end
+  
+ def mas_cert(type, other_type, app_id, keychain_path = nil, options = {})
+
+  match(
+      app_identifier: [
+        app_id
+      ],
+      type: type,
+      additional_cert_types: other_type,
+      keychain_name: keychain_path,
+
+      readonly: if options[:readonly].nil?; "false"; else options[:readonly]; end,
+      force: if options[:force].nil?; "false"; else options[:force]; end,
+      force_for_new_devices: if options[:force_for_new_devices].nil?; "false"; else options[:force_for_new_devices]; end,
+      verbose: if options[:verbose].nil?; "false"; else options[:verbose]; end,
+
+      git_branch: "mas",
+      clone_branch_directly: "true",
+      shallow_clone: "true",
+      platform: "macos",
+      fail_on_name_taken: "true",
+  )
+end
+
+def collect_symbols (archive_path, symbols_path)
+    Actions.execute_action("Collenting a symbols") do
+
+        command_parts = ""
+        title = ""
+        run_sh = -> {
+            sh(
+                command_parts.join(' '),
+                step_name: title,
+                error_callback: lambda { |msg|
+                  UI.user_error! ("Failed collecting symbols for \"#{path}\": #{msg}")
+                }
+            )
+        }
+
+        title = "Collenting a symbols, stage 1"
+        path = "#{archive_path}/dSYMs"
+        command_parts = [
+            "xcrun symbols -arch all", 
+            "-symbolsPackageDir", symbols_path.shellescape,
+            "#{path.shellescape}/*"
+        ]
+        run_sh.call
+        title = "Collenting a symbols, stage 2"
+        path = "#{archive_path}/Products/Applications/#{ENV["XPV_PRODUCT_NAME"]}.app/Contents/Resources"
+        command_parts = [
+            " /usr/bin/find", "#{path.shellescape}/app-*", "-type f",
+            "-exec xcrun symbols -arch all", 
+            "-symbolsPackageDir", symbols_path.shellescape, "{} \\;"
+        ]
+        run_sh.call
+    end
+end
+
+def create_pkg (identity, archive_path, symbols_path, pkg_path)
+    sh(
+        [ 
+            "xcrun productbuild --sign \"#{identity}\"", 
+            "--symbolication #{symbols_path.shellescape}",
+            "--component \"#{archive_path}/Products/Applications/#{ENV["XPV_PRODUCT_NAME"]}.app\"", 
+            "/Applications #{pkg_path.shellescape}" 
+        ].join(' '),
+        step_name: "Creating package for submit to MAS",
+        error_callback: lambda { |msg|
+            UI.user_error! ("Failed creating package for \"#{pkg_path}\": #{msg}")
+        }
+    )
+end
+
+def submit_to_mas (app_id, pkg_path, team_id)
+
+    deliver(
+        platform: "osx",
+        team_id: team_id,
+        app_identifier: app_id,
+        pkg: pkg_path,
+        skip_app_version_update: "true",
+        skip_screenshots: "true",
+        skip_metadata: "true",
+        precheck_include_in_app_purchases: "false",
+        ignore_language_directory_validation: "true",
+        run_precheck_before_submit: "false",
+        step_name: "Submitting product to MAS",
+        verbose: "true"
+    )
+
+end

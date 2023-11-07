@@ -26,8 +26,10 @@ SIGN_OPTIONS="--verbose=2 --force$RT_OPTIONS --timestamp --entitlements $AG_ELEC
 
 codesign $SIGN_OPTIONS --sign "${CODE_SIGN_IDENTITY}" "${RESOURCES}/libs/ConverterTool" || exit 1
 
-codesign $SIGN_OPTIONS --sign "${CODE_SIGN_IDENTITY}" "${RESOURCES}/app-x64.asar.unpacked/node_modules/safari-ext/build/Release/safari_ext_addon.node" || exit 1
-codesign $SIGN_OPTIONS --sign "${CODE_SIGN_IDENTITY}" "${RESOURCES}/app-arm64.asar.unpacked/node_modules/safari-ext/build/Release/safari_ext_addon.node" || exit 1
+/usr/bin/find "${RESOURCES}/app-x64.asar.unpacked/node_modules" -type f -name "*.node" -exec \
+codesign $SIGN_OPTIONS --sign "${CODE_SIGN_IDENTITY}" "{}" \;
+/usr/bin/find "${RESOURCES}/app-arm64.asar.unpacked/node_modules" -type f -name "*.node" -exec \
+codesign $SIGN_OPTIONS --sign "${CODE_SIGN_IDENTITY}" "{}" \;
 
 codesign $SIGN_OPTIONS --sign "${CODE_SIGN_IDENTITY}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libEGL.dylib" || exit 1
 codesign $SIGN_OPTIONS --sign "${CODE_SIGN_IDENTITY}" "$FRAMEWORKS/Electron Framework.framework/Versions/A/Libraries/libffmpeg.dylib" || exit 1
