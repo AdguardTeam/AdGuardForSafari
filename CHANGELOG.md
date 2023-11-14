@@ -12,18 +12,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated [`@adguard/filters-downloader`] to v1.1.20.
-- Updated [`@adguard/scriptlets`] to v1.9.83.
+- Updated [`@adguard/filters-downloader`] to v1.1.23
+- Updated [`@adguard/scriptlets`] to v1.9.91
 - Advanced rules applying script injected as a blob
-  [#917](https://github.com/AdguardTeam/AdGuardForSafari/issues/917).
+  [#917](https://github.com/AdguardTeam/AdGuardForSafari/issues/917)
 
 
 ## [1.11.15]
 
 ### Changed
 
-- Updated Scriptlets to v1.9.72
-- Updated SafariConverterLib to v2.0.43
+- Updated [`@adguard/scriptlets`] to v1.9.72
+- Updated [SafariConverterLib] to v2.0.43
 
 ### Fixed
 - Settings panel opens at login [853](https://github.com/AdguardTeam/AdGuardForSafari/issues/853)
@@ -35,8 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated AdGuard Assistant to v4.3.70
-- Updated SafariConverterLib to v2.0.40
-- Updated Scriptlets to v1.9.37
+- Updated [SafariConverterLib] to v2.0.40
+- Updated [`@adguard/scriptlets`] to v1.9.37
 
 ### Fixed
 
@@ -50,8 +50,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated SafariConverterLib to v2.0.39 — support :has() pseudo-class by Safari content blockers [since Safari v16.4](https://www.webkit.org/blog/13966/webkit-features-in-safari-16-4/)
-- Updated Scriptlets to v1.9.7
+- Updated [SafariConverterLib] to v2.0.39 — support :has() pseudo-class by Safari content blockers [since Safari v16.4](https://www.webkit.org/blog/13966/webkit-features-in-safari-16-4/)
+- Updated [`@adguard/scriptlets`] to v1.9.7
 - Updated ExtendedCss to v2.0.52
 
 
@@ -62,3 +62,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [`@adguard/filters-downloader`]: https://github.com/AdguardTeam/FiltersDownloader/blob/master/CHANGELOG.md
 [`@adguard/scriptlets`]: https://github.com/AdguardTeam/Scriptlets/blob/master/CHANGELOG.md
+[SafariConverterLib]: https://github.com/AdguardTeam/SafariConverterLib/blob/master/CHANGELOG.md
