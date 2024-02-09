@@ -1,9 +1,10 @@
-! Checksum: YUdL2AwaPqGOQNwSaCCWIw
+! Checksum: ZKywBYnc44GVwc8FWthRxA
+! Diff-Path: ../patches/10/10-s-1706034991-3600.patch
 ! Title: Filter unblocking search ads and self-promotion
 ! Description: Filter that unblocks search ads in Google, DuckDuckGo, Bing, or Yahoo and self-promotion on websites.
-! Version: 2.0.3.16
-! TimeUpdated: 2023-10-29T19:30:13+00:00
-! Expires: 4 days (update frequency)
+! Version: 2.0.3.21
+! TimeUpdated: 2024-01-23T18:31:24+00:00
+! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
 !
@@ -20,7 +21,6 @@
 ! AG_removeCookie
 ! Examples: AG_removeCookie('/REGEX/') or AG_removeCookie('part of the cookie name')
 !
-#%#var AG_removeCookie=function(a){var e=/./;/^\/.+\/$/.test(a)?e=new RegExp(a.slice(1,-1)):""!==a&&(e=new RegExp(a.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")));a=function(){for(var a=document.cookie.split(";"),g=a.length;g--;){cookieStr=a[g];var d=cookieStr.indexOf("=");if(-1!==d&&(d=cookieStr.slice(0,d).trim(),e.test(d)))for(var h=document.location.hostname.split("."),f=0;f<h.length-1;f++){var b=h.slice(f).join(".");if(b){var c=d+"=",k="; domain="+b;b="; domain=."+b;document.cookie=c+"; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+k+"; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+b+"; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+"; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+k+"; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+b+"; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"}}}};a();window.addEventListener("beforeunload",a)};
 !
 ! AG_defineProperty
 ! See https://github.com/AdguardTeam/deep-override
@@ -80,6 +80,7 @@
 ! This section contains the list of the rules that unblock contextual (and only contextual) ads on the search engine result pages. Rules should be domain-specific.
 !
 ! Good: example.org#@#.ad
+! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
 !
 !
@@ -187,6 +188,10 @@ google.ad,google.ae,google.al,google.am,google.as,google.at,google.az,google.ba,
 ! Fanboy's Annoyances
 google.ae,google.at,google.be,google.bg,google.by,google.ca,google.ch,google.cl,google.co.id,google.co.il,google.co.in,google.co.jp,google.co.ke,google.co.kr,google.co.nz,google.co.th,google.co.uk,google.co.ve,google.co.za,google.com,google.com.ar,google.com.au,google.com.br,google.com.co,google.com.ec,google.com.eg,google.com.hk,google.com.mx,google.com.my,google.com.pe,google.com.ph,google.com.pk,google.com.py,google.com.sa,google.com.sg,google.com.tr,google.com.tw,google.com.ua,google.com.uy,google.com.vn,google.cz,google.de,google.dk,google.dz,google.ee,google.es,google.fi,google.fr,google.gr,google.hr,google.hu,google.ie,google.it,google.lt,google.lv,google.nl,google.no,google.pl,google.pt,google.ro,google.rs,google.ru,google.se,google.sk#@##taw > div > [data-ved]
 !
+! Google Travel
+! https://github.com/AdguardTeam/AdguardFilters/issues/171055#issuecomment-1901900079
+google.*#@#c-wiz[jsrenderer="YTTf6c"] > .bhapoc.oJeWuf[jsname="bN97Pc"][data-ved]
+!
 ! Ask.com
 @@||ask.com/web$document
 search.ask.com#@#.sponsoredTop
@@ -256,6 +261,7 @@ amazon.*#@#section[class*="csm-placement-id"]
 amazon.*#@?#div[data-order-sm]:has(> div[data-csa-c-painter="ad-topper-desktop-card"]:first-child + div[data-csa-c-painter="enumclaw-slot-display-ad"]:last-child)
 amazon.*#@##dp-container > #px-profile_feature_div[data-csa-c-type="widget"]
 amazon.*#@#div[data-csa-c-painter="ad-topper-desktop-card"]
+amazon.*#@#.sbv-ad-content-container
 amazon.*#@?#div[data-display-at]:has(> div[data-csa-c-painter="ad-topper-desktop-card"]:first-child + div[style="display: none !important;"]:last-child)
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/136364
@@ -263,11 +269,12 @@ search.brave.com#@#div[data-advertiser-id]
 ! https://github.com/AdguardTeam/AdguardFilters/issues/117527
 buscape.com.br#@#div[class^="Hits_SponsoredWrapper__"]
 !
+! developer.mozilla.org - self-promo in documentation (the rule is from EasyList)
+@@||developer.mozilla.org/pong/
 ! Mediafire premium upgrade
 mediafire.com#@##upsellBox
 ! Startpage
 @@||startpage.com/adsense/search/async-ads.js$domain=startpage.com
-@@||startpage.com^$elemhide,content
 ! Irr
 irr.ru#@#.ad-link
 @@||an.yandex.ru$domain=irr.ru

@@ -1,9 +1,10 @@
-! Checksum: gSVLfJKSm0vOCPv1z+kiEA
+! Checksum: ikpOnFrvur00iokpwDNcNA
+! Diff-Path: ../patches/17/17-s-1707388620-3600.patch
 ! Title: AdGuard URL Tracking filter
 ! Description: Filter that enhances privacy by removing tracking parameters from URLs.
-! Version: 2.0.7.22
-! TimeUpdated: 2023-10-26T11:30:50+00:00
-! Expires: 4 days (update frequency)
+! Version: 2.0.7.98
+! TimeUpdated: 2024-02-08T10:32:03+00:00
+! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
 !
@@ -11,11 +12,23 @@
 !-------------- General tracking parameters list  --------------------------!
 !---------------------------------------------------------------------------!
 !
+! This section contains the list of generic `$removeparam` rules that are applied on every website.
 ! You should only put here known parameters that are used on many websites.
 ! IMPORTANT: add a comment that explains where this parameter comes from (what tracking company is using it).
 ! Ideally, supply a link to the document that explains how this parameter is used.
 !
 !
+! Commission Junction
+! https://developers.cj.com/docs/advertiser-site-tracking/enhanced-tracking-integration
+! AT Internet
+! Email subscription tracking
+! AappsFlyer
+! https://support.appsflyer.com/hc/en-us/articles/18730398273553
+! https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-8036123
+! spot.im
+! WordPress Visitor Statistics plugin
+! tracker.my.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164394
 ! https://github.com/AdguardTeam/AdguardFilters/issues/162080
 ! https://github.com/AdguardTeam/AdguardFilters/issues/158662
@@ -79,6 +92,7 @@
 ! https://www.parse.ly/help/kb/campaign-tracking-guide
 ! https://www.smashingmagazine.com/2017/08/tracking-internal-marketing-campaigns-google-analytics/
 ! UTM
+! https://support.google.com/google-ads/answer/13327296
 ! Google ads/analytics
 ! Google AMP-analytics
 ! DPG Media analytics
@@ -108,12 +122,54 @@
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/172125
+! Wargaming tracking
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-8368863
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-8282562
+! https://github.com/AdguardTeam/AdguardFilters/issues/171822
+! https://github.com/AdguardTeam/AdguardFilters/issues/171802
+! https://github.com/AdguardTeam/AdguardFilters/issues/171289
+! https://mall.kinarino.jp/sale?sort=popular&available=on&cid=group_knrn_presses-show&kcat=2&kkw=107_1046_8394_11659&klay=presses-show&karea=feature-banner
+! https://github.com/AdguardTeam/AdguardFilters/issues/170633
+! https://github.com/AdguardTeam/AdguardFilters/issues/170635#issuecomment-1890590521
+! https://github.com/AdguardTeam/AdguardFilters/issues/170366
+! https://mora.jp/special/bigsale/?fmid=mora.jack_202312_bigsale
+! https://github.com/AdguardTeam/AdguardFilters/issues/169585
+! go2jump.org / tr.rdrtr.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/168508#issuecomment-1872568599
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-7975883
+! https://github.com/AdguardTeam/AdguardFilters/issues/169365
+! boredpanda.com
+! https://github.com/AdguardTeam/AdguardFilters/issues/169023
+! huffingtonpost.it
+! https://reservation.oh-my-teeth.com/scan?tags=blog_lp102-3cp_monitor_pcFixed&clid=about-orthodontics&code=M10000
+! https://olegmakarenko.ru/?from=sds
+! https://github.com/AdguardTeam/AdguardFilters/issues/168475
+! https://raretech.site/about?from=envader-/assets/banner/banner-5.jpg
+! dtf.ru tracking
+! https://github.com/AdguardTeam/AdguardFilters/issues/168286
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-7715888
+! https://github.com/AdguardTeam/AdguardFilters/issues/167273
+! https://github.com/AdguardTeam/AdguardFilters/issues/167051
+! https://github.com/AdguardTeam/AdguardFilters/issues/167158
+! https://github.com/AdguardTeam/AdguardFilters/issues/166502
+! https://github.com/AdguardTeam/AdguardFilters/issues/166917
+! https://github.com/AdguardTeam/AdguardFilters/issues/166582
+! https://github.com/AdguardTeam/AdguardFilters/issues/166698
+! https://github.com/AdguardTeam/AdguardFilters/issues/166636
+! https://github.com/AdguardTeam/AdguardFilters/issues/166436
+! https://github.com/AdguardTeam/AdguardFilters/issues/166382
+! https://github.com/AdguardTeam/AdguardFilters/issues/166050
+! https://github.com/AdguardTeam/AdguardFilters/issues/165785
+! Do not remove "shareKey" parameter - https://github.com/AdguardTeam/AdguardFilters/issues/171962
+! sportbank.ua spam
+! https://github.com/AdguardTeam/AdguardFilters/issues/165339
+! https://github.com/AdguardTeam/AdguardFilters/issues/165022
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164620
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164060#issuecomment-1779661046
 ! https://github.com/AdguardTeam/AdguardFilters/issues/111997
 ! https://github.com/AdguardTeam/AdguardFilters/issues/164394
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-7337134
-! youtube.com - Copy video URL at its search result via mouse right click.
 ! damu.net homepage - Visit https://www.daum.net/ and click one of news feed.
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163568
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163365
@@ -142,7 +198,6 @@
 ! streamfab.jp
 ! etsy.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/160495
-! https://github.com/AdguardTeam/AdguardFilters/issues/159953
 ! https://github.com/AdguardTeam/AdguardFilters/issues/159733
 ! https://www.pixiv.net/novel/?novel13th_character_count_checker&from=pixiv_official_post
 ! https://querie.me/answer/t008mMA55hMnREySBJXZ?timestamp=1692022485
@@ -254,7 +309,15 @@
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-4966523
 ! moffme.com?source=gl&medium=moffme&campaign=article_2699
 ! Uzou recommendation trackparam
+!! tiktok
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-4978150
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-1909327
+! email/copy link function
+! Create effects link on main page and then clicking on a link
+! login button on effect page - breaks comments after logging in
+! searching a phrase and clicking on it
+! ads.tiktok.com signup page
+! tiktok end
 ! https://voicy.jp/channel/2964/451627?share.ref=https%3A%2F%2Ft.co%2F
 ! https://github.com/AdguardTeam/AdguardFilters/issues/141768
 ! https://github.com/AdguardTeam/AdguardFilters/issues/140672
@@ -363,7 +426,6 @@
 ! https://github.com/AdguardTeam/AdguardFilters/issues/114505
 ! https://github.com/AdguardTeam/AdguardFilters/issues/114561
 ! https://github.com/AdguardTeam/AdguardFilters/issues/114206
-! https://github.com/AdguardTeam/AdguardFilters/issues/113305
 ! https://github.com/AdguardTeam/AdguardFilters/issues/113639
 ! https://github.com/AdguardTeam/AdguardFilters/issues/113567
 ! https://github.com/AdguardTeam/AdguardFilters/issues/112404
@@ -407,7 +469,6 @@
 ! https://github.com/AdguardTeam/AdguardFilters/issues/104773
 ! adorama.com
 ! https://github.com/AdguardTeam/AdguardFilters/commit/920d973db052ded91b48fbb8c7ca3fe2fdeda237
-! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-1909327
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-1899731
 ! https://github.com/AdguardTeam/AdguardFilters/issues/105183
 ! www.dmm.co.jp trackparam
@@ -467,7 +528,6 @@
 ! https://github.com/AdguardTeam/AdguardFilters/issues/91233
 ! kohls.com - counter
 ! instagram.com - share tracking
-! euronews.com - email subscription tracking
 ! https://github.com/AdguardTeam/AdguardFilters/issues/89768
 ! https://github.com/AdguardTeam/AdguardFilters/issues/90055
 ! https://github.com/AdguardTeam/AdguardFilters/issues/89556
@@ -483,6 +543,8 @@
 ! Yandex
 ! Yandex.Market
 ! https://github.com/AdguardTeam/AdguardFilters/issues/88606
+! Yandex.Docs
+! Yandex.Disk
 ! Baidu search - statictics
 ! https://github.com/AdguardTeam/CoreLibs/issues/1464
 ! Probably a bug
@@ -510,12 +572,13 @@
 ! Tracks source site
 ! insider.office.com
 ! Embedded tweets
+! Twitter
+! Breaks redirects https://github.com/uBlockOrigin/uAssets/issues/20941
+! Do not apply to urls with /i/redirect?url=
 !
 !
 !
 ! https://github.com/AdguardTeam/AdguardFilters/issues/88163
-!
-! https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters
 !
 !
 !
@@ -552,9 +615,14 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_tracking_params
 !
 ! This section contains the list of rules that fix incorrect blocking. Rules should be domain-specific and only the `removeparam` modifier is allowed.
 !
+! Bad:  @@||example.org^$stealth (should be in AdGuard Base - allowlist_stealth.txt)
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/169890
+! https://github.com/AdguardTeam/AdguardFilters/issues/168271
+! https://github.com/AdguardTeam/AdguardFilters/issues/166698
+! https://github.com/uBlockOrigin/uAssets/issues/20708
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163365
 ! https://github.com/AdguardTeam/AdguardFilters/issues/163015
 ! greenbuildingadvisor.com - broken login
@@ -577,7 +645,6 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_tracking_params
 ! https://github.com/AdguardTeam/AdguardFilters/issues/63522
 ! https://github.com/AdguardTeam/AdguardFilters/issues/34644
 ! https://forum.adguard.com/index.php?threads/https-www-empflix-com-nsfw.25985/
-! https://github.com/AdguardTeam/AdguardFilters/issues/22641
 ! https://github.com/AdguardTeam/AdguardFilters/issues/6348
 ! https://github.com/AdguardTeam/AdguardForWindows/issues/356#issuecomment-314934554
 ! https://github.com/AdguardTeam/AdguardFilters/issues/52925

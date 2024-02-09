@@ -1,9 +1,10 @@
-! Checksum: IRaZ4ZcPjgdhWsZDQV2tnQ
+! Checksum: sMHPYJjGO6MQ//bQCiVi9w
+! Diff-Path: ../patches/5/5-s-1706636208-3600.patch
 ! Title: AdGuard Experimental filter
 ! Description: Filter designed to test certain hazardous filtering rules before they are added to the basic filters.
-! Version: 2.0.1.24
-! TimeUpdated: 2023-10-25T15:31:55+00:00
-! Expires: 4 days (update frequency)
+! Version: 2.0.1.32
+! TimeUpdated: 2024-01-30T17:33:30+00:00
+! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
 !
@@ -20,7 +21,6 @@
 ! AG_removeCookie
 ! Examples: AG_removeCookie('/REGEX/') or AG_removeCookie('part of the cookie name')
 !
-#%#var AG_removeCookie=function(a){var e=/./;/^\/.+\/$/.test(a)?e=new RegExp(a.slice(1,-1)):""!==a&&(e=new RegExp(a.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")));a=function(){for(var a=document.cookie.split(";"),g=a.length;g--;){cookieStr=a[g];var d=cookieStr.indexOf("=");if(-1!==d&&(d=cookieStr.slice(0,d).trim(),e.test(d)))for(var h=document.location.hostname.split("."),f=0;f<h.length-1;f++){var b=h.slice(f).join(".");if(b){var c=d+"=",k="; domain="+b;b="; domain=."+b;document.cookie=c+"; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+k+"; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+b+"; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+"; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+k+"; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";document.cookie=c+b+"; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"}}}};a();window.addEventListener("beforeunload",a)};
 !
 ! AG_defineProperty
 ! See https://github.com/AdguardTeam/deep-override
@@ -141,12 +141,10 @@
 ! Rules that are restricted to one or more domains.
 ! This section contain any type of rule grouped by domain.
 !
-! vipbox.lc - streaming provider - blocking popunders specific to that page
-/[a-z]{8,}\.(com|info|xyz)/$domain=nolive.me,third-party
 ! main youtube page - changing view for the first row of elements
-www.youtube.com#$?##contents ytd-rich-grid-row:has(> div[id="contents"] > ytd-rich-item-renderer[style="display: none !important;"]) > #contents:first-child { max-width: unset !important; }
-www.youtube.com#$?##contents ytd-rich-grid-row:has(> div[id="contents"] > ytd-rich-item-renderer[style="display: none !important;"]) ytd-rich-grid-media { max-width: unset !important; }
-www.youtube.com#$?##contents ytd-rich-grid-row:has(> div[id="contents"] > ytd-rich-item-renderer[style="display: none !important;"]) { --ytd-rich-grid-items-per-row: 1 !important; }
+www.youtube.com#$##contents ytd-rich-grid-row:has(> div[id="contents"] > ytd-rich-item-renderer[style="display: none !important;"]) > #contents:first-child { max-width: unset !important; }
+www.youtube.com#$##contents ytd-rich-grid-row:has(> div[id="contents"] > ytd-rich-item-renderer[style="display: none !important;"]) ytd-rich-grid-media { max-width: unset !important; }
+www.youtube.com#$##contents ytd-rich-grid-row:has(> div[id="contents"] > ytd-rich-item-renderer[style="display: none !important;"]) { --ytd-rich-grid-items-per-row: 1 !important; }
 ! https://github.com/AdguardTeam/AdguardFilters/issues/96262
 developer.android.com,adssettings.google.com##sc-survey-survey-manager
 !
@@ -248,10 +246,9 @@ mail.yandex.ru#?#.modal:has(> div[data-lego] div[class^="mail-SubscriptionsPopup
 ! This file contains all filters other than English, Social, Spyware and Russian.
 ! Also filters by platforms https://github.com/AdguardTeam/AdguardBrowserExtension/issues/917
 !
-!
-!
-! Filters for adguard without safari
-!
+! https://github.com/AdguardTeam/AdguardFilters/issues/169842
+/videojs8/nuevo.min.js
+/videojs/plugins/vastpro.js
 ! https://github.com/AdguardTeam/AdguardFilters/issues/142875
 imdb.com#?#div[data-testid="promptable"]:has(.ipc-rating-display-with-poster__image)
 imdb.com#$?#body:has(div[data-testid="promptable"] .ipc-rating-display-with-poster__image) { overflow: auto !important; }
