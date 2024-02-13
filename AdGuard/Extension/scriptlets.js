@@ -1,7 +1,7 @@
 
 /**
  * AdGuard Scriptlets
- * Version 1.9.105
+ * Version 1.10.1
  */
 
 (function () {
@@ -445,13 +445,16 @@
      * @param obj data object
      * @returns object's string representation
      */
-    var objectToString = function objectToString(obj) {
+    var objectToString$1 = function objectToString(obj) {
       // In case if the type of passed obj is different than Object
       // https://github.com/AdguardTeam/Scriptlets/issues/282
       if (!obj || typeof obj !== 'object') {
         return String(obj);
       }
-      return isEmptyObject(obj) ? '{}' : Object.entries(obj).map(function (pair) {
+      if (isEmptyObject(obj)) {
+        return '{}';
+      }
+      return Object.entries(obj).map(function (pair) {
         var key = pair[0];
         var value = pair[1];
         var recordValueStr = value;
@@ -469,19 +472,16 @@
      * @returns type's string representation
      */
     var convertTypeToString = function convertTypeToString(value) {
-      var output;
       if (typeof value === 'undefined') {
-        output = 'undefined';
-      } else if (typeof value === 'object') {
-        if (value === null) {
-          output = 'null';
-        } else {
-          output = objectToString(value);
-        }
-      } else {
-        output = value.toString();
+        return 'undefined';
       }
-      return output;
+      if (typeof value === 'object') {
+        if (value === null) {
+          return 'null';
+        }
+        return objectToString$1(value);
+      }
+      return value.toString();
     };
 
     /**
@@ -901,6 +901,211 @@
     };
 
     /**
+     * Conditionally logs message to console.
+     * Convention is to log messages by source.verbose if such log
+     * is not a part of scriptlet's functionality, eg on invalid input,
+     * and use 'forced' argument otherwise.
+     *
+     * @param source required, scriptlet properties
+     * @param message required, message to log
+     * @param forced to log message unconditionally
+     * @param convertMessageToString to convert message to string
+     */
+    var logMessage = function logMessage(source, message) {
+      var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+      var name = source.name,
+        verbose = source.verbose;
+      if (!forced && !verbose) {
+        return;
+      }
+
+      // eslint-disable-next-line no-console
+      var nativeConsole = console.log;
+      if (!convertMessageToString) {
+        // Template literals convert object to string,
+        // so 'message' should not be passed to template literals
+        // as it will not be logged correctly
+        nativeConsole("".concat(name, ":"), message);
+        return;
+      }
+      nativeConsole("".concat(name, ": ").concat(message));
+    };
+
+    /* eslint-disable no-console, no-underscore-dangle */
+
+    /**
+     * Hit used only for debug purposes now
+     *
+     * @param source scriptlet properties
+     * use LOG_MARKER = 'log: ' at the start of a message
+     * for logging scriptlets
+     */
+    var hit = function hit(source) {
+      if (source.verbose !== true) {
+        return;
+      }
+      try {
+        var log = console.log.bind(console);
+        var trace = console.trace.bind(console);
+        var prefix = source.ruleText || '';
+        if (source.domainName) {
+          var AG_SCRIPTLET_MARKER = '#%#//';
+          var UBO_SCRIPTLET_MARKER = '##+js';
+          var ruleStartIndex;
+          if (source.ruleText.includes(AG_SCRIPTLET_MARKER)) {
+            ruleStartIndex = source.ruleText.indexOf(AG_SCRIPTLET_MARKER);
+          } else if (source.ruleText.includes(UBO_SCRIPTLET_MARKER)) {
+            ruleStartIndex = source.ruleText.indexOf(UBO_SCRIPTLET_MARKER);
+          }
+          // delete all domains from ruleText and leave just rule part
+          var rulePart = source.ruleText.slice(ruleStartIndex);
+          // prepare applied scriptlet rule for specific domain
+          prefix = "".concat(source.domainName).concat(rulePart);
+        }
+        log("".concat(prefix, " trace start"));
+        if (trace) {
+          trace();
+        }
+        log("".concat(prefix, " trace end"));
+      } catch (e) {
+        // try catch for Edge 15
+        // In according to this issue https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/14495220/
+        // console.log throws an error
+      }
+
+      // This is necessary for unit-tests only!
+      if (typeof window.__debug === 'function') {
+        window.__debug(source);
+      }
+    };
+
+    /**
+     * Sets attribute with given value to given element.
+     *
+     * @param elem Element to set attribute to.
+     * @param attribute Attribute name to set.
+     * @param value Attribute value to set.
+     */
+    var defaultAttributeSetter = function defaultAttributeSetter(elem, attribute, value) {
+      return elem.setAttribute(attribute, value);
+    };
+
+    /**
+     * Sets attribute with given value to all elements matching given selector
+     *
+     * @param source source
+     * @param selector CSS selector
+     * @param attribute attribute name to set
+     * @param value attribute value to set
+     * @param attributeSetter function to apply to each element,
+     * defaults to native .setAttribute
+     */
+    var setAttributeBySelector = function setAttributeBySelector(source, selector, attribute, value) {
+      var attributeSetter = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultAttributeSetter;
+      var elements;
+      try {
+        elements = document.querySelectorAll(selector);
+      } catch (_unused) {
+        logMessage(source, "Failed to find elements matching selector \"".concat(selector, "\""));
+        return;
+      }
+      if (!elements || elements.length === 0) {
+        return;
+      }
+      try {
+        elements.forEach(function (elem) {
+          return attributeSetter(elem, attribute, value);
+        });
+        hit(source);
+      } catch (_unused2) {
+        logMessage(source, "Failed to set [".concat(attribute, "=\"").concat(value, "\"] to each of selected elements."));
+      }
+    };
+
+    /**
+     * Parsed attribute data type.
+     */
+
+    /**
+     * Parses attribute pairs string into an array of objects with name and value properties.
+     *
+     * @param input Attribute pairs string.
+     *
+     * @returns Array of objects with name and value properties.
+     * @throws Error if input is invalid.
+     */
+    var parseAttributePairs = function parseAttributePairs(input) {
+      if (!input) {
+        return [];
+      }
+      var NAME_VALUE_SEPARATOR = '=';
+      var PAIRS_SEPARATOR = ' ';
+      var SINGLE_QUOTE = "'";
+      var DOUBLE_QUOTE = '"';
+      var BACKSLASH = '\\';
+      var pairs = [];
+      for (var i = 0; i < input.length; i += 1) {
+        var name = '';
+        var value = '';
+
+        // collect the name
+        while (i < input.length && input[i] !== NAME_VALUE_SEPARATOR && input[i] !== PAIRS_SEPARATOR) {
+          name += input[i];
+          i += 1;
+        }
+        if (i < input.length && input[i] === NAME_VALUE_SEPARATOR) {
+          // skip the '='
+          i += 1;
+          var quote = null;
+          if (input[i] === SINGLE_QUOTE || input[i] === DOUBLE_QUOTE) {
+            quote = input[i];
+            // Skip the opening quote
+            i += 1;
+            for (; i < input.length; i += 1) {
+              if (input[i] === quote) {
+                if (input[i - 1] === BACKSLASH) {
+                  // remove the backslash and save the quote to the value
+                  value = "".concat(value.slice(0, -1)).concat(quote);
+                } else {
+                  // Skip the closing quote
+                  i += 1;
+                  quote = null;
+                  break;
+                }
+              } else {
+                value += input[i];
+              }
+            }
+            if (quote !== null) {
+              throw new Error("Unbalanced quote for attribute value: '".concat(input, "'"));
+            }
+          } else {
+            throw new Error("Attribute value should be quoted: \"".concat(input.slice(i), "\""));
+          }
+        }
+        name = name.trim();
+        value = value.trim();
+        if (!name) {
+          if (!value) {
+            // skip multiple spaces between pairs, e.g.
+            // 'name1="value1"  name2="value2"'
+            continue;
+          }
+          throw new Error("Attribute name before '=' should be specified: '".concat(input, "'"));
+        }
+        pairs.push({
+          name,
+          value
+        });
+        if (input[i] && input[i] !== PAIRS_SEPARATOR) {
+          throw new Error("No space before attribute: '".concat(input.slice(i), "'"));
+        }
+      }
+      return pairs;
+    };
+
+    /**
      * Checks whether the input path is supported
      *
      * @param rawPath input path
@@ -957,7 +1162,7 @@
       if (!value) {
         return null;
       }
-      var allowedCookieValues = new Set(['true', 'false', 'yes', 'y', 'no', 'n', 'ok', 'on', 'off', 'accept', 'accepted', 'notaccepted', 'reject', 'rejected', 'allow', 'allowed', 'disallow', 'deny', 'enable', 'enabled', 'disable', 'disabled']);
+      var allowedCookieValues = new Set(['true', 't', 'false', 'f', 'yes', 'y', 'no', 'n', 'ok', 'on', 'off', 'accept', 'accepted', 'notaccepted', 'reject', 'rejected', 'allow', 'allowed', 'disallow', 'deny', 'enable', 'enabled', 'disable', 'disabled', 'necessary', 'required']);
       var validValue;
       if (allowedCookieValues.has(value.toLowerCase())) {
         validValue = value;
@@ -1495,54 +1700,6 @@
       return preventGetter;
     };
 
-    /* eslint-disable no-console, no-underscore-dangle */
-
-    /**
-     * Hit used only for debug purposes now
-     *
-     * @param source scriptlet properties
-     * use LOG_MARKER = 'log: ' at the start of a message
-     * for logging scriptlets
-     */
-    var hit = function hit(source) {
-      if (source.verbose !== true) {
-        return;
-      }
-      try {
-        var log = console.log.bind(console);
-        var trace = console.trace.bind(console);
-        var prefix = source.ruleText || '';
-        if (source.domainName) {
-          var AG_SCRIPTLET_MARKER = '#%#//';
-          var UBO_SCRIPTLET_MARKER = '##+js';
-          var ruleStartIndex;
-          if (source.ruleText.includes(AG_SCRIPTLET_MARKER)) {
-            ruleStartIndex = source.ruleText.indexOf(AG_SCRIPTLET_MARKER);
-          } else if (source.ruleText.includes(UBO_SCRIPTLET_MARKER)) {
-            ruleStartIndex = source.ruleText.indexOf(UBO_SCRIPTLET_MARKER);
-          }
-          // delete all domains from ruleText and leave just rule part
-          var rulePart = source.ruleText.slice(ruleStartIndex);
-          // prepare applied scriptlet rule for specific domain
-          prefix = "".concat(source.domainName).concat(rulePart);
-        }
-        log("".concat(prefix, " trace start"));
-        if (trace) {
-          trace();
-        }
-        log("".concat(prefix, " trace end"));
-      } catch (e) {
-        // try catch for Edge 15
-        // In according to this issue https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/14495220/
-        // console.log throws an error
-      }
-
-      // This is necessary for unit-tests only!
-      if (typeof window.__debug === 'function') {
-        window.__debug(source);
-      }
-    };
-
     /**
      * Check if the property exists in the base object (recursively).
      * Similar to getPropertyInChain but upgraded for json-prune:
@@ -1610,38 +1767,6 @@
       }
       return output;
     }
-
-    /**
-     * Conditionally logs message to console.
-     * Convention is to log messages by source.verbose if such log
-     * is not a part of scriptlet's functionality, eg on invalid input,
-     * and use 'forced' argument otherwise.
-     *
-     * @param source required, scriptlet properties
-     * @param message required, message to log
-     * @param forced to log message unconditionally
-     * @param convertMessageToString to convert message to string
-     */
-    var logMessage = function logMessage(source, message) {
-      var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-      var name = source.name,
-        verbose = source.verbose;
-      if (!forced && !verbose) {
-        return;
-      }
-
-      // eslint-disable-next-line no-console
-      var nativeConsole = console.log;
-      if (!convertMessageToString) {
-        // Template literals convert object to string,
-        // so 'message' should not be passed to template literals
-        // as it will not be logged correctly
-        nativeConsole("".concat(name, ":"), message);
-        return;
-      }
-      nativeConsole("".concat(name, ": ").concat(message));
-    };
 
     /**
      * Returns the native `RegExp.prototype.test` method if it exists.
@@ -2165,6 +2290,36 @@
     }
 
     /**
+     * Converts error object to error with message. This method might be helpful to handle thrown errors.
+     *
+     * @param error Error object.
+     *
+     * @returns Message of the error.
+     */
+    var getErrorMessage = function getErrorMessage(error) {
+      /**
+       * Checks if error has message.
+       *
+       * @param e Error object.
+       *
+       * @returns True if error has message, false otherwise.
+       */
+      var isErrorWithMessage = function isErrorWithMessage(e) {
+        return typeof e === 'object' && e !== null && 'message' in e && typeof e.message === 'string';
+      };
+      if (isErrorWithMessage(error)) {
+        return error.message;
+      }
+      try {
+        return new Error(JSON.stringify(error)).message;
+      } catch (_unused) {
+        // fallback in case there's an error stringifying the error
+        // like with circular references for example.
+        return new Error(String(error)).message;
+      }
+    };
+
+    /**
      * Check if the property exists in the base object (recursively)
      *
      * If property doesn't exist in base object,
@@ -2292,7 +2447,7 @@
     };
 
     /**
-     * DOM tree changes observer. Used for 'remove-attr' and 'remove-class' scriptlets
+     * DOM tree changes observer.
      *
      * @param callback function to call on each mutation
      * @param observeAttrs if observer should observe attributes changes
@@ -2367,7 +2522,11 @@
      * @param {object} options MutationObserver options
      * @param timeout Disconnect timeout in ms
      */
-    var observeDocumentWithTimeout = function observeDocumentWithTimeout(callback, options) {
+    var observeDocumentWithTimeout = function observeDocumentWithTimeout(callback) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+        subtree: true,
+        childList: true
+      };
       var timeout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10000;
       var documentObserver = new MutationObserver(function (mutations, observer) {
         observer.disconnect();
@@ -4498,7 +4657,7 @@
     logAddEventListener$1.names = ['log-addEventListener',
     // aliases are needed for matching the related scriptlet converted into our syntax
     'addEventListener-logger.js', 'ubo-addEventListener-logger.js', 'aell.js', 'ubo-aell.js', 'ubo-addEventListener-logger', 'ubo-aell'];
-    logAddEventListener$1.injections = [hit, validateType, validateListener, listenerToString, convertTypeToString, logMessage, objectToString, isEmptyObject];
+    logAddEventListener$1.injections = [hit, validateType, validateListener, listenerToString, convertTypeToString, logMessage, objectToString$1, isEmptyObject];
 
     /* eslint-disable no-eval */
 
@@ -5289,8 +5448,8 @@
      * @scriptlet set-attr
      *
      * @description
-     * Sets the specified attribute on the specified elements. This scriptlet runs once when the page loads
-     * and after that and after that on DOM tree changes.
+     * Sets attribute with permitted value on the specified elements. This scriptlet runs once when the page loads
+     * and after that on DOM tree changes.
      *
      * Related UBO scriptlet:
      * https://github.com/gorhill/uBlock/wiki/Resources-Library#set-attrjs-
@@ -5303,10 +5462,11 @@
      *
      * - `selector` — required, CSS selector, specifies DOM nodes to set attributes on
      * - `attr` — required, attribute to be set
-     * - `value` — the value to assign to the attribute, defaults to ''. Possible values:
+     * - `value` — optional, the value to assign to the attribute, defaults to ''. Possible values:
      *     - `''` — empty string
      *     - positive decimal integer `<= 32767`
      *     - `true` / `false` in any case variation
+     *     - `[attribute-name]` copy the value from attribute `attribute-name` on the same element.
      *
      * ### Examples
      *
@@ -5318,16 +5478,22 @@
      *
      *     ```html
      *     <!-- before -->
-     *     <a class="class">Some text</div>
+     *     <div>
+     *         <a>Another text</a>
+     *         <a class="class">Some text</a>
+     *     </div>
      *
      *     <!-- after -->
-     *     <a class="class" test-attribute="0">Some text</div>
+     *     <div>
+     *         <a>Another text</a>
+     *         <a class="class" test-attribute="0">Some text</a>
+     *     </div>
      *     ```
      *
      * 1. Set attribute without value
      *
      *     ```adblock
-     *     example.org#%#//scriptlet('set-attr', 'div.class > a.class', 'test-attribute')
+     *     example.org#%#//scriptlet('set-attr', 'a.class', 'test-attribute')
      *     ```
      *
      *     ```html
@@ -5341,7 +5507,7 @@
      * 1. Set attribute value to `TRUE`
      *
      *     ```adblock
-     *     example.org#%#//scriptlet('set-attr', 'div.class > a.class', 'test-attribute', 'TRUE')
+     *     example.org#%#//scriptlet('set-attr', 'a.class', 'test-attribute', 'TRUE')
      *     ```
      *
      *     ```html
@@ -5355,7 +5521,7 @@
      * 1. Set attribute value to `fAlse`
      *
      *     ```adblock
-     *     example.org#%#//scriptlet('set-attr', 'div.class > a.class', 'test-attribute', 'fAlse')
+     *     example.org#%#//scriptlet('set-attr', 'a.class', 'test-attribute', 'fAlse')
      *     ```
      *
      *     ```html
@@ -5364,6 +5530,20 @@
      *
      *     <!-- after -->
      *     <a class="class" test-attribute="fAlse">Some text</div>
+     *     ```
+     *
+     * 1. Copy attribute value from the target element
+     *
+     *     ```adblock
+     *     example.org#%#//scriptlet('set-attr', 'iframe[data-cur]', 'href', '[data-cur]')
+     *     ```
+     *
+     *     ```html
+     *     <!-- before -->
+     *     <iframe data-cur="good-url.com" href="bad-url.org"></iframe>
+     *
+     *     <!-- after -->
+     *     <iframe data-cur="good-url.com" href="good-url.com"></iframe>
      *     ```
      *
      * @added v1.5.0.
@@ -5375,32 +5555,40 @@
         return;
       }
       var allowedValues = ['true', 'false'];
-
-      // Drop strings that cant be parsed into number, negative numbers and numbers below 32767
-      if (value.length !== 0 && (nativeIsNaN(parseInt(value, 10)) || parseInt(value, 10) < 0 || parseInt(value, 10) > 32767) && !allowedValues.includes(value.toLowerCase())) {
+      var shouldCopyValue = value.startsWith('[') && value.endsWith(']');
+      var isValidValue = value.length === 0 || !nativeIsNaN(parseInt(value, 10)) && parseInt(value, 10) > 0 && parseInt(value, 10) < 32767 || allowedValues.includes(value.toLowerCase());
+      if (!shouldCopyValue && !isValidValue) {
+        logMessage(source, "Invalid attribute value provided: '".concat(convertTypeToString(value), "'"));
         return;
       }
-      var setAttr = function setAttr() {
-        var nodes = [].slice.call(document.querySelectorAll(selector));
-        var set = false;
-        nodes.forEach(function (node) {
-          node.setAttribute(attr, value);
-          set = true;
-        });
-        if (set) {
-          hit(source);
-        }
-      };
-      setAttr();
-      observeDOMChanges(setAttr, true);
+
+      /**
+       * Defining value extraction logic here allows us to remove
+       * excessive `shouldCopyValue` checks in observer callback.
+       * Setting plain value is a default behavior.
+       */
+      var attributeHandler;
+      if (shouldCopyValue) {
+        attributeHandler = function attributeHandler(elem, attr, value) {
+          var valueToCopy = elem.getAttribute(value.slice(1, -1));
+          if (valueToCopy === null) {
+            logMessage(source, "No element attribute found to copy value from: ".concat(value));
+          }
+          elem.setAttribute(attr, valueToCopy);
+        };
+      }
+      setAttributeBySelector(source, selector, attr, value, attributeHandler);
+      observeDOMChanges(function () {
+        return setAttributeBySelector(source, selector, attr, value, attributeHandler);
+      }, true);
     }
     setAttr$1.names = ['set-attr',
     // aliases are needed for matching the related scriptlet converted into our syntax
     'set-attr.js', 'ubo-set-attr.js', 'ubo-set-attr'];
-    setAttr$1.injections = [hit, observeDOMChanges, nativeIsNaN,
+    setAttr$1.injections = [setAttributeBySelector, observeDOMChanges, nativeIsNaN, convertTypeToString,
     // following helpers should be imported and injected
     // because they are used by helpers above
-    throttle];
+    defaultAttributeSetter, logMessage, throttle, hit];
 
     /* eslint-disable max-len */
     /**
@@ -6101,8 +6289,8 @@
      * - `value` — required, cookie value; possible values:
      *     - number `>= 0 && <= 15`
      *     - one of the predefined constants in any case variation:
-     *         - `true`
-     *         - `false`
+     *         - `true` / `t`
+     *         - `false` / `f`
      *         - `yes` / `y`
      *         - `no` / `n`
      *         - `ok`
@@ -6113,6 +6301,7 @@
      *         - `disallow` / `deny`
      *         - `enable` / `enabled`
      *         - `disable` / `disabled`
+     *         - `necessary` / `required`
      * - `path` — optional, cookie path, defaults to `/`; possible values:
      *     - `/` — root path
      *     - `none` — to set no path at all
@@ -6175,13 +6364,19 @@
      * - `value` — required, cookie value; possible values:
      *     - number `>= 0 && <= 15`
      *     - one of the predefined constants in any case variation:
-     *         - `true`
-     *         - `false`
+     *         - `true` / `t`
+     *         - `false` / `f`
      *         - `yes` / `y`
      *         - `no` / `n`
      *         - `ok`
-     *         - `accept`/ `reject`
-     *         - `allow` / `deny`
+     *         - `on` / `off`
+     *         - `accept`/ `accepted` / `notaccepted`
+     *         - `reject` / `rejected`
+     *         - `allow` / `allowed`
+     *         - `disallow` / `deny`
+     *         - `enable` / `enabled`
+     *         - `disable` / `disabled`
+     *         - `necessary` / `required`
      * - `path` — optional, cookie path, defaults to `/`; possible values:
      *     - `/` — root path
      *     - `none` — to set no path at all
@@ -6229,7 +6424,9 @@
         window.location.reload();
       }
     }
-    setCookieReload$1.names = ['set-cookie-reload'];
+    setCookieReload$1.names = ['set-cookie-reload',
+    // aliases are needed for matching the related scriptlet converted into our syntax
+    'set-cookie-reload.js', 'ubo-set-cookie-reload.js', 'ubo-set-cookie-reload'];
     setCookieReload$1.injections = [hit, logMessage, nativeIsNaN, isCookieSetWithValue, getLimitedCookieValue, concatCookieNameValuePath, isValidCookiePath, getCookiePath];
 
     /**
@@ -6517,7 +6714,7 @@
         var shouldPrevent = false;
         var fetchData = getFetchData(args, nativeRequestClone);
         if (typeof propsToMatch === 'undefined') {
-          logMessage(source, "fetch( ".concat(objectToString(fetchData), " )"), true);
+          logMessage(source, "fetch( ".concat(objectToString$1(fetchData), " )"), true);
           hit(source);
           return Reflect.apply(target, thisArg, args);
         }
@@ -6552,7 +6749,7 @@
     preventFetch$1.names = ['prevent-fetch',
     // aliases are needed for matching the related scriptlet converted into our syntax
     'no-fetch-if.js', 'ubo-no-fetch-if.js', 'ubo-no-fetch-if'];
-    preventFetch$1.injections = [hit, getFetchData, objectToString, matchRequestProps, logMessage, noopPromiseResolve, modifyResponse, toRegExp, isValidStrPattern, escapeRegExp, isEmptyObject, getRequestData, getRequestProps, parseMatchProps, isValidParsedData, getMatchPropsData];
+    preventFetch$1.injections = [hit, getFetchData, objectToString$1, matchRequestProps, logMessage, noopPromiseResolve, modifyResponse, toRegExp, isValidStrPattern, escapeRegExp, isEmptyObject, getRequestData, getRequestProps, parseMatchProps, isValidParsedData, getMatchPropsData];
 
     /* eslint-disable max-len */
     /**
@@ -7054,7 +7251,7 @@
         xhrData = getXhrData.apply(null, args);
         if (typeof propsToMatch === 'undefined') {
           // Log if no propsToMatch given
-          logMessage(source, "xhr( ".concat(objectToString(xhrData), " )"), true);
+          logMessage(source, "xhr( ".concat(objectToString$1(xhrData), " )"), true);
           hit(source);
         } else if (matchRequestProps(source, propsToMatch, xhrData)) {
           thisArg.shouldBePrevented = true;
@@ -7253,7 +7450,7 @@
     preventXHR$1.names = ['prevent-xhr',
     // aliases are needed for matching the related scriptlet converted into our syntax
     'no-xhr-if.js', 'ubo-no-xhr-if.js', 'ubo-no-xhr-if'];
-    preventXHR$1.injections = [hit, objectToString, generateRandomResponse, matchRequestProps, getXhrData, logMessage, toRegExp, isValidStrPattern, escapeRegExp, isEmptyObject, getNumberFromString, nativeIsFinite, nativeIsNaN, parseMatchProps, isValidParsedData, getMatchPropsData, getRequestProps, getRandomIntInclusive, getRandomStrByLength];
+    preventXHR$1.injections = [hit, objectToString$1, generateRandomResponse, matchRequestProps, getXhrData, logMessage, toRegExp, isValidStrPattern, escapeRegExp, isEmptyObject, getNumberFromString, nativeIsFinite, nativeIsNaN, parseMatchProps, isValidParsedData, getMatchPropsData, getRequestProps, getRandomIntInclusive, getRandomStrByLength];
 
     /**
      * @scriptlet close-window
@@ -7781,7 +7978,7 @@
         xhrData = getXhrData.apply(null, args);
         if (shouldLog) {
           // Log if no propsToMatch given
-          var _message = "xhr( ".concat(objectToString(xhrData), " )");
+          var _message = "xhr( ".concat(objectToString$1(xhrData), " )");
           logMessage(source, _message, true);
           hit(source);
           return Reflect.apply(target, thisArg, args);
@@ -7917,7 +8114,7 @@
     // trusted scriptlets support no aliases
     ];
 
-    trustedReplaceXhrResponse$1.injections = [hit, logMessage, toRegExp, objectToString, matchRequestProps, getXhrData, getMatchPropsData, getRequestProps, isValidParsedData, parseMatchProps, isValidStrPattern, escapeRegExp, isEmptyObject];
+    trustedReplaceXhrResponse$1.injections = [hit, logMessage, toRegExp, objectToString$1, matchRequestProps, getXhrData, getMatchPropsData, getRequestProps, isValidParsedData, parseMatchProps, isValidStrPattern, escapeRegExp, isEmptyObject];
 
     /* eslint-disable max-len */
     /**
@@ -7985,7 +8182,7 @@
      *     example.org#%#//scriptlet('xml-prune', '', '', '.mpd')
      *     ```
      *
-     * @added 1.7.3.
+     * @added v1.7.3.
      */
     /* eslint-enable max-len */
 
@@ -8273,7 +8470,7 @@
     xmlPrune$1.names = ['xml-prune',
     // aliases are needed for matching the related scriptlet converted into our syntax
     'xml-prune.js', 'ubo-xml-prune.js', 'ubo-xml-prune'];
-    xmlPrune$1.injections = [hit, logMessage, toRegExp, getXhrData, objectToString, matchRequestProps, getMatchPropsData, getRequestProps, isValidParsedData, parseMatchProps, isValidStrPattern, escapeRegExp, isEmptyObject];
+    xmlPrune$1.injections = [hit, logMessage, toRegExp, getXhrData, objectToString$1, matchRequestProps, getMatchPropsData, getRequestProps, isValidParsedData, parseMatchProps, isValidStrPattern, escapeRegExp, isEmptyObject];
 
     /* eslint-disable max-len */
     /**
@@ -8747,7 +8944,7 @@
     m3uPrune$1.names = ['m3u-prune',
     // aliases are needed for matching the related scriptlet converted into our syntax
     'm3u-prune.js', 'ubo-m3u-prune.js', 'ubo-m3u-prune'];
-    m3uPrune$1.injections = [hit, toRegExp, logMessage, getXhrData, objectToString, matchRequestProps, getMatchPropsData, getRequestProps, isValidParsedData, parseMatchProps, isValidStrPattern, escapeRegExp, isEmptyObject];
+    m3uPrune$1.injections = [hit, toRegExp, logMessage, getXhrData, objectToString$1, matchRequestProps, getMatchPropsData, getRequestProps, isValidParsedData, parseMatchProps, isValidStrPattern, escapeRegExp, isEmptyObject];
 
     /* eslint-disable max-len */
     /**
@@ -9088,7 +9285,7 @@
         fetchData = getFetchData(args, nativeRequestClone);
         if (shouldLog) {
           // log if no propsToMatch given
-          logMessage(source, "fetch( ".concat(objectToString(fetchData), " )"), true);
+          logMessage(source, "fetch( ".concat(objectToString$1(fetchData), " )"), true);
           hit(source);
           return Reflect.apply(target, thisArg, args);
         }
@@ -9151,7 +9348,7 @@
             return forgedResponse;
           }).catch(function () {
             // log if response body can't be converted to a string
-            var fetchDataStr = objectToString(fetchData);
+            var fetchDataStr = objectToString$1(fetchData);
             var message = "Response body can't be converted to text: ".concat(fetchDataStr);
             logMessage(source, message);
             return Reflect.apply(target, thisArg, args);
@@ -9170,7 +9367,7 @@
     // trusted scriptlets support no aliases
     ];
 
-    trustedReplaceFetchResponse$1.injections = [hit, logMessage, getFetchData, objectToString, matchRequestProps, toRegExp, isValidStrPattern, escapeRegExp, isEmptyObject, getRequestData, getRequestProps, parseMatchProps, isValidParsedData, getMatchPropsData];
+    trustedReplaceFetchResponse$1.injections = [hit, logMessage, getFetchData, objectToString$1, matchRequestProps, toRegExp, isValidStrPattern, escapeRegExp, isEmptyObject, getRequestData, getRequestProps, parseMatchProps, isValidParsedData, getMatchPropsData];
 
     /* eslint-disable max-len */
     /**
@@ -9644,9 +9841,6 @@
       // and newly added nodes
       observeDocumentWithTimeout(function (mutations) {
         return handleMutations(mutations, handleNodes);
-      }, {
-        childList: true,
-        subtree: true
       });
     }
     removeNodeText$1.names = ['remove-node-text',
@@ -9774,9 +9968,6 @@
       // and newly added nodes
       observeDocumentWithTimeout(function (mutations) {
         return handleMutations(mutations, handleNodes);
-      }, {
-        childList: true,
-        subtree: true
       });
     }
     trustedReplaceNodeText$1.names = ['trusted-replace-node-text'
@@ -10017,11 +10208,571 @@
     // following helpers are needed for helpers above
     toRegExp, getNativeRegexpTest, shouldAbortInlineOrInjectedScript, isEmptyObject];
 
+    /* eslint-disable max-len */
+    /**
+     * @trustedScriptlet trusted-set-attr
+     *
+     * @description
+     * Sets attribute with arbitrary value on the specified elements. This scriptlet runs once when the page loads
+     * and after that on DOM tree changes.
+     *
+     * ### Syntax
+     *
+     * ```text
+     * example.org#%#//scriptlet('trusted-set-attr', selector, attr[, value])
+     * ```
+     *
+     * - `selector` — required, CSS selector, specifies DOM nodes to set attributes on
+     * - `attr` — required, attribute to be set
+     * - `value` — optional, the value to assign to the attribute, defaults to ''.
+     *
+     * ### Examples
+     *
+     * 1. Set attribute by selector
+     *
+     *     ```adblock
+     *     example.org#%#//scriptlet('trusted-set-attr', 'div.class > a.class', 'test-attribute', '[true, true]')
+     *     ```
+     *
+     *     ```html
+     *     <!-- before -->
+     *     <div>
+     *         <a>Another text</a>
+     *         <a class="class">Some text</a>
+     *     </div>
+     *
+     *     <!-- after -->
+     *     <div>
+     *         <a>Another text</a>
+     *         <a class="class" test-attribute="[true, true]">Some text</a>
+     *     </div>
+     *     ```
+     *
+     * 1. Set attribute without value
+     *
+     *     ```adblock
+     *     example.org#%#//scriptlet('trusted-set-attr', 'a.class', 'test-attribute')
+     *     ```
+     *
+     *     ```html
+     *     <!-- before -->
+     *     <a class="class">Some text</div>
+     *
+     *     <!-- after -->
+     *     <a class="class" test-attribute>Some text</div>
+     *     ```
+     *
+     * 1. Set attribute value to `MTIzNTY=`
+     *
+     *     ```adblock
+     *     example.org#%#//scriptlet('trusted-set-attr', 'a.class', 'test-attribute', 'MTIzNTY=')
+     *     ```
+     *
+     *     ```html
+     *     <!-- before -->
+     *     <a class="class">Some text</div>
+     *
+     *     <!-- after -->
+     *     <a class="class" test-attribute="MTIzNTY=">Some text</div>
+     *     ```
+     *
+     * 1. Set attribute value to `{ playback: false }`
+     *
+     *     ```adblock
+     *     example.org#%#//scriptlet('trusted-set-attr', 'a.class', 'test-attribute', '{ playback: false }')
+     *     ```
+     *
+     *     ```html
+     *     <!-- before -->
+     *     <a class="class">Some text</div>
+     *
+     *     <!-- after -->
+     *     <a class="class" test-attribute="{ playback: false }">Some text</div>
+     *     ```
+     *
+     * @added v1.10.1.
+     */
+    /* eslint-enable max-len */
+    function trustedSetAttr$1(source, selector, attr) {
+      var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+      if (!selector || !attr) {
+        return;
+      }
+      setAttributeBySelector(source, selector, attr, value);
+      observeDOMChanges(function () {
+        return setAttributeBySelector(source, selector, attr, value);
+      }, true);
+    }
+    trustedSetAttr$1.names = ['trusted-set-attr'
+    // trusted scriptlets support no aliases
+    ];
+
+    trustedSetAttr$1.injections = [setAttributeBySelector, observeDOMChanges, nativeIsNaN,
+    // following helpers should be imported and injected
+    // because they are used by helpers above
+    defaultAttributeSetter, logMessage, throttle, hit];
+
+    /* eslint-disable max-len */
+    /**
+     * @scriptlet spoof-css
+     *
+     * @description
+     * Spoof CSS property value when `getComputedStyle()` or `getBoundingClientRect()` methods is called.
+     *
+     * Related UBO scriptlet:
+     * https://github.com/gorhill/uBlock/wiki/Resources-Library#spoof-cssjs-
+     *
+     * ### Syntax
+     *
+     * ```text
+     * example.org#%#//scriptlet('spoof-css', selectors, cssNameProperty, cssNameValue)
+     * ```
+     *
+     * - `selectors` — string of comma-separated selectors to match
+     * - `cssPropertyName` — CSS property name
+     * - `cssPropertyValue` — CSS property value
+     *
+     * > Call with `debug` as `cssPropertyName` and `truthy` value as `cssPropertyValue` will trigger debugger statement
+     * > when `getComputedStyle()` or `getBoundingClientRect()` methods is called.
+     * > It may be useful for debugging but it is not allowed for prod versions of filter lists.
+     *
+     * ### Examples
+     *
+     * 1. Spoof CSS property value `display` to `block` for all elements with class `adsbygoogle`:
+     *
+     *     ```adblock
+     *     example.org#%#//scriptlet('spoof-css', '.adsbygoogle', 'display', 'block')
+     *     ```
+     *
+     * 2. Spoof CSS property value `height` to `100` for all elements with class `adsbygoogle` and `advert`:
+     *
+     *     ```adblock
+     *     example.org#%#//scriptlet('spoof-css', '.adsbygoogle, .advert', 'height', '100')
+     *     ```
+     *
+     * 3. To invoke debugger statement:
+     *
+     *     ```adblock
+     *     example.org#%#//scriptlet('spoof-css', '.adsbygoogle', 'debug', 'true')
+     *     ```
+     *
+     *
+     * @added v1.10.1.
+     */
+    /* eslint-enable max-len */
+
+    function spoofCSS$1(source, selectors, cssPropertyName, cssPropertyValue) {
+      if (!selectors) {
+        return;
+      }
+      var uboAliases = ['spoof-css.js', 'ubo-spoof-css.js', 'ubo-spoof-css'];
+
+      /**
+       * getComputedStyle uses camelCase version of CSS properties
+       * for example, "clip-path" is displayed as "clipPath"
+       * so it's needed to convert CSS property to camelCase
+       *
+       * @param {string} cssProperty
+       * @returns {string} camelCase version of CSS property
+       */
+      function convertToCamelCase(cssProperty) {
+        if (!cssProperty.includes('-')) {
+          return cssProperty;
+        }
+        var splittedProperty = cssProperty.split('-');
+        var firstPart = splittedProperty[0];
+        var secondPart = splittedProperty[1];
+        return "".concat(firstPart).concat(secondPart[0].toUpperCase()).concat(secondPart.slice(1));
+      }
+      var shouldDebug = !!(cssPropertyName === 'debug' && cssPropertyValue);
+      var propToValueMap = new Map();
+
+      /**
+       * UBO spoof-css analog has it's own args sequence:
+       * (selectors, ...arguments)
+       * arguments contains property-name/property-value pairs, all separated by commas
+       *
+       * example.com##+js(spoof-css, a[href="x.com"]\, .ads\, .bottom, clip-path, none)
+       * example.com##+js(spoof-css, .ad, clip-path, none, display, block)
+       * example.com##+js(spoof-css, .ad, debug, 1)
+       */
+      if (uboAliases.includes(source.name)) {
+        var args = source.args;
+        var arrayOfProperties = [];
+        // Check if one before last argument is 'debug'
+        var isDebug = args.at(-2);
+        if (isDebug === 'debug') {
+          // If it's debug, then we need to skip first (selectors) and last two arguments
+          arrayOfProperties = args.slice(1, -2);
+        } else {
+          // If it's not debug, then we need to skip only first (selectors) argument
+          arrayOfProperties = args.slice(1);
+        }
+        for (var i = 0; i < arrayOfProperties.length; i += 2) {
+          if (arrayOfProperties[i] === '') {
+            break;
+          }
+          propToValueMap.set(convertToCamelCase(arrayOfProperties[i]), arrayOfProperties[i + 1]);
+        }
+      } else if (cssPropertyName && cssPropertyValue && !shouldDebug) {
+        propToValueMap.set(convertToCamelCase(cssPropertyName), cssPropertyValue);
+      }
+      var spoofStyle = function spoofStyle(cssProperty, realCssValue) {
+        return propToValueMap.has(cssProperty) ? propToValueMap.get(cssProperty) : realCssValue;
+      };
+      var setRectValue = function setRectValue(rect, prop, value) {
+        Object.defineProperty(rect, prop, {
+          value: parseFloat(value)
+        });
+      };
+      var getter = function getter(target, prop, receiver) {
+        hit(source);
+        if (prop === 'toString') {
+          return target.toString.bind(target);
+        }
+        return Reflect.get(target, prop, receiver);
+      };
+      var getComputedStyleWrapper = function getComputedStyleWrapper(target, thisArg, args) {
+        if (shouldDebug) {
+          debugger; // eslint-disable-line no-debugger
+        }
+
+        var style = Reflect.apply(target, thisArg, args);
+        if (!args[0].matches(selectors)) {
+          return style;
+        }
+        var proxiedStyle = new Proxy(style, {
+          get(target, prop) {
+            var CSSStyleProp = target[prop];
+            if (typeof CSSStyleProp !== 'function') {
+              return spoofStyle(prop, CSSStyleProp || '');
+            }
+            if (prop !== 'getPropertyValue') {
+              return CSSStyleProp.bind(target);
+            }
+            var getPropertyValueFunc = new Proxy(CSSStyleProp, {
+              apply(target, thisArg, args) {
+                var cssName = args[0];
+                var cssValue = thisArg[cssName];
+                return spoofStyle(cssName, cssValue);
+              },
+              get: getter
+            });
+            return getPropertyValueFunc;
+          },
+          getOwnPropertyDescriptor(target, prop) {
+            if (propToValueMap.has(prop)) {
+              return {
+                configurable: true,
+                enumerable: true,
+                value: propToValueMap.get(prop),
+                writable: true
+              };
+            }
+            return Reflect.getOwnPropertyDescriptor(target, prop);
+          }
+        });
+        hit(source);
+        return proxiedStyle;
+      };
+      var getComputedStyleHandler = {
+        apply: getComputedStyleWrapper,
+        get: getter
+      };
+      window.getComputedStyle = new Proxy(window.getComputedStyle, getComputedStyleHandler);
+      var getBoundingClientRectWrapper = function getBoundingClientRectWrapper(target, thisArg, args) {
+        if (shouldDebug) {
+          debugger; // eslint-disable-line no-debugger
+        }
+
+        var rect = Reflect.apply(target, thisArg, args);
+        if (!thisArg.matches(selectors)) {
+          return rect;
+        }
+        var top = rect.top,
+          bottom = rect.bottom,
+          height = rect.height,
+          width = rect.width,
+          left = rect.left,
+          right = rect.right;
+        var newDOMRect = new window.DOMRect(rect.x, rect.y, top, bottom, width, height, left, right);
+        if (propToValueMap.has('top')) {
+          setRectValue(newDOMRect, 'top', propToValueMap.get('top'));
+        }
+        if (propToValueMap.has('bottom')) {
+          setRectValue(newDOMRect, 'bottom', propToValueMap.get('bottom'));
+        }
+        if (propToValueMap.has('left')) {
+          setRectValue(newDOMRect, 'left', propToValueMap.get('left'));
+        }
+        if (propToValueMap.has('right')) {
+          setRectValue(newDOMRect, 'right', propToValueMap.get('right'));
+        }
+        if (propToValueMap.has('height')) {
+          setRectValue(newDOMRect, 'height', propToValueMap.get('height'));
+        }
+        if (propToValueMap.has('width')) {
+          setRectValue(newDOMRect, 'width', propToValueMap.get('width'));
+        }
+        hit(source);
+        return newDOMRect;
+      };
+      var getBoundingClientRectHandler = {
+        apply: getBoundingClientRectWrapper,
+        get: getter
+      };
+      window.Element.prototype.getBoundingClientRect = new Proxy(window.Element.prototype.getBoundingClientRect, getBoundingClientRectHandler);
+    }
+    spoofCSS$1.names = ['spoof-css',
+    // aliases are needed for matching the related scriptlet converted into our syntax
+    'spoof-css.js', 'ubo-spoof-css.js', 'ubo-spoof-css'];
+    spoofCSS$1.injections = [hit];
+
+    /* eslint-disable max-len */
+    /**
+     * @scriptlet call-nothrow
+     *
+     * @description
+     * Prevents an exception from being thrown and returns undefined when a specific function is called.
+     *
+     * Related UBO scriptlet:
+     * https://github.com/gorhill/uBlock/wiki/Resources-Library#call-nothrowjs-
+     *
+     * ### Syntax
+     *
+     * ```text
+     * example.org#%#//scriptlet('call-nothrow', functionName)
+     * ```
+     *
+     * - `functionName` — required, the name of the function to trap
+     *
+     * ### Examples
+     *
+     * 1. Prevents an exception from being thrown when `Object.defineProperty` is called:
+     *
+     *     ```adblock
+     *     example.org#%#//scriptlet('call-nothrow', 'Object.defineProperty')
+     *     ```
+     *
+     *     For instance, the following call normally throws an error, but the scriptlet catches it and returns undefined:
+     *
+     *     ```javascript
+     *     Object.defineProperty(window, 'foo', { value: true });
+     *     Object.defineProperty(window, 'foo', { value: false });
+     *     ```
+     *
+     * 2. Prevents an exception from being thrown when `JSON.parse` is called:
+     *
+     *     ```adblock
+     *     example.org#%#//scriptlet('call-nothrow', 'JSON.parse')
+     *     ```
+     *
+     *     For instance, the following call normally throws an error, but the scriptlet catches it and returns undefined:
+     *
+     *     ```javascript
+     *     JSON.parse('foo');
+     *     ```
+     *
+     * @added v1.10.1.
+     */
+    /* eslint-enable max-len */
+    function callNoThrow$1(source, functionName) {
+      if (!functionName) {
+        return;
+      }
+      var _getPropertyInChain = getPropertyInChain(window, functionName),
+        base = _getPropertyInChain.base,
+        prop = _getPropertyInChain.prop;
+      if (!base || !prop || typeof base[prop] !== 'function') {
+        var message = "".concat(functionName, " is not a function");
+        logMessage(source, message);
+        return;
+      }
+      var objectWrapper = function objectWrapper() {
+        var result;
+        try {
+          result = Reflect.apply(...arguments);
+        } catch (e) {
+          var _message = "Error calling ".concat(functionName, ": ").concat(e.message);
+          logMessage(source, _message);
+        }
+        hit(source);
+        return result;
+      };
+      var objectHandler = {
+        apply: objectWrapper
+      };
+      base[prop] = new Proxy(base[prop], objectHandler);
+    }
+    callNoThrow$1.names = ['call-nothrow',
+    // aliases are needed for matching the related scriptlet converted into our syntax
+    'call-nothrow.js', 'ubo-call-nothrow.js', 'ubo-call-nothrow'];
+    callNoThrow$1.injections = [hit, getPropertyInChain, logMessage,
+    // following helpers are needed for helpers above
+    isEmptyObject];
+
+    /* eslint-disable max-len */
+    /**
+     * @trustedScriptlet trusted-create-element
+     *
+     * @description
+     * Creates an element with specified attributes and text content, and appends it to the specified parent element.
+     *
+     * ### Syntax
+     *
+     * ```text
+     * example.com#%#//scriptlet('trusted-create-element', parentSelector, tagName[, attributePairs[, textContent[, cleanupDelayMs]]]) <!-- markdownlint-disable-line line-length -->
+     * ```
+     *
+     * - `parentSelector` — required, CSS selector of the parent element to append the created element to.
+     * - `tagName` — required, tag name of the created element.
+     * - `attributePairs` — optional, space-separated list of attribute name and value pairs separated by `=`.
+     *   Value can be omitted. If value is set, it should be wrapped in quotes.
+     *   If quotes are needed inside value, they should be escaped with backslash.
+     *   Defaults to no attributes.
+     * - `textContent` — optional, text content of the created element. Defaults to empty string.
+     * - `cleanupDelayMs` — optional, delay in milliseconds before the created element is removed from the DOM.
+     *   Defaults to no cleanup.
+     *
+     * ### Examples
+     *
+     * 1. Create a div element with a single attribute
+     *
+     *     ```adblock
+     *     example.com#%#//scriptlet('trusted-create-element', 'body', 'div', 'data-cur="1"')
+     *     ```
+     *
+     * 1. Create a div element with text content
+     *
+     *     ```adblock
+     *     example.com#%#//scriptlet('trusted-create-element', 'body', 'div', '', 'Hello world!')
+     *     ```
+     *
+     * 1. Create a button element with multiple attributes, including attribute without value, and text content
+     *
+     *     ```adblock
+     *     example.com#%#//scriptlet('trusted-create-element', 'body', 'button', 'disabled aria-hidden="true" style="width: 0px"', 'Press here') <!-- markdownlint-disable-line line-length -->
+     *     ```
+     *
+     * 1. Create a button element with an attribute whose value contains quotes
+     *
+     *     ```adblock
+     *     example.com#%#//scriptlet('trusted-create-element', 'body', 'button', 'data="a\\"quote"')
+     *     ```
+     *
+     * 1. Create a paragraph element with text content and remove it after 5 seconds
+     *
+     *     ```adblock
+     *     example.com#%#//scriptlet('trusted-create-element', '.container > article', 'p', '', 'Hello world!', 5000)
+     *     ```
+     *
+     * @added v1.10.1.
+     */
+    /* eslint-enable max-len */
+    function trustedCreateElement$1(source, parentSelector, tagName) {
+      var attributePairs = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+      var textContent = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+      var cleanupDelayMs = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : NaN;
+      if (!parentSelector || !tagName) {
+        return;
+      }
+
+      /**
+       * Prevent infinite loops when creating iframes
+       * because scriptlet is automatically injected into the newly created iframe.
+       */
+      var IFRAME_WINDOW_NAME = 'trusted-create-element-window';
+      if (window.name === IFRAME_WINDOW_NAME) {
+        return;
+      }
+      var logError = function logError(prefix, error) {
+        logMessage(source, "".concat(prefix, " due to ").concat(getErrorMessage(error)));
+      };
+      var element;
+      try {
+        element = document.createElement(tagName);
+        element.textContent = textContent;
+      } catch (e) {
+        logError("Cannot create element with tag name '".concat(tagName, "'"), e);
+        return;
+      }
+      var attributes = [];
+      try {
+        attributes = parseAttributePairs(attributePairs);
+      } catch (e) {
+        logError("Cannot parse attributePairs param: '".concat(attributePairs, "'"), e);
+        return;
+      }
+      attributes.forEach(function (attr) {
+        try {
+          element.setAttribute(attr.name, attr.value);
+        } catch (e) {
+          logError("Cannot set attribute '".concat(attr.name, "' with value '").concat(attr.value, "'"), e);
+        }
+      });
+      var timerId;
+
+      /**
+       * Finds parent element by `parentElSelector` and appends the `el` element to it.
+       *
+       * If `removeElDelayMs` is not `NaN`,
+       * schedules the `el` element to be removed after `removeElDelayMs` milliseconds.
+       *
+       * @param parentElSelector CSS selector of the parent element.
+       * @param el HTML element to append to the parent element.
+       * @param removeElDelayMs Delay in milliseconds after which the `el` element is removed from the DOM.
+       *
+       * @returns True if the `el` element was successfully appended to the parent element, otherwise false.
+       */
+      var findParentAndAppendEl = function findParentAndAppendEl(parentElSelector, el, removeElDelayMs) {
+        var parentEl;
+        try {
+          parentEl = document.querySelector(parentElSelector);
+        } catch (e) {
+          logError("Cannot find parent element by selector '".concat(parentElSelector, "'"), e);
+          return false;
+        }
+        if (!parentEl) {
+          logMessage(source, "No parent element found by selector: '".concat(parentElSelector, "'"));
+          return false;
+        }
+        try {
+          parentEl.append(el);
+          if (el instanceof HTMLIFrameElement && el.contentWindow) {
+            el.contentWindow.name = IFRAME_WINDOW_NAME;
+          }
+          hit(source);
+        } catch (e) {
+          logError("Cannot append child to parent by selector '".concat(parentElSelector, "'"), e);
+          return false;
+        }
+        if (!nativeIsNaN(removeElDelayMs)) {
+          timerId = setTimeout(function () {
+            el.remove();
+            clearTimeout(timerId);
+          }, removeElDelayMs);
+        }
+        return true;
+      };
+      if (!findParentAndAppendEl(parentSelector, element, cleanupDelayMs)) {
+        observeDocumentWithTimeout(function (mutations, observer) {
+          if (findParentAndAppendEl(parentSelector, element, cleanupDelayMs)) {
+            observer.disconnect();
+          }
+        });
+      }
+    }
+    trustedCreateElement$1.names = ['trusted-create-element'
+    // trusted scriptlets support no aliases
+    ];
+
+    trustedCreateElement$1.injections = [hit, logMessage, observeDocumentWithTimeout, nativeIsNaN, parseAttributePairs, getErrorMessage];
+
     /**
      * This file must export all scriptlets which should be accessible
      */
 
-    var scriptletList = /*#__PURE__*/Object.freeze({
+    var scriptletListRaw = /*#__PURE__*/Object.freeze({
         __proto__: null,
         abortCurrentInlineScript: abortCurrentInlineScript$1,
         abortOnPropertyRead: abortOnPropertyRead$1,
@@ -10029,6 +10780,7 @@
         abortOnStackTrace: abortOnStackTrace$1,
         adjustSetInterval: adjustSetInterval$1,
         adjustSetTimeout: adjustSetTimeout$1,
+        callNoThrow: callNoThrow$1,
         debugCurrentInlineScript: debugCurrentInlineScript$1,
         debugOnPropertyRead: debugOnPropertyRead$1,
         debugOnPropertyWrite: debugOnPropertyWrite$1,
@@ -10073,11 +10825,14 @@
         setLocalStorageItem: setLocalStorageItem$1,
         setPopadsDummy: setPopadsDummy$1,
         setSessionStorageItem: setSessionStorageItem$1,
+        spoofCSS: spoofCSS$1,
         trustedClickElement: trustedClickElement$1,
+        trustedCreateElement: trustedCreateElement$1,
         trustedPruneInboundObject: trustedPruneInboundObject$1,
         trustedReplaceFetchResponse: trustedReplaceFetchResponse$1,
         trustedReplaceNodeText: trustedReplaceNodeText$1,
         trustedReplaceXhrResponse: trustedReplaceXhrResponse$1,
+        trustedSetAttr: trustedSetAttr$1,
         trustedSetConstant: trustedSetConstant$1,
         trustedSetCookie: trustedSetCookie$1,
         trustedSetCookieReload: trustedSetCookieReload$1,
@@ -10312,7 +11067,7 @@
      * @returns Array of all scriptlet objects.
      */
     var getScriptletsObjList = function getScriptletsObjList() {
-      return Object.values(scriptletList);
+      return Object.values(scriptletListRaw);
     };
 
     /**
@@ -10323,10 +11078,8 @@
      * @returns {Function} Scriptlet function.
      */
     var getScriptletByName = function getScriptletByName(name, scriptlets) {
-      if (!scriptlets) {
-        scriptlets = getScriptletsObjList();
-      }
-      return scriptlets.find(function (s) {
+      var allScriptletsFns = scriptlets || getScriptletsObjList();
+      return allScriptletsFns.find(function (s) {
         return s.names
         // full match name checking
         && (s.names.includes(name)
@@ -10721,6 +11474,7 @@
       return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest();
     }
 
+    var scriptletList = scriptletListRaw;
     /**
      * AdGuard scriptlet rule
      */
@@ -10756,8 +11510,10 @@
     var UBO_NO_FETCH_IF_WILDCARD = '/^/';
     var ESCAPED_COMMA_SEPARATOR = '\\,';
     var COMMA_SEPARATOR = ',';
+    var SPOOF_CSS_METHOD = 'spoofCSS';
     var REMOVE_ATTR_METHOD = 'removeAttr';
     var REMOVE_CLASS_METHOD = 'removeClass';
+    var SPOOF_CSS_ALIASES = scriptletList[SPOOF_CSS_METHOD].names;
     var REMOVE_ATTR_ALIASES = scriptletList[REMOVE_ATTR_METHOD].names;
     var REMOVE_CLASS_ALIASES = scriptletList[REMOVE_CLASS_METHOD].names;
     var REMOVE_ATTR_CLASS_APPLYING = ['asap', 'stay', 'complete'];
@@ -10848,7 +11604,7 @@
       // https://github.com/AdguardTeam/Scriptlets/issues/133
       var lastArg = restArgs.pop(); // https://github.com/microsoft/TypeScript/issues/30406
       var applying;
-      // check the last parsed arg for matching possible 'applying' vale
+      // check the last parsed arg for matching possible 'applying' value
       if (REMOVE_ATTR_CLASS_APPLYING.some(function (el) {
         return lastArg.includes(el);
       })) {
@@ -10865,6 +11621,24 @@
       }
       var validArgs = applying ? [name, value, selector, applying] : [name, value, selector];
       return validArgs;
+    };
+
+    /**
+     * Convert uBO spoof-css scriptlet selectors argument to AdGuard syntax
+     *
+     * @param parsedArgs scriptlet arguments
+     * @returns converted args
+     */
+    var convertSpoofCssArgs = function convertSpoofCssArgs(parsedArgs) {
+      var _parsedArgs2 = _toArray(parsedArgs),
+        name = _parsedArgs2[0],
+        selectors = _parsedArgs2[1],
+        restArgs = _parsedArgs2.slice(2);
+      // in uBO selectors are separated by escaped commas
+      // so it's necessary to replace it with just commas
+      var selector = replaceAll(selectors, ESCAPED_COMMA_SEPARATOR, COMMA_SEPARATOR);
+      var convertedArgs = [name, selector, ...restArgs];
+      return convertedArgs;
     };
 
     /**
@@ -10888,6 +11662,9 @@
       var scriptletName = parsedArgs[0].includes(UBO_SCRIPTLET_JS_ENDING) ? "ubo-".concat(parsedArgs[0]) : "ubo-".concat(parsedArgs[0]).concat(UBO_SCRIPTLET_JS_ENDING);
       if (REMOVE_ATTR_ALIASES.includes(scriptletName) || REMOVE_CLASS_ALIASES.includes(scriptletName)) {
         parsedArgs = validateRemoveAttrClassArgs(parsedArgs);
+      }
+      if (SPOOF_CSS_ALIASES.includes(scriptletName)) {
+        parsedArgs = convertSpoofCssArgs(parsedArgs);
       }
       var args = parsedArgs.map(function (arg, index) {
         var outputArg = arg;
@@ -17124,7 +17901,7 @@
       convertAdgRedirectToUbo
     };
 
-    var version = "1.9.105";
+    var version = "1.10.1";
 
     function abortCurrentInlineScript(source, args) {
       function abortCurrentInlineScript(source, property, search) {
@@ -18322,6 +19099,134 @@
       var updatedArgs = args ? [].concat(source).concat(args) : [source];
       try {
         adjustSetTimeout.apply(this, updatedArgs);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    function callNoThrow(source, args) {
+      function callNoThrow(source, functionName) {
+        if (!functionName) {
+          return;
+        }
+        var _getPropertyInChain = getPropertyInChain(window, functionName),
+          base = _getPropertyInChain.base,
+          prop = _getPropertyInChain.prop;
+        if (!base || !prop || typeof base[prop] !== "function") {
+          var message = "".concat(functionName, " is not a function");
+          logMessage(source, message);
+          return;
+        }
+        var objectWrapper = function objectWrapper() {
+          var result;
+          try {
+            result = Reflect.apply(...arguments);
+          } catch (e) {
+            var _message = "Error calling ".concat(functionName, ": ").concat(e.message);
+            logMessage(source, _message);
+          }
+          hit(source);
+          return result;
+        };
+        var objectHandler = {
+          apply: objectWrapper
+        };
+        base[prop] = new Proxy(base[prop], objectHandler);
+      }
+      function hit(source) {
+        if (source.verbose !== true) {
+          return;
+        }
+        try {
+          var log = console.log.bind(console);
+          var trace = console.trace.bind(console);
+          var prefix = source.ruleText || "";
+          if (source.domainName) {
+            var AG_SCRIPTLET_MARKER = "#%#//";
+            var UBO_SCRIPTLET_MARKER = "##+js";
+            var ruleStartIndex;
+            if (source.ruleText.includes(AG_SCRIPTLET_MARKER)) {
+              ruleStartIndex = source.ruleText.indexOf(AG_SCRIPTLET_MARKER);
+            } else if (source.ruleText.includes(UBO_SCRIPTLET_MARKER)) {
+              ruleStartIndex = source.ruleText.indexOf(UBO_SCRIPTLET_MARKER);
+            }
+            var rulePart = source.ruleText.slice(ruleStartIndex);
+            prefix = "".concat(source.domainName).concat(rulePart);
+          }
+          log("".concat(prefix, " trace start"));
+          if (trace) {
+            trace();
+          }
+          log("".concat(prefix, " trace end"));
+        } catch (e) {}
+        if (typeof window.__debug === "function") {
+          window.__debug(source);
+        }
+      }
+      function getPropertyInChain(base, chain) {
+        var pos = chain.indexOf(".");
+        if (pos === -1) {
+          return {
+            base: base,
+            prop: chain
+          };
+        }
+        var prop = chain.slice(0, pos);
+        if (base === null) {
+          return {
+            base: base,
+            prop: prop,
+            chain: chain
+          };
+        }
+        var nextBase = base[prop];
+        chain = chain.slice(pos + 1);
+        if ((base instanceof Object || typeof base === "object") && isEmptyObject(base)) {
+          return {
+            base: base,
+            prop: prop,
+            chain: chain
+          };
+        }
+        if (nextBase === null) {
+          return {
+            base: base,
+            prop: prop,
+            chain: chain
+          };
+        }
+        if (nextBase !== undefined) {
+          return getPropertyInChain(nextBase, chain);
+        }
+        Object.defineProperty(base, prop, {
+          configurable: true
+        });
+        return {
+          base: base,
+          prop: prop,
+          chain: chain
+        };
+      }
+      function logMessage(source, message) {
+        var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+        var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+        var name = source.name,
+          verbose = source.verbose;
+        if (!forced && !verbose) {
+          return;
+        }
+        var nativeConsole = console.log;
+        if (!convertMessageToString) {
+          nativeConsole("".concat(name, ":"), message);
+          return;
+        }
+        nativeConsole("".concat(name, ": ").concat(message));
+      }
+      function isEmptyObject(obj) {
+        return Object.keys(obj).length === 0 && !obj.prototype;
+      }
+      var updatedArgs = args ? [].concat(source).concat(args) : [source];
+      try {
+        callNoThrow.apply(this, updatedArgs);
       } catch (e) {
         console.log(e);
       }
@@ -20078,19 +20983,16 @@
         return typeof listener === "function" ? listener.toString() : listener.handleEvent.toString();
       }
       function convertTypeToString(value) {
-        var output;
         if (typeof value === "undefined") {
-          output = "undefined";
-        } else if (typeof value === "object") {
-          if (value === null) {
-            output = "null";
-          } else {
-            output = objectToString(value);
-          }
-        } else {
-          output = value.toString();
+          return "undefined";
         }
-        return output;
+        if (typeof value === "object") {
+          if (value === null) {
+            return "null";
+          }
+          return objectToString(value);
+        }
+        return value.toString();
       }
       function logMessage(source, message) {
         var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
@@ -20111,7 +21013,10 @@
         if (!obj || typeof obj !== "object") {
           return String(obj);
         }
-        return isEmptyObject(obj) ? "{}" : Object.entries(obj).map(function (pair) {
+        if (isEmptyObject(obj)) {
+          return "{}";
+        }
+        return Object.entries(obj).map(function (pair) {
           var key = pair[0];
           var value = pair[1];
           var recordValueStr = value;
@@ -21955,7 +22860,10 @@
         if (!obj || typeof obj !== "object") {
           return String(obj);
         }
-        return isEmptyObject(obj) ? "{}" : Object.entries(obj).map(function (pair) {
+        if (isEmptyObject(obj)) {
+          return "{}";
+        }
+        return Object.entries(obj).map(function (pair) {
           var key = pair[0];
           var value = pair[1];
           var recordValueStr = value;
@@ -23440,7 +24348,10 @@
         if (!obj || typeof obj !== "object") {
           return String(obj);
         }
-        return isEmptyObject(obj) ? "{}" : Object.entries(obj).map(function (pair) {
+        if (isEmptyObject(obj)) {
+          return "{}";
+        }
+        return Object.entries(obj).map(function (pair) {
           var key = pair[0];
           var value = pair[1];
           var recordValueStr = value;
@@ -24330,12 +25241,13 @@
         }
         observeDocumentWithTimeout(function (mutations) {
           return handleMutations(mutations, handleNodes);
-        }, {
-          childList: true,
-          subtree: true
         });
       }
-      function observeDocumentWithTimeout(callback, options) {
+      function observeDocumentWithTimeout(callback) {
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+          subtree: true,
+          childList: true
+        };
         var timeout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1e4;
         var documentObserver = new MutationObserver(function (mutations, observer) {
           observer.disconnect();
@@ -24485,51 +25397,46 @@
           return;
         }
         var allowedValues = ["true", "false"];
-        if (value.length !== 0 && (nativeIsNaN(parseInt(value, 10)) || parseInt(value, 10) < 0 || parseInt(value, 10) > 32767) && !allowedValues.includes(value.toLowerCase())) {
+        var shouldCopyValue = value.startsWith("[") && value.endsWith("]");
+        var isValidValue = value.length === 0 || !nativeIsNaN(parseInt(value, 10)) && parseInt(value, 10) > 0 && parseInt(value, 10) < 32767 || allowedValues.includes(value.toLowerCase());
+        if (!shouldCopyValue && !isValidValue) {
+          logMessage(source, "Invalid attribute value provided: '".concat(convertTypeToString(value), "'"));
           return;
         }
-        var setAttr = function setAttr() {
-          var nodes = [].slice.call(document.querySelectorAll(selector));
-          var set = false;
-          nodes.forEach(function (node) {
-            node.setAttribute(attr, value);
-            set = true;
-          });
-          if (set) {
-            hit(source);
-          }
-        };
-        setAttr();
-        observeDOMChanges(setAttr, true);
+        var attributeHandler;
+        if (shouldCopyValue) {
+          attributeHandler = function attributeHandler(elem, attr, value) {
+            var valueToCopy = elem.getAttribute(value.slice(1, -1));
+            if (valueToCopy === null) {
+              logMessage(source, "No element attribute found to copy value from: ".concat(value));
+            }
+            elem.setAttribute(attr, valueToCopy);
+          };
+        }
+        setAttributeBySelector(source, selector, attr, value, attributeHandler);
+        observeDOMChanges(function () {
+          return setAttributeBySelector(source, selector, attr, value, attributeHandler);
+        }, true);
       }
-      function hit(source) {
-        if (source.verbose !== true) {
+      function setAttributeBySelector(source, selector, attribute, value) {
+        var attributeSetter = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultAttributeSetter;
+        var elements;
+        try {
+          elements = document.querySelectorAll(selector);
+        } catch (_unused) {
+          logMessage(source, 'Failed to find elements matching selector "'.concat(selector, '"'));
+          return;
+        }
+        if (!elements || elements.length === 0) {
           return;
         }
         try {
-          var log = console.log.bind(console);
-          var trace = console.trace.bind(console);
-          var prefix = source.ruleText || "";
-          if (source.domainName) {
-            var AG_SCRIPTLET_MARKER = "#%#//";
-            var UBO_SCRIPTLET_MARKER = "##+js";
-            var ruleStartIndex;
-            if (source.ruleText.includes(AG_SCRIPTLET_MARKER)) {
-              ruleStartIndex = source.ruleText.indexOf(AG_SCRIPTLET_MARKER);
-            } else if (source.ruleText.includes(UBO_SCRIPTLET_MARKER)) {
-              ruleStartIndex = source.ruleText.indexOf(UBO_SCRIPTLET_MARKER);
-            }
-            var rulePart = source.ruleText.slice(ruleStartIndex);
-            prefix = "".concat(source.domainName).concat(rulePart);
-          }
-          log("".concat(prefix, " trace start"));
-          if (trace) {
-            trace();
-          }
-          log("".concat(prefix, " trace end"));
-        } catch (e) {}
-        if (typeof window.__debug === "function") {
-          window.__debug(source);
+          elements.forEach(function (elem) {
+            return attributeSetter(elem, attribute, value);
+          });
+          hit(source);
+        } catch (_unused2) {
+          logMessage(source, "Failed to set [".concat(attribute, '="').concat(value, '"] to each of selected elements.'));
         }
       }
       function observeDOMChanges(callback) {
@@ -24567,6 +25474,36 @@
         var native = Number.isNaN || window.isNaN;
         return native(num);
       }
+      function convertTypeToString(value) {
+        if (typeof value === "undefined") {
+          return "undefined";
+        }
+        if (typeof value === "object") {
+          if (value === null) {
+            return "null";
+          }
+          return objectToString(value);
+        }
+        return value.toString();
+      }
+      function defaultAttributeSetter(elem, attribute, value) {
+        return elem.setAttribute(attribute, value);
+      }
+      function logMessage(source, message) {
+        var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+        var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+        var name = source.name,
+          verbose = source.verbose;
+        if (!forced && !verbose) {
+          return;
+        }
+        var nativeConsole = console.log;
+        if (!convertMessageToString) {
+          nativeConsole("".concat(name, ":"), message);
+          return;
+        }
+        nativeConsole("".concat(name, ": ").concat(message));
+      }
       function throttle(cb, delay) {
         var wait = false;
         var savedArgs;
@@ -24589,6 +25526,36 @@
           }, delay);
         };
         return wrapper;
+      }
+      function hit(source) {
+        if (source.verbose !== true) {
+          return;
+        }
+        try {
+          var log = console.log.bind(console);
+          var trace = console.trace.bind(console);
+          var prefix = source.ruleText || "";
+          if (source.domainName) {
+            var AG_SCRIPTLET_MARKER = "#%#//";
+            var UBO_SCRIPTLET_MARKER = "##+js";
+            var ruleStartIndex;
+            if (source.ruleText.includes(AG_SCRIPTLET_MARKER)) {
+              ruleStartIndex = source.ruleText.indexOf(AG_SCRIPTLET_MARKER);
+            } else if (source.ruleText.includes(UBO_SCRIPTLET_MARKER)) {
+              ruleStartIndex = source.ruleText.indexOf(UBO_SCRIPTLET_MARKER);
+            }
+            var rulePart = source.ruleText.slice(ruleStartIndex);
+            prefix = "".concat(source.domainName).concat(rulePart);
+          }
+          log("".concat(prefix, " trace start"));
+          if (trace) {
+            trace();
+          }
+          log("".concat(prefix, " trace end"));
+        } catch (e) {}
+        if (typeof window.__debug === "function") {
+          window.__debug(source);
+        }
       }
       var updatedArgs = args ? [].concat(source).concat(args) : [source];
       try {
@@ -25158,7 +26125,7 @@
         if (!value) {
           return null;
         }
-        var allowedCookieValues = new Set(["true", "false", "yes", "y", "no", "n", "ok", "on", "off", "accept", "accepted", "notaccepted", "reject", "rejected", "allow", "allowed", "disallow", "deny", "enable", "enabled", "disable", "disabled"]);
+        var allowedCookieValues = new Set(["true", "t", "false", "f", "yes", "y", "no", "n", "ok", "on", "off", "accept", "accepted", "notaccepted", "reject", "rejected", "allow", "allowed", "disallow", "deny", "enable", "enabled", "disable", "disabled", "necessary", "required"]);
         var validValue;
         if (allowedCookieValues.has(value.toLowerCase())) {
           validValue = value;
@@ -25291,7 +26258,7 @@
         if (!value) {
           return null;
         }
-        var allowedCookieValues = new Set(["true", "false", "yes", "y", "no", "n", "ok", "on", "off", "accept", "accepted", "notaccepted", "reject", "rejected", "allow", "allowed", "disallow", "deny", "enable", "enabled", "disable", "disabled"]);
+        var allowedCookieValues = new Set(["true", "t", "false", "f", "yes", "y", "no", "n", "ok", "on", "off", "accept", "accepted", "notaccepted", "reject", "rejected", "allow", "allowed", "disallow", "deny", "enable", "enabled", "disable", "disabled", "necessary", "required"]);
         var validValue;
         if (allowedCookieValues.has(value.toLowerCase())) {
           validValue = value;
@@ -25758,6 +26725,182 @@
         console.log(e);
       }
     }
+    function spoofCSS(source, args) {
+      function spoofCSS(source, selectors, cssPropertyName, cssPropertyValue) {
+        if (!selectors) {
+          return;
+        }
+        var uboAliases = ["spoof-css.js", "ubo-spoof-css.js", "ubo-spoof-css"];
+        function convertToCamelCase(cssProperty) {
+          if (!cssProperty.includes("-")) {
+            return cssProperty;
+          }
+          var splittedProperty = cssProperty.split("-");
+          var firstPart = splittedProperty[0];
+          var secondPart = splittedProperty[1];
+          return "".concat(firstPart).concat(secondPart[0].toUpperCase()).concat(secondPart.slice(1));
+        }
+        var shouldDebug = !!(cssPropertyName === "debug" && cssPropertyValue);
+        var propToValueMap = new Map();
+        if (uboAliases.includes(source.name)) {
+          var args = source.args;
+          var arrayOfProperties = [];
+          var isDebug = args.at(-2);
+          if (isDebug === "debug") {
+            arrayOfProperties = args.slice(1, -2);
+          } else {
+            arrayOfProperties = args.slice(1);
+          }
+          for (var i = 0; i < arrayOfProperties.length; i += 2) {
+            if (arrayOfProperties[i] === "") {
+              break;
+            }
+            propToValueMap.set(convertToCamelCase(arrayOfProperties[i]), arrayOfProperties[i + 1]);
+          }
+        } else if (cssPropertyName && cssPropertyValue && !shouldDebug) {
+          propToValueMap.set(convertToCamelCase(cssPropertyName), cssPropertyValue);
+        }
+        var spoofStyle = function spoofStyle(cssProperty, realCssValue) {
+          return propToValueMap.has(cssProperty) ? propToValueMap.get(cssProperty) : realCssValue;
+        };
+        var setRectValue = function setRectValue(rect, prop, value) {
+          Object.defineProperty(rect, prop, {
+            value: parseFloat(value)
+          });
+        };
+        var getter = function getter(target, prop, receiver) {
+          hit(source);
+          if (prop === "toString") {
+            return target.toString.bind(target);
+          }
+          return Reflect.get(target, prop, receiver);
+        };
+        var getComputedStyleWrapper = function getComputedStyleWrapper(target, thisArg, args) {
+          if (shouldDebug) {
+            debugger;
+          }
+          var style = Reflect.apply(target, thisArg, args);
+          if (!args[0].matches(selectors)) {
+            return style;
+          }
+          var proxiedStyle = new Proxy(style, {
+            get(target, prop) {
+              var CSSStyleProp = target[prop];
+              if (typeof CSSStyleProp !== "function") {
+                return spoofStyle(prop, CSSStyleProp || "");
+              }
+              if (prop !== "getPropertyValue") {
+                return CSSStyleProp.bind(target);
+              }
+              var getPropertyValueFunc = new Proxy(CSSStyleProp, {
+                apply(target, thisArg, args) {
+                  var cssName = args[0];
+                  var cssValue = thisArg[cssName];
+                  return spoofStyle(cssName, cssValue);
+                },
+                get: getter
+              });
+              return getPropertyValueFunc;
+            },
+            getOwnPropertyDescriptor(target, prop) {
+              if (propToValueMap.has(prop)) {
+                return {
+                  configurable: true,
+                  enumerable: true,
+                  value: propToValueMap.get(prop),
+                  writable: true
+                };
+              }
+              return Reflect.getOwnPropertyDescriptor(target, prop);
+            }
+          });
+          hit(source);
+          return proxiedStyle;
+        };
+        var getComputedStyleHandler = {
+          apply: getComputedStyleWrapper,
+          get: getter
+        };
+        window.getComputedStyle = new Proxy(window.getComputedStyle, getComputedStyleHandler);
+        var getBoundingClientRectWrapper = function getBoundingClientRectWrapper(target, thisArg, args) {
+          if (shouldDebug) {
+            debugger;
+          }
+          var rect = Reflect.apply(target, thisArg, args);
+          if (!thisArg.matches(selectors)) {
+            return rect;
+          }
+          var top = rect.top,
+            bottom = rect.bottom,
+            height = rect.height,
+            width = rect.width,
+            left = rect.left,
+            right = rect.right;
+          var newDOMRect = new window.DOMRect(rect.x, rect.y, top, bottom, width, height, left, right);
+          if (propToValueMap.has("top")) {
+            setRectValue(newDOMRect, "top", propToValueMap.get("top"));
+          }
+          if (propToValueMap.has("bottom")) {
+            setRectValue(newDOMRect, "bottom", propToValueMap.get("bottom"));
+          }
+          if (propToValueMap.has("left")) {
+            setRectValue(newDOMRect, "left", propToValueMap.get("left"));
+          }
+          if (propToValueMap.has("right")) {
+            setRectValue(newDOMRect, "right", propToValueMap.get("right"));
+          }
+          if (propToValueMap.has("height")) {
+            setRectValue(newDOMRect, "height", propToValueMap.get("height"));
+          }
+          if (propToValueMap.has("width")) {
+            setRectValue(newDOMRect, "width", propToValueMap.get("width"));
+          }
+          hit(source);
+          return newDOMRect;
+        };
+        var getBoundingClientRectHandler = {
+          apply: getBoundingClientRectWrapper,
+          get: getter
+        };
+        window.Element.prototype.getBoundingClientRect = new Proxy(window.Element.prototype.getBoundingClientRect, getBoundingClientRectHandler);
+      }
+      function hit(source) {
+        if (source.verbose !== true) {
+          return;
+        }
+        try {
+          var log = console.log.bind(console);
+          var trace = console.trace.bind(console);
+          var prefix = source.ruleText || "";
+          if (source.domainName) {
+            var AG_SCRIPTLET_MARKER = "#%#//";
+            var UBO_SCRIPTLET_MARKER = "##+js";
+            var ruleStartIndex;
+            if (source.ruleText.includes(AG_SCRIPTLET_MARKER)) {
+              ruleStartIndex = source.ruleText.indexOf(AG_SCRIPTLET_MARKER);
+            } else if (source.ruleText.includes(UBO_SCRIPTLET_MARKER)) {
+              ruleStartIndex = source.ruleText.indexOf(UBO_SCRIPTLET_MARKER);
+            }
+            var rulePart = source.ruleText.slice(ruleStartIndex);
+            prefix = "".concat(source.domainName).concat(rulePart);
+          }
+          log("".concat(prefix, " trace start"));
+          if (trace) {
+            trace();
+          }
+          log("".concat(prefix, " trace end"));
+        } catch (e) {}
+        if (typeof window.__debug === "function") {
+          window.__debug(source);
+        }
+      }
+      var updatedArgs = args ? [].concat(source).concat(args) : [source];
+      try {
+        spoofCSS.apply(this, updatedArgs);
+      } catch (e) {
+        console.log(e);
+      }
+    }
     function trustedClickElement(source, args) {
       function trustedClickElement(source, selectors) {
         var extraMatch = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
@@ -26065,6 +27208,230 @@
       var updatedArgs = args ? [].concat(source).concat(args) : [source];
       try {
         trustedClickElement.apply(this, updatedArgs);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    function trustedCreateElement(source, args) {
+      function trustedCreateElement(source, parentSelector, tagName) {
+        var attributePairs = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
+        var textContent = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
+        var cleanupDelayMs = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : NaN;
+        if (!parentSelector || !tagName) {
+          return;
+        }
+        var IFRAME_WINDOW_NAME = "trusted-create-element-window";
+        if (window.name === IFRAME_WINDOW_NAME) {
+          return;
+        }
+        var logError = function logError(prefix, error) {
+          logMessage(source, "".concat(prefix, " due to ").concat(getErrorMessage(error)));
+        };
+        var element;
+        try {
+          element = document.createElement(tagName);
+          element.textContent = textContent;
+        } catch (e) {
+          logError("Cannot create element with tag name '".concat(tagName, "'"), e);
+          return;
+        }
+        var attributes = [];
+        try {
+          attributes = parseAttributePairs(attributePairs);
+        } catch (e) {
+          logError("Cannot parse attributePairs param: '".concat(attributePairs, "'"), e);
+          return;
+        }
+        attributes.forEach(function (attr) {
+          try {
+            element.setAttribute(attr.name, attr.value);
+          } catch (e) {
+            logError("Cannot set attribute '".concat(attr.name, "' with value '").concat(attr.value, "'"), e);
+          }
+        });
+        var timerId;
+        var findParentAndAppendEl = function findParentAndAppendEl(parentElSelector, el, removeElDelayMs) {
+          var parentEl;
+          try {
+            parentEl = document.querySelector(parentElSelector);
+          } catch (e) {
+            logError("Cannot find parent element by selector '".concat(parentElSelector, "'"), e);
+            return false;
+          }
+          if (!parentEl) {
+            logMessage(source, "No parent element found by selector: '".concat(parentElSelector, "'"));
+            return false;
+          }
+          try {
+            parentEl.append(el);
+            if (el instanceof HTMLIFrameElement && el.contentWindow) {
+              el.contentWindow.name = IFRAME_WINDOW_NAME;
+            }
+            hit(source);
+          } catch (e) {
+            logError("Cannot append child to parent by selector '".concat(parentElSelector, "'"), e);
+            return false;
+          }
+          if (!nativeIsNaN(removeElDelayMs)) {
+            timerId = setTimeout(function () {
+              el.remove();
+              clearTimeout(timerId);
+            }, removeElDelayMs);
+          }
+          return true;
+        };
+        if (!findParentAndAppendEl(parentSelector, element, cleanupDelayMs)) {
+          observeDocumentWithTimeout(function (mutations, observer) {
+            if (findParentAndAppendEl(parentSelector, element, cleanupDelayMs)) {
+              observer.disconnect();
+            }
+          });
+        }
+      }
+      function hit(source) {
+        if (source.verbose !== true) {
+          return;
+        }
+        try {
+          var log = console.log.bind(console);
+          var trace = console.trace.bind(console);
+          var prefix = source.ruleText || "";
+          if (source.domainName) {
+            var AG_SCRIPTLET_MARKER = "#%#//";
+            var UBO_SCRIPTLET_MARKER = "##+js";
+            var ruleStartIndex;
+            if (source.ruleText.includes(AG_SCRIPTLET_MARKER)) {
+              ruleStartIndex = source.ruleText.indexOf(AG_SCRIPTLET_MARKER);
+            } else if (source.ruleText.includes(UBO_SCRIPTLET_MARKER)) {
+              ruleStartIndex = source.ruleText.indexOf(UBO_SCRIPTLET_MARKER);
+            }
+            var rulePart = source.ruleText.slice(ruleStartIndex);
+            prefix = "".concat(source.domainName).concat(rulePart);
+          }
+          log("".concat(prefix, " trace start"));
+          if (trace) {
+            trace();
+          }
+          log("".concat(prefix, " trace end"));
+        } catch (e) {}
+        if (typeof window.__debug === "function") {
+          window.__debug(source);
+        }
+      }
+      function logMessage(source, message) {
+        var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+        var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+        var name = source.name,
+          verbose = source.verbose;
+        if (!forced && !verbose) {
+          return;
+        }
+        var nativeConsole = console.log;
+        if (!convertMessageToString) {
+          nativeConsole("".concat(name, ":"), message);
+          return;
+        }
+        nativeConsole("".concat(name, ": ").concat(message));
+      }
+      function observeDocumentWithTimeout(callback) {
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+          subtree: true,
+          childList: true
+        };
+        var timeout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1e4;
+        var documentObserver = new MutationObserver(function (mutations, observer) {
+          observer.disconnect();
+          callback(mutations, observer);
+          observer.observe(document.documentElement, options);
+        });
+        documentObserver.observe(document.documentElement, options);
+        if (typeof timeout === "number") {
+          setTimeout(function () {
+            return documentObserver.disconnect();
+          }, timeout);
+        }
+      }
+      function nativeIsNaN(num) {
+        var native = Number.isNaN || window.isNaN;
+        return native(num);
+      }
+      function parseAttributePairs(input) {
+        if (!input) {
+          return [];
+        }
+        var NAME_VALUE_SEPARATOR = "=";
+        var PAIRS_SEPARATOR = " ";
+        var SINGLE_QUOTE = "'";
+        var DOUBLE_QUOTE = '"';
+        var BACKSLASH = "\\";
+        var pairs = [];
+        for (var i = 0; i < input.length; i += 1) {
+          var name = "";
+          var value = "";
+          while (i < input.length && input[i] !== NAME_VALUE_SEPARATOR && input[i] !== PAIRS_SEPARATOR) {
+            name += input[i];
+            i += 1;
+          }
+          if (i < input.length && input[i] === NAME_VALUE_SEPARATOR) {
+            i += 1;
+            var quote = null;
+            if (input[i] === SINGLE_QUOTE || input[i] === DOUBLE_QUOTE) {
+              quote = input[i];
+              i += 1;
+              for (; i < input.length; i += 1) {
+                if (input[i] === quote) {
+                  if (input[i - 1] === BACKSLASH) {
+                    value = "".concat(value.slice(0, -1)).concat(quote);
+                  } else {
+                    i += 1;
+                    quote = null;
+                    break;
+                  }
+                } else {
+                  value += input[i];
+                }
+              }
+              if (quote !== null) {
+                throw new Error("Unbalanced quote for attribute value: '".concat(input, "'"));
+              }
+            } else {
+              throw new Error('Attribute value should be quoted: "'.concat(input.slice(i), '"'));
+            }
+          }
+          name = name.trim();
+          value = value.trim();
+          if (!name) {
+            if (!value) {
+              continue;
+            }
+            throw new Error("Attribute name before '=' should be specified: '".concat(input, "'"));
+          }
+          pairs.push({
+            name: name,
+            value: value
+          });
+          if (input[i] && input[i] !== PAIRS_SEPARATOR) {
+            throw new Error("No space before attribute: '".concat(input.slice(i), "'"));
+          }
+        }
+        return pairs;
+      }
+      function getErrorMessage(error) {
+        var isErrorWithMessage = function isErrorWithMessage(e) {
+          return typeof e === "object" && e !== null && "message" in e && typeof e.message === "string";
+        };
+        if (isErrorWithMessage(error)) {
+          return error.message;
+        }
+        try {
+          return new Error(JSON.stringify(error)).message;
+        } catch (_unused) {
+          return new Error(String(error)).message;
+        }
+      }
+      var updatedArgs = args ? [].concat(source).concat(args) : [source];
+      try {
+        trustedCreateElement.apply(this, updatedArgs);
       } catch (e) {
         console.log(e);
       }
@@ -26600,7 +27967,10 @@
         if (!obj || typeof obj !== "object") {
           return String(obj);
         }
-        return isEmptyObject(obj) ? "{}" : Object.entries(obj).map(function (pair) {
+        if (isEmptyObject(obj)) {
+          return "{}";
+        }
+        return Object.entries(obj).map(function (pair) {
           var key = pair[0];
           var value = pair[1];
           var recordValueStr = value;
@@ -26772,12 +28142,13 @@
         }
         observeDocumentWithTimeout(function (mutations) {
           return handleMutations(mutations, handleNodes);
-        }, {
-          childList: true,
-          subtree: true
         });
       }
-      function observeDocumentWithTimeout(callback, options) {
+      function observeDocumentWithTimeout(callback) {
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+          subtree: true,
+          childList: true
+        };
         var timeout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1e4;
         var documentObserver = new MutationObserver(function (mutations, observer) {
           observer.disconnect();
@@ -27132,7 +28503,10 @@
         if (!obj || typeof obj !== "object") {
           return String(obj);
         }
-        return isEmptyObject(obj) ? "{}" : Object.entries(obj).map(function (pair) {
+        if (isEmptyObject(obj)) {
+          return "{}";
+        }
+        return Object.entries(obj).map(function (pair) {
           var key = pair[0];
           var value = pair[1];
           var recordValueStr = value;
@@ -27231,6 +28605,147 @@
       var updatedArgs = args ? [].concat(source).concat(args) : [source];
       try {
         trustedReplaceXhrResponse.apply(this, updatedArgs);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    function trustedSetAttr(source, args) {
+      function trustedSetAttr(source, selector, attr) {
+        var value = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
+        if (!selector || !attr) {
+          return;
+        }
+        setAttributeBySelector(source, selector, attr, value);
+        observeDOMChanges(function () {
+          return setAttributeBySelector(source, selector, attr, value);
+        }, true);
+      }
+      function setAttributeBySelector(source, selector, attribute, value) {
+        var attributeSetter = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : defaultAttributeSetter;
+        var elements;
+        try {
+          elements = document.querySelectorAll(selector);
+        } catch (_unused) {
+          logMessage(source, 'Failed to find elements matching selector "'.concat(selector, '"'));
+          return;
+        }
+        if (!elements || elements.length === 0) {
+          return;
+        }
+        try {
+          elements.forEach(function (elem) {
+            return attributeSetter(elem, attribute, value);
+          });
+          hit(source);
+        } catch (_unused2) {
+          logMessage(source, "Failed to set [".concat(attribute, '="').concat(value, '"] to each of selected elements.'));
+        }
+      }
+      function observeDOMChanges(callback) {
+        var observeAttrs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+        var attrsToObserve = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+        var THROTTLE_DELAY_MS = 20;
+        var observer = new MutationObserver(throttle(callbackWrapper, THROTTLE_DELAY_MS));
+        var connect = function connect() {
+          if (attrsToObserve.length > 0) {
+            observer.observe(document.documentElement, {
+              childList: true,
+              subtree: true,
+              attributes: observeAttrs,
+              attributeFilter: attrsToObserve
+            });
+          } else {
+            observer.observe(document.documentElement, {
+              childList: true,
+              subtree: true,
+              attributes: observeAttrs
+            });
+          }
+        };
+        var disconnect = function disconnect() {
+          observer.disconnect();
+        };
+        function callbackWrapper() {
+          disconnect();
+          callback();
+          connect();
+        }
+        connect();
+      }
+      function defaultAttributeSetter(elem, attribute, value) {
+        return elem.setAttribute(attribute, value);
+      }
+      function logMessage(source, message) {
+        var forced = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+        var convertMessageToString = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+        var name = source.name,
+          verbose = source.verbose;
+        if (!forced && !verbose) {
+          return;
+        }
+        var nativeConsole = console.log;
+        if (!convertMessageToString) {
+          nativeConsole("".concat(name, ":"), message);
+          return;
+        }
+        nativeConsole("".concat(name, ": ").concat(message));
+      }
+      function throttle(cb, delay) {
+        var wait = false;
+        var savedArgs;
+        var wrapper = function wrapper() {
+          for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+          }
+          if (wait) {
+            savedArgs = args;
+            return;
+          }
+          cb(...args);
+          wait = true;
+          setTimeout(function () {
+            wait = false;
+            if (savedArgs) {
+              wrapper(...savedArgs);
+              savedArgs = null;
+            }
+          }, delay);
+        };
+        return wrapper;
+      }
+      function hit(source) {
+        if (source.verbose !== true) {
+          return;
+        }
+        try {
+          var log = console.log.bind(console);
+          var trace = console.trace.bind(console);
+          var prefix = source.ruleText || "";
+          if (source.domainName) {
+            var AG_SCRIPTLET_MARKER = "#%#//";
+            var UBO_SCRIPTLET_MARKER = "##+js";
+            var ruleStartIndex;
+            if (source.ruleText.includes(AG_SCRIPTLET_MARKER)) {
+              ruleStartIndex = source.ruleText.indexOf(AG_SCRIPTLET_MARKER);
+            } else if (source.ruleText.includes(UBO_SCRIPTLET_MARKER)) {
+              ruleStartIndex = source.ruleText.indexOf(UBO_SCRIPTLET_MARKER);
+            }
+            var rulePart = source.ruleText.slice(ruleStartIndex);
+            prefix = "".concat(source.domainName).concat(rulePart);
+          }
+          log("".concat(prefix, " trace start"));
+          if (trace) {
+            trace();
+          }
+          log("".concat(prefix, " trace end"));
+        } catch (e) {}
+        if (typeof window.__debug === "function") {
+          window.__debug(source);
+        }
+      }
+      var updatedArgs = args ? [].concat(source).concat(args) : [source];
+      try {
+        trustedSetAttr.apply(this, updatedArgs);
       } catch (e) {
         console.log(e);
       }
@@ -28458,6 +29973,10 @@
       "ubo-adjust-setTimeout": adjustSetTimeout,
       "ubo-nano-setTimeout-booster": adjustSetTimeout,
       "ubo-nano-stb": adjustSetTimeout,
+      "call-nothrow": callNoThrow,
+      "call-nothrow.js": callNoThrow,
+      "ubo-call-nothrow.js": callNoThrow,
+      "ubo-call-nothrow": callNoThrow,
       "debug-current-inline-script": debugCurrentInlineScript,
       "debug-on-property-read": debugOnPropertyRead,
       "debug-on-property-write": debugOnPropertyWrite,
@@ -28645,6 +30164,9 @@
       "ubo-set-cookie.js": setCookie,
       "ubo-set-cookie": setCookie,
       "set-cookie-reload": setCookieReload,
+      "set-cookie-reload.js": setCookieReload,
+      "ubo-set-cookie-reload.js": setCookieReload,
+      "ubo-set-cookie-reload": setCookieReload,
       "set-local-storage-item": setLocalStorageItem,
       "set-local-storage-item.js": setLocalStorageItem,
       "ubo-set-local-storage-item.js": setLocalStorageItem,
@@ -28657,11 +30179,17 @@
       "set-session-storage-item.js": setSessionStorageItem,
       "ubo-set-session-storage-item.js": setSessionStorageItem,
       "ubo-set-session-storage-item": setSessionStorageItem,
+      "spoof-css": spoofCSS,
+      "spoof-css.js": spoofCSS,
+      "ubo-spoof-css.js": spoofCSS,
+      "ubo-spoof-css": spoofCSS,
       "trusted-click-element": trustedClickElement,
+      "trusted-create-element": trustedCreateElement,
       "trusted-prune-inbound-object": trustedPruneInboundObject,
       "trusted-replace-fetch-response": trustedReplaceFetchResponse,
       "trusted-replace-node-text": trustedReplaceNodeText,
       "trusted-replace-xhr-response": trustedReplaceXhrResponse,
+      "trusted-set-attr": trustedSetAttr,
       "trusted-set-constant": trustedSetConstant,
       "trusted-set-cookie": trustedSetCookie,
       "trusted-set-cookie-reload": trustedSetCookieReload,
