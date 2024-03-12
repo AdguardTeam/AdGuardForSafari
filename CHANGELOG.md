@@ -7,11 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- version of the app is in ElectronMainApp/package.json -->
 
-
-## [Unreleased]
-TODO
-
-
 ## [1.11.17] - 2024-03-05
 
 ### Changed
@@ -66,7 +61,6 @@ TODO
 - Updated ExtendedCss to v2.0.52
 
 
-[Unreleased]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.17.329-release...HEAD
 [1.11.17]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.16.328-release...v1.11.17.329-release
 [1.11.16]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.15.309-release...v1.11.16.324-release
 [1.11.15]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.14.301-release...v1.11.15.309-release
