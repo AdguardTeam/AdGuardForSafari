@@ -1,9 +1,9 @@
-! Checksum: ikpOnFrvur00iokpwDNcNA
-! Diff-Path: ../patches/17/17-s-1707388620-3600.patch
+! Checksum: uL4gu3yiYrDoslibJ89dBA
+! Diff-Path: ../patches/17/17-s-1719056118-3600.patch
 ! Title: AdGuard URL Tracking filter
 ! Description: Filter that enhances privacy by removing tracking parameters from URLs.
-! Version: 2.0.7.98
-! TimeUpdated: 2024-02-08T10:32:03+00:00
+! Version: 2.0.8.63
+! TimeUpdated: 2024-06-22T11:33:17+00:00
 ! Expires: 5 days (update frequency)
 ! Homepage: https://github.com/AdguardTeam/AdGuardFilters
 ! License: https://github.com/AdguardTeam/AdguardFilters/blob/master/LICENSE
@@ -18,6 +18,14 @@
 ! Ideally, supply a link to the document that explains how this parameter is used.
 !
 !
+!
+! channelsight.com
+! Tracking in casino links
+! https://theaffiliateplatform.com/affiliate-custom-links/
+! jmty.jp
+! TCS
+! Visumo
+! https://www.shipsltd.co.jp/g/g316300136/?vsm_type=video&vsm_cid=e5011602-1b1c-44b0-a695-ca27aa94b448&vsm_pid=3163001362299
 ! Commission Junction
 ! https://developers.cj.com/docs/advertiser-site-tracking/enhanced-tracking-integration
 ! AT Internet
@@ -122,6 +130,46 @@
 !
 !
 !
+! https://www.carseven.co.jp/assess?from=contents_floating
+! https://github.com/AdguardTeam/AdguardFilters/issues/181725
+! https://github.com/AdguardTeam/AdguardFilters/issues/181404
+! https://github.com/AdguardTeam/AdguardFilters/issues/181299
+! https://github.com/AdguardTeam/AdguardFilters/issues/181125
+! https://github.com/AdguardTeam/AdguardFilters/issues/180304
+! https://github.com/AdguardTeam/AdguardFilters/issues/180890
+! https://github.com/AdguardTeam/AdguardFilters/issues/180896
+! https://github.com/AdguardTeam/AdguardFilters/issues/180000
+! https://github.com/AdguardTeam/AdguardFilters/issues/180785
+! https://github.com/AdguardTeam/AdguardFilters/issues/179379
+! https://github.com/AdguardTeam/AdguardFilters/issues/179934
+! https://github.com/AdguardTeam/AdguardFilters/issues/179524
+! https://qjweb.jp/news/105411/?from=sidebar
+! https://map.yahoo.co.jp/v2/place/ihEL4xYIVAo?from_srv=loco_web
+! https://github.com/AdguardTeam/AdguardFilters/issues/178806
+! https://github.com/AdguardTeam/AdguardFilters/issues/178786
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-9264793
+! https://github.com/AdguardTeam/AdguardFilters/issues/178109
+! https://github.com/AdguardTeam/AdguardFilters/issues/178001
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-9118227
+! https://github.com/AdguardTeam/AdguardFilters/issues/176856
+! https://github.com/AdguardTeam/AdguardFilters/issues/176307
+! https://github.com/AdguardTeam/AdguardFilters/issues/175941
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-8834544
+! https://github.com/AdguardTeam/AdguardFilters/issues/174921
+! https://github.com/AdguardTeam/AdguardFilters/issues/175100
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-8785529
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-8754160
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-8721233
+! https://github.com/AdguardTeam/AdguardFilters/issues/173941
+! https://github.com/AdguardTeam/AdguardFilters/issues/173987
+! https://github.com/AdguardTeam/AdguardFilters/issues/173471
+! https://github.com/AdguardTeam/AdguardFilters/issues/173807
+! https://github.com/AdguardTeam/AdguardFilters/issues/173600
+! https://github.com/AdguardTeam/AdguardFilters/issues/173056
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-8505558
+! Uber
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-8479998
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-8455734
 ! https://github.com/AdguardTeam/AdguardFilters/issues/172125
 ! Wargaming tracking
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-8368863
@@ -135,6 +183,7 @@
 ! https://github.com/AdguardTeam/AdguardFilters/issues/170366
 ! https://mora.jp/special/bigsale/?fmid=mora.jack_202312_bigsale
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169585
+! https://github.com/AdguardTeam/AdguardFilters/issues/178863
 ! go2jump.org / tr.rdrtr.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168508#issuecomment-1872568599
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-7975883
@@ -312,6 +361,8 @@
 !! tiktok
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-4978150
 ! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-1909327
+! https://github.com/AdguardTeam/AdguardFilters/issues/181809
+! https://github.com/DandelionSprout/adfilt/discussions/163#discussioncomment-750307
 ! email/copy link function
 ! Create effects link on main page and then clicking on a link
 ! login button on effect page - breaks comments after logging in
@@ -402,8 +453,7 @@
 ! get-express-vpns.com
 ! https://github.com/AdguardTeam/AdguardFilters/issues/123349
 ! MacKeeper
-! lazada.vn
-! lazada.com.ph
+! Lazada
 ! trib.al - redirecting service used by spiegel.de (when posting on facebook.com)
 ! Mail.Ru
 ! https://github.com/AdguardTeam/AdguardFilters/issues/120891
@@ -538,6 +588,7 @@
 ! https://github.com/AdguardTeam/AdguardFilters/issues/69722
 !
 ! NicoNico (nicovideo.jp)
+! Keep subdomain
 ! Naver (naver.com) - tracking parameter
 ! https://github.com/AdguardTeam/AdguardFilters/pull/89838
 ! Yandex
@@ -545,6 +596,8 @@
 ! https://github.com/AdguardTeam/AdguardFilters/issues/88606
 ! Yandex.Docs
 ! Yandex.Disk
+! Do not remove `sk` parameter - https://github.com/AdguardTeam/AdguardFilters/issues/178459
+!
 ! Baidu search - statictics
 ! https://github.com/AdguardTeam/CoreLibs/issues/1464
 ! Probably a bug
@@ -608,6 +661,11 @@
 !
 !+ NOT_OPTIMIZED
 adguard.info,adguard.com,adguard.app##.hello_from_adguard_tracking_params
+! Detect of using AdGuard products
+!+ NOT_PLATFORM(windows, mac, android, ios, ext_ublock) NOT_OPTIMIZED
+adguard.info,adguard.com,adguard.app##.hello_from_adguard_ext
+! Detect HTTPS filtering
+! Detect Advanced Protection of AdGuard for iOS
 !
 !---------------------------------------------------------------------------!
 !-------------- Fixing filtration errors (false-positive) ------------------!
@@ -619,6 +677,7 @@ adguard.info,adguard.com,adguard.app##.hello_from_adguard_tracking_params
 !
 !
 !
+! https://github.com/AdguardTeam/AdguardFilters/issues/178856 reader broken
 ! https://github.com/AdguardTeam/AdguardFilters/issues/169890
 ! https://github.com/AdguardTeam/AdguardFilters/issues/168271
 ! https://github.com/AdguardTeam/AdguardFilters/issues/166698
