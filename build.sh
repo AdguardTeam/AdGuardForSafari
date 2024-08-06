@@ -54,13 +54,15 @@ if [ "$CHANNEL" == "release" ]; then
     CONFIGURATION_NAME="Standalone Prod"
 fi
 
+bundle update fastlane
+
 STEP=1
 echo "Step $STEP: Remove local keychain if it exists"
 bundle exec fastlane remove_certs config:"$CONFIGURATION_NAME"
 
 let "STEP++"
 echo "Step $STEP: Sync certificates and provisioning profiles"
-bundle exec fastlane certs config:"$CONFIGURATION_NAME" 
+bundle exec fastlane certs config:"$CONFIGURATION_NAME"
 
 #
 # Build process
@@ -133,4 +135,3 @@ python3 -u Scripts/update_version.py --path="../$BUILD_DIR/updates.json" --chann
 let "STEP++"
 echo "Step $STEP: Remove local keychain"
 bundle exec fastlane remove_certs config:"$CONFIGURATION_NAME"
-

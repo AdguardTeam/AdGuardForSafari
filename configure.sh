@@ -10,8 +10,10 @@ echo "==== Configure environment for: $ENV_NAME ===="
 echo
 
 bundle config --local path '.bundle/vendor'
-bundle config 
+bundle config
 bundle install
+
+bundle update fastlane
 
 if [ "$1" == "dev" ]; then
     # syncs certificates for `MAS` distribution
