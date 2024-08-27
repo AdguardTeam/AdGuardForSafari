@@ -7,13 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- version of the app is in ElectronMainApp/package.json -->
 
-## [Unreleased]
+## [1.11.19] - 2024-08-22
 
 ### Changed
 
 - Updated [@adguard/scriptlets] to v1.11.16
 
-[Unreleased]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.18.332-release...HEAD
+[1.11.19]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.18.332-release...v1.11.19.336-release
 
 ## [1.11.18] - 2024-05-20
 
