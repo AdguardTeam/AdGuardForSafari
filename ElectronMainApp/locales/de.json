@@ -150,7 +150,7 @@
         }
     },
     "options_filters_check_for_updates": {
-        "message": "Nach Aktualisierungen suchen"
+        "message": "Auf Aktualisierungen prüfen"
     },
     "options_filters_enabled": {
         "message": "Aktiviert:"
@@ -189,7 +189,7 @@
         "message": "Fehler beim Importieren"
     },
     "options_filters_custom_step_one_title": {
-        "message": "Neues Filterabonnement"
+        "message": "Neues Filter-Abonnement"
     },
     "options_filters_custom_step_one_input_placeholder": {
         "message": "URL des Filters eingeben:"
@@ -222,7 +222,7 @@
         "message": "Erneut versuchen"
     },
     "options_filters_custom_step_final_title": {
-        "message": "Neues Filterabonnement"
+        "message": "Neues Filter-Abonnement"
     },
     "options_filters_custom_step_final_filter_title": {
         "message": "Titel:"
@@ -252,7 +252,7 @@
         "message": "Abonnieren"
     },
     "options_filters_check_filters_update": {
-        "message": "Alle Filter aktualisieren"
+        "message": "Auf Filteraktualisierungen prüfen"
     },
     "options_allowlist": {
         "message": "Positivliste"
@@ -564,7 +564,7 @@
         "message": "AdGuard Datenschutz"
     },
     "options_cb_social_title": {
-        "message": "AdGuard Social"
+        "message": "AdGuard Soziales"
     },
     "options_cb_security_title": {
         "message": "AdGuard Sicherheit"
@@ -582,7 +582,7 @@
         }
     },
     "options_cb_rules_overlimit_info": {
-        "message": "Das Limit von %s Regeln wurde überschritten. Bitte deaktivieren Sie unnötige Regeln, damit die App korrekt funktioniert.<br/>Aktivierte Regeln im Moment: %s (deaktivierte Regeln: $2)"
+        "message": "Die Grenze von 50.000 Regeln wurde überschritten. Bitte deaktivieren Sie unnötige Regeln, damit die App korrekt funktioniert.<br/>Aktuell aktivierte Regeln: %s ($2 Regeln deaktiviert)"
     },
     "options_cb_disabled_warning": {
         "message": "In Safari deaktiviert"

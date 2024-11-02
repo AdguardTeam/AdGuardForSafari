@@ -33,16 +33,16 @@
         "message": "Laporkan bug"
     },
     "options_support_bug_report_description": {
-        "message": "Jika ada sesuatu yang tidak berfungsi dengan benar di program"
+        "message": "Jika ada sesuatu yang tidak berfungsi dengan benar dalam program"
     },
     "options_support_incorrect_blocking_title": {
         "message": "Laporkan pemblokiran yang salah"
     },
     "options_support_incorrect_blocking_description": {
-        "message": "Jika Anda melihat iklan yang terlewat atau situs web \"rusak\""
+        "message": "Jika Anda melihat iklan terlewat atau situs web \"rusak\""
     },
     "options_support_feedback_title": {
-        "message": "Tinggalkan umpan balik"
+        "message": "Beri masukan"
     },
     "options_support_feedback_description": {
         "message": "Kirimkan permintaan fitur dan saran"
@@ -105,7 +105,7 @@
         "message": "AdGuard untuk Safari - Pengaturan"
     },
     "options_settings_import_wrong_file_extension": {
-        "message": "Ekstensi file harus .json"
+        "message": "Ekstensi berkas harus berupa .json"
     },
     "options_settings_import_error": {
         "message": "Terjadi kesalahan saat mengimpor pengaturan"
@@ -114,7 +114,7 @@
         "message": "Umum"
     },
     "options_general_desc": {
-        "message": "AdGuard untuk Safari adalah perangkat lunak sumber terbuka dan gratis. Kami menyambut umpan balik dan kontribusi Anda. Jika Anda ingin melaporkan bug atau meminta fitur, silakan menuju ke <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>repo Github kami</a>."
+        "message": "AdGuard untuk Safari adalah perangkat lunak sumber terbuka dan gratis. Kami menerima masukan dan kontribusi Anda. Jika Anda ingin melaporkan bug atau meminta fitur, silakan menuju ke <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>repositori Github kami</a>."
     },
     "options_allow_acceptable_ads": {
         "message": "Izinkan iklan pencarian dan promosi mandiri situs web"
@@ -183,7 +183,7 @@
         "message": "Tambahkan filter kustom"
     },
     "options_filters_custom_import_file": {
-        "message": "Impor file"
+        "message": "Impor berkas"
     },
     "options_popup_import_file_error_title": {
         "message": "Gagal impor"
@@ -297,7 +297,7 @@
         "message": "Terjadi kesalahan saat mengimpor aturan"
     },
     "options_popup_import_rules_wrong_file_extension": {
-        "message": "Ekstensi file harus .txt"
+        "message": "Ekstensi berkas harus berupa .txt"
     },
     "options_show_app_updated_notification": {
         "message": "Beritahu tentang pembaruan ekstensi"

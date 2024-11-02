@@ -519,10 +519,10 @@
         "message": "Eğer Ayrıntılı günlük kaydı etkinleştirilirse, AdGuard Safari uzantıları tarayıcı konsoluna ek bilgiler yazdırır"
     },
     "options_enable_hardware_acceleration": {
-        "message": "Donanımsal hızlandırmayı etkinleştir"
+        "message": "Donanım hızlandırmayı etkinleştir"
     },
     "options_enable_hardware_acceleration_desc": {
-        "message": "Ayarlar penceresi için donanımsal hızlandırmayı etkinleştirir, uygulamanın yeniden başlatılması gerekir"
+        "message": "Ayarlar penceresi için donanım hızlandırmayı etkinleştirir. Uygulamanın yeniden başlatılması gerekir"
     },
     "settings_import": {
         "message": "Ayarları içe aktar"
@@ -609,7 +609,7 @@
         "message": "Seçimimi hatırla"
     },
     "window_close_dialog_yes": {
-        "message": "Evet (tavsiye edilen)"
+        "message": "Evet (önerilir)"
     },
     "window_close_dialog_no": {
         "message": "Hayır"

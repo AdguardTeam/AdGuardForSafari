@@ -30,10 +30,10 @@
         "message": "اقترح طرقًا لتحسين التطبيق"
     },
     "options_support_bug_report_title": {
-        "message": "أبلِغ عن مشكلة"
+        "message": "الإبلاغ عن خطأ"
     },
     "options_support_bug_report_description": {
-        "message": "إذا كان هناك شيء لا يعمل بشكل صحيح في البرنامج"
+        "message": "إذا كان هناك شيء لا يعمل بشكل صحيح في البرنامَج"
     },
     "options_support_incorrect_blocking_title": {
         "message": "الإبلاغ عن حجب غير صحيح"
@@ -54,7 +54,7 @@
         "message": "أخبرنا برأيك حول AdGuard"
     },
     "options_support_discuss_title": {
-        "message": "مناقشة"
+        "message": "المناقشة"
     },
     "options_support_discuss_description": {
         "message": "ناقش في منتدانا أو في الشبكات الاجتماعية أو على GitHub"
@@ -126,7 +126,7 @@
         "message": "استيراد الإعدادات"
     },
     "options_export_logs": {
-        "message": "تصدير السجل"
+        "message": "تصدير السجلات"
     },
     "options_antibanner": {
         "message": "الفلاتر"
@@ -150,10 +150,10 @@
         }
     },
     "options_filters_check_for_updates": {
-        "message": "تحقق من وجود تحديثات"
+        "message": "تحقق وجود تحديثات"
     },
     "options_filters_enabled": {
-        "message": "تفعيل:"
+        "message": "قيد التشغيل:"
     },
     "options_filters_homepage": {
         "message": "الصفحة الرئيسية"
@@ -165,7 +165,7 @@
         "message": "%s و%s"
     },
     "options_filters_no_enabled": {
-        "message": "لا توجد فلاتر مفعلة"
+        "message": "لم يتم تمكين أي فلاتر"
     },
     "options_filters_no_filters": {
         "message": "لا المرشحات"
@@ -249,7 +249,7 @@
         "message": "إلغاء"
     },
     "options_filters_custom_step_final_commit": {
-        "message": "اشتراك"
+        "message": "الاشتراك"
     },
     "options_filters_check_filters_update": {
         "message": "التحقق من وجود تحديثات للفلاتر"
@@ -326,7 +326,7 @@
     "options_popup_update_updated_more": {
         "message": {
             "one": "%s تم تحديث الفلتر: $2",
-            "other": "%s تم تحديث الفلتر: $2"
+            "other": "%s فلاتر تمّ تحديثها: $2"
         }
     },
     "options_popup_version_update_title": {
@@ -393,7 +393,7 @@
         "message": "تشغيل AdGuard عند تسجيل الدخول"
     },
     "tray_menu_quit": {
-        "message": "خروج"
+        "message": "الخروج"
     },
     "tray_menu_protection_start": {
         "message": "حظر الإعلانات في Safari قيد التشغيل"
@@ -402,13 +402,13 @@
         "message": "حظر الإعلانات في Safari مُعطل"
     },
     "options_last_update": {
-        "message": "اخر تحديث:"
+        "message": "آخر تحديث:"
     },
     "options_about": {
         "message": "حول"
     },
     "options_content_blockers": {
-        "message": "مانعي المحتوى"
+        "message": "أدوات حظر المحتوى"
     },
     "options_content_blockers_desc": {
         "message": "أدوات حظر الإعلانات الممكنة: %s من أصل 6 (يمكن أن يحتوي كل منها على ما يصل إلى %s قاعدة)"
@@ -423,7 +423,7 @@
         "message": "جرب AdGuard Premium للحصول على حماية أفضل!"
     },
     "options_license_agreement": {
-        "message": "اتفاقيه ترخيص المستخدم النهائي"
+        "message": "اتفاقية ترخيص المستخدم النهائي"
     },
     "options_privacy_policy": {
         "message": "سياسة الخصوصية"
@@ -444,7 +444,7 @@
         "message": "ماذا تفعل هذه الإضافات؟"
     },
     "onboarding_tooltip_adguard_safari_icon": {
-        "message": "ايقونة AdGuard Safari"
+        "message": "أيقونة Safari AdGuard"
     },
     "onboarding_tooltip_adguard_safari_icon_info": {
         "message": "يمكنك استخدام هذه الايقونة لإدارة إعدادات AdGuard لـ Safari. على سبيل المثال ، قم بإيقاف الحظر مؤقتًا على موقع ويب أو احظر إعلان يدويًا."
@@ -480,7 +480,7 @@
         "message": "تجاهل"
     },
     "options_learn_more": {
-        "message": "معرفة المزيد حول هذا الموضوع"
+        "message": "اعرف المزيد عن ذلك"
     },
     "options_about_version": {
         "message": "إصدار %s"

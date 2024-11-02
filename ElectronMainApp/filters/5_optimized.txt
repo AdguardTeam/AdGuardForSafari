@@ -1,9 +1,9 @@
-! Checksum: 3OxVqD4+ysnoMjO7Cm6Rzg
-! Diff-Path: ../patches/5_optimized/5_optimized-s-1720733787-3600.patch
+! Checksum: 8zWa1RssJ8RjnwX2k+MigQ
+! Diff-Path: ../patches/5_optimized/5_optimized-s-1729488997-3600.patch
 ! Title: AdGuard Experimental filter (Optimized)
 ! Description: Filter designed to test certain hazardous filtering rules before they are added to the basic filters.
-! Version: 2.0.1.60
-! TimeUpdated: 2024-07-11T21:33:01+00:00
+! Version: 2.0.1.61
+! TimeUpdated: 2024-10-21T05:32:55+00:00
 ! Expires: 5 days (update frequency)
 #%#var AG_onLoad=function(func){if(document.readyState==="complete"||document.readyState==="interactive")func();else if(document.addEventListener)document.addEventListener("DOMContentLoaded",func);else if(document.attachEvent)document.attachEvent("DOMContentLoaded",func)};
 #%#var AG_removeElementById = function(id) { var element = document.getElementById(id); if (element && element.parentNode) { element.parentNode.removeChild(element); }};

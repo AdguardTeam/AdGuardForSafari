@@ -127,8 +127,8 @@ Options:
   -h, --help            show this help message and exit
   --path=PATH           path to the json file
   --channel=CHANNEL     channel (beta or prod)
-  --version=VERSION     sem version 
-                        
+  --version=VERSION     sem version
+
 ```
 
 ## <a id="increment-version"></a> Increments version
@@ -136,7 +136,7 @@ Options:
 Increments version in Config.xcconfig and Electron package.json
 
 ```
-Usage: /bin/bash increment-version.sh 
+Usage: /bin/bash increment-version.sh
 ```
 
 ## <a id="increment-build-number"></a> Increments build number
@@ -144,5 +144,5 @@ Usage: /bin/bash increment-version.sh
 Increments build number in Config.xcconfig
 
 ```
-Usage: /bin/bash increment-build-number.sh 
+Usage: /bin/bash increment-build-number.sh
 ```
