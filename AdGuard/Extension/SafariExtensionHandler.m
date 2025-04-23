@@ -72,7 +72,11 @@ static BOOL _mainAppReady;
     @autoreleasepool {
         // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").
         [page getPagePropertiesWithCompletionHandler:^(SFSafariPageProperties *properties) {
-            DDLogInfo(@"AG: The extension received a message (%@) from a script injected into (%@) with userInfo (%@)", messageName, properties.url, userInfo);
+            // urls are considered sensitive data, so we only log them when verbose logging is enabled
+            // https://github.com/AdguardTeam/AdGuardForSafari/issues/940
+            if ([self isVerboseLoggingEnabled]) {
+                DDLogInfo(@"AG: The extension received a message (%@) from a script injected into (%@) with userInfo (%@)", messageName, properties.url, userInfo);
+            }
         }];
         if ([messageName isEqualToString:@"blockElementPong"]) {
             [page dispatchMessageToScriptWithName:@"blockElement" userInfo:NULL];
@@ -169,6 +173,10 @@ static BOOL _mainAppReady;
 }
 
 - (void)messageReceivedFromContainingAppWithName:(NSString *)messageName userInfo:(NSDictionary<NSString *,id> *)userInfo {
+}
+
+- (BOOL)isVerboseLoggingEnabled {
+    return [AESharedResources.sharedDefaults boolForKey:AEDefaultsVerboseLogging];
 }
 
 - (BOOL)setMainAppRunning {

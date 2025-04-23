@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- version of the app is in ElectronMainApp/package.json -->
 
+<!-- TODO: add the date after release -->
+## [1.11.22]
+
+### Fixed
+
+- Browser history is stored in non-verbose logs [#940].
+
+<!-- TODO: fix the url after release -->
+[1.11.22]: https://github.com/AdguardTeam/AdGuardForSafari/compare/v1.11.20.341-release...HEAD
+[#940]: https://github.com/AdguardTeam/AdGuardForSafari/issues/940
+
 ## [1.11.20] - 2024-11-13
 
 ### Changed
