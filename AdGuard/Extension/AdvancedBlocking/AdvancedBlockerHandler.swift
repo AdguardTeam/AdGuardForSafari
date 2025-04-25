@@ -24,7 +24,6 @@ final class AdvancedBlockerHandler: NSObject {
                 }
 
                 let url = userInfo?["url"] as? String ?? "";
-                NSLog("AG: Page url: %@", url);
 
                 let pageUrl = URL(string: url);
                 if pageUrl == nil {
