@@ -13,11 +13,9 @@ bundle config --local path '.bundle/vendor'
 bundle config
 bundle install
 
-bundle update fastlane
-
 if [ "$1" == "dev" ]; then
     # syncs certificates for `MAS` distribution
     bundle exec fastlane certs config:Release --env dev
-    # syncs certificates for `Stendalone`` distribution
+    # syncs certificates for `Standalone` distribution
     bundle exec fastlane certs config:Debug --env dev
 fi

@@ -54,8 +54,6 @@ if [ "$CHANNEL" == "release" ]; then
     CONFIGURATION_NAME="Standalone Prod"
 fi
 
-bundle update fastlane
-
 STEP=1
 echo "Step $STEP: Remove local keychain if it exists"
 bundle exec fastlane remove_certs config:"$CONFIGURATION_NAME"
