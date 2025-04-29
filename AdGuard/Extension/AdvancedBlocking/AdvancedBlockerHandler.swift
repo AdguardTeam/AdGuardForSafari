@@ -24,13 +24,15 @@ final class AdvancedBlockerHandler: NSObject {
                 }
 
                 let url = userInfo?["url"] as? String ?? "";
-                NSLog("AG: Page url: %@", url);
+
+                if (self.isVerboseLoggingEnabled()) {
+                    NSLog("AG: Page url: %@", url);
+                }
 
                 let pageUrl = URL(string: url);
                 if pageUrl == nil {
                     return;
                 }
-                
 
                 let data: [String : Any]? = [
                     "url": url,
