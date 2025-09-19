@@ -68,6 +68,18 @@
     "options_about_updating": {
         "message": "Safari용 AdGuard 업데이트 중"
     },
+    "options_about_update_not_allowed_title": {
+        "message": "MacOS 업데이트 필요"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "Safari용 AdGuard는 업데이트를 설치하려면 macOS Monterey(버전 12 이상)가 필요합니다. 업데이트하지 않고 계속 사용할 수 있지만, 광고 차단 기능이 제대로 작동하지 않을 수 있습니다."
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "다시 표시 안 함"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "확인"
+    },
     "options_about_updates_not_found": {
         "message": "Safari용 AdGuard는 최신 버전입니다"
     },

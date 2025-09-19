@@ -68,6 +68,18 @@
     "options_about_updating": {
         "message": "AdGuard for Safariをアップデート中"
     },
+    "options_about_update_not_allowed_title": {
+        "message": "macOSのアップデートが必要です。"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "AdGuard for Safari をアップデートしてインストールするには、macOS 12（Monterey）以降が必要です。アップデートせずにアプリを引き続き利用することも可能ですが、広告ブロックの質が今後低下する可能性があります。"
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "次回から表示しない"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "OK"
+    },
     "options_about_updates_not_found": {
         "message": "AdGuard for Safariは最新状態です。"
     },

@@ -68,6 +68,18 @@
     "options_about_updating": {
         "message": "AdGuard für Safari wird aktualisiert"
     },
+    "options_about_update_not_allowed_title": {
+        "message": "MacOS-Update erforderlich"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "AdGuard für Safari benötigt macOS Monterey (Version 12 oder höher), um Updates zu installieren. Sie können die App ohne Update weiter verwenden, aber die Werbeblockierung kann dadurch weniger effektiv werden"
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "Nicht erneut anzeigen"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "Verstanden"
+    },
     "options_about_updates_not_found": {
         "message": "AdGuard für Safari ist aktuell"
     },

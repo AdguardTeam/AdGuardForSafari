@@ -68,6 +68,18 @@
     "options_about_updating": {
         "message": "جارٍ تحديث AdGuard لمتصفح سفاري"
     },
+    "options_about_update_not_allowed_title": {
+        "message": "تحديث macOS مطلوب"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "يحتاج AdGuard ل Safari إلى macOS Monterey (الإصدار 12) أو أحدث لتثبيت التحديثات. يمكنك الاستمرار في استخدام التطبيق دون تحديث، ولكن قد يصبح حظر الإعلانات أقل فعالية"
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "لا تظهر مرة أخرى"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "فهمت ذلك"
+    },
     "options_about_updates_not_found": {
         "message": "AdGuard for Safari محدث"
     },
@@ -393,7 +405,7 @@
         "message": "تشغيل AdGuard عند تسجيل الدخول"
     },
     "tray_menu_quit": {
-        "message": "الخروج"
+        "message": "خروج"
     },
     "tray_menu_protection_start": {
         "message": "حظر الإعلانات في Safari قيد التشغيل"

@@ -68,6 +68,18 @@
     "options_about_updating": {
         "message": "Ažuriranje AdGuarda za Safari"
     },
+    "options_about_update_not_allowed_title": {
+        "message": "Potrebno ažuriranje MacOS-a"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "Za instalaciju ažuriranja za AdGuard za Safari potreban je macOS Monterey (verzija 12) ili noviji. Možete nastaviti koristiti aplikaciju bez ažuriranja, ali blokiranje oglasa može postati manje učinkovito"
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "Nemoj više prikazivati"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "U redu"
+    },
     "options_about_updates_not_found": {
         "message": "AdGuard za Safari je ažuriran"
     },

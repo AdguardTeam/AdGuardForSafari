@@ -68,6 +68,18 @@
     "options_about_updating": {
         "message": "Safari için AdGuard güncelleniyor"
     },
+    "options_about_update_not_allowed_title": {
+        "message": "MacOS güncellemesi gerekli"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "Safari için AdGuard, güncellemeleri yükleyebilmek için macOS Monterey (sürüm 12) veya daha yenisine ihtiyaç duyar. Uygulamayı güncellemeden kullanmaya devam edebilirsiniz, ancak reklam engelleme daha az etkili olabilir"
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "Tekrar gösterme"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "Anladım"
+    },
     "options_about_updates_not_found": {
         "message": "Safari için AdGuard güncel"
     },
@@ -117,7 +129,7 @@
         "message": "Safari için AdGuard ücretsiz ve açık kaynaklı bir yazılımdır. Geri bildirimlerinizi ve katkılarınızı bekliyoruz. Bir hatayı bildirmek veya yeni bir özellik istemek istiyorsanız, lütfen <a target='_blank' href='https://link.adtidy.org/forward.html?action=github&from=options_screen&app=safari_extension' class='link'>GitHub depomuza</a> gidin."
     },
     "options_allow_acceptable_ads": {
-        "message": "Arama motoru reklamlarına ve sitelerin öz tanıtımına izin ver"
+        "message": "Arama motoru reklamlarına ve sitelerin öz tanıtıma izin ver"
     },
     "options_export_settings": {
         "message": "Ayarları dışa aktar"
@@ -471,7 +483,7 @@
         "message": "6 içerik engelleme uzantısı"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari, maksimum içerik engelleme kuralı sayısını uzantı başına %s kural ile sınırlar. Bu, her türlü reklam ve izleyici AdGuard bloklarını işlemek için yeterli değildir. Bu nedenle 6 uzantı sağlayarak bu sınırı %s kurala çıkarıyoruz."
+        "message": "Safari, maksimum içerik engelleme kuralı sayısını uzantı başına %s kural ile sınırlandırır. Bu, her türlü reklam ve izleyici AdGuard bloklarını işlemek için yeterli değildir. Bu nedenle 6 uzantı sağlayarak bu sınırı %s kurala çıkarıyoruz."
     },
     "onboarding_safari_btn": {
         "message": "Tercihleri aç"

@@ -1,15 +1,15 @@
 {
     "main_menu_about": {
-        "message": "Пра AdGuard для Safari"
+        "message": "Аб AdGuard для Safari"
     },
     "options_popup_trusted_filter_title": {
-        "message": "Давераны"
+        "message": "Давераныя"
     },
     "options_popup_trusted_filter_description": {
         "message": "Давераныя фільтры могуць выкарыстоўваць магутныя мадыфікатары правілаў фільтрацыі, якія, у сваю чаргу, могуць уяўляць небяспеку, знаходзячыся ў ненадзейных руках. Не ўсталёўвайце гэты флажок, калі цалкам не давяраеце фільтру."
     },
     "options_filters_filter_trusted_tag": {
-        "message": "давераны"
+        "message": "давераныя"
     },
     "options_filters_filter_trusted_tag_desc": {
         "message": "Вы вырашылі давяраць гэтаму фільтру"
@@ -18,7 +18,7 @@
         "message": "Падтрымка"
     },
     "options_support_faq_title": {
-        "message": "FAQ"
+        "message": "Частыя пытанні"
     },
     "options_support_faq_description": {
         "message": "Часта задаваныя пытанні"
@@ -27,7 +27,7 @@
         "message": "Адправіць запыт функцыі"
     },
     "options_support_feature_request_description": {
-        "message": "Прапануйце спосабы паляпшэння прыкладання"
+        "message": "Прапануйце спосабы паляпшэння праграмы"
     },
     "options_support_bug_report_title": {
         "message": "Паведаміць пра памылку"
@@ -54,7 +54,7 @@
         "message": "Раскажыце, што вы думаеце пра AdGuard"
     },
     "options_support_discuss_title": {
-        "message": "Форум"
+        "message": "Абмеркаваць"
     },
     "options_support_discuss_description": {
         "message": "Абмеркаваць на форуме, у сацыяльных сетках ці на GitHub"
@@ -67,6 +67,18 @@
     },
     "options_about_updating": {
         "message": "Абнаўленне AdGuard для Safari"
+    },
+    "options_about_update_not_allowed_title": {
+        "message": "Патрабуецца абнаўленне MacOS"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "AdGuard для Safari патрабуе macOS Monterey (версія 12) або пазней, каб усталяваць абнаўленні. Вы можаце працягваць выкарыстоўваць праграму без абнаўлення, але блакіроўка рэкламы можа стаць менш эфектыўнай"
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "Больш не паказваць"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "Зразумела"
     },
     "options_about_updates_not_found": {
         "message": "AdGuard для Safari абноўлены"
@@ -96,7 +108,7 @@
         "message": "Экспартаваць логі і інфармацыю пра сістэму..."
     },
     "name": {
-        "message": "AdGuard Антыбанар"
+        "message": "AdGuard AdBlocker"
     },
     "description": {
         "message": "Непераўзыдзеная абарона ад рэкламы і ўсплывальных вокнаў. Бракіруе рэкламу на Facebook, YouTube і ўсіх іншых сайтах."
@@ -120,33 +132,33 @@
         "message": "Дазволіць пошукавую рэкламу і ўласныя прома-акцыі сайтаў"
     },
     "options_export_settings": {
-        "message": "Экспарт налад"
+        "message": "Экспартаваць налады"
     },
     "options_import_settings": {
-        "message": "Імпарт налад"
+        "message": "Імпартаваць налады"
     },
     "options_export_logs": {
-        "message": "Экспартаваць логі"
+        "message": "Экспартаваць журналы"
     },
     "options_antibanner": {
         "message": "Фільтры"
     },
     "options_antibanner_info_filters": {
         "message": {
-            "one": "%s фiльтр",
-            "other": "%s фільтраў"
+            "one": "%s фільтр",
+            "other": "%s фільтры(-аў)"
         }
     },
     "options_antibanner_info_rules": {
         "message": {
             "one": "%s правіла",
-            "other": "%s правілаў"
+            "other": "%s правіл(-ы)"
         }
     },
     "options_antibanner_info_adv_rules": {
         "message": {
-            "one": "%s удасканаленае правіла",
-            "other": "%s удасканаленых правілаў"
+            "one": "%s пашыранае правіла",
+            "other": "%s пашыраныя(-х) правіл(-ы)"
         }
     },
     "options_filters_check_for_updates": {
@@ -162,10 +174,10 @@
         "message": "%s і яшчэ %s"
     },
     "options_filters_enabled_and_divider": {
-        "message": "%s i %s"
+        "message": "%s і %s"
     },
     "options_filters_no_enabled": {
-        "message": "Фільтры не ўключаны"
+        "message": "Няма ўключаных фільтраў"
     },
     "options_filters_no_filters": {
         "message": "Без фільтраў"
@@ -180,19 +192,19 @@
         "message": "Прабачыце, але ў вас пакуль няма карыстацкіх фільтраў"
     },
     "options_filters_empty_custom_add_button": {
-        "message": "Дадаць свой фільтр"
+        "message": "Дадаць карыстальніцкі фільтр"
     },
     "options_filters_custom_import_file": {
         "message": "Імпартаваць файл"
     },
     "options_popup_import_file_error_title": {
-        "message": "Памылка імпарту"
+        "message": "Памылка імпартавання"
     },
     "options_filters_custom_step_one_title": {
         "message": "Новая падпіска на фільтр"
     },
     "options_filters_custom_step_one_input_placeholder": {
-        "message": "Увядзіце URL фільтра"
+        "message": "Увядзіце URL-адрас фільтра"
     },
     "options_filters_custom_step_one_url_desc": {
         "message": "Увядзіце сапраўдны URL-адрас падпіскі."
@@ -219,7 +231,7 @@
         "message": "На жаль, ваш карыстацкі фільтр не можа быць дададзены з-за неспадзяванай памылкі."
     },
     "options_filters_custom_step_three_try_again": {
-        "message": "Паўтарыць спробу"
+        "message": "Паспрабаваць яшчэ раз"
     },
     "options_filters_custom_step_final_title": {
         "message": "Новая падпіска на фільтр"
@@ -234,13 +246,13 @@
         "message": "Версія:"
     },
     "options_filters_custom_step_final_filter_rules_count": {
-        "message": "Колькасць правілаў:"
+        "message": "Колькасць правіл:"
     },
     "options_filters_custom_step_final_filter_homepage": {
         "message": "Хатняя старонка:"
     },
     "options_filters_custom_step_final_filter_url": {
-        "message": "URL:"
+        "message": "URL-адрас:"
     },
     "options_filters_custom_step_final_back": {
         "message": "Назад"
@@ -249,49 +261,49 @@
         "message": "Скасаваць"
     },
     "options_filters_custom_step_final_commit": {
-        "message": "Падпісаццца"
+        "message": "Падпісацца"
     },
     "options_filters_check_filters_update": {
         "message": "Праверыць абнаўленні фільтраў"
     },
     "options_allowlist": {
-        "message": "Белы спіс"
+        "message": "Спіс дазволеных"
     },
     "options_allowlist_description": {
         "message": "AdGuard не фільтруе ўэб-сайты з белага спіса."
     },
     "options_allowlist_inverted": {
-        "message": " (Інвертаваны)"
+        "message": " (Інвертавана)"
     },
     "options_allowlist_info_multi": {
         "message": "Дамены: %s"
     },
     "options_allowlist_no_domains": {
-        "message": "Белы спіс пусты"
+        "message": "Спіс дазволеных пусты"
     },
     "options_allowlist_inverse": {
         "message": "Інвертаваць белы спіс<span class='sp-table-row-info'>Адблакаваць рэкламу на ўсіх сайтах, <i>апроч</i> дададзеных у белы спіс</span>"
     },
     "options_userfilter": {
-        "message": "Карыстальніцкія правілы"
+        "message": "Правілы карыстальніка"
     },
     "options_userfilter_no_user_rules": {
         "message": "Няма правіл карыстальніка"
     },
     "options_userfilter_info_single": {
-        "message": "%s карыстальніцкія правілы"
+        "message": "%s правіла карыстальніка"
     },
     "options_userfilter_info_multi": {
-        "message": "%s карыстальніцкія правілы"
+        "message": "%s правіл(-ы) карыстальніка"
     },
     "options_userfilter_description": {
         "message": "Вы можаце дадаваць свае ўласныя правілы фільтрацыі. Рэкамендуецца толькі для дасведчаных карыстальнікаў, знаёмых з HTML/CSS. Прачытайце <a class='spl-user-descr-link' href='https://link.adtidy.org/forward.html?action=filterrules&from=options_screen&app=safari_extension' target='_blank'>дапаможнік па правілах фільтрацыі</a>, каб навучыцца пісаць уласныя правілы фільтрацыі."
     },
     "options_userfilter_import": {
-        "message": "Імпарт"
+        "message": "Імпартаваць"
     },
     "options_userfilter_export": {
-        "message": "Экспарт"
+        "message": "Экспартаваць"
     },
     "options_userfilter_import_rules_error": {
         "message": "Памылка імпарту правілаў фільтрацыі"
@@ -315,18 +327,18 @@
         "message": "Усе фільтры абноўлены"
     },
     "options_popup_update_not_found": {
-        "message": "Абнаўленняў не знойдзена"
+        "message": "Абнаўленні не знойдзены"
     },
     "options_popup_update_error": {
         "message": "Не атрымалася выканаць абнаўленні. Калі ласка, паўтарыце спробу пазней."
     },
     "options_popup_update_updated": {
-        "message": "\"$1\" абноўлены да версіі $2"
+        "message": "«$1» абноўлены да версіі $2"
     },
     "options_popup_update_updated_more": {
         "message": {
             "one": "%s фільтр абноўлены: $2",
-            "other": "%s фільтраў абноўлена: $$2"
+            "other": "%s фільтры(-аў) абноўлена: $2"
         }
     },
     "options_popup_version_update_title": {
@@ -339,7 +351,7 @@
         "message": "Гэта маштабнае абнаўленне пашырэння, якое дадае мноства новых функцый і паляпшэнняў."
     },
     "notification_content_blocker_overlimit_title": {
-        "message": "Увага"
+        "message": "Папярэджанне"
     },
     "notification_content_blocker_overlimit_desc": {
         "message": "Актывавана зашмат фільтраў. Safari не можа выкарыстоўваць больш 50,000 правілаў у адной групе."
@@ -354,7 +366,7 @@
         "message": "Рэдагаванне..."
     },
     "options_editor_indicator_saving": {
-        "message": "Захоўванне..."
+        "message": "Захаванне..."
     },
     "options_editor_indicator_saved": {
         "message": "Захавана"
@@ -366,7 +378,7 @@
         "message": "Рэдагаваць"
     },
     "main_menu_undo": {
-        "message": "Скасаваць"
+        "message": "Адрабіць"
     },
     "main_menu_cut": {
         "message": "Выразаць"
@@ -378,13 +390,13 @@
         "message": "Уставіць"
     },
     "main_menu_select-all": {
-        "message": "Абраць усё"
+        "message": "Выбраць усе"
     },
     "tray_menu_about": {
-        "message": "Пра нас"
+        "message": "Аб праграме"
     },
     "tray_menu_preferences": {
-        "message": "Налады"
+        "message": "Параметры"
     },
     "tray_menu_check_updates": {
         "message": "Праверыць абнаўленні фільтраў"
@@ -396,28 +408,28 @@
         "message": "Выйсці"
     },
     "tray_menu_protection_start": {
-        "message": "Блакаванне ў Safari улучана"
+        "message": "Блакіроўка рэкламы ў Safari уключана"
     },
     "tray_menu_protection_stop": {
-        "message": "Блакаванне ў Safari адключана"
+        "message": "Блакіроўка рэкламы ў Safari выключана"
     },
     "options_last_update": {
         "message": "Апошняе абнаўленне:"
     },
     "options_about": {
-        "message": "Пра нас"
+        "message": "Аб праграме"
     },
     "options_content_blockers": {
-        "message": "Блакавальнікі кантэнту"
+        "message": "Блакіроўшчыкі змесціва"
     },
     "options_content_blockers_desc": {
         "message": "Уключана блакавальнікаў: %s з 6 (кожны можа ўтрымваць да 50 000 правілаў)"
     },
     "options_content_blockers_disabled_desc": {
-        "message": "Няма ўлучаных блакавальнікаў"
+        "message": "Блакіроўшчыкі рэкламы адключаны"
     },
     "options_compare_btn": {
-        "message": "Чым яны адрозніваюцца"
+        "message": "Чым яны адрозніваюцца?"
     },
     "options_compare_title": {
         "message": "Усталюйце AdGuard Прэміум для лепшай абароны!"
@@ -435,7 +447,7 @@
         "message": "Github"
     },
     "onboarding_safari_title": {
-        "message": "Патрэбен ваш дазвол"
+        "message": "Патрэбны ваш дазвол"
     },
     "onboarding_safari_desc": {
         "message": "Пастаўце галачкі насупраць пашырэнняў AdGuard у наладах Safari."
@@ -444,40 +456,40 @@
         "message": "Што робяць гэтыя пашырэнні?"
     },
     "onboarding_tooltip_adguard_safari_icon": {
-        "message": "Іконка AdGuard Safari"
+        "message": "Значок AdGuard Safari"
     },
     "onboarding_tooltip_adguard_safari_icon_info": {
         "message": "Вы можаце выкарыстоўваць гэты значок для кіравання наладамі AdGuard для Safari. Напрыклад, прыпыніць блакаванне на сайце ці заблакаваць рэкламу ручна."
     },
     "onboarding_tooltip_adguard_safari_icon_web_page_content": {
-        "message": "Каб «інструмент ручной блакіроўкі» працаваў, неабходны доступ да змесціва вэб-старонкі."
+        "message": "Неабходны доступ да змесціва вэб-старонкі, каб «інструмент ручной блакіроўкі» працаваў адпаведным чынам."
     },
     "onboarding_tooltip_adguard_safari_icon_browsing_history": {
         "message": "Патрабуецца доступ да гісторыі прагляду, каб вызначыць, ці працуе AdGuard на вэб-сайце, які вы зараз наведваеце."
     },
     "onboarding_tooltip_adguard_advanced_blocking": {
-        "message": "AdGuard Пашыранае блакаванне"
+        "message": "Пашыранае блакіраванне AdGuard"
     },
     "onboarding_tooltip_adguard_advanced_blocking_info": {
         "message": "Гэта пашырэнне ўжывае дадатковыя правілы блакавання, якія не падтрымваюцца Safari Content Blocking API."
     },
     "onboarding_tooltip_adguard_advanced_blocking_web_page_content": {
-        "message": "Доступ да змесціва вэб-старонкі неабходны для працы пашыраных касметычных правілаў."
+        "message": "Доступ да змесціва вэб-старонкі неабходны для працы пашыраных касметычных правіл."
     },
     "onboarding_tooltip_adguard_advanced_blocking_browsing_history": {
         "message": "Патрабуецца доступ да гісторыі прагляду, каб вызначыць, які вэб-сайт вы спрабуеце адкрыць, каб вызначыць, якія пашыраныя правілы блакіроўкі трэба прымяніць."
     },
     "onboarding_tooltip_adguard_safari_content_blockers": {
-        "message": "6 пашырэнняў для блакіроўкі кантэнту"
+        "message": "6 пашырэнняў для блакіроўкі змесціва"
     },
     "onboarding_tooltip_adguard_safari_content_blockers_info": {
-        "message": "Safari абмяжоўвае максімальную колькасць правілаў блакіроўкі змесціва %s на пашырэнне. Гэтага недастаткова для апрацоўкі разнастайных блокаў рэкламы і трэкераў AdGuard. Вось чаму мы прапануем 6 пашырэнняў, такім чынам павялічваючы гэты ліміт да %s."
+        "message": "Safari абмяжоўвае максімальную колькасць правіл блакіроўкі змесціва да %s на пашырэнне. Гэтага недастаткова для апрацоўкі разнастайных блокаў рэкламы і праграм сачэння AdGuard. Вось чаму мы прапануем 6 пашырэнняў і такім чынам павялічваючы гэта абмежаванне да %s."
     },
     "onboarding_safari_btn": {
-        "message": "Адкрыць налады"
+        "message": "Адкрыць параметры"
     },
     "onboarding_ignore_safari_btn": {
-        "message": "Прапусціць"
+        "message": "Ігнараваць"
     },
     "options_learn_more": {
         "message": "Дадатковая інфармацыя"
@@ -486,10 +498,10 @@
         "message": "Версія %s"
     },
     "notification_user_filter_updated_title": {
-        "message": "Карыстальніцкія правілы абноўлены"
+        "message": "Правілы карыстальніка абноўлены"
     },
     "notification_user_filter_updated_desc": {
-        "message": "Новае правіла было дададзена ў карыстальніцкія правілы:"
+        "message": "Новае правіла было дададзена ў правілы карыстальніка:"
     },
     "options_filters_update_period": {
         "message": "Інтэрвал абнаўлення"
@@ -513,7 +525,7 @@
         "message": "Запускаць AdGuard для Safari пры ўваходзе ў сістэму"
     },
     "options_verbose_logging": {
-        "message": "Дэталёвае лагаванне"
+        "message": "Падрабязнае вядзенне журнала"
     },
     "options_verbose_logging_desc": {
         "message": "Калі актывавана дэталёвае лагаванне, пашырэнні AdGuard для Safari будуць уводзіць дадатковую інфармацыю ў кансоль браўзара"
@@ -525,7 +537,7 @@
         "message": "Уключыць апаратнае паскарэнне для акна налад. Патрабуецца перазапуск"
     },
     "settings_import": {
-        "message": "Імпарт налад"
+        "message": "Імпартаванне налад"
     },
     "settings_import_success": {
         "message": "Налады паспяхова імпартаваны"
@@ -558,27 +570,27 @@
         "message": "Звярніце ўвагу, што састарэлыя фільтры зніжаюць якасць абароны, таму важна падтрымліваць іх у актуальным стане."
     },
     "options_cb_general_title": {
-        "message": "AdGuard Асноўныя"
+        "message": "AdGuard: асноўныя"
     },
     "options_cb_privacy_title": {
-        "message": "AdGuard Прыватнасць"
+        "message": "AdGuard: прыватнасць"
     },
     "options_cb_social_title": {
-        "message": "AdGuard Віджэты сацсецiва"
+        "message": "AdGuard: сацыяльныя сеткі"
     },
     "options_cb_security_title": {
         "message": "AdGuard Бяспека"
     },
     "options_cb_other_title": {
-        "message": "AdGuard Іншыя"
+        "message": "AdGuard; Іншыя"
     },
     "options_cb_custom_title": {
-        "message": "AdGuard Карыстацкія"
+        "message": "AdGuard: карыстальніцкія"
     },
     "options_cb_rules_info": {
         "message": {
             "one": "%s правіла выкарыстоўваецца",
-            "other": "%s правіл выкарыстоўваецца"
+            "other": "%s правіл(-ы) выкарыстоўваюцца(-ецца)"
         }
     },
     "options_cb_rules_overlimit_info": {
@@ -588,16 +600,16 @@
         "message": "Адключана ў Safari"
     },
     "options_cb_compilation_warning": {
-        "message": "Кампіляцыя не атрымалася"
+        "message": "Збой кампіляцыі"
     },
     "filters_group_custom": {
-        "message": "Карыстацкія"
+        "message": "Карыстальніцкія"
     },
     "userfilter_name": {
-        "message": "Карыстальніцкія правілы"
+        "message": "Правілы карыстальніка"
     },
     "allowlist_name": {
-        "message": "Белы спіс"
+        "message": "Спіс дазволеных"
     },
     "window_close_dialog_message": {
         "message": "Працягнуць працу AdGuard у фонавым рэжыме?"
@@ -609,7 +621,7 @@
         "message": "Запомніць мой выбар"
     },
     "window_close_dialog_yes": {
-        "message": "Так (рэкамендуецца)"
+        "message": "Так (рэкамендавана)"
     },
     "window_close_dialog_no": {
         "message": "Не"
@@ -624,7 +636,7 @@
         "message": "Вы хочаце перасунуць яго ў каталог \"Дадаткi\"?"
     },
     "folder_check_dialog_move": {
-        "message": "Перасунуць"
+        "message": "Перамясціць"
     },
     "folder_check_dialog_quit": {
         "message": "Выйсці"

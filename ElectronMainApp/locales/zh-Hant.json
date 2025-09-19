@@ -1,6 +1,6 @@
 {
     "main_menu_about": {
-        "message": "關於 AdGuard for Safari"
+        "message": "關於 AdGuard Safari 版"
     },
     "options_popup_trusted_filter_title": {
         "message": "受信任的"
@@ -9,7 +9,7 @@
         "message": "受信任的過濾器可使用在錯誤的手中可能是危險的之強大的過濾規則修飾語。除非您完全地信任它，否則勿勾選此核取框。"
     },
     "options_filters_filter_trusted_tag": {
-        "message": "受信任的"
+        "message": "信任"
     },
     "options_filters_filter_trusted_tag_desc": {
         "message": "您已選擇信任此過濾器"
@@ -33,7 +33,7 @@
         "message": "報告程式錯誤"
     },
     "options_support_bug_report_description": {
-        "message": "如果某事物未在程式中正確地運作"
+        "message": "若程式功能運作異常"
     },
     "options_support_incorrect_blocking_title": {
         "message": "報告不正確的封鎖"
@@ -67,6 +67,18 @@
     },
     "options_about_updating": {
         "message": "正在更新 AdGuard for Safari"
+    },
+    "options_about_update_not_allowed_title": {
+        "message": "請更新 MacOS"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "AdGuard Safari 版需要 macOS Monterey (12.0) 或更高版本才能安裝更新。您仍可繼續使用當前版本，但廣告封鎖效果可能會減弱。"
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "不再顯示"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "知道了"
     },
     "options_about_updates_not_found": {
         "message": "AdGuard for Safari 為最新的"
@@ -534,7 +546,7 @@
         "message": "在設定匯入期間，錯誤已發生"
     },
     "settings_notification_protection_title": {
-        "message": "防護被暫停"
+        "message": "防護已暫停"
     },
     "settings_notification_protection_button_text": {
         "message": "恢復"

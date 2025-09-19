@@ -68,6 +68,18 @@
     "options_about_updating": {
         "message": "Mise à jour d'AdGuard pour Safari"
     },
+    "options_about_update_not_allowed_title": {
+        "message": "Mise à jour MacOS nécessaire"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "AdGuard pour Safari nécessite macOS Monterey (version 12) ou ultérieure pour installer les mises à jour. Vous pouvez continuer à utiliser l'application sans mise à jour, mais le blocage des publicités pourrait perdre en efficacité."
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "Ne plus afficher"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "OK"
+    },
     "options_about_updates_not_found": {
         "message": "AdGuard pour Safari est à jour"
     },
@@ -267,7 +279,7 @@
         "message": "Domaines : %s"
     },
     "options_allowlist_no_domains": {
-        "message": "La Liste blanche est vide"
+        "message": "La liste blanche est vide"
     },
     "options_allowlist_inverse": {
         "message": "Inverser la Liste blanche<span class='sp-table-row-info'>Débloquer la publicité partout <i>excepté</i> la Liste blanche</span>"
@@ -447,7 +459,7 @@
         "message": "Icône AdGuard Safari"
     },
     "onboarding_tooltip_adguard_safari_icon_info": {
-        "message": ""
+        "message": "Vous pouvez utiliser cette icône pour gérer les paramètres d’AdGuard pour Safari. Par exemple, suspendre le blocage sur un site Web ou bloquer une publicité manuellement."
     },
     "onboarding_tooltip_adguard_safari_icon_web_page_content": {
         "message": "L' accès au contenu de la page Web est nécessaire pour faire fonctionner « l’outil de blocage manuel »."

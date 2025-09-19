@@ -68,6 +68,18 @@
     "options_about_updating": {
         "message": "بروز رسانی AdGuard for Safari"
     },
+    "options_about_update_not_allowed_title": {
+        "message": "به روز رسانی MacOS مورد نیاز است"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "AdGuard برای سافاری برای نصب به روزرسانی ها به macOS Monterey (نسخه 12) یا بالاتر نیاز دارد. می توانید بدون به روز رسانی به استفاده از برنامه ادامه دهید، اما مسدود کردن تبلیغات ممکن است کمتر موثر باشد"
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "دوباره نمایش داده نشود"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "متوجه شدم"
+    },
     "options_about_updates_not_found": {
         "message": "AdGuard for Safari بروز است"
     },
@@ -477,7 +489,7 @@
         "message": "بازکردن اولویت ها"
     },
     "onboarding_ignore_safari_btn": {
-        "message": "رَد کن"
+        "message": "نادیده گرفتن"
     },
     "options_learn_more": {
         "message": "بیشتر در مورد آن بدانید"

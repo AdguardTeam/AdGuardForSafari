@@ -68,6 +68,18 @@
     "options_about_updating": {
         "message": "Đang cập nhật AdGuard Safari"
     },
+    "options_about_update_not_allowed_title": {
+        "message": "Cần cập nhật MacOS"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "AdGuard cho Safari cần macOS Monterey (phiên bản 12) trở lên để cài đặt bản cập nhật. Bạn có thể tiếp tục sử dụng ứng dụng mà không cần cập nhật, nhưng tính năng chặn quảng cáo có thể kém hiệu quả hơn"
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "Không hiển thị lại"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "Đã nhận được"
+    },
     "options_about_updates_not_found": {
         "message": "AdGuard Safari đã được cập nhật"
     },

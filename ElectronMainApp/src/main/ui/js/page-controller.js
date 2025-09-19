@@ -371,6 +371,12 @@ PageController.prototype = {
         this.aboutUpdatesBlock.innerText = i18n.__('options_about_updates_not_found.message');
     },
 
+    onAppUpdateNotAllowed() {
+        this.aboutUpdatesBlock.innerText = i18n.__('options_about_update_not_allowed_details.message');
+        this.aboutUpdatesBlock.classList.remove('about-updates--rotate');
+        this.aboutUpdatesBlock.classList.add('about-updates--hidden');
+    },
+
     onAppUpdateDownloaded() {
         this.aboutUpdatesBlock.classList.remove('about-updates--rotate');
         this.aboutUpdatesBlock.classList.add('about-updates--hidden');

@@ -68,6 +68,18 @@
     "options_about_updating": {
         "message": "AdGuard voor Safari bijwerken"
     },
+    "options_about_update_not_allowed_title": {
+        "message": "Bijwerken macOS vereist"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "AdGuard voor Safari heeft macOS Monterey (versie 12) of nieuwer nodig om bij te werken. Je kunt de app blijven gebruiken zonder bij te werken, maar advertentieblokkering kan minder effectief worden"
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "Niet opnieuw weergeven"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "Begrepen"
+    },
     "options_about_updates_not_found": {
         "message": "AdGuard voor Safari is actueel"
     },
@@ -96,7 +108,7 @@
         "message": "Logbestanden en systeeminfo exporteren..."
     },
     "name": {
-        "message": "AdGuard-advertentieblokkeerder"
+        "message": "AdGuard Advertentieblokker"
     },
     "description": {
         "message": "Ongeëvenaarde adblock invoegtoepassing tegen advertenties en pop-ups. Blokkeert ads op Facebook, YouTube en alle andere websites."

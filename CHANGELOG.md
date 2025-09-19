@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- version of the app is in ElectronMainApp/package.json -->
 
+<!-- TODO: add date after release -->
+## 1.11.24
+
+### Added
+
+- Warning about not supported update for macOS versions lower that 12.
+
 ## [1.11.22] - 2025-05-05
 
 ### Fixed

@@ -68,6 +68,18 @@
     "options_about_updating": {
         "message": "更新 AdGuard for Safari"
     },
+    "options_about_update_not_allowed_title": {
+        "message": "请更新 MacOS"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "AdGuard Safari 版需要 macOS Monterey (12.0) 或更高版本才能安装更新。您仍可继续使用当前版本，但广告拦截效果可能会减弱。"
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "不再显示"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "知道了"
+    },
     "options_about_updates_not_found": {
         "message": "AdGuard for Safari 已为最新版本"
     },

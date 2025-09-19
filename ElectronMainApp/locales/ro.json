@@ -68,6 +68,18 @@
     "options_about_updating": {
         "message": "Se actualizează AdGuard pentru Safari"
     },
+    "options_about_update_not_allowed_title": {
+        "message": "Este necesară actualizarea MacOS"
+    },
+    "options_about_update_not_allowed_details": {
+        "message": "AdGuard pentru Safari necesită macOS Monterey (versiunea 12) sau o versiune ulterioară pentru a instala actualizări. Poți continua să folosești aplicația fără actualizare, dar blocarea reclamelor poate deveni mai puțin eficientă"
+    },
+    "options_about_update_not_allowed_checkbox": {
+        "message": "Nu mai arăta"
+    },
+    "options_about_update_not_allowed_btn_ok": {
+        "message": "Am înțeles."
+    },
     "options_about_updates_not_found": {
         "message": "AdGuard pentru Safari este la zi"
     },
