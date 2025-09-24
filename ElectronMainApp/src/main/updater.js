@@ -25,6 +25,13 @@ module.exports = (() => {
             return;
         }
 
+        const macOsVersion = safariExt.getOSVersion();
+
+        if (!isUpdateAllowedForMacOs(macOsVersion)) {
+            listeners.notifyListeners(events.APPLICATION_UPDATE_NOT_ALLOWED);
+            return;
+        }
+
         updater.init({
             channel: packageJson['standalone-beta'] === 'true' ? 'beta' : 'prod',
             url: config.get('updatesUrl'),
