@@ -24,7 +24,7 @@
     <a href="https://agrd.io/safari_release">
         <img src="https://img.shields.io/github/release/AdguardTeam/AdguardForSafari.svg?label=release" alt="Latest release" />
     </a>
-    <a href="https://agrd.io/safari_beta">
+    <a href="https://agrd.io/adguard_mini_for_mac_beta">
         <img src="https://img.shields.io/endpoint?url=https://shields-io-proxy.agrd.workers.dev/?repo=AdGuardTeam/AdGuardForSafari" alt="Latest beta" />
     </a>
 </p>
