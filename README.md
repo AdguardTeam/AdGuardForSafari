@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adtidy.org/content/release_notes/ad_blocker/mini_for_mac/Logo-AdGuard-Mini.svg" width="300px" alt="AdGuard Mini dark" />
-    <img src="https://cdn.adtidy.org/content/release_notes/ad_blocker/mini_for_mac/Logo-AdGuard-Mini-White.svg" width="300px" alt="AdGuard Mini" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://cdn.adtidy.org/content/release_notes/ad_blocker/mini_for_mac/Logo-AdGuard-Mini-White.svg" width="300px" alt="AdGuard Mini dark" />
+    <img src="https://cdn.adtidy.org/content/release_notes/ad_blocker/mini_for_mac/Logo-AdGuard-Mini.svg" width="300px" alt="AdGuard Mini" />
   </picture>
 </p>
 
