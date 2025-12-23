@@ -19,12 +19,6 @@
     <a href="https://agrd.io/mini_mac">
         <img src="https://img.shields.io/badge/download-app%20store-blue.svg" alt="Download on the App Store" />
     </a>
-    <a href="https://agrd.io/adguard_mini_for_mac">
-        <img src="https://img.shields.io/github/release/AdguardTeam/AdGuardMiniForMac.svg?label=release" alt="Latest release" />
-    </a>
-    <a href="https://agrd.io/adguard_mini_for_mac_beta">
-        <img src="https://img.shields.io/endpoint?url=https://shields-io-proxy.agrd.workers.dev/?repo=AdGuardTeam/AdGuardMiniForMac" alt="Latest beta" />
-    </a>
 </p>
 
 <br />
