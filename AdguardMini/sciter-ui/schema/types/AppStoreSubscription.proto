@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option optimize_for = CODE_SIZE;
+
+// AppStore subscription type
+enum AppStoreSubscription {
+    AppStoreSubscription_monthly = 0;
+    AppStoreSubscription_annual = 1;
+}
+
+// Describes AppStore Subscription
+message AppStoreSubscriptionInfo {
+    AppStoreSubscription subscription_type = 1;
+    string display_price = 2;
+    int32 trial_days = 3;
+    optional string intro_offer_display_price = 4;
+}
+
+// Additional promo info
+message PromoInfo {
+    string title = 1;
+    string subtitle = 2;
+}
+
+// AppStore subscriptions error
+enum AppStoreSubscriptionsError {
+    AppStoreSubscriptionsError_unknown = 0;
+    AppStoreSubscriptionsError_products_banned = 1;
+    AppStoreSubscriptionsError_other_error = 2;
+}
+
+// AppStore available subscriptions
+message AppStoreSubscriptions {
+    bool is_trial_available = 1;
+    AppStoreSubscriptionInfo monthly = 2;
+    AppStoreSubscriptionInfo annual = 3;
+    optional PromoInfo promoInfo = 4;
+}
+
+// Defines AppStore subscriptions message
+message AppStoreSubscriptionsMessage {
+    AppStoreSubscriptionsError error = 1;
+    optional AppStoreSubscriptions result = 2;
+}

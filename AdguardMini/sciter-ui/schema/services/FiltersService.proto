@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+import "PrimitivesWrappers.proto";
+import "Filters.proto";
+import "Helpers.proto";
+
+/* Service handles about app information */
+service FiltersService {
+    /* Get Filters app info */
+    rpc GetFiltersMetadata(EmptyValue) returns (Filters);
+    /* Get ids of enabled filters */
+    rpc GetEnabledFiltersIds(EmptyValue) returns (FiltersEnabledIds);
+    /* Check Custom Filter */
+    rpc CheckCustomFilter(Path) returns (FilterOrError);
+    /* Confirm add Custom filter */
+    rpc ConfirmAddCustomFilter(CustomFilterToAdd) returns (OptionalError);
+    /* Delete custom filters */
+    rpc DeleteCustomFilters(CustomFiltersToDelete) returns (OptionalError);
+    /* Update filters settings */
+    rpc UpdateFilters(FiltersUpdate) returns (OptionalError);
+    /* Get filters index */
+    rpc GetFiltersIndex(EmptyValue) returns (FiltersIndex);
+    /* Update custom filter */
+    rpc UpdateCustomFilter(CustomFilterUpdateRequest) returns (OptionalError);
+    /* Request update on filter library, result will be dispatch by TrayCallbackService.OnFilterStatusResolved */
+    rpc RequestFiltersUpdate(EmptyValue) returns (EmptyValue);
+    /* Request filters divided by safari extension */
+    rpc GetFiltersGroupedByExtensions(EmptyValue) returns (FiltersGroupedByExtensions);
+    /* Update language specific */
+    rpc UpdateLanguageSpecific(BoolValue) returns (EmptyValue);
+}

@@ -1,0 +1,116 @@
+syntax = "proto3";
+
+option optimize_for = CODE_SIZE;
+
+import "PrimitivesWrappers.proto";
+
+// Describes the structure of filters
+message Filters {
+    repeated Filter filters = 1;
+    repeated string preferredLocales = 2;
+    repeated Filter customFilters = 3;
+    bool languageSpecific = 4;
+}
+
+// Structure for filter groups
+message FilterGroup {
+    int32 groupId = 1;
+    string groupName = 2;
+    int32 displayNumber = 3;
+}
+
+message FiltersUpdate {
+    repeated int32 ids = 1;
+    bool isEnabled = 2;
+}
+
+message FiltersEnabledIds {
+    repeated int32 ids = 1;
+}
+
+// Filter entity
+message Filter {
+    int32 id = 1;
+    int32 group_id = 2;
+    bool enabled = 3;
+    int64 time_updated = 4;
+    string title = 5;
+    string description = 6;
+    string version = 7;
+    string homepage = 8;
+    int32 rules_count = 9;
+    repeated string languages = 10;
+    bool trusted = 11;
+}
+
+message FilterOrError {
+    oneof filterOrError {
+        Filter filter = 1;
+        bool error = 2;
+    }
+}
+
+message CustomFilterToAdd {
+    string url = 1;
+    string title = 2;
+    bool trusted = 3;
+}
+
+message CustomFiltersToDelete {
+    repeated int32 filtersIds = 1;
+}
+
+message FiltersDefinedGroups {
+    int32 adBlocking = 1;
+    int32 privacy = 2;
+    int32 socialWidgets = 3;
+    int32 annoyances = 4;
+    int32 security = 5;
+    int32 other = 6;
+    int32 languageSpecific = 7;
+}
+
+message FiltersIds {
+    repeated int32 ids = 1;
+}
+
+message FiltersIndex {
+    int32 unblockSearchAdsFilterId = 1;
+    int32 cookieNoticeFilterId = 2;
+    int32 popUpsFilterId = 3;
+    int32 widgetsFilterId = 4;
+    int32 otherAnnoyanceFilterId = 5;
+    int32 mobileBannersFilter = 6;
+    FiltersDefinedGroups definedGroups = 7;
+    repeated FilterGroup groups = 8;
+    map<int32, FiltersIds> filtersByGroups = 9;
+    map<int32, FiltersIds> recommendedFiltersIdsByGroupDict = 10;
+    map<int32, FiltersIds> otherFiltersIdsByGroupDict = 11;
+    int32 customGroupId = 12;
+}
+
+message FiltersGroupedByExtensions {
+    repeated int32 general = 1;
+    repeated int32 privacy = 2;
+    repeated int32 social = 3;
+    repeated int32 security = 4;
+    repeated int32 other = 5;
+    repeated int32 custom = 6;
+}
+
+message CustomFilterUpdateRequest {
+    int32 filterId = 1;
+    string title = 2;
+    bool is_trusted = 3;
+}
+
+message FiltersStatus {
+    repeated FilterUpdateStatus status = 1;
+    bool error = 2;
+}
+
+message FilterUpdateStatus {
+    int32 id = 1;
+    optional string version = 2;
+    bool success = 3;
+}

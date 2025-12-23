@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>firstStartDate</key>
+	<string>__KEY_ONLY</string>
+	<key>adguardExtra</key>
+	<false/>
+	<key>allowTelemetry</key>
+	<false/>
+	<key>telemetryId</key>
+	<string>__KEY_ONLY</string>
+	<key>showInMenuBar</key>
+	<true/>
+	<key>hardwareAcceleration</key>
+	<true/>
+	<key>autoFiltersUpdate</key>
+	<true/>
+	<key>realTimeFiltersUpdate</key>
+	<false/>
+	<key>userConsent</key>
+	<array/>
+	<key>firstRun</key>
+	<true/>
+	<key>quitOption</key>
+	<integer>0</integer>
+	<key>languageSpecific</key>
+	<true/>
+	<key>lastError</key>
+	<string>&quot;&quot;</string>
+	<key>updateChannel</key>
+	<string>&quot;&quot;</string>
+	<key>lastFiltersUpdateTime</key>
+	<string>__KEY_ONLY</string>
+	<key>generalExtensionState</key>
+	<string>__KEY_ONLY</string>
+	<key>privacyExtensionState</key>
+	<string>__KEY_ONLY</string>
+	<key>securityExtensionState</key>
+	<string>__KEY_ONLY</string>
+	<key>socialWidgetsAndAnnoyancesExtensionState</key>
+	<string>__KEY_ONLY</string>
+	<key>otherExtensionState</key>
+	<string>__KEY_ONLY</string>
+	<key>customExtensionState</key>
+	<string>__KEY_ONLY</string>
+	<key>advancedExtensionState</key>
+	<string>__KEY_ONLY</string>
+	<key>feedbackEmail</key>
+	<string>__KEY_ONLY</string>
+	<key>rateUsProtectionEnabledDate</key>
+	<string>__KEY_ONLY</string>
+	<key>rateUsNoCrashesDate</key>
+	<string>__KEY_ONLY</string>
+	<key>wasMigratedFromLegacyApp</key>
+	<string>__KEY_ONLY</string>
+	<key>didAttemptLegacyMigration</key>
+	<string>__KEY_ONLY</string>
+</dict>
+</plist>

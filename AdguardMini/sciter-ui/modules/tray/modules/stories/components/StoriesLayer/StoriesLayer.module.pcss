@@ -1,0 +1,51 @@
+/* 
+    SPDX-FileCopyrightText: AdGuard Software Limited
+    SPDX-License-Identifier: GPL-3.0-or-later
+*/
+
+.StoriesLayer {
+    position: absolute;
+    z-index: var(--zi-stories);
+    width: 360px;
+    height: 582px;
+    box-sizing: content-box;
+
+    &_contents {
+        width: 360px;
+        height: 582px;
+        box-shadow: var(--bs-big);
+        box-sizing: content-box;
+        padding: 0;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    &__aqua {
+        background: linear-gradient(11deg, #0F2737 0%, #3A869B 100%);
+    }
+
+    &__purple {
+        background: linear-gradient(11deg, #1F1C2C 0%, #928DAB 100%);
+    }
+
+    &__green {
+        background: linear-gradient(11deg, #093637 0%, #44A08D 100%);
+    }
+
+    &__blue {
+        background: linear-gradient(11deg, #1B2937 0%, #2980B9 100%);
+    }
+    
+
+    &__sand {
+        background: linear-gradient(11deg, #334D50 0%, #CBCAA5 100%);
+    }
+    
+    &__sandBlue {
+        background: linear-gradient(11deg, #064477 0%, #A6C589 100%);
+    }
+
+    &__emerald {
+        background: linear-gradient(11deg, #093637 0%, #44A08D 100%);
+    }
+}

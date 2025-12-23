@@ -1,0 +1,73 @@
+// SPDX-FileCopyrightText: AdGuard Software Limited
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+//
+//  AppStoreSubscriptions+Utils.swift
+//  SciterSchema
+//
+
+import Foundation
+import BaseSciterSchema
+
+// MARK: - PromoInfo init
+
+extension PromoInfo {
+    public init(
+        title: String,
+        subtitle: String,
+    ) {
+        self.init()
+        self.title = title
+        self.subtitle = subtitle
+    }
+}
+
+// MARK: - AppStoreSubscriptions init
+
+extension AppStoreSubscriptionInfo {
+    public init(
+        subscriptionType: AppStoreSubscription = .monthly,
+        displayPrice: String = "",
+        trialDays: Int32 = 0,
+        introOfferDisplayPrice: String? = nil
+    ) {
+        self.init()
+        self.subscriptionType = subscriptionType
+        self.displayPrice = displayPrice
+        self.trialDays = trialDays
+        if let introOfferDisplayPrice {
+            self.introOfferDisplayPrice = introOfferDisplayPrice
+        }
+    }
+}
+
+// MARK: - AppStoreSubscriptions init
+
+extension AppStoreSubscriptions {
+    public init(
+        isTrialAvailable: Bool = true,
+        monthly: AppStoreSubscriptionInfo,
+        annual: AppStoreSubscriptionInfo,
+        promoInfo: PromoInfo? = nil
+    ) {
+        self.init()
+        self.isTrialAvailable = isTrialAvailable
+        self.monthly = monthly
+        self.annual = annual
+        if let promoInfo {
+            self.promoInfo = promoInfo
+        }
+    }
+}
+
+extension AppStoreSubscriptionsMessage {
+    public init(
+        result: AppStoreSubscriptions = AppStoreSubscriptions(),
+        error: AppStoreSubscriptionsError = .unknown
+    ) {
+        self.init()
+        self.result = result
+        self.error = error
+    }
+}

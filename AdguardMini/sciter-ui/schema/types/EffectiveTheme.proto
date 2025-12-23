@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option optimize_for = CODE_SIZE;
+
+enum EffectiveTheme {
+    EffectiveTheme_light = 0;
+    EffectiveTheme_dark = 1;
+}
+
+message EffectiveThemeValue {
+    EffectiveTheme value = 1;
+}

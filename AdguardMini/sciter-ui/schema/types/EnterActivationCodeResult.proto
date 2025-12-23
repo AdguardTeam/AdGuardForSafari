@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option optimize_for = CODE_SIZE;
+
+import "Helpers.proto";
+
+// EnterActivationCodeResult type
+enum EnterActivationCodeResult {
+    EnterActivationCodeResult_notExists = 0;
+    EnterActivationCodeResult_expired = 1;
+    EnterActivationCodeResult_maxComputersExceed = 2;
+    EnterActivationCodeResult_blocked = 3;
+    EnterActivationCodeResult_valid = 4;
+}
+
+message EnterActivationCodeResultMessage {
+    EnterActivationCodeResult result = 1;
+    OptionalError error = 2;
+}

@@ -1,0 +1,102 @@
+/* 
+    SPDX-FileCopyrightText: AdGuard Software Limited
+    SPDX-License-Identifier: GPL-3.0-or-later
+*/
+
+.greenIcon {
+    color: var(--fills-buttons-main-button-default);
+
+    &:hover {
+        color: var(--fills-buttons-main-button-hovered);
+    }
+}
+
+.grayIcon {
+    color: var(--stroke-icons-gray-icons-default);
+
+    &:hover {
+        color: var(--stroke-icons-gray-icons-default);
+    }
+}
+
+.whiteIcon {
+    color: #FFFFFF;
+
+    &:hover {
+        color: #FFFFFF;
+    }
+}
+
+.redIcon {
+    color: var(--stroke-icons-error-icon-default);
+
+    &:hover {
+        color: var(--stroke-icons-error-icon-hovered);
+    }
+}
+
+.redText {
+    color: var(--stroke-icons-error-icon-default) !important;
+
+    &:hover {
+        color: var(--stroke-icons-error-icon-hovered) !important;
+    }
+}
+
+.redSubmit {
+    background: none;
+    background-color: var(--fills-buttons-danger-button-default);
+
+    &:hover {
+        background-color: var(--fills-buttons-danger-button-hovered);
+    }
+}
+
+.greenSubmit {
+    background: none;
+    background-color: var(--fills-buttons-main-button-default);
+
+    &:hover {
+        background-color: var(--fills-buttons-main-button-hovered);
+    }
+}
+
+.permanentThemedSubmit {
+    background: none;
+    background-color: var(--fills-backgrounds-page-background-default);
+    color: var(--text-main-text-main-default) !important;
+
+    &:hover {
+        background-color: var(--fills-backgrounds-page-background-default);
+        color: var(--text-main-text-main-default) !important;
+    }
+}
+
+/*
+    Buttons in stories should be white permanent
+*/
+.storyButton {
+    background: none;
+    background-color: #FFFFFF;
+    color: #3D3D3D !important;
+
+    &:hover {
+        background-color: #FFFFFF;
+        color: #3D3D3D !important;
+    }
+}
+
+.payButton {
+    color: var(--stroke-icons-attention-icon-default);
+    display: inline;
+    text-decoration: underline;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+/* Extra spaces for a text button */
+.textButton {
+    padding: var(--m-xxs) var(--m-s) !important;
+}

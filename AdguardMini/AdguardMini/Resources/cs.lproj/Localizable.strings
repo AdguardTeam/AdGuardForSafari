@@ -1,0 +1,74 @@
+/* Common - App displayed name. */
+"app_displayed_name" = "AdGuard Mini";
+
+/* App Menu - "About" title. */
+"app_menu_about_title" = "Informace o AdGuard Mini";
+
+/* App Menu - "Preferences..." title. */
+"app_menu_preferences_title" = "Předvolby...";
+
+/* App Menu - "Hide AdGuard Mini" title. */
+"app_menu_hide_title" = "Skrýt AdGuard Mini";
+
+/* App Menu - "Hide Others" title. */
+"app_menu_hide_others_title" = "Skrýt ostatní";
+
+/* App Menu - "Show All" title. */
+"app_menu_show_all_title" = "Zobrazit vše";
+
+/* App Menu - "Close" title. */
+"app_menu_close_title" = "Zavřít";
+
+/* App Menu - "Quit AdGuard Mini" title. */
+"app_menu_quit_title" = "Ukončit AdGuard Mini";
+
+/* Terminating app Alert - Message text "Quit AdGuard Mini?" */
+"terminate_app_alert_message_text" = "Ukončit AdGuard Mini?";
+
+/* Terminating app Alert - Informative text */
+"terminate_app_alert_informative_text" = "Chcete-li spravovat filtrování a automaticky kontrolovat aktualizace filtrů, ponechte AdGuard Mini běžet na pozadí";
+
+/* Terminating app Alert - Button title "Run in background" */
+"terminate_app_alert_button_title_run_in_background" = "Spustit na pozadí";
+
+/* Terminating app Alert - Button title "Quit" */
+"terminate_app_alert_button_title_quit" = "Ukončit";
+
+/* Terminating app Alert - Suppression Button title "Don’t ask me again" */
+"terminate_app_alert_suppression_button_title" = "Znovu se neptat";
+
+/* Name of the crashed application for title of the crash reporter */
+"crash_reporter_title_adguard_component" = "Komponenta AdGuard Mini";
+
+/* Crash Reporter UI (SFBCrashReporterWindowController) */
+"window_controller_crash_reporter" = "Hlášení o chybě: %1$@ (%2$@)";
+
+/* Request user about restarting AdGuard Mini */
+"restart_button" = "Restartovat";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_quit" = "Ukončit";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_title" = "Restartovat AdGuard Mini";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_text" = "Nastavení byla resetována. Restartujte prosím AdGuard Mini, abyste obnovili jeho funkčnost";
+
+/* Title on Close button in error message */
+"close_button" = "Zavřít";
+
+/* Request user about resetting AdGuard Mini */
+"reset_setting_button" = "Resetovat";
+
+/* Request user about resetting AdGuard Mini */
+"reset_settings_message" = "Resetovat nastavení AdGuard Mini?";
+
+/* Request user about resetting AdGuard Mini */
+"reseting_settings_request" = "Všechna nastavení AdGuard Mini budou obnovena na výchozí hodnoty. Vlastní nastavení budou odebrána";
+
+/* Notify the user that the application cannot be run from the current location. */
+"error_running_app" = "Přesunout AdGuard Mini do složky Aplikace";
+
+/* Notify the user that the application should be moved to the Applications folder. */
+"error_running_app_message" = "AdGuard Mini musí být spuštěn ve složce Aplikace.\nPřesuňte jej tam a zkuste to znovu";

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "PrimitivesWrappers.proto";
+import "Settings.proto";
+import "EffectiveTheme.proto";
+
+/* Service handles settings lists */
+service SettingsCallbackService {
+    /* Fires when one of extensions updated */
+    rpc OnSafariExtensionUpdate(SafariExtensionUpdate) returns (EmptyValue);
+    /* Fires when the application detects changes in a LoginItem service */
+    rpc OnLoginItemStateChange(BoolValue) returns (EmptyValue);
+    /* Fires when import completed or need to confirm consent */
+    rpc OnImportStateChange(ImportStatus) returns (EmptyValue);
+    /* Fires when another hardware acceleration was imported or migrated */
+    rpc OnHardwareAccelerationChange(BoolValue) returns (EmptyValue);
+    /* Fires when resolve if new version is available */
+    rpc OnApplicationVersionStatusResolved(BoolValue) returns (EmptyValue);
+    /* Window did become main callback */
+    rpc OnWindowDidBecomeMain(EmptyValue) returns (EmptyValue);
+    /* Fires when app requests to show settings page */
+    rpc OnSettingsPageRequested(StringValue) returns (EmptyValue);
+    /* Fires when effective theme changed */
+    rpc OnEffectiveThemeChanged(EffectiveThemeValue) returns (EmptyValue);
+}

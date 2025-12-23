@@ -1,0 +1,84 @@
+/* Domain view - Item title "Secure page" */
+"item_title_secure_page" = "דף מאובטח";
+
+/* Domain view - Domain Item hint "Protection is off for this domain" */
+"item_hint_domain_protection_off" = "ההגנה כבויה עבור אתר זה כיוון שהיא עשויה להפריע לפעולתו";
+
+/* Domain view - Item title "Protection" */
+"item_title_protection" = "הגנה";
+
+/* Domain view - Item title "Some extensions are off" */
+"item_attention_title_extensions_off" = "חלק מההרחבות כבויות";
+
+/* Domain view - Item button title "Fix it" */
+"item_attention_button_title_fix_it" = "תקן זאת";
+
+/* Domain view - Item title "Block element" */
+"item_title_block_element" = "חסום אלמנט";
+
+/* Domain view - Item title "Report an issue" */
+"item_title_report_an_issue" = "דווח על סוגייה";
+
+/* Domain view - Item title "Rate AdGuard Mini" */
+"item_title_rate_adguard_mini" = "דרג את AdGuard Mini";
+
+/* Info view - Title "Protection is disabled" */
+"info_title_protection_disabled" = "ההגנה מושבתת";
+
+/* Info view - Title "Failed to enable protection" */
+"info_title_failed_enable_protection" = "כישלון באפשור הגנה";
+
+/* Info view - Button title "Enable" */
+"info_button_title_enable" = "אפשר";
+
+/* Info view - Button title "Enabling..." */
+"info_button_title_enabling" = "מאפשר...";
+
+/* Info view - Title "AdGuard Mini is not launched" */
+"info_title_main_app_not_running" = "AdGuard Mini לא הופעל";
+
+/* Info view - Title "Failed to launch AdGuard Mini" */
+"info_title_failed_launch_main_app" = "נכשלה ההפעלה של AdGuard Mini";
+
+/* Info view - Button title "Launch AdGuard Mini" */
+"info_button_title_launch" = "הפעל את AdGuard Mini";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_launching" = "מפעיל...";
+
+/* Info view - Title "Something went wrong" */
+"info_title_something_went_wrong" = "משהו השתבש";
+
+/* Info view - Title "Failed to restart AdGuard Mini" */
+"info_title_failed_restart_main_app" = "נכשל אתחול מחדש של AdGuard Mini";
+
+/* Info view - Subtitle "Please restart the app or contact support" */
+"info_subtitle_restart_app" = "אנא אתחלו את היישום או צרו קשר עם התמיכה";
+
+/* Info view - Button title "Restart AdGuard Mini" */
+"info_button_title_restart" = "אתחל מחדש את AdGuard Mini";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_restarting" = "מאתחל...";
+
+/* Info view - Common button title "Try again" */
+"info_common_button_title_try_again" = "נסה שוב";
+
+/* Info view - Base common subtitle "Your data may be exposed" */
+"info_base_common_subtitle" = "הנתונים שלך עשויים להיחשף";
+
+/* Info view - Common subtitle after an error occurs */
+"info_error_subtitle" = "אנא נסה שוב או פנה לתמיכה";
+
+/* Info view - Title "Set up your ad blocker" */
+"info_title_set_up_ad_blocker" = "הגדר את חוסם הפרסומות שלך";
+
+/* info_subtitle_set_up_ad_blocker
+Info view - Subtitle "To get AdGuard Mini up and running properly, you’ll need to enable a few settings" */
+"info_subtitle_set_up_ad_blocker" = "כדי להפעיל את AdGuard Mini כראוי, תצטרך להפעיל כמה הגדרות";
+
+/* Info view - Button title "Open AdGuard Mini" */
+"info_button_title_open_main_app" = "פתח את AdGuard Mini";
+
+/* Info view - Button title "Opening..." */
+"info_button_title_opening" = "פותח...";

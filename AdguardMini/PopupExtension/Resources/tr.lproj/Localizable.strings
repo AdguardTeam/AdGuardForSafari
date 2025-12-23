@@ -1,0 +1,84 @@
+/* Domain view - Item title "Secure page" */
+"item_title_secure_page" = "Güvenli sayfa";
+
+/* Domain view - Domain Item hint "Protection is off for this domain" */
+"item_hint_domain_protection_off" = "Sitenin sorunsuz çalışması için koruma bu sitede devre dışı bırakıldı";
+
+/* Domain view - Item title "Protection" */
+"item_title_protection" = "Koruma";
+
+/* Domain view - Item title "Some extensions are off" */
+"item_attention_title_extensions_off" = "Bazı uzantılar kapalı";
+
+/* Domain view - Item button title "Fix it" */
+"item_attention_button_title_fix_it" = "Düzelt";
+
+/* Domain view - Item title "Block element" */
+"item_title_block_element" = "Öğeyi engelle";
+
+/* Domain view - Item title "Report an issue" */
+"item_title_report_an_issue" = "Bir sorun bildir";
+
+/* Domain view - Item title "Rate AdGuard Mini" */
+"item_title_rate_adguard_mini" = "AdGuard Mini'yi derecelendir";
+
+/* Info view - Title "Protection is disabled" */
+"info_title_protection_disabled" = "Koruma devre dışı bırakıldı";
+
+/* Info view - Title "Failed to enable protection" */
+"info_title_failed_enable_protection" = "Koruma etkinleştirilemedi";
+
+/* Info view - Button title "Enable" */
+"info_button_title_enable" = "Etkinleştir";
+
+/* Info view - Button title "Enabling..." */
+"info_button_title_enabling" = "Etkinleştiriliyor...";
+
+/* Info view - Title "AdGuard Mini is not launched" */
+"info_title_main_app_not_running" = "AdGuard Mini başlatılmadı";
+
+/* Info view - Title "Failed to launch AdGuard Mini" */
+"info_title_failed_launch_main_app" = "AdGuard Mini başlatılamadı";
+
+/* Info view - Button title "Launch AdGuard Mini" */
+"info_button_title_launch" = "AdGuard Mini'yi başlat";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_launching" = "Başlatılıyor...";
+
+/* Info view - Title "Something went wrong" */
+"info_title_something_went_wrong" = "Bir şeyler ters gitti";
+
+/* Info view - Title "Failed to restart AdGuard Mini" */
+"info_title_failed_restart_main_app" = "AdGuard Mini yeniden başlatılamadı";
+
+/* Info view - Subtitle "Please restart the app or contact support" */
+"info_subtitle_restart_app" = "Lütfen uygulamayı yeniden başlatın veya destek ile iletişime geçin";
+
+/* Info view - Button title "Restart AdGuard Mini" */
+"info_button_title_restart" = "AdGuard Mini'yi yeniden başlat";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_restarting" = "Yeniden başlatılıyor...";
+
+/* Info view - Common button title "Try again" */
+"info_common_button_title_try_again" = "Tekrar dene";
+
+/* Info view - Base common subtitle "Your data may be exposed" */
+"info_base_common_subtitle" = "Verileriniz açığa çıkabilir";
+
+/* Info view - Common subtitle after an error occurs */
+"info_error_subtitle" = "Lütfen tekrar deneyin veya destek ekibiyle iletişime geçin";
+
+/* Info view - Title "Set up your ad blocker" */
+"info_title_set_up_ad_blocker" = "Reklam engelleyicini ayarla";
+
+/* info_subtitle_set_up_ad_blocker
+Info view - Subtitle "To get AdGuard Mini up and running properly, you’ll need to enable a few settings" */
+"info_subtitle_set_up_ad_blocker" = "AdGuard Mini'yi düzgün bir şekilde çalıştırmak için birkaç ayarı etkinleştirmeniz gerekir";
+
+/* Info view - Button title "Open AdGuard Mini" */
+"info_button_title_open_main_app" = "AdGuard Mini'yi aç";
+
+/* Info view - Button title "Opening..." */
+"info_button_title_opening" = "Açılıyor...";

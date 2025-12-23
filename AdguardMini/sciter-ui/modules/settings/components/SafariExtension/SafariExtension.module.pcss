@@ -1,0 +1,35 @@
+/* 
+    SPDX-FileCopyrightText: AdGuard Software Limited
+    SPDX-License-Identifier: GPL-3.0-or-later
+*/
+
+.SafariExtension {
+    &_settings {
+        padding-right: var(--m-s);
+    }
+
+    &_rules {
+        color: var(--text-description-description-default);
+
+        &__orange {
+            color: var(--text-links-attention-link-default);
+            text-decoration-color: var(--text-links-attention-link-default);
+        }
+
+        &__red {
+            color: var(--text-links-error-link-default);
+            text-decoration-color: var(--text-links-error-link-default);
+        }
+
+        &_link {
+            display: inline;
+            text-decoration-line: underline;
+            cursor: pointer;
+        }
+    }
+
+    &_link {
+        padding-top: var(--m-xxs);
+        margin-top: var(--m-xs);
+    }
+}

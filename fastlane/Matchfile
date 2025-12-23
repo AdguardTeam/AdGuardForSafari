@@ -1,4 +1,5 @@
-if ENV["FASTLANE_PROC"].nil?
-    raise "Use 'fastlane certs' with parameters you need"
-end
+# SPDX-FileCopyrightText: AdGuard Software Limited
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
 
+raise "Use 'fastlane certs' with parameters you need" if ENV['FASTLANE_PROC'].nil?

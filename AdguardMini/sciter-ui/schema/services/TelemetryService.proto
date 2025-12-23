@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+/* Service that handles telemetry events */
+service TelemetryService {
+    /* Record telemetry event */
+    rpc RecordEvent(TelemetryEvent) returns (EmptyValue);
+}

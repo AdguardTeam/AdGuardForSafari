@@ -1,0 +1,31 @@
+/* 
+    SPDX-FileCopyrightText: AdGuard Software Limited
+    SPDX-License-Identifier: GPL-3.0-or-later
+*/
+
+/* The animation code */
+@keyframes rotation {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+  /* The element to apply the animation to */
+.Loader {
+    animation-name: rotation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    width: 24px;
+    height: 24px;
+
+    &__green {
+        color: var(--stroke-icons-product-icon-default);
+    }
+
+    &__white {
+        color: var(--stroke-icons-white-icons-default);
+    }
+}

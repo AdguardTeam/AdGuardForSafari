@@ -1,0 +1,74 @@
+/* Common - App displayed name. */
+"app_displayed_name" = "AdGuard Mini";
+
+/* App Menu - "About" title. */
+"app_menu_about_title" = "AdGuard Mini hakkında";
+
+/* App Menu - "Preferences..." title. */
+"app_menu_preferences_title" = "Tercihler...";
+
+/* App Menu - "Hide AdGuard Mini" title. */
+"app_menu_hide_title" = "AdGuard Mini'yi gizle";
+
+/* App Menu - "Hide Others" title. */
+"app_menu_hide_others_title" = "Diğerlerini Gizle";
+
+/* App Menu - "Show All" title. */
+"app_menu_show_all_title" = "Tümünü Göster";
+
+/* App Menu - "Close" title. */
+"app_menu_close_title" = "Kapat";
+
+/* App Menu - "Quit AdGuard Mini" title. */
+"app_menu_quit_title" = "AdGuard Mini'den çık";
+
+/* Terminating app Alert - Message text "Quit AdGuard Mini?" */
+"terminate_app_alert_message_text" = "AdGuard Mini'den çıkılsın mı?";
+
+/* Terminating app Alert - Informative text */
+"terminate_app_alert_informative_text" = "Filtrelemeyi yönetmek ve filtre güncellemelerini otomatik olarak denetlemek için AdGuard Mini'nin arka planda çalışmasına izin verin";
+
+/* Terminating app Alert - Button title "Run in background" */
+"terminate_app_alert_button_title_run_in_background" = "Arka planda çalıştır";
+
+/* Terminating app Alert - Button title "Quit" */
+"terminate_app_alert_button_title_quit" = "Çıkış";
+
+/* Terminating app Alert - Suppression Button title "Don’t ask me again" */
+"terminate_app_alert_suppression_button_title" = "Bana tekrar sorma";
+
+/* Name of the crashed application for title of the crash reporter */
+"crash_reporter_title_adguard_component" = "AdGuard Mini Bileşeni";
+
+/* Crash Reporter UI (SFBCrashReporterWindowController) */
+"window_controller_crash_reporter" = "Çökme Raporlayıcı: %1$@ (%2$@)";
+
+/* Request user about restarting AdGuard Mini */
+"restart_button" = "Yeniden başlat";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_quit" = "Çıkış";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_title" = "AdGuard Mini'yi yeniden başlat";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_text" = "Ayarlar sıfırlandı. İşlevselliğini geri yüklemek için lütfen AdGuard Mini'yi yeniden başlatın";
+
+/* Title on Close button in error message */
+"close_button" = "Kapat";
+
+/* Request user about resetting AdGuard Mini */
+"reset_setting_button" = "Sıfırla";
+
+/* Request user about resetting AdGuard Mini */
+"reset_settings_message" = "AdGuard Mini ayarları sıfırlansın mı?";
+
+/* Request user about resetting AdGuard Mini */
+"reseting_settings_request" = "Tüm AdGuard Mini ayarları varsayılan değerlerine sıfırlanacaktır. Özel ayarlar kaldırılacaktır";
+
+/* Notify the user that the application cannot be run from the current location. */
+"error_running_app" = "AdGuard Mini'yi Uygulamalar klasörüne taşıyın";
+
+/* Notify the user that the application should be moved to the Applications folder. */
+"error_running_app_message" = "AdGuard Mini'nin çalışması için Uygulamalar klasöründe olması gerekir.\nLütfen oraya taşıyın ve tekrar deneyin";

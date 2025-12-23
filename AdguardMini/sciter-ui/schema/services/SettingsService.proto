@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+import "PrimitivesWrappers.proto";
+import "Settings.proto";
+import "EffectiveTheme.proto";
+
+/* Service that handles settings */
+service SettingsService {
+    /* Get Settings settings */
+    rpc GetSettings(EmptyValue) returns (Settings);
+    /* Update LaunchOnStartup setting */
+    rpc UpdateLaunchOnStartup(BoolValue) returns (EmptyValue);
+    /* Update ShowInMenuBar setting */
+    rpc UpdateShowInMenuBar(BoolValue) returns (EmptyValue);
+    /* Update HardwareAcceleration setting */
+    rpc UpdateHardwareAcceleration(BoolValue) returns (EmptyValue);
+    /* Force restart on hardware acceleration import */
+    rpc ForceRestartOnHardwareAccelerationImport(EmptyValue) returns (EmptyValue);
+    /* Update DebugLogging setting */
+    rpc UpdateDebugLogging(BoolValue) returns (EmptyValue);
+    /* Update quit reaction setting */
+    rpc UpdateQuitReaction(UpdateQuitReactionMessage) returns (EmptyValue);
+    /* Update RealTimeFiltersUpdate setting */
+    rpc UpdateRealTimeFiltersUpdate(BoolValue) returns (EmptyValue);
+    /* Update AutoFiltersUpdate setting */
+    rpc UpdateAutoFiltersUpdate(BoolValue) returns (EmptyValue);
+    /* Export Settings settings */
+    rpc ExportSettings(Path) returns (OptionalError);
+    /* Import Settings settings */
+    rpc ImportSettings(Path) returns (EmptyValue);
+    /* Confirm Settings import with consent */
+    rpc ImportSettingsConfirm(ImportSettingsConfirmation) returns (EmptyValue);
+    /* Reset Settings to default settings */
+    rpc ResetSettings(EmptyValue) returns (Settings);
+    /* Get Settings settings */
+    rpc GetTraySettings(EmptyValue) returns (GlobalSettings);
+    /* Update Settings settings */
+    rpc UpdateTraySettings(GlobalSettings) returns (EmptyValue);
+    /* Get Safari extension status */
+    rpc GetSafariExtensions(EmptyValue) returns (SafariExtensions);
+    /* Get limit on the number of rules for content blockers */
+    rpc GetContentBlockersRulesLimit(EmptyValue) returns (Int32Value);
+    /* Open safati preferences */
+    rpc OpenSafariExtensionPreferences(OptionalStringValue) returns (OptionalError);
+    /* Open login items settings */
+    rpc OpenLoginItemsSettings(EmptyValue) returns (EmptyValue);
+    /* Export Logs archive */
+    rpc ExportLogs(Path) returns (OptionalError);
+    /* Fires event for swift for checking application version, result will be dispatch by TrayCallbackService.OnApplicationVersionStatusResolved */
+    rpc CheckApplicationVersion(EmptyValue) returns (EmptyValue);
+    /* Request to update application */
+    rpc RequestApplicationUpdate(EmptyValue) returns (EmptyValue);
+    /* Update consent agreement */
+    rpc UpdateConsent(UserConsent) returns (EmptyValue);
+    /* Send message to Support */
+    rpc SendFeedbackMessage(SupportMessage) returns (OptionalError);
+    /* Request open settings page */
+    rpc RequestOpenSettingsPage(StringValue) returns (EmptyValue);
+    /* Get user action last directory */
+    rpc GetUserActionLastDirectory(EmptyValue) returns (StringValue);
+    /* Update user action last directory */
+    rpc UpdateUserActionLastDirectory(StringValue) returns (EmptyValue);
+    /* Get system language */
+    rpc GetSystemLanguage(EmptyValue) returns (StringValue);
+    /* Get effective theme */
+    rpc GetEffectiveTheme(EmptyValue) returns (EffectiveThemeValue);
+}

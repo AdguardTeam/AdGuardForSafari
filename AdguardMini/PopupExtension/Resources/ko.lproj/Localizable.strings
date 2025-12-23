@@ -1,0 +1,84 @@
+/* Domain view - Item title "Secure page" */
+"item_title_secure_page" = "보안 페이지";
+
+/* Domain view - Domain Item hint "Protection is off for this domain" */
+"item_hint_domain_protection_off" = "이 웹사이트는 작동을 방해할 수 있으므로 보호 기능이 꺼져 있습니다.";
+
+/* Domain view - Item title "Protection" */
+"item_title_protection" = "보호";
+
+/* Domain view - Item title "Some extensions are off" */
+"item_attention_title_extensions_off" = "일부 확장 프로그램이 꺼져 있습니다.";
+
+/* Domain view - Item button title "Fix it" */
+"item_attention_button_title_fix_it" = "수리";
+
+/* Domain view - Item title "Block element" */
+"item_title_block_element" = "요소 차단";
+
+/* Domain view - Item title "Report an issue" */
+"item_title_report_an_issue" = "문제 신고";
+
+/* Domain view - Item title "Rate AdGuard Mini" */
+"item_title_rate_adguard_mini" = "AdGuard Mini 평가";
+
+/* Info view - Title "Protection is disabled" */
+"info_title_protection_disabled" = "보호가 비활성화 되었습니다";
+
+/* Info view - Title "Failed to enable protection" */
+"info_title_failed_enable_protection" = "보호를 켤 수 없음";
+
+/* Info view - Button title "Enable" */
+"info_button_title_enable" = "활성화";
+
+/* Info view - Button title "Enabling..." */
+"info_button_title_enabling" = "활성화 중...";
+
+/* Info view - Title "AdGuard Mini is not launched" */
+"info_title_main_app_not_running" = "AdGuard Mini가 실행되지 않습니다.";
+
+/* Info view - Title "Failed to launch AdGuard Mini" */
+"info_title_failed_launch_main_app" = "AdGuard Mini를 실행하지 못했습니다.";
+
+/* Info view - Button title "Launch AdGuard Mini" */
+"info_button_title_launch" = "AdGuard Mini 실행";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_launching" = "실행 중...";
+
+/* Info view - Title "Something went wrong" */
+"info_title_something_went_wrong" = "무엇인가 잘못되었습니다!";
+
+/* Info view - Title "Failed to restart AdGuard Mini" */
+"info_title_failed_restart_main_app" = "AdGuard Mini를 다시 시작하지 못했습니다.";
+
+/* Info view - Subtitle "Please restart the app or contact support" */
+"info_subtitle_restart_app" = "앱을 다시 시작하거나 지원팀에 문의하세요.";
+
+/* Info view - Button title "Restart AdGuard Mini" */
+"info_button_title_restart" = "AdGuard Mini 재시작";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_restarting" = "재시작 중...";
+
+/* Info view - Common button title "Try again" */
+"info_common_button_title_try_again" = "다시 시도해보세요";
+
+/* Info view - Base common subtitle "Your data may be exposed" */
+"info_base_common_subtitle" = "데이터가 노출될 수 있습니다.";
+
+/* Info view - Common subtitle after an error occurs */
+"info_error_subtitle" = "다시 시도하거나 고객 지원에 문의해 주세요.";
+
+/* Info view - Title "Set up your ad blocker" */
+"info_title_set_up_ad_blocker" = "광고 차단기 설정";
+
+/* info_subtitle_set_up_ad_blocker
+Info view - Subtitle "To get AdGuard Mini up and running properly, you’ll need to enable a few settings" */
+"info_subtitle_set_up_ad_blocker" = "AdGuard Mini를 제대로 실행하려면 몇 가지 설정을 활성화해야 합니다.";
+
+/* Info view - Button title "Open AdGuard Mini" */
+"info_button_title_open_main_app" = "AdGuard Mini 열기";
+
+/* Info view - Button title "Opening..." */
+"info_button_title_opening" = "여는 중...";

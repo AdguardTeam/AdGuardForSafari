@@ -1,0 +1,84 @@
+/* Domain view - Item title "Secure page" */
+"item_title_secure_page" = "安全的頁面";
+
+/* Domain view - Domain Item hint "Protection is off for this domain" */
+"item_hint_domain_protection_off" = "已停用此網站的保護功能，以免影響其正常運行。";
+
+/* Domain view - Item title "Protection" */
+"item_title_protection" = "防護";
+
+/* Domain view - Item title "Some extensions are off" */
+"item_attention_title_extensions_off" = "部分擴充功能未啟用。";
+
+/* Domain view - Item button title "Fix it" */
+"item_attention_button_title_fix_it" = "修復它";
+
+/* Domain view - Item title "Block element" */
+"item_title_block_element" = "封鎖元件";
+
+/* Domain view - Item title "Report an issue" */
+"item_title_report_an_issue" = "報告問題";
+
+/* Domain view - Item title "Rate AdGuard Mini" */
+"item_title_rate_adguard_mini" = "為 AdGuard Mini 評分";
+
+/* Info view - Title "Protection is disabled" */
+"info_title_protection_disabled" = "防護已停用";
+
+/* Info view - Title "Failed to enable protection" */
+"info_title_failed_enable_protection" = "未能啟用防護";
+
+/* Info view - Button title "Enable" */
+"info_button_title_enable" = "啟用";
+
+/* Info view - Button title "Enabling..." */
+"info_button_title_enabling" = "正在啟用...";
+
+/* Info view - Title "AdGuard Mini is not launched" */
+"info_title_main_app_not_running" = "AdGuard Mini 未啟動";
+
+/* Info view - Title "Failed to launch AdGuard Mini" */
+"info_title_failed_launch_main_app" = "無法啟動 AdGuard Mini";
+
+/* Info view - Button title "Launch AdGuard Mini" */
+"info_button_title_launch" = "啟動 AdGuard Mini";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_launching" = "正在啟動...";
+
+/* Info view - Title "Something went wrong" */
+"info_title_something_went_wrong" = "某事物出現問題";
+
+/* Info view - Title "Failed to restart AdGuard Mini" */
+"info_title_failed_restart_main_app" = "無法重啟 AdGuard Mini";
+
+/* Info view - Subtitle "Please restart the app or contact support" */
+"info_subtitle_restart_app" = "請重啟應用程式或聯繫支援";
+
+/* Info view - Button title "Restart AdGuard Mini" */
+"info_button_title_restart" = "重啟 AdGuard Mini";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_restarting" = "正在重啟...";
+
+/* Info view - Common button title "Try again" */
+"info_common_button_title_try_again" = "再次嘗試";
+
+/* Info view - Base common subtitle "Your data may be exposed" */
+"info_base_common_subtitle" = "您的數據可能面臨泄露風險";
+
+/* Info view - Common subtitle after an error occurs */
+"info_error_subtitle" = "請再次嘗試或與支援聯繫";
+
+/* Info view - Title "Set up your ad blocker" */
+"info_title_set_up_ad_blocker" = "設定您的廣告封鎖程式";
+
+/* info_subtitle_set_up_ad_blocker
+Info view - Subtitle "To get AdGuard Mini up and running properly, you’ll need to enable a few settings" */
+"info_subtitle_set_up_ad_blocker" = "為確保 AdGuard Mini 正常運行，您需啟動以下設定。";
+
+/* Info view - Button title "Open AdGuard Mini" */
+"info_button_title_open_main_app" = "開啟 AdGuard Mini";
+
+/* Info view - Button title "Opening..." */
+"info_button_title_opening" = "正在開啟...";

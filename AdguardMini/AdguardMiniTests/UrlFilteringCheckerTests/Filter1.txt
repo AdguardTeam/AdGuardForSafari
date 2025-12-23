@@ -1,0 +1,10 @@
+!#safari_cb_affinity(general)
+@@||r.bat.bing.com/?ld=
+carview.yahoo.co.jp#@##ad_SS
+search.yahoo.co.jp#@#.sw-Card.Ad
+@@||search.yahoo.com^$document
+@@||ad.doubleclick.net/searchads/link/click?$popup,domain=google.*
+!#safari_cb_affinity(general,privacy)
+@@||googleadservices.com/pagead/aclk*ohost=*.google.*
+!#safari_cb_affinity
+@@||test.com^$important

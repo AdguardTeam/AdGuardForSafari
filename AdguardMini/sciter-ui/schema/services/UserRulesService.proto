@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+import "PrimitivesWrappers.proto";
+import "UserRules.proto";
+
+/* Service that handles client-platform communication*/
+service UserRulesService {
+    /* Get UserRules settings */
+    rpc GetUserRules(EmptyValue) returns (UserRules);
+    /* Add UserRule */
+    rpc AddUserRule(StringValue) returns (OptionalError);
+    /* Update UserRules settings */
+    rpc UpdateUserRules(UserRules) returns (OptionalError);
+    /* Export UserRules settings */
+    rpc ExportUserRules(Path) returns (OptionalError);
+    /* Import UserRules settings */
+    rpc ImportUserRules(Path) returns (UserRules);
+    /* Reset UserRules to default settings */
+    rpc ResetUserRules(EmptyValue) returns (UserRules);
+}

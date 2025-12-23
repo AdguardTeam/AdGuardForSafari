@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option optimize_for = CODE_SIZE;
+
+// Describes App info, used in About page and in tray
+message AppInfo {
+    string version = 1;
+    Channel channel = 2;
+    repeated ThirdPartyDependency dependencies = 3;
+    bool update_available = 4;
+}
+
+// Version channel
+enum Channel {
+    Channel_unknown = 0;
+    Channel_standalone_nightly = 1;
+    Channel_standalone_beta = 2;
+    Channel_standalone_release = 3;
+    Channel_app_store = 4;
+}
+
+// Name and version of third party dependency
+message ThirdPartyDependency {
+    string name = 1;
+    string version = 2;
+}

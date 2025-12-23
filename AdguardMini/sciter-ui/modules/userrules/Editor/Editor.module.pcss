@@ -1,0 +1,60 @@
+/* 
+    SPDX-FileCopyrightText: AdGuard Software Limited
+    SPDX-License-Identifier: GPL-3.0-or-later
+*/
+
+.Editor {
+    &__loading {
+        opacity: 0.5;
+    }
+
+    &__fallback {
+        height: 396px;
+        width: 100%;
+        border: 0;
+    }
+}
+
+:global(.cm-s-adg.CodeMirror) {
+    color: var(--text-user-rules-black-default);
+    background: var(--fills-backgrounds-page-background-default);
+}
+
+:global(.cm-s-adg .CodeMirror-gutters) {
+    background: var(--fills-backgrounds-page-background-additional-default);
+    border-right: 0;
+}
+
+:global(.cm-s-adg .CodeMirror-linenumber) {
+    color: var(--text-placeholder-placeholder-default);
+    font-size: 14px;
+    line-height: 18px;
+}
+
+:global(.cm-s-adg span.cm-keyword) {
+    color: var(--text-user-rules-purple-default);
+}
+
+:global(.cm-s-adg span.cm-string) {
+    color: var(--text-user-rules-red-default);
+}
+
+:global(.cm-s-adg span.cm-operator),
+:global(.cm-s-adg span.cm-def) {
+    color: var(--text-user-rules-blue-default);
+}
+
+:global(.cm-s-adg span.cm-comment) {
+    color: var(--text-user-rules-gray-default);
+}
+
+:global(.cm-s-adg .CodeMirror-cursor) {
+    border-left: 1px solid var(--stroke-icons-black-icons-default);
+}
+
+:global(.cm-s-adg div.CodeMirror-selected),
+:global(.cm-s-adg .CodeMirror-line::selection),
+:global(.cm-s-adg .CodeMirror-line > span::selection),
+:global(.cm-s-adg .CodeMirror-line > span > span::selection) {
+    background: var(--fills-backgrounds-page-background-hovered);
+}

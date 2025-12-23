@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option optimize_for = CODE_SIZE;
+
+// Describes message for support
+message SupportMessage {
+  string email = 1;
+  string message = 2;
+  bool add_logs = 3;
+  string theme = 4;
+}

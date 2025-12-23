@@ -1,0 +1,101 @@
+/* 
+    SPDX-FileCopyrightText: AdGuard Software Limited
+    SPDX-License-Identifier: GPL-3.0-or-later
+*/
+
+.UnsavedChangesModal {
+    &_background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+    }
+
+    &_modal {
+        padding: 32px;
+        border-radius: 8px;
+        box-shadow: 32px 32px 128px 0px rgba(0, 0, 0, 0.10);
+        width: max-content;
+        background-color: var(--fills-backgrounds-page-background-default);
+        position: fixed;
+        z-index: 1000;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 432px;
+
+        &_close {
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            cursor: pointer;
+        }
+
+        &_title {
+            padding: 0;
+            margin: 0;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 38px;
+            color: var(--text-main-text-main-default);
+            margin-bottom: 24px;
+        }
+
+        &_subtitle {
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            line-height: 24px;
+            color: var(--text-main-text-main-default);
+            margin-bottom: 24px;
+        }
+
+        &_buttons {
+            display: flex;
+            gap: 16px;
+            
+            &_btn {
+                display: block;
+                border: none;
+                font-size: 16px;
+                line-height: 20px;
+                padding: 12px 20px;
+                border-radius: 8px;
+                cursor: pointer;
+                width: 168px;
+
+                &:hover {
+                    background-color: var(--fills-buttons-main-button-hovered);
+                }
+
+                &:active {
+                    background-color: var(--fills-buttons-main-button-pressed);
+                }
+
+                &__primaryBtn {
+                    background-color: var(--fills-buttons-main-button-default);
+                    color: var(--text-buttons-primary-default);
+                }
+
+                &__secondaryBtn {
+                    background-color: var(--fills-backgrounds-page-background-default);
+                    color: var(--text-main-text-main-default);
+                    border: 1px solid var(--text-buttons-secondary-default);
+                    
+                    &:hover {
+                        background-color: var(--fills-backgrounds-page-background-hovered);
+                    }
+
+                    &:active {
+                        background-color: var(--fills-backgrounds-page-background-pressed);
+                    }
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,74 @@
+/* Common - App displayed name. */
+"app_displayed_name" = "AdGuard Mini";
+
+/* App Menu - "About" title. */
+"app_menu_about_title" = "O AdGuard Mini";
+
+/* App Menu - "Preferences..." title. */
+"app_menu_preferences_title" = "Podešavanja...";
+
+/* App Menu - "Hide AdGuard Mini" title. */
+"app_menu_hide_title" = "Sakrij AdGuard Mini";
+
+/* App Menu - "Hide Others" title. */
+"app_menu_hide_others_title" = "Sakrij ostalo";
+
+/* App Menu - "Show All" title. */
+"app_menu_show_all_title" = "Pokaži sve";
+
+/* App Menu - "Close" title. */
+"app_menu_close_title" = "Zatvori";
+
+/* App Menu - "Quit AdGuard Mini" title. */
+"app_menu_quit_title" = "Izađi iz AdGuard Mini";
+
+/* Terminating app Alert - Message text "Quit AdGuard Mini?" */
+"terminate_app_alert_message_text" = "Zatvoriti AdGuard Mini?";
+
+/* Terminating app Alert - Informative text */
+"terminate_app_alert_informative_text" = "Da biste upravljali filtriranjem i automatski proveravali ažuriranja filtera, dozvolite da AdGuard Mini radi u pozadini";
+
+/* Terminating app Alert - Button title "Run in background" */
+"terminate_app_alert_button_title_run_in_background" = "Pokreni u pozadini";
+
+/* Terminating app Alert - Button title "Quit" */
+"terminate_app_alert_button_title_quit" = "Napusti";
+
+/* Terminating app Alert - Suppression Button title "Don’t ask me again" */
+"terminate_app_alert_suppression_button_title" = "Ne pitaj me ponovo";
+
+/* Name of the crashed application for title of the crash reporter */
+"crash_reporter_title_adguard_component" = "Komponenta AdGuard Mini";
+
+/* Crash Reporter UI (SFBCrashReporterWindowController) */
+"window_controller_crash_reporter" = "Izveštač padova: %1$@ (%2$@)";
+
+/* Request user about restarting AdGuard Mini */
+"restart_button" = "Ponovo pokreni";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_quit" = "Napusti";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_title" = "Ponovo pokreni AdGuard Mini";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_text" = "Podešavanja su resetovana. Molimo Vas da ponovo pokrenete AdGuard Mini da biste vratili svoju funkcionalnost";
+
+/* Title on Close button in error message */
+"close_button" = "Zatvori";
+
+/* Request user about resetting AdGuard Mini */
+"reset_setting_button" = "Resetuj";
+
+/* Request user about resetting AdGuard Mini */
+"reset_settings_message" = "Resetovanje AdGuard Mini postavki?";
+
+/* Request user about resetting AdGuard Mini */
+"reseting_settings_request" = "Sve AdGuard Mini podešavanja će biti vraćena na svoje podrazumevane vrednosti. Prilagođena podešavanja će biti uklonjena";
+
+/* Notify the user that the application cannot be run from the current location. */
+"error_running_app" = "Premestite AdGuard Mini u fasciklu Aplikacije";
+
+/* Notify the user that the application should be moved to the Applications folder. */
+"error_running_app_message" = "AdGuard Mini mora biti u fascikli Applications da bi radio.\nMolimo vas da ga premestite tamo i pokušate ponovo.";

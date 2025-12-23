@@ -1,0 +1,74 @@
+/* Common - App displayed name. */
+"app_displayed_name" = "AdGuard Mini";
+
+/* App Menu - "About" title. */
+"app_menu_about_title" = "AdGuard Mini について";
+
+/* App Menu - "Preferences..." title. */
+"app_menu_preferences_title" = "設定...";
+
+/* App Menu - "Hide AdGuard Mini" title. */
+"app_menu_hide_title" = "AdGuard Mini を非表示にする";
+
+/* App Menu - "Hide Others" title. */
+"app_menu_hide_others_title" = "他を隠す";
+
+/* App Menu - "Show All" title. */
+"app_menu_show_all_title" = "全てを表示";
+
+/* App Menu - "Close" title. */
+"app_menu_close_title" = "閉じる";
+
+/* App Menu - "Quit AdGuard Mini" title. */
+"app_menu_quit_title" = "AdGuard Mini を終了する";
+
+/* Terminating app Alert - Message text "Quit AdGuard Mini?" */
+"terminate_app_alert_message_text" = "AdGuard Mini を終了しますか？";
+
+/* Terminating app Alert - Informative text */
+"terminate_app_alert_informative_text" = "フィルタリングを管理したり、フィルタの更新を自動的にチェックしたりするためには、AdGuard Mini のバックグラウンド実行を許可してください。";
+
+/* Terminating app Alert - Button title "Run in background" */
+"terminate_app_alert_button_title_run_in_background" = "バックグラウンドで実行する";
+
+/* Terminating app Alert - Button title "Quit" */
+"terminate_app_alert_button_title_quit" = "終了";
+
+/* Terminating app Alert - Suppression Button title "Don’t ask me again" */
+"terminate_app_alert_suppression_button_title" = "次回から表示しない";
+
+/* Name of the crashed application for title of the crash reporter */
+"crash_reporter_title_adguard_component" = "AdGuard Mini コンポーネント";
+
+/* Crash Reporter UI (SFBCrashReporterWindowController) */
+"window_controller_crash_reporter" = "クラッシュレポート： %1$@ (%2$@)";
+
+/* Request user about restarting AdGuard Mini */
+"restart_button" = "再起動";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_quit" = "終了";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_title" = "AdGuard Mini を再起動してください";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_text" = "設定がリセットされました。AdGuard Mini の機能を復元するには AdGuard Mini を再起動してください。";
+
+/* Title on Close button in error message */
+"close_button" = "閉じる";
+
+/* Request user about resetting AdGuard Mini */
+"reset_setting_button" = "初期化";
+
+/* Request user about resetting AdGuard Mini */
+"reset_settings_message" = "AdGuard Mini の設定をリセットしますか？";
+
+/* Request user about resetting AdGuard Mini */
+"reseting_settings_request" = "AdGuard Mini の設定はすべてデフォルト値にリセットされます。カスタム設定は削除されます。";
+
+/* Notify the user that the application cannot be run from the current location. */
+"error_running_app" = "AdGuard Mini を「アプリケーション」フォルダへ移動してください";
+
+/* Notify the user that the application should be moved to the Applications folder. */
+"error_running_app_message" = "AdGuard Mini を実行するには、「アプリケーション」フォルダに入っている必要があります。\nそのフォルダに AdGuard Mini を移動して、再度お試しください。";

@@ -1,0 +1,74 @@
+/* Common - App displayed name. */
+"app_displayed_name" = "AdGuard Mini";
+
+/* App Menu - "About" title. */
+"app_menu_about_title" = "AdGuard Mini 정보";
+
+/* App Menu - "Preferences..." title. */
+"app_menu_preferences_title" = "설정...";
+
+/* App Menu - "Hide AdGuard Mini" title. */
+"app_menu_hide_title" = "AdGuard Mini 숨기기";
+
+/* App Menu - "Hide Others" title. */
+"app_menu_hide_others_title" = "기타 숨기기";
+
+/* App Menu - "Show All" title. */
+"app_menu_show_all_title" = "모두 보이기";
+
+/* App Menu - "Close" title. */
+"app_menu_close_title" = "닫기";
+
+/* App Menu - "Quit AdGuard Mini" title. */
+"app_menu_quit_title" = "AdGuard Mini 종료";
+
+/* Terminating app Alert - Message text "Quit AdGuard Mini?" */
+"terminate_app_alert_message_text" = "AdGuard Mini를 종료하시겠습니까?";
+
+/* Terminating app Alert - Informative text */
+"terminate_app_alert_informative_text" = "필터링을 관리하고 필터 업데이트를 자동으로 확인하려면 AdGuard Mini를 백그라운드에서 실행하도록 설정하세요.";
+
+/* Terminating app Alert - Button title "Run in background" */
+"terminate_app_alert_button_title_run_in_background" = "백그라운드에서 실행";
+
+/* Terminating app Alert - Button title "Quit" */
+"terminate_app_alert_button_title_quit" = "종료";
+
+/* Terminating app Alert - Suppression Button title "Don’t ask me again" */
+"terminate_app_alert_suppression_button_title" = "다시 묻지 않기";
+
+/* Name of the crashed application for title of the crash reporter */
+"crash_reporter_title_adguard_component" = "AdGuard Mini 컴포넌트";
+
+/* Crash Reporter UI (SFBCrashReporterWindowController) */
+"window_controller_crash_reporter" = "충돌 보고: %1$@ (%2$@)";
+
+/* Request user about restarting AdGuard Mini */
+"restart_button" = "재시작";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_quit" = "종료";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_title" = "AdGuard Mini 재시작";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_text" = "설정이 초기화되었습니다. 기능을 복원하려면 AdGuard Mini를 다시 시작하세요.";
+
+/* Title on Close button in error message */
+"close_button" = "닫기";
+
+/* Request user about resetting AdGuard Mini */
+"reset_setting_button" = "초기화";
+
+/* Request user about resetting AdGuard Mini */
+"reset_settings_message" = "AdGuard Mini 설정을 초기화하시겠습니까?";
+
+/* Request user about resetting AdGuard Mini */
+"reseting_settings_request" = "모든 AdGuard Mini 설정이 기본값으로 초기화됩니다. 사용자 정의 설정은 삭제됩니다.";
+
+/* Notify the user that the application cannot be run from the current location. */
+"error_running_app" = "AdGuard Mini를 응용 프로그램 폴더로 이동";
+
+/* Notify the user that the application should be moved to the Applications folder. */
+"error_running_app_message" = "AdGuard Mini를 실행하려면 응용 프로그램 폴더에 있어야 합니다.\n해당 폴더로 이동한 후 다시 시도하세요.";

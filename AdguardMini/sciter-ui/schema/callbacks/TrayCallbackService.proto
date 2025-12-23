@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "PrimitivesWrappers.proto";
+import "Settings.proto";
+import "EffectiveTheme.proto";
+
+/* Service handles settings lists */
+service TrayCallbackService {
+    /* On tray window open */
+    rpc OnTrayWindowVisibilityChange(BoolValue) returns (EmptyValue);
+    /* Fires when the application detects changes in a LoginItem service */
+    rpc OnLoginItemStateChange(BoolValue) returns (EmptyValue);
+    /* Fires when swift resolve if new version is available */
+    rpc OnApplicationVersionStatusResolved(BoolValue) returns (EmptyValue);
+    /* Fires when swift resolve filters current state */
+    rpc OnFilterStatusResolved(FiltersStatus) returns (EmptyValue);
+    /* Fires when one of extensions updated */
+    rpc OnSafariExtensionUpdate(SafariExtensionUpdate) returns (EmptyValue);
+    /* Fires when license state updated */
+    rpc OnLicenseUpdate(LicenseOrError) returns (EmptyValue);
+    /* Fires when effective theme changed */
+    rpc OnEffectiveThemeChanged(EffectiveThemeValue) returns (EmptyValue);
+}

@@ -1,3 +1,9 @@
+# SPDX-FileCopyrightText: AdGuard Software Limited
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# frozen_string_literal: true
+
 # This file contains the fastlane.tools configuration
 # You can find the documentation at https://docs.fastlane.tools
 #
@@ -9,127 +15,68 @@
 #
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
+
 require 'pathname'
 require 'tmpdir'
-import "Subroutings"
+
+import 'Building'
+import 'VCSWork'
+import 'Testing'
+import 'Deploying'
+import 'Updating/Updating'
+import 'Sparkle'
+import 'Sentry'
+import 'Sciter'
+
+require 'fastlane_toolkit'
+extend AG
+
+ensure_bundle_exec
 
 before_all do |lane, options|
+  @is_bamboo = ENV['bamboo_agentId'] && true
 
-  config = ENV["CONFIGURATION"]
-  if !options[:config].nil?; config = options[:config]; end
-  load_project_vars(config)
+  unless %i[
+    increment_version
+    build_version_file
+    update_third_party_deps
+  ].include?(lane)
+    setup_fastlane_toolkit(@is_bamboo)
+  end
 
-  ENV["REPO_ROOT"]    = (Pathname.new(ENV["XPV_SRCROOT"])+'..').to_s
-  ENV["BUILD_PATH"]   = "#{ENV['REPO_ROOT']}/#{ENV['BUILD_DIR']}"
+  @config = options[:config] || ENV['CONFIGURATION']
+  @scheme = ENV['SCHEME']
 
-  load_sensitive_vars(ENV["SENSITIVE_VARS_PATH"])
+  @root_path = File.dirname(File.realpath(__dir__))
+  @root_build_path = "#{@root_path}/build"
+  @build_path = "#{@root_build_path}/#{@config}"
+  @derived_data_path = "#{@build_path}/derived_data"
+  @project_file = "#{@root_path}/AdguardMini/AdguardMini.xcodeproj"
 
+  @build_settings = parse_build_settings(
+    project: @project_file,
+    scheme: @scheme,
+    configuration: @config
+  )
+
+  DefaultUpdateConstants.root_path = @root_path
+  DefaultUpdateConstants.project_path = @project_file
 end
 
-desc "Installs or updates certificates and provisioning profiles, which need for build product "
-lane :certs do |options|
-
-  if  ENV["MATCH_KEYCHAIN_PASSWORD"] == ""
-    # Remove this key should force fastlane to request keychain password
-    ENV.delete("MATCH_KEYCHAIN_PASSWORD")
-  end
-
-  app_id = ENV["XPV_PRODUCT_BUNDLE_IDENTIFIER"]
-  real_project_config = ENV["XPV_CONFIGURATION"]
-
-  keychain_path = nil
-
-  if ENV["KEYCHAIN_PATH_LOCAL"] == 'true'
-
-    keychain_path = "#{ENV['BUILD_PATH']}/certs/#{ENV['MATCH_KEYCHAIN_NAME']}"
-
-    create_local_keychain(keychain_path)
-    UI.success "Keychain path: #{keychain_path}"
-  end
-
-  if real_project_config == "Release"
-    mas_cert("appstore", "mac_installer_distribution", app_id, keychain_path, options) 
-  else
-    standalone_certs(app_id, keychain_path, options)
-  end
-
-end
-
-desc "Remove local keychain, which contains certificates"
-lane :remove_certs do |options|
-
-    step_name = "Remove local keychain, which contains certificates"
-    keychain_path = "#{ENV['BUILD_PATH']}/certs/#{ENV['MATCH_KEYCHAIN_NAME']}"
-
-  if !File.exist?(keychain_path)
-    Actions.execute_action(step_name) do
-      UI.success "No local keychain"
-    end
-    next
-  end
-
-  delete_keychain(
-    keychain_path: keychain_path,
-    step_name: step_name
+desc 'Create sensitive config'
+lane :create_sens_config do |_options|
+  config_path = "#{@root_path}/../adguard-mini-private/configuration/PrivateConfig.xcconfig"
+  prefix = 'mac-mini'
+  keys = [
+    "sentry-dsn-#{prefix}",
+    'backend-request-encryption-key',
+    'backend-request-key',
+    "#{prefix}-license-encryption-key"
+  ]
+  create_xcconfig(
+    keys: keys,
+    config_path: config_path
   )
 end
 
-desc "Notarize bundle using default credentials"
-desc "Required options:"
-desc "  - bundle: STRING Path to bundle, must be defined relativelly to BUILD_DIR"
-desc "  - id: STRING Bundle id, used for notary service"
-lane :notari do |options|
-
-  UI.user_error!("Missing argument: 'id:<BUNDLE_ID>'") if options[:id].nil?
-  UI.user_error!("Missing argument: 'bundle:<BUNDLE_PATH_RELATIVE_TO_BUILD_DIR>'") if options[:bundle].nil?
-
-  bundle_path = "#{ENV['BUILD_PATH']}/#{options[:bundle]}"
-  bundle_id = options[:id]
-
-  Dir.mktmpdir do |tempDir|
-    notari_path = "#{tempDir}/to_notarize.zip"
-
-    compress_bundle(bundle_path, notari_path)
-
-    notarize(
-      step_name: "Notarizing bundle",
-      package: notari_path,
-      use_notarytool: true,
-      bundle_id: bundle_id,
-      skip_stapling: true,
-      print_log: true,
-      verbose: true
-    )
-
-    staple_bundle(bundle_path)
-  end 
-end
-
-desc "Submit app to MAS from Xcode archive (xcarchive)"
-desc "Required options:"
-desc "  - archive: STRING Path to Xcode archive"
-lane :upload_to_mas do |options|
-
-  app_id = ENV["XPV_PRODUCT_BUNDLE_IDENTIFIER"]
-  identity = ENV["MAS_SUBMIT_INSTALLER_IDENTITY"]
-
-  path = Pathname.new(options[:archive])
-  path = Pathname.new(ENV["PWD"]) + path if path.relative?
-
-  archive_path = path.realpath.to_s
-
-  Dir.mktmpdir do |symbols_path|
-
-    collect_symbols(archive_path, symbols_path)
-    Dir.mktmpdir do |temp_dir|
-
-      pkg_path = "#{temp_dir}/thePackage.pkg"
-      create_pkg(identity, archive_path, symbols_path, pkg_path)
-
-      submit_to_mas(app_id, pkg_path, ENV["XPV_DEVELOPMENT_TEAM"])
-
-    end
-  end 
-end
-
-ENV["FASTLANE_PROC"] = "true"
+ENV['FASTLANE_PROC'] = 'true'

@@ -1,0 +1,84 @@
+/* Domain view - Item title "Secure page" */
+"item_title_secure_page" = "Безпечна сторінка";
+
+/* Domain view - Domain Item hint "Protection is off for this domain" */
+"item_hint_domain_protection_off" = "Захист для цього сайту вимкнено, оскільки він може заважати його роботі";
+
+/* Domain view - Item title "Protection" */
+"item_title_protection" = "Захист";
+
+/* Domain view - Item title "Some extensions are off" */
+"item_attention_title_extensions_off" = "Деякі розширення вимкнені";
+
+/* Domain view - Item button title "Fix it" */
+"item_attention_button_title_fix_it" = "Виправити";
+
+/* Domain view - Item title "Block element" */
+"item_title_block_element" = "Блокувати елемент";
+
+/* Domain view - Item title "Report an issue" */
+"item_title_report_an_issue" = "Повідомити про проблему";
+
+/* Domain view - Item title "Rate AdGuard Mini" */
+"item_title_rate_adguard_mini" = "Оцініть AdGuard Mini";
+
+/* Info view - Title "Protection is disabled" */
+"info_title_protection_disabled" = "Захист вимкнено";
+
+/* Info view - Title "Failed to enable protection" */
+"info_title_failed_enable_protection" = "Не вдалося увімкнути захист";
+
+/* Info view - Button title "Enable" */
+"info_button_title_enable" = "Увімкнути";
+
+/* Info view - Button title "Enabling..." */
+"info_button_title_enabling" = "Вмикається...";
+
+/* Info view - Title "AdGuard Mini is not launched" */
+"info_title_main_app_not_running" = "AdGuard Mini не запущено";
+
+/* Info view - Title "Failed to launch AdGuard Mini" */
+"info_title_failed_launch_main_app" = "Не вдалося запустити AdGuard Mini";
+
+/* Info view - Button title "Launch AdGuard Mini" */
+"info_button_title_launch" = "Запустити AdGuard Mini";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_launching" = "Запускається...";
+
+/* Info view - Title "Something went wrong" */
+"info_title_something_went_wrong" = "Щось пішло не так";
+
+/* Info view - Title "Failed to restart AdGuard Mini" */
+"info_title_failed_restart_main_app" = "Не вдалося перезапустити AdGuard Mini";
+
+/* Info view - Subtitle "Please restart the app or contact support" */
+"info_subtitle_restart_app" = "Перезапустіть програму або зверніться до служби підтримки";
+
+/* Info view - Button title "Restart AdGuard Mini" */
+"info_button_title_restart" = "Перезапустити AdGuard Mini";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_restarting" = "Перезапускається...";
+
+/* Info view - Common button title "Try again" */
+"info_common_button_title_try_again" = "Спробувати знову";
+
+/* Info view - Base common subtitle "Your data may be exposed" */
+"info_base_common_subtitle" = "Ваші дані можуть бути розкриті";
+
+/* Info view - Common subtitle after an error occurs */
+"info_error_subtitle" = "Спробуйте ще раз або напишіть у службу підтримки";
+
+/* Info view - Title "Set up your ad blocker" */
+"info_title_set_up_ad_blocker" = "Налаштуйте блокувальник реклами";
+
+/* info_subtitle_set_up_ad_blocker
+Info view - Subtitle "To get AdGuard Mini up and running properly, you’ll need to enable a few settings" */
+"info_subtitle_set_up_ad_blocker" = "Щоб AdGuard Mini працював належним чином, необхідно перевірити декілька налаштувань";
+
+/* Info view - Button title "Open AdGuard Mini" */
+"info_button_title_open_main_app" = "Відкрити AdGuard Mini";
+
+/* Info view - Button title "Opening..." */
+"info_button_title_opening" = "Відкривається...";

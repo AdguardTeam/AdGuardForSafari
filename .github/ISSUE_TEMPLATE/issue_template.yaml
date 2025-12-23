@@ -1,7 +1,7 @@
 ---
 
 name: 🐞 Bug report
-description: Create a bug report to help us improve AdGuard for Safari.
+description: Create a bug report to help us improve AdGuard Mini for Mac.
 labels: []
 body:
   - type: markdown
@@ -24,7 +24,7 @@ body:
     attributes:
       label: AdGuard version
       description: What version of our application are you running?
-      placeholder: For example, 1.11.10
+      placeholder: For example, 2.0.0
     validations:
       required: true
   - type: textarea

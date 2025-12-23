@@ -1,0 +1,40 @@
+/* 
+    SPDX-FileCopyrightText: AdGuard Software Limited
+    SPDX-License-Identifier: GPL-3.0-or-later
+*/
+
+.StoryCard {
+    width: 108px;
+    height: 116px;
+    box-sizing: content-box;
+    border-radius: var(--border-radius);
+    padding: var(--m-s);
+    margin-bottom: var(--m-xxs);
+    margin-right: var(--m-s);
+    box-shadow: var(--bs-small);
+    cursor: pointer;
+    background: var(--fills-backgrounds-cards-background-default);
+
+    &:hover {
+        background: var(--fills-backgrounds-cards-background-hovered)
+    }
+
+    &:pressed {
+        background: var(--fills-backgrounds-cards-background-pressed);
+    }
+
+
+    &__warning {
+        border: 1px solid var(--stroke-dividers-item-divider-orange-default);
+        background: var(--fills-notifications-orange-default);
+    }
+
+    &_icon {
+        color: var(--stroke-icons-product-icon-default);
+        margin-bottom: var(--m-xs);
+
+        &__warning {
+            color: var(--stroke-icons-attention-icon-default);
+        }
+    }
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+import "PrimitivesWrappers.proto";
+import "EffectiveTheme.proto";
+
+/* Service handles onboarding updates */
+service OnboardingCallbackService {
+    /* Fires when effective theme changed */
+    rpc OnEffectiveThemeChanged(EffectiveThemeValue) returns (EmptyValue);
+}

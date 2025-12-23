@@ -1,0 +1,74 @@
+/* Common - App displayed name. */
+"app_displayed_name" = "AdGuard Mini";
+
+/* App Menu - "About" title. */
+"app_menu_about_title" = "关于 AdGuard Mini";
+
+/* App Menu - "Preferences..." title. */
+"app_menu_preferences_title" = "首选项...";
+
+/* App Menu - "Hide AdGuard Mini" title. */
+"app_menu_hide_title" = "隐藏 AdGuard Mini";
+
+/* App Menu - "Hide Others" title. */
+"app_menu_hide_others_title" = "隐藏其它";
+
+/* App Menu - "Show All" title. */
+"app_menu_show_all_title" = "显示全部";
+
+/* App Menu - "Close" title. */
+"app_menu_close_title" = "关闭";
+
+/* App Menu - "Quit AdGuard Mini" title. */
+"app_menu_quit_title" = "退出 AdGuard Mini";
+
+/* Terminating app Alert - Message text "Quit AdGuard Mini?" */
+"terminate_app_alert_message_text" = "退出 AdGuard Mini？";
+
+/* Terminating app Alert - Informative text */
+"terminate_app_alert_informative_text" = "为管理过滤并自动检查过滤器更新，请允许 AdGuard Mini 在后台运行。";
+
+/* Terminating app Alert - Button title "Run in background" */
+"terminate_app_alert_button_title_run_in_background" = "后台运行";
+
+/* Terminating app Alert - Button title "Quit" */
+"terminate_app_alert_button_title_quit" = "退出";
+
+/* Terminating app Alert - Suppression Button title "Don’t ask me again" */
+"terminate_app_alert_suppression_button_title" = "不再询问";
+
+/* Name of the crashed application for title of the crash reporter */
+"crash_reporter_title_adguard_component" = "AdGuard Mini 组件";
+
+/* Crash Reporter UI (SFBCrashReporterWindowController) */
+"window_controller_crash_reporter" = "崩溃报告：%1$@ (%2$@)";
+
+/* Request user about restarting AdGuard Mini */
+"restart_button" = "重启";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_quit" = "退出";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_title" = "重启 AdGuard Mini";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_text" = "设置已重置。请重启 AdGuard Mini 以恢复其功能。";
+
+/* Title on Close button in error message */
+"close_button" = "关闭";
+
+/* Request user about resetting AdGuard Mini */
+"reset_setting_button" = "重置";
+
+/* Request user about resetting AdGuard Mini */
+"reset_settings_message" = "确定要重置 AdGuard Mini 吗？";
+
+/* Request user about resetting AdGuard Mini */
+"reseting_settings_request" = "所有 AdGuard Mini 设置将重置为默认值。自定义设置将被删除。";
+
+/* Notify the user that the application cannot be run from the current location. */
+"error_running_app" = "将 AdGuard Mini 移动到「应用程序」文件夹";
+
+/* Notify the user that the application should be moved to the Applications folder. */
+"error_running_app_message" = "AdGuard Mini 需要位于「应用程序」文件夹中才能运行。\n请将其移动到该文件夹并重试。";

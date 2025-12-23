@@ -1,0 +1,84 @@
+/* Domain view - Item title "Secure page" */
+"item_title_secure_page" = "Trang bảo mật";
+
+/* Domain view - Domain Item hint "Protection is off for this domain" */
+"item_hint_domain_protection_off" = "Đã tắt sự bảo vệ cho trang này vì nó có thể gây cản trở hoạt động của trang";
+
+/* Domain view - Item title "Protection" */
+"item_title_protection" = "Sự bảo vệ";
+
+/* Domain view - Item title "Some extensions are off" */
+"item_attention_title_extensions_off" = "Một số phần mở rộng đang tắt";
+
+/* Domain view - Item button title "Fix it" */
+"item_attention_button_title_fix_it" = "Sửa ngay";
+
+/* Domain view - Item title "Block element" */
+"item_title_block_element" = "Chặn yếu tố";
+
+/* Domain view - Item title "Report an issue" */
+"item_title_report_an_issue" = "Báo lỗi";
+
+/* Domain view - Item title "Rate AdGuard Mini" */
+"item_title_rate_adguard_mini" = "Đánh giá AdGuard Mini";
+
+/* Info view - Title "Protection is disabled" */
+"info_title_protection_disabled" = "Bảo vệ bị vô hiệu";
+
+/* Info view - Title "Failed to enable protection" */
+"info_title_failed_enable_protection" = "Không thể bật tính năng bảo vệ";
+
+/* Info view - Button title "Enable" */
+"info_button_title_enable" = "Kích hoạt";
+
+/* Info view - Button title "Enabling..." */
+"info_button_title_enabling" = "Đang bật...";
+
+/* Info view - Title "AdGuard Mini is not launched" */
+"info_title_main_app_not_running" = "AdGuard Mini chưa được khởi chạy";
+
+/* Info view - Title "Failed to launch AdGuard Mini" */
+"info_title_failed_launch_main_app" = "Không thể khởi chạy AdGuard Mini";
+
+/* Info view - Button title "Launch AdGuard Mini" */
+"info_button_title_launch" = "Khởi chạy AdGuard Mini";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_launching" = "Đang khởi chạy...";
+
+/* Info view - Title "Something went wrong" */
+"info_title_something_went_wrong" = "Something went wrong";
+
+/* Info view - Title "Failed to restart AdGuard Mini" */
+"info_title_failed_restart_main_app" = "Không thể khởi động lại AdGuard Mini";
+
+/* Info view - Subtitle "Please restart the app or contact support" */
+"info_subtitle_restart_app" = "Vui lòng khởi động lại ứng dụng hoặc liên hệ với bộ phận hỗ trợ";
+
+/* Info view - Button title "Restart AdGuard Mini" */
+"info_button_title_restart" = "Khởi động lại AdGuard Mini";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_restarting" = "Đang khởi động lại...";
+
+/* Info view - Common button title "Try again" */
+"info_common_button_title_try_again" = "Hãy thử lại";
+
+/* Info view - Base common subtitle "Your data may be exposed" */
+"info_base_common_subtitle" = "Dữ liệu của bạn có thể bị lộ";
+
+/* Info view - Common subtitle after an error occurs */
+"info_error_subtitle" = "Vui lòng thử lại hoặc liên hệ với bộ phận hỗ trợ";
+
+/* Info view - Title "Set up your ad blocker" */
+"info_title_set_up_ad_blocker" = "Thiết lập trình chặn quảng cáo của bạn";
+
+/* info_subtitle_set_up_ad_blocker
+Info view - Subtitle "To get AdGuard Mini up and running properly, you’ll need to enable a few settings" */
+"info_subtitle_set_up_ad_blocker" = "Để AdGuard Mini hoạt động đúng cách, bạn cần kiểm tra một vài cài đặt";
+
+/* Info view - Button title "Open AdGuard Mini" */
+"info_button_title_open_main_app" = "Mở AdGuard Mini";
+
+/* Info view - Button title "Opening..." */
+"info_button_title_opening" = "Đang mở...";

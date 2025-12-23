@@ -1,5 +1,12 @@
 #!/bin/bash
+
+# SPDX-FileCopyrightText: AdGuard Software Limited
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 set -e
+
+export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/bin:$PATH"
 
 if [ "$1" == "dev" ]; then
     ENV_NAME=Development
@@ -10,12 +17,46 @@ echo "==== Configure environment for: $ENV_NAME ===="
 echo
 
 bundle config --local path '.bundle/vendor'
-bundle config
+bundle config unset --local without
+
+if [ "$1" != "dev" ]; then
+    bundle config set --local without 'development'
+fi
+
 bundle install
 
+if [ ! ${bamboo_no_need_private_vars} ]; then
+    source ../adguard-mini-private/config.env
+
+    pushd fastlane
+    rm -rf keychain
+    git clone $KEYCHAIN_GIT
+    popd
+
+    bundle exec fastlane create_sens_config
+fi
+
+# Activate python venv and install components
+echo
+echo "Configure Python"
+echo
+source "`dirname $0`/Support/Scripts/include/configure_python.inc"
+
 if [ "$1" == "dev" ]; then
+    # install protobuf if need it
+    if ! command -v protoc &> /dev/null
+    then
+        brew install protobuf
+    fi
+
+    # install swift-protobuf if need it
+    if ! command -v protoc-gen-swift &> /dev/null
+    then
+        brew install swift-protobuf
+    fi
+
     # syncs certificates for `MAS` distribution
-    bundle exec fastlane certs config:Release --env dev
+    bundle exec fastlane certs config:MAS
     # syncs certificates for `Standalone` distribution
-    bundle exec fastlane certs config:Debug --env dev
+    bundle exec fastlane certs config:Debug
 fi

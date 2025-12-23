@@ -1,0 +1,84 @@
+/* Domain view - Item title "Secure page" */
+"item_title_secure_page" = "صفحه امن";
+
+/* Domain view - Domain Item hint "Protection is off for this domain" */
+"item_hint_domain_protection_off" = "محافظت برای این تارنما غیرفعال شده است زیرا ممکن است در عملکرد آن اختلال ایجاد کند";
+
+/* Domain view - Item title "Protection" */
+"item_title_protection" = "حفاظت";
+
+/* Domain view - Item title "Some extensions are off" */
+"item_attention_title_extensions_off" = "برخی افزونه‌ها غیر فعال هستند";
+
+/* Domain view - Item button title "Fix it" */
+"item_attention_button_title_fix_it" = "تعمیر کن";
+
+/* Domain view - Item title "Block element" */
+"item_title_block_element" = "مسدودسازی اجزاء";
+
+/* Domain view - Item title "Report an issue" */
+"item_title_report_an_issue" = "گزارش یک مشکل";
+
+/* Domain view - Item title "Rate AdGuard Mini" */
+"item_title_rate_adguard_mini" = "امتیاز دادن به AdGuard Mini";
+
+/* Info view - Title "Protection is disabled" */
+"info_title_protection_disabled" = "محافظت غیر فعال است";
+
+/* Info view - Title "Failed to enable protection" */
+"info_title_failed_enable_protection" = "محافظت فعال نشد";
+
+/* Info view - Button title "Enable" */
+"info_button_title_enable" = "فعالسازي";
+
+/* Info view - Button title "Enabling..." */
+"info_button_title_enabling" = "در حال فعال کردن...";
+
+/* Info view - Title "AdGuard Mini is not launched" */
+"info_title_main_app_not_running" = "AdGuard Mini راه‌اندازی نشده است";
+
+/* Info view - Title "Failed to launch AdGuard Mini" */
+"info_title_failed_launch_main_app" = "راه‌اندازی AdGuard Mini ناموفق بود";
+
+/* Info view - Button title "Launch AdGuard Mini" */
+"info_button_title_launch" = "راه‌اندازی AdGuard Mini";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_launching" = "در حال راه‌اندازی...";
+
+/* Info view - Title "Something went wrong" */
+"info_title_something_went_wrong" = "مشکلی وجود دارد";
+
+/* Info view - Title "Failed to restart AdGuard Mini" */
+"info_title_failed_restart_main_app" = "راه‌اندازی دوباره AdGuard Mini ناموفق بود";
+
+/* Info view - Subtitle "Please restart the app or contact support" */
+"info_subtitle_restart_app" = "لطفاً برنامه را دوباره راه‌اندازی کنید یا با پشتیبانی تماس بگیرید";
+
+/* Info view - Button title "Restart AdGuard Mini" */
+"info_button_title_restart" = "راه‌اندازی دوباره AdGuard Mini";
+
+/* Info view - Button title "Launching..." */
+"info_button_title_restarting" = "در حال راه‌اندازی دوباره...";
+
+/* Info view - Common button title "Try again" */
+"info_common_button_title_try_again" = "امتحان دوباره";
+
+/* Info view - Base common subtitle "Your data may be exposed" */
+"info_base_common_subtitle" = "ممکن است داده های شما در معرض دید قرار گیرد";
+
+/* Info view - Common subtitle after an error occurs */
+"info_error_subtitle" = "لطفاً دوباره امتحان کنید یا با پشتیبانی تماس بگیرید";
+
+/* Info view - Title "Set up your ad blocker" */
+"info_title_set_up_ad_blocker" = "برپایی مسدود کننده تبلیغات خود";
+
+/* info_subtitle_set_up_ad_blocker
+Info view - Subtitle "To get AdGuard Mini up and running properly, you’ll need to enable a few settings" */
+"info_subtitle_set_up_ad_blocker" = "برای راه‌اندازی صحیح AdGuard Mini، نیاز دارید چند تنظيمات را بررسی کنید";
+
+/* Info view - Button title "Open AdGuard Mini" */
+"info_button_title_open_main_app" = "گشایش AdGuard Mini";
+
+/* Info view - Button title "Opening..." */
+"info_button_title_opening" = "در حال گشایش...";

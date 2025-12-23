@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: AdGuard Software Limited
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+---
+version: 2
+plan:
+  key: ADGMINI-BFM
+plan-permissions:
+- roles:
+  - logged-in
+  permissions:
+  - view
+- users:
+  - am
+  permissions:
+  - view
+  - build
+- groups:
+  - mac-developers
+  permissions:
+  - view
+  - edit
+  - build
+  - clone
+  - admin

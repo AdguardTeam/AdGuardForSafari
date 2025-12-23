@@ -1,0 +1,248 @@
+// SPDX-FileCopyrightText: AdGuard Software Limited
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+import { observer } from 'mobx-react-lite';
+import { useEffect, useState } from 'preact/hooks';
+
+import { getTdsLink, TDS_PARAMS } from 'Common/utils/links';
+import { RouteName } from 'Modules/settings/store/modules';
+import { useSettingsStore } from 'SettingsLib/hooks';
+import { Button, ExternalLink, Icon, Text } from 'UILib';
+
+import { AlreadyPurchasedFlowModal } from '../ActivationFlow';
+
+import { AppStoreVersionActions } from './AppStoreVersionActions';
+import { TermsAndConditionsModal } from './Modals';
+import s from './Paywall.module.pcss';
+import { StandaloneVersionActions } from './StandaloneVersionActions';
+
+import type { IconType } from 'UILib';
+
+/**
+ * Paywall component
+ */
+function PaywallComponent() {
+    const { account, settings } = useSettingsStore();
+
+    const {
+        appStoreSubscriptions,
+        isTrialExpired,
+        isLicenseExpired,
+    } = account;
+
+    /**
+     * License advantages list
+     */
+    const ADVANTAGES: { label: string; icon: IconType }[] = [
+        {
+            label: translate('settings.paywall.advantage.1'),
+            icon: 'quality',
+        },
+        {
+            label: translate('settings.paywall.advantage.3'),
+            icon: 'update',
+        },
+        {
+            label: translate('settings.paywall.advantage.4'),
+            icon: 'phone',
+        },
+    ];
+
+    const { isMASReleaseVariant } = settings;
+
+    const [showAlreadyPurchasedFlowModal, setShowAlreadyPurchasedFlowModal] = useState(false);
+    const [showTermsAndConditionsModal, setShowTermsAndConditionsModal] = useState(false);
+
+    const { width, height } = document.body.getBoundingClientRect();
+    const [size, setSize] = useState<[number, number]>([width, height]);
+
+    useEffect(() => {
+        const handler = () => {
+            const { width: newWidth, height: newHeight } = document.body.getBoundingClientRect();
+            setSize([newWidth, newHeight]);
+        };
+
+        document.body.addEventListener('sizechange', handler);
+        return () => {
+            document.body.removeEventListener('sizechange', handler);
+        };
+    }, []);
+
+    const getBackgroundImageClassName = () => {
+        if (isMASReleaseVariant) {
+            return s.Paywall_bg__defaultImage;
+        }
+
+        if (isTrialExpired) {
+            return s.Paywall_bg__trialExpiredImage;
+        }
+
+        if (isLicenseExpired) {
+            return s.Paywall_bg__licenseExpiredImage;
+        }
+
+        return s.Paywall_bg__defaultImage;
+    };
+
+    const getPaywallTitle = () => {
+        if (isMASReleaseVariant) {
+            return translate('settings.paywall.title');
+        }
+
+        if (isTrialExpired) {
+            return translate('settings.paywall.trial.expired.title');
+        }
+
+        if (isLicenseExpired) {
+            return translate('settings.paywall.license.expired.title');
+        }
+
+        return translate('settings.paywall.title');
+    };
+
+    const minSized = size[0] === MIN_WIDTH && size[1] === MIN_HEIGHT;
+
+    const isRightSide = (isTrialExpired || isLicenseExpired) && !isMASReleaseVariant;
+
+    const offer = appStoreSubscriptions?.result?.promoInfo;
+    const showOffer = offer && (
+        appStoreSubscriptions?.result?.annual?.introOfferDisplayPrice ||
+        appStoreSubscriptions?.result?.monthly?.introOfferDisplayPrice
+    );
+
+
+
+    return (
+        <div className={s.Paywall}>
+            <div className={cx(s.Paywall_bg, getBackgroundImageClassName(), minSized && s.Paywall_bg__minSized)}>
+                <Icon
+                    className={s.Paywall_cross}
+                    icon="cross"
+                    onClick={() => account.closePaywall()}
+                />
+                {showOffer && !isRightSide && (
+                    <>
+                        <div className={s.Paywall_offer}>
+                            <Text
+                                className={s.Paywall_offer_text}
+                                lineHeight="none"
+                                type="t1"
+                            >
+                                🛍️&nbsp;{offer.title}
+                            </Text>
+                            <Text
+                                lineHeight="none"
+                                type="t2"
+                            >
+                                {offer.subtitle}
+                            </Text>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className={s.Paywall_offer_line}>
+                            <path d="M1.20703 0.5L18.707 18V0.5H1.20703Z" fill="var(--fills-notifications-orange-default)" stroke="var(--stroke-icons-attention-icon-default)"/>
+                        </svg>
+                    </>
+                )}
+                <div className={cx(
+                    s.Paywall_container,
+                    isRightSide ? s.Paywall_container__right : s.Paywall_container__left,
+                )}
+                >
+                    <Text
+                        className={s.Paywall_title}
+                        lineHeight="none"
+                        type="h4"
+                    >
+                        {getPaywallTitle()}
+                    </Text>
+                    <Text
+                        className={s.Paywall_desc}
+                        lineHeight="none"
+                        type="t1"
+                    >
+                        {(isTrialExpired || isLicenseExpired) && !isMASReleaseVariant
+                            ? translate('settings.paywall.expired.desc')
+                            : translate('settings.paywall.desc')}
+                    </Text>
+                    <div className={s.Paywall_advantages}>
+                        {ADVANTAGES.map(({ label, icon }) => (
+                            <div
+                                key={label}
+                                className={s.Paywall_advantages_advantage}
+                            >
+                                <Icon
+                                    className={s.Paywall_advantages_advantage_icon}
+                                    icon={icon}
+                                />
+                                <Text
+                                    lineHeight="none"
+                                    type="t1"
+                                >
+                                    {label}
+                                </Text>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className={s.Paywall_actions}>
+                        {isMASReleaseVariant
+                            ? <AppStoreVersionActions />
+                            : <StandaloneVersionActions />}
+                    </div>
+
+                    <div className={s.Paywall_footer}>
+                        <Button
+                            className={cx(s.Paywall_footer_btn, tx.button.textButton)}
+                            type="text"
+                            onClick={() => setShowAlreadyPurchasedFlowModal(true)}
+                        >
+                            <Text lineHeight="none" type="t2">
+                                {translate('settings.activation.flow.already.purchased')}
+                            </Text>
+                        </Button>
+                        {isMASReleaseVariant && appStoreSubscriptions && (
+                            <>
+                                <div className={s.Paywall_footer_link}>
+                                    <ExternalLink
+                                        className={cx(s.Paywall_footer_btn, tx.button.textButton)}
+                                        href={getTdsLink(TDS_PARAMS.eula, RouteName.license)}
+                                        textType="t2"
+                                        noLineHeight
+                                        noUnderline
+                                    >
+                                        {translate('paywall.terms.of.use')}
+                                    </ExternalLink>
+                                </div>
+                                <div className={s.Paywall_footer_link}>
+                                    <ExternalLink
+                                        className={cx(s.Paywall_footer_btn, tx.button.textButton)}
+                                        href={getTdsLink(TDS_PARAMS.privacy, RouteName.license)}
+                                        textType="t2"
+                                        noLineHeight
+                                        noUnderline
+                                    >
+                                        {translate('paywall.privacy.policy')}
+                                    </ExternalLink>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            {showTermsAndConditionsModal && (
+                <TermsAndConditionsModal onClose={() => setShowTermsAndConditionsModal(false)} />
+            )}
+
+            {showAlreadyPurchasedFlowModal && (
+                <AlreadyPurchasedFlowModal onClose={() => setShowAlreadyPurchasedFlowModal(false)} />
+            )}
+            <div
+                className={s.Paywall_backdrop}
+                onClick={() => account.closePaywall()}
+            />
+        </div>
+    );
+}
+
+export const Paywall = observer(PaywallComponent);

@@ -1,0 +1,167 @@
+{
+  "pins" : [
+    {
+      "identity" : "adguard-mac-lib",
+      "kind" : "remoteSourceControl",
+      "location" : "ssh://git@bit.int.agrd.dev:7999/adguard-mac/adguard-mac-lib.git",
+      "state" : {
+        "revision" : "ae6b92f2f7a081626b83acc8ae8a0a8ab5d28d64",
+        "version" : "12.2.0"
+      }
+    },
+    {
+      "identity" : "filterlistmanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AdguardTeam/FilterListManager.git",
+      "state" : {
+        "branch" : "v2.3.5@swift-5",
+        "revision" : "d93fc16fb3cc1abef7d959b46ac5580161e8e6c6"
+      }
+    },
+    {
+      "identity" : "punycodeswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gumob/PunycodeSwift.git",
+      "state" : {
+        "revision" : "30a462bdb4398ea835a3585472229e0d74b36ba5",
+        "version" : "3.0.0"
+      }
+    },
+    {
+      "identity" : "safariconverterlib",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AdguardTeam/SafariConverterLib",
+      "state" : {
+        "branch" : "v4.0.4",
+        "revision" : "17c6128ca2af185ffb245c38b4f921be891bd31a"
+      }
+    },
+    {
+      "identity" : "sp-appstore",
+      "kind" : "remoteSourceControl",
+      "location" : "ssh://git@bit.int.agrd.dev:7999/adguard-mac/sp-appstore.git",
+      "state" : {
+        "branch" : "0.8.0",
+        "revision" : "3631dc11b44aa500d3c5f8ce05d8e69f26c45331"
+      }
+    },
+    {
+      "identity" : "sp-backend",
+      "kind" : "remoteSourceControl",
+      "location" : "ssh://git@bit.int.agrd.dev:7999/adguard-mac/sp-backend.git",
+      "state" : {
+        "branch" : "0.6.0",
+        "revision" : "0c8a1e0f189bae8cc98a52d2800fce8f1bf05e16"
+      }
+    },
+    {
+      "identity" : "sp-color-palette",
+      "kind" : "remoteSourceControl",
+      "location" : "ssh://git@bit.int.agrd.dev:7999/adguard-mac/sp-color-palette.git",
+      "state" : {
+        "revision" : "0052497a78a166ff609dc140378e3820f3beb7db",
+        "version" : "2025.5.0"
+      }
+    },
+    {
+      "identity" : "sp-flm",
+      "kind" : "remoteSourceControl",
+      "location" : "ssh://git@bit.int.agrd.dev:7999/adguard-mac/sp-flm.git",
+      "state" : {
+        "branch" : "0.19.0",
+        "revision" : "b3b8b65e69c0d67487443f603ba02e6e25faf9df"
+      }
+    },
+    {
+      "identity" : "sp-sciter-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "ssh://git@bit.int.agrd.dev:7999/adguard-mac/sp-sciter-sdk.git",
+      "state" : {
+        "branch" : "6.0.2.25-unlink.rev.1",
+        "revision" : "18c1080eba33f78827a861c446ead466838547f0"
+      }
+    },
+    {
+      "identity" : "sp-sentry",
+      "kind" : "remoteSourceControl",
+      "location" : "ssh://git@bit.int.agrd.dev:7999/adguard-mac/sp-sentry.git",
+      "state" : {
+        "revision" : "ac7ede4942989f6dc589b62135233740ce5f95ef",
+        "version" : "9.0.0"
+      }
+    },
+    {
+      "identity" : "sp-xpcgate",
+      "kind" : "remoteSourceControl",
+      "location" : "ssh://git@bit.int.agrd.dev:7999/adguard-mac/sp-xpcgate.git",
+      "state" : {
+        "revision" : "5addd7f75fee883f97bf11dfd3370d5febaf09cf",
+        "version" : "15.0.1"
+      }
+    },
+    {
+      "identity" : "sparkle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparkle-project/Sparkle",
+      "state" : {
+        "revision" : "9a1d2a19d3595fcf8d9c447173f9a1687b3dcadb",
+        "version" : "2.8.0"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "41982a3656a71c768319979febd796c6fd111d5c",
+        "version" : "1.5.0"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections.git",
+      "state" : {
+        "revision" : "7b847a3b7008b2dc2f47ca3110d8c782fb2e5c7e",
+        "version" : "1.3.0"
+      }
+    },
+    {
+      "identity" : "swift-protobuf",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-protobuf.git",
+      "state" : {
+        "revision" : "102a647b573f60f73afdce5613a51d71349fe507",
+        "version" : "1.30.0"
+      }
+    },
+    {
+      "identity" : "swift-psl",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ameshkov/swift-psl",
+      "state" : {
+        "revision" : "cb2c44b99858261ff9c67de3bdf34296bf1337c9",
+        "version" : "1.1.59"
+      }
+    },
+    {
+      "identity" : "swiftlintplugins",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SimplyDanny/SwiftLintPlugins.git",
+      "state" : {
+        "revision" : "ef264ee3ccea175f5c9efc8b814ccb48cd3fdaac",
+        "version" : "0.62.1"
+      }
+    },
+    {
+      "identity" : "xmlcoder",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CoreOffice/XMLCoder.git",
+      "state" : {
+        "revision" : "b1e944cbd0ef33787b13f639a5418d55b3bed501",
+        "version" : "0.17.1"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: AdGuard Software Limited
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# JS
+.vscode
+/node_modules
+.eslintcache
+dist

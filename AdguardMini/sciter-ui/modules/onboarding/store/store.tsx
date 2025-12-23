@@ -1,0 +1,49 @@
+// SPDX-FileCopyrightText: AdGuard Software Limited
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+import { createContext } from 'preact';
+
+import { EmptyValue } from 'Apis/types';
+import { Action } from 'Modules/common/utils/EventAction';
+
+import {
+    Router,
+    Steps,
+} from './modules';
+
+import type { EffectiveTheme } from 'Apis/types';
+
+/**
+ * Onboarding app store
+ */
+export class OnboardingStore {
+    public steps: Steps;
+
+    public router: Router;
+
+    /**
+     * Onboarding window effective theme changed event
+     */
+    public readonly onboardingWindowEffectiveThemeChanged = new Action<EffectiveTheme>();
+
+    /**
+     * ctor
+     */
+    constructor() {
+        this.steps = new Steps(this);
+        this.router = new Router(this);
+    }
+
+    /**
+     * Get effective theme
+     */
+    public async getEffectiveTheme(): Promise<EffectiveTheme> {
+        const { value } = await window.API.onboardingService.GetEffectiveTheme(new EmptyValue());
+        return value;
+    }
+}
+
+export const store = new OnboardingStore();
+const StoreContext = createContext<OnboardingStore>(store);
+export default StoreContext;

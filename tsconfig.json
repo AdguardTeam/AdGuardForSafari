@@ -1,0 +1,49 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "alwaysStrict": true,
+        "baseUrl": "./",
+        "allowJs": true,
+        "target": "es6",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "noResolve": false,
+        "noImplicitAny": true,
+        "removeComments": true,
+        "sourceMap": true,
+        "jsx": "react-jsx",
+        "jsxImportSource": "preact",
+        "strict": true,
+        "resolveJsonModule": true,
+        "types": [
+            "node",
+            "preact"
+        ],
+        "paths": {
+            "Apis/*": ["AdguardMini/sciter-ui/modules/common/apis/*"],
+            "ApiWindow": ["AdguardMini/sciter-ui/modules/common/apis/apiWindow.ts"],
+            "Intl": ["AdguardMini/sciter-ui/modules/common/intl/index"],
+            "Theme": ["AdguardMini/sciter-ui/modules/common/theme"],
+            "Theme/*": ["AdguardMini/sciter-ui/modules/common/theme/*"],
+            "Modules/*": ["AdguardMini/sciter-ui/modules/*"],
+            "Common": ["AdguardMini/sciter-ui/modules/common/index"],
+            "Common/*": ["AdguardMini/sciter-ui/modules/common/*"],
+            "Hooks": ["AdguardMini/sciter-ui/modules/common/hooks/hooks.ts"],
+            "Utils/*": ["AdguardMini/sciter-ui/modules/common/utils/*"],
+            "Hooks/*": ["AdguardMini/sciter-ui/modules/common/hooks/*"],
+            "UILib": ["AdguardMini/sciter-ui/modules/common/components/index"],
+            "TrayStore": ["AdguardMini/sciter-ui/modules/tray/store/index"],
+            "TrayStore/*": ["AdguardMini/sciter-ui/modules/tray/store/*"],
+            "SettingsStore": ["AdguardMini/sciter-ui/modules/settings/store/index"],
+            "SettingsStore/*": ["AdguardMini/sciter-ui/modules/settings/store/*"],
+            "TrayLib/*": ["AdguardMini/sciter-ui/modules/tray/lib/*"],
+            "SettingsLib/*": ["AdguardMini/sciter-ui/modules/settings/lib/*"],
+            "OnboardingStore": ["AdguardMini/sciter-ui/modules/onboarding/store/index"],
+            "OnboardingStore/*": ["AdguardMini/sciter-ui/modules/onboarding/store/*"],
+            "OnboardingLib/*": ["AdguardMini/sciter-ui/modules/onboarding/lib/*"]
+        },
+        "useDefineForClassFields": true
+    },
+    "include": ["AdguardMini/sciter-ui/modules/**/*", "AdguardMini/sciter-ui/@types/**/*", "AdguardMini/sciter-ui/scripts/devserver-modules"],
+    "exclude": []
+  }

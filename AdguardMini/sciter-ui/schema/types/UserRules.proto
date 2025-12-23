@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option optimize_for = CODE_SIZE;
+
+// Describes User rules page settings
+message UserRules {
+    // All user rules state
+    bool enabled = 1;
+    // User rules
+    repeated UserRule rules = 2;
+}
+
+// Describes User Rule
+message UserRule {
+    // Rule text
+    string rule = 1;
+    // Is rule enabled
+    bool enabled = 2;
+}
+
+message UserRulesCallbackState {
+    // User rules
+    repeated UserRule rules = 1;
+}

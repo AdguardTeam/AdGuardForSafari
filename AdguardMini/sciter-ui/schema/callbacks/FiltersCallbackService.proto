@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+import "PrimitivesWrappers.proto";
+import "Filters.proto";
+
+/* Service handles filters lists */
+service FiltersCallbackService {
+    /* Fires when filters list updated */
+    rpc OnFiltersUpdate(EmptyValue) returns (EmptyValue);
+    /* Fires when filters index updated */
+    rpc OnFiltersIndexUpdate(FiltersIndex) returns (EmptyValue);
+    /* Fires when user asked to subscribe on custom filter */
+    rpc OnCustomFiltersSubscribe(StringValue) returns (EmptyValue);
+}

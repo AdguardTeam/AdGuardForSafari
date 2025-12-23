@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option optimize_for = CODE_SIZE;
+
+// Describes AdvancedBlocking settings page
+message AdvancedBlocking {
+    bool advanced_rules = 1;
+    bool adguard_extra = 2;
+}

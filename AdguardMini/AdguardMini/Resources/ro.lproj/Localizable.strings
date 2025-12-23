@@ -1,0 +1,74 @@
+/* Common - App displayed name. */
+"app_displayed_name" = "AdGuard Mini";
+
+/* App Menu - "About" title. */
+"app_menu_about_title" = "Despre AdGuard Mini";
+
+/* App Menu - "Preferences..." title. */
+"app_menu_preferences_title" = "Preferințe...";
+
+/* App Menu - "Hide AdGuard Mini" title. */
+"app_menu_hide_title" = "Ascunde AdGuard Mini";
+
+/* App Menu - "Hide Others" title. */
+"app_menu_hide_others_title" = "Ascunde Altele";
+
+/* App Menu - "Show All" title. */
+"app_menu_show_all_title" = "Arata tot";
+
+/* App Menu - "Close" title. */
+"app_menu_close_title" = "Închideți";
+
+/* App Menu - "Quit AdGuard Mini" title. */
+"app_menu_quit_title" = "Ieșiți din AdGuard Mini";
+
+/* Terminating app Alert - Message text "Quit AdGuard Mini?" */
+"terminate_app_alert_message_text" = "Ieșiți din AdGuard Mini?";
+
+/* Terminating app Alert - Informative text */
+"terminate_app_alert_informative_text" = "Pentru a gestiona filtrarea și a verifica automat actualizările pentru filtre, permiteți AdGuard Mini să ruleze în fundal";
+
+/* Terminating app Alert - Button title "Run in background" */
+"terminate_app_alert_button_title_run_in_background" = "Rulează în fundal";
+
+/* Terminating app Alert - Button title "Quit" */
+"terminate_app_alert_button_title_quit" = "Părăsiți";
+
+/* Terminating app Alert - Suppression Button title "Don’t ask me again" */
+"terminate_app_alert_suppression_button_title" = "Nu mă mai întreba";
+
+/* Name of the crashed application for title of the crash reporter */
+"crash_reporter_title_adguard_component" = "Componenta AdGuard Mini";
+
+/* Crash Reporter UI (SFBCrashReporterWindowController) */
+"window_controller_crash_reporter" = "Reporter Crash: %1$@ (%2$@)";
+
+/* Request user about restarting AdGuard Mini */
+"restart_button" = "Repornire";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_quit" = "Părăsiți";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_title" = "Reporniți AdGuard Mini";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_text" = "Setările au fost resetate. Vă rugăm să reporniți AdGuard Mini pentru a-i restabili funcționalitatea";
+
+/* Title on Close button in error message */
+"close_button" = "Închideți";
+
+/* Request user about resetting AdGuard Mini */
+"reset_setting_button" = "Resetare";
+
+/* Request user about resetting AdGuard Mini */
+"reset_settings_message" = "Resetați setările AdGuard Mini?";
+
+/* Request user about resetting AdGuard Mini */
+"reseting_settings_request" = "Toate setările AdGuard Mini vor fi resetate la valorile implicite. Setările personalizate vor fi eliminate";
+
+/* Notify the user that the application cannot be run from the current location. */
+"error_running_app" = "Mutați AdGuard Mini în folderul Aplicații";
+
+/* Notify the user that the application should be moved to the Applications folder. */
+"error_running_app_message" = "AdGuard Mini trebuie să fie în folderul Aplicații pentru a rula.\nVă rugăm să o mutați acolo și să încercați din nou";

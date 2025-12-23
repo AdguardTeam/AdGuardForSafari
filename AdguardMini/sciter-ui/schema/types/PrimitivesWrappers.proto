@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+option optimize_for = CODE_SIZE;
+
+// originally from https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/wrappers.proto
+
+// Empty object - in fact an alias to void
+message EmptyValue {
+}
+
+// Wrapper message for `double`.
+//
+// The JSON representation for `DoubleValue` is JSON number.
+message DoubleValue {
+    // The double value.
+    double value = 1;
+}
+
+// Wrapper message for `float`.
+//
+// The JSON representation for `FloatValue` is JSON number.
+message FloatValue {
+    // The float value.
+    float value = 1;
+}
+
+// Wrapper message for `int64`.
+//
+// The JSON representation for `Int64Value` is JSON string.
+message Int64Value {
+    // The int64 value.
+    int64 value = 1;
+}
+
+// Wrapper message for `uint64`.
+//
+// The JSON representation for `UInt64Value` is JSON string.
+message UInt64Value {
+    // The uint64 value.
+    uint64 value = 1;
+}
+
+// Wrapper message for `int32`.
+//
+// The JSON representation for `Int32Value` is JSON number.
+message Int32Value {
+    // The int32 value.
+    int32 value = 1;
+}
+
+// Wrapper message for `uint32`.
+//
+// The JSON representation for `UInt32Value` is JSON number.
+message UInt32Value {
+    // The uint32 value.
+    uint32 value = 1;
+}
+
+// Wrapper message for `bool`.
+//
+// The JSON representation for `BoolValue` is JSON `true` and `false`.
+message BoolValue {
+    // The bool value.
+    bool value = 1;
+}
+
+// Wrapper message for `string`.
+//
+// The JSON representation for `StringValue` is JSON string.
+message StringValue {
+    // The string value.
+    string value = 1;
+}
+
+// Wrapper message for `string`.
+//
+// The JSON representation for `StringValue` is JSON string.
+message StringValueArray {
+    // The string value.
+    repeated string value = 1;
+}
+
+// Wrapper message for optionsal `string`. By idea value should be nil in swift but its String()
+//
+// The JSON representation for `OptionalStringValue` is JSON string.
+message OptionalStringValue {
+    // The string value.
+    optional string value = 1;
+}
+
+// Wrapper message for `bytes`.
+//
+// The JSON representation for `BytesValue` is JSON string.
+message BytesValue {
+    // The bytes value.
+    bytes value = 1;
+}

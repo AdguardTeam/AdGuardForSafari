@@ -1,0 +1,74 @@
+/* Common - App displayed name. */
+"app_displayed_name" = "AdGuard Mini";
+
+/* App Menu - "About" title. */
+"app_menu_about_title" = "Про AdGuard Mini";
+
+/* App Menu - "Preferences..." title. */
+"app_menu_preferences_title" = "Параметри...";
+
+/* App Menu - "Hide AdGuard Mini" title. */
+"app_menu_hide_title" = "Сховати AdGuard Mini";
+
+/* App Menu - "Hide Others" title. */
+"app_menu_hide_others_title" = "Приховати решту";
+
+/* App Menu - "Show All" title. */
+"app_menu_show_all_title" = "Показати все";
+
+/* App Menu - "Close" title. */
+"app_menu_close_title" = "Закрити";
+
+/* App Menu - "Quit AdGuard Mini" title. */
+"app_menu_quit_title" = "Вийти з AdGuard Mini";
+
+/* Terminating app Alert - Message text "Quit AdGuard Mini?" */
+"terminate_app_alert_message_text" = "Вийти з AdGuard Mini?";
+
+/* Terminating app Alert - Informative text */
+"terminate_app_alert_informative_text" = "Щоб керувати фільтрацією та автоматично перевіряти оновлення фільтрів, дозвольте AdGuard Mini працювати у фоновому режимі";
+
+/* Terminating app Alert - Button title "Run in background" */
+"terminate_app_alert_button_title_run_in_background" = "Запустити у фоновому режимі";
+
+/* Terminating app Alert - Button title "Quit" */
+"terminate_app_alert_button_title_quit" = "Вихід";
+
+/* Terminating app Alert - Suppression Button title "Don’t ask me again" */
+"terminate_app_alert_suppression_button_title" = "Більше не питати";
+
+/* Name of the crashed application for title of the crash reporter */
+"crash_reporter_title_adguard_component" = "Компонент AdGuard Mini";
+
+/* Crash Reporter UI (SFBCrashReporterWindowController) */
+"window_controller_crash_reporter" = "Відправка звіту про збій: %1$@ (%2$@)";
+
+/* Request user about restarting AdGuard Mini */
+"restart_button" = "Перезапустити";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_quit" = "Вихід";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_title" = "Перезапустіть AdGuard Mini";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_text" = "Налаштування були скинуті. Перезапустіть AdGuard Mini, щоб відновити його функціональність";
+
+/* Title on Close button in error message */
+"close_button" = "Закрити";
+
+/* Request user about resetting AdGuard Mini */
+"reset_setting_button" = "Скинути";
+
+/* Request user about resetting AdGuard Mini */
+"reset_settings_message" = "Скинути налаштування AdGuard Mini?";
+
+/* Request user about resetting AdGuard Mini */
+"reseting_settings_request" = "Усі налаштування AdGuard Mini будуть скинуті до значень за замовчуванням. Користувацькі налаштування будуть видалені";
+
+/* Notify the user that the application cannot be run from the current location. */
+"error_running_app" = "Перемістити AdGuard Mini до папки «Програми»";
+
+/* Notify the user that the application should be moved to the Applications folder. */
+"error_running_app_message" = "AdGuard Mini має бути у папці «Програми», щоб працювати.\nБудь ласка, перемістіть його туди та спробуйте ще раз";

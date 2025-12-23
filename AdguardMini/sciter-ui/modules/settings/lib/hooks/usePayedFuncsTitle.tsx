@@ -1,0 +1,54 @@
+// SPDX-FileCopyrightText: AdGuard Software Limited
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+import theme from 'Theme';
+import { Button, Text } from 'UILib';
+
+import s from './PayedFuncsTitle.module.pcss';
+import { useSettingsStore } from './useSettingsStore';
+
+/**
+ * Hook for payed functions title
+ *
+ * Trial available: "Try for free" action;
+ * No trial available, standalone version: "Get full version" action;
+ * No trial available, MAS version: "Subscribe" action;
+ */
+export const usePayedFuncsTitle = () => {
+    const { account, settings } = useSettingsStore();
+    const { isLicenseOrTrialActive, trialAvailableDays } = account;
+    const { isMASReleaseVariant } = settings;
+
+    const renderShowPaywallBtn = (text: string) => (
+        <Button
+            className={s.PayedFuncsTitle_button}
+            type="text"
+            onClick={() => account.showPaywall()}
+        >
+            <Text className={theme.color.orange} type="t2">
+                {text}
+            </Text>
+        </Button>
+    );
+
+    const renderDescription = () => {
+        const params = { btn: renderShowPaywallBtn };
+
+        if (trialAvailableDays > 0) {
+            return translate('advanced.blocking.extra.try', params);
+        }
+
+        if (isMASReleaseVariant) {
+            return translate('advanced.blocking.extra.subscribe', params);
+        }
+
+        return translate('advanced.blocking.extra.pay', params);
+    };
+
+    return !isLicenseOrTrialActive ? (
+        <Text className={theme.color.orange} type="t2">
+            {renderDescription()}
+        </Text>
+    ) : undefined;
+};

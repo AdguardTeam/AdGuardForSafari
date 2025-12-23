@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+option optimize_for = CODE_SIZE;
+
+import "Helpers.proto";
+
+// Describes license or error response
+message LicenseOrError {
+    oneof result {
+        License license = 1;
+        bool error = 2;
+    }
+}
+
+// Describes user license
+message License {
+    int64 valid_until = 1;
+    int64 renewal_date = 2;
+    string license_key = 3;
+    int32 current_devices = 4;
+    int32 total_devices = 5;
+    LicenseStatus status = 6;
+    LicenseType type = 7;
+    SubscriptionStatus subscription_status = 8;
+    string application_key_owner = 9;
+    bool license_lifetime = 10;
+    bool license_trial = 11;
+    bool app_store_subscription = 12;
+    bool can_reset = 13;
+}
+
+enum LicenseStatus {
+    LicenseStatus_unknown = 0;
+    LicenseStatus_active = 1;
+    LicenseStatus_trial = 2;
+    LicenseStatus_free = 3;
+    LicenseStatus_blocked_app_id = 4;
+    LicenseStatus_expired = 5;
+    LicenseStatus_uninstall = 6;
+    LicenseStatus_wrong_key = 7;
+    LicenseStatus_already_activate = 8;
+    LicenseStatus_blocked = 9;
+}
+
+enum LicenseType {
+    LicenseType_unknown = 0;
+    LicenseType_personal = 1;
+    LicenseType_family = 2;
+    LicenseType_standard = 3;
+    LicenseType_mobile = 4;
+    LicenseType_premium = 5;
+    LicenseType_beta = 6;
+    LicenseType_bonus = 7;
+}
+
+enum SubscriptionStatus {
+    SubscriptionStatus_unknown = 0;
+    SubscriptionStatus_active = 1;
+    SubscriptionStatus_past_due = 2;
+    SubscriptionStatus_paused = 3;
+    SubscriptionStatus_deleted = 4;
+}
+
+enum WebActivateResult {
+    WebActivateResult_unknown = 0;
+    WebActivateResult_cancelled = 1;
+    WebActivateResult_user_redirected_to_purchase = 2;
+    WebActivateResult_success = 3;
+}
+
+message WebActivateResultMessage {
+    optional WebActivateResult result = 1;
+    OptionalError error = 2;
+}

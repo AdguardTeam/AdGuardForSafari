@@ -1,0 +1,89 @@
+# SPDX-FileCopyrightText: AdGuard Software Limited
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# frozen_string_literal: true
+
+desc 'Create sciter resources and UI'
+desc 'Options:'
+desc '  - config: STRING If config is set to Debug, sciter resources will be built in `dev` configuration, otherwise `prod`. The default value is empty.'
+lane :build_sciter_ui do |options|
+  # Need for building Sciter UI
+  ENV['APP_VERSION'] = @build_settings['AG_FULL_VERSION'] if ENV['APP_VERSION'].nil?
+  is_dev_build = options[:config] == 'Debug'
+
+  build_type = 'prod'
+  build_type = 'dev' if is_dev_build
+
+  Dir.chdir('..') do
+    sh(
+      'yarn',
+      error_callback: lambda { |error_output|
+        UI.user_error!("Failed run yarn: #{error_output}")
+      }
+    )
+    sh(
+      'yarn',
+      "build:#{build_type}",
+      error_callback: lambda { |error_output|
+        UI.user_error!("Failed build Sciter resources: #{error_output}")
+      }
+    )
+    sh(
+      'AdguardMini/Scripts/generateUI.sh',
+      error_callback: lambda { |error_output|
+        UI.user_error!("Failed generate UI: #{error_output}")
+      }
+    )
+  end
+end
+
+desc 'Update proto schema'
+lane :update_proto_schema do |_options|
+  # Required versions
+  required_protoc_version = '29.3'
+  required_protoc_gen_swift_version = '1.29.0'
+
+  # Check protoc version
+  protoc_version_output = sh('protoc --version', log: false).strip
+  protoc_version = protoc_version_output.match(/libprotoc (\d+\.\d+(?:\.\d+)?)/)[1]
+
+  if protoc_version != required_protoc_version
+    UI.user_error!(
+      "protoc version mismatch!\n" \
+      "Required: #{required_protoc_version}\n" \
+      "Current:  #{protoc_version}\n\n" \
+      "Please install the correct version:\n" \
+      "  brew unlink protobuf && brew install protobuf@#{required_protoc_version.split('.')[0]}"
+    )
+  end
+
+  # Check protoc-gen-swift version
+  protoc_gen_swift_version_output = sh('protoc-gen-swift --version', log: false).strip
+  protoc_gen_swift_version = protoc_gen_swift_version_output.match(/protoc-gen-swift (\d+\.\d+\.\d+)/)[1]
+
+  if protoc_gen_swift_version != required_protoc_gen_swift_version
+    UI.user_error!(
+      "protoc-gen-swift version mismatch!\n" \
+      "Required: #{required_protoc_gen_swift_version}\n" \
+      "Current:  #{protoc_gen_swift_version}\n\n" \
+      "Please install the correct version:\n" \
+      "  brew uninstall swift-protobuf\n" \
+      '  brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/4b0c9e5/Formula/s/swift-protobuf.rb'
+    )
+  end
+
+  UI.success('Version check passed:')
+  UI.message("  protoc:            #{protoc_version}")
+  UI.message("  protoc-gen-swift:  #{protoc_gen_swift_version}")
+
+  Dir.chdir('..') do
+    FastlaneCore::CommandExecutor.execute(
+      command: 'AdguardMini/Scripts/updateProtoSchema.sh',
+      print_all: true,
+      error: proc do |error_output|
+        UI.user_error!("Failed generate proto schema: #{error_output}")
+      end
+    )
+  end
+end

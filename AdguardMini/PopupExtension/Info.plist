@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>Safari</string>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.Safari.extension</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>$(PRODUCT_MODULE_NAME).SafariExtensionHandler</string>
+		<key>SFSafariContentScript</key>
+		<array>
+			<dict>
+				<key>Script</key>
+				<string>advanced-script.js</string>
+			</dict>
+			<dict>
+				<key>Excluded URL Patterns</key>
+				<array>
+					<string>http://captcha-api.yandex.ru/*</string>
+					<string>https://captcha-api.yandex.ru/*</string>
+					<string>http://ya.ru/showcaptcha</string>
+					<string>https://ya.ru/showcaptcha</string>
+					<string>http://mil.ru/*</string>
+					<string>https://mil.ru/*</string>
+					<string>http://*.wikipedia.org/*</string>
+					<string>https://*.wikipedia.org/*</string>
+					<string>http://*.icloud.com/*</string>
+					<string>https://*.icloud.com/*</string>
+					<string>http://*.hangouts.google.com/*</string>
+					<string>https://*.hangouts.google.com/*</string>
+					<string>http://*.www.facebook.com/plugins/*</string>
+					<string>https://*.www.facebook.com/plugins/*</string>
+					<string>http://*.www.facebook.com/v/plugins/*</string>
+					<string>https://*.www.facebook.com/v/plugins/*</string>
+					<string>http://*.disqus.com/embed/comments/*</string>
+					<string>https://*.disqus.com/embed/comments/*</string>
+					<string>http://*.vk.com/widget/*</string>
+					<string>https://*.vk.com/widget/*</string>
+					<string>http://*.twitter.com/intent/*</string>
+					<string>https://*.twitter.com/intent/*</string>
+					<string>http://*.www.youtube.com/embed/*</string>
+					<string>https://*.www.youtube.com/embed/*</string>
+					<string>http://*.player.vimeo.com/*</string>
+					<string>https://*.player.vimeo.com/*</string>
+					<string>http://*.coub.com/embed/*</string>
+					<string>https://*.coub.com/embed/*</string>
+					<string>http://*.staticxx.facebook.com/connect/xd_arbiter/*</string>
+					<string>https://*.staticxx.facebook.com/connect/xd_arbiter/*</string>
+					<string>http://*.vk.com/q_frame/*</string>
+					<string>https://*.vk.com/q_frame/*</string>
+					<string>http://*.tpc.googlesyndication.com/*</string>
+					<string>https://*.tpc.googlesyndication.com/*</string>
+					<string>http://*.syndication.twitter.com/*</string>
+					<string>https://*.syndication.twitter.com/*</string>
+					<string>http://*.platform.twitter.com/*</string>
+					<string>https://*.platform.twitter.com/*</string>
+					<string>http://*.tutosdeath.blogspot.com/*</string>
+					<string>https://*.tutosdeath.blogspot.com/*</string>
+					<string>http://*.notifications.google.com/*</string>
+					<string>https://*.notifications.google.com/*</string>
+					<string>http://*.google.com/recaptcha/*</string>
+					<string>https://*.google.com/recaptcha/*</string>
+					<string>http://*.bizmania.ru/*</string>
+					<string>https://*.bizmania.ru/*</string>
+					<string>http://*.bunkr.cr/*</string>
+					<string>https://*.bunkr.cr/*</string>
+				</array>
+				<key>Script</key>
+				<string>adguard-extra-injector.js</string>
+			</dict>
+		</array>
+		<key>SFSafariToolbarItem</key>
+		<dict>
+			<key>Action</key>
+			<string>Popover</string>
+			<key>Identifier</key>
+			<string>Button</string>
+			<key>Image</key>
+			<string>ToolbarStartIcon.pdf</string>
+			<key>Label</key>
+			<string>AdGuard Mini</string>
+		</dict>
+		<key>SFSafariWebsiteAccess</key>
+		<dict>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>NSHumanReadableDescription</key>
+	<string>You can use this extension to manage AdGuard Mini settings. For instance, pause blocking on a website, or block an ad manually.</string>
+</dict>
+</plist>

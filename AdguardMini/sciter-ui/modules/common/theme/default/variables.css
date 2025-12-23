@@ -1,0 +1,79 @@
+/*
+ * SPDX-FileCopyrightText: AdGuard Software Limited
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+ 
+:root {
+    /* zi = z-index */
+    --zi-below: -1;
+    --zi-default: 0;
+    --zi-above: 1;
+    --zi-above-extra: 2;
+    --zi-modal-background: 3;
+    --zi-modal: 4;
+    --zi-tooltip: 1000;
+    --zi-paywall: 1001;
+    --zi-paywall-modal: 1002;
+
+    --zi-stories: 1300;
+
+    --border-radius: 8px;
+}
+
+/* magrins/paddings */
+:root {
+    --m-xxxs: 4px;
+    --m-xxs: 8px;
+    --m-xs: 12px;
+    --m-s: 16px;
+    --m-m: 24px;
+    --m-l: 32px;
+    --m-xl: 40px;
+    --m-xxl: 48px;
+    --m-xxxl: 56px;
+}
+
+/* fonts */
+:root {
+    /* ft = font size text*/
+    --ft-s: 12px;
+    --ft-m: 14px;
+    --ft-l: 16px;
+    /* fh = font size header*/
+    --fh-h0: 64px;
+    --fh-h1: 48px;
+    --fh-h2: 40px;
+    --fh-h3: 32px;
+    --fh-h4: 24px;
+    --fh-h5: 20px;
+    --fh-h6: 18px;
+
+    /* lh = line-height */
+    --lh-s: 120%;
+    --lh-m: 130%;
+    --lh-l: 150%;
+
+    /* letter spacing */
+    --ls-default: 0;
+    --ls-xxxs: -0.45px;
+    --ls-xxs: -0.44px;
+    --ls-xs: -0.31px;
+    --ls-s: -0.15px;
+    --ls-m: .07px;
+    --ls-l: .22px;
+    --ls-xl: .35px;
+    --ls-xxl: .37px;
+    --ls-xxxl: .41px;
+    
+    /* fw = font-weight */
+    --fw-normal: 400;
+    --fw-semibold: 590;
+    --fw-bold: 700;
+}
+
+/* box-shadows */
+:root {
+    --bs-small: 4px 4px 8px rgba(0, 0, 0, 0.1);
+    --bs-big: 8px 8px 24px rgba(0, 0, 0, 0.1);
+}

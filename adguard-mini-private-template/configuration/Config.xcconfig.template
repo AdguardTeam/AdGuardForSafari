@@ -1,0 +1,12 @@
+// SPDX-FileCopyrightText: AdGuard Software Limited
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+CONFIG_BASE_BUNDLE_ID = com.example
+
+CONFIG_TEAM = MY_TEAM_ID
+CONFIG_APP_ID = $(CONFIG_BASE_BUNDLE_ID).MY_PRODUCT_NAME
+CONFIG_GROUP = $(CONFIG_TEAM).$(CONFIG_APP_ID)

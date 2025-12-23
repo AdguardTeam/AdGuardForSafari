@@ -1,0 +1,74 @@
+/* Common - App displayed name. */
+"app_displayed_name" = "AdGuard Mini";
+
+/* App Menu - "About" title. */
+"app_menu_about_title" = "Giới thiệu về AdGuard Mini";
+
+/* App Menu - "Preferences..." title. */
+"app_menu_preferences_title" = "Tùy chỉnh...";
+
+/* App Menu - "Hide AdGuard Mini" title. */
+"app_menu_hide_title" = "Ẩn AdGuard Mini";
+
+/* App Menu - "Hide Others" title. */
+"app_menu_hide_others_title" = "Ẩn các cửa sổ khác";
+
+/* App Menu - "Show All" title. */
+"app_menu_show_all_title" = "Hiện tất cả";
+
+/* App Menu - "Close" title. */
+"app_menu_close_title" = "Đóng";
+
+/* App Menu - "Quit AdGuard Mini" title. */
+"app_menu_quit_title" = "Thoát khỏi AdGuard Mini";
+
+/* Terminating app Alert - Message text "Quit AdGuard Mini?" */
+"terminate_app_alert_message_text" = "Thoát khỏi AdGuard Mini?";
+
+/* Terminating app Alert - Informative text */
+"terminate_app_alert_informative_text" = "Để chỉnh sửa đang lọc và tự động kiểm tra cập nhật đang lọc, hãy để AdGuard Mini chạy nền";
+
+/* Terminating app Alert - Button title "Run in background" */
+"terminate_app_alert_button_title_run_in_background" = "Chạy nền";
+
+/* Terminating app Alert - Button title "Quit" */
+"terminate_app_alert_button_title_quit" = "Thoát";
+
+/* Terminating app Alert - Suppression Button title "Don’t ask me again" */
+"terminate_app_alert_suppression_button_title" = "Không hỏi lại tôi";
+
+/* Name of the crashed application for title of the crash reporter */
+"crash_reporter_title_adguard_component" = "Thành phần AdGuard Mini";
+
+/* Crash Reporter UI (SFBCrashReporterWindowController) */
+"window_controller_crash_reporter" = "Báo lỗi crash: %1$@(%2$@)";
+
+/* Request user about restarting AdGuard Mini */
+"restart_button" = "Khởi động lại";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_quit" = "Thoát";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_title" = "Khởi động lại AdGuard Mini";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_text" = "Cài đặt đã được đặt lại. Vui lòng khởi động lại AdGuard Mini để khôi phục chức năng của nó";
+
+/* Title on Close button in error message */
+"close_button" = "Đóng";
+
+/* Request user about resetting AdGuard Mini */
+"reset_setting_button" = "Đặt lại";
+
+/* Request user about resetting AdGuard Mini */
+"reset_settings_message" = "Thiết lập lại cài đặt AdGuard Mini. Bạn có chắc không?";
+
+/* Request user about resetting AdGuard Mini */
+"reseting_settings_request" = "Tất cả cài đặt AdGuard Mini sẽ được đặt lại về giá trị mặc định. Cài đặt tùy chỉnh sẽ bị xóa";
+
+/* Notify the user that the application cannot be run from the current location. */
+"error_running_app" = "Di chuyển AdGuard Mini vào thư mục Ứng dụng";
+
+/* Notify the user that the application should be moved to the Applications folder. */
+"error_running_app_message" = "AdGuard Mini cần phải nằm trong thư mục Ứng dụng để chạy.\nVui lòng di chuyển nó vào đó và thử lại";

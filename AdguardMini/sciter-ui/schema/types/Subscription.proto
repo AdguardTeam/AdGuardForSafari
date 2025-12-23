@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option optimize_for = CODE_SIZE;
+
+// Subscription type
+enum Subscription {
+    Subscription_monthly = 0;
+    Subscription_annual = 1;
+    Subscription_trial = 2;
+    Subscription_standalone = 3;
+}
+
+message SubscriptionMessage {
+    Subscription subscription_type = 1;
+}

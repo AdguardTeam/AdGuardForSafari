@@ -1,0 +1,125 @@
+/* 
+    SPDX-FileCopyrightText: AdGuard Software Limited
+    SPDX-License-Identifier: GPL-3.0-or-later
+*/
+
+@keyframes rotate { 
+    from { transform: rotate(0deg); } 
+    to { transform: rotate(360deg); }
+}
+
+.SettingsItem {
+    flow: horizontal;
+    min-height: 28px;
+
+    &__pointer {
+        cursor: pointer;
+    }
+
+    &__hover {
+        &:hover {
+            border-radius: 8px;
+            background: var(--fills-buttons-secondary-button-hovered);
+        }
+
+        &:hover + .SettingsItem_container_routeBorder {
+            background: transparent;
+        }
+    }
+
+    &_defaultHovered {
+        border-radius: 8px;
+        background: var(--fills-buttons-secondary-button-hovered);
+    }
+
+    &_title {
+        width: *;
+    }
+
+    &_container {
+        box-sizing: content-box;
+        padding: var(--m-s);
+
+        &__route {
+            height: *;
+        }
+
+        &_routeBorder {
+            height: 43px;
+            width: 1px;
+            margin-top: 16px;
+            background: var(--stroke-dividers-item-divider-default);
+        }
+
+        &_line {
+            flow: horizontal;
+            min-height: 28px;
+
+            &_icon {
+                margin-right: var(--m-xs); 
+
+                &__green {
+                    color: var(--text-links-link-default);
+                }
+
+                &__orange {
+                    color: var(--text-links-attention-link-default);
+                }
+
+                &__red {
+                    color: var(--text-links-error-link-default);
+                }
+
+                &__gray {
+                    color: var(--text-buttons-secondary-default);
+                }
+
+                &__rotate {
+                    animation: 2s infinite linear rotate;   
+                }
+            }
+
+            &__negativeMargin {
+                margin-top: -4px;
+            }
+
+            &__paddingTop {
+                margin-top: 4px;
+            }
+
+            &_text {
+                margin-right: *;
+
+            }
+        }
+        
+        &_desc {
+            padding-right: var(--m-l);
+
+            &_text {
+                color: var(--text-description-description-default);
+            }
+
+            &__icon {
+                padding-left: 36px;
+            }
+        }
+
+        &_children {
+            margin-left: auto;
+        }
+
+        &__withRoute {
+            padding-left: var(--m-s);
+            cursor: pointer;
+        }
+    }
+}
+
+.SettingsItemLink {
+    &_arrow {
+        transform: rotate(180deg);
+        color: var(--text-description-description-default);
+        margin-left: *;
+    }
+}

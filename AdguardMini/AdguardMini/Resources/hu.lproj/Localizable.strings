@@ -1,0 +1,74 @@
+/* Common - App displayed name. */
+"app_displayed_name" = "AdGuard Mini";
+
+/* App Menu - "About" title. */
+"app_menu_about_title" = "AdGuard Mini névjegye";
+
+/* App Menu - "Preferences..." title. */
+"app_menu_preferences_title" = "Beállítások...";
+
+/* App Menu - "Hide AdGuard Mini" title. */
+"app_menu_hide_title" = "AdGuard Mini elrejtése";
+
+/* App Menu - "Hide Others" title. */
+"app_menu_hide_others_title" = "Többi elrejtése";
+
+/* App Menu - "Show All" title. */
+"app_menu_show_all_title" = "Összes mutatása";
+
+/* App Menu - "Close" title. */
+"app_menu_close_title" = "Bezárás";
+
+/* App Menu - "Quit AdGuard Mini" title. */
+"app_menu_quit_title" = "Kilépés az AdGuard Mini-ből";
+
+/* Terminating app Alert - Message text "Quit AdGuard Mini?" */
+"terminate_app_alert_message_text" = "Kilép az AdGuard Mini-ből?";
+
+/* Terminating app Alert - Informative text */
+"terminate_app_alert_informative_text" = "A szűrés kezeléséhez és a szűrőfrissítések automatikus ellenőrzéséhez hagyja, hogy az AdGuard Mini a háttérben fusson";
+
+/* Terminating app Alert - Button title "Run in background" */
+"terminate_app_alert_button_title_run_in_background" = "Futtatás a háttérben";
+
+/* Terminating app Alert - Button title "Quit" */
+"terminate_app_alert_button_title_quit" = "Kilépés";
+
+/* Terminating app Alert - Suppression Button title "Don’t ask me again" */
+"terminate_app_alert_suppression_button_title" = "Ne kérdezze meg újra";
+
+/* Name of the crashed application for title of the crash reporter */
+"crash_reporter_title_adguard_component" = "AdGuard Mini komponens";
+
+/* Crash Reporter UI (SFBCrashReporterWindowController) */
+"window_controller_crash_reporter" = "Összeomlás jelentő: %1$@ (%2$@)";
+
+/* Request user about restarting AdGuard Mini */
+"restart_button" = "Újraindítás";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_quit" = "Kilépés";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_title" = "Az AdGuard újraindítása szükséges.";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_text" = "Az AdGuard folytatásához újraindítás szükséges. Ehhez kattintson az \"Újraindítás\" gombra.";
+
+/* Title on Close button in error message */
+"close_button" = "Bezárás";
+
+/* Request user about resetting AdGuard Mini */
+"reset_setting_button" = "Visszaállítás";
+
+/* Request user about resetting AdGuard Mini */
+"reset_settings_message" = "AdGuard Mini beállítások visszaállítása. Biztos ebben?";
+
+/* Request user about resetting AdGuard Mini */
+"reseting_settings_request" = "Ha a \"Visszaállítás\" gombra kattint, az AdGuard Mini megkísérli az összes beállítás visszaállítását, beleértve az engedélyezett szűrőket és az egyéni szűrési szabályokat is. Az újraindítás után az AdGuard Mini úgy fog működni, mint az első indításkor.";
+
+/* Notify the user that the application cannot be run from the current location. */
+"error_running_app" = "Az AdGuard Mini nem futtatható erről a helyről!";
+
+/* Notify the user that the application should be moved to the Applications folder. */
+"error_running_app_message" = "Az AdGuard Mini futtatásához az Alkalmazások mappában kell lennie.\nKérjük, helyezze át oda, és próbálja meg újra.";

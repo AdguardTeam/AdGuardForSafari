@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "PrimitivesWrappers.proto";
+import "License.proto";
+
+/* Service handles account info */
+service AccountService {
+    /* Return License info */
+    rpc GetLicense(EmptyValue) returns (LicenseOrError);
+    /* Request to refresh the License */
+    rpc RefreshLicense(EmptyValue) returns (OptionalError);
+    /* Return available subscriptions info */
+    rpc GetSubscriptionsInfo(EmptyValue) returns (AppStoreSubscriptionsMessage);
+    /* Return trial availability */
+    rpc GetTrialAvailableDays(EmptyValue) returns (Int32Value);
+    /* Enter activation code */
+    rpc EnterActivationCode(StringValue) returns (EnterActivationCodeResultMessage);
+    /* Request opening activate page */
+    rpc RequestActivate(EmptyValue) returns (WebActivateResultMessage);
+    /* Request opening bind page */
+    rpc RequestBind(StringValue) returns (WebActivateResultMessage);
+    /* Request opening renew page */
+    rpc RequestRenew(StringValue) returns (OptionalError);
+    /* Request log out */
+    rpc RequestLogout(EmptyValue) returns (OptionalError);
+    /* Request purchase subscription */
+    rpc RequestSubscribe(SubscriptionMessage) returns (OptionalError);
+    /* Request restore purchases */
+    rpc RequestRestorePurchases(EmptyValue) returns (OptionalError);
+    /* Request opening subscriptions page */
+    rpc RequestOpenSubscriptions(EmptyValue) returns (EmptyValue);
+    /* Request opening app store page */
+    rpc RequestOpenAppStore(EmptyValue) returns (EmptyValue);
+}

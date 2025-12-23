@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+import "PrimitivesWrappers.proto";
+import "License.proto";
+
+/* Service handles account updates */
+service AccountCallbackService {
+    /* Fires when license state updated */
+    rpc OnLicenseUpdate(LicenseOrError) returns (EmptyValue);
+}

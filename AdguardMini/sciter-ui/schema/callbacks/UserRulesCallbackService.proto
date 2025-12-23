@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "UserRules.proto";
+
+/* Service handles settings lists */
+service UserRulesCallbackService {
+    /* Fires when user rules were updated through assistant */
+    rpc onUserFilterChange(UserRulesCallbackState) returns (EmptyValue);
+}

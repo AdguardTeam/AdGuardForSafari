@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>assistant</key>
+	<dict>
+		<key>Name</key>
+		<string>AdGuard Assistant</string>
+		<key>NpmPackage</key>
+		<string>@adguard/assistant</string>
+		<key>Type</key>
+		<string>npm</string>
+		<key>UpdateMethod</key>
+		<string>npm</string>
+		<key>Version</key>
+		<string>4.3.77</string>
+	</dict>
+	<key>sentry</key>
+	<dict>
+		<key>Name</key>
+		<string>Sentry</string>
+		<key>Type</key>
+		<string>binary</string>
+		<key>UpdateMethod</key>
+		<string>manual</string>
+		<key>Version</key>
+		<string>8.32.0</string>
+	</dict>
+</dict>
+</plist>

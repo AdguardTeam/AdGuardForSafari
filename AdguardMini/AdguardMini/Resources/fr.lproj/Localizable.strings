@@ -1,0 +1,74 @@
+/* Common - App displayed name. */
+"app_displayed_name" = "AdGuard Mini";
+
+/* App Menu - "About" title. */
+"app_menu_about_title" = "À propos d'AdGuard Mini";
+
+/* App Menu - "Preferences..." title. */
+"app_menu_preferences_title" = "Préférences...";
+
+/* App Menu - "Hide AdGuard Mini" title. */
+"app_menu_hide_title" = "Masquer AdGuard Mini";
+
+/* App Menu - "Hide Others" title. */
+"app_menu_hide_others_title" = "Cacher Autres";
+
+/* App Menu - "Show All" title. */
+"app_menu_show_all_title" = "Voir tout";
+
+/* App Menu - "Close" title. */
+"app_menu_close_title" = "Fermer";
+
+/* App Menu - "Quit AdGuard Mini" title. */
+"app_menu_quit_title" = "Quitter AdGuard Mini";
+
+/* Terminating app Alert - Message text "Quit AdGuard Mini?" */
+"terminate_app_alert_message_text" = "Quitter AdGuard Mini ?";
+
+/* Terminating app Alert - Informative text */
+"terminate_app_alert_informative_text" = "Pour gérer le filtrage et vérifier automatiquement les mises à jour des filtres, laissez AdGuard Mini s'exécuter en arrière-plan";
+
+/* Terminating app Alert - Button title "Run in background" */
+"terminate_app_alert_button_title_run_in_background" = "Exécuter en arrière-plan";
+
+/* Terminating app Alert - Button title "Quit" */
+"terminate_app_alert_button_title_quit" = "Quitter";
+
+/* Terminating app Alert - Suppression Button title "Don’t ask me again" */
+"terminate_app_alert_suppression_button_title" = "Ne me le demandez plus";
+
+/* Name of the crashed application for title of the crash reporter */
+"crash_reporter_title_adguard_component" = "Composant AdGuard Mini";
+
+/* Crash Reporter UI (SFBCrashReporterWindowController) */
+"window_controller_crash_reporter" = "Rapporteur de plantage: %1$@ (%2$@)";
+
+/* Request user about restarting AdGuard Mini */
+"restart_button" = "Redémarrer";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_quit" = "Quitter";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_title" = "Redémarrer AdGuard Mini";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_text" = "Les paramètres ont été remis à zéro. Merci de redémarrer AdGuard Mini pour restaurer ses fonctionnalités";
+
+/* Title on Close button in error message */
+"close_button" = "Fermer";
+
+/* Request user about resetting AdGuard Mini */
+"reset_setting_button" = "Réinitialiser";
+
+/* Request user about resetting AdGuard Mini */
+"reset_settings_message" = "Réinitialiser les paramètres d'AdGuard Mini ?";
+
+/* Request user about resetting AdGuard Mini */
+"reseting_settings_request" = "Tous les paramètres AdGuard Mini seront réinitialisés à leurs valeurs par défaut. Les paramètres personnalisés seront retirés";
+
+/* Notify the user that the application cannot be run from the current location. */
+"error_running_app" = "Déplacez AdGuard Mini vers le dossier Applications";
+
+/* Notify the user that the application should be moved to the Applications folder. */
+"error_running_app_message" = "AdGuard Mini doit se trouver dans le dossier Applications pour fonctionner.\nVeuillez le déplacer à cet endroit et réessayer.";

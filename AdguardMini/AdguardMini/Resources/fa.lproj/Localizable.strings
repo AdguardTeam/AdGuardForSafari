@@ -1,0 +1,74 @@
+/* Common - App displayed name. */
+"app_displayed_name" = "AdGuard Mini";
+
+/* App Menu - "About" title. */
+"app_menu_about_title" = "درباره AdGuard Mini";
+
+/* App Menu - "Preferences..." title. */
+"app_menu_preferences_title" = "ترجیحات...";
+
+/* App Menu - "Hide AdGuard Mini" title. */
+"app_menu_hide_title" = "نهان‌سازی AdGuard Mini";
+
+/* App Menu - "Hide Others" title. */
+"app_menu_hide_others_title" = "مخفی کردن بقیه";
+
+/* App Menu - "Show All" title. */
+"app_menu_show_all_title" = "نمایش همه";
+
+/* App Menu - "Close" title. */
+"app_menu_close_title" = "بستن";
+
+/* App Menu - "Quit AdGuard Mini" title. */
+"app_menu_quit_title" = "خروج از AdGuard Mini";
+
+/* Terminating app Alert - Message text "Quit AdGuard Mini?" */
+"terminate_app_alert_message_text" = "خروج از AdGuard Mini؟";
+
+/* Terminating app Alert - Informative text */
+"terminate_app_alert_informative_text" = "برای مدیریت پالایش و بررسی خودکار به‌روز‌رسانی‌های پالایش، اجازه دهید AdGuard Mini در پس‌زمینه اجرا شود";
+
+/* Terminating app Alert - Button title "Run in background" */
+"terminate_app_alert_button_title_run_in_background" = "اجرا در پس‌زمینه";
+
+/* Terminating app Alert - Button title "Quit" */
+"terminate_app_alert_button_title_quit" = "خروج";
+
+/* Terminating app Alert - Suppression Button title "Don’t ask me again" */
+"terminate_app_alert_suppression_button_title" = "دیگر از من نپرس";
+
+/* Name of the crashed application for title of the crash reporter */
+"crash_reporter_title_adguard_component" = "مؤلفه AdGuard Mini";
+
+/* Crash Reporter UI (SFBCrashReporterWindowController) */
+"window_controller_crash_reporter" = "گزارشگر خطا: %1$@ (%2$@)";
+
+/* Request user about restarting AdGuard Mini */
+"restart_button" = "ریستارت";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_quit" = "خروج";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_title" = "شما نیاز به راه‌اندازی مجدد AdGuard دارید.";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_message_text" = "برای ادامه کار AdGuard باید راه‌اندازی مجدد انجام شود. برای انجام این کار روی «راه‌اندازی مجدد» کلیک کنید.";
+
+/* Title on Close button in error message */
+"close_button" = "بستن";
+
+/* Request user about resetting AdGuard Mini */
+"reset_setting_button" = "ريست";
+
+/* Request user about resetting AdGuard Mini */
+"reset_settings_message" = "تنظیمات AdGuard Mini را بازنشانی کنید. مطمئن هستید؟";
+
+/* Request user about resetting AdGuard Mini */
+"reseting_settings_request" = "اگر روی «بازنشانی» کلیک کنید، AdGuard Mini تلاش می‌کند تمام تنظیمات شما، از جمله پالایش‌های فعال و رویه‌های سفارشی پالایش را بازنشانی کند. پس از راه‌اندازی مجدد، AdGuard Mini همانند اولین اجرا رفتار خواهد کرد.";
+
+/* Notify the user that the application cannot be run from the current location. */
+"error_running_app" = "امکان اجرای AdGuard Mini از این مکان وجود ندارد!";
+
+/* Notify the user that the application should be moved to the Applications folder. */
+"error_running_app_message" = "برای اجرای AdGuard Mini، این برنامه باید در پوشهٔ Applications باشد.\nلطفاً آن را به آنجا منتقل کنید و دوباره تلاش کنید.";

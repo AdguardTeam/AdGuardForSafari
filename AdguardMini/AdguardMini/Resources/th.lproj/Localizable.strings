@@ -1,0 +1,26 @@
+/* App Menu - "Hide Others" title. */
+"app_menu_hide_others_title" = "ซ่อนอื่น ๆ";
+
+/* App Menu - "Show All" title. */
+"app_menu_show_all_title" = "แสดงทั้งหมด";
+
+/* App Menu - "Close" title. */
+"app_menu_close_title" = "ปิด";
+
+/* Terminating app Alert - Button title "Quit" */
+"terminate_app_alert_button_title_quit" = "ออก";
+
+/* Crash Reporter UI (SFBCrashReporterWindowController) */
+"window_controller_crash_reporter" = "ตัวรายงานข้อขัดข้อง: %1$@ (%2$@)";
+
+/* Request user about restarting AdGuard Mini */
+"restart_button" = "เริ่มต้นใหม่";
+
+/* Request user about restarting AdGuard Mini */
+"restarting_request_quit" = "ออก";
+
+/* Title on Close button in error message */
+"close_button" = "ปิด";
+
+/* Request user about resetting AdGuard Mini */
+"reset_setting_button" = "รีเซ็ต";

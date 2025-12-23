@@ -1,0 +1,26 @@
+// SPDX-FileCopyrightText: AdGuard Software Limited
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+import lodashPlugin from 'eslint-plugin-lodash';
+import { defineConfig } from 'eslint/config';
+import commonConfig from '@adg/sciter-infra-utils/configs/eslint/common-config.mjs';
+
+export default defineConfig([
+    {
+      ignores: [
+        "AdguardMini/sciter-ui/modules/common/sciterBootstrap.ts",
+        "AdguardMini/sciter-ui/scripts/**",
+      ]
+    },
+    commonConfig,
+    {
+        plugins: {
+            'lodash': lodashPlugin,
+        },
+        rules: {
+            'lodash/import-scope': ['error', 'method'],
+            "@stylistic/multiline-ternary": "off"
+        }
+    }
+]);
