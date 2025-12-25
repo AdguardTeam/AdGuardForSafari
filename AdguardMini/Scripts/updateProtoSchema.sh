@@ -28,6 +28,34 @@ TYPESCRIPT_SCHEMA_OUTPUT_DIR="$SCITER_FOLDER_PATH/modules/common/apis"
 
 echo
 echo "=================================================================="
+echo "Verify protoc tools versions"
+echo "=================================================================="
+echo
+
+if ! command -v protoc &> /dev/null; then
+    echo "Error: protoc not found in PATH"
+    echo ""
+    echo "Please run: ./configure.sh dev"
+    echo "Or ensure build/protoc-tools/bin is in your PATH"
+    exit 1
+fi
+
+if ! command -v protoc-gen-swift &> /dev/null; then
+    echo "Error: protoc-gen-swift not found in PATH"
+    echo ""
+    echo "Please run: ./configure.sh dev"
+    echo "Or ensure build/protoc-tools/bin is in your PATH"
+    exit 1
+fi
+
+echo "protoc: $(command -v protoc)"
+protoc --version
+echo "protoc-gen-swift: $(command -v protoc-gen-swift)"
+protoc-gen-swift --version
+echo
+
+echo
+echo "=================================================================="
 echo "Cleanup and make dirs"
 echo "=================================================================="
 echo

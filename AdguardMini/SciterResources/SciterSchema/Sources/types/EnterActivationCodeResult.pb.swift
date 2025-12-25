@@ -93,21 +93,12 @@ public struct EnterActivationCodeResultMessage: Sendable {
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension EnterActivationCodeResult: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "EnterActivationCodeResult_notExists"),
-    1: .same(proto: "EnterActivationCodeResult_expired"),
-    2: .same(proto: "EnterActivationCodeResult_maxComputersExceed"),
-    3: .same(proto: "EnterActivationCodeResult_blocked"),
-    4: .same(proto: "EnterActivationCodeResult_valid"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0EnterActivationCodeResult_notExists\0\u{1}EnterActivationCodeResult_expired\0\u{1}EnterActivationCodeResult_maxComputersExceed\0\u{1}EnterActivationCodeResult_blocked\0\u{1}EnterActivationCodeResult_valid\0")
 }
 
 extension EnterActivationCodeResultMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "EnterActivationCodeResultMessage"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "result"),
-    2: .same(proto: "error"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}error\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {

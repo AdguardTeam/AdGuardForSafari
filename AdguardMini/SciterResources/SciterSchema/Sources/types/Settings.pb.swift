@@ -490,69 +490,28 @@ public struct SafariExtensionUpdate: Sendable {
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension ReleaseVariants: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "ReleaseVariants_unknown"),
-    1: .same(proto: "ReleaseVariants_MAS"),
-    2: .same(proto: "ReleaseVariants_standAlone"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0ReleaseVariants_unknown\0\u{1}ReleaseVariants_MAS\0\u{1}ReleaseVariants_standAlone\0")
 }
 
 extension ImportMode: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "ImportMode_unknown"),
-    1: .same(proto: "ImportMode_full"),
-    2: .same(proto: "ImportMode_withoutAnnoyance"),
-    3: .same(proto: "ImportMode_cancel"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0ImportMode_unknown\0\u{1}ImportMode_full\0\u{1}ImportMode_withoutAnnoyance\0\u{1}ImportMode_cancel\0")
 }
 
 extension QuitReaction: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "QuitReaction_unknown"),
-    1: .same(proto: "QuitReaction_ask"),
-    2: .same(proto: "QuitReaction_quit"),
-    3: .same(proto: "QuitReaction_keepRunning"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0QuitReaction_unknown\0\u{1}QuitReaction_ask\0\u{1}QuitReaction_quit\0\u{1}QuitReaction_keepRunning\0")
 }
 
 extension SafariExtensionType: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "SafariExtensionType_general"),
-    1: .same(proto: "SafariExtensionType_privacy"),
-    2: .same(proto: "SafariExtensionType_security"),
-    3: .same(proto: "SafariExtensionType_social"),
-    4: .same(proto: "SafariExtensionType_other"),
-    5: .same(proto: "SafariExtensionType_custom"),
-    6: .same(proto: "SafariExtensionType_adguard_for_safari"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0SafariExtensionType_general\0\u{1}SafariExtensionType_privacy\0\u{1}SafariExtensionType_security\0\u{1}SafariExtensionType_social\0\u{1}SafariExtensionType_other\0\u{1}SafariExtensionType_custom\0\u{1}SafariExtensionType_adguard_for_safari\0")
 }
 
 extension SafariExtensionStatus: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "SafariExtensionStatus_unknown"),
-    1: .same(proto: "SafariExtensionStatus_ok"),
-    2: .same(proto: "SafariExtensionStatus_loading"),
-    3: .same(proto: "SafariExtensionStatus_disabled"),
-    4: .same(proto: "SafariExtensionStatus_limit_exceeded"),
-    5: .same(proto: "SafariExtensionStatus_converter_error"),
-    6: .same(proto: "SafariExtensionStatus_safari_error"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0SafariExtensionStatus_unknown\0\u{1}SafariExtensionStatus_ok\0\u{1}SafariExtensionStatus_loading\0\u{1}SafariExtensionStatus_disabled\0\u{1}SafariExtensionStatus_limit_exceeded\0\u{1}SafariExtensionStatus_converter_error\0\u{1}SafariExtensionStatus_safari_error\0")
 }
 
 extension Settings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "Settings"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "launch_on_startup"),
-    2: .standard(proto: "show_in_menu_bar"),
-    3: .standard(proto: "hardware_acceleration"),
-    4: .standard(proto: "auto_filters_update"),
-    5: .standard(proto: "real_time_filters_update"),
-    6: .same(proto: "quitReaction"),
-    7: .standard(proto: "debug_logging"),
-    8: .standard(proto: "release_variant"),
-    9: .standard(proto: "consent_filters_ids"),
-    10: .same(proto: "language"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}launch_on_startup\0\u{3}show_in_menu_bar\0\u{3}hardware_acceleration\0\u{3}auto_filters_update\0\u{3}real_time_filters_update\0\u{1}quitReaction\0\u{3}debug_logging\0\u{3}release_variant\0\u{3}consent_filters_ids\0\u{1}language\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -627,9 +586,7 @@ extension Settings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
 
 extension UserConsent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "UserConsent"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "filters_ids"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}filters_ids\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -659,9 +616,7 @@ extension UserConsent: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
 
 extension ImportSettingsConfirmation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "ImportSettingsConfirmation"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "mode"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}mode\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -691,10 +646,7 @@ extension ImportSettingsConfirmation: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
 extension ImportStatus: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "ImportStatus"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "success"),
-    2: .standard(proto: "filters_ids"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}success\0\u{3}filters_ids\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -729,15 +681,7 @@ extension ImportStatus: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
 
 extension GlobalSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "GlobalSettings"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "enabled"),
-    2: .same(proto: "allExtensionEnabled"),
-    3: .same(proto: "newVersionAvailable"),
-    4: .same(proto: "releaseVariant"),
-    5: .same(proto: "language"),
-    6: .standard(proto: "debug_logging"),
-    7: .standard(proto: "recently_migrated"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}enabled\0\u{1}allExtensionEnabled\0\u{1}newVersionAvailable\0\u{1}releaseVariant\0\u{1}language\0\u{3}debug_logging\0\u{3}recently_migrated\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -797,9 +741,7 @@ extension GlobalSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 
 extension UpdateQuitReactionMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "UpdateQuitReactionMessage"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "reaction"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}reaction\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -829,16 +771,7 @@ extension UpdateQuitReactionMessage: SwiftProtobuf.Message, SwiftProtobuf._Messa
 
 extension SafariExtensions: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "SafariExtensions"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "general"),
-    2: .same(proto: "privacy"),
-    3: .same(proto: "social"),
-    4: .same(proto: "security"),
-    5: .same(proto: "other"),
-    6: .same(proto: "custom"),
-    7: .standard(proto: "adguard_for_safari"),
-    8: .standard(proto: "all_extensions_enabled"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}general\0\u{1}privacy\0\u{1}social\0\u{1}security\0\u{1}other\0\u{1}custom\0\u{3}adguard_for_safari\0\u{3}all_extensions_enabled\0")
 
   fileprivate class _StorageClass {
     var _general: SafariExtension? = nil
@@ -850,15 +783,11 @@ extension SafariExtensions: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     var _adguardForSafari: SafariExtension? = nil
     var _allExtensionsEnabled: Bool = false
 
-    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
-    #else
-      static let defaultInstance = _StorageClass()
-    #endif
 
     private init() {}
 
@@ -961,13 +890,7 @@ extension SafariExtensions: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
 
 extension SafariExtension: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "SafariExtension"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "id"),
-    2: .standard(proto: "rules_enabled"),
-    3: .standard(proto: "rules_total"),
-    4: .same(proto: "status"),
-    6: .standard(proto: "safari_error"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{3}rules_enabled\0\u{3}rules_total\0\u{1}status\0\u{4}\u{2}safari_error\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -1021,10 +944,7 @@ extension SafariExtension: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
 
 extension SafariExtensionUpdate: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "SafariExtensionUpdate"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "type"),
-    2: .same(proto: "state"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}type\0\u{1}state\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {

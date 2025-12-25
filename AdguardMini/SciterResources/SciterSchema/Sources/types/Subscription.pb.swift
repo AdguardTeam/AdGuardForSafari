@@ -78,19 +78,12 @@ public struct SubscriptionMessage: Sendable {
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension Subscription: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "Subscription_monthly"),
-    1: .same(proto: "Subscription_annual"),
-    2: .same(proto: "Subscription_trial"),
-    3: .same(proto: "Subscription_standalone"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0Subscription_monthly\0\u{1}Subscription_annual\0\u{1}Subscription_trial\0\u{1}Subscription_standalone\0")
 }
 
 extension SubscriptionMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "SubscriptionMessage"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "subscription_type"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}subscription_type\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {

@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: AdGuard Software Limited
-//
-// SPDX-License-Identifier: GPL-3.0-or-later
-
 /* This code was generated automatically by proto-parser tool version 1 */
 import { SafariExtensionUpdate, EmptyValue, BoolValue, ImportStatus, StringValue, EffectiveThemeValue } from '../types'
 

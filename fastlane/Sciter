@@ -40,50 +40,38 @@ end
 
 desc 'Update proto schema'
 lane :update_proto_schema do |_options|
-  # Required versions
-  required_protoc_version = '29.3'
-  required_protoc_gen_swift_version = '1.29.0'
+  tools_dir = File.expand_path('../build/protoc-tools', __dir__)
+  protoc_path = File.join(tools_dir, 'bin', 'protoc')
+  protoc_gen_swift_path = File.join(tools_dir, 'bin', 'protoc-gen-swift')
 
-  # Check protoc version
-  protoc_version_output = sh('protoc --version', log: false).strip
-  protoc_version = protoc_version_output.match(/libprotoc (\d+\.\d+(?:\.\d+)?)/)[1]
-
-  if protoc_version != required_protoc_version
+  # Check if tools are installed
+  unless File.executable?(protoc_path) && File.executable?(protoc_gen_swift_path)
     UI.user_error!(
-      "protoc version mismatch!\n" \
-      "Required: #{required_protoc_version}\n" \
-      "Current:  #{protoc_version}\n\n" \
-      "Please install the correct version:\n" \
-      "  brew unlink protobuf && brew install protobuf@#{required_protoc_version.split('.')[0]}"
+      "protoc tools not found!\n" \
+      'Please run: ./configure.sh dev'
     )
   end
 
-  # Check protoc-gen-swift version
-  protoc_gen_swift_version_output = sh('protoc-gen-swift --version', log: false).strip
-  protoc_gen_swift_version = protoc_gen_swift_version_output.match(/protoc-gen-swift (\d+\.\d+\.\d+)/)[1]
-
-  if protoc_gen_swift_version != required_protoc_gen_swift_version
-    UI.user_error!(
-      "protoc-gen-swift version mismatch!\n" \
-      "Required: #{required_protoc_gen_swift_version}\n" \
-      "Current:  #{protoc_gen_swift_version}\n\n" \
-      "Please install the correct version:\n" \
-      "  brew uninstall swift-protobuf\n" \
-      '  brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/4b0c9e5/Formula/s/swift-protobuf.rb'
-    )
-  end
+  # Extract and verify versions
+  protoc_version = sh("'#{protoc_path}' --version", log: false).strip.match(/libprotoc (\d+\.\d+(?:\.\d+)?)/)[1]
+  gen_swift_version = sh("'#{protoc_gen_swift_path}' --version", log: false).strip.match(/(\d+\.\d+\.\d+)/)[1]
 
   UI.success('Version check passed:')
   UI.message("  protoc:            #{protoc_version}")
-  UI.message("  protoc-gen-swift:  #{protoc_gen_swift_version}")
+  UI.message("  protoc-gen-swift:  #{gen_swift_version}")
 
-  Dir.chdir('..') do
-    FastlaneCore::CommandExecutor.execute(
-      command: 'AdguardMini/Scripts/updateProtoSchema.sh',
-      print_all: true,
-      error: proc do |error_output|
-        UI.user_error!("Failed generate proto schema: #{error_output}")
-      end
-    )
+  # Configure PATH to use local binaries
+  tools_bin = File.join(tools_dir, 'bin')
+  original_path = ENV['PATH']
+
+  begin
+    ENV['PATH'] = "#{tools_bin}:#{original_path}"
+    Dir.chdir('..') do
+      sh('AdguardMini/Scripts/updateProtoSchema.sh')
+    end
+  rescue => e
+    UI.user_error!("Failed generate proto schema: #{e.message}")
+  ensure
+    ENV['PATH'] = original_path
   end
 end

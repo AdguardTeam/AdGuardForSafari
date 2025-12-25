@@ -43,17 +43,8 @@ echo
 source "`dirname $0`/Support/Scripts/include/configure_python.inc"
 
 if [ "$1" == "dev" ]; then
-    # install protobuf if need it
-    if ! command -v protoc &> /dev/null
-    then
-        brew install protobuf
-    fi
-
-    # install swift-protobuf if need it
-    if ! command -v protoc-gen-swift &> /dev/null
-    then
-        brew install swift-protobuf
-    fi
+    # Install protoc tools
+    "`dirname $0`/Support/Scripts/install_protoc_tools.sh"
 
     # syncs certificates for `MAS` distribution
     bundle exec fastlane certs config:MAS

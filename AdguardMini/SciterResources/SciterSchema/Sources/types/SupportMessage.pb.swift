@@ -43,12 +43,7 @@ public struct SupportMessage: Sendable {
 
 extension SupportMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "SupportMessage"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "email"),
-    2: .same(proto: "message"),
-    3: .standard(proto: "add_logs"),
-    4: .same(proto: "theme"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}email\0\u{1}message\0\u{3}add_logs\0\u{1}theme\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {

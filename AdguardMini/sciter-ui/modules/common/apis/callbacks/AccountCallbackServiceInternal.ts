@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: AdGuard Software Limited
-//
-// SPDX-License-Identifier: GPL-3.0-or-later
-
 /* This code was generated automatically by proto-parser tool version 1 */
 import { store } from 'SettingsStore';
 import { IAccountCallbackServiceInternal } from './AccountCallbackService';

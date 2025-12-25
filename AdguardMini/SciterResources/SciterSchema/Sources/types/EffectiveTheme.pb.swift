@@ -69,17 +69,12 @@ public struct EffectiveThemeValue: Sendable {
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension EffectiveTheme: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "EffectiveTheme_light"),
-    1: .same(proto: "EffectiveTheme_dark"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0EffectiveTheme_light\0\u{1}EffectiveTheme_dark\0")
 }
 
 extension EffectiveThemeValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "EffectiveThemeValue"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "value"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}value\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {

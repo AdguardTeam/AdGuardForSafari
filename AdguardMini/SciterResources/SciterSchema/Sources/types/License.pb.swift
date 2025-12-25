@@ -338,58 +338,24 @@ public struct WebActivateResultMessage: Sendable {
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension LicenseStatus: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "LicenseStatus_unknown"),
-    1: .same(proto: "LicenseStatus_active"),
-    2: .same(proto: "LicenseStatus_trial"),
-    3: .same(proto: "LicenseStatus_free"),
-    4: .same(proto: "LicenseStatus_blocked_app_id"),
-    5: .same(proto: "LicenseStatus_expired"),
-    6: .same(proto: "LicenseStatus_uninstall"),
-    7: .same(proto: "LicenseStatus_wrong_key"),
-    8: .same(proto: "LicenseStatus_already_activate"),
-    9: .same(proto: "LicenseStatus_blocked"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0LicenseStatus_unknown\0\u{1}LicenseStatus_active\0\u{1}LicenseStatus_trial\0\u{1}LicenseStatus_free\0\u{1}LicenseStatus_blocked_app_id\0\u{1}LicenseStatus_expired\0\u{1}LicenseStatus_uninstall\0\u{1}LicenseStatus_wrong_key\0\u{1}LicenseStatus_already_activate\0\u{1}LicenseStatus_blocked\0")
 }
 
 extension LicenseType: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "LicenseType_unknown"),
-    1: .same(proto: "LicenseType_personal"),
-    2: .same(proto: "LicenseType_family"),
-    3: .same(proto: "LicenseType_standard"),
-    4: .same(proto: "LicenseType_mobile"),
-    5: .same(proto: "LicenseType_premium"),
-    6: .same(proto: "LicenseType_beta"),
-    7: .same(proto: "LicenseType_bonus"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0LicenseType_unknown\0\u{1}LicenseType_personal\0\u{1}LicenseType_family\0\u{1}LicenseType_standard\0\u{1}LicenseType_mobile\0\u{1}LicenseType_premium\0\u{1}LicenseType_beta\0\u{1}LicenseType_bonus\0")
 }
 
 extension SubscriptionStatus: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "SubscriptionStatus_unknown"),
-    1: .same(proto: "SubscriptionStatus_active"),
-    2: .same(proto: "SubscriptionStatus_past_due"),
-    3: .same(proto: "SubscriptionStatus_paused"),
-    4: .same(proto: "SubscriptionStatus_deleted"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0SubscriptionStatus_unknown\0\u{1}SubscriptionStatus_active\0\u{1}SubscriptionStatus_past_due\0\u{1}SubscriptionStatus_paused\0\u{1}SubscriptionStatus_deleted\0")
 }
 
 extension WebActivateResult: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "WebActivateResult_unknown"),
-    1: .same(proto: "WebActivateResult_cancelled"),
-    2: .same(proto: "WebActivateResult_user_redirected_to_purchase"),
-    3: .same(proto: "WebActivateResult_success"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0WebActivateResult_unknown\0\u{1}WebActivateResult_cancelled\0\u{1}WebActivateResult_user_redirected_to_purchase\0\u{1}WebActivateResult_success\0")
 }
 
 extension LicenseOrError: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "LicenseOrError"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "license"),
-    2: .same(proto: "error"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}license\0\u{1}error\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -451,21 +417,7 @@ extension LicenseOrError: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
 
 extension License: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "License"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "valid_until"),
-    2: .standard(proto: "renewal_date"),
-    3: .standard(proto: "license_key"),
-    4: .standard(proto: "current_devices"),
-    5: .standard(proto: "total_devices"),
-    6: .same(proto: "status"),
-    7: .same(proto: "type"),
-    8: .standard(proto: "subscription_status"),
-    9: .standard(proto: "application_key_owner"),
-    10: .standard(proto: "license_lifetime"),
-    11: .standard(proto: "license_trial"),
-    12: .standard(proto: "app_store_subscription"),
-    13: .standard(proto: "can_reset"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}valid_until\0\u{3}renewal_date\0\u{3}license_key\0\u{3}current_devices\0\u{3}total_devices\0\u{1}status\0\u{1}type\0\u{3}subscription_status\0\u{3}application_key_owner\0\u{3}license_lifetime\0\u{3}license_trial\0\u{3}app_store_subscription\0\u{3}can_reset\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -555,10 +507,7 @@ extension License: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
 
 extension WebActivateResultMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "WebActivateResultMessage"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "result"),
-    2: .same(proto: "error"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}result\0\u{1}error\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {

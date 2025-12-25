@@ -2,7 +2,7 @@
 
 ## Requirements
 
-Minimum deployment target: macOS 12. 
+Minimum deployment target: macOS 12.
 
 ### Main Development
 
@@ -14,8 +14,13 @@ Minimum deployment target: macOS 12.
 ### Working with Proto Schema
 
 - Python 3.9.6 or later
-- Protobuf 25.2 or later
-- swift-protobuf 1.25.2 or later
+
+**Note:** `protoc` and `protoc-gen-swift` are installed automatically by `./configure.sh dev` into `build/protoc-tools/`. No manual installation required.
+
+**Version pinning (optional):** To ensure reproducible builds, you can pin the protoc version:
+```bash
+echo '31.1' > .protoc-version
+```
 
 ### Repository Accesses
 
@@ -57,7 +62,10 @@ The last known problems were related to invalid `sciter` `dylib` entitlements. S
 ## Project Setup
 
 - You must have an `adguard-mini-private` repository with credentials at the same level as the `adguard-mini` root folder
-- Run `./configure.sh dev`. This command will also install the following dependencies if needed: `protobuf`, `swift-protobuf`
+- Run `./configure.sh dev`. This command will:
+  - Install local protoc tools (protoc + protoc-gen-swift) into `build/protoc-tools/`
+  - Set up other development dependencies
+  - Version can be pinned via `.protoc-version` file for reproducible builds
 - Run `bundle exec fastlane build_sciter_ui dev_build:true`
 - Build the project in Xcode
 

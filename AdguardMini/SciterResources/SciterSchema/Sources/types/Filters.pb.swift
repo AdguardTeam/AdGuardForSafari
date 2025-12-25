@@ -370,12 +370,7 @@ public struct FilterUpdateStatus: Sendable {
 
 extension Filters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "Filters"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "filters"),
-    2: .same(proto: "preferredLocales"),
-    3: .same(proto: "customFilters"),
-    4: .same(proto: "languageSpecific"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}filters\0\u{1}preferredLocales\0\u{1}customFilters\0\u{1}languageSpecific\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -420,11 +415,7 @@ extension Filters: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
 
 extension FilterGroup: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "FilterGroup"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "groupId"),
-    2: .same(proto: "groupName"),
-    3: .same(proto: "displayNumber"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}groupId\0\u{1}groupName\0\u{1}displayNumber\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -464,10 +455,7 @@ extension FilterGroup: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
 
 extension FiltersUpdate: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "FiltersUpdate"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "ids"),
-    2: .same(proto: "isEnabled"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}ids\0\u{1}isEnabled\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -502,9 +490,7 @@ extension FiltersUpdate: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
 
 extension FiltersEnabledIds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "FiltersEnabledIds"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "ids"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}ids\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -534,19 +520,7 @@ extension FiltersEnabledIds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
 
 extension Filter: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "Filter"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "id"),
-    2: .standard(proto: "group_id"),
-    3: .same(proto: "enabled"),
-    4: .standard(proto: "time_updated"),
-    5: .same(proto: "title"),
-    6: .same(proto: "description"),
-    7: .same(proto: "version"),
-    8: .same(proto: "homepage"),
-    9: .standard(proto: "rules_count"),
-    10: .same(proto: "languages"),
-    11: .same(proto: "trusted"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{3}group_id\0\u{1}enabled\0\u{3}time_updated\0\u{1}title\0\u{1}description\0\u{1}version\0\u{1}homepage\0\u{3}rules_count\0\u{1}languages\0\u{1}trusted\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -626,10 +600,7 @@ extension Filter: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBas
 
 extension FilterOrError: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "FilterOrError"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "filter"),
-    2: .same(proto: "error"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}filter\0\u{1}error\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -691,11 +662,7 @@ extension FilterOrError: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
 
 extension CustomFilterToAdd: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "CustomFilterToAdd"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "url"),
-    2: .same(proto: "title"),
-    3: .same(proto: "trusted"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}url\0\u{1}title\0\u{1}trusted\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -735,9 +702,7 @@ extension CustomFilterToAdd: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
 
 extension CustomFiltersToDelete: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "CustomFiltersToDelete"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "filtersIds"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}filtersIds\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -767,15 +732,7 @@ extension CustomFiltersToDelete: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 
 extension FiltersDefinedGroups: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "FiltersDefinedGroups"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "adBlocking"),
-    2: .same(proto: "privacy"),
-    3: .same(proto: "socialWidgets"),
-    4: .same(proto: "annoyances"),
-    5: .same(proto: "security"),
-    6: .same(proto: "other"),
-    7: .same(proto: "languageSpecific"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}adBlocking\0\u{1}privacy\0\u{1}socialWidgets\0\u{1}annoyances\0\u{1}security\0\u{1}other\0\u{1}languageSpecific\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -835,9 +792,7 @@ extension FiltersDefinedGroups: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 
 extension FiltersIds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "FiltersIds"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "ids"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}ids\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -867,20 +822,7 @@ extension FiltersIds: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
 
 extension FiltersIndex: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "FiltersIndex"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "unblockSearchAdsFilterId"),
-    2: .same(proto: "cookieNoticeFilterId"),
-    3: .same(proto: "popUpsFilterId"),
-    4: .same(proto: "widgetsFilterId"),
-    5: .same(proto: "otherAnnoyanceFilterId"),
-    6: .same(proto: "mobileBannersFilter"),
-    7: .same(proto: "definedGroups"),
-    8: .same(proto: "groups"),
-    9: .same(proto: "filtersByGroups"),
-    10: .same(proto: "recommendedFiltersIdsByGroupDict"),
-    11: .same(proto: "otherFiltersIdsByGroupDict"),
-    12: .same(proto: "customGroupId"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}unblockSearchAdsFilterId\0\u{1}cookieNoticeFilterId\0\u{1}popUpsFilterId\0\u{1}widgetsFilterId\0\u{1}otherAnnoyanceFilterId\0\u{1}mobileBannersFilter\0\u{1}definedGroups\0\u{1}groups\0\u{1}filtersByGroups\0\u{1}recommendedFiltersIdsByGroupDict\0\u{1}otherFiltersIdsByGroupDict\0\u{1}customGroupId\0")
 
   fileprivate class _StorageClass {
     var _unblockSearchAdsFilterID: Int32 = 0
@@ -896,15 +838,11 @@ extension FiltersIndex: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
     var _otherFiltersIdsByGroupDict: Dictionary<Int32,FiltersIds> = [:]
     var _customGroupID: Int32 = 0
 
-    #if swift(>=5.10)
       // This property is used as the initial default value for new instances of the type.
       // The type itself is protecting the reference to its storage via CoW semantics.
       // This will force a copy to be made of this reference when the first mutation occurs;
       // hence, it is safe to mark this as `nonisolated(unsafe)`.
       static nonisolated(unsafe) let defaultInstance = _StorageClass()
-    #else
-      static let defaultInstance = _StorageClass()
-    #endif
 
     private init() {}
 
@@ -1031,14 +969,7 @@ extension FiltersIndex: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
 
 extension FiltersGroupedByExtensions: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "FiltersGroupedByExtensions"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "general"),
-    2: .same(proto: "privacy"),
-    3: .same(proto: "social"),
-    4: .same(proto: "security"),
-    5: .same(proto: "other"),
-    6: .same(proto: "custom"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}general\0\u{1}privacy\0\u{1}social\0\u{1}security\0\u{1}other\0\u{1}custom\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -1093,11 +1024,7 @@ extension FiltersGroupedByExtensions: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
 extension CustomFilterUpdateRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "CustomFilterUpdateRequest"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "filterId"),
-    2: .same(proto: "title"),
-    3: .standard(proto: "is_trusted"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}filterId\0\u{1}title\0\u{3}is_trusted\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -1137,10 +1064,7 @@ extension CustomFilterUpdateRequest: SwiftProtobuf.Message, SwiftProtobuf._Messa
 
 extension FiltersStatus: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "FiltersStatus"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "status"),
-    2: .same(proto: "error"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}status\0\u{1}error\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -1175,11 +1099,7 @@ extension FiltersStatus: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
 
 extension FilterUpdateStatus: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "FilterUpdateStatus"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "id"),
-    2: .same(proto: "version"),
-    3: .same(proto: "success"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}id\0\u{1}version\0\u{1}success\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {

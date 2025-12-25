@@ -208,28 +208,16 @@ public struct AppStoreSubscriptionsMessage: Sendable {
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension AppStoreSubscription: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "AppStoreSubscription_monthly"),
-    1: .same(proto: "AppStoreSubscription_annual"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0AppStoreSubscription_monthly\0\u{1}AppStoreSubscription_annual\0")
 }
 
 extension AppStoreSubscriptionsError: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "AppStoreSubscriptionsError_unknown"),
-    1: .same(proto: "AppStoreSubscriptionsError_products_banned"),
-    2: .same(proto: "AppStoreSubscriptionsError_other_error"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0AppStoreSubscriptionsError_unknown\0\u{1}AppStoreSubscriptionsError_products_banned\0\u{1}AppStoreSubscriptionsError_other_error\0")
 }
 
 extension AppStoreSubscriptionInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "AppStoreSubscriptionInfo"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "subscription_type"),
-    2: .standard(proto: "display_price"),
-    3: .standard(proto: "trial_days"),
-    4: .standard(proto: "intro_offer_display_price"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}subscription_type\0\u{3}display_price\0\u{3}trial_days\0\u{3}intro_offer_display_price\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -278,10 +266,7 @@ extension AppStoreSubscriptionInfo: SwiftProtobuf.Message, SwiftProtobuf._Messag
 
 extension PromoInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "PromoInfo"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "title"),
-    2: .same(proto: "subtitle"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}title\0\u{1}subtitle\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -316,12 +301,7 @@ extension PromoInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementation
 
 extension AppStoreSubscriptions: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "AppStoreSubscriptions"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "is_trial_available"),
-    2: .same(proto: "monthly"),
-    3: .same(proto: "annual"),
-    4: .same(proto: "promoInfo"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}is_trial_available\0\u{1}monthly\0\u{1}annual\0\u{1}promoInfo\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -370,10 +350,7 @@ extension AppStoreSubscriptions: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 
 extension AppStoreSubscriptionsMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "AppStoreSubscriptionsMessage"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "error"),
-    2: .same(proto: "result"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}error\0\u{1}result\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {

@@ -104,23 +104,12 @@ public struct ThirdPartyDependency: Sendable {
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension Channel: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "Channel_unknown"),
-    1: .same(proto: "Channel_standalone_nightly"),
-    2: .same(proto: "Channel_standalone_beta"),
-    3: .same(proto: "Channel_standalone_release"),
-    4: .same(proto: "Channel_app_store"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0Channel_unknown\0\u{1}Channel_standalone_nightly\0\u{1}Channel_standalone_beta\0\u{1}Channel_standalone_release\0\u{1}Channel_app_store\0")
 }
 
 extension AppInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "AppInfo"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "version"),
-    2: .same(proto: "channel"),
-    3: .same(proto: "dependencies"),
-    4: .standard(proto: "update_available"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}version\0\u{1}channel\0\u{1}dependencies\0\u{3}update_available\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -165,10 +154,7 @@ extension AppInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
 
 extension ThirdPartyDependency: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "ThirdPartyDependency"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "name"),
-    2: .same(proto: "version"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}name\0\u{1}version\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
