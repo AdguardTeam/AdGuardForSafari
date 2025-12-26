@@ -38,7 +38,7 @@ export function SettingsComponent() {
     const {
         settings,
         filters: filtersStore,
-        filters: { filters: { filters: storeFilters }, filtersMap, filtersIndex },
+        filters: { filters: { filters: storeFilters } },
         account: { isLicenseOrTrialActive },
         account,
         notification } = useSettingsStore();
@@ -204,17 +204,7 @@ export function SettingsComponent() {
         onClose: () => setShowHardwareModal(false),
     };
 
-    let enabledFilters = filtersStore.enabledFilters.size;
-
-    // With no active license, we need to count only non-custom filters
-    if (!isLicenseOrTrialActive) {
-        enabledFilters = 0;
-        filtersStore.enabledFilters.forEach((id) => {
-            if (filtersMap.get(id)?.groupId !== filtersIndex.customGroupId) {
-                enabledFilters++;
-            }
-        });
-    }
+    const enabledFilters = filtersStore.enabledFilters.size;
 
     const getDisabledExtensionsStatus = () => {
         const navParam = {
