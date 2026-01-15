@@ -95,6 +95,20 @@ extension ExtensionSafariApiClientImpl: MainAppApi {
             $0.openSafariSettings(reply: reply)
         }
     }
+
+    func telemetryPageViewEvent(_ screenName: String, reply: @escaping (Error?) -> Void) {
+        LogDebugTrace()
+        self.withSafariApi(else: { reply(ExtensionSafariApiClientErrorCode.linkTimeout) }) {
+            $0.telemetryPageViewEvent(screenName, reply: reply)
+        }
+    }
+
+    func telemetryActionEvent(screenName: String, action: String, reply: @escaping (Error?) -> Void) {
+        LogDebugTrace()
+        self.withSafariApi(else: { reply(ExtensionSafariApiClientErrorCode.linkTimeout) }) {
+            $0.telemetryActionEvent(screenName: screenName, action: action, reply: reply)
+        }
+    }
 }
 
 // MARK: - SafariPopupApi implementation

@@ -173,6 +173,12 @@ extension PopupView {
 
                     LogDebug("User protection status changed: \(newValue)")
                     self.setFilteringStatusWithUrl(self.currentUrl, isEnabled: newValue)
+                    self.sendTelemetryAsync(
+                        .action(
+                            .protectionPopupClick,
+                            screen: self.telemetryMainOrExtensionsOffScreen()
+                        )
+                    )
                 }
                 .store(in: &self.cancellableSet)
 
@@ -197,14 +203,14 @@ extension PopupView {
 
         private func setFilteringStatusWithUrl(_ url: URL?, isEnabled: Bool) {
             guard let url = url?.absoluteString else { return }
-            self.performAction("Set filtering status for url") {
+            self.performAction(actionName: .setFilteringStatusForUrl) {
                 _ = try await self.safariApi.setFilteringStatusWithUrl(url, isEnabled: isEnabled)
                 await self.safariApp.reloadActivePage()
             }
         }
 
         private func setProtectionStatus(_ enabled: Bool) {
-            self.performAction("Set protection status to \(enabled)") {
+            self.performAction(actionName: enabled ? .setProtectionStatusToEnabled : .setProtectionStatusToDisabled) {
                 let timestamp = try await self.safariApi.setProtectionStatus(enabled)
                 let appState = try await self.safariApi.appState(after: timestamp)
                 self.isProtectionEnabled = appState.isProtectionEnabled
@@ -268,10 +274,11 @@ extension PopupView {
         }
 
         private func performAction(
-            _ name: String,
+            actionName: Action,
             dismissPopover: Bool = false,
             operation: @escaping () async throws -> Void
         ) {
+            let name = actionName.rawValue
             LogDebug("Starting action: \(name)")
             Task { @MainActor in
                 do {
@@ -283,8 +290,36 @@ extension PopupView {
                 } catch {
                     LogDebug("Action failed: \(name) error=\(error)")
                     await self.errorProcessing(error)
+                    if actionName == .setProtectionStatusToEnabled {
+                        self.sendTelemetryAsync(.pageView(.failedEnableProtection))
+                    }
                 }
             }
+        }
+
+        private func sendTelemetryAsync(
+            _ event: Telemetry.Event,
+            file: String = #fileID,
+            function: String = #function,
+            line: UInt = #line
+        ) {
+            Task {
+                do {
+                    switch event {
+                    case .pageView(let screen):
+                        try await self.safariApi.telemetryPageViewEvent(screen)
+                    case .action(let action, let screen):
+                        try await self.safariApi.telemetryActionEvent(action, screen: screen)
+                    }
+                    LogDebug("Did send telemetry event", file: file, function: function, line: line)
+                } catch {
+                    LogDebug("Can't send telemetry event: \(error)", file: file, function: function, line: line)
+                }
+            }
+        }
+
+        private func telemetryMainOrExtensionsOffScreen() -> Telemetry.Screen {
+            self.isAllExtensionsEnabled ? .main : .extensionsOff
         }
     }
 }
@@ -293,8 +328,9 @@ extension PopupView {
 
 extension PopupView.ViewModel {
     func fixItClicked() {
-        self.performAction("Open Safari Settings", dismissPopover: true) {
+        self.performAction(actionName: .openSafariSettings, dismissPopover: true) {
             try await self.safariApi.openSafariSettings()
+            self.sendTelemetryAsync(.action(.fixItPopupClick, screen: self.telemetryMainOrExtensionsOffScreen()))
         }
     }
 
@@ -303,6 +339,7 @@ extension PopupView.ViewModel {
             guard let page = await self.safariApp.getActivePage() else { return }
             page.dispatchMessageToScript(withName: OutgoingExtensionMessage.blockElementPing.rawValue)
             self.popupViewControllerDelegate?.dismissPopover()
+            self.sendTelemetryAsync(.action(.blockElementPopupClick, screen: self.telemetryMainOrExtensionsOffScreen()))
         }
     }
 
@@ -312,17 +349,21 @@ extension PopupView.ViewModel {
             return
         }
 
-        self.performAction("Report site", dismissPopover: true) {
+        self.performAction(actionName: .reportSite, dismissPopover: true) {
             let reportUrlString = try await self.safariApi.reportSite(with: currentUrl)
             guard let reportUrl = URL(string: reportUrlString) else { return }
 
             await self.safariApp.openUrlInNewTab(reportUrl)
+            self.sendTelemetryAsync(.action(.reportIssueClick, screen: self.telemetryMainOrExtensionsOffScreen()))
         }
     }
 
     func rateAdguardMiniClicked() {
         self.popupViewControllerDelegate?.dismissPopover()
         NSWorkspace.shared.open(Constants.rateAdguardMiniURL)
+        Task {
+            self.sendTelemetryAsync(.action(.rateMiniPopupClick, screen: self.telemetryMainOrExtensionsOffScreen()))
+        }
     }
 
     func buttonClicked() {
@@ -332,13 +373,13 @@ extension PopupView.ViewModel {
         case .domain:
             return
         case .adguardNotLaunched:
-            self.performAction("Launch main app") {
+            self.performAction(actionName: .launchMainApp) {
                 self.mainAppDiscovery.runMainApplication()
             }
         case .protectionIsDisabled:
             self.setProtectionStatus(true)
         case .somethingWentWrong:
-            self.performAction("Restart main app") {
+            self.performAction(actionName: .restartMainApp) {
                 try await self.mainAppDiscovery.restartMainApplication()
             }
         case .onboardingWasntCompleted:
@@ -347,13 +388,37 @@ extension PopupView.ViewModel {
     }
 
     func settingsClicked() {
-        self.performAction("Open settings", dismissPopover: true) {
+        self.performAction(actionName: .openSettings, dismissPopover: true) {
             try await self.mainAppDiscovery.openSettings()
+            let screen: Telemetry.Screen = if self.popupLayout == .protectionIsDisabled {
+                .protectionDisabled
+            } else {
+                self.telemetryMainOrExtensionsOffScreen()
+            }
+            self.sendTelemetryAsync(.action(.settingPopupClick, screen: screen))
         }
     }
 
     func pauseClicked() {
         self.setProtectionStatus(false)
+        self.sendTelemetryAsync(.action(.pauseProtectionPopupClick, screen: self.telemetryMainOrExtensionsOffScreen()))
+    }
+
+    func sendPageViewForCurrentLayout() {
+        let screen: Telemetry.Screen? = switch self.popupLayout {
+        case .domain:
+            self.telemetryMainOrExtensionsOffScreen()
+        case .protectionIsDisabled:
+            .protectionDisabled
+        case .somethingWentWrong:
+            .failedEnableProtection
+        case .adguardNotLaunched, .onboardingWasntCompleted:
+            nil
+        }
+
+        if let screen {
+            self.sendTelemetryAsync(.pageView(screen))
+        }
     }
 }
 
@@ -423,5 +488,18 @@ extension PopupView.ViewModel: ExtensionSafariApiClientDelegate {
     func setLogLevel(_ logLevel: LogLevel) {
         LogVerboseTrace()
         LogConfig.setLogLevelAsyncly(logLevel)
+    }
+}
+
+private extension PopupView.ViewModel {
+    enum Action: String {
+        case setFilteringStatusForUrl = "Set filtering status for url"
+        case setProtectionStatusToEnabled = "Set protection status to enabled"
+        case setProtectionStatusToDisabled = "Set protection status to disabled"
+        case openSafariSettings = "Open Safari Settings"
+        case reportSite = "Report site"
+        case launchMainApp = "Launch main app"
+        case restartMainApp = "Restart main app"
+        case openSettings = "Open settings"
     }
 }

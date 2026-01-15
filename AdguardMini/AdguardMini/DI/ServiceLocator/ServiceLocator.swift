@@ -266,6 +266,7 @@ private final class ServiceLocator {
             safariExtensionStatusManager: self.safariExtensionStatusManager,
             urlFilteringChecker: self.urlFilteringChecker,
             userSettingsService: self.userSettingsService,
+            telemetry: self.telemetryService,
             keychain: self.coreDIContainer.keychain,
             eventBus: self.eventBus
         )

@@ -34,6 +34,9 @@ protocol SafariApiInteractor {
     func reportSite(with url: String) async throws -> String
 
     func openSafariSettings() async throws
+
+    func telemetryPageViewEvent(_ screen: Telemetry.Screen) async throws
+    func telemetryActionEvent(_ action: Telemetry.Action, screen: Telemetry.Screen) async throws
 }
 
 // MARK: - SafariApiInteractorImpl
@@ -109,6 +112,22 @@ final class SafariApiInteractorImpl: SafariApiInteractor {
     func openSafariSettings() async throws {
         try await withCheckedThrowingContinuation { continuation in
             self.safariApi.openSafariSettings(reply: continuation.callback)
+        }
+    }
+
+    func telemetryPageViewEvent(_ screen: Telemetry.Screen) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            self.safariApi.telemetryPageViewEvent(screen.rawValue, reply: continuation.callback)
+        }
+    }
+
+    func telemetryActionEvent(_ action: Telemetry.Action, screen: Telemetry.Screen) async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            self.safariApi.telemetryActionEvent(
+                screenName: screen.rawValue,
+                action: action.rawValue,
+                reply: continuation.callback
+            )
         }
     }
 }

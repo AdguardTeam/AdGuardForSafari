@@ -36,6 +36,7 @@ extension TrayApp: InternalServiceDependent,
                    TrayIconUpdatesHandlerDependent,
                    StatusBarItemControllerDependent,
                    UserSettingsManagerDependent,
+                   TelemetrySciterServiceDependent,
                    TrayServiceDependent {}
 
 /// App that controls the tray window and its icon.

@@ -53,6 +53,7 @@ final class SafariApiProvider: NSObject {
     private let safariExtensionStatusManager: SafariExtensionStatusManager
     private let urlFilteringChecker: UrlFilteringChecker
     private let userSettingsService: UserSettingsService
+    private let telemetry: Telemetry.Service
     private let eventBus: EventBus
     private let keychain: KeychainManager
 
@@ -66,6 +67,7 @@ final class SafariApiProvider: NSObject {
         safariExtensionStatusManager: SafariExtensionStatusManager,
         urlFilteringChecker: UrlFilteringChecker,
         userSettingsService: UserSettingsService,
+        telemetry: Telemetry.Service,
         keychain: KeychainManager,
         eventBus: EventBus
     ) {
@@ -76,6 +78,7 @@ final class SafariApiProvider: NSObject {
         self.safariExtensionStatusManager = safariExtensionStatusManager
         self.urlFilteringChecker = urlFilteringChecker
         self.userSettingsService = userSettingsService
+        self.telemetry = telemetry
         self.keychain = keychain
         self.eventBus = eventBus
     }
@@ -280,6 +283,20 @@ extension SafariApiProvider: MainAppApi {
                 LogDebug("Failed to open safari preferences: \(error)")
             }
             reply(commonError)
+        }
+    }
+
+    func telemetryPageViewEvent(_ screenName: String, reply: @escaping (Error?) -> Void) {
+        Task {
+            await self.telemetry.sendEvent(.pageview(.init(name: screenName)))
+            reply(nil)
+        }
+    }
+
+    func telemetryActionEvent(screenName: String, action: String, reply: @escaping (Error?) -> Void) {
+        Task {
+            await self.telemetry.sendEvent(.customEvent(.init(name: action, refName: screenName)))
+            reply(nil)
         }
     }
 }

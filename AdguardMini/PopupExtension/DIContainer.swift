@@ -75,7 +75,7 @@ final class DIContainer {
         safariApi.delegate = self.popupViewModel
         self.mainView = PopupView(viewModel: self.popupViewModel)
 
-        self.safariController = PopupViewController(mainView: self.mainView)
+        self.safariController = PopupViewController(mainView: self.mainView, viewModel: self.popupViewModel)
 
         self.popupViewModel.popupViewControllerDelegate = self.safariController
     }

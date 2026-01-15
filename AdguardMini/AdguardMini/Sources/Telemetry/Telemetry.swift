@@ -45,6 +45,11 @@ enum Telemetry {
         let name: String
         /// Name of referrer page, e.g. "stats\_screen".
         let refName: String?
+
+        init(name: String, refName: String? = nil) {
+            self.name = name
+            self.refName = refName
+        }
     }
 
     struct CustomEvent {
@@ -54,6 +59,13 @@ enum Telemetry {
         let refName: String
         let action: String?
         let label: String?
+
+        init(name: String, refName: String, action: String? = nil, label: String? = nil) {
+            self.name = name
+            self.refName = refName
+            self.action = action
+            self.label = label
+        }
     }
 }
 
@@ -119,9 +131,9 @@ extension Telemetry {
                     .custom(name: event.name, refName: event.refName)
             }
 
-            let props = AML.Telemetry.Props(
-                subscriptionDuration: await self.getSubscriptionDuration(),
-                licenseStatus: await self.getLicenseStatus(),
+            let props = await AML.Telemetry.Props(
+                subscriptionDuration: self.getSubscriptionDuration(),
+                licenseStatus: self.getLicenseStatus(),
                 theme: self.getTheme(),
                 retentionCohort: self.getRetentionCohort()
             )
@@ -149,8 +161,8 @@ extension Telemetry {
                 }
             }
 
-            LogError("Unexpected license state: license exists but has no lifetime or duration field")
-            return nil
+            LogDebug("License has no lifetime or duration field")
+            return info.licenseStatus != .free ? .other : nil
         }
 
         private func getLicenseStatus() async -> AML.Telemetry.LicenseStatus? {
@@ -159,13 +171,15 @@ extension Telemetry {
             }
 
             return switch info.licenseStatus {
+            case .free:   .free
             case .trial:  .trial
             case .active: .premium
             default:      .other
             }
         }
 
-        private func getTheme() -> AML.Telemetry.Theme {
+        @MainActor
+        private func getTheme() async -> AML.Telemetry.Theme {
             UIUtils.isDarkMode() ? .systemDark : .systemLight
         }
 

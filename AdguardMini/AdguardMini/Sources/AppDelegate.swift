@@ -16,6 +16,7 @@ import CoreGraphics
 // MARK: - AppDelegate
 
 extension AppDelegate:
+    AppMetadataDependent,
     SafariApiHandlerDependent,
     LoginItemServiceDependent,
     UrlSchemesProcessorDependent,
@@ -36,6 +37,7 @@ extension AppDelegate: AppStoreRateUsDependent {}
 final class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: Internal services
 
+    var appMetadata: AppMetadata!
     var safariApiHandler: SafariApiHandler!
     var loginItemService: LoginItemService!
     var urlSchemesProcessorInjector: (() -> any UrlSchemesProcessor)!
@@ -193,6 +195,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 self.migrationSuccess = try await self.legacyMigrationService.tryMigrate()
             } catch {
                 LogError("Could not migrate: \(error)")
+            }
+
+            let firstStartDate = self.appMetadata.firstStartDate
+            if firstStartDate.isNil {
+                let isStartDateNow = self.userSettingsManager.firstRun && !self.migrationSuccess
+                self.appMetadata.firstStartDate = isStartDateNow ? .now : .distantPast
             }
 
             await self.backendService.bootstrap()

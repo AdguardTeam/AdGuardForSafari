@@ -14,11 +14,13 @@ import AML
 
 class PopupViewController: SFSafariExtensionViewController, PopupViewControllerDelegate {
     private let mainView: PopupView
+    private let viewModel: PopupView.ViewModel
 
     // MARK: Init
 
-    init(mainView: PopupView) {
+    init(mainView: PopupView, viewModel: PopupView.ViewModel) {
         self.mainView = mainView
+        self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -32,5 +34,10 @@ class PopupViewController: SFSafariExtensionViewController, PopupViewControllerD
 
     override func loadView() {
         self.view = NSHostingView(rootView: self.mainView)
+    }
+
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        self.viewModel.sendPageViewForCurrentLayout()
     }
 }

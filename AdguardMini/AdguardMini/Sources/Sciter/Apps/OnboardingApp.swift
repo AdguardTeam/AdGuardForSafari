@@ -15,6 +15,7 @@ final class OnboardingApp: SciterApp,
                            OnboardingServiceDependent,
                            FiltersServiceDependent,
                            SettingsServiceDependent,
+                           TelemetrySciterServiceDependent,
                            OnboardingCallbackServiceDependent {
     override init(
         windowRect: CGRect,

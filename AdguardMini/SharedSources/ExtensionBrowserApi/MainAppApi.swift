@@ -9,7 +9,7 @@
 
 import Foundation
 
-let ExtensionSafariApiProtocolId = "SafariAPI:2025/06/25"
+let ExtensionSafariApiProtocolId = "SafariAPI:2025/12/25"
 
 typealias EBATimestamp = TimeInterval
 
@@ -31,4 +31,7 @@ protocol MainAppApi {
     func reportSite(with url: String,
                     reply: @escaping (String?, Error?) -> Void)
     func openSafariSettings(reply: @escaping (Error?) -> Void)
+
+    func telemetryPageViewEvent(_ screenName: String, reply: @escaping (Error?) -> Void)
+    func telemetryActionEvent(screenName: String, action: String, reply: @escaping (Error?) -> Void)
 }

@@ -24,12 +24,27 @@ protocol UserSettingsManager: UserSettingsProtocol {
 
 extension UserSettings: UserSettingsManager {
     private var preservedDict: [String: Any] {
-        [
-            SettingsKey.updateChannel.rawValue: self.currentUpdateChannel,
-            SettingsKey.wasMigratedFromLegacyApp.rawValue: UserDefaults.standard.bool(
-                forKey: SettingsKey.wasMigratedFromLegacyApp.rawValue
-            )
+        func rawOf(_ key: SettingsKey) -> String { key.rawValue }
+
+        let defaults = UserDefaults.standard
+        let wasMigratedFromLegacyAppKey = rawOf(.wasMigratedFromLegacyApp)
+        let telemetryIdKey = rawOf(.telemetryId)
+        let firstStartDateKey = rawOf(.firstStartDate)
+
+        var dict: [String: Any] = [
+            rawOf(.updateChannel): self.currentUpdateChannel,
+            wasMigratedFromLegacyAppKey: defaults.bool(forKey: wasMigratedFromLegacyAppKey)
         ]
+
+        if let telemetryId = defaults.string(forKey: telemetryIdKey) {
+            dict[telemetryIdKey] = telemetryId
+        }
+
+        if let firstStartDate = defaults.object(forKey: firstStartDateKey) as? Date {
+            dict[firstStartDateKey] = firstStartDate
+        }
+
+        return dict
     }
 
     var quitReaction: QuitReaction {

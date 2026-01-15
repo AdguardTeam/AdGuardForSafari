@@ -22,6 +22,7 @@ final class SettingsApp: SciterApp,
                          SettingsCallbackServiceDependent,
                          AccountCallbackServiceDependent,
                          FiltersCallbackServiceDependent,
+                         TelemetrySciterServiceDependent,
                          UserRulesCallbackServiceDependent {
     override init(windowRect: CGRect, archivePath: String, hideOnLoosingFocus: Bool) {
         super.init(windowRect: windowRect, archivePath: archivePath, hideOnLoosingFocus: hideOnLoosingFocus)
