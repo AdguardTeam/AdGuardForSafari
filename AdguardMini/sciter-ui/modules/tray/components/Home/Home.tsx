@@ -11,7 +11,7 @@ import { EmptyValue, OptionalStringValue } from 'Apis/types';
 import { getCountableEntityStatuses } from 'Common/utils/utils';
 import theme from 'Theme';
 import { useTheme, useTrayStore } from 'TrayLib/hooks';
-import { RouteName } from 'TrayStore/modules';
+import { TrayEvent, TrayRoute } from 'TrayStore/modules';
 import { Loader, Logo, Button, Text, Switch } from 'UILib';
 
 import { StoryNavigation } from '../../modules/stories/classes';
@@ -32,18 +32,11 @@ const openSafariPreferences = () => {
 };
 
 /**
- * Opens settings window
- */
-const openSettingsWindow = () => {
-    API.internalService.OpenSettingsWindow(new EmptyValue());
-};
-
-/**
  * Home screen of tray
  */
 function HomeComponent() {
     const trayStore = useTrayStore();
-    const { settings, router, trayWindowVisibilityChanged } = trayStore;
+    const { settings, router, trayWindowVisibilityChanged, telemetry } = trayStore;
     const { settings: traySettings } = settings;
 
     const stories = useStoriesConfig();
@@ -98,7 +91,17 @@ function HomeComponent() {
         right: stories.length > 2,
     });
 
-    const navigateToUpdates = useCallback(() => router.changePath(RouteName.updates), [router]);
+    const openSettingsWindow = useCallback(() => {
+        API.internalService.OpenSettingsWindow(new EmptyValue());
+        telemetry.trackEvent(TrayEvent.SettingsClick);
+    }, [telemetry]);
+
+    const handleToggleSwitch = useCallback((checked: boolean) => {
+        settings.updateSettings(checked);
+        telemetry.trackEvent(TrayEvent.MainProtectionClick);
+    }, [settings, telemetry]);
+
+    const navigateToUpdates = useCallback(() => router.changePath(TrayRoute.updates), [router]);
 
     /**
      * Handle click on arrows in stories cards box
@@ -161,14 +164,19 @@ function HomeComponent() {
     } = getCountableEntityStatuses(settings.enabledSafariExtensionsCount, settings.safariExtensionsCount);
 
     const getDisabledExtensionsStatus = () => {
-        const linkParam = { link: (text: string) => (<div onClick={openSafariPreferences}>{text}</div>) };
-
         if (someExtensionsDisabled) {
-            return translate('tray.home.title.protection.extensions.disabled', linkParam);
+            return translate('tray.home.title.protection.extensions.disabled', {
+                link: (text: string) => {
+                    telemetry.trackEvent(TrayEvent.FixItClick);
+                    return <div onClick={openSafariPreferences}>{text}</div>;
+                },
+            });
         }
 
         if (allExtensionsDisabled) {
-            return translate('tray.home.title.protection.extensions.all.disabled', linkParam);
+            return translate('tray.home.title.protection.extensions.all.disabled', {
+                link: (text: string) => (<div onClick={openSafariPreferences}>{text}</div>),
+            });
         }
     };
 
@@ -231,7 +239,7 @@ function HomeComponent() {
                     checked={enabled}
                     className={s.Home_switch}
                     icon
-                    onChange={settings.updateSettings}
+                    onChange={handleToggleSwitch}
                 />
                 {stories.length > 0 && (
                     <>

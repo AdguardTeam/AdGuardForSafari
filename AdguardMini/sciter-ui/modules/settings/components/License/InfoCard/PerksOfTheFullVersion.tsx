@@ -187,6 +187,17 @@ function PerksOfTheFullVersionComponent({
             } else {
                 account.requestWebSubscription(Subscription.standalone);
             }
+
+            /*
+            TODO: AG-45393 Recheck telemetry tracking for license flow
+            if (isMASReleaseVariant) {
+                if (isTrialActive || trialAvailableDays <= 0) {
+                    telemetry.trackEvent(SettingsEvent.Try14DaysClick);
+                } else if (isAppStoreSubscription) {
+                    telemetry.trackEvent(SettingsEvent.SubscribeTrialEndClick);
+                }
+            }
+            */
         };
 
         return (

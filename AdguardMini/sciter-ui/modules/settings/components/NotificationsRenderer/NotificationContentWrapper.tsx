@@ -9,10 +9,11 @@ import s from './NotificationsRenderer.module.pcss';
 
 import type { ComponentChild } from 'preact';
 import type { NotificationPropsHolder } from 'SettingsLib/utils/NotificationPropsHolder';
+import type { NotificationPropertiesSelector } from 'SettingsStore/modules';
 
 type Props = {
     message: ComponentChild;
-    notification: NotificationPropsHolder;
+    notification: NotificationPropsHolder<NotificationPropertiesSelector>;
     onCloseNotification(): void;
 };
 

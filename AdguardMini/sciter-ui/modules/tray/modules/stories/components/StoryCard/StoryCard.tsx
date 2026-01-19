@@ -5,11 +5,13 @@
 import { observer } from 'mobx-react-lite';
 import { useCallback } from 'preact/hooks';
 
+import { useTrayStore } from 'Modules/tray/lib/hooks';
 import { Text, Icon } from 'UILib';
 
 import s from './StoryCard.module.pcss';
 
 import type { StoryCardIcon } from 'Modules/tray/modules/stories/model';
+import type { TrayEvent } from 'Modules/tray/store/modules';
 
 export type StoryCardProps = {
     warning?: boolean;
@@ -18,6 +20,7 @@ export type StoryCardProps = {
     storyIndex: number;
     setSelectedStoryIndex(index: number): void;
     className?: string;
+    telemetryEvent?: TrayEvent;
 };
 
 /**
@@ -30,8 +33,16 @@ function StoryCardComponent({
     storyIndex,
     setSelectedStoryIndex,
     className,
+    telemetryEvent,
 }: StoryCardProps) {
-    const onClick = useCallback(() => setSelectedStoryIndex(storyIndex), [setSelectedStoryIndex, storyIndex]);
+    const { telemetry } = useTrayStore();
+
+    const onClick = useCallback(() => {
+        setSelectedStoryIndex(storyIndex);
+        if (telemetryEvent) {
+            telemetry.trackEvent(telemetryEvent);
+        }
+    }, [setSelectedStoryIndex, storyIndex, telemetry, telemetryEvent]);
 
     return (
         <div className={cx(s.StoryCard, warning && s.StoryCard__warning, className)} onClick={onClick}>

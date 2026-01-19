@@ -8,10 +8,11 @@ import { Icon } from 'UILib';
 import s from './NotificationsRenderer.module.pcss';
 
 import type { NotificationPropsHolder } from 'SettingsLib/utils/NotificationPropsHolder';
+import type { NotificationPropertiesSelector } from 'SettingsStore/modules';
 import type { IconType } from 'UILib';
 
 type Props = {
-    notification: NotificationPropsHolder;
+    notification: NotificationPropsHolder<NotificationPropertiesSelector>;
 };
 
 /**

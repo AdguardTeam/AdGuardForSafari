@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks';
 
 import { useSettingsStore } from 'SettingsLib/hooks';
-import { RouteName } from 'SettingsStore/modules';
+import { RouteName, SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
 import { Button, Text } from 'UILib';
 
@@ -40,7 +40,7 @@ export type ContextMenuProps = {
  * Context dropdown menu
  */
 function ContextMenuComponent({ elements, reportBug, className, showReportBugTooltip }: ContextMenuProps) {
-    const { router, ui } = useSettingsStore();
+    const { router, ui, telemetry } = useSettingsStore();
     const [open, setOpen] = useState(false);
 
     const containerRef = useRef<HTMLDivElement>(null);
@@ -92,7 +92,10 @@ function ContextMenuComponent({ elements, reportBug, className, showReportBugToo
         <div ref={containerRef} className={cx(s.ContextMenu, className)}>
             {reportBug ? (
                 <div
-                    onClick={() => router?.changePath(RouteName.contact_support)}
+                    onClick={() => {
+                        telemetry.trackEvent(SettingsEvent.FlagClick);
+                        router?.changePath(RouteName.contact_support)
+                    }}
                     onMouseEnter={debounceRef.current}
                     onMouseLeave={closeTooltip}
                     onMouseLeaveCapture={closeTooltip}

@@ -10,6 +10,7 @@ import { getTdsLink, TDS_PARAMS } from 'Modules/common/utils/links';
 // import { StarStoryMainFrameButtons } from 'Modules/tray/modules/stories/components/StarStoryMainFrameButtons';
 import { RouteName as RouteNameSettings } from 'SettingsStore/modules';
 import { useTrayStore } from 'TrayLib/hooks';
+import { TrayEvent } from 'Modules/tray/store/modules';
 
 import type { IStoryFrame, StoryInfo } from '../model';
 
@@ -71,6 +72,7 @@ export function useStoriesConfig(): StoryInfo[] {
                 ],
                 backgroundColor: 'aqua',
             },
+            telemetryEvent: TrayEvent.StoryEnableExtensionsClick,
         });
     }
 
@@ -116,6 +118,7 @@ export function useStoriesConfig(): StoryInfo[] {
                 }],
                 backgroundColor: 'green',
             },
+            telemetryEvent: TrayEvent.StoryUnlockFeaturesClick,
         });
     }
 
@@ -163,6 +166,7 @@ export function useStoriesConfig(): StoryInfo[] {
                 }],
                 backgroundColor: 'emerald',
             },
+            telemetryEvent: TrayEvent.StoreUseLicenseClick,
         });
     }
 
@@ -205,6 +209,7 @@ export function useStoriesConfig(): StoryInfo[] {
             }],
             backgroundColor: 'blue',
         },
+        telemetryEvent: TrayEvent.StoryWhatFilterClick,
     });
 
     // AG-49352 stories.push({
@@ -221,6 +226,7 @@ export function useStoriesConfig(): StoryInfo[] {
     //         }],
     //         backgroundColor: 'sandBlue',
     //     },
+    //     telemetryEvent: TrayEvent.StoryLoveHearYouClick,
     // });
 
     let extraTitle = '';
@@ -310,6 +316,7 @@ export function useStoriesConfig(): StoryInfo[] {
             frames: extraFrames,
             backgroundColor: 'sand',
         },
+        telemetryEvent: TrayEvent.StoryWhatIsExtraClick,
     });
 
     stories.sort((a) => {

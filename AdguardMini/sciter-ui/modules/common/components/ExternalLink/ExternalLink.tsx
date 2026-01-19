@@ -7,6 +7,7 @@ import { Text, Icon } from 'UILib';
 import s from './ExternalLink.module.pcss';
 
 import type { ComponentChildren } from 'preact';
+import type { JSXInternal } from 'preact/src/jsx';
 import type { IconType, TextProps } from 'UILib';
 
 export type ExternalLinkProps = {
@@ -19,6 +20,7 @@ export type ExternalLinkProps = {
     icon?: IconType;
     noLineHeight?: boolean;
     color?: 'green' | 'red';
+    onClick?: JSXInternal.DOMAttributes<HTMLAnchorElement>['onClick'];
 };
 
 /**
@@ -32,6 +34,7 @@ export function ExternalLink({
     noUnderline,
     icon,
     noLineHeight,
+    onClick,
     color = 'green',
 }: ExternalLinkProps) {
     return (
@@ -40,6 +43,7 @@ export function ExternalLink({
             href={href}
             rel="noopener noreferrer"
             target="_blank"
+            onClick={onClick}
         >
             {icon && <Icon className={s[`ExternalLink__${color}`]} icon={icon} />}
             {!icon && <Text className={s.ExternalLink_text} lineHeight={noLineHeight ? 'none' : undefined} type={textType || 't1'}>{children}</Text>}

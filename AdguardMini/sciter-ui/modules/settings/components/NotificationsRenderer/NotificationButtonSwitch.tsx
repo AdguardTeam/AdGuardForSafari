@@ -8,9 +8,10 @@ import { Button, Text } from 'UILib';
 import s from './NotificationsRenderer.module.pcss';
 
 import type { NotificationPropsHolder } from 'SettingsLib/utils/NotificationPropsHolder';
+import type { NotificationPropertiesSelector } from 'SettingsStore/modules';
 
-type Props = {
-    notification: NotificationPropsHolder;
+type Props = {  
+    notification: NotificationPropsHolder<NotificationPropertiesSelector>;
     onCloseNotification(): void;
 };
 

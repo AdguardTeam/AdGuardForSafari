@@ -9,11 +9,13 @@ import s from './NotificationsRenderer.module.pcss';
 
 import type { ComponentChild } from 'preact';
 import type { NotificationPropsHolder } from 'TrayLib/utils/NotificationPropsHolder';
+import { useEffect } from 'preact/hooks';
 
 type Props = {
     message: ComponentChild;
     notification: NotificationPropsHolder;
     onCloseNotification(): void;
+    onMount?: () => void;
 };
 
 /**
@@ -27,6 +29,7 @@ export function NotificationContentWrapper({
     message,
     notification,
     onCloseNotification,
+    onMount,
 }: Props) {
     let className = '';
 
@@ -40,6 +43,10 @@ export function NotificationContentWrapper({
                 break;
         }
     }
+
+    useEffect(() => {
+        onMount?.();
+    }, [onMount]);
 
     return (
         <div className={cx(s.NotificationContentWrapper_content, className)}>

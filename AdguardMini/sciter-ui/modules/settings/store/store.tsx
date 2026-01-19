@@ -12,13 +12,16 @@ import {
     AdvancedBlocking,
     AppInfo,
     Filters,
-    Router,
     SafariProtection,
     Settings,
     UserRules,
     Windowing,
     NotificationsQueue,
     UI,
+    type SettingsTelemetry,
+    settingsTelemetryFactory,
+    settingsRouterFactory,
+    type SettingsRouterStore,
 } from './modules';
 
 import type { EffectiveTheme } from 'Apis/types';
@@ -36,8 +39,6 @@ export class SettingsStore {
 
     filters: Filters;
 
-    router: Router;
-
     safariProtection: SafariProtection;
 
     settings: Settings;
@@ -51,25 +52,37 @@ export class SettingsStore {
     ui: UI;
 
     /**
+     * Settings window router store
+     */
+    public readonly router: SettingsRouterStore;
+
+    /**
+     * Settings window telemetry
+     */
+    public readonly telemetry: SettingsTelemetry;
+
+    /**
      * Settings window effective theme changed event
      */
     public readonly settingsWindowEffectiveThemeChanged = new Action<EffectiveTheme>();
 
     /**
-     * ctor
+     * Ctor
      */
     constructor() {
         this.account = new Account(this);
         this.advancedBlocking = new AdvancedBlocking(this);
         this.appInfo = new AppInfo(this);
         this.filters = new Filters(this);
-        this.router = new Router(this);
         this.safariProtection = new SafariProtection(this);
         this.settings = new Settings(this);
         this.userRules = new UserRules(this);
         this.ui = new UI(this);
         this.windowing = new Windowing();
         this.notification = new NotificationsQueue();
+        this.telemetry = settingsTelemetryFactory();
+        this.router = settingsRouterFactory();
+
         this.init();
     }
 

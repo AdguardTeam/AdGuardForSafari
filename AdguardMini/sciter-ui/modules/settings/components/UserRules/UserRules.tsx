@@ -13,7 +13,7 @@ import { selectFile } from 'Common/utils/selectFile';
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { useOpenUserRulesWindow } from 'SettingsLib/hooks/useOpenUserRulesWindow';
 import { getNotificationSomethingWentWrongText, provideContactSupportParam } from 'SettingsLib/utils/translate';
-import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, NotificationsQueueVariant, RouteName } from 'SettingsStore/modules';
+import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, NotificationsQueueVariant, RouteName, SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
 import { Modal, ExternalLink, SettingsTitle, Input, Pagination, Icon, Text } from 'UILib';
 
@@ -32,7 +32,15 @@ const PAGE_SIZE = 100;
  * User rules page in settings module
  */
 function UserRulesComponent() {
-    const { userRules, notification, router, settings, settings: { userActionLastDirectory } } = useSettingsStore();
+    const {
+        userRules,
+        notification,
+        router,
+        settings,
+        settings: { userActionLastDirectory },
+        telemetry
+    } = useSettingsStore();
+
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showImportModal, setShowImportModal] = useState(false);
     const [page, setPage] = useState(1);
@@ -176,6 +184,7 @@ function UserRulesComponent() {
                             href={getTdsLink(TDS_PARAMS.filterrules, RouteName.user_rules)}
                             textType="t1"
                             noUnderline
+                            onClick={() => telemetry.trackEvent(SettingsEvent.RuleSyntaxClick)}
                         >
                             {translate('user.rules.how.create.rule')}
                         </ExternalLink>

@@ -9,16 +9,17 @@ import { Icon, Text } from 'UILib';
 
 import s from './NavigationHeader.module.pcss';
 
-import type { RouteName, Router } from 'SettingsStore/modules';
+import type { IRouter } from 'Modules/common/stores/interfaces/IRouter';
+import type { RouteName } from 'SettingsStore/modules';
 
 export type NavigationHeaderProps = {
     route: RouteName;
-    router: Router;
+    router: IRouter<string>;
     title: string;
     onClick?(): void;
 } | {
     route?: RouteName;
-    router?: Router;
+    router?: IRouter<string>;
     title: string;
     onClick(): void;
 };

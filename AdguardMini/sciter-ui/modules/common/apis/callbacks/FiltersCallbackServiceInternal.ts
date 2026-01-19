@@ -2,7 +2,7 @@
 import { store } from 'SettingsStore';
 import { IFiltersCallbackServiceInternal } from './FiltersCallbackService';
 import { EmptyValue, FiltersIndex, StringValue } from '../types'
-import { RouteName } from 'Modules/settings/store/modules/Router';
+import { RouteName } from 'Modules/settings/store/modules/SettingsRouter';
 
 /* Service handles filters lists  */
 export class FiltersCallbackServiceInternal  implements IFiltersCallbackServiceInternal {

@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import type { TrayEvent } from 'Modules/tray/store/modules';
+
 /**
  * Story ID type
  */
@@ -42,6 +44,11 @@ export type StoryInfo = {
      * Story display config
      */
     storyConfig: StoryViewConfig;
+    /**
+     * Telemetry event to send when this story is selected
+     * If not provided, no telemetry will be sent
+     */
+    telemetryEvent?: TrayEvent;
 };
 
 /**

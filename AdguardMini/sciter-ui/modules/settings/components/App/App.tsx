@@ -31,6 +31,7 @@ import {
     useShowEnableExtensionsNotification,
     useCheckExpiredLicenseStatus,
 } from './hooks';
+import { useTrackSettingsPage } from './hooks/useTrackSettingsPage';
 
 const notifyContainer = document.getElementById('notify')!;
 const tooltipContainer = document.getElementById('tooltip')!;
@@ -82,6 +83,7 @@ function AppComponent() {
 
     useShowEnableExtensionsNotification();
     useCheckExpiredLicenseStatus();
+    useTrackSettingsPage();
 
     return (
         <>

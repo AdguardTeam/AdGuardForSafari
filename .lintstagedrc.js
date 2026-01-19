@@ -1,3 +1,3 @@
 module.exports = {
-    "AdguardMini/sciter-ui/**/*.{ts,tsx}": "yarn lint",
+    "AdguardMini/sciter-ui/**/*.{ts,tsx}": "yarn lint --quiet",
 };

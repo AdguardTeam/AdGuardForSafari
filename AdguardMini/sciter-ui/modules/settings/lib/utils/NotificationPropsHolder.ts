@@ -2,14 +2,12 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import type { NotificationPropertiesSelector } from 'SettingsStore/modules/NotificationsQueue';
-
 /**
  * NotificationPropsHolder object for NotificationsQueue
  */
-export class NotificationPropsHolder {
+export class NotificationPropsHolder<Props> {
     /**
      * Ctor
      */
-    constructor(public readonly props: NotificationPropertiesSelector) {}
+    constructor(public readonly props: Props) {}
 }

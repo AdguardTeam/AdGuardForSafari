@@ -7,8 +7,13 @@ import { createContext } from 'preact';
 import { EmptyValue } from 'Apis/types';
 import { Action } from 'Modules/common/utils/EventAction';
 
+import {
+    type TrayRouterStore,
+    trayRouterFactory,
+    type TrayTelemetry,
+    trayTelemetryFactory,
+} from './modules';
 import { NotificationsQueue } from './modules/NotificationsQueue';
-import { Router } from './modules/Router';
 import { SettingsStore } from './modules/Settings';
 
 import type { EffectiveTheme } from 'Apis/types';
@@ -17,11 +22,14 @@ import type { EffectiveTheme } from 'Apis/types';
  * Store used in Tray
  */
 export class TrayStore {
-    public router: Router;
-
     public settings: SettingsStore;
 
     public notification: NotificationsQueue;
+
+    /**
+     * Tray router store for navigation
+     */
+    public readonly router: TrayRouterStore;
 
     /**
      * Tray window visibility changed event
@@ -34,12 +42,18 @@ export class TrayStore {
     public readonly trayWindowEffectiveThemeChanged = new Action<EffectiveTheme>();
 
     /**
-     *
+     * Tray telemetry instance
+     */
+    public readonly telemetry: TrayTelemetry;
+
+    /**
+     * Ctor
      */
     public constructor() {
-        this.router = new Router(this);
         this.settings = new SettingsStore(this);
         this.notification = new NotificationsQueue();
+        this.telemetry = trayTelemetryFactory();
+        this.router = trayRouterFactory();
     }
 
     /**

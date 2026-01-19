@@ -15,9 +15,10 @@ import { FlagIcon } from './FlagIcon';
 import { Loader } from './Loader';
 import { UnsavedChangesModal } from './UnsavedChangesModal';
 import { UpdateInfo } from './UpdateInfo';
+import { UserRulesEvents, UserRulesPages } from './UserRulesTelemetry';
 
 /**
- * DNS rules screen with editor
+ * User rules screen with editor
  */
 function AppComponent() {
     const {
@@ -27,6 +28,7 @@ function AppComponent() {
         setLoading,
         setChunkLoading,
         appendEditorValue,
+        telemetry,
     } = editorStore;
 
     const hotkeys = [
@@ -90,6 +92,9 @@ function AppComponent() {
      * Catch changes from outside
      */
     useEffect(() => {
+        telemetry.setPage(UserRulesPages.RuleEditorScreen);
+        telemetry.trackPageView();
+
         (window as any).data = new Proxy({}, {
             set(target, key, value) {
                 (target as any)[key] = value;
@@ -124,6 +129,8 @@ function AppComponent() {
                     case RulesEditorEvents.rules_saved:
                         setIsSaving(false);
                         setIsDirty(false);
+
+                        telemetry.trackEvent(UserRulesEvents.RuleCreatedClick);
                         break;
                     case RulesEditorEvents.language:
                         editorStore.setLanguage(value);

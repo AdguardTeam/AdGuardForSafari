@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Subscription, StringValue } from 'Apis/types';
 import { useSettingsStore, useTheme } from 'SettingsLib/hooks';
-import { RouteName } from 'SettingsStore/modules';
+import { RouteName, SettingsEvent } from 'SettingsStore/modules';
 import { Logo, Layout, Text, Button } from 'UILib';
 
 import { MenuItem } from './components';
@@ -16,7 +16,7 @@ import s from './Menu.module.pcss';
  * Main menu in settings app
  */
 function MenuComponent() {
-    const { account, settings } = useSettingsStore();
+    const { account, settings, telemetry } = useSettingsStore();
 
     const {
         isFreeware,
@@ -35,7 +35,7 @@ function MenuComponent() {
         // Apple trial license is packed with full subscription.
         || (isTrialActive && !account.isAppStoreSubscription);
 
-    const onClickHandler = () => {
+    const handleGetFullVersionClick = () => {
         const key = account.license.license?.licenseKey?.getHiddenValue() || '';
         if (isTrialActive) {
             window.API.accountService.RequestRenew(new StringValue({ value: key }));
@@ -46,6 +46,8 @@ function MenuComponent() {
         } else {
             account.requestWebSubscription(Subscription.standalone);
         }
+
+        telemetry.layersRelay.trackEvent(SettingsEvent.GetFullVersionClick);
     };
 
     return (
@@ -108,7 +110,7 @@ function MenuComponent() {
                         className={cx(tx.button.greenSubmit, s.Menu_getFullVersion_button)}
                         type="submit"
                         small
-                        onClick={onClickHandler}
+                        onClick={handleGetFullVersionClick}
                     >
                         <Text type="t2" semibold>
                             {translate('license.get.full.version')}

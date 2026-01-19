@@ -4,8 +4,9 @@
 
 import { observer } from 'mobx-react-lite';
 
+import { useGuardedTelemetryLayerTracking } from 'Modules/onboarding/lib/hooks/useGuardedTelemetryLayerTracking';
 import { useOnboardingStore, useTheme } from 'OnboardingLib/hooks';
-import { OnboardingSteps } from 'OnboardingStore/modules';
+import { OnboardingLayer, OnboardingSteps } from 'OnboardingStore/modules';
 
 import { Start, Extensions, Ads, Trackers, Annoyances, Finish } from './steps';
 
@@ -14,6 +15,7 @@ import { Start, Extensions, Ads, Trackers, Annoyances, Finish } from './steps';
  */
 function OnboardingComponent() {
     const { steps } = useOnboardingStore();
+    const tracker = useGuardedTelemetryLayerTracking();
 
     const { currentStep } = steps;
 
@@ -22,18 +24,30 @@ function OnboardingComponent() {
     });
 
     switch (currentStep) {
-        case OnboardingSteps.start:
+        case OnboardingSteps.start: {
+            tracker(OnboardingLayer.EulaScreen);
             return <Start />;
-        case OnboardingSteps.extensions:
+        }
+        case OnboardingSteps.extensions: {
+            tracker(OnboardingLayer.ExtensionsScreen);
             return <Extensions />;
-        case OnboardingSteps.ads:
+        }
+        case OnboardingSteps.ads: {
+            tracker(OnboardingLayer.OnboardingScreen);
             return <Ads />;
-        case OnboardingSteps.trackers:
+        }
+        case OnboardingSteps.trackers: {
+            tracker(OnboardingLayer.BlockTrackersScreen);
             return <Trackers />;
-        case OnboardingSteps.annoyances:
+        }
+        case OnboardingSteps.annoyances: {
+            tracker(OnboardingLayer.BlockAnnoyancesOnboarding);
             return <Annoyances />;
-        case OnboardingSteps.finish:
+        }
+        case OnboardingSteps.finish: {
+            tracker(OnboardingLayer.AllSetScreen);
             return <Finish />;
+        }
     }
 }
 

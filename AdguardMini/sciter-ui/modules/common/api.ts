@@ -12,6 +12,7 @@ import {
     UserRulesService,
     OnboardingService,
     TrayService,
+    TelemetryService,
 } from 'Apis/services';
 import 'Apis/ExtendLicense';
 
@@ -36,6 +37,8 @@ export class API {
     public readonly onboardingService = new OnboardingService();
 
     public readonly trayService = new TrayService();
+
+    public readonly telemetryService = new TelemetryService();
 }
 
 // @TODO: MOVE THIS TO declaration.d.ts

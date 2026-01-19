@@ -9,7 +9,7 @@ import { AppStoreSubscription, AppStoreSubscriptionsError } from 'Apis/types';
 import { provideTrialDaysParam } from 'Common/utils/translate';
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { getNotificationSomethingWentWrongText } from 'SettingsLib/utils/translate';
-import { NotificationContext, NotificationsQueueType, NotificationsQueueIconType } from 'SettingsStore/modules';
+import { NotificationContext, NotificationsQueueType, NotificationsQueueIconType, SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
 import { Button, Loader, Text } from 'UILib';
 
@@ -21,17 +21,17 @@ import { SubscriptionPrices } from './SubscriptionPrices';
  * Actions for paywall component if the current app channel is the App Store channel
  */
 function AppStoreVersionActionsComponent() {
-    const { account, notification } = useSettingsStore();
+    const { account, notification, telemetry } = useSettingsStore();
 
     const { appStoreSubscriptions, subscriptionPricesAvailable, trialAvailableDays } = account;
 
     const [currentSelectedPlan, setCurrentSelectedPlan] = useState<AppStoreSubscription>(AppStoreSubscription.annual);
-    const [errorAppear, setErrorAppear] = useState(false);
+    const [errorAppears, setErrorAppears] = useState(false);
 
     useEffect(() => {
         if (appStoreSubscriptions?.error
             && appStoreSubscriptions?.error !== AppStoreSubscriptionsError.products_banned) {
-            setErrorAppear(true);
+            setErrorAppears(true);
             notification.notify({
                 message: getNotificationSomethingWentWrongText(),
                 notificationContext: NotificationContext.info,
@@ -64,18 +64,28 @@ function AppStoreVersionActionsComponent() {
         return null;
     };
 
+    let sendTelemetryOnClick = () => {
+        telemetry.layersRelay.trackEvent(SettingsEvent.SubscribeSellingScreenClick);
+    };
     let buttonTitle = translate('settings.paywall.subscribe');
 
     if (trialAvailableDays > 0) {
         buttonTitle = translate.plural('settings.paywall.try.for.free', trialAvailableDays, provideTrialDaysParam(trialAvailableDays));
+        sendTelemetryOnClick = () => {
+            telemetry.layersRelay.trackEvent(SettingsEvent.Try14SellingScreenClick);
+        };
     } else if (appStoreSubscriptions?.error === AppStoreSubscriptionsError.products_banned) {
         buttonTitle = translate('settings.paywall.get.full.version');
+        // TODO: What is this case?
+        sendTelemetryOnClick = () => {
+            telemetry.layersRelay.trackEvent(SettingsEvent.GetFullVersionClick);
+        };
     }
 
     return (
         <div className={s.Paywall_actions_container}>
             {renderSubscriptionPrices()}
-            {!errorAppear && (
+            {!errorAppears && (
                 <Button
                     className={cx(
                         subscriptionPricesAvailable && theme.button.greenSubmit,
@@ -87,6 +97,9 @@ function AppStoreVersionActionsComponent() {
                         if (!subscriptionPricesAvailable) {
                             return;
                         }
+
+                        sendTelemetryOnClick();
+
                         if (appStoreSubscriptions?.result) {
                             account.requestAppStoreSubscription(currentSelectedPlan);
                         }

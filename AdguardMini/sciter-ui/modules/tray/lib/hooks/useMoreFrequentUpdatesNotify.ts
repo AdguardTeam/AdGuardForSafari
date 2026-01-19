@@ -5,6 +5,7 @@
 import { useEffect } from 'preact/hooks';
 
 import { NotificationContext, NotificationsQueueType, NotificationsQueueIconType, NotificationsQueueVariant } from 'TrayStore/modules';
+import { TrayEvent, TrayLayer } from 'TrayStore/modules/TrayTelemetry';
 
 import { useTrayStore } from './useTrayStore';
 
@@ -12,7 +13,7 @@ import { useTrayStore } from './useTrayStore';
  * Hook for showing notification to buy full version for more frequent updates
  */
 export function useMoreFrequentUpdatesNotify() {
-    const { settings, notification } = useTrayStore();
+    const { settings, notification, telemetry } = useTrayStore();
 
     const { isLicenseOrTrialActive, license } = settings;
 
@@ -28,7 +29,14 @@ export function useMoreFrequentUpdatesNotify() {
                 timeout: false,
                 closeable: true,
                 onClick: settings.requestOpenPaywallScreen,
+                onCrossClick: () => {
+                    telemetry.layersRelay.trackEvent(TrayEvent.FrequentUpdatesClick);
+                },
+                onMount: () => {
+                    telemetry.layersRelay.setPage(TrayLayer.NotificationFrequentUpdates);
+                    telemetry.layersRelay.trackPageView();
+                },
             }, true);
         }
-    }, [license, isLicenseOrTrialActive, notification, settings.requestOpenPaywallScreen]);
+    }, [license, isLicenseOrTrialActive, notification, settings.requestOpenPaywallScreen, telemetry]);
 }

@@ -57,7 +57,7 @@ function FiltersComponent() {
         filtersIndex: { groups, customGroupId },
         filtersMap,
     } } = useSettingsStore();
-    const params = router.getParams<FiltersPageParams>();
+    const params = router.castParams<FiltersPageParams>();
     const [groupView, setGroupView] = useState<number | undefined>(params?.groupId);
 
     const [editCustomFilterId, setEditCustomFilterId] = useState<number | undefined>();

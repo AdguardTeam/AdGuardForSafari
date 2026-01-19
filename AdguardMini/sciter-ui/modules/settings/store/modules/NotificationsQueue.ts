@@ -91,7 +91,7 @@ export class NotificationsQueue {
      *
      * @protected
      */
-    protected readonly queue: Map<string, NotificationPropsHolder> = new Map();
+    protected readonly queue: Map<string, NotificationPropsHolder<NotificationPropertiesSelector>> = new Map();
 
     /**
      * Ctor
@@ -162,7 +162,7 @@ export class NotificationsQueue {
      *
      * @param cb
      */
-    public mapQueue(cb: (notify: NotificationPropsHolder, uid: string) => any) {
+    public mapQueue(cb: (notify: NotificationPropsHolder<NotificationPropertiesSelector>, uid: string) => any) {
         const out = [];
 
         for (const [uid, notify] of this.queue) {

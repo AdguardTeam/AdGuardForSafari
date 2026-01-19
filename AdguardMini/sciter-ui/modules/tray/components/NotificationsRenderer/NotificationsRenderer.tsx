@@ -32,7 +32,7 @@ function NotificationsRendererComponent() {
     return (
         <div className={s.NotificationsRenderer_notificationsContainer}>
             {notification.mapQueue((n, uid) => {
-                const { message, closeable = true } = n.props;
+                const { message, closeable = true, onCrossClick } = n.props;
 
                 return (
                     <div
@@ -51,6 +51,7 @@ function NotificationsRendererComponent() {
                                 message={message}
                                 notification={n}
                                 onCloseNotification={() => onClose(uid)}
+                                onMount={n.props.onMount}
                             />
 
                             {closeable && (
@@ -59,7 +60,10 @@ function NotificationsRendererComponent() {
                                         icon="cross"
                                         iconClassName={s.NotificationsRenderer_notification_close}
                                         type="icon"
-                                        onClick={() => onClose(uid)}
+                                        onClick={() => {
+                                            onClose(uid);
+                                            onCrossClick?.();
+                                        }}
                                     />
                                 </NotificationIconWrapper>
                             )}

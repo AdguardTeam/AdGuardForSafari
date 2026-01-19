@@ -7,7 +7,7 @@ import { useState } from 'preact/hooks';
 
 import { useOtherEnabledFilters, useSettingsStore } from 'SettingsLib/hooks';
 import { getNotificationSomethingWentWrongText } from 'SettingsLib/utils/translate';
-import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, RouteName } from 'SettingsStore/modules';
+import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, RouteName, SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
 import { Layout, Text, Modal, SettingsTitle, ConsentModal } from 'UILib';
 
@@ -22,7 +22,7 @@ import type { FiltersPageParams } from 'SettingsLib/const/routeParams';
  * Safari Protection page in settings module
  */
 function SafariProtectionComponent() {
-    const { safariProtection, notification, settings, filters, ui } = useSettingsStore();
+    const { safariProtection, notification, settings, filters, ui, telemetry } = useSettingsStore();
     const [showLoginItemModal, setShowLoginItemModal] = useState(!settings.loginItemEnabled);
     const [showConsent, setShowConsent] = useState<number[]>();
     const { settings: { consentFiltersIds } } = settings;
@@ -120,14 +120,20 @@ function SafariProtectionComponent() {
                 <SettingsItemSwitch
                     description={translate('safari.protection.block.ads.desc')}
                     icon="ads"
-                    setValue={errorWrapper(async (e) => safariProtection.updateBlockAds(e))}
+                    setValue={errorWrapper(async (e) => {
+                        telemetry.trackEvent(SettingsEvent.BlockAdsProtectionClick);
+                        return safariProtection.updateBlockAds(e);
+                    })}
                     title={translate('safari.protection.block.ads')}
                     value={safariProtection.blockAds}
                 />
                 <SettingsItemSwitch
                     description={translate('safari.protection.block.search.ads.desc')}
                     icon="search"
-                    setValue={errorWrapper(async (e) => safariProtection.updateBlockSearchAds(e))}
+                    setValue={errorWrapper(async (e) => {
+                        telemetry.trackEvent(SettingsEvent.BlockSearchAds);
+                        return safariProtection.updateBlockSearchAds(e);
+                    })}
                     title={translate('safari.protection.block.search.ads')}
                     value={safariProtection.blockSearchAds}
                 />
@@ -135,8 +141,12 @@ function SafariProtectionComponent() {
                     description={translate('safari.protection.block.language.desc')}
                     icon="lang"
                     routeName={RouteName.language_specific}
-                    setValue={(e) => filters.updateLanguageSpecific(e)}
+                    setValue={(e) => {
+                        telemetry.trackEvent(SettingsEvent.LanguageAdBlockingClick);
+                        return filters.updateLanguageSpecific(e);
+                    }}
                     title={translate('safari.protection.block.language')}
+                    trackEventOnRouteChange={SettingsEvent.LanguageAdBlockingSettingsClick}
                     value={filters.languageSpecific}
                 />
             </div>
@@ -145,7 +155,10 @@ function SafariProtectionComponent() {
                 <SettingsItemSwitch
                     description={translate('safari.protection.block.trackers.desc')}
                     icon="tracking"
-                    setValue={errorWrapper(async (e) => safariProtection.updateBlockTrackers(e))}
+                    setValue={errorWrapper(async (e) => {
+                        telemetry.trackEvent(SettingsEvent.BlockTrackerClick);
+                        return safariProtection.updateBlockTrackers(e);
+                    })}
                     title={translate('safari.protection.block.trackers')}
                     value={safariProtection.blockTrackers}
                 />
@@ -155,7 +168,10 @@ function SafariProtectionComponent() {
                 <SettingsItemSwitch
                     description={translate('safari.protection.block.social.desc')}
                     icon="share"
-                    setValue={errorWrapper(async (e) => safariProtection.updateBlockSocialButtons(e))}
+                    setValue={errorWrapper(async (e) => {
+                        telemetry.trackEvent(SettingsEvent.SocialButtonsClick);
+                        return safariProtection.updateBlockSocialButtons(e);
+                    })}
                     title={translate('safari.protection.block.social')}
                     value={safariProtection.blockSocialButtons}
                 />
@@ -164,7 +180,10 @@ function SafariProtectionComponent() {
                     icon="cookies"
                     setValue={onUpdateFiltersWithConsent(
                         [filtersIndex.cookieNoticeFilterId],
-                        async (e) => safariProtection.updateBlockCookieNotice(e),
+                        async (e) => {
+                            telemetry.trackEvent(SettingsEvent.CookieClick);
+                            return safariProtection.updateBlockCookieNotice(e);
+                        },
                     )}
                     title={translate('safari.protection.block.cookie')}
                     value={safariProtection.blockCookieNotice}
@@ -174,7 +193,10 @@ function SafariProtectionComponent() {
                     icon="annoyance"
                     setValue={onUpdateFiltersWithConsent(
                         [filtersIndex.popUpsFilterId],
-                        async (e) => safariProtection.updateBlockPopups(e),
+                        async (e) => {
+                            telemetry.trackEvent(SettingsEvent.PopUpsClick);
+                            return safariProtection.updateBlockPopups(e);
+                        },
                     )}
                     title={translate('safari.protection.block.popups')}
                     value={safariProtection.blockPopups}
@@ -184,7 +206,10 @@ function SafariProtectionComponent() {
                     icon="browser"
                     setValue={onUpdateFiltersWithConsent(
                         [filtersIndex.widgetsFilterId],
-                        async (e) => safariProtection.updateBlockWidgets(e),
+                        async (e) => {
+                            telemetry.trackEvent(SettingsEvent.WidgetsClick);
+                            return safariProtection.updateBlockWidgets(e);
+                        },
                     )}
                     title={translate('safari.protection.block.widgets')}
                     value={safariProtection.blockWidgets}
@@ -194,7 +219,10 @@ function SafariProtectionComponent() {
                     icon="widget"
                     setValue={onUpdateFiltersWithConsent(
                         [filtersIndex.otherAnnoyanceFilterId],
-                        async (e) => safariProtection.updateBlockOther(e),
+                        async (e) => {
+                            telemetry.trackEvent(SettingsEvent.AnnoyancesClick);
+                            return safariProtection.updateBlockOther(e);
+                        },
                     )}
                     title={translate('safari.protection.block.annoyance')}
                     value={safariProtection.blockOtherAnnoyance}
@@ -211,6 +239,7 @@ function SafariProtectionComponent() {
                             backLink: RouteName.safari_protection,
                         }}
                         title={translate('safari.protection.other.filters')}
+                        trackTelemetryEvent={SettingsEvent.OtherFiltersClick}
                     />
                 )}
                 <SettingsItemLink<FiltersPageParams>

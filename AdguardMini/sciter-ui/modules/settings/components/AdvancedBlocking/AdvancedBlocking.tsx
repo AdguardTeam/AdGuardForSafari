@@ -4,6 +4,7 @@
 
 import { observer } from 'mobx-react-lite';
 
+import { SettingsEvent } from 'Modules/settings/store/modules';
 import { useSettingsStore, usePayedFuncsTitle } from 'SettingsLib/hooks';
 import { SettingsTitle, Layout } from 'UILib';
 
@@ -12,14 +13,14 @@ import { SettingsItemSwitch } from '../SettingsItem';
  * Advanced Blocking page in settings module
  */
 function AdvancedBlockingComponent() {
-    const { advancedBlocking, account } = useSettingsStore();
+    const { advancedBlocking, account, telemetry } = useSettingsStore();
     const { advancedBlocking: {
         advancedRules,
         adguardExtra,
     } } = advancedBlocking;
     const { isLicenseOrTrialActive } = account;
 
-    const payedFuncsTitle = usePayedFuncsTitle();
+    const payedFuncsTitle = usePayedFuncsTitle(SettingsEvent.TryForFreeExtraClick);
 
     return (
         <Layout type="settingsPage">
@@ -31,7 +32,10 @@ function AdvancedBlockingComponent() {
             <SettingsItemSwitch
                 description={translate('advanced.blocking.rules.desc')}
                 icon="star"
-                setValue={(e) => advancedBlocking.updateAdvancedRules(e)}
+                setValue={(e) => {
+                    telemetry.trackEvent(SettingsEvent.AdvancedRulesClick);
+                    advancedBlocking.updateAdvancedRules(e);
+                }}
                 title={translate('advanced.blocking.rules')}
                 value={advancedRules}
             />
@@ -45,6 +49,8 @@ function AdvancedBlockingComponent() {
                         account.showPaywall();
                         return;
                     }
+
+                    telemetry.trackEvent(SettingsEvent.AdguardExtraClick);
                     advancedBlocking.updateAdguardExtra(e);
                 }}
                 title={translate('advanced.blocking.extra')}

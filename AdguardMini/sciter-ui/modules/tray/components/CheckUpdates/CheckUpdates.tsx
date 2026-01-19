@@ -10,7 +10,7 @@ import { ADGUARD_MINI_TITLE } from 'Common/utils/consts';
 import theme from 'Theme';
 import { useTrayStore, useMoreFrequentUpdatesNotify, useDateFormat, DATE_FORMAT } from 'TrayLib/hooks';
 import { provideContactSupportParam } from 'TrayLib/utils/translate';
-import { RouteName } from 'TrayStore/modules';
+import { TrayEvent, TrayRoute } from 'TrayStore/modules';
 import { Button, Icon, Text, Loader } from 'UILib';
 
 import s from './CheckUpdates.module.pcss';
@@ -37,7 +37,7 @@ function getIconProps(shouldUpdate: boolean): { icon: IconType; className: strin
  * Check Updates page in tray - RouteName.update;
  */
 function CheckUpdatesComponent() {
-    const { settings, router, notification } = useTrayStore();
+    const { settings, router, notification, telemetry } = useTrayStore();
     const {
         newVersionAvailable,
         filtersUpdating,
@@ -46,7 +46,8 @@ function CheckUpdatesComponent() {
         settings: globalSettings,
     } = settings;
 
-    const params = router.getParams<{ noUpdate: boolean }>();
+    // TODO: AG-45393 check all casts params are not inlined
+    const params = router.castParams<{ noUpdate: boolean }>();
     useEffect(() => {
         if (!params?.noUpdate) {
             settings.checkFiltersUpdate();
@@ -91,7 +92,7 @@ function CheckUpdatesComponent() {
     }
 
     const onShowResults = () => {
-        router.changePath(RouteName.filters);
+        router.changePath(TrayRoute.filters);
         notification.clearAll();
     };
 
@@ -105,7 +106,7 @@ function CheckUpdatesComponent() {
                     iconClassName={theme.button.grayIcon}
                     type="icon"
                     onClick={() => {
-                        router.changePath(RouteName.home);
+                        router.changePath(TrayRoute.home);
                         notification.clearAll();
                     }}
                 />
@@ -144,6 +145,7 @@ function CheckUpdatesComponent() {
                         onClick={() => {
                             if (filtersHoverable) {
                                 onShowResults();
+                                telemetry.trackEvent(TrayEvent.UpdatesFiltersClick);
                             }
                         }}
                     >

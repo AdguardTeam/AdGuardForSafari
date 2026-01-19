@@ -5,6 +5,7 @@
 import { observer } from 'mobx-react-lite';
 
 import { SettingsItem } from 'Modules/settings/components/SettingsItem';
+import { SettingsEvent } from 'Modules/settings/store/modules';
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { Modal } from 'UILib';
 
@@ -20,7 +21,7 @@ function AlreadyPurchasedModalComponent({
     onClose,
     onGoToEnterActivationCodeStep,
 }: AlreadyPurchasedModalProps) {
-    const { account, settings } = useSettingsStore();
+    const { account, settings, telemetry } = useSettingsStore();
 
     const { isMASReleaseVariant } = settings;
 
@@ -39,6 +40,7 @@ function AlreadyPurchasedModalComponent({
                 onContainerClick={() => {
                     account.requestLoginOrActivate();
                     onClose();
+                    telemetry.trackEvent(SettingsEvent.LogInClick);
                 }}
             />
             {isMASReleaseVariant && (
@@ -49,6 +51,7 @@ function AlreadyPurchasedModalComponent({
                     onContainerClick={() => {
                         account.restorePurchase();
                         onClose();
+                        telemetry.trackEvent(SettingsEvent.RestoreClick);
                     }}
                 />
             )}

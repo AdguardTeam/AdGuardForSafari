@@ -71,7 +71,7 @@ export function Button({
                 {icon && <Icon className={iconClassName} icon={icon} small={type === 'iconSmall'} />}
                 {children}
             </div>
-        )
+        );
     }
     return (
         <button

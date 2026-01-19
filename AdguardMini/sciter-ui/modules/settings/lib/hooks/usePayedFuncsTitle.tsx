@@ -8,15 +8,19 @@ import { Button, Text } from 'UILib';
 import s from './PayedFuncsTitle.module.pcss';
 import { useSettingsStore } from './useSettingsStore';
 
+import type { SettingsEvent } from 'Modules/settings/store/modules';
+
 /**
  * Hook for payed functions title
  *
  * Trial available: "Try for free" action;
  * No trial available, standalone version: "Get full version" action;
  * No trial available, MAS version: "Subscribe" action;
+ *
+ * @param trackTelemetryEvent - The telemetry event to track when the paywall is shown
  */
-export const usePayedFuncsTitle = () => {
-    const { account, settings } = useSettingsStore();
+export function usePayedFuncsTitle(trackTelemetryEvent?: SettingsEvent) {
+    const { account, settings, telemetry } = useSettingsStore();
     const { isLicenseOrTrialActive, trialAvailableDays } = account;
     const { isMASReleaseVariant } = settings;
 
@@ -24,7 +28,12 @@ export const usePayedFuncsTitle = () => {
         <Button
             className={s.PayedFuncsTitle_button}
             type="text"
-            onClick={() => account.showPaywall()}
+            onClick={() => {
+                if (trackTelemetryEvent) {
+                    telemetry.trackEvent(trackTelemetryEvent);
+                }
+                account.showPaywall();
+            }}
         >
             <Text className={theme.color.orange} type="t2">
                 {text}

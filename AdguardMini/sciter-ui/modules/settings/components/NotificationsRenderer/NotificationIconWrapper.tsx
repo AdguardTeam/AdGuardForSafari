@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { NotificationsQueueVariant } from 'SettingsStore/modules';
+import { type NotificationPropertiesSelector, NotificationsQueueVariant } from 'SettingsStore/modules';
 
 import s from './NotificationsRenderer.module.pcss';
 
@@ -10,7 +10,7 @@ import type { ComponentChildren } from 'preact';
 import type { NotificationPropsHolder } from 'SettingsLib/utils/NotificationPropsHolder';
 
 type Props = {
-    notification: NotificationPropsHolder;
+    notification: NotificationPropsHolder<NotificationPropertiesSelector>;
     children: ComponentChildren;
 };
 

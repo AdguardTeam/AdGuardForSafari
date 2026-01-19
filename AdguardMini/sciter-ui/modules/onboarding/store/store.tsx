@@ -8,8 +8,11 @@ import { EmptyValue } from 'Apis/types';
 import { Action } from 'Modules/common/utils/EventAction';
 
 import {
-    Router,
+    type OnboardingRouterStore,
     Steps,
+    onboardingRouterFactory,
+    onboardingTelemetryFactory,
+    type OnboardingTelemetry,
 } from './modules';
 
 import type { EffectiveTheme } from 'Apis/types';
@@ -20,7 +23,15 @@ import type { EffectiveTheme } from 'Apis/types';
 export class OnboardingStore {
     public steps: Steps;
 
-    public router: Router;
+    /**
+     * Onboarding router instance
+     */
+    public router: OnboardingRouterStore;
+
+    /**
+     * Onboarding telemetry instance
+     */
+    public readonly telemetry: OnboardingTelemetry;
 
     /**
      * Onboarding window effective theme changed event
@@ -28,11 +39,12 @@ export class OnboardingStore {
     public readonly onboardingWindowEffectiveThemeChanged = new Action<EffectiveTheme>();
 
     /**
-     * ctor
+     * Ctor
      */
     constructor() {
         this.steps = new Steps(this);
-        this.router = new Router(this);
+        this.router = onboardingRouterFactory();
+        this.telemetry = onboardingTelemetryFactory();
     }
 
     /**

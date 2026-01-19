@@ -9,3 +9,4 @@ export * from './TelemetryService';
 export * from './TrayService';
 export * from './InternalService';
 export * from './AccountService';
+export * from './TelemetryService';

@@ -12,6 +12,7 @@ import { Button, Text } from 'UILib';
 
 import { InfoCard } from './InfoCard';
 import s from './UnauthorizedUserNotification.module.pcss';
+import { SettingsEvent } from 'Modules/settings/store/modules';
 
 enum NotificationType {
     isAppStoreSubscription = 'isAppStoreSubscription',
@@ -112,7 +113,7 @@ const renderNotificationButton = (
  * Notification for unauthorized user on License screen
  */
 function UnauthorizedUserNotificationComponent() {
-    const { account, settings } = useSettingsStore();
+    const { account, settings, telemetry } = useSettingsStore();
 
     const {
         isAppStoreSubscription,
@@ -134,8 +135,11 @@ function UnauthorizedUserNotificationComponent() {
 
     const notificationButtonActionHandler = (): void => {
         switch (notificationType) {
-            case NotificationType.isAppStoreSubscription:
             case NotificationType.isActivatedByKey:
+                account.requestBindLicense();
+                telemetry.trackEvent(SettingsEvent.BindLicenseClick);
+                break;
+            case NotificationType.isAppStoreSubscription:
                 account.requestBindLicense();
                 break;
             case NotificationType.isStandaloneFreewareWithTrialAvailable:

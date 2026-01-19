@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { Button, Text } from 'Common/components';
 import theme from 'Theme';
 import { useTrayStore, useMoreFrequentUpdatesNotify } from 'TrayLib/hooks';
-import { RouteName } from 'TrayStore/modules';
+import { TrayRoute } from 'TrayStore/modules';
 
 import s from './FiltersUpdate.module.pcss';
 
@@ -36,7 +36,7 @@ function FiltersUpdateComponent() {
                     icon="back"
                     iconClassName={theme.button.grayIcon}
                     type="icon"
-                    onClick={() => router.changePath(RouteName.updates, { noUpdate: true })}
+                    onClick={() => router.changePath(TrayRoute.updates, { noUpdate: true })}
                 />
             </div>
             <div>

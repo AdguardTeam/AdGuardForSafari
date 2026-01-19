@@ -6,7 +6,7 @@ import qs from 'qs';
 
 import type { RouteName as OnboardingRouteName } from 'OnboardingStore/modules';
 import type { RouteName as SettingsRouteName } from 'SettingsStore/modules';
-import type { RouteName as TrayRouteName } from 'TrayStore/modules';
+import type { TrayRoute as TrayRouteName } from 'TrayStore/modules';
 
 type TdsRouteName = SettingsRouteName | OnboardingRouteName | TrayRouteName;
 

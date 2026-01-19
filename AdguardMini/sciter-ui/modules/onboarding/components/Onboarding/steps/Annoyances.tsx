@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { useEffect, useRef, useState } from 'preact/hooks';
 
 import { ConsentModal } from 'Common/components';
+import { OnboardingEvents } from 'Modules/onboarding/store/modules';
 import { useLottieElementAdapter, useOnboardingStore } from 'OnboardingLib/hooks';
 
 import { Step } from '../Step';
@@ -14,25 +15,39 @@ import { Step } from '../Step';
  * Step "Annoyances"
  */
 function AnnoyancesComponent() {
-    const { steps, steps: { annoyanceFilters, annoyanceHasBeenAccepted } } = useOnboardingStore();
+    const { steps, steps: { annoyanceFilters, annoyanceHasBeenAccepted }, telemetry } = useOnboardingStore();
     const [showConsentModal, setShowConsentModal] = useState(false);
 
     const elLottieRef = useRef<HTMLLottieElement | null>(null);
     const { startLottie, finishLottie } = useLottieElementAdapter(elLottieRef);
     useEffect(startLottie, [startLottie]);
 
-    const primaryAction = () => {
+    /**
+     *
+     */
+    function handleBlockAnnoyances() {
         if (annoyanceHasBeenAccepted) {
             finishLottie(async () => steps.shouldBlockAnnoyances(true));
+            telemetry.layersRelay.trackEvent(OnboardingEvents.BlockTrackersYesClick);
         } else {
             setShowConsentModal(true);
         }
-    };
+    }
 
-    const onEnable = () => {
+    /**
+     *
+     */
+    async function handleSkipAnnoyances() {
+        await steps.shouldBlockAnnoyances(false);
+    }
+
+    /**
+     *
+     */
+    function onConsentEnable() {
         setShowConsentModal(false);
         finishLottie(async () => steps.shouldBlockAnnoyances(true));
-    };
+    }
 
     return (
         <>
@@ -40,8 +55,8 @@ function AnnoyancesComponent() {
                 description={translate('onboarding.annoyances.desc')}
                 elLottieRef={elLottieRef}
                 lottie="annoyances"
-                primaryButton={{ action: primaryAction, label: translate('onboarding.block.btn') }}
-                secondaryButton={{ action: async () => steps.shouldBlockAnnoyances(false), label: translate('onboarding.dont.block.btn') }}
+                primaryButton={{ action: handleBlockAnnoyances, label: translate('onboarding.block.btn') }}
+                secondaryButton={{ action: handleSkipAnnoyances, label: translate('onboarding.dont.block.btn') }}
                 title={translate('onboarding.annoyances.title')}
                 imageSmall
             />
@@ -49,7 +64,7 @@ function AnnoyancesComponent() {
                 <ConsentModal
                     filters={annoyanceFilters}
                     onClose={() => setShowConsentModal(false)}
-                    onEnable={onEnable}
+                    onEnable={onConsentEnable}
                 />
             )}
         </>

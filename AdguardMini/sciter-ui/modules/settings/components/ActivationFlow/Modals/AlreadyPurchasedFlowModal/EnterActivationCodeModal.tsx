@@ -8,7 +8,7 @@ import { EnterActivationCodeResult } from 'Apis/types';
 import { getTdsLink, TDS_PARAMS } from 'Modules/common/utils/links';
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { provideContactSupportParam } from 'SettingsLib/utils/translate';
-import { ActivationFlowResult, RouteName } from 'SettingsStore/modules';
+import { ActivationFlowResult, RouteName, SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
 import { ExternalLink, Input, Modal, Text } from 'UILib';
 
@@ -34,58 +34,65 @@ function EnterActivationCodeModalComponent({
     onGoBack,
     onClose,
 }: EnterActivationCodeModalProps) {
-    const { account } = useSettingsStore();
+    const { account, telemetry } = useSettingsStore();
+
+    /**
+     * Handle activation code submission
+     */
+    const submitAction = async () => {
+        const { error: { hasError }, result } = await account.activateLicenseByCode(activationCode);
+
+        telemetry.trackEvent(SettingsEvent.ActivateViaCodeClick);
+
+        if (hasError) {
+            handleActivationCodeErrorMessageChange(
+                translate('settings.activation.flow.enter.activation.code.modal.error.error', provideContactSupportParam({
+                    onClick: onGoBack,
+                })),
+            );
+            return;
+        }
+
+        switch (result) {
+            case EnterActivationCodeResult.valid:
+                account.setActivationFlowResult(ActivationFlowResult.licenseSuccess);
+                onClose();
+                break;
+            case EnterActivationCodeResult.notExists:
+                handleActivationCodeErrorMessageChange(
+                    translate('settings.activation.flow.enter.activation.code.modal.error.not.exist'),
+                );
+                break;
+            case EnterActivationCodeResult.blocked:
+                handleActivationCodeErrorMessageChange(
+                    translate('settings.activation.flow.enter.activation.code.modal.error.blocked'),
+                );
+                break;
+            case EnterActivationCodeResult.expired:
+                handleActivationCodeErrorMessageChange(
+                    translate('settings.activation.flow.enter.activation.code.modal.error.expired'),
+                );
+                break;
+            case EnterActivationCodeResult.maxComputersExceed:
+                handleActivationCodeErrorMessageChange(
+                    translate('settings.activation.flow.enter.activation.code.modal.error.max.computers', { link: (text: string) => (
+                        <ExternalLink
+                            color="red"
+                            href={getTdsLink(TDS_PARAMS.account, RouteName.license)}
+                            textType="t1"
+                        >
+                            {text}
+                        </ExternalLink>
+                    ) }),
+                );
+                break;
+        }
+    };
 
     return (
         <Modal
             size="medium"
-            submitAction={async () => {
-                const { error: { hasError }, result } = await account.activateLicenseByCode(activationCode);
-
-                if (hasError) {
-                    handleActivationCodeErrorMessageChange(
-                        translate('settings.activation.flow.enter.activation.code.modal.error.error', provideContactSupportParam({
-                            onClick: onGoBack,
-                        })),
-                    );
-                    return;
-                }
-
-                switch (result) {
-                    case EnterActivationCodeResult.valid:
-                        account.setActivationFlowResult(ActivationFlowResult.licenseSuccess);
-                        onClose();
-                        break;
-                    case EnterActivationCodeResult.notExists:
-                        handleActivationCodeErrorMessageChange(
-                            translate('settings.activation.flow.enter.activation.code.modal.error.not.exist'),
-                        );
-                        break;
-                    case EnterActivationCodeResult.blocked:
-                        handleActivationCodeErrorMessageChange(
-                            translate('settings.activation.flow.enter.activation.code.modal.error.blocked'),
-                        );
-                        break;
-                    case EnterActivationCodeResult.expired:
-                        handleActivationCodeErrorMessageChange(
-                            translate('settings.activation.flow.enter.activation.code.modal.error.expired'),
-                        );
-                        break;
-                    case EnterActivationCodeResult.maxComputersExceed:
-                        handleActivationCodeErrorMessageChange(
-                            translate('settings.activation.flow.enter.activation.code.modal.error.max.computers', { link: (text: string) => (
-                                <ExternalLink
-                                    color="red"
-                                    href={getTdsLink(TDS_PARAMS.account, RouteName.license)}
-                                    textType="t1"
-                                >
-                                    {text}
-                                </ExternalLink>
-                            ) }),
-                        );
-                        break;
-                }
-            }}
+            submitAction={submitAction}
             submitClassName={theme.button.greenSubmit}
             submitText={translate('settings.activation.flow.enter.activation.code.modal.activate')}
             title={translate('settings.activation.flow.enter.activation.code.modal.title')}

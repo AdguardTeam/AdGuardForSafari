@@ -48,7 +48,7 @@ function UserRuleComponent() {
 
     const { userRules: { rules } } = userRules;
 
-    const params = router.getParams<Params>();
+    const params = router.castParams<Params>();
     const rawRule = userRules.rules[typeof params?.index === 'number' ? params.index : -1]?.rule;
 
     const initialType = (rawRule ? RulesBuilder.getRuleType(rawRule) : 'block') || 'custom';
@@ -135,6 +135,7 @@ function UserRuleComponent() {
         if (safeRef.current) {
             return;
         }
+
         safeRef.current = true;
 
         if (rule.rule instanceof CustomRule && !rule.rule.getRule()) {

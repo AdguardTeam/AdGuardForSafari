@@ -107,11 +107,9 @@ function PaywallComponent() {
 
     const offer = appStoreSubscriptions?.result?.promoInfo;
     const showOffer = offer && (
-        appStoreSubscriptions?.result?.annual?.introOfferDisplayPrice ||
-        appStoreSubscriptions?.result?.monthly?.introOfferDisplayPrice
+        appStoreSubscriptions?.result?.annual?.introOfferDisplayPrice
+        || appStoreSubscriptions?.result?.monthly?.introOfferDisplayPrice
     );
-
-
 
     return (
         <div className={s.Paywall}>
@@ -129,7 +127,8 @@ function PaywallComponent() {
                                 lineHeight="none"
                                 type="t1"
                             >
-                                🛍️&nbsp;{offer.title}
+                                🛍️&nbsp;
+                                {offer.title}
                             </Text>
                             <Text
                                 lineHeight="none"
@@ -138,8 +137,8 @@ function PaywallComponent() {
                                 {offer.subtitle}
                             </Text>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className={s.Paywall_offer_line}>
-                            <path d="M1.20703 0.5L18.707 18V0.5H1.20703Z" fill="var(--fills-notifications-orange-default)" stroke="var(--stroke-icons-attention-icon-default)"/>
+                        <svg className={s.Paywall_offer_line} fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.20703 0.5L18.707 18V0.5H1.20703Z" fill="var(--fills-notifications-orange-default)" stroke="var(--stroke-icons-attention-icon-default)" />
                         </svg>
                     </>
                 )}

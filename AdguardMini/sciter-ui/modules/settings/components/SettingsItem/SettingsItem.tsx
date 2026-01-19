@@ -9,8 +9,9 @@ import { Icon, Switch, Text } from 'UILib';
 
 import s from './SettingsItem.module.pcss';
 
+import type { RouteParamsMap } from 'Modules/common/stores/interfaces/IRouter';
 import type { ComponentChildren } from 'preact';
-import type { RouteName, RouterParams } from 'SettingsStore/modules';
+import type { RouteName, SettingsEvent } from 'SettingsStore/modules';
 import type { IconType } from 'UILib';
 
 export type SettingsItemProps = {
@@ -22,6 +23,10 @@ export type SettingsItemProps = {
     description?: string;
     additionalText?: ComponentChildren;
     routeName?: RouteName;
+    /**
+     * Can be used with routeName param to track event when navigating to that route
+     */
+    trackEventOnRouteChange?: SettingsEvent;
     className?: string;
     contentClassName?: string;
     children?: ComponentChildren;
@@ -47,11 +52,15 @@ function SettingsItemComponent({
     additionalText,
     noHover,
     defaultHovered,
+    trackEventOnRouteChange,
 }: SettingsItemProps) {
-    const { router } = useSettingsStore();
+    const { router, telemetry } = useSettingsStore();
 
     const handleRouteChange = (e: MouseEvent) => {
         e.stopPropagation();
+        if (trackEventOnRouteChange) {
+            telemetry.trackEvent(trackEventOnRouteChange);
+        }
         router.changePath(routeName!);
     };
 
@@ -173,13 +182,14 @@ export function SettingsItemSwitch({
     );
 }
 
-export type SettingsItemLinkProps<T extends Record<string, any> = object> = Omit<SettingsItemProps, 'children' | 'onContainerClick' | 'routeName'> & {
+export type SettingsItemLinkProps<T extends Record<string, any> = object> = Omit<SettingsItemProps, 'children' | 'onContainerClick' | 'routeName' | 'trackEventOnRouteChange'> & {
     externalLink?: string;
     internalLink?: RouteName;
-    internalLinkParams?: RouterParams<T>;
+    internalLinkParams?: RouteParamsMap<T>;
     onClick?(): void;
     disabled?: boolean;
     linkIcon?: IconType;
+    trackTelemetryEvent?: SettingsEvent;
 };
 
 /**
@@ -192,9 +202,10 @@ function SettingsItemLinkComponent<T extends Record<string, any>>({
     onClick,
     disabled,
     linkIcon,
+    trackTelemetryEvent,
     ...rest
 }: SettingsItemLinkProps<T>) {
-    const { router } = useSettingsStore();
+    const { router, telemetry } = useSettingsStore();
     const handleClick = () => {
         if (onClick) {
             onClick();
@@ -203,6 +214,11 @@ function SettingsItemLinkComponent<T extends Record<string, any>>({
         if (disabled) {
             return;
         }
+
+        if (trackTelemetryEvent) {
+            telemetry.trackEvent(trackTelemetryEvent);
+        }
+
         if (externalLink) {
             window.OpenLinkInBrowser(externalLink);
         } else if (internalLink) {

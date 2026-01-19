@@ -10,7 +10,7 @@ import { selectFile } from 'Common/utils/selectFile';
 import { getCountableEntityStatuses } from 'Common/utils/utils';
 import { usePayedFuncsTitle, useSettingsStore } from 'SettingsLib/hooks';
 import { quitReactionText, getNotificationSettingsImportFailedText, getNotificationSomethingWentWrongText } from 'SettingsLib/utils/translate';
-import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, NotificationsQueueVariant, RouteName } from 'SettingsStore/modules';
+import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, NotificationsQueueVariant, RouteName, SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
 import {
     Layout,
@@ -41,6 +41,7 @@ export function SettingsComponent() {
         filters: { filters: { filters: storeFilters } },
         account: { isLicenseOrTrialActive },
         account,
+        telemetry,
         notification } = useSettingsStore();
     const {
         settings: {
@@ -68,7 +69,7 @@ export function SettingsComponent() {
     const [hardwareModalLoader, setHardwareModalLoader] = useState(false);
     const [showConsentModal, setShowConsentModal] = useState<number[]>();
 
-    const payedFuncsTitle = usePayedFuncsTitle();
+    const payedFuncsTitle = usePayedFuncsTitle(SettingsEvent.RealTimeUpdatesTryForFreeClick);
 
     useEffect(() => {
         if (shouldGiveConsent.length) {
@@ -162,6 +163,7 @@ export function SettingsComponent() {
             closeable: true,
         });
         setShowResetModal(false);
+        telemetry.trackEvent(SettingsEvent.ResetToDefaultClick);
     };
 
     const onExportLogs = () => {
@@ -283,7 +285,10 @@ export function SettingsComponent() {
             <Text className={s.Settings_sectionTitle} type="h5">{translate('settings.updates')}</Text>
             <SettingsItemSwitch
                 description={translate('settings.update.filters.auto.desc')}
-                setValue={(e) => settings.updateAutoFiltersUpdate(e)}
+                setValue={(e) => {
+                    settings.updateAutoFiltersUpdate(e);
+                    telemetry.trackEvent(SettingsEvent.UpdateFiltersAutoClick);
+                }}
                 title={translate('settings.update.filters.auto')}
                 value={autoFiltersUpdate}
             />
@@ -301,6 +306,7 @@ export function SettingsComponent() {
                         return;
                     }
                     settings.updateRealTimeFiltersUpdate(e);
+                    telemetry.trackEvent(SettingsEvent.RealTimeUpdatesClick);
                 }}
                 title={translate('settings.real.time.filter.updates')}
                 value={realTimeFiltersUpdate}
