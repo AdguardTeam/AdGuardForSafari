@@ -6,9 +6,10 @@ import { observer } from 'mobx-react-lite';
 
 import { SettingsEvent } from 'Modules/settings/store/modules';
 import { useSettingsStore, usePayedFuncsTitle } from 'SettingsLib/hooks';
-import { SettingsTitle, Layout } from 'UILib';
+import { Layout } from 'UILib';
 
 import { SettingsItemSwitch } from '../SettingsItem';
+import { SettingsTitle } from '../SettingsTitle';
 /**
  * Advanced Blocking page in settings module
  */

@@ -5,10 +5,12 @@
 import { observer } from 'mobx-react-lite';
 
 import { QuitReaction as QuitReactionEnum } from 'Apis/types';
-import { Layout, SettingsTitle, Radio, Text } from 'Common/components';
+import { Layout, Radio, Text } from 'Common/components';
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { quitReactionText } from 'SettingsLib/utils/translate';
 import { RouteName } from 'SettingsStore/modules';
+
+import { SettingsTitle } from '../SettingsTitle';
 
 import s from './QuitReaction.module.pcss';
 

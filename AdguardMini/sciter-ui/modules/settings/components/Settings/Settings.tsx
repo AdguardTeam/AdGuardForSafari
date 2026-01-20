@@ -16,7 +16,6 @@ import {
     Layout,
     Text,
     Modal,
-    SettingsTitle,
     Button,
     ConsentModal,
     AppUsageDataModal,
@@ -24,6 +23,7 @@ import {
 import { getFormattedDateTime } from 'Utils/date';
 
 import { SettingsItemLink, SettingsItemSwitch } from '../SettingsItem';
+import { SettingsTitle } from '../SettingsTitle';
 
 import s from './Settings.module.pcss';
 

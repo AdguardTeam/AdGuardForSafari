@@ -7,13 +7,14 @@ import { observer } from 'mobx-react-lite';
 import { useState, useMemo } from 'preact/hooks';
 
 import { TDS_PARAMS, getTdsLink } from 'Common/utils/links';
+import { SettingsTitle } from 'Modules/settings/components/SettingsTitle';
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { getNotificationSomethingWentWrongText } from 'SettingsLib/utils/translate';
 import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, RouteName } from 'SettingsStore/modules';
 import theme from 'Theme';
-import { Layout, Text, Input, ExternalLink, Icon, SettingsTitle } from 'UILib';
+import { ExternalLink, Icon, Input, Layout, Text } from 'UILib';
 
-import { FilterGroupPage, Filter, FilterGroup, CustomFilter, EditCustomFilterModal } from './components';
+import { EditCustomFilterModal, CustomFilter, Filter, FilterGroup, FilterGroupPage } from './components';
 import s from './Filters.module.pcss';
 
 import type { GroupWithFilters } from './helpers';

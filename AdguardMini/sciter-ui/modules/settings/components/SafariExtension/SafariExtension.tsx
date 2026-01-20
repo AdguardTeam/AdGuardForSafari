@@ -12,10 +12,10 @@ import {
     Layout,
     Text,
     ExternalLink,
-    SettingsTitle,
 } from 'UILib';
 
 import { SettingsItem } from '../SettingsItem';
+import { SettingsTitle } from '../SettingsTitle';
 
 import { useUpdateSafariExtensions } from './hooks';
 import s from './SafariExtension.module.pcss';

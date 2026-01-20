@@ -9,8 +9,10 @@ import { SupportMessage } from 'Apis/types';
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { RouteName } from 'SettingsStore/modules';
 import th from 'Theme';
-import { Layout, Text, Input, Textarea, Checkbox, Button, SettingsTitle, Modal, Select } from 'UILib';
+import { Layout, Text, Input, Textarea, Checkbox, Button, Modal, Select } from 'UILib';
 import { isValidEmail } from 'Utils/email';
+
+import { SettingsTitle } from '../SettingsTitle';
 
 import s from './SupportContact.module.pcss';
 

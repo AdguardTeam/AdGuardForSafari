@@ -11,9 +11,10 @@ import { useSettingsStore } from 'SettingsLib/hooks';
 import { getNotificationSomethingWentWrongText } from 'SettingsLib/utils/translate';
 import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, RouteName } from 'SettingsStore/modules';
 import theme from 'Theme';
-import { Layout, Text, Input, Modal, SettingsTitle, Icon } from 'UILib';
+import { Icon, Input, Layout, Modal, Text } from 'UILib';
 
 import { SettingsItemSwitch } from '../SettingsItem';
+import { SettingsTitle } from '../SettingsTitle';
 
 import s from './LanguageSpecific.module.pcss';
 

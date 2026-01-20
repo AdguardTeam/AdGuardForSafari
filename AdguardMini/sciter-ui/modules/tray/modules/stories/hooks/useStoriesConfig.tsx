@@ -9,7 +9,7 @@ import { provideTrialDaysParam } from 'Common/utils/translate';
 import { getTdsLink, TDS_PARAMS } from 'Modules/common/utils/links';
 // import { StarStoryMainFrameButtons } from 'Modules/tray/modules/stories/components/StarStoryMainFrameButtons';
 import { TrayEvent } from 'Modules/tray/store/modules';
-import { RouteName as RouteNameSettings } from 'SettingsStore/modules';
+import { RouteName as RouteNameSettings } from 'SettingsStore/modules/SettingsRouter';
 import { useTrayStore } from 'TrayLib/hooks';
 import { ExternalLink } from 'UILib';
 

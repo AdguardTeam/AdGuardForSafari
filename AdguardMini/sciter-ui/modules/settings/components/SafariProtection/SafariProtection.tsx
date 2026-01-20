@@ -9,9 +9,10 @@ import { useOtherEnabledFilters, useSettingsStore } from 'SettingsLib/hooks';
 import { getNotificationSomethingWentWrongText } from 'SettingsLib/utils/translate';
 import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, RouteName, SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
-import { Layout, Text, Modal, SettingsTitle, ConsentModal } from 'UILib';
+import { Layout, Text, Modal, ConsentModal } from 'UILib';
 
 import { SettingsItemSwitch, SettingsItemLink } from '../SettingsItem';
+import { SettingsTitle } from '../SettingsTitle';
 
 import s from './SafariProtection.module.pcss';
 

@@ -3,12 +3,14 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import theme from 'Theme';
-import { Text, ContextMenu } from 'UILib';
+import { Text } from 'UILib';
+
+import { ContextMenu } from '../ContextMenu';
 
 import s from './SettingsTitle.module.pcss';
 
+import type { ContextMenuProps } from '../ContextMenu';
 import type { ComponentChildren } from 'preact';
-import type { ContextMenuProps } from 'UILib';
 
 type SettingsTitleProps = {
     title: string;

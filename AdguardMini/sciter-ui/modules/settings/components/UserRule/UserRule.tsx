@@ -20,7 +20,9 @@ import { useSettingsStore } from 'SettingsLib/hooks';
 import { getNotificationSomethingWentWrongText } from 'SettingsLib/utils/translate';
 import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, RouteName } from 'SettingsStore/modules';
 import theme from 'Theme';
-import { Layout, Text, RuleHighlighter, Textarea, Checkbox, Button, Select, Modal, ContextMenu } from 'UILib';
+import { Layout, Text, RuleHighlighter, Textarea, Checkbox, Button, Select, Modal } from 'UILib';
+
+import { ContextMenu } from '../ContextMenu';
 
 import { BlockRequestForm, UnblockRequestForm, CommentForm, CustomRuleForm, DisableFilteringForm } from './forms';
 import { convertRule, getLabelByRuleType, getTypeOptions, validateDomain } from './forms/helpers';

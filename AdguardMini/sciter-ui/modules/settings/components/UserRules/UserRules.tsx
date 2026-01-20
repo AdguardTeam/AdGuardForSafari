@@ -15,9 +15,10 @@ import { useOpenUserRulesWindow } from 'SettingsLib/hooks/useOpenUserRulesWindow
 import { getNotificationSomethingWentWrongText, provideContactSupportParam } from 'SettingsLib/utils/translate';
 import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, NotificationsQueueVariant, RouteName, SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
-import { Modal, ExternalLink, SettingsTitle, Input, Pagination, Icon, Text } from 'UILib';
+import { Modal, ExternalLink, Input, Pagination, Icon, Text } from 'UILib';
 
 import { SettingsItemSwitch } from '../SettingsItem';
+import { SettingsTitle } from '../SettingsTitle';
 
 import { RulesList, OpenedEditorPlug, ImportModal } from './components';
 import { useToggleHeader } from './hooks/useToggleHeader';

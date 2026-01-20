@@ -5,7 +5,7 @@
 import { observer } from 'mobx-react-lite';
 
 import { EmptyValue, StringValue } from 'Apis/types';
-import { RouteName as SettingsRouteName } from 'SettingsStore/modules';
+import { RouteName as SettingsRouteName } from 'SettingsStore/modules/SettingsRouter';
 import { Button } from 'UILib';
 
 import styles from './ContactSupportLink.module.pcss';

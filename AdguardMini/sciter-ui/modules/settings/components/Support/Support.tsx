@@ -8,9 +8,10 @@ import { EmptyValue } from 'Apis/types';
 import { TDS_PARAMS, getTdsLink } from 'Common/utils/links';
 // import { useSettingsStore } from 'Modules/settings/lib/hooks';
 import { RouteName } from 'SettingsStore/modules';
-import { Layout, SettingsTitle } from 'UILib';
+import { Layout } from 'UILib';
 
 import { SettingsItemLink } from '../SettingsItem';
+import { SettingsTitle } from '../SettingsTitle';
 
 import type { SettingsItemLinkProps } from '../SettingsItem';
 

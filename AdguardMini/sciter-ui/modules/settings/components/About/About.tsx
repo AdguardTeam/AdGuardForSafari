@@ -8,10 +8,11 @@ import { useEffect, useState } from 'preact/hooks';
 import { Channel, ReleaseVariants } from 'Apis/types';
 import { ADGUARD_MINI_TITLE } from 'Common/utils/consts';
 import { TDS_PARAMS, getTdsLink } from 'Common/utils/links';
+import { SettingsTitle } from 'Modules/settings/components/SettingsTitle';
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { RouteName } from 'SettingsStore/modules';
 import theme from 'Theme';
-import { Layout, Text, ExternalLink, SettingsTitle, Icon } from 'UILib';
+import { ExternalLink, Icon, Layout, Text } from 'UILib';
 
 import { SettingsItem } from '../SettingsItem/SettingsItem';
 

@@ -4,7 +4,7 @@
 
 import { EmptyValue, StringValue } from 'Apis/types';
 import { getTdsLink, TDS_PARAMS } from 'Modules/common/utils/links';
-import { RouteName } from 'SettingsStore/modules';
+import { RouteName } from 'SettingsStore/modules/SettingsRouter';
 
 import { PrimaryAndSecondaryButtons } from './PrimaryAndSecondaryButtons/PrimaryAndSecondaryButtons';
 

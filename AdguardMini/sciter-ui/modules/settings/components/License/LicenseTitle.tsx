@@ -11,14 +11,14 @@ import { useSettingsStore } from 'SettingsLib/hooks';
 import { provideContactSupportParam } from 'SettingsLib/utils/translate';
 import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, RouteName } from 'SettingsStore/modules';
 import theme from 'Theme';
-import { SettingsTitle } from 'UILib';
 
 import { AlreadyPurchasedFlowModal } from '../ActivationFlow';
+import { SettingsTitle } from '../SettingsTitle';
 
 import { LicenseStatusActionType, useLicenseStatusActionType } from './LicenseStatus/hooks';
 import { ResetLicenseModal } from './ResetLicenseModal';
 
-import type { ContextMenuProps } from 'UILib';
+import type { ContextMenuProps } from '../ContextMenu';
 
 /**
  * Title component with context actions for License screen

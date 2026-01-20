@@ -5,13 +5,14 @@
 import { observer } from 'mobx-react-lite';
 import { useState, useEffect, useMemo, useLayoutEffect } from 'preact/hooks';
 
+import { SettingsTitle } from 'Modules/settings/components/SettingsTitle';
 import { useSettingsStore } from 'Modules/settings/lib/hooks';
 import { getNotificationSomethingWentWrongText } from 'SettingsLib/utils/translate';
 import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType } from 'SettingsStore/modules';
 import theme from 'Theme';
-import { Layout, SettingsTitle, Text, Icon } from 'UILib';
+import { Icon, Layout, Text } from 'UILib';
 
-import { CustomFilter, Filter, AddCustomFilterModal, RemoveAllCustomFiltersModal } from '..';
+import { AddCustomFilterModal, CustomFilter, Filter, RemoveAllCustomFiltersModal } from '..';
 
 import s from './FilterGroupPage.module.pcss';
 
