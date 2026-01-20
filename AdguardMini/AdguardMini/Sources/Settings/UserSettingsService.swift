@@ -21,6 +21,7 @@ protocol UserSettingsService: AnyObject {
     var quitReaction:            QuitReaction { get set }
     var userConsent:             [Int] { get set }
     var userActionLastDirectory: String { get set }
+    var allowTelemetry:          Bool { get set }
 
     // MARK: Properties with side effects
 
@@ -111,6 +112,11 @@ extension UserSettingsServiceImpl: UserSettingsService {
     var userActionLastDirectory: String {
         get { self.keychain.userActionLastDirectory }
         set { self.keychain.userActionLastDirectory = newValue }
+    }
+
+    var allowTelemetry: Bool {
+        get { self.userSettingsManager.allowTelemetry }
+        set { self.userSettingsManager.allowTelemetry = newValue }
     }
 
     // MARK: Properties with side effects and special setters

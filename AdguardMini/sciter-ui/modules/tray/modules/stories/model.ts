@@ -12,7 +12,7 @@ export type StoryId = string;
 /**
  * Story card icon classname
  */
-export type StoryCardIcon = 'info' | 'quality' | 'phone' | 'custom_filter' | 'star' | 'advanced' | 'adguard';
+export type StoryCardIcon = 'info' | 'quality' | 'phone' | 'custom_filter' | 'star' | 'advanced' | 'adguard' | 'rocket';
 
 /**
  * Story background color classname
@@ -22,7 +22,7 @@ export type StoryBackgroundColor = 'aqua' | 'blue' | 'green' | 'purple' | 'sand'
 /**
  * Story frame image classname
  */
-export type StoryFrameImage = 'advanced' | 'devices' | 'extensions' | 'extra1' | 'extra2' | 'extra3' | 'filters1' | 'filters2' | 'filters3' | 'filters4' | 'filters5' | 'loginItem' | 'rate1' | 'rate2' | 'rate3' | 'ag_mini_mac_release_blogpost';
+export type StoryFrameImage = 'advanced' | 'devices' | 'extensions' | 'extra1' | 'extra2' | 'extra3' | 'filters1' | 'filters2' | 'filters3' | 'filters4' | 'filters5' | 'loginItem' | 'rate1' | 'rate2' | 'rate3' | 'ag_mini_mac_release_blogpost' | 'telemetry1' | 'telemetry3' | 'telemetry4';
 
 /**
  * Main story model
@@ -61,6 +61,12 @@ export type StoryViewConfig = {
     id: StoryId;
 
     /**
+     * Total number of frames in the story, used in telemetry story due to number of frames is 4,
+     * but total number of frames is 3
+     */
+    totalFrames?: number;
+
+    /**
      * One media frame of a story
      */
     frames: IStoryFrame[];
@@ -70,6 +76,11 @@ export type StoryViewConfig = {
      * In CSS it is used as a class with specified gradient.
      */
     backgroundColor: StoryBackgroundColor;
+
+    /**
+     * Callback to call before next story is shown/story closed
+     */
+    onBeforeClose?(): void;
 };
 
 /**
@@ -107,5 +118,5 @@ export interface IStoryFrame {
      *
      * @see FrameContent
      */
-    component?: React.FC<{ isMASReleaseVariant: boolean }>;
+    component?: React.FC<{ isMASReleaseVariant: boolean, frameIdNavigation(frameId: string): void }>;
 }

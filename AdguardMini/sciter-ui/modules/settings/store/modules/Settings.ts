@@ -331,6 +331,16 @@ export class Settings {
     }
 
     /**
+     * Update allowTelemetry setting
+     */
+    public updateAllowTelemetry(value: boolean) {
+        const newValue = this.updateHelper();
+        window.API.settingsService.UpdateAllowTelemetry(new BoolValue({ value }));
+        newValue.allowTelemetry = value;
+        this.commitSettings(newValue);
+    }
+
+    /**
      * Export logs to selected destination
      * @param path path to save file
      */

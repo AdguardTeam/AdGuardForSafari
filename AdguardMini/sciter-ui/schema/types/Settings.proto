@@ -14,7 +14,8 @@ message Settings {
     ReleaseVariants release_variant = 8;
     repeated int32 consent_filters_ids = 9;
     string language = 10;
-    Theme theme = 11;
+    bool allow_telemetry = 11;
+    Theme theme = 12;
 }
 
 message UserConsent {
@@ -51,7 +52,8 @@ message GlobalSettings {
     string language = 5;
     bool debug_logging = 6;
     bool recently_migrated = 7;
-    Theme theme = 8;
+    bool allow_telemetry = 8;
+    Theme theme = 9;
 }
 
 message UpdateQuitReactionMessage {

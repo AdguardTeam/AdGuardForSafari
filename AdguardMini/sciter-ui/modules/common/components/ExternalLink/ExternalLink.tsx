@@ -19,7 +19,7 @@ export type ExternalLinkProps = {
     noUnderline?: boolean;
     icon?: IconType;
     noLineHeight?: boolean;
-    color?: 'green' | 'red';
+    color?: 'green' | 'red' | 'inheritColor';
     onClick?: JSXInternal.DOMAttributes<HTMLAnchorElement>['onClick'];
 };
 

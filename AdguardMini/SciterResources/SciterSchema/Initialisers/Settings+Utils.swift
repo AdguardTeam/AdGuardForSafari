@@ -22,7 +22,8 @@ extension Settings {
         theme: Theme,
         consentFiltersIds: [Int32] = [],
         releaseVariant: ReleaseVariants = .standAlone,
-        language: String = ""
+        language: String = "",
+        allowTelemetry: Bool = false
     ) {
         self.init()
         self.launchOnStartup = launchOnStartup
@@ -36,5 +37,6 @@ extension Settings {
         self.consentFiltersIds = consentFiltersIds
         self.releaseVariant = releaseVariant
         self.language = language
+        self.allowTelemetry = allowTelemetry
     }
 }

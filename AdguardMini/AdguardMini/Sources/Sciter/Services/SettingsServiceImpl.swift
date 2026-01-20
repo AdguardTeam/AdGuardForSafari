@@ -132,7 +132,8 @@ extension Sciter {
                 self.userSettingsService.settings.toProto(
                     userConsent: self.userSettingsService.userConsent,
                     releaseVariant: ProductInfo.releaseVariant,
-                    language: Locales.navigatorLang
+                    language: Locales.navigatorLang,
+                    allowTelemetry: self.userSettingsService.allowTelemetry
                 )
             )
         }
@@ -172,7 +173,8 @@ extension Sciter {
                     newSettings.toProto(
                         userConsent: self.userSettingsService.userConsent,
                         releaseVariant: ProductInfo.releaseVariant,
-                        language: Locales.navigatorLang
+                        language: Locales.navigatorLang,
+                        allowTelemetry: self.userSettingsService.allowTelemetry
                     )
                 )
             }
@@ -189,6 +191,7 @@ extension Sciter {
                     language: Locales.navigatorLang,
                     debugLogging: self.userSettingsService.settings.debugLogging,
                     recentlyMigrated: self.appMetadata.wasMigratedFromLegacyApp,
+                    allowTelemetry: self.userSettingsService.allowTelemetry,
                     theme: self.userSettingsService.theme.toProto()
                 )
                 promise(traySettings)
@@ -325,6 +328,11 @@ extension Sciter {
                 self.userSettingsService.setTheme(message.theme.toTheme())
                 promise(EmptyValue())
             }
+        }
+
+        func updateAllowTelemetry(_ message: BoolValue, _ promise: @escaping (EmptyValue) -> Void) {
+            self.userSettingsService.allowTelemetry = message.value
+            promise(EmptyValue())
         }
     }
 }

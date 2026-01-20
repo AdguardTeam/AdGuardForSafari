@@ -16,6 +16,7 @@ export type TextProps = {
     div?: boolean;
     aria?: string;
     lineHeight?: 's' | 'm' | 'l' | 'none';
+    onClick?: JSX.DOMAttributes<HTMLElement>['onClick'];
 };
 
 /**
@@ -31,6 +32,7 @@ export function Text({
     semibold,
     lineHeight,
     div,
+    onClick,
 }: TextProps): JSX.Element {
     let lineHeightClass: string | undefined = lineHeight;
 
@@ -65,6 +67,7 @@ export function Text({
             className,
         ),
         aria,
+        onClick,
     };
     switch (type) {
         case 'h0':

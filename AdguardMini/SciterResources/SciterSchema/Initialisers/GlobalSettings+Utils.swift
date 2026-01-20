@@ -19,6 +19,7 @@ extension GlobalSettings {
         language: String = "",
         debugLogging: Bool = false,
         recentlyMigrated: Bool = false,
+        allowTelemetry: Bool = false,
         theme: Theme
     ) {
         self.init()
@@ -29,6 +30,7 @@ extension GlobalSettings {
         self.language = language
         self.debugLogging = debugLogging
         self.recentlyMigrated = recentlyMigrated
+        self.allowTelemetry = allowTelemetry
         self.theme = theme
     }
 }

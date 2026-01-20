@@ -64,7 +64,8 @@ export type IconType
         | 'copy'
         | 'rightIcon'
         | 'extra'
-        | 'flag';
+        | 'flag'
+        | 'rocket';
 
 export type IconsProps = {
     icon: IconType;
@@ -128,7 +129,7 @@ export function Icons({ icon }: IconsProps): JSXInternal.Element {
         case 'adguard':
             return (
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <path d="M13.3333 14.6667C15.334 16.6667 13.9998 15.3334 16 17.3334L20 13.3334M4 6.93343C4 11.0242 3.94859 21.3034 15.9997 28.2668C28.0511 21.3034 28 11.0242 28 6.93343C20.7856 2.55834 11.3492 2.57794 4 6.93343Z" stroke="#67B279" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M13.3333 14.6667C15.334 16.6667 13.9998 15.3334 16 17.3334L20 13.3334M4 6.93343C4 11.0242 3.94859 21.3034 15.9997 28.2668C28.0511 21.3034 28 11.0242 28 6.93343C20.7856 2.55834 11.3492 2.57794 4 6.93343Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             );
         case 'settings':
@@ -502,8 +503,8 @@ export function Icons({ icon }: IconsProps): JSXInternal.Element {
         case 'radioChecked': {
             return (
                 <svg fill="none" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" stroke="#67B279" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
-                    <circle cx="12" cy="12" fill="#67B279" r="5" stroke="#67B279" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+                    <circle cx="12" cy="12" fill="#67B279" r="5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
                 </svg>
             );
         }
@@ -579,5 +580,15 @@ export function Icons({ icon }: IconsProps): JSXInternal.Element {
                     <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M20 5.39149V5.38634V4.80557V4.05164C20 3.95255 19.909 3.87846 19.8119 3.89858L19.0737 4.05164L18.505 4.16955L18.5 4.1706L17.1054 4.45974C15.4179 4.80964 13.6616 4.58074 12.1201 3.80998C10.4328 2.96638 8.49382 2.77438 6.67391 3.27071L4 3.99994V3.99997V15.3589V21H5.5V15.6291L6.75199 15.3196C8.51589 14.8836 10.38 15.1436 11.9572 16.0457C13.5853 16.9768 15.5166 17.2227 17.326 16.7292L19.9005 16.0271C19.9592 16.0111 20 15.9577 20 15.8968V5.39149ZM5.5 14.084L6.39202 13.8635C8.53026 13.3349 10.7899 13.6501 12.7019 14.7436C13.9845 15.4771 15.5059 15.6708 16.9314 15.2821L18.5 14.8543V5.7025L17.41 5.9285C15.3922 6.34686 13.2924 6.07318 11.4492 5.15163C10.0921 4.47307 8.53244 4.31863 7.06858 4.71786L5.5 5.14564V14.084Z" />
                 </svg>
             );
+        case 'rocket':
+            return (
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.2173 10.0833C21.3954 10.0835 22.3501 11.039 22.3501 12.2171C22.3499 13.3951 21.3953 14.3498 20.2173 14.3499C19.0391 14.3499 18.0837 13.3952 18.0835 12.2171C18.0835 11.0389 19.039 10.0833 20.2173 10.0833Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                    <line x1="19.4165" y1="20.75" x2="19.4165" y2="28.5833" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M6 22.6667V26.6667H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="12.5835" y1="12.75" x2="4.75016" y2="12.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M17.9802 5.10457L26.4655 6.04738L27.4083 14.5327L14.209 23.9607L8.55214 18.3039L17.9802 5.10457Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+            )
     }
 }

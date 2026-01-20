@@ -186,7 +186,7 @@ function HomeComponent() {
     return (
         <Fragment>
             {currentStory && (
-                <FlushCompletedStories>
+                <FlushCompletedStories currentStory={currentStory}>
                     {({ addCompletedStory }) => (
                         <StoriesLayer
                             key={currentStory!.id}

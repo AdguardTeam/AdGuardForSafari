@@ -20,7 +20,12 @@ extension ReleaseVariant {
 }
 
 extension SettingsDTO {
-    func toProto(userConsent: [Int], releaseVariant: ReleaseVariant, language: String) -> Settings {
+    func toProto(
+        userConsent: [Int],
+        releaseVariant: ReleaseVariant,
+        language: String,
+        allowTelemetry: Bool
+    ) -> Settings {
         Settings(
             launchOnStartup:       self.launchOnStartup,
             showInMenuBar:         self.showInMenuBar,
@@ -32,7 +37,8 @@ extension SettingsDTO {
             theme:                 self.theme.toProto(),
             consentFiltersIds:     userConsent.map(Int32.init),
             releaseVariant:        releaseVariant.toProto(),
-            language:              language
+            language:              language,
+            allowTelemetry:        allowTelemetry
         )
     }
 }

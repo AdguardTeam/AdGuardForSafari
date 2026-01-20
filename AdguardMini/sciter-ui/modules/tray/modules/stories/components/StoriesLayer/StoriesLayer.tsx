@@ -58,6 +58,10 @@ export function StoriesLayer({
         dispatch(actions.next());
     }, [moveToNextStory, currentFrameIndex, length, id, addCompletedStory]);
 
+    const handleFrameNavigation = useCallback((frameId: string) => {
+        dispatch(actions.setFrameById(frameId));
+    }, []);
+
     const handleButtonAction = useCallback(() => {
         closeStories();
         addCompletedStory(id);
@@ -89,11 +93,18 @@ export function StoriesLayer({
         return null;
     }
 
+    // Due to totalNumber of frames can be lower than actual frames number, see telemetry story
+    // We have to correct currentFrameIndex to prevent incorrect position of progress bar
+    let progressBarCurrentIndex = currentFrameIndex;
+    if (currentFrameIndex >= length) {
+        progressBarCurrentIndex = length - 1;
+    }
+
     return (
         <div className={s.StoriesLayer}>
             <div className={cx(s.StoriesLayer_contents, s[`StoriesLayer__${backgroundColor}`])}>
                 <ProgressBarGroup
-                    currentFrameIndex={currentFrameIndex}
+                    currentFrameIndex={progressBarCurrentIndex}
                     framesCount={story.length}
                     isFirstFrameReturnedBack={isFirstFrameReturnedBack}
                     onClose={handleClose}
@@ -107,6 +118,7 @@ export function StoriesLayer({
                     frame={frame}
                     isMASReleaseVariant={isMASReleaseVariant}
                     storyActionButtonHandle={handleButtonAction}
+                    frameIdNavigation={handleFrameNavigation}
                 />
             </div>
         </div>

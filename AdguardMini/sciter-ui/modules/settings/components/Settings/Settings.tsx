@@ -19,6 +19,7 @@ import {
     SettingsTitle,
     Button,
     ConsentModal,
+    AppUsageDataModal,
 } from 'UILib';
 import { getFormattedDateTime } from 'Utils/date';
 
@@ -51,6 +52,7 @@ export function SettingsComponent() {
             autoFiltersUpdate,
             realTimeFiltersUpdate,
             debugLogging,
+            allowTelemetry,
             quitReaction,
         },
         userActionLastDirectory,
@@ -67,6 +69,7 @@ export function SettingsComponent() {
     const [showResetModal, setShowResetModal] = useState(false);
     const [showHardwareModal, setShowHardwareModal] = useState(false);
     const [hardwareModalLoader, setHardwareModalLoader] = useState(false);
+    const [showTelemetryModal, setShowTelemetryModal] = useState(false);
     const [showConsentModal, setShowConsentModal] = useState<number[]>();
 
     const payedFuncsTitle = usePayedFuncsTitle(SettingsEvent.RealTimeUpdatesTryForFreeClick);
@@ -335,6 +338,24 @@ export function SettingsComponent() {
             />
             <Text className={s.Settings_sectionTitle} type="h5">{translate('settings.miscellaneous')}</Text>
             <SettingsItemSwitch
+                setValue={(e) => settings.updateAllowTelemetry(e)}
+                title={translate('telemetry.accept.send.data', {
+                    link: (text: string) => (
+                        <div
+                            className={s.Settings_telemetryModalLink}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setShowTelemetryModal(true);
+                            }}
+                        >
+                            {text}
+                        </div>
+                    ),
+                })}
+                value={allowTelemetry}
+            />
+            <SettingsItemSwitch
                 additionalText={(
                     <Text className={theme.color.orange} type="t2">
                         {translate('settings.debug.warning')}
@@ -390,6 +411,7 @@ export function SettingsComponent() {
                     onPartial={() => onConsent(ImportMode.withoutAnnoyance)}
                 />
             )}
+            {showTelemetryModal && <AppUsageDataModal onClose={() => setShowTelemetryModal(false)} />}
         </Layout>
     );
 }

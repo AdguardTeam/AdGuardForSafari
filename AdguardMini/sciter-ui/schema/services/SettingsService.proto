@@ -64,6 +64,8 @@ service SettingsService {
     rpc GetSystemLanguage(EmptyValue) returns (StringValue);
     /* Get effective theme */
     rpc GetEffectiveTheme(EmptyValue) returns (EffectiveThemeValue);
+    /* Update allow telemetry */
+    rpc UpdateAllowTelemetry(BoolValue) returns (EmptyValue);
     /* Update theme setting */
     rpc UpdateTheme(UpdateThemeMessage) returns (EmptyValue);
 }

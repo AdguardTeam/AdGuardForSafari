@@ -126,6 +126,10 @@ public protocol SettingsServiceProtocol
 	func getEffectiveTheme (
 						_ message: EmptyValue,
 						_ promise: @escaping (EffectiveThemeValue) -> Void) -> Void
+	/// Update allow telemetry
+	func updateAllowTelemetry (
+						_ message: BoolValue,
+						_ promise: @escaping (EmptyValue) -> Void) -> Void
 	/// Update theme setting
 	func updateTheme (
 						_ message: UpdateThemeMessage,
@@ -484,6 +488,18 @@ open class SettingsService: SciterBridge
 			inputType: EmptyValue.self,
 			outputType: EffectiveThemeValue.self,
 			method: cast.getEffectiveTheme(_:_:),
+			message,
+			promise
+		)
+	}
+
+	/// Wrapper for `UpdateAllowTelemetry`
+	@objc func UpdateAllowTelemetry(_ message: Data, promise: @escaping (Data) -> Void)
+	{
+		swiftCall(
+			inputType: BoolValue.self,
+			outputType: EmptyValue.self,
+			method: cast.updateAllowTelemetry(_:_:),
 			message,
 			promise
 		)

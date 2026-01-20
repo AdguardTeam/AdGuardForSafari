@@ -10,3 +10,4 @@ export * from './StoryCard/StoryCard';
 export * from './StoriesLayer/StoriesLayer';
 export * from './FlushCompletedStories';
 export * from './StarStoryMainFrameButtons';
+export * from './TelemetryStoryFrameButtons';

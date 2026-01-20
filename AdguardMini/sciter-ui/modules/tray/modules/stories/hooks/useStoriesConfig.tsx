@@ -8,9 +8,12 @@ import { OptionalStringValue, EmptyValue, StringValue, SubscriptionMessage, Subs
 import { provideTrialDaysParam } from 'Common/utils/translate';
 import { getTdsLink, TDS_PARAMS } from 'Modules/common/utils/links';
 // import { StarStoryMainFrameButtons } from 'Modules/tray/modules/stories/components/StarStoryMainFrameButtons';
+import { TrayEvent } from 'Modules/tray/store/modules';
 import { RouteName as RouteNameSettings } from 'SettingsStore/modules';
 import { useTrayStore } from 'TrayLib/hooks';
-import { TrayEvent } from 'Modules/tray/store/modules';
+import { ExternalLink } from 'UILib';
+
+import { telemetryStoryFrameButtonsWrapper } from '../components';
 
 import type { IStoryFrame, StoryInfo } from '../model';
 
@@ -49,7 +52,7 @@ export function useStoriesConfig(): StoryInfo[] {
         license,
     } = settings;
 
-    const { allExtensionEnabled } = traySettings || {};
+    const { allExtensionEnabled, allowTelemetry } = traySettings || {};
 
     if (!allExtensionEnabled) {
         requiredStories.push({
@@ -105,16 +108,16 @@ export function useStoriesConfig(): StoryInfo[] {
             icon: 'adguard',
             text: translate('tray.story.meetAGMini.card'),
             storyConfig: {
-                id:'meetAGMini',
+                id: 'meetAGMini',
                 frames: [{
                     title: translate('tray.story.meetAGMini.card.title'),
                     description: translate('tray.story.meetAGMini.card.desc'),
-                    image: "ag_mini_mac_release_blogpost",
-                    frameId: "meetAGMini1",
+                    image: 'ag_mini_mac_release_blogpost',
+                    frameId: 'meetAGMini1',
                     actionButton: {
                         title: translate('tray.story.meetAGMini.card.action'),
                         action: () => window.OpenLinkInBrowser(getTdsLink(TDS_PARAMS.ag_mini_mac_release_blogpost)),
-                    }
+                    },
                 }],
                 backgroundColor: 'green',
             },
@@ -167,6 +170,54 @@ export function useStoriesConfig(): StoryInfo[] {
                 backgroundColor: 'emerald',
             },
             telemetryEvent: TrayEvent.StoreUseLicenseClick,
+        });
+    }
+
+    if (!allowTelemetry) {
+        stories.push({
+            icon: 'rocket',
+            text: translate('telemetry.story.title'),
+            storyConfig: {
+                id: 'telemetry',
+                totalFrames: 3,
+                onBeforeClose: () => {
+                    settings.getSettings();
+                },
+                frames: [{
+                    frameId: 'telemetry1',
+                    title: translate('telemetry.story.frame.1.title'),
+                    description: translate('telemetry.story.frame.1.desc'),
+                    image: 'telemetry1',
+                    component: telemetryStoryFrameButtonsWrapper(true),
+                }, {
+                    frameId: 'telemetry2',
+                    title: translate('telemetry.story.frame.2.title'),
+                    description: translate('telemetry.story.frame.2.desc', { link: (text: string) => <ExternalLink color="inheritColor" href={getTdsLink(TDS_PARAMS.privacy)}>{text}</ExternalLink> }),
+                    image: 'extra1',
+                    component: telemetryStoryFrameButtonsWrapper(false),
+                }, {
+                    frameId: 'telemetry3',
+                    title: translate('telemetry.story.frame.3.title'),
+                    description: translate('telemetry.story.frame.3.desc'),
+                    image: 'telemetry3',
+                    actionButton: {
+                        title: translate('telemetry.story.frame.button.settings'),
+                        action: () => {
+                            window.API.internalService.OpenSettingsWindow(new EmptyValue());
+                            window.API.settingsService.RequestOpenSettingsPage(new StringValue({
+                                value: RouteNameSettings.settings,
+                            }));
+                        },
+                    },
+                }, {
+                    frameId: 'telemetry4',
+                    title: translate('telemetry.story.frame.4.title'),
+                    description: translate('telemetry.story.frame.4.desc'),
+                    image: 'telemetry4',
+                }],
+                backgroundColor: 'sandBlue',
+            },
+            telemetryEvent: TrayEvent.TelemetryClick,
         });
     }
 
@@ -229,11 +280,28 @@ export function useStoriesConfig(): StoryInfo[] {
     //     telemetryEvent: TrayEvent.StoryLoveHearYouClick,
     // });
 
+
+    const extraFrames: IStoryFrame[] = [
+        {
+            title: translate('tray.story.adguard.extra'),
+            description: translate('tray.story.adguard.extra.desc'),
+            image: 'extra1',
+            frameId: 'extra1',
+        }, {
+            title: translate('tray.story.adguard.extra.title.2'),
+            description: translate('tray.story.adguard.extra.desc.2'),
+            image: 'extra2',
+            frameId: 'extra2',
+        },
+    ];
+
     let extraTitle = '';
     let extraDescription = '';
     let extraButtonTitle = '';
     let extraButtonAction = noop;
     if (trialAvailableDays > 0) {
+        extraTitle = translate('tray.story.adguard.extra.title.3');
+        extraDescription = translate('tray.story.adguard.extra.desc.3');
         extraButtonTitle = translate.plural('tray.story.adguard.extra.action.3.trial', trialAvailableDays, provideTrialDaysParam(trialAvailableDays));
         extraButtonAction = () => {
             window.API.internalService.OpenSettingsWindow(new EmptyValue());
@@ -272,20 +340,6 @@ export function useStoriesConfig(): StoryInfo[] {
             }
         };
     }
-
-    const extraFrames: IStoryFrame[] = [
-        {
-            title: translate('tray.story.adguard.extra'),
-            description: translate('tray.story.adguard.extra.desc'),
-            image: 'extra1',
-            frameId: 'extra1',
-        }, {
-            title: translate('tray.story.adguard.extra.title.2'),
-            description: translate('tray.story.adguard.extra.desc.2'),
-            image: 'extra2',
-            frameId: 'extra2',
-        },
-    ];
 
     /*
         Last frame should be show in cases:

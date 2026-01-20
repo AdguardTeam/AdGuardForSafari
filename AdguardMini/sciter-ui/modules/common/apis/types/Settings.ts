@@ -58,6 +58,7 @@ export class Settings extends pb_1.Message {
         releaseVariant?: ReleaseVariants;
         consentFiltersIds?: number[];
         language?: string;
+        allowTelemetry?: boolean;
         theme?: Theme;
     }) {
         super();
@@ -92,6 +93,9 @@ export class Settings extends pb_1.Message {
             }
             if ("language" in data && data.language != undefined) {
                 this.language = data.language;
+            }
+            if ("allowTelemetry" in data && data.allowTelemetry != undefined) {
+                this.allowTelemetry = data.allowTelemetry;
             }
             if ("theme" in data && data.theme != undefined) {
                 this.theme = data.theme;
@@ -158,11 +162,17 @@ export class Settings extends pb_1.Message {
     set language(value: string) {
         pb_1.Message.setField(this, 10, value);
     }
+    get allowTelemetry() {
+        return pb_1.Message.getFieldWithDefault(this, 11, false) as boolean;
+    }
+    set allowTelemetry(value: boolean) {
+        pb_1.Message.setField(this, 11, value);
+    }
     get theme() {
-        return pb_1.Message.getFieldWithDefault(this, 11, Theme.unknown) as Theme;
+        return pb_1.Message.getFieldWithDefault(this, 12, Theme.unknown) as Theme;
     }
     set theme(value: Theme) {
-        pb_1.Message.setField(this, 11, value);
+        pb_1.Message.setField(this, 12, value);
     }
     static fromObject(data: {
         launchOnStartup?: boolean;
@@ -175,6 +185,7 @@ export class Settings extends pb_1.Message {
         releaseVariant?: ReleaseVariants;
         consentFiltersIds?: number[];
         language?: string;
+        allowTelemetry?: boolean;
         theme?: Theme;
     }): Settings {
         const message = new Settings({});
@@ -208,6 +219,9 @@ export class Settings extends pb_1.Message {
         if (data.language != null) {
             message.language = data.language;
         }
+        if (data.allowTelemetry != null) {
+            message.allowTelemetry = data.allowTelemetry;
+        }
         if (data.theme != null) {
             message.theme = data.theme;
         }
@@ -225,6 +239,7 @@ export class Settings extends pb_1.Message {
             releaseVariant?: ReleaseVariants;
             consentFiltersIds?: number[];
             language?: string;
+            allowTelemetry?: boolean;
             theme?: Theme;
         } = {};
         if (this.launchOnStartup != null) {
@@ -257,6 +272,9 @@ export class Settings extends pb_1.Message {
         if (this.language != null) {
             data.language = this.language;
         }
+        if (this.allowTelemetry != null) {
+            data.allowTelemetry = this.allowTelemetry;
+        }
         if (this.theme != null) {
             data.theme = this.theme;
         }
@@ -286,8 +304,10 @@ export class Settings extends pb_1.Message {
             writer.writePackedInt32(9, this.consentFiltersIds);
         if (this.language.length)
             writer.writeString(10, this.language);
+        if (this.allowTelemetry != false)
+            writer.writeBool(11, this.allowTelemetry);
         if (this.theme != Theme.unknown)
-            writer.writeEnum(11, this.theme);
+            writer.writeEnum(12, this.theme);
         if (!w)
             return writer.getResultBuffer();
     }
@@ -328,6 +348,9 @@ export class Settings extends pb_1.Message {
                     message.language = reader.readString();
                     break;
                 case 11:
+                    message.allowTelemetry = reader.readBool();
+                    break;
+                case 12:
                     message.theme = reader.readEnum();
                     break;
                 default: reader.skipField();
@@ -576,6 +599,7 @@ export class GlobalSettings extends pb_1.Message {
         language?: string;
         debugLogging?: boolean;
         recentlyMigrated?: boolean;
+        allowTelemetry?: boolean;
         theme?: Theme;
     }) {
         super();
@@ -601,6 +625,9 @@ export class GlobalSettings extends pb_1.Message {
             }
             if ("recentlyMigrated" in data && data.recentlyMigrated != undefined) {
                 this.recentlyMigrated = data.recentlyMigrated;
+            }
+            if ("allowTelemetry" in data && data.allowTelemetry != undefined) {
+                this.allowTelemetry = data.allowTelemetry;
             }
             if ("theme" in data && data.theme != undefined) {
                 this.theme = data.theme;
@@ -649,11 +676,17 @@ export class GlobalSettings extends pb_1.Message {
     set recentlyMigrated(value: boolean) {
         pb_1.Message.setField(this, 7, value);
     }
+    get allowTelemetry() {
+        return pb_1.Message.getFieldWithDefault(this, 8, false) as boolean;
+    }
+    set allowTelemetry(value: boolean) {
+        pb_1.Message.setField(this, 8, value);
+    }
     get theme() {
-        return pb_1.Message.getFieldWithDefault(this, 8, Theme.unknown) as Theme;
+        return pb_1.Message.getFieldWithDefault(this, 9, Theme.unknown) as Theme;
     }
     set theme(value: Theme) {
-        pb_1.Message.setField(this, 8, value);
+        pb_1.Message.setField(this, 9, value);
     }
     static fromObject(data: {
         enabled?: boolean;
@@ -663,6 +696,7 @@ export class GlobalSettings extends pb_1.Message {
         language?: string;
         debugLogging?: boolean;
         recentlyMigrated?: boolean;
+        allowTelemetry?: boolean;
         theme?: Theme;
     }): GlobalSettings {
         const message = new GlobalSettings({});
@@ -687,6 +721,9 @@ export class GlobalSettings extends pb_1.Message {
         if (data.recentlyMigrated != null) {
             message.recentlyMigrated = data.recentlyMigrated;
         }
+        if (data.allowTelemetry != null) {
+            message.allowTelemetry = data.allowTelemetry;
+        }
         if (data.theme != null) {
             message.theme = data.theme;
         }
@@ -701,6 +738,7 @@ export class GlobalSettings extends pb_1.Message {
             language?: string;
             debugLogging?: boolean;
             recentlyMigrated?: boolean;
+            allowTelemetry?: boolean;
             theme?: Theme;
         } = {};
         if (this.enabled != null) {
@@ -723,6 +761,9 @@ export class GlobalSettings extends pb_1.Message {
         }
         if (this.recentlyMigrated != null) {
             data.recentlyMigrated = this.recentlyMigrated;
+        }
+        if (this.allowTelemetry != null) {
+            data.allowTelemetry = this.allowTelemetry;
         }
         if (this.theme != null) {
             data.theme = this.theme;
@@ -747,8 +788,10 @@ export class GlobalSettings extends pb_1.Message {
             writer.writeBool(6, this.debugLogging);
         if (this.recentlyMigrated != false)
             writer.writeBool(7, this.recentlyMigrated);
+        if (this.allowTelemetry != false)
+            writer.writeBool(8, this.allowTelemetry);
         if (this.theme != Theme.unknown)
-            writer.writeEnum(8, this.theme);
+            writer.writeEnum(9, this.theme);
         if (!w)
             return writer.getResultBuffer();
     }
@@ -780,6 +823,9 @@ export class GlobalSettings extends pb_1.Message {
                     message.recentlyMigrated = reader.readBool();
                     break;
                 case 8:
+                    message.allowTelemetry = reader.readBool();
+                    break;
+                case 9:
                     message.theme = reader.readEnum();
                     break;
                 default: reader.skipField();

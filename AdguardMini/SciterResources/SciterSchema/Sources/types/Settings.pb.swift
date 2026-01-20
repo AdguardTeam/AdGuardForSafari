@@ -318,6 +318,8 @@ public struct Settings: Sendable {
 
   public var language: String = String()
 
+  public var allowTelemetry: Bool = false
+
   public var theme: Theme = .unknown
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -381,6 +383,8 @@ public struct GlobalSettings: Sendable {
   public var debugLogging: Bool = false
 
   public var recentlyMigrated: Bool = false
+
+  public var allowTelemetry: Bool = false
 
   public var theme: Theme = .unknown
 
@@ -573,7 +577,7 @@ extension Theme: SwiftProtobuf._ProtoNameProviding {
 
 extension Settings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "Settings"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}launch_on_startup\0\u{3}show_in_menu_bar\0\u{3}hardware_acceleration\0\u{3}auto_filters_update\0\u{3}real_time_filters_update\0\u{1}quitReaction\0\u{3}debug_logging\0\u{3}release_variant\0\u{3}consent_filters_ids\0\u{1}language\0\u{1}theme\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}launch_on_startup\0\u{3}show_in_menu_bar\0\u{3}hardware_acceleration\0\u{3}auto_filters_update\0\u{3}real_time_filters_update\0\u{1}quitReaction\0\u{3}debug_logging\0\u{3}release_variant\0\u{3}consent_filters_ids\0\u{1}language\0\u{3}allow_telemetry\0\u{1}theme\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -591,7 +595,8 @@ extension Settings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
       case 8: try { try decoder.decodeSingularEnumField(value: &self.releaseVariant) }()
       case 9: try { try decoder.decodeRepeatedInt32Field(value: &self.consentFiltersIds) }()
       case 10: try { try decoder.decodeSingularStringField(value: &self.language) }()
-      case 11: try { try decoder.decodeSingularEnumField(value: &self.theme) }()
+      case 11: try { try decoder.decodeSingularBoolField(value: &self.allowTelemetry) }()
+      case 12: try { try decoder.decodeSingularEnumField(value: &self.theme) }()
       default: break
       }
     }
@@ -628,8 +633,11 @@ extension Settings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
     if !self.language.isEmpty {
       try visitor.visitSingularStringField(value: self.language, fieldNumber: 10)
     }
+    if self.allowTelemetry != false {
+      try visitor.visitSingularBoolField(value: self.allowTelemetry, fieldNumber: 11)
+    }
     if self.theme != .unknown {
-      try visitor.visitSingularEnumField(value: self.theme, fieldNumber: 11)
+      try visitor.visitSingularEnumField(value: self.theme, fieldNumber: 12)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -645,6 +653,7 @@ extension Settings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
     if lhs.releaseVariant != rhs.releaseVariant {return false}
     if lhs.consentFiltersIds != rhs.consentFiltersIds {return false}
     if lhs.language != rhs.language {return false}
+    if lhs.allowTelemetry != rhs.allowTelemetry {return false}
     if lhs.theme != rhs.theme {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -748,7 +757,7 @@ extension ImportStatus: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
 
 extension GlobalSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "GlobalSettings"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}enabled\0\u{1}allExtensionEnabled\0\u{1}newVersionAvailable\0\u{1}releaseVariant\0\u{1}language\0\u{3}debug_logging\0\u{3}recently_migrated\0\u{1}theme\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}enabled\0\u{1}allExtensionEnabled\0\u{1}newVersionAvailable\0\u{1}releaseVariant\0\u{1}language\0\u{3}debug_logging\0\u{3}recently_migrated\0\u{3}allow_telemetry\0\u{1}theme\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -763,7 +772,8 @@ extension GlobalSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       case 5: try { try decoder.decodeSingularStringField(value: &self.language) }()
       case 6: try { try decoder.decodeSingularBoolField(value: &self.debugLogging) }()
       case 7: try { try decoder.decodeSingularBoolField(value: &self.recentlyMigrated) }()
-      case 8: try { try decoder.decodeSingularEnumField(value: &self.theme) }()
+      case 8: try { try decoder.decodeSingularBoolField(value: &self.allowTelemetry) }()
+      case 9: try { try decoder.decodeSingularEnumField(value: &self.theme) }()
       default: break
       }
     }
@@ -791,8 +801,11 @@ extension GlobalSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     if self.recentlyMigrated != false {
       try visitor.visitSingularBoolField(value: self.recentlyMigrated, fieldNumber: 7)
     }
+    if self.allowTelemetry != false {
+      try visitor.visitSingularBoolField(value: self.allowTelemetry, fieldNumber: 8)
+    }
     if self.theme != .unknown {
-      try visitor.visitSingularEnumField(value: self.theme, fieldNumber: 8)
+      try visitor.visitSingularEnumField(value: self.theme, fieldNumber: 9)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -805,6 +818,7 @@ extension GlobalSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     if lhs.language != rhs.language {return false}
     if lhs.debugLogging != rhs.debugLogging {return false}
     if lhs.recentlyMigrated != rhs.recentlyMigrated {return false}
+    if lhs.allowTelemetry != rhs.allowTelemetry {return false}
     if lhs.theme != rhs.theme {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

@@ -18,8 +18,8 @@ export function PrimaryAndSecondaryButtons({
 }: {
     primaryButtonTitle: string;
     primaryButtonAction(): void;
-    secondaryButtonTitle: string;
-    secondaryButtonAction(): void;
+    secondaryButtonTitle?: string;
+    secondaryButtonAction?: () => void;
 }) {
     return (
         <>
@@ -30,13 +30,15 @@ export function PrimaryAndSecondaryButtons({
             >
                 <Text lineHeight="none" type="t1" semibold>{primaryButtonTitle}</Text>
             </Button>
-            <Button
-                className={cx(s.PrimaryAndSecondaryButtons_buttonText, tx.button.textButton)}
-                type="text"
-                onClick={secondaryButtonAction}
-            >
-                <Text lineHeight="none" type="t1">{secondaryButtonTitle}</Text>
-            </Button>
+            {(secondaryButtonTitle && secondaryButtonAction) && (
+                <Button
+                    className={cx(s.PrimaryAndSecondaryButtons_buttonText, tx.button.textButton)}
+                    type="text"
+                    onClick={secondaryButtonAction}
+                >
+                    <Text lineHeight="none" type="t1">{secondaryButtonTitle}</Text>
+                </Button>
+            )}
         </>
     );
 }

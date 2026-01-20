@@ -27,7 +27,14 @@ export class StoryNavigation {
      *
      */
     public get length() {
-        return this.storyInfo.frames.length;
+        return this.storyInfo.totalFrames || this.storyInfo.frames.length;
+    }
+
+    /**
+     * Callback to call before next story is shown/story closed
+     */
+    public get onBeforeClose() {
+        return this.storyInfo.onBeforeClose;
     }
 
     /**

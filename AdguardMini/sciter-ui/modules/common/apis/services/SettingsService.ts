@@ -65,6 +65,8 @@ interface ISettingsService {
 	GetSystemLanguage(param:EmptyValue): Promise<StringValue>;
 	/* Get effective theme */
 	GetEffectiveTheme(param:EmptyValue): Promise<EffectiveThemeValue>;
+	/* Update allow telemetry */
+	UpdateAllowTelemetry(param:BoolValue): Promise<EmptyValue>;
 	/* Update theme setting */
 	UpdateTheme(param:UpdateThemeMessage): Promise<EmptyValue>;
 }
@@ -506,6 +508,21 @@ export class SettingsService implements ISettingsService {
 		const data = EffectiveThemeValue.deserializeBinary(res);
 
 		log.dbg('Response data', 'SettingsService.GetEffectiveTheme', data.toObject());
+		return data;
+	};
+
+	/**
+	 * Update allow telemetry
+	 * @param BoolValue param
+	 * @returns EmptyValue param
+	 */
+	UpdateAllowTelemetry = async (param: BoolValue): Promise<EmptyValue> => {
+		log.dbg('Request data', 'SettingsService.UpdateAllowTelemetry', param.toObject());
+
+		const res = await xcall('SettingsService.UpdateAllowTelemetry', param.serializeBinary().buffer);
+		const data = EmptyValue.deserializeBinary(res);
+
+		log.dbg('Response data', 'SettingsService.UpdateAllowTelemetry', data.toObject());
 		return data;
 	};
 
