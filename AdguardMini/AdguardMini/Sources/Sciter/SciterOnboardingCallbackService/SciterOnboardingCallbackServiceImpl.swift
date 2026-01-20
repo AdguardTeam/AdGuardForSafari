@@ -41,8 +41,11 @@ final class SciterOnboardingCallbackServiceImpl: RestartableServiceBase, SciterO
     }
 
     @objc func onEffectiveThemeChanged(notification: Notification) {
-        self.runAsyncIfStarted { [weak self] in
-            self?.onboardingCallbacks.onEffectiveThemeChanged(.current)
+        if let incomingTheme: Theme = self.eventBus.parseNotification(notification) {
+            self.runAsyncIfStarted { [weak self] in
+                let theme = EffectiveThemeValue.resolve(incomingTheme)
+                self?.onboardingCallbacks.onEffectiveThemeChanged(theme)
+            }
         }
     }
 

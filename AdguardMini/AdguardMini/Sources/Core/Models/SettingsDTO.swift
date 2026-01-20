@@ -17,4 +17,5 @@ struct SettingsDTO: Codable, Equatable {
     let launchOnStartup: Bool
     let showInMenuBar: Bool
     let quitReaction: QuitReaction
+    let theme: Theme
 }

@@ -11,7 +11,15 @@ import BaseSciterSchema
 import AML
 
 extension EffectiveThemeValue {
-    static var current: EffectiveThemeValue {
+    static func resolve(_ theme: Theme) -> EffectiveThemeValue {
+        switch theme {
+        case .system: .current
+        case .light:  .light
+        case .dark:   .dark
+        }
+    }
+
+    private static var current: EffectiveThemeValue {
         UIUtils.isDarkMode() ? .dark : .light
     }
 }

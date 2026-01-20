@@ -201,7 +201,11 @@ extension SettingsImportBase {
         }
 
         /// Exclude keys with side effects.
-        let excludedKeys = [SettingsKey.realTimeFiltersUpdate, SettingsKey.showInMenuBar].map(\.rawValue)
+        let excludedKeys = [
+            SettingsKey.realTimeFiltersUpdate,
+            SettingsKey.showInMenuBar,
+            SettingsKey.themeOption
+        ].map(\.rawValue)
         let appKeys = SettingsKey.allCases.map(\.rawValue).filter { !excludedKeys.contains($0) }
         let sharedKeys = SharedSettingsKey.allCases.map(\.rawValue)
 
@@ -220,6 +224,10 @@ extension SettingsImportBase {
         }
         if let showInMenuBar = entity[SettingsKey.showInMenuBar.rawValue] as? Bool {
             self.userSettingsService.setShowInMenuBar(showInMenuBar)
+        }
+        if let themeOption = entity[SettingsKey.themeOption.rawValue] as? Int,
+           let theme = Theme(rawValue: themeOption) {
+            self.userSettingsService.setTheme(theme)
         }
 
         self.context.preferencesImported = true

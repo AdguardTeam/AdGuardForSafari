@@ -64,4 +64,6 @@ service SettingsService {
     rpc GetSystemLanguage(EmptyValue) returns (StringValue);
     /* Get effective theme */
     rpc GetEffectiveTheme(EmptyValue) returns (EffectiveThemeValue);
+    /* Update theme setting */
+    rpc UpdateTheme(UpdateThemeMessage) returns (EmptyValue);
 }

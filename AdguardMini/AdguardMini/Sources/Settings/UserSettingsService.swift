@@ -28,6 +28,7 @@ protocol UserSettingsService: AnyObject {
     var autoFiltersUpdate: Bool { get }
     var realTimeFiltersUpdate: Bool { get }
     var settings: SettingsDTO { get }
+    var theme: Theme { get }
 
     func setAutoFiltersUpdate(_ value: Bool)
     func setRealTimeFiltersUpdate(_ value: Bool)
@@ -35,6 +36,7 @@ protocol UserSettingsService: AnyObject {
     func setHardwareAcceleration(_ value: Bool)
     func setLaunchOnStartup(_ value: Bool)
     func setShowInMenuBar(_ value: Bool)
+    func setTheme(_ theme: Theme)
 
     @discardableResult
     func updateSettings(newSettings: SettingsDTO) -> SettingsDTO
@@ -134,6 +136,10 @@ extension UserSettingsServiceImpl: UserSettingsService {
         self.userSettingsManager.realTimeFiltersUpdate
     }
 
+    var theme: Theme {
+        self.userSettingsManager.theme
+    }
+
     var settings: SettingsDTO {
         get {
             SettingsDTO(
@@ -143,12 +149,15 @@ extension UserSettingsServiceImpl: UserSettingsService {
                 hardwareAcceleration: self.userSettingsManager.hardwareAcceleration,
                 launchOnStartup:      self.sharedSettingsStorage.launchOnStartup,
                 showInMenuBar:        self.userSettingsManager.showInMenuBar,
-                quitReaction:         self.userSettingsManager.quitReaction
+                quitReaction:         self.userSettingsManager.quitReaction,
+                theme:                self.theme
             )
         }
         set(obj) {
             self.setAutoFiltersUpdate(obj.autoFiltersUpdate)
             self.setRealTimeFiltersUpdate(obj.realTimeFiltersUpdate)
+            self.setTheme(obj.theme)
+
             self.keychain.debugLogging = obj.debugLogging
             self.userSettingsManager.hardwareAcceleration = obj.hardwareAcceleration
             self.sharedSettingsStorage.launchOnStartup = obj.launchOnStartup
@@ -167,6 +176,12 @@ extension UserSettingsServiceImpl: UserSettingsService {
         let old = self.userSettingsManager.realTimeFiltersUpdate
         self.userSettingsManager.realTimeFiltersUpdate = value
         self.appSettingUpdateHandler.handleRealTimeFiltersUpdateUpdates(old, value)
+    }
+
+    func setTheme(_ theme: Theme) {
+        let old = self.theme
+        self.userSettingsManager.theme = theme
+        self.appSettingUpdateHandler.handleThemeUpdates(old, theme)
     }
 
     func setDebugLogging(_ value: Bool) {

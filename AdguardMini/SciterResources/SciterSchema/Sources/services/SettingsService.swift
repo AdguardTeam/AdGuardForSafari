@@ -126,6 +126,10 @@ public protocol SettingsServiceProtocol
 	func getEffectiveTheme (
 						_ message: EmptyValue,
 						_ promise: @escaping (EffectiveThemeValue) -> Void) -> Void
+	/// Update theme setting
+	func updateTheme (
+						_ message: UpdateThemeMessage,
+						_ promise: @escaping (EmptyValue) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -480,6 +484,18 @@ open class SettingsService: SciterBridge
 			inputType: EmptyValue.self,
 			outputType: EffectiveThemeValue.self,
 			method: cast.getEffectiveTheme(_:_:),
+			message,
+			promise
+		)
+	}
+
+	/// Wrapper for `UpdateTheme`
+	@objc func UpdateTheme(_ message: Data, promise: @escaping (Data) -> Void)
+	{
+		swiftCall(
+			inputType: UpdateThemeMessage.self,
+			outputType: EmptyValue.self,
+			method: cast.updateTheme(_:_:),
 			message,
 			promise
 		)

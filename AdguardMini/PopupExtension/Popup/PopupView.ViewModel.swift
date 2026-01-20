@@ -489,6 +489,13 @@ extension PopupView.ViewModel: ExtensionSafariApiClientDelegate {
         LogVerboseTrace()
         LogConfig.setLogLevelAsyncly(logLevel)
     }
+
+    func setTheme(_ theme: Theme) {
+        LogVerboseTrace()
+        Task {
+            await NSApplication.shared.setTheme(theme)
+        }
+    }
 }
 
 private extension PopupView.ViewModel {

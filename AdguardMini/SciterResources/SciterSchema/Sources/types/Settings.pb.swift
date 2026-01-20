@@ -250,6 +250,48 @@ public enum SafariExtensionStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
 
 }
 
+public enum Theme: SwiftProtobuf.Enum, Swift.CaseIterable {
+  public typealias RawValue = Int
+  case unknown // = 0
+  case system // = 1
+  case light // = 2
+  case dark // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unknown
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unknown
+    case 1: self = .system
+    case 2: self = .light
+    case 3: self = .dark
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unknown: return 0
+    case .system: return 1
+    case .light: return 2
+    case .dark: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Theme] = [
+    .unknown,
+    .system,
+    .light,
+    .dark,
+  ]
+
+}
+
 /// Describes settings page
 public struct Settings: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -275,6 +317,8 @@ public struct Settings: Sendable {
   public var consentFiltersIds: [Int32] = []
 
   public var language: String = String()
+
+  public var theme: Theme = .unknown
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -337,6 +381,8 @@ public struct GlobalSettings: Sendable {
   public var debugLogging: Bool = false
 
   public var recentlyMigrated: Bool = false
+
+  public var theme: Theme = .unknown
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -487,6 +533,18 @@ public struct SafariExtensionUpdate: Sendable {
   fileprivate var _state: SafariExtension? = nil
 }
 
+public struct UpdateThemeMessage: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var theme: Theme = .unknown
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension ReleaseVariants: SwiftProtobuf._ProtoNameProviding {
@@ -509,9 +567,13 @@ extension SafariExtensionStatus: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0SafariExtensionStatus_unknown\0\u{1}SafariExtensionStatus_ok\0\u{1}SafariExtensionStatus_loading\0\u{1}SafariExtensionStatus_disabled\0\u{1}SafariExtensionStatus_limit_exceeded\0\u{1}SafariExtensionStatus_converter_error\0\u{1}SafariExtensionStatus_safari_error\0")
 }
 
+extension Theme: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0Theme_unknown\0\u{1}Theme_system\0\u{1}Theme_light\0\u{1}Theme_dark\0")
+}
+
 extension Settings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "Settings"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}launch_on_startup\0\u{3}show_in_menu_bar\0\u{3}hardware_acceleration\0\u{3}auto_filters_update\0\u{3}real_time_filters_update\0\u{1}quitReaction\0\u{3}debug_logging\0\u{3}release_variant\0\u{3}consent_filters_ids\0\u{1}language\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{3}launch_on_startup\0\u{3}show_in_menu_bar\0\u{3}hardware_acceleration\0\u{3}auto_filters_update\0\u{3}real_time_filters_update\0\u{1}quitReaction\0\u{3}debug_logging\0\u{3}release_variant\0\u{3}consent_filters_ids\0\u{1}language\0\u{1}theme\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -529,6 +591,7 @@ extension Settings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
       case 8: try { try decoder.decodeSingularEnumField(value: &self.releaseVariant) }()
       case 9: try { try decoder.decodeRepeatedInt32Field(value: &self.consentFiltersIds) }()
       case 10: try { try decoder.decodeSingularStringField(value: &self.language) }()
+      case 11: try { try decoder.decodeSingularEnumField(value: &self.theme) }()
       default: break
       }
     }
@@ -565,6 +628,9 @@ extension Settings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
     if !self.language.isEmpty {
       try visitor.visitSingularStringField(value: self.language, fieldNumber: 10)
     }
+    if self.theme != .unknown {
+      try visitor.visitSingularEnumField(value: self.theme, fieldNumber: 11)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -579,6 +645,7 @@ extension Settings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
     if lhs.releaseVariant != rhs.releaseVariant {return false}
     if lhs.consentFiltersIds != rhs.consentFiltersIds {return false}
     if lhs.language != rhs.language {return false}
+    if lhs.theme != rhs.theme {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -681,7 +748,7 @@ extension ImportStatus: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
 
 extension GlobalSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "GlobalSettings"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}enabled\0\u{1}allExtensionEnabled\0\u{1}newVersionAvailable\0\u{1}releaseVariant\0\u{1}language\0\u{3}debug_logging\0\u{3}recently_migrated\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}enabled\0\u{1}allExtensionEnabled\0\u{1}newVersionAvailable\0\u{1}releaseVariant\0\u{1}language\0\u{3}debug_logging\0\u{3}recently_migrated\0\u{1}theme\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -696,6 +763,7 @@ extension GlobalSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       case 5: try { try decoder.decodeSingularStringField(value: &self.language) }()
       case 6: try { try decoder.decodeSingularBoolField(value: &self.debugLogging) }()
       case 7: try { try decoder.decodeSingularBoolField(value: &self.recentlyMigrated) }()
+      case 8: try { try decoder.decodeSingularEnumField(value: &self.theme) }()
       default: break
       }
     }
@@ -723,6 +791,9 @@ extension GlobalSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     if self.recentlyMigrated != false {
       try visitor.visitSingularBoolField(value: self.recentlyMigrated, fieldNumber: 7)
     }
+    if self.theme != .unknown {
+      try visitor.visitSingularEnumField(value: self.theme, fieldNumber: 8)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -734,6 +805,7 @@ extension GlobalSettings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     if lhs.language != rhs.language {return false}
     if lhs.debugLogging != rhs.debugLogging {return false}
     if lhs.recentlyMigrated != rhs.recentlyMigrated {return false}
+    if lhs.theme != rhs.theme {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -976,6 +1048,36 @@ extension SafariExtensionUpdate: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   public static func ==(lhs: SafariExtensionUpdate, rhs: SafariExtensionUpdate) -> Bool {
     if lhs.type != rhs.type {return false}
     if lhs._state != rhs._state {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension UpdateThemeMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = "UpdateThemeMessage"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}theme\0")
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.theme) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.theme != .unknown {
+      try visitor.visitSingularEnumField(value: self.theme, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: UpdateThemeMessage, rhs: UpdateThemeMessage) -> Bool {
+    if lhs.theme != rhs.theme {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

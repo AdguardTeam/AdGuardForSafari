@@ -57,6 +57,11 @@ final class PopupStatePreparerImpl: PopupStatePreparer {
             LogConfig.setLogLevelAsyncly(logLevel)
         }
 
+        if let theme = appState?.theme,
+           let theme = Theme(rawValue: Int(theme)) {
+            await NSApplication.shared.setTheme(theme)
+        }
+
         let isProtectionEnabled = appState?.isProtectionEnabled ?? false
         guard isProtectionEnabled else {
             return self.prepareState(

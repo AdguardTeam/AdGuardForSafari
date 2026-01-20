@@ -19,6 +19,7 @@ extension Settings {
         realTimeFiltersUpdate: Bool = false,
         debugLogging: Bool = false,
         quitReaction: QuitReaction = .ask,
+        theme: Theme,
         consentFiltersIds: [Int32] = [],
         releaseVariant: ReleaseVariants = .standAlone,
         language: String = ""
@@ -31,6 +32,7 @@ extension Settings {
         self.realTimeFiltersUpdate = realTimeFiltersUpdate
         self.debugLogging = debugLogging
         self.quitReaction = quitReaction
+        self.theme = theme
         self.consentFiltersIds = consentFiltersIds
         self.releaseVariant = releaseVariant
         self.language = language

@@ -12,11 +12,14 @@ import SciterSchema
 import AML
 import AppKit
 
-extension Sciter.TrayServiceImpl: EventBusDependent {}
+extension Sciter.TrayServiceImpl:
+    EventBusDependent,
+    UserSettingsManagerDependent {}
 
 extension Sciter {
     final class TrayServiceImpl: TrayService.ServiceType {
         var eventBus: EventBus!
+        var userSettingsManager: UserSettingsManager!
 
         override init() {
             super.init()
@@ -24,7 +27,12 @@ extension Sciter {
         }
 
         func getEffectiveTheme(_ message: EmptyValue, _ promise: @escaping (EffectiveThemeValue) -> Void) {
-            promise(.current)
+            Task {
+                let theme = self.userSettingsManager.theme
+                await MainActor.run {
+                    promise(.resolve(theme))
+                }
+            }
         }
     }
 }

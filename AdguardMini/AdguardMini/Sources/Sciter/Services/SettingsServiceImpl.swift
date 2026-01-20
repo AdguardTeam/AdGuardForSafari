@@ -35,8 +35,7 @@ extension Sciter.SettingsServiceImpl:
     AppUpdaterDependent,
     SciterAppControllerDependent,
     AppLifecycleServiceDependent,
-    AppMetadataDependent {
-}
+    AppMetadataDependent {}
 
 extension Sciter {
     final class SettingsServiceImpl: SettingsService.ServiceType {
@@ -189,7 +188,8 @@ extension Sciter {
                     releaseVariant: ProductInfo.releaseVariant.toProto(),
                     language: Locales.navigatorLang,
                     debugLogging: self.userSettingsService.settings.debugLogging,
-                    recentlyMigrated: self.appMetadata.wasMigratedFromLegacyApp
+                    recentlyMigrated: self.appMetadata.wasMigratedFromLegacyApp,
+                    theme: self.userSettingsService.theme.toProto()
                 )
                 promise(traySettings)
             }
@@ -312,7 +312,19 @@ extension Sciter {
         }
 
         func getEffectiveTheme(_ message: EmptyValue, _ promise: @escaping (EffectiveThemeValue) -> Void) {
-            promise(.current)
+            Task {
+                let theme = self.userSettingsService.theme
+                await MainActor.run {
+                    promise(.resolve(theme))
+                }
+            }
+        }
+
+        func updateTheme(_ message: UpdateThemeMessage, _ promise: @escaping (EmptyValue) -> Void) {
+            Task {
+                self.userSettingsService.setTheme(message.theme.toTheme())
+                promise(EmptyValue())
+            }
         }
     }
 }

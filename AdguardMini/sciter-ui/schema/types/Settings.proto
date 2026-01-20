@@ -14,6 +14,7 @@ message Settings {
     ReleaseVariants release_variant = 8;
     repeated int32 consent_filters_ids = 9;
     string language = 10;
+    Theme theme = 11;
 }
 
 message UserConsent {
@@ -50,6 +51,7 @@ message GlobalSettings {
     string language = 5;
     bool debug_logging = 6;
     bool recently_migrated = 7;
+    Theme theme = 8;
 }
 
 message UpdateQuitReactionMessage {
@@ -105,4 +107,15 @@ enum SafariExtensionStatus {
     SafariExtensionStatus_limit_exceeded = 4;
     SafariExtensionStatus_converter_error = 5;
     SafariExtensionStatus_safari_error = 6;
+}
+
+message UpdateThemeMessage {
+    Theme theme = 1;
+}
+
+enum Theme {
+    Theme_unknown = 0;
+    Theme_system = 1;
+    Theme_light = 2;
+    Theme_dark = 3;
 }

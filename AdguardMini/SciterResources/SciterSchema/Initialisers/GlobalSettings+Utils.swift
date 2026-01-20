@@ -18,7 +18,8 @@ extension GlobalSettings {
         releaseVariant: ReleaseVariants = .standAlone,
         language: String = "",
         debugLogging: Bool = false,
-        recentlyMigrated: Bool = false
+        recentlyMigrated: Bool = false,
+        theme: Theme
     ) {
         self.init()
         self.enabled = enabled
@@ -28,5 +29,6 @@ extension GlobalSettings {
         self.language = language
         self.debugLogging = debugLogging
         self.recentlyMigrated = recentlyMigrated
+        self.theme = theme
     }
 }

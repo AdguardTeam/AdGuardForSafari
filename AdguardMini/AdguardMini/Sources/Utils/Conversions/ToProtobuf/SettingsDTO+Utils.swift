@@ -29,6 +29,7 @@ extension SettingsDTO {
             realTimeFiltersUpdate: self.realTimeFiltersUpdate,
             debugLogging:          self.debugLogging,
             quitReaction:          self.quitReaction.toProto(),
+            theme:                 self.theme.toProto(),
             consentFiltersIds:     userConsent.map(Int32.init),
             releaseVariant:        releaseVariant.toProto(),
             language:              language

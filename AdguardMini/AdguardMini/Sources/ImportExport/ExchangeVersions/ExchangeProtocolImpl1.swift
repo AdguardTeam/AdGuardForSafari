@@ -52,18 +52,6 @@ struct ExchangeProtocolImpl1: ExchangeProtocol {
 }
 
 extension ExchangeProtocolImpl1.Settings {
-    func settingsDTO() -> SettingsDTO {
-        SettingsDTO(
-            autoFiltersUpdate: self.autoFiltersUpdate,
-            realTimeFiltersUpdate: self.realTimeFiltersUpdate,
-            debugLogging: self.debugLogging,
-            hardwareAcceleration: self.hardwareAcceleration,
-            launchOnStartup: self.launchOnStartup,
-            showInMenuBar: self.showInMenuBar,
-            quitReaction: self.quitReaction
-        )
-    }
-
     func advancedBlockingState() -> AdvancedBlockingDTO {
         AdvancedBlockingDTO(
             advancedRules: self.advancedRules,

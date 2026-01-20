@@ -56,7 +56,12 @@ extension Sciter {
         }
 
         func getEffectiveTheme(_ message: EmptyValue, _ promise: @escaping (EffectiveThemeValue) -> Void) {
-            promise(.current)
+            Task {
+                let theme = self.userSettingsManager.theme
+                await MainActor.run {
+                    promise(.resolve(theme))
+                }
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ final class EBAAppState: NSObject, NSSecureCoding {
     @objc dynamic var isProtectionEnabled: Bool = false
     @objc dynamic var lastCheckTime: EBATimestamp = currentTimestamp()
     @objc dynamic var logLevel: Int32 = Int32(Logger.shared.logLevel.rawValue)
+    @objc dynamic var theme: Int32 = Int32(Theme.system.rawValue)
 
     @objc static let supportsSecureCoding: Bool = true
 
@@ -41,12 +42,14 @@ final class EBAAppState: NSObject, NSSecureCoding {
         coder.encode(self.isProtectionEnabled, forKey: "isProtectionEnabled")
         coder.encode(self.lastCheckTime, forKey: "lastCheckTime")
         coder.encode(self.logLevel, forKey: "logLevel")
+        coder.encode(self.theme, forKey: "theme")
     }
 
     @objc required init?(coder: NSCoder) {
         self.isProtectionEnabled = coder.decodeBool(forKey: "isProtectionEnabled")
         self.lastCheckTime = coder.decodeDouble(forKey: "lastCheckTime")
         self.logLevel = coder.decodeInt32(forKey: "logLevel")
+        self.theme = coder.decodeInt32(forKey: "theme")
     }
 
     @objc var lastCheckTimeString: String {
@@ -54,15 +57,16 @@ final class EBAAppState: NSObject, NSSecureCoding {
     }
 
     override var description: String {
-        "<\(type(of: self)): \(Unmanaged.passUnretained(self).toOpaque())> isProtectionEnabled: \(self.isProtectionEnabled), lastCheckTime: \(self.lastCheckTimeString), logLevel: \(self.logLevel)"
+        "<\(type(of: self)): \(Unmanaged.passUnretained(self).toOpaque())> isProtectionEnabled: \(self.isProtectionEnabled), lastCheckTime: \(self.lastCheckTimeString), logLevel: \(self.logLevel), theme: \(self.theme)"
     }
 }
 
 // MARK: Date + iso8601String
 
 fileprivate extension Date {
+    private static let iso8601DateFormatter = ISO8601DateFormatter()
     var iso8601String: String {
-        let formatter = ISO8601DateFormatter()
+        let formatter = Self.iso8601DateFormatter
         return formatter.string(from: self)
     }
 }

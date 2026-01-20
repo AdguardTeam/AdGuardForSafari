@@ -170,6 +170,7 @@ extension SafariApiProvider: MainAppApi {
         let appState = EBAAppState()
         appState.isProtectionEnabled = self.protectionService.isProtectionEnabled
         appState.logLevel = Int32(Logger.shared.logLevel.rawValue)
+        appState.theme = Int32(self.userSettingsService.theme.rawValue)
         return appState
     }
 

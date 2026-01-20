@@ -180,9 +180,17 @@ extension SettingsExport {
     private func preferences(folderUrl: URL, progress: Progress) throws {
         let bundleId = self.apiService.bundleId()
         let groupId = self.apiService.groupBundleId()
-        guard let defs = UserDefaults().persistentDomain(forName: bundleId),
-              let sharedDefs = UserDefaults().persistentDomain(forName: groupId)
+
+        guard let defs = UserDefaults().persistentDomain(forName: bundleId)
         else { return }
+
+        let sharedDefs: [String: Any]
+        if let defs = UserDefaults().persistentDomain(forName: groupId) {
+            sharedDefs = defs
+        } else {
+            LogWarn("Shared defaults does not exists. Proceeding with app level defs only")
+            sharedDefs = [:]
+        }
 
         let prefs = try defs
             .merging(sharedDefs) { appLevelPrefs, _ in appLevelPrefs }

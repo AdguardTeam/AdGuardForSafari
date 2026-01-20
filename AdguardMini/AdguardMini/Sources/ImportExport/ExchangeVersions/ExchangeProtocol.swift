@@ -10,7 +10,6 @@
 import Foundation
 
 protocol SettingsModelProtocol: Codable {
-    func settingsDTO() -> SettingsDTO
     func advancedBlockingState() -> AdvancedBlockingDTO
 
     init(data: Data) throws

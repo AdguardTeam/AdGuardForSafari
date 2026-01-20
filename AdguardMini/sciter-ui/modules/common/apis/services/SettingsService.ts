@@ -1,7 +1,7 @@
 /* This code was generated automatically by proto-parser tool version 1 */
 
 
-import { EmptyValue, Settings, BoolValue, UpdateQuitReactionMessage, Path, OptionalError, ImportSettingsConfirmation, GlobalSettings, SafariExtensions, Int32Value, OptionalStringValue, UserConsent, SupportMessage, StringValue, EffectiveThemeValue } from '../types'
+import { EmptyValue, Settings, BoolValue, UpdateQuitReactionMessage, Path, OptionalError, ImportSettingsConfirmation, GlobalSettings, SafariExtensions, Int32Value, OptionalStringValue, UserConsent, SupportMessage, StringValue, EffectiveThemeValue, UpdateThemeMessage } from '../types'
 import { xcall } from 'ApiWindow';
 
 /* Service that handles settings  */
@@ -65,6 +65,8 @@ interface ISettingsService {
 	GetSystemLanguage(param:EmptyValue): Promise<StringValue>;
 	/* Get effective theme */
 	GetEffectiveTheme(param:EmptyValue): Promise<EffectiveThemeValue>;
+	/* Update theme setting */
+	UpdateTheme(param:UpdateThemeMessage): Promise<EmptyValue>;
 }
 
 /**
@@ -504,6 +506,21 @@ export class SettingsService implements ISettingsService {
 		const data = EffectiveThemeValue.deserializeBinary(res);
 
 		log.dbg('Response data', 'SettingsService.GetEffectiveTheme', data.toObject());
+		return data;
+	};
+
+	/**
+	 * Update theme setting
+	 * @param UpdateThemeMessage param
+	 * @returns EmptyValue param
+	 */
+	UpdateTheme = async (param: UpdateThemeMessage): Promise<EmptyValue> => {
+		log.dbg('Request data', 'SettingsService.UpdateTheme', param.toObject());
+
+		const res = await xcall('SettingsService.UpdateTheme', param.serializeBinary().buffer);
+		const data = EmptyValue.deserializeBinary(res);
+
+		log.dbg('Response data', 'SettingsService.UpdateTheme', data.toObject());
 		return data;
 	};
 

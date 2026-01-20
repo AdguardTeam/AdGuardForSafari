@@ -123,6 +123,11 @@ extension ExtensionSafariApiClientImpl: SafariPopupApi {
         LogDebug("appStateChanged \(appState)")
         self.delegate?.appStateChanged(appState)
     }
+
+    func setTheme(_ theme: Theme) {
+        LogDebug("setTheme: \(theme)")
+        self.delegate?.setTheme(theme)
+    }
 }
 
 // MARK: - XPCGateClientDelegate implementation

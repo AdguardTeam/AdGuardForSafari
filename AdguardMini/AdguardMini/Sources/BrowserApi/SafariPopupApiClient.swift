@@ -28,6 +28,12 @@ final class SafariPopupApiClient: SafariPopupApi {
         }
     }
 
+    func setTheme(_ theme: Theme) {
+        self.withProxies { proxy in
+            proxy.setTheme(theme)
+        }
+    }
+
     func withProxies(_ completion: @escaping (SafariPopupApi) -> Void) {
         self.proxyStorage.withRemoteProxies(SafariPopupApi.self) { proxy in
             completion(proxy)

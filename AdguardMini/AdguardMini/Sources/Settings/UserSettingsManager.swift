@@ -13,6 +13,7 @@ import Foundation
 
 protocol UserSettingsManager: UserSettingsProtocol {
     var quitReaction: QuitReaction { get set }
+    var theme: Theme { get set }
     var currentUpdateChannel: String { get set }
 
     func registerUserDefaults(_ dict: [String: Any])
@@ -50,6 +51,11 @@ extension UserSettings: UserSettingsManager {
     var quitReaction: QuitReaction {
         get { QuitReaction(rawValue: self.quitOption) ?? .ask }
         set { self.quitOption = newValue.rawValue }
+    }
+
+    var theme: Theme {
+        get { Theme(rawValue: self.themeOption) ?? .system }
+        set { self.themeOption = newValue.rawValue }
     }
 
     var currentUpdateChannel: String {

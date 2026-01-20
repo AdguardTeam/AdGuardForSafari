@@ -250,7 +250,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         self.effectiveThemeObserver = NSApplication.shared.observe(\.effectiveAppearance) { _, _ in
             Task {
-                self.eventBus.post(event: .effectiveThemeChanged, userInfo: nil)
+                let userTheme = self.userSettingsManager.theme
+                self.eventBus.post(event: .effectiveThemeChanged, userInfo: userTheme)
             }
         }
 
@@ -299,6 +300,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             self.appStoreRateUs.startMonitoring()
             #endif
         }
+        let theme = self.userSettingsManager.theme
+        await NSApplication.shared.setTheme(theme)
     }
 
     /// Checks that the app bundle is located under /Applications

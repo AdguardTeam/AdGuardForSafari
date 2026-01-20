@@ -7,7 +7,7 @@
 //  AdguardMini
 //
 
-import Foundation
+import Cocoa
 import AML
 
 // MARK: - TrayChangesDelegate
@@ -31,6 +31,7 @@ protocol AppSettingUpdateHandler: TrayIconUpdatesHandler {
     func handleDebugLoggingUpdates(_ old: Bool, _ new: Bool)
     func handleHardwareAccelerationUpdates(_ old: Bool, _ new: Bool)
     func handleShowInMenuUpdates(_ old: Bool, _ new: Bool)
+    func handleThemeUpdates(_ old: Theme, _ new: Theme)
 }
 
 // MARK: - UserSettingUpdateHandlerImpl
@@ -100,5 +101,13 @@ extension AppSettingUpdateHandlerImpl: AppSettingUpdateHandler {
     func handleShowInMenuUpdates(_ old: Bool, _ new: Bool) {
         guard old != new else { return }
         self.trayChangesDelegate?.statusBarItemIsHidden = !new
+    }
+
+    func handleThemeUpdates(_ old: Theme, _ new: Theme) {
+        guard old != new else { return }
+        self.safariPopupApi.setTheme(new)
+        Task {
+            await NSApplication.shared.setTheme(new)
+        }
     }
 }

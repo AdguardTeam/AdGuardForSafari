@@ -39,6 +39,12 @@ export enum SafariExtensionStatus {
     converter_error = 5,
     safari_error = 6
 }
+export enum Theme {
+    unknown = 0,
+    system = 1,
+    light = 2,
+    dark = 3
+}
 export class Settings extends pb_1.Message {
     #one_of_decls: number[][] = [];
     constructor(data?: any[] | {
@@ -52,6 +58,7 @@ export class Settings extends pb_1.Message {
         releaseVariant?: ReleaseVariants;
         consentFiltersIds?: number[];
         language?: string;
+        theme?: Theme;
     }) {
         super();
         pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [9], this.#one_of_decls);
@@ -85,6 +92,9 @@ export class Settings extends pb_1.Message {
             }
             if ("language" in data && data.language != undefined) {
                 this.language = data.language;
+            }
+            if ("theme" in data && data.theme != undefined) {
+                this.theme = data.theme;
             }
         }
     }
@@ -148,6 +158,12 @@ export class Settings extends pb_1.Message {
     set language(value: string) {
         pb_1.Message.setField(this, 10, value);
     }
+    get theme() {
+        return pb_1.Message.getFieldWithDefault(this, 11, Theme.unknown) as Theme;
+    }
+    set theme(value: Theme) {
+        pb_1.Message.setField(this, 11, value);
+    }
     static fromObject(data: {
         launchOnStartup?: boolean;
         showInMenuBar?: boolean;
@@ -159,6 +175,7 @@ export class Settings extends pb_1.Message {
         releaseVariant?: ReleaseVariants;
         consentFiltersIds?: number[];
         language?: string;
+        theme?: Theme;
     }): Settings {
         const message = new Settings({});
         if (data.launchOnStartup != null) {
@@ -191,6 +208,9 @@ export class Settings extends pb_1.Message {
         if (data.language != null) {
             message.language = data.language;
         }
+        if (data.theme != null) {
+            message.theme = data.theme;
+        }
         return message;
     }
     toObject() {
@@ -205,6 +225,7 @@ export class Settings extends pb_1.Message {
             releaseVariant?: ReleaseVariants;
             consentFiltersIds?: number[];
             language?: string;
+            theme?: Theme;
         } = {};
         if (this.launchOnStartup != null) {
             data.launchOnStartup = this.launchOnStartup;
@@ -236,6 +257,9 @@ export class Settings extends pb_1.Message {
         if (this.language != null) {
             data.language = this.language;
         }
+        if (this.theme != null) {
+            data.theme = this.theme;
+        }
         return data;
     }
     serialize(): Uint8Array;
@@ -262,6 +286,8 @@ export class Settings extends pb_1.Message {
             writer.writePackedInt32(9, this.consentFiltersIds);
         if (this.language.length)
             writer.writeString(10, this.language);
+        if (this.theme != Theme.unknown)
+            writer.writeEnum(11, this.theme);
         if (!w)
             return writer.getResultBuffer();
     }
@@ -300,6 +326,9 @@ export class Settings extends pb_1.Message {
                     break;
                 case 10:
                     message.language = reader.readString();
+                    break;
+                case 11:
+                    message.theme = reader.readEnum();
                     break;
                 default: reader.skipField();
             }
@@ -547,6 +576,7 @@ export class GlobalSettings extends pb_1.Message {
         language?: string;
         debugLogging?: boolean;
         recentlyMigrated?: boolean;
+        theme?: Theme;
     }) {
         super();
         pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -571,6 +601,9 @@ export class GlobalSettings extends pb_1.Message {
             }
             if ("recentlyMigrated" in data && data.recentlyMigrated != undefined) {
                 this.recentlyMigrated = data.recentlyMigrated;
+            }
+            if ("theme" in data && data.theme != undefined) {
+                this.theme = data.theme;
             }
         }
     }
@@ -616,6 +649,12 @@ export class GlobalSettings extends pb_1.Message {
     set recentlyMigrated(value: boolean) {
         pb_1.Message.setField(this, 7, value);
     }
+    get theme() {
+        return pb_1.Message.getFieldWithDefault(this, 8, Theme.unknown) as Theme;
+    }
+    set theme(value: Theme) {
+        pb_1.Message.setField(this, 8, value);
+    }
     static fromObject(data: {
         enabled?: boolean;
         allExtensionEnabled?: boolean;
@@ -624,6 +663,7 @@ export class GlobalSettings extends pb_1.Message {
         language?: string;
         debugLogging?: boolean;
         recentlyMigrated?: boolean;
+        theme?: Theme;
     }): GlobalSettings {
         const message = new GlobalSettings({});
         if (data.enabled != null) {
@@ -647,6 +687,9 @@ export class GlobalSettings extends pb_1.Message {
         if (data.recentlyMigrated != null) {
             message.recentlyMigrated = data.recentlyMigrated;
         }
+        if (data.theme != null) {
+            message.theme = data.theme;
+        }
         return message;
     }
     toObject() {
@@ -658,6 +701,7 @@ export class GlobalSettings extends pb_1.Message {
             language?: string;
             debugLogging?: boolean;
             recentlyMigrated?: boolean;
+            theme?: Theme;
         } = {};
         if (this.enabled != null) {
             data.enabled = this.enabled;
@@ -680,6 +724,9 @@ export class GlobalSettings extends pb_1.Message {
         if (this.recentlyMigrated != null) {
             data.recentlyMigrated = this.recentlyMigrated;
         }
+        if (this.theme != null) {
+            data.theme = this.theme;
+        }
         return data;
     }
     serialize(): Uint8Array;
@@ -700,6 +747,8 @@ export class GlobalSettings extends pb_1.Message {
             writer.writeBool(6, this.debugLogging);
         if (this.recentlyMigrated != false)
             writer.writeBool(7, this.recentlyMigrated);
+        if (this.theme != Theme.unknown)
+            writer.writeEnum(8, this.theme);
         if (!w)
             return writer.getResultBuffer();
     }
@@ -729,6 +778,9 @@ export class GlobalSettings extends pb_1.Message {
                     break;
                 case 7:
                     message.recentlyMigrated = reader.readBool();
+                    break;
+                case 8:
+                    message.theme = reader.readEnum();
                     break;
                 default: reader.skipField();
             }
@@ -1321,5 +1373,72 @@ export class SafariExtensionUpdate extends pb_1.Message {
     }
     static deserializeBinary(bytes: Uint8Array): SafariExtensionUpdate {
         return SafariExtensionUpdate.deserialize(bytes);
+    }
+}
+export class UpdateThemeMessage extends pb_1.Message {
+    #one_of_decls: number[][] = [];
+    constructor(data?: any[] | {
+        theme?: Theme;
+    }) {
+        super();
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+        if (!Array.isArray(data) && typeof data == "object") {
+            if ("theme" in data && data.theme != undefined) {
+                this.theme = data.theme;
+            }
+        }
+    }
+    get theme() {
+        return pb_1.Message.getFieldWithDefault(this, 1, Theme.unknown) as Theme;
+    }
+    set theme(value: Theme) {
+        pb_1.Message.setField(this, 1, value);
+    }
+    static fromObject(data: {
+        theme?: Theme;
+    }): UpdateThemeMessage {
+        const message = new UpdateThemeMessage({});
+        if (data.theme != null) {
+            message.theme = data.theme;
+        }
+        return message;
+    }
+    toObject() {
+        const data: {
+            theme?: Theme;
+        } = {};
+        if (this.theme != null) {
+            data.theme = this.theme;
+        }
+        return data;
+    }
+    serialize(): Uint8Array;
+    serialize(w: pb_1.BinaryWriter): void;
+    serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+        const writer = w || new pb_1.BinaryWriter();
+        if (this.theme != Theme.unknown)
+            writer.writeEnum(1, this.theme);
+        if (!w)
+            return writer.getResultBuffer();
+    }
+    static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UpdateThemeMessage {
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new UpdateThemeMessage();
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    message.theme = reader.readEnum();
+                    break;
+                default: reader.skipField();
+            }
+        }
+        return message;
+    }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): UpdateThemeMessage {
+        return UpdateThemeMessage.deserialize(bytes);
     }
 }

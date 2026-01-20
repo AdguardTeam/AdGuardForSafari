@@ -233,9 +233,12 @@ final class SciterCallbackServiceImpl: RestartableServiceBase, SciterCallbackSer
     }
 
     @objc func onEffectiveThemeChanged(notification: Notification) {
-        self.runAsyncIfStarted { [weak self] in
-            self?.trayCallbacks.onEffectiveThemeChanged(.current)
-            self?.settingsCallbacks.onEffectiveThemeChanged(.current)
+        if let incomingTheme: Theme = self.eventBus.parseNotification(notification) {
+            self.runAsyncIfStarted { [weak self] in
+                let theme = EffectiveThemeValue.resolve(incomingTheme)
+                self?.trayCallbacks.onEffectiveThemeChanged(theme)
+                self?.settingsCallbacks.onEffectiveThemeChanged(theme)
+            }
         }
     }
 

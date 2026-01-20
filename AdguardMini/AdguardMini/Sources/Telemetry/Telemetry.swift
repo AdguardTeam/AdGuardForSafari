@@ -180,7 +180,11 @@ extension Telemetry {
 
         @MainActor
         private func getTheme() async -> AML.Telemetry.Theme {
-            UIUtils.isDarkMode() ? .systemDark : .systemLight
+            switch await self.settings.theme {
+            case .system: UIUtils.isDarkMode() ? .systemDark : .systemLight
+            case .light:  .light
+            case .dark:   .dark
+            }
         }
 
         private func getRetentionCohort() -> AML.Telemetry.RetentionCohort {

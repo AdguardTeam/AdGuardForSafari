@@ -15,4 +15,5 @@ import AML
 protocol SafariPopupApi: AnyObject {
     func appStateChanged(_ appState: EBAAppState)
     func setLogLevel(_ logLevel: LogLevel)
+    func setTheme(_ theme: Theme)
 }
