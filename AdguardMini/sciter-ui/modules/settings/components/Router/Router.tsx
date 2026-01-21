@@ -20,6 +20,7 @@ import { Support } from '../Support';
 import { SupportContact } from '../SupportContact';
 import { UserRule } from '../UserRule';
 import { UserRules } from '../UserRules';
+import { Theme } from '../Theme';
 
 /**
  * Component for handling Routes. Depending on RouterStore display current page
@@ -53,6 +54,8 @@ function RouterComponent() {
             return <About />;
         case RouteName.quit_reaction:
             return <QuitReaction />;
+        case RouteName.theme:
+            return <Theme />;
     }
 }
 

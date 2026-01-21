@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { QuitReaction } from 'Apis/types';
+import { QuitReaction, Theme } from 'Apis/types';
 import { ContactSupportLink } from 'Modules/settings/components/ContactSupportLink';
 
 import type { ContactSupportLinkProps } from 'Modules/settings/components/ContactSupportLink';
@@ -20,6 +20,22 @@ export const quitReactionText = (val: QuitReaction) => {
             return translate('settings.hardware.quit.reaction.quit');
         case QuitReaction.keepRunning:
             return translate('settings.hardware.quit.reaction.background');
+    }
+};
+
+/**
+ * Translations for themes
+ * @param val - Theme enum
+ * @returns translated label
+ */
+export const themeText = (val: Theme) => {
+    switch (val) {
+        case Theme.system:
+            return translate('settings.theme.system');
+        case Theme.light:
+            return translate('settings.theme.light');
+        case Theme.dark:
+            return translate('settings.theme.dark');
     }
 };
 

@@ -21,6 +21,7 @@ export enum RouteName {
     contact_support = 'contact_support',
     about = 'about',
     quit_reaction = 'quit_reaction',
+    theme = 'theme',
 }
 
 /**

@@ -18,10 +18,11 @@ import {
     ImportSettingsConfirmation,
     ReleaseVariants,
     StringValue,
+    UpdateThemeMessage,
 } from 'Apis/types';
 import { updateLanguage } from 'Intl';
 
-import type { ImportMode, QuitReaction, SafariExtensionUpdate, SafariExtension } from 'Apis/types';
+import type { ImportMode, QuitReaction, SafariExtensionUpdate, SafariExtension, Theme } from 'Apis/types';
 import type { SettingsStore } from 'SettingsStore';
 
 /**
@@ -317,6 +318,16 @@ export class Settings {
         const newValue = this.updateHelper();
         newValue.quitReaction = data;
         window.API.settingsService.UpdateQuitReaction(new UpdateQuitReactionMessage({ reaction: data }));
+        this.commitSettings(newValue);
+    }
+
+    /**
+     * Update theme
+     */
+    public updateTheme(data: Theme) {
+        const newValue = this.updateHelper();
+        newValue.theme = data;
+        window.API.settingsService.UpdateTheme(new UpdateThemeMessage({ theme: data }));
         this.commitSettings(newValue);
     }
 

@@ -9,7 +9,7 @@ import { ImportMode, OptionalStringValue, Path } from 'Apis/types';
 import { selectFile } from 'Common/utils/selectFile';
 import { getCountableEntityStatuses } from 'Common/utils/utils';
 import { usePayedFuncsTitle, useSettingsStore } from 'SettingsLib/hooks';
-import { quitReactionText, getNotificationSettingsImportFailedText, getNotificationSomethingWentWrongText } from 'SettingsLib/utils/translate';
+import { quitReactionText, getNotificationSettingsImportFailedText, getNotificationSomethingWentWrongText, themeText } from 'SettingsLib/utils/translate';
 import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, NotificationsQueueVariant, RouteName, SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
 import {
@@ -54,6 +54,7 @@ export function SettingsComponent() {
             debugLogging,
             allowTelemetry,
             quitReaction,
+            theme: themeSetting,
         },
         userActionLastDirectory,
         incomeHardwareAcceleration,
@@ -331,6 +332,11 @@ export function SettingsComponent() {
                 value={hardwareAcceleration}
                 setValue={() => setShowHardwareModal(true)}
             /> */}
+            <SettingsItemLink
+                description={themeText(themeSetting)}
+                internalLink={RouteName.theme}
+                title={translate('settings.theme')}
+            />
             <SettingsItemLink
                 description={quitReactionText(quitReaction)}
                 internalLink={RouteName.quit_reaction}

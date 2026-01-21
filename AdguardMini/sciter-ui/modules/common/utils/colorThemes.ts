@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { EffectiveTheme } from 'Apis/types';
+import { EffectiveTheme, Theme } from 'Apis/types';
 
 export enum SUPPORTED_COLOR_THEMES {
     dark = 'dark',
@@ -16,7 +16,8 @@ export type OnColorThemeChanged = (colorTheme: ColorTheme) => void;
 export type UseColorTheme = (onThemeChanged: OnColorThemeChanged) => void;
 
 /**
- * Color types coercion
+ * Get supported color theme from effective color theme
+ * @param colorTheme Effective color theme
  */
 export function getColorTheme(colorTheme: EffectiveTheme): ColorTheme {
     switch (colorTheme) {
@@ -24,6 +25,18 @@ export function getColorTheme(colorTheme: EffectiveTheme): ColorTheme {
         case EffectiveTheme.light: return SUPPORTED_COLOR_THEMES.light;
 
         default: return SUPPORTED_COLOR_THEMES.light;
+    }
+}
+
+/**
+ * Get effective color theme from settings
+ * @param colorTheme Color theme from settings
+ */
+export function getEffectiveTheme(colorTheme: Theme): EffectiveTheme {
+    switch (colorTheme) {
+        case Theme.dark: return EffectiveTheme.dark;
+
+        default: return EffectiveTheme.light;
     }
 }
 

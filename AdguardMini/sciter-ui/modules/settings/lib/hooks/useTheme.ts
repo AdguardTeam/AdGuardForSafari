@@ -5,9 +5,9 @@
 import { useLayoutEffect } from 'preact/hooks';
 
 import { useSettingsStore } from 'SettingsLib/hooks';
-import { getColorTheme } from 'Utils/colorThemes';
+import { getColorTheme, getEffectiveTheme } from 'Utils/colorThemes';
 
-import type { EffectiveTheme } from 'Apis/types';
+import { Theme, type EffectiveTheme } from 'Apis/types';
 import type { OnColorThemeChanged } from 'Utils/colorThemes';
 
 /**
@@ -15,17 +15,21 @@ import type { OnColorThemeChanged } from 'Utils/colorThemes';
  */
 export function useTheme(onThemeChanged: OnColorThemeChanged) {
     const settingsStore = useSettingsStore();
-    const { settingsWindowEffectiveThemeChanged } = settingsStore;
+    const { settingsWindowEffectiveThemeChanged, settings: { settings: { theme } } } = settingsStore;
 
     useLayoutEffect(() => {
-        // Get effective theme on mount
-        (async () => {
-            const value = await settingsStore.getEffectiveTheme();
-            onThemeChanged(getColorTheme(value));
-        })();
+        if (theme === Theme.system) {
+            (async () => {
+                const value = await settingsStore.getEffectiveTheme();
+                onThemeChanged(getColorTheme(value));
+            })();
 
-        return settingsWindowEffectiveThemeChanged.addEventListener((value: EffectiveTheme) => {
-            onThemeChanged(getColorTheme(value));
-        });
-    }, []);
+            return settingsWindowEffectiveThemeChanged.addEventListener((value: EffectiveTheme) => {
+                onThemeChanged(getColorTheme(value));
+            });
+        }
+
+        const value = getEffectiveTheme(theme);
+        onThemeChanged(getColorTheme(value));
+    }, [theme]);
 }
