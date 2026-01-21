@@ -19,6 +19,7 @@ import { LicenseStatusActionType, useLicenseStatusActionType } from './LicenseSt
 import { ResetLicenseModal } from './ResetLicenseModal';
 
 import type { ContextMenuProps } from '../ContextMenu';
+import type { LicenseRouterParams } from 'SettingsStore/modules';
 
 /**
  * Title component with context actions for License screen
@@ -27,7 +28,10 @@ function LicenseTitleComponent() {
     const {
         account,
         notification,
+        router,
     } = useSettingsStore();
+
+    const showAlreadyPurchasedFlow = router.castParams<LicenseRouterParams>()?.alreadyPurchased;
 
     const failedToRefreshLicenseNotificationUidRef = useRef<Nullable<string>>(null);
 
@@ -35,7 +39,7 @@ function LicenseTitleComponent() {
         isFreeware, isLicenseBlocked, isLicenseBlockedAppId, isAppStoreSubscription, license: { license },
     } = account;
 
-    const [showAlreadyPurchasedFlowModal, setShowAlreadyPurchasedFlowModal] = useState(false);
+    const [showAlreadyPurchasedFlowModal, setShowAlreadyPurchasedFlowModal] = useState(!!showAlreadyPurchasedFlow);
     const [showResetLicenseModal, setShowResetLicenseModal] = useState(false);
 
     const elements: ContextMenuProps['elements'] = [];

@@ -132,6 +132,16 @@ declare type SciterWindow = {
     minSize: [number, number];
 
     /**
+     * Window is resizable
+     */
+    isResizable: boolean;
+
+    /**
+     * Window is maximizable
+     */
+    isMaximizable: boolean;
+
+    /**
      * Window box
      */
     box(boxPart: BoxPart, boxOf?: BoxOf, relTo?: RelTo, asPPX?: boolean): number | number[];

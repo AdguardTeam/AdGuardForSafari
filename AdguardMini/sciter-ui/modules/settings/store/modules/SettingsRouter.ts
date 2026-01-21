@@ -21,6 +21,7 @@ export enum RouteName {
     contact_support = 'contact_support',
     about = 'about',
     quit_reaction = 'quit_reaction',
+    migration = 'migration',
     theme = 'theme',
 }
 
@@ -28,6 +29,13 @@ export enum RouteName {
  * Settings router store type
  */
 export type SettingsRouterStore = RouterStore<RouteName>;
+
+/**
+ * License router params type
+ */
+export type LicenseRouterParams = {
+    alreadyPurchased?: boolean;
+};
 
 /**
  * Creates and returns a settings router store

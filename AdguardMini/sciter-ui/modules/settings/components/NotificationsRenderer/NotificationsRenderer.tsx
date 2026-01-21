@@ -5,7 +5,8 @@
 import { cx } from 'classix';
 import { observer } from 'mobx-react-lite';
 
-import { useSettingsStore } from 'Modules/settings/lib/hooks';
+import { useSettingsStore } from 'SettingsLib/hooks';
+import { RouteName } from 'SettingsStore/modules';
 import { Button } from 'UILib';
 
 import { NotificationContentWrapper } from './NotificationContentWrapper';
@@ -19,13 +20,14 @@ import s from './NotificationsRenderer.module.pcss';
 function NotificationsRendererComponent() {
     const {
         notification,
+        router,
     } = useSettingsStore();
 
     const onClose = (id: string) => {
         notification.closeNotify(id);
     };
 
-    if (notification.queueLength === 0) {
+    if (notification.queueLength === 0 || router.currentPath === RouteName.migration) {
         return null;
     }
 

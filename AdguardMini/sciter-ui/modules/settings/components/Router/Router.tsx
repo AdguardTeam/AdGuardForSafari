@@ -6,12 +6,16 @@ import { observer } from 'mobx-react-lite';
 
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { RouteName } from 'SettingsStore/modules';
+import { Layout } from 'UILib';
 
 import { About } from '../About';
 import { AdvancedBlocking } from '../AdvancedBlocking';
+import { ConvertingStatus } from '../ConvertingStatus/ConvertingStatus';
 import { Filters } from '../Filters';
 import { LanguageSpecific } from '../LanguageSpecific';
 import { License } from '../License';
+import { Menu } from '../Menu';
+import { Migration } from '../Migration';
 import { QuitReaction } from '../QuitReaction';
 import { SafariExtension } from '../SafariExtension';
 import { SafariProtection } from '../SafariProtection';
@@ -22,41 +26,72 @@ import { UserRule } from '../UserRule';
 import { UserRules } from '../UserRules';
 import { Theme } from '../Theme';
 
+import s from './Router.module.pcss';
+
 /**
  * Component for handling Routes. Depending on RouterStore display current page
  */
 function RouterComponent() {
     const { router } = useSettingsStore();
+    let component = null;
     switch (router.currentPath) {
         case RouteName.safari_protection:
-            return <SafariProtection />;
+            component = <SafariProtection />;
+            break;
         case RouteName.language_specific:
-            return <LanguageSpecific />;
+            component = <LanguageSpecific />;
+            break;
         case RouteName.advanced_blocking:
-            return <AdvancedBlocking />;
+            component = <AdvancedBlocking />;
+            break;
         case RouteName.user_rules:
-            return <UserRules />;
+            component = <UserRules />;
+            break;
         case RouteName.user_rule:
-            return <UserRule />;
+            component = <UserRule />;
+            break;
         case RouteName.settings:
-            return <Settings />;
+            component = <Settings />;
+            break;
         case RouteName.safari_extensions:
-            return <SafariExtension />;
+            component = <SafariExtension />;
+            break;
         case RouteName.filters:
-            return <Filters />;
+            component = <Filters />;
+            break;
         case RouteName.license:
-            return <License />;
+            component = <License />;
+            break;
         case RouteName.support:
-            return <Support />;
+            component = <Support />;
+            break;
         case RouteName.contact_support:
-            return <SupportContact />;
+            component = <SupportContact />;
+            break;
         case RouteName.about:
-            return <About />;
+            component = <About />;
+            break;
         case RouteName.quit_reaction:
-            return <QuitReaction />;
+            component = <QuitReaction />;
+            break;
         case RouteName.theme:
-            return <Theme />;
+            component = <Theme />;
+            break;
     }
+
+    if (router.currentPath === RouteName.migration) {
+        return <Migration />;
+    }
+
+    return (
+        <Layout type="settings">
+            <Menu />
+            <div className={s.Router_container}>
+                <ConvertingStatus />
+                {component}
+            </div>
+        </Layout>
+    );
 }
 
 export const Router = observer(RouterComponent);

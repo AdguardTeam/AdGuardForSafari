@@ -47,6 +47,7 @@ final class SciterAppsControllerImpl: SciterAppsController {
     private let sciterCallbackService: SciterCallbackService
     private let sciterOnboardingCallbackService: SciterOnboardingCallbackService
     private let protectionService: ProtectionService
+    private let eventBus: EventBus
 
     private let workQueue = DispatchQueue(
         label: "\(SciterAppsControllerImpl.self)-\(UUID().uuidString)",
@@ -60,12 +61,14 @@ final class SciterAppsControllerImpl: SciterAppsController {
         sciterAppLocator: SciterAppLocator,
         sciterCallbackService: SciterCallbackService,
         sciterOnboardingCallbackService: SciterOnboardingCallbackService,
-        protectionService: ProtectionService
+        protectionService: ProtectionService,
+        eventBus: EventBus
     ) {
         self.sciterAppLocator = sciterAppLocator
         self.sciterCallbackService = sciterCallbackService
         self.sciterOnboardingCallbackService = sciterOnboardingCallbackService
         self.protectionService = protectionService
+        self.eventBus = eventBus
     }
 
     func configureAndLoadSciter(hardwareAcceleration: Bool) {
@@ -128,6 +131,7 @@ final class SciterAppsControllerImpl: SciterAppsController {
             await self.protectionService.startIfEnabled()
             if self.openSettingsOnStart || openSettings {
                 self.openSettingsOnStart = false
+                self.eventBus.post(event: .settingsPageRequested, userInfo: "migration")
                 await self.settings.showWindow()
             }
             LogInfo("Main Sciter app started")

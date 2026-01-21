@@ -12,7 +12,7 @@ import type { ComponentChildren, Ref } from 'preact';
 import type { NavigationHeaderProps } from 'UILib';
 
 export type LayoutProps = {
-    type: 'settings' | 'settingsMenu' | 'settingsPage';
+    type: 'settings' | 'settingsMenu' | 'settingsPage' | 'migration';
     children: ComponentChildren;
     className?: string;
     navigation?: NavigationHeaderProps;

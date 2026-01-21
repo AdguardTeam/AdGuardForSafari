@@ -1,0 +1,42 @@
+/* 
+    SPDX-FileCopyrightText: AdGuard Software Limited
+    SPDX-License-Identifier: GPL-3.0-or-later
+*/
+
+.Migration {
+    &_container {
+        flow: horizontal;
+        padding: 134px 50px;
+        vertical-align: center;
+
+        &_text {
+            width: 400px;
+            padding: var(--m-xxxl) var(--m-s) 0;
+        }
+
+        &__title {
+            margin-bottom: var(--m-xs);
+        }
+
+        &__description {
+            margin-bottom: var(--m-m);
+        }
+
+        &_image {
+            width: 300px;
+            height: 255px;
+        }
+    }
+
+    &_buttons {
+        flow: horizontal;
+        vertical-align: center;
+        padding: 22px 74px 0;
+        height: 78px;
+
+        > button {
+            margin: 0 var(--m-l);
+            width: 246px;
+        }
+    }
+}

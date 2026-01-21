@@ -13,19 +13,15 @@ import {
     NotificationsQueueType,
     NotificationsQueueVariant,
 } from 'SettingsStore/modules/NotificationsQueue';
-import { Layout } from 'UILib';
 
 import { ActivationFlowStatusController } from '../ActivationFlow';
-import { ConvertingStatus } from '../ConvertingStatus/ConvertingStatus';
 import { ErrorBoundary } from '../ErrorBoundary';
-import { Menu } from '../Menu';
 import { MigrationFiltersConsentController } from '../MigrationFiltersConsentController';
 import { NotificationsRenderer } from '../NotificationsRenderer';
 import { PaywallController } from '../Paywall';
 import { Router } from '../Router';
 import { Tooltip } from '../Tooltip';
 
-import s from './App.module.pcss';
 import './App.pcss';
 import {
     useShowEnableExtensionsNotification,
@@ -91,13 +87,7 @@ function AppComponent() {
                 <PaywallController />
                 <MigrationFiltersConsentController />
                 <ActivationFlowStatusController />
-                <Layout type="settings">
-                    <Menu />
-                    <div className={s.App_container}>
-                        <ConvertingStatus />
-                        <Router />
-                    </div>
-                </Layout>
+                <Router />
                 {createPortal(<NotificationsRenderer />, notifyContainer)}
                 {createPortal(<Tooltip />, tooltipContainer)}
             </ErrorBoundary>
