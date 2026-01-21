@@ -24,8 +24,13 @@ final class SettingsApp: SciterApp,
                          FiltersCallbackServiceDependent,
                          TelemetrySciterServiceDependent,
                          UserRulesCallbackServiceDependent {
-    override init(windowRect: CGRect, archivePath: String, hideOnLoosingFocus: Bool) {
-        super.init(windowRect: windowRect, archivePath: archivePath, hideOnLoosingFocus: hideOnLoosingFocus)
+    override init(windowRect: CGRect, archivePath: String, hideOnLoosingFocus: Bool, enableFrameAutosave: Bool) {
+        super.init(
+            windowRect: windowRect,
+            archivePath: archivePath,
+            hideOnLoosingFocus: hideOnLoosingFocus,
+            enableFrameAutosave: enableFrameAutosave
+        )
         LogInfo("Initialized - rect: \(windowRect)")
     }
 

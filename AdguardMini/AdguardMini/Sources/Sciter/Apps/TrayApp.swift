@@ -64,12 +64,14 @@ final class TrayApp: SciterApp, TrayChangesDelegate, StatusBarItemControllerDele
     override init(
         windowRect: CGRect,
         archivePath: String,
-        hideOnLoosingFocus: Bool
+        hideOnLoosingFocus: Bool,
+        enableFrameAutosave: Bool
     ) {
         super.init(
             windowRect: windowRect,
             archivePath: archivePath,
-            hideOnLoosingFocus: hideOnLoosingFocus
+            hideOnLoosingFocus: hideOnLoosingFocus,
+            enableFrameAutosave: enableFrameAutosave
         )
 
         self.setupServices()

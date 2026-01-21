@@ -22,7 +22,8 @@ class SciterApp: SciterWindowControllerImpl, SciterServiceDependent {
     init(
         windowRect: CGRect,
         archivePath: String,
-        hideOnLoosingFocus: Bool
+        hideOnLoosingFocus: Bool,
+        enableFrameAutosave: Bool
     ) {
         let sciterApp = SciterSwift.App()
         self.app = sciterApp
@@ -38,6 +39,15 @@ class SciterApp: SciterWindowControllerImpl, SciterServiceDependent {
 
         self.app.start()
         LogInfo("[\(type(of: self))] Started - rect: \(windowRect)")
+
+        // IMPORTANT: setFrameAutosaveName must be called AFTER self.app.start()
+        // Because start() performs frame manipulations that would interfere with autosave
+        guard enableFrameAutosave,
+              let window = self.nsWindow else { return }
+        let autosaveName = Self.className()
+        if !window.setFrameAutosaveName(autosaveName) {
+            LogWarn("Can't set frame autosave name: \(autosaveName)")
+        }
     }
 
     deinit {

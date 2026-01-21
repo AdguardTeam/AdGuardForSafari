@@ -108,7 +108,8 @@ final class SciterAppLocator {
         let app = OnboardingApp(
             windowRect: Constants.onboardingWindowRect,
             archivePath: Constants.onboardingArchivePath,
-            hideOnLoosingFocus: false
+            hideOnLoosingFocus: false,
+            enableFrameAutosave: false
         )
         self._onboardingApp = app
         return app
@@ -119,7 +120,8 @@ final class SciterAppLocator {
         let app = TrayApp(
             windowRect: Constants.trayWindowRect,
             archivePath: Constants.trayArchivePath,
-            hideOnLoosingFocus: true
+            hideOnLoosingFocus: true,
+            enableFrameAutosave: false
         )
         self._trayApp = app
         return app
@@ -130,7 +132,8 @@ final class SciterAppLocator {
         let app = SettingsApp(
             windowRect: Constants.settingsWindowRect,
             archivePath: Constants.settingsArchivePath,
-            hideOnLoosingFocus: false
+            hideOnLoosingFocus: false,
+            enableFrameAutosave: true
         )
         self._settingsApp = app
         return app
