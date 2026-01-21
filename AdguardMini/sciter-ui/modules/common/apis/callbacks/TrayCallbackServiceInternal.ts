@@ -2,6 +2,7 @@
 import { store } from 'TrayStore';
 import { ITrayCallbackServiceInternal } from './TrayCallbackService';
 import { BoolValue, EmptyValue, FiltersStatus, SafariExtensionUpdate, LicenseOrError, EffectiveThemeValue } from '../types'
+import { TrayRoute } from 'TrayStore/modules/TrayRouter';
 
 /* Service handles settings lists  */
 export class TrayCallbackServiceInternal implements ITrayCallbackServiceInternal {
@@ -9,6 +10,8 @@ export class TrayCallbackServiceInternal implements ITrayCallbackServiceInternal
         // Idk how it works, i will remain it as it is
         if (param.value) {
             store.settings.getSettings();
+        } else {
+            store.router.changePath(TrayRoute.home);
         }
 
         store.settings.getAdvancedBlocking();
