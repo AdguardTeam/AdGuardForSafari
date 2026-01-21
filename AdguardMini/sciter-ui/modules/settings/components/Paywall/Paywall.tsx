@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import { observer } from 'mobx-react-lite';
-import { useEffect, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 
 import { getTdsLink, TDS_PARAMS } from 'Common/utils/links';
 import { RouteName } from 'Modules/settings/store/modules';
@@ -54,21 +54,6 @@ function PaywallComponent() {
     const [showAlreadyPurchasedFlowModal, setShowAlreadyPurchasedFlowModal] = useState(false);
     const [showTermsAndConditionsModal, setShowTermsAndConditionsModal] = useState(false);
 
-    const { width, height } = document.body.getBoundingClientRect();
-    const [size, setSize] = useState<[number, number]>([width, height]);
-
-    useEffect(() => {
-        const handler = () => {
-            const { width: newWidth, height: newHeight } = document.body.getBoundingClientRect();
-            setSize([newWidth, newHeight]);
-        };
-
-        document.body.addEventListener('sizechange', handler);
-        return () => {
-            document.body.removeEventListener('sizechange', handler);
-        };
-    }, []);
-
     const getBackgroundImageClassName = () => {
         if (isMASReleaseVariant) {
             return s.Paywall_bg__defaultImage;
@@ -101,8 +86,6 @@ function PaywallComponent() {
         return translate('settings.paywall.title');
     };
 
-    const minSized = size[0] === MIN_WIDTH && size[1] === MIN_HEIGHT;
-
     const isRightSide = (isTrialExpired || isLicenseExpired) && !isMASReleaseVariant;
 
     const offer = appStoreSubscriptions?.result?.promoInfo;
@@ -113,7 +96,7 @@ function PaywallComponent() {
 
     return (
         <div className={s.Paywall}>
-            <div className={cx(s.Paywall_bg, getBackgroundImageClassName(), minSized && s.Paywall_bg__minSized)}>
+            <div className={cx(s.Paywall_bg, getBackgroundImageClassName())}>
                 <Icon
                     className={s.Paywall_cross}
                     icon="cross"
