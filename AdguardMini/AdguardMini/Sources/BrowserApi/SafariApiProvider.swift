@@ -57,6 +57,10 @@ final class SafariApiProvider: NSObject {
     private let eventBus: EventBus
     private let keychain: KeychainManager
 
+    #if MAS
+    private let appStoreRateUs: AppStoreRateUs?
+    #endif
+
     // MARK: Init
 
     init(
@@ -69,7 +73,8 @@ final class SafariApiProvider: NSObject {
         userSettingsService: UserSettingsService,
         telemetry: Telemetry.Service,
         keychain: KeychainManager,
-        eventBus: EventBus
+        eventBus: EventBus,
+        appStoreRateUs: AppStoreRateUs?
     ) {
         self.proxyStorage = proxyStorage
         self.supportService = supportService
@@ -81,6 +86,10 @@ final class SafariApiProvider: NSObject {
         self.telemetry = telemetry
         self.keychain = keychain
         self.eventBus = eventBus
+
+        #if MAS
+        self.appStoreRateUs = appStoreRateUs
+        #endif
     }
 
     // MARK: Deinit
@@ -299,5 +308,12 @@ extension SafariApiProvider: MainAppApi {
             await self.telemetry.sendEvent(.customEvent(.init(name: action, refName: screenName)))
             reply(nil)
         }
+    }
+
+    func notifyWindowOpened(reply: @escaping (Error?) -> Void) {
+        #if MAS
+        self.appStoreRateUs?.onWindowOpened()
+        #endif
+        reply(nil)
     }
 }

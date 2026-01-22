@@ -12,31 +12,10 @@ import StoreKit
 import SwiftUI
 import AML
 
-// MARK: - Constants
-
-private enum Constants {
-    /// 72 hours (or from devConfig)
-    static let requiredDuration: TimeInterval = {
-        if let seconds = DeveloperConfigUtils[.rateUsRequiredDuration] as? Int {
-            return TimeInterval(seconds)
-        }
-        return 72.hours
-    }()
-
-    /// 1 hour (or from devConfig)
-    static let checkInterval: TimeInterval = {
-        if let seconds = DeveloperConfigUtils[.rateUsCheckInterval] as? Int {
-            return TimeInterval(seconds)
-        }
-        return 1.hour
-    }()
-}
-
 // MARK: - AppStoreRateUs
 
 protocol AppStoreRateUs {
-    func startMonitoring()
-    func stopMonitoring()
+    func onWindowOpened()
 }
 
 // MARK: - ReviewRequester
@@ -77,72 +56,57 @@ private final class ReviewRequester {
 
 final class AppStoreRateUsImpl: AppStoreRateUs {
     private let appMetadata: AppMetadata
-    private var timer: DispatchSourceTimer?
+    private var debounceTask: Task<Void, Never>?
+    private let debounceDelay: TimeInterval = 1.5
 
     init(appMetadata: AppMetadata) {
         self.appMetadata = appMetadata
     }
 
-    deinit {
-        self.stopMonitoring()
-    }
-
-    func startMonitoring() {
-        self.stopMonitoring()
-
-        LogInfo("Start monitoring rate us")
-
-        let timer = DispatchSource.makeTimerSource(queue: .main)
-        timer.schedule(deadline: .now(), repeating: Constants.checkInterval)
-        timer.setEventHandler { [weak self] in
-            self?.checkAndRequestReviewIfNeeded()
-        }
-
-        self.timer = timer
-        timer.resume()
-    }
-
-    func stopMonitoring() {
-        LogInfo("Stop monitoring rate us")
-        self.timer?.cancel()
-        self.timer = nil
-    }
-
-    private func checkAndRequestReviewIfNeeded() {
-        guard let protectionEnabledDate = self.appMetadata.rateUsProtectionEnabledDate,
-              let noCrashesDate = self.appMetadata.rateUsNoCrashesDate
-        else {
-            let missing = [
-                self.appMetadata.rateUsProtectionEnabledDate == nil ? "protectionEnabledDate" : nil,
-                self.appMetadata.rateUsNoCrashesDate == nil ? "noCrashesDate" : nil
-            ].compactMap { $0 }.joined(separator: ", ")
-            LogDebug("Rate us check skipped: missing \(missing)")
+    func onWindowOpened() {
+        guard self.canShowRateUs() else {
             return
         }
 
-        let now = Date.now
-        let protectionDuration = now.timeIntervalSince(protectionEnabledDate)
-        let noCrashesDuration = now.timeIntervalSince(noCrashesDate)
+        self.debounceTask?.cancel()
+        self.debounceTask = Task {
+            try? await Task.sleep(seconds: self.debounceDelay)
 
-        guard protectionDuration >= Constants.requiredDuration,
-              noCrashesDuration >= Constants.requiredDuration
-        else {
-            LogDebug("Conditions not met yet. Protection: \(protectionDuration.fullHours)h, No crashes: \(noCrashesDuration.fullHours)h")
-            return
+            guard !Task.isCancelled else {
+                LogDebug("Rate us request cancelled by debouncer")
+                return
+            }
+
+            await self.callRateUs()
+            self.advanceToNextStage()
+        }
+    }
+
+    private func canShowRateUs() -> Bool {
+        guard let noCrashesDate = appMetadata.rateUsNoCrashesDate else {
+            LogDebug("Rate us check skipped: missing noCrashesDate")
+            return false
         }
 
-        LogInfo("Conditions met! Protection: \(protectionDuration.fullHours)h, No crashes: \(noCrashesDuration.fullHours)h")
+        let currentStage = self.appMetadata.rateUsStage
+        let elapsed = Date.now.timeIntervalSince(noCrashesDate)
 
-        self.stopMonitoring()
+        let canShow = elapsed >= currentStage.interval
 
-        Task { @MainActor in
-            self.callRateUs()
+        if canShow {
+            LogInfo("Rate us conditions met: stage=\(currentStage), elapsed=\(elapsed.fullHours)h")
+        } else {
+            LogDebug("Rate us conditions not met: stage=\(currentStage), elapsed=\(elapsed.fullHours)h, required=\(currentStage.interval.fullHours)h")
         }
 
-        self.appMetadata.rateUsProtectionEnabledDate = .now
+        return canShow
+    }
+
+    private func advanceToNextStage() {
+        let currentStage = self.appMetadata.rateUsStage
+        self.appMetadata.rateUsStage = currentStage.next
         self.appMetadata.rateUsNoCrashesDate = .now
-
-        self.startMonitoring()
+        LogInfo("Rate us stage advanced: \(currentStage) → \(currentStage.next)")
     }
 
     @MainActor

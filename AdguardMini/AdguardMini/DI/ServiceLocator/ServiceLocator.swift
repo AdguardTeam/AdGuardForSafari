@@ -268,7 +268,14 @@ private final class ServiceLocator {
             userSettingsService: self.userSettingsService,
             telemetry: self.telemetryService,
             keychain: self.coreDIContainer.keychain,
-            eventBus: self.eventBus
+            eventBus: self.eventBus,
+            appStoreRateUs: {
+                #if MAS
+                return self.appStoreRateUs
+                #else
+                return nil
+                #endif
+            }()
         )
     }()
     private lazy var loginItemService: LoginItemService = {

@@ -70,6 +70,6 @@ extension UrlSchemesProcessorDependent {
 }
 
 #if MAS
-protocol AppStoreRateUsDependent:  ServiceDependent { var appStoreRateUs:  AppStoreRateUs! { get set } }
+protocol AppStoreRateUsDependent: ServiceDependent { var appStoreRateUs: AppStoreRateUs! { get set } }
 protocol AppStoreInteractorDependent: ServiceDependent { var appStoreInteractor: AppStoreInteractor! { get set } }
 #endif

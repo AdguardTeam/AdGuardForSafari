@@ -11,19 +11,28 @@ import Foundation
 import AML
 import SciterSchema
 
-final class SettingsApp: SciterApp,
-                         InternalServiceDependent,
-                         SettingsServiceDependent,
-                         AccountServiceDependent,
-                         AdvancedBlockingServiceDependent,
-                         AppInfoServiceDependent,
-                         FiltersServiceDependent,
-                         UserRulesServiceDependent,
-                         SettingsCallbackServiceDependent,
-                         AccountCallbackServiceDependent,
-                         FiltersCallbackServiceDependent,
-                         TelemetrySciterServiceDependent,
-                         UserRulesCallbackServiceDependent {
+extension SettingsApp: InternalServiceDependent,
+                       SettingsServiceDependent,
+                       AccountServiceDependent,
+                       AdvancedBlockingServiceDependent,
+                       AppInfoServiceDependent,
+                       FiltersServiceDependent,
+                       UserRulesServiceDependent,
+                       SettingsCallbackServiceDependent,
+                       AccountCallbackServiceDependent,
+                       FiltersCallbackServiceDependent,
+                       TelemetrySciterServiceDependent,
+                       UserRulesCallbackServiceDependent {}
+
+#if MAS
+extension SettingsApp: AppStoreRateUsDependent {}
+#endif
+
+final class SettingsApp: SciterApp {
+    #if MAS
+    var appStoreRateUs: AppStoreRateUs!
+    #endif
+
     override init(windowRect: CGRect, archivePath: String, hideOnLoosingFocus: Bool, enableFrameAutosave: Bool) {
         super.init(
             windowRect: windowRect,
@@ -32,6 +41,19 @@ final class SettingsApp: SciterApp,
             enableFrameAutosave: enableFrameAutosave
         )
         LogInfo("Initialized - rect: \(windowRect)")
+
+        #if MAS
+        self.setupServices()
+        #endif
+    }
+
+    @MainActor
+    override func showWindow() async {
+        await super.showWindow()
+
+        #if MAS
+        self.appStoreRateUs.onWindowOpened()
+        #endif
     }
 
     func windowDidBecomeMain(_ notification: Notification) {

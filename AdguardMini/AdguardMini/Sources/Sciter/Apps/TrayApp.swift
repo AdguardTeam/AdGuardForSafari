@@ -39,6 +39,10 @@ extension TrayApp: InternalServiceDependent,
                    TelemetrySciterServiceDependent,
                    TrayServiceDependent {}
 
+#if MAS
+extension TrayApp: AppStoreRateUsDependent {}
+#endif
+
 /// App that controls the tray window and its icon.
 final class TrayApp: SciterApp, TrayChangesDelegate, StatusBarItemControllerDelegate {
     // MARK: Dependencies
@@ -46,6 +50,10 @@ final class TrayApp: SciterApp, TrayChangesDelegate, StatusBarItemControllerDele
     var trayIconUpdatesHandler: TrayIconUpdatesHandler!
     var statusBarItemController: StatusBarItemController!
     var userSettingsManager: UserSettingsManager!
+
+    #if MAS
+    var appStoreRateUs: AppStoreRateUs!
+    #endif
 
     // MARK: Public
 
@@ -155,6 +163,10 @@ final class TrayApp: SciterApp, TrayChangesDelegate, StatusBarItemControllerDele
         }
 
         await self.openPanel()
+
+        #if MAS
+        self.appStoreRateUs.onWindowOpened()
+        #endif
 
         Task {
             self.app.callback(TrayCallbackService.self).onTrayWindowVisibilityChange(

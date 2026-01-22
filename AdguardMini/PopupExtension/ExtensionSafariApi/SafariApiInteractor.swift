@@ -37,6 +37,8 @@ protocol SafariApiInteractor {
 
     func telemetryPageViewEvent(_ screen: Telemetry.Screen) async throws
     func telemetryActionEvent(_ action: Telemetry.Action, screen: Telemetry.Screen) async throws
+
+    func notifyWindowOpened() async throws
 }
 
 // MARK: - SafariApiInteractorImpl
@@ -128,6 +130,12 @@ final class SafariApiInteractorImpl: SafariApiInteractor {
                 action: action.rawValue,
                 reply: continuation.callback
             )
+        }
+    }
+
+    func notifyWindowOpened() async throws {
+        try await withCheckedThrowingContinuation { continuation in
+            self.safariApi.notifyWindowOpened(reply: continuation.callback)
         }
     }
 }

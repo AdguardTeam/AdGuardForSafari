@@ -419,6 +419,10 @@ extension PopupView.ViewModel {
         if let screen {
             self.sendTelemetryAsync(.pageView(screen))
         }
+
+        Task {
+            try? await self.safariApi.notifyWindowOpened()
+        }
     }
 }
 

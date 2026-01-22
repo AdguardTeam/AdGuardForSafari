@@ -33,7 +33,7 @@ protocol SciterWindowController: AnyObject {
 // MARK: - SciterWindowController
 
 /// Controller for sciter window.
-class SciterWindowControllerImpl: NSObject, NSWindowDelegate {
+class SciterWindowControllerImpl: NSObject, NSWindowDelegate, SciterWindowController {
     // MARK: Private properties
 
     /// Sciter tray app
@@ -97,11 +97,9 @@ class SciterWindowControllerImpl: NSObject, NSWindowDelegate {
             await self.hideWindow()
         }
     }
-}
 
 // MARK: - SciterWindowController implementation
 
-extension SciterWindowControllerImpl: SciterWindowController {
     var nsWindow: NSWindow? {
         self.sciterApp.nswindow
     }

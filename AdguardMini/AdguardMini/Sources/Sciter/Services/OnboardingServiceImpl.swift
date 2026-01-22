@@ -47,9 +47,6 @@ extension Sciter {
                 self.userSettingsManager.firstRun = false
                 await self.sciterAppController.startMainApp(openSettings: true)
 
-                #if MAS
-                self.appStoreRateUs.startMonitoring()
-                #endif
                 // AG-49474
 //                self.eventBus.post(event: .settingsPageRequested, userInfo: "paywall")
             }

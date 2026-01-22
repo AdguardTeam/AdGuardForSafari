@@ -37,9 +37,11 @@ struct DeveloperConfigUtils {
         case filtersFullUpdatePeriod = "filters_full_update_period"
 
         /// Value is integer number of seconds.
-        case rateUsCheckInterval = "rate_us_check_interval"
+        case rateUsFirstDuration = "rate_us_first_duration"
         /// Value is integer number of seconds.
-        case rateUsRequiredDuration = "rate_us_required_duration"
+        case rateUsSecondDuration = "rate_us_second_duration"
+        /// Value is integer number of seconds.
+        case rateUsThirdDuration = "rate_us_third_duration"
 
         /// Value is string with URL to the backend API host.
         case backendApiUrl = "backend_api_url"

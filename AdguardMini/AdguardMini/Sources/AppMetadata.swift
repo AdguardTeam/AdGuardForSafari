@@ -17,8 +17,8 @@ protocol AppMetadata: AnyObject {
     var wasMigratedFromLegacyApp: Bool { get set }
     var didAttemptLegacyMigration: Bool { get set }
 
-    var rateUsProtectionEnabledDate: Date? { get set }
     var rateUsNoCrashesDate: Date? { get set }
+    var rateUsStage: RateUsStage { get set }
 }
 
 // MARK: - AppMetadataImpl
@@ -33,11 +33,22 @@ final class AppMetadataImpl: AppMetadata {
     @UserDefault(key: .didAttemptLegacyMigration, defaultValue: false)
     var didAttemptLegacyMigration: Bool
 
-    @UserDefault(.rateUsProtectionEnabledDate)
-    var rateUsProtectionEnabledDate: Date?
-
     @UserDefault(.rateUsNoCrashesDate)
     var rateUsNoCrashesDate: Date?
+
+    @UserDefault(key: .rateUsStage, defaultValue: nil)
+    private var rateUsStageRaw: Int?
+    var rateUsStage: RateUsStage {
+        get {
+            if let rawValue = self.rateUsStageRaw {
+                return RateUsStage(rawValue: rawValue) ?? .first
+            }
+            return .first
+        }
+        set {
+            self.rateUsStageRaw = newValue.rawValue
+        }
+    }
 
     init() {
         // Migrate metadata

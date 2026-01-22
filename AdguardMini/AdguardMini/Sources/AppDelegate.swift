@@ -295,10 +295,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             if self.userSettingsManager.firstRun { self.userSettingsManager.firstRun.toggle() }
             await self.sciterAppController.startMainApp(openSettings: self.migrationSuccess)
-
-            #if MAS
-            self.appStoreRateUs.startMonitoring()
-            #endif
         }
         let theme = self.userSettingsManager.theme
         await NSApplication.shared.setTheme(theme)

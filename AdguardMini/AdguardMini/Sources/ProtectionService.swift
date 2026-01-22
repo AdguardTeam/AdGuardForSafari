@@ -47,9 +47,6 @@ final class ProtectionServiceImpl: ProtectionService {
 
     func startIfEnabled() async {
         if self.isProtectionEnabled {
-            if self.appMetadata.rateUsProtectionEnabledDate.isNil {
-                self.appMetadata.rateUsProtectionEnabledDate = .now
-            }
             await self.serviceSupervisor.startAll()
         }
     }
@@ -68,7 +65,5 @@ final class ProtectionServiceImpl: ProtectionService {
             await self.statusBarItemController.updateStatusBarIcon()
         }
         LogInfo("Protection: \(isEnabled ? "enabled" : "disabled")")
-
-        self.appMetadata.rateUsProtectionEnabledDate = isEnabled ? Date.now : nil
     }
 }
