@@ -51,7 +51,6 @@ function NotificationsRendererComponent() {
                                 message={message}
                                 notification={n}
                                 onCloseNotification={() => onClose(uid)}
-                                onMount={n.props.onMount}
                             />
 
                             {closeable && (

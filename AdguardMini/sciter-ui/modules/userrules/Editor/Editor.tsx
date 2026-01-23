@@ -64,7 +64,8 @@ function EditorComponent({
     } = editorStore;
 
     const editorRef = useRef<EditorFromTextArea | null>(null);
-    const lineChangedByEnter = useRef<number | null>(null);
+    const isEmpty = editorStore.editorValue.length === 0;
+    const lineChangedByEnter = useRef<number | null>(isEmpty ? 0 : null);
     const [fallbackValue, setFallbackValue] = useState<string>();
 
     /**

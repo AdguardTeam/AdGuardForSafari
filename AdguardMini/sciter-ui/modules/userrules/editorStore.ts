@@ -5,7 +5,6 @@
 import { makeAutoObservable } from 'mobx';
 
 import { updateLanguage } from 'Intl';
-import { UserRulesTelemetry } from './UserRulesTelemetry';
 
 /**
  * Store for the User rules editor
@@ -23,11 +22,6 @@ class EditorStore {
     private $isDirty = false;
 
     private $language = 'en';
-
-    /**
-     * Telemetry instance for the User rules editor
-     */
-    public readonly telemetry: UserRulesTelemetry = new UserRulesTelemetry();
 
     /**
      * Returns the current language of the editor.

@@ -28,7 +28,7 @@ function AnnoyancesComponent() {
     function handleBlockAnnoyances() {
         if (annoyanceHasBeenAccepted) {
             finishLottie(async () => steps.shouldBlockAnnoyances(true));
-            telemetry.layersRelay.trackEvent(OnboardingEvents.BlockTrackersYesClick);
+            telemetry.layersRelay.trackEvent(OnboardingEvents.BlockAnnoyancesYesClick);
         } else {
             setShowConsentModal(true);
         }

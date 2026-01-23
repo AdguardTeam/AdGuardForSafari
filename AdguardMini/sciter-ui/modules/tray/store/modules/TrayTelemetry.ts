@@ -48,5 +48,5 @@ export type TrayTelemetry = Telemetry<TrayPage, TrayEvent, TrayLayer>;
  * Creates and returns a new TrayTelemetry instance
  */
 export function trayTelemetryFactory(): TrayTelemetry {
-    return new Telemetry<TrayPage, TrayEvent, TrayLayer>();
+    return new Telemetry<TrayPage, TrayEvent, TrayLayer>(TrayPage.TrayMenu);
 }

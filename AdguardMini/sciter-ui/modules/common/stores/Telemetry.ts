@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { CustomTelemetryEvent, PageView, TelemetryEvent } from "../apis/types/Telemetry";
+import { CustomTelemetryEvent, PageView, TelemetryEvent } from '../apis/types/Telemetry';
 
 /**
  * Telemetry relay for tracking pages and events
@@ -12,12 +12,19 @@ export class TelemetryRelay<Pages extends string, Events extends string> {
     /**
      * Current telemetry page
      */
-    private currentPage: Pages | 'unknown' = 'unknown';
+    private currentPage: Pages | 'unknown';
 
     /**
      * Previous telemetry page
      */
     private previousPage: Pages | 'unknown' = 'unknown';
+
+    /**
+     * We pass initial page to track first page view
+     */
+    constructor(initialPage?: Pages | 'unknown') {
+        this.currentPage = initialPage || 'unknown';
+    }
 
     /**
      * Sets the current page for telemetry tracking
@@ -64,7 +71,7 @@ export class TelemetryRelay<Pages extends string, Events extends string> {
 export default class Telemetry<
     Pages extends string,
     Events extends string,
-    Layers extends string
+    Layers extends string,
 > extends TelemetryRelay<Pages, Events> {
     /**
      * Relay for layered pages (ex.: modal dialogs, overlays)

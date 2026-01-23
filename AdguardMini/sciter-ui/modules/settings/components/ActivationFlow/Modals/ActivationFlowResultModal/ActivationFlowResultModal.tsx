@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { provideTrialDaysParam } from 'Common/utils/translate';
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { provideContactSupportParam } from 'SettingsLib/utils/translate';
-import { ActivationFlowResult } from 'SettingsStore/modules';
+import { ActivationFlowResult, SettingsEvent, SettingsLayer } from 'SettingsStore/modules';
 import theme from 'Theme';
 import { Modal, Text } from 'UILib';
 
@@ -15,6 +15,7 @@ import s from './ActivationFlowResultModal.module.pcss';
 import { SuccessImage, FailureImage } from './Images';
 
 import type { ModalProps } from 'UILib';
+import { useEffect } from 'preact/hooks';
 
 type ActivationFlowResultModalProps = {
     activationResult: ActivationFlowResult;
@@ -26,7 +27,7 @@ type ActivationFlowResultModalProps = {
 function ActivationFlowResultModalComponent({
     activationResult,
 }: ActivationFlowResultModalProps) {
-    const { account } = useSettingsStore();
+    const { account, telemetry } = useSettingsStore();
     const { trialAvailableDays } = account;
 
     const handleModalClose = () => {
@@ -41,6 +42,15 @@ function ActivationFlowResultModalComponent({
 
         account.resetActivationFlowStatus();
     };
+
+    useEffect(() => {
+        if (activationResult === ActivationFlowResult.licenseFailure) {
+            telemetry.layersRelay.setPage(SettingsLayer.FailedActivation);
+        } else if (activationResult === ActivationFlowResult.restoreFailure) {
+            telemetry.layersRelay.setPage(SettingsLayer.NoPurchaseScreen);
+        }
+        telemetry.layersRelay.trackPageView();
+    }, [activationResult, telemetry.layersRelay]);
 
     let modalConfig: ModalProps;
 
@@ -102,6 +112,7 @@ function ActivationFlowResultModalComponent({
                     // Open the paywall when restoring purchases from outside it
                     account.showPaywall();
                     account.resetActivationFlowStatus();
+                    telemetry.layersRelay.trackEvent(SettingsEvent.NoRestoreSubscribeClick);
                 },
                 submitText: translate('settings.activation.flow.restore.failure.subscribe'),
                 submitClassName: theme.button.greenSubmit,

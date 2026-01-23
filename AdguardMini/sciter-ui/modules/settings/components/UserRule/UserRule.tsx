@@ -18,7 +18,7 @@ import { useCallback, useRef, useState } from 'preact/hooks';
 import { UserRule as UserRuleType } from 'Apis/types';
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { getNotificationSomethingWentWrongText } from 'SettingsLib/utils/translate';
-import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, RouteName } from 'SettingsStore/modules';
+import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, RouteName, SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
 import { Layout, Text, RuleHighlighter, Textarea, Checkbox, Button, Select, Modal } from 'UILib';
 
@@ -45,7 +45,7 @@ export type FormErrors = Partial<Record<ErrorFields, string>>;
  * User rule create edit page in settings module
  */
 function UserRuleComponent() {
-    const { router, userRules, notification } = useSettingsStore();
+    const { router, userRules, notification, telemetry } = useSettingsStore();
     const editRef = useRef(false);
 
     const { userRules: { rules } } = userRules;
@@ -251,6 +251,7 @@ function UserRuleComponent() {
                 return;
             }
         }
+        telemetry.layersRelay.trackEvent(SettingsEvent.CreateRuleClick);
         notifySuccess(rule.rule.buildRule(), () => {
             userRules.updateRules(rulesCopy);
         });

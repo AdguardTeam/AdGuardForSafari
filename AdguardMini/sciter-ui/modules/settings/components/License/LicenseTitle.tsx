@@ -9,7 +9,7 @@ import { Subscription } from 'Apis/types';
 import { getTdsLink, TDS_PARAMS } from 'Modules/common/utils/links';
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { provideContactSupportParam } from 'SettingsLib/utils/translate';
-import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, RouteName } from 'SettingsStore/modules';
+import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, RouteName, SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
 
 import { AlreadyPurchasedFlowModal } from '../ActivationFlow';
@@ -29,6 +29,7 @@ function LicenseTitleComponent() {
         account,
         notification,
         router,
+        telemetry,
     } = useSettingsStore();
 
     const showAlreadyPurchasedFlow = router.castParams<LicenseRouterParams>()?.alreadyPurchased;
@@ -56,6 +57,7 @@ function LicenseTitleComponent() {
     const licenseStatusActionHandler = (): void => {
         switch (actionType) {
             case LicenseStatusActionType.manageLicense:
+                telemetry.trackEvent(SettingsEvent.ManageSubscriptionClick);
                 if (isAppStoreSubscription) {
                     account.requestOpenSubscriptions();
                 } else {

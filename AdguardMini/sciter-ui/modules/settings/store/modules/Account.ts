@@ -55,7 +55,15 @@ type ActivationFlowStatus
  * Account store
  */
 export class Account {
-    rootStore: SettingsStore;
+    /**
+     * Stores the activation flow status
+     */
+    private activationFlowStatus: ActivationFlowStatus = {
+        type: ActivationFlowStatusType.isCheckingLicenseStatus,
+        value: false,
+    };
+
+    public rootStore: SettingsStore;
 
     /**
      * User License
@@ -78,13 +86,10 @@ export class Account {
     public paywallShouldBeShown = false;
 
     /**
-     * Stores the activation flow status
+     * Trial availability status
+     * Show available days for trial, if 0 - trial is not available
      */
-    private activationFlowStatus: ActivationFlowStatus = {
-        type: ActivationFlowStatusType.isCheckingLicenseStatus,
-        value: false,
-    };
-
+    public trialAvailableDays = 0;
     /**
      * Checks if the license object is exist
      */
@@ -105,12 +110,6 @@ export class Account {
     public get subscriptionPricesAvailable() {
         return !isNull(this.appStoreSubscriptions);
     }
-
-    /**
-     * Trial availability status
-     * Show available days for trial, if 0 - trial is not available
-     */
-    public trialAvailableDays = 0;
 
     /**
      * Checks if trial is expired
@@ -198,6 +197,32 @@ export class Account {
     }
 
     /**
+     * Indicates that the license status is being checked right now
+     */
+    public get isCheckingLicenseStatus() {
+        const { type, value } = this.activationFlowStatus;
+        return type === ActivationFlowStatusType.isCheckingLicenseStatus && value;
+    }
+
+    /**
+     * Indicates that an error has occured within the activation flow
+     */
+    public get hasActivationError() {
+        const { type, value } = this.activationFlowStatus;
+        return type === ActivationFlowStatusType.hasActivationError && value;
+    }
+
+    /**
+     * Returns the activation flow result, if there is one
+     */
+    public get activationResult() {
+        const { type, value } = this.activationFlowStatus;
+        if (type === ActivationFlowStatusType.hasActivationResult) {
+            return value;
+        }
+    }
+
+    /**
      * Ctor
      *
      * @param rootStore
@@ -207,6 +232,34 @@ export class Account {
         makeAutoObservable(this, {
             rootStore: false,
         }, { autoBind: true });
+    }
+
+    /**
+     * Request subscription to AdGuard mini
+     */
+    private async requestSubscription(subscriptionType: Subscription) {
+        this.updateActivationFlowStatus({
+            type: ActivationFlowStatusType.isCheckingLicenseStatus,
+            value: true,
+        });
+
+        const { hasError } = await API.accountService.RequestSubscribe(
+            new SubscriptionMessage({ subscriptionType }),
+        );
+
+        if (hasError) {
+            this.updateActivationFlowStatus({
+                type: ActivationFlowStatusType.hasActivationError,
+                value: true,
+            });
+        }
+    }
+
+    /**
+     * Updates the activation flow status
+     */
+    private updateActivationFlowStatus(status: typeof this.activationFlowStatus) {
+        this.activationFlowStatus = status;
     }
 
     /**
@@ -232,27 +285,6 @@ export class Account {
      */
     public async refreshLicense() {
         return API.accountService.RefreshLicense(new EmptyValue());
-    }
-
-    /**
-     * Request subscription to AdGuard mini
-     */
-    private async requestSubscription(subscriptionType: Subscription) {
-        this.updateActivationFlowStatus({
-            type: ActivationFlowStatusType.isCheckingLicenseStatus,
-            value: true,
-        });
-
-        const { hasError } = await API.accountService.RequestSubscribe(
-            new SubscriptionMessage({ subscriptionType }),
-        );
-
-        if (hasError) {
-            this.updateActivationFlowStatus({
-                type: ActivationFlowStatusType.hasActivationError,
-                value: true,
-            });
-        }
     }
 
     /**
@@ -391,13 +423,6 @@ export class Account {
     }
 
     /**
-     * Updates the activation flow status
-     */
-    private updateActivationFlowStatus(status: typeof this.activationFlowStatus) {
-        this.activationFlowStatus = status;
-    }
-
-    /**
      * Resets the activation flow status to initial value
      */
     public resetActivationFlowStatus() {
@@ -422,32 +447,6 @@ export class Account {
      */
     public setIsTrialAvailable(value: number) {
         this.trialAvailableDays = value;
-    }
-
-    /**
-     * Indicates that the license status is being checked right now
-     */
-    public get isCheckingLicenseStatus() {
-        const { type, value } = this.activationFlowStatus;
-        return type === ActivationFlowStatusType.isCheckingLicenseStatus && value;
-    }
-
-    /**
-     * Indicates that an error has occured within the activation flow
-     */
-    public get hasActivationError() {
-        const { type, value } = this.activationFlowStatus;
-        return type === ActivationFlowStatusType.hasActivationError && value;
-    }
-
-    /**
-     * Returns the activation flow result, if there is one
-     */
-    public get activationResult() {
-        const { type, value } = this.activationFlowStatus;
-        if (type === ActivationFlowStatusType.hasActivationResult) {
-            return value;
-        }
     }
 
     /**

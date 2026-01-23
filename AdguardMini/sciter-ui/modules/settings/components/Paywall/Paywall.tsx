@@ -3,10 +3,10 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import { observer } from 'mobx-react-lite';
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 
 import { getTdsLink, TDS_PARAMS } from 'Common/utils/links';
-import { RouteName } from 'Modules/settings/store/modules';
+import { RouteName, SettingsLayer } from 'Modules/settings/store/modules';
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { Button, ExternalLink, Icon, Text } from 'UILib';
 
@@ -23,13 +23,18 @@ import type { IconType } from 'UILib';
  * Paywall component
  */
 function PaywallComponent() {
-    const { account, settings } = useSettingsStore();
+    const { account, settings, telemetry } = useSettingsStore();
 
     const {
         appStoreSubscriptions,
         isTrialExpired,
         isLicenseExpired,
     } = account;
+
+    useEffect(() => {
+        telemetry.layersRelay.setPage(SettingsLayer.SellingScreen);
+        telemetry.layersRelay.trackPageView();
+    }, [telemetry]);
 
     /**
      * License advantages list

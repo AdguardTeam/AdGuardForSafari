@@ -25,7 +25,7 @@ function TrackersComponent() {
      */
     function handleBlockTrackers() {
         finishLottie(async () => steps.shouldBlockTrackers(true));
-        telemetry.layersRelay.trackEvent(OnboardingEvents.BlockAnnoyancesYesClick);
+        telemetry.layersRelay.trackEvent(OnboardingEvents.BlockTrackersYesClick);
     }
 
     /**

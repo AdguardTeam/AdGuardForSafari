@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { StringValue, Subscription } from 'Apis/types';
 import { provideTrialDaysParam } from 'Common/utils/translate';
 import { useSettingsStore } from 'SettingsLib/hooks';
+import { SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
 import { Button, Text } from 'UILib';
 
@@ -104,6 +105,7 @@ function PerksOfTheFullVersionComponent({
     const {
         account,
         settings: { isMASReleaseVariant },
+        telemetry,
     } = useSettingsStore();
 
     const comparisonItems: ComparisonItem[] = [
@@ -166,7 +168,7 @@ function PerksOfTheFullVersionComponent({
                     return translate.plural('license.try.for.free', trialAvailableDays, provideTrialDaysParam(trialAvailableDays));
                 }
 
-                return isAppStoreSubscription ? translate('license.subscribe') : translate('license.get.full.version');
+                return (isAppStoreSubscription || isFreeware) ? translate('license.subscribe') : translate('license.get.full.version');
             }
 
             if (isLicenseExpired) {
@@ -188,16 +190,13 @@ function PerksOfTheFullVersionComponent({
                 account.requestWebSubscription(Subscription.standalone);
             }
 
-            /*
-            TODO: AG-45393 Recheck telemetry tracking for license flow
             if (isMASReleaseVariant) {
-                if (isTrialActive || trialAvailableDays <= 0) {
+                if (trialAvailableDays > 0 && !isTrialActive) {
                     telemetry.trackEvent(SettingsEvent.Try14DaysClick);
-                } else if (isAppStoreSubscription) {
-                    telemetry.trackEvent(SettingsEvent.SubscribeTrialEndClick);
+                } else {
+                    telemetry.trackEvent(SettingsEvent.SubscribeClick);
                 }
             }
-            */
         };
 
         return (

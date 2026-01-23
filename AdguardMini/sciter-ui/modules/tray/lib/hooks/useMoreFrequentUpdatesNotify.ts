@@ -28,8 +28,8 @@ export function useMoreFrequentUpdatesNotify() {
                 btnLabel: translate('buy'),
                 timeout: false,
                 closeable: true,
-                onClick: settings.requestOpenPaywallScreen,
-                onCrossClick: () => {
+                onClick: () => {
+                    settings.requestOpenPaywallScreen();
                     telemetry.layersRelay.trackEvent(TrayEvent.FrequentUpdatesClick);
                 },
                 onMount: () => {

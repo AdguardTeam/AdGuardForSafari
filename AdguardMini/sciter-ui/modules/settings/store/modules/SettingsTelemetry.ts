@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import Telemetry from 'Modules/common/stores/Telemetry';
+import { UserRulesPages, UserRulesEvents } from 'Modules/common/utils/consts';
 
 /**
  * Settings-specific pages
@@ -56,6 +57,7 @@ export enum SettingsEvent {
     RealTimeUpdatesTryForFreeClick = 'real_time_updates_try_for_free_click',
     ResetToDefaultClick = 'reset_to_default_click',
     Try14DaysClick = 'try_14_days_click',
+    SubscribeClick = 'subscribe_click',
     LogInClick = 'log_in_click',
     RestoreClick = 'restore_click',
     ActivateViaCodeClick = 'activate_via_code_click',
@@ -69,16 +71,22 @@ export enum SettingsEvent {
     GetFullVersionClick = 'get_full_version_click',
     TryForFreeFiltersClick = 'try_for_free_filters_click',
     FlagClick = 'flag_click',
+    NoRestoreSubscribeClick = 'no_restore_subscribe_click',
+    CreateRuleClick = 'create_rule_click',
 }
 
 /**
  * Telemetry type for settings window module
  */
-export type SettingsTelemetry = Telemetry<SettingsPage, SettingsEvent, SettingsLayer>;
+export type SettingsTelemetry = Telemetry<
+    SettingsPage | UserRulesPages,
+    SettingsEvent | UserRulesEvents,
+    SettingsLayer
+>;
 
 /**
  * Creates and returns a new settings telemetry instance.
  */
 export function settingsTelemetryFactory(): SettingsTelemetry {
-    return new Telemetry<SettingsPage, SettingsEvent, SettingsLayer>();
+    return new Telemetry<SettingsPage, SettingsEvent, SettingsLayer>(SettingsPage.SafariProtection);
 }

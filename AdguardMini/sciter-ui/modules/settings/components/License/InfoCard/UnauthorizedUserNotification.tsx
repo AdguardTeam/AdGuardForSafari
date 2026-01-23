@@ -136,11 +136,9 @@ function UnauthorizedUserNotificationComponent() {
     const notificationButtonActionHandler = (): void => {
         switch (notificationType) {
             case NotificationType.isActivatedByKey:
-                account.requestBindLicense();
-                telemetry.trackEvent(SettingsEvent.BindLicenseClick);
-                break;
             case NotificationType.isAppStoreSubscription:
                 account.requestBindLicense();
+                telemetry.trackEvent(SettingsEvent.BindLicenseClick);
                 break;
             case NotificationType.isStandaloneFreewareWithTrialAvailable:
                 account.requestWebSubscription(Subscription.trial);

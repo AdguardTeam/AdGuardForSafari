@@ -16,6 +16,14 @@ export const ADGUARD_MINI_TITLE = 'AdGuard Mini';
  */
 export const SPLITTER = '!~!';
 
+export enum UserRulesPages {
+    RuleEditorScreen = 'rule_editor_screen',
+}
+
+export enum UserRulesEvents {
+    RuleCreatedClick = 'rule_created_click',
+}
+
 /**
  * Events for rules editor, to pass from webview to sciter and vice versa
  */
@@ -37,4 +45,6 @@ export enum RulesEditorEvents {
     update = 'update',
     rules_saved = 'rules_saved',
     language = 'language',
+    telemetry_page_view = 'telemetry_page_view',
+    telemetry_event_rules_created_click = 'telemetry_event_rules_created_click',
 }

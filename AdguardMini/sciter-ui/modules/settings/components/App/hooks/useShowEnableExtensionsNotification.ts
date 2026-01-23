@@ -13,7 +13,7 @@ import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType
  * Shows a notification if the user has disabled one or more extensions
  */
 export function useShowEnableExtensionsNotification() {
-    const { router: { currentPath }, notification, settings } = useSettingsStore();
+    const { router: { currentPath }, notification, settings, telemetry } = useSettingsStore();
     const notificationUid = useRef<string>();
 
     const {
@@ -39,12 +39,14 @@ export function useShowEnableExtensionsNotification() {
             notificationContext: NotificationContext.ctaButton,
             btnLabel: translate('settings.enable.extensions.btn'),
             iconType: NotificationsQueueIconType.info,
-            onClick: openSafariPref,
+            onClick: () => {
+                openSafariPref();
+            },
             type: NotificationsQueueType.warning,
             variant: NotificationsQueueVariant.textOnly,
             timeout: false,
         });
-    }, [notification, allExtensionsDisabled]);
+    }, [notification, allExtensionsDisabled, telemetry]);
 
     /**
      * We should force an update on the snack each time allExtensionsDisabled changes,

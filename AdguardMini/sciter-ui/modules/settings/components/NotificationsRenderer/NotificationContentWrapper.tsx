@@ -10,6 +10,7 @@ import s from './NotificationsRenderer.module.pcss';
 import type { ComponentChild } from 'preact';
 import type { NotificationPropsHolder } from 'SettingsLib/utils/NotificationPropsHolder';
 import type { NotificationPropertiesSelector } from 'SettingsStore/modules';
+import { useEffect } from 'preact/hooks';
 
 type Props = {
     message: ComponentChild;
@@ -30,6 +31,10 @@ export function NotificationContentWrapper({
     onCloseNotification,
 }: Props) {
     let className = '';
+
+    useEffect(() => {
+        notification.props.onMount?.();
+    }, [notification.props.onMount]);
 
     if ('variant' in notification.props) {
         switch (notification.props.variant) {

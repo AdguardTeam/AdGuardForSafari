@@ -121,7 +121,6 @@ export function useStoriesConfig(): StoryInfo[] {
                 }],
                 backgroundColor: 'green',
             },
-            telemetryEvent: TrayEvent.StoryUnlockFeaturesClick,
         });
     }
 
@@ -143,6 +142,7 @@ export function useStoriesConfig(): StoryInfo[] {
                 }],
                 backgroundColor: 'green',
             },
+            telemetryEvent: TrayEvent.StoryUnlockFeaturesClick,
         });
     }
 

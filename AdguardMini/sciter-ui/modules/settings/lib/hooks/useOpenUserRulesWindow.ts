@@ -6,9 +6,9 @@ import { useEffect } from 'preact/hooks';
 
 import { UserRule } from 'Apis/types';
 import { getTdsLink, TDS_PARAMS } from 'Common/utils/links';
-import { RulesEditorEvents, SPLITTER } from 'Modules/common/utils/consts';
+import { RulesEditorEvents, SPLITTER, UserRulesEvents, UserRulesPages } from 'Modules/common/utils/consts';
 import html from 'Modules/inline/main.html';
-import { RouteName } from 'SettingsStore/modules';
+import { RouteName, SettingsPage } from 'SettingsStore/modules';
 import { SciterWindowId } from 'SettingsStore/modules/Windowing';
 import { getColorTheme } from 'Utils/colorThemes';
 
@@ -35,6 +35,7 @@ export function useOpenUserRulesWindow() {
         userRules,
         settings: { settings },
         router,
+        telemetry,
     } = settingsStore;
 
     const { isWindowOpened, openWindow, sendMessage, closeWindow } = useOpenSciterWindow({
@@ -90,11 +91,22 @@ export function useOpenUserRulesWindow() {
 
             [RulesEditorEvents.close_request]: function CloseRequest() {
                 closeWindow();
+                telemetry.setPage(SettingsPage.UserRulesScreen);
+                telemetry.trackPageView();
             },
 
             [RulesEditorEvents.init_theme]: async function InitTheme() {
                 const value = await settingsStore.getEffectiveTheme();
                 settingsStore.setColorTheme(getColorTheme(value));
+            },
+
+            [RulesEditorEvents.telemetry_event_rules_created_click]: function TelemetryEventRulesCreatedClick() {
+                telemetry.trackEvent(UserRulesEvents.RuleCreatedClick);
+            },
+
+            [RulesEditorEvents.telemetry_page_view]: function TelemetryPageView() {
+                telemetry.setPage(UserRulesPages.RuleEditorScreen);
+                telemetry.trackPageView();
             },
         },
         eventListeners: {

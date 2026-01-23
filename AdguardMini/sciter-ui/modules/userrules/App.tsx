@@ -15,7 +15,6 @@ import { FlagIcon } from './FlagIcon';
 import { Loader } from './Loader';
 import { UnsavedChangesModal } from './UnsavedChangesModal';
 import { UpdateInfo } from './UpdateInfo';
-import { UserRulesEvents, UserRulesPages } from './UserRulesTelemetry';
 
 /**
  * User rules screen with editor
@@ -28,7 +27,6 @@ function AppComponent() {
         setLoading,
         setChunkLoading,
         appendEditorValue,
-        telemetry,
     } = editorStore;
 
     const hotkeys = [
@@ -92,8 +90,7 @@ function AppComponent() {
      * Catch changes from outside
      */
     useEffect(() => {
-        telemetry.setPage(UserRulesPages.RuleEditorScreen);
-        telemetry.trackPageView();
+        window.jsBridgeCall(RulesEditorEvents.telemetry_page_view);
 
         (window as any).data = new Proxy({}, {
             set(target, key, value) {
@@ -130,7 +127,7 @@ function AppComponent() {
                         setIsSaving(false);
                         setIsDirty(false);
 
-                        telemetry.trackEvent(UserRulesEvents.RuleCreatedClick);
+                        window.jsBridgeCall(RulesEditorEvents.telemetry_event_rules_created_click);
                         break;
                     case RulesEditorEvents.language:
                         editorStore.setLanguage(value);

@@ -167,8 +167,16 @@ function HomeComponent() {
         if (someExtensionsDisabled) {
             return translate('tray.home.title.protection.extensions.disabled', {
                 link: (text: string) => {
-                    telemetry.trackEvent(TrayEvent.FixItClick);
-                    return <div onClick={openSafariPreferences}>{text}</div>;
+                    return (
+                        <div 
+                            onClick={() => {
+                                telemetry.trackEvent(TrayEvent.FixItClick);
+                                openSafariPreferences();
+                            }}
+                        >
+                            {text}
+                        </div>
+                    );
                 },
             });
         }

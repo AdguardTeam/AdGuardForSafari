@@ -15,7 +15,6 @@ type Props = {
     message: ComponentChild;
     notification: NotificationPropsHolder;
     onCloseNotification(): void;
-    onMount?: () => void;
 };
 
 /**
@@ -29,7 +28,6 @@ export function NotificationContentWrapper({
     message,
     notification,
     onCloseNotification,
-    onMount,
 }: Props) {
     let className = '';
 
@@ -45,8 +43,8 @@ export function NotificationContentWrapper({
     }
 
     useEffect(() => {
-        onMount?.();
-    }, [onMount]);
+        notification.props.onMount?.();
+    }, [notification.props.onMount]);
 
     return (
         <div className={cx(s.NotificationContentWrapper_content, className)}>
