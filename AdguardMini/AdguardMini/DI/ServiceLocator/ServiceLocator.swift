@@ -360,8 +360,7 @@ private final class ServiceLocator {
             sciterAppLocator: self.sciterAppLocator,
             sciterCallbackService: self.sciterCallbackService,
             sciterOnboardingCallbackService: self.sciterOnboardingCallbackService,
-            protectionService: self.protectionService,
-            eventBus: self.eventBus
+            protectionService: self.protectionService
         )
     }()
 

@@ -57,6 +57,7 @@ extension AppStatusInfo {
             coder.encode(status.rawValue, forKey: "status")
             coder.encode(duration.rawValue, forKey: "duration")
             coder.encode(nextBillDate, forKey: "nextBillDate")
+            coder.encode(inAppPaymentSystem?.rawValue, forKey: "inAppPaymentSystem")
         }
     }
 }
