@@ -13,6 +13,7 @@ import theme from 'Theme';
 import { useTheme, useTrayStore } from 'TrayLib/hooks';
 import { TrayEvent, TrayRoute } from 'TrayStore/modules';
 import { Loader, Logo, Button, Text, Switch } from 'UILib';
+import { isDarkColorTheme } from 'Utils/colorThemes';
 
 import { StoryNavigation } from '../../modules/stories/classes';
 import { StoriesLayer, StoryCard } from '../../modules/stories/components';
@@ -44,6 +45,8 @@ function HomeComponent() {
     const [isLoading, setIsLoading] = useState(false);
     const moveToNextStory = useCallback(() => setStoryIndex((prev) => prev + 1), []);
     const closeStories = useCallback(() => setStoryIndex(-1), []);
+
+    const [isDarkTheme, setIsDarkTheme] = useState(false);
 
     useEffect(() => {
         const exts = settings.getSafariExtensionsLoading();
@@ -147,6 +150,7 @@ function HomeComponent() {
 
     useTheme((th) => {
         document.documentElement.setAttribute('theme', th);
+        setIsDarkTheme(isDarkColorTheme(th));
     });
 
     if (!traySettings) {
@@ -209,7 +213,7 @@ function HomeComponent() {
             )}
             <div className={s.Home}>
                 <div className={s.Home_header}>
-                    <Logo className={s.Home_header_logo} useTheme={useTheme} />
+                    <Logo className={s.Home_header_logo} isDarkTheme={isDarkTheme} />
                     <Button
                         className={cx(theme.button.greenIcon, s.Home_header_update)}
                         icon="update"

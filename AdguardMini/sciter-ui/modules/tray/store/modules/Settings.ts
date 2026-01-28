@@ -161,6 +161,9 @@ export class SettingsStore {
             newValue.releaseVariant = this.settings.releaseVariant;
             newValue.language = this.settings.language;
             newValue.debugLogging = this.settings.debugLogging;
+            newValue.recentlyMigrated = this.settings.recentlyMigrated;
+            newValue.allowTelemetry = this.settings.allowTelemetry;
+            newValue.theme = this.settings.theme;
         }
         return newValue;
     }

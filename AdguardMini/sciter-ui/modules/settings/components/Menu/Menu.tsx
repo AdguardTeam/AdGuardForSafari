@@ -3,11 +3,13 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import { observer } from 'mobx-react-lite';
+import { useState } from 'preact/hooks';
 
 import { Subscription, StringValue } from 'Apis/types';
 import { useSettingsStore, useTheme } from 'SettingsLib/hooks';
 import { RouteName, SettingsEvent } from 'SettingsStore/modules';
 import { Logo, Layout, Text, Button } from 'UILib';
+import { isDarkColorTheme } from 'Utils/colorThemes';
 
 import { MenuItem } from './components';
 import s from './Menu.module.pcss';
@@ -50,9 +52,15 @@ function MenuComponent() {
         telemetry.layersRelay.trackEvent(SettingsEvent.GetFullVersionClick);
     };
 
+    const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+    useTheme((theme) => {
+        setIsDarkTheme(isDarkColorTheme(theme));
+    });
+
     return (
         <Layout className={s.Menu} type="settingsMenu">
-            <Logo className={s.Menu_logo} useTheme={useTheme} />
+            <Logo className={s.Menu_logo} isDarkTheme={isDarkTheme} />
             <div className={s.Menu_menuItems}>
                 <MenuItem
                     activeRoutes={[RouteName.language_specific]}
