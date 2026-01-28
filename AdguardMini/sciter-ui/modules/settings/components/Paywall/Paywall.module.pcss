@@ -179,6 +179,16 @@ html:theme(light) {
         &_link {
             display: inline-block;
             margin: 0 *;
+            cursor: pointer;
+            >a {
+                transition: color linear 0.1s;
+            }
+
+            &:hover {
+                >a {
+                    color: var(--fills-buttons-main-button-hovered);
+                }
+            }
         }
     }
 }
