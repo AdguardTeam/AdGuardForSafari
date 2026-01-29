@@ -15,7 +15,7 @@ import { useOpenUserRulesWindow } from 'SettingsLib/hooks/useOpenUserRulesWindow
 import { getNotificationSomethingWentWrongText, provideContactSupportParam } from 'SettingsLib/utils/translate';
 import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, NotificationsQueueVariant, RouteName, SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
-import { Modal, ExternalLink, Input, Pagination, Icon, Text } from 'UILib';
+import { Modal, Input, Pagination, Icon, Text, Button } from 'UILib';
 
 import { SettingsItemSwitch } from '../SettingsItem';
 import { SettingsTitle } from '../SettingsTitle';
@@ -180,15 +180,18 @@ function UserRulesComponent() {
                     reportBug
                 >
                     {!isScrolling && (
-                        <ExternalLink
+                        <Button
+                            type="text"
                             className={s.UserRules_howTo}
-                            href={getTdsLink(TDS_PARAMS.filterrules, RouteName.user_rules)}
-                            textType="t1"
-                            noUnderline
-                            onClick={() => telemetry.trackEvent(SettingsEvent.RuleSyntaxClick)}
+                            onClick={() => {
+                                window.OpenLinkInBrowser(getTdsLink(TDS_PARAMS.filterrules, RouteName.user_rules));
+                                telemetry.trackEvent(SettingsEvent.RuleSyntaxClick);
+                            }}
                         >
-                            {translate('user.rules.how.create.rule')}
-                        </ExternalLink>
+                            <Text lineHeight="none" type="t1">
+                                {translate('user.rules.how.create.rule')}
+                            </Text>
+                        </Button>
                     )}
                 </SettingsTitle>
                 {!isScrolling && (

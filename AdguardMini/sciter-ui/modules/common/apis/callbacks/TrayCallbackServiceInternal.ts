@@ -3,6 +3,7 @@ import { store } from 'TrayStore';
 import { ITrayCallbackServiceInternal } from './TrayCallbackService';
 import { BoolValue, EmptyValue, FiltersStatus, SafariExtensionUpdate, LicenseOrError, EffectiveThemeValue } from '../types'
 import { TrayRoute } from 'TrayStore/modules/TrayRouter';
+import { TrayPage } from 'Modules/tray/store/modules';
 
 /* Service handles settings lists  */
 export class TrayCallbackServiceInternal implements ITrayCallbackServiceInternal {
@@ -10,6 +11,8 @@ export class TrayCallbackServiceInternal implements ITrayCallbackServiceInternal
         // Idk how it works, i will remain it as it is
         if (param.value) {
             store.settings.getSettings();
+            store.telemetry.setPage(TrayPage.TrayMenu);
+            store.telemetry.trackPageView();
         } else {
             store.router.changePath(TrayRoute.home);
         }
