@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 
 import { useSettingsStore } from 'SettingsLib/hooks';
 import { getNotificationSomethingWentWrongText } from 'SettingsLib/utils/translate';
-import { NotificationContext, NotificationsQueueType, NotificationsQueueIconType } from 'SettingsStore/modules';
+import { NotificationContext, NotificationsQueueType, NotificationsQueueIconType, RouteName } from 'SettingsStore/modules';
 import { ConsentModal } from 'UILib';
 
 import type { Filter } from 'Apis/types';
@@ -21,9 +21,10 @@ function MigrationFiltersConsentControllerComponent() {
         settings,
         filters,
         notification,
+        router,
     } = useSettingsStore();
 
-    if (filtersMap.size === 0) {
+    if (filtersMap.size === 0 || router.currentPath === RouteName.migration) {
         return null;
     }
 
