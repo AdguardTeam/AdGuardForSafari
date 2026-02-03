@@ -17,8 +17,9 @@ final class SharedDIContainer {
 
     // MARK: Public properties
 
-    private(set) lazy var sharedSettingsStorage: SharedSettingsStorage = SharedSettingsStorageImpl()
-    private(set) lazy var filtersStorage: FiltersStorage = {
+    let sharedSettingsStorage: SharedSettingsStorage = SharedSettingsStorageImpl()
+
+    let filtersStorage: FiltersStorage = {
         let fileManager = AMFileManagerImpl()
         let fileStorage = GroupFolderFileServiceImpl(fileManager: fileManager)
         return FiltersStorageImpl(fileStorage: fileStorage)

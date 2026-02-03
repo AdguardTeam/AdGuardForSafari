@@ -18,26 +18,20 @@ import AML
 final class WebExtensionDIContainer {
     static let shared = WebExtensionDIContainer()
 
-    private var webExtensionHolder: WebExtension?
-    var webExtension: WebExtension {
-        if let webExtensionHolder {
-            return webExtensionHolder
-        }
+    let webExtension: WebExtension
 
+    // MARK: Init
+
+    private init() {
         var engine: WebExtension
         do {
             engine = try WebExtension(
                 containerURL: SharedDIContainer.shared.filtersStorage.originDir
             )
         } catch {
-            LogError("Failed to create advanced filter engine: \(error)")
+            LogError("[FATAL] Failed to create advanced filter engine: \(error)")
             fatalError("Failed to create advanced filter engine: \(error)")
         }
-        self.webExtensionHolder = engine
-        return engine
+        self.webExtension = engine
     }
-
-    // MARK: Init
-
-    private init() {}
 }
