@@ -81,10 +81,10 @@
   resolved "https://registry.yarnpkg.com/@adguard/css-tokenizer/-/css-tokenizer-1.2.0.tgz#edc72c297243a0514a2aa4a4c4d4b9327b0697eb"
   integrity sha512-cUj5j/AU5z/T4//5M6KnIJBpykAY4QbDsoiQ2DaWX/r2XkepMkTb8DhIbUHJD/QLGEyLeQLpi+nlxAgf4NTRRQ==
 
-"@adguard/rules-editor@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@adguard/rules-editor/-/rules-editor-1.3.0.tgz#04c6a6ecb8caa62a7e588609274a7ada86aa9601"
-  integrity sha512-nskp5lSc9RqPrnsBa46D1lMbuThgy4twz058iY+81Xt7BP7hSPrPCCvgX/s8dWHYH1aZqR5/6IVfITcOEK7W6Q==
+"@adguard/rules-editor@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@adguard/rules-editor/-/rules-editor-1.3.1.tgz#2432fa8e5be06f5739aac7473731f3efb8c22553"
+  integrity sha512-HrDwOdgy1M5ZPGLrvn9uuk4X9ynfBeLvlx3IyoWJ6vnVHYzix3P4Ea3XCjjoFYD7BImciEBKvCcEaonEi7D0LA==
   dependencies:
     "@adguard/tsurlfilter" "^2.1.12"
     "@types/codemirror" "^5.60.10"
@@ -1972,9 +1972,9 @@ available-typed-arrays@^1.0.7:
     possible-typed-array-names "^1.0.0"
 
 axe-core@^4.10.0:
-  version "4.11.0"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.11.0.tgz#16f74d6482e343ff263d4f4503829e9ee91a86b6"
-  integrity sha512-ilYanEU8vxxBexpJd8cWM4ElSQq4QctCLKih0TSfjIfCQTeyH/6zVrmIJfLPrKTKJRbiG+cfnZbQIjAlJmF1jQ==
+  version "4.11.1"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.11.1.tgz#052ff9b2cbf543f5595028b583e4763b40c78ea7"
+  integrity sha512-BASOg+YwO2C+346x3LZOeoovTIoTrRqEsqMa6fmfAV0P+U9mFr9NsyOEpiYvFjbc64NMrSswhV50WdXzdb/Z5A==
 
 axios-form-data@^1.1.1:
   version "1.1.1"
