@@ -19,6 +19,15 @@
     <a href="https://agrd.io/mini_mac">
         <img src="https://img.shields.io/badge/download-app%20store-blue.svg" alt="Download on the App Store" />
     </a>
+    <a href="https://agrd.io/adguard_mini_for_mac">
+        <img src="https://img.shields.io/github/release/AdguardTeam/AdGuardMiniForMac.svg?label=release&filter=%2Arelease" alt="Release version" />
+    </a>
+    <a href="https://agrd.io/adguard_mini_for_mac_beta">
+        <img src="https://img.shields.io/github/release/AdguardTeam/AdGuardMiniForMac.svg?label=beta&filter=%2Abeta&color=orange" alt="Beta version" />
+    </a>
+    <a href="https://agrd.io/adguard_mini_for_mac_nightly">
+        <img src="https://img.shields.io/badge/nightly-download-green" alt="Nighlty version" />
+    </a>
 </p>
 
 <br />
@@ -76,4 +85,4 @@ To report an issue or submit a feature request, [go to the *Issues* section of t
 
 ## Technical documentation for developers
 
-See [./DEVELOPMENT.md](./DEVELOPMENT.md)
+See [DEVELOPMENT.md](./DEVELOPMENT.md)
