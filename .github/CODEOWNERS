@@ -4,8 +4,12 @@
 
 # Documentation: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-# Critical
-/.github/ @forcomprehension @fix-parrot @vityevato
-
 # Default
 * @AdGuardSoftwareLimited/sciter @fix-parrot @vityevato
+
+# TypeScript UI: reviewed without the Swift code owner
+/AdguardMini/ui/ @AdGuardSoftwareLimited/sciter @fix-parrot
+/AdguardMini/PopupExtension/ContentScript/ @AdGuardSoftwareLimited/sciter @fix-parrot
+
+# Critical
+/.github/ @forcomprehension @fix-parrot @vityevato
