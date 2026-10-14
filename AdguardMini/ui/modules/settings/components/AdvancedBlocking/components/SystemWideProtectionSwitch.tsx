@@ -17,6 +17,16 @@ import s from './SystemWideProtectionSwitch.module.pcss';
  */
 type Props = {
     muted: boolean;
+    /**
+     * Whether the user selected the feature but the filter is not running:
+     * the switch shows its inactive "on" state.
+     */
+    inactive?: boolean;
+    /**
+     * Whether the bring-up runs: the switch is shown disabled in the light
+     * product green until the filter is confirmed running.
+     */
+    enabling?: boolean;
     value: boolean;
     onChange(value: boolean): void;
     orangeIcon?: boolean;
@@ -33,6 +43,8 @@ type Props = {
 export function SystemWideProtectionSwitch(props: Props) {
     const {
         muted,
+        inactive = false,
+        enabling = false,
         value,
         onChange,
         isNew = false,
@@ -107,9 +119,10 @@ export function SystemWideProtectionSwitch(props: Props) {
                 )}
                 description={translate('advanced.blocking.system.wide.desc')}
                 disabled={disabled}
+                enabling={enabling}
                 icon="apps"
                 iconColor={orangeIcon ? 'orange' : undefined}
-                muted={muted}
+                muted={inactive}
                 newLabel={isNew}
                 routeName={RouteName.system_wide_protection}
                 setValue={onChange}

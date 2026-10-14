@@ -23,11 +23,11 @@ export function PromoComponent() {
 
     const { advancedBlocking, router, settings } = useSettingsStore();
     const { urlFilterState } = advancedBlocking;
-    const { enabled } = urlFilterState;
+    const { userIntentEnabled } = urlFilterState;
 
     const isPromoDismissed = settings.dismissedPromoCards.has(SYSTEM_WIDE_ID);
 
-    if (enabled || isPromoDismissed) {
+    if (userIntentEnabled || isPromoDismissed) {
         return null;
     }
 

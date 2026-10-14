@@ -8,6 +8,7 @@ enum URLFilterStatus {
     URLFilterStatus_error = 1;
     URLFilterStatus_loading = 2;
     URLFilterStatus_running = 3;
+    URLFilterStatus_dns_error = 4;
 }
 
 /* Protection level applied to the URL filter. */
@@ -30,6 +31,8 @@ message URLFilterState {
     URLFilterStatus status = 3;
     URLFilterInfo info = 4;
     bool is_installed = 5;
+    /* Whether the user's persisted choice is to keep the filter enabled. */
+    bool user_intent_enabled = 6;
 }
 
 message URLFilterProtectionLevelUpdate {

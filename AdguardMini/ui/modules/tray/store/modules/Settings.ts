@@ -314,6 +314,7 @@ export class SettingsStore {
         const newConfiguration = this.urlFilterState.clone();
         const prevConfiguration = this.urlFilterState.clone();
         newConfiguration.enabled = true;
+        newConfiguration.userIntentEnabled = true;
         this.setURLFilterState(newConfiguration);
         const resp = await window.API.Execute(new SetURLFilterEnabledRequest({ value: true }));
         if (resp.hasError) {

@@ -184,7 +184,7 @@ function PaywallComponent() {
                         className={s.Paywall_title}
                         id={titleId}
                         lineHeight="none"
-                        tabIndex={0}
+                        tabIndex={-1}
                         type="h4"
                     >
                         {getPaywallTitle()}

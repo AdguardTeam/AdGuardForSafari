@@ -27,11 +27,13 @@ export function AdvancedBlockingControlComponent() {
     const { advancedBlocking, account, telemetry, settings } = useSettingsStore();
     const {
         adguardExtra, realTimeFiltersUpdate,
-        urlFilterState: { enabled: systemWideProtectionEnabled, isInstalled },
+        urlFilterState: { userIntentEnabled, isInstalled },
         urlFilterNew: isSystemWideProtectionNew,
+        isSystemWideProtectionInactive,
+        isSystemWideProtectionEnabling,
     } = advancedBlocking;
 
-    const { settings: { macos25OrLower, non501User, autoFiltersUpdate } } = settings;
+    const { settings: { macos25OrLower, non501User, autoFiltersUpdate, protectionEnabled } } = settings;
 
     const [showNotSupportedModal, setShowNotSupportedModal] = useState(false);
     const [showInstallModal, setShowInstallModal] = useState(false);
@@ -40,7 +42,7 @@ export function AdvancedBlockingControlComponent() {
 
     const isFree = !isLicenseOrTrialActive;
 
-    const isSystemWideProtectionDisabled = macos25OrLower || non501User;
+    const isSystemWideProtectionDisabled = macos25OrLower || non501User || !protectionEnabled;
 
     const payedFuncsTitle = usePayedFuncsTitle(SettingsEvent.TryForFreeAbTest);
     const onAdguardExtraChange = (value: boolean) => {
@@ -87,13 +89,15 @@ export function AdvancedBlockingControlComponent() {
             />
             <SystemWideProtectionSwitch
                 disabled={isSystemWideProtectionDisabled}
+                enabling={isSystemWideProtectionEnabling}
+                inactive={isSystemWideProtectionInactive}
                 isNew={isSystemWideProtectionNew}
                 muted={!isLicenseOrTrialActive}
                 non501User={non501User}
                 macos25OrLower={macos25OrLower}
                 orangeIcon={isFree}
                 setShowNotSupportedModal={setShowNotSupportedModal}
-                value={isLicenseOrTrialActive ? systemWideProtectionEnabled : false}
+                value={isLicenseOrTrialActive ? userIntentEnabled : false}
                 onChange={onUpdateSystemWideProtection}
             />
             <AdguardExtraSwitch

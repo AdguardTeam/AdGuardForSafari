@@ -18,6 +18,7 @@ extension URLFilterUIState {
             protectionLevel: self.protectionLevel.toProto(),
             status: self.status.toProto(),
             isInstalled: self.isInstalled,
+            userIntentEnabled: self.userIntentEnabled,
             info: self.info.toProto()
         )
     }

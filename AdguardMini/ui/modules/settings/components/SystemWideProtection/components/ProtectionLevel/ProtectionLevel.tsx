@@ -32,6 +32,8 @@ function ProtectionLevelComponent() {
             protectionLevel: systemWideProtectionLevel,
         },
         urlFilterInfo,
+        isSystemWideProtectionInactive,
+        isSystemWideProtectionEnabling,
     } = advancedBlocking;
 
     const { isLicenseOrTrialActive } = account;
@@ -39,9 +41,12 @@ function ProtectionLevelComponent() {
     const isFree = !isLicenseOrTrialActive;
 
     const { settings: { macos25OrLower, non501User } } = settings;
-    const isDisabled = macos25OrLower || non501User || !systemWideProtectionEnabled || !urlFilterInfo;
+    const isDisabled = macos25OrLower || non501User || !systemWideProtectionEnabled || !urlFilterInfo
+        || isSystemWideProtectionEnabling;
 
-    const muted = !systemWideProtectionEnabled;
+    // The failed bring-up mutes the level; the enabling one shows it disabled.
+    const muted = isSystemWideProtectionInactive
+        || (!systemWideProtectionEnabled && !isSystemWideProtectionEnabling);
 
     const onUpdateSystemWideProtectionLevel = (value: URLFilterProtectionLevel) => {
         telemetry.trackEvent(SystemWideProtectionLevelToTelemetryEventMap[value]);

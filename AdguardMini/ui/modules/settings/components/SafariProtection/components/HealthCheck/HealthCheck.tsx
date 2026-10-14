@@ -17,6 +17,7 @@ import {
     HealthCheckDismissId,
     NoUpdatesCard,
     RulesLimitExceededCard,
+    SystemWideProtectionUnavailableCard,
 } from './components';
 import s from './HealthCheck.module.pcss';
 
@@ -37,7 +38,7 @@ type HealthCheckProps = {
 function HealthCheckComponent({ setShowConsent }: HealthCheckProps) {
     const [showAllIssues, setShowAllIssues] = useState(false);
 
-    const { settings, safariProtection } = useSettingsStore();
+    const { settings, safariProtection, advancedBlocking } = useSettingsStore();
 
     const {
         dismissedHealthCheckCards,
@@ -63,6 +64,8 @@ function HealthCheckComponent({ setShowConsent }: HealthCheckProps) {
 
     const hasBackgroundDisabled = !loginItemEnabled;
 
+    const hasSystemWideProtectionUnavailable = advancedBlocking.isSystemWideProtectionUnavailable;
+
     const hasAdBlockingDisabled = !blockAds;
 
     const hasAnnoyanceBlockingDisabled = !blockSocialButtons
@@ -77,6 +80,9 @@ function HealthCheckComponent({ setShowConsent }: HealthCheckProps) {
         ),
         hasBackgroundDisabled && (
             <BackgroundDisabledCard key="backgroundDisabled" />
+        ),
+        hasSystemWideProtectionUnavailable && (
+            <SystemWideProtectionUnavailableCard key="systemWideProtectionUnavailable" />
         ),
         hasExtensionsBroken && (
             <ExtensionsBrokenCard

@@ -24,6 +24,8 @@ struct URLFilterUIState: Equatable {
     var protectionLevel: URLFilterProtectionLevel
     /// Whether the settings card is still marked as new.
     var isInstalled: Bool
+    /// Whether the user's persisted choice is to keep the filter enabled.
+    var userIntentEnabled: Bool
     /// Read-only metadata.
     var info: URLFilterInfo
 }
@@ -34,6 +36,7 @@ extension URLFilterUIState {
         status: .error,
         protectionLevel: .essential,
         isInstalled: false,
+        userIntentEnabled: false,
         info: .empty
     )
 }
@@ -43,6 +46,20 @@ extension URLFilterUIState {
 /// UI-facing status of URLFiltering extension
 enum URLFilterUIStatus: Equatable {
     case error
+    /// A System-wide Protection failure caused by blocked iCloud hosts.
+    ///
+    /// The UI shows no generic snack for this status.
+    case dnsError
     case loading
     case running
+}
+
+extension URLFilterUIStatus {
+    /// Whether the status represents a failed filter.
+    var isError: Bool {
+        switch self {
+        case .error, .dnsError: true
+        case .loading, .running: false
+        }
+    }
 }

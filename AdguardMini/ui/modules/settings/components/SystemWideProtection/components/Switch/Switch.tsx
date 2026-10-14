@@ -22,15 +22,17 @@ type SwitchProps = {
 function SwitchComponent({ onNeedInstall }: SwitchProps) {
     const { account, advancedBlocking, telemetry, settings } = useSettingsStore();
     const {
-        urlFilterState: { isInstalled, enabled },
+        urlFilterState: { isInstalled, userIntentEnabled },
+        isSystemWideProtectionInactive,
+        isSystemWideProtectionEnabling,
     } = advancedBlocking;
 
     const { isLicenseOrTrialActive } = account;
 
     const isFree = !isLicenseOrTrialActive;
 
-    const { settings: { macos25OrLower, non501User } } = settings;
-    const isDisabled = macos25OrLower || non501User;
+    const { settings: { macos25OrLower, non501User, protectionEnabled } } = settings;
+    const isDisabled = macos25OrLower || non501User || !protectionEnabled;
 
     const onUpdateSystemWideProtection = (value: boolean) => {
         telemetry.trackEvent(SettingsEvent.SystemWideProtectionToggleClick);
@@ -48,10 +50,12 @@ function SwitchComponent({ onNeedInstall }: SwitchProps) {
     return (
         <SettingsItemSwitch
             disabled={isDisabled}
+            enabling={isSystemWideProtectionEnabling}
+            muted={!isLicenseOrTrialActive || isSystemWideProtectionInactive}
             icon="apps"
             setValue={onUpdateSystemWideProtection}
             title={translate('advanced.blocking.system.wide')}
-            value={enabled}
+            value={isLicenseOrTrialActive && userIntentEnabled}
         />
     );
 }

@@ -32,6 +32,8 @@
     &_handler {
         position: relative;
         vertical-align: top;
+        /* A long wrapping label must not shrink the icon: keep it a flex item of a fixed size. */
+        flex-shrink: 0;
         color: var(--stroke-icons-gray-icons-default);
 
         &__checked {

@@ -31,6 +31,7 @@ public enum URLFilterStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
   case error // = 1
   case loading // = 2
   case running // = 3
+  case dnsError // = 4
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -43,6 +44,7 @@ public enum URLFilterStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
     case 1: self = .error
     case 2: self = .loading
     case 3: self = .running
+    case 4: self = .dnsError
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -53,6 +55,7 @@ public enum URLFilterStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
     case .error: return 1
     case .loading: return 2
     case .running: return 3
+    case .dnsError: return 4
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -63,6 +66,7 @@ public enum URLFilterStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
     .error,
     .loading,
     .running,
+    .dnsError,
   ]
 
 }
@@ -161,6 +165,9 @@ public struct URLFilterState: Sendable {
 
   public var isInstalled: Bool = false
 
+  /// Whether the user's persisted choice is to keep the filter enabled. 
+  public var userIntentEnabled: Bool = false
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -183,7 +190,7 @@ public struct URLFilterProtectionLevelUpdate: Sendable {
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 extension URLFilterStatus: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0URLFilterStatus_unknown\0\u{1}URLFilterStatus_error\0\u{1}URLFilterStatus_loading\0\u{1}URLFilterStatus_running\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{2}\0URLFilterStatus_unknown\0\u{1}URLFilterStatus_error\0\u{1}URLFilterStatus_loading\0\u{1}URLFilterStatus_running\0\u{1}URLFilterStatus_dns_error\0")
 }
 
 extension URLFilterProtectionLevel: SwiftProtobuf._ProtoNameProviding {
@@ -231,7 +238,7 @@ extension URLFilterInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
 
 extension URLFilterState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = "URLFilterState"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}enabled\0\u{3}protection_level\0\u{1}status\0\u{1}info\0\u{3}is_installed\0")
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap(bytecode: "\0\u{1}enabled\0\u{3}protection_level\0\u{1}status\0\u{1}info\0\u{3}is_installed\0\u{3}user_intent_enabled\0")
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
@@ -244,6 +251,7 @@ extension URLFilterState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
       case 3: try { try decoder.decodeSingularEnumField(value: &self.status) }()
       case 4: try { try decoder.decodeSingularMessageField(value: &self._info) }()
       case 5: try { try decoder.decodeSingularBoolField(value: &self.isInstalled) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self.userIntentEnabled) }()
       default: break
       }
     }
@@ -269,6 +277,9 @@ extension URLFilterState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     if self.isInstalled != false {
       try visitor.visitSingularBoolField(value: self.isInstalled, fieldNumber: 5)
     }
+    if self.userIntentEnabled != false {
+      try visitor.visitSingularBoolField(value: self.userIntentEnabled, fieldNumber: 6)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -278,6 +289,7 @@ extension URLFilterState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
     if lhs.status != rhs.status {return false}
     if lhs._info != rhs._info {return false}
     if lhs.isInstalled != rhs.isInstalled {return false}
+    if lhs.userIntentEnabled != rhs.userIntentEnabled {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

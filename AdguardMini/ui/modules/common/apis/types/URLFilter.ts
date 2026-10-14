@@ -8,7 +8,8 @@ export enum URLFilterStatus {
     unknown = 0,
     error = 1,
     loading = 2,
-    running = 3
+    running = 3,
+    dns_error = 4
 }
 export enum URLFilterProtectionLevel {
     essential = 0,
@@ -138,6 +139,7 @@ export class URLFilterState extends pb_1.Message {
         status?: URLFilterStatus;
         info?: URLFilterInfo;
         isInstalled?: boolean;
+        userIntentEnabled?: boolean;
     }) {
         super();
         pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -156,6 +158,9 @@ export class URLFilterState extends pb_1.Message {
             }
             if ("isInstalled" in data && data.isInstalled != undefined) {
                 this.isInstalled = data.isInstalled;
+            }
+            if ("userIntentEnabled" in data && data.userIntentEnabled != undefined) {
+                this.userIntentEnabled = data.userIntentEnabled;
             }
         }
     }
@@ -192,12 +197,19 @@ export class URLFilterState extends pb_1.Message {
     set isInstalled(value: boolean) {
         pb_1.Message.setField(this, 5, value);
     }
+    get userIntentEnabled() {
+        return pb_1.Message.getFieldWithDefault(this, 6, false) as boolean;
+    }
+    set userIntentEnabled(value: boolean) {
+        pb_1.Message.setField(this, 6, value);
+    }
     static fromObject(data: {
         enabled?: boolean;
         protectionLevel?: URLFilterProtectionLevel;
         status?: URLFilterStatus;
         info?: ReturnType<typeof URLFilterInfo.prototype.toObject>;
         isInstalled?: boolean;
+        userIntentEnabled?: boolean;
     }): URLFilterState {
         const message = new URLFilterState({});
         if (data.enabled != null) {
@@ -215,6 +227,9 @@ export class URLFilterState extends pb_1.Message {
         if (data.isInstalled != null) {
             message.isInstalled = data.isInstalled;
         }
+        if (data.userIntentEnabled != null) {
+            message.userIntentEnabled = data.userIntentEnabled;
+        }
         return message;
     }
     toObject() {
@@ -224,6 +239,7 @@ export class URLFilterState extends pb_1.Message {
             status?: URLFilterStatus;
             info?: ReturnType<typeof URLFilterInfo.prototype.toObject>;
             isInstalled?: boolean;
+            userIntentEnabled?: boolean;
         } = {};
         if (this.enabled != null) {
             data.enabled = this.enabled;
@@ -239,6 +255,9 @@ export class URLFilterState extends pb_1.Message {
         }
         if (this.isInstalled != null) {
             data.isInstalled = this.isInstalled;
+        }
+        if (this.userIntentEnabled != null) {
+            data.userIntentEnabled = this.userIntentEnabled;
         }
         return data;
     }
@@ -256,6 +275,8 @@ export class URLFilterState extends pb_1.Message {
             writer.writeMessage(4, this.info, () => this.info.serialize(writer));
         if (this.isInstalled != false)
             writer.writeBool(5, this.isInstalled);
+        if (this.userIntentEnabled != false)
+            writer.writeBool(6, this.userIntentEnabled);
         if (!w)
             return writer.getResultBuffer();
     }
@@ -279,6 +300,9 @@ export class URLFilterState extends pb_1.Message {
                     break;
                 case 5:
                     message.isInstalled = reader.readBool();
+                    break;
+                case 6:
+                    message.userIntentEnabled = reader.readBool();
                     break;
                 default: reader.skipField();
             }

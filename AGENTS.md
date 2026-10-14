@@ -210,8 +210,9 @@ adguard-mini/
 - **Component tests (node:test)**: tests that render Preact components import
   `AdguardMini/ui/tests/mocks/domEnvironment.ts` first — it installs a jsdom
   document (with animation frames), stubs CSS-module imports, and defines the
-  webpack-injected globals (only `translate` for now). `UILib` and `react`/`react-dom` resolve to the
-  mocks in `AdguardMini/ui/tests/mocks/` via `tsconfig.node-tests.json`.
+  webpack-injected globals (`translate`, `cx`, `tx`). `Theme`, `UILib`, and
+  `react`/`react-dom` resolve to the mocks in `AdguardMini/ui/tests/mocks/`
+  via `tsconfig.node-tests.json`.
   Test files are excluded from ESLint (`.test.ts`/`.test.tsx` ignores).
 - **CI**: `yarn lint --quiet` and `yarn test:node` also run on every pull
   request via the `ts-lint` and `ts-test` jobs in
@@ -571,18 +572,14 @@ Blocker JSON consumed by the extension targets.
    - Use SPDX license headers, not legacy `Created by` / `Copyright` headers
    - `inclusive_language` is an error
    - No redundant boolean conditions (`== true`, `== false`)
-   - Capitalize the first word in comments. In multi-line `//` comments,
-     each continuation line is checked independently — restructure lines so
-     that every `//` line begins with a capitalized word (or a code reference
-     in backticks):
+   - Capitalize the first word in comments (a leading code reference in
+     backticks is accepted):
      ```swift
-     // Good: restructure so each `//` line starts with a capital letter.
-     // `TokenBucketLimiter` reads a monotonic clock.
-     // A wall-clock jump cannot refill the bucket.
+     // Good: the first word starts with a capital letter.
+     // `SMCopyAllJobDictionaries` is the only way to query login item status.
 
-     // Bad: a continuation line starts with a lowercase word.
-     // `TokenBucketLimiter` reads a monotonic clock, so a wall-clock
-     // jump cannot refill the bucket.
+     // Bad: the first word starts with a lowercase letter.
+     // this comment would be flagged by SwiftLint.
      ```
    - Analyzer rules enabled: `unused_declaration`, `unused_import`,
      `capture_variable`, `typesafe_array_init`
@@ -638,10 +635,16 @@ Blocker JSON consumed by the extension targets.
 
 5. **Comments in code**: An in-code comment justifies the statement it
    accompanies; it does not narrate what the code does.
-   - Answer *why* — a non-obvious constraint, a workaround, an invariant.
-     The *what* is already in the code and belongs there.
-   - Keep them short: one or two lines by default; a longer comment needs
-     a concrete reason to exist.
+   - Comment only critical, non-obvious places — a constraint, a
+     workaround, an invariant that the code cannot express on its own.
+     Code that reads clearly stays uncommented; the *what* is already in
+     the code.
+   - One line maximum. A comment MUST fit on a single `//` line; never
+     write multi-line comment blocks. If the reason does not fit on one
+     line, restructure the code instead of extending the comment.
+   - Documentation comments (`///`, JSDoc) are governed by the
+     "Top-level documentation" rule above. SPDX headers and `swiftlint`
+     directives are structural, not explanatory, and are exempt.
    - Keep them self-contained: comments are read without the discussion
      that produced them. Do not cite reviews, PRs, or commits, do not say
      "as agreed" or "as discussed", and do not record what was changed or
@@ -651,14 +654,18 @@ Blocker JSON consumed by the extension targets.
      above). The ticket that prompted the change belongs in the commit
      message and the pull request.
    ```swift
-   // Good: short, self-contained, and explains why.
-   // `orderOut` alone frees nothing — AppKit still owns an ordered-out
-   // Window — so teardown closes it instead.
+   // Good: one line, self-contained, and explains why.
+   // AppKit still owns an ordered-out window, so teardown closes it.
 
    // Bad: restates what the code already says.
    // Increment the counter and return it.
    counter += 1
    return counter
+
+   // Bad: a multi-line block where one line would do.
+   // AppKit still owns an ordered-out window even after the
+   // call returns, so teardown closes it.
+   self.window.close()
 
    // Bad: references a discussion that is not part of the code.
    // Per the review thread, we no longer await the reload here.
@@ -676,7 +683,9 @@ Blocker JSON consumed by the extension targets.
    or records the change history is unreadable without that context —
    commits and `git blame` already carry it. A ticket number ages badly
    for the same reason. `TODO` is different: it is a promise about work
-   not yet done, so it needs somewhere to track that work.
+   not yet done, so it needs somewhere to track that work. A comment
+   that needs several lines marks code that does not read clearly, so
+   the one-line limit pushes the explanation back into the code.
 
 6. **Explicit `self` in Swift**: Inside a class, every reference to an
    instance method or stored property MUST be written with `self.` — not
@@ -1253,17 +1262,38 @@ humans and AI agents that consume project documentation.
     UI through several sources — the request response and one or more
     platform pushes — the notification MUST be owned by the store that owns
     the state and deduplicated by error kind while its snack is shown, so the
-    repeated reports of one failure show a single snack. Once the snack is
-    gone — auto-closed, dismissed, or dropped by another notification — the
-    next failure is reported again: a control that rolls back silently leaves
-    no other feedback. The key also clears when the state recovers (a push or
-    a pull reports the feature running, or the user's call lands). A
-    different error replaces the shown snack instead of stacking another one.
+    repeated reports of one failure show a single snack. A failure the
+    platform reports on its own — a push or a pull — MUST also be collapsed
+    per feature-page visit: the platform retries a failed bring-up while the
+    page is open and repeats the failure, so such a snack is shown at most
+    once per visit, and closing it — auto-closed, dismissed, or dropped by
+    another notification — MUST NOT re-arm the report. An explicit user
+    attempt always reports its failure. The key also clears when the state
+    recovers (a push or a pull reports the feature running, or the user's call
+    lands). A different error replaces the shown snack instead of stacking
+    another one.
 
     **Rationale**: A failed System-wide Protection enable arrives as both an
     RPC error and a pushed error state, and the platform repeats the push for
     one change. Notifying from each source replaced identical snacks back to
     back, which reads as blinking; one store-owned, error-keyed slot makes
-    the number of reporting sources irrelevant, and tying it to the snack's
-    lifetime keeps a repeated attempt silent only while the user can still
-    see why it failed.
+    the number of reporting sources irrelevant, and the visit is the unit the
+    design counts automatic attempts by — a retry that keeps failing no
+    longer re-shows the snack after it closed while the page stays open.
+
+20. **Platform state pushes over focus-triggered refreshes**: State that the
+    platform owns and a WebView module displays (the main protection switch,
+    login item, hardware acceleration, URL filter state) MUST be pushed to
+    the module's callback service when it changes. A focus- or
+    visibility-triggered recovery MUST NOT be the only way an already-open
+    window learns such a value: the window can be open without focus, and
+    the writer can debounce the change (the tray uploads settings with a
+    trailing debounce), so a refresh fired by focus races the change it is
+    meant to show. Keep focus recovery for state that has no change event of
+    its own, such as the helper status the user toggles in System Settings.
+
+    **Rationale**: A focus-based sync shows whatever the platform had when
+    focus returned and leaves the window stale until the next focus change,
+    while a push reaches the open window immediately, focused or not — the
+    pattern the settings window already relies on for the login item and
+    URL filter state.

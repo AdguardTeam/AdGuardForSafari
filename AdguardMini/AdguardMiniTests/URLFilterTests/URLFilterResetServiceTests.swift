@@ -8,6 +8,7 @@
 //
 
 import XCTest
+import AML
 
 // MARK: - Fakes
 
@@ -25,6 +26,7 @@ private final class FakeURLFilterService: URLFilterService {
     }
     func setEnabledByUser(_: Bool) async throws {}
     func reconcile() async {}
+    func retryIfNeeded() async {}
     func setProtectionLevel(_: URLFilterProtectionLevel) async throws {}
     func getState() async throws -> URLFilterState {
         URLFilterState(
@@ -90,6 +92,32 @@ private enum TestError: Error {
     case generic
 }
 
+/// Answers the assembler with a preconfigured blockage verdict and records how
+/// often it was consulted.
+private final class FakeICloudDomainBlockageChecker: ICloudDomainBlockageChecking, @unchecked Sendable {
+    private let lock = UnfairLock()
+    private var storedIsBlocked = false
+    private var storedCallCount = 0
+
+    /// Whether the checker reports a blocked iCloud domain.
+    var isBlocked: Bool {
+        get { locked(self.lock) { self.storedIsBlocked } }
+        set { locked(self.lock) { self.storedIsBlocked = newValue } }
+    }
+
+    /// Number of times `isAnyDomainBlocked()` was called.
+    var callCount: Int {
+        locked(self.lock) { self.storedCallCount }
+    }
+
+    func isAnyDomainBlocked() async -> Bool {
+        locked(self.lock) {
+            self.storedCallCount += 1
+            return self.storedIsBlocked
+        }
+    }
+}
+
 // MARK: - Test helpers
 
 private func makeResetService(
@@ -102,7 +130,9 @@ private func makeResetService(
         urlFilterService: urlFilterService,
         protectionLevelProvider: { .essential },
         isNewProvider: { false },
-        bloomMetadataProvider: { nil }
+        bloomMetadataProvider: { nil },
+        userIntentProvider: { keychainStorage.urlFilterEnabled },
+        iCloudDomainBlockageChecker: FakeICloudDomainBlockageChecker()
     )
     let resetService = URLFilterResetServiceImpl(
         urlFilterService,

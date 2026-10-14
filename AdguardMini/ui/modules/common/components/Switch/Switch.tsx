@@ -13,6 +13,11 @@ export type SwitchProps = {
     labelClassName?: string;
     disabled?: boolean;
     muted?: boolean;
+    /**
+     * Whether the switch is waiting for the feature to run: it is disabled and
+     * shown in the light product green while the bring-up runs.
+     */
+    enabling?: boolean;
     id?: string;
     name?: string;
     ariaLabel?: string;
@@ -30,6 +35,7 @@ export function Switch({
     labelClassName,
     disabled,
     muted,
+    enabling,
     onChange,
     id,
     name,
@@ -37,7 +43,9 @@ export function Switch({
     ariaDescribedby,
     icon,
 }: SwitchProps) {
-    const keyboard = useToggleControlKeyboard(disabled, () => onChange(!checked));
+    // An enabling switch is not interactive either: the bring-up owns the state.
+    const isDisabled = disabled || enabling;
+    const keyboard = useToggleControlKeyboard(isDisabled, () => onChange(!checked));
 
     return (
         // The inner `<input>` is `display: none`, so it is absent from the
@@ -50,9 +58,9 @@ export function Switch({
         <label
             aria-checked={checked}
             aria-describedby={ariaDescribedby}
-            aria-disabled={disabled}
+            aria-disabled={isDisabled}
             aria-label={ariaLabel}
-            className={cx(s.switch, disabled && s.disabledSwitch, className)}
+            className={cx(s.switch, isDisabled && s.disabledSwitch, enabling && s.enablingSwitch, className)}
             htmlFor={id}
             // The rule fires because a `<label>` is not natively interactive —
             // but this one is: it owns the click handler and the tab stop,
@@ -61,7 +69,7 @@ export function Switch({
             role="switch"
             onClick={(e) => {
                 e.stopPropagation();
-                if (!disabled) {
+                if (!isDisabled) {
                     onChange(!checked);
                 }
             }}
@@ -74,7 +82,7 @@ export function Switch({
             <input
                 checked={checked}
                 className={cx(s.input, s.checked)}
-                disabled={disabled}
+                disabled={isDisabled}
                 id={id}
                 name={name}
                 type="checkbox"
