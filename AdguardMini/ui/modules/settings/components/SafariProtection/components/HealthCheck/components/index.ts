@@ -6,6 +6,7 @@ export * from './HealthCheckDismissId';
 export * from './HealthCheckCard';
 export * from './ExtensionsDisabledCard';
 export * from './BackgroundDisabledCard';
+export * from './SystemWideProtectionUnavailableCard';
 export * from './ExtensionsBrokenCard';
 export * from './RulesLimitExceededCard';
 export * from './NoUpdatesCard';

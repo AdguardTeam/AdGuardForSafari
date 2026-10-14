@@ -36,9 +36,8 @@ function FilteringRulesComponent() {
     const updateDescId = useId();
     const updateValueId = useId();
 
-    // Do not render the component
-    // if there are no rules and no last update timestamp
-    if (!(info.rulesCount > 0 || info.lastUpdate > 0)) {
+    // Nothing to show without rules, a last-update timestamp, or a fetched state.
+    if (!info || !(info.rulesCount > 0 || info.lastUpdate > 0)) {
         return null;
     }
 

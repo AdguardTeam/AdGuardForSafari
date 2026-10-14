@@ -26,6 +26,7 @@ private final class FakeURLFilterService: URLFilterService {
     }
     func setEnabledByUser(_: Bool) async throws {}
     func reconcile() async {}
+    func retryIfNeeded() async {}
     func setProtectionLevel(_: URLFilterProtectionLevel) async throws {}
     func getState() async throws -> URLFilterState {
         URLFilterState(
@@ -130,6 +131,7 @@ private func makeResetService(
         protectionLevelProvider: { .essential },
         isNewProvider: { false },
         bloomMetadataProvider: { nil },
+        userIntentProvider: { keychainStorage.urlFilterEnabled },
         iCloudDomainBlockageChecker: FakeICloudDomainBlockageChecker()
     )
     let resetService = URLFilterResetServiceImpl(

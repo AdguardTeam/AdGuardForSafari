@@ -64,6 +64,7 @@ export function Text({
     ariaLabelledby?: string;
     lineHeight?: string;
     semibold?: boolean;
+    wide?: boolean;
 }) {
     return (
         <span

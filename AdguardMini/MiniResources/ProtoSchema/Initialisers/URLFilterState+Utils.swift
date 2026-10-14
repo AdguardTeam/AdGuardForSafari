@@ -14,6 +14,7 @@ extension URLFilterState {
         protectionLevel: URLFilterProtectionLevel,
         status: URLFilterStatus,
         isInstalled: Bool,
+        userIntentEnabled: Bool,
         info: URLFilterInfo
     ) {
         self.init()
@@ -21,6 +22,7 @@ extension URLFilterState {
         self.protectionLevel = protectionLevel
         self.status = status
         self.isInstalled = isInstalled
+        self.userIntentEnabled = userIntentEnabled
         self.info = info
     }
 }

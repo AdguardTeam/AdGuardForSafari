@@ -1266,20 +1266,24 @@ humans and AI agents that consume project documentation.
     UI through several sources — the request response and one or more
     platform pushes — the notification MUST be owned by the store that owns
     the state and deduplicated by error kind while its snack is shown, so the
-    repeated reports of one failure show a single snack. Once the snack is
-    gone — auto-closed, dismissed, or dropped by another notification — the
-    next failure is reported again: a control that rolls back silently leaves
-    no other feedback. The key also clears when the state recovers (a push or
-    a pull reports the feature running, or the user's call lands). A
-    different error replaces the shown snack instead of stacking another one.
+    repeated reports of one failure show a single snack. A failure the
+    platform reports on its own — a push or a pull — MUST also be collapsed
+    per feature-page visit: the platform retries a failed bring-up while the
+    page is open and repeats the failure, so such a snack is shown at most
+    once per visit, and closing it — auto-closed, dismissed, or dropped by
+    another notification — MUST NOT re-arm the report. An explicit user
+    attempt always reports its failure. The key also clears when the state
+    recovers (a push or a pull reports the feature running, or the user's call
+    lands). A different error replaces the shown snack instead of stacking
+    another one.
 
     **Rationale**: A failed System-wide Protection enable arrives as both an
     RPC error and a pushed error state, and the platform repeats the push for
     one change. Notifying from each source replaced identical snacks back to
     back, which reads as blinking; one store-owned, error-keyed slot makes
-    the number of reporting sources irrelevant, and tying it to the snack's
-    lifetime keeps a repeated attempt silent only while the user can still
-    see why it failed.
+    the number of reporting sources irrelevant, and the visit is the unit the
+    design counts automatic attempts by — a retry that keeps failing no
+    longer re-shows the snack after it closed while the page stays open.
 
 20. **Platform state pushes over focus-triggered refreshes**: State that the
     platform owns and a WebView module displays (the main protection switch,

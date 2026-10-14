@@ -13,6 +13,7 @@ import {
     UpdateRealTimeFiltersUpdateRequest,
     ResetURLFilterCacheRequest,
     RemoveURLFilterRequest,
+    RetryURLFilterRequest,
     GetRealTimeFiltersUpdateRequest,
     GetAdguardExtraRequest,
     GetAdvancedRulesRequest,
@@ -27,6 +28,7 @@ import {
     NotificationContext,
     NotificationsQueueIconType,
     NotificationsQueueType,
+    NotificationsQueueVariant,
 } from 'Common/stores/NotificationsQueue';
 import { getNotificationSomethingWentWrongText } from 'SettingsLib/utils/translate';
 
@@ -65,8 +67,6 @@ enum URLFilterErrorKind {
     enable = 'enable',
     /** A maintenance call (cache reset, filter removal) failed. */
     maintenance = 'maintenance',
-    /** A System-wide Protection failure caused by blocked iCloud hosts. */
-    dns = 'dns',
 }
 
 /**
@@ -88,9 +88,25 @@ export class AdvancedBlocking {
     private urlFilterErrorNotificationId: string | null = null;
 
     /**
+     * Whether the "unavailable" snack was already shown for an automatic
+     * failure during the current System-wide Protection page visit.
+     *
+     * The platform retries a failed bring-up while the page is open and
+     * reports the same failure again and again; the design counts automatic
+     * attempts per visit. An explicit attempt reports its own failure, and a
+     * recovery re-arms the automatic report.
+     */
+    private unavailableSnackShownThisVisit = false;
+
+    /**
      * Notifications queue used to surface error toasts.
      */
     private readonly notification: NotificationsQueue;
+
+    /**
+     * Opens the System-wide Protection page, where the troubleshooting steps are.
+     */
+    private readonly openSystemWideProtection: () => void;
 
     /**
      * Whether the stats of a pushed state are being held: the next push — or
@@ -140,12 +156,48 @@ export class AdvancedBlocking {
     public urlFilterNew = false;
 
     /**
+     * Whether the System-wide Protection page must scroll its Troubleshooting
+     * block into view: the snack action points the user to the steps.
+     */
+    public scrollToTroubleshootingRequested = false;
+
+    /**
+     * Whether System-wide Protection is unavailable because a DNS filter
+     * blocks the iCloud hosts it needs: the Safari Protection page shows its
+     * dedicated card for this failure instead of a snack.
+     */
+    public get isSystemWideProtectionUnavailable(): boolean {
+        return this.urlFilterState.status === URLFilterStatus.dns_error;
+    }
+
+    /**
+     * Whether the filter is being enabled: the switch shows the in-progress
+     * "on" state while the bring-up runs.
+     */
+    public get isSystemWideProtectionEnabling(): boolean {
+        return this.urlFilterState.userIntentEnabled
+            && this.urlFilterState.status === URLFilterStatus.loading;
+    }
+
+    /**
+     * Whether the switch must show the ON INACTIVE state: the user's choice
+     * is on, but the bring-up failed and the filter is not running.
+     */
+    public get isSystemWideProtectionInactive(): boolean {
+        return this.urlFilterState.userIntentEnabled
+            && this.urlFilterState.status !== URLFilterStatus.running
+            && !this.isSystemWideProtectionEnabling;
+    }
+
+    /**
      * Ctor
      *
      * @param notification Notifications queue used to surface error toasts.
+     * @param openSystemWideProtection Opens the System-wide Protection page.
      */
-    public constructor(notification: NotificationsQueue) {
+    public constructor(notification: NotificationsQueue, openSystemWideProtection: () => void) {
         this.notification = notification;
+        this.openSystemWideProtection = openSystemWideProtection;
         makeAutoObservable(this, {
             getAdvancedRules: flow,
             getAdguardExtra: flow,
@@ -154,32 +206,102 @@ export class AdvancedBlocking {
     }
 
     /**
-     * Shows the notification for a System-wide Protection failure.
+     * Whether the snack of the given kind is currently on screen.
+     *
+     * The snack may have been dropped by another notification without clearing
+     * the id, so the queue — not the id — tells whether it shows.
+     *
+     * @param kind Kind of the failure the snack reports.
+     */
+    private isURLFilterErrorSnackShown(kind: URLFilterErrorKind): boolean {
+        return this.reportedURLFilterErrorKind === kind
+            && this.urlFilterErrorNotificationId !== null
+            && this.notification.get(this.urlFilterErrorNotificationId) !== undefined;
+    }
+
+    /**
+     * Reports an automatic bring-up failure that reached the UI as a state
+     * change: a push or a pull of a failed state.
+     *
+     * The snack is shown wherever the user is, but automatic reports are
+     * collapsed per page visit: the platform retries the bring-up while the
+     * System-wide Protection page is open and reports one failure several
+     * times, and the design counts automatic attempts per visit.
+     */
+    private reportAutomaticURLFilterFailure() {
+        if (this.unavailableSnackShownThisVisit) {
+            return;
+        }
+        this.showSystemWideProtectionUnavailableSnack();
+    }
+
+    /**
+     * Shows the snack for a System-wide Protection bring-up failure.
+     *
+     * The failure is reported wherever the user is — the switch also lives on
+     * the Advanced blocking page, so the failure can arrive while the settings
+     * window is on any page. Reports of one kind share a single snack while it
+     * is on screen; an automatic report is also remembered for the page visit,
+     * so it is not shown again after the snack closed.
+     */
+    private showSystemWideProtectionUnavailableSnack() {
+        if (this.isURLFilterErrorSnackShown(URLFilterErrorKind.enable)) {
+            return;
+        }
+        this.unavailableSnackShownThisVisit = true;
+        this.closeURLFilterErrorNotification();
+        this.reportedURLFilterErrorKind = URLFilterErrorKind.enable;
+        this.urlFilterErrorNotificationId = this.notification.notify({
+            message: translate('advanced.blocking.system.wide.unavailable'),
+            notificationContext: NotificationContext.ctaButton,
+            type: NotificationsQueueType.warning,
+            iconType: NotificationsQueueIconType.error,
+            variant: NotificationsQueueVariant.textOnly,
+            btnLabel: translate('advanced.blocking.system.wide.troubleshooting'),
+            onClick: () => {
+                this.closeURLFilterErrorNotification();
+                this.requestTroubleshootingScroll();
+                this.openSystemWideProtection();
+            },
+            closeable: true,
+            onClose: () => {
+                this.urlFilterErrorNotificationId = null;
+            },
+        });
+    }
+
+    /**
+     * Closes the shown System-wide Protection error notification, if any.
+     */
+    private closeURLFilterErrorNotification() {
+        if (this.urlFilterErrorNotificationId === null) {
+            return;
+        }
+        this.notification.closeNotify(this.urlFilterErrorNotificationId);
+        this.urlFilterErrorNotificationId = null;
+    }
+
+    /**
+     * Shows the notification for a maintenance failure (cache reset, filter
+     * removal).
      *
      * One failed change reaches the UI more than once — the request response
      * and the pushed state both report it — so failures of one kind share a
      * single notification while it is on screen. Once the snack is gone —
      * auto-closed, dismissed, or dropped by another notification — the next
-     * failure is reported again: the switch rolls back silently, so a retry
-     * after a gone snack would leave the user without any feedback.
+     * failure is reported again.
      *
      * @param kind Kind of the failure to report.
      */
     private notifyURLFilterError(kind: URLFilterErrorKind) {
-        // The snack may have been dropped by another notification without
-        // clearing the id, so the queue — not the id — tells whether it shows.
-        const isSnackShown = this.urlFilterErrorNotificationId !== null
-            && this.notification.get(this.urlFilterErrorNotificationId) !== undefined;
-        if (isSnackShown && this.reportedURLFilterErrorKind === kind) {
+        if (this.isURLFilterErrorSnackShown(kind)) {
             return;
         }
         // A different error supersedes the previous one: one error, one snack.
-        if (this.urlFilterErrorNotificationId !== null) {
-            this.notification.closeNotify(this.urlFilterErrorNotificationId);
-        }
+        this.closeURLFilterErrorNotification();
         this.reportedURLFilterErrorKind = kind;
         this.urlFilterErrorNotificationId = this.notification.notify({
-            message: this.errorNotificationMessage(kind),
+            message: getNotificationSomethingWentWrongText(),
             notificationContext: NotificationContext.info,
             type: NotificationsQueueType.warning,
             iconType: NotificationsQueueIconType.error,
@@ -191,28 +313,12 @@ export class AdvancedBlocking {
     }
 
     /**
-     * Message of the notification shown for a System-wide Protection failure.
-     *
-     * @param kind Kind of the failure.
-     */
-    private errorNotificationMessage(kind: URLFilterErrorKind): string {
-        if (kind === URLFilterErrorKind.enable) {
-            return translate('advanced.blocking.system.wide.error');
-        }
-        if (kind === URLFilterErrorKind.dns) {
-            // TODO: AG-60022 Replace the temporary DNS snack with the warning card.
-            return 'Couldn\'t enable System-wide protection: iCloud domains are blocked by your DNS filter';
-        }
-        return getNotificationSomethingWentWrongText();
-    }
-
-    /**
-     * Clears the deduplication key once the filter recovered, so a failure
-     * after the recovery is reported again — even while the snack of the
-     * previous error is still on screen.
+     * Clears the failure-reporting state once the filter recovered or a change
+     * landed, so a failure after it is reported again.
      */
     private resetURLFilterError() {
         this.reportedURLFilterErrorKind = null;
+        this.unavailableSnackShownThisVisit = false;
     }
 
     /**
@@ -262,6 +368,40 @@ export class AdvancedBlocking {
     }
 
     /**
+     * Starts a System-wide Protection page visit: automatic failure reports
+     * are collapsed to one per visit. Losing and returning focus does not
+     * start a new visit.
+     */
+    public beginSystemWideProtectionPageVisit() {
+        this.unavailableSnackShownThisVisit = false;
+    }
+
+    /**
+     * Ends a System-wide Protection page visit: automatic failure reports are
+     * no longer collapsed, so a failure reported on another page is shown
+     * again. Losing and returning focus does not end a visit.
+     */
+    public endSystemWideProtectionPageVisit() {
+        this.unavailableSnackShownThisVisit = false;
+    }
+
+    /**
+     * Asks the System-wide Protection page to scroll to the troubleshooting
+     * steps: the failure snack points the user there.
+     */
+    public requestTroubleshootingScroll() {
+        this.scrollToTroubleshootingRequested = true;
+    }
+
+    /**
+     * Clears the pending troubleshooting scroll request once the page scrolls
+     * to the steps.
+     */
+    public consumeTroubleshootingScroll() {
+        this.scrollToTroubleshootingRequested = false;
+    }
+
+    /**
      * URL filter state setter
      */
     public setURLFilterState(data: URLFilterState) {
@@ -291,10 +431,8 @@ export class AdvancedBlocking {
      */
     public applyPushedURLFilterState(data: URLFilterState) {
         this.setURLFilterState(data);
-        if (data.status === URLFilterStatus.error) {
-            this.notifyURLFilterError(URLFilterErrorKind.enable);
-        } else if (data.status === URLFilterStatus.dns_error) {
-            this.notifyURLFilterError(URLFilterErrorKind.dns);
+        if (data.status === URLFilterStatus.error || data.status === URLFilterStatus.dns_error) {
+            this.reportAutomaticURLFilterFailure();
         } else if (data.status === URLFilterStatus.running) {
             // The filter works again: a later failure is a new error.
             this.resetURLFilterError();
@@ -377,12 +515,19 @@ export class AdvancedBlocking {
 
     /**
      * Get URL filter state from swift
+     *
+     * @param reportFailure Whether an error state shows the unavailable snack;
+     * a maintenance call reports its own failure instead.
      */
-    public async getURLFilterState() {
+    public async getURLFilterState(reportFailure = true) {
         const resp = await window.API.Execute(new GetURLFilterStateRequest());
         this.setURLFilterState(resp);
         this.showStats(resp.info);
-        if (resp.status === URLFilterStatus.running) {
+        if (resp.status === URLFilterStatus.error || resp.status === URLFilterStatus.dns_error) {
+            if (reportFailure) {
+                this.reportAutomaticURLFilterFailure();
+            }
+        } else if (resp.status === URLFilterStatus.running) {
             // The filter works again: a later failure is a new error.
             this.resetURLFilterError();
         }
@@ -401,18 +546,34 @@ export class AdvancedBlocking {
      */
     public async updateSystemWideProtection(value: boolean) {
         const newValue = this.urlFilterState.clone();
-        const prevValue = this.urlFilterState.clone();
-        newValue.enabled = value;
+        newValue.userIntentEnabled = value;
         this.setURLFilterState(newValue);
         const resp = await window.API.Execute(new SetURLFilterEnabledRequest({ value }));
         if (resp.hasError) {
-            this.notifyURLFilterError(URLFilterErrorKind.enable);
-            this.setURLFilterState(prevValue);
+            // The user pressed the switch: the failure is reported wherever it was pressed.
+            this.showSystemWideProtectionUnavailableSnack();
+            // The platform persists the intent before attempting the start,
+            // so the pull — not the response — tells the effective state.
             await this.getURLFilterState();
         } else {
             // The toggle landed: the error state of the previous attempt is over.
             this.resetURLFilterError();
         }
+    }
+
+    /**
+     * Asks the platform to retry a failed bring-up: called when the
+     * System-wide Protection page opens and when the settings window regains
+     * focus while it is open.
+     *
+     * The platform re-checks the user's intent, the main switch, and the
+     * license, and never creates a configuration on its own.
+     */
+    public async retrySystemWideProtection() {
+        if (!this.urlFilterState.userIntentEnabled) {
+            return;
+        }
+        await window.API.Execute(new RetryURLFilterRequest());
     }
 
     /**
@@ -447,7 +608,8 @@ export class AdvancedBlocking {
     public async resetURLFilterCache() {
         const resp = await window.API.Execute(new ResetURLFilterCacheRequest());
         if (resp.hasError) {
-            await this.getURLFilterState();
+            // The maintenance failure is the reported one; the pull only refreshes the state.
+            await this.getURLFilterState(false);
             this.notifyURLFilterError(URLFilterErrorKind.maintenance);
         } else {
             return true;
@@ -460,7 +622,8 @@ export class AdvancedBlocking {
     public async removeURLFilter() {
         const resp = await window.API.Execute(new RemoveURLFilterRequest());
         if (resp.hasError) {
-            await this.getURLFilterState();
+            // The maintenance failure is the reported one; the pull only refreshes the state.
+            await this.getURLFilterState(false);
             this.notifyURLFilterError(URLFilterErrorKind.maintenance);
         } else {
             return true;

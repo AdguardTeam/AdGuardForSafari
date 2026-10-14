@@ -31,6 +31,8 @@ message URLFilterState {
     URLFilterStatus status = 3;
     URLFilterInfo info = 4;
     bool is_installed = 5;
+    /* Whether the user's persisted choice is to keep the filter enabled. */
+    bool user_intent_enabled = 6;
 }
 
 message URLFilterProtectionLevelUpdate {

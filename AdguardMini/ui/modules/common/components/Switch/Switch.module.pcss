@@ -35,6 +35,14 @@
         }
     }
 
+    /* A switch waiting for the feature to run keeps the light product green. */
+    &.enablingSwitch {
+        .labelEnabled {
+            background-color: var(--fills-switch-all-on-disabled);
+            border-color: var(--fills-switch-all-on-disabled);
+        }
+    }
+
     &:hover {
         .disabled {
             border-color: var(--text-links-error-link-hovered);

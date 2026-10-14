@@ -63,6 +63,10 @@ protocol URLFilterService: AnyObject {
     /// apply a stale switch value.
     /// Errors are logged internally, never thrown.
     func reconcile() async
+    /// Retries a failed bring-up when the user's persisted intent, the main
+    /// switch, and the license still justify it; a no-op otherwise. Never
+    /// creates a configuration.
+    func retryIfNeeded() async
     /// Enables or disables the filter and refreshes PIR parameters so it (re)starts.
     /// - Throws: ``URLFilterServiceError/superseded`` when a newer transition
     ///   superseded the level change before the restart completed.
@@ -251,6 +255,16 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
             return
         }
         guard self.userIntentEnabled, await self.licenseProvider.isPaid() else { return }
+        try? await self.applyAutomaticTransition(to: true)
+    }
+
+    /// Retries a failed bring-up when the user's persisted intent, the main
+    /// switch, and the license still justify it. Reads them fresh, so a retry
+    /// cannot revive a filter the user has turned off in the meantime.
+    func retryIfNeeded() async {
+        // Only a filter the user wants on is retried; a retry never creates a configuration.
+        guard self.userIntentEnabled else { return }
+        // The transition logs its own failures; the state push tells the UI how the retry ended.
         try? await self.applyAutomaticTransition(to: true)
     }
 
@@ -1137,10 +1151,11 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
             self.clearDisconnectErrorSnapshot()
         }
         let manager = NEURLFilterManager.shared
-        // Rebuild from the manager so status, enabled flag, and latest
-        // `lastDisconnectError` reflect the transition, not a stale snapshot.
+        // The manager read is not a status source: it reports `.invalid` for a
+        // Running filter right after the preferences reload below. The observed
+        // Event is the transition itself, so the cached status comes from it.
         try? await manager.loadFromPreferences()
-        self.cachedState = await self.makeState(from: manager)
+        self.cachedState = await self.makeState(from: manager, statusOverride: status)
         // Sample after the reload so the log describes the same manager state
         // As the derivation it explains.
         let rawError = self.rawLastDisconnectError(from: await manager.lastDisconnectError)
@@ -1360,8 +1375,16 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
         return await self.makeState(from: manager)
     }
 
-    private func makeState(from manager: NEURLFilterManager) async -> URLFilterState {
-        let rawStatus = self.rawStatus(from: await manager.status)
+    private func makeState(
+        from manager: NEURLFilterManager,
+        statusOverride: NEURLFilterManager.Status? = nil
+    ) async -> URLFilterState {
+        let rawStatus: URLFilterRawStatus
+        if let statusOverride {
+            rawStatus = self.rawStatus(from: statusOverride)
+        } else {
+            rawStatus = self.rawStatus(from: await manager.status)
+        }
         let rawError = self.rawLastDisconnectError(from: await manager.lastDisconnectError)
         // Read the synchronous properties once so the snapshot is consistent.
         let isEnabled = manager.isEnabled
@@ -1507,6 +1530,8 @@ final actor URLFilterServiceNoOp: URLFilterService {
     }
 
     func reconcile() async {}
+
+    func retryIfNeeded() async {}
 
     func setEnabledByUser(_: Bool) async throws {
         throw URLFilterServiceError.unsupportedPlatform

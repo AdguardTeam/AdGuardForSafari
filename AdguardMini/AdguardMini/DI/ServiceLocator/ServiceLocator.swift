@@ -397,6 +397,9 @@ final class ServiceLocator {
             bloomMetadataProvider: { [bloomMetadataStorage = self.urlFilterBloomMetadataStorage] in
                 bloomMetadataStorage.load()
             },
+            userIntentProvider: { [sharedKeychainStorage = self.sharedKeychainStorage] in
+                sharedKeychainStorage.urlFilterEnabled
+            },
             iCloudDomainBlockageChecker: self.iCloudDomainBlockageChecker
         )
     }()

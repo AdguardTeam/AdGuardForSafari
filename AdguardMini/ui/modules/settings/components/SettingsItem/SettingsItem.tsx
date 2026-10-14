@@ -236,6 +236,11 @@ export type SettingsItemSwitchProps = SettingsItemProps & {
     setValue(e: boolean): void;
     muted?: boolean;
     disabled?: boolean;
+    /**
+     * Whether the switch is waiting for the feature to run: it is shown
+     * disabled in the light product green while the bring-up runs.
+     */
+    enabling?: boolean;
 };
 
 /**
@@ -247,6 +252,7 @@ export function SettingsItemSwitch({
     setValue,
     muted,
     disabled,
+    enabling,
     iconColor,
     ...rest
 }: SettingsItemSwitchProps) {
@@ -261,7 +267,7 @@ export function SettingsItemSwitch({
             descriptionId={descriptionId}
             iconColor={iconColor ?? (isEnabled ? 'green' : 'gray')}
             onContainerClick={() => {
-                if (disabled) {
+                if (disabled || enabling) {
                     return;
                 }
                 setValue(!value);
@@ -277,6 +283,7 @@ export function SettingsItemSwitch({
                 ariaLabel={rest.title}
                 checked={value}
                 disabled={disabled}
+                enabling={enabling}
                 id={id}
                 muted={muted}
                 onChange={setValue}

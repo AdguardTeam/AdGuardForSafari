@@ -37,6 +37,7 @@ private final class FakeURLFilterService: URLFilterService {
     func removeConfiguration() async throws {}
     func setEnabledByUser(_: Bool) async throws {}
     func reconcile() async {}
+    func retryIfNeeded() async {}
     func setProtectionLevel(_: URLFilterProtectionLevel) async throws {}
     func getState() async throws -> URLFilterState {
         if let error = self.getStateError {
@@ -82,13 +83,15 @@ private func makeAssembler(
     protectionLevel: URLFilterProtectionLevel = .essential,
     isNew: Bool = false,
     bloomMetadata: URLFilterBloomMetadata? = nil,
-    checker: FakeICloudDomainBlockageChecker = FakeICloudDomainBlockageChecker()
+    checker: FakeICloudDomainBlockageChecker = FakeICloudDomainBlockageChecker(),
+    userIntent: Bool = true
 ) -> URLFilterStateAssembler {
     URLFilterStateAssembler(
         urlFilterService: service,
         protectionLevelProvider: { protectionLevel },
         isNewProvider: { isNew },
         bloomMetadataProvider: { bloomMetadata },
+        userIntentProvider: { userIntent },
         iCloudDomainBlockageChecker: checker
     )
 }
@@ -200,17 +203,34 @@ final class URLFilterStateAssemblerTests: XCTestCase {
         XCTAssertEqual(checker.callCount, 0)
     }
 
-    func testDisabledStoppedWithStaleErrorStaysLoading() async {
+    func testDisabledStoppedWithErrorAndIntentOnMapsToError() async {
         let service = FakeURLFilterService()
         service.state = makeState(
             enabled: false,
             status: .stopped,
             lastDisconnectError: .configurationDisabled
         )
-        let assembler = makeAssembler(service: service)
+        let assembler = makeAssembler(service: service, userIntent: true)
 
         let state = await assembler.makeState()
 
+        // A filter disabled after a failure keeps the failure while the user still wants it on.
+        XCTAssertEqual(state.status, .error)
+        XCTAssertFalse(state.enabled)
+    }
+
+    func testDisabledStoppedWithErrorAndIntentOffStaysLoading() async {
+        let service = FakeURLFilterService()
+        service.state = makeState(
+            enabled: false,
+            status: .stopped,
+            lastDisconnectError: .configurationDisabled
+        )
+        let assembler = makeAssembler(service: service, userIntent: false)
+
+        let state = await assembler.makeState()
+
+        // The user turned the filter off: no failure is surfaced.
         XCTAssertEqual(state.status, .loading)
         XCTAssertFalse(state.enabled)
     }
@@ -251,19 +271,67 @@ final class URLFilterStateAssemblerTests: XCTestCase {
         XCTAssertFalse(state.enabled)
     }
 
-    func testDisabledWithInvalidStatusAndErrorStaysLoading() async {
+    func testDisabledWithErrorAndIntentOnMapsToError() async {
         let service = FakeURLFilterService()
         service.state = makeState(
             enabled: false,
             status: .invalid,
             lastDisconnectError: .extensionFailedToLoad
         )
-        let assembler = makeAssembler(service: service)
+        let assembler = makeAssembler(service: service, userIntent: true)
 
         let state = await assembler.makeState()
 
+        // The fail-safe disabled the filter, but the user still wants it on: the switch stays inactive.
+        XCTAssertEqual(state.status, .error)
+        XCTAssertFalse(state.enabled)
+        XCTAssertTrue(state.userIntentEnabled)
+    }
+
+    func testDisabledWithErrorAndIntentOffStaysLoading() async {
+        let service = FakeURLFilterService()
+        service.state = makeState(
+            enabled: false,
+            status: .invalid,
+            lastDisconnectError: .extensionFailedToLoad
+        )
+        let assembler = makeAssembler(service: service, userIntent: false)
+
+        let state = await assembler.makeState()
+
+        // The user turned the filter off: no failure is surfaced.
         XCTAssertEqual(state.status, .loading)
         XCTAssertFalse(state.enabled)
+        XCTAssertFalse(state.userIntentEnabled)
+    }
+
+    func testFailSafeDisabledFilterWithBlockedICloudDomainsStaysDNSError() async {
+        let service = FakeURLFilterService()
+        service.state = makeState(
+            enabled: false,
+            status: .invalid,
+            lastDisconnectError: .serverSetupIncomplete
+        )
+        let checker = FakeICloudDomainBlockageChecker()
+        checker.isBlocked = true
+        let assembler = makeAssembler(service: service, checker: checker, userIntent: true)
+
+        let state = await assembler.makeState()
+
+        // The fail-safe disable must not hide the iCloud failure: the card and the switch state survive it.
+        XCTAssertEqual(state.status, .dnsError)
+        XCTAssertFalse(state.enabled)
+        XCTAssertTrue(state.userIntentEnabled)
+    }
+
+    func testAssemblesTheUserIntentForTheSwitch() async {
+        let service = FakeURLFilterService()
+
+        let onState = await makeAssembler(service: service, userIntent: true).makeState()
+        XCTAssertTrue(onState.userIntentEnabled)
+
+        let offState = await makeAssembler(service: service, userIntent: false).makeState()
+        XCTAssertFalse(offState.userIntentEnabled)
     }
 
     func testStateFetchFailureMapsToError() async {

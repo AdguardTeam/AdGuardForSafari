@@ -17,7 +17,7 @@
 // assignment below is legal.
 declare global {
     // eslint-disable-next-line no-var
-    var translate: (key: string) => string;
+    var translate: (key: string, params?: Record<string, unknown>) => string;
 }
 
 // Install the runtime `translate` used by the callback internals

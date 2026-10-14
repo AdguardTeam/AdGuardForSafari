@@ -53,7 +53,8 @@ final class WebViewCallbackCoordinator {
             deliver: { [settings] state in
                 LogDebug(
                     "URLFilter state push: enabled=\(state.enabled), status=\(state.status), "
-                        + "protectionLevel=\(state.protectionLevel)"
+                        + "protectionLevel=\(state.protectionLevel), "
+                        + "userIntentEnabled=\(state.userIntentEnabled)"
                 )
                 settings.onURLFilterStateChanged(state.toProto())
             }

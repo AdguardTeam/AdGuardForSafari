@@ -27,8 +27,10 @@ export function AdvancedBlockingControlComponent() {
     const { advancedBlocking, account, telemetry, settings } = useSettingsStore();
     const {
         adguardExtra, realTimeFiltersUpdate,
-        urlFilterState: { enabled: systemWideProtectionEnabled, isInstalled },
+        urlFilterState: { userIntentEnabled, isInstalled },
         urlFilterNew: isSystemWideProtectionNew,
+        isSystemWideProtectionInactive,
+        isSystemWideProtectionEnabling,
     } = advancedBlocking;
 
     const { settings: { macos25OrLower, non501User, autoFiltersUpdate, protectionEnabled } } = settings;
@@ -87,13 +89,15 @@ export function AdvancedBlockingControlComponent() {
             />
             <SystemWideProtectionSwitch
                 disabled={isSystemWideProtectionDisabled}
+                enabling={isSystemWideProtectionEnabling}
+                inactive={isSystemWideProtectionInactive}
                 isNew={isSystemWideProtectionNew}
                 muted={!isLicenseOrTrialActive}
                 non501User={non501User}
                 macos25OrLower={macos25OrLower}
                 orangeIcon={isFree}
                 setShowNotSupportedModal={setShowNotSupportedModal}
-                value={isLicenseOrTrialActive ? systemWideProtectionEnabled : false}
+                value={isLicenseOrTrialActive ? userIntentEnabled : false}
                 onChange={onUpdateSystemWideProtection}
             />
             <AdguardExtraSwitch

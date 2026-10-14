@@ -24,6 +24,7 @@ actor URLFilterStateAssembler {
     private let isNewProvider: @Sendable () -> Bool
     private let bloomMetadataProvider: @Sendable () -> URLFilterBloomMetadata?
     private let iCloudDomainBlockageChecker: ICloudDomainBlockageChecking
+    private let userIntentProvider: @Sendable () -> Bool
 
     /// Creates the assembler.
     /// - Parameters:
@@ -31,12 +32,14 @@ actor URLFilterStateAssembler {
     ///   - protectionLevelProvider: Reads the persisted protection level.
     ///   - isNewProvider: Reads the "settings card is new" flag.
     ///   - bloomMetadataProvider: Reads the persisted bloom metadata, if any.
+    ///   - userIntentProvider: Reads the user's persisted choice to keep the filter on.
     ///   - iCloudDomainBlockageChecker: Classifies a failed filter as the iCloud error.
     init(
         urlFilterService: URLFilterService,
         protectionLevelProvider: @escaping @Sendable () -> URLFilterProtectionLevel,
         isNewProvider: @escaping @Sendable () -> Bool,
         bloomMetadataProvider: @escaping @Sendable () -> URLFilterBloomMetadata?,
+        userIntentProvider: @escaping @Sendable () -> Bool,
         iCloudDomainBlockageChecker: ICloudDomainBlockageChecking
     ) {
         self.urlFilterService = urlFilterService
@@ -44,6 +47,7 @@ actor URLFilterStateAssembler {
         self.isNewProvider = isNewProvider
         self.bloomMetadataProvider = bloomMetadataProvider
         self.iCloudDomainBlockageChecker = iCloudDomainBlockageChecker
+        self.userIntentProvider = userIntentProvider
     }
 
     /// Builds the current aggregate state.
@@ -54,12 +58,14 @@ actor URLFilterStateAssembler {
         // Re-read the metadata on every assembly: it is written by the
         // URL filter extension process and may appear at any time.
         let bloomMetadata = self.bloomMetadataProvider()
+        let userIntentEnabled = self.userIntentProvider()
 
         // A filter reports `.invalid` while disabled or mid-bring-up.
-        // Only surface an error when enabled with a recorded failure.
+        // A recorded failure surfaces while the user wants the filter on, fail-safe disable included.
+        let hasFailure = userIntentEnabled && state.lastDisconnectError != nil
         var status: URLFilterUIStatus = switch state.status {
-        case .invalid, .unknown:   (state.enabled && state.lastDisconnectError != nil) ? .error : .loading
-        case .stopped:             (state.enabled && state.lastDisconnectError != nil) ? .error : .loading
+        case .invalid, .unknown:   hasFailure ? .error : .loading
+        case .stopped:             hasFailure ? .error : .loading
         case .starting, .stopping: .loading
         case .running:             .running
         }
@@ -78,6 +84,7 @@ actor URLFilterStateAssembler {
             status: status,
             protectionLevel: self.protectionLevelProvider(),
             isInstalled: state.serverURL != nil && state.issuerURL != nil,
+            userIntentEnabled: userIntentEnabled,
             info: URLFilterInfo(
                 rulesCount: bloomMetadata?.rulesCount,
                 lastUpdate: bloomMetadata?.timeUpdated

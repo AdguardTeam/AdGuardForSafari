@@ -1,0 +1,47 @@
+/* 
+    SPDX-FileCopyrightText: AdGuard Software Limited
+    SPDX-License-Identifier: GPL-3.0-or-later
+*/
+
+.Troubleshooting {
+    &_block {
+        margin: 0 var(--m-s) var(--m-m);
+        padding: var(--m-m) var(--m-s);
+        background: var(--fills-backgrounds-page-background-additional-default);
+        border-radius: var(--border-radius);
+
+        /* The step text opts in for copying; the card box stays non-selectable. */
+        h5,
+        p,
+        p * {
+            user-select: text;
+            -webkit-user-select: text;
+        }
+
+        &_title {
+            margin-bottom: var(--m-xs);
+        }
+
+        &_desc {
+            margin-bottom: var(--m-s);
+        }
+    }
+
+    &_link {
+        color: inherit;
+        cursor: pointer;
+
+        /* Inline text action: the floating offset keeps the ring clear of the text. */
+        --focus-ring-offset: var(--focus-ring-offset-floating);
+
+        @mixin focus-ring;
+    }
+
+    &_link_disabled {
+        color: inherit;
+    }
+
+    &_list {
+        padding-inline-start: var(--m-m);
+    }
+}

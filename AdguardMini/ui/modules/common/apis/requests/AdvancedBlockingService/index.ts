@@ -7,6 +7,7 @@ export * from './GetURLFilterStateRequest';
 export * from './RemoveURLFilterRequest';
 export * from './RequestUpdateURLFilterProtectionLevelRequest';
 export * from './ResetURLFilterCacheRequest';
+export * from './RetryURLFilterRequest';
 export * from './SetURLFilterEnabledRequest';
 export * from './UpdateAdguardExtraRequest';
 export * from './UpdateAdvancedRulesRequest';

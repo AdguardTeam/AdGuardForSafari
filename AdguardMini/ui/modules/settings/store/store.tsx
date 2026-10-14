@@ -10,6 +10,7 @@ import {
     AdvancedBlocking,
     AppInfo,
     Filters,
+    RouteName,
     SafariProtection,
     Settings,
     UserRules,
@@ -66,7 +67,11 @@ export class SettingsStore {
         this.notification = new NotificationsQueue();
         this.account = new Account();
         this.abTests = new ABTests();
-        this.advancedBlocking = new AdvancedBlocking(this.notification);
+        this.router = settingsRouterFactory();
+        this.advancedBlocking = new AdvancedBlocking(
+            this.notification,
+            () => this.router.changePath(RouteName.system_wide_protection),
+        );
         this.appInfo = new AppInfo();
         this.filters = new Filters();
         this.settings = new Settings();
@@ -75,7 +80,6 @@ export class SettingsStore {
         this.ui = new UI();
         this.windowing = windowing;
         this.telemetry = settingsTelemetryFactory();
-        this.router = settingsRouterFactory();
 
         this.init();
     }

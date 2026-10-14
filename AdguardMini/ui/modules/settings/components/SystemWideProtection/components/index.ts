@@ -9,3 +9,4 @@ export * from './RemoveFilterModal';
 export * from './ResetCacheModal';
 export * from './Switch';
 export * from './Title';
+export * from './Troubleshooting';

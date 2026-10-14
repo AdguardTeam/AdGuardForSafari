@@ -22,7 +22,9 @@ type SwitchProps = {
 function SwitchComponent({ onNeedInstall }: SwitchProps) {
     const { account, advancedBlocking, telemetry, settings } = useSettingsStore();
     const {
-        urlFilterState: { isInstalled, enabled },
+        urlFilterState: { isInstalled, userIntentEnabled },
+        isSystemWideProtectionInactive,
+        isSystemWideProtectionEnabling,
     } = advancedBlocking;
 
     const { isLicenseOrTrialActive } = account;
@@ -48,11 +50,12 @@ function SwitchComponent({ onNeedInstall }: SwitchProps) {
     return (
         <SettingsItemSwitch
             disabled={isDisabled}
-            muted={!isLicenseOrTrialActive}
+            enabling={isSystemWideProtectionEnabling}
+            muted={!isLicenseOrTrialActive || isSystemWideProtectionInactive}
             icon="apps"
             setValue={onUpdateSystemWideProtection}
             title={translate('advanced.blocking.system.wide')}
-            value={enabled}
+            value={isLicenseOrTrialActive && userIntentEnabled}
         />
     );
 }

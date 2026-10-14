@@ -116,6 +116,14 @@ final class AdvancedBlockingServiceImpl: AdvancedBlockingService.ServiceType {
         }
     }
 
+    func retryURLFilter(_ message: EmptyValue,
+                        _ promise: @escaping (EmptyValue) -> Void) {
+        Task { @MainActor in
+            await self.urlFilterService.retryIfNeeded()
+            promise(EmptyValue())
+        }
+    }
+
     func requestUpdateURLFilterProtectionLevel(_ message: URLFilterProtectionLevelUpdate,
                                                _ promise: @escaping (OptionalError) -> Void) {
         Task { @MainActor in

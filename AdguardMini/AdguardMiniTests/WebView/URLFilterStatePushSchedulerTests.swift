@@ -203,6 +203,7 @@ final class URLFilterStatePushSchedulerTests: XCTestCase {
             status: status,
             protectionLevel: .essential,
             isInstalled: true,
+            userIntentEnabled: status == .running,
             info: .empty
         )
     }
