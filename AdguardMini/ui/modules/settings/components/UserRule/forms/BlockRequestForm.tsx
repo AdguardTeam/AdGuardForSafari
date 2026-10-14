@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { DomainModifiers } from '@adguard/rules-editor';
+import { DomainModifiers } from '@adg/rules-builder';
 
 import { Input, Select, Textarea, Checkbox, Text, Dropdown } from 'Common/components';
 import theme from 'Theme';
@@ -12,7 +12,7 @@ import s from '../UserRule.module.pcss';
 import { getLabelByBlockContentModifier, getContentBlockOptions, getDomainOptions, validateDomain } from './helpers';
 
 import type { FormErrors } from '../UserRule';
-import type { BlockContentTypeModifiers, BlockRequestRule } from '@adguard/rules-editor';
+import type { BlockContentTypeModifiers, BlockRequestRule } from '@adg/rules-builder';
 import type { IOption } from 'Common/components';
 
 type BlockRequestFormProps = {
@@ -30,7 +30,7 @@ type BlockRequestFormProps = {
  * Form for Block request rule
  */
 export function BlockRequestForm({ rule, setRule, errors, setErrors }: BlockRequestFormProps) {
-    const currentRule = rule.rule as BlockRequestRule;
+    const currentRule = rule.rule;
 
     const onDomainChange = (e: string) => {
         currentRule.setDomain(e);

@@ -167,11 +167,13 @@ module.exports = () => ({
                 }]
             },
             {
-                // The `userrules` module imports `@adguard/rules-editor`, which
-                // ships a WebAssembly file (`dist/onigasm.wasm`) for its syntax
+                // The `userrules` module imports `@adguard/rules-editor`
+                // (which uses `vscode-oniguruma`) and ships the Oniguruma
+                // WebAssembly file (`release/onig.wasm`) for its syntax
                 // highlighter. Inline the WASM as a base64 data URL so the
                 // WKWebView host can load it with the rest of the userrules
-                // bundle.
+                // bundle — the module CSP forbids `connect-src`, so a
+                // separate `.wasm` fetch would fail.
                 test: /\.wasm$/,
                 type: 'asset/inline'
             },

@@ -8,7 +8,7 @@ import theme from 'Theme';
 import s from '../UserRule.module.pcss';
 
 import type { FormErrors } from '../UserRule';
-import type { CustomRule } from '@adguard/rules-editor';
+import type { CustomRule } from '@adg/rules-builder';
 
 type CustomRuleFormProps = {
     // CustomRule form builder
@@ -25,7 +25,7 @@ type CustomRuleFormProps = {
  * Form for Custom rule
  */
 export function CustomRuleForm({ rule, setRule, errors, setErrors }: CustomRuleFormProps) {
-    const currentRule = rule.rule as CustomRule;
+    const currentRule = rule.rule;
 
     const onRuleChange = (e: string) => {
         currentRule.setRule(e);

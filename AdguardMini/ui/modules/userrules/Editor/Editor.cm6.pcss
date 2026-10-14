@@ -1,0 +1,347 @@
+/* 
+    SPDX-FileCopyrightText: AdGuard Software Limited
+    SPDX-License-Identifier: GPL-3.0-or-later
+*/
+
+/*
+ * Static CodeMirror 6 base theme.
+ *
+ * CM6 injects its styles (base theme, editor themes, highlight styles) as
+ * dynamically-created `<style>` elements via style-mod, which the module's
+ * strict CSP (`style-src 'self' <hash>`; no `'unsafe-inline'`) blocks. The
+ * editor therefore renders completely unstyled unless the styles ship in a
+ * regular stylesheet — which is what this file does: the CM6 `baseTheme`
+ * spec converted to plain CSS (root `&` → `.cm-editor`), themed with the
+ * design-system tokens, plus the adblock highlight classes and the
+ * enabled-rule gutter.
+ *
+ * The `&light`/`&dark` variants of the original spec are collapsed into
+ * token-driven values so both app themes keep working.
+ */
+
+.cm-editor {
+    position: relative !important;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: column;
+    color: var(--text-user-rules-black-default);
+    background: var(--fills-backgrounds-page-background-default);
+    height: 100%;
+}
+
+.cm-scroller {
+    display: flex !important;
+    align-items: flex-start !important;
+    font-family: monospace;
+    line-height: 1.4;
+    height: 100%;
+    overflow-x: auto;
+    position: relative;
+    z-index: 0;
+    overflow-anchor: none;
+}
+
+.cm-content {
+    margin: 0;
+    flex-grow: 2;
+    flex-shrink: 0;
+    display: block;
+    white-space: pre;
+    word-wrap: normal;
+    box-sizing: border-box;
+    min-height: 100%;
+    padding: 4px 0;
+    outline: none;
+    caret-color: var(--text-user-rules-black-default);
+}
+
+.cm-content[contenteditable=true] {
+    -webkit-user-modify: read-write-plaintext-only;
+}
+
+.cm-line {
+    display: block;
+    padding: 0 2px 0 6px;
+}
+
+.cm-iso {
+    unicode-bidi: isolate;
+}
+
+.cm-announced {
+    position: fixed;
+    top: -10000px;
+}
+
+@media print {
+    .cm-announced { display: none; }
+}
+
+.cm-gutters {
+    flex-shrink: 0;
+    display: flex;
+    height: 100%;
+    box-sizing: border-box;
+    z-index: 200;
+    background: var(--fills-backgrounds-page-background-additional-default);
+    border-right: 0;
+}
+
+.cm-gutters-before {
+    inset-inline-start: 0;
+}
+
+.cm-gutters-after {
+    inset-inline-end: 0;
+}
+
+.cm-gutter {
+    display: flex !important;
+    flex-direction: column;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    min-height: 100%;
+    overflow: hidden;
+}
+
+.cm-gutterElement {
+    box-sizing: border-box;
+}
+
+.cm-lineNumbers .cm-gutterElement {
+    padding: 0 3px 0 5px;
+    min-width: 20px;
+    text-align: right;
+    white-space: nowrap;
+    color: var(--text-placeholder-placeholder-default);
+    font-size: 14px;
+    line-height: 18px;
+}
+
+/* Enabled-rule gutter. The rules-editor sizes the marker element with
+   CodeMirror 5-era inline margins (`-12px` left / `4px` top), which push it
+   out of a CM6 gutter; neutralize them and center the marker in a fixed-width
+   gutter instead. */
+.cm-editor .cm-breakpoint-gutter {
+    width: 16px;
+    min-width: 16px;
+}
+
+.cm-editor .cm-breakpoint-gutter .cm-gutterElement {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cm-editor .cm-breakpoint-gutter .cm-gutterElement > div {
+    margin: 0 !important;
+}
+
+/* Search panel (`Cmd-F` / `Cmd-Alt-G`) and the dialog that shares its
+   classes. CodeMirror's own panel theme is a dark gradient toolbar injected
+   through style-mod (blocked by the module CSP), so the panel is styled from
+   the design system instead. */
+.cm-panels {
+    box-sizing: border-box;
+    position: sticky;
+    left: 0;
+    right: 0;
+    z-index: 300;
+    background: var(--fills-backgrounds-page-background-additional-default);
+    color: var(--text-main-text-main-default);
+}
+
+.cm-panels-top {
+    top: 0;
+    border-bottom: 1px solid var(--stroke-dividers-item-divider-default);
+}
+
+.cm-panels-bottom {
+    bottom: 0;
+    border-top: 1px solid var(--stroke-dividers-item-divider-default);
+}
+
+.cm-panel.cm-search {
+    position: relative;
+    padding: var(--m-xxs) var(--m-l) var(--m-xxs) var(--m-xs);
+    /* The editor's monospace stack must not reach the toolbar. */
+    font-family: system-ui, -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    font-size: var(--ft-m);
+    line-height: var(--lh-m);
+}
+
+.cm-panel.cm-search input,
+.cm-panel.cm-search button,
+.cm-panel.cm-search label {
+    margin: 2px var(--m-xxs) 2px 0;
+    vertical-align: middle;
+}
+
+/* The replace row is separated by a `<br>` in the panel markup. */
+.cm-panel.cm-search [name='replace'],
+.cm-panel.cm-search [name='replaceAll'] {
+    margin-top: var(--m-xxxs);
+}
+
+.cm-panel.cm-search label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--m-xxxs);
+    margin-right: var(--m-xs);
+    font-size: var(--ft-s);
+    line-height: var(--lh-m);
+    white-space: pre;
+}
+
+.cm-panel.cm-search input[type='checkbox'] {
+    flex: none;
+    margin: 0;
+    accent-color: var(--fills-buttons-main-button-default);
+}
+
+.cm-panel.cm-search [name='close'] {
+    position: absolute;
+    top: var(--m-xxs);
+    right: var(--m-xxs);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: transparent;
+    color: var(--stroke-icons-gray-icons-default);
+    font: inherit;
+    font-size: var(--ft-l);
+    cursor: pointer;
+
+    @mixin focus-ring;
+
+    &:hover {
+        background-color: var(--fills-backgrounds-page-background-hovered);
+    }
+}
+
+.cm-dialog {
+    padding: 2px 19px 4px 6px;
+    position: relative;
+}
+
+.cm-dialog label {
+    font-size: 80%;
+}
+
+.cm-dialog-close {
+    position: absolute;
+    top: 3px;
+    right: 4px;
+    background-color: inherit;
+    border: none;
+    font: inherit;
+    font-size: 14px;
+    padding: 0;
+
+    @mixin focus-ring;
+}
+
+.cm-tab {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.cm-widgetBuffer {
+    vertical-align: text-top;
+    height: 1em;
+    width: 0;
+    display: inline;
+}
+
+/* Panel controls follow the design system's primary button (`Button__submit`)
+   and text field (`Input`). */
+.cm-button {
+    vertical-align: middle;
+    padding: var(--m-xxxs) var(--m-xs);
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--fills-buttons-main-button-default);
+    background-image: none;
+    color: var(--text-buttons-primary-default);
+    font-family: inherit;
+    font-size: var(--ft-s);
+    line-height: var(--lh-m);
+    cursor: pointer;
+
+    @mixin focus-ring;
+
+    &:hover {
+        background-color: var(--fills-buttons-main-button-hovered);
+    }
+
+    &:active {
+        background-color: var(--fills-buttons-main-button-pressed);
+    }
+}
+
+.cm-textfield {
+    box-sizing: border-box;
+    min-width: 180px;
+    vertical-align: middle;
+    padding: var(--m-xxxs) var(--m-xxs);
+    border: 1px solid var(--stroke-inputs-inactive-input-stroke-default);
+    border-radius: var(--border-radius);
+    background-color: var(--fills-backgrounds-page-background-default);
+    color: var(--text-main-text-main-default);
+    font: inherit;
+
+    &::placeholder {
+        color: var(--text-placeholder-placeholder-default);
+    }
+
+    /* Text fields keep their focus border instead of the shared ring. */
+    &:focus {
+        border-color: var(--stroke-inputs-active-input-stroke-default);
+        outline: none;
+    }
+}
+
+/* Search matches are tinted with the product green; `color-mix` is not
+   available on macOS 12, so the alpha variants are written out. */
+.cm-searchMatch {
+    background: rgba(103, 178, 121, .28);
+}
+
+.cm-searchMatch.cm-searchMatch-selected {
+    background: rgba(103, 178, 121, .55);
+}
+
+/* Adblock syntax-highlight token colors (class-based `HighlightStyle` so the
+   colors live in this static stylesheet instead of style-mod's
+   CSP-blocked injected `<style>`). */
+.adg-cm-keyword {
+    color: var(--text-user-rules-purple-default);
+}
+
+.adg-cm-string {
+    color: var(--text-user-rules-red-default);
+}
+
+.adg-cm-regexp {
+    color: var(--text-user-rules-red-default);
+}
+
+.adg-cm-operator {
+    color: var(--text-user-rules-blue-default);
+}
+
+.adg-cm-definition {
+    color: var(--text-user-rules-blue-default);
+}
+
+.adg-cm-comment {
+    color: var(--text-user-rules-gray-default);
+}

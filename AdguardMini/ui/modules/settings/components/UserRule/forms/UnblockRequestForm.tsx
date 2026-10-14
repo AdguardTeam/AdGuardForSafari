@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { DomainModifiers } from '@adguard/rules-editor';
+import { DomainModifiers } from '@adg/rules-builder';
 
 import { Input, Dropdown, Textarea, Checkbox, Text, Select } from 'Common/components';
 import theme from 'Theme';
@@ -12,7 +12,7 @@ import s from '../UserRule.module.pcss';
 import { getDomainOptions, getContentUnblockOptions, getLabelByUnblockContentModifier, validateDomain } from './helpers';
 
 import type { FormErrors } from '../UserRule';
-import type { UnblockContentTypeModifier, UnblockRequestRule } from '@adguard/rules-editor';
+import type { UnblockContentTypeModifier, UnblockRequestRule } from '@adg/rules-builder';
 import type { IOption } from 'Common/components';
 
 type UnblockRequestFormProps = {
@@ -30,7 +30,7 @@ type UnblockRequestFormProps = {
  * Form for Unblock request rule
  */
 export function UnblockRequestForm({ rule, setRule, errors, setErrors }: UnblockRequestFormProps) {
-    const currentRule = rule.rule as UnblockRequestRule;
+    const currentRule = rule.rule;
 
     const onDomainChange = (e: string) => {
         currentRule.setDomain(e);

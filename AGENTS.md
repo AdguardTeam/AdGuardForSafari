@@ -48,9 +48,19 @@ synchronization.
     - Swift: Sparkle (updates), XMLCoder, FilterListManager (AdGuardFLM),
       Sentry
     - TypeScript: Preact, MobX, Webpack, google-protobuf,
-      @adguard/rules-editor, @adg/webview-utils-kit (internally-vendored
-      fork at `AdguardMini/ui/packages/webview-utils-kit/`; Sciter-coupled
-      APIs replaced with W3C/WebKit equivalents), classix, date-fns, lodash
+      @adguard/rules-editor, @codemirror/state, @codemirror/view,
+      @codemirror/commands, @codemirror/language, @codemirror/search
+      (the user-rules editor's direct CodeMirror 6 packages),
+      @lezer/highlight, vscode-oniguruma (the Oniguruma WASM grammar
+      engine, inlined as a data URL), @adg/webview-utils-kit
+      (internally-vendored fork at
+      `AdguardMini/ui/packages/webview-utils-kit/`; Sciter-coupled
+      APIs replaced with W3C/WebKit equivalents),
+      @adg/rules-builder (published package installed from the AdGuard
+      Artifactory npm registry; sources live in the
+      `sciter-rules-builder` repository — the user-rules builder and
+      simple tokenizer extracted from rules-editor v1, backed by
+      `@adguard/agtree`), classix, date-fns, lodash
 - **Storage**: UserDefaults, file-based storage (JSON/plist), Safari Content
   Blocker rules (JSON)
 - **Testing**: XCTest (Swift), node:test (TypeScript)
@@ -1097,32 +1107,28 @@ humans and AI agents that consume project documentation.
     alternative because third-party animation libraries legitimately apply
     inline styles.
 
-14. **Native clipboard for WKWebView (Swift + TS)**: The WebKit async
-    clipboard *read* API (`navigator.clipboard.readText`) is not granted to
-    `WKWebView` pages — every read rejects with a `NotAllowedError` ("The
-    request is not allowed by the user agent or the platform in the current
-    context..."), which broke the user-rules editor's `Cmd+V`. Reads MUST
-    route through the Swift `systemClipboardRead` message handler, which
-    uses `NSPasteboard` directly and never `navigator.clipboard`. The read
-    path is request/response with a JS-generated correlation id and a
-    `window.__resolveSystemClipboardRead(id, text)` reply delivered via
-    `callAsyncJavaScript`; a pasteboard without string content replies empty
-    so callers never hang. Code in third-party packages (e.g.
-    `@adguard/rules-editor`'s `onPaste`) that reads
-    `navigator.clipboard.readText()` MUST be rerouted — override the key
-    binding in our module to read via `window.SystemClipboard.read()`.
+14. **Clipboard in WKWebView (Swift + TS)**: The WebKit async clipboard
+    *read* API (`navigator.clipboard.readText`) is not granted to `WKWebView`
+    pages — every read rejects with a `NotAllowedError` ("The request is not
+    allowed by the user agent or the platform in the current context...") —
+    so `navigator.clipboard` MUST NOT be used for reads. Text paste MUST go
+    through the standard DOM `paste` event, whose `clipboardData` carries the
+    text: the user-rules editor relies on that path and MUST NOT intercept
+    `Cmd+V` to read the clipboard itself. If a programmatic read is ever
+    required, it MUST be reintroduced as a Swift `NSPasteboard` bridge (the
+    removed `systemClipboardRead` channel), never attempted from the page.
     Clipboard *writes* are different: `navigator.clipboard.writeText` is
     allowed in WKWebView when triggered by a user gesture, so the editor's
-    copy/cut (`Cmd-C` / `Cmd-X`) keep working and are not rerouted. The
+    copy/cut (`Cmd-C` / `Cmd-X`) keep working and are not rerouted; the
     Swift `systemClipboard` write bridge stays the preferred path for
     gesture-less programmatic copies.
 
     **Rationale**: WebKit offers no permission grant for *reading* the async
     clipboard in embedded `WKWebView` hosts — unlike writes, reads require
-    the platform paste callout that an embedded page never shows. Routing
-    reads through the `systemClipboardRead` bridge keeps a single Swift-owned
-    paste seam; writes triggered by a gesture are permitted by WebKit, so the
-    standard copy/cut behavior needs no rerouting.
+    the platform paste callout that an embedded page never shows. A DOM
+    `paste` event is user-gesture-driven and carries the data directly, so
+    the editor needs no privileged read channel; dropping the old one removes
+    a pasteboard-draining RPC surface.
 
 15. **WebUI bundle anti-tampering (Swift)**: The frontend bundle
     (`Contents/Resources/WebUI/`) is sealed with the app's code signature:
@@ -1164,35 +1170,6 @@ humans and AI agents that consume project documentation.
     **Rationale**: The seal is applied automatically at build time and
     covers every sealed file without a manifest that would go stale on
     in-place WebUI syncs.
-
-16. **Emscripten/WASM console clobbering (TS)**: The onigasm tokenizer
-    bundled in `@adguard/rules-editor` is built with Emscripten's
-    `ENVIRONMENT_IS_SHELL=true`, so its glue runs on any macOS. During
-    `loadWASM` the glue synchronously assigns `console.log = print` (its
-    `print` resolves to `window.print`; `console.warn`/`console.error` get
-    `printErr || print` too) and rolls all three back to the pre-clobber
-    originals in the same synchronous section, right after the factory
-    returns — there is no async re-clobbering. The rollback is skipped only
-    when the factory throws synchronously: e.g. a WASM init failure makes
-    Emscripten's `abort()` call `out(what)`/`err(what)`, which are
-    `window.print.bind(console)` and throw the very "Can only call
-    Window.print on instances of Window" they were invoked to report
-    (strict mode is irrelevant — `print` with `this === console` throws in
-    any mode). `console.*` then stays clobbered, and rules-editor's
-    `initEditor` swallows the init error in an empty `catch` and resolves,
-    silently leaving the editor without highlighting. Guards required when
-    such a library is loaded: replace `window.print` with a forwarder to the
-    native log (captured before the clobbering) so `abort()`/`err()`
-    diagnostics survive, and re-apply the console→Swift forwarding
-    (`reinstallConsoleLogForwarding` in
-    `AdguardMini/ui/modules/common/lib/logBridge.ts`) after the library's
-    initialization completes — on the failure path too, where the glue's
-    rollback never ran.
-
-    **Rationale**: A broken `console.log` is invisible — no error is
-    logged — yet disables logging itself and every action that logs first;
-    guarding the Emscripten print path keeps diagnostics and user actions
-    alive.
 
 16. **Keyboard focus and activation (TS)**: Every control the user can Tab to
     MUST show the shared keyboard focus ring: a 2px outline in
@@ -1297,3 +1274,48 @@ humans and AI agents that consume project documentation.
     while a push reaches the open window immediately, focused or not — the
     pattern the settings window already relies on for the login item and
     URL filter state.
+
+21. **Enabled-rule markers (TS)**: The user-rules editor's gutter markers are
+    owned by `modules/userrules/lib/breakpoints.ts` and anchored to their
+    rule, not to a line number. A command that rearranges whole lines (move,
+    copy, delete) MUST report the resulting markers explicitly, as
+    `modules/userrules/lib/lineCommands.ts` does, instead of relying on the
+    field's positional mapping: it cannot tell a swapped line from a deleted
+    one. Copy and delete report the resulting line numbers through
+    `replaceBreakpoints`; move reports an invertible line-number permutation
+    through `permuteBreakpoints`, since its markers cannot be mapped
+    positionally and its undo must replay the reverse permutation against
+    the markers present at that moment. Those transactions MUST be isolated
+    in history (`isolateHistory.of('full')`): their effects carry line
+    numbers of the document they were built from, and merging with the
+    surrounding edits would replay those numbers against another document.
+    Ordinary edits keep their markers through the mapping, and the
+    `invertedEffects` provider restores them when a change is undone: it
+    MUST report only the markers a change actually loses — dropped, or
+    merged into the line above — or the reverse permutation, never a full
+    snapshot. A snapshot both reverts marker toggles made after the edit
+    when the edit is undone and accumulates one full marker set per
+    keystroke in the history.
+
+    **Rationale**: Positional mapping left markers on the line number instead
+    of the rule, so a moved, copied or deleted rule silently changed its
+    enabled state; only the explicit line-number payload keeps the enabled
+    flags with the rules the user enabled, only a relative inverse keeps the
+    toggles the user made after the command, and only an isolated history
+    event keeps those line numbers tied to the document they describe.
+
+22. **Localizing library UI (TS)**: A third-party widget that renders its own
+    UI MUST be localized through that library's own mechanism, with the
+    strings kept in the module locale files — CodeMirror's search panel and
+    its screen-reader announcements take their labels from
+    `EditorState.phrases`, registered by the user-rules editor
+    (`modules/userrules/Editor/Editor.tsx`). The same applies to the widget's
+    chrome: the panel's CodeMirror theme is a dark gradient toolbar built for
+    a standalone editor, so its panel, fields and buttons are styled from the
+    design system (`Editor.cm6.pcss`) instead of being left at the library
+    defaults.
+
+    **Rationale**: Library UI is visible product surface: leaving it English
+    and unstyled ships a screen that ignores both the app's localization and
+    its design system, and neither gap is visible from the library's own
+    documentation.

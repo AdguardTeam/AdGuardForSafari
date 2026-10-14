@@ -2,57 +2,57 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { initEditor, RulesBuilder, getRulesFromEditor, configureEditorMode, setEditorValue } from '@adguard/rules-editor';
-import '@adguard/rules-editor/dist/codemirror.css';
-import wasm from '@adguard/rules-editor/dist/onigasm.wasm';
+import { initEditor } from '@adguard/rules-editor';
+import { HighlightStyle, syntaxHighlighting } from '@codemirror/language';
+import { Compartment, EditorState } from '@codemirror/state';
+import { EditorView } from '@codemirror/view';
+import { tags } from '@lezer/highlight';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useRef } from 'preact/hooks';
+import wasmUrl from 'vscode-oniguruma/release/onig.wasm';
 
 import { UserRule } from 'Common/apis/types';
-import { reinstallConsoleLogForwarding } from 'Common/lib/logBridge';
 
 import { editorStore } from '../editorStore';
+import { breakpointState, getRulesFromEditor, setEditorValue } from '../lib/breakpoints';
 import { dataUrlToBytes } from '../lib/dataUrlToBytes';
 import { debouncedEditorSync } from '../lib/debouncedEditorSync';
+import { editorExtensions, keepHideShortcut } from '../lib/editorExtensions';
 
+import './Editor.cm6.pcss';
 import s from './Editor.module.pcss';
 import './Editor.pcss';
-
-import type { EditorFromTextArea } from '@adguard/rules-editor';
 
 type EditorProps = {
     className: string;
     onSave(): void;
 };
 
-/** Minimal CodeMirror surface the clipboard-paste path uses. Kept structural
- *  (not the `EditorFromTextArea` subtype) because CodeMirror's keymap
- *  handlers pass the base `Editor` type, which is assignable to this shape. */
-type PasteEditor = {
-    getSelection(): string;
-    getCursor(end?: 'from' | 'to'): { line: number; ch: number };
-    getCursor(): { line: number; ch: number };
-    replaceRange(
-        replacement: string,
-        from: { line: number; ch: number },
-        to: { line: number; ch: number },
-    ): void;
-    lineInfo(line: number): { text: string } | undefined;
-    setGutterMarker(
-        line: number,
-        gutterID: string,
-        value: HTMLElement | null,
-    ): unknown;
-    operation<T>(callback: () => T): T;
-};
-
 const MARKER_COLOR = 'var(--stroke-icons-product-icon-default)';
 const MARKER_HTML = '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 16 16" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.9888 3.24536C14.4056 3.60773 14.4497 4.23936 14.0873 4.65614L7.13182 12.6561C6.94683 12.8689 6.68062 12.9937 6.39875 12.9998C6.11688 13.0059 5.84553 12.8927 5.65154 12.6881L1.94039 8.77448C1.56037 8.37373 1.57718 7.74079 1.97793 7.36077C2.37868 6.98075 3.01163 6.99756 3.39165 7.39831L6.34505 10.5128L12.578 3.34389C12.9404 2.92711 13.572 2.88299 13.9888 3.24536Z" fill="var(--stroke-icons-product-icon-default)"/></svg>';
 
-/* The theme to style the editor with.
- * The default is "default" theme and "adg" for override default theme
+/**
+ * Token colors for the TextMate grammar highlight, matching the legacy
+ * `.cm-keyword` / `.cm-string` / `.cm-operator` / `.cm-comment` CSS rules.
+ *
+ * Classes (not just colors) are declared so the token colors live in the
+ * static `Editor.cm6.pcss` stylesheet: CodeMirror's style-mod injects
+ * `<style>` elements dynamically, which this module's strict CSP blocks, so
+ * the CSS must ship in a regular stylesheet to be applied.
  */
-const THEME = 'default adg';
+const highlightStyle = HighlightStyle.define([
+    { tag: tags.keyword, class: 'adg-cm-keyword', color: 'var(--text-user-rules-purple-default)' },
+    { tag: tags.string, class: 'adg-cm-string', color: 'var(--text-user-rules-red-default)' },
+    { tag: tags.regexp, class: 'adg-cm-regexp', color: 'var(--text-user-rules-red-default)' },
+    { tag: tags.operator, class: 'adg-cm-operator', color: 'var(--text-user-rules-blue-default)' },
+    { tag: tags.definition(tags.variableName), class: 'adg-cm-definition', color: 'var(--text-user-rules-blue-default)' },
+    { tag: tags.comment, class: 'adg-cm-comment', color: 'var(--text-user-rules-gray-default)' },
+]);
+
+/**
+ * Compartment toggling read-only state while rules are (re)loaded over RPC.
+ */
+const readOnlyCompartment = new Compartment();
 
 /**
  * User rules editor component
@@ -66,9 +66,7 @@ function EditorComponent({
         setRules,
     } = editorStore;
 
-    const editorRef = useRef<EditorFromTextArea | null>(null);
-    const isEmpty = editorStore.rules.length === 0;
-    const lineChangedByEnter = useRef<number | null>(isEmpty ? 0 : null);
+    const editorRef = useRef<EditorView | null>(null);
 
     /**
      * Syncs the CodeMirror editor content from `editorStore.rules`.
@@ -87,84 +85,39 @@ function EditorComponent({
 
     /**
      * Parses the current editor content into `editorStore.rules` (the
-     * working set). On a parse failure the raw text is preserved for display
-     * but the previous working set is kept — never wiped — so a subsequent
-     * Save cannot silently erase user rules.
+     * working set). `getRulesFromEditor` always returns the per-line
+     * `{ enabled, rule }` pairs, so the store always mirrors the document.
      */
     const syncRulesFromEditor = () => {
         if (!editorRef.current) {
             return;
         }
         const rules = getRulesFromEditor(editorRef.current);
-        if (typeof rules === 'string') {
-            // Parse error / raw output path: keep the previous rules.
-            return;
-        }
         setRules(rules.map((r) => new UserRule({ rule: r.rule, enabled: r.enabled })));
     };
 
     /**
-     * Pastes text read through the Swift `NSPasteboard` bridge at the
-     * cursor / selection, marking pasted rules as enabled. This mirrors the
-     * rules-editor's `onPaste` — but the rules-editor reads
-     * `navigator.clipboard.readText()`, which WKWebView never grants (every
-     * read rejected with a NotAllowedError, breaking Cmd+V), so the editor
-     * routes the read through `window.SystemClipboard.read()` instead.
+     * Marks the editor dirty and refreshes the working set after a marker
+     * toggle. A marker toggle changes no text, so the library's `onChange`
+     * (which fires only for document changes) never sees it.
      */
-    const pasteFromClipboard = async (cm: PasteEditor) => {
-        const text = await window.SystemClipboard.read();
-        if (!text) {
-            return;
-        }
-        const lines = text.split('\n');
-        const makeMarker = () => {
-            const marker = document.createElement('div');
-            marker.style.color = MARKER_COLOR;
-            marker.style.marginLeft = '-12px';
-            marker.style.marginTop = '4px';
-            marker.innerHTML = MARKER_HTML;
-            return marker;
-        };
-        const markPastedLines = (startLine: number) => {
-            lines.forEach((_, index) => {
-                const lineNumber = startLine + index;
-                const info = cm.lineInfo(lineNumber);
-                if (info?.text && RulesBuilder.getRuleType(info.text) !== 'comment') {
-                    cm.setGutterMarker(lineNumber, 'breakpoints', makeMarker());
-                }
-            });
-        };
-        if (cm.getSelection()) {
-            const positionFrom = cm.getCursor('from');
-            const positionTo = cm.getCursor('to');
-            // Replace an in-line selection with a single-line paste in place.
-            if (positionFrom.line === positionTo.line && lines.length === 1) {
-                cm.replaceRange(text, positionFrom, positionTo);
-                return;
-            }
-            cm.operation(() => {
-                cm.replaceRange(text, positionFrom, positionTo);
-                markPastedLines(positionFrom.line);
-            });
-            return;
-        }
-        const head = cm.getCursor();
-        cm.operation(() => {
-            cm.replaceRange(text, head, head);
-            markPastedLines(head.line);
-        });
+    const onMarkerToggle = () => {
+        setIsDirty(true);
+        syncRulesFromEditor();
     };
 
     useEffect(() => {
         let cancelled = false;
+
         const init = async () => {
-            // `wasm` is inlined as a `data:` URL by webpack `asset/inline`;
-            // onigasm's `loadWASM` fetches string arguments, which the module's
-            // strict CSP (`connect-src 'none'`) blocks. Hand it the raw bytes
-            // instead so the editor loads without any network connection.
+            // `wasmUrl` is inlined as a `data:` URL by webpack `asset/inline`;
+            // vscode-oniguruma's `loadWASM` fetches string arguments, which the
+            // module's strict CSP (`connect-src 'none'`) blocks. Hand it the
+            // raw bytes instead so the editor loads without any network
+            // connection.
             let wasmBytes: ArrayBuffer;
             try {
-                wasmBytes = dataUrlToBytes(wasm);
+                wasmBytes = dataUrlToBytes(wasmUrl);
             } catch (err) {
                 // A malformed/missing data URL must not leave an unhandled
                 // promise rejection; the fallback textarea remains usable.
@@ -175,62 +128,50 @@ function EditorComponent({
             let initError: unknown = null;
             try {
                 editorRef.current = await initEditor(document.getElementById('area') as HTMLTextAreaElement, wasmBytes, {
-                    withBreakpoints: true,
+                    highlight: 'full',
+                    // The enabled-rule gutter and the `Mod-/` toggle are
+                    // implemented locally (`lib/breakpoints`): the library's
+                    // gutter has no click handling and its `Mod-/` both
+                    // toggles the marker and comments the line. Keep the
+                    // library's own field disabled so the two states cannot
+                    // diverge.
+                    withBreakpoints: false,
                     hotkeys: {
                         mode: 'mac',
-                        toggleRule: () => {
-                            setIsDirty(true);
-                            syncRulesFromEditor();
-                        },
-                        markerColor: MARKER_COLOR,
-                        markerHTML: MARKER_HTML,
                         onSave: () => {
                             if (editorStore.isDirty && !editorStore.loading) {
                                 onSave();
                             }
                         },
                     },
-                    onChange(editor, makeMarker) {
+                    onChange(view) {
                         setIsDirty(true);
-                        if (editorRef.current?.getValue() === '') {
+                        if (view.state.doc.length === 0) {
                             setRules([]);
                             return;
                         }
-                        if (lineChangedByEnter.current !== null) {
-                            const info = editor.lineInfo(lineChangedByEnter.current);
-                            if (info?.text && RulesBuilder.getRuleType(info.text) !== 'comment') {
-                                editor.setGutterMarker(lineChangedByEnter.current, 'breakpoints', makeMarker());
-                                lineChangedByEnter.current = null;
-                            }
-                        }
-                        configureEditorMode(editor);
                         // Re-parse the editor content into the working set. Parsing
                         // walks every line, so it is debounced and flushed before Save —
                         // running it per keystroke blocks the main thread for large
                         // rule sets.
                         debouncedEditorSync.schedule(syncRulesFromEditor);
                     },
-                    editor: {
-                        gutters: ['CodeMirror-linenumbers', 'breakpoints'],
-                        theme: THEME,
-                    },
+                    extensions: [
+                        breakpointState({ onToggle: onMarkerToggle }),
+                        // The keymaps, localized phrases and line commands
+                        // restoring the v1 behaviors the rules-editor v2
+                        // dropped (`lib/editorExtensions`).
+                        ...editorExtensions({ onToggle: onMarkerToggle }),
+                        syntaxHighlighting(highlightStyle),
+                        readOnlyCompartment.of([]),
+                    ],
                 });
             } catch (err) {
-                // Rules-editor swallows WASM init failures in an empty
-                // `catch`, so they never reach here; failures reported
-                // through Emscripten's `abort()`/`err()` are traced by the
-                // `window.print` forwarder in `index.tsx`. This log covers
-                // the remaining `initEditor` failures and is written after
-                // the `finally` restores the console.
+                // The library surfaces WASM and grammar failures as
+                // `WasmLoadError` / `GrammarNotFoundError` from `initEditor`;
+                // record the error so it is logged below and the fallback
+                // textarea stays usable.
                 initError = err;
-            } finally {
-                // Onigasm's Emscripten glue (compiled with
-                // `ENVIRONMENT_IS_SHELL=true`) replaces `console.*` with
-                // `print` and rolls the console back only when the factory
-                // returns normally; when it throws synchronously (e.g. a
-                // WASM init failure), `console.*` stays clobbered. Restore
-                // the console→Swift forwarding on every path.
-                reinstallConsoleLogForwarding();
             }
             if (initError !== null) {
                 // The fallback textarea remains usable.
@@ -242,38 +183,35 @@ function EditorComponent({
                 return;
             }
             if (cancelled) {
+                // The component unmounted while the WASM grammar was loading;
+                // destroy the view the library already created.
+                editorRef.current.destroy();
+                editorRef.current = null;
                 return;
             }
-            // Fill the flex container (`App_editor`) exactly; the scroll area
-            // handles overflow, so the editor keeps a fixed height.
-            editorRef.current.setSize(null, '100%');
 
-            editorRef.current.setOption('extraKeys', {
-                ...editorRef.current.getOption('extraKeys') as Record<string, () => void>,
-                'Enter': (cm) => {
-                    lineChangedByEnter.current = cm.getCursor().line + 1;
-                    cm.execCommand('newlineAndIndent');
-                },
-                // Replace the rules-editor's `Cmd-V`, whose
-                // `navigator.clipboard.readText()` is denied in WKWebView.
-                'Cmd-V': (cm) => {
-                    void pasteFromClipboard(cm);
-                },
-            });
+            // The library's `Mod-h` binding would shadow the app's Hide menu
+            // item; the guard stops the key before CodeMirror's keymap sees
+            // it (see `keepHideShortcut`).
+            editorRef.current.dom.addEventListener('keydown', keepHideShortcut, true);
 
-            // Seed the editor with the loaded rules (if the RPC load already resolved).
-            if (editorStore.rules.length) {
-                // Seeding fires a `change` event whose scheduled parse must not run
-                // afterwards — the store already holds the loaded set.
-                debouncedEditorSync.cancel();
-                syncEditorFromStore();
-                setIsDirty(false);
-            }
+            // Seed the editor with the loaded rules (the RPC load resolves
+            // before the component mounts). Seeding dispatches a document
+            // change, so the library's `onChange` schedules a parse of the set
+            // just seeded; drop it — the store already holds that set.
+            syncEditorFromStore();
+            debouncedEditorSync.cancel();
+            setIsDirty(false);
         };
         void init();
         return () => {
             cancelled = true;
             debouncedEditorSync.cancel();
+            if (editorRef.current) {
+                editorRef.current.dom.removeEventListener('keydown', keepHideShortcut, true);
+                editorRef.current.destroy();
+            }
+            editorRef.current = null;
         };
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -284,18 +222,31 @@ function EditorComponent({
      * does NOT fire on the editor's own `onChange` mutations.
      */
     useEffect(() => {
-        // A scheduled parse from a prior `change` event is stale once the editor
-        // is re-seeded; the store already holds the freshly loaded set.
-        debouncedEditorSync.cancel();
         syncEditorFromStore();
+        // Seeding dispatches a document change, so the library's `onChange`
+        // schedules a parse of the set just seeded; drop it — the store
+        // already holds that set. This also clears a parse left over from a
+        // prior `change` event, which is stale once the editor is re-seeded.
+        debouncedEditorSync.cancel();
         setIsDirty(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [editorStore.loadedRules]);
 
+    /**
+     * Freezes the editor while rules are (re)loaded over RPC so a concurrent
+     * keystroke cannot race the re-seed.
+     */
     useEffect(() => {
-        if (editorRef.current) {
-            editorRef.current.setOption('readOnly', editorStore.loading ? 'nocursor' : false);
+        if (!editorRef.current) {
+            return;
         }
+        editorRef.current.dispatch({
+            effects: readOnlyCompartment.reconfigure(
+                editorStore.loading
+                    ? [EditorState.readOnly.of(true), EditorView.editable.of(false)]
+                    : [],
+            ),
+        });
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [editorStore.loading]);
 

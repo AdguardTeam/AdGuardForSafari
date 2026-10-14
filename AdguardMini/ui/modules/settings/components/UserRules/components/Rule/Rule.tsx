@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { RulesBuilder } from '@adguard/rules-editor';
+import { RulesBuilder } from '@adg/rules-builder';
 
 import { TooltipArea } from 'Modules/settings/components/Tooltip';
 import theme from 'Theme';

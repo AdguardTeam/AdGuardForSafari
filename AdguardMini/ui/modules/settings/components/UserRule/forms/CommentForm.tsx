@@ -8,7 +8,7 @@ import theme from 'Theme';
 import s from '../UserRule.module.pcss';
 
 import type { FormErrors } from '../UserRule';
-import type { Comment } from '@adguard/rules-editor';
+import type { Comment } from '@adg/rules-builder';
 
 type CommentFormProps = {
     // Comment form builder

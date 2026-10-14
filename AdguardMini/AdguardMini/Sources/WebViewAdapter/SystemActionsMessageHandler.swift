@@ -25,21 +25,15 @@ protocol PasteboardWriting: AnyObject {
     func writeString(_ string: String)
 }
 
-/// Test seam for `NSPasteboard.general` reads.
-protocol PasteboardReading: AnyObject {
-    /// Returns the current string content, or `nil` if the pasteboard has none.
-    func readString() -> String?
-}
-
 // MARK: - SystemActionsMessageHandler
 
 /// Handles open-link and clipboard actions.
 ///
-/// Clipboard writes (`systemClipboard`) and reads (`systemClipboardRead`)
-/// route through the Swift `NSPasteboard`, because the WebKit async clipboard
-/// API (`navigator.clipboard`) is not granted to `WKWebView` pages — a
-/// `readText()` there rejects with a `NotAllowedError`, which is exactly why
-/// the editor's Cmd+V failed.
+/// Clipboard writes (`systemClipboard`) route through the Swift
+/// `NSPasteboard`. Reads have no bridge: the WebKit async clipboard API
+/// (`navigator.clipboard`) is not granted to `WKWebView` pages, and text
+/// paste works through the DOM `paste` event, whose `clipboardData` carries
+/// the text.
 final class SystemActionsMessageHandler: NSObject, WKScriptMessageHandler {
     private enum Constants {
         /// Max clipboard payload (1 MiB).
@@ -49,30 +43,17 @@ final class SystemActionsMessageHandler: NSObject, WKScriptMessageHandler {
         static let clipboardRefillPerSecond = 2.0
     }
 
-    /// Fixed instruction body; runtime values travel only in `arguments`.
-    private enum InstructionBodies {
-        static let resolveClipboardReadBody = "window.__resolveSystemClipboardRead(id, text)"
-    }
-
     private let externalLinkGate: ExternalLinkGate
     private let pasteboard: PasteboardWriting
-    private let pasteboardReader: PasteboardReading
-    /// Host web view used to deliver `systemClipboardRead` replies back to JS.
-    /// Absent only in unit tests that construct the handler without a host.
-    private let webViewEvaluator: (any WebViewAsyncInvoking)?
     private let clipboardLimiter: TokenBucketLimiter
 
     init(
         externalLinkGate: ExternalLinkGate,
         pasteboard: PasteboardWriting,
-        pasteboardReader: PasteboardReading,
-        webViewEvaluator: (any WebViewAsyncInvoking)? = nil,
         clipboardLimiter: TokenBucketLimiter? = nil
     ) {
         self.externalLinkGate = externalLinkGate
         self.pasteboard = pasteboard
-        self.pasteboardReader = pasteboardReader
-        self.webViewEvaluator = webViewEvaluator
         self.clipboardLimiter = clipboardLimiter ?? TokenBucketLimiter(
             capacity: Constants.clipboardCapacity,
             refillPerSecond: Constants.clipboardRefillPerSecond
@@ -84,8 +65,7 @@ final class SystemActionsMessageHandler: NSObject, WKScriptMessageHandler {
     override convenience init() {
         self.init(
             externalLinkGate: ExternalLinkGate(linkOpener: NSWorkspaceLinkOpener()),
-            pasteboard: NSPasteboardWriter(),
-            pasteboardReader: NSPasteboardReader()
+            pasteboard: NSPasteboardWriter()
         )
     }
 
@@ -110,8 +90,6 @@ final class SystemActionsMessageHandler: NSObject, WKScriptMessageHandler {
             externalLinkGate.open(candidate: message.body)
         case "systemClipboard":
             self.handleClipboardWrite(message: message)
-        case "systemClipboardRead":
-            self.handleClipboardRead(message: message)
         default:
             LogDebug("Unknown WKScriptMessage name: \(message.name)")
             return
@@ -142,67 +120,6 @@ final class SystemActionsMessageHandler: NSObject, WKScriptMessageHandler {
             }
         }
     }
-
-    private func handleClipboardRead(message: ScriptMessageHandling) {
-        // Reads are rate-limited like the write path: any script in the page
-        // Could otherwise drain the system pasteboard silently, without a
-        // User gesture, at an unbounded rate.
-        guard let evaluator = self.webViewEvaluator else {
-            LogError("systemClipboardRead: no web view evaluator configured")
-            return
-        }
-        guard let id = Self.coerceReadId(message.body) else {
-            LogError("systemClipboardRead: bad body, got \(String(describing: type(of: message.body)))")
-            return
-        }
-        switch self.clipboardLimiter.tryConsume() {
-        case .allowed:
-            break
-        case .limited(let shouldLog):
-            // A dropped read gets no reply; the JS side resolves empty after
-            // Its own timeout, so a paste simply inserts nothing.
-            if shouldLog {
-                LogDebug("systemClipboardRead: read rate limited — dropping")
-            }
-            return
-        }
-        // The reply must reach the page that asked: deliver the pasteboard
-        // Content back into this host's own JS context. A pasteboard without
-        // String content reads as empty, so the editor pastes nothing instead
-        // Of hanging on a missing reply.
-        let text = self.pasteboardReader.readString() ?? ""
-        evaluator.invoke(
-            body: InstructionBodies.resolveClipboardReadBody,
-            arguments: ["id": id, "text": text]
-        ) { result in
-            if case .failure(let error) = result {
-                // Log safe identifiers only; the error can embed a JS
-                // Exception message or session data.
-                let nsError = error as NSError
-                LogError(
-                    "systemClipboardRead: reply failed domain=\(nsError.domain) "
-                        + "code=\(nsError.code)"
-                )
-            }
-        }
-    }
-
-    /// Coerces the `systemClipboardRead` correlation id from an `{ id: n }`
-    /// body, rejecting fractional values so the reply cannot be correlated to
-    /// the wrong pending read.
-    private static func coerceReadId(_ value: Any?) -> Int? {
-        guard let dict = value as? [String: Any] else { return nil }
-        switch dict["id"] {
-        case let intValue as Int:
-            return intValue
-        case let number as NSNumber:
-            let doubleValue = number.doubleValue
-            guard doubleValue.rounded() == doubleValue else { return nil }
-            return Int(doubleValue)
-        default:
-            return nil
-        }
-    }
 }
 
 // MARK: - Production backends
@@ -217,11 +134,5 @@ final class NSPasteboardWriter: PasteboardWriting {
     func writeString(_ string: String) {
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(string, forType: .string)
-    }
-}
-
-final class NSPasteboardReader: PasteboardReading {
-    func readString() -> String? {
-        NSPasteboard.general.string(forType: .string)
     }
 }

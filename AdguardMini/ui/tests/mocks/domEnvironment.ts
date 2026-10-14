@@ -32,6 +32,11 @@ const dom = new JSDOM(
     { pretendToBeVisual: true },
 );
 
+// The app only ships on macOS, but jsdom reports no platform, and CodeMirror
+// resolves `Mod-` against it at module load — without this, `Mod-` would mean
+// `Ctrl-` in keyboard tests.
+Object.defineProperty(dom.window.navigator, 'platform', { value: 'MacIntel' });
+
 const globalScope = globalThis as unknown as Record<string, unknown>;
 // `defineProperty` because node exposes `navigator` as a getter-only global.
 Object.defineProperty(globalScope, 'window', { value: dom.window, configurable: true });
@@ -39,6 +44,16 @@ Object.defineProperty(globalScope, 'document', { value: dom.window.document, con
 Object.defineProperty(globalScope, 'navigator', { value: dom.window.navigator, configurable: true });
 Object.defineProperty(globalScope, 'requestAnimationFrame', {
     value: dom.window.requestAnimationFrame.bind(dom.window),
+    configurable: true,
+});
+Object.defineProperty(globalScope, 'MutationObserver', {
+    value: dom.window.MutationObserver,
+    configurable: true,
+});
+// CodeMirror checks `element instanceof Window`; without the global the check
+// throws in jsdom.
+Object.defineProperty(globalScope, 'Window', {
+    value: dom.window.Window,
     configurable: true,
 });
 Object.defineProperty(globalScope, 'cancelAnimationFrame', {

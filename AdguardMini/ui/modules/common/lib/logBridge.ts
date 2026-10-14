@@ -20,9 +20,8 @@ type ConsoleMethods = {
 let consoleForwardingInstalled = false;
 
 /**
- * The true original console methods, captured before any override. Kept at
- * module scope so the overrides can be re-applied later (a third-party
- * library may replace `console.*`; see `reinstallConsoleLogForwarding`).
+ * The true original console methods, captured before any override so the
+ * overrides can chain to them without recursing.
  */
 let origConsole: ConsoleMethods | null = null;
 
@@ -68,8 +67,8 @@ export function installConsoleLogForwarding(): void {
     }
     consoleForwardingInstalled = true;
 
-    // Capture the true originals before overriding, so the overrides can be
-    // re-applied later (a third-party library may replace `console.*`).
+    // Capture the true originals before overriding, so the overrides can
+    // chain to them without recursing.
     origConsole = {
         log: console.log.bind(console),
         info: console.info.bind(console),
@@ -91,7 +90,7 @@ export function installConsoleLogForwarding(): void {
     };
 }
 
-/** Apply the console→Swift overrides using the captured originals. */
+/** Applies the console→Swift overrides using the captured originals. */
 function applyConsoleOverrides(): void {
     const original = origConsole;
     if (!original) {
@@ -117,24 +116,4 @@ function applyConsoleOverrides(): void {
         forwardToSwift('warn', args);
         original.warn(...args);
     };
-}
-
-/**
- * Re-apply the console overrides after the onigasm Emscripten glue (bundled
- * in `@adguard/rules-editor`, built with `ENVIRONMENT_IS_SHELL=true`)
- * replaced `console.*` with its `print` (which resolves to `window.print`).
- * The glue rolls the console back itself when its factory returns normally,
- * but when the factory throws synchronously (e.g. a WASM init failure)
- * `console.*` stays clobbered and every log call throws "Can only call
- * Window.print on instances of Window" (observed on macOS 12), silently
- * breaking the close/save JS paths that log first. `origConsole` keeps the
- * true original functions, so re-applying is safe no matter what replaced
- * them.
- */
-export function reinstallConsoleLogForwarding(): void {
-    if (!consoleForwardingInstalled) {
-        installConsoleLogForwarding();
-        return;
-    }
-    applyConsoleOverrides();
 }

@@ -4,14 +4,9 @@
 
 import { useEnter, focusOnBody } from '@adg/webview-utils-kit';
 import {
-    BlockRequestRule,
-    UnblockRequestRule,
-    CustomRule,
-    NoFilteringRule,
-    Comment,
     DomainModifiers,
     RulesBuilder,
-} from '@adguard/rules-editor';
+} from '@adg/rules-builder';
 import { observer } from 'mobx-react-lite';
 import { useCallback, useEffect, useId, useRef, useState } from 'preact/hooks';
 
@@ -29,14 +24,10 @@ import { BlockRequestForm, UnblockRequestForm, CommentForm, CustomRuleForm, Disa
 import { convertRule, getLabelByRuleType, getTypeOptions, validateDomain } from './forms/helpers';
 import s from './UserRule.module.pcss';
 
-import type { RuleTypeOptions } from './forms/helpers';
-import type {
-    RuleType } from '@adguard/rules-editor';
+import type { RuleType } from '@adg/rules-builder';
 import type { IOption } from 'UILib';
 
 type Params = { index?: number };
-
-type RuleTypeParam<T> = { rule: T };
 
 type ErrorFields = 'domain' | 'websites' | 'additionalComment' | 'comment' | 'rule';
 
@@ -137,12 +128,12 @@ function UserRuleComponent() {
             return;
         }
 
-        if (currentType === 'comment') {
+        if (currentRule.type === 'comment') {
             const tempComment = RulesBuilder.getRuleByType('comment');
-            tempComment.setText((currentRule as Comment).getText());
+            tempComment.setText(currentRule.getText());
             setAddComment({ value: true, comment: tempComment });
         }
-        const newBuilder = convertRule(currentRule as RuleTypeOptions, currentType, newType);
+        const newBuilder = convertRule(currentRule, currentType, newType);
 
         setType(typeOptions.find((t) => t.value === e)!);
         setRule({ rule: newBuilder! });
@@ -155,13 +146,13 @@ function UserRuleComponent() {
 
         safeRef.current = true;
 
-        if (rule.rule instanceof CustomRule && !rule.rule.getRule()) {
+        if (rule.rule.type === 'custom' && !rule.rule.getRule()) {
             setErrors({ ...errors, rule: translate('user.rules.fill.field') });
             safeRef.current = false;
             return;
         }
 
-        if (rule.rule instanceof BlockRequestRule || rule.rule instanceof UnblockRequestRule) {
+        if (rule.rule.type === 'block' || rule.rule.type === 'unblock') {
             const showDomainsField = rule.rule.getDomainModifiers() === DomainModifiers.onlyListed
                 || rule.rule.getDomainModifiers() === DomainModifiers.allExceptListed;
             let hasError = false;
@@ -192,7 +183,7 @@ function UserRuleComponent() {
             }
         }
 
-        if (rule.rule instanceof NoFilteringRule) {
+        if (rule.rule.type === 'noFiltering') {
             if (!rule.rule.getDomain()) {
                 setErrors({ ...errors, domain: translate('user.rules.fill.field') });
                 safeRef.current = false;
@@ -205,7 +196,7 @@ function UserRuleComponent() {
             }
         }
 
-        if (rule.rule instanceof Comment) {
+        if (rule.rule.type === 'comment') {
             if (!rule.rule.getText()) {
                 setErrors({ ...errors, comment: translate('user.rules.fill.field') });
                 safeRef.current = false;
@@ -310,47 +301,47 @@ function UserRuleComponent() {
                     onChange={onRuleTypeChange}
                 />
             </div>
-            {(type.value === 'block') && (
+            {(rule.rule.type === 'block') && (
                 // TODO: AG-40506
                 <BlockRequestForm
                     errors={errors}
-                    rule={rule as RuleTypeParam<BlockRequestRule>}
+                    rule={{ rule: rule.rule }}
                     setErrors={setErrors}
                     setRule={setRule}
                 />
             )}
-            {(type.value === 'unblock') && (
+            {(rule.rule.type === 'unblock') && (
                 // TODO: AG-40506
                 <UnblockRequestForm
                     errors={errors}
-                    rule={rule as RuleTypeParam<UnblockRequestRule>}
+                    rule={{ rule: rule.rule }}
                     setErrors={setErrors}
                     setRule={setRule}
                 />
             )}
-            {(type.value === 'noFiltering') && (
+            {(rule.rule.type === 'noFiltering') && (
                 // TODO: AG-40506
                 <DisableFilteringForm
                     errors={errors}
-                    rule={rule as RuleTypeParam<NoFilteringRule>}
+                    rule={{ rule: rule.rule }}
                     setErrors={setErrors}
                     setRule={setRule}
                 />
             )}
-            {(type.value === 'custom') && (
+            {(rule.rule.type === 'custom') && (
                 // TODO: AG-40506
                 <CustomRuleForm
                     errors={errors}
-                    rule={rule as RuleTypeParam<CustomRule>}
+                    rule={{ rule: rule.rule }}
                     setErrors={setErrors}
                     setRule={setRule}
                 />
             )}
-            {(type.value === 'comment') && (
+            {(rule.rule.type === 'comment') && (
                 // TODO: AG-40506
                 <CommentForm
                     errors={errors}
-                    rule={rule as RuleTypeParam<Comment>}
+                    rule={{ rule: rule.rule }}
                     setErrors={setErrors}
                     setRule={setRule}
                 />

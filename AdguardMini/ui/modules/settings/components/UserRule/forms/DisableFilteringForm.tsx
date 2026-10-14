@@ -10,7 +10,7 @@ import s from '../UserRule.module.pcss';
 import { getExceptionOptions, getLabelByExceptionModifier, validateDomain } from './helpers';
 
 import type { FormErrors } from '../UserRule';
-import type { ExceptionSelectModifiers, NoFilteringRule } from '@adguard/rules-editor';
+import type { ExceptionSelectModifiers, NoFilteringRule } from '@adg/rules-builder';
 import type { IOption } from 'Common/components';
 
 type DisableFilteringFormProps = {

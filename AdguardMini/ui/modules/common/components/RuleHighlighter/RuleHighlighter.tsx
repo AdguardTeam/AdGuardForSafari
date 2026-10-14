@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import { simpleTokenizer } from '@adguard/rules-editor';
+import { simpleTokenizer } from '@adg/rules-builder';
 
 import s from './RuleHighlighter.module.pcss';
 

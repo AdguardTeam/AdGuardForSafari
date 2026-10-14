@@ -8,7 +8,7 @@ import { Icon } from 'UILib';
 
 import s from './Helpers.module.pcss';
 
-import type { RulesBuilder } from '@adguard/rules-editor';
+import type { RulesBuilder } from '@adg/rules-builder';
 import type { IconType } from 'UILib';
 
 /**

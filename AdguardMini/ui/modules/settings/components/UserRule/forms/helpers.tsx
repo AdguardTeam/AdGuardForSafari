@@ -8,19 +8,16 @@ import {
     DomainModifiers,
     ExceptionSelectModifiers,
     RulesBuilder,
-} from '@adguard/rules-editor';
+} from '@adg/rules-builder';
 import isValidDomain from 'is-valid-domain';
 
 import { getIconByType } from '../../UserRules/components/helpers';
 import s from '../UserRule.module.pcss';
 
-import type { BlockRequestRule, CustomRule, Comment, NoFilteringRule, RuleType, UnblockRequestRule } from '@adguard/rules-editor';
+import type { RuleType, RuleTypeOptions } from '@adg/rules-builder';
 import type { IOption } from 'Common/components';
 
-/**
- * Union type for possible rule types
- */
-export type RuleTypeOptions = BlockRequestRule | UnblockRequestRule | Comment | NoFilteringRule | CustomRule;
+export type { RuleTypeOptions } from '@adg/rules-builder';
 
 /**
  * Empty rule for block type
@@ -323,7 +320,10 @@ export function convertRule(currentRule: RuleTypeOptions, currentType: RuleType,
     let newBuilder: RuleTypeOptions;
     switch (currentType) {
         case 'block': {
-            const tempRule = currentRule as BlockRequestRule;
+            if (currentRule.type !== 'block') {
+                break;
+            }
+            const tempRule = currentRule;
             switch (newType) {
                 case 'unblock': {
                     const tRule = RulesBuilder.getRuleByType('unblock');
@@ -365,7 +365,10 @@ export function convertRule(currentRule: RuleTypeOptions, currentType: RuleType,
             break;
         }
         case 'unblock': {
-            const tempRule = currentRule as UnblockRequestRule;
+            if (currentRule.type !== 'unblock') {
+                break;
+            }
+            const tempRule = currentRule;
             switch (newType) {
                 case 'block': {
                     const tRule = RulesBuilder.getRuleByType('block');
@@ -406,7 +409,10 @@ export function convertRule(currentRule: RuleTypeOptions, currentType: RuleType,
             break;
         }
         case 'noFiltering': {
-            const tempRule = currentRule as NoFilteringRule;
+            if (currentRule.type !== 'noFiltering') {
+                break;
+            }
+            const tempRule = currentRule;
             switch (newType) {
                 case 'block': {
                     const tRule = RulesBuilder.getRuleByType('block');
@@ -443,15 +449,15 @@ export function convertRule(currentRule: RuleTypeOptions, currentType: RuleType,
         }
         case 'custom': {
             const tRule = RulesBuilder.getRuleByType(newType);
-            newBuilder = tRule as RuleTypeOptions;
-            if (newType === 'comment') {
-                (tRule as Comment).setText(currentRule.buildRule());
+            newBuilder = tRule;
+            if (newType === 'comment' && tRule.type === 'comment') {
+                tRule.setText(currentRule.buildRule());
             }
             break;
         }
         case 'comment': {
             const tRule = RulesBuilder.getRuleByType(newType);
-            newBuilder = tRule as RuleTypeOptions;
+            newBuilder = tRule;
             break;
         }
     }
