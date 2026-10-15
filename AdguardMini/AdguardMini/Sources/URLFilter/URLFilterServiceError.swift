@@ -23,7 +23,7 @@ enum URLFilterServiceError: Error, LocalizedError, CustomStringConvertible {
     case loadFailed(Error)
     /// Removing the configuration failed.
     case removeFailed(Error)
-    /// Enabling or disabling the filter failed.
+    /// Applying or refreshing the filter's runtime failed after the configuration was written.
     case setEnabledFailed(Error)
     /// Resetting the prefilter cache failed.
     case resetCacheFailed(Error)
@@ -47,7 +47,7 @@ enum URLFilterServiceError: Error, LocalizedError, CustomStringConvertible {
         case let .removeFailed(error):
             "URLFilter configuration removal failed: \(error)"
         case let .setEnabledFailed(error):
-            "URLFilter enable/disable failed: \(error)"
+            "URLFilter runtime apply/refresh failed: \(error)"
         case let .resetCacheFailed(error):
             "URLFilter prefilter cache reset failed: \(error)"
         case .superseded:

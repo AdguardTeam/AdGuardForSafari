@@ -550,11 +550,15 @@ export class AdvancedBlocking {
         this.setURLFilterState(newValue);
         const resp = await window.API.Execute(new SetURLFilterEnabledRequest({ value }));
         if (resp.hasError) {
-            // The user pressed the switch: the failure is reported wherever it was pressed.
-            this.showSystemWideProtectionUnavailableSnack();
             // The platform persists the intent before attempting the start,
             // so the pull — not the response — tells the effective state.
-            await this.getURLFilterState();
+            await this.getURLFilterState(false);
+            // A declined system install prompt clears the intent: no failure to report.
+            const isDeclined = value && !this.urlFilterState.userIntentEnabled;
+            if (!isDeclined) {
+                // The user pressed the switch: the failure is reported wherever it was pressed.
+                this.showSystemWideProtectionUnavailableSnack();
+            }
         } else {
             // The toggle landed: the error state of the previous attempt is over.
             this.resetURLFilterError();
