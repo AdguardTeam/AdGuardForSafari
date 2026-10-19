@@ -25,9 +25,9 @@ on:
         type: string
         required: true
       slack-channel:
-        description: 'Slack channel for notifications'
+        description: 'Slack channel override; empty derives #proj-ag-<major>-<minor>-mini-mac from the tag, adding -<patch> when patch != 0'
         type: string
-        default: '#adguard-mini-deploy'
+        default: ''
   workflow_call:
     inputs:
       tag:
@@ -35,9 +35,9 @@ on:
         type: string
         required: true
       slack-channel:
-        description: 'Slack channel for notifications'
+        description: 'Slack channel override; empty derives #proj-ag-<major>-<minor>-mini-mac from the tag, adding -<patch> when patch != 0'
         type: string
-        default: '#adguard-mini-deploy'
+        default: ''
 
 permissions:
   contents: read
@@ -91,7 +91,8 @@ jobs:
         with:
           key: build-images/macos
 
-  # Single source for artifact names, download URLs and the deployer module.
+  # Single source for artifact names, download URLs, the deployer module,
+  # and the resolved Slack notification channel.
   constants:
     if: github.repository == 'AdGuardSoftwareLimited/sciter-adguard-mini'
     name: Constants
@@ -109,8 +110,22 @@ jobs:
       download-url: ${{ steps.const.outputs.download-url }}
       deployer-module: ${{ steps.const.outputs.deployer-module }}
       channel: ${{ steps.const.outputs.channel }}
+      slack-channel: ${{ steps.slack-channel.outputs.channel }}
       timestamp: ${{ steps.const.outputs.timestamp }}
     steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Derive Slack channel
+        id: slack-channel
+        uses: ./.github/actions/derive-slack-channel
+        with:
+          product: ag
+          platform: mini-mac
+          release: ${{ needs.meta.outputs.release }}
+          channel: ${{ inputs.slack-channel }}
+
       - id: const
         env:
           VERSION: ${{ needs.meta.outputs.version }}
@@ -144,6 +159,24 @@ jobs:
           echo "deployer-module=${DEPLOYER_MODULE}" >> "$GITHUB_OUTPUT"
           echo "channel=${CHANNEL}" >> "$GITHUB_OUTPUT"
           echo "timestamp=$(date +%s)" >> "$GITHUB_OUTPUT"
+
+  # ---------------------------------------------------------------------------
+  # Preflight
+  # ---------------------------------------------------------------------------
+
+  # Fails the run before any build starts when the bot cannot post to the
+  # resolved channel.
+  check-slack-channel:
+    if: github.repository == 'AdGuardSoftwareLimited/sciter-adguard-mini'
+    name: Check Slack channel
+    needs: [constants]
+    runs-on: [team-mac]
+    timeout-minutes: 5
+    steps:
+      - name: Check Slack channel access
+        uses: AdGuardSoftwareLimited/actions/actions/check-slack-channel@master
+        with:
+          channel: ${{ needs.constants.outputs.slack-channel }}
 
   # ---------------------------------------------------------------------------
   # Changelog
@@ -216,7 +249,7 @@ jobs:
   build-standalone:
     if: github.repository == 'AdGuardSoftwareLimited/sciter-adguard-mini'
     name: Build Standalone
-    needs: [meta, build-number, constants]
+    needs: [meta, build-number, constants, check-slack-channel]
     uses: ./.github/workflows/build-standalone.yml
     secrets: inherit
     with:
@@ -229,7 +262,7 @@ jobs:
   build-mas:
     if: github.repository == 'AdGuardSoftwareLimited/sciter-adguard-mini'
     name: Build MAS
-    needs: [meta, build-number, constants]
+    needs: [meta, build-number, constants, check-slack-channel]
     uses: ./.github/workflows/build-mas.yml
     secrets: inherit
     with:
@@ -410,20 +443,68 @@ jobs:
     secrets: inherit
 
   # ---------------------------------------------------------------------------
-  # Notification
+  # Notifications
   # ---------------------------------------------------------------------------
 
-  # A notification failure never fails the deploy (continue-on-error).
-  slack-notify:
-    if: github.repository == 'AdGuardSoftwareLimited/sciter-adguard-mini'
-    name: Slack notification
+  # Notifications never fail the deploy. The explicit `!cancelled()` overrides
+  # the implicit success() check a skipped nightly-json fails on beta/release.
+
+  # Sent as soon as both variants are built, before the deploy jobs wait on
+  # environment approvals. Silent when the build failed or was skipped.
+  slack-notify-build:
+    name: Slack notification (build)
     needs: [meta, build-number, constants, build-mas, finalize-standalone]
+    if: ${{ !cancelled() && needs.build-mas.result == 'success' && needs.finalize-standalone.result == 'success' && github.repository == 'AdGuardSoftwareLimited/sciter-adguard-mini' }}
     uses: AdGuardSoftwareLimited/actions/.github/workflows/slack-build-notify.yml@master
     with:
       team: mac
-      channel: ${{ inputs.slack-channel || '#adguard-mini-deploy' }}
+      channel: ${{ needs.constants.outputs.slack-channel }}
       product: AdGuard Mini for Mac
       version-title: ${{ needs.meta.outputs.version-title }}
+      metadata: >-
+        {
+          "Version": "${{ needs.meta.outputs.version }}",
+          "Channel": "${{ needs.constants.outputs.channel }}",
+          "Tag": "${{ inputs.tag || github.ref_name }}",
+          "Build": "${{ needs.build-number.outputs.value }}"
+        }
+      continue-on-error: true
+    secrets: inherit
+
+  # Sent only after the standalone bundle is published to the static storage.
+  slack-notify-static:
+    name: Slack notification (static)
+    needs: [meta, build-number, constants, deploy-static]
+    if: ${{ !cancelled() && needs.deploy-static.result == 'success' && github.repository == 'AdGuardSoftwareLimited/sciter-adguard-mini' }}
+    uses: AdGuardSoftwareLimited/actions/.github/workflows/slack-build-notify.yml@master
+    with:
+      team: mac
+      channel: ${{ needs.constants.outputs.slack-channel }}
+      product: AdGuard Mini for Mac
+      version-title: ${{ needs.meta.outputs.version-title }}
+      action: 'published to the static storage'
+      metadata: >-
+        {
+          "Version": "${{ needs.meta.outputs.version }}",
+          "Channel": "${{ needs.constants.outputs.channel }}",
+          "Tag": "${{ inputs.tag || github.ref_name }}",
+          "Build": "${{ needs.build-number.outputs.value }}"
+        }
+      continue-on-error: true
+    secrets: inherit
+
+  # Sent only after the MAS build is uploaded to TestFlight.
+  slack-notify-testflight:
+    name: Slack notification (TestFlight)
+    needs: [meta, build-number, constants, deploy-mas]
+    if: ${{ !cancelled() && needs.deploy-mas.result == 'success' && github.repository == 'AdGuardSoftwareLimited/sciter-adguard-mini' }}
+    uses: AdGuardSoftwareLimited/actions/.github/workflows/slack-build-notify.yml@master
+    with:
+      team: mac
+      channel: ${{ needs.constants.outputs.slack-channel }}
+      product: AdGuard Mini for Mac
+      version-title: ${{ needs.meta.outputs.version-title }}
+      action: 'uploaded to TestFlight'
       metadata: >-
         {
           "Version": "${{ needs.meta.outputs.version }}",

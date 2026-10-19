@@ -1,0 +1,68 @@
+# SPDX-FileCopyrightText: AdGuard Software Limited
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+name: Derive Slack Channel
+description: >
+  Composes the #proj-<product>-<release>-<platform> Slack notification channel
+  from the version metadata, or passes an explicit channel through.
+
+inputs:
+  product:
+    description: 'Product token, e.g. ag'
+    required: true
+  platform:
+    description: 'Platform token, e.g. mini-mac'
+    required: true
+  release:
+    description: 'The release output of version-metadata.yml, e.g. 3.0 or 4.14.2'
+    required: true
+  channel:
+    description: 'Explicit channel override. A non-empty value wins'
+    required: false
+    default: ''
+
+outputs:
+  channel:
+    description: 'Resolved Slack channel, e.g. #proj-ag-3-0-mini-mac'
+    value: ${{ steps.derive.outputs.channel }}
+
+runs:
+  using: composite
+  steps:
+    - name: Compose channel
+      id: derive
+      shell: bash
+      env:
+        INPUT_CHANNEL: ${{ inputs.channel }}
+        PRODUCT: ${{ inputs.product }}
+        PLATFORM: ${{ inputs.platform }}
+        RELEASE: ${{ inputs.release }}
+      run: |
+        set -euo pipefail
+
+        if [[ -n "${INPUT_CHANNEL}" ]]; then
+          echo "channel=${INPUT_CHANNEL}" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+
+        if [[ -z "${PRODUCT}" || -z "${PLATFORM}" || -z "${RELEASE}" ]]; then
+          echo "::error::Set product, platform and release, or pass an explicit channel"
+          exit 1
+        fi
+
+        if [[ ! "${RELEASE}" =~ ^[0-9]+(\.[0-9]+)+$ ]]; then
+          echo "::error::release must be digits separated by dots, e.g. '3.0', got '${RELEASE}'"
+          echo "::error::Pass the version-metadata release output, not the tag"
+          exit 1
+        fi
+
+        PRODUCT="$(printf '%s' "${PRODUCT}" | tr '[:upper:]' '[:lower:]')"
+        PLATFORM="$(printf '%s' "${PLATFORM}" | tr '[:upper:]' '[:lower:]')"
+
+        if [[ "${PRODUCT}${PLATFORM}" == *[[:space:]#]* ]]; then
+          echo "::error::product and platform must not contain spaces or '#'"
+          exit 1
+        fi
+
+        echo "channel=#proj-${PRODUCT}-${RELEASE//./-}-${PLATFORM}" >> "$GITHUB_OUTPUT"

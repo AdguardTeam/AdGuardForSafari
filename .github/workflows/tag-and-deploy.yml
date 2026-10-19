@@ -22,9 +22,9 @@ on:
         type: string
         required: true
       slack-channel:
-        description: 'Slack channel for notifications'
+        description: 'Slack channel override; empty derives #proj-ag-<major>-<minor>-mini-mac from the tag, adding -<patch> when patch != 0'
         type: string
-        default: '#adguard-qa-desktop-builds'
+        default: ''
       ref:
         description: 'Git ref to tag (SHA or branch). Empty = current HEAD.'
         type: string
@@ -37,11 +37,46 @@ permissions:
 
 jobs:
 
-  # Validates the requested tag and creates it; fails fast without touching
-  # the deploy if the tag is malformed, duplicated, or lacks a changelog.
+  # Parses the tag into the major/minor/patch the channel check needs.
+  meta:
+    if: github.repository == 'AdGuardSoftwareLimited/sciter-adguard-mini'
+    name: Version metadata
+    uses: AdGuardSoftwareLimited/actions/.github/workflows/version-metadata.yml@master
+    with:
+      team: mac
+      tag: ${{ inputs.tag }}
+
+  # Runs before the tag exists, so a bad channel leaves no tag behind.
+  check-slack-channel:
+    if: github.repository == 'AdGuardSoftwareLimited/sciter-adguard-mini'
+    name: Check Slack channel
+    needs: [meta]
+    runs-on: [team-mac]
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Derive Slack channel
+        id: derive
+        uses: ./.github/actions/derive-slack-channel
+        with:
+          product: ag
+          platform: mini-mac
+          release: ${{ needs.meta.outputs.release }}
+          channel: ${{ inputs.slack-channel }}
+
+      - name: Check Slack channel access
+        uses: AdGuardSoftwareLimited/actions/actions/check-slack-channel@master
+        with:
+          channel: ${{ steps.derive.outputs.channel }}
+
+  # Validates the requested tag and creates it. A malformed tag fails here.
   tag:
     if: github.repository == 'AdGuardSoftwareLimited/sciter-adguard-mini'
     name: Validate & tag
+    needs: [check-slack-channel]
     uses: AdGuardSoftwareLimited/actions/.github/workflows/validate-and-tag.yml@master
     with:
       team: mac
@@ -50,7 +85,7 @@ jobs:
     secrets: inherit
 
   # Runs the production pipeline (deploy-app.yml) for the new tag and
-  # reports the result to the configured Slack channel.
+  # reports the result to the resolved Slack channel.
   deploy:
     if: github.repository == 'AdGuardSoftwareLimited/sciter-adguard-mini'
     name: Deploy
