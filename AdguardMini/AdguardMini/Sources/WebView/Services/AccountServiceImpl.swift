@@ -96,21 +96,7 @@ final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType {
         Task {
             do {
                 let products = try await self.appStoreInteractor.getAvailableSubscriptions()
-                var promoInfo: ProtoSchema.PromoInfo?
-                do {
-                    let info = try await self.backendService.promoInfo()
-                    if info.isActual {
-                        LogDebug("Promo info is actual")
-                        promoInfo = PromoInfo(
-                            title: info.title,
-                            subtitle: info.label,
-                            buttonText: info.buttonText,
-                            buttonUrl: info.buttonUrl
-                        )
-                    }
-                } catch {
-                    LogError("Error fetching promo info: \(error)")
-                }
+                let promoInfo = await self.fetchPromoInfo()
                 promise(
                     AppStoreSubscriptionsMessage(
                         result: AppStoreSubscriptions(
@@ -127,16 +113,37 @@ final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType {
         }
         #else
         Task {
+            let promoInfo = await self.fetchPromoInfo()
             promise(
                 AppStoreSubscriptionsMessage(
                     result: AppStoreSubscriptions(
                         monthly: .init(),
-                        annual: .init()
+                        annual: .init(),
+                        promoInfo: promoInfo
                     )
                 )
             )
         }
         #endif
+    }
+
+    private func fetchPromoInfo() async -> ProtoSchema.PromoInfo? {
+        if let promo = DeveloperConfigUtils.promoOverride {
+            LogInfo("Using promo override from devConfig.json")
+            return ProtoSchema.PromoInfo(title: promo.title, subtitle: promo.label, buttonText: nil, buttonUrl: nil)
+        }
+
+        do {
+            let info = try await self.backendService.promoInfo()
+            let promoInfo = info.toProto()
+            if promoInfo != nil {
+                LogDebug("Promo info is actual")
+            }
+            return promoInfo
+        } catch {
+            LogError("Error fetching promo info: \(error)")
+            return nil
+        }
     }
 
     func getTrialAvailableDays(_ message: EmptyValue, _ promise: @escaping (Int32Value) -> Void) {

@@ -64,7 +64,7 @@ on:
         type: boolean
         default: false
       xcodebuild-args:
-        description: "Additional xcodebuild build settings appended to XCODEBUILD_ARGS (e.g. 'AG_FOO=\"bar\" AG_BAZ=\"qux\"')."
+        description: "Additional xcodebuild build settings appended to XCODEBUILD_ARGS. Write one build setting per line; each line is passed verbatim as one argument, with no shell quoting or expansion. Values MUST be fully expanded: an unexpanded $(SETTING) reference makes generateConfigConstants.sh emit duplicate Swift constants."
         type: string
         default: ""
 
@@ -128,11 +128,13 @@ jobs:
         [ -n "${{ inputs.version }}" ] && XCODEBUILD_OVERRIDE_ARGS+=("AG_VERSION=${{ inputs.version }}")
         [ -n "${{ inputs.version-title }}" ] && XCODEBUILD_OVERRIDE_ARGS+=("AG_VERSION_TITLE=${{ inputs.version-title }}")
         [ -n "${{ inputs.build-number }}" ] && XCODEBUILD_OVERRIDE_ARGS+=("AG_BUILD=${{ inputs.build-number }}")
-        if [ -n "${{ inputs.xcodebuild-args }}" ]; then
-          while IFS= read -r arg; do
-            XCODEBUILD_OVERRIDE_ARGS+=("$arg")
-          done < <(printf '%s' "${{ inputs.xcodebuild-args }}" | xargs printf '%s\n')
-        fi
+        while IFS= read -r arg; do
+          if [ -n "${arg}" ]; then
+            XCODEBUILD_OVERRIDE_ARGS+=("${arg}")
+          fi
+        done <<'XCODEBUILD_ARGS_EOF'
+        ${{ inputs.xcodebuild-args }}
+        XCODEBUILD_ARGS_EOF
         {
           echo "XCODEBUILD_OVERRIDE_ARGS<<EOF"
           printf '%s\n' "${XCODEBUILD_OVERRIDE_ARGS[@]}"

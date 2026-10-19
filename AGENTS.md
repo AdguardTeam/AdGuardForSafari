@@ -805,6 +805,20 @@ Blocker JSON consumed by the extension targets.
    **Rationale**: Keeps backend and versioning contract violations visible
    instead of papering over them.
 
+10. **Boolean names state the condition they hold (Swift + TS)**: A boolean
+    property, flag, or local MUST be named for the condition it carries, in
+    the module's own terms — not for the UI region or the element it
+    positions. `hasIntroOfferPrice`, not `isOfferBlockVisible`. One concept
+    keeps one name across the module: the same value passed to a helper under
+    a second name reads as another entity and hides its effect at the call
+    site, as a layout flag that silently gated promo-card visibility did.
+    Rename a misleading local when the change removes the reason the old name
+    existed.
+
+    **Rationale**: A name that describes an area or an element instead of a
+    condition forces the reader to open the calculation to learn what the flag
+    means, and a second name for one value makes the caller's effect invisible.
+
 ### Testing Discipline
 
 1. **XCTest for Swift**: Unit tests are located in `AdguardMini/AdguardMiniTests/`.

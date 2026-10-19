@@ -117,6 +117,12 @@ html[theme="light"] {
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.10), 8px 8px 12px rgba(0, 0, 0, 0.20);
         animation: 0.2s ease-out offer-appear;
 
+        /* The right-content layout leaves the illustration side free, so the card mirrors there. */
+        &__left {
+            right: auto;
+            left: var(--m-s);
+        }
+
         &_text {
             display: flex;
             flex: 1 0 0;

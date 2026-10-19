@@ -125,6 +125,7 @@
 		16B91426300139130046E668 /* AGSentry in Frameworks */ = {isa = PBXBuildFile; productRef = 16B91425300139130046E668 /* AGSentry */; };
 		173AF1A1003AF1A1007DF535 /* ProtoSchema in Frameworks */ = {isa = PBXBuildFile; productRef = 173AF101003AF101007DF535 /* ProtoSchema */; };
 		173AF1A2003AF1A2007DF535 /* FLM in Frameworks */ = {isa = PBXBuildFile; productRef = 173AF102003AF102007DF535 /* FLM */; };
+		A6046700A11B22C33D44E551 /* AppBackend in Frameworks */ = {isa = PBXBuildFile; productRef = A6046700A11B22C33D44E552 /* AppBackend */; };
 		EB00BB882ABAF71F007FA047 /* AGSEDesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = EB00BB872ABAF71F007FA047 /* AGSEDesignSystem */; };
 		EB0532072C4FDD400054CF62 /* SharedSettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3F1C582BADC40400DD2717 /* SharedSettingsStorage.swift */; };
 		EB08495D2AB33E4900222913 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB08495C2AB33E4900222913 /* DIContainer.swift */; };
@@ -656,6 +657,7 @@
 				Backend/Models/LicenseType.swift,
 				Backend/Models/SubscriptionStatus.swift,
 				Backend/Models/TrialInfo.swift,
+				"Backend/Utils/PromotionResponse+Utils.swift",
 				Core/AllowBlockListRuleBuilder.swift,
 				Core/AppLogConfig.swift,
 				Core/Debouncer.swift,
@@ -713,6 +715,7 @@
 				URLFilter/URLFilterStateAssembler.swift,
 				URLFilter/URLFilterStatus.swift,
 				URLFilter/URLFilterUIState.swift,
+				"Utils/Conversions/ToProtobuf/PromotionResponse+ToProto.swift",
 				"Utils/Date+Utils.swift",
 				"Utils/EffectiveThemeValue+Utils.swift",
 				Utils/LogTag.swift,
@@ -1157,6 +1160,7 @@
 				173AF1A1003AF1A1007DF535 /* ProtoSchema in Frameworks */,
 				16901AAA2FFFCD9C007DF535 /* ContentBlockerConverter in Frameworks */,
 				16901AA82FFFCD8F007DF535 /* AdGuardMacLib in Frameworks */,
+				A6046700A11B22C33D44E551 /* AppBackend in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1654,6 +1658,7 @@
 				173AF102003AF102007DF535 /* FLM */,
 				16901AA72FFFCD8F007DF535 /* AdGuardMacLib */,
 				16901AA92FFFCD9C007DF535 /* ContentBlockerConverter */,
+				A6046700A11B22C33D44E552 /* AppBackend */,
 			);
 			productName = AdguardMiniTests;
 			productReference = EB843F062B90ED15009179E0 /* AdguardMiniTests.xctest */;
@@ -5728,6 +5733,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 16901A842FFFC03B007DF535 /* XCRemoteSwiftPackageReference "sp-flm" */;
 			productName = FLM;
+		};
+		A6046700A11B22C33D44E552 /* AppBackend */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 160C1C112FFFB70300B840B9 /* XCRemoteSwiftPackageReference "sp-backend" */;
+			productName = AppBackend;
 		};
 		EB00BB872ABAF71F007FA047 /* AGSEDesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;

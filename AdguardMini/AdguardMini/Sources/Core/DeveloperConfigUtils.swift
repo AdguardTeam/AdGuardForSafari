@@ -85,6 +85,12 @@ struct DeveloperConfigUtils {
         ///
         /// Example: `{"url_filter_override_uid": 501}`.
         case urlFilterOverrideUID = "url_filter_override_uid"
+
+        /// Value is a dictionary with the paywall promo text, shown instead of
+        /// the backend promo while it is set.
+        ///
+        /// Example: `{"promo_override": {"title": "Black Friday", "label": "~50% off"}}`.
+        case promoOverride = "promo_override"
     }
 
     // MARK: Public properties and methods
@@ -103,6 +109,28 @@ struct DeveloperConfigUtils {
             }
             return Self.config[name.rawValue]
         }
+    }
+
+    /// Returns the paywall promo text from `promo_override`.
+    static var promoOverride: (title: String, label: String)? {
+        Self.promoOverride(from: Self[.promoOverride])
+    }
+
+    /// Maps the `promo_override` value to the paywall promo text.
+    ///
+    /// - Parameter raw: The `promo_override` value as parsed from JSON.
+    /// - Returns: The card text, or `nil` when the value cannot describe one.
+    static func promoOverride(from raw: Any?) -> (title: String, label: String)? {
+        guard let raw else {
+            return nil
+        }
+
+        guard let fields = raw as? [String: String] else {
+            LogWarn("devConfig promo_override must be an object of strings")
+            return nil
+        }
+
+        return (fields["title"] ?? "", fields["label"] ?? "")
     }
 
     /// Returns devConfig.json file url.

@@ -14,7 +14,7 @@ const offer = new PromoInfo({ title: 'Black Friday', subtitle: '50% off the firs
 const visible = {
     offer,
     hasIntroOfferPrice: true,
-    isContentOnRight: false,
+    isStandaloneReleaseVariant: false,
     isDismissed: false,
 };
 
@@ -24,14 +24,20 @@ test('visiblePromoOffer returns the offer when every condition holds', () => {
 
 test('visiblePromoOffer hides the card when the backend sent no promo', () => {
     assert.equal(visiblePromoOffer({ ...visible, offer: undefined }), undefined);
+    assert.equal(
+        visiblePromoOffer({ ...visible, offer: undefined, isStandaloneReleaseVariant: true }),
+        undefined,
+    );
 });
 
 test('visiblePromoOffer hides the card without an intro offer price', () => {
     assert.equal(visiblePromoOffer({ ...visible, hasIntroOfferPrice: false }), undefined);
 });
 
-test('visiblePromoOffer hides the card while the paywall content is on the right', () => {
-    assert.equal(visiblePromoOffer({ ...visible, isContentOnRight: true }), undefined);
+test('visiblePromoOffer shows the card in a standalone build without an intro offer price', () => {
+    const standalone = { ...visible, hasIntroOfferPrice: false, isStandaloneReleaseVariant: true };
+
+    assert.equal(visiblePromoOffer(standalone), offer);
 });
 
 test('visiblePromoOffer hides the card the user closed', () => {

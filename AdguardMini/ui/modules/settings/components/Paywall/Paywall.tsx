@@ -62,7 +62,7 @@ function PaywallComponent() {
         },
     ];
 
-    const { isMASReleaseVariant } = settings;
+    const { isMASReleaseVariant, isStandaloneReleaseVariant } = settings;
 
     const [showAlreadyPurchasedFlowModal, setShowAlreadyPurchasedFlowModal] = useState(false);
     const [showTermsAndConditionsModal, setShowTermsAndConditionsModal] = useState(false);
@@ -120,7 +120,7 @@ function PaywallComponent() {
         return translate('settings.paywall.title');
     };
 
-    const isRightSide = (isTrialExpired || isLicenseExpired) && !isMASReleaseVariant;
+    const isContentOnRight = (isTrialExpired || isLicenseExpired) && !isMASReleaseVariant;
 
     const offer = visiblePromoOffer({
         offer: appStoreSubscriptions?.result?.promoInfo,
@@ -128,7 +128,7 @@ function PaywallComponent() {
             appStoreSubscriptions?.result?.annual?.introOfferDisplayPrice
             || appStoreSubscriptions?.result?.monthly?.introOfferDisplayPrice,
         ),
-        isContentOnRight: isRightSide,
+        isStandaloneReleaseVariant,
         isDismissed: isOfferDismissed,
     });
 
@@ -151,7 +151,7 @@ function PaywallComponent() {
                     onClick={() => account.closePaywall()}
                 />
                 {offer && (
-                    <div className={s.Paywall_offer}>
+                    <div className={cx(s.Paywall_offer, isContentOnRight && s.Paywall_offer__left)}>
                         <div className={s.Paywall_offer_text}>
                             <Text
                                 lineHeight="l"
@@ -175,7 +175,7 @@ function PaywallComponent() {
                 )}
                 <div className={cx(
                     s.Paywall_container,
-                    isRightSide ? s.Paywall_container__right : s.Paywall_container__left,
+                    isContentOnRight ? s.Paywall_container__right : s.Paywall_container__left,
                 )}
                 >
                     {/* The heading names itself plus the line under it. */}

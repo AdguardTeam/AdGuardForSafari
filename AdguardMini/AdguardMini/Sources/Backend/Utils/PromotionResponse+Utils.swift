@@ -11,6 +11,7 @@ import Foundation
 import AppBackend
 
 extension AppBackend.PromotionResponse {
+    /// Whether the promotion is active and inside its date window.
     var isActual: Bool {
         let now = Date.now
         let isActualDate = now >= self.startDate && now < self.endDate

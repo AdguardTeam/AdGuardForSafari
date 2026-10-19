@@ -17,26 +17,23 @@ import { Paywall } from './Paywall';
 function PaywallControllerComponent() {
     const {
         account,
-        settings: { isMASReleaseVariant },
         account: { paywallShouldBeShown, isLicenseOrTrialActive },
         notification,
     } = useSettingsStore();
 
     useEffect(() => {
-        if (isMASReleaseVariant) {
-            account.getSubscriptionsInfo().then(({ error }) => {
-                if (error && paywallShouldBeShown && !isLicenseOrTrialActive) {
-                    notification.notify({
-                        message: getNotificationSomethingWentWrongText(),
-                        notificationContext: NotificationContext.info,
-                        type: NotificationsQueueType.warning,
-                        iconType: NotificationsQueueIconType.error,
-                        closeable: true,
-                    });
-                }
-            });
-        }
-    }, [notification, account, isMASReleaseVariant, paywallShouldBeShown, isLicenseOrTrialActive]);
+        account.getSubscriptionsInfo().then(({ error }) => {
+            if (error && paywallShouldBeShown && !isLicenseOrTrialActive) {
+                notification.notify({
+                    message: getNotificationSomethingWentWrongText(),
+                    notificationContext: NotificationContext.info,
+                    type: NotificationsQueueType.warning,
+                    iconType: NotificationsQueueIconType.error,
+                    closeable: true,
+                });
+            }
+        });
+    }, [notification, account, paywallShouldBeShown, isLicenseOrTrialActive]);
 
     if (paywallShouldBeShown && !isLicenseOrTrialActive) {
         return <Paywall />;

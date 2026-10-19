@@ -64,6 +64,16 @@ export class Account {
     };
 
     /**
+     * Id of the last started subscriptions info request
+     */
+    private subscriptionsRequestId: number = 0;
+
+    /**
+     * Id of the subscriptions info response already applied to the store
+     */
+    private lastAppliedSubscriptionsRequestId: number = 0;
+
+    /**
      * User License
      */
     public license = new LicenseOrError({ error: true }) as unknown as LicenseOrErrorExtended;
@@ -382,12 +392,24 @@ export class Account {
 
     /**
      * Receive app store subscriptions info
+     *
+     * Overlapping callers (settings init and the paywall refresh) cannot apply
+     * their answers out of order: a response older than one already applied is
+     * discarded, and while a request is pending the store keeps its previous
+     * value.
      */
-    public async getSubscriptionsInfo() {
+    public async getSubscriptionsInfo(): Promise<AppStoreSubscriptionsMessage> {
+        const requestId = this.subscriptionsRequestId + 1;
+        this.subscriptionsRequestId = requestId;
+
         await this.getTrialAvailability();
         const result = await window.API.Execute(new GetSubscriptionsInfoRequest());
 
-        this.setSubscriptionsInfo(result);
+        if (requestId > this.lastAppliedSubscriptionsRequestId) {
+            this.lastAppliedSubscriptionsRequestId = requestId;
+            this.setSubscriptionsInfo(result);
+        }
+
         return result;
     }
 

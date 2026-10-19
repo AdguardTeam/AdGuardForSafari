@@ -12,8 +12,8 @@ type PromoOfferVisibility = {
     offer?: PromoInfo;
     /** Whether a subscription carries an intro (discounted) price. */
     hasIntroOfferPrice: boolean;
-    /** The paywall content column is laid out on the right. */
-    isContentOnRight: boolean;
+    /** Whether the build is the standalone variant, which has no App Store prices. */
+    isStandaloneReleaseVariant: boolean;
     /** The user closed the card during this paywall session. */
     isDismissed: boolean;
 };
@@ -22,9 +22,11 @@ type PromoOfferVisibility = {
  * Resolves the promo offer to render on the paywall.
  *
  * The card advertises the discounted plan, so it needs promo copy and an intro
- * price to advertise. It is drawn over the illustration on the right, so it
- * stays hidden while the paywall content itself sits there, and it stays
- * dismissed for the rest of the paywall session once the user closes it.
+ * price to advertise — except in a standalone build, which has no App Store
+ * intro price and shows the card on the promo copy alone. A release variant the
+ * platform has not reported yet keeps the intro-price gate, so the card cannot
+ * appear before the variant is known. The card stays dismissed for the rest of
+ * the paywall session once the user closes it.
  *
  * @param params - Offer payload and the conditions around showing it
  * @returns The offer to render, or `undefined` when the card must stay hidden
@@ -32,10 +34,12 @@ type PromoOfferVisibility = {
 export function visiblePromoOffer({
     offer,
     hasIntroOfferPrice,
-    isContentOnRight,
+    isStandaloneReleaseVariant,
     isDismissed,
 }: PromoOfferVisibility): PromoInfo | undefined {
-    if (!offer || !hasIntroOfferPrice || isContentOnRight || isDismissed) {
+    const requiresIntroOfferPrice = !isStandaloneReleaseVariant;
+
+    if (!offer || (requiresIntroOfferPrice && !hasIntroOfferPrice) || isDismissed) {
         return undefined;
     }
 
