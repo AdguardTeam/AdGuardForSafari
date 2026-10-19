@@ -15,7 +15,10 @@ import ContentBlockerConverter
 /// Centralizes the mapping logic that was previously duplicated across SafariConverter and FiltersServiceImpl.
 extension ContentBlockerType {
     /// All content blocker types in the library.
-    private static let allCases: [ContentBlockerType] = [
+    ///
+    /// `nonisolated(unsafe)` because the array is a write-once constant of
+    /// library enum cases that are only read, never mutated.
+    nonisolated(unsafe) private static let allCases: [ContentBlockerType] = [
         .general, .privacy, .security, .socialWidgetsAndAnnoyances, .other, .custom
     ]
 

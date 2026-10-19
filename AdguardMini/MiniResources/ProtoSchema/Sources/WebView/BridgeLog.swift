@@ -42,7 +42,10 @@ public enum BridgeLog {
     /// `AppLogConfig.setup()` (which runs before any bridge exists). Bridge
     /// log calls can arrive from non-main contexts, so the closure must be
     /// thread-safe.
-    public static var sink: ((BridgeLogLevel, String) -> Void)?
+    ///
+    /// `nonisolated(unsafe)` because the sink is written once at startup.
+    /// Reads afterwards come from arbitrary threads.
+    nonisolated(unsafe) public static var sink: ((BridgeLogLevel, String) -> Void)?
 
     public static func error(_ message: @autoclosure () -> String) {
         emit(.error, message())

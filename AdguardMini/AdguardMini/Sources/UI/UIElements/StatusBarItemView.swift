@@ -11,6 +11,11 @@ import Foundation
 import AppKit.NSStatusItem
 import AML
 
+/// Wraps the status item's button.
+///
+/// `@MainActor` because `NSStatusItem` and its button are AppKit objects
+/// driven from the main thread.
+@MainActor
 final class StatusBarItemView {
     private(set) var statusItem: NSStatusItem
 

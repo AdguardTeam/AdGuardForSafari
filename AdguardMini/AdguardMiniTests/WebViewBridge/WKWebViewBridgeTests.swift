@@ -11,6 +11,8 @@ import XCTest
 import WebKit
 import ProtoSchema  // Bridge types (per finding #9 rev 3)
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class WKWebViewBridgeTests: XCTestCase {
     func testDispatch_RoutesByMethodName_ToRegisteredServiceHandler() {
         let bridge = WKWebViewBridge(webView: MockWebView())
@@ -347,7 +349,7 @@ final class WKWebViewBridgeTests: XCTestCase {
         bridge.markPageReady()
 
         let methods = recorder.invocations.compactMap {
-            try? $0.get().arguments["method"] as? String
+            $0.get().arguments["method"] as? String
         }
         XCTAssertEqual(methods, ["A.First", "B.Second"], "buffered pushes must flush in FIFO order")
     }

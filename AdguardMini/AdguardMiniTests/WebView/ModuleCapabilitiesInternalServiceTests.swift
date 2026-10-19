@@ -11,6 +11,8 @@ import XCTest
 
 /// Snapshot of per-module `InternalService` caller audit.
 /// Update only when shipped TS callers change.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class ModuleCapabilitiesInternalServiceTests: XCTestCase {
     func testInternalServiceSubsets_MatchAuditedCallers() {
         XCTAssertEqual(

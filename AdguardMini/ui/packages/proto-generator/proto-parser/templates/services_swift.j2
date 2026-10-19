@@ -13,7 +13,7 @@ public protocol {{service.body.name}}Protocol
 	/// {{helper.wrap_string(method.description, "	/// ")}}
 	func {{helper.pascal_to_camel(method.body.name)}} (
 						_ message: {{method.body.request_message_type}},
-						_ promise: @escaping ({{method.body.response_message_type}}) -> Void) -> Void
+						_ promise: sending @escaping ({{method.body.response_message_type}}) -> Void) -> Void
 {% endfor %}
 }
 
@@ -27,7 +27,7 @@ open class {{service.body.name}}: {{config["service_class_name"]}}
 	public typealias ServiceType = {{service.body.name}} & {{config["service_protocol"]}} & {{service.body.name}}Protocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 {% for method in service.body.body %}
 		case "{{method.body.name}}":

@@ -68,7 +68,7 @@ extension StatisticsPeriod: CustomStringConvertible {
 
 // MARK: - StatisticsStore
 
-protocol StatisticsStore {
+protocol StatisticsStore: Sendable {
     func addCounts(_ counts: [SafariBlockerType: Int]) throws
     func addAdsBlockedTotal(_ count: Int) throws
     func queryStatistics(for period: StatisticsPeriod, blockerType: SafariBlockerType?) throws -> Int
@@ -107,7 +107,11 @@ final class NoOpStatisticsStore: StatisticsStore {
 ///
 /// Both the main app and PopupExtension create their own instance pointing at
 /// the same SQLite file. SQLite's WAL mode ensures cross-process safety.
-final class SharedStatisticsStoreImpl: StatisticsStore {
+///
+/// `@unchecked Sendable` because the stored container and context are
+/// immutable and every context access goes through `performAndWait`, which
+/// runs the block on the context's queue.
+final class SharedStatisticsStoreImpl: StatisticsStore, @unchecked Sendable {
     // MARK: Private properties
 
     private let persistentContainer: NSPersistentContainer

@@ -27,7 +27,9 @@ protocol AppStoreInteractor {
 
 // MARK: - AppStoreInteractorImpl
 
-final class AppStoreInteractorImpl: AppStoreInteractor, StoreApiDelegate {
+/// `@unchecked Sendable` because the store delegate only forwards to the
+/// injected services and posts events.
+final class AppStoreInteractorImpl: AppStoreInteractor, StoreApiDelegate, @unchecked Sendable {
     private let appStore: StoreApiProtocol
     private let backendService: BackendService
     private let eventBus: EventBus
@@ -82,9 +84,11 @@ final class AppStoreInteractorImpl: AppStoreInteractor, StoreApiDelegate {
         let error = err.map { "\($0)" } ?? "success"
         LogInfo("Purchase \(signedTransaction.productID): \(error)")
         self.eventBus.post(event: .appStoreTransactionUpdated, userInfo: nil)
+        // The signed transaction is only read for its JWS representation.
+        let jws = signedTransaction.jwsRepresentation
         Task {
             do {
-                try await self.validateReceipt(jws: signedTransaction.jwsRepresentation)
+                try await self.validateReceipt(jws: jws)
             } catch {
                 LogError("Failed to validate receipt after transaction updated: \(error)")
             }

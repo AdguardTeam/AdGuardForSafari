@@ -10,6 +10,8 @@
 import XCTest
 
 /// Tests for child-window model types.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class ChildWindowTypesTests: XCTestCase {
     func testWindowIdIsStringTypeAlias() {
         let id: WindowId = "0"

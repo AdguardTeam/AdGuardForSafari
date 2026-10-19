@@ -12,14 +12,14 @@ import XCTest
 final class FilteringDecisionTests: XCTestCase {
     private var mockChecker: MockUrlFilteringChecker!
 
-    override func setUp() {
-        super.setUp()
+    override func setUp() async throws {
+        try await super.setUp()
         self.mockChecker = MockUrlFilteringChecker()
     }
 
-    override func tearDown() {
+    override func tearDown() async throws {
         self.mockChecker = nil
-        super.tearDown()
+        try await super.tearDown()
     }
 
     // MARK: - resolveEnable tests

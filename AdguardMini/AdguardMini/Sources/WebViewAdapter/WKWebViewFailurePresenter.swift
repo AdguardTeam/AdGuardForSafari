@@ -12,7 +12,8 @@ import AppKit
 import AML
 
 /// Presents WKWebView failures.
-protocol WKWebViewFailurePresenting: AnyObject {
+/// `Sendable` because both implementations hold only immutable state.
+protocol WKWebViewFailurePresenting: AnyObject, Sendable {
     /// Handles a WKWebView load failure.
     func handleLoadFailure(module: String, error: Error) async
 
@@ -36,7 +37,9 @@ protocol WKWebViewFailurePresenting: AnyObject {
 // MARK: - WKWebViewFailurePresenter
 
 /// Live failure presenter with logging and restart flow.
-final class WKWebViewFailurePresenter: WKWebViewFailurePresenting {
+///
+/// `Sendable` because every stored property is an immutable `@Sendable` closure.
+final class WKWebViewFailurePresenter: WKWebViewFailurePresenting, @unchecked Sendable {
     private let presentAlert: @MainActor @Sendable (AppAlert) async -> NSApplication.ModalResponse
     private let restartApp: @MainActor @Sendable () async -> Void
     private let terminateApp: @MainActor @Sendable () async -> Void
@@ -134,7 +137,7 @@ final class WKWebViewFailurePresenter: WKWebViewFailurePresenting {
 // MARK: - NoOpFailurePresenter
 
 /// No-op presenter implementation.
-final class NoOpFailurePresenter: WKWebViewFailurePresenting {
+final class NoOpFailurePresenter: WKWebViewFailurePresenting, @unchecked Sendable {
     func handleLoadFailure(module: String, error: Error) async {}
     func handleJSRuntimeError(message: String, stack: String?) async {}
     func handleCSPViolation(message: String, stack: String?) async {}

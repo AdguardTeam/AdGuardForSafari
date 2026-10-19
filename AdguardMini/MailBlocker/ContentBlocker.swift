@@ -14,7 +14,10 @@ import MailKit
 /// MailKit content blocker that serves Content Blocking JSON to Mail.app
 /// from the shared App Group. Falls back to `[]` when the file is missing,
 /// unreadable, or invalid.
-final class ContentBlocker: NSObject, MEContentBlocker {
+///
+/// `@unchecked Sendable` because `filtersStorage` is a `let` assigned once
+/// in `init` and the blocker only reads from it.
+final class ContentBlocker: NSObject, MEContentBlocker, @unchecked Sendable {
     static let shared = ContentBlocker()
 
     private let filtersStorage: FiltersStorage

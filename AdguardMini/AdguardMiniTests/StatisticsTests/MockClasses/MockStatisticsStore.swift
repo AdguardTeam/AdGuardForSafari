@@ -60,7 +60,8 @@ extension MockStatisticsStore {
     }
 }
 
-final class MockStatisticsStore: StatisticsStore {
+/// `@unchecked Sendable` because the double is driven single-threaded by one test.
+final class MockStatisticsStore: StatisticsStore, @unchecked Sendable {
     private let configuration: Configuration
     private(set) var addCountsCalls: [[SafariBlockerType: Int]] = []
     private(set) var addAdsBlockedTotalCalls: [Int] = []

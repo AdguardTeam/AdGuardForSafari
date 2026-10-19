@@ -111,7 +111,10 @@ final class WebUIIntegrityVerifier: WebUIIntegrityVerifying {
     // MARK: - No-op factory
 
     /// Returns a no-op verifier that reports every bundle as intact.
-    static let noOp: any WebUIIntegrityVerifying = NoOpWebUIIntegrityVerifier()
+    ///
+    /// `nonisolated(unsafe)` because the verifier is a stateless singleton
+    /// that is only read through the protocol.
+    nonisolated(unsafe) static let noOp: any WebUIIntegrityVerifying = NoOpWebUIIntegrityVerifier()
 }
 
 // MARK: - NoOpWebUIIntegrityVerifier

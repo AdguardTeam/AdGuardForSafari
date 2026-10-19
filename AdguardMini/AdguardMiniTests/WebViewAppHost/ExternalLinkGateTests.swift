@@ -14,6 +14,8 @@ private final class MockLinkOpener: LinkOpening {
     func openURL(_ url: URL) { opened.append(url) }
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class ExternalLinkGateTests: XCTestCase {
     private func makeGate() -> (gate: ExternalLinkGate, opener: MockLinkOpener) {
         let opener = MockLinkOpener()

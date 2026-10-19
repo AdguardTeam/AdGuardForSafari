@@ -9,7 +9,7 @@
 
 import Foundation
 
-protocol ServiceSupervisor {
+protocol ServiceSupervisor: Sendable {
     var isStarted: Bool { get async }
 
     func startAll() async

@@ -20,6 +20,8 @@ private enum Constants {
 
 // MARK: - ToolbarRendererTests
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class ToolbarRendererTests: XCTestCase {
     private func state(
         mainAppRunning: Bool = true,

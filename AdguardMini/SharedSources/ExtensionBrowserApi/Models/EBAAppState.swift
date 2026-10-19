@@ -26,7 +26,7 @@ final class EBAAppState: NSObject, NSSecureCoding {
         Date().timeIntervalSinceReferenceDate
     }
 
-    @objc static var zeroTimestampString = Date(timeIntervalSinceReferenceDate: EBATimestamp.zero).iso8601String
+    @objc static let zeroTimestampString = Date(timeIntervalSinceReferenceDate: EBATimestamp.zero).iso8601String
 
     @objc static func timestampString(_ timestamp: EBATimestamp) -> String {
         timestamp == EBATimestamp.zero
@@ -70,7 +70,8 @@ final class EBAAppState: NSObject, NSSecureCoding {
 // MARK: Date + iso8601String
 
 fileprivate extension Date {
-    private static let iso8601DateFormatter = ISO8601DateFormatter()
+    // `ISO8601DateFormatter` lacks `Sendable`, but it is thread-safe and read-only.
+    nonisolated(unsafe) private static let iso8601DateFormatter = ISO8601DateFormatter()
     var iso8601String: String {
         let formatter = Self.iso8601DateFormatter
         return formatter.string(from: self)

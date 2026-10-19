@@ -23,7 +23,9 @@ extension OnboardingServiceImpl:
 extension OnboardingServiceImpl: AppStoreRateUsDependent {}
 #endif
 
-final class OnboardingServiceImpl: OnboardingService.ServiceType {
+/// `@unchecked Sendable` because the injected services are assigned once
+/// during DI setup and only read afterwards.
+final class OnboardingServiceImpl: OnboardingService.ServiceType, @unchecked Sendable {
     var webViewAppsController: WebViewAppsController!
     var userSettingsManager: UserSettingsManager!
     var protectionService: ProtectionService!
@@ -39,7 +41,7 @@ final class OnboardingServiceImpl: OnboardingService.ServiceType {
         self.setupServices()
     }
 
-    func onboardingDidComplete(_ message: EmptyValue, _ promise: @escaping (EmptyValue) -> Void) {
+    func onboardingDidComplete(_ message: EmptyValue, _ promise: sending @escaping (EmptyValue) -> Void) {
         // Single main-actor task with a deterministic order.
         Task { @MainActor in
             self.webViewAppsController.destroy(.onboarding)

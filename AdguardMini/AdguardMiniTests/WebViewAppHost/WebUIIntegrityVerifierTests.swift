@@ -14,6 +14,8 @@ import Security
 /// `codesign` signs and the Security framework validates — no certificates,
 /// no keychain entries, and no stub standing in for the seal check. These are
 /// the tests that prove a modified bundle is caught.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class WebUIIntegrityRealSignatureTests: XCTestCase {
     private enum Constants {
         static let bundleIdentifier = "com.adguard.test.Fixture"

@@ -21,11 +21,13 @@ final actor Debouncer {
     func debounce(_ completion: @escaping () async -> Void, onCancel: @escaping @Sendable () -> Void = {}) {
         self.debounceTask?.cancel()
 
+        // `nonisolated(unsafe)` because the completion runs once, in this task.
+        nonisolated(unsafe) let job = completion
         self.debounceTask = Task.detached {
             try? await withTaskCancellationHandler(
                 operation: {
                     try await Task.sleep(seconds: self.debounceTimeSeconds)
-                    await completion()
+                    await job()
                 },
                 onCancel: onCancel
             )

@@ -9,6 +9,8 @@
 
 import XCTest
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class PathConfinerTests: XCTestCase {
     private let roots = ["/Users/test/Library/Containers/com.adguard.mini"]
 

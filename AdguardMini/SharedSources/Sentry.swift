@@ -37,5 +37,6 @@ enum SharedSentryUtilities {
         Self.sentryStorage.buildUrl(relativePath: "", with: nil).path
     }()
 
-    private static let sentryStorage: SentryStorage = SentryStorageImpl()
+    // Only `buildUrl(relativePath:with:)` is called on the instance and it never escapes the file.
+    nonisolated(unsafe) private static let sentryStorage: SentryStorage = SentryStorageImpl()
 }

@@ -16,11 +16,11 @@ public protocol OnboardingServiceProtocol
 	/// Notifies that onboarding did complete.
 	func onboardingDidComplete (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Get system language
 	func getSystemLanguage (
 						_ message: EmptyValue,
-						_ promise: @escaping (StringValue) -> Void) -> Void
+						_ promise: sending @escaping (StringValue) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -33,7 +33,7 @@ open class OnboardingService: WebViewBridge
 	public typealias ServiceType = OnboardingService & Service & OnboardingServiceProtocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 		case "OnboardingDidComplete":
 			do {

@@ -59,7 +59,9 @@ private extension Notification.Name {
 
 // MARK: - EventBus
 
-protocol EventBus {
+/// `Sendable` because the implementation is stateless: it forwards to
+/// `NotificationCenter`.
+protocol EventBus: Sendable {
     /// Function to post a notification.
     func post(event: Event, userInfo: Any?)
     /// Function to subscribe to notifications.
@@ -82,7 +84,7 @@ protocol EventBus {
 
 /// For needs of passing events from/to different services and remove cycle dependencies, there is simple event bus based on NotificationCenter.
 /// for parse notifications data use parseNotification
-final class EventBusImpl: EventBus {
+final class EventBusImpl: EventBus, @unchecked Sendable {
     func post(event: Event, userInfo: Any? = nil) {
         NotificationCenter.default.post(
             name: .init(event.rawValue),

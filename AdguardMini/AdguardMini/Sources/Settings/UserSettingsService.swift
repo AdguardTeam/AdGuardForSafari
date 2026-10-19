@@ -12,7 +12,8 @@ import AML
 
 // MARK: - UserSettingsService
 
-protocol UserSettingsService: AnyObject {
+/// `Sendable` because the implementation holds only immutable collaborators.
+protocol UserSettingsService: AnyObject, Sendable {
     var firstRun: Bool { get }
 
     // MARK: Properties without side effects
@@ -56,7 +57,9 @@ protocol UserSettingsService: AnyObject {
 
 // MARK: - UserSettingsServiceImpl
 
-final class UserSettingsServiceImpl {
+/// `@unchecked Sendable` because every stored property is an immutable
+/// collaborator.
+final class UserSettingsServiceImpl: @unchecked Sendable {
     private let keychain: KeychainManager
     private let userSettingsManager: UserSettingsManager
     private let appSettingUpdateHandler: AppSettingUpdateHandler

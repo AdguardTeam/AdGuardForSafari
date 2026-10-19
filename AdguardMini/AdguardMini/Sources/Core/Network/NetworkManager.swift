@@ -43,14 +43,16 @@ typealias Parameters = [String: String]
 
 // MARK: - NetworkManagerProtocol
 
-protocol NetworkManager: AnyObject {
+/// `Sendable` because the implementation is stateless over `URLSession`.
+protocol NetworkManager: AnyObject, Sendable {
     func data(request: Request) async throws -> Response
     func data(request: URLRequest) async throws -> Response
 }
 
 // MARK: - NetworkManager
 
-final class NetworkManagerImpl: NetworkManager {
+/// `@unchecked Sendable` because the manager is stateless over `URLSession`.
+final class NetworkManagerImpl: NetworkManager, @unchecked Sendable {
     // MARK: Private properties
 
     private let session = URLSession(configuration: Constants.configuration)

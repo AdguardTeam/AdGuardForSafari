@@ -11,6 +11,8 @@ import XCTest
 import ProtoSchema
 
 /// Ensures generated service method allowlist matches generated dispatch cases.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class ServiceMethodAllowlistConsistencyTests: XCTestCase {
     /// Resolves path to generated `Sources/services` directory.
     private func generatedServicesDir() throws -> URL {

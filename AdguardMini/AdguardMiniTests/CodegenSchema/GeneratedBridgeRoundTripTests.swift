@@ -11,20 +11,25 @@ import XCTest
 import ProtoSchema  // Public surface; no @testable import per AGENTS.md  III.2
 
 /// Round-trip checks for regenerated service and callback bridges.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class GeneratedBridgeRoundTripTests: XCTestCase {
     /// `ThemeService.handleRequest` should return valid serialized reply bytes.
     func testRegenerated_ThemeService_HandleRequest_RoundTripsEmptyValueRequest() throws {
         let service = StubThemeService()
         let exp = expectation(description: "handleRequest promise called")
         var roundTrippedValue: EffectiveThemeValue?
-        service.handleRequest(
-            method: "GetEffectiveTheme",
-            bytes: try EmptyValue().serializedData()
-        ) { replyBytes in
+        // `nonisolated(unsafe)` because the stub replies synchronously. The promise never outlives this test method.
+        nonisolated(unsafe) let promise: (Data) -> Void = { replyBytes in
             XCTAssertFalse(replyBytes.isEmpty, "Reply bytes must be non-empty for a successful RPC")
             roundTrippedValue = try? EffectiveThemeValue(serializedBytes: replyBytes)
             exp.fulfill()
         }
+        service.handleRequest(
+            method: "GetEffectiveTheme",
+            bytes: try EmptyValue().serializedData(),
+            promise: promise
+        )
         wait(for: [exp], timeout: 1.0)
         // Assert the round-tripped VALUE, not just deserializability, so a
         // Mangled non-zero enum case would be caught (the stub returns `.dark`).

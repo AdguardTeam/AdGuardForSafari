@@ -9,6 +9,8 @@
 
 import XCTest
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class TokenBucketLimiterTests: XCTestCase {
     private func makeClock() -> (now: () -> TimeInterval, advance: (TimeInterval) -> Void) {
         var current: TimeInterval = 0

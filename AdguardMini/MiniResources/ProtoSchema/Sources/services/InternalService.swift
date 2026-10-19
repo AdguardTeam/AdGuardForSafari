@@ -16,32 +16,32 @@ public protocol InternalServiceProtocol
 	/// Opens settings window of Adguard window
 	func openSettingsWindow (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Opens the user-rules editor window
 	func openUserRulesWindow (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Closes the user-rules editor window (called by the editor after it  resolves
 	/// unsaved changes, or immediately if there are none)
 	func closeUserRulesWindow (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Returns the system UI language so the editor can localise translate()
 	func getSystemLanguage (
 						_ message: EmptyValue,
-						_ promise: @escaping (StringValue) -> Void) -> Void
+						_ promise: sending @escaping (StringValue) -> Void) -> Void
 	/// Activates the Finder, and opens one window selecting the specified file
 	func showInFinder (
 						_ message: Path,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Opens report page in default browser
 	func reportAnIssue (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Opens the hidden diagnostics window
 	func openDiagnosticsWindow (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -54,7 +54,7 @@ open class InternalService: WebViewBridge
 	public typealias ServiceType = InternalService & Service & InternalServiceProtocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 		case "OpenSettingsWindow":
 			do {

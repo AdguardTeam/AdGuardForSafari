@@ -14,6 +14,9 @@ import ProtoSchema
 /// Interface for presenting native open/save panels.
 protocol FilePanelPresenting {
     /// Presents the panel and returns selected path or `nil`.
+    ///
+    /// `@MainActor` because `NSOpenPanel`/`NSSavePanel` are AppKit panels.
+    @MainActor
     func present(params: SelectFileParams) -> String?
 }
 
@@ -67,6 +70,7 @@ final class NSFilePanelPresenter: FilePanelPresenting {
             && isDirectory.boolValue
     }
 
+    @MainActor
     func present(params: SelectFileParams) -> String? {
         if params.isSave {
             let panel = NSSavePanel()

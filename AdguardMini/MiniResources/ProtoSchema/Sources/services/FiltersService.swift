@@ -16,48 +16,48 @@ public protocol FiltersServiceProtocol
 	/// Get Filters app info
 	func getFiltersMetadata (
 						_ message: EmptyValue,
-						_ promise: @escaping (Filters) -> Void) -> Void
+						_ promise: sending @escaping (Filters) -> Void) -> Void
 	/// Get ids of enabled filters
 	func getEnabledFiltersIds (
 						_ message: EmptyValue,
-						_ promise: @escaping (FiltersEnabledIds) -> Void) -> Void
+						_ promise: sending @escaping (FiltersEnabledIds) -> Void) -> Void
 	/// Check Custom Filter
 	func checkCustomFilter (
 						_ message: Path,
-						_ promise: @escaping (FilterOrError) -> Void) -> Void
+						_ promise: sending @escaping (FilterOrError) -> Void) -> Void
 	/// Confirm add Custom filter
 	func confirmAddCustomFilter (
 						_ message: CustomFilterToAdd,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Delete custom filters
 	func deleteCustomFilters (
 						_ message: CustomFiltersToDelete,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Update filters settings
 	func updateFilters (
 						_ message: FiltersUpdate,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Get filters index
 	func getFiltersIndex (
 						_ message: EmptyValue,
-						_ promise: @escaping (FiltersIndex) -> Void) -> Void
+						_ promise: sending @escaping (FiltersIndex) -> Void) -> Void
 	/// Update custom filter
 	func updateCustomFilter (
 						_ message: CustomFilterUpdateRequest,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Request update on filter library, result will be dispatch by
 	/// TrayCallbackService.OnFilterStatusResolved
 	func requestFiltersUpdate (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Request filters divided by safari extension
 	func getFiltersGroupedByExtensions (
 						_ message: EmptyValue,
-						_ promise: @escaping (FiltersGroupedByExtensions) -> Void) -> Void
+						_ promise: sending @escaping (FiltersGroupedByExtensions) -> Void) -> Void
 	/// Update language specific
 	func updateLanguageSpecific (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -70,7 +70,7 @@ open class FiltersService: WebViewBridge
 	public typealias ServiceType = FiltersService & Service & FiltersServiceProtocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 		case "GetFiltersMetadata":
 			do {

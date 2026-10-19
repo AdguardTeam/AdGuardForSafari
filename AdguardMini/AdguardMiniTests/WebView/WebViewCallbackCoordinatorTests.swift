@@ -15,6 +15,8 @@ import XCTest
 /// Process-boundary activities (`.conversion(.end)` / `.reload(.start)`) are
 /// dropped so the UI does not interrupt its animations; the meaningful ones
 /// are forwarded.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class WebViewCallbackCoordinatorTests: XCTestCase {
     func testShouldIgnore_ConversionEnd() {
         XCTAssertTrue(SafariExtensionActivity.conversion(.end).shouldIgnore)

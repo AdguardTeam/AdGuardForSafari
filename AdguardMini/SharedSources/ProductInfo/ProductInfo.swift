@@ -25,6 +25,8 @@ enum ProductInfo {
         return "\(BuildConfig.AG_PRODUCT_NAME)/\(BuildConfig.AG_VERSION_TITLE) (Macintosh; Intel Mac OS X \(version.majorVersion)_\(version.minorVersion)_\(version.patchVersion))"
     }()
 
+    // `@concurrent` so the detached work stays off the caller's actor.
+    @concurrent
     static func applicationId() async -> String {
         await Task.detached(priority: .userInitiated) {
             Self.applicationId()

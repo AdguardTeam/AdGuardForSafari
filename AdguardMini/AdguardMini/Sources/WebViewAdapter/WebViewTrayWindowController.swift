@@ -18,7 +18,9 @@ private enum Constants {
 }
 
 /// Status-bar click handler for the WKWebView tray host.
-final class WebViewTrayWindowController: StatusBarItemControllerDelegate,
+/// `@unchecked Sendable` because the controller's state is touched only from
+/// the main thread.
+final class WebViewTrayWindowController: @unchecked Sendable, StatusBarItemControllerDelegate,
     TrayChangesDelegate,
     TrayIconUpdatesHandlerDependent,
     UserSettingsManagerDependent {

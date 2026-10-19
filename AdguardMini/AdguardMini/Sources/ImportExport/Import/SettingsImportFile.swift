@@ -33,20 +33,23 @@ extension SettingsImportFile {
 // MARK: SettingsImportFile Implementation
 
 /// Service for importing of the app settings from FILE.
-final class SettingsImportFile: SettingsImportBase {
+/// `@unchecked Sendable` because the inherited state is immutable and every
+/// import operation owns its own `Context`.
+final class SettingsImportFile: SettingsImportBase, @unchecked Sendable {
     private let mapper: LegacyMapper
 
     init(api: SettingsImportApiService, userSettingsService: UserSettingsService, mapper: LegacyMapper) {
         self.mapper = mapper
-        super.init(userSettingsService: userSettingsService)
-        self.apiService = api
+        super.init(userSettingsService: userSettingsService, apiService: api)
     }
 
+    // `@concurrent` so the detached prefetch stays off the caller's actor.
     /// Prefetch and analyze the data to be imported.
     ///
     /// It is necessary in order to find out from the user whether user gives consent to import annoyance filters. Necessary for EULA and Privacy policy.
     /// - Parameter url: Path to the archive with data to import.
     /// - Returns: Array of containers with data to import.
+    @concurrent
     func prefetchImport(_ url: URL) async throws -> [ExchangeSettingsContainer] {
         try await Task.detached {
             if url.pathExtension == "json" {
@@ -67,8 +70,10 @@ final class SettingsImportFile: SettingsImportBase {
         progress.localizedDescription = "Importing AdGuard Mini Settings"
         progress.kind = ProgressKind("AdGuard Mini settings importing from file")
         parentProgress?.addChild(progress, withPendingUnitCount: 1)
+        // `nonisolated(unsafe)` because the mode is read once, in this task.
+        nonisolated(unsafe) let mode = mode
         let result = await Task.detached {
-            self.context = Context()
+            let context = Context()
 
             var buildFolder: URL
             do {
@@ -101,7 +106,7 @@ final class SettingsImportFile: SettingsImportBase {
             if progress.isCancelled { return }
 
             // Preparation before changing the stored app settings
-            try self.prepareStorages(progress: progress)
+            try await self.prepareStorages(progress: progress)
 
             try await self.clearAllSettings(progress: progress)
 
@@ -137,7 +142,7 @@ final class SettingsImportFile: SettingsImportBase {
                     filtersForConsent.append(filterId)
                 }
 
-                try await self.importContainer(item, progress: progress)
+                try await self.importContainer(item, progress: progress, context: context)
 
                 LogInfo("Processing \"\(item)\" finished")
             }
@@ -150,18 +155,18 @@ final class SettingsImportFile: SettingsImportBase {
             if progress.isCancelled { return }
 
             if let container = preferences {
-                try await self.importContainer(container, progress: progress)
+                try await self.importContainer(container, progress: progress, context: context)
 
                 if progress.isCancelled { return }
             }
 
             if let container = legacyGroups {
-                try await self.importContainer(container, progress: progress)
+                try await self.importContainer(container, progress: progress, context: context)
 
                 if progress.isCancelled { return }
             }
 
-            guard self.context.settingsModified else {
+            guard context.settingsModified else {
                 throw Error.invalidArchive.log()
             }
 
@@ -175,13 +180,11 @@ final class SettingsImportFile: SettingsImportBase {
             nil
         }
 
-        try self.stopImport(progress: progress, error: error)
+        try await self.stopImport(progress: progress, error: error)
     }
 
     private func prefetchActual(_ url: URL) async throws -> [ExchangeSettingsContainer] {
         var containers: [ExchangeSettingsContainer] = []
-
-        self.context = Context()
 
         var buildFolder: URL
         do {
@@ -226,11 +229,6 @@ final class SettingsImportFile: SettingsImportBase {
         for item in files {
             LogInfo("Prefetching \"\(item)\" started")
 
-            self.context.currentProcessedFileUrl = item
-            defer {
-                self.context.currentProcessedFileUrl = nil
-            }
-
             switch item.pathExtension {
             case ExchangeSettings.jsonExtension:
                 let jsonData = try Data(contentsOf: item)
@@ -259,16 +257,10 @@ final class SettingsImportFile: SettingsImportBase {
     // swiftlint:disable:next function_body_length
     private func prefetchLegacy(_ url: URL) async throws -> [ExchangeSettingsContainer] {
         var containers: [ExchangeSettingsContainer] = []
-        self.context = Context()
 
         let name = "AdGuard for Safari"
         LogInfo("\(name) legacy settings prefetch started")
         LogInfo("\(name) legacy settings prefetch from: \(url.path)")
-
-        self.context.currentProcessedFileUrl = url
-        defer {
-            self.context.currentProcessedFileUrl = nil
-        }
 
         let data = try Data(contentsOf: url)
         let settings = try JSONDecoder().decode(Legacy.Settings.self, from: data)
@@ -421,26 +413,18 @@ final class SettingsImportFile: SettingsImportBase {
 // MARK: Private Methods
 
 private extension SettingsImportFile {
-    private func checkContext(url: URL, manifest: ExchangeSettingsModelManifest) throws -> Bool {
-        var imported = false
-        if manifest.settingsType == .preferences {
-            imported = self.context.preferencesImported
-        }
-        if imported {
-            LogWarn("\(manifest.settingsType) already imported, ignored file: \(url.path)")
-            return false
-        }
-        return true
-    }
-
-    private func importContainer(_ container: ExchangeSettingsContainer, progress: Progress) async throws {
+    private func importContainer(
+        _ container: ExchangeSettingsContainer,
+        progress: Progress,
+        context: Context
+    ) async throws {
         LogInfo("Importing \(container.manifest.settingsType) started")
 
         switch container.manifest.settingsType {
         case .preferences:
-            try self.importPreferences(container: container, progress: progress)
+            try self.importPreferences(container: container, progress: progress, context: context)
         case .blockingFilters:
-            try await self.importBlockingFilter(container: container, progress: progress)
+            try await self.importBlockingFilter(container: container, progress: progress, context: context)
             return
         case .legacyGroups:
             let enabledLegacyGroups = container.payload[Constants.legacyGroupsKey] as? Set<Int> ?? []
@@ -451,10 +435,14 @@ private extension SettingsImportFile {
         }
         LogInfo("Importing \(container.manifest.settingsType) finished")
 
-        self.context.settingsModified = true
+        context.settingsModified = true
     }
 
-    private func importPreferences(container: ExchangeSettingsContainer, progress: Progress) throws {
+    private func importPreferences(
+        container: ExchangeSettingsContainer,
+        progress: Progress,
+        context: Context
+    ) throws {
         // Transform input dict into entity dict
         guard let dict = try ExchangeSettingsModel.convertPreferencesEntity(
             container.payload,
@@ -466,21 +454,25 @@ private extension SettingsImportFile {
         let model = try ExchangeSettingsModel.Preferences(plist: dict, progress: progress)
         let entity = try model.entity(progress: progress)
 
-        try self.importPreferences(entity: entity, progress: progress)
+        try self.importPreferences(entity: entity, progress: progress, context: context)
     }
 
-    private func importBlockingFilter(container: ExchangeSettingsContainer, progress: Progress) async throws {
+    private func importBlockingFilter(
+        container: ExchangeSettingsContainer,
+        progress: Progress,
+        context: Context
+    ) async throws {
         let model = try ExchangeSettingsModel.BlockingFilter(dict: container.payload, progress: progress)
         let entity = try model.entity(progress: progress)
 
-        try await self.importBlockingFilter(entity: entity, progress: progress)
+        try await self.importBlockingFilter(entity: entity, progress: progress, context: context)
     }
 }
 
 // MARK: SettingsImportError Implementation
 
 extension SettingsImportFile.Error {
-    static var errorDomain: String = "SettingsImportFileErrorDomain"
+    static let errorDomain: String = "SettingsImportFileErrorDomain"
 
     /// A localized message describing what error occurred.
     var errorDescription: String? {

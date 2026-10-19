@@ -19,9 +19,11 @@ final class SyncAsync {
 
     /// Submit the job to the queue and return control (asynchronously)
     func async(_ block: @escaping () async -> Void) {
+        // `nonisolated(unsafe)` because the block runs exactly once, on `queue`.
+        nonisolated(unsafe) let job = block
         self.queue.async {
             SerialJob.run {
-                await block()
+                await job()
             }
         }
     }
@@ -71,12 +73,14 @@ private extension SyncAsync {
         }
 
         private func run() -> Out {
+            // `nonisolated(unsafe)` because the task is the only writer.
+            nonisolated(unsafe) let job = self
             Task {
-                self.result = await self.block()
-                self.sem.signal()
+                job.result = await job.block()
+                job.sem.signal()
             }
             self.sem.wait()
-            return result!
+            return self.result!
         }
     }
 
@@ -99,17 +103,19 @@ private extension SyncAsync {
         }
 
         private func run() -> Result<Out, Error> {
+            // `nonisolated(unsafe)` because the task is the only writer.
+            nonisolated(unsafe) let job = self
             Task {
-                defer { self.sem.signal() }
+                defer { job.sem.signal() }
 
                 var res: Out!
                 do {
-                    res = try await self.block()
+                    res = try await job.block()
                 } catch {
-                    self.result = .failure(error)
+                    job.result = .failure(error)
                     return
                 }
-                self.result = .success(res)
+                job.result = .success(res)
             }
             self.sem.wait()
             return self.result!

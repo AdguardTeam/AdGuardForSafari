@@ -18,7 +18,11 @@ protocol UrlSchemesProcessor {
 
 // MARK: - UrlSchemesProcessorImpl
 
-final class UrlSchemesProcessorImpl: UrlSchemesProcessor {
+/// Handles the app's custom URL schemes.
+///
+/// `@unchecked Sendable` because every stored property is a `let` service and
+/// the processor holds no mutable state of its own.
+final class UrlSchemesProcessorImpl: UrlSchemesProcessor, @unchecked Sendable {
     private let appLifecycleService: AppLifecycleService
     private let backendService: BackendService
     private let webViewAppsController: WebViewAppsController
@@ -130,6 +134,9 @@ final class UrlSchemesProcessorImpl: UrlSchemesProcessor {
         }
     }
 
+    /// `@MainActor` because the callers already hop to the main actor and the
+    /// tail call into `handleShowSettings` must stay on it.
+    @MainActor
     private func handleSessionEnd() async throws {
         await self.backendService.cancelWebSession()
         try await self.backendService.refreshAppStatusInfo()
@@ -138,13 +145,16 @@ final class UrlSchemesProcessorImpl: UrlSchemesProcessor {
 
     private func handleShowSettings(page: String? = nil) {
         let firstRun = self.userSettings.firstRun
-        if firstRun {
-            self.webViewAppsController.show(.onboarding)
-        } else {
-            self.webViewAppsController.show(.settings)
-            if let page {
-                self.eventBus.post(event: .settingsPageRequested, userInfo: page)
+        // Deep links arrive on the main thread, so the isolation is asserted.
+        MainActor.assumeIsolated {
+            if firstRun {
+                self.webViewAppsController.show(.onboarding)
+            } else {
+                self.webViewAppsController.show(.settings)
             }
+        }
+        if !firstRun, let page {
+            self.eventBus.post(event: .settingsPageRequested, userInfo: page)
         }
     }
 }

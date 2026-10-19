@@ -15,7 +15,9 @@ extension TelemetryServiceImpl:
     ABTestsStorageDependent,
     TelemetryServiceDependent {}
 
-final class TelemetryServiceImpl: TelemetryService.ServiceType {
+/// `@unchecked Sendable` because the injected services are assigned once
+/// during DI setup and only read afterwards.
+final class TelemetryServiceImpl: TelemetryService.ServiceType, @unchecked Sendable {
     var abTestsStorage: ABTests.Storage!
     var telemetryService: Telemetry.Service!
 
@@ -24,7 +26,7 @@ final class TelemetryServiceImpl: TelemetryService.ServiceType {
         self.setupServices()
     }
 
-    func recordEvent(_ message: TelemetryEvent, _ promise: @escaping (EmptyValue) -> Void) {
+    func recordEvent(_ message: TelemetryEvent, _ promise: sending @escaping (EmptyValue) -> Void) {
         Task {
             guard let messageEvent = message.kind else {
                 // Drop invalid events (log + warn, no debug-only assertion so
@@ -71,7 +73,7 @@ final class TelemetryServiceImpl: TelemetryService.ServiceType {
         capped(value)
     }
 
-    func getActiveABTests(_ message: EmptyValue, _ promise: @escaping (ActiveABTests) -> Void) {
+    func getActiveABTests(_ message: EmptyValue, _ promise: sending @escaping (ActiveABTests) -> Void) {
         Task {
             let tests = await self.abTestsStorage.getActiveTests()
 

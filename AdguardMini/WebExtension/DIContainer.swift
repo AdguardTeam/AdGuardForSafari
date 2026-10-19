@@ -13,7 +13,11 @@
 final class DIContainer {
     // MARK: Singleton
 
-    static let shared: DIContainer = DIContainer()
+    /// `nonisolated(unsafe)` because the container is created once and its lazy
+    /// services are read after their first access. The class stays
+    /// non-Sendable, so the compiler still rejects passing an instance between
+    /// isolation domains.
+    nonisolated(unsafe) static let shared: DIContainer = DIContainer()
 
     // MARK: Public properties
 
@@ -26,11 +30,6 @@ final class DIContainer {
     // MARK: Private properties
 
     private lazy var safariApi = ExtensionSafariApiClientImpl()
-    private lazy var filtersStorage: FiltersStorage = {
-        let fileManager = AMFileManagerImpl()
-        let fileStorage = GroupFolderFileServiceImpl(fileManager: fileManager)
-        return FiltersStorageImpl(fileStorage: fileStorage)
-    }()
 
     // MARK: Init
 

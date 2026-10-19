@@ -6,6 +6,7 @@ excluded:
     - "MiniResources/*"
     - "ui/packages/*"
     - "build/*"
+    - "../build/*"
     - "../.bundle/*"
     - "../Support/XcodeTemplates/*"
     - "*/Localization/String+localized.swift"

@@ -11,6 +11,8 @@ import XCTest
 import AppKit
 
 /// Verifies alert and restart behavior of the live failure presenter.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class WKWebViewFailurePresenterTests: XCTestCase {
     private final class Recorder {
         var presentedAlertsCount = 0

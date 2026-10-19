@@ -10,6 +10,8 @@
 import XCTest
 import ProtoSchema
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class UserRulesValidatorTests: XCTestCase {
     private func rules(count: Int, length: Int) -> UserRules {
         UserRules(rules: (0..<count).map { _ in

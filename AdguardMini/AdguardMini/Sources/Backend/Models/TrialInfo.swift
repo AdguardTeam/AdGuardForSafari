@@ -7,7 +7,7 @@
 //  AdguardMini
 //
 
-public struct TrialInfo {
+public struct TrialInfo: Sendable {
     /// Is extended trial available.
     public let isAvailable: Bool
     /// Available duration in days.

@@ -16,7 +16,7 @@ public protocol ThemeServiceProtocol
 	/// Get effective theme
 	func getEffectiveTheme (
 						_ message: EmptyValue,
-						_ promise: @escaping (EffectiveThemeValue) -> Void) -> Void
+						_ promise: sending @escaping (EffectiveThemeValue) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -29,7 +29,7 @@ open class ThemeService: WebViewBridge
 	public typealias ServiceType = ThemeService & Service & ThemeServiceProtocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 		case "GetEffectiveTheme":
 			do {

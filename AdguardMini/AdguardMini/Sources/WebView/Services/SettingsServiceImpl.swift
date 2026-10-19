@@ -37,7 +37,9 @@ extension SettingsServiceImpl:
     ProtectionServiceDependent,
     MailFiltersUpdaterDependent {}
 
-final class SettingsServiceImpl: SettingsService.ServiceType {
+/// `@unchecked Sendable` because the injected services are assigned once
+/// during DI setup and only read afterwards.
+final class SettingsServiceImpl: SettingsService.ServiceType, @unchecked Sendable {
     var importExportService: ImportExportService!
     var userSettingsService: UserSettingsService!
     var support: Support!
@@ -58,7 +60,7 @@ final class SettingsServiceImpl: SettingsService.ServiceType {
         self.setupServices()
     }
 
-    func getContentBlockersRulesLimit(_ message: EmptyValue, _ promise: @escaping (Int32Value) -> Void) {
+    func getContentBlockersRulesLimit(_ message: EmptyValue, _ promise: sending @escaping (Int32Value) -> Void) {
         Task {
             let rulesLimit = SafariVersion.autodetect().rulesLimit
             promise(Int32Value(Int32(rulesLimit)))
@@ -66,7 +68,7 @@ final class SettingsServiceImpl: SettingsService.ServiceType {
     }
 
     /// Presents native open/save panel and grants selected path.
-    func selectFile(_ message: SelectFileParams, _ promise: @escaping (SelectFilePath) -> Void) {
+    func selectFile(_ message: SelectFileParams, _ promise: sending @escaping (SelectFilePath) -> Void) {
         Task { @MainActor in
             let picked = filePanelPresenter.present(params: message)
             if let path = picked {
@@ -176,7 +178,7 @@ final class SettingsServiceImpl: SettingsService.ServiceType {
         promise(settings)
     }
 
-    func exportSettings(_ message: Path, _ promise: @escaping (OptionalError) -> Void) {
+    func exportSettings(_ message: Path, _ promise: sending @escaping (OptionalError) -> Void) {
         Task {
             let url = URL(fileURLWithPath: message.path).standardizedFileURL.resolvingSymlinksInPath()
             guard PathConfiner.isConfinable(
@@ -198,7 +200,7 @@ final class SettingsServiceImpl: SettingsService.ServiceType {
         }
     }
 
-    func importSettings(_ message: Path, _ promise: @escaping (EmptyValue) -> Void) {
+    func importSettings(_ message: Path, _ promise: sending @escaping (EmptyValue) -> Void) {
         Task {
             let url = URL(fileURLWithPath: message.path).standardizedFileURL.resolvingSymlinksInPath()
             guard PathConfiner.isConfinable(
@@ -215,14 +217,17 @@ final class SettingsServiceImpl: SettingsService.ServiceType {
         }
     }
 
-    func importSettingsConfirm(_ message: ImportSettingsConfirmation, _ promise: @escaping (EmptyValue) -> Void) {
+    func importSettingsConfirm(
+        _ message: ImportSettingsConfirmation,
+        _ promise: sending @escaping (EmptyValue) -> Void
+    ) {
         Task {
             promise(EmptyValue())
             await self.importExportService.importSettings(message.mode.toSwift())
         }
     }
 
-    func resetSettings(_ message: EmptyValue, _ promise: @escaping (Settings) -> Void) {
+    func resetSettings(_ message: EmptyValue, _ promise: sending @escaping (Settings) -> Void) {
         Task {
             // Hide settings on main actor.
             await MainActor.run { self.webViewAppsController.hide(.settings) }
@@ -248,7 +253,7 @@ final class SettingsServiceImpl: SettingsService.ServiceType {
         }
     }
 
-    func exportLogs(_ message: Path, _ promise: @escaping (OptionalError) -> Void) {
+    func exportLogs(_ message: Path, _ promise: sending @escaping (OptionalError) -> Void) {
         Task {
             let url = URL(fileURLWithPath: message.path).standardizedFileURL.resolvingSymlinksInPath()
             guard PathConfiner.isConfinable(
@@ -281,7 +286,7 @@ final class SettingsServiceImpl: SettingsService.ServiceType {
         promise(EmptyValue())
     }
 
-    func sendFeedbackMessage(_ message: SupportMessage, _ promise: @escaping (OptionalError) -> Void) {
+    func sendFeedbackMessage(_ message: SupportMessage, _ promise: sending @escaping (OptionalError) -> Void) {
         Task.detached(priority: .userInitiated) {
             do {
                 try await self.support.sendFeedbackMessage(
@@ -306,7 +311,7 @@ final class SettingsServiceImpl: SettingsService.ServiceType {
         promise(EmptyValue())
     }
 
-    func updateTheme(_ message: UpdateThemeMessage, _ promise: @escaping (EmptyValue) -> Void) {
+    func updateTheme(_ message: UpdateThemeMessage, _ promise: sending @escaping (EmptyValue) -> Void) {
         Task {
             self.userSettingsService.setTheme(message.theme.toTheme())
             promise(EmptyValue())

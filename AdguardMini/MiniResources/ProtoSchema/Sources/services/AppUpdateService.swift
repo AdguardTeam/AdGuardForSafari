@@ -17,11 +17,11 @@ public protocol AppUpdateServiceProtocol
 	/// dispatched by TrayCallbackService.OnApplicationVersionStatusResolved
 	func checkApplicationVersion (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Request to update application
 	func requestApplicationUpdate (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -34,7 +34,7 @@ open class AppUpdateService: WebViewBridge
 	public typealias ServiceType = AppUpdateService & Service & AppUpdateServiceProtocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 		case "CheckApplicationVersion":
 			do {

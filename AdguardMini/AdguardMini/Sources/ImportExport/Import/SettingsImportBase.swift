@@ -71,11 +71,13 @@ extension SettingsImportBase {
 // MARK: SettingsImportBase Implementation
 
 /// Base class for services, which imports an app settings.
-class SettingsImportBase {
+/// `@unchecked Sendable` because every stored property is an immutable
+/// collaborator.
+class SettingsImportBase: @unchecked Sendable {
     // MARK: Context definition
 
+    /// Bookkeeping of a single import operation, owned by that operation.
     final class Context {
-        var currentProcessedFileUrl: URL?
         var preferencesImported = false
         var importedBlockingFilterIds = Set<Int>()
         var settingsModified = false
@@ -84,14 +86,15 @@ class SettingsImportBase {
     // MARK: Public
 
     let queue = DispatchQueue(label: #fileID)
-    var context = Context()
-    var apiService: SettingsImportApiService!
+    let apiService: SettingsImportApiService
     let userSettingsService: UserSettingsService
 
-    init(userSettingsService: UserSettingsService) {
+    init(userSettingsService: UserSettingsService, apiService: SettingsImportApiService) {
         self.userSettingsService = userSettingsService
+        self.apiService = apiService
     }
 
+    @MainActor
     func stopImport(progress: Progress, error: Swift.Error?) throws {
         // MAIN RETURN
         var error = error
@@ -114,22 +117,26 @@ class SettingsImportBase {
         LogInfo("\(kind) finished")
     }
 
-    func prepareStorages(progress: Progress) throws {
+    func prepareStorages(progress: Progress) async throws {
         // Prepare Preferences
         let bundleId = self.apiService.bundleId()
-        guard let defaults = UserDefaults().persistentDomain(forName: bundleId) else {
-            throw Error.fatal.log()
-        }
-        progress.undoManager.registerUndo(withTarget: self.context) { _ in
-            UserDefaults().setPersistentDomain(defaults, forName: bundleId)
+        try await MainActor.run {
+            guard let defaults = UserDefaults().persistentDomain(forName: bundleId) else {
+                throw Error.fatal.log()
+            }
+            progress.undoManager.registerUndo(withTarget: self) { _ in
+                UserDefaults().setPersistentDomain(defaults, forName: bundleId)
+            }
         }
 
         // Prepare DB
         guard self.apiService.beginDbTransaction() else {
             throw Error.prepareDB.log()
         }
-        progress.undoManager.registerUndo(withTarget: self.context) { _ in
-            _ = self.apiService.rollbackDbTransaction()
+        await MainActor.run {
+            progress.undoManager.registerUndo(withTarget: self) { _ in
+                _ = self.apiService.rollbackDbTransaction()
+            }
         }
     }
 
@@ -182,7 +189,7 @@ extension SettingsImportBase {
 // MARK: Import entities implementation
 
 extension SettingsImportBase {
-    func importPreferences(entity: [String: Any], progress: Progress) throws {
+    func importPreferences(entity: [String: Any], progress: Progress, context: Context) throws {
         let bundleId = self.apiService.bundleId()
         let groupBundleId = self.apiService.groupBundleId()
 
@@ -230,10 +237,10 @@ extension SettingsImportBase {
             self.userSettingsService.setTheme(theme)
         }
 
-        self.context.preferencesImported = true
+        context.preferencesImported = true
     }
 
-    func importBlockingFilter(entity: FilterDTO, progress: Progress) async throws {
+    func importBlockingFilter(entity: FilterDTO, progress: Progress, context: Context) async throws {
         guard let meta = entity.meta
         else {
             LogError("Can't getting filterId from meta:\n\(String(describing: entity.meta))\n")
@@ -242,7 +249,7 @@ extension SettingsImportBase {
 
         let id = meta.filterId
 
-        guard self.context.importedBlockingFilterIds.insert(id).inserted else {
+        guard context.importedBlockingFilterIds.insert(id).inserted else {
             LogError("Blocking filter with id: \(id), already imported, ignored this file")
             throw Error.applyFilters.log()
         }
@@ -258,7 +265,7 @@ extension SettingsImportBase {
 // MARK: SettingsImportBase.Error Implementation
 
 extension SettingsImportBase.Error {
-    static var errorDomain: String = "SettingsImportErrorDomain"
+    static let errorDomain: String = "SettingsImportErrorDomain"
 
     /// A localized message describing what error occurred.
     var errorDescription: String? {

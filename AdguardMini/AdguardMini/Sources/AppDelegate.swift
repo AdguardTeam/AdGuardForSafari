@@ -40,7 +40,9 @@ extension AppDelegate:
 extension AppDelegate: AppStoreRateUsDependent {}
 #endif
 
-final class AppDelegate: NSObject, NSApplicationDelegate {
+/// `@unchecked Sendable` because the delegate's mutable state is touched only
+/// from the main thread and its services are injected once during startup.
+final class AppDelegate: NSObject, NSApplicationDelegate, @unchecked Sendable {
     // MARK: Internal services
 
     var appMetadata: AppMetadata!
@@ -99,7 +101,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // Per-module capability set (message handlers + bridge services) is
         // Documented in `ModuleCapabilities`; this factory registers them.
         self.webViewAppsController = WebViewAppsController(
-            hostFactory: { module in
+            // The factory builds every module host and lives as long as the app, so it keeps the delegate.
+            hostFactory: { [self] module in
                 switch module {
                 case .tray:
                     let locator = ServiceLocator.shared
@@ -437,6 +440,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     /// Performs Quit from App (user selected).
+    @MainActor
     func performAppQuit() {
         self.performQuit = true
         NSApplication.shared.terminate(self)
@@ -498,7 +502,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func continueStartAppStep1() {
-        NSApplication.shared.mainMenu = AppMenu()
+        // AppKit startup runs on the main thread. The menu and the KVO registration are main-actor APIs.
+        MainActor.assumeIsolated {
+            NSApplication.shared.mainMenu = AppMenu()
+        }
 
         // `UIUtils` stores the desired activation policy internally.
         // It restores `.accessory` in `removeWindow` once the last window closes.
@@ -509,10 +516,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // NotificationCenter delivers synchronously on the posting thread.
         // Downstream observers drive the main-thread-only WKWebView
         // `evaluateJavaScript`, so the post MUST run on the main actor.
-        self.effectiveThemeObserver = NSApplication.shared.observe(\.effectiveAppearance) { _, _ in
-            Task { @MainActor in
-                let userTheme = self.userSettingsManager.theme
-                self.eventBus.post(event: .effectiveThemeChanged, userInfo: userTheme)
+        MainActor.assumeIsolated {
+            // The KVO registration runs under this main-thread assertion.
+            self.effectiveThemeObserver = NSApplication.shared.observe(\.effectiveAppearance) { _, _ in
+                Task { @MainActor in
+                    let userTheme = self.userSettingsManager.theme
+                    self.eventBus.post(event: .effectiveThemeChanged, userInfo: userTheme)
+                }
             }
         }
 
@@ -595,14 +605,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // Validate that the app is inside /Applications
         guard appBundlePath.hasPrefix(expectedPath) else {
             LogWarn("App is running outside of \(expectedPath): \(appBundlePath)")
-            let alert = NSAlert()
-            // Configure alert buttons and texts (localized)
-            alert.addButton(withTitle: .localized.base.close_button).keyEquivalent = "\r"
-            alert.messageText = .localized.base.error_running_app
-            alert.informativeText = .localized.base.error_running_app_message
-            alert.alertStyle = .warning
+            // The startup check runs on the main thread; the alert is AppKit.
+            MainActor.assumeIsolated {
+                let alert = NSAlert()
+                // Configure alert buttons and texts (localized)
+                alert.addButton(withTitle: .localized.base.close_button).keyEquivalent = "\r"
+                alert.messageText = .localized.base.error_running_app
+                alert.informativeText = .localized.base.error_running_app_message
+                alert.alertStyle = .warning
 
-            alert.runModal()
+                alert.runModal()
+            }
             return false
         }
 
@@ -711,10 +724,12 @@ extension AppDelegate {
     /// `WKWebViewAppHost` directly instead leaves the default
     /// `WKWebViewFailurePresenter.noOp`, which silently swallows load
     /// failures, JS runtime errors, and the recurring-timeout signal.
+    /// `@MainActor` because it builds a main-actor host for the module.
+    @MainActor
     private func makeWebViewAppHostProduction(
         module: ModuleId,
         onVisibilityChange: VisibilityChange? = nil,
-        bridgeSetup: @escaping (WKWebViewBridge) -> Void,
+        bridgeSetup: @escaping @MainActor (WKWebViewBridge) -> Void,
         extraMessageHandlersSetup: ((WKUserContentController) -> Void)? = nil
     ) -> WKWebViewAppHost {
         let monitor = RecurringRpcTimeoutMonitor()

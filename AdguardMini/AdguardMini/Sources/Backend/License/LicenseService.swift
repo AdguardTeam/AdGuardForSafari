@@ -26,7 +26,8 @@ private enum Constants {
 
 // MARK: - LicenseService
 
-protocol LicenseService {
+/// `Sendable` because the implementation holds only immutable collaborators.
+protocol LicenseService: Sendable {
     func requestAppStatus() async throws -> AppStatusResponse
     func activateApp(appKey: String) async throws -> ActivationResponse
     func validateReceipt(jws: String, restore: Bool) async throws -> ValidateReceiptResponse
@@ -37,7 +38,9 @@ protocol LicenseService {
 
 // MARK: - LicenseServiceImpl
 
-final class LicenseServiceImpl: LicenseService {
+/// `@unchecked Sendable` because every stored property is an immutable
+/// collaborator.
+final class LicenseServiceImpl: LicenseService, @unchecked Sendable {
     private let networkManager: NetworkManager
 
     private let systemInfo: SystemInfoManager

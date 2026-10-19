@@ -24,7 +24,7 @@ enum SharedSettingsKey: String, CaseIterable {
 }
 
 /// The storage responsible for working the settings available to all applications in the app group.
-protocol SharedSettingsStorage: AnyObject {
+protocol SharedSettingsStorage: AnyObject, Sendable {
     var sharedUserDefaults: UserDefaults { get }
 
     var protectionEnabled: Bool { get set }
@@ -42,7 +42,9 @@ protocol SharedSettingsStorage: AnyObject {
     func resetStorage()
 }
 
-final class SharedSettingsStorageImpl: SharedSettingsStorage {
+/// `@unchecked Sendable` because `UserDefaults` is documented thread-safe and
+/// the storage keeps no mutable state of its own.
+final class SharedSettingsStorageImpl: SharedSettingsStorage, @unchecked Sendable {
     // MARK: Public properties
 
     let sharedUserDefaults: UserDefaults

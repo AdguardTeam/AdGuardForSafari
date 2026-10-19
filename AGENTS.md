@@ -43,7 +43,8 @@ synchronization.
 
 ## Technical Context
 
-- **Language/Version**: Swift 5.9+ (platform), TypeScript 5.x (UI)
+- **Language/Version**: Swift 6 (platform, including the local SPM packages),
+  TypeScript 5.x (UI)
 - **Primary Dependencies**:
     - Swift: Sparkle (updates), XMLCoder, FilterListManager (AdGuardFLM),
       Sentry
@@ -209,8 +210,13 @@ adguard-mini/
   `tabIdentifier` from `XcodeListWindows`. Note: the active scheme's test plan
   must include `AdguardMiniTests`; if `GetTestList` returns 0 tests, fall back
   to the terminal method.
-- **Fallback (terminal)**: `xcodebuild test -project
-  AdguardMini/AdguardMini.xcodeproj -scheme AdguardMiniTests`
+- **Fallback (terminal)**:
+  `xcodebuild test -project AdguardMini/AdguardMini.xcodeproj -scheme
+  AdguardMiniTests -configuration Release -derivedDataPath
+  build/derived_data -skipPackagePluginValidation
+  CODE_SIGNING_ALLOWED=NO`
+  (`-scheme AdguardMini` declares no testables and discovers zero tests;
+  `AdguardMiniTests` is the scheme that discovers them.)
 - **TypeScript (node:test)**: `yarn test:node` runs the TypeScript test
   suite (Node's built-in `node:test` runner — not Jest). Set `RUN_BUILD=1`
   (`RUN_BUILD=1 yarn test:node`) to also run the slow integration tests that
@@ -249,12 +255,14 @@ adguard-mini/
 
 - `./Support/Scripts/update_proto_schema.sh` - Regenerate Swift and TypeScript
   schema from Protobuf definitions
-- `AdguardMini/ui/packages/proto-generator` - Vendored (local) fork of the
-  `@adg/proto-generator` codegen, trimmed to the Swift and TypeScript
-  converters (the C# converter/templates were removed — this project only
-  generates Swift + TypeScript). It is symlinked into `node_modules`
+- `AdguardMini/ui/packages/proto-generator` - Local workspace package
+  (`@adg/proto-generator`) holding the Swift and TypeScript codegen, trimmed
+  from the upstream package (the C# converter/templates were removed — this
+  project only generates Swift + TypeScript). Yarn workspaces
+  (`AdguardMini/ui/packages/*`) link it into `node_modules`
   (`node_modules/@adg/proto-generator`), which is how
-  `AdguardMini/Scripts/updateProtoSchema.sh` resolves it.
+  `AdguardMini/Scripts/updateProtoSchema.sh` resolves it; edits here take
+  effect on the next regeneration.
 
 ### Dependency Updates
 
@@ -341,7 +349,7 @@ You MUST follow the following rules for EVERY task that you perform:
   Swift files.
 
 - You MUST build the project (see "Platform" section) and verify it compiles
-  without new errors after making Swift changes.
+  without new errors or warnings after making Swift changes.
 
 - You MUST run tests (see "Testing" section) and verify no test failures
   after making Swift changes.
@@ -463,10 +471,14 @@ Blocker JSON consumed by the extension targets.
 3. **Protobuf schema sync**: Swift and TypeScript communicate via Protobuf.
    Schema definitions live in `AdguardMini/ui/schema/`. Generated Swift
    code goes to `AdguardMini/MiniResources/ProtoSchema/Sources/`, generated
-   TypeScript stays in the schema directory.
+   TypeScript stays in the schema directory. Generated service protocols
+   declare each reply `promise` as `sending`: implementations MUST declare
+   the same `sending` parameter and hand the promise to the `Task` as is,
+   without re-binding it through `nonisolated(unsafe)`.
 
    **Rationale**: Ensures type-safe communication between Swift platform layer
-   and TypeScript UI layer.
+   and TypeScript UI layer; the `sending` contract states the reply handover
+   once, at the protocol, where the compiler checks it.
 
 4. **UI modules**: Each UI module (`tray`, `settings`, `onboarding`,
    `userrules`) runs independently in its own WKWebView window. Shared
@@ -818,6 +830,19 @@ Blocker JSON consumed by the extension targets.
     **Rationale**: A name that describes an area or an element instead of a
     condition forces the reader to open the calculation to learn what the flag
     means, and a second name for one value makes the caller's effect invisible.
+
+11. **Compiler warnings**: A change MUST NOT introduce new compiler warnings.
+    Check the build output (see "Platform" section for the Swift command and
+    `yarn build:dev` for the TypeScript type check) against the warnings
+    present before the change. A warning in a file the change touches MUST be
+    fixed when the fix stays local to that file; otherwise report it. A
+    warning MUST NOT be silenced with a compiler flag, a cast to `Any`, or an
+    `@unchecked` conformance without a rationale.
+
+    **Rationale**: In Swift 6 an isolation-contract violation surfaces as a
+    warning long before it becomes an error, so a warning is a defect the
+    build has not rejected yet; a migration that leaves them behind hides the
+    problems it exists to fix.
 
 ### Testing Discipline
 
@@ -1336,7 +1361,24 @@ humans and AI agents that consume project documentation.
     its design system, and neither gap is visible from the library's own
     documentation.
 
-23. **URL filter install prompt and enable state (Swift)**: One user enable
+23. **DI containers and `Sendable` (Swift)**: A DI container
+    (`ServiceLocator`, `SharedDIContainer`, `WebExtensionDIContainer`,
+    `DIContainer`) MUST NOT declare `@unchecked Sendable`. Keep the container
+    non-Sendable and mark only the global access —
+    `nonisolated(unsafe) static let shared` — so the compiler still rejects
+    passing an instance between isolation domains. A service that an actor
+    takes in its initializer MUST be `Sendable` at its protocol level. Put
+    the thread-safety rationale (`UserDefaults`-backed, stateless,
+    serialized access) on the implementation that carries the state.
+
+    **Rationale**: `@unchecked Sendable` on a container claims the whole
+    container is safe to share and suppresses real region-isolation
+    diagnostics in its lazy service initializers. The narrow global marker
+    states only that the singleton access is unchecked. Services shared with
+    actors are shared by design, so their protocols carry the `Sendable`
+    contract, and the escape hatch stays next to the state it excuses.
+
+24. **URL filter install prompt and enable state (Swift)**: One user enable
     attempt MUST raise the macOS URL filter install/allow prompt at most
     once, because an enable's configuration write is terminal for that
     attempt when it fails. A declined install/allow prompt — the system

@@ -19,6 +19,8 @@ import XCTest
 ///   `onEndReload` -> `SafariExtensionStateServiceImpl.updateInfo` path;
 /// - a cancellation abort only clears the in-progress flag and preserves a
 ///   previously stored `.safariError`.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class SafariExtensionReloadIntegrationTests: XCTestCase {
     /// Everything the tests drive: the real manager, the real state service
     /// acting as its delegate, and the controllable fake reload API.

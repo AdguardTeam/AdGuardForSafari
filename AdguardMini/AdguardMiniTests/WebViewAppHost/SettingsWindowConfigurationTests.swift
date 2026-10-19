@@ -10,6 +10,8 @@
 import XCTest
 import AppKit
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class SettingsWindowConfigurationTests: XCTestCase {
     func testSettingsConfig_HasTitledResizableMiniaturizableClosableStyle() {
         let config = ModuleWindowConfigurator.config(for: .settings)
@@ -59,6 +61,8 @@ final class SettingsWindowConfigurationTests: XCTestCase {
 import WebKit
 import ProtoSchema
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class SettingsWindowHostConfigurationTests: XCTestCase {
     private func makeSettingsHost(frameAutosaveKeyOverride: String? = nil) -> WKWebViewAppHost {
         WKWebViewAppHost(

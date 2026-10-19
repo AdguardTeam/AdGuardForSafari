@@ -23,7 +23,7 @@ enum ThirdPartyDependencies {
     )
 
     /// Third Party Dependencies in format [(name: String, version: String)].
-    static var deps: [(name: String, version: String)] = {
+    static let deps: [(name: String, version: String)] = {
         var array: [(String, String)] = []
 
         for dep in ThirdPartyDeps.allCases {

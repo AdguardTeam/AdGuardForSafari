@@ -10,6 +10,9 @@
 import SwiftUI
 
 extension Text {
+    /// `@MainActor` because the helper builds a view and calls the
+    /// main-actor-isolated `View` extension methods.
+    @MainActor
     func textStyle(_ configuration: Configuration) -> some View {
         self
             .font(configuration.font)

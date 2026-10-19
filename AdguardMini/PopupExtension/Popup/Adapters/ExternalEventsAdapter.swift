@@ -117,8 +117,10 @@ extension ExternalEventsAdapter: ExtensionSafariApiClientDelegate {
     }
 
     func setLogLevel(_ logLevel: LogLevel) {
+        // `LogLevel` is an immutable raw-value enum; the task only reads it.
+        nonisolated(unsafe) let level = logLevel
         Task {
-            await self.store.dispatch(.logLevelChanged(logLevel))
+            await self.store.dispatch(.logLevelChanged(level))
         }
     }
 

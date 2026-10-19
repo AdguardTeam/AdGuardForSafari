@@ -189,6 +189,8 @@ private extension Spacer {
 // MARK: - DomainView_Previews
 
 private enum PreviewBuilder {
+    /// `@MainActor` because the builder instantiates main-actor views.
+    @MainActor
     static func buildDomainView(
         isProtectionEnabled: Bool = true,
         isDisabled: Bool = false,

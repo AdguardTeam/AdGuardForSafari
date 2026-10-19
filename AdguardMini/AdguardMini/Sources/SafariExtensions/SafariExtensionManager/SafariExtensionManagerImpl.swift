@@ -15,7 +15,9 @@ import AMLC
 
 // MARK: - SafariExtensionManagerImpl
 
-final class SafariExtensionManagerImpl: SafariExtensionManager {
+/// `@unchecked Sendable` because every stored property is an immutable
+/// collaborator.
+final class SafariExtensionManagerImpl: SafariExtensionManager, @unchecked Sendable {
     private weak var delegate: ReloadExtensionDelegate?
     private let safariPopupApiClient: SafariPopupApi
     private let retryPolicy = RetryPolicy()

@@ -10,10 +10,12 @@
 import XCTest
 import CoreData
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class SharedStatisticsStoreTests: XCTestCase {
     private var temporaryStoreURLs: [URL] = []
 
-    override func tearDownWithError() throws {
+    override func tearDown() async throws {
         for url in self.temporaryStoreURLs {
             try? FileManager.default.removeItem(at: url)
             try? FileManager.default.removeItem(at: url.appendingPathExtension("shm"))

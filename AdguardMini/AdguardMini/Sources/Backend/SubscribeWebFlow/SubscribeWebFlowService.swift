@@ -21,14 +21,16 @@ private enum Constants {
 
 // MARK: - SubscribeWebFlowService
 
-protocol SubscribeWebFlowService {
+/// `Sendable` because the implementation holds only immutable collaborators.
+protocol SubscribeWebFlowService: Sendable {
     func startPurchaseFlow(from screen: String) async throws
     func startRenewalFlow(licenseKey: String, from screen: String) async throws
 }
 
 // MARK: - SubscribeWebFlowServiceImpl
 
-final class SubscribeWebFlowServiceImpl {
+/// `@unchecked Sendable` because the service holds only immutable collaborators.
+final class SubscribeWebFlowServiceImpl: @unchecked Sendable {
     private let productInfo: ProductInfoStorage
 
     init(productInfo: ProductInfoStorage) {

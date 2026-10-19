@@ -17,6 +17,11 @@ enum MenuType {
 
 extension AppMenu: WebViewAppsControllerDependent, EventBusDependent, UserSettingsManagerDependent {}
 
+/// Main menu builder.
+///
+/// `@MainActor` because the menu and its items are AppKit objects driven from
+/// the main thread.
+@MainActor
 final class AppMenu: NSMenu, NSMenuItemValidation, NSMenuDelegate {
     // MARK: DI
 

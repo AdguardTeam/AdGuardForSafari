@@ -11,22 +11,46 @@ import XCTest
 import ProtoSchema
 
 /// Recording test double for `WKWebViewFailurePresenting`.
-private final class RecordingFailurePresenter: WKWebViewFailurePresenting {
+///
+/// `@unchecked Sendable` because every read and write goes through `lock`: the
+/// handler routes the recorded calls from its own tasks.
+private final class RecordingFailurePresenter: WKWebViewFailurePresenting, @unchecked Sendable {
     struct LoadFailureCall {
         let module: String
         let errorDesc: String
         let domain: String
         let code: Int
     }
-    var loadFailureCalls: [LoadFailureCall] = []
     struct JSRuntimeErrorCall { let message: String; let stack: String? }
-    var jsRuntimeErrorCalls: [JSRuntimeErrorCall] = []
     struct CSPViolationCall { let message: String; let stack: String? }
-    var cspViolationCalls: [CSPViolationCall] = []
     struct RpcErrorCall { let message: String; let stack: String? }
-    var rpcErrorCalls: [RpcErrorCall] = []
-    var rpcTimeoutAlertCalls = 0
-    var bundleIntegrityFailureCalls = 0
+
+    private let lock = NSLock()
+    private var loadFailures: [LoadFailureCall] = []
+    private var jsRuntimeErrors: [JSRuntimeErrorCall] = []
+    private var cspViolations: [CSPViolationCall] = []
+    private var rpcErrors: [RpcErrorCall] = []
+    private var rpcTimeoutAlerts = 0
+    private var bundleIntegrityFailures = 0
+
+    var loadFailureCalls: [LoadFailureCall] {
+        self.lock.withLock { self.loadFailures }
+    }
+    var jsRuntimeErrorCalls: [JSRuntimeErrorCall] {
+        self.lock.withLock { self.jsRuntimeErrors }
+    }
+    var cspViolationCalls: [CSPViolationCall] {
+        self.lock.withLock { self.cspViolations }
+    }
+    var rpcErrorCalls: [RpcErrorCall] {
+        self.lock.withLock { self.rpcErrors }
+    }
+    var rpcTimeoutAlertCalls: Int {
+        self.lock.withLock { self.rpcTimeoutAlerts }
+    }
+    var bundleIntegrityFailureCalls: Int {
+        self.lock.withLock { self.bundleIntegrityFailures }
+    }
     /// Optional hook so tests can synchronize on routing (replaces fixed sleeps).
     var onLoadFailure: (() -> Void)?
 
@@ -35,25 +59,29 @@ private final class RecordingFailurePresenter: WKWebViewFailurePresenting {
         // Here), so also capture the stable `NSError` domain/code for exact
         // Assertions.
         let nsError = error as NSError
-        loadFailureCalls.append(
-            .init(module: module, errorDesc: error.localizedDescription, domain: nsError.domain, code: nsError.code)
+        let call = LoadFailureCall(
+            module: module,
+            errorDesc: error.localizedDescription,
+            domain: nsError.domain,
+            code: nsError.code
         )
-        onLoadFailure?()
+        self.lock.withLock { self.loadFailures.append(call) }
+        self.onLoadFailure?()
     }
     func handleJSRuntimeError(message: String, stack: String?) async {
-        jsRuntimeErrorCalls.append(.init(message: message, stack: stack))
+        self.lock.withLock { self.jsRuntimeErrors.append(.init(message: message, stack: stack)) }
     }
     func handleCSPViolation(message: String, stack: String?) async {
-        cspViolationCalls.append(.init(message: message, stack: stack))
+        self.lock.withLock { self.cspViolations.append(.init(message: message, stack: stack)) }
     }
     func handleRpcError(message: String, stack: String?) async {
-        rpcErrorCalls.append(.init(message: message, stack: stack))
+        self.lock.withLock { self.rpcErrors.append(.init(message: message, stack: stack)) }
     }
     func handleRecurringRpcTimeout() async {
-        rpcTimeoutAlertCalls += 1
+        self.lock.withLock { self.rpcTimeoutAlerts += 1 }
     }
     func handleBundleIntegrityFailure() async {
-        bundleIntegrityFailureCalls += 1
+        self.lock.withLock { self.bundleIntegrityFailures += 1 }
     }
 }
 

@@ -11,7 +11,7 @@ import SwiftUI
 import ColorPalette
 
 private enum Constants {
-    static var cornerRadius: CGFloat = 0
+    static let cornerRadius: CGFloat = 0
 
     static var backgroundColor: StatefulColor {
         StatefulColor(

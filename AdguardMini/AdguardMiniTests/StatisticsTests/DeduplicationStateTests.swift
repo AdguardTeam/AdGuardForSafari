@@ -8,11 +8,13 @@
 
 import XCTest
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class DeduplicationStateTests: XCTestCase {
     private var state = DeduplicationState()
 
-    override func setUp() {
-        super.setUp()
+    override func setUp() async throws {
+        try await super.setUp()
         state = DeduplicationState()
     }
 

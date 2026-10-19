@@ -23,7 +23,9 @@ extension TraySettingsServiceImpl:
     SystemInfoManagerDependent,
     StatisticsServiceDependent {}
 
-final class TraySettingsServiceImpl: TraySettingsService.ServiceType {
+/// `@unchecked Sendable` because the injected services are assigned once
+/// during DI setup and only read afterwards.
+final class TraySettingsServiceImpl: TraySettingsService.ServiceType, @unchecked Sendable {
     var protectionService: ProtectionService!
     var appUpdater: AppUpdater!
     var userSettingsService: UserSettingsService!
@@ -37,7 +39,7 @@ final class TraySettingsServiceImpl: TraySettingsService.ServiceType {
     }
 
     func getTraySettings(_ message: EmptyValue,
-                         _ promise: @escaping (GlobalSettings) -> Void) {
+                         _ promise: sending @escaping (GlobalSettings) -> Void) {
         // Services read here (user settings, updater, health-check provider)
         // And `setProtectionStatus` mutate shared state; keep access on the
         // Main actor like the sibling WebView services.
@@ -67,7 +69,7 @@ final class TraySettingsServiceImpl: TraySettingsService.ServiceType {
     }
 
     func updateTraySettings(_ message: GlobalSettings,
-                            _ promise: @escaping (EmptyValue) -> Void) {
+                            _ promise: sending @escaping (EmptyValue) -> Void) {
         Task { @MainActor in
             await self.protectionService.setProtectionStatus(isEnabled: message.enabled)
             self.userSettingsService.hiddenStories = message.hiddenStories

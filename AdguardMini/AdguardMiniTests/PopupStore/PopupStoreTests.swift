@@ -61,6 +61,8 @@ private final class MockEffectRunner: EffectRunning, @unchecked Sendable {
 
 // MARK: - Tests
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class PopupStoreTests: XCTestCase {
     /// Convenience constructor matching the pattern from PopupReducerTests.
     private func state(

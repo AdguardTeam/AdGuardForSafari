@@ -19,7 +19,11 @@ import AML
 /// removed, so the next assembled state does not reuse stale flags.
 ///
 /// Used as the single reset entry point by app-level reset flows.
-protocol URLFilterResetService: AnyObject {
+/// Resets the system-wide protection state during an app reset.
+///
+/// `Sendable` because the implementation holds no mutable state and forwards
+/// to services that are themselves thread-safe or actors.
+protocol URLFilterResetService: AnyObject, Sendable {
     /// Resets all URL filtering state.
     ///
     /// The local cleanup (keychain, bloom metadata, prefilter file) runs even
@@ -37,7 +41,7 @@ protocol URLFilterResetService: AnyObject {
 /// Delegates the platform removal to `URLFilterService` and the keychain
 /// cleanup to `SharedKeychainStorage`, keeping the bloom metadata and the
 /// prefilter file cleanup local.
-final class URLFilterResetServiceImpl: URLFilterResetService {
+final class URLFilterResetServiceImpl: URLFilterResetService, @unchecked Sendable {
     // MARK: Private properties
 
     private let urlFilterService: URLFilterService

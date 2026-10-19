@@ -10,6 +10,8 @@
 import XCTest
 
 /// Tests for `ModuleWindowConfigurator.config(for: .userrules)`.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class UserrulesWindowConfigurationTests: XCTestCase {
     func testUserrulesConfig_HasTitledClosableMiniaturizableResizableStyleMask() {
         let config = ModuleWindowConfigurator.config(for: .userrules)

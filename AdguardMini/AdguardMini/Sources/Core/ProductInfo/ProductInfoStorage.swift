@@ -10,7 +10,8 @@
 import Foundation
 import AML
 
-protocol ProductInfoStorage {
+/// `Sendable` because the implementation holds only an immutable collaborator.
+protocol ProductInfoStorage: Sendable {
     var applicationId: String { get async }
 }
 

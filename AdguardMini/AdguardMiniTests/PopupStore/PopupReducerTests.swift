@@ -23,6 +23,8 @@ private enum Constants {
     static let siteBURL = URL(string: "https://b.com")!
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class PopupReducerTests: XCTestCase {
     // MARK: Helpers
 

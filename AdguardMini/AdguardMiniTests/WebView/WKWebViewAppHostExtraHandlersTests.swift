@@ -11,6 +11,8 @@ import XCTest
 import WebKit
 
 /// Tests `extraMessageHandlersSetup` init hook behavior.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class WKWebViewAppHostExtraHandlersTests: XCTestCase {
     func testExtraMessageHandlersSetup_CalledExactlyOnceOnInit() {
         var callCount = 0

@@ -146,7 +146,11 @@ extension ExchangeSettingsItemModel {
 }
 
 /// Container, which represents settings logical block for exchange (settings file) as data objects.
-struct ExchangeSettingsContainer {
+///
+/// `@unchecked Sendable` because the container is built once inside the
+/// detached prefetch task and not mutated afterwards; `payload` is a JSON
+/// dictionary that stays read-only once constructed.
+struct ExchangeSettingsContainer: @unchecked Sendable {
     /// JSON file URL.
     var url: URL
     /// Manifest, what is this payload.
@@ -162,7 +166,7 @@ struct ExchangeSettingsContainer {
 // MARK: ExchangeSettingsModelError Implementation
 
 extension ExchangeSettingsModelError {
-    static var errorDomain: String = "ExchangeSettingsModelErrorDomain"
+    static let errorDomain: String = "ExchangeSettingsModelErrorDomain"
 
     var errorDescription: String? {
         "Unknown error"

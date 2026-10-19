@@ -16,7 +16,7 @@ public protocol AppInfoServiceProtocol
 	/// Get About app info
 	func getAbout (
 						_ message: EmptyValue,
-						_ promise: @escaping (AppInfo) -> Void) -> Void
+						_ promise: sending @escaping (AppInfo) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -29,7 +29,7 @@ open class AppInfoService: WebViewBridge
 	public typealias ServiceType = AppInfoService & Service & AppInfoServiceProtocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 		case "GetAbout":
 			do {

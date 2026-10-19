@@ -19,7 +19,7 @@ open class WebViewBridge: WKWebViewServiceHandler {
 
     // `unavailable_function` is no longer needed: the default no-op resolves
     // Gracefully instead of fatal-erroring.
-    public func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+    public func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
         // BridgeLog takes a single string-interpolation literal; `+` string
         // Concatenation does not compile, so the Message is one literal kept
         // Under the 120-char line limit.

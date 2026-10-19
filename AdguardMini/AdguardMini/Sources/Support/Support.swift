@@ -27,7 +27,8 @@ private enum Constants {
 
 // MARK: - Support
 
-protocol Support: ReportSiteProtocol {
+/// `Sendable` because the implementation holds only immutable collaborators.
+protocol Support: ReportSiteProtocol, Sendable {
     /// Generates archive with logs.
     /// - Parameters:
     ///   - fileUrl: URL for logs archive.
@@ -76,7 +77,9 @@ protocol ReportSiteProtocol {
 // MARK: - Support
 
 /// Aggregates all interaction with user support.
-final class SupportImpl {
+/// `@unchecked Sendable` because every stored property is an immutable
+/// collaborator.
+final class SupportImpl: @unchecked Sendable {
     private let safariFiltersStorage: SafariFiltersStorage
     private let filtersStorage: FiltersStorage
     private let filtersSupervisor: FiltersSupervisor
@@ -184,7 +187,7 @@ final class SupportImpl {
         Platform: Mac OS X
         OS: \(ProcessInfo.processInfo.operatingSystemVersionString)
         Arch: \(SystemInfo.getCPUType().rawValue)
-        Locale: \(Locale.canonicalIdentifier(from: Locale.current.identifier))
+        Locale: \(Locale.current.identifier)
 
         \(licenseSection)
 

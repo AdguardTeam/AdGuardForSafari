@@ -25,7 +25,13 @@ protocol MailFiltersUpdater: RestartableService {
 
 // MARK: - MailFiltersUpdaterImpl
 
-final class MailFiltersUpdaterImpl: RestartableServiceBase, MailFiltersUpdater {
+/// Regenerates the Mail Tracking Protection ruleset and reloads the MailKit
+/// extension. Starts, stops, and debounces update requests.
+///
+/// `@unchecked Sendable` because the update task and the update bookkeeping
+/// are guarded by `lk`, and the debounced conversion runs serially on its own
+/// task.
+final class MailFiltersUpdaterImpl: RestartableServiceBase, MailFiltersUpdater, @unchecked Sendable {
     private let converter: MailRulesetConverting
     private let ruleProvider: MailRuleProvider
     private let licenseProvider: MailPremiumStatusProvider
@@ -93,10 +99,11 @@ final class MailFiltersUpdaterImpl: RestartableServiceBase, MailFiltersUpdater {
     /// One conversion→reload→log cycle. Internal so tests drive it directly,
     /// without debounce timing.
     func convert() async {
-        self.hasPendingUpdates = false
-
-        self.updateCounter += 1
-        let updateId = self.updateCounter
+        let updateId = locked(self.lk) {
+            self.hasPendingUpdates = false
+            self.updateCounter += 1
+            return self.updateCounter
+        }
         LogInfo("Mail filters update started (ID: \(updateId))")
 
         await self.extensionStateService.setLoading(true)

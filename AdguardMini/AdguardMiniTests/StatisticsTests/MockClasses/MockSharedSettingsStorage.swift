@@ -9,7 +9,8 @@
 
 import Foundation
 
-final class MockSharedSettingsStorage: SharedSettingsStorage {
+/// `@unchecked Sendable` because the double is driven single-threaded by one test.
+final class MockSharedSettingsStorage: SharedSettingsStorage, @unchecked Sendable {
     let sharedUserDefaults: UserDefaults = UserDefaults(suiteName: "MockSharedSettingsStorage.\(UUID().uuidString)")!
 
     var protectionEnabled: Bool = true

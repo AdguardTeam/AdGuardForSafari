@@ -15,6 +15,8 @@ import XCTest
 /// Uses the compiled defaults (``URLFilterLevelConfiguration/compiledDefaultLevels``),
 /// never the dev-config-affected ``URLFilterLevelConfiguration/defaultLevels``,
 /// so the tests stay independent of any `devConfig.json` on the machine.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class URLFilterLevelConfigurationTests: XCTestCase {
     /// Database name expected inside the PIR token payload, per protection level.
     private let tokenDatabaseNames: [URLFilterProtectionLevel: String] = [

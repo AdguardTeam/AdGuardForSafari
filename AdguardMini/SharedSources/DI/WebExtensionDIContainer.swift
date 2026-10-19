@@ -16,7 +16,10 @@ import AML
 
 /// A class containing some important shared dependencies.
 final class WebExtensionDIContainer {
-    static let shared = WebExtensionDIContainer()
+    /// `nonisolated(unsafe)` because the container is created once and only
+    /// read afterwards. The class stays non-Sendable, so the compiler still
+    /// rejects passing an instance between isolation domains.
+    nonisolated(unsafe) static let shared = WebExtensionDIContainer()
 
     let webExtension: WebExtension
 

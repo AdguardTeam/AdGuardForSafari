@@ -13,7 +13,10 @@
 final class SharedDIContainer {
     // MARK: Singleton
 
-    static let shared: SharedDIContainer = SharedDIContainer()
+    /// `nonisolated(unsafe)` because the container is created once and only
+    /// read afterwards. The class stays non-Sendable, so the compiler still
+    /// rejects passing an instance between isolation domains.
+    nonisolated(unsafe) static let shared: SharedDIContainer = SharedDIContainer()
 
     // MARK: Public properties
 

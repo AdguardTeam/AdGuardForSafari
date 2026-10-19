@@ -9,6 +9,8 @@
 
 import XCTest
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class SafariExtensionStateServiceTests: XCTestCase {
     private func checkOnStartConversion(
         _ blockerType: SafariBlockerType,

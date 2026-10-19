@@ -16,27 +16,27 @@ public protocol UserRulesServiceProtocol
 	/// Get UserRules settings
 	func getUserRules (
 						_ message: EmptyValue,
-						_ promise: @escaping (UserRules) -> Void) -> Void
+						_ promise: sending @escaping (UserRules) -> Void) -> Void
 	/// Add UserRule
 	func addUserRule (
 						_ message: StringValue,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Update UserRules settings
 	func updateUserRules (
 						_ message: UserRules,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Export UserRules settings
 	func exportUserRules (
 						_ message: Path,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Import UserRules settings
 	func importUserRules (
 						_ message: Path,
-						_ promise: @escaping (UserRules) -> Void) -> Void
+						_ promise: sending @escaping (UserRules) -> Void) -> Void
 	/// Reset UserRules to default settings
 	func resetUserRules (
 						_ message: EmptyValue,
-						_ promise: @escaping (UserRules) -> Void) -> Void
+						_ promise: sending @escaping (UserRules) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -49,7 +49,7 @@ open class UserRulesService: WebViewBridge
 	public typealias ServiceType = UserRulesService & Service & UserRulesServiceProtocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 		case "GetUserRules":
 			do {

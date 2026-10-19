@@ -28,7 +28,9 @@ private func makeState(
     )
 }
 
-private final class FakeURLFilterService: URLFilterService {
+/// `@unchecked Sendable` because the double is driven single-threaded by one
+/// test.
+private final class FakeURLFilterService: URLFilterService, @unchecked Sendable {
     var state = makeState()
     var getStateError: Error?
 
@@ -96,6 +98,8 @@ private func makeAssembler(
     )
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class URLFilterStateAssemblerTests: XCTestCase {
     // MARK: State assembly
 

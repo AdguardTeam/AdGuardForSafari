@@ -12,7 +12,9 @@ import AML
 
 // MARK: - Fakes
 
-private final class FakeURLFilterService: URLFilterService {
+/// `@unchecked Sendable` because the double is driven single-threaded by one
+/// test.
+private final class FakeURLFilterService: URLFilterService, @unchecked Sendable {
     var removeConfigurationError: Error?
     var removeConfigurationCalls = 0
 
@@ -40,7 +42,8 @@ private final class FakeURLFilterService: URLFilterService {
     func resetCache() async throws {}
 }
 
-private final class FakeKeychainStorage: SharedKeychainStorage {
+/// `@unchecked Sendable` because the double is driven single-threaded by one test.
+private final class FakeKeychainStorage: SharedKeychainStorage, @unchecked Sendable {
     var urlFilterProtectionLevelOption = 0
     var urlFilterEnabled = true
     var resetCalls = 0
@@ -146,6 +149,8 @@ private func makeResetService(
 
 // MARK: - URLFilterResetServiceTests
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class URLFilterResetServiceTests: XCTestCase {
     func testSuccessfulResetClearsAllLocalState() async {
         let urlFilterService = FakeURLFilterService()

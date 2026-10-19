@@ -12,6 +12,8 @@ import XCTest
 /// Verifies the MailKit reloader is untouched by the Safari retry feature:
 /// `reload()` makes exactly one MailKit call and never retries, on both the
 /// success and the failure path.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class MailExtensionReloaderTests: XCTestCase {
     /// Controllable stand-in for `MEExtensionManager.reloadContentBlocker`.
     private actor FakeMailReload {

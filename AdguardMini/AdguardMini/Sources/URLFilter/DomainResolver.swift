@@ -69,8 +69,12 @@ struct SystemDomainResolver: DomainResolving {
                 entry.pointee.ai_addr, entry.pointee.ai_addrlen,
                 &host, socklen_t(host.count), nil, 0, NI_NUMERICHOST
             )
-            if status == 0 {
-                addresses.append(String(cString: host))
+            if status == 0,
+               let address = String(
+                   bytes: host.prefix { $0 != 0 }.map { UInt8(bitPattern: $0) },
+                   encoding: .utf8
+               ) {
+                addresses.append(address)
             }
             current = entry.pointee.ai_next
         }

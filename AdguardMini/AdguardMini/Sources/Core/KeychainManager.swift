@@ -38,7 +38,9 @@ extension Keychain {
 
 // MARK: - KeychainManager
 
-protocol KeychainManager: AnyObject {
+/// `Sendable` because the implementation is stateless: every member reads or
+/// writes the keychain through `Keychain`.
+protocol KeychainManager: AnyObject, Sendable {
     var applicationId: String? { get async }
     var debugLogging: Bool { get set }
     var userActionLastDirectory: String { get set }
@@ -54,7 +56,9 @@ protocol KeychainManager: AnyObject {
 
 // MARK: - KeychainManagerImpl
 
-final class KeychainManagerImpl: KeychainManager {
+/// `@unchecked Sendable` because the manager is stateless: every member reads
+/// or writes the keychain through `Keychain`.
+final class KeychainManagerImpl: KeychainManager, @unchecked Sendable {
     var applicationId: String? {
         get async {
             await ProductInfo.applicationId()
@@ -101,6 +105,8 @@ final class KeychainManagerImpl: KeychainManager {
         }
     }
 
+    // `@concurrent` so the blocking SecItem work stays off the caller's actor.
+    @concurrent
     func setAppStatusInfo(_ appStatusInfo: AppStatusInfo) async {
         _ = await Task.detached(priority: .userInitiated) {
             do {
@@ -117,10 +123,14 @@ final class KeychainManagerImpl: KeychainManager {
         .result
     }
 
+    // `@concurrent` so the blocking SecItem work stays off the caller's actor.
+    @concurrent
     func delete(key: KeychainKey.Base) async {
         await Keychain.delete(key: key)
     }
 
+    // `@concurrent` so the blocking SecItem work stays off the caller's actor.
+    @concurrent
     func delete(key: KeychainKey.Secured) async {
         // Delete from both shared and non-shared keychain for safety
         Keychain.deleteShared(for: key.key)

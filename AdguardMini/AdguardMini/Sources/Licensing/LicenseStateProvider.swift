@@ -27,7 +27,9 @@ struct TrialAvailability {
 
 // MARK: - LicenseStateProvider
 
-protocol LicenseStateProvider: AnyObject {
+/// `Sendable` because the implementations hold only immutable collaborators
+/// and `UserDefaults`-backed state.
+protocol LicenseStateProvider: AnyObject, Sendable {
     /// Returns stored app status info from secure storage.
     func getStoredInfo() async -> AppStatusInfo?
 
@@ -55,7 +57,9 @@ protocol LicenseStateProvider: AnyObject {
 
 // MARK: - LicenseStateProviderImpl
 
-class LicenseStateProviderBase: LicenseStateProvider {
+/// `@unchecked Sendable` because every stored property is an immutable
+/// collaborator.
+class LicenseStateProviderBase: LicenseStateProvider, @unchecked Sendable {
     private let keychain: KeychainManager
 
     init(keychain: KeychainManager) {
@@ -95,7 +99,7 @@ class LicenseStateProviderBase: LicenseStateProvider {
 
 #if MAS
 
-final class LicenseStateProviderImpl: LicenseStateProviderBase {
+final class LicenseStateProviderImpl: LicenseStateProviderBase, @unchecked Sendable {
     // MARK: Private properties
 
     private let appStoreInteractor: AppStoreInteractor
@@ -247,7 +251,7 @@ final class LicenseStateProviderImpl: LicenseStateProviderBase {
 }
 #else
 
-final class LicenseStateProviderImpl: LicenseStateProviderBase {
+final class LicenseStateProviderImpl: LicenseStateProviderBase, @unchecked Sendable {
     // MARK: Private properties
 
     private let backendService: BackendService

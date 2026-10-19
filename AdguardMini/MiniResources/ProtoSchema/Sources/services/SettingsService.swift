@@ -16,107 +16,107 @@ public protocol SettingsServiceProtocol
 	/// Get Settings settings
 	func getSettings (
 						_ message: EmptyValue,
-						_ promise: @escaping (Settings) -> Void) -> Void
+						_ promise: sending @escaping (Settings) -> Void) -> Void
 	/// Update LaunchOnStartup setting
 	func updateLaunchOnStartup (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Update ShowInMenuBar setting
 	func updateShowInMenuBar (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Update HardwareAcceleration setting
 	func updateHardwareAcceleration (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Force restart on hardware acceleration import
 	func forceRestartOnHardwareAccelerationImport (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Update DebugLogging setting
 	func updateDebugLogging (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Update quit reaction setting
 	func updateQuitReaction (
 						_ message: UpdateQuitReactionMessage,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Update AutoFiltersUpdate setting
 	func updateAutoFiltersUpdate (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Export Settings settings
 	func exportSettings (
 						_ message: Path,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Import Settings settings
 	func importSettings (
 						_ message: Path,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Confirm Settings import with consent
 	func importSettingsConfirm (
 						_ message: ImportSettingsConfirmation,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Reset Settings to default settings
 	func resetSettings (
 						_ message: EmptyValue,
-						_ promise: @escaping (Settings) -> Void) -> Void
+						_ promise: sending @escaping (Settings) -> Void) -> Void
 	/// Get limit on the number of rules for content blockers
 	func getContentBlockersRulesLimit (
 						_ message: EmptyValue,
-						_ promise: @escaping (Int32Value) -> Void) -> Void
+						_ promise: sending @escaping (Int32Value) -> Void) -> Void
 	/// Export Logs archive
 	func exportLogs (
 						_ message: Path,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Send message to Support
 	func sendFeedbackMessage (
 						_ message: SupportMessage,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Get user action last directory
 	func getUserActionLastDirectory (
 						_ message: EmptyValue,
-						_ promise: @escaping (StringValue) -> Void) -> Void
+						_ promise: sending @escaping (StringValue) -> Void) -> Void
 	/// Update user action last directory
 	func updateUserActionLastDirectory (
 						_ message: StringValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Update theme setting
 	func updateTheme (
 						_ message: UpdateThemeMessage,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Reset all statistics
 	func resetStatistics (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Present the native open or save panel and return the picked path
 	func selectFile (
 						_ message: SelectFileParams,
-						_ promise: @escaping (SelectFilePath) -> Void) -> Void
+						_ promise: sending @escaping (SelectFilePath) -> Void) -> Void
 	/// Updates Safari toolbar badge visibility
 	func updateShowSafariToolbarBadge (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Mark the report problem label as shown, so it is displayed only once
 	func updateReportProblemLabelShown (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Get dismissed Safari Protection health check cards
 	func getHealthCheckDismissedCards (
 						_ message: EmptyValue,
-						_ promise: @escaping (StringValueArray) -> Void) -> Void
+						_ promise: sending @escaping (StringValueArray) -> Void) -> Void
 	/// Update dismissed Safari Protection health check cards
 	func updateHealthCheckDismissedCards (
 						_ message: StringValueArray,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Get dismissed Safari Protection promo cards
 	func getPromoDismissedCards (
 						_ message: EmptyValue,
-						_ promise: @escaping (StringValueArray) -> Void) -> Void
+						_ promise: sending @escaping (StringValueArray) -> Void) -> Void
 	/// Update dismissed Safari Protection promo cards
 	func updatePromoDismissedCards (
 						_ message: StringValueArray,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -129,7 +129,7 @@ open class SettingsService: WebViewBridge
 	public typealias ServiceType = SettingsService & Service & SettingsServiceProtocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 		case "GetSettings":
 			do {

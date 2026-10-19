@@ -17,7 +17,9 @@ extension SafariExtensionsServiceImpl:
     SafariExtensionManagerDependent,
     SafariExtensionStateServiceDependent {}
 
-final class SafariExtensionsServiceImpl: SafariExtensionsService.ServiceType {
+/// `@unchecked Sendable` because the injected services are assigned once
+/// during DI setup and only read afterwards.
+final class SafariExtensionsServiceImpl: SafariExtensionsService.ServiceType, @unchecked Sendable {
     var safariExtensionStatusManager: SafariExtensionStatusManager!
     var safariExtensionStateService: SafariExtensionStateService!
     var safariExtensionManager: SafariExtensionManager!
@@ -28,7 +30,7 @@ final class SafariExtensionsServiceImpl: SafariExtensionsService.ServiceType {
     }
 
     func getSafariExtensions(_ message: EmptyValue,
-                             _ promise: @escaping (SafariExtensions) -> Void) {
+                             _ promise: sending @escaping (SafariExtensions) -> Void) {
         Task {
             let safariExtensions = await self.safariExtensionStateService.getAllExtensionsStatus()
             let safariExtProto = safariExtensions.toProto()
@@ -37,7 +39,7 @@ final class SafariExtensionsServiceImpl: SafariExtensionsService.ServiceType {
     }
 
     func openSafariExtensionPreferences(_ message: OptionalStringValue,
-                                        _ promise: @escaping (OptionalError) -> Void) {
+                                        _ promise: sending @escaping (OptionalError) -> Void) {
         Task {
             let identifier = if message.hasValue, !message.value.isEmpty {
                 message.value
@@ -72,7 +74,7 @@ final class SafariExtensionsServiceImpl: SafariExtensionsService.ServiceType {
         }
     }
 
-    func requestReloadContentBlockers(_ message: EmptyValue, _ promise: @escaping (EmptyValue) -> Void) {
+    func requestReloadContentBlockers(_ message: EmptyValue, _ promise: sending @escaping (EmptyValue) -> Void) {
         Task {
             await self.safariExtensionManager.reloadAllContentBlockers()
             promise(EmptyValue())

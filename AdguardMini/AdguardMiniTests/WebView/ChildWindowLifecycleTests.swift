@@ -12,6 +12,8 @@ import XCTest
 
 /// Lifecycle tests for `openChildWindow` and `closeChildWindow`.
 /// Uses real `WKWebViewAppHost` instances through factory injection.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class ChildWindowLifecycleTests: XCTestCase {
     // MARK: - Lazy creation
 
@@ -174,20 +176,22 @@ final class ChildWindowLifecycleTests: XCTestCase {
 
 /// The user-rules editor must reopen with the size and position the user
 /// left it in, not with the configured default.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class ChildWindowGeometryPersistenceTests: XCTestCase {
     /// Unique autosave key for this test, so a persisted frame neither reads
     /// nor writes the real module's slot (tests run in parallel processes
     /// sharing one defaults domain).
     private var autosaveKey = ""
 
-    override func setUp() {
-        super.setUp()
+    override func setUp() async throws {
+        try await super.setUp()
         self.autosaveKey = "AdguardMiniTests.UserRulesEditor.\(UUID().uuidString)"
     }
 
-    override func tearDown() {
+    override func tearDown() async throws {
         NSWindow.removeFrame(usingName: self.autosaveKey)
-        super.tearDown()
+        try await super.tearDown()
     }
 
     /// Persists `frame` under the test's autosave key — the same write
@@ -277,6 +281,8 @@ final class ChildWindowGeometryPersistenceTests: XCTestCase {
 
 // MARK: - Test scenario + real-host factory
 
+/// `@MainActor` because the factory builds main-actor hosts.
+@MainActor
 private final class RealHostFactory {
     /// Captures hosts created by the factory.
     var createdHosts: [WKWebViewAppHost] = []
@@ -304,6 +310,8 @@ private final class RealHostFactory {
     }
 }
 
+/// `@MainActor` because the scenario drives the main-actor controller.
+@MainActor
 private struct ChildWindowScenario {
     let controller: WebViewAppsController
     let factory: RealHostFactory

@@ -27,7 +27,12 @@ typealias VisibilityChange = (Bool) -> Void
 
 // MARK: - WKWebViewAppHost
 
-/** Module host. */
+/// Module host.
+///
+/// `@MainActor` because the host owns the module's `WKWebView`, its window,
+/// and the AppKit delegates attached to them; every entry point already runs
+/// on the main thread.
+@MainActor
 final class WKWebViewAppHost: NSObject {
     // MARK: - Constants
 
@@ -158,7 +163,7 @@ final class WKWebViewAppHost: NSObject {
         onVisibilityChange: VisibilityChange? = nil,
         failurePresenter: any WKWebViewFailurePresenting = WKWebViewFailurePresenter.noOp,
         integrityVerifier: any WebUIIntegrityVerifying,
-        bridgeSetup: (WKWebViewBridge) -> Void,
+        bridgeSetup: @MainActor (WKWebViewBridge) -> Void,
         externalLinkGate: ExternalLinkGate? = nil,
         extraMessageHandlersSetup: ((WKUserContentController) -> Void)? = nil,
         frameAutosaveKeyOverride: String? = nil
@@ -559,7 +564,10 @@ final class WKWebViewAppHost: NSObject {
             object: self.window,
             queue: .main
         ) { [weak self] _ in
-            self?.handleWindowBecameMain()
+            // The observer is delivered on the main queue.
+            MainActor.assumeIsolated {
+                self?.handleWindowBecameMain()
+            }
         }
     }
 
@@ -900,7 +908,7 @@ extension WKWebViewAppHost: WKNavigationDelegate {
     func webView(
         _ webView: WKWebView,
         decidePolicyFor navigationAction: WKNavigationAction,
-        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+        decisionHandler: @escaping @MainActor (WKNavigationActionPolicy) -> Void
     ) {
         decisionHandler(
             self.navigationPolicy.decidePolicy(

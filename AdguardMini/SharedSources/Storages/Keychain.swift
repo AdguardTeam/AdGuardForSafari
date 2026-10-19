@@ -20,6 +20,8 @@ private enum Constants {
 // MARK: - Keychain
 
 enum Keychain {
+    // `@concurrent` so the blocking SecItem work stays off the caller's actor.
+    @concurrent
     static func set(key: KeychainKey.Base, value: String) async {
         _ = await Task.detached(priority: .userInitiated) {
             Self.set(key: key, value: value)
@@ -66,14 +68,20 @@ enum Keychain {
         return Self.setShared(key: key.key, data: data)
     }
 
+    // `@concurrent` so the blocking SecItem work stays off the caller's actor.
+    @concurrent
     static func delete(key: KeychainKey.Base) async {
         await Self.delete(key: key.key)
     }
 
+    // `@concurrent` so the blocking SecItem work stays off the caller's actor.
+    @concurrent
     static func delete(key: KeychainKey.Secured) async {
         await Self.delete(key: key.key)
     }
 
+    // `@concurrent` so the blocking SecItem work stays off the caller's actor.
+    @concurrent
     static func delete(key: String) async {
         _ = await Task.detached(priority: .userInitiated) {
             Self.delete(for: key)
@@ -94,13 +102,17 @@ enum Keychain {
         Self.delete(for: key, accessGroup: BuildConfig.AG_GROUP, service: BuildConfig.AG_APP_ID)
     }
 
+    // `@concurrent` because the keychain read is blocking file IO.
     /// Loads data from keychain with optional access group.
+    @concurrent
     static func getValue(for key: String, accessGroup: String? = nil, service: String? = nil) async -> Data? {
         await Task(priority: .userInitiated) {
             Self.getValue(for: key, accessGroup: accessGroup, service: service)
         }.value
     }
 
+    // `@concurrent` so the blocking SecItem work stays off the caller's actor.
+    @concurrent
     static func getValue(for key: String) async -> String? {
         await Task(priority: .userInitiated) {
             Self.getValue(for: key)

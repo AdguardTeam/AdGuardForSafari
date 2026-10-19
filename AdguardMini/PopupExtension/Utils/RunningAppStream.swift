@@ -17,8 +17,9 @@ import Foundation
 enum RunningAppStream {
     static func stream(bundleId: String) -> AsyncStream<Bool> {
         AsyncStream { continuation in
-            var hasEmitted = false
-            var lastEmitted = false
+            // KVO notifications arrive serially on the main thread, which guards the counters.
+            nonisolated(unsafe) var hasEmitted = false
+            nonisolated(unsafe) var lastEmitted = false
             let observation = NSWorkspace.shared.observe(
                 \.runningApplications,
                 options: [.initial, .new]

@@ -38,7 +38,9 @@ private enum Constants {
 /// On older systems the no-op implementation (``URLFilterServiceNoOp``) is injected:
 /// every throwing method throws ``URLFilterServiceError/unsupportedPlatform``
 /// and ``getStatus()`` returns ``URLFilterStatus/disabled``.
-protocol URLFilterService: AnyObject {
+/// Both implementations are actors, so the existential is `Sendable` and can
+/// be held by other actors.
+protocol URLFilterService: AnyObject, Sendable {
     /// Begins observing status and configuration changes.
     func start() async
     /// Loads the current configuration from `NEURLFilterManager`.

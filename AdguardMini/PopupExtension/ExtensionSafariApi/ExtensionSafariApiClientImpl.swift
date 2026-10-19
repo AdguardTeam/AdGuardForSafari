@@ -28,7 +28,12 @@ protocol ExtensionSafariApiClientManager: SafariPopupApi, MainAppApi {
 
 // MARK: - ExtensionSafariApiClientImpl
 
-final class ExtensionSafariApiClientImpl {
+/// XPC client that forwards the Safari popup API calls to the main app.
+///
+/// `@unchecked Sendable` because its state is write-once after setup:
+/// `delegate` and `gateClient` are assigned during DI setup and never
+/// reassigned afterwards.
+final class ExtensionSafariApiClientImpl: @unchecked Sendable {
     // MARK: Public properties
 
     weak var delegate: ExtensionSafariApiClientDelegate?
@@ -71,6 +76,9 @@ final class ExtensionSafariApiClientImpl {
                                start: Date?,
                                else failHandler: @escaping () -> Void,
                                block: @escaping (_ api: MainAppApi) -> Void) {
+        // Both closures belong to one call chain and are dispatched serially within it.
+        nonisolated(unsafe) let failHandler = failHandler
+        nonisolated(unsafe) let block = block
         var delay = 0.0
 
         /* In recursive call (when the start argument is not zero),

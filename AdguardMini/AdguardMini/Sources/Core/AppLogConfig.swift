@@ -8,8 +8,10 @@
 //
 
 import Foundation
-import AML
-import ProtoSchema
+
+// `@preconcurrency` because both packages build in Swift 5 mode without concurrency annotations.
+@preconcurrency import AML
+@preconcurrency import ProtoSchema
 
 enum AppLogConfig {
     static func setup() {

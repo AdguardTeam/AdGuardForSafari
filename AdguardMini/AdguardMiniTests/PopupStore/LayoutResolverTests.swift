@@ -15,6 +15,8 @@ private enum Constants {
     static let exampleDomain = "example.com"
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class LayoutResolverTests: XCTestCase {    // MARK: Helpers
 
     private func resolve(

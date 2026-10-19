@@ -10,7 +10,8 @@
 import Foundation
 
 import AML
-import AppBackend
+// `@preconcurrency` because the package builds in Swift 5 mode and its response types carry no `Sendable` annotations.
+@preconcurrency import AppBackend
 
 // MARK: - Constants
 
@@ -42,7 +43,8 @@ enum CommonBackendParameters {
 
 // MARK: - BackendService
 
-protocol BackendService {
+/// `Sendable` because the implementation is an actor.
+protocol BackendService: Sendable {
     var trialInfo: TrialInfo? { get async }
 
     func webActivateApp(from screen: String) async throws -> WebActivateResult
@@ -389,7 +391,7 @@ final actor BackendServiceImpl: BackendService {
             guard let self else { return }
 
             do {
-                if await self.netReachability.isAvailable() {
+                if self.netReachability.isAvailable() {
                     try await self.refreshAppStatusInfo()
                 } else {
                     LogWarn("Network is not available for app status refresh")

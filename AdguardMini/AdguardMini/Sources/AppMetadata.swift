@@ -11,7 +11,8 @@ import Foundation
 
 // MARK: - AppMetadata
 
-protocol AppMetadata: AnyObject {
+/// `Sendable` because the implementation stores every value in `UserDefaults`.
+protocol AppMetadata: AnyObject, Sendable {
     var firstStartDate: Date? { get set }
 
     var wasMigratedFromLegacyApp: Bool { get set }
@@ -23,7 +24,9 @@ protocol AppMetadata: AnyObject {
 
 // MARK: - AppMetadataImpl
 
-final class AppMetadataImpl: AppMetadata {
+/// `@unchecked Sendable` because every value lives in `UserDefaults`, which is
+/// thread-safe; the property wrappers keep no state of their own.
+final class AppMetadataImpl: AppMetadata, @unchecked Sendable {
     @UserDefault(.firstStartDate)
     var firstStartDate: Date?
 

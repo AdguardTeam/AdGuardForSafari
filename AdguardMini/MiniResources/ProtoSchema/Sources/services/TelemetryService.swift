@@ -16,11 +16,11 @@ public protocol TelemetryServiceProtocol
 	/// Record telemetry event
 	func recordEvent (
 						_ message: TelemetryEvent,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Get active AB tests
 	func getActiveABTests (
 						_ message: EmptyValue,
-						_ promise: @escaping (ActiveABTests) -> Void) -> Void
+						_ promise: sending @escaping (ActiveABTests) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -33,7 +33,7 @@ open class TelemetryService: WebViewBridge
 	public typealias ServiceType = TelemetryService & Service & TelemetryServiceProtocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 		case "RecordEvent":
 			do {

@@ -24,7 +24,10 @@ private enum Constants {
 /// Separated from ``SharedSettingsStorage`` so that targets which only need a
 /// few Keychain-backed values (e.g. URL filter properties) do not have to pull
 /// in the full ``SharedSettingsStorage`` and its dependencies.
-protocol SharedKeychainStorage: AnyObject {
+///
+/// `Sendable` because the implementation is stateless: every member reads or
+/// writes Keychain items.
+protocol SharedKeychainStorage: AnyObject, Sendable {
     /// Raw integer value of the selected protection level.
     var urlFilterProtectionLevelOption: Int { get set }
 

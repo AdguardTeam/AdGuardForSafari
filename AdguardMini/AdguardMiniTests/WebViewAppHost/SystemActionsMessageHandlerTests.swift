@@ -28,6 +28,8 @@ private struct HandlerFixture {
     let pasteboard: MockPasteboard
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class SystemActionsMessageHandlerTests: XCTestCase {
     private func makeHandler() -> HandlerFixture {
         let link = MockLinkOpener()

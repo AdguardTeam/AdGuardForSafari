@@ -63,12 +63,14 @@ enum SettingsExportError: ConvertableError {
 /// SettingsExport public interface.
 protocol SettingsExportProtocol {
     init(api: SettingsExportApiService)
+    // `@concurrent` so the detached export stays off the caller's actor.
     /// Starts export process.
     /// - Parameters:
     ///   - fileUrl: AdGuard settings file URL (target url).
     ///   - parentProgress: Parent `Progress` object if exists.
     ///   - completion: Performs when export process completed (asynchronously).
     /// - Returns: Returns Progress object for controlling export process, which possibles canceling of the export.
+    @concurrent
     func export(
         to fileUrl: URL,
         progress parentProgress: Progress?
@@ -86,7 +88,9 @@ extension SettingsExportProtocol {
 // MARK: SettingsExport Implementation
 
 /// Service for exporting of the app settings.
-final class SettingsExport: NSObject, SettingsExportProtocol {
+/// `@unchecked Sendable` because every stored property is an immutable
+/// collaborator.
+final class SettingsExport: NSObject, SettingsExportProtocol, @unchecked Sendable {
     // MARK: Private properties
 
     private let apiService: SettingsExportApiService
@@ -97,6 +101,8 @@ final class SettingsExport: NSObject, SettingsExportProtocol {
         self.apiService = api
     }
 
+    // `@concurrent` so the detached work stays off the caller's actor.
+    @concurrent
     func export(
         to fileUrl: URL,
         progress parentProgress: Progress? = nil
@@ -317,7 +323,7 @@ extension SettingsExport {
 // MARK: SettingsExportError Implementation
 
 extension SettingsExportError {
-    static var errorDomain: String = "SettingsExportErrorDomain"
+    static let errorDomain: String = "SettingsExportErrorDomain"
 
     var errorDescription: String? {
         switch self {

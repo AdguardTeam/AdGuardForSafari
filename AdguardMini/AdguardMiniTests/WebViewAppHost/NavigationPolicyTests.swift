@@ -15,6 +15,8 @@ private final class MockLinkOpener: LinkOpening {
     func openURL(_ url: URL) { opened.append(url) }
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class NavigationPolicyTests: XCTestCase {
     private let entryURL = URL(fileURLWithPath: "/tmp/WebUI/settings.html")
 

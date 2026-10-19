@@ -99,7 +99,9 @@ enum FlmApi {
 
 // MARK: - FiltersSupervisor
 
-protocol FiltersSupervisor: RestartableService, FlmApi.All {
+/// `Sendable` because the implementation holds only immutable collaborators
+/// and its restart state is touched through the service lifecycle.
+protocol FiltersSupervisor: RestartableService, FlmApi.All, Sendable {
     var filtersSpecialIds: FLMConstants { get }
     var languageSpecific: Bool { get }
 
@@ -111,7 +113,9 @@ protocol FiltersSupervisor: RestartableService, FlmApi.All {
 
 // MARK: - FiltersSupervisorImpl
 
-final class FiltersSupervisorImpl: RestartableServiceBase {
+/// `@unchecked Sendable` because `start`/`stop` are serialized by the
+/// `ServiceSupervisor` actor and the collaborators are immutable.
+final class FiltersSupervisorImpl: RestartableServiceBase, @unchecked Sendable {
     private let safariFiltersStorage: SafariFiltersStorage
     private let safariFiltersUpdater: SafariFiltersUpdater
     private let mailFiltersUpdater: MailFiltersUpdater
@@ -236,16 +240,20 @@ final class FiltersSupervisorImpl: RestartableServiceBase {
         }
     }
 
-    private func asyncly<T>(_ completion: @escaping () throws -> T) async throws -> T {
-        try await Task.detached {
-            try completion()
+    private func asyncly<T: Sendable>(_ completion: @escaping () throws -> T) async throws -> T {
+        // `nonisolated(unsafe)` because the completion runs once, in this task.
+        nonisolated(unsafe) let job = completion
+        return try await Task.detached {
+            try job()
         }
         .value
     }
 
-    private func asyncly<T>(_ completion: @escaping () -> T) async -> T {
-        await Task.detached {
-            completion()
+    private func asyncly<T: Sendable>(_ completion: @escaping () -> T) async -> T {
+        // `nonisolated(unsafe)` because the completion runs once, in this task.
+        nonisolated(unsafe) let job = completion
+        return await Task.detached {
+            job()
         }
         .value
     }
@@ -256,7 +264,7 @@ final class FiltersSupervisorImpl: RestartableServiceBase {
         if debug { LogDebug(msg) } else { LogInfo(msg) }
     }
 
-    private func flmCall<T>(
+    private func flmCall<T: Sendable>(
         _ label: String = #function,
         debug: Bool = false,
         _ completion: @escaping () throws -> T
@@ -274,7 +282,7 @@ final class FiltersSupervisorImpl: RestartableServiceBase {
         }
     }
 
-    private func flmCall<T>(
+    private func flmCall<T: Sendable>(
         _ label: String = #function,
         debug: Bool = false,
         _ completion: @escaping () -> T
@@ -338,6 +346,8 @@ extension FiltersSupervisorImpl: FLMFatalErrorDelegate {
 // MARK: - Interact API
 
 extension FiltersSupervisorImpl: FlmApi.Interact {
+    // `@concurrent` so the FLM dispatch stays off the caller's actor.
+    @concurrent
     func setFilters(_ filterIds: [Int], enabled: Bool) async {
         await self.flmCall("setFilters(\(filterIds), enabled: \(enabled))") {
             self.filtersManager.setFilters(filterIds, enabled: enabled)
@@ -357,6 +367,8 @@ extension FiltersSupervisorImpl: FlmApi.Interact {
         }
     }
 
+    // `@concurrent` so the FLM dispatch stays off the caller's actor.
+    @concurrent
     func updateCustomFilterMetadata(_ filterId: Int, title: String, trusted: Bool) async {
         await self.flmCall("updateCustomFilterMetadata(\(filterId))") {
             self.filtersManager.updateCustomFilterMetadata(filterId, title: title, trusted: trusted)
@@ -364,6 +376,8 @@ extension FiltersSupervisorImpl: FlmApi.Interact {
         }
     }
 
+    // `@concurrent` so the FLM dispatch stays off the caller's actor.
+    @concurrent
     func removeCustomFilters(_ filterIds: [Int]) async throws {
         try await self.flmCall("removeCustomFilters(\(filterIds))") {
             if !self.filtersManager.removeCustomFilters(filterIds) {

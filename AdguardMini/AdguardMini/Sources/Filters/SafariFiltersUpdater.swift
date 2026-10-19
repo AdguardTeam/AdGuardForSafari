@@ -27,7 +27,10 @@ protocol SafariFiltersUpdater: RestartableService {
 
 // MARK: - SafariFiltersUpdaterImpl
 
-final class SafariFiltersUpdaterImpl: RestartableServiceBase, SafariFiltersUpdater {
+/// `@unchecked Sendable` because `start`/`stop` are serialized by the
+/// `ServiceSupervisor` actor, the collaborators are immutable, and the update
+/// bookkeeping is guarded by `lk`.
+final class SafariFiltersUpdaterImpl: RestartableServiceBase, SafariFiltersUpdater, @unchecked Sendable {
     private let filterListManager: FLMProtocol
 
     private let safariConverter: SafariConverter
@@ -98,17 +101,19 @@ final class SafariFiltersUpdaterImpl: RestartableServiceBase, SafariFiltersUpdat
     }
 
     private func createUpdateTask() -> Task<Void, Never> {
-        Task {
+        // `self` is captured explicitly: the task owns the updater for its lifetime.
+        Task { [self] in
             let progress = Progress(totalUnitCount: 4)
 
             await self.debouncer.debounce { [weak self] in
                 guard let self else { return }
 
-                // Reset pending updates flag at the start
-                self.hasPendingUpdates = false
-
-                self.updateCounter += 1
-                let updateId = self.updateCounter
+                let updateId = locked(self.lk) {
+                    // Reset pending updates flag at the start
+                    self.hasPendingUpdates = false
+                    self.updateCounter += 1
+                    return self.updateCounter
+                }
                 LogInfo("Safari filters update started (ID: \(updateId))")
 
                 do {

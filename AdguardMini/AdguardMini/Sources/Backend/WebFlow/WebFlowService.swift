@@ -17,9 +17,10 @@ import AppBackend
 
 private enum Constants {
     #if !MAS
-    static let appType = WebAPI.AppType.standalone
+    // `nonisolated(unsafe)` because the value is a write-once constant from a Swift 5 module.
+    nonisolated(unsafe) static let appType = WebAPI.AppType.standalone
     #else
-    static let appType = WebAPI.AppType.store
+    nonisolated(unsafe) static let appType = WebAPI.AppType.store
     #endif
 
     static let redirectUrl = "\(MainUrlSchemeActionUrl.webFlowRedirect.url)"
@@ -29,14 +30,16 @@ private enum Constants {
     static let webSessionErrorDomain = "com.apple.AuthenticationServices.WebAuthenticationSession"
     static let webSessionErrorCancelledCode = 1
 
-    static let checkIfUserRedirectedToPurchase: (URLQueryItem) -> Bool = {
+    // `nonisolated(unsafe)` because the closure is a write-once constant that captures no state.
+    nonisolated(unsafe) static let checkIfUserRedirectedToPurchase: (URLQueryItem) -> Bool = {
         $0.name == "result" && $0.value == "userRedirectedToPurchase"
     }
 }
 
 // MARK: - WebFlowService
 
-protocol WebFlowService {
+/// `Sendable` because the implementation holds only immutable collaborators.
+protocol WebFlowService: Sendable {
     func activate(from screen: String) async throws -> WebActivateResult
     func activateTrial(from screen: String) async throws -> WebActivateResult
     func bindLicense(licenseKey: String, from screen: String) async throws -> WebActivateResult
@@ -45,7 +48,9 @@ protocol WebFlowService {
 
 // MARK: - WebFlowServiceImpl
 
-final class WebFlowServiceImpl {
+/// `@unchecked Sendable` because every stored property is a `let` collaborator
+/// and the service keeps no mutable state of its own.
+final class WebFlowServiceImpl: @unchecked Sendable {
     private let productInfo: ProductInfoStorage
     private let webSession: WebSession
 

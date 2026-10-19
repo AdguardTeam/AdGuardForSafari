@@ -12,6 +12,8 @@ import AppKit
 import WebKit
 import ProtoSchema
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class OnboardingWindowConfigurationTests: XCTestCase {
     func testOnboardingConfig_HasTitledClosableStyle_ExcludesResizableMiniaturizableFullScreen() {
         let config = ModuleWindowConfigurator.config(for: .onboarding)
@@ -71,6 +73,8 @@ final class OnboardingWindowConfigurationTests: XCTestCase {
     }
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class OnboardingWindowHostConfigurationTests: XCTestCase {
     private func makeOnboardingHost() -> WKWebViewAppHost {
         WKWebViewAppHost(

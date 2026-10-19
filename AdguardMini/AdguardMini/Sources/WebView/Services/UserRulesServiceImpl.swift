@@ -16,7 +16,9 @@ import FLM
 extension UserRulesServiceImpl: FiltersSupervisorDependent,
                                        ImportExportServiceDependent {}
 
-final class UserRulesServiceImpl: UserRulesService.ServiceType {
+/// `@unchecked Sendable` because the injected services are assigned once
+/// during DI setup and only read afterwards.
+final class UserRulesServiceImpl: UserRulesService.ServiceType, @unchecked Sendable {
     var filtersSupervisor: FiltersSupervisor!
     var importExportService: ImportExportService!
 
@@ -26,14 +28,14 @@ final class UserRulesServiceImpl: UserRulesService.ServiceType {
         self.setupServices()
     }
 
-    func getUserRules(_ message: EmptyValue, _ promise: @escaping (UserRules) -> Void) {
+    func getUserRules(_ message: EmptyValue, _ promise: sending @escaping (UserRules) -> Void) {
         Task {
             let userRules = await self.getCurrentUserRulesProto()
             promise(userRules)
         }
     }
 
-    func addUserRule(_ message: StringValue, _ promise: @escaping (OptionalError) -> Void) {
+    func addUserRule(_ message: StringValue, _ promise: sending @escaping (OptionalError) -> Void) {
         Task {
             if await self.filtersSupervisor.addUserRule(message.value) {
                 promise(.noError)
@@ -43,7 +45,7 @@ final class UserRulesServiceImpl: UserRulesService.ServiceType {
         }
     }
 
-    func updateUserRules(_ message: UserRules, _ promise: @escaping (OptionalError) -> Void) {
+    func updateUserRules(_ message: UserRules, _ promise: sending @escaping (OptionalError) -> Void) {
         Task {
             guard case .success = UserRulesValidator.validate(message) else {
                 LogError("updateUserRules rejected: payload exceeds validation caps")
@@ -59,7 +61,7 @@ final class UserRulesServiceImpl: UserRulesService.ServiceType {
         }
     }
 
-    func exportUserRules(_ message: Path, _ promise: @escaping (OptionalError) -> Void) {
+    func exportUserRules(_ message: Path, _ promise: sending @escaping (OptionalError) -> Void) {
         Task {
             guard PathConfiner.isConfinable(
                 message.path,
@@ -85,7 +87,7 @@ final class UserRulesServiceImpl: UserRulesService.ServiceType {
         }
     }
 
-    func importUserRules(_ message: Path, _ promise: @escaping (UserRules) -> Void) {
+    func importUserRules(_ message: Path, _ promise: sending @escaping (UserRules) -> Void) {
         Task {
             guard PathConfiner.isConfinable(
                 message.path,
@@ -120,7 +122,7 @@ final class UserRulesServiceImpl: UserRulesService.ServiceType {
         }
     }
 
-    func resetUserRules(_ message: EmptyValue, _ promise: @escaping (UserRules) -> Void) {
+    func resetUserRules(_ message: EmptyValue, _ promise: sending @escaping (UserRules) -> Void) {
         Task {
             await self.filtersSupervisor.removeUserRules()
             let userRulesFL = await self.filtersSupervisor.getUserRules()

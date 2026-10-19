@@ -12,7 +12,9 @@
 
 import Foundation
 
-final class EventBusMock: EventBus {
+/// `@unchecked Sendable` because the double is driven single-threaded by one
+/// test.
+final class EventBusMock: EventBus, @unchecked Sendable {
     var isStarted: Bool = true
     func subscribe(observer: Any, selector: Selector, event: Event) { fatalError("Usage is not expected") }
     func notifications(for event: Event) -> NotificationCenter.Notifications { fatalError("Usage is not expected") }

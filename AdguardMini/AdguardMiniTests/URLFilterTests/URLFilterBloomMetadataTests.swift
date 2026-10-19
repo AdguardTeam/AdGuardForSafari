@@ -9,21 +9,23 @@
 
 import XCTest
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class URLFilterBloomMetadataTests: XCTestCase {
     private var suiteName: String!
     private var userDefaults: UserDefaults!
 
-    override func setUp() {
-        super.setUp()
+    override func setUp() async throws {
+        try await super.setUp()
         self.suiteName = "URLFilterBloomMetadataTests.\(UUID().uuidString)"
         self.userDefaults = UserDefaults(suiteName: self.suiteName)!
     }
 
-    override func tearDown() {
+    override func tearDown() async throws {
         self.userDefaults.removePersistentDomain(forName: self.suiteName)
         self.userDefaults = nil
         self.suiteName = nil
-        super.tearDown()
+        try await super.tearDown()
     }
 
     func testRoundTrip() {

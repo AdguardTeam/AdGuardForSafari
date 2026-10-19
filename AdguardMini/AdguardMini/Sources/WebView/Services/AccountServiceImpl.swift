@@ -49,7 +49,11 @@ extension AccountServiceImpl: AppStoreInteractorDependent {}
 
 // MARK: - AccountServiceImpl implementation
 
-final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType {
+/// Account service bridge.
+///
+/// `@unchecked Sendable` because the injected services are assigned once
+/// during DI setup and only read afterwards.
+final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType, @unchecked Sendable {
     var backendService: BackendService!
     var licenseStateProvider: LicenseStateProvider!
     var appActivationObserver: AppActivationObserver!
@@ -63,7 +67,7 @@ final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType {
         self.setupServices()
     }
 
-    func getLicense(_ message: EmptyValue, _ promise: @escaping (LicenseOrError) -> Void) {
+    func getLicense(_ message: EmptyValue, _ promise: sending @escaping (LicenseOrError) -> Void) {
         Task {
             let licenseInfo = await self.backendService.getStoredAppStatusInfo()
             let canReset = await self.licenseStateProvider.canReset(for: licenseInfo)
@@ -71,14 +75,14 @@ final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType {
         }
     }
 
-    func getTrayLicense(_ message: EmptyValue, _ promise: @escaping (TrayLicenseOrError) -> Void) {
+    func getTrayLicense(_ message: EmptyValue, _ promise: sending @escaping (TrayLicenseOrError) -> Void) {
         Task {
             let licenseInfo = await self.backendService.getStoredAppStatusInfo()
             promise(licenseInfo?.toTrayProto() ?? .licenseError)
         }
     }
 
-    func refreshLicense(_ message: EmptyValue, _ promise: @escaping (OptionalError) -> Void) {
+    func refreshLicense(_ message: EmptyValue, _ promise: sending @escaping (OptionalError) -> Void) {
         Task {
             do {
                 try await self.backendService.refreshAppStatusInfo()
@@ -91,7 +95,10 @@ final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType {
         }
     }
 
-    func getSubscriptionsInfo(_ message: EmptyValue, _ promise: @escaping (AppStoreSubscriptionsMessage) -> Void) {
+    func getSubscriptionsInfo(
+        _ message: EmptyValue,
+        _ promise: sending @escaping (AppStoreSubscriptionsMessage) -> Void
+    ) {
         #if MAS
         Task {
             do {
@@ -146,14 +153,14 @@ final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType {
         }
     }
 
-    func getTrialAvailableDays(_ message: EmptyValue, _ promise: @escaping (Int32Value) -> Void) {
+    func getTrialAvailableDays(_ message: EmptyValue, _ promise: sending @escaping (Int32Value) -> Void) {
         Task {
             let trialAvailability = await self.licenseStateProvider.getTrialAvailability()
             promise(Int32Value(Int32(trialAvailability.availableDays)))
         }
     }
 
-    func requestActivate(_ message: EmptyValue, _ promise: @escaping (WebActivateResultMessage) -> Void) {
+    func requestActivate(_ message: EmptyValue, _ promise: sending @escaping (WebActivateResultMessage) -> Void) {
         Task {
             await self.startWebFlow(
                 from: Constants.defaultScreenName,
@@ -163,7 +170,7 @@ final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType {
         }
     }
 
-    func requestBind(_ message: StringValue, _ promise: @escaping (WebActivateResultMessage) -> Void) {
+    func requestBind(_ message: StringValue, _ promise: sending @escaping (WebActivateResultMessage) -> Void) {
         // Throwing closure is not part of task on this case
         // swiftlint:disable:next unhandled_throwing_task
         Task {
@@ -177,7 +184,7 @@ final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType {
 
     func requestRenew(
         _ message: StringValue,
-        _ promise: @escaping (OptionalError) -> Void
+        _ promise: sending @escaping (OptionalError) -> Void
     ) {
         Task {
             self.appActivationObserver.startObserving()
@@ -200,7 +207,7 @@ final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType {
         }
     }
 
-    func requestLogout(_ message: EmptyValue, _ promise: @escaping (OptionalError) -> Void) {
+    func requestLogout(_ message: EmptyValue, _ promise: sending @escaping (OptionalError) -> Void) {
         Task {
             do {
                 try await self.backendService.logout()
@@ -212,7 +219,7 @@ final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType {
         }
     }
 
-    func requestSubscribe(_ message: SubscriptionMessage, _ promise: @escaping (OptionalError) -> Void) {
+    func requestSubscribe(_ message: SubscriptionMessage, _ promise: sending @escaping (OptionalError) -> Void) {
         Task {
             LogInfo("Request subscribe: \(message.info)")
             await self.makeSubscribe(message, promise)
@@ -221,7 +228,7 @@ final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType {
 
     func enterActivationCode(
         _ message: StringValue,
-        _ promise: @escaping (EnterActivationCodeResultMessage) -> Void
+        _ promise: sending @escaping (EnterActivationCodeResultMessage) -> Void
     ) {
         Task {
             do {
@@ -234,7 +241,7 @@ final class AccountServiceImpl: ProtoSchema.AccountService.ServiceType {
         }
     }
 
-    func requestRestorePurchases(_ message: EmptyValue, _ promise: @escaping (OptionalError) -> Void) {
+    func requestRestorePurchases(_ message: EmptyValue, _ promise: sending @escaping (OptionalError) -> Void) {
         #if MAS
         Task {
             do {

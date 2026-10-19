@@ -25,7 +25,11 @@ private enum Constants {
 // MARK: - TerminationListener
 
 /// Observer for app starring/closing
-final class TerminationListener: NSObject {
+///
+/// `@unchecked Sendable` because the relaunch `Task` closures capture `self`:
+/// `restartScheduled` is guarded by the instance lock, and `executable` and
+/// `ppid` are set only in `init`.
+final class TerminationListener: NSObject, @unchecked Sendable {
     // MARK: Private properties
 
     private var executable: URL

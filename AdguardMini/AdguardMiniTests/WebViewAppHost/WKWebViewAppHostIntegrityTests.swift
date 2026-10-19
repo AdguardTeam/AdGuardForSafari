@@ -24,7 +24,9 @@ private final class StubIntegrityVerifier: WebUIIntegrityVerifying {
 }
 
 /// Recording test double for `WKWebViewFailurePresenting`.
-private final class IntegrityRecordingFailurePresenter: WKWebViewFailurePresenting {
+/// `@unchecked Sendable` because the recorder is driven single-threaded by one
+/// test.
+private final class IntegrityRecordingFailurePresenter: WKWebViewFailurePresenting, @unchecked Sendable {
     var bundleIntegrityFailureCalls = 0
     /// Optional hook so tests can synchronize on the async presenter routing.
     var onIntegrityFailure: (() -> Void)?
@@ -41,6 +43,8 @@ private final class IntegrityRecordingFailurePresenter: WKWebViewFailurePresenti
     }
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class WKWebViewAppHostIntegrityTests: XCTestCase {
     @MainActor
     private func makeHost(

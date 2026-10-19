@@ -17,7 +17,9 @@ extension SystemServiceImpl:
     TrayWindowControllerDependent,
     EventBusDependent {}
 
-final class SystemServiceImpl: SystemService.ServiceType {
+/// `@unchecked Sendable` because the injected services are assigned once
+/// during DI setup and only read afterwards.
+final class SystemServiceImpl: SystemService.ServiceType, @unchecked Sendable {
     var trayWindowController: WebViewTrayWindowController!
     var eventBus: EventBus!
 
@@ -26,7 +28,7 @@ final class SystemServiceImpl: SystemService.ServiceType {
         self.setupServices()
     }
 
-    func requestOpenSettingsPage(_ message: StringValue, _ promise: @escaping (EmptyValue) -> Void) {
+    func requestOpenSettingsPage(_ message: StringValue, _ promise: sending @escaping (EmptyValue) -> Void) {
         // Both branches mutate `NSWindow` / post events; run uniformly on the
         // Main actor (the RPC arrives on a background delivery queue).
         Task { @MainActor in

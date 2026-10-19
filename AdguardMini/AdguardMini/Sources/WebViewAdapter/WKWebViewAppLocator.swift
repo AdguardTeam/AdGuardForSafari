@@ -20,7 +20,10 @@ protocol WebViewAppsControllerDependent: AnyObject {
 // MARK: - WKWebViewAppLocator
 
 /// File-private locator that holds WKWebView-specific singleton services.
-private final class WKWebViewAppLocator {
+///
+/// `@unchecked Sendable` because the locator is created once and its lazy
+/// service access is confined to the main-thread WebView hosts.
+private final class WKWebViewAppLocator: @unchecked Sendable {
     static let shared = WKWebViewAppLocator()
 
     /// WKWebView-specific theme service instance.

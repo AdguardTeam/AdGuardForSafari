@@ -13,6 +13,8 @@ import ContentBlockerConverter
 
 /// Tests for `SafariUserRulesDistributor` — the production helper that
 /// distributes user rules and service groups across Safari content blockers.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class SafariConverterUserRulesTests: XCTestCase {
     /// User rules without affinity must reach every content blocker.
     func testUserRulesWithoutAffinityDistributedToAllBlockers() {

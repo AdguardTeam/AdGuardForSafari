@@ -114,7 +114,9 @@ extension Telemetry {
 extension Telemetry {
     final actor ServiceImpl: Telemetry.Service {
         private let network: NetworkManager
-        private let settings: UserSettingsManager
+        /// `nonisolated` because the service is immutable and sendable.
+        /// The actor also reads it from the main actor.
+        nonisolated private let settings: UserSettingsService
         private let abTestsStorage: ABTests.Storage
         private let appMetadata: AppMetadata
         private let licenseStateProvider: LicenseStateProvider
@@ -122,7 +124,7 @@ extension Telemetry {
 
         init(
             network: NetworkManager,
-            settings: UserSettingsManager,
+            settings: UserSettingsService,
             abTestsStorage: ABTests.Storage,
             appMetadata: AppMetadata,
             licenseStateProvider: LicenseStateProvider
@@ -319,10 +321,12 @@ extension Telemetry {
             }
         }
 
-        @MainActor
+        /// Reads the theme and the appearance on the main actor, so the
+        /// non-`Sendable` `AML.Telemetry.Theme` never crosses isolation.
         private func getTheme() async -> AML.Telemetry.Theme {
-            switch await self.settings.theme {
-            case .system: UIUtils.isDarkMode() ? .systemDark : .systemLight
+            let (theme, isDark) = await MainActor.run { (self.settings.theme, UIUtils.isDarkMode()) }
+            return switch theme {
+            case .system: isDark ? .systemDark : .systemLight
             case .light:  .light
             case .dark:   .dark
             }
@@ -345,11 +349,18 @@ extension Telemetry {
 
 extension Telemetry {
     private enum SyntheticId {
-        @UserDefault(.telemetryId)
-        static var stored: String?
+        /// `@unchecked Sendable` because `UserDefaults` is thread-safe, so the
+        /// storage may be shared across threads as is.
+        private final class Storage: @unchecked Sendable {
+            @UserDefault(.telemetryId)
+            var stored: String?
+        }
 
-        private static let lock = UnfairLock()
-        private static var runtime: String?
+        private static let storage = Storage()
+
+        // `nonisolated(unsafe)` because `lock` guards every access to `runtime` and to the storage's value.
+        nonisolated(unsafe) private static let lock = UnfairLock()
+        nonisolated(unsafe) private static var runtime: String?
 
         static func get() -> String {
             locked(self.lock) {
@@ -357,14 +368,14 @@ extension Telemetry {
                     return id
                 }
 
-                if let id = self.stored,
+                if let id = self.storage.stored,
                    self.isValid(id) {
                     self.runtime = id
                     return id
                 }
 
                 let new = self.create()
-                self.stored = new
+                self.storage.stored = new
                 self.runtime = new
                 return new
             }

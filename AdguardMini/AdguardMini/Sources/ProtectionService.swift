@@ -12,7 +12,8 @@ import AML
 
 // MARK: - ProtectionService
 
-protocol ProtectionService {
+/// `Sendable` because the implementation holds only immutable collaborators.
+protocol ProtectionService: Sendable {
     var isProtectionEnabled: Bool { get }
     func startIfEnabled() async
     func setProtectionStatus(isEnabled: Bool) async
@@ -20,7 +21,9 @@ protocol ProtectionService {
 
 // MARK: - ProtectionServiceImpl
 
-final class ProtectionServiceImpl: ProtectionService {
+/// `@unchecked Sendable` because every stored property is an immutable
+/// collaborator.
+final class ProtectionServiceImpl: ProtectionService, @unchecked Sendable {
     private let serviceSupervisor: ServiceSupervisor
     private let safariExtensionManager: SafariExtensionManager
     private let sharedSettingsStorage: SharedSettingsStorage

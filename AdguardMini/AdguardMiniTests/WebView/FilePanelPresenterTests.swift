@@ -10,6 +10,8 @@
 import XCTest
 import UniformTypeIdentifiers
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class FilePanelPresenterTests: XCTestCase {
     func testContentTypes_ParsesCommaSeparatedExtensions() throws {
         let types = NSFilePanelPresenter.contentTypes(from: "txt,zip")

@@ -9,6 +9,8 @@
 
 import XCTest
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class UrlFilteringCheckerTests: XCTestCase {
     private let fChecker = UrlFilteringCheckerImpl(urlBuilder: AllowBlockListRuleBuilderImpl())
     private let testHost = "example.com"

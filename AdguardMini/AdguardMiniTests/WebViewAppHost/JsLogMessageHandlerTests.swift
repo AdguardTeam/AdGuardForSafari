@@ -10,9 +10,11 @@
 import XCTest
 import ProtoSchema // ScriptMessageHandling test seam.
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class JsLogMessageHandlerTests: XCTestCase {
     func testRoute_IsCalledWhenUnderTheRateLimit() {
-        var current = Date(timeIntervalSince1970: 0)
+        let current = Date(timeIntervalSince1970: 0)
         let limiter = TokenBucketLimiter(capacity: 60, refillPerSecond: 6) { current.timeIntervalSince1970 }
         var routed: [RoutedLog] = []
         let handler = JsLogMessageHandler(
@@ -56,7 +58,7 @@ final class JsLogMessageHandlerTests: XCTestCase {
     }
 
     func testRoute_IsNotCalled_WhenTheBudgetIsExhausted() {
-        var current = Date(timeIntervalSince1970: 0)
+        let current = Date(timeIntervalSince1970: 0)
         // `refillPerSecond` must be > 0 per `TokenBucketLimiter`'s precondition.
         // A non-advancing clock keeps the bucket from ever refilling, which is
         // The intent here (budget exhausted -> subsequent calls dropped).

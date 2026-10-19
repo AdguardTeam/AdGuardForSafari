@@ -12,7 +12,11 @@ import AML
 
 // MARK: - WatchdogManager
 
-protocol WatchdogManager {
+/// Starts the watchdog helper process.
+///
+/// `Sendable` because it is held by `AppLifecycleServiceImpl`, which an actor
+/// shares; the implementation is stateless.
+protocol WatchdogManager: Sendable {
     func startWatchdog()
 }
 

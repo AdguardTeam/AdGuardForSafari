@@ -21,7 +21,7 @@ private enum Constants {
     static var adguardBaseFilterId: Int { 2 }
     static var adguardMobileAdsFilterId: Int { 11 }
 
-    static var indexFiltersDiapason: ClosedRange<Int> = 1...999
+    static let indexFiltersDiapason: ClosedRange<Int> = 1...999
 }
 
 // MARK: - LegacyMapper

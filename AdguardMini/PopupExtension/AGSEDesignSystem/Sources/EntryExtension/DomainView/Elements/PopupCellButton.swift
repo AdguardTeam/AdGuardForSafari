@@ -13,7 +13,7 @@ import ColorPalette
 // MARK: - UI constants
 
 private enum Constants {
-    static var cornerRadius: CGFloat = 0
+    static let cornerRadius: CGFloat = 0
 
     static var defaultBackgroundColor: StatefulColor {
         StatefulColor(

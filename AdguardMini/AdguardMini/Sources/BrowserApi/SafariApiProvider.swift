@@ -34,7 +34,12 @@ protocol SafariApiHandler {
 
 // MARK: - SafariApiProvider
 
-final class SafariApiProvider: NSObject {
+/// Handles XPC requests from the Safari extension and relays them to the app.
+///
+/// `@unchecked Sendable` because every mutable property is read and written
+/// inside `workQueue.sync`; the KVO callback below only touches the thread-safe
+/// proxy storage.
+final class SafariApiProvider: NSObject, @unchecked Sendable {
     // MARK: Private properties
 
     private let workQueue = DispatchQueue(label: "ExtensionSafariApiWorkQueue", autoreleaseFrequency: .workItem)
@@ -191,6 +196,8 @@ extension SafariApiProvider: MainAppApi {
     }
 
     func appState(after time: EBATimestamp, reply: @escaping (EBAAppState?, Error?) -> Void) {
+        // `nonisolated(unsafe)` because the reply is invoked once, from this task.
+        nonisolated(unsafe) let reply = reply
         Task {
             let appState = await self.createAppState(after: time)
             reply(appState, nil)
@@ -198,6 +205,8 @@ extension SafariApiProvider: MainAppApi {
     }
 
     func appState(_ reply: @escaping (EBAAppState?, Error?) -> Void) {
+        // `nonisolated(unsafe)` because the reply is invoked once, from this task.
+        nonisolated(unsafe) let reply = reply
         Task {
             let appState = await self.createAppState()
             reply(appState, nil)
@@ -205,6 +214,8 @@ extension SafariApiProvider: MainAppApi {
     }
 
     func getCurrentFilteringState(withUrl url: String, reply: @escaping (EBACurrentFilteringState?, Error?) -> Void) {
+        // `nonisolated(unsafe)` because the reply is invoked once, from this task.
+        nonisolated(unsafe) let reply = reply
         Task {
             let host = URL(string: url)?.host ?? "(invalid url)"
             let filteringState = EBACurrentFilteringState()
@@ -215,6 +226,8 @@ extension SafariApiProvider: MainAppApi {
     }
 
     func getExtraState(withUrl url: String, reply: @escaping (Bool, Error?) -> Void) {
+        // `nonisolated(unsafe)` because the reply is invoked once, from this task.
+        nonisolated(unsafe) let reply = reply
         Task {
             let isProtectionEnabled = self.protectionService.isProtectionEnabled
             let isPaid = await self.licenseStateProvider.isPaid()
@@ -230,6 +243,8 @@ extension SafariApiProvider: MainAppApi {
     func popupPresentationState(
         reply: @escaping (_ hasAttention: Bool, _ isUpsellAvailable: Bool, _ error: Error?) -> Void
     ) {
+        // `nonisolated(unsafe)` because the reply is invoked once, from this task.
+        nonisolated(unsafe) let reply = reply
         Task {
             let hasAttention = await self.healthCheckAttentionProvider.hasAttention()
             let isPaid = await self.licenseStateProvider.isPaid()
@@ -249,6 +264,8 @@ extension SafariApiProvider: MainAppApi {
     }
 
     func setProtectionStatus(_ enabled: Bool, reply: @escaping (EBATimestamp, Error?) -> Void) {
+        // `nonisolated(unsafe)` because the reply is invoked once, from this task.
+        nonisolated(unsafe) let reply = reply
         Task {
             LogInfo("Set protection status \(enabled)")
             await self.protectionService.setProtectionStatus(isEnabled: enabled)
@@ -257,6 +274,8 @@ extension SafariApiProvider: MainAppApi {
     }
 
     func setFilteringStatusWithUrl(_ url: String, isEnabled: Bool, reply: @escaping (EBATimestamp, Error?) -> Void) {
+        // `nonisolated(unsafe)` because the reply is invoked once, from this task.
+        nonisolated(unsafe) let reply = reply
         Task {
             var commonError: Error?
 
@@ -331,6 +350,8 @@ extension SafariApiProvider: MainAppApi {
     }
 
     func addRule(_ ruleText: String, reply: @escaping (Error?) -> Void) {
+        // `nonisolated(unsafe)` because the reply is invoked once, from this task.
+        nonisolated(unsafe) let reply = reply
         Task {
             if await self.filtersSupervisor.addUserRule(ruleText) {
                 await self.onUserRulesChanged()
@@ -342,6 +363,8 @@ extension SafariApiProvider: MainAppApi {
     }
 
     func reportSite(with url: String, reply: @escaping (String?, Error?) -> Void) {
+        // `nonisolated(unsafe)` because the reply is invoked once, from this task.
+        nonisolated(unsafe) let reply = reply
         Task {
             guard let reportUrl = await self.supportService.reportSiteUrl(
                 reportUrl: url,
@@ -356,6 +379,8 @@ extension SafariApiProvider: MainAppApi {
     }
 
     func openSafariSettings(reply: @escaping (Error?) -> Void) {
+        // `nonisolated(unsafe)` because the reply is invoked once, from this task.
+        nonisolated(unsafe) let reply = reply
         Task {
             var commonError: Error?
             let identifier =
@@ -372,6 +397,8 @@ extension SafariApiProvider: MainAppApi {
     }
 
     func telemetryPageViewEvent(_ screenName: String, reply: @escaping (Error?) -> Void) {
+        // `nonisolated(unsafe)` because the reply is invoked once, from this task.
+        nonisolated(unsafe) let reply = reply
         Task {
             await self.telemetry.sendEvent(.pageview(.init(name: screenName)))
             reply(nil)
@@ -379,6 +406,8 @@ extension SafariApiProvider: MainAppApi {
     }
 
     func telemetryActionEvent(screenName: String, action: String, reply: @escaping (Error?) -> Void) {
+        // `nonisolated(unsafe)` because the reply is invoked once, from this task.
+        nonisolated(unsafe) let reply = reply
         Task {
             await self.telemetry.sendEvent(.customEvent(.init(name: action, refName: screenName)))
             reply(nil)

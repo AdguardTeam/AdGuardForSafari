@@ -12,13 +12,6 @@ import AML
 import AGSentry
 import AGCrashReporterLib
 
-// MARK: - Constants
-
-private enum Constants {
-    @UserDefault(key: .feedbackEmail, defaultValue: nil)
-    static var feedbackEmail: String?
-}
-
 // MARK: - SentryHelper
 
 protocol SentryHelper {
@@ -28,9 +21,20 @@ protocol SentryHelper {
 
 // MARK: - SentryHelperImpl
 
-final class SentryHelperImpl: SentryHelper {
+/// `@unchecked Sendable` because the helper's flags are best-effort guards
+/// touched from the startup sequence and Sentry's event callback; the reset
+/// flag is guarded by `resetLock` and `onEndStart` is assigned once at start-up.
+final class SentryHelperImpl: SentryHelper, @unchecked Sendable {
+    /// The crash reporter's reply address, persisted between runs.
+    @UserDefault(key: .feedbackEmail, defaultValue: nil)
+    private var feedbackEmail: String?
+
     private let appMetadata: AppMetadata
     private let appResetService: AppResetService
+
+    /// Guards `isResetingAtStartUp`, which Sentry's callback thread and the
+    /// main thread both touch.
+    private let resetLock = UnfairLock()
     private var isResetingAtStartUp = false
 
     var onEndStart: (() -> Void) = {}
@@ -51,13 +55,14 @@ final class SentryHelperImpl: SentryHelper {
     private func shouldSend(sentryEvent event: SentryEvent) -> Bool {
         self.appMetadata.rateUsNoCrashesDate = .now
 
-        guard !self.isResetingAtStartUp else { return false }
+        let resetInProgress = locked(self.resetLock) { self.isResetingAtStartUp }
+        guard !resetInProgress else { return false }
 
         let crashedAppName = (event.isComponentEvent
                               ? .localized.base.crash_reporter_title_adguard_component
                               : BuildConfig.AG_APP_DISPLAYED_NAME)
 
-        let email = Constants.feedbackEmail
+        let email = self.feedbackEmail
 
         let reply = DispatchQueue.safeMainSync {
             SentryCrashReporter
@@ -70,7 +75,7 @@ final class SentryHelperImpl: SentryHelper {
         }
 
         if !reply.email.isEmpty {
-            Constants.feedbackEmail = reply.email
+            self.feedbackEmail = reply.email
         }
 
         if reply.send {
@@ -78,18 +83,19 @@ final class SentryHelperImpl: SentryHelper {
         }
 
         if reply.reset {
-            self.isResetingAtStartUp = true
+            locked(self.resetLock) { self.isResetingAtStartUp = true }
             Task {
                 if await !self.appResetService.resetApp(request: true) {
                     await MainActor.run {
-                        self.isResetingAtStartUp = false
+                        locked(self.resetLock) { self.isResetingAtStartUp = false }
                         self.onEndStart()
                     }
                 }
             }
         }
 
-        return !self.isResetingAtStartUp && reply.send
+        let isResetting = locked(self.resetLock) { self.isResetingAtStartUp }
+        return !isResetting && reply.send
     }
 
     private func makeWindowTitle() -> String {
@@ -106,7 +112,8 @@ extension SentryHelperImpl {
     func startSentryAndContinueStartUp() {
         let completion = {
             DispatchQueue.main.async {
-                if !self.isResetingAtStartUp {
+                let resetInProgress = locked(self.resetLock) { self.isResetingAtStartUp }
+                if !resetInProgress {
                     self.onEndStart()
                 }
             }

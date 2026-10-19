@@ -189,7 +189,7 @@ class CodeGeneratorAbstract(object):
         action_name = self.FILE_TYPE_ACTIONS_MAP[file_type]
         if action_name and not self.should_skip_primary_generation(file_type):
             file_type_action = getattr(self, action_name)
-            for proto_file in os.listdir(dir_input):
+            for proto_file in sorted(os.listdir(dir_input)):
                 if not proto_file.endswith(".proto"):
                     logger.info("File %s is not a proto file, ignore it", proto_file)
                     continue
@@ -224,7 +224,7 @@ class CodeGeneratorAbstract(object):
         post_action_name = self.FILE_TYPE_POST_ACTIONS_MAP[file_type]
         if post_action_name:
             file_type_post_action = getattr(self, post_action_name)
-            for proto_file in os.listdir(dir_input):
+            for proto_file in sorted(os.listdir(dir_input)):
                 if not proto_file.endswith(".proto"):
                     logger.info("File %s is not a proto file, ignore it", proto_file)
                     continue

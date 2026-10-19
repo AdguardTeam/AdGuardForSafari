@@ -13,8 +13,8 @@ final class StatisticsPeriodTests: XCTestCase {
     private var calendar: Calendar!
     private var referenceDate: Date!
 
-    override func setUp() {
-        super.setUp()
+    override func setUp() async throws {
+        try await super.setUp()
         var cal = Calendar(identifier: .gregorian)
         cal.timeZone = TimeZone(secondsFromGMT: 0)!
         self.calendar = cal

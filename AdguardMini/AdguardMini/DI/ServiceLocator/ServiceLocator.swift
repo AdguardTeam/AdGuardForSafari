@@ -386,14 +386,11 @@ final class ServiceLocator {
         ICloudDomainBlockageChecker(resolver: SystemDomainResolver())
 
     private lazy var urlFilterStateAssembler: URLFilterStateAssembler = {
-        URLFilterStateAssembler(
+        let userSettingsService = self.userSettingsService
+        return URLFilterStateAssembler(
             urlFilterService: self.urlFilterService,
-            protectionLevelProvider: { [userSettingsService = self.userSettingsService] in
-                userSettingsService.urlFilterProtectionLevel
-            },
-            isNewProvider: { [userSettingsService = self.userSettingsService] in
-                userSettingsService.urlFilterIsNew
-            },
+            protectionLevelProvider: { userSettingsService.urlFilterProtectionLevel },
+            isNewProvider: { userSettingsService.urlFilterIsNew },
             bloomMetadataProvider: { [bloomMetadataStorage = self.urlFilterBloomMetadataStorage] in
                 bloomMetadataStorage.load()
             },
@@ -414,7 +411,7 @@ final class ServiceLocator {
 
     private lazy var telemetryService: Telemetry.Service = Telemetry.ServiceImpl(
         network: self.coreDIContainer.networkManager,
-        settings: self.userSettingsManager,
+        settings: self.userSettingsService,
         abTestsStorage: self.abTestsStorage,
         appMetadata: self.appMetadata,
         licenseStateProvider: self.licenseStateProvider
@@ -617,7 +614,11 @@ final class ServiceLocator {
 
     // MARK: Singleton
 
-    static let shared: ServiceLocator = ServiceLocator()
+    /// `nonisolated(unsafe)` because the container is created once and its lazy
+    /// services are read after their first access. The class stays
+    /// non-Sendable, so the compiler still rejects passing an instance between
+    /// isolation domains.
+    nonisolated(unsafe) static let shared: ServiceLocator = ServiceLocator()
 
     private init() {}
 }

@@ -62,7 +62,9 @@ import Sparkle
 
 // MARK: - UpdaterControllerImpl
 
-final class UpdaterControllerImpl: NSObject {
+/// `@unchecked Sendable` because the feed state is guarded by `lock` and the
+/// callbacks are assigned once in `init`.
+final class UpdaterControllerImpl: NSObject, @unchecked Sendable {
     private var updaterController: SPUStandardUpdaterController!
     private var onFoundUpdate: (String) -> Void
     private var onDidntFindUpdate: () -> Void
@@ -234,14 +236,22 @@ extension UpdaterControllerImpl: UpdaterController {
     func checkForUpdate(silentCheck: Bool = false) {
         if silentCheck {
             self.updaterController.updater.checkForUpdateInformation()
+        } else if Thread.isMainThread {
+            MainActor.assumeIsolated { self.presentUpdateUI() }
         } else {
-            if let wnd = NSApp.windows.first(where: {
-                $0.identifier?.rawValue == "SUUpdateAlert"
-            }) {
-                wnd.makeKeyAndOrderFront(self)
-            } else {
-                self.updaterController.checkForUpdates(self)
-            }
+            // The update UI is AppKit-bound, so an off-main caller hops instead of trapping.
+            Task { @MainActor in self.presentUpdateUI() }
+        }
+    }
+
+    @MainActor
+    private func presentUpdateUI() {
+        if let wnd = NSApp.windows.first(where: {
+            $0.identifier?.rawValue == "SUUpdateAlert"
+        }) {
+            wnd.makeKeyAndOrderFront(self)
+        } else {
+            self.updaterController.checkForUpdates(self)
         }
     }
 

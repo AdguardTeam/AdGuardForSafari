@@ -12,6 +12,8 @@ import AppKit
 import WebKit
 import ProtoSchema
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class TrayWindowConfigurationTests: XCTestCase {
     func testTrayConfig_HasStatusBarLevelAndNonactivatingPanelStyle() {
         let config = ModuleWindowConfigurator.config(for: .tray)
@@ -48,6 +50,8 @@ final class TrayWindowConfigurationTests: XCTestCase {
     }
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class TrayWindowHostConfigurationTests: XCTestCase {
     private func makeTrayHost() -> WKWebViewAppHost {
         WKWebViewAppHost(
@@ -97,6 +101,8 @@ private final class VisibilityRecorder {
     func handle(_ visible: Bool) { calls.append(visible) }
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class TrayVisibilityLifecycleTests: XCTestCase {
     private func makeTrayHost(recorder: VisibilityRecorder) -> WKWebViewAppHost {
         WKWebViewAppHost(

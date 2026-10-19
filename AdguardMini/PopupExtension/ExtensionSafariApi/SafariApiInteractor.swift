@@ -168,7 +168,9 @@ private extension CheckedContinuation where E == Error {
             if let err = error {
                 self.resume(throwing: err)
             } else if let val = result {
-                self.resume(returning: val)
+                // A closure parameter cannot be sent directly; the value is resumed once and never shared.
+                nonisolated(unsafe) let value = val
+                self.resume(returning: value)
             } else {
                 self.resume(throwing: SafariApiInteractorError.bothReplyParamsAreNil)
             }

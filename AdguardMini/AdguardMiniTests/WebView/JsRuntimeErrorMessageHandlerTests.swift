@@ -9,6 +9,8 @@
 
 import XCTest
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class JsRuntimeErrorMessageHandlerTests: XCTestCase {
     private enum Constants {
         static let maxUnknownKindLength = 128

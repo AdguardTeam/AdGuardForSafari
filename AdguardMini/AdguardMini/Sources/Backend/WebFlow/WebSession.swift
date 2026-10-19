@@ -98,8 +98,9 @@ final class WebSessionImpl: WebSession {
         }
         self.cancelTimer()
         if let timeout {
-            self.timer = Timer.scheduledTimer(withTimeInterval: timeout, repeats: false) { [weak self] timer in
-                self?.cancel()
+            let session = WeakBox(self)
+            self.timer = Timer.scheduledTimer(withTimeInterval: timeout, repeats: false) { timer in
+                session.value?.cancel()
                 timer.invalidate()
             }
         }
@@ -119,8 +120,25 @@ final class WebSessionImpl: WebSession {
 
 // MARK: - PresentationContextProvider
 
-final class PresentationContextProvider: NSObject, ASWebAuthenticationPresentationContextProviding {
+/// Presents the web session in the app's key window.
+///
+/// `nonisolated` because only the protocol method needs the main actor; the
+/// provider is created by `WebSessionImpl` in a nonisolated context.
+nonisolated final class PresentationContextProvider: NSObject, ASWebAuthenticationPresentationContextProviding {
+    @MainActor
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         NSApplication.shared.keyWindow ?? NSApplication.shared.mainWindow ?? ASPresentationAnchor()
+    }
+}
+
+// MARK: - WeakBox
+
+/// Carries a weak reference into a `@Sendable` callback without retaining the
+/// object and without claiming the object itself is `Sendable`.
+private final class WeakBox<T: AnyObject>: @unchecked Sendable {
+    private(set) weak var value: T?
+
+    init(_ value: T) {
+        self.value = value
     }
 }

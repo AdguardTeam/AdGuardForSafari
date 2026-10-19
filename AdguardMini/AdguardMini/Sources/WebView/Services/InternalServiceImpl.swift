@@ -17,7 +17,9 @@ extension InternalServiceImpl:
     SupportDependent {}
 
 /// Service for internal helper operations.
-final class InternalServiceImpl: InternalService.ServiceType {
+/// `@unchecked Sendable` because the injected services are assigned once
+/// during DI setup and only read afterwards.
+final class InternalServiceImpl: InternalService.ServiceType, @unchecked Sendable {
     // MARK: Private properties
 
     var webViewAppsController: WebViewAppsController!
@@ -32,7 +34,7 @@ final class InternalServiceImpl: InternalService.ServiceType {
 
     // MARK: Protocol implementation
 
-    func openSettingsWindow(_ message: EmptyValue, _ promise: @escaping (EmptyValue) -> Void) {
+    func openSettingsWindow(_ message: EmptyValue, _ promise: sending @escaping (EmptyValue) -> Void) {
         Task { @MainActor in
             self.webViewAppsController.show(.settings)
             self.eventBus.post(event: .settingsWindowOpened, userInfo: nil)
@@ -44,7 +46,7 @@ final class InternalServiceImpl: InternalService.ServiceType {
     // MARK: User rules window
 
     /// Opens the user-rules child window.
-    func openUserRulesWindow(_ message: EmptyValue, _ promise: @escaping (EmptyValue) -> Void) {
+    func openUserRulesWindow(_ message: EmptyValue, _ promise: sending @escaping (EmptyValue) -> Void) {
         Task { @MainActor in
             let params = ChildWindowParams(
                 id: ChildWindow.userRuleEditorWindowId,
@@ -66,7 +68,7 @@ final class InternalServiceImpl: InternalService.ServiceType {
     }
 
     /// Closes the user-rules child window.
-    func closeUserRulesWindow(_ message: EmptyValue, _ promise: @escaping (EmptyValue) -> Void) {
+    func closeUserRulesWindow(_ message: EmptyValue, _ promise: sending @escaping (EmptyValue) -> Void) {
         Task { @MainActor in
             do {
                 try self.webViewAppsController.closeChildWindow(
@@ -102,7 +104,7 @@ final class InternalServiceImpl: InternalService.ServiceType {
         promise(EmptyValue())
     }
 
-    func reportAnIssue(_ message: EmptyValue, _ promise: @escaping (EmptyValue) -> Void) {
+    func reportAnIssue(_ message: EmptyValue, _ promise: sending @escaping (EmptyValue) -> Void) {
         Task {
             guard let url = await self.support.reportSiteUrl(reportUrl: nil, from: "support") else {
                 promise(EmptyValue())
@@ -112,16 +114,16 @@ final class InternalServiceImpl: InternalService.ServiceType {
             // `reportSiteUrl` resumes on a background executor; AppKit calls
             // Must run on the main actor.
             await MainActor.run {
-                NSWorkspace.shared.open(url)
-                promise(EmptyValue())
+                _ = NSWorkspace.shared.open(url)
             }
+            promise(EmptyValue())
         }
     }
 
     // MARK: Diagnostics window
 
     /// Opens the hidden diagnostics window.
-    func openDiagnosticsWindow(_ message: EmptyValue, _ promise: @escaping (EmptyValue) -> Void) {
+    func openDiagnosticsWindow(_ message: EmptyValue, _ promise: sending @escaping (EmptyValue) -> Void) {
         Task { @MainActor in
             DiagnosticsWindowPresenter.present(support: self.support)
             promise(EmptyValue())

@@ -35,7 +35,9 @@ protocol SafariConverter {
 
 // MARK: - SafariConverterImpl
 
-final class SafariConverterImpl {
+/// `@unchecked Sendable` because every stored property is a `let` collaborator;
+/// the delegate is a weak callback reference read only after `init`.
+final class SafariConverterImpl: @unchecked Sendable {
     private let filtersConverter: FiltersConverter
     private let storage: SafariFiltersStorage
     private let webExtension: WebExtension
@@ -146,15 +148,18 @@ final class SafariConverterImpl {
         groups: [ContentBlockerType: [String]],
         progress: Progress
     ) -> AsyncStream<SafariConversionResult> {
-        AsyncStream { continuation in
+        // `nonisolated(unsafe)` because the detached conversion only reads both values.
+        nonisolated(unsafe) let conversionGroups = groups
+        nonisolated(unsafe) let stateDelegate = self.delegate
+        return AsyncStream { continuation in
             Task.detached(priority: .utility) {
                 await withTaskGroup(
                     of: SafariConversionResult.self
-                ) { [delegate = self.delegate] taskGroup in
-                    for (contentBlockerType, rules) in groups where !rules.isEmpty {
+                ) { taskGroup in
+                    for (contentBlockerType, rules) in conversionGroups where !rules.isEmpty {
                         let safariBlockerType = SafariBlockerType(contentBlockerType)
                         taskGroup.addTask {
-                            await delegate?.onStartConversion(blockerType: safariBlockerType)
+                            await stateDelegate?.onStartConversion(blockerType: safariBlockerType)
                             let convStart = Date()
                             LogDebug("\(LogTag.safari) convertAndSave(\(safariBlockerType)) start")
                             let result = await self.convertAndSave(
@@ -169,7 +174,7 @@ final class SafariConverterImpl {
                     }
 
                     for await result in taskGroup {
-                        await delegate?.onEndConversion(result)
+                        await stateDelegate?.onEndConversion(result)
                         continuation.yield(result)
                     }
                 }

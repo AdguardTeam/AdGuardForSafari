@@ -11,6 +11,8 @@ import XCTest
 import AppKit
 
 /// Verifies `AppAlert` failure factories configure expected buttons and style.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class AppAlertWebViewFailuresTests: XCTestCase {
     // The `AppAlert` factories are `@MainActor`-isolated and construct AppKit
     // `NSAlert`s; reading their state after the `await` must also run on the

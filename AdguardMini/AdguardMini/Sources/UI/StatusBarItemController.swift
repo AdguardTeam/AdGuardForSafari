@@ -25,7 +25,8 @@ extension StatusBarItemControllerDelegate {
 
 // MARK: - StatusBarItemController
 
-protocol StatusBarItemController {
+/// `Sendable` because the implementation is main-thread-only.
+protocol StatusBarItemController: Sendable {
     var delegate: StatusBarItemControllerDelegate? { get set }
 
     func updateTrayIconVisibility(isHidden: Bool) async
@@ -40,7 +41,9 @@ protocol StatusBarItemController {
 
 // MARK: - StatusBarItemControllerImpl
 
-final class StatusBarItemControllerImpl: StatusBarItemController {
+/// `@unchecked Sendable` because its mutable state (`statusBarItemView`) is
+/// only touched from the main thread and the delegate is a weak reference.
+final class StatusBarItemControllerImpl: StatusBarItemController, @unchecked Sendable {
     /// Status bar element.
     private var statusBarItemView: StatusBarItemView?
 
@@ -180,13 +183,16 @@ final class StatusBarItemControllerImpl: StatusBarItemController {
     func openContextMenu(_ sender: NSStatusBarButton) {
         LogDebug("Will open context menu")
         self.delegate?.handleTrayContextMenuWillPresent()
-        let mainMenu = AppMenu(menuType: .context)
-        self.statusBarItemView?.statusItem.menu = mainMenu
-        sender.performClick(sender)
-        self.statusBarItemView?.statusItem.menu = nil
+        // The status-item button action runs on the main thread. The menu and the synthetic click are main-actor APIs.
+        MainActor.assumeIsolated {
+            let mainMenu = AppMenu(menuType: .context)
+            self.statusBarItemView?.statusItem.menu = mainMenu
+            sender.performClick(sender)
+            self.statusBarItemView?.statusItem.menu = nil
+        }
     }
 
-    @objc
+    @objc @MainActor
     func handleStatusBarClicked(_ sender: NSStatusBarButton) {
         LogDebug("Handle status bar clicked by \(sender)")
 

@@ -16,6 +16,8 @@ private final class RecordingDenialLog: InterfaceRequestDenialLogging {
     func recordRefusal(_ entry: StaticString) { refusals.append(String(describing: entry)) }
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class InterfaceRequestDenierTests: XCTestCase {
     private func makeDenier() -> (denier: InterfaceRequestDenier, log: RecordingDenialLog) {
         let log = RecordingDenialLog()

@@ -10,6 +10,8 @@
 import XCTest
 
 /// State-machine tests for `RecurringRpcTimeoutMonitor`.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class RecurringRpcTimeoutMonitorTests: XCTestCase {
     private func makeMonitor() -> RecurringRpcTimeoutMonitor {
         // Uses production default threshold (3).

@@ -11,7 +11,9 @@ import Foundation
 
 /// ``PIRLicenseProvider`` over the license state; App Store builds also use
 /// the active subscription JWS.
-final class PIRLicenseProviderImpl: PIRLicenseProvider {
+/// `@unchecked Sendable` because every stored property is an immutable
+/// collaborator.
+final class PIRLicenseProviderImpl: PIRLicenseProvider, @unchecked Sendable {
     private let licenseStateProvider: LicenseStateProvider
     #if MAS
     private let appStoreInteractor: AppStoreInteractor

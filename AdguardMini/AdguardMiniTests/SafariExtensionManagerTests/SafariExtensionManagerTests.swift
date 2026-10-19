@@ -37,6 +37,8 @@ private actor GatedReload {
     }
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class SafariExtensionManagerTests: XCTestCase {
     // MARK: Fixtures
 

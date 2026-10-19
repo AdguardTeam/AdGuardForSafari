@@ -29,12 +29,19 @@ extension NWPath {
     }
 }
 
-protocol NetworkReachability {
+/// Reports whether the network is currently reachable.
+///
+/// `Sendable` because `BackendServiceImpl`, an actor, holds one.
+protocol NetworkReachability: Sendable {
     func isAvailable() -> Bool
 }
 
 /// Minimal reachability wrapper.
-final class NetworkReachabilityImpl: NetworkReachability {
+///
+/// `@unchecked Sendable` because all mutable state (`prevIface`,
+/// `wasReachable`) is confined to the monitor's serial queue, `NWPathMonitor`
+/// is thread-safe, and the event bus only posts to `NotificationCenter`.
+final class NetworkReachabilityImpl: NetworkReachability, @unchecked Sendable {
     private let monitor = NWPathMonitor()
     private let queue = DispatchQueue(label: "NetworkReachability.monitor")
 
@@ -54,12 +61,14 @@ final class NetworkReachabilityImpl: NetworkReachability {
         self.monitor.currentPath.status == .satisfied
     }
 
-    private func startMonitoring() {
-        var prevIface: String?
-        // By design
-        // swiftlint:disable:next discouraged_optional_boolean
-        var wasReachable: Bool?
+    /// Previous interface name, touched only from the monitor's serial queue.
+    private var prevIface: String?
 
+    // Previous reachability value, touched only from the monitor's serial queue.
+    // swiftlint:disable:next discouraged_optional_boolean
+    private var wasReachable: Bool?
+
+    private func startMonitoring() {
         self.monitor.pathUpdateHandler = { [weak self] path in
             guard let self else { return }
 
@@ -72,12 +81,12 @@ final class NetworkReachabilityImpl: NetworkReachability {
 
             var notifyNetworkChanged = false
 
-            if prevIface != iface {
-                prevIface = iface
+            if self.prevIface != iface {
+                self.prevIface = iface
                 notifyNetworkChanged = true
             }
 
-            if let prev = wasReachable {
+            if let prev = self.wasReachable {
                 if prev != isCurrentlyReachable {
                     notifyNetworkChanged = true
                     LogInfo("Network is \(isCurrentlyReachable ? "reachable" : "unreachable")")
@@ -87,7 +96,7 @@ final class NetworkReachabilityImpl: NetworkReachability {
                 LogDebug("Initial reachability observation")
             }
 
-            wasReachable = isCurrentlyReachable
+            self.wasReachable = isCurrentlyReachable
 
             if notifyNetworkChanged, iface != nil {
                 self.eventBus.post(event: .networkStatusChanged, userInfo: isCurrentlyReachable)

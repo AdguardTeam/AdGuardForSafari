@@ -34,7 +34,7 @@ class CodeGeneratorTypeScript(CodeGeneratorAbstract):
 
         logger.info("Skipping service generation for TypeScript, using requests instead")
         request_names = []
-        for proto_file in os.listdir(dir_input):
+        for proto_file in sorted(os.listdir(dir_input)):
             if not proto_file.endswith(".proto"):
                 continue
 

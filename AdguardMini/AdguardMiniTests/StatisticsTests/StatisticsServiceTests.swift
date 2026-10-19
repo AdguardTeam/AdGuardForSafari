@@ -9,6 +9,8 @@
 
 import XCTest
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class StatisticsServiceTests: XCTestCase {
     func testAddBlockCounts_DelegatesToStore() {
         let mockStore = MockStatisticsStore.MockType.success(queryResult: 0).createObject()

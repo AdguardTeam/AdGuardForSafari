@@ -31,6 +31,10 @@ final class LoggerInterfaceRequestDenialLog: InterfaceRequestDenialLogging {
 }
 
 /// Denies interface window/dialog/file-picker requests.
+///
+/// `@MainActor` because WebKit invokes `WKUIDelegate` methods on the main
+/// thread and the denier only reports refusals.
+@MainActor
 final class InterfaceRequestDenier: NSObject, WKUIDelegate {
     private let logger: InterfaceRequestDenialLogging
 
@@ -73,7 +77,7 @@ final class InterfaceRequestDenier: NSObject, WKUIDelegate {
         _ webView: WKWebView,
         runJavaScriptAlertPanelWithMessage message: String,
         initiatedByFrame frame: WKFrameInfo,
-        completionHandler: @escaping () -> Void
+        completionHandler: @escaping @MainActor () -> Void
     ) {
         refuseAlert(completionHandler: completionHandler)
     }
@@ -92,7 +96,7 @@ final class InterfaceRequestDenier: NSObject, WKUIDelegate {
         _ webView: WKWebView,
         runJavaScriptConfirmPanelWithMessage message: String,
         initiatedByFrame frame: WKFrameInfo,
-        completionHandler: @escaping (Bool) -> Void
+        completionHandler: @escaping @MainActor (Bool) -> Void
     ) {
         refuseConfirm(completionHandler: completionHandler)
     }
@@ -112,7 +116,7 @@ final class InterfaceRequestDenier: NSObject, WKUIDelegate {
         runJavaScriptTextInputPanelWithPrompt prompt: String,
         defaultText: String?,
         initiatedByFrame frame: WKFrameInfo,
-        completionHandler: @escaping (String?) -> Void
+        completionHandler: @escaping @MainActor (String?) -> Void
     ) {
         refusePrompt(completionHandler: completionHandler)
     }
@@ -135,7 +139,7 @@ final class InterfaceRequestDenier: NSObject, WKUIDelegate {
         initiatedByFrame frame: WKFrameInfo,
         // Required by WKUIDelegate contract.
         // swiftlint:disable:next discouraged_optional_collection
-        completionHandler: @escaping ([URL]?) -> Void
+        completionHandler: @escaping @MainActor ([URL]?) -> Void
     ) {
         refuseOpenPanel(completionHandler: completionHandler)
     }
@@ -164,7 +168,7 @@ final class InterfaceRequestDenier: NSObject, WKUIDelegate {
         requestMediaCapturePermissionFor origin: WKSecurityOrigin,
         initiatedByFrame frame: WKFrameInfo,
         type: WKMediaCaptureType,
-        decisionHandler: @escaping (WKPermissionDecision) -> Void
+        decisionHandler: @escaping @MainActor (WKPermissionDecision) -> Void
     ) {
         refuseMediaCapture(decisionHandler: decisionHandler)
     }

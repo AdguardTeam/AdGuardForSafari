@@ -16,7 +16,9 @@ extension AdvancedBlockingServiceImpl:
     URLFilterServiceDependent,
     URLFilterStateAssemblerDependent {}
 
-final class AdvancedBlockingServiceImpl: AdvancedBlockingService.ServiceType {
+/// `@unchecked Sendable` because the injected services are assigned once
+/// during DI setup and only read afterwards.
+final class AdvancedBlockingServiceImpl: AdvancedBlockingService.ServiceType, @unchecked Sendable {
     var userSettingsService: UserSettingsService!
     var urlFilterService: URLFilterService!
     var urlFilterStateAssembler: URLFilterStateAssembler!
@@ -70,7 +72,7 @@ final class AdvancedBlockingServiceImpl: AdvancedBlockingService.ServiceType {
     }
 
     func resetURLFilterCache(_ message: EmptyValue,
-                             _ promise: @escaping (OptionalError) -> Void) {
+                             _ promise: sending @escaping (OptionalError) -> Void) {
         Task { @MainActor in
             do {
                 try await self.urlFilterService.resetCache()
@@ -83,7 +85,7 @@ final class AdvancedBlockingServiceImpl: AdvancedBlockingService.ServiceType {
     }
 
     func removeURLFilter(_ message: EmptyValue,
-                         _ promise: @escaping (OptionalError) -> Void) {
+                         _ promise: sending @escaping (OptionalError) -> Void) {
         Task { @MainActor in
             do {
                 try await self.urlFilterService.removeConfiguration()
@@ -96,7 +98,7 @@ final class AdvancedBlockingServiceImpl: AdvancedBlockingService.ServiceType {
     }
 
     func getURLFilterState(_ message: EmptyValue,
-                           _ promise: @escaping (ProtoSchema.URLFilterState) -> Void) {
+                           _ promise: sending @escaping (ProtoSchema.URLFilterState) -> Void) {
         Task { @MainActor in
             let state = await self.urlFilterStateAssembler.makeState()
             promise(state.toProto())
@@ -104,7 +106,7 @@ final class AdvancedBlockingServiceImpl: AdvancedBlockingService.ServiceType {
     }
 
     func setURLFilterEnabled(_ message: BoolValue,
-                             _ promise: @escaping (OptionalError) -> Void) {
+                             _ promise: sending @escaping (OptionalError) -> Void) {
         Task { @MainActor in
             do {
                 try await self.urlFilterService.setEnabledByUser(message.value)
@@ -117,7 +119,7 @@ final class AdvancedBlockingServiceImpl: AdvancedBlockingService.ServiceType {
     }
 
     func retryURLFilter(_ message: EmptyValue,
-                        _ promise: @escaping (EmptyValue) -> Void) {
+                        _ promise: sending @escaping (EmptyValue) -> Void) {
         Task { @MainActor in
             await self.urlFilterService.retryIfNeeded()
             promise(EmptyValue())
@@ -125,7 +127,7 @@ final class AdvancedBlockingServiceImpl: AdvancedBlockingService.ServiceType {
     }
 
     func requestUpdateURLFilterProtectionLevel(_ message: URLFilterProtectionLevelUpdate,
-                                               _ promise: @escaping (OptionalError) -> Void) {
+                                               _ promise: sending @escaping (OptionalError) -> Void) {
         Task { @MainActor in
             do {
                 try await self.urlFilterService.setProtectionLevel(message.protectionLevel.toSwift())

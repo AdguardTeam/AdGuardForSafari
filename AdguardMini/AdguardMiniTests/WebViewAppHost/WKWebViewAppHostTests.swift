@@ -18,6 +18,8 @@ private final class TestThemeService: ThemeService, Service, ThemeServiceProtoco
     }
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class WKWebViewAppHostTests: XCTestCase {
     /// Synthetic file URL avoids `Bundle.main.url(...)` fatal path in tests.
     private func makeHost(

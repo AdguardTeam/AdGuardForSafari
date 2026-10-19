@@ -53,3 +53,7 @@ enum ExtensionSafariApiClientErrorCode: Error, CustomStringConvertible, Equatabl
         }
     }
 }
+
+/// `@unchecked Sendable` because the payload arrives from the message bridge
+/// as a `String` or `NSError` and is read-only once the error is constructed.
+extension ExtensionSafariApiClientErrorCode: @unchecked Sendable {}

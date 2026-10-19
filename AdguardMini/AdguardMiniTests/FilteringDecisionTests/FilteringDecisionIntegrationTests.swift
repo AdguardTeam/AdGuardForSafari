@@ -11,17 +11,19 @@ import XCTest
 
 /// Integration tests that verify `FilteringDecision` works correctly with the real
 /// `UrlFilteringCheckerImpl` implementation.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class FilteringDecisionIntegrationTests: XCTestCase {
     private var checker: UrlFilteringCheckerImpl!
 
-    override func setUp() {
-        super.setUp()
+    override func setUp() async throws {
+        try await super.setUp()
         self.checker = UrlFilteringCheckerImpl(urlBuilder: AllowBlockListRuleBuilderImpl())
     }
 
-    override func tearDown() {
+    override func tearDown() async throws {
         self.checker = nil
-        super.tearDown()
+        try await super.tearDown()
     }
 
     // MARK: - resolveEnable integration tests

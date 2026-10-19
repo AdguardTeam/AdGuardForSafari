@@ -16,17 +16,19 @@ import XCTest
 /// intentional because the method is used for **searching** existing rules, not for
 /// generating new ones. If a user explicitly added `@@||com^$important,document`,
 /// the popup toggle must respect it.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class FilteringDecisionTLDTests: XCTestCase {
     private var mockChecker: MockUrlFilteringChecker!
 
-    override func setUp() {
-        super.setUp()
+    override func setUp() async throws {
+        try await super.setUp()
         self.mockChecker = MockUrlFilteringChecker()
     }
 
-    override func tearDown() {
+    override func tearDown() async throws {
         self.mockChecker = nil
-        super.tearDown()
+        try await super.tearDown()
     }
 
     /// Verifies that a TLD-level allowlist rule is treated as a broader parent

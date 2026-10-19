@@ -18,7 +18,10 @@ import AML
 /// is already running: delivery is gated by a monotonic sequence, so a slow
 /// older assembly cannot overwrite a state that was already delivered, while
 /// the newest completed assembly is still always delivered.
-final class URLFilterStatePushScheduler {
+///
+/// `@unchecked Sendable` because every mutable field is guarded by `lock`, and
+/// the task closure touches only that guarded state and immutable callbacks.
+final class URLFilterStatePushScheduler: @unchecked Sendable {
     private let lock = NSLock()
     private let debounceSeconds: TimeInterval
     private let assemble: () async -> URLFilterUIState

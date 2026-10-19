@@ -11,6 +11,8 @@ import XCTest
 import ProtoSchema
 
 /// Verifies `closeChildWindow` tears down host and triggers close callback once.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class ChildWindowCloseCallbackTests: XCTestCase {
     func testCloseChildWindowInvokesOnChildWindowClosed() throws {
         var closedIds: [WindowId] = []

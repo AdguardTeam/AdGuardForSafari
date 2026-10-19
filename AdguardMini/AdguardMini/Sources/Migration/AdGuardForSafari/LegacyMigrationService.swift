@@ -53,7 +53,8 @@ enum LegacyMigrationServiceError: Error {
 
 // MARK: - LegacyMigrationService
 
-protocol LegacyMigrationService {
+/// `Sendable` because the implementation holds only immutable collaborators.
+protocol LegacyMigrationService: Sendable {
     func tryMigrate() async throws -> Bool
 }
 
@@ -61,7 +62,9 @@ protocol LegacyMigrationService {
 
 extension Legacy {
     /// Service for the migration from the legacy AdGuard for Safari app to the new AdGuard Mini for Mac app.
-    final class MigrationServiceImpl {
+    /// `@unchecked Sendable` because every stored property is an immutable
+    /// collaborator.
+    final class MigrationServiceImpl: @unchecked Sendable {
         private static let logPrefix = "[Legacy Migration] "
 
         private let appSettings: UserSettingsService

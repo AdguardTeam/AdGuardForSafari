@@ -11,6 +11,8 @@ import XCTest
 import WebKit
 
 /// Verifies every `WKWebViewAppHost` installs `InterfaceRequestDenier` as `uiDelegate`.
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class WKWebViewAppHostUiDelegateTests: XCTestCase {
     private func makeHost(module: ModuleId) -> WKWebViewAppHost {
         WKWebViewAppHost(

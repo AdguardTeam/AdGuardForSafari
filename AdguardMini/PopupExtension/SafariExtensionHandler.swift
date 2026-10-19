@@ -86,7 +86,43 @@ enum IncomingExtensionMessage: String {
 // MARK: - SafariExtensionHandler
 
 /// Popup extension handler
-final class SafariExtensionHandler: SFSafariExtensionHandler {
+///
+/// `@unchecked Sendable` because the dependencies are assigned once in `init`
+/// on the main thread and only read afterwards; every service is used through
+/// its own isolation — main-actor types, actors, lock-guarded objects, or
+/// stateless helpers.
+final class SafariExtensionHandler: SFSafariExtensionHandler, @unchecked Sendable {
+    // MARK: Dependencies
+
+    /// Main-thread-confined collaborators, resolved once from the main-actor
+    /// container so that `init` can assign them to `let` properties.
+    private struct Dependencies: @unchecked Sendable {
+        let viewController: SFSafariExtensionViewController
+        let safariApi: SafariApiInteractor
+        let popupStore: PopupStore
+        let externalEventsAdapter: ExternalEventsAdapter
+        let sharedSettingsStorage: SharedSettingsStorage
+        let advancedBlockerHandler: AdvancedBlockerHandler
+        let appDiscovery: MainAppDiscovery
+        let statsReporter: BlockingStatsReporter
+        let perTabStatsTracker: PerTabStatsTracker
+        let safariApp: SafariApp
+
+        @MainActor
+        init(container: DIContainer) {
+            self.viewController = container.safariController
+            self.safariApi = container.safariApiInteractor
+            self.popupStore = container.popupStore
+            self.externalEventsAdapter = container.externalEventsAdapter
+            self.sharedSettingsStorage = container.sharedSettingsStorage
+            self.advancedBlockerHandler = container.advancedBlockerHandler
+            self.appDiscovery = container.mainAppDiscovery
+            self.statsReporter = container.blockingStatsReporter
+            self.perTabStatsTracker = container.perTabStatsTracker
+            self.safariApp = container.safariApp
+        }
+    }
+
     private let viewController: SFSafariExtensionViewController
     private let safariApi: SafariApiInteractor
     private let popupStore: PopupStore
@@ -109,22 +145,24 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
 
     // MARK: Init
 
-    @MainActor
+    // Safari instantiates the principal class on the main thread; the container is main-actor isolated.
     override init() {
-        let container = DIContainer.shared
+        let dependencies = MainActor.assumeIsolated {
+            Dependencies(container: DIContainer.shared)
+        }
 
-        self.viewController = container.safariController
-        self.safariApi = container.safariApiInteractor
-        self.popupStore = container.popupStore
-        self.externalEventsAdapter = container.externalEventsAdapter
-        self.sharedSettingsStorage = container.sharedSettingsStorage
-        self.advancedBlockerHandler = container.advancedBlockerHandler
-        self.appDiscovery = container.mainAppDiscovery
-        self.statsReporter = container.blockingStatsReporter
-        self.perTabStatsTracker = container.perTabStatsTracker
+        self.viewController = dependencies.viewController
+        self.safariApi = dependencies.safariApi
+        self.popupStore = dependencies.popupStore
+        self.externalEventsAdapter = dependencies.externalEventsAdapter
+        self.sharedSettingsStorage = dependencies.sharedSettingsStorage
+        self.advancedBlockerHandler = dependencies.advancedBlockerHandler
+        self.appDiscovery = dependencies.appDiscovery
+        self.statsReporter = dependencies.statsReporter
+        self.perTabStatsTracker = dependencies.perTabStatsTracker
+        self.safariApp = dependencies.safariApp
 
-        let safariApp = container.safariApp
-        self.safariApp = safariApp
+        let safariApp: SafariApp = dependencies.safariApp
         self.toolbarThrottler = Throttler(
             baseDelay: Constants.toolbarThrottleBaseDelay,
             maxDelay: Constants.toolbarThrottleMaxDelay,
@@ -142,7 +180,7 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
         // Best-effort teardown: actor `cancel()` is async and `deinit` is synchronous.
         // Cancellation is bridged through a `Task`.
         // Pending trailing updates are intentionally dropped — the badge refreshes on the next wake-up.
-        let throttler = self.toolbarThrottler
+        let throttler: Throttler = self.toolbarThrottler
         Task { await throttler.cancel() }
         LogDebug("\(self) deinited")
     }
@@ -164,12 +202,14 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
         LogDebug("Content blocker \(blockerType) blocked \(urls.count) resource(s)")
 
         let pageHash = page.hashValue
+        // The page is handed to the tracker actor and not used afterwards.
+        nonisolated(unsafe) let trackedPage = page
         Task {
             await self.perTabStatsTracker.trackBlocked(
                 pageHash: pageHash,
                 urls: urls,
                 blockerType: blockerType,
-                page: page
+                page: trackedPage
             )
             await self.perTabStatsTracker.evictStaleEntries()
         }
@@ -196,8 +236,10 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
     // This is required by the signature of the function we're overwriting
     // swiftlint:disable:next discouraged_optional_collection
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String: Any]?) {
-        page.getPropertiesWithCompletionHandler { [messageName, userInfo] properties in
-            LogDebug("The extension received a message \"\(messageName)\" from a script injected into (\(properties?.url?.absoluteString ?? "nil")) with userInfo (\(userInfo ?? [:]))")
+        // `[String: Any]` is not Sendable; the log line captures a String snapshot.
+        let userInfoDescription = "\(userInfo ?? [:])"
+        page.getPropertiesWithCompletionHandler { [messageName, userInfoDescription] properties in
+            LogDebug("The extension received a message \"\(messageName)\" from a script injected into (\(properties?.url?.absoluteString ?? "nil")) with userInfo (\(userInfoDescription))")
         }
 
         let message = IncomingExtensionMessage(rawValue: messageName)
@@ -207,8 +249,10 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
             page.dispatchMessageToScript(withName: OutgoingExtensionMessage.blockElement.rawValue)
         case .ruleResponse:
             LogInfo("Try to add rule to user rules: \(userInfo?["rule"] ?? "nil")")
+            // `[String: Any]` is not Sendable; the copy is only read.
+            nonisolated(unsafe) let ruleInfo = userInfo
             Task {
-                if let newRule = userInfo?["rule"] as? String {
+                if let newRule = ruleInfo?["rule"] as? String {
                     do {
                         try await self.safariApi.addRule(newRule)
                     } catch {
@@ -217,10 +261,15 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
                 }
             }
         case .getAdGuardExtraData:
-            Task { await self.processAdGuardExtra(for: page, userInfo: userInfo ?? [:]) }
+            // `[String: Any]` and the page are not Sendable; the copies are only read.
+            nonisolated(unsafe) let extraInfo = userInfo ?? [:]
+            nonisolated(unsafe) let extraPage = page
+            Task { await self.processAdGuardExtra(for: extraPage, userInfo: extraInfo) }
         case .addFilterSubscription:
+            // `[String: Any]` is not Sendable; the copy is only read.
+            nonisolated(unsafe) let subscribeInfo = userInfo
             Task {
-                if let subscribeUrlString = userInfo?["url"] as? String {
+                if let subscribeUrlString = subscribeInfo?["url"] as? String {
                     do {
                         try await self.appDiscovery.subscribeCustomFilter(subscribeUrlString)
                     } catch {
@@ -240,14 +289,17 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
         in window: SFSafariWindow,
         validationHandler: @escaping ((Bool, String) -> Void)
     ) {
+        // The window and the completion closure are handed to the task once.
+        nonisolated(unsafe) let validationWindow = window
+        nonisolated(unsafe) let validation = validationHandler
         Task { @MainActor in
-            guard let toolbarItem = await window.toolbarItem() else {
-                validationHandler(false, "")
+            guard let toolbarItem = await validationWindow.toolbarItem() else {
+                validation(false, "")
                 return
             }
 
             let tabStats = await self.perTabStatsTracker
-                .getStatsForActiveTab(in: window)
+                .getStatsForActiveTab(in: validationWindow)
 
             let state = self.popupStore.snapshot()
             let badgeText = ToolbarRenderer.render(
@@ -257,19 +309,19 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
                     .showSafariToolbarBadge,
                 into: toolbarItem
             )
-            validationHandler(true, badgeText)
+            validation(true, badgeText)
 
             let token = Store.SafariWindowToken(
-                rawValue: UInt(bitPattern: ObjectIdentifier(window))
+                rawValue: UInt(bitPattern: ObjectIdentifier(validationWindow))
             )
 
             // Only update tab context and dispatch XPC prereqs for the active window.
             // Background-window updates would overwrite the popup domain.
             // This causes flicker when the counter fires in another window.
             let activeWindow = await SFSafariApplication.activeWindow()
-            guard activeWindow == window else { return }
+            guard activeWindow == validationWindow else { return }
 
-            let pageUrl = await window.activeTab()?.activePage()?.properties()?.url
+            let pageUrl = await validationWindow.activeTab()?.activePage()?.properties()?.url
             await self.externalEventsAdapter.refreshTabStats(
                 stats: tabStats,
                 token: token,

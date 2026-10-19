@@ -41,7 +41,10 @@ private final class ContentBlockerServiceLocator {
 
     // MARK: Singleton
 
-    static let shared = ContentBlockerServiceLocator()
+    /// `nonisolated(unsafe)` because the locator is created once and only read
+    /// afterwards. The class stays non-Sendable, so the compiler still rejects
+    /// passing an instance between isolation domains.
+    nonisolated(unsafe) static let shared = ContentBlockerServiceLocator()
 
     // MARK: Init
 

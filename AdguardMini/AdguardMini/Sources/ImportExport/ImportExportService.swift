@@ -27,8 +27,8 @@ fileprivate enum Constants {
 // MARK: - ImportExportService
 
 protocol ImportExportService: AnyObject {
-    func saveFile<T: Encodable>(obj: T, path: String) async throws
-    func loadFile<T: Decodable>(path: String) async -> Result<T, Error>
+    func saveFile<T: Encodable & Sendable>(obj: T, path: String) async throws
+    func loadFile<T: Decodable & Sendable>(path: String) async -> Result<T, Error>
 
     func savePlainFile(obj: String, path: String) async throws
     func loadPlainFile(path: String) async -> Result<String, Error>
@@ -186,12 +186,12 @@ final class ImportExportServiceImpl: ImportExportService {
         }
     }
 
-    func saveFile<T: Encodable>(obj: T, path: String) async throws {
+    func saveFile<T: Encodable & Sendable>(obj: T, path: String) async throws {
         let url = URL(fileURLWithPath: "\(path)")
         try await self.saveFile(obj: obj, url: url)
     }
 
-    func saveFile<T: Encodable>(obj: T, url: URL) async throws {
+    func saveFile<T: Encodable & Sendable>(obj: T, url: URL) async throws {
         let result = await Task {
             let data = try JSONEncoder().encode(obj)
             try data.write(to: url, options: .atomic)
@@ -208,12 +208,12 @@ final class ImportExportServiceImpl: ImportExportService {
         }.value
     }
 
-    func loadFile<T: Decodable>(path: String) async -> Result<T, Error> {
+    func loadFile<T: Decodable & Sendable>(path: String) async -> Result<T, Error> {
         let url = URL(fileURLWithPath: path)
         return await self.loadFile(url: url)
     }
 
-    func loadFile<T: Decodable>(url: URL) async -> Result<T, Error> {
+    func loadFile<T: Decodable & Sendable>(url: URL) async -> Result<T, Error> {
         await Task {
             let result: Result<T, Error>
             do {

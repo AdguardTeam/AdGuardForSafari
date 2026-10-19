@@ -23,7 +23,9 @@ protocol XPCConnectionStorage {
     func reset()
 }
 
-final class XPCConnectionStorageImpl: XPCConnectionStorage {
+/// `@unchecked Sendable` because `connections` is only touched inside
+/// `workQueue.sync` (and from `workQueue.async` cleanup blocks).
+final class XPCConnectionStorageImpl: XPCConnectionStorage, @unchecked Sendable {
     private let workQueue = DispatchQueue(label: "XPCConnectionStorageWorkQueue", autoreleaseFrequency: .workItem)
 
     private var connections = Set<NSXPCConnection>()

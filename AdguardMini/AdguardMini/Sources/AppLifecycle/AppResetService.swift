@@ -107,6 +107,6 @@ actor AppResetServiceImpl: AppResetService {
             LogInfo("User selected to quit app.")
         }
 
-        await self.lifecycle.terminate(restart: shouldRestart)
+        self.lifecycle.terminate(restart: shouldRestart)
     }
 }

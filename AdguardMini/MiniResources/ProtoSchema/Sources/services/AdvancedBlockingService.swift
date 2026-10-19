@@ -16,67 +16,67 @@ public protocol AdvancedBlockingServiceProtocol
 	/// Get AdvancedRules
 	func getAdvancedRules (
 						_ message: EmptyValue,
-						_ promise: @escaping (BoolValue) -> Void) -> Void
+						_ promise: sending @escaping (BoolValue) -> Void) -> Void
 	/// Update AdvancedRules
 	func updateAdvancedRules (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Get AdguardExtra
 	func getAdguardExtra (
 						_ message: EmptyValue,
-						_ promise: @escaping (BoolValue) -> Void) -> Void
+						_ promise: sending @escaping (BoolValue) -> Void) -> Void
 	/// Update AdguardExtra
 	func updateAdguardExtra (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Get MailProtection
 	func getMailProtection (
 						_ message: EmptyValue,
-						_ promise: @escaping (BoolValue) -> Void) -> Void
+						_ promise: sending @escaping (BoolValue) -> Void) -> Void
 	/// Update MailProtection
 	func updateMailProtection (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Get RealTimeFiltersUpdate
 	func getRealTimeFiltersUpdate (
 						_ message: EmptyValue,
-						_ promise: @escaping (BoolValue) -> Void) -> Void
+						_ promise: sending @escaping (BoolValue) -> Void) -> Void
 	/// Update RealTimeFiltersUpdate
 	func updateRealTimeFiltersUpdate (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Get URLFilter state
 	func getURLFilterState (
 						_ message: EmptyValue,
-						_ promise: @escaping (URLFilterState) -> Void) -> Void
+						_ promise: sending @escaping (URLFilterState) -> Void) -> Void
 	/// Set URLFilter enabled state
 	func setURLFilterEnabled (
 						_ message: BoolValue,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Retry a failed URL filter bring-up
 	func retryURLFilter (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Ask for update of URLFilter protection level
 	func requestUpdateURLFilterProtectionLevel (
 						_ message: URLFilterProtectionLevelUpdate,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Reset URLFilter prefilter cache
 	func resetURLFilterCache (
 						_ message: EmptyValue,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Remove URLFilter configuration
 	func removeURLFilter (
 						_ message: EmptyValue,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Get URLFilter seen
 	func getURLFilterSeen (
 						_ message: EmptyValue,
-						_ promise: @escaping (BoolValue) -> Void) -> Void
+						_ promise: sending @escaping (BoolValue) -> Void) -> Void
 	/// Update URLFilterSeen state
 	func updateURLFilterSeen (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -89,7 +89,7 @@ open class AdvancedBlockingService: WebViewBridge
 	public typealias ServiceType = AdvancedBlockingService & Service & AdvancedBlockingServiceProtocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 		case "GetAdvancedRules":
 			do {

@@ -16,63 +16,63 @@ public protocol AccountServiceProtocol
 	/// Return License info
 	func getLicense (
 						_ message: EmptyValue,
-						_ promise: @escaping (LicenseOrError) -> Void) -> Void
+						_ promise: sending @escaping (LicenseOrError) -> Void) -> Void
 	/// Return tray-scoped License info
 	func getTrayLicense (
 						_ message: EmptyValue,
-						_ promise: @escaping (TrayLicenseOrError) -> Void) -> Void
+						_ promise: sending @escaping (TrayLicenseOrError) -> Void) -> Void
 	/// Request to refresh the License
 	func refreshLicense (
 						_ message: EmptyValue,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Return available subscriptions info
 	func getSubscriptionsInfo (
 						_ message: EmptyValue,
-						_ promise: @escaping (AppStoreSubscriptionsMessage) -> Void) -> Void
+						_ promise: sending @escaping (AppStoreSubscriptionsMessage) -> Void) -> Void
 	/// Return trial availability
 	func getTrialAvailableDays (
 						_ message: EmptyValue,
-						_ promise: @escaping (Int32Value) -> Void) -> Void
+						_ promise: sending @escaping (Int32Value) -> Void) -> Void
 	/// Enter activation code
 	func enterActivationCode (
 						_ message: StringValue,
-						_ promise: @escaping (EnterActivationCodeResultMessage) -> Void) -> Void
+						_ promise: sending @escaping (EnterActivationCodeResultMessage) -> Void) -> Void
 	/// Request opening activate page
 	func requestActivate (
 						_ message: EmptyValue,
-						_ promise: @escaping (WebActivateResultMessage) -> Void) -> Void
+						_ promise: sending @escaping (WebActivateResultMessage) -> Void) -> Void
 	/// Request opening bind page
 	func requestBind (
 						_ message: StringValue,
-						_ promise: @escaping (WebActivateResultMessage) -> Void) -> Void
+						_ promise: sending @escaping (WebActivateResultMessage) -> Void) -> Void
 	/// Request opening renew page
 	func requestRenew (
 						_ message: StringValue,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Request log out
 	func requestLogout (
 						_ message: EmptyValue,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Request purchase subscription
 	func requestSubscribe (
 						_ message: SubscriptionMessage,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Request restore purchases
 	func requestRestorePurchases (
 						_ message: EmptyValue,
-						_ promise: @escaping (OptionalError) -> Void) -> Void
+						_ promise: sending @escaping (OptionalError) -> Void) -> Void
 	/// Request opening subscriptions page
 	func requestOpenSubscriptions (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Request opening app store page
 	func requestOpenAppStore (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Request opening app store review page
 	func requestOpenAppStoreReview (
 						_ message: EmptyValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -85,7 +85,7 @@ open class AccountService: WebViewBridge
 	public typealias ServiceType = AccountService & Service & AccountServiceProtocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 		case "GetLicense":
 			do {

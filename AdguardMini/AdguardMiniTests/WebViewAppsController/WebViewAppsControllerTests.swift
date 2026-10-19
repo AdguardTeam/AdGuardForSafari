@@ -17,6 +17,8 @@ private final class TestThemeService: ThemeService, Service, ThemeServiceProtoco
     }
 }
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class WebViewAppsControllerTests: XCTestCase {
     // Shared factory mirroring AppDelegate wiring with test stubs.
     private func makeController() -> WebViewAppsController {

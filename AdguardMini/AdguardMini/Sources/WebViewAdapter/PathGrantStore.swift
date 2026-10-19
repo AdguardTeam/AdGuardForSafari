@@ -10,7 +10,9 @@
 import Foundation
 
 /// Thread-safe bounded store of picker-granted paths.
-final class PathGrantStore {
+///
+/// `@unchecked Sendable` because every access to `granted` is guarded by `lock`.
+final class PathGrantStore: @unchecked Sendable {
     /// Shared instance.
     static let shared = PathGrantStore()
 

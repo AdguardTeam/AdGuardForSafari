@@ -37,10 +37,14 @@ private enum Constants {
 
 // MARK: - ReviewRequester
 
+/// Shows the App Store review prompt.
+///
+/// `@MainActor` because every step touches AppKit: the prompt is presented in
+/// a window's view controller. The class itself is stateless.
+@MainActor
 private final class ReviewRequester {
     static let shared = ReviewRequester()
 
-    @MainActor
     func requestReview() {
         guard let window = NSApplication.shared.windows.first else {
             LogWarn("Review request skipped: no windows")
@@ -52,7 +56,6 @@ private final class ReviewRequester {
         AppStore.requestReview(in: vc)
     }
 
-    @MainActor
     private func ensureContentViewController(for window: NSWindow) -> NSViewController {
         if let existing = window.contentViewController {
             LogDebug("Using existing window.contentViewController: \(type(of: existing)).")
@@ -70,7 +73,9 @@ private final class ReviewRequester {
 
 // MARK: - AppStoreRateUsImpl
 
-final class AppStoreRateUsImpl: AppStoreRateUs {
+/// `@unchecked Sendable` because `debounceTask` is touched only from the
+/// main-actor visibility callback that drives the rate-us request.
+final class AppStoreRateUsImpl: AppStoreRateUs, @unchecked Sendable {
     private let appMetadata: AppMetadata
     private let statisticsService: StatisticsService
     private var debounceTask: Task<Void, Never>?

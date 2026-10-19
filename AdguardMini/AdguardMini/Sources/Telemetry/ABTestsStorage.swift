@@ -44,7 +44,7 @@ extension ABTests {
     /// - Tracks which experiments are active
     /// - Stores user's assigned test options
     /// - Removes outdated experiments when slots change
-    protocol Storage {
+    protocol Storage: Sendable {
         /// Returns experiments that have not been assigned an option yet
         /// - Returns: Array of new experiments awaiting assignment
         func getNewTests() async -> [ActiveExperiment]

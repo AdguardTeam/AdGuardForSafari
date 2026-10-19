@@ -15,7 +15,11 @@ import FLM
 extension FiltersServiceImpl:
     FiltersSupervisorDependent {}
 
-final class FiltersServiceImpl: FiltersService.ServiceType {
+/// Filters service bridge.
+///
+/// `@unchecked Sendable` because the injected services are assigned once
+/// during DI setup and only read afterwards.
+final class FiltersServiceImpl: FiltersService.ServiceType, @unchecked Sendable {
     var filtersSupervisor: FiltersSupervisor!
 
     override init() {
@@ -23,7 +27,7 @@ final class FiltersServiceImpl: FiltersService.ServiceType {
         self.setupServices()
     }
 
-    func updateFilters(_ message: FiltersUpdate, _ promise: @escaping (OptionalError) -> Void) {
+    func updateFilters(_ message: FiltersUpdate, _ promise: sending @escaping (OptionalError) -> Void) {
         LogInfo("DIAG: updateFilters START count=\(message.ids.count) enabled=\(message.isEnabled)")
         Task {
             LogInfo("DIAG: updateFilters before setFilters")
@@ -33,7 +37,7 @@ final class FiltersServiceImpl: FiltersService.ServiceType {
         }
     }
 
-    func getFiltersMetadata(_ message: EmptyValue, _ promise: @escaping (Filters) -> Void) {
+    func getFiltersMetadata(_ message: EmptyValue, _ promise: sending @escaping (Filters) -> Void) {
         Task {
             let filters = await self.filtersSupervisor.getStoredFilterMetadataWithRulesCount()
             var customFilters: [Filter] = []
@@ -59,14 +63,14 @@ final class FiltersServiceImpl: FiltersService.ServiceType {
         }
     }
 
-    func updateLanguageSpecific(_ message: BoolValue, _ promise: @escaping (EmptyValue) -> Void) {
+    func updateLanguageSpecific(_ message: BoolValue, _ promise: sending @escaping (EmptyValue) -> Void) {
         Task {
             await self.filtersSupervisor.switchLanguageSpecific(message.value)
             promise(EmptyValue())
         }
     }
 
-    func getEnabledFiltersIds(_ message: EmptyValue, _ promise: @escaping (FiltersEnabledIds) -> Void) {
+    func getEnabledFiltersIds(_ message: EmptyValue, _ promise: sending @escaping (FiltersEnabledIds) -> Void) {
         Task {
             var ids = await self.filtersSupervisor.getEnabledFilterIds()
             var data = FiltersEnabledIds()
@@ -78,9 +82,10 @@ final class FiltersServiceImpl: FiltersService.ServiceType {
         }
     }
 
-    func checkCustomFilter(_ message: Path, _ promise: @escaping (FilterOrError) -> Void) {
+    func checkCustomFilter(_ message: Path, _ promise: sending @escaping (FilterOrError) -> Void) {
         enum Internal {
-            static let dateFormatter = ISO8601DateFormatter()
+            // Write-once shared formatter, read-only after construction.
+            nonisolated(unsafe) static let dateFormatter = ISO8601DateFormatter()
         }
 
         Task {
@@ -125,7 +130,7 @@ final class FiltersServiceImpl: FiltersService.ServiceType {
         }
     }
 
-    func confirmAddCustomFilter(_ message: CustomFilterToAdd, _ promise: @escaping (OptionalError) -> Void) {
+    func confirmAddCustomFilter(_ message: CustomFilterToAdd, _ promise: sending @escaping (OptionalError) -> Void) {
         Task {
             do {
                 try await self.filtersSupervisor.installCustomFilter(
@@ -143,7 +148,7 @@ final class FiltersServiceImpl: FiltersService.ServiceType {
         }
     }
 
-    func deleteCustomFilters(_ message: CustomFiltersToDelete, _ promise: @escaping (OptionalError) -> Void) {
+    func deleteCustomFilters(_ message: CustomFiltersToDelete, _ promise: sending @escaping (OptionalError) -> Void) {
         Task {
             do {
                 try await self.filtersSupervisor.removeCustomFilters(message.filtersIds.map(Int.init))
@@ -156,14 +161,17 @@ final class FiltersServiceImpl: FiltersService.ServiceType {
         }
     }
 
-    func getFiltersIndex(_ message: EmptyValue, _ promise: @escaping (ProtoSchema.FiltersIndex) -> Void) {
+    func getFiltersIndex(_ message: EmptyValue, _ promise: sending @escaping (ProtoSchema.FiltersIndex) -> Void) {
         Task {
             let index = await self.filtersSupervisor.getFiltersIndex()
             promise(index.toProto())
         }
     }
 
-    func updateCustomFilter(_ message: CustomFilterUpdateRequest, _ promise: @escaping (OptionalError) -> Void) {
+    func updateCustomFilter(
+        _ message: CustomFilterUpdateRequest,
+        _ promise: sending @escaping (OptionalError) -> Void
+    ) {
         Task {
             await self.filtersSupervisor.updateCustomFilterMetadata(
                 Int(message.filterID),
@@ -180,7 +188,7 @@ final class FiltersServiceImpl: FiltersService.ServiceType {
     }
 
     func getFiltersGroupedByExtensions(_ message: EmptyValue,
-                                       _ promise: @escaping (FiltersGroupedByExtensions) -> Void) {
+                                       _ promise: sending @escaping (FiltersGroupedByExtensions) -> Void) {
         Task {
             var filters = await self.filtersSupervisor.getActiveRulesInfo()
             // Safari extension do not use language specific filters when languageSpecific option is disabled by user

@@ -113,6 +113,8 @@ private enum Fixtures {
 
 // MARK: - Tests
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class ThrottlerTests: XCTestCase {
     /// Spins until the throttler has returned to its idle state. Deterministic:
     /// the burst loop flips `isWindowOpen` to `false` only after it has reset

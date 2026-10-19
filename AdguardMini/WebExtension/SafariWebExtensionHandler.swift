@@ -25,7 +25,9 @@ private enum BrowserAction {
 
 // MARK: - SafariWebExtensionHandler
 
-final class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
+/// `@unchecked Sendable` because all stored properties are `let` values
+/// assigned once in `init`; the handler only reads them.
+final class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling, @unchecked Sendable {
     private let webExtension: WebExtension?
     private let sharedSettingsStorage: SharedSettingsStorage
     private let safariApi: SafariApiInteractor
@@ -50,6 +52,15 @@ final class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
             return
         }
 
+        // `nonisolated(unsafe)` because the request task owns the context and the message.
+        nonisolated(unsafe) let requestContext = context
+        nonisolated(unsafe) let requestMessage = message
+        self.respond(to: requestContext, message: requestMessage, action: action)
+    }
+
+    /// Hands the request context and message to the task with exclusive
+    /// ownership, so the task may use them off the request queue.
+    private func respond(to context: sending NSExtensionContext, message: sending [String: Any], action: String) {
         Task {
             let returningItems: [Any] =
             if action == BrowserAction.advancedBlockingData {

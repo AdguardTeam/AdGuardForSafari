@@ -10,6 +10,8 @@
 import XCTest
 import AppKit
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class EditMenuBuilderTests: XCTestCase {
     private func makeTitles() -> EditMenuTitles {
         EditMenuTitles(

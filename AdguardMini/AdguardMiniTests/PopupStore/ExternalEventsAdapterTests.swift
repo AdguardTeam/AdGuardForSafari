@@ -57,6 +57,8 @@ private final class SpyEffectRunner: EffectRunning, @unchecked Sendable {
 
 // MARK: - ExternalEventsAdapterTests
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class ExternalEventsAdapterTests: XCTestCase {
     // MARK: NSWorkspace stream -> mainAppRunningChanged
 

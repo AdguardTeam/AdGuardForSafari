@@ -8,13 +8,13 @@
 //
 
 import Foundation
-import AML
+@preconcurrency import AML
 
 extension Store {
     /// Side-effects returned by the reducer alongside a new state.
     /// Executed by `EffectRunner`.
     /// Pure value-typed descriptions; no hidden state.
-    enum Effect: Equatable {
+    enum Effect: Equatable, Sendable {
         case setProtectionStatus(enable: Bool)
         case setFilteringStatusForUrl(String, enable: Bool)
         case refreshAppState(after: EBATimestamp? = nil)

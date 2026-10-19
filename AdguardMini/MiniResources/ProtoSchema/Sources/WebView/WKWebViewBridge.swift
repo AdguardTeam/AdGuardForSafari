@@ -31,7 +31,7 @@ public protocol WKWebViewServiceHandler: AnyObject {
     /// Cannot carry an error, so a richer envelope would require reworking
     /// `@adg/proto-generator`'s Swift templates); those paths are
     /// Unreachable from a correct bundle.
-    func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void)
+    func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void)
 }
 
 /** Test seam for `WKWebView.callAsyncJavaScript`. */
@@ -58,18 +58,24 @@ extension ScriptMessageHandling {
 }
 
 // `callAsyncJavaScript` requires plist-compatible arguments; bytes use base64.
-extension WKWebView: WebViewAsyncInvoking {
+// The `@preconcurrency` conformance keeps the seam nonisolated; off-main calls trap.
+extension WKWebView: @preconcurrency WebViewAsyncInvoking {
     public func invoke(
         body: String,
         arguments: [String: Any],
         completion: ((Result<Any, Error>) -> Void)?
     ) {
+        // `nonisolated(unsafe)` because `callAsyncJavaScript` requires a `@MainActor @Sendable` handler.
+        nonisolated(unsafe) let callback = completion
+        let handler: @MainActor @Sendable (Result<Any, Error>) -> Void = { result in
+            callback?(result)
+        }
         callAsyncJavaScript(
             body,
             arguments: arguments,
             in: nil,
             in: .page,
-            completionHandler: completion
+            completionHandler: handler
         )
     }
 }
@@ -77,12 +83,17 @@ extension WKWebView: WebViewAsyncInvoking {
 /// `WKScriptMessage.name` and `.body` are read-only stored properties, which
 /// satisfy the read-only protocol requirements. `isFromMainFrame` reports
 /// the real `WKFrameInfo.isMainFrame` so the rpc channel rejects subframes.
-extension WKScriptMessage: ScriptMessageHandling {
+/// The `@preconcurrency` conformance keeps the seam nonisolated.
+/// Message handlers are delivered on the main thread, so the reads are safe.
+extension WKScriptMessage: @preconcurrency ScriptMessageHandling {
     public var isFromMainFrame: Bool { frameInfo.isMainFrame }
 }
 
 /** Bidirectional RPC channel between Swift and a WKWebView. */
-public final class WKWebViewBridge: NSObject, WKScriptMessageHandler {
+/// `@unchecked Sendable` because the bridge is shared across isolation domains.
+/// JS invocations hop to the main thread internally.
+/// The push gate is lock-guarded, and registries are written once at setup.
+public final class WKWebViewBridge: NSObject, @unchecked Sendable {
     private enum Constants {
         /// Message name in `window.webkit.messageHandlers` the JS side posts to.
         static let rpcMessageName = "rpc"
@@ -260,7 +271,8 @@ public final class WKWebViewBridge: NSObject, WKScriptMessageHandler {
         methodForLogging method: String
     ) {
         let start = Date()
-        var settled = false
+        // `nonisolated(unsafe)` because the flag is only touched under `lock`.
+        nonisolated(unsafe) var settled = false
         let lock = NSLock()
 
         // Timer-first path.
@@ -297,30 +309,18 @@ public final class WKWebViewBridge: NSObject, WKScriptMessageHandler {
             }
         }
 
-        if Thread.isMainThread {
-            evaluate()
-        } else {
-            DispatchQueue.main.async { evaluate() }
-        }
+        self.onMainThread(evaluate)
     }
 
-    // MARK: - WKScriptMessageHandler
-
-    public func userContentController(
-        _ userContentController: WKUserContentController,
-        didReceive message: WKScriptMessage
-    ) {
-        // The rpc channel is privileged (arbitrary Swift service methods), so
-        // It must only be triggered by the module page itself, not by any
-        // Subframe whose content is not under our control. Defense-in-depth
-        // Behind the CSP `frame-src 'none'` policy; `handle(message:)` also
-        // Re-checks via `isFromMainFrame` so the test seam stays honest.
-        guard message.frameInfo.isMainFrame else {
-            BridgeLog.error("WKWebViewBridge: ignoring rpc from non-main frame")
+    /// Runs `work` on the main thread, hopping when called from elsewhere.
+    private func onMainThread(_ work: @escaping () -> Void) {
+        if Thread.isMainThread {
+            work()
             return
         }
-        // Adapt the framework type to the test-seam protocol and delegate.
-        handle(message: message)
+        // `nonisolated(unsafe)` because the job only reads plist values. The JS call itself runs on the main thread.
+        nonisolated(unsafe) let job = work
+        DispatchQueue.main.async { job() }
     }
 
     /** Test seam for handling script messages in unit tests. */
@@ -540,7 +540,7 @@ public final class WKWebViewBridge: NSObject, WKScriptMessageHandler {
         body: String,
         arguments: [String: Any]
     ) {
-        let work = { [weak self] in
+        let work: () -> Void = { [weak self] in
             self?.webView.invoke(body: body, arguments: arguments) { result in
                 if case .failure(let error) = result {
                     BridgeLog.error(
@@ -549,10 +549,26 @@ public final class WKWebViewBridge: NSObject, WKScriptMessageHandler {
                 }
             }
         }
-        if Thread.isMainThread {
-            work()
-        } else {
-            DispatchQueue.main.async { work() }
+        self.onMainThread(work)
+    }
+}
+
+// MARK: - WKScriptMessageHandler
+
+extension WKWebViewBridge: WKScriptMessageHandler {
+    /// Handles an rpc message posted by the page.
+    /// `@MainActor` because WebKit delivers script messages on the main thread.
+    @MainActor
+    public func userContentController(
+        _ userContentController: WKUserContentController,
+        didReceive message: WKScriptMessage
+    ) {
+        // The rpc channel is privileged, so only the module's main frame may trigger it.
+        guard message.frameInfo.isMainFrame else {
+            BridgeLog.error("WKWebViewBridge: ignoring rpc from non-main frame")
+            return
         }
+        // Adapt the framework type to the test-seam protocol and delegate.
+        handle(message: message)
     }
 }

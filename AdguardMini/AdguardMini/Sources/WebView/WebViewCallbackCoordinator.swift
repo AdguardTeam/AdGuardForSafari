@@ -13,7 +13,9 @@ import FLM
 import ProtoSchema
 
 /// Routes native EventBus notifications to WKWebView callback services.
-final class WebViewCallbackCoordinator {
+/// `@unchecked Sendable` because the injected services are assigned once
+/// during DI setup and only read afterwards.
+final class WebViewCallbackCoordinator: @unchecked Sendable {
     private let eventBus: EventBus
     private let tray: TrayCallbackService
     private let settings: SettingsCallbackService

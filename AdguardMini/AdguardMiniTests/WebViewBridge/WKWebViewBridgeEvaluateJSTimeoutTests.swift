@@ -10,6 +10,8 @@
 import XCTest
 import ProtoSchema  // Bridge + protocol types
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class WKWebViewBridgeEvaluateJSTimeoutTests: XCTestCase {
     /// `WebViewAsyncInvoking` mock that never calls completion.
     private final class HangingWebView: WebViewAsyncInvoking {

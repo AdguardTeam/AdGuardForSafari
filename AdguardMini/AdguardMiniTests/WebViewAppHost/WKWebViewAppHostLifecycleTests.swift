@@ -12,6 +12,8 @@ import WebKit
 import AppKit
 import ProtoSchema
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class WKWebViewAppHostLifecycleTests: XCTestCase {
     private func makeHost() -> WKWebViewAppHost {
         let host = WKWebViewAppHost(
@@ -115,20 +117,22 @@ final class WKWebViewAppHostLifecycleTests: XCTestCase {
         // Deterministic signal that teardown really closed the window rather
         // Than only ordering it out. Window deallocation is not usable here:
         // AppKit and WebKit both hold autoreleased references past the call.
-        var didClose = false
+        /// `@unchecked Sendable` because the test observes one synchronous close.
+        final class CloseFlag: @unchecked Sendable { var value = false }
+        let didClose = CloseFlag()
         let observer = NotificationCenter.default.addObserver(
             forName: NSWindow.willCloseNotification,
             object: window,
             queue: nil
         ) { _ in
-            didClose = true
+            didClose.value = true
         }
         defer { NotificationCenter.default.removeObserver(observer) }
 
         host.teardown()
 
         XCTAssertEqual(host.state, .destroyed)
-        XCTAssertTrue(didClose, "teardown closes the window, it does not merely order it out")
+        XCTAssertTrue(didClose.value, "teardown closes the window, it does not merely order it out")
         XCTAssertFalse(window.isVisible)
         XCTAssertNil(host.webView.superview, "the web view leaves the view hierarchy")
         XCTAssertNil(window.delegate, "the window delegate is detached before the close")

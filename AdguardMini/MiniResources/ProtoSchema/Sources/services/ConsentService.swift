@@ -16,11 +16,11 @@ public protocol ConsentServiceProtocol
 	/// Update allow telemetry
 	func updateAllowTelemetry (
 						_ message: BoolValue,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Update consent agreement
 	func updateConsent (
 						_ message: UserConsent,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -33,7 +33,7 @@ open class ConsentService: WebViewBridge
 	public typealias ServiceType = ConsentService & Service & ConsentServiceProtocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 		case "UpdateAllowTelemetry":
 			do {

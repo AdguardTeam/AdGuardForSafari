@@ -95,7 +95,8 @@ enum UserDefaultsBuilder {
 
             // MARK: - UserSettings
 
-            final class UserSettings {
+            // `@unchecked Sendable` because every value lives in thread-safe `UserDefaults`.
+            final class UserSettings: @unchecked Sendable {
             \(userDefaultsVars)
             }
             """

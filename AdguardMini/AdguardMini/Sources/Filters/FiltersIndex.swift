@@ -92,7 +92,7 @@ enum AdGuardAnnoyancesFilterId {
 
 // MARK: - Filters index for safari protection switchers
 
-protocol FiltersIndex {
+protocol FiltersIndex: Sendable {
     var unblockSearchAdsFilterId: Int { get }
     var cookieNoticeFilterId: Int { get }
     var popUpsFilterId: Int { get }
@@ -110,7 +110,9 @@ protocol FiltersIndex {
 
 // MARK: - Implementation for FiltersIndex
 
-final class FiltersIndexImpl: FiltersIndex {
+/// `Sendable` because every stored property is a `let` set in `init`, so the
+/// index may be shared once built.
+final class FiltersIndexImpl: FiltersIndex, Sendable {
     /// Id of filter to unblock search ads.
     let unblockSearchAdsFilterId: Int = AdGuardAdditionalFilterId.unblockSearchAdsFilterId
 

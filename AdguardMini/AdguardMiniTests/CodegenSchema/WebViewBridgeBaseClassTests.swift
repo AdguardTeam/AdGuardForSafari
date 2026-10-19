@@ -8,13 +8,16 @@
 //
 
 import XCTest
-import ProtoSchema  // Public surface; no @testable import per AGENTS.md  III.2
+// `@preconcurrency` because the package builds in Swift 5 mode.
+@preconcurrency import ProtoSchema  // Public surface; no @testable import per AGENTS.md  III.2
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class WebViewBridgeBaseClassTests: XCTestCase {
     /// `WebViewBridge` should conform to `WKWebViewServiceHandler`.
     func testWebViewBridge_ConformsToWKWebViewServiceHandler() {
         let service = WebViewBridge()
-        XCTAssertTrue(service is WKWebViewServiceHandler)
+        XCTAssertNotNil(service as? WKWebViewServiceHandler)
     }
 
     /// `WebViewCallbackBridge` should expose attach and bridge storage.

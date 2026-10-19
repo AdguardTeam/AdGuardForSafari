@@ -47,7 +47,7 @@ final class SupportServiceImpl: SupportService {
             applicationId: await self.productInfo.applicationId,
             version: BuildConfig.AG_VERSION_TITLE,
             email: email,
-            language: Locale.current.languageCode ?? "en",
+            language: Locale.current.language.languageCode?.identifier ?? "en",
             subject: subject,
             description: description,
             attachments: attachments

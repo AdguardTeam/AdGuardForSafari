@@ -16,15 +16,15 @@ public protocol TraySettingsServiceProtocol
 	/// Get tray-specific settings
 	func getTraySettings (
 						_ message: EmptyValue,
-						_ promise: @escaping (GlobalSettings) -> Void) -> Void
+						_ promise: sending @escaping (GlobalSettings) -> Void) -> Void
 	/// Update tray-specific settings
 	func updateTraySettings (
 						_ message: GlobalSettings,
-						_ promise: @escaping (EmptyValue) -> Void) -> Void
+						_ promise: sending @escaping (EmptyValue) -> Void) -> Void
 	/// Get blocking statistics
 	func getStatistics (
 						_ message: StatisticsRequest,
-						_ promise: @escaping (StatisticsResponse) -> Void) -> Void
+						_ promise: sending @escaping (StatisticsResponse) -> Void) -> Void
 }
 
 // MARK: Protobuf Bridge definition
@@ -37,7 +37,7 @@ open class TraySettingsService: WebViewBridge
 	public typealias ServiceType = TraySettingsService & Service & TraySettingsServiceProtocol
 
 	/// WKWebView dispatch entry.
-	public override func handleRequest(method: String, bytes: Data, promise: @escaping (Data) -> Void) {
+	public override func handleRequest(method: String, bytes: Data, promise: sending @escaping (Data) -> Void) {
 		switch method {
 		case "GetTraySettings":
 			do {

@@ -60,8 +60,13 @@ private enum IdleBlocker: CustomStringConvertible {
 /// All state here is main-thread-only. Every caller already funnels through
 /// `Task { @MainActor in … }`, an AppKit action or an already-`@MainActor`
 /// Context; the reaper hops to the main actor before touching anything.
+///
+/// `@MainActor` states that contract: the controller reads and writes
+/// `NSWindow` state directly.
+@MainActor
 final class WebViewAppsController: ChildWindowControlling {
-    private let hostFactory: (ModuleId) -> WKWebViewAppHost
+    /// `@MainActor` because the factory builds a main-actor host.
+    private let hostFactory: @MainActor (ModuleId) -> WKWebViewAppHost
     private var hosts: [ModuleId: WKWebViewAppHost] = [:]
 
     /// How long a module may stay invisible before it is reaped. Injectable
@@ -79,7 +84,10 @@ final class WebViewAppsController: ChildWindowControlling {
     private var showIntents: [ModuleId: Int] = [:]
 
     /// Called after child window teardown (for close callback propagation).
-    private let onChildWindowClosed: ((WindowId) -> Void)?
+    ///
+    /// `nonisolated(unsafe)` because it is written once by the nonisolated
+    /// initializer and only read afterwards.
+    nonisolated(unsafe) private let onChildWindowClosed: ((WindowId) -> Void)?
 
     /// Parent-to-child index enforcing one child window per parent.
     private var parentChildIndex: [ModuleId: WindowId] = [:]
@@ -88,8 +96,11 @@ final class WebViewAppsController: ChildWindowControlling {
     private var childWindows: [WindowId: WKWebViewAppHost] = [:]
 
     /// Creates controller with host factory and optional close callback.
-    init(
-        hostFactory: @escaping (ModuleId) -> WKWebViewAppHost,
+    ///
+    /// `nonisolated` because the initializer only stores the injected values;
+    /// callers build the controller before any main-actor work starts.
+    nonisolated init(
+        hostFactory: @escaping @MainActor (ModuleId) -> WKWebViewAppHost,
         onChildWindowClosed: ((WindowId) -> Void)? = nil,
         idleTimeout: TimeInterval = Constants.idleTimeout
     ) {

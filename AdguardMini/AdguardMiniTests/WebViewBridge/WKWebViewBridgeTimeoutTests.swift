@@ -10,6 +10,8 @@
 import XCTest
 import ProtoSchema  // Bridge + protocol types
 
+/// `@MainActor` because the code under test is main-actor isolated.
+@MainActor
 final class WKWebViewBridgeTimeoutTests: XCTestCase {
     /// A `WebViewAsyncInvoking` mock that NEVER invokes the completion
     /// handler. Lets `DispatchQueue.main.asyncAfter` run the timer-fire
