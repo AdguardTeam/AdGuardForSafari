@@ -200,7 +200,10 @@ adguard-mini/
   must include `AdguardMiniTests`; if `GetTestList` returns 0 tests, fall back
   to the terminal method.
 - **Fallback (terminal)**:
-  `xcodebuild test -project AdguardMini/AdguardMini.xcodeproj -scheme AdguardMini`
+  `xcodebuild test -project AdguardMini/AdguardMini.xcodeproj
+  -scheme AdguardMiniTests`
+  The `AdguardMiniTests` scheme is the one whose test action declares the
+  `AdguardMiniTests` testable; the `AdguardMini` scheme has no testables.
 - **TypeScript (node:test)**: `yarn test:node` runs the TypeScript test
   suite (Node's built-in `node:test` runner — not Jest). Set `RUN_BUILD=1`
   (`RUN_BUILD=1 yarn test:node`) to also run the slow integration tests that
@@ -453,7 +456,8 @@ Blocker JSON consumed by the extension targets.
 3. **Protobuf schema sync**: Swift and TypeScript communicate via Protobuf.
    Schema definitions live in `AdguardMini/ui/schema/`. Generated Swift
    code goes to `AdguardMini/MiniResources/ProtoSchema/Sources/`, generated
-   TypeScript stays in the schema directory.
+   TypeScript goes to `AdguardMini/ui/modules/common/apis/` (`types/`,
+   `requests/` and `callbacks/`).
 
    **Rationale**: Ensures type-safe communication between Swift platform layer
    and TypeScript UI layer.

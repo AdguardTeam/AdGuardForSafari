@@ -22,7 +22,7 @@ struct URLFilterUIState: Equatable {
     var status: URLFilterUIStatus
     /// Selected protection level.
     var protectionLevel: URLFilterProtectionLevel
-    /// Whether the settings card is still marked as new.
+    /// Whether a System-wide Protection configuration is installed.
     var isInstalled: Bool
     /// Whether the user's persisted choice is to keep the filter enabled.
     var userIntentEnabled: Bool

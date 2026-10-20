@@ -15,8 +15,10 @@ import AML
 private final class FakeURLFilterService: URLFilterService {
     var removeConfigurationError: Error?
     var removeConfigurationCalls = 0
+    var isFilterInstalled = false
 
     func start() async {}
+    func refreshInstalledState() async {}
     func loadConfiguration() async throws -> URLFilterConfiguration? { nil }
     func removeConfiguration() async throws {
         self.removeConfigurationCalls += 1
@@ -129,7 +131,6 @@ private func makeResetService(
     let assembler = URLFilterStateAssembler(
         urlFilterService: urlFilterService,
         protectionLevelProvider: { .essential },
-        isNewProvider: { false },
         bloomMetadataProvider: { nil },
         userIntentProvider: { keychainStorage.urlFilterEnabled },
         iCloudDomainBlockageChecker: FakeICloudDomainBlockageChecker()

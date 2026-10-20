@@ -128,6 +128,12 @@ final class SettingsServiceImpl: SettingsService.ServiceType {
         promise(EmptyValue())
     }
 
+    func updateExperimentalSystemWideProtectionEnabled(_ message: BoolValue,
+                                                       _ promise: @escaping (EmptyValue) -> Void) {
+        self.userSettingsService.experimentalSystemWideProtectionEnabled = message.value
+        promise(EmptyValue())
+    }
+
     func getHealthCheckDismissedCards(_ message: EmptyValue,
                                       _ promise: @escaping (StringValueArray) -> Void) {
         var response = StringValueArray()
@@ -156,24 +162,10 @@ final class SettingsServiceImpl: SettingsService.ServiceType {
 
     func getSettings(_ message: EmptyValue,
                      _ promise: @escaping (Settings) -> Void) {
-        let timeSinceLastFiltersUpdate = max(
-            0,
-            Date.now.timeIntervalSince(self.userSettingsService.lastFiltersUpdateTime)
-        )
-        var settings = self.userSettingsService.settings.toProto(
-            userConsent: self.userSettingsService.userConsent,
-            releaseVariant: ProductInfo.releaseVariant,
-            language: Locales.navigatorLang,
-            allowTelemetry: self.userSettingsService.allowTelemetry,
-            lastUpdateMoreSevenDays: timeSinceLastFiltersUpdate > Constants.noUpdatesThreshold,
-            loginItemEnabled: !self.healthCheckAttentionProvider.hasLoginItemDisabled()
-        )
-
-        settings.non501User = Constants.isNon501User
-        settings.macos25OrLower = self.systemInfoManager.isMacOS25OrLower
-        settings.protectionEnabled = self.protectionService.isProtectionEnabled
-        settings.reportProblemLabelShown = self.userSettingsService.reportProblemLabelShown
-        promise(settings)
+        Task { @MainActor in
+            await self.userSettingsService.refreshExperimentalSystemWideProtectionState()
+            promise(self.makeSettings(from: self.userSettingsService.settings))
+        }
     }
 
     func exportSettings(_ message: Path, _ promise: @escaping (OptionalError) -> Void) {
@@ -228,24 +220,31 @@ final class SettingsServiceImpl: SettingsService.ServiceType {
             await MainActor.run { self.webViewAppsController.hide(.settings) }
             _ = await self.appResetService.resetApp(request: false)
             let newSettings = self.userSettingsService.settings
-            // Compute the stale-filters flag the same way `getSettings` does:
-            // After a reset `lastFiltersUpdateTime` reverts to its distant-past
-            // Default, so hardcoding `false` here would contradict it.
-            let timeSinceLastFiltersUpdate = max(
-                0,
-                Date.now.timeIntervalSince(self.userSettingsService.lastFiltersUpdateTime)
-            )
-            promise(
-                newSettings.toProto(
-                    userConsent: self.userSettingsService.userConsent,
-                    releaseVariant: ProductInfo.releaseVariant,
-                    language: Locales.navigatorLang,
-                    allowTelemetry: self.userSettingsService.allowTelemetry,
-                    lastUpdateMoreSevenDays: timeSinceLastFiltersUpdate > Constants.noUpdatesThreshold,
-                    loginItemEnabled: !self.healthCheckAttentionProvider.hasLoginItemDisabled()
-                )
-            )
+            promise(self.makeSettings(from: newSettings))
         }
+    }
+
+    /// Builds the settings payload for the initial read and the post-reset refresh.
+    private func makeSettings(from settings: SettingsDTO) -> Settings {
+        let timeSinceLastFiltersUpdate = max(
+            0,
+            Date.now.timeIntervalSince(self.userSettingsService.lastFiltersUpdateTime)
+        )
+        return settings.toProto(
+            userConsent: self.userSettingsService.userConsent,
+            releaseVariant: ProductInfo.releaseVariant,
+            language: Locales.navigatorLang,
+            allowTelemetry: self.userSettingsService.allowTelemetry,
+            lastUpdateMoreSevenDays: timeSinceLastFiltersUpdate > Constants.noUpdatesThreshold,
+            loginItemEnabled: !self.healthCheckAttentionProvider.hasLoginItemDisabled(),
+            non501User: Constants.isNon501User,
+            macos25OrLower: self.systemInfoManager.isMacOS25OrLower,
+            reportProblemLabelShown: self.userSettingsService.reportProblemLabelShown,
+            protectionEnabled: self.protectionService.isProtectionEnabled,
+            experimentalSystemWideProtectionEnabled:
+                self.userSettingsService.experimentalSystemWideProtectionEnabled,
+            isMacos272: self.systemInfoManager.isMacOS272
+        )
     }
 
     func exportLogs(_ message: Path, _ promise: @escaping (OptionalError) -> Void) {

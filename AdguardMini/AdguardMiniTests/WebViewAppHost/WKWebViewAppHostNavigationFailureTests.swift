@@ -11,6 +11,8 @@ import XCTest
 import ProtoSchema
 
 /// Recording test double for `WKWebViewFailurePresenting`.
+/// Main-actor isolated like the live presenter, so concurrently routed calls cannot race the recorded arrays.
+@MainActor
 private final class RecordingFailurePresenter: WKWebViewFailurePresenting {
     struct LoadFailureCall {
         let module: String
