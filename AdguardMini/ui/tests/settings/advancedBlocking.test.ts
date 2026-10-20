@@ -144,6 +144,20 @@ function makeRunningState(): URLFilterState {
 }
 
 /**
+ * Builds the state the platform reports for an installed configuration.
+ */
+function makeInstalledState(): URLFilterState {
+    return new URLFilterState({
+        enabled: true,
+        protectionLevel: URLFilterProtectionLevel.essential,
+        status: URLFilterStatus.running,
+        isInstalled: true,
+        userIntentEnabled: true,
+        info: new URLFilterInfo({}),
+    });
+}
+
+/**
  * Drops the shown notification the way a foreign one does: through
  * `closeOthers`, which clears the queue without calling `onClose`.
  *
@@ -735,6 +749,45 @@ test('reports a repeated filter removal failure once the snack closed', async (t
     assert.equal(queue.queueLength, 1);
 });
 
+test('removeURLFilterIfInstalled removes an installed configuration', async (t) => {
+    t.mock.timers.enable();
+    const calls = installAdvancedBlockingApi({ pulledState: makeInstalledState() });
+    const advancedBlocking = new AdvancedBlocking(new NotificationsQueue(), () => {});
+
+    const removed = await advancedBlocking.removeURLFilterIfInstalled();
+
+    assert.equal(removed, true);
+    assert.equal(
+        calls.filter((request) => (request as { FQN: string }).FQN === 'AdvancedBlockingService.RemoveURLFilter').length,
+        1,
+    );
+});
+
+test('removeURLFilterIfInstalled skips removal when no configuration is installed', async () => {
+    const calls = installAdvancedBlockingApi();
+    const advancedBlocking = new AdvancedBlocking(new NotificationsQueue(), () => {});
+
+    const removed = await advancedBlocking.removeURLFilterIfInstalled();
+
+    assert.equal(removed, true);
+    assert.equal(
+        calls.some((request) => (request as { FQN: string }).FQN === 'AdvancedBlockingService.RemoveURLFilter'),
+        false,
+    );
+});
+
+test('removeURLFilterIfInstalled reports a failed removal', async (t) => {
+    t.mock.timers.enable();
+    installAdvancedBlockingApi({ pulledState: makeInstalledState(), removalFails: true });
+    const queue = new NotificationsQueue();
+    const advancedBlocking = new AdvancedBlocking(queue, () => {});
+
+    const removed = await advancedBlocking.removeURLFilterIfInstalled();
+
+    assert.equal(removed, false);
+    assert.equal(queue.queueLength, 1);
+});
+
 /*
  * iCloud failure: the Safari Protection page shows its dedicated card for
  * this state, and the failure is also reported as a snack.
@@ -761,6 +814,29 @@ test('reports the pull\'s DNS failure and marks System-wide Protection unavailab
     await advancedBlocking.getURLFilterState();
 
     assert.equal(advancedBlocking.isSystemWideProtectionUnavailable, true);
+    assert.equal(queue.queueLength, 1);
+});
+
+test('does not report a DNS failure when the experimental flag hides System-wide Protection', async (t) => {
+    t.mock.timers.enable();
+    installAdvancedBlockingApi({ pulledState: makeDNSFailureState() });
+    const queue = new NotificationsQueue();
+    const advancedBlocking = new AdvancedBlocking(queue, () => {}, () => false);
+
+    await advancedBlocking.getURLFilterState();
+
+    assert.equal(advancedBlocking.isSystemWideProtectionUnavailable, true);
+    assert.equal(queue.queueLength, 0);
+});
+
+test('reports an explicit enable failure even when the experimental flag hides System-wide Protection', async (t) => {
+    t.mock.timers.enable();
+    installAdvancedBlockingApi({ enabledUpdateFails: true, pulledState: makeErrorState() });
+    const queue = new NotificationsQueue();
+    const advancedBlocking = new AdvancedBlocking(queue, () => {}, () => false);
+
+    await advancedBlocking.updateSystemWideProtection(true);
+
     assert.equal(queue.queueLength, 1);
 });
 

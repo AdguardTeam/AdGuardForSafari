@@ -81,6 +81,69 @@ test('setProtectionEnabled updates the entity the SWP switch reads', () => {
     assert.equal(settings.settings.protectionEnabled, false);
 });
 
+test('updateExperimentalSystemWideProtectionEnabled updates the entity and persists it', async () => {
+    const calls: unknown[] = [];
+    (globalThis as unknown as { window: Record<string, unknown> }).window =
+        globalThis as unknown as Record<string, unknown>;
+    (globalThis as unknown as { API: { Execute(req: unknown): Promise<unknown> } }).API = {
+        Execute: async (req: unknown) => {
+            calls.push(req);
+            return undefined;
+        },
+    };
+
+    try {
+        const settings = new Settings();
+        settings.setSettings(new SettingsEnt({
+            experimentalSystemWideProtectionEnabled: false,
+            language: 'en',
+        }));
+
+        await settings.updateExperimentalSystemWideProtectionEnabled(true);
+
+        assert.equal(settings.settings.experimentalSystemWideProtectionEnabled, true);
+        assert.equal(calls.length, 1);
+        const req = calls[0] as {
+            FQN: string;
+            getRequestMessage(): { toObject(): Record<string, unknown> };
+        };
+        assert.equal(req.FQN, 'SettingsService.UpdateExperimentalSystemWideProtectionEnabled');
+        assert.equal(req.getRequestMessage().toObject().value, true);
+    } finally {
+        delete (globalThis as unknown as { API?: unknown }).API;
+        delete (globalThis as unknown as { window?: unknown }).window;
+    }
+});
+
+test('updateExperimentalSystemWideProtectionEnabled rolls back when persistence fails', async () => {
+    (globalThis as unknown as { window: Record<string, unknown> }).window =
+        globalThis as unknown as Record<string, unknown>;
+    (globalThis as unknown as { API: { Execute(req: unknown): Promise<unknown> } }).API = {
+        Execute: async () => {
+            throw new Error('persist failed');
+        },
+    };
+    // The store logs the rolled-back update; the case asserts the state only.
+    const originalConsoleError = console.error;
+    console.error = () => {};
+
+    try {
+        const settings = new Settings();
+        settings.setSettings(new SettingsEnt({
+            experimentalSystemWideProtectionEnabled: false,
+            language: 'en',
+        }));
+
+        await settings.updateExperimentalSystemWideProtectionEnabled(true);
+
+        assert.equal(settings.settings.experimentalSystemWideProtectionEnabled, false);
+    } finally {
+        console.error = originalConsoleError;
+        delete (globalThis as unknown as { API?: unknown }).API;
+        delete (globalThis as unknown as { window?: unknown }).window;
+    }
+});
+
 test('updateReportProblemLabelShown marks the flag locally and persists it', async () => {
     const calls: unknown[] = [];
     (globalThis as unknown as { window: Record<string, unknown> }).window =

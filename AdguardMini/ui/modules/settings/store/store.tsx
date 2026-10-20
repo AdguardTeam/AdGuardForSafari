@@ -71,6 +71,7 @@ export class SettingsStore {
         this.advancedBlocking = new AdvancedBlocking(
             this.notification,
             () => this.router.changePath(RouteName.system_wide_protection),
+            () => this.settings.settings.experimentalSystemWideProtectionEnabled,
         );
         this.appInfo = new AppInfo();
         this.filters = new Filters();
@@ -93,18 +94,29 @@ export class SettingsStore {
         this.account.getTrialAvailability();
         this.abTests.loadActiveABTests();
         this.advancedBlocking.getAdvancedBlocking();
-        this.advancedBlocking.getURLFilterState();
         this.appInfo.getAppInfo();
         this.filters.getEnabledFilters();
         this.filters.getFilters();
         this.filters.getFiltersIndex();
         this.filters.getFiltersGroupedByExtension();
-        this.settings.getSettings();
         this.settings.getHealthCheckDismissedCards();
         this.settings.getPromoDismissedCards();
         this.settings.getSafariExtensions();
         this.settings.getUserActionLastDirectory();
         this.userRules.getUserRules();
+        void this.loadURLFilterStateAfterSettings();
+    }
+
+    /**
+     * Loads the URL-filter state after the settings fetch settles, so the
+     * automatic failure snack is gated by the resolved experimental flag.
+     */
+    private async loadURLFilterStateAfterSettings() {
+        try {
+            await this.settings.getSettings();
+        } finally {
+            this.advancedBlocking.getURLFilterState();
+        }
     }
 }
 

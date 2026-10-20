@@ -12,8 +12,13 @@ import s from '../Settings.module.pcss';
 type Props = {
     allowTelemetry: boolean;
     debugLogging: boolean;
+    experimentalSystemWideProtectionEnabled: boolean;
+    isMacos272: boolean;
+    isRemovingSystemWideProtection: boolean;
     onToggleAllowTelemetry(value: boolean): void;
     onToggleDebugLogging(value: boolean): void;
+    onToggleExperimentalSystemWideProtection(value: boolean): void;
+    onOpenSystemWideProtection(): void;
     onOpenTelemetryModal(): void;
     onExportLogs(): void;
     showSafariToolbarBadge: boolean;
@@ -27,10 +32,15 @@ export function MiscSection(props: Props) {
     const {
         allowTelemetry,
         debugLogging,
+        experimentalSystemWideProtectionEnabled,
+        isMacos272,
+        isRemovingSystemWideProtection,
         onExportLogs,
+        onOpenSystemWideProtection,
         onOpenTelemetryModal,
         onToggleAllowTelemetry,
         onToggleDebugLogging,
+        onToggleExperimentalSystemWideProtection,
         showSafariToolbarBadge,
         updateShowSafariToolbarBadge,
     } = props;
@@ -59,6 +69,35 @@ export function MiscSection(props: Props) {
                 setValue={updateShowSafariToolbarBadge}
                 title={translate('settings.safari.toolbar.badge')}
                 value={showSafariToolbarBadge}
+            />
+            <SettingsItemSwitch
+                additionalText={(
+                    <>
+                        {experimentalSystemWideProtectionEnabled && (
+                            <div
+                                className={s.Settings_experimentalLink}
+                                {...buttonProps(onOpenSystemWideProtection, {
+                                    preventDefault: true,
+                                    stopPropagation: true,
+                                })}
+                            >
+                                <Text type="t2">
+                                    {translate('settings.system.wide.experimental.go.to')}
+                                </Text>
+                            </div>
+                        )}
+                        {isMacos272 && (
+                            <Text className={cx(theme.color.orange, s.Settings_experimentalWarning)} type="t2">
+                                {translate('settings.system.wide.experimental.warning')}
+                            </Text>
+                        )}
+                    </>
+                )}
+                description={translate('settings.system.wide.experimental.desc')}
+                disabled={isRemovingSystemWideProtection}
+                setValue={onToggleExperimentalSystemWideProtection}
+                title={translate('settings.system.wide.experimental')}
+                value={experimentalSystemWideProtectionEnabled}
             />
             <SettingsItemSwitch
                 additionalText={(

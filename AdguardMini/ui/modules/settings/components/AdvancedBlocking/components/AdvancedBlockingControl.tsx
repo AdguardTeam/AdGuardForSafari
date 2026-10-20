@@ -20,6 +20,8 @@ import s from './AdvancedBlockingControl.module.pcss';
 import { AdvancedBlockingTitle } from './AdvancedBlockingTitle';
 import { SystemWideProtectionSwitch } from './SystemWideProtectionSwitch';
 
+import type { NotSupportedModalReason } from '../../NotSupportedModal';
+
 /**
  * Advanced blocking main component
  */
@@ -33,9 +35,18 @@ export function AdvancedBlockingControlComponent() {
         isSystemWideProtectionEnabling,
     } = advancedBlocking;
 
-    const { settings: { macos25OrLower, non501User, autoFiltersUpdate, protectionEnabled } } = settings;
+    const {
+        settings: {
+            autoFiltersUpdate,
+            experimentalSystemWideProtectionEnabled,
+            isMacos272,
+            macos25OrLower,
+            non501User,
+            protectionEnabled,
+        },
+    } = settings;
 
-    const [showNotSupportedModal, setShowNotSupportedModal] = useState(false);
+    const [notSupportedReason, setNotSupportedReason] = useState<NotSupportedModalReason>();
     const [showInstallModal, setShowInstallModal] = useState(false);
 
     const { isLicenseOrTrialActive } = account;
@@ -87,19 +98,22 @@ export function AdvancedBlockingControlComponent() {
                 <div className={s.AdvancedBlockingControl_payedTitle}>{payedFuncsTitle}</div>
             ) : undefined}
             />
-            <SystemWideProtectionSwitch
-                disabled={isSystemWideProtectionDisabled}
-                enabling={isSystemWideProtectionEnabling}
-                inactive={isSystemWideProtectionInactive}
-                isNew={isSystemWideProtectionNew}
-                muted={!isLicenseOrTrialActive}
-                non501User={non501User}
-                macos25OrLower={macos25OrLower}
-                orangeIcon={isFree}
-                setShowNotSupportedModal={setShowNotSupportedModal}
-                value={isLicenseOrTrialActive ? userIntentEnabled : false}
-                onChange={onUpdateSystemWideProtection}
-            />
+            {experimentalSystemWideProtectionEnabled && (
+                <SystemWideProtectionSwitch
+                    disabled={isSystemWideProtectionDisabled}
+                    enabling={isSystemWideProtectionEnabling}
+                    inactive={isSystemWideProtectionInactive}
+                    isMacos272={isMacos272}
+                    isNew={isSystemWideProtectionNew}
+                    macos25OrLower={macos25OrLower}
+                    muted={!isLicenseOrTrialActive}
+                    non501User={non501User}
+                    orangeIcon={isFree}
+                    setShowNotSupportedModal={setNotSupportedReason}
+                    value={isLicenseOrTrialActive ? userIntentEnabled : false}
+                    onChange={onUpdateSystemWideProtection}
+                />
+            )}
             <AdguardExtraSwitch
                 muted={!isLicenseOrTrialActive}
                 orangeIcon={isFree}
@@ -130,8 +144,11 @@ export function AdvancedBlockingControlComponent() {
                 title={translate('settings.real.time.filter.updates.AG_51019_advanced_settings')}
                 value={realTimeFiltersUpdate}
             />
-            {showNotSupportedModal && (
-                <NotSupportedModal setShowNotSupportedModal={setShowNotSupportedModal} />
+            {notSupportedReason && (
+                <NotSupportedModal
+                    reason={notSupportedReason}
+                    setShowNotSupportedModal={() => setNotSupportedReason(undefined)}
+                />
             )}
             {showInstallModal && (
                 <InstallModal onClose={() => setShowInstallModal(false)} />

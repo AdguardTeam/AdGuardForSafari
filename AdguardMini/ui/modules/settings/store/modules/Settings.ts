@@ -7,7 +7,7 @@ import { makeAutoObservable } from 'mobx';
 
 import { UpdateAllowTelemetryRequest, UpdateConsentRequest } from 'Apis/requests/ConsentService';
 import { GetSafariExtensionsRequest } from 'Apis/requests/SafariExtensionsService';
-import { ExportLogsRequest, ExportSettingsRequest, ForceRestartOnHardwareAccelerationImportRequest, GetContentBlockersRulesLimitRequest, GetHealthCheckDismissedCardsRequest, GetSettingsRequest, GetUserActionLastDirectoryRequest, ImportSettingsConfirmRequest, ImportSettingsRequest, ResetSettingsRequest, ResetStatisticsRequest, UpdateAutoFiltersUpdateRequest, UpdateDebugLoggingRequest, UpdateHardwareAccelerationRequest, UpdateHealthCheckDismissedCardsRequest, UpdateLaunchOnStartupRequest, UpdateQuitReactionRequest, UpdateReportProblemLabelShownRequest, UpdateShowInMenuBarRequest, UpdateThemeRequest, UpdateUserActionLastDirectoryRequest, UpdateShowSafariToolbarBadgeRequest, UpdatePromoDismissedCardsRequest, GetPromoDismissedCardsRequest } from 'Apis/requests/SettingsService';
+import { ExportLogsRequest, ExportSettingsRequest, ForceRestartOnHardwareAccelerationImportRequest, GetContentBlockersRulesLimitRequest, GetHealthCheckDismissedCardsRequest, GetSettingsRequest, GetUserActionLastDirectoryRequest, ImportSettingsConfirmRequest, ImportSettingsRequest, ResetSettingsRequest, ResetStatisticsRequest, UpdateAutoFiltersUpdateRequest, UpdateDebugLoggingRequest, UpdateExperimentalSystemWideProtectionEnabledRequest, UpdateHardwareAccelerationRequest, UpdateHealthCheckDismissedCardsRequest, UpdateLaunchOnStartupRequest, UpdateQuitReactionRequest, UpdateReportProblemLabelShownRequest, UpdateShowInMenuBarRequest, UpdateThemeRequest, UpdateUserActionLastDirectoryRequest, UpdateShowSafariToolbarBadgeRequest, UpdatePromoDismissedCardsRequest, GetPromoDismissedCardsRequest } from 'Apis/requests/SettingsService';
 import { OpenLoginItemsSettingsRequest } from 'Apis/requests/SystemService';
 import { GetEffectiveThemeRequest } from 'Apis/requests/ThemeService/GetEffectiveThemeRequest';
 import {
@@ -388,6 +388,17 @@ export class Settings {
         await this.commitAndPersist(
             (v) => { v.showSafariToolbarBadge = value; },
             async () => window.API.Execute(new UpdateShowSafariToolbarBadgeRequest({ value })),
+        );
+    }
+
+    /**
+     * Updates the experimental System-wide Protection visibility flag.
+     * @param value Whether System-wide Protection UI is shown
+     */
+    public async updateExperimentalSystemWideProtectionEnabled(value: boolean) {
+        await this.commitAndPersist(
+            (v) => { v.experimentalSystemWideProtectionEnabled = value; },
+            async () => window.API.Execute(new UpdateExperimentalSystemWideProtectionEnabledRequest({ value })),
         );
     }
 

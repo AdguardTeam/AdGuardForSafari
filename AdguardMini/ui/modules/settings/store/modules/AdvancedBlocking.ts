@@ -109,6 +109,12 @@ export class AdvancedBlocking {
     private readonly openSystemWideProtection: () => void;
 
     /**
+     * Whether System-wide Protection UI is currently visible: when the
+     * experimental flag is off, automatic failure snacks stay hidden too.
+     */
+    private readonly isSystemWideProtectionVisible: () => boolean;
+
+    /**
      * Whether the stats of a pushed state are being held: the next push — or
      * the timeout — shows them.
      */
@@ -194,10 +200,16 @@ export class AdvancedBlocking {
      *
      * @param notification Notifications queue used to surface error toasts.
      * @param openSystemWideProtection Opens the System-wide Protection page.
+     * @param isSystemWideProtectionVisible Whether the feature UI is visible.
      */
-    public constructor(notification: NotificationsQueue, openSystemWideProtection: () => void) {
+    public constructor(
+        notification: NotificationsQueue,
+        openSystemWideProtection: () => void,
+        isSystemWideProtectionVisible: () => boolean = () => true,
+    ) {
         this.notification = notification;
         this.openSystemWideProtection = openSystemWideProtection;
+        this.isSystemWideProtectionVisible = isSystemWideProtectionVisible;
         makeAutoObservable(this, {
             getAdvancedRules: flow,
             getAdguardExtra: flow,
@@ -229,6 +241,9 @@ export class AdvancedBlocking {
      * times, and the design counts automatic attempts per visit.
      */
     private reportAutomaticURLFilterFailure() {
+        if (!this.isSystemWideProtectionVisible()) {
+            return;
+        }
         if (this.unavailableSnackShownThisVisit) {
             return;
         }
@@ -242,7 +257,9 @@ export class AdvancedBlocking {
      * the Advanced blocking page, so the failure can arrive while the settings
      * window is on any page. Reports of one kind share a single snack while it
      * is on screen; an automatic report is also remembered for the page visit,
-     * so it is not shown again after the snack closed.
+     * so it is not shown again after the snack closed. The caller decides
+     * whether to report: an explicit attempt always reports, an automatic one
+     * only while the experimental flag shows the feature.
      */
     private showSystemWideProtectionUnavailableSnack() {
         if (this.isURLFilterErrorSnackShown(URLFilterErrorKind.enable)) {
@@ -628,6 +645,24 @@ export class AdvancedBlocking {
         } else {
             return true;
         }
+    }
+
+    /**
+     * Removes the URL filter configuration if one is installed.
+     *
+     * Hiding the experimental feature while its filter keeps running would
+     * leave the user with filtering they can no longer control. The state is
+     * refreshed first: the startup pull may not have landed yet, and a stale
+     * "not installed" would skip the removal.
+     *
+     * @returns Whether no configuration remains.
+     */
+    public async removeURLFilterIfInstalled(): Promise<boolean> {
+        await this.getURLFilterState(false);
+        if (!this.urlFilterState.isInstalled) {
+            return true;
+        }
+        return (await this.removeURLFilter()) === true;
     }
 
     /**

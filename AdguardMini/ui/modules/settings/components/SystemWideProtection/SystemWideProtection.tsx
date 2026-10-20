@@ -23,6 +23,8 @@ import {
     Troubleshooting,
 } from './components';
 
+import type { NotSupportedModalReason } from '../NotSupportedModal';
+
 /**
  * System-wide Protection page component for settings module
  */
@@ -34,7 +36,7 @@ function SystemWideProtectionComponent() {
         scrollToTroubleshootingRequested,
     } = advancedBlocking;
 
-    const [showNotSupportedModal, setShowNotSupportedModal] = useState(false);
+    const [notSupportedReason, setNotSupportedReason] = useState<NotSupportedModalReason>();
     const [showInstallModal, setShowInstallModal] = useState(false);
     const [showResetCacheModal, setShowResetCacheModal] = useState(false);
     const [showRemoveFilterModal, setShowRemoveFilterModal] = useState(false);
@@ -74,7 +76,7 @@ function SystemWideProtectionComponent() {
     return (
         <Layout navigation={{ router, route: RouteName.advanced_blocking, title: translate('menu.advanced.blocking.title') }} type="settingsPage">
             <Title
-                setShowNotSupportedModal={setShowNotSupportedModal}
+                setShowNotSupportedModal={setNotSupportedReason}
                 setShowRemoveFilterModal={setShowRemoveFilterModal}
                 setShowResetCacheModal={setShowResetCacheModal}
             />
@@ -89,8 +91,11 @@ function SystemWideProtectionComponent() {
                 setShowResetCacheModal={setShowResetCacheModal}
                 onContactSupport={() => router.changePath(RouteName.contact_support)}
             />
-            {showNotSupportedModal && (
-                <NotSupportedModal setShowNotSupportedModal={setShowNotSupportedModal} />
+            {notSupportedReason && (
+                <NotSupportedModal
+                    reason={notSupportedReason}
+                    setShowNotSupportedModal={() => setNotSupportedReason(undefined)}
+                />
             )}
             {showInstallModal && (
                 <InstallModal onClose={() => setShowInstallModal(false)} />

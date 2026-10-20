@@ -26,8 +26,9 @@ export function PromoComponent() {
     const { userIntentEnabled } = urlFilterState;
 
     const isPromoDismissed = settings.dismissedPromoCards.has(SYSTEM_WIDE_ID);
+    const { experimentalSystemWideProtectionEnabled } = settings.settings;
 
-    if (userIntentEnabled || isPromoDismissed) {
+    if (!experimentalSystemWideProtectionEnabled || userIntentEnabled || isPromoDismissed) {
         return null;
     }
 

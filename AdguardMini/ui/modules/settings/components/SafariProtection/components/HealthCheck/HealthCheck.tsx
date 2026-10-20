@@ -43,7 +43,10 @@ function HealthCheckComponent({ setShowConsent }: HealthCheckProps) {
     const {
         dismissedHealthCheckCards,
         loginItemEnabled,
-        settings: { lastUpdateMoreSevenDays },
+        settings: {
+            experimentalSystemWideProtectionEnabled,
+            lastUpdateMoreSevenDays,
+        },
     } = settings;
 
     const {
@@ -64,7 +67,8 @@ function HealthCheckComponent({ setShowConsent }: HealthCheckProps) {
 
     const hasBackgroundDisabled = !loginItemEnabled;
 
-    const hasSystemWideProtectionUnavailable = advancedBlocking.isSystemWideProtectionUnavailable;
+    const hasSystemWideProtectionUnavailable = experimentalSystemWideProtectionEnabled
+        && advancedBlocking.isSystemWideProtectionUnavailable;
 
     const hasAdBlockingDisabled = !blockAds;
 
