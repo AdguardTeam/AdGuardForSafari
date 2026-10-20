@@ -51,6 +51,7 @@ type AdvancedBlockingApiOptions = {
     enabledUpdateFails?: boolean;
     cacheResetFails?: boolean;
     removalFails?: boolean;
+    statePullRejects?: boolean;
     pulledState?: URLFilterState;
 };
 
@@ -79,6 +80,9 @@ function installAdvancedBlockingApi(options: AdvancedBlockingApiOptions = {}) {
                 case 'AdvancedBlockingService.RetryURLFilter':
                     return Promise.resolve(new EmptyValue());
                 case 'AdvancedBlockingService.GetURLFilterState':
+                    if (options.statePullRejects) {
+                        return Promise.reject(new Error('RPC "GetURLFilterState" was rejected by the native side'));
+                    }
                     return Promise.resolve(options.pulledState ?? new URLFilterState());
                 default:
                     throw new Error(`Unexpected request: ${fqn}`);
@@ -139,6 +143,21 @@ function makeRunningState(): URLFilterState {
         protectionLevel: URLFilterProtectionLevel.essential,
         status: URLFilterStatus.running,
         userIntentEnabled: true,
+        info: new URLFilterInfo({}),
+    });
+}
+
+/**
+ * Builds the state the platform reports when the user declined the system
+ * install prompt.
+ */
+function makeDeclinedState(): URLFilterState {
+    return new URLFilterState({
+        enabled: false,
+        protectionLevel: URLFilterProtectionLevel.essential,
+        status: URLFilterStatus.loading,
+        isInstalled: false,
+        userIntentEnabled: false,
         info: new URLFilterInfo({}),
     });
 }
@@ -619,6 +638,63 @@ test('reports the failure of an explicit attempt after an automatic report', asy
 
     const [retryId] = notificationIds(queue);
     assert.notEqual(retryId, automaticId);
+    assert.equal(queue.queueLength, 1);
+});
+
+test('does not report a declined system install prompt', async (t) => {
+    t.mock.timers.enable();
+    const apiOptions: AdvancedBlockingApiOptions = {
+        enabledUpdateFails: true,
+        pulledState: makeDeclinedState(),
+    };
+    installAdvancedBlockingApi(apiOptions);
+    const queue = new NotificationsQueue();
+    const advancedBlocking = new AdvancedBlocking(queue, () => {});
+
+    await advancedBlocking.updateSystemWideProtection(true);
+
+    // The declined prompt rolls the toggle back to OFF without a snack.
+    assert.equal(queue.queueLength, 0);
+    assert.equal(advancedBlocking.urlFilterState.userIntentEnabled, false);
+    assert.equal(advancedBlocking.isSystemWideProtectionInactive, false);
+    assert.equal(advancedBlocking.isSystemWideProtectionEnabling, false);
+
+    // A later attempt whose intent survives is reported again.
+    apiOptions.pulledState = makeErrorState();
+    await advancedBlocking.updateSystemWideProtection(true);
+
+    assert.equal(queue.queueLength, 1);
+});
+
+test('reports an explicit enable failure when the state pull rejects', async (t) => {
+    t.mock.timers.enable();
+    installAdvancedBlockingApi({ enabledUpdateFails: true, statePullRejects: true });
+    const queue = new NotificationsQueue();
+    const advancedBlocking = new AdvancedBlocking(queue, () => {});
+
+    await advancedBlocking.updateSystemWideProtection(true);
+
+    // The pull cannot confirm a decline: the explicit attempt reports its failure.
+    assert.equal(queue.queueLength, 1);
+});
+
+test('reports a failed disable while the user\'s intent is off', async (t) => {
+    t.mock.timers.enable();
+    installAdvancedBlockingApi({
+        enabledUpdateFails: true,
+        pulledState: new URLFilterState({
+            enabled: true,
+            status: URLFilterStatus.running,
+            userIntentEnabled: false,
+            info: new URLFilterInfo({}),
+        }),
+    });
+    const queue = new NotificationsQueue();
+    const advancedBlocking = new AdvancedBlocking(queue, () => {});
+
+    await advancedBlocking.updateSystemWideProtection(false);
+
+    // The filter may still run against the user's wish: the failure is real.
     assert.equal(queue.queueLength, 1);
 });
 

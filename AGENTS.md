@@ -566,7 +566,8 @@ Blocker JSON consumed by the extension targets.
 1. **SwiftLint compliance**: All Swift code MUST pass SwiftLint with the
    configuration at `AdguardMini/.swiftlint.yml`. Key rules:
    - Line length: 120 characters (warning)
-   - File length: 400 lines (warning), 800 lines (error)
+   - File length: no enforced limit (`file_length` is disabled in
+     `AdguardMini/.swiftlint.yml`); keep files under 400 lines
    - Function body length: 70 lines
    - `force_try` is an error
    - TODOs MUST include a JIRA reference (e.g., `// TODO: AG-1234`)
@@ -1276,10 +1277,11 @@ humans and AI agents that consume project documentation.
     page is open and repeats the failure, so such a snack is shown at most
     once per visit, and closing it — auto-closed, dismissed, or dropped by
     another notification — MUST NOT re-arm the report. An explicit user
-    attempt always reports its failure. The key also clears when the state
-    recovers (a push or a pull reports the feature running, or the user's call
-    lands). A different error replaces the shown snack instead of stacking
-    another one.
+    attempt always reports its failure, except an attempt whose system prompt
+    the user declined: a decision is not a failure. The key also clears when
+    the state recovers (a push or a pull reports the feature running, or the
+    user's call lands). A different error replaces the shown snack instead of
+    stacking another one.
 
     **Rationale**: A failed System-wide Protection enable arrives as both an
     RPC error and a pushed error state, and the platform repeats the push for
@@ -1305,3 +1307,25 @@ humans and AI agents that consume project documentation.
     while a push reaches the open window immediately, focused or not — the
     pattern the settings window already relies on for the login item and
     URL filter state.
+
+21. **URL filter install prompt and enable state (Swift)**: One user enable
+    attempt MUST raise the macOS URL filter install/allow prompt at most
+    once, because an enable's configuration write is terminal for that
+    attempt when it fails. A declined install/allow prompt — the system
+    reports the permission as denied — MUST clear the persisted user intent,
+    so the app never retries on its own: the automatic enable paths and the
+    page-open/focus retry stop, and the install is attempted again only by a
+    new explicit user enable. Every other failure keeps the intent, a
+    bring-up the extension cancelled included, and a relaunch whose
+    preferences load confirms that no configuration exists clears it. A state
+    rebuild that a failed preferences load produced MUST NOT replace the
+    state the service serves, because a failed save leaves staged,
+    never-persisted values on the manager.
+
+    **Rationale**: `saveToPreferences()` is the call that raises the prompt,
+    and the bounded retry loop re-ran it, so one decline asked the user three
+    times. The same failed save leaves staged values that the UI could read
+    back as ON for a filter that was never installed. A declined prompt is a
+    decision about the feature, not a transient fault, so it must not leave
+    an intent that makes the platform retry the prompt behind the user's
+    back.

@@ -205,4 +205,26 @@ enum URLFilterReconcileDecision {
         }
         return hasElapsedGrace ? .fire : .keep
     }
+
+    /// Whether a failed `setEnabled` attempt may be re-run.
+    ///
+    /// An enable's failed configuration write ends the attempt whatever the
+    /// error was, and so does a decision error: the declined install/allow
+    /// prompt or a bring-up the extension cancelled.
+    static func shouldRetrySetEnabled(
+        enabled: Bool,
+        saveFailed: Bool,
+        filterError: URLFilterError?
+    ) -> Bool {
+        guard !(enabled && saveFailed) else { return false }
+        return filterError != .configurationPermissionDenied && filterError != .extensionCancelled
+    }
+
+    /// Whether a failed enable must drop the persisted user intent.
+    ///
+    /// Only the declined install/allow prompt is the user's decision about the
+    /// feature; a cancelled bring-up and every transient fault keep the intent.
+    static func shouldClearUserIntent(enabled: Bool, filterError: URLFilterError?) -> Bool {
+        enabled && filterError == .configurationPermissionDenied
+    }
 }

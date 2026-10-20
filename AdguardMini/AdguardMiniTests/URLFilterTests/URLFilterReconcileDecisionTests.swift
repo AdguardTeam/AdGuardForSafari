@@ -455,4 +455,121 @@ final class URLFilterReconcileDecisionTests: XCTestCase {
             isPaid: isPaid
         )
     }
+
+    // MARK: shouldRetrySetEnabled
+
+    func testShouldRetrySetEnabled_EndsAFailedEnableSave() {
+        XCTAssertFalse(
+            URLFilterReconcileDecision.shouldRetrySetEnabled(
+                enabled: true,
+                saveFailed: true,
+                filterError: nil
+            )
+        )
+        XCTAssertFalse(
+            URLFilterReconcileDecision.shouldRetrySetEnabled(
+                enabled: true,
+                saveFailed: true,
+                filterError: .internalError
+            )
+        )
+    }
+
+    func testShouldRetrySetEnabled_EndsADecisionError() {
+        XCTAssertFalse(
+            URLFilterReconcileDecision.shouldRetrySetEnabled(
+                enabled: true,
+                saveFailed: false,
+                filterError: .configurationPermissionDenied
+            )
+        )
+        XCTAssertFalse(
+            URLFilterReconcileDecision.shouldRetrySetEnabled(
+                enabled: true,
+                saveFailed: false,
+                filterError: .extensionCancelled
+            )
+        )
+        XCTAssertFalse(
+            URLFilterReconcileDecision.shouldRetrySetEnabled(
+                enabled: false,
+                saveFailed: false,
+                filterError: .extensionCancelled
+            )
+        )
+    }
+
+    func testShouldRetrySetEnabled_RetriesAFailedDisableSave() {
+        XCTAssertTrue(
+            URLFilterReconcileDecision.shouldRetrySetEnabled(
+                enabled: false,
+                saveFailed: true,
+                filterError: nil
+            )
+        )
+    }
+
+    func testShouldRetrySetEnabled_RetriesARuntimeFailure() {
+        XCTAssertTrue(
+            URLFilterReconcileDecision.shouldRetrySetEnabled(
+                enabled: true,
+                saveFailed: false,
+                filterError: .internalError
+            )
+        )
+        XCTAssertTrue(
+            URLFilterReconcileDecision.shouldRetrySetEnabled(
+                enabled: true,
+                saveFailed: false,
+                filterError: nil
+            )
+        )
+    }
+
+    // MARK: shouldClearUserIntent
+
+    func testShouldClearUserIntent_ClearsOnADeclinedPermission() {
+        XCTAssertTrue(
+            URLFilterReconcileDecision.shouldClearUserIntent(
+                enabled: true,
+                filterError: .configurationPermissionDenied
+            )
+        )
+    }
+
+    func testShouldClearUserIntent_KeepsTheIntentOnEveryOtherFailure() {
+        XCTAssertFalse(
+            URLFilterReconcileDecision.shouldClearUserIntent(
+                enabled: true,
+                filterError: .extensionCancelled
+            )
+        )
+        XCTAssertFalse(
+            URLFilterReconcileDecision.shouldClearUserIntent(
+                enabled: true,
+                filterError: .internalError
+            )
+        )
+        XCTAssertFalse(
+            URLFilterReconcileDecision.shouldClearUserIntent(
+                enabled: true,
+                filterError: .configurationUnchanged
+            )
+        )
+        XCTAssertFalse(
+            URLFilterReconcileDecision.shouldClearUserIntent(
+                enabled: true,
+                filterError: nil
+            )
+        )
+    }
+
+    func testShouldClearUserIntent_NeverClearsOnADisable() {
+        XCTAssertFalse(
+            URLFilterReconcileDecision.shouldClearUserIntent(
+                enabled: false,
+                filterError: .configurationPermissionDenied
+            )
+        )
+    }
 }

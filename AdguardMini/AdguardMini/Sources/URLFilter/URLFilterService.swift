@@ -62,6 +62,9 @@ protocol URLFilterService: URLFilterInstalledStateProvider {
     /// While the main switch is off, an enable only persists the intent and
     /// ensures a disabled configuration exists for a later automatic bring-up;
     /// it neither enables the filter nor throws.
+    /// One enable attempt raises the install/allow prompt at most once: a
+    /// declined prompt clears the persisted intent, so only a new explicit
+    /// enable retries the install, while every other failure keeps it.
     /// - Throws: ``URLFilterServiceError/superseded`` when a newer transition
     ///   superseded the toggle before it landed; the intent is already persisted.
     func setEnabledByUser(_ enabled: Bool) async throws
@@ -82,6 +85,7 @@ protocol URLFilterService: URLFilterInstalledStateProvider {
     /// Returns the current derived filter status.
     /// While an app-initiated transition runs, the last settled state is
     /// returned so its intermediate disable/bring-up states never reach the UI.
+    /// A state rebuild from a failed preferences load does not replace the served state.
     func getState() async throws -> URLFilterState
     /// Invalidates the prefilter cache so the extension re-fetches the prefilter
     /// data by calling `NEURLFilterManager.resetPIRCache()`.
@@ -147,6 +151,9 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
     /// intermediate state changes are not published to the UI; see
     /// ``suspendStatePublishing()``.
     private var statePublishingSuspensions = 0
+    /// Counts persisted intent writes, so a declined attempt never clears an
+    /// intent a newer explicit enable recorded.
+    private var intentWriteGeneration = 0
     /// The state the UI last saw before the current transition began; served
     /// by ``getState()`` while ``statePublishingSuspensions`` is non-zero.
     private var settledState: URLFilterState?
@@ -176,14 +183,7 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
         let manager = NEURLFilterManager.shared
         // Only a confirmed-absent configuration reconciles the persisted
         // Intent away; a failed preferences load must not erase it.
-        let loadSucceeded: Bool
-        do {
-            try await manager.loadFromPreferences()
-            loadSucceeded = true
-        } catch {
-            LogWarn("URLFilter preferences load failed at startup: \(error)")
-            loadSucceeded = false
-        }
+        let loadSucceeded = await self.loadPreferences(logContext: "startup")
         if loadSucceeded {
             let rawError = self.rawLastDisconnectError(from: await manager.lastDisconnectError)
             let rawStatus = self.rawStatus(from: await manager.status)
@@ -222,16 +222,34 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
     }
 
     private func persistURLFilterIntent(_ enabled: Bool) {
+        self.intentWriteGeneration += 1
         self.sharedKeychainStorage.urlFilterEnabled = enabled
+    }
+
+    /// Loads the manager's preferences, reporting whether the load succeeded: a
+    /// failed load leaves the manager's values unconfirmed.
+    private func loadPreferences(logContext: String) async -> Bool {
+        do {
+            try await NEURLFilterManager.shared.loadFromPreferences()
+            return true
+        } catch {
+            LogWarn("URLFilter preferences load failed (\(logContext)): \(error)")
+            return false
+        }
+    }
+
+    /// Loads the manager's preferences, throwing the service's load failure.
+    private func loadPreferencesOrThrow() async throws {
+        do {
+            try await NEURLFilterManager.shared.loadFromPreferences()
+        } catch {
+            throw URLFilterServiceError.loadFailed(error)
+        }
     }
 
     func loadConfiguration() async throws -> URLFilterConfiguration? {
         let manager = NEURLFilterManager.shared
-        do {
-            try await manager.loadFromPreferences()
-        } catch {
-            throw URLFilterServiceError.loadFailed(error)
-        }
+        try await self.loadPreferencesOrThrow()
         // A valid configuration must have at least a server URL set.
         guard manager.pirServerURL != nil else { return nil }
         let protectionLevel = self.sharedKeychainStorage.urlFilterProtectionLevel
@@ -497,6 +515,7 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
         // No transition starts here: an in-flight ownership disable must not
         // Be superseded, and automatic paths never create a configuration.
         if enabled, !self.sharedSettingsStorage.protectionEnabled {
+            let intentGeneration = self.intentWriteGeneration
             // Best-effort: a staging failure must not surface the misleading bring-up error.
             do {
                 try await self.ensureDisabledConfigurationExists()
@@ -506,6 +525,12 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
                     await self.reconcile()
                 }
             } catch {
+                // Staging also saves the configuration, so a decline here is the user's decision too.
+                self.clearDeclinedIntent(
+                    enabled: enabled,
+                    filterError: self.underlyingFilterError(from: error),
+                    intentGeneration: intentGeneration
+                )
                 LogWarn("URLFilter disabled configuration staging failed: \(error)")
             }
             return
@@ -522,7 +547,7 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
             }
         } catch {
             // A failed enable can leave an enabled-but-broken configuration.
-            // The persisted intent is kept for a later retry.
+            // A transient failure keeps the intent; a declined one was cleared in `setEnabled`.
             switch error {
             case URLFilterServiceError.superseded, is CancellationError:
                 break
@@ -546,6 +571,7 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
         // The whole operation (including the retry loop) validates against one
         // Generation, so a newer transition supersedes it at any suspension.
         let generation = expectedGeneration ?? self.transitionGeneration
+        let intentGeneration = self.intentWriteGeneration
 
         for attempt in 1...Constants.maxRetryAttempts {
             // Do not retry after cancellation.
@@ -571,6 +597,23 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
             } catch {
                 // Surface cancellation as `CancellationError`, not the underlying error.
                 try Task.checkCancellation()
+                let filterError = self.underlyingFilterError(from: error)
+                // Saving raises the install prompt, and a decision error is not a transient fault.
+                guard URLFilterReconcileDecision.shouldRetrySetEnabled(
+                    enabled: enabled,
+                    saveFailed: self.isSaveFailure(error),
+                    filterError: filterError
+                ) else {
+                    self.clearDeclinedIntent(
+                        enabled: enabled,
+                        filterError: filterError,
+                        intentGeneration: intentGeneration
+                    )
+                    LogError(
+                        "URLFilter setEnabled(\(enabled)) is not retryable after attempt \(attempt): \(error)"
+                    )
+                    throw error
+                }
                 if attempt < Constants.maxRetryAttempts {
                     LogWarn(
                         "URLFilter setEnabled(\(enabled)) failed on attempt \(attempt) "
@@ -753,11 +796,7 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
         // No await point then separates loading from saving on the shared manager.
         let license = enabled ? await self.licenseProvider.licenseCredential() : ""
         let manager = NEURLFilterManager.shared
-        do {
-            try await manager.loadFromPreferences()
-        } catch {
-            throw URLFilterServiceError.loadFailed(error)
-        }
+        try await self.loadPreferencesOrThrow()
         // A real bring-up from disabled re-stages the current level and
         // Re-fetches its prefilter, so a pending level restart is fulfilled.
         let wasEnabled = manager.isEnabled
@@ -808,10 +847,10 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
         do {
             try await manager.saveToPreferences()
         } catch NEURLFilterManager.Error.configurationUnchanged {
-            // The enabled flag already matched; continue to refresh so the filter reflects state.
+            try self.confirmUnchangedSave(alreadyMatchedRequestedState: wasEnabled == enabled)
             LogDebug("URLFilter Configuration Unchanged")
         } catch {
-            throw URLFilterServiceError.setEnabledFailed(error)
+            throw URLFilterServiceError.saveFailed(error)
         }
         // The save already landed: reflect it in the cache even when a newer
         // Transition supersedes this one, so later decisions see the real state.
@@ -828,11 +867,41 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
         self.cachedState = await self.makeState(from: manager)
     }
 
+    /// Confirms an unchanged save, or throws when the write never landed: the
+    /// flag loaded before staging must already match the requested state.
+    private func confirmUnchangedSave(alreadyMatchedRequestedState: Bool) throws {
+        guard alreadyMatchedRequestedState else {
+            throw URLFilterServiceError.saveFailed(NEURLFilterManager.Error.configurationUnchanged)
+        }
+    }
+
+    /// Clears the persisted intent when a failed enable was the user's own decision.
+    private func clearDeclinedIntent(enabled: Bool, filterError: URLFilterError?, intentGeneration: Int) {
+        // A newer intent write owns the outcome: never clear over it.
+        guard intentGeneration == self.intentWriteGeneration,
+              URLFilterReconcileDecision.shouldClearUserIntent(enabled: enabled, filterError: filterError)
+        else {
+            return
+        }
+        LogInfo("URLFilter enable declined; clearing the persisted intent")
+        self.persistURLFilterIntent(false)
+        // An automatic retry has no publication of its own: the open page must learn the intent is off.
+        if self.statePublishingSuspensions == 0 {
+            self.eventBus.post(event: .urlFilterConfigurationChanged, userInfo: nil)
+        }
+    }
+
     /// A successful bring-up from disabled applies the current level and
     /// re-fetches its prefilter, so a pending level restart is fulfilled.
     private func clearPendingLevelRestartIfBroughtUp(enabled: Bool, wasEnabled: Bool) {
         guard enabled, !wasEnabled else { return }
         self.levelRestartPending = false
+    }
+
+    /// Whether the failure is a failed configuration write rather than a runtime apply.
+    private func isSaveFailure(_ error: Error) -> Bool {
+        if case URLFilterServiceError.saveFailed = error { return true }
+        return false
     }
 
     /// Stages the level's PIR endpoints and effective token on an enabled run.
@@ -901,11 +970,7 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
     /// that is still in flight is not superseded.
     private func ensureDisabledConfigurationExists() async throws {
         let manager = NEURLFilterManager.shared
-        do {
-            try await manager.loadFromPreferences()
-        } catch {
-            throw URLFilterServiceError.loadFailed(error)
-        }
+        try await self.loadPreferencesOrThrow()
         guard manager.pirServerURL == nil else {
             self.cachedState = await self.makeState(from: manager)
             return
@@ -964,8 +1029,8 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
         do {
             try await manager.saveToPreferences()
         } catch NEURLFilterManager.Error.configurationUnchanged {
-            // A matched configuration is still started by the refresh below, as in `setEnabledOnce`.
-            LogDebug("URLFilter Configuration Unchanged")
+            // Both callers loaded the configuration and found none: unchanged confirms nothing.
+            throw URLFilterServiceError.saveFailed(NEURLFilterManager.Error.configurationUnchanged)
         } catch {
             throw URLFilterServiceError.saveFailed(error)
         }
@@ -1001,12 +1066,7 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
             return false
         }
         let license = await self.licenseProvider.licenseCredential()
-        do {
-            try await manager.loadFromPreferences()
-        } catch {
-            LogWarn("URLFilter token refresh aborted: preferences load failed: \(error)")
-            return false
-        }
+        guard await self.loadPreferences(logContext: "token refresh") else { return false }
         guard manager.pirServerURL != nil else { return false }
         guard !license.isEmpty || !levelConfig.pirAuthenticationToken.isEmpty else {
             // A transient StoreKit gap must not overwrite a working token.
@@ -1083,12 +1143,7 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
         let manager = NEURLFilterManager.shared
         let level = self.sharedKeychainStorage.urlFilterProtectionLevel
         guard let levelConfig = URLFilterLevelConfiguration.defaultLevels[level] else { return }
-        do {
-            try await manager.loadFromPreferences()
-        } catch {
-            LogWarn("URLFilter token invalidation aborted: preferences load failed: \(error)")
-            return
-        }
+        guard await self.loadPreferences(logContext: "token invalidation") else { return }
         guard manager.pirServerURL != nil else { return }
         let invalidToken = URLFilterLevelConfiguration.pirAuthenticationToken(for: level, license: "")
         guard manager.pirAuthenticationToken != invalidToken else { return }
@@ -1190,8 +1245,12 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
         // The manager read is not a status source: it reports `.invalid` for a
         // Running filter right after the preferences reload below. The observed
         // Event is the transition itself, so the cached status comes from it.
-        try? await manager.loadFromPreferences()
-        self.cachedState = await self.makeState(from: manager, statusOverride: status)
+        let loadSucceeded = await self.loadPreferences(logContext: "status change")
+        let state = await self.makeState(from: manager, statusOverride: status)
+        // A failed save leaves staged values, so only a load-backed rebuild may replace the served state.
+        if loadSucceeded {
+            self.cachedState = state
+        }
         // Sample after the reload so the log describes the same manager state
         // As the derivation it explains.
         let rawError = self.rawLastDisconnectError(from: await manager.lastDisconnectError)
@@ -1262,10 +1321,7 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
     private func fireFailSafeDisable(deadline: Date) async {
         guard self.failSafeDisableDeadline == deadline else { return }
         let manager = NEURLFilterManager.shared
-        do {
-            try await manager.loadFromPreferences()
-        } catch {
-            LogWarn("URLFilter fail-safe disable aborted: preferences load failed: \(error)")
+        guard await self.loadPreferences(logContext: "fail-safe disable") else {
             self.failSafeDisableDeadline = nil
             return
         }
@@ -1498,12 +1554,16 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
         self.clearDisconnectErrorSnapshot()
         // The error is no longer stale: rebuild so it can surface.
         let manager = NEURLFilterManager.shared
-        try? await manager.loadFromPreferences()
+        let loadSucceeded = await self.loadPreferences(logContext: "stale error rebuild")
         LogInfo(
             "URLFilter stale disconnect error expired: "
                 + "disconnectError=\(snapshot.error.logName), status=\(snapshot.status)"
         )
-        self.cachedState = await self.makeState(from: manager)
+        let state = await self.makeState(from: manager)
+        // Only a load-backed rebuild may replace the last good state.
+        if loadSucceeded {
+            self.cachedState = state
+        }
         guard self.statePublishingSuspensions == 0 else { return }
         self.eventBus.post(event: .urlFilterStatusChanged, userInfo: nil)
     }
@@ -1517,6 +1577,25 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
         case .stopping:   .stopping
         @unknown default: .unknown
         }
+    }
+
+    /// The mapped platform error behind a save or runtime failure, or `nil`
+    /// when the failure is another kind or its payload is not a manager error.
+    private func underlyingFilterError(from error: Error) -> URLFilterError? {
+        // Configuration staging throws the manager error unwrapped, so map it first.
+        if let managerError = error as? NEURLFilterManager.Error {
+            return self.rawLastDisconnectError(from: managerError)
+        }
+        let underlying: Error
+        switch error {
+        case URLFilterServiceError.saveFailed(let inner),
+             URLFilterServiceError.setEnabledFailed(let inner):
+            underlying = inner
+        default:
+            return nil
+        }
+        guard let managerError = underlying as? NEURLFilterManager.Error else { return nil }
+        return self.rawLastDisconnectError(from: managerError)
     }
 
     // NEURLFilterManager.Error has a lot of cases
