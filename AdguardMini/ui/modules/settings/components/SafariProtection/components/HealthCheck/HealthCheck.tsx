@@ -42,12 +42,15 @@ function HealthCheckComponent({ setShowConsent }: HealthCheckProps) {
 
     const {
         dismissedHealthCheckCards,
+        healthCheckDismissedLoaded,
         loginItemEnabled,
         settings: {
             experimentalSystemWideProtectionEnabled,
             lastUpdateMoreSevenDays,
         },
     } = settings;
+
+    const filtersLoaded = safariProtection.filters.isLoaded;
 
     const {
         blockAds,
@@ -64,6 +67,16 @@ function HealthCheckComponent({ setShowConsent }: HealthCheckProps) {
         hasRestartableExtensionsError,
         hasRulesLimitExceeded,
     } = useSafariExtensionsStatus();
+
+    const isReady = settings.isSettingsLoaded
+        && filtersLoaded
+        && settings.safariExtensionsStore.isLoaded
+        && advancedBlocking.isURLFilterStateLoaded
+        && healthCheckDismissedLoaded;
+
+    if (!isReady) {
+        return null;
+    }
 
     const hasBackgroundDisabled = !loginItemEnabled;
 

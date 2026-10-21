@@ -31,6 +31,11 @@ export class Settings {
     public settings = new SettingsEnt();
 
     /**
+     * Whether the settings have been received from the platform.
+     */
+    public isSettingsLoaded = false;
+
+    /**
      * Effective theme of the settings window.
      */
     public effectiveTheme: EffectiveTheme | null = null;
@@ -77,9 +82,19 @@ export class Settings {
     public dismissedHealthCheckCards = new Set<string>();
 
     /**
+     * Whether the dismissed health check card ids have been loaded.
+     */
+    public healthCheckDismissedLoaded = false;
+
+    /**
      * Defines dismissed promo cards, contains card ids
      */
     public dismissedPromoCards = new Set<string>();
+
+    /**
+     * Whether the dismissed promo card ids have been loaded.
+     */
+    public promoDismissedLoaded = false;
 
     /**
      * Whether the one-time report problem label has already been shown.
@@ -203,6 +218,7 @@ export class Settings {
      */
     public setHealthCheckCardDismissed(cardIds: string[]) {
         this.dismissedHealthCheckCards = new Set(cardIds);
+        this.healthCheckDismissedLoaded = true;
     }
 
     /**
@@ -226,6 +242,7 @@ export class Settings {
      */
     public setPromoDismissed(cardIds: string[]) {
         this.dismissedPromoCards = new Set(cardIds);
+        this.promoDismissedLoaded = true;
     }
 
     /**
@@ -296,6 +313,7 @@ export class Settings {
         ]);
         this.setSafariExtensions(ext);
         this.setContentBlockersRulesLimit(limit.value);
+        this.safariExtensionsStore.markLoaded();
     }
 
     /**
@@ -500,6 +518,7 @@ export class Settings {
      */
     public setSettings(data: SettingsEnt) {
         this.settings = data;
+        this.isSettingsLoaded = true;
         this.loginItemEnabled = data.loginItemEnabled ?? true;
         this.reportProblemLabelShown = data.reportProblemLabelShown;
         updateLanguage(data.language);

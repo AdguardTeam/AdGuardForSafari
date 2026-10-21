@@ -42,6 +42,16 @@ test('setSettings keeps login item enabled when the response reports it enabled'
     assert.equal(settings.loginItemEnabled, true);
 });
 
+test('setSettings marks the settings as loaded', () => {
+    const settings = new Settings();
+
+    assert.equal(settings.isSettingsLoaded, false);
+
+    settings.setSettings(new SettingsEnt({ language: 'en' }));
+
+    assert.equal(settings.isSettingsLoaded, true);
+});
+
 test('setSettings overrides a previously disabled login item state', () => {
     const settings = new Settings();
     settings.setLoginItem(false);
@@ -63,6 +73,27 @@ test('report problem label stays unanswered until the platform responds', () => 
     const settings = new Settings();
 
     assert.equal(settings.reportProblemLabelShown, undefined);
+});
+
+test('dismissed card lists stay unanswered until the platform responds', () => {
+    const settings = new Settings();
+
+    assert.equal(settings.healthCheckDismissedLoaded, false);
+    assert.equal(settings.promoDismissedLoaded, false);
+});
+
+test('setHealthCheckCardDismissed marks the dismissed list loaded', () => {
+    const settings = new Settings();
+    settings.setHealthCheckCardDismissed([]);
+
+    assert.equal(settings.healthCheckDismissedLoaded, true);
+});
+
+test('setPromoDismissed marks the dismissed list loaded', () => {
+    const settings = new Settings();
+    settings.setPromoDismissed([]);
+
+    assert.equal(settings.promoDismissedLoaded, true);
 });
 
 test('setSettings reports the label as never shown when the platform has no record', () => {

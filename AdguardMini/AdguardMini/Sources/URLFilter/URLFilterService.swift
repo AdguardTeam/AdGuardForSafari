@@ -437,6 +437,9 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
                 LogInfo("URLFilter auto-enable skipped: preconditions did not hold")
                 return
             }
+            // Hide the retry's bring-up states: the UI sees one settled result.
+            self.suspendStatePublishing()
+            defer { self.resumeStatePublishing() }
             // Own this transition only after the preconditions hold: bump and
             // Capture so a concurrent action during the awaits above cannot be
             // Inherited by this enable.
@@ -465,6 +468,9 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
                 LogInfo("URLFilter auto-disable skipped: preconditions hold or changed")
                 return
             }
+            // Hide the disable's stopping states: the UI sees one settled result.
+            self.suspendStatePublishing()
+            defer { self.resumeStatePublishing() }
             let generation = self.beginTransition()
             do {
                 let applied = try await self.setEnabled(
@@ -1357,6 +1363,9 @@ final actor URLFilterServiceLiveImpl: URLFilterService {
         let rawStatus = self.rawStatus(from: await manager.status)
         let rawError = self.rawLastDisconnectError(from: await manager.lastDisconnectError)
         let trigger = "status=\(rawStatus), disconnectError=\(rawError.map(\.logName) ?? "none")"
+        // Hide the auto-disable's stopping states: the UI sees one settled result.
+        self.suspendStatePublishing()
+        defer { self.resumeStatePublishing() }
         do {
             // An auto-disable supersedes any in-flight enable retry, but the
             // Automatic transition does not overwrite the user's intent.
