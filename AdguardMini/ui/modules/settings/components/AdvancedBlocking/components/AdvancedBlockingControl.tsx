@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import { observer } from 'mobx-react-lite';
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 
 import { buttonProps } from 'Common/lib/keyboardActivation';
 import { SettingsEvent } from 'Modules/settings/store/modules';
@@ -34,6 +34,12 @@ export function AdvancedBlockingControlComponent() {
         isSystemWideProtectionInactive,
         isSystemWideProtectionEnabling,
     } = advancedBlocking;
+
+    useEffect(() => {
+        // Opening the page starts a visit: automatic reports are collapsed per visit.
+        advancedBlocking.beginSystemWideProtectionPageVisit();
+        return () => advancedBlocking.endSystemWideProtectionPageVisit();
+    }, [advancedBlocking]);
 
     const {
         settings: {

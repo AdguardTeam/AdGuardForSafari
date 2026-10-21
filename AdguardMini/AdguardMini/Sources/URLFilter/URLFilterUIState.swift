@@ -48,7 +48,7 @@ enum URLFilterUIStatus: Equatable {
     case error
     /// A System-wide Protection failure caused by blocked iCloud hosts.
     ///
-    /// The UI shows no generic snack for this status.
+    /// The UI treats it like `error`; the status only identifies the cause.
     case dnsError
     case loading
     case running

@@ -54,7 +54,6 @@ function SettingsControlComponent() {
             theme: themeSetting,
             showSafariToolbarBadge,
             experimentalSystemWideProtectionEnabled,
-            isMacos272,
         },
         userActionLastDirectory,
         incomeHardwareAcceleration,
@@ -225,7 +224,6 @@ function SettingsControlComponent() {
                 allowTelemetry={allowTelemetry}
                 debugLogging={debugLogging}
                 experimentalSystemWideProtectionEnabled={experimentalSystemWideProtectionEnabled}
-                isMacos272={isMacos272}
                 isRemovingSystemWideProtection={isRemovingSystemWideProtection}
                 showSafariToolbarBadge={showSafariToolbarBadge}
                 updateShowSafariToolbarBadge={async (value) => settings.updateShowSafariToolbarBadge(value)}

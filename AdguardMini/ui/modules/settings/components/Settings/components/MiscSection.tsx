@@ -13,7 +13,6 @@ type Props = {
     allowTelemetry: boolean;
     debugLogging: boolean;
     experimentalSystemWideProtectionEnabled: boolean;
-    isMacos272: boolean;
     isRemovingSystemWideProtection: boolean;
     onToggleAllowTelemetry(value: boolean): void;
     onToggleDebugLogging(value: boolean): void;
@@ -33,7 +32,6 @@ export function MiscSection(props: Props) {
         allowTelemetry,
         debugLogging,
         experimentalSystemWideProtectionEnabled,
-        isMacos272,
         isRemovingSystemWideProtection,
         onExportLogs,
         onOpenSystemWideProtection,
@@ -85,11 +83,6 @@ export function MiscSection(props: Props) {
                                     {translate('settings.system.wide.experimental.go.to')}
                                 </Text>
                             </div>
-                        )}
-                        {isMacos272 && (
-                            <Text className={cx(theme.color.orange, s.Settings_experimentalWarning)} type="t2">
-                                {translate('settings.system.wide.experimental.warning')}
-                            </Text>
                         )}
                     </>
                 )}

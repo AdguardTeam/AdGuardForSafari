@@ -109,10 +109,10 @@ export class AdvancedBlocking {
     private readonly openSystemWideProtection: () => void;
 
     /**
-     * Whether System-wide Protection UI is currently visible: when the
-     * experimental flag is off, automatic failure snacks stay hidden too.
+     * Whether a page that carries the System-wide Protection switch is
+     * active: failure snacks stay hidden on the other pages.
      */
-    private readonly isSystemWideProtectionVisible: () => boolean;
+    private readonly isSystemWideProtectionPageActive: () => boolean;
 
     /**
      * Whether the stats of a pushed state are being held: the next push — or
@@ -168,12 +168,14 @@ export class AdvancedBlocking {
     public scrollToTroubleshootingRequested = false;
 
     /**
-     * Whether System-wide Protection is unavailable because a DNS filter
-     * blocks the iCloud hosts it needs: the Safari Protection page shows its
-     * dedicated card for this failure instead of a snack.
+     * Whether System-wide Protection is unavailable: the user selected the
+     * filter, but the platform reports a failed state. The Safari Protection
+     * health check renders its orange card from this state.
      */
     public get isSystemWideProtectionUnavailable(): boolean {
-        return this.urlFilterState.status === URLFilterStatus.dns_error;
+        return this.urlFilterState.userIntentEnabled
+            && (this.urlFilterState.status === URLFilterStatus.error
+                || this.urlFilterState.status === URLFilterStatus.dns_error);
     }
 
     /**
@@ -200,16 +202,17 @@ export class AdvancedBlocking {
      *
      * @param notification Notifications queue used to surface error toasts.
      * @param openSystemWideProtection Opens the System-wide Protection page.
-     * @param isSystemWideProtectionVisible Whether the feature UI is visible.
+     * @param isSystemWideProtectionPageActive Whether a page that carries the
+     * switch is active.
      */
     public constructor(
         notification: NotificationsQueue,
         openSystemWideProtection: () => void,
-        isSystemWideProtectionVisible: () => boolean = () => true,
+        isSystemWideProtectionPageActive: () => boolean = () => true,
     ) {
         this.notification = notification;
         this.openSystemWideProtection = openSystemWideProtection;
-        this.isSystemWideProtectionVisible = isSystemWideProtectionVisible;
+        this.isSystemWideProtectionPageActive = isSystemWideProtectionPageActive;
         makeAutoObservable(this, {
             getAdvancedRules: flow,
             getAdguardExtra: flow,
@@ -235,13 +238,13 @@ export class AdvancedBlocking {
      * Reports an automatic bring-up failure that reached the UI as a state
      * change: a push or a pull of a failed state.
      *
-     * The snack is shown wherever the user is, but automatic reports are
+     * The snack is scoped to the pages that carry the switch: a failure that
+     * arrives while the user is elsewhere is not shown. Automatic reports are
      * collapsed per page visit: the platform retries the bring-up while the
-     * System-wide Protection page is open and reports one failure several
-     * times, and the design counts automatic attempts per visit.
+     * page is open and reports one failure several times.
      */
     private reportAutomaticURLFilterFailure() {
-        if (!this.isSystemWideProtectionVisible()) {
+        if (!this.isSystemWideProtectionPageActive()) {
             return;
         }
         if (this.unavailableSnackShownThisVisit) {
@@ -253,15 +256,18 @@ export class AdvancedBlocking {
     /**
      * Shows the snack for a System-wide Protection bring-up failure.
      *
-     * The failure is reported wherever the user is — the switch also lives on
-     * the Advanced blocking page, so the failure can arrive while the settings
-     * window is on any page. Reports of one kind share a single snack while it
-     * is on screen; an automatic report is also remembered for the page visit,
-     * so it is not shown again after the snack closed. The caller decides
-     * whether to report: an explicit attempt always reports, an automatic one
-     * only while the experimental flag shows the feature.
+     * The snack is shown only on the pages that carry the switch (System-wide
+     * Protection and Advanced blocking); a failure that arrives while the user
+     * is elsewhere is not reported. Reports of one kind share a single snack
+     * while it is on screen; an automatic report is also remembered for the
+     * page visit, so it is not shown again after the snack closed. The caller
+     * decides whether to report: an explicit attempt reports its own failure,
+     * while an automatic one is also collapsed per visit.
      */
     private showSystemWideProtectionUnavailableSnack() {
+        if (!this.isSystemWideProtectionPageActive()) {
+            return;
+        }
         if (this.isURLFilterErrorSnackShown(URLFilterErrorKind.enable)) {
             return;
         }
@@ -296,6 +302,19 @@ export class AdvancedBlocking {
         }
         this.notification.closeNotify(this.urlFilterErrorNotificationId);
         this.urlFilterErrorNotificationId = null;
+    }
+
+    /**
+     * Closes the "unavailable" snack when the user leaves the pages that carry
+     * the System-wide Protection switch.
+     */
+    public closeSystemWideProtectionUnavailableSnack() {
+        if (this.reportedURLFilterErrorKind !== URLFilterErrorKind.enable) {
+            return;
+        }
+        this.closeURLFilterErrorNotification();
+        this.reportedURLFilterErrorKind = null;
+        this.unavailableSnackShownThisVisit = false;
     }
 
     /**
