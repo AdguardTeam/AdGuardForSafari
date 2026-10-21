@@ -14,7 +14,7 @@ service UserRulesService {
     /* Export UserRules settings */
     rpc ExportUserRules(Path) returns (OptionalError);
     /* Import UserRules settings */
-    rpc ImportUserRules(Path) returns (UserRules);
+    rpc ImportUserRules(Path) returns (UserRulesOrError);
     /* Reset UserRules to default settings */
     rpc ResetUserRules(EmptyValue) returns (UserRules);
 }

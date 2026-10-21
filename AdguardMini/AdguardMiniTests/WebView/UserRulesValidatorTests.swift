@@ -83,4 +83,35 @@ final class UserRulesValidatorTests: XCTestCase {
             .ruleTooLong(maxLength: 65_536)
         )
     }
+
+    func testImportAllowed_AtByteCap_IsAllowed() {
+        let content = String(repeating: "a", count: UserRulesValidator.maxImportedContentBytes)
+        XCTAssertTrue(
+            UserRulesValidator.isImportAllowed(content: content),
+            "Content exactly at the import cap must be allowed"
+        )
+    }
+
+    func testImportAllowed_OverByteCap_IsRejected() {
+        let content = String(repeating: "a", count: UserRulesValidator.maxImportedContentBytes + 1)
+        XCTAssertFalse(
+            UserRulesValidator.isImportAllowed(content: content),
+            "One byte over the import cap must be rejected"
+        )
+    }
+
+    /// The import cap counts UTF-8 BYTES, so multibyte text hits it sooner.
+    func testImportAllowed_MultibyteContent_IsMeasuredInBytes() {
+        // 3 bytes per CJK character: the character count stays under the cap.
+        let content = String(repeating: "中", count: UserRulesValidator.maxImportedContentBytes / 3 + 1)
+        XCTAssertFalse(
+            UserRulesValidator.isImportAllowed(content: content),
+            "Multibyte content must be measured in bytes, not characters"
+        )
+    }
+
+    /// Pins the cap value itself, which the boundary checks derive from.
+    func testImportCap_IsThirtyTwoMiB() {
+        XCTAssertEqual(UserRulesValidator.maxImportedContentBytes, 32 * 1024 * 1024)
+    }
 }

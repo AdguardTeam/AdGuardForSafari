@@ -87,38 +87,28 @@ final class UserRulesServiceImpl: UserRulesService.ServiceType, @unchecked Senda
         }
     }
 
-    func importUserRules(_ message: Path, _ promise: sending @escaping (UserRules) -> Void) {
+    func importUserRules(_ message: Path, _ promise: sending @escaping (UserRulesOrError) -> Void) {
         Task {
-            guard PathConfiner.isConfinable(
-                message.path,
-                granted: PathGrantStore.shared,
-                containerRoots: PathConfiner.containerRoots(appGroupIdentifier: BuildConfig.AG_APP_ID)
-            ) else {
-                LogError("importUserRules rejected: path not confined")
-                promise(UserRules())
-                return
+            let decision = await UserRulesImportDecision.make(
+                isConfined: PathConfiner.isConfinable(
+                    message.path,
+                    granted: PathGrantStore.shared,
+                    containerRoots: PathConfiner.containerRoots(appGroupIdentifier: BuildConfig.AG_APP_ID)
+                )
+            ) {
+                await self.importExportService.loadPlainFile(path: message.path)
             }
-            let result: Result<String, Error> =
-            await self.importExportService.loadPlainFile(path: message.path)
-            switch result {
-            case .success(let rules):
-                // Apply the same caps `updateUserRules` enforces, so an
-                // Arbitrarily large/corrupt import cannot exhaust memory/disk
-                // (the loaded file bypasses the proto `UserRulesValidator`
-                // Path, which only runs on RPC payloads).
-                guard UserRulesValidator.isImportAllowed(content: rules) else {
-                    LogError("importUserRules rejected: content exceeds caps")
-                    promise(UserRules())
-                    return
-                }
+            switch decision {
+            case .save(let rules):
                 await self.filtersSupervisor.saveUserRules(rules)
-                let userRules = await self.getCurrentUserRulesProto()
-                promise(userRules)
-            case .failure(let error):
+            case .unreadable(let error):
                 LogError("Can't load data from \(message.path): \(error)")
-                // TODO: AG-56500 Send error to Sciter
-                promise(UserRules())
+            case .overCap:
+                LogError("importUserRules rejected: content exceeds caps")
+            case .notConfined:
+                LogError("importUserRules rejected: path not confined")
             }
+            promise(await decision.reply { await self.getCurrentUserRulesProto() })
         }
     }
 

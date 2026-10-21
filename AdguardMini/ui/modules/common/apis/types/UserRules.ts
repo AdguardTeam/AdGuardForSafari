@@ -251,3 +251,112 @@ export class UserRulesCallbackState extends pb_1.Message {
         return UserRulesCallbackState.deserialize(bytes);
     }
 }
+export class UserRulesOrError extends pb_1.Message {
+    #one_of_decls: number[][] = [[1, 2]];
+    constructor(data?: any[] | ({} & (({
+        userRules?: UserRules;
+        error?: never;
+    } | {
+        userRules?: never;
+        error?: boolean;
+    })))) {
+        super();
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+        if (!Array.isArray(data) && typeof data == "object") {
+            if ("userRules" in data && data.userRules != undefined) {
+                this.userRules = data.userRules;
+            }
+            if ("error" in data && data.error != undefined) {
+                this.error = data.error;
+            }
+        }
+    }
+    get userRules() {
+        return pb_1.Message.getWrapperField(this, UserRules, 1) as UserRules;
+    }
+    set userRules(value: UserRules) {
+        pb_1.Message.setOneofWrapperField(this, 1, this.#one_of_decls[0], value);
+    }
+    get has_userRules() {
+        return pb_1.Message.getField(this, 1) != null;
+    }
+    get error() {
+        return pb_1.Message.getFieldWithDefault(this, 2, false) as boolean;
+    }
+    set error(value: boolean) {
+        pb_1.Message.setOneofField(this, 2, this.#one_of_decls[0], value);
+    }
+    get has_error() {
+        return pb_1.Message.getField(this, 2) != null;
+    }
+    get result() {
+        const cases: {
+            [index: number]: "none" | "userRules" | "error";
+        } = {
+            0: "none",
+            1: "userRules",
+            2: "error"
+        };
+        return cases[pb_1.Message.computeOneofCase(this, [1, 2])];
+    }
+    static fromObject(data: {
+        userRules?: ReturnType<typeof UserRules.prototype.toObject>;
+        error?: boolean;
+    }): UserRulesOrError {
+        const message = new UserRulesOrError({});
+        if (data.userRules != null) {
+            message.userRules = UserRules.fromObject(data.userRules);
+        }
+        if (data.error != null) {
+            message.error = data.error;
+        }
+        return message;
+    }
+    toObject() {
+        const data: {
+            userRules?: ReturnType<typeof UserRules.prototype.toObject>;
+            error?: boolean;
+        } = {};
+        if (this.userRules != null) {
+            data.userRules = this.userRules.toObject();
+        }
+        if (this.error != null) {
+            data.error = this.error;
+        }
+        return data;
+    }
+    serialize(): Uint8Array;
+    serialize(w: pb_1.BinaryWriter): void;
+    serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+        const writer = w || new pb_1.BinaryWriter();
+        if (this.has_userRules)
+            writer.writeMessage(1, this.userRules, () => this.userRules.serialize(writer));
+        if (this.has_error)
+            writer.writeBool(2, this.error);
+        if (!w)
+            return writer.getResultBuffer();
+    }
+    static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UserRulesOrError {
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new UserRulesOrError();
+        while (reader.nextField()) {
+            if (reader.isEndGroup())
+                break;
+            switch (reader.getFieldNumber()) {
+                case 1:
+                    reader.readMessage(message.userRules, () => message.userRules = UserRules.deserialize(reader));
+                    break;
+                case 2:
+                    message.error = reader.readBool();
+                    break;
+                default: reader.skipField();
+            }
+        }
+        return message;
+    }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): UserRulesOrError {
+        return UserRulesOrError.deserialize(bytes);
+    }
+}

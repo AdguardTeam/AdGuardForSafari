@@ -16,6 +16,18 @@ export function getNotificationSettingsImportFailedText(): string {
     return 'settings import failed';
 }
 
+/**
+ * Stand-in for the real contact-support parameter builder. The ambient
+ * `translate` stub resolves messages without parameters, so the returned
+ * parameters are never read.
+ *
+ * @param _props Link props the real builder forwards (unused).
+ * @returns Empty translation parameters.
+ */
+export function provideContactSupportParam(_props?: Record<string, unknown>): Record<string, unknown> {
+    return {};
+}
+
 /** Fixed text stand-in for the real generic "something went wrong" translation. */
 export function getNotificationSomethingWentWrongText(): string {
     return 'something went wrong';

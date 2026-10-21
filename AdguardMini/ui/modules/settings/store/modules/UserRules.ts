@@ -119,12 +119,18 @@ export class UserRules {
     }
 
     /**
-     * Import setings from selected destination
+     * Import user rules from selected destination
      * @param path path to read file
+     * @returns `true` when the imported rules were applied, `false` when the
+     *   platform reported a failure
      */
-    public async importUserRules(path: string) {
+    public async importUserRules(path: string): Promise<boolean> {
         const resp = await window.API.Execute(new ImportUserRulesRequest({ path }));
-        this.setUserRules(resp);
+        if (!resp.has_userRules) {
+            return false;
+        }
+        this.setUserRules(resp.userRules);
+        return true;
     }
 
     /**

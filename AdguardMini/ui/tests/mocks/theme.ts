@@ -16,6 +16,7 @@
 type ThemeStub = {
     typo: Record<string, string | undefined>;
     button: { greenSubmit: string; underline: string };
+    color: { linkGreen: string };
 };
 
 declare global {
@@ -27,6 +28,7 @@ declare global {
 const theme: ThemeStub = {
     typo: {},
     button: { greenSubmit: 'greenSubmit', underline: 'underline' },
+    color: { linkGreen: 'linkGreen' },
 };
 
 globalThis.tx = theme;

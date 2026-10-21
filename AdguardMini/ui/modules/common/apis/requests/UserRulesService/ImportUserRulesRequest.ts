@@ -1,7 +1,7 @@
 /* This code was generated automatically by proto-parser tool version 1 */
 
 import { PlatformRequest } from '@adg/webview-utils-kit';
-import { UserRules as ReturnValue, Path as RequestMessage } from '../../types'
+import { UserRulesOrError as ReturnValue, Path as RequestMessage } from '../../types'
 
 /**
  * Import UserRules settings

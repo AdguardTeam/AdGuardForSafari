@@ -6,16 +6,11 @@ import { useSearch } from '@adg/webview-utils-kit';
 import { observer } from 'mobx-react-lite';
 import { useState, useEffect, useRef } from 'preact/hooks';
 
-import { ShowInFinderRequest } from 'Apis/requests/InternalService';
 import { buttonProps } from 'Common/lib/keyboardActivation';
-import { getFormattedDateTime } from 'Common/utils/date';
 import { TDS_PARAMS, getTdsLink } from 'Common/utils/links';
-import { dirname } from 'Common/utils/path';
-import { selectFile } from 'Common/utils/selectFile';
 import { openUserRulesWindow } from 'Modules/settings/lib/openUserRulesWindow';
 import { useSettingsStore } from 'SettingsLib/hooks';
-import { getNotificationSomethingWentWrongText, provideContactSupportParam } from 'SettingsLib/utils/translate';
-import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, NotificationsQueueVariant, RouteName, SettingsEvent } from 'SettingsStore/modules';
+import { NotificationContext, NotificationsQueueIconType, NotificationsQueueType, RouteName, SettingsEvent } from 'SettingsStore/modules';
 import theme from 'Theme';
 import { Modal, Input, Pagination, Icon, Text, Button } from 'UILib';
 
@@ -24,6 +19,7 @@ import { SettingsTitle } from '../SettingsTitle';
 
 import { RulesList, OpenedEditorPlug, ImportModal } from './components';
 import { useToggleHeader } from './hooks/useToggleHeader';
+import { useUserRulesFileActions } from './hooks/useUserRulesFileActions';
 import s from './UserRules.module.pcss';
 
 /**
@@ -40,8 +36,6 @@ function UserRulesComponent() {
         ui,
         notification,
         router,
-        settings,
-        settings: { userActionLastDirectory },
         telemetry,
         windowing,
     } = useSettingsStore();
@@ -117,65 +111,7 @@ function UserRulesComponent() {
         });
     }, [ui, ui.userRulesScrollTop, isRuleEditorWindowOpened, rulesToRender.length, setIsScrolling]);
 
-    const showInFinder = (path: string) => {
-        window.API.Execute(new ShowInFinderRequest({ path }));
-    };
-
-    const onImportRules = () => {
-        try {
-            const defaultPath = userActionLastDirectory ?? '';
-            selectFile(false, '(*.txt)|*.txt', translate('import'), defaultPath, async (path: string) => {
-                settings.updateUserActionLastDirectory(dirname(path));
-                userRules.importUserRules(path);
-                notification.notify({
-                    message: translate('notification.user.rules.import'),
-                    notificationContext: NotificationContext.info,
-                    type: NotificationsQueueType.success,
-                    iconType: NotificationsQueueIconType.done,
-                    closeable: true,
-                });
-            });
-        } catch (error) {
-            log.error(String(error), 'onImportRules');
-            notification.notify({
-                message: translate('notification.user.rules.import.failed', provideContactSupportParam({
-                    className: tx.color.linkGreen,
-                })),
-                notificationContext: NotificationContext.info,
-                type: NotificationsQueueType.warning,
-                iconType: NotificationsQueueIconType.error,
-                closeable: true,
-            });
-        }
-    };
-
-    const onExportRules = () => {
-        const defaultPath = userActionLastDirectory ?? '';
-        selectFile(true, '(*.txt)|*.txt', translate('export'), `${defaultPath}/adguard_mini_user_rules_${getFormattedDateTime()}`, async (path: string) => {
-            settings.updateUserActionLastDirectory(dirname(path));
-            const error = await userRules.exportUserRules(path);
-            if (error) {
-                notification.notify({
-                    message: getNotificationSomethingWentWrongText(),
-                    notificationContext: NotificationContext.info,
-                    type: NotificationsQueueType.warning,
-                    iconType: NotificationsQueueIconType.error,
-                    closeable: true,
-                });
-            } else {
-                notification.notify({
-                    message: translate('notification.user.rules.export'),
-                    notificationContext: NotificationContext.ctaButton,
-                    type: NotificationsQueueType.success,
-                    iconType: NotificationsQueueIconType.done,
-                    closeable: true,
-                    onClick: () => { showInFinder(path); },
-                    btnLabel: translate('notification.open.in.finder'),
-                    variant: NotificationsQueueVariant.textOnly,
-                });
-            }
-        });
-    };
+    const { onImportRules, onExportRules } = useUserRulesFileActions();
 
     const onDeleteAll = () => {
         const { rules: currentRules } = userRules.userRules;

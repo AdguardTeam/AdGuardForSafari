@@ -32,7 +32,7 @@ public protocol UserRulesServiceProtocol
 	/// Import UserRules settings
 	func importUserRules (
 						_ message: Path,
-						_ promise: sending @escaping (UserRules) -> Void) -> Void
+						_ promise: sending @escaping (UserRulesOrError) -> Void) -> Void
 	/// Reset UserRules to default settings
 	func resetUserRules (
 						_ message: EmptyValue,

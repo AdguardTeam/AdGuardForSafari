@@ -22,3 +22,11 @@ message UserRulesCallbackState {
     // User rules
     repeated UserRule rules = 1;
 }
+
+// Describes user rules or error response
+message UserRulesOrError {
+    oneof result {
+        UserRules userRules = 1;
+        bool error = 2;
+    }
+}

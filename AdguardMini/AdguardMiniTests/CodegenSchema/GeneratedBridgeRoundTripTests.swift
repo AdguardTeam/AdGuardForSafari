@@ -37,6 +37,69 @@ final class GeneratedBridgeRoundTripTests: XCTestCase {
         XCTAssertEqual(reply.value, .dark, "Round-tripped theme value must be preserved")
     }
 
+    /// `UserRulesService.handleRequest` should round-trip the import failure reply.
+    func testRegenerated_UserRulesService_ImportUserRules_RoundTripsErrorReply() throws {
+        let service = StubUserRulesService(importReply: .importError)
+        XCTAssertEqual(
+            try self.roundTripImport(service).result,
+            .error(true),
+            "Round-tripped import failure reply must be preserved"
+        )
+    }
+
+    /// `UserRulesService.handleRequest` should round-trip the imported rules reply.
+    func testRegenerated_UserRulesService_ImportUserRules_RoundTripsRulesReply() throws {
+        let imported = UserRules(enabled: true, rules: [UserRule(rule: "||example.org^", enabled: true)])
+        let service = StubUserRulesService(importReply: UserRulesOrError(userRules: imported))
+        XCTAssertEqual(
+            try self.roundTripImport(service).result,
+            .userRules(imported),
+            "Round-tripped imported rules must be preserved"
+        )
+    }
+
+    /// `UserRulesService.handleRequest` should round-trip an empty but valid rules reply.
+    func testRegenerated_UserRulesService_ImportUserRules_RoundTripsEmptyRulesReply() throws {
+        let imported = UserRules(enabled: true, rules: [])
+        let service = StubUserRulesService(importReply: UserRulesOrError(userRules: imported))
+        XCTAssertEqual(
+            try self.roundTripImport(service).result,
+            .userRules(imported),
+            "An empty but valid imported rule set must be preserved"
+        )
+    }
+
+    /// Sends one import request through the generated dispatcher and returns its reply.
+    private func roundTripImport(_ service: StubUserRulesService) throws -> UserRulesOrError {
+        var request = Path()
+        request.path = Constants.importRequestPath
+        let exp = self.expectation(description: "handleRequest promise called")
+        var roundTrippedValue: UserRulesOrError?
+        // `nonisolated(unsafe)` because the stub replies synchronously. The promise never outlives this test method.
+        nonisolated(unsafe) let promise: (Data) -> Void = { replyBytes in
+            XCTAssertFalse(replyBytes.isEmpty, "Reply bytes must be non-empty for a dispatched import RPC")
+            roundTrippedValue = try? UserRulesOrError(serializedBytes: replyBytes)
+            exp.fulfill()
+        }
+        service.handleRequest(
+            method: "ImportUserRules",
+            bytes: try request.serializedData(),
+            promise: promise
+        )
+        self.wait(for: [exp], timeout: 1.0)
+        XCTAssertEqual(
+            service.receivedImportPath,
+            Constants.importRequestPath,
+            "The dispatcher must decode the request Path"
+        )
+        return try XCTUnwrap(roundTrippedValue, "Reply must deserialize into UserRulesOrError")
+    }
+
+    /// Values the import round-trip checks send and expect.
+    private enum Constants {
+        static let importRequestPath = "/imports/user-rules.txt"
+    }
+
     /// Callback should dispatch through bridge when attached.
     func testRegenerated_SettingsCallbackService_DualDispatch_BridgeAttachedCallsDispatchCallback() {
         let callback = SettingsCallbackService()
@@ -84,6 +147,63 @@ private final class StubThemeService: ThemeService, Service, ThemeServiceProtoco
         // Use non-zero enum value so proto reply is not empty.
         value.value = .dark
         promise(value)
+    }
+}
+
+/// UserRulesService stub for reply-routing checks.
+private final class StubUserRulesService: UserRulesService, Service, UserRulesServiceProtocol {
+    /// Path the last import request carried, so the request leg can be pinned.
+    private(set) var receivedImportPath: String?
+
+    /// Reply the import sends back.
+    private let importReply: UserRulesOrError
+
+    init(importReply: UserRulesOrError) {
+        self.importReply = importReply
+        super.init()
+    }
+
+    func getUserRules(
+        _ message: EmptyValue,
+        _ promise: sending @escaping (UserRules) -> Void
+    ) {
+        promise(UserRules())
+    }
+
+    func addUserRule(
+        _ message: StringValue,
+        _ promise: sending @escaping (OptionalError) -> Void
+    ) {
+        promise(OptionalError())
+    }
+
+    func updateUserRules(
+        _ message: UserRules,
+        _ promise: sending @escaping (OptionalError) -> Void
+    ) {
+        promise(OptionalError())
+    }
+
+    func exportUserRules(
+        _ message: Path,
+        _ promise: sending @escaping (OptionalError) -> Void
+    ) {
+        promise(OptionalError())
+    }
+
+    func importUserRules(
+        _ message: Path,
+        _ promise: sending @escaping (UserRulesOrError) -> Void
+    ) {
+        self.receivedImportPath = message.path
+        promise(self.importReply)
+    }
+
+    func resetUserRules(
+        _ message: EmptyValue,
+        _ promise: sending @escaping (UserRules) -> Void
+    ) {
+        promise(UserRules())
     }
 }
 
