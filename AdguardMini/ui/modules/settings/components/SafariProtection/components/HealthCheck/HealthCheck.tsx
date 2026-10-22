@@ -38,7 +38,7 @@ type HealthCheckProps = {
 function HealthCheckComponent({ setShowConsent }: HealthCheckProps) {
     const [showAllIssues, setShowAllIssues] = useState(false);
 
-    const { settings, safariProtection, advancedBlocking } = useSettingsStore();
+    const { settings, safariProtection, advancedBlocking, account } = useSettingsStore();
 
     const {
         dismissedHealthCheckCards,
@@ -49,6 +49,8 @@ function HealthCheckComponent({ setShowConsent }: HealthCheckProps) {
             lastUpdateMoreSevenDays,
         },
     } = settings;
+
+    const { isLicenseOrTrialActive } = account;
 
     const filtersLoaded = safariProtection.filters.isLoaded;
 
@@ -80,7 +82,7 @@ function HealthCheckComponent({ setShowConsent }: HealthCheckProps) {
 
     const hasBackgroundDisabled = !loginItemEnabled;
 
-    const hasSystemWideProtectionUnavailable = experimentalSystemWideProtectionEnabled
+    const hasSystemWideProtectionUnavailable = isLicenseOrTrialActive && experimentalSystemWideProtectionEnabled
         && advancedBlocking.isSystemWideProtectionUnavailable;
 
     const hasAdBlockingDisabled = !blockAds;

@@ -74,6 +74,7 @@ export class SettingsStore {
             () => this.router.changePath(RouteName.system_wide_protection),
             () => this.settings.settings.experimentalSystemWideProtectionEnabled
                 && this.isSystemWideProtectionPage(this.router.currentPath),
+            () => this.account.isLicenseOrTrialActive,
         );
         this.appInfo = new AppInfo();
         this.filters = new Filters();

@@ -1127,6 +1127,76 @@ test('does not mark System-wide Protection unavailable without user intent', asy
     assert.equal(advancedBlocking.isSystemWideProtectionUnavailable, false);
 });
 
+test('does not mark System-wide Protection unavailable without a license', async (t) => {
+    t.mock.timers.enable();
+    installAdvancedBlockingApi();
+    const advancedBlocking = new AdvancedBlocking(
+        new NotificationsQueue(),
+        () => {},
+        () => true,
+        () => false,
+    );
+
+    advancedBlocking.applyPushedURLFilterState(makeErrorState());
+    settleURLFilterState(t);
+
+    assert.equal(advancedBlocking.urlFilterState.userIntentEnabled, true);
+    assert.equal(advancedBlocking.isSystemWideProtectionUnavailable, false);
+});
+
+test('does not report an automatic failure without a license', async (t) => {
+    t.mock.timers.enable();
+    installAdvancedBlockingApi({ pulledState: makeDNSFailureState() });
+    const queue = new NotificationsQueue();
+    const advancedBlocking = new AdvancedBlocking(
+        queue,
+        () => {},
+        () => true,
+        () => false,
+    );
+
+    await advancedBlocking.getURLFilterState();
+    settleURLFilterState(t);
+
+    assert.equal(queue.queueLength, 0);
+});
+
+test('does not retry System-wide Protection without a license', async () => {
+    const calls = installAdvancedBlockingApi();
+    const advancedBlocking = new AdvancedBlocking(
+        new NotificationsQueue(),
+        () => {},
+        () => true,
+        () => false,
+    );
+    advancedBlocking.setURLFilterState(makeErrorState());
+
+    await advancedBlocking.retrySystemWideProtection();
+
+    assert.equal(
+        calls.some((req) => (req as { FQN: string }).FQN === 'AdvancedBlockingService.RetryURLFilter'),
+        false,
+    );
+});
+
+test('retries System-wide Protection with a license', async () => {
+    const calls = installAdvancedBlockingApi();
+    const advancedBlocking = new AdvancedBlocking(
+        new NotificationsQueue(),
+        () => {},
+        () => true,
+        () => true,
+    );
+    advancedBlocking.setURLFilterState(makeErrorState());
+
+    await advancedBlocking.retrySystemWideProtection();
+
+    assert.equal(
+        calls.some((req) => (req as { FQN: string }).FQN === 'AdvancedBlockingService.RetryURLFilter'),
+        true,
+    );
+});
+
 test('a pushed DNS failure does not replace the snack of a failed enable', async (t) => {
     t.mock.timers.enable();
     installAdvancedBlockingApi({ enabledUpdateFails: true, pulledState: makeErrorState() });

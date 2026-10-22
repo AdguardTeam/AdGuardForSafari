@@ -125,6 +125,13 @@ export class AdvancedBlocking {
     private readonly isSystemWideProtectionPageActive: () => boolean;
 
     /**
+     * Whether the user has a paid license or an active trial. A free user
+     * cannot act on a System-wide Protection failure, so the failure UI is
+     * hidden.
+     */
+    private readonly isLicenseOrTrialActive: () => boolean;
+
+    /**
      * Whether the stats of a pushed state are being held: the next push — or
      * the timeout — shows them.
      */
@@ -212,12 +219,14 @@ export class AdvancedBlocking {
     public scrollToTroubleshootingRequested = false;
 
     /**
-     * Whether System-wide Protection is unavailable: the user selected the
-     * filter, but the platform reports a failed state. The Safari Protection
-     * health check renders its orange card from this state.
+     * Whether System-wide Protection is unavailable: the user has a paid
+     * license or trial, selected the filter, but the platform reports a failed
+     * state. The Safari Protection health check renders its orange card from
+     * this state.
      */
     public get isSystemWideProtectionUnavailable(): boolean {
-        return this.urlFilterState.userIntentEnabled
+        return this.isLicenseOrTrialActive()
+            && this.urlFilterState.userIntentEnabled
             && (this.urlFilterState.status === URLFilterStatus.error
                 || this.urlFilterState.status === URLFilterStatus.dns_error);
     }
@@ -248,15 +257,19 @@ export class AdvancedBlocking {
      * @param openSystemWideProtection Opens the System-wide Protection page.
      * @param isSystemWideProtectionPageActive Whether a page that carries the
      * switch is active.
+     * @param isLicenseOrTrialActive Whether the user has a paid license or an
+     * active trial.
      */
     public constructor(
         notification: NotificationsQueue,
         openSystemWideProtection: () => void,
         isSystemWideProtectionPageActive: () => boolean = () => true,
+        isLicenseOrTrialActive: () => boolean = () => true,
     ) {
         this.notification = notification;
         this.openSystemWideProtection = openSystemWideProtection;
         this.isSystemWideProtectionPageActive = isSystemWideProtectionPageActive;
+        this.isLicenseOrTrialActive = isLicenseOrTrialActive;
         makeAutoObservable(this, {
             getAdvancedRules: flow,
             getAdguardExtra: flow,
@@ -306,9 +319,13 @@ export class AdvancedBlocking {
      * while it is on screen; an automatic report is also remembered for the
      * page visit, so it is not shown again after the snack closed. The caller
      * decides whether to report: an explicit attempt reports its own failure,
-     * while an automatic one is also collapsed per visit.
+     * while an automatic one is also collapsed per visit. A free user has no
+     * actionable failure, so no snack is shown without a paid license or trial.
      */
     private showSystemWideProtectionUnavailableSnack() {
+        if (!this.isLicenseOrTrialActive()) {
+            return;
+        }
         if (!this.isSystemWideProtectionPageActive()) {
             return;
         }
@@ -776,10 +793,11 @@ export class AdvancedBlocking {
      * focus while it is open.
      *
      * The platform re-checks the user's intent, the main switch, and the
-     * license, and never creates a configuration on its own.
+     * license, and never creates a configuration on its own. A free user has
+     * no System-wide Protection to retry, so no request is sent.
      */
     public async retrySystemWideProtection() {
-        if (!this.urlFilterState.userIntentEnabled) {
+        if (!this.isLicenseOrTrialActive() || !this.urlFilterState.userIntentEnabled) {
             return;
         }
         await window.API.Execute(new RetryURLFilterRequest());

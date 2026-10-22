@@ -29,12 +29,14 @@ import type { NotSupportedModalReason } from '../NotSupportedModal';
  * System-wide Protection page component for settings module
  */
 function SystemWideProtectionComponent() {
-    const { advancedBlocking, router } = useSettingsStore();
+    const { advancedBlocking, router, account } = useSettingsStore();
     const {
         urlFilterNew,
         urlFilterState: { isInstalled },
         scrollToTroubleshootingRequested,
     } = advancedBlocking;
+
+    const { isLicenseOrTrialActive } = account;
 
     const [notSupportedReason, setNotSupportedReason] = useState<NotSupportedModalReason>();
     const [showInstallModal, setShowInstallModal] = useState(false);
@@ -50,20 +52,21 @@ function SystemWideProtectionComponent() {
     }, [advancedBlocking, urlFilterNew]);
 
     useEffect(() => {
-        // Opening the page starts a visit: automatic reports are collapsed per visit.
-        advancedBlocking.beginSystemWideProtectionPageVisit();
-        // The platform retries a failed bring-up on page open and on window focus.
-        advancedBlocking.retrySystemWideProtection();
+        if (isLicenseOrTrialActive) {
+            // Opening the page starts a visit: automatic reports are collapsed per visit.
+            advancedBlocking.beginSystemWideProtectionPageVisit();
+            // The platform retries a failed bring-up on page open and on window focus.
+            advancedBlocking.retrySystemWideProtection();
+            const handleFocus = () => advancedBlocking.retrySystemWideProtection();
+            window.addEventListener('focus', handleFocus);
 
-        const handleFocus = () => advancedBlocking.retrySystemWideProtection();
-        window.addEventListener('focus', handleFocus);
-
-        return () => {
-            window.removeEventListener('focus', handleFocus);
-            // Leaving the page ends the visit: failures on other pages show again.
-            advancedBlocking.endSystemWideProtectionPageVisit();
-        };
-    }, [advancedBlocking]);
+            return () => {
+                window.removeEventListener('focus', handleFocus);
+                // Leaving the page ends the visit: failures on other pages show again.
+                advancedBlocking.endSystemWideProtectionPageVisit();
+            };
+        }
+    }, [advancedBlocking, isLicenseOrTrialActive]);
 
     useEffect(() => {
         if (!scrollToTroubleshootingRequested) {
