@@ -25,6 +25,7 @@ let package = Package(
                 .process("AGSEDesignSystem/Resources/Assets.xcassets")
             ],
             swiftSettings: [
+                .enableUpcomingFeature("MemberImportVisibility"),
                 .unsafeFlags([
                     "-Xfrontend",
                     "-warn-long-function-bodies=50",

@@ -11,6 +11,7 @@ import Foundation
 import StoreKit
 
 import AML
+import AppBackend
 import AppStore
 
 // MARK: - AppStoreInteractor

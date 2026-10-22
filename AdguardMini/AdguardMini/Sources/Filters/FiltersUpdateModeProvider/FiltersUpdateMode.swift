@@ -13,6 +13,7 @@ private enum Constants {
 }
 
 import Foundation
+import AML
 
 /// Describes marketing-level filters update modes and their technical schedule.
 ///

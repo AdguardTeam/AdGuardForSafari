@@ -5,6 +5,8 @@
 /// This code was generated automatically by proto-parser tool version 1
 
 import Foundation
+import SwiftProtobuf
+
 // WKWebView-only service bridge.
 
 // MARK: Protocol definition

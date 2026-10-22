@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import AML
 
 /// Class used as response in `getCurrentFilteringState` API method
 @objc(EBACurrentFilteringState)

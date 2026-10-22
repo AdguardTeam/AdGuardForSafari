@@ -4,6 +4,8 @@
 
 /// This code was generated automatically by proto-parser tool version 1
 
+import SwiftProtobuf
+
 // WKWebView-only callback bridge.
 
 // MARK: `toSciter` / WKWebView service implementation

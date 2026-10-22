@@ -11,6 +11,7 @@
 
 import Cocoa
 import AML
+import FLM
 
 private enum Constants {
     static let legacyCustomGroupId = 0

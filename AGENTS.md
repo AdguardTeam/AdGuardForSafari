@@ -844,6 +844,19 @@ Blocker JSON consumed by the extension targets.
     build has not rejected yet; a migration that leaves them behind hides the
     problems it exists to fix.
 
+12. **Explicit member imports**: The project enables
+    `SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES` for all Xcode
+    targets and configurations in `AdguardMini/CommonConfig.xcconfig`. The
+    local Swift packages (`ProtoSchema`, `AGSEDesignSystem`) enable the same
+    feature in their `Package.swift`. Import every module whose types or
+    members a file uses directly — never rely on a transitive import; a
+    missing import fails the build. MAS-only code is type-checked only in the
+    `Debug-MAS` and `MAS` configurations; build one of them before you claim
+    the flag is clean.
+
+    **Rationale**: Member-import visibility catches code that compiles only
+    because the needed module arrived transitively.
+
 ### Testing Discipline
 
 1. **XCTest for Swift**: Unit tests are located in `AdguardMini/AdguardMiniTests/`.

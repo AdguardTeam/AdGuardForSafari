@@ -27,14 +27,16 @@ let package = Package(
         .target(
             name: "ProtoSchema",
             dependencies: ["BaseProtoSchema"],
-            path: "Initialisers"
+            path: "Initialisers",
+            swiftSettings: [.enableUpcomingFeature("MemberImportVisibility")]
         ),
         .target(
             name: "BaseProtoSchema",
             dependencies: [
                 .product(name: "SwiftProtobuf", package: "swift-protobuf")
             ],
-            path: "Sources"
+            path: "Sources",
+            swiftSettings: [.enableUpcomingFeature("MemberImportVisibility")]
         )
     ],
     swiftLanguageModes: [.v6]

@@ -9,6 +9,7 @@
 
 import XCTest
 import ProtoSchema  // Public surface; no @testable import per AGENTS.md  III.2
+import SwiftProtobuf
 
 /// Round-trip checks for regenerated service and callback bridges.
 /// `@MainActor` because the code under test is main-actor isolated.

@@ -10,6 +10,7 @@
 // swiftlint:disable discouraged_optional_collection
 
 import Foundation
+import AML
 
 extension ExchangeSettingsModel {
     static func convertPreferencesEntity(

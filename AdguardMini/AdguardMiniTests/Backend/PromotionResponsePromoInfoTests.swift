@@ -10,6 +10,7 @@
 import XCTest
 
 import AppBackend
+import BaseProtoSchema
 
 /// Covers mapping of a decoded backend promotion response into the paywall promo model.
 final class PromotionResponsePromoInfoTests: XCTestCase {

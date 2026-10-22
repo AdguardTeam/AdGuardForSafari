@@ -8,6 +8,7 @@
 //
 
 import BaseProtoSchema
+import ProtoSchema
 import AML
 
 extension EffectiveThemeValue {

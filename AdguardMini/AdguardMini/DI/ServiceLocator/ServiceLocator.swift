@@ -11,6 +11,7 @@ import Foundation
 import StoreKit
 
 import AML
+import AdGuardFLMLib
 import FLM
 import AppStore
 // Generated service base types (`ThemeService`, `AccountService`, etc.)
